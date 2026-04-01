@@ -1,145 +1,83 @@
-import 'package:app_lib_ui_kit/ui_kit.dart';
 import 'package:flutter/material.dart';
 
-class FormsDemo extends StatefulWidget {
+import 'demos/app_button_demo.dart';
+import 'demos/app_text_field_demo.dart';
+import 'demos/date_time_picker_demo.dart';
+import 'demos/form_section_demo.dart';
+import 'demos/image_picker_demo.dart';
+import 'demos/rating_bar_demo.dart';
+
+class FormsDemo extends StatelessWidget {
   const FormsDemo({super.key});
-
-  @override
-  State<FormsDemo> createState() => _FormsDemoState();
-}
-
-class _FormsDemoState extends State<FormsDemo> {
-  double _rating = 3.5;
-  DateTime? _selectedDate;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Forms')),
       body: ListView(
-        padding: const EdgeInsets.all(16),
         children: [
-          _sectionTitle(context, 'AppTextField'),
-          const AppTextField(
-            label: 'Name',
-            hint: 'Enter your name',
-            prefixIcon: Icons.person,
+          ListTile(
+            leading: const Icon(Icons.text_fields),
+            title: const Text('AppTextField'),
+            subtitle: const Text('Text fields: normal, password, multiline'),
+            trailing: const Icon(Icons.chevron_right),
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute<void>(builder: (_) => const AppTextFieldDemo()),
+            ),
           ),
-          const SizedBox(height: 12),
-          const AppTextField(
-            label: 'Email',
-            hint: 'you@example.com',
-            prefixIcon: Icons.email,
-            keyboardType: TextInputType.emailAddress,
+          ListTile(
+            leading: const Icon(Icons.smart_button),
+            title: const Text('AppButton'),
+            subtitle: const Text('Primary, secondary, outline, loading, disabled'),
+            trailing: const Icon(Icons.chevron_right),
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute<void>(builder: (_) => const AppButtonDemo()),
+            ),
           ),
-          const SizedBox(height: 12),
-          const AppTextField(
-            label: 'Password',
-            hint: 'Enter password',
-            prefixIcon: Icons.lock,
-            obscure: true,
+          ListTile(
+            leading: const Icon(Icons.segment),
+            title: const Text('FormSection'),
+            subtitle: const Text('Grouped form fields with title'),
+            trailing: const Icon(Icons.chevron_right),
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute<void>(builder: (_) => const FormSectionDemo()),
+            ),
           ),
-          const SizedBox(height: 12),
-          const AppTextField(
-            label: 'Bio',
-            hint: 'Tell us about yourself',
-            maxLines: 3,
+          ListTile(
+            leading: const Icon(Icons.calendar_today),
+            title: const Text('AppDateTimePicker'),
+            subtitle: const Text('Date and time selection'),
+            trailing: const Icon(Icons.chevron_right),
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute<void>(builder: (_) => const DateTimePickerDemo()),
+            ),
           ),
-          const SizedBox(height: 12),
-          const AppTextField(
-            label: 'Disabled',
-            hint: 'Cannot edit',
-            enabled: false,
+          ListTile(
+            leading: const Icon(Icons.add_a_photo),
+            title: const Text('AppImagePicker'),
+            subtitle: const Text('Camera or gallery image selection'),
+            trailing: const Icon(Icons.chevron_right),
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute<void>(builder: (_) => const ImagePickerDemo()),
+            ),
           ),
-          const SizedBox(height: 24),
-          _sectionTitle(context, 'AppButton variants'),
-          AppButton(
-            label: 'Primary',
-            onPressed: () {},
-            expand: true,
+          ListTile(
+            leading: const Icon(Icons.star_half),
+            title: const Text('AppRatingBar'),
+            subtitle: const Text('Star rating input'),
+            trailing: const Icon(Icons.chevron_right),
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute<void>(builder: (_) => const RatingBarDemo()),
+            ),
           ),
-          const SizedBox(height: 8),
-          AppButton(
-            label: 'Secondary',
-            variant: AppButtonVariant.secondary,
-            onPressed: () {},
-            expand: true,
-          ),
-          const SizedBox(height: 8),
-          AppButton(
-            label: 'Outline',
-            variant: AppButtonVariant.outline,
-            onPressed: () {},
-            expand: true,
-          ),
-          const SizedBox(height: 8),
-          AppButton(
-            label: 'Text',
-            variant: AppButtonVariant.text,
-            onPressed: () {},
-            expand: true,
-          ),
-          const SizedBox(height: 8),
-          AppButton(
-            label: 'With Icon',
-            icon: Icons.send,
-            onPressed: () {},
-            expand: true,
-          ),
-          const SizedBox(height: 8),
-          const AppButton(
-            label: 'Loading',
-            isLoading: true,
-            expand: true,
-          ),
-          const SizedBox(height: 8),
-          const AppButton(label: 'Disabled', expand: true),
-          const SizedBox(height: 24),
-          _sectionTitle(context, 'AppDateTimePicker'),
-          AppDateTimePicker(
-            label: 'Select Date & Time',
-            value: _selectedDate,
-            onChanged: (dt) => setState(() => _selectedDate = dt),
-          ),
-          const SizedBox(height: 24),
-          _sectionTitle(context, 'AppRatingBar'),
-          AppRatingBar(
-            rating: _rating,
-            onRatingChanged: (r) => setState(() => _rating = r),
-          ),
-          const SizedBox(height: 8),
-          Text('Rating: ${_rating.toStringAsFixed(1)}'),
-          const SizedBox(height: 24),
-          _sectionTitle(context, 'FormSection'),
-          FormSection(
-            title: 'Personal Info',
-            description: 'Enter your basic information.',
-            children: [
-              const AppTextField(label: 'First Name', hint: 'John'),
-              const SizedBox(height: 8),
-              const AppTextField(label: 'Last Name', hint: 'Doe'),
-            ],
-          ),
-          const SizedBox(height: 24),
-          _sectionTitle(context, 'AppImagePicker'),
-          AppImagePicker(
-            label: 'Choose Photo',
-            onPickRequested: (source) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text('Pick from: ${source.name}')),
-              );
-            },
-          ),
-          const SizedBox(height: 32),
         ],
       ),
-    );
-  }
-
-  Widget _sectionTitle(BuildContext context, String title) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 8),
-      child: Text(title, style: Theme.of(context).textTheme.titleMedium),
     );
   }
 }

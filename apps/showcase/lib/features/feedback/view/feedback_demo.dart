@@ -1,5 +1,12 @@
-import 'package:app_lib_ui_kit/ui_kit.dart';
 import 'package:flutter/material.dart';
+
+import 'demos/app_dialog_demo.dart';
+import 'demos/app_toast_demo.dart';
+import 'demos/badge_widget_demo.dart';
+import 'demos/empty_state_view_demo.dart';
+import 'demos/error_state_view_demo.dart';
+import 'demos/shimmer_widget_demo.dart';
+import 'demos/skeleton_loader_demo.dart';
 
 class FeedbackDemo extends StatelessWidget {
   const FeedbackDemo({super.key});
@@ -9,182 +16,79 @@ class FeedbackDemo extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('Feedback')),
       body: ListView(
-        padding: const EdgeInsets.all(16),
         children: [
-          _sectionTitle(context, 'SkeletonLoader'),
-          Row(
-            children: [
-              const SkeletonLoader(
-                shape: SkeletonShape.circle,
-                width: 48,
-                height: 48,
-              ),
-              const SizedBox(width: 12),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
-                    SkeletonLoader(height: 14, width: 120),
-                    SizedBox(height: 8),
-                    SkeletonLoader(height: 14),
-                  ],
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 12),
-          const SkeletonLoader(shape: SkeletonShape.text, lineCount: 4),
-          const SizedBox(height: 24),
-          _sectionTitle(context, 'ShimmerWidget'),
-          ShimmerWidget(
-            child: Container(
-              height: 80,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(12),
-              ),
+          ListTile(
+            leading: const Icon(Icons.rectangle_outlined),
+            title: const Text('SkeletonLoader'),
+            subtitle: const Text('Placeholder skeleton shapes'),
+            trailing: const Icon(Icons.chevron_right),
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute<void>(builder: (_) => const SkeletonLoaderDemo()),
             ),
           ),
-          const SizedBox(height: 24),
-          _sectionTitle(context, 'EmptyStateView'),
-          const EmptyStateView(
-            title: 'No Items Found',
-            subtitle: 'Try adjusting your search or filters.',
-            icon: Icons.inbox,
-            actionLabel: 'Refresh',
+          ListTile(
+            leading: const Icon(Icons.gradient),
+            title: const Text('ShimmerWidget'),
+            subtitle: const Text('Animated shimmer loading effect'),
+            trailing: const Icon(Icons.chevron_right),
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute<void>(builder: (_) => const ShimmerWidgetDemo()),
+            ),
           ),
-          const SizedBox(height: 24),
-          _sectionTitle(context, 'ErrorStateView'),
-          ErrorStateView(
-            message: 'Something went wrong. Please try again.',
-            onRetry: () {
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('Retry tapped')),
-              );
-            },
+          ListTile(
+            leading: const Icon(Icons.inbox),
+            title: const Text('EmptyStateView'),
+            subtitle: const Text('Empty state with icon and action'),
+            trailing: const Icon(Icons.chevron_right),
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute<void>(builder: (_) => const EmptyStateViewDemo()),
+            ),
           ),
-          const SizedBox(height: 24),
-          _sectionTitle(context, 'BadgeWidget'),
-          Row(
-            children: [
-              BadgeWidget(
-                count: 5,
-                child: Icon(Icons.mail,
-                    size: 32, color: Theme.of(context).colorScheme.primary),
-              ),
-              const SizedBox(width: 24),
-              BadgeWidget(
-                showDot: true,
-                child: Icon(Icons.notifications,
-                    size: 32, color: Theme.of(context).colorScheme.primary),
-              ),
-              const SizedBox(width: 24),
-              BadgeWidget(
-                count: 99,
-                child: Icon(Icons.chat,
-                    size: 32, color: Theme.of(context).colorScheme.primary),
-              ),
-            ],
+          ListTile(
+            leading: const Icon(Icons.error_outline),
+            title: const Text('ErrorStateView'),
+            subtitle: const Text('Error state with retry button'),
+            trailing: const Icon(Icons.chevron_right),
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute<void>(builder: (_) => const ErrorStateViewDemo()),
+            ),
           ),
-          const SizedBox(height: 24),
-          _sectionTitle(context, 'AppDialog'),
-          Wrap(
-            spacing: 8,
-            runSpacing: 8,
-            children: [
-              ElevatedButton(
-                onPressed: () => AppDialog.show(
-                  context,
-                  title: 'Info',
-                  content: 'This is an informational dialog.',
-                  variant: AppDialogVariant.info,
-                  primaryLabel: 'OK',
-                ),
-                child: const Text('Info'),
-              ),
-              ElevatedButton(
-                onPressed: () => AppDialog.show(
-                  context,
-                  title: 'Success',
-                  content: 'Operation completed successfully!',
-                  variant: AppDialogVariant.success,
-                  primaryLabel: 'Great',
-                ),
-                child: const Text('Success'),
-              ),
-              ElevatedButton(
-                onPressed: () => AppDialog.show(
-                  context,
-                  title: 'Error',
-                  content: 'An error occurred.',
-                  variant: AppDialogVariant.error,
-                  primaryLabel: 'Dismiss',
-                ),
-                child: const Text('Error'),
-              ),
-              ElevatedButton(
-                onPressed: () => AppDialog.show(
-                  context,
-                  title: 'Confirm',
-                  content: 'Are you sure you want to proceed?',
-                  variant: AppDialogVariant.confirm,
-                  primaryLabel: 'Yes',
-                  secondaryLabel: 'No',
-                ),
-                child: const Text('Confirm'),
-              ),
-            ],
+          ListTile(
+            leading: const Icon(Icons.dialpad),
+            title: const Text('AppDialog'),
+            subtitle: const Text('Info, success, error, confirm dialogs'),
+            trailing: const Icon(Icons.chevron_right),
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute<void>(builder: (_) => const AppDialogDemo()),
+            ),
           ),
-          const SizedBox(height: 24),
-          _sectionTitle(context, 'AppToast'),
-          Wrap(
-            spacing: 8,
-            runSpacing: 8,
-            children: [
-              ElevatedButton(
-                onPressed: () => AppToast.show(
-                  context,
-                  message: 'Info toast message',
-                  variant: AppToastVariant.info,
-                ),
-                child: const Text('Info Toast'),
-              ),
-              ElevatedButton(
-                onPressed: () => AppToast.show(
-                  context,
-                  message: 'Success toast message',
-                  variant: AppToastVariant.success,
-                ),
-                child: const Text('Success Toast'),
-              ),
-              ElevatedButton(
-                onPressed: () => AppToast.show(
-                  context,
-                  message: 'Error toast message',
-                  variant: AppToastVariant.error,
-                ),
-                child: const Text('Error Toast'),
-              ),
-              ElevatedButton(
-                onPressed: () => AppToast.show(
-                  context,
-                  message: 'Warning toast message',
-                  variant: AppToastVariant.warning,
-                ),
-                child: const Text('Warning Toast'),
-              ),
-            ],
+          ListTile(
+            leading: const Icon(Icons.message),
+            title: const Text('AppToast'),
+            subtitle: const Text('Toast/snackbar variants'),
+            trailing: const Icon(Icons.chevron_right),
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute<void>(builder: (_) => const AppToastDemo()),
+            ),
           ),
-          const SizedBox(height: 32),
+          ListTile(
+            leading: const Icon(Icons.notifications_active),
+            title: const Text('BadgeWidget'),
+            subtitle: const Text('Count badge and dot badge on icons'),
+            trailing: const Icon(Icons.chevron_right),
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute<void>(builder: (_) => const BadgeWidgetDemo()),
+            ),
+          ),
         ],
       ),
-    );
-  }
-
-  Widget _sectionTitle(BuildContext context, String title) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 8),
-      child: Text(title, style: Theme.of(context).textTheme.titleMedium),
     );
   }
 }

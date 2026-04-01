@@ -1,7 +1,9 @@
-import 'package:app_lib_ui_kit/ui_kit.dart';
 import 'package:flutter/material.dart';
 
-import '../../../sample_data/sample_data.dart';
+import 'demos/forgot_password_form_demo.dart';
+import 'demos/login_form_demo.dart';
+import 'demos/onboarding_carousel_demo.dart';
+import 'demos/sign_up_form_demo.dart';
 
 class OnboardingDemo extends StatelessWidget {
   const OnboardingDemo({super.key});
@@ -11,76 +13,53 @@ class OnboardingDemo extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('Onboarding')),
       body: ListView(
-        padding: const EdgeInsets.all(16),
         children: [
-          _sectionTitle(context, 'OnboardingCarousel'),
-          SizedBox(
-            height: 380,
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(12),
-              child: OnboardingCarousel(
-                pages: SampleData.onboardingPages
-                    .map(
-                      (p) => OnboardingPage(
-                        title: p['title']!,
-                        subtitle: p['subtitle']!,
-                        image: Icon(
-                          Icons.widgets,
-                          size: 80,
-                          color: Theme.of(context).colorScheme.primary,
-                        ),
-                      ),
-                    )
-                    .toList(),
-                onFinish: () {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('Onboarding finished!')),
-                  );
-                },
+          ListTile(
+            leading: const Icon(Icons.swipe),
+            title: const Text('OnboardingCarousel'),
+            subtitle: const Text('Swipeable pages with indicator'),
+            trailing: const Icon(Icons.chevron_right),
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute<void>(
+                builder: (_) => const OnboardingCarouselDemo(),
               ),
             ),
           ),
-          const SizedBox(height: 24),
-          _sectionTitle(context, 'LoginForm'),
-          LoginForm(
-            onLogin: (email, password) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text('Login: $email')),
-              );
-            },
-            onGoogleLogin: () {},
-            onAppleLogin: () {},
-            onForgotPassword: () {},
+          ListTile(
+            leading: const Icon(Icons.login),
+            title: const Text('LoginForm'),
+            subtitle: const Text('Email + password + social login'),
+            trailing: const Icon(Icons.chevron_right),
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute<void>(builder: (_) => const LoginFormDemo()),
+            ),
           ),
-          const SizedBox(height: 24),
-          _sectionTitle(context, 'SignUpForm'),
-          SignUpForm(
-            onSignUp: (name, email, password) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text('Sign up: $name ($email)')),
-              );
-            },
+          ListTile(
+            leading: const Icon(Icons.person_add),
+            title: const Text('SignUpForm'),
+            subtitle: const Text('Name, email, password registration'),
+            trailing: const Icon(Icons.chevron_right),
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute<void>(builder: (_) => const SignUpFormDemo()),
+            ),
           ),
-          const SizedBox(height: 24),
-          _sectionTitle(context, 'ForgotPasswordForm'),
-          ForgotPasswordForm(
-            description: 'Enter your email to receive a reset link.',
-            onSubmit: (email) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text('Reset link sent to $email')),
-              );
-            },
+          ListTile(
+            leading: const Icon(Icons.lock_reset),
+            title: const Text('ForgotPasswordForm'),
+            subtitle: const Text('Email-based password reset'),
+            trailing: const Icon(Icons.chevron_right),
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute<void>(
+                builder: (_) => const ForgotPasswordFormDemo(),
+              ),
+            ),
           ),
-          const SizedBox(height: 32),
         ],
       ),
-    );
-  }
-
-  Widget _sectionTitle(BuildContext context, String title) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 8),
-      child: Text(title, style: Theme.of(context).textTheme.titleMedium),
     );
   }
 }

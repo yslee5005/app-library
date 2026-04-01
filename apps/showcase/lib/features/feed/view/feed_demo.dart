@@ -1,7 +1,9 @@
-import 'package:app_lib_ui_kit/ui_kit.dart';
 import 'package:flutter/material.dart';
 
-import '../../../sample_data/sample_data.dart';
+import 'demos/app_card_demo.dart';
+import 'demos/app_list_tile_demo.dart';
+import 'demos/detail_screen_layout_demo.dart';
+import 'demos/feed_list_view_demo.dart';
 
 class FeedDemo extends StatelessWidget {
   const FeedDemo({super.key});
@@ -11,101 +13,51 @@ class FeedDemo extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('Feed')),
       body: ListView(
-        padding: const EdgeInsets.all(16),
         children: [
-          _sectionTitle(context, 'FeedListView with AppCards'),
-          SizedBox(
-            height: 500,
-            child: FeedListView(
-              itemCount: SampleData.feedItems.length,
-              itemBuilder: (context, index) {
-                final item = SampleData.feedItems[index];
-                return AppCard(
-                  title: item['title']!,
-                  subtitle: item['subtitle'],
-                  image: Container(
-                    color: Colors.primaries[index % Colors.primaries.length]
-                        .withValues(alpha: 0.3),
-                    child: Center(
-                      child: Icon(
-                        Icons.image,
-                        size: 48,
-                        color:
-                            Colors.primaries[index % Colors.primaries.length],
-                      ),
-                    ),
-                  ),
-                  onTap: () {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text('Tapped ${item['title']}')),
-                    );
-                  },
-                );
-              },
-              onRefresh: () async {
-                await Future<void>.delayed(const Duration(seconds: 1));
-              },
+          ListTile(
+            leading: const Icon(Icons.view_list),
+            title: const Text('FeedListView'),
+            subtitle: const Text('Infinite scroll feed with cards'),
+            trailing: const Icon(Icons.chevron_right),
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute<void>(builder: (_) => const FeedListViewDemo()),
             ),
           ),
-          const SizedBox(height: 24),
-          _sectionTitle(context, 'AppCard (horizontal layout)'),
-          AppCard(
-            title: 'Horizontal Card',
-            subtitle: 'This card uses a horizontal layout.',
-            layout: AppCardLayout.horizontal,
-            image: Container(
-              color: Theme.of(context).colorScheme.primaryContainer,
-              child: const Center(child: Icon(Icons.image, size: 36)),
+          ListTile(
+            leading: const Icon(Icons.credit_card),
+            title: const Text('AppCard'),
+            subtitle: const Text('Vertical, horizontal, and text-only variants'),
+            trailing: const Icon(Icons.chevron_right),
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute<void>(builder: (_) => const AppCardDemo()),
             ),
-            onTap: () {},
           ),
-          const SizedBox(height: 24),
-          _sectionTitle(context, 'AppListTile'),
-          ...List.generate(5, (i) {
-            return AppListTile(
-              title: 'List item ${i + 1}',
-              subtitle: 'Subtitle for item ${i + 1}',
-              leading: CircleAvatar(child: Text('${i + 1}')),
-              trailing: const Icon(Icons.chevron_right),
-              onTap: () {},
-            );
-          }),
-          const SizedBox(height: 24),
-          _sectionTitle(context, 'DetailScreenLayout'),
-          SizedBox(
-            height: 400,
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(12),
-              child: DetailScreenLayout(
-                title: 'Detail View',
-                heroImage: Container(
-                  color: Theme.of(context).colorScheme.primaryContainer,
-                  child: const Center(
-                    child: Icon(Icons.photo, size: 64, color: Colors.white70),
-                  ),
-                ),
-                expandedHeight: 200,
-                body: Padding(
-                  padding: const EdgeInsets.all(16),
-                  child: Text(
-                    'This is a detail screen layout with a hero image '
-                    'that collapses as you scroll.',
-                    style: Theme.of(context).textTheme.bodyLarge,
-                  ),
-                ),
+          ListTile(
+            leading: const Icon(Icons.list),
+            title: const Text('AppListTile'),
+            subtitle: const Text('List tile with leading, trailing, and tap'),
+            trailing: const Icon(Icons.chevron_right),
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute<void>(builder: (_) => const AppListTileDemo()),
+            ),
+          ),
+          ListTile(
+            leading: const Icon(Icons.article),
+            title: const Text('DetailScreenLayout'),
+            subtitle: const Text('Collapsing hero image detail screen'),
+            trailing: const Icon(Icons.chevron_right),
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute<void>(
+                builder: (_) => const DetailScreenLayoutDemo(),
               ),
             ),
           ),
-          const SizedBox(height: 32),
         ],
       ),
-    );
-  }
-
-  Widget _sectionTitle(BuildContext context, String title) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 8),
-      child: Text(title, style: Theme.of(context).textTheme.titleMedium),
     );
   }
 }

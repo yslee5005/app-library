@@ -1,8 +1,10 @@
-import 'package:app_lib_ui_kit/ui_kit.dart';
 import 'package:flutter/material.dart';
 
-import '../../../app.dart';
-import '../../../sample_data/sample_data.dart';
+import 'demos/language_picker_tile_demo.dart';
+import 'demos/profile_edit_form_demo.dart';
+import 'demos/profile_header_demo.dart';
+import 'demos/settings_screen_demo.dart';
+import 'demos/theme_switch_tile_demo.dart';
 
 class ProfileDemo extends StatelessWidget {
   const ProfileDemo({super.key});
@@ -12,123 +14,61 @@ class ProfileDemo extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('Profile')),
       body: ListView(
-        padding: const EdgeInsets.all(16),
         children: [
-          _sectionTitle(context, 'ProfileHeader'),
-          ProfileHeader(
-            displayName: SampleData.userName,
-            bio: SampleData.userBio,
-            stats: const [
-              ProfileStat(label: 'Followers', count: 1200),
-              ProfileStat(label: 'Posts', count: 342),
-              ProfileStat(label: 'Following', count: 180),
-            ],
-          ),
-          const SizedBox(height: 24),
-          _sectionTitle(context, 'ProfileEditForm'),
-          ProfileEditForm(
-            initialName: SampleData.userName,
-            initialBio: SampleData.userBio,
-            onSave: (name, bio) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text('Saved: $name')),
-              );
-            },
-          ),
-          const SizedBox(height: 24),
-          _sectionTitle(context, 'SettingsScreen'),
-          SizedBox(
-            height: 500,
-            child: SettingsScreen(
-              sections: [
-                SettingsSection(
-                  title: 'Appearance',
-                  items: [
-                    SettingsItem(
-                      title: 'Dark Mode',
-                      icon: Icons.dark_mode,
-                      type: SettingsItemType.toggle,
-                      value: ShowcaseApp.themeMode.value == ThemeMode.dark,
-                      onChanged: (val) {
-                        ShowcaseApp.themeMode.value =
-                            (val as bool) ? ThemeMode.dark : ThemeMode.light;
-                      },
-                    ),
-                    SettingsItem(
-                      title: 'Language',
-                      subtitle: 'English',
-                      icon: Icons.language,
-                      type: SettingsItemType.navigation,
-                      onTap: () {},
-                    ),
-                  ],
-                ),
-                SettingsSection(
-                  title: 'Account',
-                  items: [
-                    SettingsItem(
-                      title: 'Notifications',
-                      icon: Icons.notifications,
-                      type: SettingsItemType.toggle,
-                      value: true,
-                      onChanged: (_) {},
-                    ),
-                    SettingsItem(
-                      title: 'Privacy',
-                      icon: Icons.lock,
-                      type: SettingsItemType.navigation,
-                      onTap: () {},
-                    ),
-                    SettingsItem(
-                      title: 'Log Out',
-                      icon: Icons.logout,
-                      type: SettingsItemType.navigation,
-                      onTap: () {},
-                    ),
-                  ],
-                ),
-              ],
+          ListTile(
+            leading: const Icon(Icons.account_circle),
+            title: const Text('ProfileHeader'),
+            subtitle: const Text('Avatar, name, bio, and stats'),
+            trailing: const Icon(Icons.chevron_right),
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute<void>(builder: (_) => const ProfileHeaderDemo()),
             ),
           ),
-          const SizedBox(height: 24),
-          _sectionTitle(context, 'ThemeSwitchTile'),
-          ValueListenableBuilder<ThemeMode>(
-            valueListenable: ShowcaseApp.themeMode,
-            builder: (context, mode, _) {
-              return ThemeSwitchTile(
-                isDarkMode: mode == ThemeMode.dark,
-                onChanged: (val) {
-                  ShowcaseApp.themeMode.value =
-                      val ? ThemeMode.dark : ThemeMode.light;
-                },
-              );
-            },
+          ListTile(
+            leading: const Icon(Icons.edit),
+            title: const Text('ProfileEditForm'),
+            subtitle: const Text('Editable name and bio fields'),
+            trailing: const Icon(Icons.chevron_right),
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute<void>(builder: (_) => const ProfileEditFormDemo()),
+            ),
           ),
-          const SizedBox(height: 24),
-          _sectionTitle(context, 'LanguagePickerTile'),
-          LanguagePickerTile(
-            currentLanguage: 'en',
-            languages: const [
-              LanguageOption(code: 'en', label: 'English'),
-              LanguageOption(code: 'ko', label: 'Korean'),
-              LanguageOption(code: 'ja', label: 'Japanese'),
-            ],
-            onChanged: (code) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text('Language: $code')),
-              );
-            },
+          ListTile(
+            leading: const Icon(Icons.settings),
+            title: const Text('SettingsScreen'),
+            subtitle: const Text('Grouped settings with toggles and nav'),
+            trailing: const Icon(Icons.chevron_right),
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute<void>(builder: (_) => const SettingsScreenDemo()),
+            ),
           ),
-          const SizedBox(height: 32),
+          ListTile(
+            leading: const Icon(Icons.dark_mode),
+            title: const Text('ThemeSwitchTile'),
+            subtitle: const Text('Dark mode toggle tile'),
+            trailing: const Icon(Icons.chevron_right),
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute<void>(builder: (_) => const ThemeSwitchTileDemo()),
+            ),
+          ),
+          ListTile(
+            leading: const Icon(Icons.language),
+            title: const Text('LanguagePickerTile'),
+            subtitle: const Text('Language selector dropdown'),
+            trailing: const Icon(Icons.chevron_right),
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute<void>(
+                builder: (_) => const LanguagePickerTileDemo(),
+              ),
+            ),
+          ),
         ],
       ),
-    );
-  }
-
-  Widget _sectionTitle(BuildContext context, String title) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 8),
-      child: Text(title, style: Theme.of(context).textTheme.titleMedium),
     );
   }
 }
