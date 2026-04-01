@@ -1,0 +1,17 @@
+# App Library — Ralph Loop 설정
+# Max $200 플랜 최적화 (정액제 → 비용 제한 불필요)
+
+# 시간 제한
+CLAUDE_TIMEOUT_MINUTES=15
+SESSION_EXPIRY_HOURS=6
+
+# stuck 감지
+CB_NO_PROGRESS_THRESHOLD=3
+CB_SAME_ERROR_THRESHOLD=5
+
+# 비용 (Max 플랜이므로 넉넉하게)
+MAX_CALLS_PER_HOUR=100
+MAX_TOKENS_PER_HOUR=0
+
+# 도구 제한
+ALLOWED_TOOLS="Write,Read,Edit,Glob,Grep,Bash(flutter *),Bash(dart *),Bash(melos *),Bash(git add *),Bash(git commit *),Bash(git checkout *),Bash(git branch *),Bash(git diff *),Bash(git log *),Bash(git status),Bash(mkdir *),Bash(ls *)"

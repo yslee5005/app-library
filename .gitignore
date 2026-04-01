@@ -1,0 +1,54 @@
+# Environment
+.env
+.env.*
+!.env.example
+
+# Flutter/Dart
+**/build/
+**/.dart_tool/
+**/.packages
+**/.pub-cache/
+**/.pub/
+**/pubspec.lock
+# Keep root pubspec.lock for monorepo
+!/pubspec.lock
+
+# IDE
+.idea/
+*.iml
+.vscode/
+*.swp
+*.swo
+
+# macOS
+.DS_Store
+**/.DS_Store
+Thumbs.db
+
+# Generated
+**/*.g.dart
+**/*.freezed.dart
+**/*.gr.dart
+**/*.mocks.dart
+
+# Debug
+**/debug-info/
+
+# Melos
+.melos/
+
+# Ralph
+.ralph/logs/
+.progress.md
+
+# Claude Code
+.claude/settings.local.json
+
+# Secrets
+*.key
+*.pem
+*.p12
+*.jks
+credentials.json
+google-services.json
+GoogleService-Info.plist
