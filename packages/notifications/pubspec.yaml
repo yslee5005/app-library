@@ -1,0 +1,16 @@
+name: app_lib_notifications
+description: App Library notifications package.
+version: 1.0.0
+publish_to: none
+environment:
+  sdk: ^3.7.0
+  flutter: ">=3.29.0"
+resolution: workspace
+dependencies:
+  flutter:
+    sdk: flutter
+  app_lib_core:
+    path: ../core
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
