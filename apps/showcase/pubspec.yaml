@@ -1,0 +1,20 @@
+name: showcase
+description: App Library component showcase app.
+version: 1.0.0
+publish_to: none
+environment:
+  sdk: ^3.7.0
+  flutter: ">=3.29.0"
+resolution: workspace
+dependencies:
+  flutter:
+    sdk: flutter
+  app_lib_core:
+    path: ../../packages/core
+  app_lib_theme:
+    path: ../../packages/theme
+  app_lib_ui_kit:
+    path: ../../packages/ui_kit
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
