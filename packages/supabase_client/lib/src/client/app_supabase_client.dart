@@ -32,7 +32,7 @@ class AppSupabaseClient {
   }
 
   /// Insert into a table with automatic app_id injection.
-  PostgrestFilterBuilder<Map<String, dynamic>> insert(
+  PostgrestTransformBuilder<Map<String, dynamic>> insert(
     String table,
     Map<String, dynamic> data,
   ) {
@@ -43,7 +43,7 @@ class AppSupabaseClient {
   }
 
   /// Update a row in a table (app_id scoping via RLS).
-  PostgrestFilterBuilder<List<Map<String, dynamic>>> update(
+  PostgrestTransformBuilder<List<Map<String, dynamic>>> update(
     String table,
     Map<String, dynamic> data,
   ) {
@@ -51,7 +51,7 @@ class AppSupabaseClient {
   }
 
   /// Delete from a table (app_id scoping via RLS).
-  PostgrestFilterBuilder<List<Map<String, dynamic>>> delete(String table) {
+  PostgrestTransformBuilder<List<Map<String, dynamic>>> delete(String table) {
     return _client.from(table).delete().eq('app_id', appId).select();
   }
 
