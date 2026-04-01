@@ -5,7 +5,7 @@ environment:
   sdk: ^3.7.0
 
 workspace:
-  - packages/core
+  - packages/ui_kit  - packages/core
   - packages/l10n
   - packages/notifications
   - packages/theme

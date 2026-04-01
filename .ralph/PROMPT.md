@@ -1,135 +1,73 @@
-# Ralph Development Instructions — App Library Phase 3: Auth + Comments
+# Ralph Development Instructions — App Library Phase 4: Theme + Notifications + L10n
 
 ## Context
 You are Ralph, an autonomous AI development agent working on the **app-library** monorepo.
 
 Read and follow CLAUDE.md in the project root.
-Read specs/design/DESIGN.md for architecture, DB schema, and RLS policies.
-Read specs/security/SECURITY.md for security rules.
+Read specs/design/DESIGN.md for architecture patterns.
 
-Existing packages (DO NOT MODIFY): core, supabase_client, pagination, cache, error_logging.
+Existing packages (DO NOT MODIFY): core, supabase_client, pagination, cache, error_logging, auth, comments.
 
 ## Current Objectives
 
-Build 2 packages in order: auth → comments.
-Also create Supabase migration SQL files (DO NOT execute them).
+Build 3 packages in order: theme → notifications → l10n
 
-### Package 1: auth
-- [ ] Implement AuthState sealed class in auth/lib/src/domain/ (authenticated, unauthenticated, loading, error)
-- [ ] Implement UserProfile model in auth/lib/src/domain/ (id, appId, email, displayName, avatarUrl, provider)
-- [ ] Implement AuthRepository abstract interface in auth/lib/src/domain/ (signInWithGoogle, signInWithApple, signInWithEmail, signUp, signOut, deleteAccount, getCurrentUser, onAuthStateChange)
-- [ ] Implement SupabaseAuthRepository in auth/lib/src/data/ (implements AuthRepository using supabase_flutter)
-- [ ] Implement GoogleAuthService in auth/lib/src/data/ (google_sign_in + Supabase OAuth)
-- [ ] Implement AppleAuthService in auth/lib/src/data/ (sign_in_with_apple + Supabase OAuth)
-- [ ] Implement EmailAuthService in auth/lib/src/data/ (Supabase email/password)
-- [ ] Create auth/lib/auth.dart barrel export
-- [ ] Write unit tests for AuthState and UserProfile models
-- [ ] Run `dart analyze` on auth — 0 issues
-- [ ] Git commit: "feat: add auth package — authentication models and services"
+### Package 1: theme
+- [ ] Create packages/theme/ directory structure (lib/src/tokens/, config/, generators/ + test/)
+- [ ] Create pubspec.yaml (depends on app_lib_core + flutter, resolution: workspace)
+- [ ] Implement AppColors class in tokens/ (seed color based, light/dark variants)
+- [ ] Implement AppSpacing class in tokens/ (xs, sm, md, lg, xl constants)
+- [ ] Implement AppRadius class in tokens/ (sm, md, lg, xl constants)
+- [ ] Implement AppTypography class in tokens/ (heading, body, caption text styles)
+- [ ] Implement ThemeConfig in config/ (seedColor, fontFamily, borderRadius → input)
+- [ ] Implement ThemeGenerator in generators/ (ThemeConfig → ThemeData for light + dark)
+- [ ] Create theme.dart barrel export
+- [ ] Write unit tests (ThemeGenerator produces valid ThemeData, light/dark differ)
+- [ ] Run `flutter analyze` — 0 issues
+- [ ] Git commit: "feat: add theme package — seed color based theme generator"
 
-### Package 2: comments
-- [ ] Implement CommentModel in comments/lib/src/domain/ (id, appId, contentType, contentId, userId, body, parentCommentId, likeCount, replyCount, isDeleted, createdAt)
-- [ ] Implement CommentFilter in comments/lib/src/domain/ (contentType, contentId, parentCommentId, userId, sortBy)
-- [ ] Implement CreateCommentRequest in comments/lib/src/domain/ (contentType, contentId, body, parentCommentId)
-- [ ] Implement CommentRepository abstract interface in comments/lib/src/domain/ (getComments, addComment, updateComment, deleteComment, toggleLike, getCommentCount)
-- [ ] Implement SupabaseCommentRepository in comments/lib/src/data/ (implements CommentRepository with cursor pagination, uses app_lib_supabase_client)
-- [ ] Create comments/lib/comments.dart barrel export
-- [ ] Write unit tests for CommentModel, CommentFilter, CreateCommentRequest
-- [ ] Run `dart analyze` on comments — 0 issues
-- [ ] Git commit: "feat: add comments package — comment models and repository"
+### Package 2: notifications
+- [ ] Create packages/notifications/ directory structure (lib/src/domain/, data/ + test/)
+- [ ] Create pubspec.yaml (depends on app_lib_core + flutter_local_notifications, resolution: workspace)
+- [ ] Implement NotificationMessage model in domain/ (id, title, body, payload, scheduledAt)
+- [ ] Implement NotificationRepository abstract interface in domain/ (show, schedule, cancel, cancelAll, requestPermission)
+- [ ] Implement LocalNotificationService in data/ (wraps flutter_local_notifications)
+- [ ] Create notifications.dart barrel export
+- [ ] Write unit tests for NotificationMessage model
+- [ ] Run `flutter analyze` — 0 issues
+- [ ] Git commit: "feat: add notifications package — local notification service"
 
-### Supabase Migrations (create SQL files only, DO NOT execute)
-- [ ] Create supabase/migrations/001_create_profiles.sql
-- [ ] Create supabase/migrations/002_create_comments.sql
-- [ ] Create supabase/migrations/003_create_comment_likes.sql
-- [ ] Create supabase/migrations/004_rls_policies.sql (with COALESCE NULL defense)
-- [ ] Create supabase/migrations/005_rpc_functions.sql (toggle_like, handle_new_user trigger)
-- [ ] Git commit: "feat: add Supabase migration scripts"
+### Package 3: l10n
+- [ ] Create packages/l10n/ directory structure (lib/src/services/, utils/ + test/)
+- [ ] Create pubspec.yaml (depends on app_lib_core only, pure Dart, resolution: workspace)
+- [ ] Implement RelativeTimeFormatter in utils/ (e.g., "3 minutes ago", "yesterday", supports en/ko)
+- [ ] Implement NumberFormatter in utils/ (compact numbers: 1.2K, 3.4M)
+- [ ] Implement LanguageService in services/ (get system locale, supported locales list)
+- [ ] Create l10n.dart barrel export
+- [ ] Write unit tests for RelativeTimeFormatter and NumberFormatter
+- [ ] Run `dart analyze` — 0 issues
+- [ ] Git commit: "feat: add l10n package — relative time and number formatters"
 
 ### Final
-- [ ] Run all dart tests from each package directory — all pass
-- [ ] Run `dart analyze` from each package — 0 issues
-
-## Architecture
-
-### Auth package structure:
-```
-packages/auth/lib/src/
-├── domain/
-│   ├── auth_state.dart          # sealed class
-│   ├── user_profile.dart        # model
-│   └── auth_repository.dart     # abstract interface
-├── data/
-│   ├── supabase_auth_repository.dart
-│   ├── google_auth_service.dart
-│   ├── apple_auth_service.dart
-│   └── email_auth_service.dart
-└── ...
-```
-
-### Comments package structure:
-```
-packages/comments/lib/src/
-├── domain/
-│   ├── comment_model.dart
-│   ├── comment_filter.dart
-│   ├── create_comment_request.dart
-│   └── comment_repository.dart  # abstract interface
-├── data/
-│   └── supabase_comment_repository.dart
-└── ...
-```
-
-### Supabase migration files:
-```
-supabase/migrations/
-├── 001_create_profiles.sql
-├── 002_create_comments.sql
-├── 003_create_comment_likes.sql
-├── 004_rls_policies.sql
-└── 005_rpc_functions.sql
-```
-
-### RLS Policy Pattern (MUST follow):
-```sql
-USING (app_id = COALESCE(
-  current_setting('request.jwt.claims', true)::json->>'app_id',
-  '___INVALID___'
-))
-```
+- [ ] All tests pass in all 3 new packages
 
 ## Code Conventions
-- Files: snake_case.dart, Classes: PascalCase
-- Sealed classes for state types (AuthState)
-- Constructors before fields
-- Use const wherever possible
-- Follow patterns from packages/core and packages/pagination
+- Sealed classes for state types, const where possible
+- Constructors before fields, snake_case files, PascalCase classes
+- Follow existing patterns from packages/core
 
 ## Protected Files (DO NOT MODIFY)
-- .ralph/, .ralphrc
-- packages/core/, packages/supabase_client/, packages/pagination/, packages/cache/, packages/error_logging/
-- CLAUDE.md, specs/, templates/
+- .ralph/, .ralphrc, packages/core/, packages/supabase_client/, packages/pagination/, packages/cache/, packages/error_logging/, packages/auth/, packages/comments/, supabase/
 
 ## Boundaries
-
 ### Always
-- Run `dart test` or `flutter test` after each package
-- Run `dart analyze` after each package — 0 issues
-- Git commit after each milestone
-- All Supabase tables MUST have app_id column
-- All RLS policies MUST use COALESCE NULL defense
-
+- Run tests after each package, git commit after each package
 ### Never
-- git push, rm -rf, .env modification
-- Execute Supabase migrations (only create SQL files)
-- Delete existing tests or packages
-- Use dynamic types
-- Store service_role key in client code
+- git push, rm -rf, .env modification, delete existing code
+### If Stuck
+- Skip Flutter widget tests if simulator not available, focus on unit tests
 
-## Status Reporting (CRITICAL)
-
-At the end of your response, ALWAYS include:
-
+## Status Reporting
 ```
 ---RALPH_STATUS---
 STATUS: IN_PROGRESS | COMPLETE | BLOCKED
@@ -141,5 +79,4 @@ EXIT_SIGNAL: false | true
 RECOMMENDATION: <one line>
 ---END_RALPH_STATUS---
 ```
-
-When ALL checkboxes are done, set EXIT_SIGNAL: true and STATUS: COMPLETE.
+When ALL checkboxes done → EXIT_SIGNAL: true, STATUS: COMPLETE.
