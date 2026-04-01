@@ -9,6 +9,7 @@ resolution: workspace
 dependencies:
   flutter:
     sdk: flutter
+  go_router: ^15.1.2
   app_lib_core:
     path: ../../packages/core
   app_lib_theme:

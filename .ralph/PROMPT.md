@@ -1,70 +1,86 @@
-# Ralph Development Instructions — App Library Phase 6: UI Kit (Search, Forms, Feedback, Media, Charts)
+# Ralph Development Instructions — App Library Phase 7: Showcase App
 
 ## Context
 You are Ralph working on **app-library** monorepo.
-Read CLAUDE.md. packages/ui_kit/ already exists with categories A-D.
-Now adding categories E-I to the SAME ui_kit package.
+Read CLAUDE.md. ALL packages are complete (core, supabase_client, pagination, cache, error_logging, auth, comments, theme, notifications, l10n, ui_kit with 40+ widgets).
+
+Now build a showcase app that demonstrates every component.
 
 ## Current Objectives
 
-Add widgets to existing packages/ui_kit/ — categories E-I (19 widgets).
+Create apps/showcase/ — a Flutter app where you can navigate through all UI components.
 
-### Category E: Search/Filter
-- [ ] E1: AppSearchBar widget — TextField with search icon, clear button, debounced onChanged callback (300ms).
-- [ ] E2: FilterBottomSheet widget — ModalBottomSheet with sections of filter options (checkboxes, range slider, chips). Callback: onApply(FilterState).
-- [ ] E3: SortSelector widget — DropdownButton or popup menu with sort options. Callback: onSortChanged(SortOption).
-- [ ] E4: ChipFilterBar widget — Horizontal scrollable row of FilterChip. Callback: onSelectionChanged(Set<String>).
+### Setup
+- [ ] Create apps/showcase/ Flutter app (flutter create in the directory)
+- [ ] Configure pubspec.yaml with ALL packages as path dependencies + resolution: workspace
+- [ ] Set up app_config.dart (appId: 'showcase')
+- [ ] Set up go_router with routes for each category
+- [ ] Apply theme using app_lib_theme with purple seed color (Color(0xFF6750A4))
 
-### Category F: Input/Forms
-- [ ] F1: AppTextField widget — TextFormField with label, hint, error text, prefix/suffix icon, obscure toggle for passwords.
-- [ ] F2: AppButton widget — ElevatedButton/OutlinedButton/TextButton with loading state, disabled state. Variants: primary, secondary, outline, text.
-- [ ] F3: FormSection widget — Column with section title + list of form fields + optional description text.
-- [ ] F4: AppDateTimePicker widget — Tap to show date/time picker dialog. Displays selected value. Callback: onChanged(DateTime).
-- [ ] F5: AppImagePicker widget — Tap to show camera/gallery choice. Displays selected image thumbnail. Callback: onImageSelected(File).
-- [ ] F6: AppRatingBar widget — Row of star icons, tappable for input or read-only for display. Callback: onRatingChanged(double).
+### Home Screen
+- [ ] Grid of 9 category cards: Navigation, Onboarding, Profile, Feed, Search, Forms, Feedback, Media, Charts
+- [ ] Each card: icon + category name + component count
+- [ ] Tapping a card navigates to that category's demo list
 
-### Category G: Feedback/State
-- [ ] G1: SkeletonLoader widget — Animated placeholder mimicking content layout. Takes child shape (rectangle, circle, text lines).
-- [ ] G2: ShimmerWidget widget — Shimmer animation overlay. Wraps any child widget.
-- [ ] G3: EmptyStateView widget — Centered icon + title + subtitle + optional action button.
-- [ ] G4: ErrorStateView widget — Centered error icon + message + retry button. Callback: onRetry.
-- [ ] G5: AppDialog widget — Configurable dialog: title, content, primary/secondary actions. Variants: success, error, confirm.
-- [ ] G6: AppToast widget — Static method to show snackbar/toast. Variants: success, error, info, warning.
-- [ ] G7: BadgeWidget widget — Small badge overlay on any widget. Shows count number or dot.
+### Category Demo Screens
+- [ ] Navigation demo: show AppShell with 3 tabs, drawer toggle, bottom nav switching
+- [ ] Onboarding demo: OnboardingCarousel with 3 sample pages, LoginForm, SignUpForm
+- [ ] Profile demo: ProfileHeader with sample data, ProfileEditForm, SettingsScreen with sample sections
+- [ ] Feed demo: FeedListView with 20 sample AppCards, AppListTiles, DetailScreenLayout
+- [ ] Search demo: AppSearchBar + ChipFilterBar + FilterBottomSheet + SortSelector
+- [ ] Forms demo: all form widgets (AppTextField, AppButton variants, DateTimePicker, RatingBar)
+- [ ] Feedback demo: SkeletonLoader, ShimmerWidget, EmptyStateView, ErrorStateView, dialogs, toasts
+- [ ] Media demo: AppCachedImage grid, ImageCarousel, AppAvatar sizes, ExpandableText
+- [ ] Charts demo: StatCard row, AppProgressBar variants, HeatmapCalendar with sample data
 
-### Category H: Media/Content
-- [ ] H1: AppCachedImage widget — Image.network with placeholder, error widget, and fade-in animation. Uses cached_network_image pattern.
-- [ ] H2: ImageCarousel widget — PageView of images with page indicator dots. Optional auto-play.
-- [ ] H3: AppAvatar widget — CircleAvatar with image URL fallback to initials. Configurable size (sm, md, lg).
-- [ ] H4: ExpandableText widget — Text with "Show more"/"Show less" toggle. maxLines parameter.
+### Dark Mode
+- [ ] ThemeSwitchTile in settings that toggles between light and dark mode across the entire app
 
-### Category I: Data Visualization
-- [ ] I1: StatCard widget — Card showing big number + label + optional trend indicator (up/down arrow + percentage).
-- [ ] I2: AppProgressBar widget — Linear or circular progress indicator with label and percentage text.
-- [ ] I3: HeatmapCalendar widget — Grid of colored cells representing activity over time (GitHub contribution style). Takes Map<DateTime, int>.
+### Final
+- [ ] App compiles without errors: `flutter build apk --debug` (or just `flutter analyze`)
+- [ ] All screens navigable without crashes
+- [ ] Git commit: "feat: add showcase app — demonstrates all 40+ UI components"
 
-### Finalize
-- [ ] Update ui_kit.dart barrel export with all new widgets
-- [ ] Write widget tests for AppSearchBar, AppButton, EmptyStateView, AppAvatar
-- [ ] Run `flutter analyze` — 0 issues
-- [ ] Git commit: "feat: add ui_kit search, forms, feedback, media, charts widgets"
+## Sample Data
+Use hardcoded sample data (no Supabase connection needed for showcase):
+- Sample user: "John Doe", avatar as initials "JD"
+- Sample feed items: 20 cards with placeholder titles "Item 1" through "Item 20"
+- Sample comments: 5 sample comments
+- Sample stats: followers: 1.2K, posts: 342, rating: 4.8
 
-## Widget Design Rules
-- Use theme tokens from app_lib_theme (never hardcode)
-- Stateless where possible
-- All text passed as parameters (no hardcoded strings)
-- const constructors
-- Material 3
+## App Structure
+```
+apps/showcase/lib/
+├── main.dart
+├── app.dart                    # MaterialApp.router + ProviderScope + theme
+├── config/app_config.dart
+├── router/app_router.dart      # go_router with all category routes
+├── features/
+│   ├── home/view/home_view.dart            # Category grid
+│   ├── navigation/view/navigation_demo.dart
+│   ├── onboarding/view/onboarding_demo.dart
+│   ├── profile/view/profile_demo.dart
+│   ├── feed/view/feed_demo.dart
+│   ├── search/view/search_demo.dart
+│   ├── forms/view/forms_demo.dart
+│   ├── feedback/view/feedback_demo.dart
+│   ├── media/view/media_demo.dart
+│   └── charts/view/charts_demo.dart
+└── sample_data/
+    └── sample_data.dart        # All hardcoded sample data in one file
+```
 
 ## Protected Files (DO NOT MODIFY)
-- .ralph/, .ralphrc, all existing packages except ui_kit additions, specs/, supabase/
-- DO NOT modify existing ui_kit widgets from Phase 5
+- .ralph/, .ralphrc, ALL packages/, specs/, supabase/, templates/
 
 ## Boundaries
 ### Always
-- Theme tokens only, run flutter analyze, git commit
+- Use app_lib_theme for all theming
+- Use go_router for navigation
+- Import widgets from app_lib_ui_kit
+- Run flutter analyze
 ### Never
-- git push, rm -rf, delete existing code, hardcode values
+- git push, rm -rf, modify packages, connect to real Supabase
 
 ## Status Reporting
 ```
