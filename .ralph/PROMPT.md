@@ -1,86 +1,190 @@
-# Ralph Development Instructions — App Library Phase 7: Showcase App
+# Ralph Development Instructions — Showcase App: Component-Level Navigation
 
 ## Context
 You are Ralph working on **app-library** monorepo.
-Read CLAUDE.md. ALL packages are complete (core, supabase_client, pagination, cache, error_logging, auth, comments, theme, notifications, l10n, ui_kit with 40+ widgets).
+Read CLAUDE.md and .claude/rules/flutter-layout.md for layout rules.
 
-Now build a showcase app that demonstrates every component.
+The showcase app (apps/showcase/) already exists and runs. Currently each category (Navigation, Onboarding, etc.) shows all widgets mixed together on one screen.
 
-## Current Objectives
+## Objective
+Refactor ALL 9 category demo screens so each shows a **list of component names** → tapping one opens a **dedicated demo screen** for that single component.
 
-Create apps/showcase/ — a Flutter app where you can navigate through all UI components.
+## Architecture Pattern
 
-### Setup
-- [ ] Create apps/showcase/ Flutter app (flutter create in the directory)
-- [ ] Configure pubspec.yaml with ALL packages as path dependencies + resolution: workspace
-- [ ] Set up app_config.dart (appId: 'showcase')
-- [ ] Set up go_router with routes for each category
-- [ ] Apply theme using app_lib_theme with purple seed color (Color(0xFF6750A4))
+For EACH category, create this structure:
+```
+features/{category}/
+├── view/{category}_demo.dart          ← Component list (names + descriptions)
+└── view/demos/
+    ├── {widget1}_demo.dart            ← Individual demo screen
+    ├── {widget2}_demo.dart
+    └── ...
+```
 
-### Home Screen
-- [ ] Grid of 9 category cards: Navigation, Onboarding, Profile, Feed, Search, Forms, Feedback, Media, Charts
-- [ ] Each card: icon + category name + component count
-- [ ] Tapping a card navigates to that category's demo list
+### Example: Onboarding category
 
-### Category Demo Screens
-- [ ] Navigation demo: show AppShell with 3 tabs, drawer toggle, bottom nav switching
-- [ ] Onboarding demo: OnboardingCarousel with 3 sample pages, LoginForm, SignUpForm
-- [ ] Profile demo: ProfileHeader with sample data, ProfileEditForm, SettingsScreen with sample sections
-- [ ] Feed demo: FeedListView with 20 sample AppCards, AppListTiles, DetailScreenLayout
-- [ ] Search demo: AppSearchBar + ChipFilterBar + FilterBottomSheet + SortSelector
-- [ ] Forms demo: all form widgets (AppTextField, AppButton variants, DateTimePicker, RatingBar)
-- [ ] Feedback demo: SkeletonLoader, ShimmerWidget, EmptyStateView, ErrorStateView, dialogs, toasts
-- [ ] Media demo: AppCachedImage grid, ImageCarousel, AppAvatar sizes, ExpandableText
-- [ ] Charts demo: StatCard row, AppProgressBar variants, HeatmapCalendar with sample data
+**onboarding_demo.dart** (REPLACE existing — becomes a list):
+```dart
+class OnboardingDemo extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('Onboarding')),
+      body: ListView(
+        children: [
+          ListTile(
+            leading: Icon(Icons.swipe),
+            title: Text('OnboardingCarousel'),
+            subtitle: Text('Swipeable pages with indicator'),
+            trailing: Icon(Icons.chevron_right),
+            onTap: () => Navigator.push(context, MaterialPageRoute(
+              builder: (_) => OnboardingCarouselDemo(),
+            )),
+          ),
+          ListTile(
+            leading: Icon(Icons.login),
+            title: Text('LoginForm'),
+            subtitle: Text('Email + password + social login'),
+            trailing: Icon(Icons.chevron_right),
+            onTap: () => Navigator.push(context, MaterialPageRoute(
+              builder: (_) => LoginFormDemo(),
+            )),
+          ),
+          // ... more components
+        ],
+      ),
+    );
+  }
+}
+```
 
-### Dark Mode
-- [ ] ThemeSwitchTile in settings that toggles between light and dark mode across the entire app
+**demos/onboarding_carousel_demo.dart** (individual demo):
+```dart
+class OnboardingCarouselDemo extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('OnboardingCarousel')),
+      body: OnboardingCarousel(
+        pages: SampleData.onboardingPages.map((p) => OnboardingPage(
+          title: p['title']!,
+          subtitle: p['subtitle']!,
+        )).toList(),
+        onComplete: () => Navigator.pop(context),
+      ),
+    );
+  }
+}
+```
+
+## Checklist — ALL 9 categories
+
+### 1. Navigation (4 widgets)
+- [ ] Create features/navigation/view/demos/ directory
+- [ ] app_shell_demo.dart — Full AppShell with 3 tabs + bottom nav
+- [ ] bottom_nav_bar_demo.dart — Standalone bottom nav switching content
+- [ ] drawer_menu_demo.dart — Drawer with sample menu items
+- [ ] tab_layout_demo.dart — TabBar with 3 tabs
+- [ ] Update navigation_demo.dart → list of 4 components with ListTile navigation
+
+### 2. Onboarding (4 widgets)
+- [ ] Create features/onboarding/view/demos/
+- [ ] onboarding_carousel_demo.dart — 3 sample pages carousel
+- [ ] login_form_demo.dart — Login form with all fields
+- [ ] sign_up_form_demo.dart — Sign up form
+- [ ] forgot_password_form_demo.dart — Forgot password form
+- [ ] Update onboarding_demo.dart → list of 4 components
+
+### 3. Profile (5 widgets)
+- [ ] Create features/profile/view/demos/
+- [ ] profile_header_demo.dart — Sample profile header with stats
+- [ ] profile_edit_form_demo.dart — Editable profile form
+- [ ] settings_screen_demo.dart — Settings with sections
+- [ ] theme_switch_tile_demo.dart — Dark mode toggle
+- [ ] language_picker_tile_demo.dart — Language selector
+- [ ] Update profile_demo.dart → list of 5 components
+
+### 4. Feed (4 widgets)
+- [ ] Create features/feed/view/demos/
+- [ ] feed_list_view_demo.dart — Infinite scroll feed with sample cards
+- [ ] app_card_demo.dart — Card variants (vertical, horizontal, with/without image)
+- [ ] app_list_tile_demo.dart — ListTile variants
+- [ ] detail_screen_layout_demo.dart — Detail screen with hero image
+- [ ] Update feed_demo.dart → list of 4 components
+
+### 5. Search (4 widgets)
+- [ ] Create features/search/view/demos/
+- [ ] search_bar_demo.dart — Search bar with debounced results
+- [ ] filter_bottom_sheet_demo.dart — Filter sheet with options
+- [ ] sort_selector_demo.dart — Sort dropdown
+- [ ] chip_filter_bar_demo.dart — Horizontal chip filters
+- [ ] Update search_demo.dart → list of 4 components
+
+### 6. Forms (6 widgets)
+- [ ] Create features/forms/view/demos/
+- [ ] app_text_field_demo.dart — TextField variants (normal, password, error)
+- [ ] app_button_demo.dart — Button variants (primary, secondary, outline, loading)
+- [ ] form_section_demo.dart — Form with sections
+- [ ] date_time_picker_demo.dart — Date/time picker
+- [ ] image_picker_demo.dart — Image selection
+- [ ] rating_bar_demo.dart — Star rating input
+- [ ] Update forms_demo.dart → list of 6 components
+
+### 7. Feedback (7 widgets)
+- [ ] Create features/feedback/view/demos/
+- [ ] skeleton_loader_demo.dart — Skeleton placeholder
+- [ ] shimmer_widget_demo.dart — Shimmer effect
+- [ ] empty_state_view_demo.dart — Empty state with icon and action
+- [ ] error_state_view_demo.dart — Error state with retry
+- [ ] app_dialog_demo.dart — Dialog variants (success, error, confirm)
+- [ ] app_toast_demo.dart — Toast/snackbar variants
+- [ ] badge_widget_demo.dart — Badge on icons
+- [ ] Update feedback_demo.dart → list of 7 components
+
+### 8. Media (4 widgets)
+- [ ] Create features/media/view/demos/
+- [ ] app_cached_image_demo.dart — Cached image with placeholder
+- [ ] image_carousel_demo.dart — Image slider
+- [ ] app_avatar_demo.dart — Avatar sizes (sm, md, lg) with image and initials
+- [ ] expandable_text_demo.dart — Show more/less text
+- [ ] Update media_demo.dart → list of 4 components
+
+### 9. Charts (3 widgets)
+- [ ] Create features/charts/view/demos/
+- [ ] stat_card_demo.dart — Stat cards with trend indicators
+- [ ] app_progress_bar_demo.dart — Linear and circular progress
+- [ ] heatmap_calendar_demo.dart — GitHub-style heatmap
+- [ ] Update charts_demo.dart → list of 3 components
 
 ### Final
-- [ ] App compiles without errors: `flutter build apk --debug` (or just `flutter analyze`)
-- [ ] All screens navigable without crashes
-- [ ] Git commit: "feat: add showcase app — demonstrates all 40+ UI components"
+- [ ] flutter analyze — 0 errors
+- [ ] Git commit: "feat: refactor showcase — component-level navigation for all 9 categories"
+
+## CRITICAL Layout Rules (from .claude/rules/flutter-layout.md)
+- **NEVER** use ListView inside another scrollable without shrinkWrap
+- **Forms**: use SingleChildScrollView + Column, NOT ListView
+- **Individual demo screens**: Scaffold body is bounded, so ListView is OK there
+- **List screens**: ListView with ListTile is fine (direct Scaffold child)
 
 ## Sample Data
-Use hardcoded sample data (no Supabase connection needed for showcase):
-- Sample user: "John Doe", avatar as initials "JD"
-- Sample feed items: 20 cards with placeholder titles "Item 1" through "Item 20"
-- Sample comments: 5 sample comments
-- Sample stats: followers: 1.2K, posts: 342, rating: 4.8
+Import from `sample_data/sample_data.dart` for demo content.
 
-## App Structure
-```
-apps/showcase/lib/
-├── main.dart
-├── app.dart                    # MaterialApp.router + ProviderScope + theme
-├── config/app_config.dart
-├── router/app_router.dart      # go_router with all category routes
-├── features/
-│   ├── home/view/home_view.dart            # Category grid
-│   ├── navigation/view/navigation_demo.dart
-│   ├── onboarding/view/onboarding_demo.dart
-│   ├── profile/view/profile_demo.dart
-│   ├── feed/view/feed_demo.dart
-│   ├── search/view/search_demo.dart
-│   ├── forms/view/forms_demo.dart
-│   ├── feedback/view/feedback_demo.dart
-│   ├── media/view/media_demo.dart
-│   └── charts/view/charts_demo.dart
-└── sample_data/
-    └── sample_data.dart        # All hardcoded sample data in one file
-```
+## Widget Imports
+Import widgets from `package:app_lib_ui_kit/ui_kit.dart`.
+Use Navigator.push with MaterialPageRoute for demo navigation (not go_router for sub-screens).
 
 ## Protected Files (DO NOT MODIFY)
-- .ralph/, .ralphrc, ALL packages/, specs/, supabase/, templates/
+- .ralph/, .ralphrc, packages/, specs/, templates/, supabase/
+- Do NOT modify any ui_kit widget source code — only modify apps/showcase/
 
 ## Boundaries
 ### Always
-- Use app_lib_theme for all theming
-- Use go_router for navigation
-- Import widgets from app_lib_ui_kit
-- Run flutter analyze
+- Each demo screen: Scaffold with AppBar showing widget name
+- Use theme tokens (never hardcode colors)
+- Run flutter analyze before committing
 ### Never
-- git push, rm -rf, modify packages, connect to real Supabase
+- git push, rm -rf, modify packages/
+- Use ListView in unbounded parent (use SingleChildScrollView+Column for forms)
 
 ## Status Reporting
 ```
@@ -94,4 +198,4 @@ EXIT_SIGNAL: false | true
 RECOMMENDATION: <one line>
 ---END_RALPH_STATUS---
 ```
-When ALL checkboxes done → EXIT_SIGNAL: true, STATUS: COMPLETE.
+When ALL 9 categories refactored → EXIT_SIGNAL: true, STATUS: COMPLETE.
