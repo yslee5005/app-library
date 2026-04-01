@@ -1,5 +1,5 @@
 name: app_lib_ui_kit
-description: App Library ui_kit package.
+description: App Library UI Kit — reusable widgets for navigation, onboarding, profile, and feed.
 version: 1.0.0
 publish_to: none
 environment:
@@ -11,6 +11,8 @@ dependencies:
     sdk: flutter
   app_lib_core:
     path: ../core
+  app_lib_theme:
+    path: ../theme
 dev_dependencies:
   flutter_test:
     sdk: flutter
