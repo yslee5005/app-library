@@ -4,6 +4,9 @@ publish_to: none
 environment:
   sdk: ^3.7.0
 
+flutter:
+  uses-material-design: true
+
 workspace:
   - apps/showcase
   - packages/ui_kit
