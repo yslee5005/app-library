@@ -76,8 +76,10 @@ class _LoginFormState extends State<LoginForm> {
     return Form(
       key: _formKey,
       child: AutofillGroup(
-        child: ListView(
+        child: SingleChildScrollView(
           padding: const EdgeInsets.all(AppSpacing.lg),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             // Email
             TextFormField(
@@ -184,6 +186,7 @@ class _LoginFormState extends State<LoginForm> {
                 ),
             ],
           ],
+          ),
         ),
       ),
     );

@@ -77,9 +77,11 @@ class _ProfileEditFormState extends State<ProfileEditForm> {
 
     return Form(
       key: _formKey,
-      child: ListView(
+      child: SingleChildScrollView(
         padding: const EdgeInsets.all(AppSpacing.lg),
-        children: [
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
           // Avatar picker
           Center(
             child: GestureDetector(
@@ -149,6 +151,7 @@ class _ProfileEditFormState extends State<ProfileEditForm> {
                 : Text(widget.saveLabel),
           ),
         ],
+        ),
       ),
     );
   }

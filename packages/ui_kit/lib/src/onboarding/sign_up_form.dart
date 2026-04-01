@@ -66,9 +66,11 @@ class _SignUpFormState extends State<SignUpForm> {
     return Form(
       key: _formKey,
       child: AutofillGroup(
-        child: ListView(
+        child: SingleChildScrollView(
           padding: const EdgeInsets.all(AppSpacing.lg),
-          children: [
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
             // Name
             TextFormField(
               controller: _nameController,
@@ -167,6 +169,7 @@ class _SignUpFormState extends State<SignUpForm> {
                   : Text(widget.signUpLabel),
             ),
           ],
+          ),
         ),
       ),
     );
