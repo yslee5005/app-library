@@ -7,3 +7,6 @@ environment:
 workspace:
   - packages/core
   - packages/supabase_client
+  - packages/pagination
+  - packages/cache
+  - packages/error_logging
