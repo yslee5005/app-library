@@ -16,6 +16,9 @@ dependencies:
     path: ../../packages/theme
   app_lib_ui_kit:
     path: ../../packages/ui_kit
+flutter:
+  uses-material-design: true
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
