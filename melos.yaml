@@ -1,0 +1,38 @@
+name: app_library
+
+packages:
+  - packages/**
+  - apps/**
+
+command:
+  bootstrap:
+    usePubspecOverrides: true
+
+scripts:
+  analyze:
+    run: melos exec -- dart analyze
+    description: Analyze all packages
+
+  test:
+    run: melos exec -- flutter test
+    description: Run tests in all packages
+
+  test:dart:
+    run: melos exec -- dart test
+    description: Run dart tests (for pure Dart packages)
+    packageFilters:
+      noDependsOn: flutter
+
+  build_runner:
+    run: melos exec -- dart run build_runner build --delete-conflicting-outputs
+    description: Run build_runner in packages that use it
+    packageFilters:
+      dependsOn: build_runner
+
+  format:
+    run: melos exec -- dart format lib
+    description: Format all packages
+
+  clean:
+    run: melos exec -- flutter clean
+    description: Clean all packages

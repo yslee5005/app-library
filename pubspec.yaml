@@ -1,0 +1,9 @@
+name: app_library_workspace
+publish_to: none
+
+environment:
+  sdk: ^3.7.0
+
+workspace:
+  - packages/core
+  - packages/supabase_client
