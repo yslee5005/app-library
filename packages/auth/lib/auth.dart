@@ -14,3 +14,6 @@ export 'src/data/apple_auth_service.dart';
 export 'src/data/email_auth_service.dart';
 export 'src/data/google_auth_service.dart';
 export 'src/data/supabase_auth_repository.dart';
+
+// Providers
+export 'src/providers/auth_providers.dart';

@@ -11,3 +11,6 @@ export 'package:app_lib_core/core.dart'
 // Domain
 export 'src/domain/paginated_repository.dart';
 export 'src/domain/pagination_state.dart';
+
+// Providers
+export 'src/providers/pagination_providers.dart';
