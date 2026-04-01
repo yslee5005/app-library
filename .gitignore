@@ -10,6 +10,8 @@
 **/.pub-cache/
 **/.pub/
 **/pubspec.lock
+**/.flutter-plugins
+**/.flutter-plugins-dependencies
 # Keep root pubspec.lock for monorepo
 !/pubspec.lock
 

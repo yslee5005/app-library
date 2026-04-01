@@ -5,7 +5,10 @@ environment:
   sdk: ^3.7.0
 
 workspace:
-  - packages/l10n  - packages/notifications  - packages/theme  - packages/core
+  - packages/core
+  - packages/l10n
+  - packages/notifications
+  - packages/theme
   - packages/supabase_client
   - packages/pagination
   - packages/cache
