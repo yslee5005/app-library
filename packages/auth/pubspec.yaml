@@ -1,0 +1,27 @@
+name: app_lib_auth
+description: Authentication module — Google, Apple, Email/Password with Supabase.
+version: 1.0.0
+publish_to: none
+
+environment:
+  sdk: ^3.7.0
+  flutter: ">=3.29.0"
+
+resolution: workspace
+
+dependencies:
+  flutter:
+    sdk: flutter
+  app_lib_core:
+    path: ../core
+  app_lib_supabase_client:
+    path: ../supabase_client
+  supabase_flutter: ^2.8.0
+  google_sign_in: ^6.2.0
+  sign_in_with_apple: ^6.1.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+  mocktail: ^1.0.0

@@ -10,3 +10,5 @@ workspace:
   - packages/pagination
   - packages/cache
   - packages/error_logging
+  - packages/auth
+  - packages/comments

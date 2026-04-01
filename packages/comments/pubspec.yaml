@@ -1,0 +1,23 @@
+name: app_lib_comments
+description: Comments, replies, and likes system with Supabase.
+version: 1.0.0
+publish_to: none
+
+environment:
+  sdk: ^3.7.0
+
+resolution: workspace
+
+dependencies:
+  app_lib_core:
+    path: ../core
+  app_lib_supabase_client:
+    path: ../supabase_client
+  app_lib_pagination:
+    path: ../pagination
+  supabase_flutter: ^2.8.0
+
+dev_dependencies:
+  lints: ^5.0.0
+  test: ^1.25.0
+  mocktail: ^1.0.0
