@@ -50,6 +50,27 @@ Phase별 PROMPT.md 생성 → `ralph --monitor`
 | 다국어 | + l10n |
 | 공통 위젯 | + ui_kit |
 
+## 추천 pub.dev 패키지 (래핑 불필요, 앱에서 직접 사용)
+
+| 기능 | 패키지 | 비고 |
+|------|--------|------|
+| 이미지 캐싱 | cached_network_image | |
+| URL 열기 | url_launcher | |
+| 스와이프 액션 | flutter_slidable | Flutter Favorite |
+| 무한 스크롤 UI | infinite_scroll_pagination | Flutter Favorite |
+| 차트 | fl_chart | |
+| 시머 로딩 | shimmer | |
+| 이미지 선택 | image_picker | 공식 |
+| 웹뷰 | webview_flutter | 공식 |
+| 지도 | google_maps_flutter | 공식 |
+| 카메라 | camera | 공식 |
+| 소셜 공유 | share_plus | 공식 |
+| 위치 | geolocator | |
+| 생체인증 | local_auth | 공식 |
+
+이 패키지들은 이미 수백만 다운로드로 검증됨. 직접 구현하지 말 것.
+인프라 래핑이 필요한 것(FCM, RevenueCat, Analytics)은 Thin Wrapper 패턴으로.
+
 ## Boundaries (컴팩션 후에도 유지되도록 여기에 명시)
 
 ### Always
