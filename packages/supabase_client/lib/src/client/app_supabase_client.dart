@@ -60,10 +60,13 @@ class AppSupabaseClient {
     String functionName, {
     Map<String, dynamic>? params,
   }) {
-    return _client.rpc(functionName, params: {
-      'p_app_id': appId,
-      ...?params,
-    });
+    return _client.rpc(
+      functionName,
+      params: {
+        'p_app_id': appId,
+        ...?params,
+      },
+    );
   }
 
   /// Initialize Supabase Flutter. Call once in main.dart.

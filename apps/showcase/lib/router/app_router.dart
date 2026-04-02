@@ -4,6 +4,7 @@ import '../features/charts/view/charts_demo.dart';
 import '../features/feed/view/feed_demo.dart';
 import '../features/feedback/view/feedback_demo.dart';
 import '../features/forms/view/forms_demo.dart';
+import '../features/full_flow/view/full_flow_demo.dart';
 import '../features/home/view/home_view.dart';
 import '../features/media/view/media_demo.dart';
 import '../features/navigation/view/navigation_demo.dart';
@@ -53,6 +54,10 @@ final appRouter = GoRouter(
     GoRoute(
       path: '/charts',
       builder: (context, state) => const ChartsDemo(),
+    ),
+    GoRoute(
+      path: '/full-flow',
+      builder: (context, state) => const FullFlowDemo(),
     ),
   ],
 );

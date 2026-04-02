@@ -18,6 +18,7 @@ class HomeView extends StatelessWidget {
     '/feedback',
     '/media',
     '/charts',
+    '/full-flow',
   ];
 
   @override

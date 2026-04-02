@@ -28,6 +28,9 @@ class AppBottomNavBar extends StatelessWidget {
     required this.items,
     required this.currentIndex,
     required this.onTap,
+    this.backgroundColor,
+    this.selectedColor,
+    this.unselectedColor,
     super.key,
   });
 
@@ -40,14 +43,25 @@ class AppBottomNavBar extends StatelessWidget {
   /// Called when an item is tapped.
   final ValueChanged<int> onTap;
 
+  /// Optional background color for the navigation bar.
+  final Color? backgroundColor;
+
+  /// Optional color for the selected item.
+  final Color? selectedColor;
+
+  /// Optional color for unselected items.
+  final Color? unselectedColor;
+
   @override
   Widget build(BuildContext context) {
     return NavigationBar(
       selectedIndex: currentIndex,
       onDestinationSelected: onTap,
+      backgroundColor: backgroundColor,
+      indicatorColor: selectedColor?.withAlpha(40),
       destinations: items.map((item) {
-        Widget icon = Icon(item.icon);
-        Widget activeIcon = Icon(item.activeIcon ?? item.icon);
+        Widget icon = Icon(item.icon, color: unselectedColor);
+        Widget activeIcon = Icon(item.activeIcon ?? item.icon, color: selectedColor);
 
         if (item.badgeCount != null && item.badgeCount! > 0) {
           icon = Badge.count(

@@ -16,6 +16,8 @@ class LoginForm extends StatefulWidget {
     this.appleLabel = 'Continue with Apple',
     this.orDividerLabel = 'or',
     this.isLoading = false,
+    this.spacing,
+    this.buttonStyle,
     super.key,
   });
 
@@ -42,6 +44,12 @@ class LoginForm extends StatefulWidget {
 
   /// Whether the form is in a loading state.
   final bool isLoading;
+
+  /// Optional spacing between form fields. Defaults to [AppSpacing.md].
+  final double? spacing;
+
+  /// Optional style for the login button.
+  final ButtonStyle? buttonStyle;
 
   @override
   State<LoginForm> createState() => _LoginFormState();
@@ -95,7 +103,7 @@ class _LoginFormState extends State<LoginForm> {
                 return null;
               },
             ),
-            const SizedBox(height: AppSpacing.md),
+            SizedBox(height: widget.spacing ?? AppSpacing.md),
 
             // Password
             TextFormField(
@@ -134,11 +142,12 @@ class _LoginFormState extends State<LoginForm> {
                 ),
               ),
 
-            const SizedBox(height: AppSpacing.md),
+            SizedBox(height: widget.spacing ?? AppSpacing.md),
 
             // Login button
             FilledButton(
               onPressed: widget.isLoading ? null : _submit,
+              style: widget.buttonStyle,
               child: widget.isLoading
                   ? const SizedBox(
                       height: 20,

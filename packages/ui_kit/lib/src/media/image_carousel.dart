@@ -12,6 +12,7 @@ class ImageCarousel extends StatefulWidget {
     this.fit = BoxFit.cover,
     this.onPageChanged,
     this.placeholder,
+    this.indicatorColor,
     super.key,
   });
 
@@ -38,6 +39,9 @@ class ImageCarousel extends StatefulWidget {
 
   /// Widget shown while each image loads.
   final Widget? placeholder;
+
+  /// Optional color for the active page indicator dot.
+  final Color? indicatorColor;
 
   @override
   State<ImageCarousel> createState() => _ImageCarouselState();
@@ -140,7 +144,7 @@ class _ImageCarouselState extends State<ImageCarousel> {
                     height: 8,
                     decoration: BoxDecoration(
                       color: isActive
-                          ? theme.colorScheme.primary
+                          ? (widget.indicatorColor ?? theme.colorScheme.primary)
                           : theme.colorScheme.onSurface.withAlpha(80),
                       borderRadius: BorderRadius.circular(4),
                     ),

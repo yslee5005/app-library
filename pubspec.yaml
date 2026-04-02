@@ -9,6 +9,7 @@ flutter:
 
 workspace:
   - apps/showcase
+  - apps/pet-life
   - packages/ui_kit
   - packages/core
   - packages/l10n

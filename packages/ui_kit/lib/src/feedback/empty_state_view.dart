@@ -10,6 +10,7 @@ class EmptyStateView extends StatelessWidget {
     this.actionLabel,
     this.onAction,
     this.iconSize = 64,
+    this.spacing,
     super.key,
   });
 
@@ -31,6 +32,9 @@ class EmptyStateView extends StatelessWidget {
   /// Size of the [icon].
   final double iconSize;
 
+  /// Optional spacing between elements.
+  final double? spacing;
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -47,7 +51,7 @@ class EmptyStateView extends StatelessWidget {
                 size: iconSize,
                 color: theme.colorScheme.onSurfaceVariant.withAlpha(160),
               ),
-              const SizedBox(height: AppSpacing.md),
+              SizedBox(height: spacing ?? AppSpacing.md),
             ],
             Text(
               title,
@@ -55,7 +59,7 @@ class EmptyStateView extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
             if (subtitle != null) ...[
-              const SizedBox(height: AppSpacing.sm),
+              SizedBox(height: spacing ?? AppSpacing.sm),
               Text(
                 subtitle!,
                 style: theme.textTheme.bodyMedium?.copyWith(
@@ -65,7 +69,7 @@ class EmptyStateView extends StatelessWidget {
               ),
             ],
             if (actionLabel != null && onAction != null) ...[
-              const SizedBox(height: AppSpacing.lg),
+              SizedBox(height: spacing ?? AppSpacing.lg),
               FilledButton(onPressed: onAction, child: Text(actionLabel!)),
             ],
           ],

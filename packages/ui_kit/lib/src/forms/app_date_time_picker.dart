@@ -14,6 +14,8 @@ class AppDateTimePicker extends StatelessWidget {
     this.firstDate,
     this.lastDate,
     this.dateFormat,
+    this.borderRadius,
+    this.fillColor,
     super.key,
   });
 
@@ -43,6 +45,12 @@ class AppDateTimePicker extends StatelessWidget {
 
   /// Optional custom formatter. When null uses a default representation.
   final String Function(DateTime)? dateFormat;
+
+  /// Optional border radius override.
+  final double? borderRadius;
+
+  /// Optional fill color for the input field.
+  final Color? fillColor;
 
   String _formatDefault(DateTime dt) {
     final parts = <String>[];
@@ -104,9 +112,10 @@ class AppDateTimePicker extends StatelessWidget {
         ? (dateFormat?.call(value!) ?? _formatDefault(value!))
         : null;
 
+    final effectiveRadius = borderRadius ?? AppRadius.md;
     return InkWell(
       onTap: () => _pick(context),
-      borderRadius: BorderRadius.circular(AppRadius.md),
+      borderRadius: BorderRadius.circular(effectiveRadius),
       child: InputDecorator(
         decoration: InputDecoration(
           labelText: label,
@@ -116,6 +125,13 @@ class AppDateTimePicker extends StatelessWidget {
             horizontal: AppSpacing.md,
             vertical: AppSpacing.sm,
           ),
+          filled: fillColor != null,
+          fillColor: fillColor,
+          border: borderRadius != null
+              ? OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(borderRadius!),
+                )
+              : null,
         ),
         child: displayText != null
             ? Text(displayText, style: theme.textTheme.bodyLarge)

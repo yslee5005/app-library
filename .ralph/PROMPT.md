@@ -1,190 +1,160 @@
-# Ralph Development Instructions — Showcase App: Component-Level Navigation
+# Ralph — Pet Life App Implementation
 
 ## Context
 You are Ralph working on **app-library** monorepo.
-Read CLAUDE.md and .claude/rules/flutter-layout.md for layout rules.
+Build the Pet Life app at `apps/pet-life/`.
+Read `apps/pet-life/specs/REQUIREMENTS.md` for full requirements.
+Read `CLAUDE.md` for project rules.
+Read `.claude/rules/flutter-layout.md` for layout rules.
 
-The showcase app (apps/showcase/) already exists and runs. Currently each category (Navigation, Onboarding, etc.) shows all widgets mixed together on one screen.
+The app concept: **"말 못하는 반려견의 상태를 대변하는 앱"**
 
-## Objective
-Refactor ALL 9 category demo screens so each shows a **list of component names** → tapping one opens a **dedicated demo screen** for that single component.
+## Tech Stack
+- Flutter, go_router, shared_preferences, lottie, share_plus, intl
+- App Library packages: core, theme, ui_kit, cache, notifications, l10n
+- Design: dark premium (#1C1C2E background, #D4A574 amber accent)
+- Data: breed_database.json (130 breeds) in assets/data/
 
-## Architecture Pattern
-
-For EACH category, create this structure:
-```
-features/{category}/
-├── view/{category}_demo.dart          ← Component list (names + descriptions)
-└── view/demos/
-    ├── {widget1}_demo.dart            ← Individual demo screen
-    ├── {widget2}_demo.dart
-    └── ...
-```
-
-### Example: Onboarding category
-
-**onboarding_demo.dart** (REPLACE existing — becomes a list):
+## CRITICAL: Do NOT use Lottie files that don't exist
+Since we don't have actual Lottie JSON files yet, use PLACEHOLDER widgets for dog animation:
 ```dart
-class OnboardingDemo extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text('Onboarding')),
-      body: ListView(
-        children: [
-          ListTile(
-            leading: Icon(Icons.swipe),
-            title: Text('OnboardingCarousel'),
-            subtitle: Text('Swipeable pages with indicator'),
-            trailing: Icon(Icons.chevron_right),
-            onTap: () => Navigator.push(context, MaterialPageRoute(
-              builder: (_) => OnboardingCarouselDemo(),
-            )),
-          ),
-          ListTile(
-            leading: Icon(Icons.login),
-            title: Text('LoginForm'),
-            subtitle: Text('Email + password + social login'),
-            trailing: Icon(Icons.chevron_right),
-            onTap: () => Navigator.push(context, MaterialPageRoute(
-              builder: (_) => LoginFormDemo(),
-            )),
-          ),
-          // ... more components
-        ],
-      ),
-    );
-  }
-}
+// Placeholder for dog character — will be replaced with Lottie later
+Container(
+  width: 150, height: 150,
+  decoration: BoxDecoration(
+    color: Color(0xFFD4A574).withOpacity(0.2),
+    borderRadius: BorderRadius.circular(75),
+  ),
+  child: Icon(Icons.pets, size: 60, color: Color(0xFFD4A574)),
+)
 ```
 
-**demos/onboarding_carousel_demo.dart** (individual demo):
-```dart
-class OnboardingCarouselDemo extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text('OnboardingCarousel')),
-      body: OnboardingCarousel(
-        pages: SampleData.onboardingPages.map((p) => OnboardingPage(
-          title: p['title']!,
-          subtitle: p['subtitle']!,
-        )).toList(),
-        onComplete: () => Navigator.pop(context),
-      ),
-    );
-  }
-}
-```
+## Checklist — Build in Order
 
-## Checklist — ALL 9 categories
+### Phase 1: App Structure + Data Layer
+- [ ] Create app structure: config/, router/, features/, models/, services/
+- [ ] Implement PetProfile model (name, breed, birthDate, weightKg, neutered, routines)
+- [ ] Implement DailyRoutine model (id, name, icon, goalPerDay, streak)
+- [ ] Implement DailyLog model (date, routineId, completed, time)
+- [ ] Implement BreedDataService — loads breed_database.json + breeds_tier2-4.json from assets
+- [ ] Implement PetStorageService — save/load PetProfile and DailyLogs using shared_preferences
+- [ ] Implement DogStateService — determines dog mood based on logs (happy/sad/sleeping/hungry/bored)
+- [ ] Implement LifeCalculator — remaining days, remaining walks, human age, life percentage
+- [ ] Git commit: "feat: pet-life data layer — models and services"
 
-### 1. Navigation (4 widgets)
-- [ ] Create features/navigation/view/demos/ directory
-- [ ] app_shell_demo.dart — Full AppShell with 3 tabs + bottom nav
-- [ ] bottom_nav_bar_demo.dart — Standalone bottom nav switching content
-- [ ] drawer_menu_demo.dart — Drawer with sample menu items
-- [ ] tab_layout_demo.dart — TabBar with 3 tabs
-- [ ] Update navigation_demo.dart → list of 4 components with ListTile navigation
+### Phase 2: Onboarding
+- [ ] Create features/onboarding/ with 3 steps
+- [ ] Step 1: Pet info (name, breed search/select, birth date, weight)
+  - Breed search: TextField that filters breed list from JSON
+  - Show breed info when selected (lifespan, size, exercise needs)
+- [ ] Step 2: Daily routine setup
+  - Toggle cards for routines (walk AM/PM, meal AM/PM, teeth, meds)
+  - Breed-based recommendation text at bottom
+  - [+ 직접 추가] button
+- [ ] Step 3: Summary + start
+- [ ] Save to shared_preferences on complete
+- [ ] Navigate to main home after onboarding
+- [ ] Git commit: "feat: pet-life onboarding — breed select + routine setup"
 
-### 2. Onboarding (4 widgets)
-- [ ] Create features/onboarding/view/demos/
-- [ ] onboarding_carousel_demo.dart — 3 sample pages carousel
-- [ ] login_form_demo.dart — Login form with all fields
-- [ ] sign_up_form_demo.dart — Sign up form
-- [ ] forgot_password_form_demo.dart — Forgot password form
-- [ ] Update onboarding_demo.dart → list of 4 components
+### Phase 3: Main Home Screen
+- [ ] Create features/home/ with HomeView
+- [ ] Top bar: pet name left + streak badge right
+- [ ] Hero section: glassmorphism card with dog placeholder + speech bubble
+  - Speech bubble text from DogStateService
+  - States: happy, wants_walk, hungry, sad, sleeping, bored, very_happy
+- [ ] Life journey mini timeline:
+  - Horizontal bar: Born●━━●━━●━━🐕━●━━○━━○
+  - Past = amber, future = gray, current = paw icon with glow
+  - Show "XX% 경과" text
+  - CustomPaint or Row of widgets
+- [ ] Routine section: horizontal PageView of routine cards
+  - Each card: icon + name + streak fire + complete button
+  - Tap complete → update log → dog reacts → streak increments
+  - Page indicator dots below
+- [ ] Daily insight card: rotating health facts from breed data
+- [ ] Bottom nav: 4 tabs (Home/Analysis/Guide/Settings) with XP bar above
+- [ ] Git commit: "feat: pet-life main home — dog state + journey timeline + routine cards"
 
-### 3. Profile (5 widgets)
-- [ ] Create features/profile/view/demos/
-- [ ] profile_header_demo.dart — Sample profile header with stats
-- [ ] profile_edit_form_demo.dart — Editable profile form
-- [ ] settings_screen_demo.dart — Settings with sections
-- [ ] theme_switch_tile_demo.dart — Dark mode toggle
-- [ ] language_picker_tile_demo.dart — Language selector
-- [ ] Update profile_demo.dart → list of 5 components
+### Phase 4: Analysis Page
+- [ ] Create features/analysis/ with AnalysisView
+- [ ] Life Journey Timeline (full vertical scroll):
+  - Past milestones (amber): birth, socialization, adult, senior
+  - Current position (glowing): age, human age, remaining days
+  - Future warnings (gray): health risks by age from breed data
+  - Emotional message at bottom + share button
+- [ ] Time tab: remaining days card, remaining walks, human age, life progress ring
+- [ ] Health tab: breed-specific disease risk cards with severity colors
+  - Red = critical, orange = high, yellow = moderate
+  - Each card shows: condition, prevalence %, severity, source
+  - Tap → detail page with prevention tips + citation
+- [ ] Record tab: monthly routine completion chart (simple bar chart)
+- [ ] Git commit: "feat: pet-life analysis — journey timeline + health dashboard"
 
-### 4. Feed (4 widgets)
-- [ ] Create features/feed/view/demos/
-- [ ] feed_list_view_demo.dart — Infinite scroll feed with sample cards
-- [ ] app_card_demo.dart — Card variants (vertical, horizontal, with/without image)
-- [ ] app_list_tile_demo.dart — ListTile variants
-- [ ] detail_screen_layout_demo.dart — Detail screen with hero image
-- [ ] Update feed_demo.dart → list of 4 components
+### Phase 5: Guide + Settings
+- [ ] Create features/guide/ — age-based health checklist, vaccination schedule
+- [ ] Create features/settings/ — edit routines, edit pet info, dark mode, language
+- [ ] Add notification scheduling for routine reminders
+- [ ] Git commit: "feat: pet-life guide + settings"
 
-### 5. Search (4 widgets)
-- [ ] Create features/search/view/demos/
-- [ ] search_bar_demo.dart — Search bar with debounced results
-- [ ] filter_bottom_sheet_demo.dart — Filter sheet with options
-- [ ] sort_selector_demo.dart — Sort dropdown
-- [ ] chip_filter_bar_demo.dart — Horizontal chip filters
-- [ ] Update search_demo.dart → list of 4 components
-
-### 6. Forms (6 widgets)
-- [ ] Create features/forms/view/demos/
-- [ ] app_text_field_demo.dart — TextField variants (normal, password, error)
-- [ ] app_button_demo.dart — Button variants (primary, secondary, outline, loading)
-- [ ] form_section_demo.dart — Form with sections
-- [ ] date_time_picker_demo.dart — Date/time picker
-- [ ] image_picker_demo.dart — Image selection
-- [ ] rating_bar_demo.dart — Star rating input
-- [ ] Update forms_demo.dart → list of 6 components
-
-### 7. Feedback (7 widgets)
-- [ ] Create features/feedback/view/demos/
-- [ ] skeleton_loader_demo.dart — Skeleton placeholder
-- [ ] shimmer_widget_demo.dart — Shimmer effect
-- [ ] empty_state_view_demo.dart — Empty state with icon and action
-- [ ] error_state_view_demo.dart — Error state with retry
-- [ ] app_dialog_demo.dart — Dialog variants (success, error, confirm)
-- [ ] app_toast_demo.dart — Toast/snackbar variants
-- [ ] badge_widget_demo.dart — Badge on icons
-- [ ] Update feedback_demo.dart → list of 7 components
-
-### 8. Media (4 widgets)
-- [ ] Create features/media/view/demos/
-- [ ] app_cached_image_demo.dart — Cached image with placeholder
-- [ ] image_carousel_demo.dart — Image slider
-- [ ] app_avatar_demo.dart — Avatar sizes (sm, md, lg) with image and initials
-- [ ] expandable_text_demo.dart — Show more/less text
-- [ ] Update media_demo.dart → list of 4 components
-
-### 9. Charts (3 widgets)
-- [ ] Create features/charts/view/demos/
-- [ ] stat_card_demo.dart — Stat cards with trend indicators
-- [ ] app_progress_bar_demo.dart — Linear and circular progress
-- [ ] heatmap_calendar_demo.dart — GitHub-style heatmap
-- [ ] Update charts_demo.dart → list of 3 components
-
-### Final
+### Phase 6: Polish
+- [ ] Theme: dark premium with ThemeConfig(seedColor: Color(0xFFD4A574))
+- [ ] All glassmorphism cards: Container with semi-transparent background + blur
+- [ ] Streak animation when completing a routine
+- [ ] Dog speech bubble changes based on time of day + completion status
 - [ ] flutter analyze — 0 errors
-- [ ] Git commit: "feat: refactor showcase — component-level navigation for all 9 categories"
+- [ ] Git commit: "feat: pet-life polish — theme, animations, final touches"
 
-## CRITICAL Layout Rules (from .claude/rules/flutter-layout.md)
-- **NEVER** use ListView inside another scrollable without shrinkWrap
-- **Forms**: use SingleChildScrollView + Column, NOT ListView
-- **Individual demo screens**: Scaffold body is bounded, so ListView is OK there
-- **List screens**: ListView with ListTile is fine (direct Scaffold child)
+## Data Flow
+```
+breed_database.json → BreedDataService → breed info
+PetProfile (shared_prefs) → LifeCalculator → remaining days, walks
+DailyLog (shared_prefs) → DogStateService → dog mood/speech
+DogState + LifeCalc → HomeView → display
+```
 
-## Sample Data
-Import from `sample_data/sample_data.dart` for demo content.
+## Design Specs
+- Background: #1C1C2E
+- Accent: #D4A574 (amber)
+- Cards: glassmorphism (Colors.white.withOpacity(0.08) + 1px white border 0.1 opacity)
+- Text: white, amber, Colors.white70
+- Border radius: 24px
+- Bottom nav: with thin XP bar above
 
-## Widget Imports
-Import widgets from `package:app_lib_ui_kit/ui_kit.dart`.
-Use Navigator.push with MaterialPageRoute for demo navigation (not go_router for sub-screens).
+## Glassmorphism Card Pattern
+```dart
+Container(
+  decoration: BoxDecoration(
+    color: Colors.white.withOpacity(0.08),
+    borderRadius: BorderRadius.circular(24),
+    border: Border.all(color: Colors.white.withOpacity(0.1)),
+  ),
+  child: ...
+)
+```
 
-## Protected Files (DO NOT MODIFY)
-- .ralph/, .ralphrc, packages/, specs/, templates/, supabase/
-- Do NOT modify any ui_kit widget source code — only modify apps/showcase/
+## Layout Rules
+- NEVER use ListView inside another scrollable
+- Forms: SingleChildScrollView + Column
+- Use CustomScrollView with Slivers for complex scrolling
+- Main home: SingleChildScrollView wrapping Column
+
+## Protected Files
+- .ralph/, .ralphrc, packages/, specs/, templates/
+- breed_database.json and tier files (already created, just READ them)
 
 ## Boundaries
 ### Always
-- Each demo screen: Scaffold with AppBar showing widget name
-- Use theme tokens (never hardcode colors)
-- Run flutter analyze before committing
+- Dark theme throughout
+- Korean text for UI labels
+- Every health stat shows source citation
+- flutter analyze after each phase
+- Git commit after each phase
 ### Never
-- git push, rm -rf, modify packages/
-- Use ListView in unbounded parent (use SingleChildScrollView+Column for forms)
+- git push, rm -rf
+- Modify any packages/ code
+- Use real Lottie files (use placeholder)
+- Connect to any backend
+- Hardcode colors (use theme or constants)
 
 ## Status Reporting
 ```
@@ -192,10 +162,10 @@ Use Navigator.push with MaterialPageRoute for demo navigation (not go_router for
 STATUS: IN_PROGRESS | COMPLETE | BLOCKED
 TASKS_COMPLETED_THIS_LOOP: <number>
 FILES_MODIFIED: <number>
-TESTS_STATUS: PASSING | FAILING | NOT_RUN
+TESTS_STATUS: NOT_RUN
 WORK_TYPE: IMPLEMENTATION
 EXIT_SIGNAL: false | true
 RECOMMENDATION: <one line>
 ---END_RALPH_STATUS---
 ```
-When ALL 9 categories refactored → EXIT_SIGNAL: true, STATUS: COMPLETE.
+When ALL phases done → EXIT_SIGNAL: true, STATUS: COMPLETE.

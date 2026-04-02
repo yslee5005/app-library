@@ -16,6 +16,8 @@ class SkeletonLoader extends StatefulWidget {
     this.height,
     this.borderRadius,
     this.lineCount = 3,
+    this.baseColor,
+    this.highlightColor,
     super.key,
   });
 
@@ -34,6 +36,12 @@ class SkeletonLoader extends StatefulWidget {
 
   /// Number of lines when [shape] is [SkeletonShape.text].
   final int lineCount;
+
+  /// Optional base color for the skeleton animation.
+  final Color? baseColor;
+
+  /// Optional highlight color for the skeleton animation.
+  final Color? highlightColor;
 
   @override
   State<SkeletonLoader> createState() => _SkeletonLoaderState();
@@ -63,13 +71,13 @@ class _SkeletonLoaderState extends State<SkeletonLoader>
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final baseColor = theme.colorScheme.surfaceContainerHighest;
-    final highlightColor = theme.colorScheme.surfaceContainerLow;
+    final effectiveBaseColor = widget.baseColor ?? theme.colorScheme.surfaceContainerHighest;
+    final effectiveHighlightColor = widget.highlightColor ?? theme.colorScheme.surfaceContainerLow;
 
     return AnimatedBuilder(
       animation: _animation,
       builder: (context, _) {
-        final color = Color.lerp(baseColor, highlightColor, _animation.value)!;
+        final color = Color.lerp(effectiveBaseColor, effectiveHighlightColor, _animation.value)!;
         return switch (widget.shape) {
           SkeletonShape.rectangle => _rectangle(color),
           SkeletonShape.circle => _circle(color),

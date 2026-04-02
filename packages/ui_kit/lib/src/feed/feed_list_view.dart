@@ -14,6 +14,7 @@ class FeedListView extends StatelessWidget {
     this.separatorBuilder,
     this.emptyWidget,
     this.loadingMoreWidget,
+    this.itemSpacing,
     super.key,
   });
 
@@ -47,6 +48,9 @@ class FeedListView extends StatelessWidget {
   /// Custom loading-more indicator widget.
   final Widget? loadingMoreWidget;
 
+  /// Spacing between items. Defaults to [AppSpacing.sm].
+  final double? itemSpacing;
+
   @override
   Widget build(BuildContext context) {
     if (itemCount == 0 && emptyWidget != null) {
@@ -70,7 +74,7 @@ class FeedListView extends StatelessWidget {
       padding: padding ?? const EdgeInsets.all(AppSpacing.md),
       itemCount: totalCount,
       separatorBuilder: separatorBuilder ??
-          (_, __) => const SizedBox(height: AppSpacing.sm),
+          (_, __) => SizedBox(height: itemSpacing ?? AppSpacing.sm),
       itemBuilder: (context, index) {
         // Loading indicator at the bottom
         if (index == itemCount) {

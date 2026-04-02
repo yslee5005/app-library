@@ -21,6 +21,8 @@ class AppToast {
     Duration duration = const Duration(seconds: 3),
     String? actionLabel,
     VoidCallback? onAction,
+    Color? backgroundColor,
+    double? borderRadius,
   }) {
     final theme = Theme.of(context);
     final (bg, fg, icon) = _style(variant, theme);
@@ -41,10 +43,10 @@ class AppToast {
               ),
             ],
           ),
-          backgroundColor: bg,
+          backgroundColor: backgroundColor ?? bg,
           behavior: SnackBarBehavior.floating,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(AppRadius.md),
+            borderRadius: BorderRadius.circular(borderRadius ?? AppRadius.md),
           ),
           margin: const EdgeInsets.all(AppSpacing.md),
           duration: duration,

@@ -30,6 +30,9 @@ class OnboardingCarousel extends StatefulWidget {
     this.skipLabel = 'Skip',
     this.nextLabel = 'Next',
     this.finishLabel = 'Get Started',
+    this.indicatorActiveColor,
+    this.indicatorInactiveColor,
+    this.pageSpacing,
     super.key,
   });
 
@@ -50,6 +53,15 @@ class OnboardingCarousel extends StatefulWidget {
 
   /// Label for the finish button on the last page.
   final String finishLabel;
+
+  /// Optional color for the active page indicator.
+  final Color? indicatorActiveColor;
+
+  /// Optional color for the inactive page indicator.
+  final Color? indicatorInactiveColor;
+
+  /// Optional horizontal spacing for page content.
+  final double? pageSpacing;
 
   @override
   State<OnboardingCarousel> createState() => _OnboardingCarouselState();
@@ -108,7 +120,7 @@ class _OnboardingCarouselState extends State<OnboardingCarousel> {
               final page = widget.pages[index];
               return Padding(
                 padding:
-                    const EdgeInsets.symmetric(horizontal: AppSpacing.lg),
+                    EdgeInsets.symmetric(horizontal: widget.pageSpacing ?? AppSpacing.lg),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -152,8 +164,8 @@ class _OnboardingCarouselState extends State<OnboardingCarousel> {
                 height: 8.0,
                 decoration: BoxDecoration(
                   color: isActive
-                      ? colorScheme.primary
-                      : colorScheme.outlineVariant,
+                      ? (widget.indicatorActiveColor ?? colorScheme.primary)
+                      : (widget.indicatorInactiveColor ?? colorScheme.outlineVariant),
                   borderRadius: AppRadius.smAll,
                 ),
               );

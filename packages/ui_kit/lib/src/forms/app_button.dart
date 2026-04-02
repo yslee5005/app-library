@@ -16,6 +16,9 @@ class AppButton extends StatelessWidget {
     this.isLoading = false,
     this.icon,
     this.expand = false,
+    this.borderRadius,
+    this.padding,
+    this.elevation,
     super.key,
   });
 
@@ -36,6 +39,15 @@ class AppButton extends StatelessWidget {
 
   /// When true the button stretches to fill available width.
   final bool expand;
+
+  /// Optional border radius override.
+  final double? borderRadius;
+
+  /// Optional padding override.
+  final EdgeInsetsGeometry? padding;
+
+  /// Optional elevation override.
+  final double? elevation;
 
   @override
   Widget build(BuildContext context) {
@@ -65,11 +77,21 @@ class AppButton extends StatelessWidget {
               )
             : Text(label);
 
-    final style = expand
-        ? const ButtonStyle(
-            minimumSize: WidgetStatePropertyAll(
-              Size(double.infinity, 48),
-            ),
+    final hasOverrides = expand || padding != null || elevation != null || borderRadius != null;
+    final style = hasOverrides
+        ? ButtonStyle(
+            minimumSize: expand
+                ? const WidgetStatePropertyAll(Size(double.infinity, 48))
+                : null,
+            padding: padding != null ? WidgetStatePropertyAll(padding) : null,
+            elevation: elevation != null ? WidgetStatePropertyAll(elevation) : null,
+            shape: borderRadius != null
+                ? WidgetStatePropertyAll(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(borderRadius!),
+                    ),
+                  )
+                : null,
           )
         : null;
 

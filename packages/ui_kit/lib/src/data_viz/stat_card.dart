@@ -13,6 +13,9 @@ class StatCard extends StatelessWidget {
     this.trendValue,
     this.icon,
     this.onTap,
+    this.padding,
+    this.valueStyle,
+    this.labelStyle,
     super.key,
   });
 
@@ -34,6 +37,15 @@ class StatCard extends StatelessWidget {
   /// Tap handler.
   final VoidCallback? onTap;
 
+  /// Optional padding override for card content.
+  final EdgeInsetsGeometry? padding;
+
+  /// Optional text style for the value.
+  final TextStyle? valueStyle;
+
+  /// Optional text style for the label.
+  final TextStyle? labelStyle;
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -43,7 +55,7 @@ class StatCard extends StatelessWidget {
         onTap: onTap,
         borderRadius: BorderRadius.circular(AppRadius.lg),
         child: Padding(
-          padding: const EdgeInsets.all(AppSpacing.md),
+          padding: padding ?? const EdgeInsets.all(AppSpacing.md),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
@@ -58,14 +70,14 @@ class StatCard extends StatelessWidget {
               ],
               Text(
                 value,
-                style: theme.textTheme.headlineMedium?.copyWith(
+                style: valueStyle ?? theme.textTheme.headlineMedium?.copyWith(
                   fontWeight: FontWeight.w700,
                 ),
               ),
               const SizedBox(height: AppSpacing.xs),
               Text(
                 label,
-                style: theme.textTheme.bodySmall?.copyWith(
+                style: labelStyle ?? theme.textTheme.bodySmall?.copyWith(
                   color: theme.colorScheme.onSurfaceVariant,
                 ),
               ),

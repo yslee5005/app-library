@@ -15,6 +15,7 @@ class AppDialog extends StatelessWidget {
     this.onPrimary,
     this.onSecondary,
     this.icon,
+    this.borderRadius,
     super.key,
   });
 
@@ -45,6 +46,9 @@ class AppDialog extends StatelessWidget {
   /// Custom icon. If null a default is chosen based on [variant].
   final IconData? icon;
 
+  /// Optional border radius for the dialog.
+  final double? borderRadius;
+
   /// Convenience method to show the dialog.
   static Future<void> show(
     BuildContext context, {
@@ -57,6 +61,7 @@ class AppDialog extends StatelessWidget {
     VoidCallback? onPrimary,
     VoidCallback? onSecondary,
     IconData? icon,
+    double? borderRadius,
   }) {
     return showDialog<void>(
       context: context,
@@ -70,6 +75,7 @@ class AppDialog extends StatelessWidget {
         onPrimary: onPrimary,
         onSecondary: onSecondary,
         icon: icon,
+        borderRadius: borderRadius,
       ),
     );
   }
@@ -93,6 +99,11 @@ class AppDialog extends StatelessWidget {
     final theme = Theme.of(context);
 
     return AlertDialog(
+      shape: borderRadius != null
+          ? RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(borderRadius!),
+            )
+          : null,
       icon: Icon(
         icon ?? _defaultIcon,
         size: 40,

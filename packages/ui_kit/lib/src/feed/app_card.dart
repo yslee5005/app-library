@@ -17,6 +17,10 @@ class AppCard extends StatelessWidget {
     this.layout = AppCardLayout.vertical,
     this.imageHeight = 160.0,
     this.imageWidth = 120.0,
+    this.padding,
+    this.borderRadius,
+    this.elevation,
+    this.backgroundColor,
     super.key,
   });
 
@@ -44,12 +48,31 @@ class AppCard extends StatelessWidget {
   /// Image width for horizontal layout.
   final double imageWidth;
 
+  /// Optional content padding override.
+  final EdgeInsetsGeometry? padding;
+
+  /// Optional border radius override.
+  final double? borderRadius;
+
+  /// Optional card elevation override.
+  final double? elevation;
+
+  /// Optional card background color override.
+  final Color? backgroundColor;
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
     return Card(
       clipBehavior: Clip.antiAlias,
+      elevation: elevation,
+      color: backgroundColor,
+      shape: borderRadius != null
+          ? RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(borderRadius!),
+            )
+          : null,
       child: InkWell(
         onTap: onTap,
         child: layout == AppCardLayout.vertical
@@ -70,7 +93,7 @@ class AppCard extends StatelessWidget {
             child: image,
           ),
         Padding(
-          padding: const EdgeInsets.all(AppSpacing.md),
+          padding: padding ?? const EdgeInsets.all(AppSpacing.md),
           child: Row(
             children: [
               Expanded(
@@ -112,7 +135,7 @@ class AppCard extends StatelessWidget {
             ),
           Expanded(
             child: Padding(
-              padding: const EdgeInsets.all(AppSpacing.md),
+              padding: padding ?? const EdgeInsets.all(AppSpacing.md),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [

@@ -12,6 +12,8 @@ class SignUpForm extends StatefulWidget {
     this.signUpLabel = 'Sign Up',
     this.passwordMismatchError = 'Passwords do not match',
     this.isLoading = false,
+    this.spacing,
+    this.buttonStyle,
     super.key,
   });
 
@@ -28,6 +30,12 @@ class SignUpForm extends StatefulWidget {
 
   /// Whether the form is in a loading state.
   final bool isLoading;
+
+  /// Optional spacing between form fields. Defaults to [AppSpacing.md].
+  final double? spacing;
+
+  /// Optional style for the sign up button.
+  final ButtonStyle? buttonStyle;
 
   @override
   State<SignUpForm> createState() => _SignUpFormState();
@@ -84,7 +92,7 @@ class _SignUpFormState extends State<SignUpForm> {
                 return null;
               },
             ),
-            const SizedBox(height: AppSpacing.md),
+            SizedBox(height: widget.spacing ?? AppSpacing.md),
 
             // Email
             TextFormField(
@@ -100,7 +108,7 @@ class _SignUpFormState extends State<SignUpForm> {
                 return null;
               },
             ),
-            const SizedBox(height: AppSpacing.md),
+            SizedBox(height: widget.spacing ?? AppSpacing.md),
 
             // Password
             TextFormField(
@@ -127,7 +135,7 @@ class _SignUpFormState extends State<SignUpForm> {
                 return null;
               },
             ),
-            const SizedBox(height: AppSpacing.md),
+            SizedBox(height: widget.spacing ?? AppSpacing.md),
 
             // Confirm password
             TextFormField(
@@ -155,11 +163,12 @@ class _SignUpFormState extends State<SignUpForm> {
                 return null;
               },
             ),
-            const SizedBox(height: AppSpacing.lg),
+            SizedBox(height: widget.spacing ?? AppSpacing.lg),
 
             // Sign up button
             FilledButton(
               onPressed: widget.isLoading ? null : _submit,
+              style: widget.buttonStyle,
               child: widget.isLoading
                   ? const SizedBox(
                       height: 20,

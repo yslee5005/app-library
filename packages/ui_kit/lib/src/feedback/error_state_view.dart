@@ -9,6 +9,7 @@ class ErrorStateView extends StatelessWidget {
     this.icon = Icons.error_outline,
     this.retryLabel = 'Retry',
     this.iconSize = 64,
+    this.spacing,
     super.key,
   });
 
@@ -27,6 +28,9 @@ class ErrorStateView extends StatelessWidget {
   /// Size of the [icon].
   final double iconSize;
 
+  /// Optional spacing between elements.
+  final double? spacing;
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -42,7 +46,7 @@ class ErrorStateView extends StatelessWidget {
               size: iconSize,
               color: theme.colorScheme.error,
             ),
-            const SizedBox(height: AppSpacing.md),
+            SizedBox(height: spacing ?? AppSpacing.md),
             Text(
               message,
               style: theme.textTheme.bodyLarge?.copyWith(
@@ -51,7 +55,7 @@ class ErrorStateView extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
             if (onRetry != null) ...[
-              const SizedBox(height: AppSpacing.lg),
+              SizedBox(height: spacing ?? AppSpacing.lg),
               OutlinedButton.icon(
                 onPressed: onRetry,
                 icon: const Icon(Icons.refresh),

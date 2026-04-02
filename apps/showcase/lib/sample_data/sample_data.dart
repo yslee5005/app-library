@@ -61,6 +61,7 @@ class SampleData {
     {'name': 'Feedback', 'icon': Icons.feedback, 'count': 7},
     {'name': 'Media', 'icon': Icons.image, 'count': 4},
     {'name': 'Charts', 'icon': Icons.bar_chart, 'count': 3},
+    {'name': 'Full Flow', 'icon': Icons.route, 'count': 3},
   ];
 
   // Settings sections

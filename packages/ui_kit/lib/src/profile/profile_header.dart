@@ -21,6 +21,7 @@ class ProfileHeader extends StatelessWidget {
     this.stats = const [],
     this.avatarRadius = 48.0,
     this.onAvatarTap,
+    this.spacing,
     super.key,
   });
 
@@ -41,6 +42,9 @@ class ProfileHeader extends StatelessWidget {
 
   /// Called when the avatar is tapped.
   final VoidCallback? onAvatarTap;
+
+  /// Optional spacing between profile sections. Defaults to [AppSpacing.md].
+  final double? spacing;
 
   @override
   Widget build(BuildContext context) {
@@ -66,14 +70,14 @@ class ProfileHeader extends StatelessWidget {
                 : null,
           ),
         ),
-        const SizedBox(height: AppSpacing.md),
+        SizedBox(height: spacing ?? AppSpacing.md),
 
         // Name
         Text(displayName, style: theme.textTheme.titleLarge),
 
         // Bio
         if (bio != null && bio!.isNotEmpty) ...[
-          const SizedBox(height: AppSpacing.xs),
+          SizedBox(height: spacing != null ? spacing! / 2 : AppSpacing.xs),
           Text(
             bio!,
             style: theme.textTheme.bodyMedium?.copyWith(
@@ -85,7 +89,7 @@ class ProfileHeader extends StatelessWidget {
 
         // Stats row
         if (stats.isNotEmpty) ...[
-          const SizedBox(height: AppSpacing.md),
+          SizedBox(height: spacing ?? AppSpacing.md),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: stats.map((stat) {

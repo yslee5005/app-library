@@ -8,6 +8,8 @@ class FormSection extends StatelessWidget {
     required this.children,
     this.description,
     this.padding,
+    this.titleStyle,
+    this.spacing,
     super.key,
   });
 
@@ -23,6 +25,12 @@ class FormSection extends StatelessWidget {
   /// Outer padding. Defaults to vertical [AppSpacing.md].
   final EdgeInsetsGeometry? padding;
 
+  /// Optional text style for the section title.
+  final TextStyle? titleStyle;
+
+  /// Optional spacing between form fields. Defaults to [AppSpacing.sm].
+  final double? spacing;
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -33,7 +41,7 @@ class FormSection extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(title, style: theme.textTheme.titleMedium),
+          Text(title, style: titleStyle ?? theme.textTheme.titleMedium),
           if (description != null) ...[
             const SizedBox(height: AppSpacing.xs),
             Text(
@@ -43,12 +51,12 @@ class FormSection extends StatelessWidget {
               ),
             ),
           ],
-          const SizedBox(height: AppSpacing.sm),
+          SizedBox(height: spacing ?? AppSpacing.sm),
           ...List.generate(
             children.length * 2 - 1,
             (i) => i.isEven
                 ? children[i ~/ 2]
-                : const SizedBox(height: AppSpacing.sm),
+                : SizedBox(height: spacing ?? AppSpacing.sm),
           ),
         ],
       ),

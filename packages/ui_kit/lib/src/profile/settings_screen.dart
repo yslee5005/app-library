@@ -59,6 +59,7 @@ class SettingsScreen extends StatelessWidget {
   const SettingsScreen({
     required this.sections,
     this.padding,
+    this.sectionSpacing,
     super.key,
   });
 
@@ -67,6 +68,9 @@ class SettingsScreen extends StatelessWidget {
 
   /// Optional padding around the list.
   final EdgeInsetsGeometry? padding;
+
+  /// Optional spacing between sections. Defaults to divider with [AppSpacing.md] height.
+  final double? sectionSpacing;
 
   @override
   Widget build(BuildContext context) {
@@ -96,7 +100,9 @@ class SettingsScreen extends StatelessWidget {
             ),
             ...section.items.map((item) => _buildItem(context, item)),
             if (sectionIndex < sections.length - 1)
-              const Divider(height: AppSpacing.md),
+              sectionSpacing != null
+                  ? SizedBox(height: sectionSpacing)
+                  : const Divider(height: AppSpacing.md),
           ],
         );
       },

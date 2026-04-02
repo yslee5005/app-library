@@ -13,6 +13,7 @@ class ProfileEditForm extends StatefulWidget {
     this.bioLabel = 'Bio',
     this.saveLabel = 'Save',
     this.isLoading = false,
+    this.spacing,
     super.key,
   });
 
@@ -38,6 +39,9 @@ class ProfileEditForm extends StatefulWidget {
 
   /// Loading state.
   final bool isLoading;
+
+  /// Optional spacing between form fields.
+  final double? spacing;
 
   @override
   State<ProfileEditForm> createState() => _ProfileEditFormState();
@@ -114,7 +118,7 @@ class _ProfileEditFormState extends State<ProfileEditForm> {
               ),
             ),
           ),
-          const SizedBox(height: AppSpacing.lg),
+          SizedBox(height: widget.spacing ?? AppSpacing.lg),
 
           // Name
           TextFormField(
@@ -128,7 +132,7 @@ class _ProfileEditFormState extends State<ProfileEditForm> {
               return null;
             },
           ),
-          const SizedBox(height: AppSpacing.md),
+          SizedBox(height: widget.spacing ?? AppSpacing.md),
 
           // Bio
           TextFormField(
@@ -137,7 +141,7 @@ class _ProfileEditFormState extends State<ProfileEditForm> {
             maxLines: 3,
             textInputAction: TextInputAction.done,
           ),
-          const SizedBox(height: AppSpacing.lg),
+          SizedBox(height: widget.spacing ?? AppSpacing.lg),
 
           // Save button
           FilledButton(

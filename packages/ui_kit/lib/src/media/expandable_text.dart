@@ -11,6 +11,7 @@ class ExpandableText extends StatefulWidget {
     this.style,
     this.expandLabel = 'Show more',
     this.collapseLabel = 'Show less',
+    this.linkColor,
     super.key,
   });
 
@@ -28,6 +29,9 @@ class ExpandableText extends StatefulWidget {
 
   /// Label for the collapse action.
   final String collapseLabel;
+
+  /// Optional color for the expand/collapse link.
+  final Color? linkColor;
 
   @override
   State<ExpandableText> createState() => _ExpandableTextState();
@@ -69,7 +73,7 @@ class _ExpandableTextState extends State<ExpandableText> {
                 child: Text(
                   _expanded ? widget.collapseLabel : widget.expandLabel,
                   style: theme.textTheme.labelMedium?.copyWith(
-                    color: theme.colorScheme.primary,
+                    color: widget.linkColor ?? theme.colorScheme.primary,
                     fontWeight: FontWeight.w600,
                   ),
                 ),

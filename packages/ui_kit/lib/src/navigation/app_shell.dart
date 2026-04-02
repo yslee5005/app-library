@@ -36,6 +36,7 @@ class AppShell extends StatelessWidget {
     this.appBar,
     this.drawer,
     this.floatingActionButton,
+    this.backgroundColor,
     super.key,
   });
 
@@ -57,12 +58,16 @@ class AppShell extends StatelessWidget {
   /// Optional floating action button.
   final Widget? floatingActionButton;
 
+  /// Optional scaffold background color.
+  final Color? backgroundColor;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: appBar,
       drawer: drawer,
       floatingActionButton: floatingActionButton,
+      backgroundColor: backgroundColor,
       body: IndexedStack(
         index: currentIndex,
         children: tabs.map((tab) => tab.body).toList(),

@@ -28,6 +28,8 @@ class AppDrawerMenu extends StatelessWidget {
     this.email,
     this.headerDecoration,
     this.onHeaderTap,
+    this.headerBackgroundColor,
+    this.width,
     super.key,
   });
 
@@ -49,16 +51,23 @@ class AppDrawerMenu extends StatelessWidget {
   /// Called when the header is tapped.
   final VoidCallback? onHeaderTap;
 
+  /// Optional background color for the header. Ignored if [headerDecoration] is set.
+  final Color? headerBackgroundColor;
+
+  /// Optional drawer width.
+  final double? width;
+
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
 
     return Drawer(
+      width: width,
       child: Column(
         children: [
           UserAccountsDrawerHeader(
             decoration: headerDecoration ??
-                BoxDecoration(color: colorScheme.primaryContainer),
+                BoxDecoration(color: headerBackgroundColor ?? colorScheme.primaryContainer),
             accountName: Text(
               displayName ?? '',
               style: TextStyle(color: colorScheme.onPrimaryContainer),

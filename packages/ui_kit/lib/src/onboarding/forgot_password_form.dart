@@ -9,6 +9,7 @@ class ForgotPasswordForm extends StatefulWidget {
     this.submitLabel = 'Send Reset Link',
     this.description,
     this.isLoading = false,
+    this.spacing,
     super.key,
   });
 
@@ -26,6 +27,9 @@ class ForgotPasswordForm extends StatefulWidget {
 
   /// Whether the form is in a loading state.
   final bool isLoading;
+
+  /// Optional spacing between form elements. Defaults to [AppSpacing.lg].
+  final double? spacing;
 
   @override
   State<ForgotPasswordForm> createState() => _ForgotPasswordFormState();
@@ -65,7 +69,7 @@ class _ForgotPasswordFormState extends State<ForgotPasswordForm> {
                 color: theme.colorScheme.onSurfaceVariant,
               ),
             ),
-            const SizedBox(height: AppSpacing.lg),
+            SizedBox(height: widget.spacing ?? AppSpacing.lg),
           ],
 
           // Email
@@ -83,7 +87,7 @@ class _ForgotPasswordFormState extends State<ForgotPasswordForm> {
               return null;
             },
           ),
-          const SizedBox(height: AppSpacing.lg),
+          SizedBox(height: widget.spacing ?? AppSpacing.lg),
 
           // Submit button
           FilledButton(

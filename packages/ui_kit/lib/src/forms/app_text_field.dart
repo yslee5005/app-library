@@ -22,6 +22,8 @@ class AppTextField extends StatefulWidget {
     this.onChanged,
     this.onFieldSubmitted,
     this.autofillHints,
+    this.borderRadius,
+    this.fillColor,
     super.key,
   });
 
@@ -45,6 +47,12 @@ class AppTextField extends StatefulWidget {
   final ValueChanged<String>? onChanged;
   final ValueChanged<String>? onFieldSubmitted;
   final Iterable<String>? autofillHints;
+
+  /// Optional border radius for the input decoration.
+  final double? borderRadius;
+
+  /// Optional fill color for the input field.
+  final Color? fillColor;
 
   @override
   State<AppTextField> createState() => _AppTextFieldState();
@@ -93,6 +101,23 @@ class _AppTextFieldState extends State<AppTextField> {
           horizontal: AppSpacing.md,
           vertical: AppSpacing.sm,
         ),
+        filled: widget.fillColor != null,
+        fillColor: widget.fillColor,
+        border: widget.borderRadius != null
+            ? OutlineInputBorder(
+                borderRadius: BorderRadius.circular(widget.borderRadius!),
+              )
+            : null,
+        enabledBorder: widget.borderRadius != null
+            ? OutlineInputBorder(
+                borderRadius: BorderRadius.circular(widget.borderRadius!),
+              )
+            : null,
+        focusedBorder: widget.borderRadius != null
+            ? OutlineInputBorder(
+                borderRadius: BorderRadius.circular(widget.borderRadius!),
+              )
+            : null,
       ),
     );
   }

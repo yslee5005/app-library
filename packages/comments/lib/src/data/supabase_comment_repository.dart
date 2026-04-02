@@ -67,11 +67,13 @@ class SupabaseCommentRepository implements CommentRepository {
           ? comments.last.createdAt?.toIso8601String()
           : null;
 
-      return Result.success(PaginatedResult(
-        items: comments,
-        hasMore: hasMore,
-        cursor: cursor,
-      ));
+      return Result.success(
+        PaginatedResult(
+          items: comments,
+          hasMore: hasMore,
+          cursor: cursor,
+        ),
+      );
     } catch (e, st) {
       return Result.failure(
         DatabaseException(
@@ -193,10 +195,12 @@ class SupabaseCommentRepository implements CommentRepository {
       );
 
       final data = result as Map<String, dynamic>;
-      return Result.success((
-        isLiked: data['is_liked'] as bool,
-        likeCount: data['like_count'] as int,
-      ));
+      return Result.success(
+        (
+          isLiked: data['is_liked'] as bool,
+          likeCount: data['like_count'] as int,
+        ),
+      );
     } catch (e, st) {
       return Result.failure(
         DatabaseException(

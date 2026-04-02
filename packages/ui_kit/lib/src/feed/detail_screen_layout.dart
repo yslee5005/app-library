@@ -11,6 +11,7 @@ class DetailScreenLayout extends StatelessWidget {
     this.expandedHeight = 300.0,
     this.bottomBar,
     this.actions,
+    this.bodyPadding,
     super.key,
   });
 
@@ -32,6 +33,9 @@ class DetailScreenLayout extends StatelessWidget {
   /// Optional app bar actions.
   final List<Widget>? actions;
 
+  /// Optional body content padding override.
+  final EdgeInsetsGeometry? bodyPadding;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,7 +53,7 @@ class DetailScreenLayout extends StatelessWidget {
                 : null,
           ),
           SliverPadding(
-            padding: const EdgeInsets.all(AppSpacing.md),
+            padding: bodyPadding ?? const EdgeInsets.all(AppSpacing.md),
             sliver: SliverToBoxAdapter(child: body),
           ),
         ],

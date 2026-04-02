@@ -28,6 +28,9 @@ class AppTabLayout extends StatelessWidget {
     this.isScrollable = false,
     this.initialIndex = 0,
     this.onTabChanged,
+    this.indicatorColor,
+    this.labelColor,
+    this.unselectedLabelColor,
     super.key,
   });
 
@@ -43,6 +46,15 @@ class AppTabLayout extends StatelessWidget {
   /// Called when the selected tab changes.
   final ValueChanged<int>? onTabChanged;
 
+  /// Optional color for the tab indicator.
+  final Color? indicatorColor;
+
+  /// Optional color for the selected tab label.
+  final Color? labelColor;
+
+  /// Optional color for unselected tab labels.
+  final Color? unselectedLabelColor;
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -53,6 +65,9 @@ class AppTabLayout extends StatelessWidget {
           TabBar(
             isScrollable: isScrollable,
             onTap: onTabChanged,
+            indicatorColor: indicatorColor,
+            labelColor: labelColor,
+            unselectedLabelColor: unselectedLabelColor,
             tabs: tabs
                 .map(
                   (tab) => Tab(
