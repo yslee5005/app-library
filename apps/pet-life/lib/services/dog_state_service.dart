@@ -143,16 +143,40 @@ class DogStateService {
       return healthMessage;
     }
 
-    // Default: happy
-    final happyMessages = [
-      '오늘도 좋은 하루! 😊',
-      '같이 있어서 행복해요! 🐕',
-      '오늘도 건강하게 보내요! 💪',
-    ];
+    // Default: happy (time-based greetings)
+    final happyMessages = _getTimeBasedMessages(hour);
     return DogMessage(
       state: DogState.happy,
       message: happyMessages[now.day % happyMessages.length],
     );
+  }
+
+  List<String> _getTimeBasedMessages(int hour) {
+    if (hour >= 6 && hour < 10) {
+      return [
+        '좋은 아침이에요! 오늘도 힘내요! ☀️',
+        '일어났어요! 아침 산책 갈까요? 🌅',
+        '좋은 하루가 시작됐어요! 😊',
+      ];
+    } else if (hour >= 10 && hour < 14) {
+      return [
+        '오늘도 좋은 하루! 😊',
+        '같이 있어서 행복해요! 🐕',
+        '점심 맛있게 드세요! 🍽️',
+      ];
+    } else if (hour >= 14 && hour < 18) {
+      return [
+        '오후도 화이팅! 💪',
+        '저녁 산책이 기대돼요! 🐾',
+        '오늘도 건강하게 보내요! 😊',
+      ];
+    } else {
+      return [
+        '오늘 하루도 수고했어요! 🌙',
+        '편안한 저녁 보내요! ✨',
+        '오늘도 좋은 하루였어요! 💖',
+      ];
+    }
   }
 
   int _daysSinceLastCompletion(
