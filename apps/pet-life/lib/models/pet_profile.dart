@@ -1,4 +1,5 @@
 import 'daily_routine.dart';
+import 'favorite_activity.dart';
 
 class PetProfile {
   final String name;
@@ -7,6 +8,8 @@ class PetProfile {
   final double weightKg;
   final bool neutered;
   final List<DailyRoutine> routines;
+  final List<FavoriteActivity> favoriteActivities;
+  final Map<String, DateTime> lastActivityDates; // activityId → last done date
   final DateTime createdAt;
 
   const PetProfile({
@@ -16,17 +19,17 @@ class PetProfile {
     required this.weightKg,
     this.neutered = false,
     required this.routines,
+    this.favoriteActivities = const [],
+    this.lastActivityDates = const {},
     required this.createdAt,
   });
 
-  /// Age in years (fractional)
   double get ageYears {
     final now = DateTime.now();
     final diff = now.difference(birthDate);
     return diff.inDays / 365.25;
   }
 
-  /// Age as display string
   String get ageDisplay {
     final years = ageYears;
     if (years < 1) {
@@ -43,6 +46,8 @@ class PetProfile {
     double? weightKg,
     bool? neutered,
     List<DailyRoutine>? routines,
+    List<FavoriteActivity>? favoriteActivities,
+    Map<String, DateTime>? lastActivityDates,
     DateTime? createdAt,
   }) {
     return PetProfile(
@@ -52,6 +57,8 @@ class PetProfile {
       weightKg: weightKg ?? this.weightKg,
       neutered: neutered ?? this.neutered,
       routines: routines ?? this.routines,
+      favoriteActivities: favoriteActivities ?? this.favoriteActivities,
+      lastActivityDates: lastActivityDates ?? this.lastActivityDates,
       createdAt: createdAt ?? this.createdAt,
     );
   }
@@ -64,6 +71,10 @@ class PetProfile {
       'weightKg': weightKg,
       'neutered': neutered,
       'routines': routines.map((r) => r.toJson()).toList(),
+      'favoriteActivities': favoriteActivities.map((a) => a.toJson()).toList(),
+      'lastActivityDates': lastActivityDates.map(
+        (k, v) => MapEntry(k, v.toIso8601String()),
+      ),
       'createdAt': createdAt.toIso8601String(),
     };
   }
@@ -78,6 +89,13 @@ class PetProfile {
       routines: (json['routines'] as List<dynamic>)
           .map((e) => DailyRoutine.fromJson(e as Map<String, dynamic>))
           .toList(),
+      favoriteActivities: (json['favoriteActivities'] as List<dynamic>?)
+              ?.map((e) => FavoriteActivity.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+      lastActivityDates: (json['lastActivityDates'] as Map<String, dynamic>?)
+              ?.map((k, v) => MapEntry(k, DateTime.parse(v as String))) ??
+          {},
       createdAt: DateTime.parse(json['createdAt'] as String),
     );
   }

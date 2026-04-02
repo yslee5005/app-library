@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
+import 'package:flutter/services.dart';
 
 import '../../../config/app_config.dart';
-import '../../../models/breed_info.dart';
 import '../../../models/daily_log.dart';
 import '../../../models/daily_routine.dart';
+import '../../../models/favorite_activity.dart';
 import '../../../models/pet_profile.dart';
-import '../../../services/breed_data_service.dart';
 import '../../../services/dog_state_service.dart';
 import '../../../services/life_calculator.dart';
 import '../../../services/pet_storage_service.dart';
@@ -23,16 +22,9 @@ class HomeView extends StatefulWidget {
 class _HomeViewState extends State<HomeView> {
   PetProfile? _profile;
   List<DailyLog> _todayLogs = [];
-  List<DailyLog> _recentLogs = [];
   DogMessage? _dogMessage;
   LifeStats? _lifeStats;
-  BreedInfo? _breedInfo;
   Map<String, int> _streaks = {};
-
-  final _dogStateService = DogStateService();
-  final _lifeCalculator = LifeCalculator();
-  final _storageService = PetStorageService();
-  final _breedService = BreedDataService();
 
   @override
   void initState() {
@@ -41,63 +33,46 @@ class _HomeViewState extends State<HomeView> {
   }
 
   Future<void> _loadData() async {
-    final profile = await _storageService.loadProfile();
+    final storage = PetStorageService();
+    final profile = await storage.loadProfile();
     if (profile == null) return;
 
     final today = PetStorageService.dateString(DateTime.now());
-    final allLogs = await _storageService.loadLogs();
-    final todayLogs = allLogs.where((l) => l.date == today).toList();
-
-    // Recent logs: last 30 days
-    final thirtyDaysAgo =
-        DateTime.now().subtract(const Duration(days: 30));
-    final recentLogs = allLogs
-        .where((l) =>
-            DateTime.tryParse(l.date)?.isAfter(thirtyDaysAgo) ?? false)
-        .toList();
-
-    final dogMessage = await _dogStateService.getDogState(
+    final todayLogs = await storage.getLogsForDate(today);
+    final allLogs = await storage.loadLogs();
+    final lifeStats = LifeCalculator().calculate(profile);
+    final dogMessage = await DogStateService().getDogState(
       profile: profile,
       todayLogs: todayLogs,
-      recentLogs: recentLogs,
+      recentLogs: allLogs,
     );
 
-    final lifeStats = _lifeCalculator.calculate(profile);
-    final breedInfo = _breedService.getBreedById(profile.breedId);
-
-    // Load streaks for each routine
     final streaks = <String, int>{};
     for (final routine in profile.routines) {
-      streaks[routine.id] = await _storageService.getStreak(routine.id);
+      streaks[routine.id] = await storage.getStreak(routine.id);
     }
 
-    setState(() {
-      _profile = profile;
-      _todayLogs = todayLogs;
-      _recentLogs = recentLogs;
-      _dogMessage = dogMessage;
-      _lifeStats = lifeStats;
-      _breedInfo = breedInfo;
-      _streaks = streaks;
-    });
+    if (mounted) {
+      setState(() {
+        _profile = profile;
+        _todayLogs = todayLogs;
+        _dogMessage = dogMessage;
+        _lifeStats = lifeStats;
+        _streaks = streaks;
+      });
+    }
   }
 
   Future<void> _completeRoutine(DailyRoutine routine) async {
+    HapticFeedback.mediumImpact();
     final today = PetStorageService.dateString(DateTime.now());
-    final log = DailyLog(
+    await PetStorageService().addLog(DailyLog(
       date: today,
       routineId: routine.id,
       completed: true,
       completedAt: DateTime.now(),
-    );
-
-    await _storageService.addLog(log);
+    ));
     await _loadData();
-  }
-
-  bool _isRoutineCompleted(String routineId) {
-    return _todayLogs.any(
-        (l) => l.routineId == routineId && l.completed);
   }
 
   @override
@@ -111,21 +86,25 @@ class _HomeViewState extends State<HomeView> {
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
+          padding: const EdgeInsets.all(20),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(height: 16),
+              // Top bar
               _buildTopBar(),
-              const SizedBox(height: 20),
-              _buildHeroSection(),
-              const SizedBox(height: 20),
-              _buildLifeJourneyMiniTimeline(),
-              const SizedBox(height: 20),
-              _buildRoutineSection(),
-              const SizedBox(height: 20),
-              _buildDailyInsight(),
-              const SizedBox(height: 32),
+              const SizedBox(height: 16),
+
+              // Dog + speech bubble
+              _buildDogSection(),
+              const SizedBox(height: 24),
+
+              // Favorite activities — THE CORE
+              _buildFavoriteActivities(),
+              const SizedBox(height: 24),
+
+              // Daily routine (compact)
+              _buildDailyRoutine(),
+              const SizedBox(height: 16),
             ],
           ),
         ),
@@ -133,381 +112,50 @@ class _HomeViewState extends State<HomeView> {
     );
   }
 
-  // ─── Top Bar ───
   Widget _buildTopBar() {
-    final perfectDayStreak = _calculatePerfectDayStreak();
+    final totalStreak = _streaks.values.fold(0, (a, b) => a > b ? a : b);
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              _profile!.name,
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-            Text(
-              _profile!.ageDisplay,
-              style: Theme.of(context).textTheme.bodyMedium,
-            ),
-          ],
+        Text(
+          '🐾 ${_profile!.name}',
+          style: const TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
         ),
-        if (perfectDayStreak > 0)
+        const Spacer(),
+        if (totalStreak > 0)
           Container(
-            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
             decoration: BoxDecoration(
-              color: AppConfig.accentColor.withValues(alpha: 0.15),
-              borderRadius: BorderRadius.circular(20),
+              color: AppConfig.accentColor.withOpacity(0.2),
+              borderRadius: BorderRadius.circular(12),
             ),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                const Text('🔥', style: TextStyle(fontSize: 16)),
-                const SizedBox(width: 4),
-                Text(
-                  '$perfectDayStreak일',
-                  style: TextStyle(
-                    color: AppConfig.accentColor,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-              ],
+            child: Text(
+              '🔥 $totalStreak',
+              style: TextStyle(color: AppConfig.accentColor, fontSize: 13, fontWeight: FontWeight.bold),
             ),
           ),
       ],
     );
   }
 
-  int _calculatePerfectDayStreak() {
-    if (_profile == null || _profile!.routines.isEmpty) return 0;
-    // Simple: check if all routines were completed today
-    final allCompleted = _profile!.routines.every(
-        (r) => _isRoutineCompleted(r.id));
-    if (!allCompleted) return 0;
-    // Count consecutive days from today backwards
-    return _streaks.values.isEmpty
-        ? 0
-        : _streaks.values.reduce((a, b) => a < b ? a : b);
-  }
-
-  // ─── Hero Section ───
-  Widget _buildHeroSection() {
+  Widget _buildDogSection() {
     return GlassCard(
-      child: Column(
-        children: [
-          Row(
-            children: [
-              const DogPlaceholder(size: 100),
-              const SizedBox(width: 16),
-              Expanded(
-                child: _buildSpeechBubble(),
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildSpeechBubble() {
-    final message = _dogMessage?.message ?? '안녕하세요!';
-    return Container(
-      padding: const EdgeInsets.all(14),
-      decoration: BoxDecoration(
-        color: Colors.white.withValues(alpha: 0.06),
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: Colors.white.withValues(alpha: 0.08)),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            message,
-            style: const TextStyle(color: Colors.white, fontSize: 14),
-          ),
-          if (_dogMessage?.source != null) ...[
-            const SizedBox(height: 6),
-            Text(
-              '출처: ${_dogMessage!.source}',
-              style: TextStyle(
-                color: Colors.white.withValues(alpha: 0.4),
-                fontSize: 10,
-              ),
-            ),
-          ],
-        ],
-      ),
-    );
-  }
-
-  // ─── Life Journey Mini Timeline ───
-  Widget _buildLifeJourneyMiniTimeline() {
-    if (_lifeStats == null || _breedInfo == null) return const SizedBox.shrink();
-
-    final percentage = _lifeStats!.lifePercentage;
-    final milestones = _breedService.getAgeMilestones(_profile!.breedId);
-
-    return GlassCard(
-      padding: const EdgeInsets.all(16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text('인생 여정',
-                  style: Theme.of(context).textTheme.titleMedium),
-              Text(
-                '${percentage.toStringAsFixed(0)}% 경과',
-                style: TextStyle(
-                  color: AppConfig.accentColor,
-                  fontWeight: FontWeight.w600,
-                  fontSize: 13,
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 16),
-          _buildTimelineBar(percentage, milestones),
-          const SizedBox(height: 8),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const Text('탄생',
-                  style: TextStyle(color: Colors.white38, fontSize: 11)),
-              Text('~${_lifeStats!.medianLifespan.toStringAsFixed(0)}세',
-                  style: const TextStyle(color: Colors.white38, fontSize: 11)),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildTimelineBar(double percentage, List<AgeMilestone> milestones) {
-    return SizedBox(
-      height: 32,
-      child: LayoutBuilder(
-        builder: (context, constraints) {
-          final width = constraints.maxWidth;
-          final currentPos = (percentage / 100) * width;
-
-          return Stack(
-            clipBehavior: Clip.none,
-            children: [
-              // Background bar
-              Positioned(
-                top: 14,
-                left: 0,
-                right: 0,
-                child: Container(
-                  height: 4,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(2),
-                    color: Colors.white.withValues(alpha: 0.1),
-                  ),
-                ),
-              ),
-              // Progress bar
-              Positioned(
-                top: 14,
-                left: 0,
-                width: currentPos.clamp(0, width),
-                child: Container(
-                  height: 4,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(2),
-                    gradient: LinearGradient(
-                      colors: [
-                        AppConfig.accentColor.withValues(alpha: 0.4),
-                        AppConfig.accentColor,
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-              // Milestone dots
-              ...milestones.map((m) {
-                final pos = (m.age / _lifeStats!.medianLifespan) * width;
-                final isPast = m.age <= _lifeStats!.currentAgeYears;
-                return Positioned(
-                  top: 11,
-                  left: pos.clamp(4, width - 4) - 4,
-                  child: Container(
-                    width: 10,
-                    height: 10,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: isPast
-                          ? AppConfig.accentColor
-                          : Colors.white.withValues(alpha: 0.2),
-                    ),
-                  ),
-                );
-              }),
-              // Current position: paw icon
-              Positioned(
-                top: 2,
-                left: (currentPos - 14).clamp(0, width - 28),
-                child: Container(
-                  width: 28,
-                  height: 28,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: AppConfig.accentColor,
-                    boxShadow: [
-                      BoxShadow(
-                        color: AppConfig.accentColor.withValues(alpha: 0.5),
-                        blurRadius: 8,
-                        spreadRadius: 2,
-                      ),
-                    ],
-                  ),
-                  child: const Icon(Icons.pets, size: 14, color: Colors.black),
-                ),
-              ),
-            ],
-          );
-        },
-      ),
-    );
-  }
-
-  // ─── Routine Section ───
-  Widget _buildRoutineSection() {
-    if (_profile == null || _profile!.routines.isEmpty) {
-      return const SizedBox.shrink();
-    }
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text('오늘의 루틴',
-            style: Theme.of(context).textTheme.titleMedium),
-        const SizedBox(height: 12),
-        SizedBox(
-          height: 160,
-          child: PageView.builder(
-            controller: PageController(viewportFraction: 0.85),
-            itemCount: _profile!.routines.length,
-            itemBuilder: (context, index) {
-              final routine = _profile!.routines[index];
-              final completed = _isRoutineCompleted(routine.id);
-              final streak = _streaks[routine.id] ?? 0;
-
-              return Padding(
-                padding: const EdgeInsets.only(right: 12),
-                child: _buildRoutineCard(routine, completed, streak),
-              );
-            },
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildRoutineCard(
-      DailyRoutine routine, bool completed, int streak) {
-    return GlassCard(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Icon(
-                routine.icon,
-                color: completed
-                    ? AppConfig.accentColor
-                    : Colors.white54,
-                size: 28,
-              ),
-              if (streak > 0)
-                Container(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                  decoration: BoxDecoration(
-                    color: Colors.orange.withValues(alpha: 0.15),
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  child: Text(
-                    '🔥 $streak',
-                    style: const TextStyle(
-                        fontSize: 12, color: Colors.orange),
-                  ),
-                ),
-            ],
-          ),
-          const SizedBox(height: 8),
-          Text(
-            routine.name,
-            style: TextStyle(
-              color: completed ? AppConfig.accentColor : Colors.white,
-              fontSize: 16,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-          const Spacer(),
-          SizedBox(
-            width: double.infinity,
-            child: completed
-                ? Container(
-                    padding: const EdgeInsets.symmetric(vertical: 10),
-                    decoration: BoxDecoration(
-                      color: AppConfig.accentColor.withValues(alpha: 0.15),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: const Center(
-                      child: Text(
-                        '완료 ✓',
-                        style: TextStyle(
-                            color: AppConfig.accentColor,
-                            fontWeight: FontWeight.w600),
-                      ),
-                    ),
-                  )
-                : ElevatedButton(
-                    onPressed: () => _completeRoutine(routine),
-                    child: const Text('완료하기'),
-                  ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  // ─── Daily Insight ───
-  Widget _buildDailyInsight() {
-    final insights = _getInsights();
-    if (insights.isEmpty) return const SizedBox.shrink();
-
-    final today = DateTime.now().day;
-    final insight = insights[today % insights.length];
-
-    return GlassCard(
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.all(20),
       child: Row(
         children: [
-          Icon(Icons.lightbulb_outline,
-              color: AppConfig.accentColor, size: 20),
-          const SizedBox(width: 12),
+          const DogPlaceholder(size: 70),
+          const SizedBox(width: 16),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  '오늘의 건강 정보',
-                  style: TextStyle(
-                    color: AppConfig.accentColor,
-                    fontSize: 12,
-                    fontWeight: FontWeight.w600,
-                  ),
+                  _dogMessage?.message ?? '안녕하세요! 🐾',
+                  style: const TextStyle(color: Colors.white, fontSize: 15, height: 1.4),
                 ),
                 const SizedBox(height: 4),
                 Text(
-                  insight,
-                  style: const TextStyle(color: Colors.white70, fontSize: 13),
+                  '${_profile!.ageDisplay} · ${_lifeStats != null ? "${_lifeStats!.remainingDays}일 남음" : ""}',
+                  style: const TextStyle(color: Colors.white38, fontSize: 12),
                 ),
               ],
             ),
@@ -517,24 +165,253 @@ class _HomeViewState extends State<HomeView> {
     );
   }
 
-  List<String> _getInsights() {
-    final breed = _breedInfo;
-    final insights = <String>[
-      '반려견의 치아 건강을 위해 매일 양치질을 해주세요. 3세 이상 반려견의 80%가 치주질환이 있습니다.',
-      '산책은 신체 건강뿐 아니라 정신 건강에도 중요합니다. 인지 기능 저하를 예방해요.',
-      '적정 체중을 유지하면 수명이 평균 2.5년 늘어납니다. (AVMA 50,000+ dogs study)',
-      '시니어 반려견은 연 2회 건강검진을 권장합니다.',
-      '사람 음식 중 초콜릿, 포도, 양파, 자일리톨은 반려견에게 독성이 있습니다.',
-    ];
+  // ─── THE CORE: Favorite Activities with Remaining Counts ───
+  Widget _buildFavoriteActivities() {
+    final activities = _profile!.favoriteActivities;
 
-    if (breed != null) {
-      for (final risk in breed.geneticHealthRisks) {
-        if (risk.description != null) {
-          insights.add('${risk.conditionKo}: ${risk.description} (${risk.source})');
-        }
-      }
+    if (activities.isEmpty) {
+      return GlassCard(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          children: [
+            const Text(
+              '좋아하는 활동을 등록해주세요',
+              style: TextStyle(color: Colors.white54, fontSize: 14),
+            ),
+            const SizedBox(height: 12),
+            OutlinedButton(
+              onPressed: () {}, // TODO: navigate to settings
+              style: OutlinedButton.styleFrom(
+                foregroundColor: AppConfig.accentColor,
+                side: BorderSide(color: AppConfig.accentColor.withOpacity(0.3)),
+              ),
+              child: const Text('활동 등록하기'),
+            ),
+          ],
+        ),
+      );
     }
 
-    return insights;
+    // Sort by urgency (most urgent first)
+    final sorted = [...activities];
+    sorted.sort((a, b) {
+      final aYears = a.yearsRemaining(_profile!.ageYears);
+      final bYears = b.yearsRemaining(_profile!.ageYears);
+      return aYears.compareTo(bYears);
+    });
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Text(
+          '초코가 좋아하는 것들',
+          style: TextStyle(color: Colors.white, fontSize: 17, fontWeight: FontWeight.w600),
+        ),
+        const SizedBox(height: 4),
+        const Text(
+          '남은 가능 횟수를 확인하세요',
+          style: TextStyle(color: Colors.white38, fontSize: 12),
+        ),
+        const SizedBox(height: 12),
+        ...sorted.map((activity) => _buildActivityCard(activity)),
+      ],
+    );
+  }
+
+  Widget _buildActivityCard(FavoriteActivity activity) {
+    final age = _profile!.ageYears;
+    final remaining = activity.remainingCount(age);
+    final yearsLeft = activity.yearsRemaining(age);
+    final urgency = activity.urgencyLevel(age);
+    final lastDate = _profile!.lastActivityDates[activity.id];
+
+    // Days since last activity
+    String lastText;
+    bool isOverdue = false;
+    if (lastDate != null) {
+      final daysSince = DateTime.now().difference(lastDate).inDays;
+      if (daysSince == 0) {
+        lastText = '오늘 함';
+      } else if (daysSince < 30) {
+        lastText = '${daysSince}일 전';
+        if (daysSince > 14) isOverdue = true;
+      } else {
+        final months = (daysSince / 30).round();
+        lastText = '${months}개월 전';
+        isOverdue = true;
+      }
+    } else {
+      lastText = '기록 없음';
+      isOverdue = true;
+    }
+
+    final borderColor = urgency == 'critical'
+        ? Colors.redAccent
+        : urgency == 'warning'
+            ? AppConfig.accentColor
+            : Colors.transparent;
+
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 10),
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.white.withOpacity(0.08),
+          borderRadius: BorderRadius.circular(20),
+          border: Border.all(
+            color: borderColor.withOpacity(urgency == 'normal' ? 0.05 : 0.3),
+            width: urgency == 'normal' ? 1 : 1.5,
+          ),
+        ),
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Title row
+            Row(
+              children: [
+                Text(activity.emoji, style: const TextStyle(fontSize: 24)),
+                const SizedBox(width: 10),
+                Expanded(
+                  child: Text(
+                    activity.name,
+                    style: const TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w600),
+                  ),
+                ),
+                Text(
+                  '약 ${_formatCount(remaining)}번',
+                  style: TextStyle(
+                    color: urgency == 'critical' ? Colors.redAccent : AppConfig.accentColor,
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 8),
+
+            // Reason + remaining years
+            Text(
+              '${yearsLeft.toStringAsFixed(1)}년 남음 · ${activity.reason}',
+              style: const TextStyle(color: Colors.white38, fontSize: 12),
+            ),
+            const SizedBox(height: 8),
+
+            // Progress bar
+            ClipRRect(
+              borderRadius: BorderRadius.circular(3),
+              child: LinearProgressIndicator(
+                value: (yearsLeft / (activity.maxAgeAvailable - _profile!.birthDate.year + DateTime.now().year))
+                    .clamp(0.0, 1.0),
+                backgroundColor: Colors.white.withOpacity(0.08),
+                valueColor: AlwaysStoppedAnimation<Color>(
+                  urgency == 'critical' ? Colors.redAccent : AppConfig.accentColor,
+                ),
+                minHeight: 4,
+              ),
+            ),
+            const SizedBox(height: 8),
+
+            // Last activity + warning
+            Row(
+              children: [
+                Text(
+                  '마지막: $lastText',
+                  style: TextStyle(
+                    color: isOverdue ? Colors.redAccent.shade100 : Colors.white30,
+                    fontSize: 11,
+                  ),
+                ),
+                if (isOverdue) ...[
+                  const Text(' ⚠️', style: TextStyle(fontSize: 11)),
+                ],
+                const Spacer(),
+                if (isOverdue)
+                  Text(
+                    '데려가볼까요?',
+                    style: TextStyle(color: AppConfig.accentColor, fontSize: 11),
+                  ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  // ─── Daily Routine (compact) ───
+  Widget _buildDailyRoutine() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Text(
+          '오늘의 루틴',
+          style: TextStyle(color: Colors.white54, fontSize: 14),
+        ),
+        const SizedBox(height: 8),
+        Wrap(
+          spacing: 8,
+          runSpacing: 8,
+          children: _profile!.routines.map((routine) {
+            final isCompleted = _todayLogs.any(
+              (l) => l.routineId == routine.id && l.completed,
+            );
+            final streak = _streaks[routine.id] ?? 0;
+
+            return GestureDetector(
+              onTap: isCompleted ? null : () => _completeRoutine(routine),
+              child: Container(
+                padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+                decoration: BoxDecoration(
+                  color: isCompleted
+                      ? AppConfig.accentColor.withOpacity(0.15)
+                      : Colors.white.withOpacity(0.06),
+                  borderRadius: BorderRadius.circular(14),
+                  border: Border.all(
+                    color: isCompleted
+                        ? AppConfig.accentColor.withOpacity(0.3)
+                        : Colors.white.withOpacity(0.05),
+                  ),
+                ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(
+                      routine.icon,
+                      size: 16,
+                      color: isCompleted ? AppConfig.accentColor : Colors.white38,
+                    ),
+                    const SizedBox(width: 6),
+                    Text(
+                      routine.name,
+                      style: TextStyle(
+                        color: isCompleted ? AppConfig.accentColor : Colors.white54,
+                        fontSize: 13,
+                      ),
+                    ),
+                    if (streak > 0 && isCompleted) ...[
+                      const SizedBox(width: 4),
+                      Text(
+                        '🔥$streak',
+                        style: TextStyle(color: AppConfig.accentColor, fontSize: 11),
+                      ),
+                    ],
+                    if (isCompleted)
+                      const Padding(
+                        padding: EdgeInsets.only(left: 4),
+                        child: Icon(Icons.check, size: 14, color: Colors.green),
+                      ),
+                  ],
+                ),
+              ),
+            );
+          }).toList(),
+        ),
+      ],
+    );
+  }
+
+  String _formatCount(int count) {
+    if (count >= 1000) return '${(count / 1000).toStringAsFixed(1)}K';
+    return count.toString();
   }
 }

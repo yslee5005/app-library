@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'models/daily_log.dart';
 import 'models/daily_routine.dart';
+import 'models/favorite_activity.dart';
 import 'models/pet_profile.dart';
 import 'router/app_router.dart';
 import 'services/breed_data_service.dart';
@@ -35,6 +36,20 @@ Future<void> _injectSampleData() async {
       ...DailyRoutine.defaults,
       DailyRoutine.optionals[0], // 양치질
     ],
+    favoriteActivities: [
+      FavoriteActivity.allActivities[0], // 수영
+      FavoriteActivity.allActivities[1], // 공놀이
+      FavoriteActivity.allActivities[2], // 등산
+      FavoriteActivity.allActivities[4], // 친구 만남
+      FavoriteActivity.allActivities[5], // 드라이브
+    ],
+    lastActivityDates: {
+      'swimming': DateTime.now().subtract(const Duration(days: 60)),
+      'ball_play': DateTime.now().subtract(const Duration(days: 3)),
+      'hiking': DateTime.now().subtract(const Duration(days: 180)),
+      'dog_friends': DateTime.now().subtract(const Duration(days: 21)),
+      'car_ride': DateTime.now().subtract(const Duration(days: 7)),
+    },
     createdAt: DateTime(2024, 1, 1),
   );
 
