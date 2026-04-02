@@ -1,0 +1,666 @@
+{
+  "version": "1.0.0",
+  "last_updated": "2026-04-01",
+  "sources": [
+    "PMC: Life expectancy tables (13M+ dogs) — doi:10.3389/fvets.2023.1082102",
+    "UK Kennel Club mortality study (5,663 dogs) — doi:10.1186/s40575-018-0066-8",
+    "PLOS Genetics: 152 genetic disorders (100K+ dogs) — doi:10.1371/journal.pgen.1007361",
+    "CIDD: Canine Inherited Disorders Database — cidd.discoveryspace.ca",
+    "AVMA: Overweight dogs lifespan study (50K+ dogs)",
+    "Dog Aging Project — dogagingproject.org",
+    "AKC Breed Standards — akc.org"
+  ],
+  "breeds": [
+    {
+      "id": "golden_retriever",
+      "name": "Golden Retriever",
+      "name_ko": "골든 리트리버",
+      "group": "Sporting",
+      "size": "large",
+      "weight_kg": {"min": 25, "max": 34},
+      "height_cm": {"min": 51, "max": 61},
+      "lifespan_years": {"min": 10, "max": 12, "median": 11.0},
+      "senior_age": 7,
+      "temperament": ["Intelligent", "Friendly", "Devoted", "Reliable"],
+      "exercise_minutes_per_day": {"min": 60, "max": 120},
+      "grooming_frequency": "2-3 times weekly",
+      "shedding_level": "high",
+      "genetic_health_risks": [
+        {
+          "condition": "Cancer (Hemangiosarcoma, Lymphoma)",
+          "condition_ko": "암 (혈관육종, 림프종)",
+          "prevalence_percent": 60,
+          "severity": "critical",
+          "source": "Morris Animal Foundation Golden Retriever Lifetime Study",
+          "description": "약 60%의 골든 리트리버가 암으로 사망합니다. 림프종과 혈관육종이 가장 흔합니다.",
+          "prevention": "정기 검진, 비정상 종괴 발견 시 즉시 수의사 방문"
+        },
+        {
+          "condition": "Hip Dysplasia",
+          "condition_ko": "고관절 이형성증",
+          "prevalence_percent": 20,
+          "severity": "high",
+          "source": "OFA Statistics",
+          "description": "고관절이 비정상적으로 발달하여 관절염과 보행 장애를 유발합니다.",
+          "prevention": "적정 체중 유지, 과도한 운동 자제 (성장기), OFA 검사"
+        },
+        {
+          "condition": "Elbow Dysplasia",
+          "condition_ko": "팔꿈치 이형성증",
+          "prevalence_percent": 11,
+          "severity": "moderate",
+          "source": "OFA Statistics",
+          "description": "팔꿈치 관절의 비정상적 발달로 절뚝거림을 유발합니다.",
+          "prevention": "적정 체중 유지, 정기 검진"
+        },
+        {
+          "condition": "Heart Disease (Subvalvular Aortic Stenosis)",
+          "condition_ko": "심장병 (대동맥하 협착증)",
+          "prevalence_percent": 5,
+          "severity": "high",
+          "source": "CIDD",
+          "description": "심장 판막 이상으로 갑작스러운 사망을 유발할 수 있습니다.",
+          "prevention": "심장 초음파 검사 권장"
+        }
+      ],
+      "age_milestones": [
+        {"age": 0.5, "event": "사회화 완료기", "description": "3-14주 사이 사회화가 매우 중요합니다."},
+        {"age": 1, "event": "성견 도달", "description": "신체 성장이 대부분 완료됩니다."},
+        {"age": 2, "event": "정서 성숙", "description": "행동이 안정됩니다."},
+        {"age": 7, "event": "시니어 진입", "description": "연 2회 건강검진 권장. 암 검사 시작."},
+        {"age": 9, "event": "고령기", "description": "관절, 심장, 인지 기능 주의 필요."}
+      ],
+      "fun_facts": [
+        "골든 리트리버는 3번째로 인기 있는 견종입니다 (AKC)",
+        "물놀이를 매우 좋아하며 발가락 사이에 물갈퀴가 있습니다"
+      ]
+    },
+    {
+      "id": "labrador_retriever",
+      "name": "Labrador Retriever",
+      "name_ko": "래브라도 리트리버",
+      "group": "Sporting",
+      "size": "large",
+      "weight_kg": {"min": 25, "max": 36},
+      "height_cm": {"min": 55, "max": 62},
+      "lifespan_years": {"min": 10, "max": 12, "median": 12.0},
+      "senior_age": 7,
+      "temperament": ["Friendly", "Active", "Outgoing", "Gentle"],
+      "exercise_minutes_per_day": {"min": 60, "max": 120},
+      "grooming_frequency": "weekly",
+      "shedding_level": "high",
+      "genetic_health_risks": [
+        {
+          "condition": "Hip Dysplasia",
+          "condition_ko": "고관절 이형성증",
+          "prevalence_percent": 12,
+          "severity": "high",
+          "source": "OFA Statistics",
+          "description": "대형견에서 흔한 관절 질환입니다.",
+          "prevention": "적정 체중 유지, OFA 검사"
+        },
+        {
+          "condition": "Obesity",
+          "condition_ko": "비만",
+          "prevalence_percent": 35,
+          "severity": "high",
+          "source": "AVMA Study (50K+ dogs)",
+          "description": "래브라도는 비만 성향이 높습니다. 과체중 시 수명이 최대 2년 단축됩니다.",
+          "prevention": "식이 조절, 규칙적 운동, 체중 모니터링"
+        },
+        {
+          "condition": "Exercise-Induced Collapse (EIC)",
+          "condition_ko": "운동 유발성 허탈",
+          "prevalence_percent": 3,
+          "severity": "moderate",
+          "source": "University of Minnesota Research",
+          "description": "격한 운동 후 뒷다리 힘이 빠지는 유전 질환입니다.",
+          "prevention": "DNA 검사로 확인 가능"
+        },
+        {
+          "condition": "Progressive Retinal Atrophy",
+          "condition_ko": "진행성 망막 위축",
+          "prevalence_percent": 2,
+          "severity": "moderate",
+          "source": "CIDD",
+          "description": "시력이 점진적으로 저하되어 실명에 이를 수 있습니다.",
+          "prevention": "유전자 검사, 정기 안과 검진"
+        }
+      ],
+      "age_milestones": [
+        {"age": 0.5, "event": "사회화 완료기", "description": "다양한 사람, 동물, 환경에 노출시키세요."},
+        {"age": 1.5, "event": "성견 도달", "description": "신체적으로 성숙합니다."},
+        {"age": 7, "event": "시니어 진입", "description": "체중 관리가 더욱 중요해집니다."},
+        {"age": 10, "event": "고령기", "description": "관절 보조제, 저자극 식이 고려."}
+      ],
+      "fun_facts": [
+        "22년 연속 미국에서 가장 인기 있는 견종이었습니다 (AKC)",
+        "POMC 유전자 변이로 인해 항상 배고픈 느낌을 받습니다"
+      ]
+    },
+    {
+      "id": "german_shepherd",
+      "name": "German Shepherd",
+      "name_ko": "저먼 셰퍼드",
+      "group": "Herding",
+      "size": "large",
+      "weight_kg": {"min": 22, "max": 40},
+      "height_cm": {"min": 55, "max": 65},
+      "lifespan_years": {"min": 9, "max": 13, "median": 10.3},
+      "senior_age": 7,
+      "temperament": ["Confident", "Courageous", "Smart", "Loyal"],
+      "exercise_minutes_per_day": {"min": 60, "max": 120},
+      "grooming_frequency": "2-3 times weekly",
+      "shedding_level": "high",
+      "genetic_health_risks": [
+        {
+          "condition": "Hip Dysplasia",
+          "condition_ko": "고관절 이형성증",
+          "prevalence_percent": 19,
+          "severity": "high",
+          "source": "OFA Statistics",
+          "description": "저먼 셰퍼드에서 가장 흔한 유전 질환입니다.",
+          "prevention": "OFA/PennHIP 검사, 체중 관리"
+        },
+        {
+          "condition": "Degenerative Myelopathy",
+          "condition_ko": "퇴행성 척수병증",
+          "prevalence_percent": 2,
+          "severity": "critical",
+          "source": "University of Missouri Research",
+          "description": "척수가 점진적으로 퇴행하여 뒷다리 마비를 유발합니다. 치료법이 없습니다.",
+          "prevention": "DNA 검사 (SOD1 유전자), 물리치료"
+        },
+        {
+          "condition": "Bloat (GDV)",
+          "condition_ko": "위 확장-꼬임 (GDV)",
+          "prevalence_percent": 5,
+          "severity": "critical",
+          "source": "Purdue University Study",
+          "description": "위가 가스로 부풀어 꼬이는 응급 상황입니다. 치료하지 않으면 수시간 내 사망합니다.",
+          "prevention": "소량 다회 급식, 식후 격한 운동 자제, 예방적 위고정술"
+        },
+        {
+          "condition": "Exocrine Pancreatic Insufficiency",
+          "condition_ko": "외분비 췌장 기능부전",
+          "prevalence_percent": 1,
+          "severity": "moderate",
+          "source": "CIDD",
+          "description": "췌장이 소화 효소를 충분히 생산하지 못합니다.",
+          "prevention": "소화 효소 보충제로 관리 가능"
+        }
+      ],
+      "age_milestones": [
+        {"age": 0.5, "event": "사회화 필수기", "description": "저먼 셰퍼드는 사회화가 부족하면 공격적이 될 수 있습니다."},
+        {"age": 2, "event": "성견 도달", "description": "대형견은 성숙이 늦습니다."},
+        {"age": 7, "event": "시니어 진입", "description": "관절 건강 모니터링 시작."},
+        {"age": 9, "event": "고령기", "description": "퇴행성 척수병증 증상 주의."}
+      ],
+      "fun_facts": [
+        "세계에서 가장 많이 활용되는 경찰견/군견입니다",
+        "독일어 이름은 'Deutscher Schäferhund'입니다"
+      ]
+    },
+    {
+      "id": "poodle_standard",
+      "name": "Poodle (Standard)",
+      "name_ko": "스탠다드 푸들",
+      "group": "Non-Sporting",
+      "size": "large",
+      "weight_kg": {"min": 20, "max": 32},
+      "height_cm": {"min": 38, "max": 60},
+      "lifespan_years": {"min": 12, "max": 15, "median": 13.5},
+      "senior_age": 8,
+      "temperament": ["Active", "Proud", "Very Smart", "Elegant"],
+      "exercise_minutes_per_day": {"min": 60, "max": 90},
+      "grooming_frequency": "daily",
+      "shedding_level": "low",
+      "genetic_health_risks": [
+        {
+          "condition": "Addison's Disease",
+          "condition_ko": "애디슨병 (부신피질기능저하증)",
+          "prevalence_percent": 8,
+          "severity": "high",
+          "source": "CIDD",
+          "description": "부신이 충분한 호르몬을 생산하지 못합니다.",
+          "prevention": "정기 혈액 검사, 스트레스 시 증상 주의"
+        },
+        {
+          "condition": "Bloat (GDV)",
+          "condition_ko": "위 확장-꼬임 (GDV)",
+          "prevalence_percent": 6,
+          "severity": "critical",
+          "source": "Purdue University Study",
+          "description": "깊은 가슴을 가진 견종에서 위험합니다.",
+          "prevention": "소량 다회 급식, 식후 운동 자제"
+        },
+        {
+          "condition": "Hip Dysplasia",
+          "condition_ko": "고관절 이형성증",
+          "prevalence_percent": 12,
+          "severity": "moderate",
+          "source": "OFA Statistics",
+          "description": "대형 푸들에서 나타날 수 있습니다.",
+          "prevention": "OFA 검사, 체중 관리"
+        },
+        {
+          "condition": "Progressive Retinal Atrophy",
+          "condition_ko": "진행성 망막 위축",
+          "prevalence_percent": 3,
+          "severity": "moderate",
+          "source": "CIDD",
+          "description": "시력 점진적 저하.",
+          "prevention": "유전자 검사"
+        }
+      ],
+      "age_milestones": [
+        {"age": 0.5, "event": "사회화 완료기", "description": "똑똒하지만 사회화도 중요합니다."},
+        {"age": 2, "event": "성견 도달", "description": "정신적으로도 성숙합니다."},
+        {"age": 8, "event": "시니어 진입", "description": "안과 검진 시작 권장."},
+        {"age": 12, "event": "고령기", "description": "관절, 치매 주의."}
+      ],
+      "fun_facts": [
+        "푸들은 원래 오리 사냥견(Water Retriever)이었습니다",
+        "푸들 컷은 수영 시 관절을 보호하기 위한 실용적 이유에서 시작됐습니다"
+      ]
+    },
+    {
+      "id": "french_bulldog",
+      "name": "French Bulldog",
+      "name_ko": "프렌치 불독",
+      "group": "Non-Sporting",
+      "size": "small",
+      "weight_kg": {"min": 7, "max": 13},
+      "height_cm": {"min": 28, "max": 33},
+      "lifespan_years": {"min": 10, "max": 12, "median": 9.8},
+      "senior_age": 8,
+      "temperament": ["Adaptable", "Playful", "Smart", "Affectionate"],
+      "exercise_minutes_per_day": {"min": 30, "max": 60},
+      "grooming_frequency": "weekly",
+      "shedding_level": "moderate",
+      "genetic_health_risks": [
+        {
+          "condition": "Brachycephalic Obstructive Airway Syndrome",
+          "condition_ko": "단두종 폐쇄성 기도 증후군 (BOAS)",
+          "prevalence_percent": 50,
+          "severity": "critical",
+          "source": "Royal Veterinary College, UK",
+          "description": "납작한 얼굴 구조로 인한 호흡 곤란. 프렌치 불독의 50%가 영향을 받습니다.",
+          "prevention": "더운 날씨/과도한 운동 자제, 적정 체중 유지, 심한 경우 수술"
+        },
+        {
+          "condition": "Intervertebral Disc Disease",
+          "condition_ko": "추간판 질환 (IVDD)",
+          "prevalence_percent": 15,
+          "severity": "high",
+          "source": "CIDD",
+          "description": "척추 디스크가 탈출하여 통증과 마비를 유발합니다.",
+          "prevention": "높은 곳 점프 자제, 계단 사용 제한"
+        },
+        {
+          "condition": "Skin Allergies",
+          "condition_ko": "피부 알레르기",
+          "prevalence_percent": 30,
+          "severity": "moderate",
+          "source": "Banfield Pet Hospital Data",
+          "description": "피부 주름 사이 감염, 아토피 등이 흔합니다.",
+          "prevention": "주름 부위 청결 유지, 저자극 식이"
+        },
+        {
+          "condition": "Heat Stroke",
+          "condition_ko": "열사병",
+          "prevalence_percent": 15,
+          "severity": "critical",
+          "source": "Scientific Reports 2024",
+          "description": "단두종은 체온 조절이 어려워 열사병 위험이 매우 높습니다.",
+          "prevention": "30°C 이상에서 외출 자제, 항상 물 준비, 시원한 환경"
+        }
+      ],
+      "age_milestones": [
+        {"age": 0.5, "event": "사회화 완료기", "description": "다양한 환경에 노출시키되 과격한 운동은 자제하세요."},
+        {"age": 1, "event": "성견 도달", "description": "소형견은 빠르게 성장합니다."},
+        {"age": 8, "event": "시니어 진입", "description": "호흡기, 척추 검진 중요."},
+        {"age": 10, "event": "고령기", "description": "활동량 감소, 관절 관리."}
+      ],
+      "fun_facts": [
+        "2023-2024년 미국에서 가장 인기 있는 견종 1위 (AKC)",
+        "자연분만이 어려워 80%가 제왕절개로 태어납니다"
+      ]
+    },
+    {
+      "id": "shih_tzu",
+      "name": "Shih Tzu",
+      "name_ko": "시츄",
+      "group": "Toy",
+      "size": "small",
+      "weight_kg": {"min": 4, "max": 7},
+      "height_cm": {"min": 20, "max": 28},
+      "lifespan_years": {"min": 10, "max": 16, "median": 13.0},
+      "senior_age": 10,
+      "temperament": ["Affectionate", "Playful", "Outgoing", "Loyal"],
+      "exercise_minutes_per_day": {"min": 20, "max": 40},
+      "grooming_frequency": "daily",
+      "shedding_level": "low",
+      "genetic_health_risks": [
+        {
+          "condition": "Patellar Luxation",
+          "condition_ko": "슬개골 탈구",
+          "prevalence_percent": 20,
+          "severity": "moderate",
+          "source": "OFA Statistics",
+          "description": "무릎뼈가 정상 위치에서 벗어나 절뚝거림을 유발합니다.",
+          "prevention": "적정 체중 유지, 높은 곳 점프 자제"
+        },
+        {
+          "condition": "Eye Problems (Cataracts, PRA)",
+          "condition_ko": "안과 질환 (백내장, PRA)",
+          "prevalence_percent": 15,
+          "severity": "moderate",
+          "source": "CIDD",
+          "description": "돌출된 눈 구조로 인해 안과 질환이 흔합니다.",
+          "prevention": "정기 안과 검진, 눈 주위 청결"
+        },
+        {
+          "condition": "Dental Disease",
+          "condition_ko": "치과 질환",
+          "prevalence_percent": 85,
+          "severity": "moderate",
+          "source": "Cornell Veterinary Medicine",
+          "description": "소형견은 치주질환 비율이 특히 높습니다.",
+          "prevention": "매일 양치, 치과 간식, 정기 스케일링"
+        }
+      ],
+      "age_milestones": [
+        {"age": 0.3, "event": "사회화 최적기", "description": "소형견도 사회화가 중요합니다."},
+        {"age": 1, "event": "성견 도달", "description": "소형견은 빠르게 성숙합니다."},
+        {"age": 10, "event": "시니어 진입", "description": "소형견은 시니어 시작이 늦습니다."},
+        {"age": 13, "event": "고령기", "description": "치매 가능성 (28% at 11-12세)."}
+      ],
+      "fun_facts": [
+        "시츄는 중국 황실에서 키우던 견종입니다",
+        "이름은 중국어로 '사자 개'를 뜻합니다"
+      ]
+    },
+    {
+      "id": "beagle",
+      "name": "Beagle",
+      "name_ko": "비글",
+      "group": "Hound",
+      "size": "medium",
+      "weight_kg": {"min": 9, "max": 11},
+      "height_cm": {"min": 33, "max": 38},
+      "lifespan_years": {"min": 10, "max": 15, "median": 12.5},
+      "senior_age": 8,
+      "temperament": ["Friendly", "Curious", "Merry", "Determined"],
+      "exercise_minutes_per_day": {"min": 60, "max": 90},
+      "grooming_frequency": "weekly",
+      "shedding_level": "moderate",
+      "genetic_health_risks": [
+        {
+          "condition": "Epilepsy",
+          "condition_ko": "간질 (뇌전증)",
+          "prevalence_percent": 6,
+          "severity": "moderate",
+          "source": "CIDD",
+          "description": "원인 불명의 발작이 반복됩니다.",
+          "prevention": "항경련제로 관리 가능, 정기 검진"
+        },
+        {
+          "condition": "Hypothyroidism",
+          "condition_ko": "갑상선 기능저하증",
+          "prevalence_percent": 5,
+          "severity": "low",
+          "source": "CIDD",
+          "description": "갑상선 호르몬 부족으로 체중 증가, 탈모 등이 나타납니다.",
+          "prevention": "혈액 검사로 진단, 호르몬 보충제로 관리"
+        },
+        {
+          "condition": "Intervertebral Disc Disease",
+          "condition_ko": "추간판 질환",
+          "prevalence_percent": 3,
+          "severity": "high",
+          "source": "CIDD",
+          "description": "척추 디스크 문제.",
+          "prevention": "비만 방지, 높은 곳 점프 자제"
+        }
+      ],
+      "age_milestones": [
+        {"age": 0.5, "event": "사회화 및 훈련기", "description": "비글은 후각이 매우 뛰어나 산만할 수 있습니다."},
+        {"age": 1.5, "event": "성견 도달", "description": "에너지가 매우 높습니다."},
+        {"age": 8, "event": "시니어 진입", "description": "체중 관리 시작."},
+        {"age": 12, "event": "고령기", "description": "청력 저하 가능성."}
+      ],
+      "fun_facts": [
+        "비글은 후각 수용체가 2억 2천만 개입니다 (사람은 500만 개)",
+        "스누피의 모델이 비글입니다"
+      ]
+    },
+    {
+      "id": "yorkshire_terrier",
+      "name": "Yorkshire Terrier",
+      "name_ko": "요크셔 테리어",
+      "group": "Toy",
+      "size": "small",
+      "weight_kg": {"min": 2, "max": 3},
+      "height_cm": {"min": 18, "max": 23},
+      "lifespan_years": {"min": 13, "max": 16, "median": 14.5},
+      "senior_age": 10,
+      "temperament": ["Affectionate", "Sprightly", "Tomboyish", "Bold"],
+      "exercise_minutes_per_day": {"min": 20, "max": 40},
+      "grooming_frequency": "daily",
+      "shedding_level": "low",
+      "genetic_health_risks": [
+        {
+          "condition": "Patellar Luxation",
+          "condition_ko": "슬개골 탈구",
+          "prevalence_percent": 25,
+          "severity": "moderate",
+          "source": "OFA Statistics",
+          "description": "요크셔 테리어에서 매우 흔한 질환입니다.",
+          "prevention": "체중 관리, 미끄러운 바닥 주의"
+        },
+        {
+          "condition": "Portosystemic Shunt",
+          "condition_ko": "간문맥 단락",
+          "prevalence_percent": 3,
+          "severity": "critical",
+          "source": "CIDD",
+          "description": "간을 우회하는 비정상 혈관으로 독소 축적을 유발합니다.",
+          "prevention": "혈액 검사, 담즙산 검사"
+        },
+        {
+          "condition": "Dental Disease",
+          "condition_ko": "치과 질환",
+          "prevalence_percent": 85,
+          "severity": "moderate",
+          "source": "Cornell Veterinary Medicine",
+          "description": "소형견은 치주질환에 매우 취약합니다.",
+          "prevention": "매일 양치, 정기 스케일링"
+        },
+        {
+          "condition": "Tracheal Collapse",
+          "condition_ko": "기관 허탈",
+          "prevalence_percent": 10,
+          "severity": "high",
+          "source": "CIDD",
+          "description": "기관이 약해져 만성 기침을 유발합니다.",
+          "prevention": "목줄 대신 하네스 사용, 비만 방지"
+        }
+      ],
+      "age_milestones": [
+        {"age": 0.3, "event": "사회화 최적기", "description": "작아도 용감한 성격, 큰 개를 무서워하지 않도록 사회화."},
+        {"age": 1, "event": "성견 도달", "description": "초소형견은 매우 빠르게 성숙합니다."},
+        {"age": 10, "event": "시니어 진입", "description": "치과 건강 특히 중요."},
+        {"age": 14, "event": "고령기", "description": "기관 허탈 증상 주의."}
+      ],
+      "fun_facts": [
+        "과체중 요크셔 테리어는 수명이 2.5년 단축됩니다 (AVMA 연구)",
+        "2차 세계대전의 영웅견 Smoky도 요크셔 테리어였습니다"
+      ]
+    },
+    {
+      "id": "chihuahua",
+      "name": "Chihuahua",
+      "name_ko": "치와와",
+      "group": "Toy",
+      "size": "small",
+      "weight_kg": {"min": 1.5, "max": 3},
+      "height_cm": {"min": 15, "max": 23},
+      "lifespan_years": {"min": 14, "max": 18, "median": 15.5},
+      "senior_age": 11,
+      "temperament": ["Charming", "Graceful", "Sassy", "Devoted"],
+      "exercise_minutes_per_day": {"min": 20, "max": 30},
+      "grooming_frequency": "weekly",
+      "shedding_level": "low",
+      "genetic_health_risks": [
+        {
+          "condition": "Patellar Luxation",
+          "condition_ko": "슬개골 탈구",
+          "prevalence_percent": 30,
+          "severity": "moderate",
+          "source": "OFA Statistics",
+          "description": "치와와에서 가장 흔한 정형외과 질환입니다.",
+          "prevention": "미끄러운 바닥 방지, 체중 관리"
+        },
+        {
+          "condition": "Heart Disease (Patent Ductus Arteriosus)",
+          "condition_ko": "심장병 (동맥관 개존증)",
+          "prevalence_percent": 5,
+          "severity": "high",
+          "source": "CIDD",
+          "description": "선천적 심장 결함.",
+          "prevention": "심장 청진, 심장 초음파"
+        },
+        {
+          "condition": "Hydrocephalus",
+          "condition_ko": "수두증",
+          "prevalence_percent": 2,
+          "severity": "critical",
+          "source": "CIDD",
+          "description": "뇌에 뇌척수액이 축적됩니다.",
+          "prevention": "두개골 봉합 확인 (molera)"
+        },
+        {
+          "condition": "Dental Disease",
+          "condition_ko": "치과 질환",
+          "prevalence_percent": 90,
+          "severity": "moderate",
+          "source": "Cornell Veterinary Medicine",
+          "description": "작은 입에 치아가 밀집되어 있어 치주질환이 매우 흔합니다.",
+          "prevention": "매일 양치 필수"
+        }
+      ],
+      "age_milestones": [
+        {"age": 0.3, "event": "사회화 최적기", "description": "안아만 주면 사회화가 안 됩니다. 걷게 해주세요."},
+        {"age": 0.5, "event": "성견 도달", "description": "초소형견은 6개월이면 거의 성장 완료."},
+        {"age": 11, "event": "시니어 진입", "description": "치와와는 장수견이라 시니어 시작이 늦습니다."},
+        {"age": 15, "event": "고령기", "description": "치매 확률 증가 (68% at 15-16세)."}
+      ],
+      "fun_facts": [
+        "가장 오래 사는 견종 중 하나로 20년 이상 산 기록도 있습니다",
+        "세계에서 가장 작은 견종입니다"
+      ]
+    },
+    {
+      "id": "pomeranian",
+      "name": "Pomeranian",
+      "name_ko": "포메라니안",
+      "group": "Toy",
+      "size": "small",
+      "weight_kg": {"min": 1.4, "max": 3},
+      "height_cm": {"min": 15, "max": 18},
+      "lifespan_years": {"min": 12, "max": 16, "median": 14.0},
+      "senior_age": 10,
+      "temperament": ["Inquisitive", "Bold", "Lively", "Intelligent"],
+      "exercise_minutes_per_day": {"min": 20, "max": 40},
+      "grooming_frequency": "2-3 times weekly",
+      "shedding_level": "moderate",
+      "genetic_health_risks": [
+        {
+          "condition": "Patellar Luxation",
+          "condition_ko": "슬개골 탈구",
+          "prevalence_percent": 20,
+          "severity": "moderate",
+          "source": "OFA Statistics",
+          "description": "소형견에서 흔한 무릎 질환.",
+          "prevention": "체중 관리, 점프 자제"
+        },
+        {
+          "condition": "Alopecia X (Black Skin Disease)",
+          "condition_ko": "탈모증 X (블랙 스킨 질환)",
+          "prevalence_percent": 10,
+          "severity": "low",
+          "source": "CIDD",
+          "description": "원인 불명의 대칭성 탈모. 건강에는 영향 없지만 미용적 문제.",
+          "prevention": "호르몬 검사, 피부과 상담"
+        },
+        {
+          "condition": "Tracheal Collapse",
+          "condition_ko": "기관 허탈",
+          "prevalence_percent": 8,
+          "severity": "high",
+          "source": "CIDD",
+          "description": "기관이 약해져 '거위 울음' 같은 기침.",
+          "prevention": "하네스 사용, 비만 방지"
+        }
+      ],
+      "age_milestones": [
+        {"age": 0.3, "event": "사회화 최적기", "description": "소형견 증후군 방지 위해 다양한 경험 필요."},
+        {"age": 0.7, "event": "성견 도달", "description": "작지만 에너지가 높습니다."},
+        {"age": 10, "event": "시니어 진입", "description": "치과, 심장 검진 시작."},
+        {"age": 14, "event": "고령기", "description": "인지기능 저하 가능성."}
+      ],
+      "fun_facts": [
+        "빅토리아 여왕이 포메라니안 애호가였습니다",
+        "원래는 중형견이었으나 소형화 되었습니다"
+      ]
+    }
+  ],
+  "global_health_data": {
+    "dental_disease": {
+      "stat": "3세 이상 강아지의 80-90%가 치주질환을 가지고 있습니다",
+      "source": "Cornell University College of Veterinary Medicine",
+      "url": "https://www.vet.cornell.edu/departments-centers-and-institutes/riney-canine-health-center/health-topics/canine-health-information/periodontal-disease"
+    },
+    "obesity": {
+      "stat": "반려견의 33%가 과체중이며, 과체중은 수명을 최대 2.5년 단축시킵니다",
+      "source": "AVMA Study, 50,000+ dogs",
+      "url": "https://www.avma.org/javma-news/2019-03-01/study-finds-overweight-dogs-live-shorter-lives"
+    },
+    "cognitive_decline": {
+      "by_age": [
+        {"age_range": "8-10", "prevalence_percent": 14},
+        {"age_range": "11-12", "prevalence_percent": 28},
+        {"age_range": "13-14", "prevalence_percent": 41},
+        {"age_range": "15-16", "prevalence_percent": 68}
+      ],
+      "source": "PMC: Canine Cognitive Dysfunction",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6582309/"
+    },
+    "socialization": {
+      "critical_period_weeks": {"start": 3, "end": 14},
+      "stat": "행동 문제는 3세 미만 강아지 사망(안락사) 원인 1위입니다",
+      "behavior_genetic_percent": 35,
+      "behavior_environment_percent": 65,
+      "source": "UC Davis Veterinary Medicine & AVSAB",
+      "url": "https://healthtopics.vetmed.ucdavis.edu/health-topics/canine/puppy-socialization"
+    },
+    "activity_and_dementia": {
+      "stat": "비활동적인 강아지는 활동적인 강아지보다 치매 위험이 6.47배 높습니다",
+      "source": "Dog Aging Project, Nature Scientific Reports",
+      "url": "https://www.nature.com/articles/s41598-022-15837-9"
+    },
+    "vaccination_schedule": {
+      "puppy": [
+        {"age_weeks": "6-8", "vaccines": ["DHPP (1차)"]},
+        {"age_weeks": "10-12", "vaccines": ["DHPP (2차)", "Bordetella"]},
+        {"age_weeks": "14-16", "vaccines": ["DHPP (3차)", "Rabies"]}
+      ],
+      "adult_boosters": [
+        {"frequency": "annually", "vaccines": ["Bordetella", "Leptospirosis"]},
+        {"frequency": "every 3 years", "vaccines": ["DHPP", "Rabies"]}
+      ],
+      "source": "AKC & AAHA Vaccination Guidelines"
+    }
+  }
+}
