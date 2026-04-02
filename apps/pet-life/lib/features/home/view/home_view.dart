@@ -220,11 +220,14 @@ class _HomeViewState extends State<HomeView> {
 
   Widget _buildActivityCard(FavoriteActivity activity) {
     final age = _profile!.ageYears;
+    final remaining = activity.remainingCount(age);
     final urgency = activity.urgencyLevel(age);
     final lastDate = _profile!.lastActivityDates[activity.id];
     final humanUnit = activity.remainingHumanUnit(age);
+    final freq = activity.frequencyDisplay;
+    final missed = activity.missedCount(lastDate);
+    final remainingIfMore = activity.remainingIfMore(age);
 
-    // Days since last activity
     int daysSinceLast = -1;
     bool isOverdue = false;
     if (lastDate != null) {
@@ -238,20 +241,20 @@ class _HomeViewState extends State<HomeView> {
         ? activity.overdueMessage(_profile!.name, daysSinceLast)
         : '';
 
-    final borderColor = urgency == 'critical'
+    final accentColor = urgency == 'critical'
         ? Colors.redAccent
         : urgency == 'warning'
-            ? AppConfig.accentColor
-            : Colors.transparent;
+            ? const Color(0xFFE8A838) // brighter amber for readability
+            : AppConfig.accentColor;
 
     return Padding(
-      padding: const EdgeInsets.only(bottom: 12),
+      padding: const EdgeInsets.only(bottom: 14),
       child: Container(
         decoration: BoxDecoration(
-          color: Colors.white.withOpacity(0.08),
+          color: const Color(0xFF252540), // slightly lighter than background for contrast
           borderRadius: BorderRadius.circular(20),
           border: Border.all(
-            color: borderColor.withOpacity(urgency == 'normal' ? 0.05 : 0.3),
+            color: accentColor.withOpacity(urgency == 'normal' ? 0.1 : 0.35),
             width: urgency == 'normal' ? 1 : 1.5,
           ),
         ),
@@ -259,29 +262,71 @@ class _HomeViewState extends State<HomeView> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Emoji + name
+            // Emoji + name + remaining count
             Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(activity.emoji, style: const TextStyle(fontSize: 28)),
                 const SizedBox(width: 12),
                 Expanded(
-                  child: Text(
-                    activity.name,
-                    style: const TextStyle(color: Colors.white, fontSize: 17, fontWeight: FontWeight.w600),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        activity.name,
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 17,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      if (freq.isNotEmpty) ...[
+                        const SizedBox(height: 2),
+                        Text(
+                          '현재 패턴: $freq',
+                          style: const TextStyle(color: Color(0xFF9090A0), fontSize: 12),
+                        ),
+                      ],
+                    ],
                   ),
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Text(
+                      '$remaining번',
+                      style: TextStyle(
+                        color: accentColor,
+                        fontSize: 22,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const Text(
+                      '남음',
+                      style: TextStyle(color: Color(0xFF8080A0), fontSize: 11),
+                    ),
+                  ],
                 ),
               ],
             ),
-            const SizedBox(height: 12),
+            const SizedBox(height: 14),
 
-            // THE CORE MESSAGE — human-friendly remaining time
-            Text(
-              humanUnit,
-              style: TextStyle(
-                color: urgency == 'critical' ? Colors.redAccent : AppConfig.accentColor,
-                fontSize: 16,
-                fontWeight: FontWeight.w600,
-                height: 1.3,
+            // Human-friendly remaining time
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+              decoration: BoxDecoration(
+                color: accentColor.withOpacity(0.1),
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Text(
+                humanUnit,
+                style: TextStyle(
+                  color: accentColor,
+                  fontSize: 14,
+                  fontWeight: FontWeight.w600,
+                  height: 1.4,
+                ),
               ),
             ),
             const SizedBox(height: 10),
@@ -289,19 +334,32 @@ class _HomeViewState extends State<HomeView> {
             // Overdue warning
             if (isOverdue && overdueMsg.isNotEmpty) ...[
               Container(
-                padding: const EdgeInsets.all(10),
+                width: double.infinity,
+                padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
                 decoration: BoxDecoration(
-                  color: Colors.redAccent.withOpacity(0.08),
-                  borderRadius: BorderRadius.circular(10),
+                  color: Colors.redAccent.withOpacity(0.1),
+                  borderRadius: BorderRadius.circular(12),
                 ),
                 child: Row(
                   children: [
-                    const Text('⚠️', style: TextStyle(fontSize: 13)),
+                    const Text('⚠️', style: TextStyle(fontSize: 14)),
                     const SizedBox(width: 8),
                     Expanded(
-                      child: Text(
-                        overdueMsg,
-                        style: TextStyle(color: Colors.redAccent.shade100, fontSize: 12, height: 1.3),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            overdueMsg,
+                            style: const TextStyle(color: Color(0xFFFF8A80), fontSize: 13, height: 1.3),
+                          ),
+                          if (missed > 0) ...[
+                            const SizedBox(height: 2),
+                            Text(
+                              '이미 $missed번의 기회를 놓쳤어요',
+                              style: const TextStyle(color: Color(0xFFFF8A80), fontSize: 11),
+                            ),
+                          ],
+                        ],
                       ),
                     ),
                   ],
@@ -310,10 +368,20 @@ class _HomeViewState extends State<HomeView> {
               const SizedBox(height: 10),
             ],
 
+            // Motivational: if you do 1 more per unit...
+            if (remaining > 0 && remainingIfMore > remaining)
+              Padding(
+                padding: const EdgeInsets.only(bottom: 10),
+                child: Text(
+                  '💡 ${_frequencyUnitLabel(activity.frequencyUnit)} 1번 더 하면 → ${remainingIfMore}번으로 늘어나요!',
+                  style: const TextStyle(color: Color(0xFF80D0A0), fontSize: 12),
+                ),
+              ),
+
             // Loss message
             Text(
               activity.lossMessage(age),
-              style: const TextStyle(color: Colors.white30, fontSize: 11),
+              style: const TextStyle(color: Color(0xFF707088), fontSize: 11),
             ),
             const SizedBox(height: 12),
 
@@ -321,21 +389,33 @@ class _HomeViewState extends State<HomeView> {
             if (isOverdue)
               SizedBox(
                 width: double.infinity,
-                child: OutlinedButton(
+                child: ElevatedButton(
                   onPressed: () {},
-                  style: OutlinedButton.styleFrom(
-                    foregroundColor: AppConfig.accentColor,
-                    side: BorderSide(color: AppConfig.accentColor.withOpacity(0.3)),
-                    padding: const EdgeInsets.symmetric(vertical: 10),
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: accentColor.withOpacity(0.15),
+                    foregroundColor: accentColor,
+                    elevation: 0,
+                    padding: const EdgeInsets.symmetric(vertical: 12),
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
                   ),
-                  child: Text('이번 주에 ${activity.name} 하기 ${activity.emoji}'),
+                  child: Text(
+                    '이번 주에 ${activity.name} 하기 ${activity.emoji}',
+                    style: const TextStyle(fontWeight: FontWeight.w600),
+                  ),
                 ),
               ),
           ],
         ),
       ),
     );
+  }
+
+  String _frequencyUnitLabel(String unit) {
+    return switch (unit) {
+      'weekly' => '매주',
+      'yearly' => '매년',
+      _ => '매달',
+    };
   }
 
   // ─── Daily Routine (compact) ───

@@ -37,11 +37,11 @@ Future<void> _injectSampleData() async {
       DailyRoutine.optionals[0], // 양치질
     ],
     favoriteActivities: [
-      FavoriteActivity.allActivities[0], // 수영
-      FavoriteActivity.allActivities[1], // 공놀이
-      FavoriteActivity.allActivities[2], // 등산
-      FavoriteActivity.allActivities[4], // 친구 만남
-      FavoriteActivity.allActivities[5], // 드라이브
+      FavoriteActivity.allActivities[0].copyWith(userFrequency: 1, frequencyUnit: 'monthly'), // 수영 월 1회
+      FavoriteActivity.allActivities[1].copyWith(userFrequency: 3, frequencyUnit: 'weekly'), // 공놀이 주 3회
+      FavoriteActivity.allActivities[2].copyWith(userFrequency: 4, frequencyUnit: 'yearly'), // 등산 연 4회
+      FavoriteActivity.allActivities[4].copyWith(userFrequency: 2, frequencyUnit: 'monthly'), // 친구 만남 월 2회
+      FavoriteActivity.allActivities[5].copyWith(userFrequency: 2, frequencyUnit: 'monthly'), // 드라이브 월 2회
     ],
     lastActivityDates: {
       'swimming': DateTime.now().subtract(const Duration(days: 60)),

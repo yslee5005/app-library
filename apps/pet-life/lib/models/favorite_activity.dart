@@ -7,9 +7,13 @@ class FavoriteActivity {
   final String emoji;
   final int maxAgeAvailable;
   final String reason;
-  final int frequencyPerMonth;
-  final String? seasonUnit; // "여름", "가을", "겨울" or null for year-round
-  final int seasonsPerYear; // how many seasons per year this applies to
+  final int frequencyPerMonth; // default/template value
+  final String? seasonUnit;
+  final int seasonsPerYear;
+
+  // User-personalized frequency
+  final double userFrequency; // user's actual frequency
+  final String frequencyUnit; // 'weekly', 'monthly', 'yearly'
 
   const FavoriteActivity({
     required this.id,
@@ -19,12 +23,57 @@ class FavoriteActivity {
     required this.reason,
     this.frequencyPerMonth = 2,
     this.seasonUnit,
-    this.seasonsPerYear = 4, // year-round by default
+    this.seasonsPerYear = 4,
+    this.userFrequency = 0,
+    this.frequencyUnit = 'monthly',
   });
 
+  /// Monthly frequency from user input (converted to per-month)
+  double get _monthlyFrequency {
+    if (userFrequency > 0) {
+      return switch (frequencyUnit) {
+        'weekly' => userFrequency * 4.33,
+        'yearly' => userFrequency / 12,
+        _ => userFrequency, // monthly
+      };
+    }
+    return frequencyPerMonth.toDouble();
+  }
+
+  /// User-friendly frequency display
+  String get frequencyDisplay {
+    if (userFrequency <= 0) return '';
+    final num = userFrequency % 1 == 0 ? userFrequency.toInt().toString() : userFrequency.toStringAsFixed(1);
+    return switch (frequencyUnit) {
+      'weekly' => '주 $num회',
+      'yearly' => '연 $num회',
+      _ => '월 $num회',
+    };
+  }
+
+  /// Remaining count based on user's frequency
   int remainingCount(double currentAge) {
     final yearsLeft = (maxAgeAvailable - currentAge).clamp(0.0, 20.0);
-    return (yearsLeft * 12 * frequencyPerMonth).round();
+    return (yearsLeft * 12 * _monthlyFrequency).round();
+  }
+
+  /// If user increased frequency by 1 unit, how many more?
+  int remainingIfMore(double currentAge) {
+    final yearsLeft = (maxAgeAvailable - currentAge).clamp(0.0, 20.0);
+    final extraMonthly = switch (frequencyUnit) {
+      'weekly' => 4.33,
+      'yearly' => 1.0 / 12,
+      _ => 1.0,
+    };
+    return (yearsLeft * 12 * (_monthlyFrequency + extraMonthly)).round();
+  }
+
+  /// How many times were "missed" since last activity
+  int missedCount(DateTime? lastDate) {
+    if (lastDate == null) return 0;
+    final daysSince = DateTime.now().difference(lastDate).inDays;
+    final monthsSince = daysSince / 30.0;
+    return (_monthlyFrequency * monthsSince).round();
   }
 
   double yearsRemaining(double currentAge) {
@@ -83,6 +132,10 @@ class FavoriteActivity {
         'maxAgeAvailable': maxAgeAvailable,
         'reason': reason,
         'frequencyPerMonth': frequencyPerMonth,
+        'userFrequency': userFrequency,
+        'frequencyUnit': frequencyUnit,
+        'seasonUnit': seasonUnit,
+        'seasonsPerYear': seasonsPerYear,
       };
 
   factory FavoriteActivity.fromJson(Map<String, dynamic> json) {
@@ -93,6 +146,28 @@ class FavoriteActivity {
       maxAgeAvailable: json['maxAgeAvailable'] as int,
       reason: json['reason'] as String,
       frequencyPerMonth: json['frequencyPerMonth'] as int? ?? 2,
+      userFrequency: (json['userFrequency'] as num?)?.toDouble() ?? 0,
+      frequencyUnit: json['frequencyUnit'] as String? ?? 'monthly',
+      seasonUnit: json['seasonUnit'] as String?,
+      seasonsPerYear: json['seasonsPerYear'] as int? ?? 4,
+    );
+  }
+
+  FavoriteActivity copyWith({
+    double? userFrequency,
+    String? frequencyUnit,
+  }) {
+    return FavoriteActivity(
+      id: id,
+      name: name,
+      emoji: emoji,
+      maxAgeAvailable: maxAgeAvailable,
+      reason: reason,
+      frequencyPerMonth: frequencyPerMonth,
+      seasonUnit: seasonUnit,
+      seasonsPerYear: seasonsPerYear,
+      userFrequency: userFrequency ?? this.userFrequency,
+      frequencyUnit: frequencyUnit ?? this.frequencyUnit,
     );
   }
 
