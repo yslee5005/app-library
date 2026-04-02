@@ -138,6 +138,48 @@ Container(
 - Use CustomScrollView with Slivers for complex scrolling
 - Main home: SingleChildScrollView wrapping Column
 
+### Phase 7: Unit Tests + Flow Tests
+- [ ] Create test/models/ — PetProfile, DailyRoutine, DailyLog model tests
+  - Construction, serialization (toJson/fromJson), edge cases
+- [ ] Create test/services/life_calculator_test.dart
+  - Remaining days calculation (breed median lifespan - current age)
+  - Remaining walks (remaining days × walks per day)
+  - Human age conversion (16 × ln(dog_age) + 31)
+  - Life percentage (current age / median lifespan × 100)
+  - Edge cases: newborn puppy (0 days), very old dog (past median)
+- [ ] Create test/services/dog_state_test.dart
+  - Returns happy when all routines completed today
+  - Returns wants_walk when walk not done and hour > 10
+  - Returns sad when no routines done for 3+ days
+  - Returns sleeping when hour is 22-6
+  - Returns very_happy when perfect day streak > 0
+  - Returns bored when walk not done for 3+ days
+- [ ] Create test/services/breed_data_test.dart
+  - Loads breed database JSON correctly
+  - Finds breed by ID
+  - Returns genetic health risks for known breed
+  - Returns empty risks for unknown breed
+  - Returns "limited" data_confidence for rare breeds
+- [ ] Create test/services/pet_storage_test.dart
+  - Save and load PetProfile
+  - Save and load DailyLog
+  - Streak calculation: consecutive days count
+  - Streak reset when day missed
+  - Streak freeze: doesn't reset when freeze active
+- [ ] Create test/flow/onboarding_flow_test.dart (widget test)
+  - Can select breed from list
+  - Can enter name, age, weight
+  - Can toggle routines on/off
+  - Completing onboarding saves profile
+  - Navigates to home after completion
+- [ ] Create test/flow/routine_completion_flow_test.dart (widget test)
+  - Tapping routine card marks it complete
+  - Completion updates streak count
+  - Completion changes dog state/speech
+  - All routines complete → "완벽한 하루" state
+- [ ] Run all tests: `flutter test` — ALL PASS
+- [ ] Git commit: "test: pet-life unit tests + flow tests — all passing"
+
 ## Protected Files
 - .ralph/, .ralphrc, packages/, specs/, templates/
 - breed_database.json and tier files (already created, just READ them)
