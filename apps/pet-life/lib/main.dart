@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+import 'models/daily_log.dart';
+import 'models/daily_routine.dart';
+import 'models/pet_profile.dart';
 import 'router/app_router.dart';
 import 'services/breed_data_service.dart';
 import 'services/pet_storage_service.dart';
@@ -11,10 +14,67 @@ void main() async {
   // Load breed data
   await BreedDataService().loadBreeds();
 
-  // Check onboarding status
-  final isOnboarded = await PetStorageService().isOnboardingComplete();
+  // === TEST MODE: Skip onboarding, inject sample data ===
+  await _injectSampleData();
 
-  runApp(PetLifeApp(isOnboarded: isOnboarded));
+  runApp(const PetLifeApp(isOnboarded: true));
+}
+
+/// Injects hardcoded sample data for testing
+Future<void> _injectSampleData() async {
+  final storage = PetStorageService();
+
+  // Sample pet: 초코, 골든 리트리버, 7세
+  final profile = PetProfile(
+    name: '초코',
+    breedId: 'golden_retriever',
+    birthDate: DateTime(2019, 3, 15),
+    weightKg: 28.0,
+    neutered: true,
+    routines: [
+      ...DailyRoutine.defaults,
+      DailyRoutine.optionals[0], // 양치질
+    ],
+    createdAt: DateTime(2024, 1, 1),
+  );
+
+  await storage.saveProfile(profile);
+  await storage.setOnboardingComplete(true);
+
+  // Sample daily logs — 오늘 일부 완료 + 과거 14일 스트릭
+  final today = PetStorageService.dateString(DateTime.now());
+  final logs = <DailyLog>[];
+
+  // 오늘: 아침 산책 + 아침 식사 완료
+  logs.add(DailyLog(
+    date: today,
+    routineId: 'walk_am',
+    completed: true,
+    completedAt: DateTime.now().subtract(const Duration(hours: 3)),
+  ));
+  logs.add(DailyLog(
+    date: today,
+    routineId: 'meal_am',
+    completed: true,
+    completedAt: DateTime.now().subtract(const Duration(hours: 4)),
+  ));
+
+  // 과거 14일 — 전부 완료 (스트릭 14일)
+  for (int i = 1; i <= 14; i++) {
+    final date = PetStorageService.dateString(
+      DateTime.now().subtract(Duration(days: i)),
+    );
+    for (final routineId in ['walk_am', 'walk_pm', 'meal_am', 'meal_pm']) {
+      logs.add(DailyLog(
+        date: date,
+        routineId: routineId,
+        completed: true,
+        completedAt: DateTime.now().subtract(Duration(days: i)),
+      ));
+    }
+  }
+
+  await storage.saveLogs(logs);
 }
 
 class PetLifeApp extends StatelessWidget {

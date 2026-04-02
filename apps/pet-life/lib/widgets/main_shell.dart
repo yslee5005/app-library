@@ -11,7 +11,7 @@ class MainShell extends StatelessWidget {
   int _currentIndex(BuildContext context) {
     final location = GoRouterState.of(context).uri.path;
     if (location.startsWith('/analysis')) return 1;
-    if (location.startsWith('/guide')) return 2;
+    if (location.startsWith('/records')) return 2;
     if (location.startsWith('/settings')) return 3;
     return 0;
   }
@@ -58,7 +58,7 @@ class MainShell extends StatelessWidget {
                 case 1:
                   context.go('/analysis');
                 case 2:
-                  context.go('/guide');
+                  context.go('/records');
                 case 3:
                   context.go('/settings');
               }
@@ -75,9 +75,9 @@ class MainShell extends StatelessWidget {
                 label: '분석',
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.menu_book_outlined),
-                activeIcon: Icon(Icons.menu_book),
-                label: '가이드',
+                icon: Icon(Icons.calendar_month_outlined),
+                activeIcon: Icon(Icons.calendar_month),
+                label: '기록',
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.settings_outlined),

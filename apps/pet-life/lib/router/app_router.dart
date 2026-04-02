@@ -1,7 +1,7 @@
 import 'package:go_router/go_router.dart';
 
 import '../features/analysis/view/analysis_view.dart';
-import '../features/guide/view/guide_view.dart';
+import '../features/records/view/records_view.dart';
 import '../features/home/view/home_view.dart';
 import '../features/onboarding/view/onboarding_view.dart';
 import '../features/settings/view/settings_view.dart';
@@ -35,9 +35,9 @@ class AppRouter {
             ),
           ),
           GoRoute(
-            path: '/guide',
+            path: '/records',
             pageBuilder: (context, state) => const NoTransitionPage(
-              child: GuideView(),
+              child: RecordsView(),
             ),
           ),
           GoRoute(
