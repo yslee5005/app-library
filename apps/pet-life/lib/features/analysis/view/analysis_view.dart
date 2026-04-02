@@ -6,6 +6,7 @@ import '../../../models/breed_info.dart';
 import '../../../models/daily_log.dart';
 import '../../../models/pet_profile.dart';
 import '../../../services/breed_data_service.dart';
+import '../../../services/care_standards.dart';
 import '../../../services/life_calculator.dart';
 import '../../../services/pet_storage_service.dart';
 import '../../../widgets/glass_card.dart';
@@ -239,8 +240,10 @@ class _AnalysisViewState extends State<AnalysisView> {
     );
   }
 
-  // ─── 3. Category Comparisons ───
+  // ─── 3. Category Comparisons (15 items) ───
   Widget _buildComparisonSection() {
+    final standards = CareStandards(profile: _profile!, breed: _breedInfo);
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -248,43 +251,58 @@ class _AnalysisViewState extends State<AnalysisView> {
           '📊 항목별 비교',
           style: TextStyle(color: Colors.white, fontSize: 17, fontWeight: FontWeight.w600),
         ),
-        const SizedBox(height: 12),
-        _buildComparisonCard(
-          icon: '🦴',
-          title: '산책',
-          current: _getWeeklyCount('walk'),
-          recommended: _getRecommendedWeeklyWalks(),
-          unit: '회/주',
-          tip: _getWalkTip(),
-          source: 'AKC Exercise Guidelines',
+        const SizedBox(height: 4),
+        const Text(
+          '건강하게 오래 사는 강아지 기준과 비교',
+          style: TextStyle(color: Colors.white38, fontSize: 12),
         ),
-        const SizedBox(height: 10),
-        _buildComparisonCard(
-          icon: '🦷',
-          title: '양치질',
-          current: _getWeeklyCount('care'),
-          recommended: 7,
-          unit: '회/주',
-          tip: _getTeethTip(),
-          source: 'Cornell Vet: 80-90% 치주질환',
-        ),
-        const SizedBox(height: 10),
-        _buildWeightCard(),
-        const SizedBox(height: 10),
-        _buildComparisonCard(
-          icon: '🏥',
-          title: '건강검진',
-          current: 0,
-          recommended: _profile!.ageYears >= (_breedInfo?.seniorAge ?? 7) ? 2 : 1,
-          unit: '회/년',
-          tip: _profile!.ageYears >= (_breedInfo?.seniorAge ?? 7)
-              ? '시니어는 연 2회 건강검진이 필수예요'
-              : '연 1회 건강검진을 권장해요',
-          source: 'AAHA Guidelines',
-          isCritical: true,
-        ),
+        const SizedBox(height: 16),
+        ...standards.categories.map((category) => _buildCategoryGroup(category)),
       ],
     );
+  }
+
+  Widget _buildCategoryGroup(CareCategory category) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(bottom: 8, top: 8),
+          child: Text(
+            '${category.icon} ${category.name}',
+            style: const TextStyle(color: Colors.white54, fontSize: 14, fontWeight: FontWeight.w600),
+          ),
+        ),
+        ...category.items.map((item) {
+          if (item.isWeightItem) return _buildWeightCard();
+          final current = _getCurrentValue(item);
+          return Padding(
+            padding: const EdgeInsets.only(bottom: 8),
+            child: _buildComparisonCard(
+              icon: item.icon,
+              title: item.name,
+              current: current,
+              recommended: item.recommended,
+              unit: item.unit,
+              tip: item.tip,
+              source: item.source,
+              isCritical: current == 0 && item.recommended > 0,
+              hasNoRecord: current == -1,
+            ),
+          );
+        }),
+        const SizedBox(height: 8),
+      ],
+    );
+  }
+
+  int _getCurrentValue(CareItem item) {
+    // If linked to a routine category, auto-count from logs
+    if (item.routineCategory != null) {
+      return _getWeeklyCount(item.routineCategory!);
+    }
+    // Items without routine tracking return -1 (no record)
+    return -1;
   }
 
   Widget _buildComparisonCard({
@@ -296,7 +314,40 @@ class _AnalysisViewState extends State<AnalysisView> {
     required String tip,
     required String source,
     bool isCritical = false,
+    bool hasNoRecord = false,
   }) {
+    if (hasNoRecord) {
+      return GlassCard(
+        padding: const EdgeInsets.all(14),
+        child: Row(
+          children: [
+            Text(icon, style: const TextStyle(fontSize: 18)),
+            const SizedBox(width: 10),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(title, style: const TextStyle(color: Colors.white, fontSize: 14)),
+                  const SizedBox(height: 2),
+                  Text('기록 없음 · 권장 $recommended$unit', style: const TextStyle(color: Colors.white30, fontSize: 11)),
+                ],
+              ),
+            ),
+            TextButton(
+              onPressed: () {},
+              style: TextButton.styleFrom(
+                foregroundColor: AppConfig.accentColor,
+                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                minimumSize: Size.zero,
+                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+              ),
+              child: const Text('루틴 추가 →', style: TextStyle(fontSize: 11)),
+            ),
+          ],
+        ),
+      );
+    }
+
     final percentage = recommended > 0 ? (current / recommended * 100).clamp(0, 100).round() : 0;
     final deficit = recommended - current;
 
