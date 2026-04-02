@@ -1,75 +1,13 @@
 
 
-The Phase 9 implementation is already complete from the previous loop. Let me verify the current state and run the remaining checklist items.
-
-
-⚡ [Bash]
-
-I see the showcase app changes are in place, plus there are package changes from previous phases. Let me verify the showcase-specific files are all correct.
-
-
-⚡ [Bash]
-
-Good. Now let me run the remaining checklist items — `flutter build apk --debug`.
-
-
-⚡ [Bash]
-
-Build error. Let me see the full error.
-
-
-⚡ [Bash]
-
-The issue is `flutter_riverpod 3.3.1` is incompatible with this Flutter version. Let me check which version of flutter_riverpod is compatible.
-
-
-⚡ [Bash]
-
-Flutter 3.29.2 (March 2025) — `flutter_riverpod 3.3.1` requires a newer Flutter. The packages use `^3.0.0` constraint, so let me pin to a compatible version.
-
-
-⚡ [Bash]
-
-
-
-⚡ [TodoWrite]
-
-
-
-⚡ [Grep]
-
-The issue is `flutter_riverpod 3.3.1` uses a `scheduleFrameCallback` API with `scheduleNewFrame` named parameter that doesn't exist in Flutter 3.29.2. I need to constrain to an earlier version. Let me check what version works.
-
-
-⚡ [Bash]
-
-I need to constrain `flutter_riverpod` to `>=3.0.0 <3.3.0` or find a compatible version. The packages declare `^3.0.0`. Let me check if version 3.0.0 works with this Flutter.
-
-
-⚡ [Edit]
-
-But wait — the packages themselves also declare `^3.0.0` and the workspace resolution means the single version must satisfy all. I need to add a version constraint at the workspace level. Let me check the workspace root pubspec.
+I'll start by reading the key files to understand the current state of the project.
 
 
 ⚡ [Read]
 
-I need to add a `dependency_overrides` in the root pubspec to pin flutter_riverpod to a compatible version. Actually, a better approach — let me add a direct dependency constraint at the workspace level.
 
 
-⚡ [Edit]
-
-The packages themselves also use `^3.0.0`, so adding `dependency_overrides` in root pubspec would pin it across the workspace. But `dependency_overrides` is discouraged per CLAUDE.md. Let me check if `riverpod` (without flutter_) has a constraint issue too and try using an explicit version in the packages.
-
-Actually, looking at the error: `scheduleFrameCallback(scheduleNewFrame: false, ...)` — this API was added in Flutter 3.32+ (the `scheduleNewFrame` parameter). Since we're on Flutter 3.29.2, we need `flutter_riverpod <3.3.0`. The cleanest approach is to add an upper bound constraint. Since this is a workspace, I'll update the package pubspecs too.
-
-Wait — the PROMPT says **DO NOT modify packages/ files**. So I can only modify showcase. Let me think about this differently.
-
-The workspace resolution means all packages share the same `flutter_riverpod` version. Since I can't modify packages, I need to constrain it from the showcase side. Let me use `dependency_overrides` in the root pubspec to pin a compatible version — this is the standard workaround for version incompatibility in a workspace.
-
-Actually, I should just add a tighter constraint in the showcase pubspec. The workspace resolver will pick the version that satisfies ALL constraints, so `">=3.0.0 <3.3.0"` in showcase + `^3.0.0` in packages = `>=3.0.0 <3.3.0`.
-
-
-⚡ [Edit]
+⚡ [Bash]
 
 
 
@@ -79,20 +17,17 @@ Actually, I should just add a tighter constraint in the showcase pubspec. The wo
 
 ⚡ [Bash]
 
-Now `flutter_riverpod 3.2.1` — should be compatible with Flutter 3.29.2. Let me build again.
 
 
-⚡ [Bash]
+⚡ [Read]
 
-Still failing. Let me get the actual error.
 
 
 ⚡ [Bash]
 
-Still the same issue in 3.2.1. Let me try an older version.
 
 
-⚡ [Edit]
+⚡ [Read]
 
 
 
@@ -102,7 +37,11 @@ Still the same issue in 3.2.1. Let me try an older version.
 
 ⚡ [Bash]
 
-Build succeeded! Now let me run analyze one more time to confirm clean.
+Now let me check the flutter-layout rules and the existing packages to understand what's available.
+
+
+⚡ [Read]
+
 
 
 ⚡ [Bash]
@@ -111,41 +50,335 @@ Build succeeded! Now let me run analyze one more time to confirm clean.
 
 ⚡ [Bash]
 
-0 errors, 0 warnings. 55 info-level issues (all pre-existing).
+
+
+⚡ [ToolSearch]
+
+
+
+Let me check the breed data files and understand the full structure before starting implementation.
+
+
+⚡ [Read]
+
+
+
+⚡ [Read]
+
+
+
+⚡ [Read]
+
+
+
+⚡ [Bash]
+
+Now I have a clear picture of the project. Let me set up the todo list and start implementing Phase 1.
 
 
 ⚡ [TodoWrite]
 
-## Phase 9: Showcase Integration — Complete
+Let me check if the assets/animations directory exists and understand the workspace structure.
 
-### Summary of all changes
 
-**New files:**
-- `apps/showcase/lib/mocks/mock_auth_repository.dart` — Full AuthRepository mock with simulated delays
-- `apps/showcase/lib/mocks/mock_comment_repository.dart` — Full CommentRepository mock with in-memory storage, pagination, likes
-- `apps/showcase/lib/features/full_flow/view/full_flow_demo.dart` — 3-screen flow: Login → Feed (paginated, 30 items) → Detail + Comments with add/like
+⚡ [Bash]
 
-**Modified files:**
-- `apps/showcase/pubspec.yaml` — Added flutter_riverpod (>=3.0.0 <3.2.0), app_lib_auth, app_lib_comments, app_lib_pagination
-- `apps/showcase/lib/main.dart` — ProviderScope with mock repository overrides
-- `apps/showcase/lib/features/onboarding/view/demos/login_form_demo.dart` — ConsumerWidget, connects to authNotifier (loading/authenticated/sign-out)
-- `apps/showcase/lib/features/feed/view/demos/feed_list_view_demo.dart` — ConsumerWidget with PaginationNotifier, load-more adds next page
-- `apps/showcase/lib/sample_data/sample_data.dart` — Added "Full Flow" 10th category
-- `apps/showcase/lib/features/home/view/home_view.dart` — Added `/full-flow` route
-- `apps/showcase/lib/router/app_router.dart` — Added FullFlowDemo route
 
-**Verification:**
-- `flutter analyze` — 0 errors, 0 warnings
-- `flutter build apk --debug` — Build succeeded
 
-```
----RALPH_STATUS---
-STATUS: COMPLETE
-TASKS_COMPLETED_THIS_LOOP: 10
-FILES_MODIFIED: 10
-TESTS_STATUS: NOT_RUN
-WORK_TYPE: IMPLEMENTATION
-EXIT_SIGNAL: true
-RECOMMENDATION: Run showcase app on device/emulator to verify all 10 categories render and interact correctly
----END_RALPH_STATUS---
-```
+⚡ [Bash]
+
+Good. Now let me start building Phase 1 — App Structure + Data Layer. I'll create all the models and services in parallel.
+
+
+⚡ [Bash]
+
+Now let me create all the model files and services. I'll write them in parallel.
+
+
+⚡ [Write]
+
+
+
+⚡ [Write]
+
+
+
+⚡ [Write]
+
+
+
+⚡ [Write]
+
+Now let me create all the services and the breed model.
+
+
+⚡ [Write]
+
+
+
+⚡ [Write]
+
+
+
+⚡ [Write]
+
+
+
+⚡ [Write]
+
+
+
+⚡ [Write]
+
+Now let me create the router, theme config, and update main.dart. I'll also create the glassmorphism card widget.
+
+
+⚡ [Write]
+
+
+
+⚡ [Write]
+
+
+
+⚡ [Write]
+
+
+
+⚡ [Write]
+
+
+
+⚡ [Write]
+
+Now create the stub views for each feature and update main.dart.
+
+
+⚡ [Write]
+
+
+
+⚡ [Write]
+
+
+
+⚡ [Write]
+
+
+
+⚡ [Write]
+
+
+
+⚡ [Write]
+
+Now update main.dart to properly initialize services and use the router.
+
+
+⚡ [Write]
+
+Now let me run flutter analyze to check Phase 1.
+
+
+⚡ [Bash]
+
+Only warnings and info-level issues, no errors. Let me fix the warnings (unused imports/variables) quickly.
+
+
+⚡ [Edit]
+
+
+
+⚡ [Edit]
+
+
+
+⚡ [Edit]
+
+
+
+⚡ [Edit]
+
+
+
+⚡ [Bash]
+
+Phase 1 clean — 0 errors, 0 warnings. Now let me commit and move to Phase 2.
+
+
+⚡ [Bash]
+
+
+
+⚡ [TodoWrite]
+
+Now Phase 2: Onboarding. I need 3 steps — pet info (name, breed, birthdate, weight), routine setup, and summary.
+
+
+⚡ [Write]
+
+
+
+⚡ [Bash]
+
+Onboarding clean. Commit and move to Phase 3.
+
+
+⚡ [Bash]
+
+
+
+⚡ [TodoWrite]
+
+Now Phase 3: Main Home Screen — the most important screen with dog state, journey timeline, and routine cards.
+
+
+⚡ [Write]
+
+
+
+⚡ [Bash]
+
+Let me check there are no unused import warnings.
+
+
+⚡ [Bash]
+
+
+
+⚡ [Bash]
+
+
+
+⚡ [TodoWrite]
+
+Now Phase 4: Analysis page with 3 tabs (Time, Health, Records) and a life journey vertical timeline.
+
+
+⚡ [Write]
+
+
+
+⚡ [Bash]
+
+
+
+⚡ [Bash]
+
+
+
+⚡ [Bash]
+
+
+
+⚡ [TodoWrite]
+
+Phase 5: Guide + Settings pages. Let me write both in parallel.
+
+
+⚡ [Write]
+
+
+
+⚡ [Write]
+
+
+
+⚡ [Bash]
+
+
+
+⚡ [Bash]
+
+
+
+⚡ [TodoWrite]
+
+Phase 6: Polish — add streak animation, time-based speech, and ensure all glassmorphism is consistent. Let me also do a full `dart analyze` to clean up any issues.
+
+
+⚡ [Bash]
+
+Good, 0 errors, 0 warnings. Now let me enhance the dog speech bubble to change based on time of day, add a streak completion animation widget, and ensure the theme is consistently applied.
+
+
+⚡ [Write]
+
+
+
+⚡ [Bash]
+
+Now let me enhance DogStateService to include time-of-day specific messages and add the time-based greeting logic to the home view's speech bubble.
+
+
+⚡ [Read]
+
+
+
+⚡ [Edit]
+
+Now add the `_getTimeBasedMessages` method.
+
+
+⚡ [Read]
+
+
+
+⚡ [Read]
+
+
+
+⚡ [Edit]
+
+Now let's do a full analyze to make sure everything is clean.
+
+
+⚡ [Bash]
+
+
+
+⚡ [Bash]
+
+
+
+⚡ [TodoWrite]
+
+Now Phase 7: Unit tests + flow tests. Let me create all test files.
+
+
+⚡ [Bash]
+
+Let me create all the model tests, service tests, and flow tests in parallel.
+
+
+⚡ [Write]
+
+
+
+⚡ [Write]
+
+
+
+⚡ [Write]
+
+Now let me write the service tests.
+
+
+⚡ [Write]
+
+
+
+⚡ [Write]
+
+
+
+⚡ [Write]
+
+
+
+⚡ [Write]
+
+Now let me run the tests to see how they do.
+
+
+⚡ [Bash]

@@ -4,6 +4,7 @@ import 'package:share_plus/share_plus.dart';
 import '../../../config/app_config.dart';
 import '../../../models/breed_info.dart';
 import '../../../models/daily_log.dart';
+import '../../../models/daily_routine.dart';
 import '../../../models/pet_profile.dart';
 import '../../../services/breed_data_service.dart';
 import '../../../services/life_calculator.dart';
@@ -186,15 +187,12 @@ class _AnalysisViewState extends State<AnalysisView>
                 const SizedBox(height: 16),
                 OutlinedButton.icon(
                   onPressed: () {
-                    SharePlus.instance.share(
-                      ShareParams(
-                        text:
-                            '${_profile!.name}와 함께하는 시간\n'
-                            '남은 산책: ${_formatNumber(_lifeStats!.remainingWalks)}번\n'
-                            '남은 식사: ${_formatNumber(_lifeStats!.remainingMeals)}번\n'
-                            '오늘도 소중한 하루를 보내요 🐾\n\n'
-                            '#PetLife #반려견사랑',
-                      ),
+                    Share.share(
+                        '${_profile!.name}와 함께하는 시간\n'
+                        '남은 산책: ${_formatNumber(_lifeStats!.remainingWalks)}번\n'
+                        '남은 식사: ${_formatNumber(_lifeStats!.remainingMeals)}번\n'
+                        '오늘도 소중한 하루를 보내요 🐾\n\n'
+                        '#PetLife #반려견사랑',
                     );
                   },
                   icon: const Icon(Icons.share, size: 18),
@@ -723,7 +721,7 @@ class _AnalysisViewState extends State<AnalysisView>
     return names[weekday];
   }
 
-  Widget _buildRoutineStatCard(routine) {
+  Widget _buildRoutineStatCard(DailyRoutine routine) {
     final completedCount = _allLogs
         .where((l) => l.routineId == routine.id && l.completed)
         .length;
