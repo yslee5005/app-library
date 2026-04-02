@@ -4,7 +4,6 @@ import 'package:share_plus/share_plus.dart';
 import '../../../config/app_config.dart';
 import '../../../models/breed_info.dart';
 import '../../../models/daily_log.dart';
-import '../../../models/daily_routine.dart';
 import '../../../models/pet_profile.dart';
 import '../../../services/breed_data_service.dart';
 import '../../../services/life_calculator.dart';
@@ -18,41 +17,42 @@ class AnalysisView extends StatefulWidget {
   State<AnalysisView> createState() => _AnalysisViewState();
 }
 
-class _AnalysisViewState extends State<AnalysisView>
-    with SingleTickerProviderStateMixin {
-  late final TabController _tabController;
+class _AnalysisViewState extends State<AnalysisView> {
   PetProfile? _profile;
   LifeStats? _lifeStats;
   BreedInfo? _breedInfo;
   List<DailyLog> _allLogs = [];
+  Map<String, int> _streaks = {};
 
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 3, vsync: this);
     _loadData();
   }
 
-  @override
-  void dispose() {
-    _tabController.dispose();
-    super.dispose();
-  }
-
   Future<void> _loadData() async {
-    final profile = await PetStorageService().loadProfile();
+    final storage = PetStorageService();
+    final profile = await storage.loadProfile();
     if (profile == null) return;
 
     final lifeStats = LifeCalculator().calculate(profile);
     final breedInfo = BreedDataService().getBreedById(profile.breedId);
-    final allLogs = await PetStorageService().loadLogs();
+    final allLogs = await storage.loadLogs();
 
-    setState(() {
-      _profile = profile;
-      _lifeStats = lifeStats;
-      _breedInfo = breedInfo;
-      _allLogs = allLogs;
-    });
+    final streaks = <String, int>{};
+    for (final routine in profile.routines) {
+      streaks[routine.id] = await storage.getStreak(routine.id);
+    }
+
+    if (mounted) {
+      setState(() {
+        _profile = profile;
+        _lifeStats = lifeStats;
+        _breedInfo = breedInfo;
+        _allLogs = allLogs;
+        _streaks = streaks;
+      });
+    }
   }
 
   @override
@@ -65,650 +65,581 @@ class _AnalysisViewState extends State<AnalysisView>
 
     return Scaffold(
       body: SafeArea(
-        child: Column(
-          children: [
-            // Title
-            Padding(
-              padding: const EdgeInsets.fromLTRB(20, 16, 20, 0),
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: Text('분석',
-                    style: Theme.of(context).textTheme.headlineMedium),
-              ),
-            ),
-            const SizedBox(height: 16),
-            // Tab bar
-            Container(
-              margin: const EdgeInsets.symmetric(horizontal: 20),
-              decoration: BoxDecoration(
-                color: Colors.white.withValues(alpha: 0.06),
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: TabBar(
-                controller: _tabController,
-                indicator: BoxDecoration(
-                  color: AppConfig.accentColor.withValues(alpha: 0.2),
-                  borderRadius: BorderRadius.circular(12),
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.all(20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Header
+              Text(
+                '${_profile!.name} 분석',
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 28,
+                  fontWeight: FontWeight.bold,
                 ),
-                indicatorSize: TabBarIndicatorSize.tab,
-                labelColor: AppConfig.accentColor,
-                unselectedLabelColor: Colors.white54,
-                dividerHeight: 0,
-                tabs: const [
-                  Tab(text: '시간'),
-                  Tab(text: '건강'),
-                  Tab(text: '기록'),
-                ],
               ),
-            ),
-            const SizedBox(height: 16),
-            Expanded(
-              child: TabBarView(
-                controller: _tabController,
-                children: [
-                  _buildTimeTab(),
-                  _buildHealthTab(),
-                  _buildRecordTab(),
-                ],
-              ),
-            ),
-          ],
+              const SizedBox(height: 24),
+
+              // 1. Journey Timeline
+              _buildJourneySection(),
+              const SizedBox(height: 28),
+
+              // 2. Care Score
+              _buildCareScore(),
+              const SizedBox(height: 28),
+
+              // 3. Category Comparisons
+              _buildComparisonSection(),
+              const SizedBox(height: 28),
+
+              // 4. Health Risks
+              _buildHealthRisks(),
+              const SizedBox(height: 28),
+
+              // 5. Bottom CTA
+              _buildBottomCTA(),
+              const SizedBox(height: 40),
+            ],
+          ),
         ),
       ),
     );
   }
 
-  // ─── Time Tab ───
-  Widget _buildTimeTab() {
-    return SingleChildScrollView(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
-      child: Column(
-        children: [
-          // Life Journey Timeline (vertical)
-          _buildLifeJourneyTimeline(),
-          const SizedBox(height: 20),
-          // Remaining days
-          _buildRemainingCard(),
-          const SizedBox(height: 16),
-          // Human age + walks + meals
-          Row(
-            children: [
-              Expanded(
-                child: _buildStatCard(
-                  '사람 나이',
-                  '${_lifeStats!.humanAge.toStringAsFixed(0)}세',
-                  Icons.person_outline,
-                ),
-              ),
-              const SizedBox(width: 12),
-              Expanded(
-                child: _buildStatCard(
-                  '남은 산책',
-                  _formatNumber(_lifeStats!.remainingWalks),
-                  Icons.directions_walk,
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 12),
-          Row(
-            children: [
-              Expanded(
-                child: _buildStatCard(
-                  '남은 식사',
-                  _formatNumber(_lifeStats!.remainingMeals),
-                  Icons.restaurant,
-                ),
-              ),
-              const SizedBox(width: 12),
-              Expanded(
-                child: _buildStatCard(
-                  '수명 진행',
-                  '${_lifeStats!.lifePercentage.toStringAsFixed(1)}%',
-                  Icons.timeline,
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 20),
-          // Emotional message + share
-          GlassCard(
-            child: Column(
-              children: [
-                Text(
-                  '남은 ${_formatNumber(_lifeStats!.remainingWalks)}번의 산책 중\n오늘이 그 중 하나예요 🐾',
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 15,
-                    height: 1.6,
-                  ),
-                ),
-                const SizedBox(height: 16),
-                OutlinedButton.icon(
-                  onPressed: () {
-                    Share.share(
-                        '${_profile!.name}와 함께하는 시간\n'
-                        '남은 산책: ${_formatNumber(_lifeStats!.remainingWalks)}번\n'
-                        '남은 식사: ${_formatNumber(_lifeStats!.remainingMeals)}번\n'
-                        '오늘도 소중한 하루를 보내요 🐾\n\n'
-                        '#PetLife #반려견사랑',
-                    );
-                  },
-                  icon: const Icon(Icons.share, size: 18),
-                  label: const Text('공유하기'),
-                ),
-              ],
-            ),
-          ),
-          const SizedBox(height: 32),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildLifeJourneyTimeline() {
-    final milestones = BreedDataService().getAgeMilestones(_profile!.breedId);
-    final currentAge = _lifeStats!.currentAgeYears;
+  // ─── 1. Journey Timeline ───
+  Widget _buildJourneySection() {
+    final percentage = _lifeStats!.lifePercentage.round();
 
     return GlassCard(
+      padding: const EdgeInsets.all(20),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('인생 여정 타임라인',
-              style: Theme.of(context).textTheme.titleMedium),
-          const SizedBox(height: 20),
-          ...milestones.map((m) {
-            final isPast = m.age <= currentAge;
-            final isCurrent =
-                (m.age - currentAge).abs() < 1.0 && isPast;
-
-            return _buildTimelineNode(
-              label: m.event,
-              description: m.description,
-              ageLabel: '${m.age.toStringAsFixed(m.age == m.age.roundToDouble() ? 0 : 1)}세',
-              isPast: isPast,
-              isCurrent: isCurrent,
-              isLast: m == milestones.last,
-            );
-          }),
-          // Current position node
-          if (!milestones.any((m) =>
-              (m.age - currentAge).abs() < 1.0 && m.age <= currentAge))
-            _buildTimelineNode(
-              label: '현재',
-              description:
-                  '${currentAge.toStringAsFixed(1)}세 · 사람 나이 ${_lifeStats!.humanAge.toStringAsFixed(0)}세 · 남은 시간 ${_formatNumber(_lifeStats!.remainingDays)}일',
-              ageLabel: '${currentAge.toStringAsFixed(1)}세',
-              isPast: true,
-              isCurrent: true,
-              isLast: false,
+          const Text(
+            '🐾 여정',
+            style: TextStyle(color: Colors.white, fontSize: 17, fontWeight: FontWeight.w600),
+          ),
+          const SizedBox(height: 16),
+          // Mini timeline bar
+          Row(
+            children: [
+              const Text('탄생', style: TextStyle(color: Colors.white38, fontSize: 11)),
+              const SizedBox(width: 8),
+              Expanded(
+                child: Stack(
+                  children: [
+                    // Background
+                    Container(
+                      height: 6,
+                      decoration: BoxDecoration(
+                        color: Colors.white.withOpacity(0.1),
+                        borderRadius: BorderRadius.circular(3),
+                      ),
+                    ),
+                    // Progress
+                    FractionallySizedBox(
+                      widthFactor: percentage / 100,
+                      child: Container(
+                        height: 6,
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            colors: [AppConfig.accentColor.withOpacity(0.5), AppConfig.accentColor],
+                          ),
+                          borderRadius: BorderRadius.circular(3),
+                        ),
+                      ),
+                    ),
+                    // Dog position
+                    Positioned(
+                      left: (MediaQuery.of(context).size.width - 80) * (percentage / 100) - 8,
+                      top: -5,
+                      child: const Text('🐕', style: TextStyle(fontSize: 16)),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(width: 8),
+              const Text('🌈', style: TextStyle(fontSize: 11)),
+            ],
+          ),
+          const SizedBox(height: 12),
+          Center(
+            child: Text(
+              '$percentage% 경과 · 남은 시간 ${_formatNumber(_lifeStats!.remainingDays)}일',
+              style: const TextStyle(color: Colors.white54, fontSize: 13),
             ),
-          // Future milestones
-          ...(_breedInfo?.geneticHealthRisks ?? [])
-              .where((r) => r.severity == 'critical')
-              .take(2)
-              .map((risk) {
-            return _buildTimelineNode(
-              label: '주의: ${risk.conditionKo}',
-              description:
-                  '발생률 ${risk.prevalencePercent}% · ${risk.source}',
-              ageLabel: '',
-              isPast: false,
-              isCurrent: false,
-              isLast: false,
-              isWarning: true,
-            );
-          }),
-          _buildTimelineNode(
-            label: '평균 수명',
-            description:
-                '~${_lifeStats!.medianLifespan.toStringAsFixed(0)}세',
-            ageLabel:
-                '${_lifeStats!.medianLifespan.toStringAsFixed(0)}세',
-            isPast: false,
-            isCurrent: false,
-            isLast: true,
           ),
         ],
       ),
     );
   }
 
-  Widget _buildTimelineNode({
-    required String label,
-    required String description,
-    required String ageLabel,
-    required bool isPast,
-    required bool isCurrent,
-    required bool isLast,
-    bool isWarning = false,
-  }) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        // Timeline line + dot
-        SizedBox(
-          width: 30,
-          child: Column(
-            children: [
-              Container(
-                width: isCurrent ? 18 : 12,
-                height: isCurrent ? 18 : 12,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: isWarning
-                      ? Colors.orange.withValues(alpha: 0.8)
-                      : isPast
-                          ? AppConfig.accentColor
-                          : Colors.white.withValues(alpha: 0.2),
-                  boxShadow: isCurrent
-                      ? [
-                          BoxShadow(
-                            color: AppConfig.accentColor
-                                .withValues(alpha: 0.5),
-                            blurRadius: 8,
-                            spreadRadius: 2,
-                          ),
-                        ]
-                      : null,
-                ),
-                child: isCurrent
-                    ? const Icon(Icons.pets, size: 10, color: Colors.black)
-                    : null,
-              ),
-              if (!isLast)
-                Container(
-                  width: 2,
-                  height: 40,
-                  color: isPast
-                      ? AppConfig.accentColor.withValues(alpha: 0.3)
-                      : Colors.white.withValues(alpha: 0.1),
-                ),
-            ],
-          ),
-        ),
-        const SizedBox(width: 12),
-        // Content
-        Expanded(
-          child: Padding(
-            padding: const EdgeInsets.only(bottom: 12),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  label,
-                  style: TextStyle(
-                    color: isWarning
-                        ? Colors.orange
-                        : isPast
-                            ? Colors.white
-                            : Colors.white54,
-                    fontWeight:
-                        isCurrent ? FontWeight.bold : FontWeight.w500,
-                    fontSize: 14,
-                  ),
-                ),
-                const SizedBox(height: 2),
-                Text(
-                  description,
-                  style: TextStyle(
-                    color: isPast
-                        ? Colors.white54
-                        : Colors.white.withValues(alpha: 0.3),
-                    fontSize: 12,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ],
-    );
-  }
+  // ─── 2. Care Score ───
+  Widget _buildCareScore() {
+    final score = _calculateCareScore();
 
-  Widget _buildRemainingCard() {
     return GlassCard(
+      padding: const EdgeInsets.all(24),
       child: Column(
         children: [
-          Text(
-            '남은 시간',
-            style: Theme.of(context).textTheme.bodyMedium,
+          const Text(
+            '🏆 돌봄 점수',
+            style: TextStyle(color: Colors.white, fontSize: 17, fontWeight: FontWeight.w600),
           ),
-          const SizedBox(height: 12),
-          // Circular progress
+          const SizedBox(height: 20),
+          // Circular score
           SizedBox(
-            width: 120,
-            height: 120,
+            width: 140,
+            height: 140,
             child: Stack(
               alignment: Alignment.center,
               children: [
                 SizedBox(
-                  width: 120,
-                  height: 120,
+                  width: 140,
+                  height: 140,
                   child: CircularProgressIndicator(
-                    value: _lifeStats!.lifePercentage / 100,
-                    strokeWidth: 8,
-                    backgroundColor: Colors.white.withValues(alpha: 0.1),
+                    value: score / 100,
+                    strokeWidth: 10,
+                    backgroundColor: Colors.white.withOpacity(0.08),
                     valueColor: AlwaysStoppedAnimation<Color>(
-                        AppConfig.accentColor),
+                      score >= 70
+                          ? Colors.green
+                          : score >= 40
+                              ? AppConfig.accentColor
+                              : Colors.redAccent,
+                    ),
                   ),
                 ),
                 Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Text(
-                      _formatNumber(_lifeStats!.remainingDays),
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 24,
+                      '$score',
+                      style: TextStyle(
+                        color: AppConfig.accentColor,
+                        fontSize: 40,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    const Text('일',
-                        style: TextStyle(
-                            color: Colors.white54, fontSize: 13)),
+                    const Text('/ 100', style: TextStyle(color: Colors.white38, fontSize: 13)),
                   ],
                 ),
               ],
             ),
           ),
-          const SizedBox(height: 8),
+          const SizedBox(height: 16),
           Text(
-            '약 ${(_lifeStats!.remainingDays / 365.25).toStringAsFixed(1)}년',
-            style: TextStyle(
-                color: AppConfig.accentColor, fontSize: 13),
+            _getCareScoreMessage(score),
+            style: const TextStyle(color: Colors.white70, fontSize: 14),
+            textAlign: TextAlign.center,
           ),
         ],
       ),
     );
   }
 
-  Widget _buildStatCard(String label, String value, IconData icon) {
+  // ─── 3. Category Comparisons ───
+  Widget _buildComparisonSection() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Text(
+          '📊 항목별 비교',
+          style: TextStyle(color: Colors.white, fontSize: 17, fontWeight: FontWeight.w600),
+        ),
+        const SizedBox(height: 12),
+        _buildComparisonCard(
+          icon: '🦴',
+          title: '산책',
+          current: _getWeeklyCount('walk'),
+          recommended: _getRecommendedWeeklyWalks(),
+          unit: '회/주',
+          tip: _getWalkTip(),
+          source: 'AKC Exercise Guidelines',
+        ),
+        const SizedBox(height: 10),
+        _buildComparisonCard(
+          icon: '🦷',
+          title: '양치질',
+          current: _getWeeklyCount('care'),
+          recommended: 7,
+          unit: '회/주',
+          tip: _getTeethTip(),
+          source: 'Cornell Vet: 80-90% 치주질환',
+        ),
+        const SizedBox(height: 10),
+        _buildWeightCard(),
+        const SizedBox(height: 10),
+        _buildComparisonCard(
+          icon: '🏥',
+          title: '건강검진',
+          current: 0,
+          recommended: _profile!.ageYears >= (_breedInfo?.seniorAge ?? 7) ? 2 : 1,
+          unit: '회/년',
+          tip: _profile!.ageYears >= (_breedInfo?.seniorAge ?? 7)
+              ? '시니어는 연 2회 건강검진이 필수예요'
+              : '연 1회 건강검진을 권장해요',
+          source: 'AAHA Guidelines',
+          isCritical: true,
+        ),
+      ],
+    );
+  }
+
+  Widget _buildComparisonCard({
+    required String icon,
+    required String title,
+    required int current,
+    required int recommended,
+    required String unit,
+    required String tip,
+    required String source,
+    bool isCritical = false,
+  }) {
+    final percentage = recommended > 0 ? (current / recommended * 100).clamp(0, 100).round() : 0;
+    final deficit = recommended - current;
+
     return GlassCard(
       padding: const EdgeInsets.all(16),
-      child: Column(
-        children: [
-          Icon(icon, color: AppConfig.accentColor, size: 24),
-          const SizedBox(height: 8),
-          Text(value,
-              style: const TextStyle(
-                color: Colors.white,
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-              )),
-          const SizedBox(height: 4),
-          Text(label,
-              style: const TextStyle(color: Colors.white54, fontSize: 12)),
-        ],
-      ),
-    );
-  }
-
-  // ─── Health Tab ───
-  Widget _buildHealthTab() {
-    final risks = _breedInfo?.geneticHealthRisks ?? [];
-
-    return SingleChildScrollView(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          if (_breedInfo != null) ...[
-            Text(
-              '${_breedInfo!.nameKo} 유전 건강 위험',
-              style: Theme.of(context).textTheme.titleMedium,
-            ),
-            const SizedBox(height: 4),
-            Text(
-              '견종별 유전적 건강 위험입니다. 수의사와 상담을 권장합니다.',
-              style: Theme.of(context).textTheme.bodySmall,
-            ),
-            const SizedBox(height: 16),
-          ],
-          if (risks.isEmpty)
-            GlassCard(
-              child: Column(
-                children: [
-                  const Icon(Icons.check_circle_outline,
-                      color: Colors.green, size: 40),
-                  const SizedBox(height: 12),
-                  Text(
-                    '이 견종에 대한 주요 유전병 데이터가 없습니다.',
-                    style: Theme.of(context).textTheme.bodyMedium,
-                    textAlign: TextAlign.center,
-                  ),
-                ],
-              ),
-            ),
-          ...risks.map(_buildHealthRiskCard),
-          const SizedBox(height: 16),
-          // Disclaimer
-          Container(
-            padding: const EdgeInsets.all(12),
-            decoration: BoxDecoration(
-              color: Colors.orange.withValues(alpha: 0.1),
-              borderRadius: BorderRadius.circular(12),
-              border: Border.all(
-                  color: Colors.orange.withValues(alpha: 0.2)),
-            ),
-            child: Row(
-              children: [
-                Icon(Icons.info_outline,
-                    color: Colors.orange.withValues(alpha: 0.7), size: 20),
-                const SizedBox(width: 8),
-                Expanded(
-                  child: Text(
-                    '이 정보는 참고용이며 수의학적 진단을 대체하지 않습니다. '
-                    '반드시 수의사와 상담하세요.',
-                    style: TextStyle(
-                      color: Colors.orange.withValues(alpha: 0.8),
-                      fontSize: 11,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          const SizedBox(height: 32),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildHealthRiskCard(HealthRisk risk) {
-    final severityColor = _getSeverityColor(risk.severity);
-
-    return GlassCard(
-      margin: const EdgeInsets.only(bottom: 12),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             children: [
-              Container(
-                width: 8,
-                height: 8,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: severityColor,
-                ),
-              ),
+              Text(icon, style: const TextStyle(fontSize: 20)),
               const SizedBox(width: 8),
-              Expanded(
-                child: Text(
-                  risk.conditionKo,
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 15,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-              ),
+              Text(title, style: const TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w600)),
+              const Spacer(),
               Container(
-                padding: const EdgeInsets.symmetric(
-                    horizontal: 8, vertical: 4),
+                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                 decoration: BoxDecoration(
-                  color: severityColor.withValues(alpha: 0.15),
-                  borderRadius: BorderRadius.circular(8),
+                  color: percentage >= 80
+                      ? Colors.green.withOpacity(0.2)
+                      : percentage >= 50
+                          ? AppConfig.accentColor.withOpacity(0.2)
+                          : Colors.redAccent.withOpacity(0.2),
+                  borderRadius: BorderRadius.circular(12),
                 ),
                 child: Text(
-                  '${risk.prevalencePercent}%',
+                  '$percentage%',
                   style: TextStyle(
-                    color: severityColor,
+                    color: percentage >= 80 ? Colors.green : percentage >= 50 ? AppConfig.accentColor : Colors.redAccent,
                     fontSize: 13,
-                    fontWeight: FontWeight.w600,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
               ),
             ],
           ),
-          if (risk.description != null) ...[
-            const SizedBox(height: 8),
-            Text(
-              risk.description!,
-              style: const TextStyle(color: Colors.white70, fontSize: 13),
-            ),
-          ],
-          if (risk.prevention != null) ...[
-            const SizedBox(height: 8),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Icon(Icons.shield_outlined,
-                    color: Colors.green.withValues(alpha: 0.7), size: 16),
-                const SizedBox(width: 6),
-                Expanded(
-                  child: Text(
-                    risk.prevention!,
-                    style: TextStyle(
-                      color: Colors.green.withValues(alpha: 0.8),
-                      fontSize: 12,
-                    ),
+          const SizedBox(height: 12),
+          // Comparison bars
+          Row(
+            children: [
+              SizedBox(
+                width: 30,
+                child: Text('나', style: TextStyle(color: Colors.white54, fontSize: 11)),
+              ),
+              Expanded(
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(3),
+                  child: LinearProgressIndicator(
+                    value: percentage / 100,
+                    backgroundColor: Colors.white.withOpacity(0.08),
+                    valueColor: AlwaysStoppedAnimation<Color>(AppConfig.accentColor),
+                    minHeight: 8,
                   ),
                 ),
-              ],
-            ),
-          ],
-          const SizedBox(height: 8),
-          Text(
-            '출처: ${risk.source}',
-            style: TextStyle(
-              color: Colors.white.withValues(alpha: 0.3),
-              fontSize: 10,
-            ),
+              ),
+              const SizedBox(width: 8),
+              Text('$current$unit', style: const TextStyle(color: Colors.white70, fontSize: 12)),
+            ],
           ),
+          const SizedBox(height: 6),
+          Row(
+            children: [
+              SizedBox(
+                width: 30,
+                child: Text('권장', style: TextStyle(color: Colors.white38, fontSize: 11)),
+              ),
+              Expanded(
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(3),
+                  child: LinearProgressIndicator(
+                    value: 1.0,
+                    backgroundColor: Colors.white.withOpacity(0.08),
+                    valueColor: AlwaysStoppedAnimation<Color>(Colors.white.withOpacity(0.15)),
+                    minHeight: 8,
+                  ),
+                ),
+              ),
+              const SizedBox(width: 8),
+              Text('$recommended$unit', style: const TextStyle(color: Colors.white38, fontSize: 12)),
+            ],
+          ),
+          const SizedBox(height: 12),
+          // Tip
+          if (deficit > 0)
+            Container(
+              padding: const EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                color: isCritical ? Colors.redAccent.withOpacity(0.1) : AppConfig.accentColor.withOpacity(0.08),
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Row(
+                children: [
+                  Text(isCritical ? '🔴' : '💡', style: const TextStyle(fontSize: 14)),
+                  const SizedBox(width: 8),
+                  Expanded(
+                    child: Text(
+                      tip,
+                      style: TextStyle(
+                        color: isCritical ? Colors.redAccent.shade100 : Colors.white60,
+                        fontSize: 12,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          if (deficit <= 0)
+            Container(
+              padding: const EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                color: Colors.green.withOpacity(0.1),
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: const Row(
+                children: [
+                  Text('✅', style: TextStyle(fontSize: 14)),
+                  SizedBox(width: 8),
+                  Text('잘하고 있어요!', style: TextStyle(color: Colors.green, fontSize: 12)),
+                ],
+              ),
+            ),
+          // Source
+          const SizedBox(height: 6),
+          Text(source, style: const TextStyle(color: Colors.white24, fontSize: 10)),
         ],
       ),
     );
   }
 
-  Color _getSeverityColor(String severity) {
-    switch (severity) {
-      case 'critical':
-        return Colors.red;
-      case 'high':
-        return Colors.orange;
-      case 'moderate':
-        return Colors.amber;
-      case 'low':
-        return Colors.green;
-      default:
-        return Colors.grey;
-    }
-  }
+  Widget _buildWeightCard() {
+    final weight = _profile!.weightKg;
+    final minWeight = _breedInfo?.weightKg?.min.toDouble() ?? 10;
+    final maxWeight = _breedInfo?.weightKg?.max.toDouble() ?? 40;
+    final isInRange = weight >= minWeight && weight <= maxWeight;
+    final isOver = weight > maxWeight;
 
-  // ─── Record Tab ───
-  Widget _buildRecordTab() {
-    return SingleChildScrollView(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
+    return GlassCard(
+      padding: const EdgeInsets.all(16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('월간 루틴 달성률',
-              style: Theme.of(context).textTheme.titleMedium),
+          Row(
+            children: [
+              const Text('⚖️', style: TextStyle(fontSize: 20)),
+              const SizedBox(width: 8),
+              const Text('체중', style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w600)),
+              const Spacer(),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                decoration: BoxDecoration(
+                  color: isInRange ? Colors.green.withOpacity(0.2) : Colors.redAccent.withOpacity(0.2),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Text(
+                  isInRange ? '적정' : isOver ? '과체중' : '저체중',
+                  style: TextStyle(
+                    color: isInRange ? Colors.green : Colors.redAccent,
+                    fontSize: 13,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ],
+          ),
           const SizedBox(height: 16),
-          _buildMonthlyChart(),
-          const SizedBox(height: 24),
-          Text('루틴별 통계',
-              style: Theme.of(context).textTheme.titleMedium),
-          const SizedBox(height: 12),
-          if (_profile != null)
-            ..._profile!.routines.map(_buildRoutineStatCard),
-          const SizedBox(height: 32),
+          // Weight range bar
+          Stack(
+            children: [
+              Container(
+                height: 8,
+                decoration: BoxDecoration(
+                  color: Colors.white.withOpacity(0.08),
+                  borderRadius: BorderRadius.circular(4),
+                ),
+              ),
+              Positioned(
+                left: MediaQuery.of(context).size.width * 0.15,
+                right: MediaQuery.of(context).size.width * 0.15,
+                child: Container(
+                  height: 8,
+                  decoration: BoxDecoration(
+                    color: Colors.green.withOpacity(0.3),
+                    borderRadius: BorderRadius.circular(4),
+                  ),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 6),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text('${minWeight.round()}kg', style: const TextStyle(color: Colors.white38, fontSize: 11)),
+              Text(
+                '${weight}kg (현재)',
+                style: TextStyle(color: AppConfig.accentColor, fontSize: 12, fontWeight: FontWeight.w600),
+              ),
+              Text('${maxWeight.round()}kg', style: const TextStyle(color: Colors.white38, fontSize: 11)),
+            ],
+          ),
+          if (isOver) ...[
+            const SizedBox(height: 10),
+            Container(
+              padding: const EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                color: Colors.redAccent.withOpacity(0.1),
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: const Row(
+                children: [
+                  Text('⚠️', style: TextStyle(fontSize: 14)),
+                  SizedBox(width: 8),
+                  Expanded(
+                    child: Text(
+                      '과체중은 수명을 최대 2.5년 단축시켜요 — AVMA',
+                      style: TextStyle(color: Colors.redAccent, fontSize: 12),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
         ],
       ),
     );
   }
 
-  Widget _buildMonthlyChart() {
-    // Get last 30 days completion data
-    final now = DateTime.now();
-    final routineCount =
-        _profile?.routines.length ?? 1;
-    final last7Days = List.generate(7, (i) {
-      final date = now.subtract(Duration(days: 6 - i));
-      final dateStr = PetStorageService.dateString(date);
-      final completedCount = _allLogs
-          .where((l) => l.date == dateStr && l.completed)
-          .length;
-      final rate = routineCount > 0
-          ? (completedCount / routineCount).clamp(0.0, 1.0)
-          : 0.0;
-      return (date, rate);
-    });
+  // ─── 4. Health Risks ───
+  Widget _buildHealthRisks() {
+    if (_breedInfo == null || _breedInfo!.geneticHealthRisks.isEmpty) {
+      return const SizedBox.shrink();
+    }
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Text(
+          '⚠️ 건강 위험',
+          style: TextStyle(color: Colors.white, fontSize: 17, fontWeight: FontWeight.w600),
+        ),
+        const SizedBox(height: 12),
+        ..._breedInfo!.geneticHealthRisks.take(4).map(_buildHealthRiskCard),
+      ],
+    );
+  }
+
+  Widget _buildHealthRiskCard(HealthRisk risk) {
+    final color = risk.severity == 'critical'
+        ? Colors.redAccent
+        : risk.severity == 'high'
+            ? Colors.orange
+            : Colors.amber;
+
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 8),
+      child: GlassCard(
+        padding: const EdgeInsets.all(14),
+        child: Row(
+          children: [
+            Container(
+              width: 8,
+              height: 40,
+              decoration: BoxDecoration(
+                color: color,
+                borderRadius: BorderRadius.circular(4),
+              ),
+            ),
+            const SizedBox(width: 12),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    risk.conditionKo,
+                    style: const TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w500),
+                  ),
+                  const SizedBox(height: 2),
+                  Text(
+                    '${risk.prevalencePercent}% 발생률 · ${risk.source}',
+                    style: const TextStyle(color: Colors.white38, fontSize: 11),
+                  ),
+                ],
+              ),
+            ),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+              decoration: BoxDecoration(
+                color: color.withOpacity(0.2),
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Text(
+                '${risk.prevalencePercent}%',
+                style: TextStyle(color: color, fontSize: 12, fontWeight: FontWeight.bold),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  // ─── 5. Bottom CTA ───
+  Widget _buildBottomCTA() {
+    final score = _calculateCareScore();
+    final pointsToTop = (80 - score).clamp(0, 100);
 
     return GlassCard(
+      padding: const EdgeInsets.all(20),
       child: Column(
         children: [
+          Text(
+            pointsToTop > 0
+                ? '${_profile!.name}의 돌봄 점수를 올리면\n더 건강하고 오래 함께할 수 있어요'
+                : '${_profile!.name}를 정말 잘 돌보고 계시네요! 💛',
+            style: const TextStyle(color: Colors.white70, fontSize: 14, height: 1.5),
+            textAlign: TextAlign.center,
+          ),
+          if (pointsToTop > 0) ...[
+            const SizedBox(height: 4),
+            Text(
+              '오늘 +${(pointsToTop * 0.3).round()}점 가능해요!',
+              style: TextStyle(color: AppConfig.accentColor, fontSize: 13, fontWeight: FontWeight.w600),
+            ),
+          ],
+          const SizedBox(height: 16),
           SizedBox(
-            height: 150,
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: last7Days.map((entry) {
-                final (date, rate) = entry;
-                final dayName = _getDayName(date.weekday);
-                return Expanded(
-                  child: Padding(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 4),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        Text(
-                          '${(rate * 100).toInt()}%',
-                          style: TextStyle(
-                            color: rate > 0
-                                ? AppConfig.accentColor
-                                : Colors.white30,
-                            fontSize: 10,
-                          ),
-                        ),
-                        const SizedBox(height: 4),
-                        Container(
-                          height: (rate * 100).clamp(4, 100),
-                          decoration: BoxDecoration(
-                            borderRadius:
-                                BorderRadius.circular(4),
-                            color: rate > 0
-                                ? AppConfig.accentColor
-                                    .withValues(alpha: 0.3 + rate * 0.7)
-                                : Colors.white
-                                    .withValues(alpha: 0.05),
-                          ),
-                        ),
-                        const SizedBox(height: 4),
-                        Text(
-                          dayName,
-                          style: const TextStyle(
-                              color: Colors.white38,
-                              fontSize: 11),
-                        ),
-                      ],
-                    ),
-                  ),
+            width: double.infinity,
+            child: OutlinedButton.icon(
+              onPressed: () {
+                Share.share(
+                  '${_profile!.name} 돌봄 점수: $score/100\n'
+                  '남은 시간: ${_formatNumber(_lifeStats!.remainingDays)}일\n'
+                  '오늘도 함께 걸어요 🐾\n\n'
+                  '#PetLife #반려견사랑',
                 );
-              }).toList(),
+              },
+              icon: const Icon(Icons.share_outlined, size: 18),
+              label: const Text('분석 결과 공유하기'),
+              style: OutlinedButton.styleFrom(
+                foregroundColor: AppConfig.accentColor,
+                side: BorderSide(color: AppConfig.accentColor.withOpacity(0.3)),
+                padding: const EdgeInsets.symmetric(vertical: 14),
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+              ),
             ),
           ),
         ],
@@ -716,41 +647,85 @@ class _AnalysisViewState extends State<AnalysisView>
     );
   }
 
-  String _getDayName(int weekday) {
-    const names = ['', '월', '화', '수', '목', '금', '토', '일'];
-    return names[weekday];
+  // ─── Helpers ───
+
+  int _calculateCareScore() {
+    int score = 0;
+
+    // Walk score (max 30)
+    final weeklyWalks = _getWeeklyCount('walk');
+    final recWalks = _getRecommendedWeeklyWalks();
+    score += ((weeklyWalks / recWalks) * 30).clamp(0, 30).round();
+
+    // Teeth score (max 20)
+    final weeklyTeeth = _getWeeklyCount('care');
+    score += ((weeklyTeeth / 7) * 20).clamp(0, 20).round();
+
+    // Weight score (max 20)
+    final weight = _profile!.weightKg;
+    final minW = _breedInfo?.weightKg?.min.toDouble() ?? 10;
+    final maxW = _breedInfo?.weightKg?.max.toDouble() ?? 40;
+    if (weight >= minW && weight <= maxW) score += 20;
+
+    // Streak bonus (max 15)
+    final maxStreak = _streaks.values.fold(0, (a, b) => a > b ? a : b);
+    score += (maxStreak / 30 * 15).clamp(0, 15).round();
+
+    // Meal score (max 15)
+    final weeklyMeals = _getWeeklyCount('meal');
+    score += ((weeklyMeals / 14) * 15).clamp(0, 15).round();
+
+    return score.clamp(0, 100);
   }
 
-  Widget _buildRoutineStatCard(DailyRoutine routine) {
-    final completedCount = _allLogs
-        .where((l) => l.routineId == routine.id && l.completed)
-        .length;
+  String _getCareScoreMessage(int score) {
+    if (score >= 80) return '훌륭해요! 상위 20% 보호자예요 🏆';
+    if (score >= 60) return '잘하고 있어요! 상위 40% 🌟';
+    if (score >= 40) return '조금만 더 노력하면 상위 40%! 💪';
+    return '${_profile!.name}가 더 많은 관심이 필요해요 🐾';
+  }
 
-    return GlassCard(
-      margin: const EdgeInsets.only(bottom: 8),
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-      child: Row(
-        children: [
-          Icon(routine.icon, color: AppConfig.accentColor, size: 24),
-          const SizedBox(width: 12),
-          Expanded(
-            child: Text(routine.name,
-                style: const TextStyle(color: Colors.white)),
-          ),
-          Text(
-            '$completedCount회 완료',
-            style:
-                const TextStyle(color: Colors.white54, fontSize: 13),
-          ),
-        ],
-      ),
-    );
+  int _getWeeklyCount(String category) {
+    final now = DateTime.now();
+    final weekAgo = now.subtract(const Duration(days: 7));
+    return _allLogs.where((l) {
+      final date = DateTime.tryParse(l.date);
+      if (date == null) return false;
+      final routine = _profile!.routines.where((r) => r.id == l.routineId).firstOrNull;
+      return l.completed && date.isAfter(weekAgo) && routine?.category == category;
+    }).length;
+  }
+
+  int _getRecommendedWeeklyWalks() {
+    final exerciseMin = _breedInfo?.exerciseMinutesPerDay?.min ?? 60;
+    if (exerciseMin >= 90) return 14;
+    if (exerciseMin >= 60) return 14;
+    return 10;
+  }
+
+  String _getWalkTip() {
+    final current = _getWeeklyCount('walk');
+    final rec = _getRecommendedWeeklyWalks();
+    final deficit = rec - current;
+    if (deficit <= 0) return '충분히 산책하고 있어요!';
+    if (deficit <= 4) return '하루 ${(deficit / 7).ceil()}번 더 가면 권장량 달성!';
+    return '산책이 부족해요. 매일 산책이 치매 위험 6.47배 낮춰줘요';
+  }
+
+  String _getTeethTip() {
+    final current = _getWeeklyCount('care');
+    if (current >= 7) return '매일 양치 완벽!';
+    if (current >= 3) return '주 ${7 - current}회 더 하면 치주질환 예방에 효과적!';
+    return '3세 이상 80-90%가 치주질환. 양치를 시작해보세요';
   }
 
   String _formatNumber(int number) {
     if (number >= 1000) {
-      return '${(number / 1000).toStringAsFixed(0)},${(number % 1000).toString().padLeft(3, '0')}';
+      return '${(number / 1000).toStringAsFixed(1)}K';
     }
-    return number.toString();
+    return number.toString().replaceAllMapped(
+      RegExp(r'(\d)(?=(\d{3})+(?!\d))'),
+      (m) => '${m[1]},',
+    );
   }
 }
