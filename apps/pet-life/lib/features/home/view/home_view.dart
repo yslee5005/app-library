@@ -220,30 +220,23 @@ class _HomeViewState extends State<HomeView> {
 
   Widget _buildActivityCard(FavoriteActivity activity) {
     final age = _profile!.ageYears;
-    final remaining = activity.remainingCount(age);
-    final yearsLeft = activity.yearsRemaining(age);
     final urgency = activity.urgencyLevel(age);
     final lastDate = _profile!.lastActivityDates[activity.id];
+    final humanUnit = activity.remainingHumanUnit(age);
 
     // Days since last activity
-    String lastText;
+    int daysSinceLast = -1;
     bool isOverdue = false;
     if (lastDate != null) {
-      final daysSince = DateTime.now().difference(lastDate).inDays;
-      if (daysSince == 0) {
-        lastText = '오늘 함';
-      } else if (daysSince < 30) {
-        lastText = '${daysSince}일 전';
-        if (daysSince > 14) isOverdue = true;
-      } else {
-        final months = (daysSince / 30).round();
-        lastText = '${months}개월 전';
-        isOverdue = true;
-      }
+      daysSinceLast = DateTime.now().difference(lastDate).inDays;
+      isOverdue = daysSinceLast > 14;
     } else {
-      lastText = '기록 없음';
       isOverdue = true;
     }
+
+    final overdueMsg = daysSinceLast > 0
+        ? activity.overdueMessage(_profile!.name, daysSinceLast)
+        : '';
 
     final borderColor = urgency == 'critical'
         ? Colors.redAccent
@@ -252,7 +245,7 @@ class _HomeViewState extends State<HomeView> {
             : Colors.transparent;
 
     return Padding(
-      padding: const EdgeInsets.only(bottom: 10),
+      padding: const EdgeInsets.only(bottom: 12),
       child: Container(
         decoration: BoxDecoration(
           color: Colors.white.withOpacity(0.08),
@@ -262,76 +255,83 @@ class _HomeViewState extends State<HomeView> {
             width: urgency == 'normal' ? 1 : 1.5,
           ),
         ),
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.all(18),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Title row
+            // Emoji + name
             Row(
               children: [
-                Text(activity.emoji, style: const TextStyle(fontSize: 24)),
-                const SizedBox(width: 10),
+                Text(activity.emoji, style: const TextStyle(fontSize: 28)),
+                const SizedBox(width: 12),
                 Expanded(
                   child: Text(
                     activity.name,
-                    style: const TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w600),
-                  ),
-                ),
-                Text(
-                  '약 ${_formatCount(remaining)}번',
-                  style: TextStyle(
-                    color: urgency == 'critical' ? Colors.redAccent : AppConfig.accentColor,
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
+                    style: const TextStyle(color: Colors.white, fontSize: 17, fontWeight: FontWeight.w600),
                   ),
                 ),
               ],
             ),
-            const SizedBox(height: 8),
+            const SizedBox(height: 12),
 
-            // Reason + remaining years
+            // THE CORE MESSAGE — human-friendly remaining time
             Text(
-              '${yearsLeft.toStringAsFixed(1)}년 남음 · ${activity.reason}',
-              style: const TextStyle(color: Colors.white38, fontSize: 12),
-            ),
-            const SizedBox(height: 8),
-
-            // Progress bar
-            ClipRRect(
-              borderRadius: BorderRadius.circular(3),
-              child: LinearProgressIndicator(
-                value: (yearsLeft / (activity.maxAgeAvailable - _profile!.birthDate.year + DateTime.now().year))
-                    .clamp(0.0, 1.0),
-                backgroundColor: Colors.white.withOpacity(0.08),
-                valueColor: AlwaysStoppedAnimation<Color>(
-                  urgency == 'critical' ? Colors.redAccent : AppConfig.accentColor,
-                ),
-                minHeight: 4,
+              humanUnit,
+              style: TextStyle(
+                color: urgency == 'critical' ? Colors.redAccent : AppConfig.accentColor,
+                fontSize: 16,
+                fontWeight: FontWeight.w600,
+                height: 1.3,
               ),
             ),
-            const SizedBox(height: 8),
+            const SizedBox(height: 10),
 
-            // Last activity + warning
-            Row(
-              children: [
-                Text(
-                  '마지막: $lastText',
-                  style: TextStyle(
-                    color: isOverdue ? Colors.redAccent.shade100 : Colors.white30,
-                    fontSize: 11,
-                  ),
+            // Overdue warning
+            if (isOverdue && overdueMsg.isNotEmpty) ...[
+              Container(
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  color: Colors.redAccent.withOpacity(0.08),
+                  borderRadius: BorderRadius.circular(10),
                 ),
-                if (isOverdue) ...[
-                  const Text(' ⚠️', style: TextStyle(fontSize: 11)),
-                ],
-                const Spacer(),
-                if (isOverdue)
-                  Text(
-                    '데려가볼까요?',
-                    style: TextStyle(color: AppConfig.accentColor, fontSize: 11),
-                  ),
-              ],
+                child: Row(
+                  children: [
+                    const Text('⚠️', style: TextStyle(fontSize: 13)),
+                    const SizedBox(width: 8),
+                    Expanded(
+                      child: Text(
+                        overdueMsg,
+                        style: TextStyle(color: Colors.redAccent.shade100, fontSize: 12, height: 1.3),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 10),
+            ],
+
+            // Loss message
+            Text(
+              activity.lossMessage(age),
+              style: const TextStyle(color: Colors.white30, fontSize: 11),
             ),
+            const SizedBox(height: 12),
+
+            // CTA button
+            if (isOverdue)
+              SizedBox(
+                width: double.infinity,
+                child: OutlinedButton(
+                  onPressed: () {},
+                  style: OutlinedButton.styleFrom(
+                    foregroundColor: AppConfig.accentColor,
+                    side: BorderSide(color: AppConfig.accentColor.withOpacity(0.3)),
+                    padding: const EdgeInsets.symmetric(vertical: 10),
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                  ),
+                  child: Text('이번 주에 ${activity.name} 하기 ${activity.emoji}'),
+                ),
+              ),
           ],
         ),
       ),

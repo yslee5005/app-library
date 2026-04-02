@@ -5,9 +5,11 @@ class FavoriteActivity {
   final String id;
   final String name;
   final String emoji;
-  final int maxAgeAvailable; // After this age, activity becomes difficult
-  final String reason; // Why it becomes difficult
-  final int frequencyPerMonth; // How often owner typically does this
+  final int maxAgeAvailable;
+  final String reason;
+  final int frequencyPerMonth;
+  final String? seasonUnit; // "여름", "가을", "겨울" or null for year-round
+  final int seasonsPerYear; // how many seasons per year this applies to
 
   const FavoriteActivity({
     required this.id,
@@ -16,23 +18,57 @@ class FavoriteActivity {
     required this.maxAgeAvailable,
     required this.reason,
     this.frequencyPerMonth = 2,
+    this.seasonUnit,
+    this.seasonsPerYear = 4, // year-round by default
   });
 
-  /// Calculate remaining possible times based on current age
   int remainingCount(double currentAge) {
     final yearsLeft = (maxAgeAvailable - currentAge).clamp(0.0, 20.0);
     return (yearsLeft * 12 * frequencyPerMonth).round();
   }
 
-  /// Years remaining for this activity
   double yearsRemaining(double currentAge) {
     return (maxAgeAvailable - currentAge).clamp(0.0, 20.0);
   }
 
-  /// Is this activity still possible?
+  /// Remaining in human-friendly unit (seasons or years)
+  String remainingHumanUnit(double currentAge) {
+    final years = yearsRemaining(currentAge);
+    if (seasonUnit != null) {
+      final seasons = years.round();
+      return '함께 할 수 있는 $seasonUnit이 ${seasons}번 남았어요';
+    }
+    if (years <= 1) {
+      final months = (years * 12).round();
+      return '${months}개월 후면 어려워져요';
+    }
+    return '${years.round()}년 후면 어려워져요';
+  }
+
+  /// What you lose if you don't do it this month
+  String lossMessage(double currentAge) {
+    if (seasonUnit != null) {
+      return '이번 $seasonUnit에 안 가면 1번이 영원히 사라져요';
+    }
+    return '이번 달 안 하면 1번이 영원히 사라져요';
+  }
+
+  /// Emotional message based on how long since last done
+  String overdueMessage(String petName, int daysSinceLast) {
+    if (daysSinceLast > 180) {
+      return '반년 동안 ${(daysSinceLast / 30).round()}번의 기회를 놓쳤어요';
+    }
+    if (daysSinceLast > 60) {
+      return '${(daysSinceLast / 30).round()}개월째 $petName를 데려가지 않았어요';
+    }
+    if (daysSinceLast > 14) {
+      return '${(daysSinceLast / 7).round()}주째 못 했어요';
+    }
+    return '';
+  }
+
   bool isAvailable(double currentAge) => currentAge < maxAgeAvailable;
 
-  /// Urgency level: critical (<1yr), warning (<2yr), normal
   String urgencyLevel(double currentAge) {
     final years = yearsRemaining(currentAge);
     if (years <= 1) return 'critical';
@@ -69,6 +105,8 @@ class FavoriteActivity {
           maxAgeAvailable: 10,
           reason: '체력 저하로 수영이 어려워짐',
           frequencyPerMonth: 2,
+          seasonUnit: '여름',
+          seasonsPerYear: 1,
         ),
         FavoriteActivity(
           id: 'ball_play',
@@ -85,6 +123,8 @@ class FavoriteActivity {
           maxAgeAvailable: 10,
           reason: '장거리 보행이 어려워짐',
           frequencyPerMonth: 2,
+          seasonUnit: '가을',
+          seasonsPerYear: 2,
         ),
         FavoriteActivity(
           id: 'beach',
@@ -93,13 +133,15 @@ class FavoriteActivity {
           maxAgeAvailable: 11,
           reason: '더위와 체력 부담',
           frequencyPerMonth: 1,
+          seasonUnit: '여름',
+          seasonsPerYear: 1,
         ),
         FavoriteActivity(
           id: 'dog_friends',
-          name: '친구 만남',
+          name: '새 친구 사귀기',
           emoji: '🐕',
           maxAgeAvailable: 8,
-          reason: '사회성 감소, 새 만남에 스트레스',
+          reason: '8세 이후 낯선 강아지에게 스트레스',
           frequencyPerMonth: 4,
         ),
         FavoriteActivity(
@@ -117,6 +159,8 @@ class FavoriteActivity {
           maxAgeAvailable: 10,
           reason: '야외 환경 적응 어려움',
           frequencyPerMonth: 1,
+          seasonUnit: '캠핑 시즌',
+          seasonsPerYear: 2,
         ),
         FavoriteActivity(
           id: 'snow_play',
@@ -125,6 +169,8 @@ class FavoriteActivity {
           maxAgeAvailable: 10,
           reason: '추위에 관절 악화, 체온 조절 어려움',
           frequencyPerMonth: 1,
+          seasonUnit: '겨울',
+          seasonsPerYear: 1,
         ),
         FavoriteActivity(
           id: 'training',
