@@ -219,6 +219,7 @@ class _HomeViewState extends State<HomeView> {
   }
 
   Widget _buildActivityCard(FavoriteActivity activity) {
+    final name = _profile!.name;
     final age = _profile!.ageYears;
     final remaining = activity.remainingCount(age);
     final urgency = activity.urgencyLevel(age);
@@ -230,163 +231,183 @@ class _HomeViewState extends State<HomeView> {
 
     int daysSinceLast = -1;
     bool isOverdue = false;
+    String lastLabel = '기록 없음';
     if (lastDate != null) {
       daysSinceLast = DateTime.now().difference(lastDate).inDays;
       isOverdue = daysSinceLast > 14;
-    } else {
-      isOverdue = true;
+      if (daysSinceLast == 0) {
+        lastLabel = '오늘';
+      } else if (daysSinceLast < 30) {
+        lastLabel = '${daysSinceLast}일 전';
+      } else {
+        lastLabel = '${(daysSinceLast / 30).round()}개월 전';
+      }
     }
 
-    final overdueMsg = daysSinceLast > 0
-        ? activity.overdueMessage(_profile!.name, daysSinceLast)
-        : '';
-
     final accentColor = urgency == 'critical'
-        ? Colors.redAccent
+        ? const Color(0xFFFF6B6B)
         : urgency == 'warning'
-            ? const Color(0xFFE8A838) // brighter amber for readability
-            : AppConfig.accentColor;
+            ? const Color(0xFFFFB347)
+            : const Color(0xFFD4A574);
 
     return Padding(
       padding: const EdgeInsets.only(bottom: 14),
       child: Container(
         decoration: BoxDecoration(
-          color: const Color(0xFF252540), // slightly lighter than background for contrast
-          borderRadius: BorderRadius.circular(20),
+          color: const Color(0xFF252540),
+          borderRadius: BorderRadius.circular(22),
           border: Border.all(
-            color: accentColor.withOpacity(urgency == 'normal' ? 0.1 : 0.35),
-            width: urgency == 'normal' ? 1 : 1.5,
+            color: accentColor.withOpacity(urgency == 'normal' ? 0.08 : 0.3),
           ),
         ),
-        padding: const EdgeInsets.all(18),
+        padding: const EdgeInsets.all(20),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Emoji + name + remaining count
+            // ── Row 1: Emoji + Name + Big Number ──
             Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(activity.emoji, style: const TextStyle(fontSize: 28)),
-                const SizedBox(width: 12),
+                // Emoji in circle
+                Container(
+                  width: 48,
+                  height: 48,
+                  decoration: BoxDecoration(
+                    color: accentColor.withOpacity(0.12),
+                    borderRadius: BorderRadius.circular(14),
+                  ),
+                  alignment: Alignment.center,
+                  child: Text(activity.emoji, style: const TextStyle(fontSize: 24)),
+                ),
+                const SizedBox(width: 14),
+                // Name + freq
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
                         activity.name,
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 17,
-                          fontWeight: FontWeight.w600,
-                        ),
+                        style: const TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w600),
                       ),
-                      if (freq.isNotEmpty) ...[
-                        const SizedBox(height: 2),
-                        Text(
-                          '현재 패턴: $freq',
-                          style: const TextStyle(color: Color(0xFF9090A0), fontSize: 12),
-                        ),
-                      ],
+                      if (freq.isNotEmpty)
+                        Text(freq, style: const TextStyle(color: Color(0xFF8888A0), fontSize: 12)),
                     ],
                   ),
                 ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    Text(
-                      '$remaining번',
-                      style: TextStyle(
-                        color: accentColor,
-                        fontSize: 22,
-                        fontWeight: FontWeight.bold,
+                // Big remaining number
+                Container(
+                  width: 64,
+                  height: 64,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: accentColor.withOpacity(0.12),
+                    border: Border.all(color: accentColor.withOpacity(0.3), width: 2),
+                  ),
+                  alignment: Alignment.center,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        '$remaining',
+                        style: TextStyle(color: accentColor, fontSize: 20, fontWeight: FontWeight.bold, height: 1),
                       ),
-                    ),
-                    const Text(
-                      '남음',
-                      style: TextStyle(color: Color(0xFF8080A0), fontSize: 11),
-                    ),
-                  ],
+                      Text('번', style: TextStyle(color: accentColor.withOpacity(0.7), fontSize: 10)),
+                    ],
+                  ),
                 ),
               ],
             ),
-            const SizedBox(height: 14),
+            const SizedBox(height: 16),
 
-            // Human-friendly remaining time
+            // ── Row 2: Emotional message ──
             Container(
               width: double.infinity,
-              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 11),
               decoration: BoxDecoration(
-                color: accentColor.withOpacity(0.1),
-                borderRadius: BorderRadius.circular(12),
+                color: accentColor.withOpacity(0.08),
+                borderRadius: BorderRadius.circular(14),
               ),
               child: Text(
-                humanUnit,
-                style: TextStyle(
-                  color: accentColor,
-                  fontSize: 14,
-                  fontWeight: FontWeight.w600,
-                  height: 1.4,
-                ),
+                '$name와 $humanUnit',
+                style: TextStyle(color: accentColor, fontSize: 14, fontWeight: FontWeight.w500, height: 1.4),
               ),
-            ),
-            const SizedBox(height: 10),
-
-            // Overdue warning
-            if (isOverdue && overdueMsg.isNotEmpty) ...[
-              Container(
-                width: double.infinity,
-                padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
-                decoration: BoxDecoration(
-                  color: Colors.redAccent.withOpacity(0.1),
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child: Row(
-                  children: [
-                    const Text('⚠️', style: TextStyle(fontSize: 14)),
-                    const SizedBox(width: 8),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            overdueMsg,
-                            style: const TextStyle(color: Color(0xFFFF8A80), fontSize: 13, height: 1.3),
-                          ),
-                          if (missed > 0) ...[
-                            const SizedBox(height: 2),
-                            Text(
-                              '이미 $missed번의 기회를 놓쳤어요',
-                              style: const TextStyle(color: Color(0xFFFF8A80), fontSize: 11),
-                            ),
-                          ],
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 10),
-            ],
-
-            // Motivational: if you do 1 more per unit...
-            if (remaining > 0 && remainingIfMore > remaining)
-              Padding(
-                padding: const EdgeInsets.only(bottom: 10),
-                child: Text(
-                  '💡 ${_frequencyUnitLabel(activity.frequencyUnit)} 1번 더 하면 → ${remainingIfMore}번으로 늘어나요!',
-                  style: const TextStyle(color: Color(0xFF80D0A0), fontSize: 12),
-                ),
-              ),
-
-            // Loss message
-            Text(
-              activity.lossMessage(age),
-              style: const TextStyle(color: Color(0xFF707088), fontSize: 11),
             ),
             const SizedBox(height: 12),
 
-            // CTA button
-            if (isOverdue)
+            // ── Row 3: Timeline dot — last activity ──
+            Row(
+              children: [
+                // Timeline visual
+                Container(
+                  width: 10,
+                  height: 10,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: isOverdue ? const Color(0xFFFF6B6B) : const Color(0xFF50C878),
+                  ),
+                ),
+                Container(
+                  width: 40,
+                  height: 2,
+                  color: isOverdue
+                      ? const Color(0xFFFF6B6B).withOpacity(0.3)
+                      : const Color(0xFF50C878).withOpacity(0.3),
+                ),
+                const SizedBox(width: 8),
+                Text(
+                  '마지막: $lastLabel',
+                  style: TextStyle(
+                    color: isOverdue ? const Color(0xFFFF8A80) : const Color(0xFF90B0A0),
+                    fontSize: 12,
+                  ),
+                ),
+                if (isOverdue && missed > 0) ...[
+                  const SizedBox(width: 6),
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                    decoration: BoxDecoration(
+                      color: const Color(0xFFFF6B6B).withOpacity(0.15),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: Text(
+                      '$missed번 놓침',
+                      style: const TextStyle(color: Color(0xFFFF8A80), fontSize: 10, fontWeight: FontWeight.w600),
+                    ),
+                  ),
+                ],
+              ],
+            ),
+            const SizedBox(height: 12),
+
+            // ── Row 4: Motivation + Loss (side by side) ──
+            Row(
+              children: [
+                if (remaining > 0 && remainingIfMore > remaining)
+                  Expanded(
+                    child: Row(
+                      children: [
+                        const Text('💡', style: TextStyle(fontSize: 12)),
+                        const SizedBox(width: 4),
+                        Flexible(
+                          child: Text(
+                            '1번 더 하면 → ${remainingIfMore}번',
+                            style: const TextStyle(color: Color(0xFF80D0A0), fontSize: 11),
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
+                else
+                  const Spacer(),
+                Text(
+                  activity.lossMessage(age),
+                  style: const TextStyle(color: Color(0xFF606078), fontSize: 10),
+                ),
+              ],
+            ),
+
+            // ── Row 5: CTA button ──
+            if (isOverdue) ...[
+              const SizedBox(height: 14),
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
@@ -399,23 +420,16 @@ class _HomeViewState extends State<HomeView> {
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
                   ),
                   child: Text(
-                    '이번 주에 ${activity.name} 하기 ${activity.emoji}',
-                    style: const TextStyle(fontWeight: FontWeight.w600),
+                    '$name와 ${activity.name} 가기 ${activity.emoji}',
+                    style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 14),
                   ),
                 ),
               ),
+            ],
           ],
         ),
       ),
     );
-  }
-
-  String _frequencyUnitLabel(String unit) {
-    return switch (unit) {
-      'weekly' => '매주',
-      'yearly' => '매년',
-      _ => '매달',
-    };
   }
 
   // ─── Daily Routine (compact) ───
