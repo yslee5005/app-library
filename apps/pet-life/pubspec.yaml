@@ -20,17 +20,11 @@ dependencies:
 
   # App Library packages
   app_lib_core:
-    path: ../../packages/core
   app_lib_theme:
-    path: ../../packages/theme
   app_lib_ui_kit:
-    path: ../../packages/ui_kit
   app_lib_cache:
-    path: ../../packages/cache
   app_lib_notifications:
-    path: ../../packages/notifications
   app_lib_l10n:
-    path: ../../packages/l10n
 
 flutter:
   uses-material-design: true

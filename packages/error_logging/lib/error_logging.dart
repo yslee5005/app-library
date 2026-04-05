@@ -7,3 +7,6 @@ export 'src/services/error_logging_service.dart';
 
 // Filters
 export 'src/filters/sensitive_data_filter.dart';
+
+// Providers
+export 'src/providers/error_logging_providers.dart';

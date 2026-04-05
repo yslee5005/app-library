@@ -12,17 +12,11 @@ dependencies:
   go_router: ^15.1.2
   flutter_riverpod: ">=3.0.0 <3.2.0"
   app_lib_core:
-    path: ../../packages/core
   app_lib_theme:
-    path: ../../packages/theme
   app_lib_ui_kit:
-    path: ../../packages/ui_kit
   app_lib_auth:
-    path: ../../packages/auth
   app_lib_comments:
-    path: ../../packages/comments
   app_lib_pagination:
-    path: ../../packages/pagination
 flutter:
   uses-material-design: true
 

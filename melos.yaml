@@ -4,9 +4,11 @@ packages:
   - packages/**
   - apps/**
 
+sdkPath: auto
+
 command:
   bootstrap:
-    usePubspecOverrides: true
+    runPubGetInParallel: true
 
 scripts:
   analyze:

@@ -14,3 +14,7 @@ export 'src/domain/pagination_state.dart';
 
 // Providers
 export 'src/providers/pagination_providers.dart';
+
+// Widgets
+export 'src/widgets/infinite_scroll_grid.dart';
+export 'src/widgets/infinite_scroll_list.dart';

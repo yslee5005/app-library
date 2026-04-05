@@ -10,7 +10,6 @@ resolution: workspace
 
 dependencies:
   app_lib_core:
-    path: ../core
 
 dev_dependencies:
   lints: ^5.0.0

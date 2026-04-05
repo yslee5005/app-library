@@ -1,142 +1,120 @@
-# Ralph — Pet Life App Implementation
+# Ralph — App Library Foundation (전체 패키지 완성)
 
 ## Context
 You are Ralph working on **app-library** monorepo.
-Build the Pet Life app at `apps/pet-life/`.
-Read `apps/pet-life/specs/REQUIREMENTS.md` for full requirements.
-Read `CLAUDE.md` for project rules.
+Build the shared Flutter component library (11 packages) to production-ready quality.
+Read `CLAUDE.md` for project rules and boundaries.
+Read `specs/requirements/REQUIREMENTS.md` for full requirements.
+Read `specs/design/DESIGN.md` for architecture and structure.
+Read `specs/tasks/TASKS.md` for task checklist.
+Read `.claude/rules/packages.md` for package development rules.
+Read `.claude/rules/security.md` for security constraints.
 Read `.claude/rules/flutter-layout.md` for layout rules.
 
-The app concept: **"말 못하는 반려견의 상태를 대변하는 앱"**
+**Mission:** Complete ALL packages (Phase 1-5) so new apps can assemble packages and ship.
 
 ## Tech Stack
-- Flutter, go_router, shared_preferences, lottie, share_plus, intl
-- App Library packages: core, theme, ui_kit, cache, notifications, l10n
-- Design: dark premium (#1C1C2E background, #D4A574 amber accent)
-- Data: breed_database.json (130 breeds) in assets/data/
+- Flutter (Dart 3.9+), Riverpod 3.0, Supabase, freezed, go_router, Melos + Pub Workspaces
+- Hexagonal Architecture: core <- data <- providers <- app (reverse dependency forbidden)
+- Each package: domain/ (interfaces+models) -> data/ (implementations) -> providers/ (Riverpod) -> widgets/ (optional UI)
 
-## CRITICAL: Do NOT use Lottie files that don't exist
-Since we don't have actual Lottie JSON files yet, use PLACEHOLDER widgets for dog animation:
-```dart
-// Placeholder for dog character — will be replaced with Lottie later
-Container(
-  width: 150, height: 150,
-  decoration: BoxDecoration(
-    color: Color(0xFFD4A574).withOpacity(0.2),
-    borderRadius: BorderRadius.circular(75),
-  ),
-  child: Icon(Icons.pets, size: 60, color: Color(0xFFD4A574)),
-)
-```
+## Package Inventory (Current State)
+All 11 packages exist with initial implementations:
+1. **core** — AppException hierarchy, Result<T>, PaginatedResult, PaginationParams, AppConstants. Tests: result_test.dart
+2. **supabase_client** — AppSupabaseClient, SupabaseConfig. Tests: supabase_config_test.dart
+3. **auth** — AuthRepository, AuthState, UserProfile, Google/Apple/Email services, SupabaseAuthRepository, auth_providers. Tests: auth_test.dart
+4. **pagination** — PaginatedRepository, PaginationState, pagination_providers. Tests: pagination_test.dart
+5. **comments** — CommentModel, CommentFilter, CommentRepository, SupabaseCommentRepository, comment_providers. Tests: comments_test.dart
+6. **cache** — CacheInterface, CacheEntry, MemoryCache, CacheManager. Tests: cache_test.dart (pure Dart)
+7. **error_logging** — ErrorLevel, ErrorLoggingService, SensitiveDataFilter. Tests: error_logging_test.dart (pure Dart)
+8. **theme** — AppColors, AppSpacing, AppRadius, AppTypography, ThemeConfig, ThemeGenerator. Tests: theme_test.dart
+9. **l10n** — LanguageService, RelativeTimeFormatter, NumberFormatter. Tests: l10n_test.dart (pure Dart)
+10. **notifications** — NotificationMessage, NotificationRepository, LocalNotificationService. Tests: notification_message_test.dart
+11. **ui_kit** — 40+ widgets across 8 categories. Tests: 8 test files
 
-## Checklist — Build in Order
+Apps: showcase (demo app), pet-life (consumer app)
 
-### Phase 1: App Structure + Data Layer
-- [ ] Create app structure: config/, router/, features/, models/, services/
-- [ ] Implement PetProfile model (name, breed, birthDate, weightKg, neutered, routines)
-- [ ] Implement DailyRoutine model (id, name, icon, goalPerDay, streak)
-- [ ] Implement DailyLog model (date, routineId, completed, time)
-- [ ] Implement BreedDataService — loads breed_database.json + breeds_tier2-4.json from assets
-- [ ] Implement PetStorageService — save/load PetProfile and DailyLogs using shared_preferences
-- [ ] Implement DogStateService — determines dog mood based on logs (happy/sad/sleeping/hungry/bored)
-- [ ] Implement LifeCalculator — remaining days, remaining walks, human age, life percentage
-- [ ] Git commit: "feat: pet-life data layer — models and services"
+## Checklist — Work in Order, ONE Package Per Loop
 
-### Phase 2: Onboarding
-- [ ] Create features/onboarding/ with 3 steps
-- [ ] Step 1: Pet info (name, breed search/select, birth date, weight)
-  - Breed search: TextField that filters breed list from JSON
-  - Show breed info when selected (lifespan, size, exercise needs)
-- [ ] Step 2: Daily routine setup
-  - Toggle cards for routines (walk AM/PM, meal AM/PM, teeth, meds)
-  - Breed-based recommendation text at bottom
-  - [+ 직접 추가] button
-- [ ] Step 3: Summary + start
-- [ ] Save to shared_preferences on complete
-- [ ] Navigate to main home after onboarding
-- [ ] Git commit: "feat: pet-life onboarding — breed select + routine setup"
+### Phase 1: Foundation Verification
+- [ ] Verify `melos bootstrap` works (resolve any dependency issues)
+- [ ] Run `dart test` on core package — fix any failures
+- [ ] Run `flutter test` on supabase_client — fix any failures
+- [ ] Run `dart analyze` on root — fix any analyzer errors
+- [ ] Verify core barrel export covers all public APIs
+- [ ] Add missing tests for core if any (PaginatedResult, PaginationParams, AppConstants)
+- [ ] Git commit: "fix: Phase 1 기반 패키지 검증 및 수정"
 
-### Phase 3: Main Home Screen
-- [ ] Create features/home/ with HomeView
-- [ ] Top bar: pet name left + streak badge right
-- [ ] Hero section: glassmorphism card with dog placeholder + speech bubble
-  - Speech bubble text from DogStateService
-  - States: happy, wants_walk, hungry, sad, sleeping, bored, very_happy
-- [ ] Life journey mini timeline:
-  - Horizontal bar: Born●━━●━━●━━🐕━●━━○━━○
-  - Past = amber, future = gray, current = paw icon with glow
-  - Show "XX% 경과" text
-  - CustomPaint or Row of widgets
-- [ ] Routine section: horizontal PageView of routine cards
-  - Each card: icon + name + streak fire + complete button
-  - Tap complete → update log → dog reacts → streak increments
-  - Page indicator dots below
-- [ ] Daily insight card: rotating health facts from breed data
-- [ ] Bottom nav: 4 tabs (Home/Analysis/Guide/Settings) with XP bar above
-- [ ] Git commit: "feat: pet-life main home — dog state + journey timeline + routine cards"
+### Phase 2: Data Layer Verification
+- [ ] Run `dart test` on cache package — fix any failures
+- [ ] Run `dart test` on error_logging package — fix any failures
+- [ ] Run `flutter test` on pagination package — fix any failures
+- [ ] Verify cache has CacheManagementMixin (add if missing per TASKS.md)
+- [ ] Verify error_logging has Riverpod provider (add if missing per TASKS.md)
+- [ ] Verify pagination has InfiniteScrollList/Grid widgets (add if missing per TASKS.md)
+- [ ] Add missing tests for data layer packages
+- [ ] Git commit: "fix: Phase 2 데이터 레이어 패키지 검증 및 보완"
 
-### Phase 4: Analysis Page
-- [ ] Create features/analysis/ with AnalysisView
-- [ ] Life Journey Timeline (full vertical scroll):
-  - Past milestones (amber): birth, socialization, adult, senior
-  - Current position (glowing): age, human age, remaining days
-  - Future warnings (gray): health risks by age from breed data
-  - Emotional message at bottom + share button
-- [ ] Time tab: remaining days card, remaining walks, human age, life progress ring
-- [ ] Health tab: breed-specific disease risk cards with severity colors
-  - Red = critical, orange = high, yellow = moderate
-  - Each card shows: condition, prevalence %, severity, source
-  - Tap → detail page with prevention tips + citation
-- [ ] Record tab: monthly routine completion chart (simple bar chart)
-- [ ] Git commit: "feat: pet-life analysis — journey timeline + health dashboard"
+### Phase 3: Auth + Comments Verification
+- [ ] Create Supabase migration SQL files (supabase/migrations/)
+- [ ] Run `flutter test` on auth package — fix any failures
+- [ ] Run tests on comments package — fix any failures
+- [ ] Verify auth has all required providers (authStateProvider, currentUserProvider)
+- [ ] Verify comments has widget layer (CommentSheet, CommentItem, ReplyList, CommentInput)
+- [ ] Add missing tests
+- [ ] Git commit: "fix: Phase 3 인증/댓글 패키지 검증 및 보완"
 
-### Phase 5: Guide + Settings
-- [ ] Create features/guide/ — age-based health checklist, vaccination schedule
-- [ ] Create features/settings/ — edit routines, edit pet info, dark mode, language
-- [ ] Add notification scheduling for routine reminders
-- [ ] Git commit: "feat: pet-life guide + settings"
+### Phase 4: UI + Polish Verification
+- [ ] Run `flutter test` on theme package — fix any failures
+- [ ] Run `flutter test` on notifications package — fix any failures
+- [ ] Run `flutter test` (or dart test) on l10n package — fix any failures
+- [ ] Run `flutter test` on ui_kit package — fix any failures
+- [ ] Verify theme has all design tokens per TASKS.md
+- [ ] Verify notifications has Riverpod provider (add if missing)
+- [ ] Verify l10n has Riverpod provider (localeProvider, add if missing)
+- [ ] Verify ui_kit covers all TASKS.md widgets
+- [ ] Git commit: "fix: Phase 4 UI/테마/알림/다국어 검증 및 보완"
 
-### Phase 6: Polish
-- [ ] Theme: dark premium with ThemeConfig(seedColor: Color(0xFFD4A574))
-- [ ] All glassmorphism cards: Container with semi-transparent background + blur
-- [ ] Streak animation when completing a routine
-- [ ] Dog speech bubble changes based on time of day + completion status
-- [ ] flutter analyze — 0 errors
-- [ ] Git commit: "feat: pet-life polish — theme, animations, final touches"
+### Phase 5: Integration + template_app
+- [ ] Create `apps/template_app/` with full structure:
+  - main.dart: Supabase init + Sentry + ProviderScope
+  - app.dart: MaterialApp.router + theme
+  - config/app_config.dart
+  - router/app_router.dart (go_router: login/home/settings)
+  - features/home/, features/login/, features/settings/
+- [ ] Add `apps/template_app` to root pubspec.yaml workspace
+- [ ] Add `apps/template_app` to melos.yaml packages
+- [ ] Run `melos bootstrap` — success
+- [ ] Run `melos run analyze` — 0 errors across all packages
+- [ ] Run `melos run test` — all tests pass
+- [ ] Git commit: "feat: Phase 5 template_app 및 전체 통합 완료"
 
-## Data Flow
-```
-breed_database.json → BreedDataService → breed info
-PetProfile (shared_prefs) → LifeCalculator → remaining days, walks
-DailyLog (shared_prefs) → DogStateService → dog mood/speech
-DogState + LifeCalc → HomeView → display
-```
+## Execution Rules
 
-## Design Specs
-- Background: #1C1C2E
-- Accent: #D4A574 (amber)
-- Cards: glassmorphism (Colors.white.withOpacity(0.08) + 1px white border 0.1 opacity)
-- Text: white, amber, Colors.white70
-- Border radius: 24px
-- Bottom nav: with thin XP bar above
+### Per Loop
+1. Pick ONE package (or one phase sub-task)
+2. Read existing implementation files first
+3. Fix issues or add missing components
+4. Run tests: `dart test` (pure Dart) or `flutter test` (Flutter)
+5. Run analyzer: `dart analyze`
+6. 0 errors required before moving on
+7. Run `dart run build_runner build --delete-conflicting-outputs` after freezed/riverpod changes
+8. Git commit in Korean with descriptive message
 
-## Glassmorphism Card Pattern
-```dart
-Container(
-  decoration: BoxDecoration(
-    color: Colors.white.withOpacity(0.08),
-    borderRadius: BorderRadius.circular(24),
-    border: Border.all(color: Colors.white.withOpacity(0.1)),
-  ),
-  child: ...
-)
-```
-
-## Layout Rules
-- NEVER use ListView inside another scrollable
-- Forms: SingleChildScrollView + Column
-- Use CustomScrollView with Slivers for complex scrolling
-- Main home: SingleChildScrollView wrapping Column
+### Package Test Commands
+| Package | Type | Test Command |
+|---------|------|-------------|
+| core | Pure Dart | `cd packages/core && dart test` |
+| cache | Pure Dart | `cd packages/cache && dart test` |
+| error_logging | Pure Dart | `cd packages/error_logging && dart test` |
+| l10n | Pure Dart | `cd packages/l10n && dart test` |
+| supabase_client | Flutter | `cd packages/supabase_client && flutter test` |
+| auth | Flutter | `cd packages/auth && flutter test` |
+| pagination | Flutter | `cd packages/pagination && flutter test` |
+| comments | Flutter | `cd packages/comments && flutter test` |
+| theme | Flutter | `cd packages/theme && flutter test` |
+| notifications | Flutter | `cd packages/notifications && flutter test` |
+| ui_kit | Flutter | `cd packages/ui_kit && flutter test` |
 
 ### Phase 7: Unit Tests + Flow Tests
 - [ ] Create test/models/ — PetProfile, DailyRoutine, DailyLog model tests
@@ -181,33 +159,49 @@ Container(
 - [ ] Git commit: "test: pet-life unit tests + flow tests — all passing"
 
 ## Protected Files
-- .ralph/, .ralphrc, packages/, specs/, templates/
-- breed_database.json and tier files (already created, just READ them)
+- .ralph/, .ralphrc, specs/, templates/, CLAUDE.md, .claude/, .moai/
+- DO NOT modify .env files
+- DO NOT run git push
+- DO NOT run rm -rf
+- DO NOT modify existing app code in apps/pet-life/ or apps/showcase/ (unless fixing imports)
 
 ## Boundaries
+
 ### Always
-- Dark theme throughout
-- Korean text for UI labels
-- Every health stat shows source citation
-- flutter analyze after each phase
-- Git commit after each phase
+- Follow existing code patterns already in the codebase
+- Use sealed classes for state types (like AppException, AuthState, PaginationState)
+- Use const constructors where possible
+- Barrel export all public APIs from package root
+- Run analyzer after each change
+- Korean commit messages
+
 ### Never
 - git push, rm -rf
-- Modify any packages/ code
-- Use real Lottie files (use placeholder)
-- Connect to any backend
-- Hardcode colors (use theme or constants)
+- Modify .env files
+- Add app-specific logic to packages
+- Create circular dependencies
+- Use static singletons (use constructor injection)
+- Trust client app_id in RLS (JWT app_metadata only)
+- pub.dev publish
+
+### Ask First
+- New external dependency
+- core interface changes
+- Supabase schema/RLS changes
 
 ## Status Reporting
 ```
 ---RALPH_STATUS---
 STATUS: IN_PROGRESS | COMPLETE | BLOCKED
+PHASE: 1 | 2 | 3 | 4 | 5
+CURRENT_PACKAGE: <package_name>
 TASKS_COMPLETED_THIS_LOOP: <number>
 FILES_MODIFIED: <number>
-TESTS_STATUS: NOT_RUN
-WORK_TYPE: IMPLEMENTATION
+TESTS_STATUS: PASS | FAIL | NOT_RUN
+ANALYZE_STATUS: CLEAN | ERRORS | NOT_RUN
+WORK_TYPE: VERIFICATION | IMPLEMENTATION | FIX | TEST
 EXIT_SIGNAL: false | true
 RECOMMENDATION: <one line>
 ---END_RALPH_STATUS---
 ```
-When ALL phases done → EXIT_SIGNAL: true, STATUS: COMPLETE.
+When ALL phases done -> EXIT_SIGNAL: true, STATUS: COMPLETE.

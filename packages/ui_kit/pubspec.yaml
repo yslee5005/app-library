@@ -10,9 +10,7 @@ dependencies:
   flutter:
     sdk: flutter
   app_lib_core:
-    path: ../core
   app_lib_theme:
-    path: ../theme
 dev_dependencies:
   flutter_test:
     sdk: flutter

@@ -10,3 +10,6 @@ export 'src/memory/memory_cache.dart';
 
 // Manager
 export 'src/manager/cache_manager.dart';
+
+// Mixins
+export 'src/mixins/cache_management_mixin.dart';

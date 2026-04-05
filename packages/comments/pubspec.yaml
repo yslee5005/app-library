@@ -14,11 +14,8 @@ dependencies:
     sdk: flutter
   flutter_riverpod: ^3.0.0
   app_lib_core:
-    path: ../core
   app_lib_supabase_client:
-    path: ../supabase_client
   app_lib_pagination:
-    path: ../pagination
   supabase_flutter: ^2.8.0
 
 dev_dependencies:

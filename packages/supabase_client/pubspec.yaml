@@ -13,7 +13,6 @@ dependencies:
   flutter:
     sdk: flutter
   app_lib_core:
-    path: ../core
   supabase_flutter: ^2.8.0
 
 dev_dependencies:
