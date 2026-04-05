@@ -39,9 +39,29 @@ Thumbs.db
 # Melos
 .melos/
 
-# Ralph
+# Ralph (session files)
 .ralph/logs/
+.ralph/.call_count
+.ralph/.claude_session_id
+.ralph/.exit_signals
+.ralph/.last_reset
+.ralph/.loop_start_sha
+.ralph/.ralph_session
+.ralph/.token_count
+.ralph/live.log
+.ralph/progress.json
+.ralph/status.json
 .progress.md
+
+# Debug screenshots
+screen_*.png
+
+# Android build cache
+**/.gradle/
+**/app/.cxx/
+
+# Mart Scanner (specs only, not yet built)
+# apps/mart-scanner/
 
 # Claude Code
 .claude/settings.local.json
