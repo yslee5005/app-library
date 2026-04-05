@@ -1,4 +1,4 @@
-package com.blacklabelled.blacklabelled
+package ystech.blacklabelled.blacklabelled
 
 import io.flutter.embedding.android.FlutterActivity
 
