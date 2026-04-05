@@ -38,3 +38,11 @@ scripts:
   clean:
     run: melos exec -- flutter clean
     description: Clean all packages
+
+  verify-safe:
+    run: melos exec --scope="showcase,pet_life,blacklabelled" -- dart analyze
+    description: Verify all apps compile after package changes (Step 5)
+
+  verify-package:
+    run: melos exec --scope="$MELOS_SCOPE" -- dart analyze && melos exec --scope="$MELOS_SCOPE" -- flutter test
+    description: Analyze + test a specific package (Step 4)

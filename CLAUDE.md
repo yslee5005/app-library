@@ -71,6 +71,61 @@ Phase별 PROMPT.md 생성 → `ralph --monitor`
 이 패키지들은 이미 수백만 다운로드로 검증됨. 직접 구현하지 말 것.
 인프라 래핑이 필요한 것(FCM, RevenueCat, Analytics)은 Thin Wrapper 패턴으로.
 
+## 패키지 변경 안전 규칙 (공유 패키지 수정 시 필수)
+
+packages/ 하위 코드를 수정할 때 반드시 아래 7단계를 따를 것. **1개 위젯/클래스 단위로** 순차 실행.
+
+### Step 1: 영향 범위 파악
+```bash
+# 변경 대상 클래스/위젯 사용처 전체 검색
+grep -r "ClassName" apps/ packages/ --include="*.dart" -l
+# 현재 상태 기록 (baseline)
+melos run analyze 2>&1 | tail -5
+```
+
+### Step 2: 변경 계획 검증
+- 기존 constructor 시그니처 확인 (필수)
+- 추가 파라미터는 **반드시 optional + 기본값** (breaking change 금지)
+- 새 enum 값 추가 OK, 기존 enum 값 제거/변경 금지
+- 클래스 제거/이름 변경 금지 (deprecated 마킹만 가능)
+
+### Step 3: 코드 수정
+- 패키지 코드 변경 실행
+
+### Step 4: 패키지 단위 검증
+```bash
+melos exec --scope="변경된패키지" -- dart analyze
+melos exec --scope="변경된패키지" -- flutter test
+```
+
+### Step 5: 전체 앱 영향 검증 (가장 중요)
+```bash
+melos run verify-safe
+```
+에러 발생 시 → Step 3 수정 롤백 후 재설계
+
+### Step 6: showcase 데모
+- 새 기능에 데모 추가 (선택)
+- 기존 데모 깨지지 않는지 확인
+
+### Step 7: 전체 검증
+```bash
+melos run analyze
+```
+baseline 대비 에러 증가 시 → 해당 변경 전체 롤백
+
+### Breaking Change 판정 기준
+| 변경 유형 | 안전 여부 |
+|----------|----------|
+| optional 파라미터 추가 (기본값 있음) | ✅ 안전 |
+| enum 값 추가 | ✅ 안전 |
+| 새 파일/클래스 추가 | ✅ 안전 |
+| 기존 파라미터 타입 변경 | ❌ breaking |
+| required 파라미터 추가 | ❌ breaking |
+| 클래스/함수 이름 변경 | ❌ breaking |
+| 기존 파라미터 제거 | ❌ breaking |
+| 내부 구현 변경 (시그니처 동일) | ⚠️ 테스트로 확인 |
+
 ## Boundaries (컴팩션 후에도 유지되도록 여기에 명시)
 
 ### Always
