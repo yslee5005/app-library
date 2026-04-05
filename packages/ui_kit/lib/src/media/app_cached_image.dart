@@ -1,10 +1,10 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
-/// A network image with placeholder, error fallback, and fade-in animation.
+/// A network image with disk/memory caching, placeholder, error fallback,
+/// and fade-in animation.
 ///
-/// This is a pure Flutter implementation that does not depend on
-/// `cached_network_image`. For production caching, consider wrapping with
-/// that package or using a similar approach.
+/// Wraps [CachedNetworkImage] for automatic disk and memory caching.
 class AppCachedImage extends StatelessWidget {
   const AppCachedImage({
     required this.imageUrl,
@@ -46,50 +46,33 @@ class AppCachedImage extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
-    Widget image = Image.network(
-      imageUrl,
+    Widget image = CachedNetworkImage(
+      imageUrl: imageUrl,
       width: width,
       height: height,
       fit: fit,
-      frameBuilder: (context, child, frame, wasSynchronouslyLoaded) {
-        if (wasSynchronouslyLoaded) return child;
-        return AnimatedOpacity(
-          opacity: frame != null ? 1.0 : 0.0,
-          duration: fadeInDuration,
-          curve: Curves.easeIn,
-          child: child,
-        );
-      },
-      loadingBuilder: (context, child, loadingProgress) {
-        if (loadingProgress == null) return child;
-        return placeholder ??
-            Container(
-              width: width,
-              height: height,
-              color: theme.colorScheme.surfaceContainerHighest,
-              alignment: Alignment.center,
-              child: CircularProgressIndicator(
-                strokeWidth: 2,
-                value: loadingProgress.expectedTotalBytes != null
-                    ? loadingProgress.cumulativeBytesLoaded /
-                        loadingProgress.expectedTotalBytes!
-                    : null,
-              ),
-            );
-      },
-      errorBuilder: (context, error, stackTrace) {
-        return errorWidget ??
-            Container(
-              width: width,
-              height: height,
-              color: theme.colorScheme.surfaceContainerHighest,
-              alignment: Alignment.center,
-              child: Icon(
-                Icons.broken_image_outlined,
-                color: theme.colorScheme.onSurfaceVariant,
-              ),
-            );
-      },
+      fadeInDuration: fadeInDuration,
+      placeholder: (context, url) =>
+          placeholder ??
+          Container(
+            width: width,
+            height: height,
+            color: theme.colorScheme.surfaceContainerHighest,
+            alignment: Alignment.center,
+            child: const CircularProgressIndicator(strokeWidth: 2),
+          ),
+      errorWidget: (context, url, error) =>
+          errorWidget ??
+          Container(
+            width: width,
+            height: height,
+            color: theme.colorScheme.surfaceContainerHighest,
+            alignment: Alignment.center,
+            child: Icon(
+              Icons.broken_image_outlined,
+              color: theme.colorScheme.onSurfaceVariant,
+            ),
+          ),
     );
 
     if (borderRadius != null) {
