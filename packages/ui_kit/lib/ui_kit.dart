@@ -30,6 +30,7 @@ export 'src/feed/app_card.dart';
 export 'src/feed/app_list_tile.dart';
 export 'src/feed/detail_screen_layout.dart';
 export 'src/feed/feed_list_view.dart';
+export 'src/feed/process_timeline.dart';
 
 // ── Search / Filter ────────────────────────────────────────────────
 export 'src/search/app_search_bar.dart';
