@@ -13,6 +13,7 @@ class ImageCarousel extends StatefulWidget {
     this.onPageChanged,
     this.placeholder,
     this.indicatorColor,
+    this.indicatorBuilder,
     super.key,
   });
 
@@ -42,6 +43,11 @@ class ImageCarousel extends StatefulWidget {
 
   /// Optional color for the active page indicator dot.
   final Color? indicatorColor;
+
+  /// Custom indicator widget builder.
+  /// Receives the total page count and current page index.
+  /// When provided, replaces the default dot indicators.
+  final Widget Function(int pageCount, int currentPage)? indicatorBuilder;
 
   @override
   State<ImageCarousel> createState() => _ImageCarouselState();
@@ -127,30 +133,39 @@ class _ImageCarouselState extends State<ImageCarousel> {
             ),
           ),
 
-          // Page indicator dots
+          // Page indicator
           if (widget.imageUrls.length > 1)
             Positioned(
               bottom: AppSpacing.sm,
               left: 0,
               right: 0,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: List.generate(widget.imageUrls.length, (index) {
-                  final isActive = index == _currentPage;
-                  return AnimatedContainer(
-                    duration: const Duration(milliseconds: 200),
-                    margin: const EdgeInsets.symmetric(horizontal: 3),
-                    width: isActive ? 20 : 8,
-                    height: 8,
-                    decoration: BoxDecoration(
-                      color: isActive
-                          ? (widget.indicatorColor ?? theme.colorScheme.primary)
-                          : theme.colorScheme.onSurface.withAlpha(80),
-                      borderRadius: BorderRadius.circular(4),
+              child: widget.indicatorBuilder != null
+                  ? Center(
+                      child: widget.indicatorBuilder!(
+                        widget.imageUrls.length,
+                        _currentPage,
+                      ),
+                    )
+                  : Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children:
+                          List.generate(widget.imageUrls.length, (index) {
+                        final isActive = index == _currentPage;
+                        return AnimatedContainer(
+                          duration: const Duration(milliseconds: 200),
+                          margin: const EdgeInsets.symmetric(horizontal: 3),
+                          width: isActive ? 20 : 8,
+                          height: 8,
+                          decoration: BoxDecoration(
+                            color: isActive
+                                ? (widget.indicatorColor ??
+                                    theme.colorScheme.primary)
+                                : theme.colorScheme.onSurface.withAlpha(80),
+                            borderRadius: BorderRadius.circular(4),
+                          ),
+                        );
+                      }),
                     ),
-                  );
-                }),
-              ),
             ),
         ],
       ),
