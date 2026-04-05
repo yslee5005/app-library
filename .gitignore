@@ -60,6 +60,18 @@ screen_*.png
 **/.gradle/
 **/app/.cxx/
 
+# iOS/macOS/Linux auto-generated
+**/ios/Flutter/Generated.xcconfig
+**/ios/Flutter/flutter_export_environment.sh
+**/ios/Podfile
+**/ios/Podfile.lock
+**/ios/Pods/
+**/macos/Flutter/GeneratedPluginRegistrant.swift
+**/linux/flutter/generated_plugin_registrant.*
+**/linux/flutter/generated_plugins.cmake
+**/windows/flutter/generated_plugin_registrant.*
+**/windows/flutter/generated_plugins.cmake
+
 # Mart Scanner (specs only, not yet built)
 # apps/mart-scanner/
 
