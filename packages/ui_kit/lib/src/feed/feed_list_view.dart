@@ -1,7 +1,7 @@
 import 'package:app_lib_theme/theme.dart';
 import 'package:flutter/material.dart';
 
-/// ListView.builder with pull-to-refresh and load-more indicator.
+/// ListView.builder with pull-to-refresh, load-more, and horizontal support.
 class FeedListView extends StatelessWidget {
   const FeedListView({
     required this.itemCount,
@@ -15,6 +15,10 @@ class FeedListView extends StatelessWidget {
     this.emptyWidget,
     this.loadingMoreWidget,
     this.itemSpacing,
+    this.scrollDirection = Axis.vertical,
+    this.itemExtent,
+    this.height,
+    this.physics,
     super.key,
   });
 
@@ -51,10 +55,24 @@ class FeedListView extends StatelessWidget {
   /// Spacing between items. Defaults to [AppSpacing.sm].
   final double? itemSpacing;
 
+  /// Scroll direction. Defaults to [Axis.vertical].
+  /// When [Axis.horizontal], pull-to-refresh is disabled.
+  final Axis scrollDirection;
+
+  /// Fixed extent for each item (width in horizontal, height in vertical).
+  /// When set, items are constrained to this size.
+  final double? itemExtent;
+
+  /// Fixed height for the list container (useful for horizontal lists).
+  final double? height;
+
+  /// Custom scroll physics.
+  final ScrollPhysics? physics;
+
   @override
   Widget build(BuildContext context) {
     if (itemCount == 0 && emptyWidget != null) {
-      if (onRefresh != null) {
+      if (onRefresh != null && scrollDirection == Axis.vertical) {
         return RefreshIndicator(
           onRefresh: onRefresh!,
           child: CustomScrollView(
@@ -67,16 +85,23 @@ class FeedListView extends StatelessWidget {
       return emptyWidget!;
     }
 
+    final isHorizontal = scrollDirection == Axis.horizontal;
+
     // Total count: items + optional loading indicator
     final totalCount = itemCount + (isLoadingMore && hasMore ? 1 : 0);
 
+    final defaultSeparator = isHorizontal
+        ? SizedBox(width: itemSpacing ?? AppSpacing.sm)
+        : SizedBox(height: itemSpacing ?? AppSpacing.sm);
+
     Widget listView = ListView.separated(
+      scrollDirection: scrollDirection,
+      physics: physics,
       padding: padding ?? const EdgeInsets.all(AppSpacing.md),
       itemCount: totalCount,
-      separatorBuilder: separatorBuilder ??
-          (_, __) => SizedBox(height: itemSpacing ?? AppSpacing.sm),
+      separatorBuilder: separatorBuilder ?? (_, __) => defaultSeparator,
       itemBuilder: (context, index) {
-        // Loading indicator at the bottom
+        // Loading indicator at the end
         if (index == itemCount) {
           return loadingMoreWidget ??
               const Padding(
@@ -85,7 +110,17 @@ class FeedListView extends StatelessWidget {
               );
         }
 
-        return itemBuilder(context, index);
+        final child = itemBuilder(context, index);
+
+        if (itemExtent != null) {
+          return SizedBox(
+            width: isHorizontal ? itemExtent : null,
+            height: isHorizontal ? null : itemExtent,
+            child: child,
+          );
+        }
+
+        return child;
       },
     );
 
@@ -104,12 +139,17 @@ class FeedListView extends StatelessWidget {
       );
     }
 
-    // Wrap with RefreshIndicator
-    if (onRefresh != null) {
-      return RefreshIndicator(
+    // Wrap with RefreshIndicator (vertical only)
+    if (onRefresh != null && !isHorizontal) {
+      listView = RefreshIndicator(
         onRefresh: onRefresh!,
         child: listView,
       );
+    }
+
+    // Constrain height for horizontal lists
+    if (height != null) {
+      return SizedBox(height: height, child: listView);
     }
 
     return listView;
