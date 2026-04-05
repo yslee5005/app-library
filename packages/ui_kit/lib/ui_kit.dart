@@ -25,6 +25,7 @@ export 'src/profile/settings_screen.dart';
 export 'src/profile/theme_switch_tile.dart';
 
 // ── Feed / List / Detail ───────────────────────────────────────────
+export 'src/feed/bento_grid.dart';
 export 'src/feed/app_card.dart';
 export 'src/feed/app_list_tile.dart';
 export 'src/feed/detail_screen_layout.dart';
