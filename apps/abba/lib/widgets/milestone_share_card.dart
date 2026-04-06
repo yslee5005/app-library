@@ -42,18 +42,16 @@ class MilestoneShareCard {
       final boundary =
           key.currentContext!.findRenderObject() as RenderRepaintBoundary;
       final image = await boundary.toImage(pixelRatio: 3.0);
-      final byteData =
-          await image.toByteData(format: ui.ImageByteFormat.png);
+      final byteData = await image.toByteData(format: ui.ImageByteFormat.png);
       final pngBytes = byteData!.buffer.asUint8List();
 
       final dir = await getTemporaryDirectory();
       final file = File('${dir.path}/abba_milestone_$streakDays.png');
       await file.writeAsBytes(pngBytes);
 
-      await Share.shareXFiles(
-        [XFile(file.path)],
-        text: _shareText(streakDays, locale),
-      );
+      await Share.shareXFiles([
+        XFile(file.path),
+      ], text: _shareText(streakDays, locale));
     } finally {
       overlay.remove();
     }
@@ -63,7 +61,8 @@ class MilestoneShareCard {
     return switch (locale) {
       'ko' => '$days일 연속 기도! Abba와 함께하는 기도 여정 #Abba #기도',
       'ja' => '$days日連続の祈り！Abbaとの祈りの旅 #Abba #祈り',
-      'es' => '¡$days días seguidos de oración! Mi viaje con Abba #Abba #Oración',
+      'es' =>
+        '¡$days días seguidos de oración! Mi viaje con Abba #Abba #Oración',
       'zh' => '连续$days天祷告！与Abba同行的祷告之旅 #Abba #祷告',
       _ => '$days day prayer streak! My prayer journey with Abba #Abba #Prayer',
     };
@@ -99,10 +98,7 @@ class _MilestoneCardWidget extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
-              _icon,
-              style: const TextStyle(fontSize: 80),
-            ),
+            Text(_icon, style: const TextStyle(fontSize: 80)),
             const SizedBox(height: AbbaSpacing.lg),
             Text(
               '$streakDays',

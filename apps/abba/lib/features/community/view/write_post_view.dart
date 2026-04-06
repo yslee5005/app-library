@@ -37,10 +37,7 @@ class _WritePostViewState extends ConsumerState<WritePostView> {
           onPressed: () => context.pop(),
           icon: const Icon(Icons.close),
         ),
-        title: Text(
-          '${l10n.writePostTitle} 🌸',
-          style: AbbaTypography.h1,
-        ),
+        title: Text('${l10n.writePostTitle} 🌸', style: AbbaTypography.h1),
         actions: [
           TextButton(
             onPressed: _isSubmitting ? null : _submitPost,
@@ -77,8 +74,7 @@ class _WritePostViewState extends ConsumerState<WritePostView> {
                           color: _isAnonymous
                               ? AbbaColors.sage
                               : Colors.transparent,
-                          borderRadius:
-                              BorderRadius.circular(AbbaRadius.xl),
+                          borderRadius: BorderRadius.circular(AbbaRadius.xl),
                         ),
                         alignment: Alignment.center,
                         child: Text(
@@ -102,8 +98,7 @@ class _WritePostViewState extends ConsumerState<WritePostView> {
                           color: !_isAnonymous
                               ? AbbaColors.sage
                               : Colors.transparent,
-                          borderRadius:
-                              BorderRadius.circular(AbbaRadius.xl),
+                          borderRadius: BorderRadius.circular(AbbaRadius.xl),
                         ),
                         alignment: Alignment.center,
                         child: Text(
@@ -134,8 +129,7 @@ class _WritePostViewState extends ConsumerState<WritePostView> {
                 _CategoryChip(
                   label: l10n.categoryPrayerRequest,
                   isSelected: _category == 'prayer_request',
-                  onTap: () =>
-                      setState(() => _category = 'prayer_request'),
+                  onTap: () => setState(() => _category = 'prayer_request'),
                 ),
               ],
             ),
@@ -148,8 +142,9 @@ class _WritePostViewState extends ConsumerState<WritePostView> {
               style: AbbaTypography.body,
               decoration: InputDecoration(
                 hintText: l10n.writePostHint,
-                hintStyle:
-                    AbbaTypography.body.copyWith(color: AbbaColors.muted),
+                hintStyle: AbbaTypography.body.copyWith(
+                  color: AbbaColors.muted,
+                ),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(AbbaRadius.lg),
                   borderSide: BorderSide.none,
@@ -180,7 +175,9 @@ class _WritePostViewState extends ConsumerState<WritePostView> {
             // Share button
             AbbaButton(
               label: '${l10n.sharePostButton} 🌱',
-              onPressed: () { if (!_isSubmitting) _submitPost(); },
+              onPressed: () {
+                if (!_isSubmitting) _submitPost();
+              },
               isHero: true,
             ),
           ],

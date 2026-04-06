@@ -19,7 +19,8 @@ class AbbaCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: margin ??
+      margin:
+          margin ??
           const EdgeInsets.symmetric(
             horizontal: AbbaSpacing.md,
             vertical: AbbaSpacing.sm,

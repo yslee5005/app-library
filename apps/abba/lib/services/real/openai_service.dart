@@ -17,10 +17,7 @@ class OpenAiService implements AiService {
   }) async {
     final langName = _localeName(locale);
 
-    ErrorLoggingService.addBreadcrumb(
-      'AI API call started',
-      category: 'ai',
-    );
+    ErrorLoggingService.addBreadcrumb('AI API call started', category: 'ai');
 
     try {
       final response = await http.post(
@@ -33,14 +30,8 @@ class OpenAiService implements AiService {
           'model': 'gpt-4o-mini',
           'response_format': {'type': 'json_object'},
           'messages': [
-            {
-              'role': 'system',
-              'content': _buildSystemPrompt(langName),
-            },
-            {
-              'role': 'user',
-              'content': transcript,
-            },
+            {'role': 'system', 'content': _buildSystemPrompt(langName)},
+            {'role': 'user', 'content': transcript},
           ],
           'temperature': 0.7,
           'max_tokens': 2000,
@@ -64,14 +55,8 @@ class OpenAiService implements AiService {
             'model': 'gpt-4o-mini',
             'response_format': {'type': 'json_object'},
             'messages': [
-              {
-                'role': 'system',
-                'content': _buildSystemPrompt(langName),
-              },
-              {
-                'role': 'user',
-                'content': transcript,
-              },
+              {'role': 'system', 'content': _buildSystemPrompt(langName)},
+              {'role': 'user', 'content': transcript},
             ],
             'temperature': 0.7,
             'max_tokens': 2000,
@@ -102,8 +87,7 @@ class OpenAiService implements AiService {
   PrayerResult _parseResponse(String body) {
     try {
       final json = jsonDecode(body) as Map<String, dynamic>;
-      final content =
-          json['choices'][0]['message']['content'] as String;
+      final content = json['choices'][0]['message']['content'] as String;
       final data = jsonDecode(content) as Map<String, dynamic>;
       return PrayerResult.fromJson(data);
     } catch (e, stackTrace) {
@@ -122,7 +106,8 @@ class OpenAiService implements AiService {
       bibleStory: const BibleStory(
         titleEn: 'God is faithful',
         titleKo: '하나님은 신실하십니다',
-        summaryEn: 'Even when we cannot see the way, God is faithfully guiding our steps.',
+        summaryEn:
+            'Even when we cannot see the way, God is faithfully guiding our steps.',
         summaryKo: '우리가 길을 볼 수 없을 때에도, 하나님은 신실하게 우리의 발걸음을 인도하십니다.',
       ),
       testimony: '',

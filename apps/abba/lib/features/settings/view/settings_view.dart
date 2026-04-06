@@ -30,10 +30,7 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
     return Scaffold(
       backgroundColor: AbbaColors.cream,
       appBar: AppBar(
-        title: Text(
-          '${l10n.settingsTitle} ⚙️',
-          style: AbbaTypography.h1,
-        ),
+        title: Text('${l10n.settingsTitle} ⚙️', style: AbbaTypography.h1),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(AbbaSpacing.md),
@@ -48,8 +45,7 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
                   children: [
                     CircleAvatar(
                       radius: 32,
-                      backgroundColor:
-                          AbbaColors.sage.withValues(alpha: 0.2),
+                      backgroundColor: AbbaColors.sage.withValues(alpha: 0.2),
                       child: Text(
                         profile.name[0].toUpperCase(),
                         style: AbbaTypography.h1.copyWith(
@@ -120,18 +116,24 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
                       items: [
                         DropdownMenuItem(
                           value: 'warm',
-                          child: Text(l10n.voiceWarm,
-                              style: AbbaTypography.bodySmall),
+                          child: Text(
+                            l10n.voiceWarm,
+                            style: AbbaTypography.bodySmall,
+                          ),
                         ),
                         DropdownMenuItem(
                           value: 'calm',
-                          child: Text(l10n.voiceCalm,
-                              style: AbbaTypography.bodySmall),
+                          child: Text(
+                            l10n.voiceCalm,
+                            style: AbbaTypography.bodySmall,
+                          ),
                         ),
                         DropdownMenuItem(
                           value: 'strong',
-                          child: Text(l10n.voiceStrong,
-                              style: AbbaTypography.bodySmall),
+                          child: Text(
+                            l10n.voiceStrong,
+                            style: AbbaTypography.bodySmall,
+                          ),
                         ),
                       ],
                       onChanged: (v) {
@@ -150,26 +152,11 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
                       value: locale,
                       underline: const SizedBox.shrink(),
                       items: const [
-                        DropdownMenuItem(
-                          value: 'en',
-                          child: Text('English'),
-                        ),
-                        DropdownMenuItem(
-                          value: 'ko',
-                          child: Text('한국어'),
-                        ),
-                        DropdownMenuItem(
-                          value: 'ja',
-                          child: Text('日本語'),
-                        ),
-                        DropdownMenuItem(
-                          value: 'es',
-                          child: Text('Español'),
-                        ),
-                        DropdownMenuItem(
-                          value: 'zh',
-                          child: Text('中文'),
-                        ),
+                        DropdownMenuItem(value: 'en', child: Text('English')),
+                        DropdownMenuItem(value: 'ko', child: Text('한국어')),
+                        DropdownMenuItem(value: 'ja', child: Text('日本語')),
+                        DropdownMenuItem(value: 'es', child: Text('Español')),
+                        DropdownMenuItem(value: 'zh', child: Text('中文')),
                       ],
                       onChanged: (v) {
                         if (v != null) {
@@ -355,8 +342,8 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
                   child: _PlanColumn(
                     title: l10n.premiumPlan,
                     price: l10n.monthlyPrice,
-                    features: const [
-                      'Unlimited',
+                    features: [
+                      l10n.unlimited,
                       '📜📖✍️',
                       '💬 AI',
                       '🔊 TTS',
@@ -509,7 +496,10 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
           // Section header
           Padding(
             padding: const EdgeInsets.fromLTRB(
-              AbbaSpacing.md, AbbaSpacing.md, AbbaSpacing.md, 0,
+              AbbaSpacing.md,
+              AbbaSpacing.md,
+              AbbaSpacing.md,
+              0,
             ),
             child: Row(
               children: [
@@ -522,13 +512,13 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
           // Morning reminder toggle + time
           _SettingsTile(
             icon: Icons.wb_sunny_outlined,
-            title: 'Morning Prayer',
+            title: l10n.morningPrayerReminder,
             trailing: Switch(
               value: settings?.morningReminder ?? true,
               onChanged: (v) {
-                ref.read(notificationServiceProvider).updateSettings(
-                  morningReminder: v,
-                );
+                ref
+                    .read(notificationServiceProvider)
+                    .updateSettings(morningReminder: v);
                 ref.invalidate(notificationSettingsProvider);
               },
               activeTrackColor: AbbaColors.sage,
@@ -546,9 +536,9 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
                 if (time != null) {
                   final formatted =
                       '${time.hour.toString().padLeft(2, '0')}:${time.minute.toString().padLeft(2, '0')}';
-                  ref.read(notificationServiceProvider).updateSettings(
-                    morningTime: formatted,
-                  );
+                  ref
+                      .read(notificationServiceProvider)
+                      .updateSettings(morningTime: formatted);
                   ref.invalidate(notificationSettingsProvider);
                 }
               },
@@ -558,13 +548,13 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
           // Evening reminder
           _SettingsTile(
             icon: Icons.nightlight_outlined,
-            title: 'Evening Gratitude',
+            title: l10n.eveningGratitudeReminder,
             trailing: Switch(
               value: settings?.eveningReminder ?? false,
               onChanged: (v) {
-                ref.read(notificationServiceProvider).updateSettings(
-                  eveningReminder: v,
-                );
+                ref
+                    .read(notificationServiceProvider)
+                    .updateSettings(eveningReminder: v);
                 ref.invalidate(notificationSettingsProvider);
               },
               activeTrackColor: AbbaColors.sage,
@@ -574,13 +564,13 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
           // Streak reminder
           _SettingsTile(
             icon: Icons.local_fire_department_outlined,
-            title: 'Streak Reminder',
+            title: l10n.streakReminder,
             trailing: Switch(
               value: settings?.streakReminder ?? true,
               onChanged: (v) {
-                ref.read(notificationServiceProvider).updateSettings(
-                  streakReminder: v,
-                );
+                ref
+                    .read(notificationServiceProvider)
+                    .updateSettings(streakReminder: v);
                 ref.invalidate(notificationSettingsProvider);
               },
               activeTrackColor: AbbaColors.sage,
@@ -590,13 +580,13 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
           // Weekly summary
           _SettingsTile(
             icon: Icons.calendar_view_week,
-            title: 'Weekly Summary',
+            title: l10n.weeklySummaryReminder,
             trailing: Switch(
               value: settings?.weeklySummary ?? true,
               onChanged: (v) {
-                ref.read(notificationServiceProvider).updateSettings(
-                  weeklySummary: v,
-                );
+                ref
+                    .read(notificationServiceProvider)
+                    .updateSettings(weeklySummary: v);
                 ref.invalidate(notificationSettingsProvider);
               },
               activeTrackColor: AbbaColors.sage,
@@ -651,7 +641,8 @@ class _SettingsTile extends StatelessWidget {
           color: titleColor ?? AbbaColors.warmBrown,
         ),
       ),
-      trailing: trailing ??
+      trailing:
+          trailing ??
           (onTap != null
               ? const Icon(Icons.chevron_right, color: AbbaColors.muted)
               : null),
@@ -691,16 +682,14 @@ class _PlanColumn extends StatelessWidget {
         border: isActive
             ? Border.all(color: AbbaColors.sage, width: 2)
             : isPremium
-                ? Border.all(color: AbbaColors.softGold, width: 2)
-                : null,
+            ? Border.all(color: AbbaColors.softGold, width: 2)
+            : null,
       ),
       child: Column(
         children: [
           Text(
             title,
-            style: AbbaTypography.body.copyWith(
-              fontWeight: FontWeight.w600,
-            ),
+            style: AbbaTypography.body.copyWith(fontWeight: FontWeight.w600),
           ),
           Text(price, style: AbbaTypography.h2),
           const SizedBox(height: AbbaSpacing.sm),

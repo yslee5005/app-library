@@ -121,5 +121,17 @@
   "promoTitle": "런칭 특가",
   "promoBanner": "3개월간 ₩5,900/월!",
   "promoEndsOn": "{date}까지 특가",
-  "@promoEndsOn": { "placeholders": { "date": {} } }
+  "@promoEndsOn": { "placeholders": { "date": {} } },
+  "premiumLimitTitle": "오늘의 기도를 마쳤습니다",
+  "premiumLimitBody": "내일 다시 만나요!\nPremium으로 무제한 기도하기",
+  "laterButton": "다음에 하기",
+  "morningPrayerReminder": "아침 기도",
+  "eveningGratitudeReminder": "저녁 감사",
+  "streakReminder": "스트릭 알림",
+  "weeklySummaryReminder": "주간 요약",
+  "unlimited": "무제한",
+  "streakRecovery": "괜찮아요, 다시 시작하면 돼요 🌱",
+  "prayerSaved": "기도가 저장되었습니다",
+  "quietTimeLabel": "큐티",
+  "morningPrayerLabel": "아침 기도"
 }

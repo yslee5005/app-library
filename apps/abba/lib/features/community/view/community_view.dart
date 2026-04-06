@@ -24,10 +24,7 @@ class _CommunityViewState extends ConsumerState<CommunityView> {
     return Scaffold(
       backgroundColor: AbbaColors.cream,
       appBar: AppBar(
-        title: Text(
-          '${l10n.communityTitle} 🌻',
-          style: AbbaTypography.h1,
-        ),
+        title: Text('${l10n.communityTitle} 🌻', style: AbbaTypography.h1),
       ),
       body: Column(
         children: [
@@ -42,19 +39,24 @@ class _CommunityViewState extends ConsumerState<CommunityView> {
                 _FilterChip(
                   label: l10n.filterAll,
                   isSelected: filter == 'all',
-                  onTap: () => ref.read(communityFilterProvider.notifier).state = 'all',
+                  onTap: () =>
+                      ref.read(communityFilterProvider.notifier).state = 'all',
                 ),
                 const SizedBox(width: AbbaSpacing.sm),
                 _FilterChip(
                   label: l10n.filterTestimony,
                   isSelected: filter == 'testimony',
-                  onTap: () => ref.read(communityFilterProvider.notifier).state = 'testimony',
+                  onTap: () =>
+                      ref.read(communityFilterProvider.notifier).state =
+                          'testimony',
                 ),
                 const SizedBox(width: AbbaSpacing.sm),
                 _FilterChip(
                   label: l10n.filterPrayerRequest,
                   isSelected: filter == 'prayer_request',
-                  onTap: () => ref.read(communityFilterProvider.notifier).state = 'prayer_request',
+                  onTap: () =>
+                      ref.read(communityFilterProvider.notifier).state =
+                          'prayer_request',
                 ),
               ],
             ),
@@ -67,7 +69,9 @@ class _CommunityViewState extends ConsumerState<CommunityView> {
                   return Center(
                     child: Text(
                       l10n.noPrayersRecorded,
-                      style: AbbaTypography.body.copyWith(color: AbbaColors.muted),
+                      style: AbbaTypography.body.copyWith(
+                        color: AbbaColors.muted,
+                      ),
                     ),
                   );
                 }
@@ -83,8 +87,7 @@ class _CommunityViewState extends ConsumerState<CommunityView> {
                   ),
                 );
               },
-              loading: () =>
-                  const Center(child: CircularProgressIndicator()),
+              loading: () => const Center(child: CircularProgressIndicator()),
               error: (e, s) => Center(child: Text('Error: $e')),
             ),
           ),
@@ -220,8 +223,9 @@ class _PostCardState extends ConsumerState<_PostCard> {
                       children: [
                         Text(
                           post.displayName ?? l10n.anonymous,
-                          style: AbbaTypography.body
-                              .copyWith(fontWeight: FontWeight.w600),
+                          style: AbbaTypography.body.copyWith(
+                            fontWeight: FontWeight.w600,
+                          ),
                         ),
                         Text(
                           _formatTime(post.createdAt),
@@ -252,7 +256,11 @@ class _PostCardState extends ConsumerState<_PostCard> {
                   ),
                   // Overflow menu (report / delete)
                   PopupMenuButton<String>(
-                    icon: Icon(Icons.more_vert, color: AbbaColors.muted, size: 20),
+                    icon: Icon(
+                      Icons.more_vert,
+                      color: AbbaColors.muted,
+                      size: 20,
+                    ),
                     onSelected: (value) => _handleMenuAction(value, post, l10n),
                     itemBuilder: (context) {
                       final authState = ref.read(authStateProvider);
@@ -263,7 +271,11 @@ class _PostCardState extends ConsumerState<_PostCard> {
                             value: 'delete',
                             child: Row(
                               children: [
-                                Icon(Icons.delete_outline, size: 18, color: AbbaColors.error),
+                                Icon(
+                                  Icons.delete_outline,
+                                  size: 18,
+                                  color: AbbaColors.error,
+                                ),
                                 const SizedBox(width: AbbaSpacing.sm),
                                 Text(l10n.deletePost),
                               ],
@@ -273,7 +285,11 @@ class _PostCardState extends ConsumerState<_PostCard> {
                           value: 'report',
                           child: Row(
                             children: [
-                              Icon(Icons.flag_outlined, size: 18, color: AbbaColors.muted),
+                              Icon(
+                                Icons.flag_outlined,
+                                size: 18,
+                                color: AbbaColors.muted,
+                              ),
                               const SizedBox(width: AbbaSpacing.sm),
                               Text(l10n.reportPost),
                             ],
@@ -332,12 +348,13 @@ class _PostCardState extends ConsumerState<_PostCard> {
                       onReply: isReply
                           ? null
                           : () => setState(() {
-                                _replyToCommentId = comment.id;
-                                _replyToName =
-                                    comment.displayName ?? l10n.anonymous;
-                              }),
+                              _replyToCommentId = comment.id;
+                              _replyToName =
+                                  comment.displayName ?? l10n.anonymous;
+                            }),
                       onDelete: () => _handleDeleteComment(comment.id),
-                      isOwner: ref.read(authStateProvider).user?.id ==
+                      isOwner:
+                          ref.read(authStateProvider).user?.id ==
                           comment.userId,
                     );
                   }),
@@ -368,7 +385,11 @@ class _PostCardState extends ConsumerState<_PostCard> {
                             _replyToCommentId = null;
                             _replyToName = null;
                           }),
-                          child: Icon(Icons.close, size: 16, color: AbbaColors.muted),
+                          child: Icon(
+                            Icons.close,
+                            size: 16,
+                            color: AbbaColors.muted,
+                          ),
                         ),
                       ],
                     ),
@@ -382,8 +403,9 @@ class _PostCardState extends ConsumerState<_PostCard> {
                         style: AbbaTypography.bodySmall,
                         decoration: InputDecoration(
                           hintText: l10n.commentButton,
-                          hintStyle: AbbaTypography.bodySmall
-                              .copyWith(color: AbbaColors.muted),
+                          hintStyle: AbbaTypography.bodySmall.copyWith(
+                            color: AbbaColors.muted,
+                          ),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(AbbaRadius.xl),
                             borderSide: BorderSide.none,
@@ -407,7 +429,11 @@ class _PostCardState extends ConsumerState<_PostCard> {
                           color: AbbaColors.sage,
                           shape: BoxShape.circle,
                         ),
-                        child: Icon(Icons.send, size: 18, color: AbbaColors.white),
+                        child: Icon(
+                          Icons.send,
+                          size: 18,
+                          color: AbbaColors.white,
+                        ),
                       ),
                     ),
                   ],
@@ -467,7 +493,11 @@ class _PostCardState extends ConsumerState<_PostCard> {
     ref.invalidate(filteredCommunityPostsProvider);
   }
 
-  void _handleMenuAction(String action, CommunityPost post, AppLocalizations l10n) {
+  void _handleMenuAction(
+    String action,
+    CommunityPost post,
+    AppLocalizations l10n,
+  ) {
     if (action == 'delete') {
       _showDeleteConfirm(post.id, l10n);
     } else if (action == 'report') {
@@ -480,10 +510,7 @@ class _PostCardState extends ConsumerState<_PostCard> {
       context: context,
       builder: (ctx) => AlertDialog(
         title: Text(l10n.deleteConfirmTitle, style: AbbaTypography.h2),
-        content: Text(
-          l10n.deleteConfirmMessage,
-          style: AbbaTypography.body,
-        ),
+        content: Text(l10n.deleteConfirmMessage, style: AbbaTypography.body),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(ctx, false),
@@ -491,8 +518,10 @@ class _PostCardState extends ConsumerState<_PostCard> {
           ),
           TextButton(
             onPressed: () => Navigator.pop(ctx, true),
-            child: Text(l10n.deletePost,
-                style: TextStyle(color: AbbaColors.error)),
+            child: Text(
+              l10n.deletePost,
+              style: TextStyle(color: AbbaColors.error),
+            ),
           ),
         ],
       ),
@@ -539,9 +568,9 @@ class _PostCardState extends ConsumerState<_PostCard> {
       final repo = ref.read(communityRepositoryProvider);
       await repo.reportPost(postId, reason);
       if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(l10n.reportSubmitted)),
-        );
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text(l10n.reportSubmitted)));
       }
     }
   }
@@ -639,7 +668,11 @@ class _CommentWidget extends StatelessWidget {
                     if (isOwner)
                       GestureDetector(
                         onTap: onDelete,
-                        child: Icon(Icons.close, size: 14, color: AbbaColors.muted),
+                        child: Icon(
+                          Icons.close,
+                          size: 14,
+                          color: AbbaColors.muted,
+                        ),
                       ),
                   ],
                 ),
@@ -650,7 +683,7 @@ class _CommentWidget extends StatelessWidget {
                     child: Padding(
                       padding: const EdgeInsets.only(top: AbbaSpacing.xs),
                       child: Text(
-                        '↩️ Reply',
+                        '↩️ ${AppLocalizations.of(context)!.replyButton}',
                         style: AbbaTypography.caption.copyWith(
                           color: AbbaColors.sage,
                         ),

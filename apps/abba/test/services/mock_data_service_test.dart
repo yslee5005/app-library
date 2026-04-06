@@ -1,0 +1,61 @@
+import 'package:flutter_test/flutter_test.dart';
+import 'package:abba/services/mock_data.dart';
+
+void main() {
+  TestWidgetsFlutterBinding.ensureInitialized();
+
+  late MockDataService service;
+
+  setUp(() {
+    service = MockDataService();
+  });
+
+  group('MockDataService', () {
+    test('getPrayerResult loads and parses JSON', () async {
+      final result = await service.getPrayerResult();
+
+      expect(result.scripture.reference, 'Psalm 23:1');
+      expect(result.scripture.verseEn, isNotEmpty);
+      expect(result.scripture.verseKo, isNotEmpty);
+      expect(result.bibleStory.titleEn, isNotEmpty);
+      expect(result.testimony, isNotEmpty);
+      expect(result.guidance, isNotNull);
+      expect(result.aiPrayer, isNotNull);
+      expect(result.originalLanguage, isNotNull);
+    });
+
+    test('getPrayerResult caches result', () async {
+      final result1 = await service.getPrayerResult();
+      final result2 = await service.getPrayerResult();
+
+      expect(identical(result1, result2), true);
+    });
+
+    test('getQTPassages loads 5 passages', () async {
+      final passages = await service.getQTPassages();
+
+      expect(passages, isNotEmpty);
+      expect(passages.length, 5);
+      expect(passages[0].id, 'qt-1');
+      expect(passages[0].reference, 'Psalm 23:1-6');
+    });
+
+    test('getCommunityPosts loads posts with comments', () async {
+      final posts = await service.getCommunityPosts();
+
+      expect(posts, isNotEmpty);
+      expect(posts[0].id, 'post-1');
+      expect(posts[0].category, 'testimony');
+      expect(posts[0].comments, isNotEmpty);
+    });
+
+    test('getUserProfile loads profile', () async {
+      final profile = await service.getUserProfile();
+
+      expect(profile.id, 'mock-user-1');
+      expect(profile.name, 'Grace');
+      expect(profile.email, 'grace@example.com');
+      expect(profile.totalPrayers, 45);
+    });
+  });
+}

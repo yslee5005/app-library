@@ -35,10 +35,7 @@ class AiPrayerCard extends ConsumerWidget {
       content: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            aiPrayer.text(locale),
-            style: AbbaTypography.body,
-          ),
+          Text(aiPrayer.text(locale), style: AbbaTypography.body),
           const SizedBox(height: AbbaSpacing.md),
           // Audio player UI
           StreamBuilder<TtsPlaybackState>(
@@ -48,7 +45,7 @@ class AiPrayerCard extends ConsumerWidget {
               final state = snapshot.data ?? const TtsPlaybackState();
               final progress = state.duration.inMilliseconds > 0
                   ? state.position.inMilliseconds /
-                      state.duration.inMilliseconds
+                        state.duration.inMilliseconds
                   : 0.0;
 
               return Container(
@@ -68,7 +65,9 @@ class AiPrayerCard extends ConsumerWidget {
                         } else {
                           tts.speak(
                             text: aiPrayer.text(locale),
-                            voice: ref.read(userProfileProvider).when(
+                            voice: ref
+                                .read(userProfileProvider)
+                                .when(
                                   data: (p) => p.voicePreference,
                                   loading: () => 'warm',
                                   error: (e, s) => 'warm',
@@ -93,8 +92,9 @@ class AiPrayerCard extends ConsumerWidget {
                             borderRadius: BorderRadius.circular(2),
                             child: LinearProgressIndicator(
                               value: progress,
-                              backgroundColor:
-                                  AbbaColors.sage.withValues(alpha: 0.3),
+                              backgroundColor: AbbaColors.sage.withValues(
+                                alpha: 0.3,
+                              ),
                               color: AbbaColors.sage,
                               minHeight: 4,
                             ),

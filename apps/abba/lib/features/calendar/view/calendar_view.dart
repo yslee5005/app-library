@@ -41,10 +41,7 @@ class _CalendarViewState extends ConsumerState<CalendarView> {
     return Scaffold(
       backgroundColor: AbbaColors.cream,
       appBar: AppBar(
-        title: Text(
-          '${l10n.calendarTitle} 📅',
-          style: AbbaTypography.h1,
-        ),
+        title: Text('${l10n.calendarTitle} 📅', style: AbbaTypography.h1),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(AbbaSpacing.md),
@@ -63,7 +60,10 @@ class _CalendarViewState extends ConsumerState<CalendarView> {
                           Expanded(
                             child: Column(
                               children: [
-                                Text(icon, style: const TextStyle(fontSize: 32)),
+                                Text(
+                                  icon,
+                                  style: const TextStyle(fontSize: 32),
+                                ),
                                 const SizedBox(height: AbbaSpacing.xs),
                                 Text(
                                   '${streak.current}',
@@ -84,7 +84,10 @@ class _CalendarViewState extends ConsumerState<CalendarView> {
                           Expanded(
                             child: Column(
                               children: [
-                                const Text('🏆', style: TextStyle(fontSize: 32)),
+                                const Text(
+                                  '🏆',
+                                  style: TextStyle(fontSize: 32),
+                                ),
                                 const SizedBox(height: AbbaSpacing.xs),
                                 Text(
                                   '${streak.best}',
@@ -103,9 +106,7 @@ class _CalendarViewState extends ConsumerState<CalendarView> {
                       if (streak.current == 0) ...[
                         const SizedBox(height: AbbaSpacing.sm),
                         Text(
-                          locale == 'ko'
-                              ? '괜찮아요, 다시 시작하면 됩니다 🌱'
-                              : "It's okay, you can start again 🌱",
+                          l10n.streakRecovery,
                           style: AbbaTypography.bodySmall.copyWith(
                             color: AbbaColors.sage,
                           ),
@@ -190,8 +191,7 @@ class _CalendarViewState extends ConsumerState<CalendarView> {
 
   Widget _buildCalendarGrid(Set<DateTime> prayerDays) {
     final firstDay = DateTime(_currentMonth.year, _currentMonth.month, 1);
-    final lastDay =
-        DateTime(_currentMonth.year, _currentMonth.month + 1, 0);
+    final lastDay = DateTime(_currentMonth.year, _currentMonth.month + 1, 0);
     final startWeekday = firstDay.weekday % 7; // Sunday = 0
     final now = DateTime.now();
     final today = DateTime(now.year, now.month, now.day);
@@ -222,9 +222,7 @@ class _CalendarViewState extends ConsumerState<CalendarView> {
               border: isToday
                   ? Border.all(color: AbbaColors.softGold, width: 2)
                   : null,
-              color: isSelected
-                  ? AbbaColors.sage.withValues(alpha: 0.2)
-                  : null,
+              color: isSelected ? AbbaColors.sage.withValues(alpha: 0.2) : null,
             ),
             child: Center(
               child: Column(
@@ -233,24 +231,30 @@ class _CalendarViewState extends ConsumerState<CalendarView> {
                   Text(
                     '$day',
                     style: AbbaTypography.bodySmall.copyWith(
-                      fontWeight:
-                          isToday ? FontWeight.w700 : FontWeight.w400,
+                      fontWeight: isToday ? FontWeight.w700 : FontWeight.w400,
                     ),
                   ),
                   if (hasPrayer) ...[
-                    Builder(builder: (context) {
-                      // Check if previous day had prayer (grace recovery = 🌼)
-                      final prevDay = date.subtract(const Duration(days: 1));
-                      final prevHasPrayer = prayerDays.contains(prevDay);
-                      final twoDaysAgo = date.subtract(const Duration(days: 2));
-                      final twoDaysHasPrayer = prayerDays.contains(twoDaysAgo);
-                      // Grace recovery: today has prayer, yesterday doesn't, but 2 days ago does
-                      final isGraceRecovery = !prevHasPrayer && twoDaysHasPrayer;
-                      return Text(
-                        isGraceRecovery ? '🌼' : '🌸',
-                        style: const TextStyle(fontSize: 12),
-                      );
-                    }),
+                    Builder(
+                      builder: (context) {
+                        // Check if previous day had prayer (grace recovery = 🌼)
+                        final prevDay = date.subtract(const Duration(days: 1));
+                        final prevHasPrayer = prayerDays.contains(prevDay);
+                        final twoDaysAgo = date.subtract(
+                          const Duration(days: 2),
+                        );
+                        final twoDaysHasPrayer = prayerDays.contains(
+                          twoDaysAgo,
+                        );
+                        // Grace recovery: today has prayer, yesterday doesn't, but 2 days ago does
+                        final isGraceRecovery =
+                            !prevHasPrayer && twoDaysHasPrayer;
+                        return Text(
+                          isGraceRecovery ? '🌼' : '🌸',
+                          style: const TextStyle(fontSize: 12),
+                        );
+                      },
+                    ),
                   ],
                 ],
               ),
@@ -287,9 +291,7 @@ class _CalendarViewState extends ConsumerState<CalendarView> {
                 const SizedBox(height: AbbaSpacing.sm),
                 Text(
                   l10n.noPrayersRecorded,
-                  style: AbbaTypography.body.copyWith(
-                    color: AbbaColors.muted,
-                  ),
+                  style: AbbaTypography.body.copyWith(color: AbbaColors.muted),
                 ),
               ],
             ),
@@ -316,15 +318,12 @@ class _CalendarViewState extends ConsumerState<CalendarView> {
                       Expanded(
                         child: Text(
                           prayer.mode == 'qt'
-                              ? 'Quiet Time'
-                              : 'Morning Prayer',
+                              ? l10n.quietTimeLabel
+                              : l10n.morningPrayerLabel,
                           style: AbbaTypography.body,
                         ),
                       ),
-                      Icon(
-                        Icons.chevron_right,
-                        color: AbbaColors.muted,
-                      ),
+                      Icon(Icons.chevron_right, color: AbbaColors.muted),
                     ],
                   ),
                 ),

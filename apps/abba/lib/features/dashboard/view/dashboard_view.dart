@@ -32,10 +32,7 @@ class DashboardView extends ConsumerWidget {
           onPressed: () => context.go('/home'),
           icon: const Icon(Icons.arrow_back),
         ),
-        title: Text(
-          '${l10n.dashboardTitle} 🌸',
-          style: AbbaTypography.h1,
-        ),
+        title: Text('${l10n.dashboardTitle} 🌸', style: AbbaTypography.h1),
         actions: [
           IconButton(
             onPressed: () => context.go('/community/write'),
@@ -44,7 +41,8 @@ class DashboardView extends ConsumerWidget {
         ],
       ),
       body: resultAsync.when(
-        data: (result) => _buildContent(context, ref, result, l10n, locale, isPremium),
+        data: (result) =>
+            _buildContent(context, ref, result, l10n, locale, isPremium),
         loading: () => const Center(child: CircularProgressIndicator()),
         error: (e, s) => Center(child: Text('Error: $e')),
       ),
@@ -65,9 +63,7 @@ class DashboardView extends ConsumerWidget {
       });
     }
 
-    final testimonyText = locale == 'ko'
-        ? result.testimony
-        : result.testimony;
+    final testimonyText = locale == 'ko' ? result.testimony : result.testimony;
 
     return ListView(
       padding: const EdgeInsets.only(bottom: AbbaSpacing.xl),

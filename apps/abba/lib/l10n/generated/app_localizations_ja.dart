@@ -366,4 +366,40 @@ class AppLocalizationsJa extends AppLocalizations {
   String promoEndsOn(Object date) {
     return '$dateまで特別価格';
   }
+
+  @override
+  String get premiumLimitTitle => '今日の祈りが完了しました';
+
+  @override
+  String get premiumLimitBody => 'また明日お会いしましょう！\nPremiumで無制限に祈りましょう';
+
+  @override
+  String get laterButton => '後で';
+
+  @override
+  String get morningPrayerReminder => '朝の祈り';
+
+  @override
+  String get eveningGratitudeReminder => '夕方の感謝';
+
+  @override
+  String get streakReminder => '連続記録リマインダー';
+
+  @override
+  String get weeklySummaryReminder => '週間まとめ';
+
+  @override
+  String get unlimited => '無制限';
+
+  @override
+  String get streakRecovery => '大丈夫、また始めましょう 🌱';
+
+  @override
+  String get prayerSaved => '祈りが保存されました';
+
+  @override
+  String get quietTimeLabel => 'QT';
+
+  @override
+  String get morningPrayerLabel => '朝の祈り';
 }

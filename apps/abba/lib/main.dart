@@ -47,14 +47,12 @@ Future<void> main() async {
       sttServiceProvider.overrideWithValue(MockSttService()),
       ttsServiceProvider.overrideWithValue(MockTtsService()),
       prayerRepositoryProvider.overrideWithValue(MockPrayerRepository()),
-      communityRepositoryProvider
-          .overrideWithValue(MockCommunityRepository(mockData)),
-      subscriptionServiceProvider
-          .overrideWithValue(MockSubscriptionService()),
-      notificationServiceProvider
-          .overrideWithValue(MockNotificationService()),
-      qtRepositoryProvider
-          .overrideWithValue(MockQtRepository(mockData)),
+      communityRepositoryProvider.overrideWithValue(
+        MockCommunityRepository(mockData),
+      ),
+      subscriptionServiceProvider.overrideWithValue(MockSubscriptionService()),
+      notificationServiceProvider.overrideWithValue(MockNotificationService()),
+      qtRepositoryProvider.overrideWithValue(MockQtRepository(mockData)),
     ]);
   } else {
     // Real mode — connect to Supabase, OpenAI, etc.
@@ -69,23 +67,21 @@ Future<void> main() async {
       aiServiceProvider.overrideWithValue(CachedAiService(OpenAiService())),
       sttServiceProvider.overrideWithValue(RealSttService()),
       ttsServiceProvider.overrideWithValue(RealTtsService()),
-      prayerRepositoryProvider
-          .overrideWithValue(SupabasePrayerRepository(supabase)),
-      communityRepositoryProvider
-          .overrideWithValue(SupabaseCommunityRepository(supabase)),
-      subscriptionServiceProvider
-          .overrideWithValue(RevenueCatSubscriptionService()),
-      notificationServiceProvider
-          .overrideWithValue(RealNotificationService(supabase)),
-      qtRepositoryProvider
-          .overrideWithValue(SupabaseQtRepository(supabase)),
+      prayerRepositoryProvider.overrideWithValue(
+        SupabasePrayerRepository(supabase),
+      ),
+      communityRepositoryProvider.overrideWithValue(
+        SupabaseCommunityRepository(supabase),
+      ),
+      subscriptionServiceProvider.overrideWithValue(
+        RevenueCatSubscriptionService(),
+      ),
+      notificationServiceProvider.overrideWithValue(
+        RealNotificationService(supabase),
+      ),
+      qtRepositoryProvider.overrideWithValue(SupabaseQtRepository(supabase)),
     ]);
   }
 
-  runApp(
-    ProviderScope(
-      overrides: overrides,
-      child: const AbbaApp(),
-    ),
-  );
+  runApp(ProviderScope(overrides: overrides, child: const AbbaApp()));
 }

@@ -121,5 +121,17 @@
   "promoTitle": "特別キャンペーン",
   "promoBanner": "3ヶ月間¥580/月!",
   "promoEndsOn": "{date}まで特別価格",
-  "@promoEndsOn": { "placeholders": { "date": {} } }
+  "@promoEndsOn": { "placeholders": { "date": {} } },
+  "premiumLimitTitle": "今日の祈りが完了しました",
+  "premiumLimitBody": "また明日お会いしましょう！\nPremiumで無制限に祈りましょう",
+  "laterButton": "後で",
+  "morningPrayerReminder": "朝の祈り",
+  "eveningGratitudeReminder": "夕方の感謝",
+  "streakReminder": "連続記録リマインダー",
+  "weeklySummaryReminder": "週間まとめ",
+  "unlimited": "無制限",
+  "streakRecovery": "大丈夫、また始めましょう 🌱",
+  "prayerSaved": "祈りが保存されました",
+  "quietTimeLabel": "QT",
+  "morningPrayerLabel": "朝の祈り"
 }

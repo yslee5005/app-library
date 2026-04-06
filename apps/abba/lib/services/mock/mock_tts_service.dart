@@ -10,10 +10,7 @@ class MockTtsService implements TtsService {
   static const _mockDuration = Duration(seconds: 45);
 
   @override
-  Future<void> speak({
-    required String text,
-    required String voice,
-  }) async {
+  Future<void> speak({required String text, required String voice}) async {
     _position = Duration.zero;
     _isPlaying = true;
     _emitState();
@@ -53,10 +50,12 @@ class MockTtsService implements TtsService {
   Stream<TtsPlaybackState> get playbackState => _controller.stream;
 
   void _emitState() {
-    _controller.add(TtsPlaybackState(
-      position: _position,
-      duration: _mockDuration,
-      isPlaying: _isPlaying,
-    ));
+    _controller.add(
+      TtsPlaybackState(
+        position: _position,
+        duration: _mockDuration,
+        isPlaying: _isPlaying,
+      ),
+    );
   }
 }

@@ -55,9 +55,7 @@ class WelcomeView extends StatelessWidget {
               // Subtitle
               Text(
                 l10n.welcomeSubtitle,
-                style: AbbaTypography.body.copyWith(
-                  color: AbbaColors.muted,
-                ),
+                style: AbbaTypography.body.copyWith(color: AbbaColors.muted),
                 textAlign: TextAlign.center,
               ),
               const Spacer(flex: 3),

@@ -373,4 +373,41 @@ class AppLocalizationsEn extends AppLocalizations {
   String promoEndsOn(Object date) {
     return 'Offer ends $date';
   }
+
+  @override
+  String get premiumLimitTitle => 'Today\'s prayer is complete';
+
+  @override
+  String get premiumLimitBody =>
+      'See you tomorrow!\nPray unlimited with Premium';
+
+  @override
+  String get laterButton => 'Maybe later';
+
+  @override
+  String get morningPrayerReminder => 'Morning Prayer';
+
+  @override
+  String get eveningGratitudeReminder => 'Evening Gratitude';
+
+  @override
+  String get streakReminder => 'Streak Reminder';
+
+  @override
+  String get weeklySummaryReminder => 'Weekly Summary';
+
+  @override
+  String get unlimited => 'Unlimited';
+
+  @override
+  String get streakRecovery => 'It\'s okay, you can start again 🌱';
+
+  @override
+  String get prayerSaved => 'Prayer saved successfully';
+
+  @override
+  String get quietTimeLabel => 'Quiet Time';
+
+  @override
+  String get morningPrayerLabel => 'Morning Prayer';
 }

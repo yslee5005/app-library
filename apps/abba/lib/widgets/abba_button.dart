@@ -30,37 +30,37 @@ class AbbaButton extends StatelessWidget {
       button: true,
       label: label,
       child: SizedBox(
-      width: double.infinity,
-      height: height,
-      child: ElevatedButton(
-        onPressed: onPressed,
-        style: ElevatedButton.styleFrom(
-          backgroundColor: bgColor,
-          foregroundColor: fgColor,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(AbbaRadius.lg),
-          ),
-          elevation: 2,
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            if (icon != null) ...[
-              Icon(icon, size: isHero ? 28 : 24),
-              const SizedBox(width: AbbaSpacing.sm),
-            ],
-            Text(
-              label,
-              style: AbbaTypography.body.copyWith(
-                fontWeight: FontWeight.w600,
-                color: fgColor,
-                fontSize: isHero ? 20 : 18,
-              ),
+        width: double.infinity,
+        height: height,
+        child: ElevatedButton(
+          onPressed: onPressed,
+          style: ElevatedButton.styleFrom(
+            backgroundColor: bgColor,
+            foregroundColor: fgColor,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(AbbaRadius.lg),
             ),
-          ],
+            elevation: 2,
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              if (icon != null) ...[
+                Icon(icon, size: isHero ? 28 : 24),
+                const SizedBox(width: AbbaSpacing.sm),
+              ],
+              Text(
+                label,
+                style: AbbaTypography.body.copyWith(
+                  fontWeight: FontWeight.w600,
+                  color: fgColor,
+                  fontSize: isHero ? 20 : 18,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
-    ),
     );
   }
 }

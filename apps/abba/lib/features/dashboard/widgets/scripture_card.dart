@@ -30,10 +30,7 @@ class ScriptureCard extends StatelessWidget {
             ],
           ),
           const SizedBox(height: AbbaSpacing.md),
-          Text(
-            scripture.verse(locale),
-            style: AbbaTypography.body,
-          ),
+          Text(scripture.verse(locale), style: AbbaTypography.body),
           const SizedBox(height: AbbaSpacing.sm),
           Text(
             '— ${scripture.reference}',

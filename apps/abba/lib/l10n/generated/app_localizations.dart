@@ -793,6 +793,78 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Offer ends {date}'**
   String promoEndsOn(Object date);
+
+  /// No description provided for @premiumLimitTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Today\'s prayer is complete'**
+  String get premiumLimitTitle;
+
+  /// No description provided for @premiumLimitBody.
+  ///
+  /// In en, this message translates to:
+  /// **'See you tomorrow!\nPray unlimited with Premium'**
+  String get premiumLimitBody;
+
+  /// No description provided for @laterButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Maybe later'**
+  String get laterButton;
+
+  /// No description provided for @morningPrayerReminder.
+  ///
+  /// In en, this message translates to:
+  /// **'Morning Prayer'**
+  String get morningPrayerReminder;
+
+  /// No description provided for @eveningGratitudeReminder.
+  ///
+  /// In en, this message translates to:
+  /// **'Evening Gratitude'**
+  String get eveningGratitudeReminder;
+
+  /// No description provided for @streakReminder.
+  ///
+  /// In en, this message translates to:
+  /// **'Streak Reminder'**
+  String get streakReminder;
+
+  /// No description provided for @weeklySummaryReminder.
+  ///
+  /// In en, this message translates to:
+  /// **'Weekly Summary'**
+  String get weeklySummaryReminder;
+
+  /// No description provided for @unlimited.
+  ///
+  /// In en, this message translates to:
+  /// **'Unlimited'**
+  String get unlimited;
+
+  /// No description provided for @streakRecovery.
+  ///
+  /// In en, this message translates to:
+  /// **'It\'s okay, you can start again 🌱'**
+  String get streakRecovery;
+
+  /// No description provided for @prayerSaved.
+  ///
+  /// In en, this message translates to:
+  /// **'Prayer saved successfully'**
+  String get prayerSaved;
+
+  /// No description provided for @quietTimeLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Quiet Time'**
+  String get quietTimeLabel;
+
+  /// No description provided for @morningPrayerLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Morning Prayer'**
+  String get morningPrayerLabel;
 }
 
 class _AppLocalizationsDelegate

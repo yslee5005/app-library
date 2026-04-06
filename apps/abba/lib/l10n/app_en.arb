@@ -121,5 +121,17 @@
   "promoTitle": "Launch Special",
   "promoBanner": "First 3 months at $3.99/mo!",
   "promoEndsOn": "Offer ends {date}",
-  "@promoEndsOn": { "placeholders": { "date": {} } }
+  "@promoEndsOn": { "placeholders": { "date": {} } },
+  "premiumLimitTitle": "Today's prayer is complete",
+  "premiumLimitBody": "See you tomorrow!\nPray unlimited with Premium",
+  "laterButton": "Maybe later",
+  "morningPrayerReminder": "Morning Prayer",
+  "eveningGratitudeReminder": "Evening Gratitude",
+  "streakReminder": "Streak Reminder",
+  "weeklySummaryReminder": "Weekly Summary",
+  "unlimited": "Unlimited",
+  "streakRecovery": "It's okay, you can start again 🌱",
+  "prayerSaved": "Prayer saved successfully",
+  "quietTimeLabel": "Quiet Time",
+  "morningPrayerLabel": "Morning Prayer"
 }

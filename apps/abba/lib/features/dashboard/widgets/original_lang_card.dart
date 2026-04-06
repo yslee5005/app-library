@@ -53,10 +53,7 @@ class OriginalLangCard extends StatelessWidget {
             style: AbbaTypography.body.copyWith(fontWeight: FontWeight.w600),
           ),
           const SizedBox(height: AbbaSpacing.sm),
-          Text(
-            originalLanguage.context(locale),
-            style: AbbaTypography.body,
-          ),
+          Text(originalLanguage.context(locale), style: AbbaTypography.body),
         ],
       ),
     );

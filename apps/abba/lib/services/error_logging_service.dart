@@ -26,9 +26,7 @@ class ErrorLoggingService {
     final message = event.message?.formatted;
     if (message != null) {
       final masked = _maskSensitive(message);
-      return event.copyWith(
-        message: SentryMessage(masked),
-      );
+      return event.copyWith(message: SentryMessage(masked));
     }
     return event;
   }
@@ -53,9 +51,8 @@ class ErrorLoggingService {
 
   static void addBreadcrumb(String message, {String? category}) {
     if (AppConfig.sentryDsn.isEmpty) return;
-    Sentry.addBreadcrumb(Breadcrumb(
-      message: message,
-      category: category ?? 'app',
-    ));
+    Sentry.addBreadcrumb(
+      Breadcrumb(message: message, category: category ?? 'app'),
+    );
   }
 }

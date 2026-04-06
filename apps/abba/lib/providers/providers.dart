@@ -63,15 +63,15 @@ final qtRepositoryProvider = Provider<QtRepository>((ref) {
 });
 
 /// Notification settings
-final notificationSettingsProvider =
-    FutureProvider<NotificationSettings>((ref) {
+final notificationSettingsProvider = FutureProvider<NotificationSettings>((
+  ref,
+) {
   final service = ref.watch(notificationServiceProvider);
   return service.getSettings();
 });
 
 /// Current subscription status (reactive)
-final subscriptionStatusProvider =
-    StreamProvider<SubscriptionStatus>((ref) {
+final subscriptionStatusProvider = StreamProvider<SubscriptionStatus>((ref) {
   final service = ref.watch(subscriptionServiceProvider);
   return service.statusStream;
 });
@@ -100,8 +100,7 @@ final userProfileProvider = FutureProvider<UserProfile>((ref) {
   return ref.watch(mockDataServiceProvider).getUserProfile();
 });
 
-final prayerResultProvider =
-    StateProvider<AsyncValue<PrayerResult>>((ref) {
+final prayerResultProvider = StateProvider<AsyncValue<PrayerResult>>((ref) {
   return const AsyncValue.loading();
 });
 
@@ -119,7 +118,9 @@ final communityPostsProvider = FutureProvider<List<CommunityPost>>((ref) {
 final communityFilterProvider = StateProvider<String>((ref) => 'all');
 
 /// Filtered community posts (reacts to filter changes)
-final filteredCommunityPostsProvider = FutureProvider<List<CommunityPost>>((ref) {
+final filteredCommunityPostsProvider = FutureProvider<List<CommunityPost>>((
+  ref,
+) {
   final filter = ref.watch(communityFilterProvider);
   final repo = ref.watch(communityRepositoryProvider);
   return repo.getPosts(category: filter == 'all' ? null : filter);
@@ -136,26 +137,30 @@ final savedPostsProvider = FutureProvider<List<CommunityPost>>((ref) {
 // ---------------------------------------------------------------------------
 
 /// Prayers for a specific date (used by Calendar day detail)
-final calendarPrayersProvider =
-    FutureProvider.family<List<Prayer>, DateTime>((ref, date) {
+final calendarPrayersProvider = FutureProvider.family<List<Prayer>, DateTime>((
+  ref,
+  date,
+) {
   final repo = ref.watch(prayerRepositoryProvider);
   return repo.getPrayersByDate(date);
 });
 
 /// Monthly prayer dates (for calendar markers)
-final monthlyPrayerDaysProvider = FutureProvider.family<Set<DateTime>,
-    ({int year, int month})>((ref, params) async {
-  final repo = ref.watch(prayerRepositoryProvider);
-  final prayers = await repo.getPrayersByMonth(params.year, params.month);
-  return prayers.map((p) {
-    final d = p.createdAt;
-    return DateTime(d.year, d.month, d.day);
-  }).toSet();
-});
+final monthlyPrayerDaysProvider =
+    FutureProvider.family<Set<DateTime>, ({int year, int month})>((
+      ref,
+      params,
+    ) async {
+      final repo = ref.watch(prayerRepositoryProvider);
+      final prayers = await repo.getPrayersByMonth(params.year, params.month);
+      return prayers.map((p) {
+        final d = p.createdAt;
+        return DateTime(d.year, d.month, d.day);
+      }).toSet();
+    });
 
 /// Streak data from repository
-final streakProvider =
-    FutureProvider<({int current, int best})>((ref) {
+final streakProvider = FutureProvider<({int current, int best})>((ref) {
   final repo = ref.watch(prayerRepositoryProvider);
   return repo.getStreak();
 });

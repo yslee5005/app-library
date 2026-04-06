@@ -366,4 +366,40 @@ class AppLocalizationsZh extends AppLocalizations {
   String promoEndsOn(Object date) {
     return '优惠截止$date';
   }
+
+  @override
+  String get premiumLimitTitle => '今天的祷告已完成';
+
+  @override
+  String get premiumLimitBody => '明天见！\n升级Premium无限祷告';
+
+  @override
+  String get laterButton => '以后再说';
+
+  @override
+  String get morningPrayerReminder => '早祷';
+
+  @override
+  String get eveningGratitudeReminder => '晚间感恩';
+
+  @override
+  String get streakReminder => '连续记录提醒';
+
+  @override
+  String get weeklySummaryReminder => '每周总结';
+
+  @override
+  String get unlimited => '无限';
+
+  @override
+  String get streakRecovery => '没关系，重新开始吧 🌱';
+
+  @override
+  String get prayerSaved => '祷告已保存';
+
+  @override
+  String get quietTimeLabel => '灵修';
+
+  @override
+  String get morningPrayerLabel => '早祷';
 }

@@ -24,9 +24,9 @@ final appRouter = GoRouter(
     // Skip auth redirect in mock mode
     if (AppConfig.useMock) return null;
 
-    final isLoggedIn =
-        Supabase.instance.client.auth.currentSession != null;
-    final isAuthRoute = state.matchedLocation == '/welcome' ||
+    final isLoggedIn = Supabase.instance.client.auth.currentSession != null;
+    final isAuthRoute =
+        state.matchedLocation == '/welcome' ||
         state.matchedLocation == '/login';
 
     if (!isLoggedIn && !isAuthRoute) return '/welcome';
@@ -34,14 +34,8 @@ final appRouter = GoRouter(
     return null;
   },
   routes: [
-    GoRoute(
-      path: '/welcome',
-      builder: (context, state) => const WelcomeView(),
-    ),
-    GoRoute(
-      path: '/login',
-      builder: (context, state) => const LoginView(),
-    ),
+    GoRoute(path: '/welcome', builder: (context, state) => const WelcomeView()),
+    GoRoute(path: '/login', builder: (context, state) => const LoginView()),
     StatefulShellRoute.indexedStack(
       builder: (context, state, navigationShell) {
         return _ScaffoldWithNavBar(navigationShell: navigationShell);

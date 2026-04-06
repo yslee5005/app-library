@@ -17,18 +17,21 @@ class LoginView extends ConsumerWidget {
 
     Future<void> handleSignIn(Future<void> Function() signIn) async {
       try {
-        ref.read(authStateProvider.notifier).state =
-            const AbbaAuthState(status: AuthStatus.loading);
+        ref.read(authStateProvider.notifier).state = const AbbaAuthState(
+          status: AuthStatus.loading,
+        );
         await signIn();
         // Auth state will be updated by the service
       } catch (e, stackTrace) {
         ErrorLoggingService.captureException(e, stackTrace);
-        ref.read(authStateProvider.notifier).state =
-            AbbaAuthState(status: AuthStatus.unauthenticated, error: '$e');
+        ref.read(authStateProvider.notifier).state = AbbaAuthState(
+          status: AuthStatus.unauthenticated,
+          error: '$e',
+        );
         if (context.mounted) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('$e')),
-          );
+          ScaffoldMessenger.of(
+            context,
+          ).showSnackBar(SnackBar(content: Text('$e')));
         }
       }
     }
@@ -173,9 +176,7 @@ Future<(String, String)?> _showEmailDialog(
               Navigator.pop(context, (email, password));
             }
           },
-          style: ElevatedButton.styleFrom(
-            backgroundColor: AbbaColors.sage,
-          ),
+          style: ElevatedButton.styleFrom(backgroundColor: AbbaColors.sage),
           child: Text(
             l10n.signIn,
             style: const TextStyle(color: AbbaColors.white),

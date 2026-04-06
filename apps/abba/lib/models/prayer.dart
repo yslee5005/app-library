@@ -52,8 +52,9 @@ class PrayerResult {
   factory PrayerResult.fromJson(Map<String, dynamic> json) {
     return PrayerResult(
       scripture: Scripture.fromJson(json['scripture'] as Map<String, dynamic>),
-      bibleStory:
-          BibleStory.fromJson(json['bible_story'] as Map<String, dynamic>),
+      bibleStory: BibleStory.fromJson(
+        json['bible_story'] as Map<String, dynamic>,
+      ),
       testimony: json['testimony']?['transcript_en'] as String? ?? '',
       guidance: json['guidance'] != null
           ? Guidance.fromJson(json['guidance'] as Map<String, dynamic>)
@@ -63,7 +64,8 @@ class PrayerResult {
           : null,
       originalLanguage: json['original_language'] != null
           ? OriginalLanguage.fromJson(
-              json['original_language'] as Map<String, dynamic>)
+              json['original_language'] as Map<String, dynamic>,
+            )
           : null,
     );
   }

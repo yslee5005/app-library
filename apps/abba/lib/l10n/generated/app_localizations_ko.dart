@@ -366,4 +366,40 @@ class AppLocalizationsKo extends AppLocalizations {
   String promoEndsOn(Object date) {
     return '$date까지 특가';
   }
+
+  @override
+  String get premiumLimitTitle => '오늘의 기도를 마쳤습니다';
+
+  @override
+  String get premiumLimitBody => '내일 다시 만나요!\nPremium으로 무제한 기도하기';
+
+  @override
+  String get laterButton => '다음에 하기';
+
+  @override
+  String get morningPrayerReminder => '아침 기도';
+
+  @override
+  String get eveningGratitudeReminder => '저녁 감사';
+
+  @override
+  String get streakReminder => '스트릭 알림';
+
+  @override
+  String get weeklySummaryReminder => '주간 요약';
+
+  @override
+  String get unlimited => '무제한';
+
+  @override
+  String get streakRecovery => '괜찮아요, 다시 시작하면 돼요 🌱';
+
+  @override
+  String get prayerSaved => '기도가 저장되었습니다';
+
+  @override
+  String get quietTimeLabel => '큐티';
+
+  @override
+  String get morningPrayerLabel => '아침 기도';
 }

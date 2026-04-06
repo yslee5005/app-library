@@ -35,10 +35,7 @@ class BibleStoryCard extends StatelessWidget {
             style: AbbaTypography.body.copyWith(fontWeight: FontWeight.w600),
           ),
           const SizedBox(height: AbbaSpacing.sm),
-          Text(
-            bibleStory.summary(locale),
-            style: AbbaTypography.body,
-          ),
+          Text(bibleStory.summary(locale), style: AbbaTypography.body),
         ],
       ),
     );

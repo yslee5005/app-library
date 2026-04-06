@@ -31,14 +31,14 @@ class _PremiumModalContentState extends ConsumerState<_PremiumModalContent> {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    final isKo = Localizations.localeOf(context).languageCode == 'ko';
 
     return Container(
       padding: const EdgeInsets.all(AbbaSpacing.xl),
       decoration: const BoxDecoration(
         color: AbbaColors.cream,
-        borderRadius:
-            BorderRadius.vertical(top: Radius.circular(AbbaRadius.xl)),
+        borderRadius: BorderRadius.vertical(
+          top: Radius.circular(AbbaRadius.xl),
+        ),
       ),
       child: SafeArea(
         child: Column(
@@ -47,15 +47,13 @@ class _PremiumModalContentState extends ConsumerState<_PremiumModalContent> {
             const Text('🌸', style: TextStyle(fontSize: 48)),
             const SizedBox(height: AbbaSpacing.md),
             Text(
-              isKo ? '오늘의 기도를 마쳤습니다' : "Today's prayer is complete",
+              l10n.premiumLimitTitle,
               style: AbbaTypography.h1,
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: AbbaSpacing.sm),
             Text(
-              isKo
-                  ? '내일 다시 만나요!\nPremium으로 무제한 기도하기'
-                  : 'See you tomorrow!\nPray unlimited with Premium',
+              l10n.premiumLimitBody,
               style: AbbaTypography.body.copyWith(color: AbbaColors.muted),
               textAlign: TextAlign.center,
             ),
@@ -117,7 +115,7 @@ class _PremiumModalContentState extends ConsumerState<_PremiumModalContent> {
             TextButton(
               onPressed: () => Navigator.of(context).pop(false),
               child: Text(
-                isKo ? '다음에 하기' : 'Maybe later',
+                l10n.laterButton,
                 style: AbbaTypography.body.copyWith(color: AbbaColors.muted),
               ),
             ),

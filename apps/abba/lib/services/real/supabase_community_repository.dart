@@ -32,9 +32,7 @@ class SupabaseCommunityRepository implements CommunityRepository {
       query = query.lt('created_at', cursor);
     }
 
-    final data = await query
-        .order('created_at', ascending: false)
-        .limit(limit);
+    final data = await query.order('created_at', ascending: false).limit(limit);
 
     final posts = <CommunityPost>[];
     for (final row in data as List) {
@@ -43,12 +41,14 @@ class SupabaseCommunityRepository implements CommunityRepository {
       final isSaved = await _isSaved(postId);
       final comments = await getComments(postId);
 
-      posts.add(CommunityPost.fromJson({
-        ...row as Map<String, dynamic>,
-        'is_liked': isLiked,
-        'is_saved': isSaved,
-        'comments': comments.map((c) => c.toJson()).toList(),
-      }));
+      posts.add(
+        CommunityPost.fromJson({
+          ...row as Map<String, dynamic>,
+          'is_liked': isLiked,
+          'is_saved': isSaved,
+          'comments': comments.map((c) => c.toJson()).toList(),
+        }),
+      );
     }
 
     return posts;
@@ -81,13 +81,17 @@ class SupabaseCommunityRepository implements CommunityRepository {
     required String content,
     String? displayName,
   }) async {
-    final data = await _client.from('community_posts').insert({
-      'app_id': 'abba',
-      'user_id': _userId,
-      'display_name': displayName,
-      'category': category,
-      'content': content,
-    }).select().single();
+    final data = await _client
+        .from('community_posts')
+        .insert({
+          'app_id': 'abba',
+          'user_id': _userId,
+          'display_name': displayName,
+          'category': category,
+          'content': content,
+        })
+        .select()
+        .single();
 
     return CommunityPost.fromJson({
       ...data,
@@ -130,19 +134,21 @@ class SupabaseCommunityRepository implements CommunityRepository {
     String? displayName,
     String? parentCommentId,
   }) async {
-    final data = await _client.from('post_comments').insert({
-      'app_id': 'abba',
-      'post_id': postId,
-      'user_id': _userId,
-      'display_name': displayName,
-      'content': content,
-      'parent_comment_id': parentCommentId,
-    }).select().single();
+    final data = await _client
+        .from('post_comments')
+        .insert({
+          'app_id': 'abba',
+          'post_id': postId,
+          'user_id': _userId,
+          'display_name': displayName,
+          'content': content,
+          'parent_comment_id': parentCommentId,
+        })
+        .select()
+        .single();
 
     // Update comment count
-    await _client.rpc('increment_comment_count', params: {
-      'p_post_id': postId,
-    });
+    await _client.rpc('increment_comment_count', params: {'p_post_id': postId});
 
     return Comment.fromJson(data);
   }
@@ -164,9 +170,10 @@ class SupabaseCommunityRepository implements CommunityRepository {
         .eq('user_id', _userId);
 
     // Decrement comment count
-    await _client.rpc('decrement_comment_count', params: {
-      'p_post_id': comment['post_id'],
-    });
+    await _client.rpc(
+      'decrement_comment_count',
+      params: {'p_post_id': comment['post_id']},
+    );
   }
 
   // --- Likes ---
@@ -190,9 +197,7 @@ class SupabaseCommunityRepository implements CommunityRepository {
           .eq('user_id', _userId)
           .eq('app_id', 'abba');
 
-      await _client.rpc('decrement_like_count', params: {
-        'p_post_id': postId,
-      });
+      await _client.rpc('decrement_like_count', params: {'p_post_id': postId});
       return false;
     } else {
       // Like
@@ -202,9 +207,7 @@ class SupabaseCommunityRepository implements CommunityRepository {
         'user_id': _userId,
       });
 
-      await _client.rpc('increment_like_count', params: {
-        'p_post_id': postId,
-      });
+      await _client.rpc('increment_like_count', params: {'p_post_id': postId});
       return true;
     }
   }
@@ -262,12 +265,14 @@ class SupabaseCommunityRepository implements CommunityRepository {
     for (final row in data as List) {
       final postId = row['id'] as String;
       final comments = await getComments(postId);
-      posts.add(CommunityPost.fromJson({
-        ...row as Map<String, dynamic>,
-        'is_liked': await _isLiked(postId),
-        'is_saved': true,
-        'comments': comments.map((c) => c.toJson()).toList(),
-      }));
+      posts.add(
+        CommunityPost.fromJson({
+          ...row as Map<String, dynamic>,
+          'is_liked': await _isLiked(postId),
+          'is_saved': true,
+          'comments': comments.map((c) => c.toJson()).toList(),
+        }),
+      );
     }
     return posts;
   }
@@ -292,10 +297,10 @@ class SupabaseCommunityRepository implements CommunityRepository {
         .eq('target_id', postId)
         .eq('app_id', 'abba');
 
-    await _client.rpc('update_report_count', params: {
-      'p_post_id': postId,
-      'p_count': (reports as List).length,
-    });
+    await _client.rpc(
+      'update_report_count',
+      params: {'p_post_id': postId, 'p_count': (reports as List).length},
+    );
   }
 
   @override

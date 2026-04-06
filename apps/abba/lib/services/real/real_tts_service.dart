@@ -11,11 +11,7 @@ import '../error_logging_service.dart';
 import '../tts_service.dart';
 
 /// Maps voice preference to OpenAI TTS voice
-const _voiceMap = {
-  'warm': 'alloy',
-  'calm': 'nova',
-  'strong': 'onyx',
-};
+const _voiceMap = {'warm': 'alloy', 'calm': 'nova', 'strong': 'onyx'};
 
 /// Maximum number of cached audio files before cleanup
 const _maxCacheEntries = 10;
@@ -33,19 +29,18 @@ class RealTtsService implements TtsService {
   RealTtsService() {
     // Forward player state to our stream
     _player.positionStream.listen((position) {
-      _controller.add(TtsPlaybackState(
-        position: position,
-        duration: _player.duration ?? Duration.zero,
-        isPlaying: _player.playing,
-      ));
+      _controller.add(
+        TtsPlaybackState(
+          position: position,
+          duration: _player.duration ?? Duration.zero,
+          isPlaying: _player.playing,
+        ),
+      );
     });
   }
 
   @override
-  Future<void> speak({
-    required String text,
-    required String voice,
-  }) async {
+  Future<void> speak({required String text, required String voice}) async {
     final textHash = text.hashCode.toString();
     final openAiVoice = _voiceMap[voice] ?? 'alloy';
 
@@ -64,10 +59,7 @@ class RealTtsService implements TtsService {
       }
     }
 
-    ErrorLoggingService.addBreadcrumb(
-      'TTS API call started',
-      category: 'tts',
-    );
+    ErrorLoggingService.addBreadcrumb('TTS API call started', category: 'tts');
 
     try {
       // Call OpenAI TTS API

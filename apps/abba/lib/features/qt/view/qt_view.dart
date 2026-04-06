@@ -23,10 +23,7 @@ class QtView extends ConsumerWidget {
     return Scaffold(
       backgroundColor: AbbaColors.cream,
       appBar: AppBar(
-        title: Text(
-          '${l10n.qtPageTitle} 🌱',
-          style: AbbaTypography.h1,
-        ),
+        title: Text('${l10n.qtPageTitle} 🌱', style: AbbaTypography.h1),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -42,8 +39,7 @@ class QtView extends ConsumerWidget {
           Expanded(
             child: passagesAsync.when(
               data: (passages) => ListView.builder(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: AbbaSpacing.md),
+                padding: const EdgeInsets.symmetric(horizontal: AbbaSpacing.md),
                 itemCount: passages.length,
                 itemBuilder: (context, index) => _QtPassageCard(
                   passage: passages[index],
@@ -52,8 +48,7 @@ class QtView extends ConsumerWidget {
                   completedLabel: l10n.qtCompleted,
                 ),
               ),
-              loading: () =>
-                  const Center(child: CircularProgressIndicator()),
+              loading: () => const Center(child: CircularProgressIndicator()),
               error: (e, s) => Center(child: Text('Error: $e')),
             ),
           ),

@@ -121,5 +121,17 @@
   "promoTitle": "Oferta de lanzamiento",
   "promoBanner": "¡3 meses a $3.99/mes!",
   "promoEndsOn": "Oferta hasta {date}",
-  "@promoEndsOn": { "placeholders": { "date": {} } }
+  "@promoEndsOn": { "placeholders": { "date": {} } },
+  "premiumLimitTitle": "La oración de hoy está completa",
+  "premiumLimitBody": "¡Nos vemos mañana!\nOra sin límites con Premium",
+  "laterButton": "Quizás después",
+  "morningPrayerReminder": "Oración matutina",
+  "eveningGratitudeReminder": "Gratitud vespertina",
+  "streakReminder": "Recordatorio de racha",
+  "weeklySummaryReminder": "Resumen semanal",
+  "unlimited": "Ilimitado",
+  "streakRecovery": "Está bien, puedes empezar de nuevo 🌱",
+  "prayerSaved": "Oración guardada exitosamente",
+  "quietTimeLabel": "Tiempo de quietud",
+  "morningPrayerLabel": "Oración matutina"
 }

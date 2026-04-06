@@ -37,14 +37,10 @@ class HomeView extends ConsumerWidget {
                   _getGreeting(l10n, profile.name),
                   style: AbbaTypography.h1,
                 ),
-                loading: () => Text(
-                  _getGreeting(l10n, ''),
-                  style: AbbaTypography.h1,
-                ),
-                error: (e, s) => Text(
-                  _getGreeting(l10n, ''),
-                  style: AbbaTypography.h1,
-                ),
+                loading: () =>
+                    Text(_getGreeting(l10n, ''), style: AbbaTypography.h1),
+                error: (e, s) =>
+                    Text(_getGreeting(l10n, ''), style: AbbaTypography.h1),
               ),
               const SizedBox(height: AbbaSpacing.xl),
               // Pray button
@@ -68,7 +64,10 @@ class HomeView extends ConsumerWidget {
                 data: (profile) {
                   final locale = ref.watch(localeProvider);
                   final icon = streakGardenIcon(profile.currentStreak);
-                  final label = streakGardenLabel(profile.currentStreak, locale);
+                  final label = streakGardenLabel(
+                    profile.currentStreak,
+                    locale,
+                  );
                   return AbbaCard(
                     margin: EdgeInsets.zero,
                     child: Row(
@@ -160,8 +159,9 @@ class HomeView extends ConsumerWidget {
       final prefs = await SharedPreferences.getInstance();
       final today = DateTime.now().toIso8601String().substring(0, 10);
       final lastDate = prefs.getString('last_prayer_date') ?? '';
-      final count =
-          lastDate == today ? (prefs.getInt('today_prayer_count') ?? 0) : 0;
+      final count = lastDate == today
+          ? (prefs.getInt('today_prayer_count') ?? 0)
+          : 0;
 
       if (count >= 1) {
         if (context.mounted) await showPremiumModal(context);

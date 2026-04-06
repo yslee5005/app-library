@@ -34,8 +34,9 @@ class MockSttService implements SttService {
     _listening = true;
     int index = 0;
 
-    _simulationTimer =
-        Timer.periodic(const Duration(milliseconds: 1500), (timer) {
+    _simulationTimer = Timer.periodic(const Duration(milliseconds: 1500), (
+      timer,
+    ) {
       if (!_listening || index >= _mockTranscripts.length) {
         timer.cancel();
         if (index >= _mockTranscripts.length) {

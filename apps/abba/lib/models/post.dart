@@ -73,7 +73,8 @@ class CommunityPost {
       isHidden: json['is_hidden'] as bool? ?? false,
       reportCount: json['report_count'] as int? ?? 0,
       createdAt: DateTime.parse(json['created_at'] as String),
-      comments: (json['comments'] as List<dynamic>?)
+      comments:
+          (json['comments'] as List<dynamic>?)
               ?.map((e) => Comment.fromJson(e as Map<String, dynamic>))
               .toList() ??
           [],

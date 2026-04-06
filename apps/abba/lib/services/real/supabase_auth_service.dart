@@ -14,14 +14,14 @@ class SupabaseAuthService implements AuthService {
       final session = data.session;
       if (session != null) {
         _fetchProfile(session.user.id).then((profile) {
-          _controller.add(AbbaAuthState(
-            status: AuthStatus.authenticated,
-            user: profile,
-          ));
+          _controller.add(
+            AbbaAuthState(status: AuthStatus.authenticated, user: profile),
+          );
         });
       } else {
-        _controller
-            .add(const AbbaAuthState(status: AuthStatus.unauthenticated));
+        _controller.add(
+          const AbbaAuthState(status: AuthStatus.unauthenticated),
+        );
       }
     });
   }
@@ -85,7 +85,8 @@ class SupabaseAuthService implements AuthService {
 
     final profile = UserProfile(
       id: user.id,
-      name: user.userMetadata?['full_name'] as String? ??
+      name:
+          user.userMetadata?['full_name'] as String? ??
           user.email?.split('@').first ??
           'User',
       email: user.email ?? '',
@@ -115,8 +116,9 @@ class SupabaseAuthService implements AuthService {
   }
 
   Future<UserProfile> _waitForProfile() async {
-    final state = await authStateChanges
-        .firstWhere((s) => s.status == AuthStatus.authenticated);
+    final state = await authStateChanges.firstWhere(
+      (s) => s.status == AuthStatus.authenticated,
+    );
     return state.user!;
   }
 }

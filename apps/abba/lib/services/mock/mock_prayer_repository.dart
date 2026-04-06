@@ -16,10 +16,12 @@ class MockPrayerRepository implements PrayerRepository {
   @override
   Future<List<Prayer>> getPrayersByDate(DateTime date) async {
     return _prayers
-        .where((p) =>
-            p.createdAt.year == date.year &&
-            p.createdAt.month == date.month &&
-            p.createdAt.day == date.day)
+        .where(
+          (p) =>
+              p.createdAt.year == date.year &&
+              p.createdAt.month == date.month &&
+              p.createdAt.day == date.day,
+        )
         .toList();
   }
 
@@ -40,10 +42,12 @@ class MockPrayerRepository implements PrayerRepository {
   Future<int> getTodayPrayerCount() async {
     final now = DateTime.now();
     return _prayers
-        .where((p) =>
-            p.createdAt.year == now.year &&
-            p.createdAt.month == now.month &&
-            p.createdAt.day == now.day)
+        .where(
+          (p) =>
+              p.createdAt.year == now.year &&
+              p.createdAt.month == now.month &&
+              p.createdAt.day == now.day,
+        )
         .length;
   }
 

@@ -121,8 +121,7 @@ class _RecordingOverlayState extends ConsumerState<RecordingOverlay>
       category: 'recording',
     );
 
-    final transcript =
-        _isTextMode ? _textController.text : _transcript;
+    final transcript = _isTextMode ? _textController.text : _transcript;
     ref.read(sttServiceProvider).stopListening();
 
     // Store transcript for AI processing
@@ -139,8 +138,9 @@ class _RecordingOverlayState extends ConsumerState<RecordingOverlay>
     return Container(
       decoration: const BoxDecoration(
         color: AbbaColors.cream,
-        borderRadius:
-            BorderRadius.vertical(top: Radius.circular(AbbaRadius.xl)),
+        borderRadius: BorderRadius.vertical(
+          top: Radius.circular(AbbaRadius.xl),
+        ),
       ),
       child: SafeArea(
         child: Column(
@@ -195,32 +195,30 @@ class _RecordingOverlayState extends ConsumerState<RecordingOverlay>
             // Pulse animation or text input
             if (_isTextMode)
               Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: AbbaSpacing.xl),
+                padding: const EdgeInsets.symmetric(horizontal: AbbaSpacing.xl),
                 child: TextField(
                   controller: _textController,
                   maxLines: 8,
                   style: AbbaTypography.body,
                   decoration: InputDecoration(
                     hintText: l10n.textInputHint,
-                    hintStyle: AbbaTypography.body
-                        .copyWith(color: AbbaColors.muted),
+                    hintStyle: AbbaTypography.body.copyWith(
+                      color: AbbaColors.muted,
+                    ),
                     border: OutlineInputBorder(
-                      borderRadius:
-                          BorderRadius.circular(AbbaRadius.lg),
-                      borderSide:
-                          const BorderSide(color: AbbaColors.sage),
+                      borderRadius: BorderRadius.circular(AbbaRadius.lg),
+                      borderSide: const BorderSide(color: AbbaColors.sage),
                     ),
                     focusedBorder: OutlineInputBorder(
-                      borderRadius:
-                          BorderRadius.circular(AbbaRadius.lg),
+                      borderRadius: BorderRadius.circular(AbbaRadius.lg),
                       borderSide: const BorderSide(
-                          color: AbbaColors.sage, width: 2),
+                        color: AbbaColors.sage,
+                        width: 2,
+                      ),
                     ),
                     filled: true,
                     fillColor: AbbaColors.white,
-                    contentPadding:
-                        const EdgeInsets.all(AbbaSpacing.md),
+                    contentPadding: const EdgeInsets.all(AbbaSpacing.md),
                   ),
                 ),
               )
@@ -230,8 +228,7 @@ class _RecordingOverlayState extends ConsumerState<RecordingOverlay>
                   AnimatedBuilder(
                     animation: _pulseController,
                     builder: (context, child) {
-                      final scale =
-                          1.0 + (_pulseController.value * 0.15);
+                      final scale = 1.0 + (_pulseController.value * 0.15);
                       return Transform.scale(
                         scale: _isPaused ? 1.0 : scale,
                         child: Container(
@@ -240,8 +237,7 @@ class _RecordingOverlayState extends ConsumerState<RecordingOverlay>
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
                             color: AbbaColors.sage.withValues(
-                              alpha: 0.2 +
-                                  (_pulseController.value * 0.15),
+                              alpha: 0.2 + (_pulseController.value * 0.15),
                             ),
                           ),
                           child: Center(
@@ -267,7 +263,8 @@ class _RecordingOverlayState extends ConsumerState<RecordingOverlay>
                     const SizedBox(height: AbbaSpacing.lg),
                     Padding(
                       padding: const EdgeInsets.symmetric(
-                          horizontal: AbbaSpacing.xl),
+                        horizontal: AbbaSpacing.xl,
+                      ),
                       child: Text(
                         _transcript,
                         style: AbbaTypography.bodySmall.copyWith(
@@ -290,8 +287,7 @@ class _RecordingOverlayState extends ConsumerState<RecordingOverlay>
             const Spacer(),
             // Buttons
             Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: AbbaSpacing.xl),
+              padding: const EdgeInsets.symmetric(horizontal: AbbaSpacing.xl),
               child: Row(
                 children: [
                   Expanded(
@@ -300,9 +296,7 @@ class _RecordingOverlayState extends ConsumerState<RecordingOverlay>
                       child: OutlinedButton.icon(
                         onPressed: _togglePause,
                         icon: Icon(
-                          _isPaused
-                              ? Icons.play_arrow
-                              : Icons.pause,
+                          _isPaused ? Icons.play_arrow : Icons.pause,
                           color: AbbaColors.sage,
                         ),
                         label: Text(
@@ -314,11 +308,9 @@ class _RecordingOverlayState extends ConsumerState<RecordingOverlay>
                           ),
                         ),
                         style: OutlinedButton.styleFrom(
-                          side: const BorderSide(
-                              color: AbbaColors.sage),
+                          side: const BorderSide(color: AbbaColors.sage),
                           shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(
-                                AbbaRadius.lg),
+                            borderRadius: BorderRadius.circular(AbbaRadius.lg),
                           ),
                         ),
                       ),

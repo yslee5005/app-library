@@ -23,10 +23,9 @@ class MockAuthService implements AuthService {
   Future<UserProfile> _mockSignIn() async {
     await Future<void>.delayed(const Duration(milliseconds: 500));
     final profile = await _mockData.getUserProfile();
-    _controller.add(AbbaAuthState(
-      status: AuthStatus.authenticated,
-      user: profile,
-    ));
+    _controller.add(
+      AbbaAuthState(status: AuthStatus.authenticated, user: profile),
+    );
     return profile;
   }
 

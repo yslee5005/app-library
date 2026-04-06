@@ -2,26 +2,37 @@
 class AppConfig {
   AppConfig._();
 
-  static const String env =
-      String.fromEnvironment('ENV', defaultValue: 'mock');
+  static const String env = String.fromEnvironment('ENV', defaultValue: 'mock');
 
-  static const String appId =
-      String.fromEnvironment('APP_ID', defaultValue: 'abba');
+  static const String appId = String.fromEnvironment(
+    'APP_ID',
+    defaultValue: 'abba',
+  );
 
-  static const String supabaseUrl =
-      String.fromEnvironment('SUPABASE_URL', defaultValue: '');
+  static const String supabaseUrl = String.fromEnvironment(
+    'SUPABASE_URL',
+    defaultValue: '',
+  );
 
-  static const String supabaseAnonKey =
-      String.fromEnvironment('SUPABASE_ANON_KEY', defaultValue: '');
+  static const String supabaseAnonKey = String.fromEnvironment(
+    'SUPABASE_ANON_KEY',
+    defaultValue: '',
+  );
 
-  static const String openAiApiKey =
-      String.fromEnvironment('OPENAI_API_KEY', defaultValue: '');
+  static const String openAiApiKey = String.fromEnvironment(
+    'OPENAI_API_KEY',
+    defaultValue: '',
+  );
 
-  static const String sentryDsn =
-      String.fromEnvironment('SENTRY_DSN', defaultValue: '');
+  static const String sentryDsn = String.fromEnvironment(
+    'SENTRY_DSN',
+    defaultValue: '',
+  );
 
-  static const String revenueCatApiKey =
-      String.fromEnvironment('REVENUECAT_API_KEY', defaultValue: '');
+  static const String revenueCatApiKey = String.fromEnvironment(
+    'REVENUECAT_API_KEY',
+    defaultValue: '',
+  );
 
   /// true when running in mock mode (JSON data, no external services)
   static bool get useMock => env == 'mock';

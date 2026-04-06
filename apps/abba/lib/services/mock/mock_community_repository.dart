@@ -40,10 +40,14 @@ class MockCommunityRepository implements CommunityRepository {
     result.sort((a, b) => b.createdAt.compareTo(a.createdAt));
     if (result.length > limit) result = result.sublist(0, limit);
 
-    return result.map((p) => p.copyWith(
-      isLiked: _likedPostIds.contains(p.id),
-      isSaved: _savedPostIds.contains(p.id),
-    )).toList();
+    return result
+        .map(
+          (p) => p.copyWith(
+            isLiked: _likedPostIds.contains(p.id),
+            isSaved: _savedPostIds.contains(p.id),
+          ),
+        )
+        .toList();
   }
 
   @override
