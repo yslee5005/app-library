@@ -20,6 +20,9 @@ class AppConfig {
   static const String sentryDsn =
       String.fromEnvironment('SENTRY_DSN', defaultValue: '');
 
+  static const String revenueCatApiKey =
+      String.fromEnvironment('REVENUECAT_API_KEY', defaultValue: '');
+
   /// true when running in mock mode (JSON data, no external services)
   static bool get useMock => env == 'mock';
 

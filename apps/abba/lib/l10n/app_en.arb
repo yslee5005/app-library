@@ -100,5 +100,10 @@
   "passwordLabel": "Password",
   "signIn": "Sign In",
   "cancel": "Cancel",
-  "noPrayersRecorded": "No prayers recorded"
+  "noPrayersRecorded": "No prayers recorded",
+  "deletePost": "Delete",
+  "reportPost": "Report",
+  "reportSubmitted": "Report submitted. Thank you.",
+  "deleteConfirmTitle": "Delete Post",
+  "deleteConfirmMessage": "Are you sure you want to delete this post?"
 }

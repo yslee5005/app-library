@@ -6,6 +6,7 @@ import '../../../l10n/generated/app_localizations.dart';
 import '../../../providers/providers.dart';
 import '../../../theme/abba_theme.dart';
 import '../../../widgets/abba_card.dart';
+import '../../../widgets/streak_garden.dart';
 
 class CalendarView extends ConsumerStatefulWidget {
   const CalendarView({super.key});
@@ -49,52 +50,71 @@ class _CalendarViewState extends ConsumerState<CalendarView> {
         padding: const EdgeInsets.all(AbbaSpacing.md),
         child: Column(
           children: [
-            // Streak card
+            // Streak card with garden growth
             streakAsync.when(
-              data: (streak) => AbbaCard(
-                margin: const EdgeInsets.only(bottom: AbbaSpacing.md),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: Column(
+              data: (streak) {
+                final icon = streakGardenIcon(streak.current);
+                return AbbaCard(
+                  margin: const EdgeInsets.only(bottom: AbbaSpacing.md),
+                  child: Column(
+                    children: [
+                      Row(
                         children: [
-                          const Text('🔥', style: TextStyle(fontSize: 32)),
-                          const SizedBox(height: AbbaSpacing.xs),
-                          Text(
-                            '${streak.current}',
-                            style: AbbaTypography.hero,
+                          Expanded(
+                            child: Column(
+                              children: [
+                                Text(icon, style: const TextStyle(fontSize: 32)),
+                                const SizedBox(height: AbbaSpacing.xs),
+                                Text(
+                                  '${streak.current}',
+                                  style: AbbaTypography.hero,
+                                ),
+                                Text(
+                                  '${l10n.currentStreak} (${l10n.days})',
+                                  style: AbbaTypography.caption,
+                                ),
+                              ],
+                            ),
                           ),
-                          Text(
-                            '${l10n.currentStreak} (${l10n.days})',
-                            style: AbbaTypography.caption,
+                          Container(
+                            width: 1,
+                            height: 60,
+                            color: AbbaColors.muted.withValues(alpha: 0.3),
+                          ),
+                          Expanded(
+                            child: Column(
+                              children: [
+                                const Text('🏆', style: TextStyle(fontSize: 32)),
+                                const SizedBox(height: AbbaSpacing.xs),
+                                Text(
+                                  '${streak.best}',
+                                  style: AbbaTypography.hero,
+                                ),
+                                Text(
+                                  '${l10n.bestStreak} (${l10n.days})',
+                                  style: AbbaTypography.caption,
+                                ),
+                              ],
+                            ),
                           ),
                         ],
                       ),
-                    ),
-                    Container(
-                      width: 1,
-                      height: 60,
-                      color: AbbaColors.muted.withValues(alpha: 0.3),
-                    ),
-                    Expanded(
-                      child: Column(
-                        children: [
-                          const Text('🏆', style: TextStyle(fontSize: 32)),
-                          const SizedBox(height: AbbaSpacing.xs),
-                          Text(
-                            '${streak.best}',
-                            style: AbbaTypography.hero,
+                      // Encouragement for streak = 0
+                      if (streak.current == 0) ...[
+                        const SizedBox(height: AbbaSpacing.sm),
+                        Text(
+                          locale == 'ko'
+                              ? '괜찮아요, 다시 시작하면 됩니다 🌱'
+                              : "It's okay, you can start again 🌱",
+                          style: AbbaTypography.bodySmall.copyWith(
+                            color: AbbaColors.sage,
                           ),
-                          Text(
-                            '${l10n.bestStreak} (${l10n.days})',
-                            style: AbbaTypography.caption,
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+                        ),
+                      ],
+                    ],
+                  ),
+                );
+              },
               loading: () => const Padding(
                 padding: EdgeInsets.only(bottom: AbbaSpacing.md),
                 child: Center(child: CircularProgressIndicator()),
@@ -217,8 +237,21 @@ class _CalendarViewState extends ConsumerState<CalendarView> {
                           isToday ? FontWeight.w700 : FontWeight.w400,
                     ),
                   ),
-                  if (hasPrayer)
-                    const Text('🌸', style: TextStyle(fontSize: 12)),
+                  if (hasPrayer) ...[
+                    Builder(builder: (context) {
+                      // Check if previous day had prayer (grace recovery = 🌼)
+                      final prevDay = date.subtract(const Duration(days: 1));
+                      final prevHasPrayer = prayerDays.contains(prevDay);
+                      final twoDaysAgo = date.subtract(const Duration(days: 2));
+                      final twoDaysHasPrayer = prayerDays.contains(twoDaysAgo);
+                      // Grace recovery: today has prayer, yesterday doesn't, but 2 days ago does
+                      final isGraceRecovery = !prevHasPrayer && twoDaysHasPrayer;
+                      return Text(
+                        isGraceRecovery ? '🌼' : '🌸',
+                        style: const TextStyle(fontSize: 12),
+                      );
+                    }),
+                  ],
                 ],
               ),
             ),

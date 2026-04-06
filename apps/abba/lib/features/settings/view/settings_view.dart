@@ -16,7 +16,6 @@ class SettingsView extends ConsumerStatefulWidget {
 }
 
 class _SettingsViewState extends ConsumerState<SettingsView> {
-  bool _notificationsEnabled = true;
   String _voicePreference = 'warm';
   bool _darkMode = false;
 
@@ -97,23 +96,14 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
             const SizedBox(height: AbbaSpacing.md),
 
             // Settings list
+            _buildNotificationSettings(l10n),
+            const SizedBox(height: AbbaSpacing.md),
+
             AbbaCard(
               margin: const EdgeInsets.only(bottom: AbbaSpacing.md),
               padding: EdgeInsets.zero,
               child: Column(
                 children: [
-                  // Notifications
-                  _SettingsTile(
-                    icon: Icons.notifications_outlined,
-                    title: l10n.notificationSetting,
-                    trailing: Switch(
-                      value: _notificationsEnabled,
-                      onChanged: (v) =>
-                          setState(() => _notificationsEnabled = v),
-                      activeTrackColor: AbbaColors.sage,
-                    ),
-                  ),
-                  const Divider(height: 1),
                   // AI Voice
                   _SettingsTile(
                     icon: Icons.record_voice_over_outlined,
@@ -239,96 +229,284 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
   }
 
   Widget _buildPremiumCard(AppLocalizations l10n) {
+    final premiumAsync = ref.watch(isPremiumProvider);
+    final isPremium = premiumAsync.valueOrNull ?? false;
+
     return AbbaCard(
       margin: EdgeInsets.zero,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Promo banner
-          Container(
-            width: double.infinity,
-            padding: const EdgeInsets.all(AbbaSpacing.md),
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: [
-                  AbbaColors.softGold.withValues(alpha: 0.3),
-                  AbbaColors.softPink.withValues(alpha: 0.3),
+          if (isPremium) ...[
+            // Active premium banner
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.all(AbbaSpacing.md),
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [
+                    AbbaColors.softGold.withValues(alpha: 0.3),
+                    AbbaColors.sage.withValues(alpha: 0.3),
+                  ],
+                ),
+                borderRadius: BorderRadius.circular(AbbaRadius.md),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    '✅ Premium',
+                    style: AbbaTypography.h2.copyWith(
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
                 ],
               ),
-              borderRadius: BorderRadius.circular(AbbaRadius.md),
             ),
-            child: Text(
-              '🌸 ${l10n.launchPromo}',
-              style: AbbaTypography.body.copyWith(
-                fontWeight: FontWeight.w600,
-              ),
-              textAlign: TextAlign.center,
-            ),
-          ),
-          const SizedBox(height: AbbaSpacing.md),
-          // Price comparison
-          Row(
-            children: [
-              Expanded(
-                child: _PlanColumn(
-                  title: l10n.freePlan,
-                  price: '\$0',
-                  features: const ['1x/day', '📜', '📖', '✍️'],
-                  isActive: true,
+            const SizedBox(height: AbbaSpacing.md),
+            SizedBox(
+              width: double.infinity,
+              height: abbaButtonHeight,
+              child: OutlinedButton(
+                onPressed: () async {
+                  final service = ref.read(subscriptionServiceProvider);
+                  await service.restorePurchases();
+                },
+                style: OutlinedButton.styleFrom(
+                  side: const BorderSide(color: AbbaColors.sage),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(AbbaRadius.lg),
+                  ),
+                ),
+                child: Text(
+                  l10n.comingSoon, // "Manage Subscription"
+                  style: AbbaTypography.body.copyWith(color: AbbaColors.sage),
                 ),
               ),
-              const SizedBox(width: AbbaSpacing.md),
-              Expanded(
-                child: _PlanColumn(
-                  title: l10n.premiumPlan,
-                  price: l10n.monthlyPrice,
-                  features: const [
-                    'Unlimited',
-                    '📜📖✍️',
-                    '💬 AI',
-                    '🔊 TTS',
-                    '🔤',
+            ),
+          ] else ...[
+            // Promo banner
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.all(AbbaSpacing.md),
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [
+                    AbbaColors.softGold.withValues(alpha: 0.3),
+                    AbbaColors.softPink.withValues(alpha: 0.3),
                   ],
-                  isActive: false,
-                  isPremium: true,
                 ),
-              ),
-            ],
-          ),
-          const SizedBox(height: AbbaSpacing.sm),
-          Center(
-            child: Text(
-              '${l10n.yearlyPrice} (${l10n.yearlySave})',
-              style: AbbaTypography.bodySmall.copyWith(
-                color: AbbaColors.muted,
-              ),
-            ),
-          ),
-          const SizedBox(height: AbbaSpacing.md),
-          // CTA button
-          SizedBox(
-            width: double.infinity,
-            height: abbaButtonHeight,
-            child: ElevatedButton(
-              onPressed: () {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text(l10n.comingSoon)),
-                );
-              },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: AbbaColors.premium,
-                foregroundColor: AbbaColors.white,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(AbbaRadius.lg),
-                ),
+                borderRadius: BorderRadius.circular(AbbaRadius.md),
               ),
               child: Text(
-                '💎 ${l10n.startPremium}',
+                '🌸 ${l10n.launchPromo}',
                 style: AbbaTypography.body.copyWith(
-                  color: AbbaColors.white,
                   fontWeight: FontWeight.w600,
                 ),
+                textAlign: TextAlign.center,
               ),
+            ),
+            const SizedBox(height: AbbaSpacing.md),
+            // Price comparison
+            Row(
+              children: [
+                Expanded(
+                  child: _PlanColumn(
+                    title: l10n.freePlan,
+                    price: '\$0',
+                    features: const ['1x/day', '📜', '📖', '✍️'],
+                    isActive: true,
+                  ),
+                ),
+                const SizedBox(width: AbbaSpacing.md),
+                Expanded(
+                  child: _PlanColumn(
+                    title: l10n.premiumPlan,
+                    price: l10n.monthlyPrice,
+                    features: const [
+                      'Unlimited',
+                      '📜📖✍️',
+                      '💬 AI',
+                      '🔊 TTS',
+                      '🔤',
+                    ],
+                    isActive: false,
+                    isPremium: true,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: AbbaSpacing.sm),
+            Center(
+              child: Text(
+                '${l10n.yearlyPrice} (${l10n.yearlySave})',
+                style: AbbaTypography.bodySmall.copyWith(
+                  color: AbbaColors.muted,
+                ),
+              ),
+            ),
+            const SizedBox(height: AbbaSpacing.md),
+            // Monthly CTA
+            SizedBox(
+              width: double.infinity,
+              height: abbaButtonHeight,
+              child: ElevatedButton(
+                onPressed: () async {
+                  final service = ref.read(subscriptionServiceProvider);
+                  final success = await service.purchaseMonthly();
+                  if (success) ref.invalidate(isPremiumProvider);
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: AbbaColors.premium,
+                  foregroundColor: AbbaColors.white,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(AbbaRadius.lg),
+                  ),
+                ),
+                child: Text(
+                  '💎 ${l10n.startPremium} — ${l10n.monthlyPrice}',
+                  style: AbbaTypography.body.copyWith(
+                    color: AbbaColors.white,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(height: AbbaSpacing.sm),
+            // Yearly CTA
+            SizedBox(
+              width: double.infinity,
+              height: abbaButtonHeight,
+              child: OutlinedButton(
+                onPressed: () async {
+                  final service = ref.read(subscriptionServiceProvider);
+                  final success = await service.purchaseYearly();
+                  if (success) ref.invalidate(isPremiumProvider);
+                },
+                style: OutlinedButton.styleFrom(
+                  side: const BorderSide(color: AbbaColors.premium),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(AbbaRadius.lg),
+                  ),
+                ),
+                child: Text(
+                  '${l10n.yearlyPrice} (${l10n.yearlySave})',
+                  style: AbbaTypography.body.copyWith(
+                    color: AbbaColors.premium,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ],
+      ),
+    );
+  }
+
+  Widget _buildNotificationSettings(AppLocalizations l10n) {
+    final settingsAsync = ref.watch(notificationSettingsProvider);
+    final settings = settingsAsync.valueOrNull;
+
+    return AbbaCard(
+      margin: EdgeInsets.zero,
+      padding: EdgeInsets.zero,
+      child: Column(
+        children: [
+          // Section header
+          Padding(
+            padding: const EdgeInsets.fromLTRB(
+              AbbaSpacing.md, AbbaSpacing.md, AbbaSpacing.md, 0,
+            ),
+            child: Row(
+              children: [
+                Icon(Icons.notifications_outlined, color: AbbaColors.warmBrown),
+                const SizedBox(width: AbbaSpacing.sm),
+                Text(l10n.notificationSetting, style: AbbaTypography.h2),
+              ],
+            ),
+          ),
+          // Morning reminder toggle + time
+          _SettingsTile(
+            icon: Icons.wb_sunny_outlined,
+            title: 'Morning Prayer',
+            trailing: Switch(
+              value: settings?.morningReminder ?? true,
+              onChanged: (v) {
+                ref.read(notificationServiceProvider).updateSettings(
+                  morningReminder: v,
+                );
+                ref.invalidate(notificationSettingsProvider);
+              },
+              activeTrackColor: AbbaColors.sage,
+            ),
+          ),
+          if (settings?.morningReminder ?? true) ...[
+            _SettingsTile(
+              icon: Icons.access_time,
+              title: settings?.morningTime ?? '06:00',
+              onTap: () async {
+                final time = await showTimePicker(
+                  context: context,
+                  initialTime: const TimeOfDay(hour: 6, minute: 0),
+                );
+                if (time != null) {
+                  final formatted =
+                      '${time.hour.toString().padLeft(2, '0')}:${time.minute.toString().padLeft(2, '0')}';
+                  ref.read(notificationServiceProvider).updateSettings(
+                    morningTime: formatted,
+                  );
+                  ref.invalidate(notificationSettingsProvider);
+                }
+              },
+            ),
+          ],
+          const Divider(height: 1),
+          // Evening reminder
+          _SettingsTile(
+            icon: Icons.nightlight_outlined,
+            title: 'Evening Gratitude',
+            trailing: Switch(
+              value: settings?.eveningReminder ?? false,
+              onChanged: (v) {
+                ref.read(notificationServiceProvider).updateSettings(
+                  eveningReminder: v,
+                );
+                ref.invalidate(notificationSettingsProvider);
+              },
+              activeTrackColor: AbbaColors.sage,
+            ),
+          ),
+          const Divider(height: 1),
+          // Streak reminder
+          _SettingsTile(
+            icon: Icons.local_fire_department_outlined,
+            title: 'Streak Reminder',
+            trailing: Switch(
+              value: settings?.streakReminder ?? true,
+              onChanged: (v) {
+                ref.read(notificationServiceProvider).updateSettings(
+                  streakReminder: v,
+                );
+                ref.invalidate(notificationSettingsProvider);
+              },
+              activeTrackColor: AbbaColors.sage,
+            ),
+          ),
+          const Divider(height: 1),
+          // Weekly summary
+          _SettingsTile(
+            icon: Icons.calendar_view_week,
+            title: 'Weekly Summary',
+            trailing: Switch(
+              value: settings?.weeklySummary ?? true,
+              onChanged: (v) {
+                ref.read(notificationServiceProvider).updateSettings(
+                  weeklySummary: v,
+                );
+                ref.invalidate(notificationSettingsProvider);
+              },
+              activeTrackColor: AbbaColors.sage,
             ),
           ),
         ],

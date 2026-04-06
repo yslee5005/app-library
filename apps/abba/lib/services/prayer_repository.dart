@@ -9,4 +9,8 @@ abstract class PrayerRepository {
   Future<int> getTodayPrayerCount();
   Future<void> updateStreak();
   Future<({int current, int best})> getStreak();
+  Future<int> getTotalPrayerCount();
+
+  /// Check and record milestones, returns list of newly achieved milestones
+  Future<List<String>> checkMilestones();
 }

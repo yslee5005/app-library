@@ -1,18 +1,39 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../l10n/generated/app_localizations.dart';
+import '../providers/providers.dart';
 import '../theme/abba_theme.dart';
 
 /// Shows a soft modal when free user hits daily prayer limit.
-/// Returns true if user wants to proceed with Premium, false otherwise.
+/// Returns true if user successfully purchased Premium, false otherwise.
 Future<bool> showPremiumModal(BuildContext context) async {
-  final l10n = AppLocalizations.of(context)!;
-  final isKo = Localizations.localeOf(context).languageCode == 'ko';
-
   final result = await showModalBottomSheet<bool>(
     context: context,
     backgroundColor: Colors.transparent,
-    builder: (ctx) => Container(
+    builder: (ctx) => const _PremiumModalContent(),
+  );
+
+  return result ?? false;
+}
+
+class _PremiumModalContent extends ConsumerStatefulWidget {
+  const _PremiumModalContent();
+
+  @override
+  ConsumerState<_PremiumModalContent> createState() =>
+      _PremiumModalContentState();
+}
+
+class _PremiumModalContentState extends ConsumerState<_PremiumModalContent> {
+  bool _purchasing = false;
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+    final isKo = Localizations.localeOf(context).languageCode == 'ko';
+
+    return Container(
       padding: const EdgeInsets.all(AbbaSpacing.xl),
       decoration: const BoxDecoration(
         color: AbbaColors.cream,
@@ -39,13 +60,12 @@ Future<bool> showPremiumModal(BuildContext context) async {
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: AbbaSpacing.xl),
+            // Monthly button
             SizedBox(
               width: double.infinity,
               height: abbaHeroButtonHeight,
               child: ElevatedButton(
-                onPressed: () {
-                  Navigator.of(ctx).pop(true);
-                },
+                onPressed: _purchasing ? null : _purchaseMonthly,
                 style: ElevatedButton.styleFrom(
                   backgroundColor: AbbaColors.premium,
                   foregroundColor: AbbaColors.white,
@@ -53,10 +73,41 @@ Future<bool> showPremiumModal(BuildContext context) async {
                     borderRadius: BorderRadius.circular(AbbaRadius.lg),
                   ),
                 ),
+                child: _purchasing
+                    ? const SizedBox(
+                        width: 24,
+                        height: 24,
+                        child: CircularProgressIndicator(
+                          color: AbbaColors.white,
+                          strokeWidth: 2,
+                        ),
+                      )
+                    : Text(
+                        '💎 ${l10n.startPremium} — ${l10n.monthlyPrice}',
+                        style: AbbaTypography.body.copyWith(
+                          color: AbbaColors.white,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+              ),
+            ),
+            const SizedBox(height: AbbaSpacing.sm),
+            // Yearly button
+            SizedBox(
+              width: double.infinity,
+              height: abbaButtonHeight,
+              child: OutlinedButton(
+                onPressed: _purchasing ? null : _purchaseYearly,
+                style: OutlinedButton.styleFrom(
+                  side: const BorderSide(color: AbbaColors.premium),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(AbbaRadius.lg),
+                  ),
+                ),
                 child: Text(
-                  '💎 ${l10n.startPremium} — ${l10n.monthlyPrice}',
+                  '${l10n.yearlyPrice} (${l10n.yearlySave})',
                   style: AbbaTypography.body.copyWith(
-                    color: AbbaColors.white,
+                    color: AbbaColors.premium,
                     fontWeight: FontWeight.w600,
                   ),
                 ),
@@ -64,7 +115,7 @@ Future<bool> showPremiumModal(BuildContext context) async {
             ),
             const SizedBox(height: AbbaSpacing.md),
             TextButton(
-              onPressed: () => Navigator.of(ctx).pop(false),
+              onPressed: () => Navigator.of(context).pop(false),
               child: Text(
                 isKo ? '다음에 하기' : 'Maybe later',
                 style: AbbaTypography.body.copyWith(color: AbbaColors.muted),
@@ -73,8 +124,28 @@ Future<bool> showPremiumModal(BuildContext context) async {
           ],
         ),
       ),
-    ),
-  );
+    );
+  }
 
-  return result ?? false;
+  Future<void> _purchaseMonthly() async {
+    setState(() => _purchasing = true);
+    try {
+      final service = ref.read(subscriptionServiceProvider);
+      final success = await service.purchaseMonthly();
+      if (mounted) Navigator.of(context).pop(success);
+    } finally {
+      if (mounted) setState(() => _purchasing = false);
+    }
+  }
+
+  Future<void> _purchaseYearly() async {
+    setState(() => _purchasing = true);
+    try {
+      final service = ref.read(subscriptionServiceProvider);
+      final success = await service.purchaseYearly();
+      if (mounted) Navigator.of(context).pop(success);
+    } finally {
+      if (mounted) setState(() => _purchasing = false);
+    }
+  }
 }

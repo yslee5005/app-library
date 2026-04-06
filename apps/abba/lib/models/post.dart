@@ -9,6 +9,8 @@ class CommunityPost {
   final int commentCount;
   final bool isLiked;
   final bool isSaved;
+  final bool isHidden;
+  final int reportCount;
   final DateTime createdAt;
   final List<Comment> comments;
 
@@ -23,6 +25,8 @@ class CommunityPost {
     this.commentCount = 0,
     this.isLiked = false,
     this.isSaved = false,
+    this.isHidden = false,
+    this.reportCount = 0,
     required this.createdAt,
     this.comments = const [],
   });
@@ -30,7 +34,9 @@ class CommunityPost {
   CommunityPost copyWith({
     bool? isLiked,
     bool? isSaved,
+    bool? isHidden,
     int? likeCount,
+    int? reportCount,
     List<Comment>? comments,
     int? commentCount,
   }) {
@@ -45,6 +51,8 @@ class CommunityPost {
       commentCount: commentCount ?? this.commentCount,
       isLiked: isLiked ?? this.isLiked,
       isSaved: isSaved ?? this.isSaved,
+      isHidden: isHidden ?? this.isHidden,
+      reportCount: reportCount ?? this.reportCount,
       createdAt: createdAt,
       comments: comments ?? this.comments,
     );
@@ -62,12 +70,29 @@ class CommunityPost {
       commentCount: json['comment_count'] as int? ?? 0,
       isLiked: json['is_liked'] as bool? ?? false,
       isSaved: json['is_saved'] as bool? ?? false,
+      isHidden: json['is_hidden'] as bool? ?? false,
+      reportCount: json['report_count'] as int? ?? 0,
       createdAt: DateTime.parse(json['created_at'] as String),
       comments: (json['comments'] as List<dynamic>?)
               ?.map((e) => Comment.fromJson(e as Map<String, dynamic>))
               .toList() ??
           [],
     );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'user_id': userId,
+      'display_name': displayName,
+      'category': category,
+      'content': content,
+      'like_count': likeCount,
+      'comment_count': commentCount,
+      'is_hidden': isHidden,
+      'report_count': reportCount,
+      'created_at': createdAt.toIso8601String(),
+    };
   }
 }
 
@@ -97,5 +122,16 @@ class Comment {
       parentCommentId: json['parent_comment_id'] as String?,
       createdAt: DateTime.parse(json['created_at'] as String),
     );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'user_id': userId,
+      'display_name': displayName,
+      'content': content,
+      'parent_comment_id': parentCommentId,
+      'created_at': createdAt.toIso8601String(),
+    };
   }
 }

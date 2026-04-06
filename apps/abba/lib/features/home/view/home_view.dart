@@ -10,6 +10,7 @@ import '../../../widgets/abba_button.dart';
 import '../../../models/user_profile.dart';
 import '../../../widgets/abba_card.dart';
 import '../../../widgets/premium_modal.dart';
+import '../../../widgets/streak_garden.dart';
 import '../../recording/view/recording_overlay.dart';
 
 class HomeView extends ConsumerWidget {
@@ -62,23 +63,39 @@ class HomeView extends ConsumerWidget {
                 backgroundColor: AbbaColors.softGold,
               ),
               const SizedBox(height: AbbaSpacing.lg),
-              // Streak card
+              // Streak card with growing garden
               profileAsync.when(
-                data: (profile) => AbbaCard(
-                  margin: EdgeInsets.zero,
-                  child: Row(
-                    children: [
-                      const Text('', style: TextStyle(fontSize: 32)),
-                      const SizedBox(width: AbbaSpacing.md),
-                      Expanded(
-                        child: Text(
-                          l10n.streakDays(profile.currentStreak),
-                          style: AbbaTypography.h2,
+                data: (profile) {
+                  final locale = ref.watch(localeProvider);
+                  final icon = streakGardenIcon(profile.currentStreak);
+                  final label = streakGardenLabel(profile.currentStreak, locale);
+                  return AbbaCard(
+                    margin: EdgeInsets.zero,
+                    child: Row(
+                      children: [
+                        Text(icon, style: const TextStyle(fontSize: 40)),
+                        const SizedBox(width: AbbaSpacing.md),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                l10n.streakDays(profile.currentStreak),
+                                style: AbbaTypography.h2,
+                              ),
+                              Text(
+                                label,
+                                style: AbbaTypography.bodySmall.copyWith(
+                                  color: AbbaColors.muted,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
-                ),
+                      ],
+                    ),
+                  );
+                },
                 loading: () => const SizedBox.shrink(),
                 error: (e, s) => const SizedBox.shrink(),
               ),
@@ -94,7 +111,7 @@ class HomeView extends ConsumerWidget {
                       children: [
                         Row(
                           children: [
-                            const Text('', style: TextStyle(fontSize: 24)),
+                            const Text('📜', style: TextStyle(fontSize: 24)),
                             const SizedBox(width: AbbaSpacing.sm),
                             Text(l10n.dailyVerse, style: AbbaTypography.h2),
                           ],

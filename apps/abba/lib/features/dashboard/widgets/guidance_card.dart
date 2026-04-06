@@ -9,6 +9,7 @@ class GuidanceCard extends StatelessWidget {
   final String title;
   final String locale;
   final VoidCallback onUnlock;
+  final bool isUserPremium;
 
   const GuidanceCard({
     super.key,
@@ -16,6 +17,7 @@ class GuidanceCard extends StatelessWidget {
     required this.title,
     required this.locale,
     required this.onUnlock,
+    this.isUserPremium = false,
   });
 
   @override
@@ -23,7 +25,7 @@ class GuidanceCard extends StatelessWidget {
     return PremiumBlur(
       title: title,
       icon: '💬',
-      isLocked: guidance.isPremium,
+      isLocked: guidance.isPremium && !isUserPremium,
       onUnlock: onUnlock,
       content: Text(
         guidance.content(locale),

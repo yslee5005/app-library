@@ -8,14 +8,22 @@ import 'providers/providers.dart';
 import 'services/error_logging_service.dart';
 import 'services/mock/mock_ai_service.dart';
 import 'services/mock/mock_auth_service.dart';
+import 'services/mock/mock_community_repository.dart';
+import 'services/mock/mock_notification_service.dart';
 import 'services/mock/mock_prayer_repository.dart';
+import 'services/mock/mock_qt_repository.dart';
 import 'services/mock/mock_stt_service.dart';
+import 'services/mock/mock_subscription_service.dart';
 import 'services/mock/mock_tts_service.dart';
 import 'services/mock_data.dart';
 import 'services/real/openai_service.dart';
+import 'services/real/real_notification_service.dart';
 import 'services/real/real_stt_service.dart';
+import 'services/real/supabase_qt_repository.dart';
 import 'services/real/real_tts_service.dart';
+import 'services/real/revenuecat_subscription_service.dart';
 import 'services/real/supabase_auth_service.dart';
+import 'services/real/supabase_community_repository.dart';
 import 'services/real/supabase_prayer_repository.dart';
 
 Future<void> main() async {
@@ -38,6 +46,14 @@ Future<void> main() async {
       sttServiceProvider.overrideWithValue(MockSttService()),
       ttsServiceProvider.overrideWithValue(MockTtsService()),
       prayerRepositoryProvider.overrideWithValue(MockPrayerRepository()),
+      communityRepositoryProvider
+          .overrideWithValue(MockCommunityRepository(mockData)),
+      subscriptionServiceProvider
+          .overrideWithValue(MockSubscriptionService()),
+      notificationServiceProvider
+          .overrideWithValue(MockNotificationService()),
+      qtRepositoryProvider
+          .overrideWithValue(MockQtRepository(mockData)),
     ]);
   } else {
     // Real mode — connect to Supabase, OpenAI, etc.
@@ -54,6 +70,14 @@ Future<void> main() async {
       ttsServiceProvider.overrideWithValue(RealTtsService()),
       prayerRepositoryProvider
           .overrideWithValue(SupabasePrayerRepository(supabase)),
+      communityRepositoryProvider
+          .overrideWithValue(SupabaseCommunityRepository(supabase)),
+      subscriptionServiceProvider
+          .overrideWithValue(RevenueCatSubscriptionService()),
+      notificationServiceProvider
+          .overrideWithValue(RealNotificationService(supabase)),
+      qtRepositoryProvider
+          .overrideWithValue(SupabaseQtRepository(supabase)),
     ]);
   }
 

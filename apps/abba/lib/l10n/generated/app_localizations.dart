@@ -667,6 +667,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'No prayers recorded'**
   String get noPrayersRecorded;
+
+  /// No description provided for @deletePost.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete'**
+  String get deletePost;
+
+  /// No description provided for @reportPost.
+  ///
+  /// In en, this message translates to:
+  /// **'Report'**
+  String get reportPost;
+
+  /// No description provided for @reportSubmitted.
+  ///
+  /// In en, this message translates to:
+  /// **'Report submitted. Thank you.'**
+  String get reportSubmitted;
+
+  /// No description provided for @deleteConfirmTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete Post'**
+  String get deleteConfirmTitle;
+
+  /// No description provided for @deleteConfirmMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to delete this post?'**
+  String get deleteConfirmMessage;
 }
 
 class _AppLocalizationsDelegate

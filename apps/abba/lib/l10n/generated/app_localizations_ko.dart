@@ -304,4 +304,19 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get noPrayersRecorded => '기도 기록이 없습니다';
+
+  @override
+  String get deletePost => '삭제';
+
+  @override
+  String get reportPost => '신고';
+
+  @override
+  String get reportSubmitted => '신고가 접수되었습니다. 감사합니다.';
+
+  @override
+  String get deleteConfirmTitle => '글 삭제';
+
+  @override
+  String get deleteConfirmMessage => '이 글을 삭제하시겠습니까?';
 }

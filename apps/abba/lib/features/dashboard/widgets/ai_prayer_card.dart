@@ -12,6 +12,7 @@ class AiPrayerCard extends ConsumerWidget {
   final String title;
   final String locale;
   final VoidCallback onUnlock;
+  final bool isUserPremium;
 
   const AiPrayerCard({
     super.key,
@@ -19,6 +20,7 @@ class AiPrayerCard extends ConsumerWidget {
     required this.title,
     required this.locale,
     required this.onUnlock,
+    this.isUserPremium = false,
   });
 
   @override
@@ -28,7 +30,7 @@ class AiPrayerCard extends ConsumerWidget {
     return PremiumBlur(
       title: title,
       icon: '🔊',
-      isLocked: aiPrayer.isPremium,
+      isLocked: aiPrayer.isPremium && !isUserPremium,
       onUnlock: onUnlock,
       content: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

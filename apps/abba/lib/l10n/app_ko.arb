@@ -100,5 +100,10 @@
   "passwordLabel": "비밀번호",
   "signIn": "로그인",
   "cancel": "취소",
-  "noPrayersRecorded": "기도 기록이 없습니다"
+  "noPrayersRecorded": "기도 기록이 없습니다",
+  "deletePost": "삭제",
+  "reportPost": "신고",
+  "reportSubmitted": "신고가 접수되었습니다. 감사합니다.",
+  "deleteConfirmTitle": "글 삭제",
+  "deleteConfirmMessage": "이 글을 삭제하시겠습니까?"
 }

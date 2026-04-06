@@ -59,4 +59,17 @@ class MockPrayerRepository implements PrayerRepository {
   Future<({int current, int best})> getStreak() async {
     return (current: _currentStreak, best: _bestStreak);
   }
+
+  @override
+  Future<int> getTotalPrayerCount() async => _prayers.length;
+
+  @override
+  Future<List<String>> checkMilestones() async {
+    final milestones = <String>[];
+    if (_prayers.length == 1) milestones.add('first_prayer');
+    if (_currentStreak == 7) milestones.add('7_day_streak');
+    if (_currentStreak == 30) milestones.add('30_day_streak');
+    if (_prayers.length == 100) milestones.add('100_prayers');
+    return milestones;
+  }
 }

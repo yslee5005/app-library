@@ -305,4 +305,20 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get noPrayersRecorded => 'No prayers recorded';
+
+  @override
+  String get deletePost => 'Delete';
+
+  @override
+  String get reportPost => 'Report';
+
+  @override
+  String get reportSubmitted => 'Report submitted. Thank you.';
+
+  @override
+  String get deleteConfirmTitle => 'Delete Post';
+
+  @override
+  String get deleteConfirmMessage =>
+      'Are you sure you want to delete this post?';
 }

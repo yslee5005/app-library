@@ -24,6 +24,8 @@ dependencies:
   speech_to_text: ^7.0.0
   sentry_flutter: ^8.3.0
   path_provider: ^2.1.0
+  # Phase 3
+  purchases_flutter: ^8.9.0
 
 dev_dependencies:
   flutter_test:

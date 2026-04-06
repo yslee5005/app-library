@@ -124,8 +124,12 @@ class SupabasePrayerRepository implements PrayerRepository {
         return; // Already prayed today
       } else if (diff == 1) {
         current++; // Consecutive day
+      } else if (diff == 2) {
+        // Grace recovery: if missed only 1 day (within 24h window),
+        // restore streak instead of resetting
+        current++; // Grace recovery — streak continues
       } else {
-        current = 1; // Streak broken
+        current = 1; // Streak broken (missed 2+ days)
       }
     } else {
       current = 1;
@@ -159,6 +163,55 @@ class SupabasePrayerRepository implements PrayerRepository {
       current: data['current_streak'] as int? ?? 0,
       best: data['best_streak'] as int? ?? 0,
     );
+  }
+
+  @override
+  Future<int> getTotalPrayerCount() async {
+    final data = await _client
+        .from('prayers')
+        .select('id')
+        .eq('app_id', 'abba')
+        .eq('user_id', _userId);
+
+    return (data as List).length;
+  }
+
+  @override
+  Future<List<String>> checkMilestones() async {
+    final newMilestones = <String>[];
+    final totalPrayers = await getTotalPrayerCount();
+    final streak = await getStreak();
+
+    final milestoneChecks = <String, bool>{
+      'first_prayer': totalPrayers >= 1,
+      '7_day_streak': streak.current >= 7,
+      '30_day_streak': streak.current >= 30,
+      '100_prayers': totalPrayers >= 100,
+    };
+
+    for (final entry in milestoneChecks.entries) {
+      if (!entry.value) continue;
+
+      // Check if already achieved
+      final existing = await _client
+          .from('milestones')
+          .select('id')
+          .eq('app_id', 'abba')
+          .eq('user_id', _userId)
+          .eq('milestone_type', entry.key)
+          .maybeSingle();
+
+      if (existing == null) {
+        await _client.from('milestones').insert({
+          'app_id': 'abba',
+          'user_id': _userId,
+          'milestone_type': entry.key,
+        });
+        newMilestones.add(entry.key);
+      }
+    }
+
+    return newMilestones;
   }
 
   Map<String, dynamic> _resultToJson(PrayerResult result) {

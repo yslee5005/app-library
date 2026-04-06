@@ -6,9 +6,13 @@ import '../models/qt_passage.dart';
 import '../models/user_profile.dart';
 import '../services/ai_service.dart';
 import '../services/auth_service.dart';
+import '../services/community_repository.dart';
 import '../services/mock_data.dart';
+import '../services/notification_service.dart';
 import '../services/prayer_repository.dart';
+import '../services/qt_repository.dart';
 import '../services/stt_service.dart';
+import '../services/subscription_service.dart';
 import '../services/tts_service.dart';
 
 // ---------------------------------------------------------------------------
@@ -42,6 +46,42 @@ final prayerRepositoryProvider = Provider<PrayerRepository>((ref) {
   throw UnimplementedError('prayerRepositoryProvider must be overridden');
 });
 
+final communityRepositoryProvider = Provider<CommunityRepository>((ref) {
+  throw UnimplementedError('communityRepositoryProvider must be overridden');
+});
+
+final subscriptionServiceProvider = Provider<SubscriptionService>((ref) {
+  throw UnimplementedError('subscriptionServiceProvider must be overridden');
+});
+
+final notificationServiceProvider = Provider<NotificationService>((ref) {
+  throw UnimplementedError('notificationServiceProvider must be overridden');
+});
+
+final qtRepositoryProvider = Provider<QtRepository>((ref) {
+  throw UnimplementedError('qtRepositoryProvider must be overridden');
+});
+
+/// Notification settings
+final notificationSettingsProvider =
+    FutureProvider<NotificationSettings>((ref) {
+  final service = ref.watch(notificationServiceProvider);
+  return service.getSettings();
+});
+
+/// Current subscription status (reactive)
+final subscriptionStatusProvider =
+    StreamProvider<SubscriptionStatus>((ref) {
+  final service = ref.watch(subscriptionServiceProvider);
+  return service.statusStream;
+});
+
+/// Quick check: is current user premium?
+final isPremiumProvider = FutureProvider<bool>((ref) {
+  final service = ref.watch(subscriptionServiceProvider);
+  return service.isPremium;
+});
+
 // ---------------------------------------------------------------------------
 // Auth state
 // ---------------------------------------------------------------------------
@@ -66,11 +106,29 @@ final prayerResultProvider =
 });
 
 final qtPassagesProvider = FutureProvider<List<QTPassage>>((ref) {
-  return ref.watch(mockDataServiceProvider).getQTPassages();
+  final repo = ref.watch(qtRepositoryProvider);
+  return repo.getTodayPassages();
 });
 
 final communityPostsProvider = FutureProvider<List<CommunityPost>>((ref) {
-  return ref.watch(mockDataServiceProvider).getCommunityPosts();
+  final repo = ref.watch(communityRepositoryProvider);
+  return repo.getPosts();
+});
+
+/// Filter for community posts
+final communityFilterProvider = StateProvider<String>((ref) => 'all');
+
+/// Filtered community posts (reacts to filter changes)
+final filteredCommunityPostsProvider = FutureProvider<List<CommunityPost>>((ref) {
+  final filter = ref.watch(communityFilterProvider);
+  final repo = ref.watch(communityRepositoryProvider);
+  return repo.getPosts(category: filter == 'all' ? null : filter);
+});
+
+/// Saved posts for current user
+final savedPostsProvider = FutureProvider<List<CommunityPost>>((ref) {
+  final repo = ref.watch(communityRepositoryProvider);
+  return repo.getSavedPosts();
 });
 
 // ---------------------------------------------------------------------------

@@ -1,21 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../l10n/generated/app_localizations.dart';
+import '../../../providers/providers.dart';
 import '../../../theme/abba_theme.dart';
 import '../../../widgets/abba_button.dart';
 
-class WritePostView extends StatefulWidget {
+class WritePostView extends ConsumerStatefulWidget {
   const WritePostView({super.key});
 
   @override
-  State<WritePostView> createState() => _WritePostViewState();
+  ConsumerState<WritePostView> createState() => _WritePostViewState();
 }
 
-class _WritePostViewState extends State<WritePostView> {
+class _WritePostViewState extends ConsumerState<WritePostView> {
   bool _isAnonymous = true;
   String _category = 'testimony';
   final _textController = TextEditingController();
+  bool _isSubmitting = false;
 
   @override
   void dispose() {
@@ -40,11 +43,11 @@ class _WritePostViewState extends State<WritePostView> {
         ),
         actions: [
           TextButton(
-            onPressed: () => context.pop(),
+            onPressed: _isSubmitting ? null : _submitPost,
             child: Text(
               l10n.sharePostButton,
               style: AbbaTypography.body.copyWith(
-                color: AbbaColors.sage,
+                color: _isSubmitting ? AbbaColors.muted : AbbaColors.sage,
                 fontWeight: FontWeight.w600,
               ),
             ),
@@ -159,12 +162,7 @@ class _WritePostViewState extends State<WritePostView> {
             const SizedBox(height: AbbaSpacing.md),
             // Import from prayer
             OutlinedButton.icon(
-              onPressed: () {
-                _textController.text =
-                    'Dear Lord, I thank you for this beautiful morning. '
-                    'Please guide my steps today and help me to be a blessing '
-                    'to others.';
-              },
+              onPressed: _importFromPrayer,
               icon: const Text('🎙️', style: TextStyle(fontSize: 18)),
               label: Text(
                 l10n.importFromPrayer,
@@ -182,13 +180,50 @@ class _WritePostViewState extends State<WritePostView> {
             // Share button
             AbbaButton(
               label: '${l10n.sharePostButton} 🌱',
-              onPressed: () => context.pop(),
+              onPressed: () { if (!_isSubmitting) _submitPost(); },
               isHero: true,
             ),
           ],
         ),
       ),
     );
+  }
+
+  void _importFromPrayer() {
+    // Get latest prayer result testimony
+    final result = ref.read(prayerResultProvider);
+    result.when(
+      data: (prayerResult) {
+        _textController.text = prayerResult.testimony;
+      },
+      loading: () {},
+      error: (e, s) {},
+    );
+  }
+
+  Future<void> _submitPost() async {
+    final text = _textController.text.trim();
+    if (text.isEmpty) return;
+
+    setState(() => _isSubmitting = true);
+
+    try {
+      final repo = ref.read(communityRepositoryProvider);
+      final profile = ref.read(userProfileProvider).valueOrNull;
+
+      await repo.createPost(
+        category: _category,
+        content: text,
+        displayName: _isAnonymous ? null : profile?.name,
+      );
+
+      // Refresh community posts
+      ref.invalidate(filteredCommunityPostsProvider);
+
+      if (mounted) context.pop();
+    } finally {
+      if (mounted) setState(() => _isSubmitting = false);
+    }
   }
 }
 

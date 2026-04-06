@@ -9,6 +9,7 @@ class OriginalLangCard extends StatelessWidget {
   final String title;
   final String locale;
   final VoidCallback onUnlock;
+  final bool isUserPremium;
 
   const OriginalLangCard({
     super.key,
@@ -16,6 +17,7 @@ class OriginalLangCard extends StatelessWidget {
     required this.title,
     required this.locale,
     required this.onUnlock,
+    this.isUserPremium = false,
   });
 
   @override
@@ -23,7 +25,7 @@ class OriginalLangCard extends StatelessWidget {
     return PremiumBlur(
       title: title,
       icon: '🔤',
-      isLocked: originalLanguage.isPremium,
+      isLocked: originalLanguage.isPremium && !isUserPremium,
       onUnlock: onUnlock,
       content: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

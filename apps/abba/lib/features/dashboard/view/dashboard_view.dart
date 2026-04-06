@@ -7,6 +7,7 @@ import '../../../models/prayer.dart';
 import '../../../providers/providers.dart';
 import '../../../theme/abba_theme.dart';
 import '../../../widgets/abba_button.dart';
+import '../../../widgets/premium_modal.dart';
 import '../widgets/ai_prayer_card.dart';
 import '../widgets/bible_story_card.dart';
 import '../widgets/guidance_card.dart';
@@ -22,6 +23,7 @@ class DashboardView extends ConsumerWidget {
     final l10n = AppLocalizations.of(context)!;
     final locale = ref.watch(localeProvider);
     final resultAsync = ref.watch(prayerResultProvider);
+    final isPremium = ref.watch(isPremiumProvider).valueOrNull ?? false;
 
     return Scaffold(
       backgroundColor: AbbaColors.cream,
@@ -36,17 +38,13 @@ class DashboardView extends ConsumerWidget {
         ),
         actions: [
           IconButton(
-            onPressed: () {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text(l10n.comingSoon)),
-              );
-            },
+            onPressed: () => context.go('/community/write'),
             icon: const Icon(Icons.share),
           ),
         ],
       ),
       body: resultAsync.when(
-        data: (result) => _buildContent(context, result, l10n, locale),
+        data: (result) => _buildContent(context, ref, result, l10n, locale, isPremium),
         loading: () => const Center(child: CircularProgressIndicator()),
         error: (e, s) => Center(child: Text('Error: $e')),
       ),
@@ -55,14 +53,16 @@ class DashboardView extends ConsumerWidget {
 
   Widget _buildContent(
     BuildContext context,
+    WidgetRef ref,
     PrayerResult result,
     AppLocalizations l10n,
     String locale,
+    bool isPremium,
   ) {
-    void showPremiumSnackBar() {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(l10n.comingSoon)),
-      );
+    void showPremiumUpgrade() {
+      showPremiumModal(context).then((purchased) {
+        if (purchased) ref.invalidate(isPremiumProvider);
+      });
     }
 
     final testimonyText = locale == 'ko'
@@ -92,21 +92,24 @@ class DashboardView extends ConsumerWidget {
             guidance: result.guidance!,
             title: l10n.guidanceTitle,
             locale: locale,
-            onUnlock: showPremiumSnackBar,
+            onUnlock: showPremiumUpgrade,
+            isUserPremium: isPremium,
           ),
         if (result.aiPrayer != null)
           AiPrayerCard(
             aiPrayer: result.aiPrayer!,
             title: l10n.aiPrayerTitle,
             locale: locale,
-            onUnlock: showPremiumSnackBar,
+            onUnlock: showPremiumUpgrade,
+            isUserPremium: isPremium,
           ),
         if (result.originalLanguage != null)
           OriginalLangCard(
             originalLanguage: result.originalLanguage!,
             title: l10n.originalLangTitle,
             locale: locale,
-            onUnlock: showPremiumSnackBar,
+            onUnlock: showPremiumUpgrade,
+            isUserPremium: isPremium,
           ),
         const SizedBox(height: AbbaSpacing.lg),
         Padding(
