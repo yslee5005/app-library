@@ -1,0 +1,115 @@
+[
+  {
+    "id": "post-1",
+    "user_id": "user-1",
+    "display_name": "Grace Kim",
+    "avatar_url": null,
+    "category": "testimony",
+    "content": "I've been praying for my mother's health for three months. Yesterday, the doctor said her recovery is miraculous. God is faithful! Please continue to pray for her complete healing.",
+    "like_count": 24,
+    "comment_count": 5,
+    "is_liked": false,
+    "is_saved": false,
+    "created_at": "2026-04-06T08:30:00Z",
+    "comments": [
+      {
+        "id": "comment-1",
+        "user_id": "user-2",
+        "display_name": "John Lee",
+        "content": "Praise God! What a wonderful testimony. Continuing to pray for your mother.",
+        "parent_comment_id": null,
+        "created_at": "2026-04-06T09:00:00Z"
+      },
+      {
+        "id": "comment-2",
+        "user_id": "user-3",
+        "display_name": null,
+        "content": "Amen! God hears our prayers.",
+        "parent_comment_id": null,
+        "created_at": "2026-04-06T09:15:00Z"
+      },
+      {
+        "id": "comment-3",
+        "user_id": "user-4",
+        "display_name": "Sarah Park",
+        "content": "Thank you for sharing this. It strengthens my faith too!",
+        "parent_comment_id": "comment-1",
+        "created_at": "2026-04-06T09:30:00Z"
+      }
+    ]
+  },
+  {
+    "id": "post-2",
+    "user_id": "user-5",
+    "display_name": null,
+    "avatar_url": null,
+    "category": "prayer_request",
+    "content": "Please pray for my job interview tomorrow. I've been unemployed for 6 months and this opportunity feels like God's answer. I need peace and confidence.",
+    "like_count": 18,
+    "comment_count": 3,
+    "is_liked": true,
+    "is_saved": false,
+    "created_at": "2026-04-06T07:45:00Z",
+    "comments": [
+      {
+        "id": "comment-4",
+        "user_id": "user-1",
+        "display_name": "Grace Kim",
+        "content": "Praying for you! Isaiah 41:10 - Do not fear, for I am with you.",
+        "parent_comment_id": null,
+        "created_at": "2026-04-06T08:00:00Z"
+      }
+    ]
+  },
+  {
+    "id": "post-3",
+    "user_id": "user-6",
+    "display_name": "David Cho",
+    "avatar_url": null,
+    "category": "testimony",
+    "content": "7 days of consecutive prayer! I never thought I could build this habit. The AI prayer responses have been so encouraging. God speaks through many ways.",
+    "like_count": 31,
+    "comment_count": 2,
+    "is_liked": false,
+    "is_saved": true,
+    "created_at": "2026-04-05T19:00:00Z",
+    "comments": []
+  },
+  {
+    "id": "post-4",
+    "user_id": "user-7",
+    "display_name": null,
+    "avatar_url": null,
+    "category": "prayer_request",
+    "content": "My marriage is going through a difficult season. We've been arguing a lot and I feel distant from my spouse. Please pray for restoration and God's peace in our home.",
+    "like_count": 42,
+    "comment_count": 8,
+    "is_liked": false,
+    "is_saved": false,
+    "created_at": "2026-04-05T15:30:00Z",
+    "comments": [
+      {
+        "id": "comment-5",
+        "user_id": "user-2",
+        "display_name": "John Lee",
+        "content": "I've been through the same thing. Keep praying together. It gets better.",
+        "parent_comment_id": null,
+        "created_at": "2026-04-05T16:00:00Z"
+      }
+    ]
+  },
+  {
+    "id": "post-5",
+    "user_id": "user-8",
+    "display_name": "Mary Jung",
+    "avatar_url": null,
+    "category": "testimony",
+    "content": "Today's QT passage from Philippians 4:6-7 spoke directly to my anxiety about finances. After praying, I felt such peace. God truly guards our hearts when we bring everything to Him.",
+    "like_count": 15,
+    "comment_count": 1,
+    "is_liked": false,
+    "is_saved": false,
+    "created_at": "2026-04-05T06:00:00Z",
+    "comments": []
+  }
+]

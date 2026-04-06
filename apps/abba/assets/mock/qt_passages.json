@@ -1,0 +1,52 @@
+[
+  {
+    "id": "qt-1",
+    "reference": "Psalm 23:1-6",
+    "text_en": "The Lord is my shepherd; I shall not want. He makes me lie down in green pastures. He leads me beside still waters. He restores my soul. He leads me in paths of righteousness for his name's sake. Even though I walk through the valley of the shadow of death, I will fear no evil, for you are with me.",
+    "text_ko": "여호와는 나의 목자시니 내게 부족함이 없으리로다. 그가 나를 푸른 풀밭에 누이시며 쉴 만한 물가로 인도하시는도다. 내 영혼을 소생시키시고 자기 이름을 위하여 의의 길로 인도하시는도다. 내가 사망의 음침한 골짜기로 다닐지라도 해를 두려워하지 않을 것은 주께서 나와 함께 하심이라.",
+    "icon": "🌿",
+    "color_hex": "#B2DFDB",
+    "date": "2026-04-06",
+    "is_completed": false
+  },
+  {
+    "id": "qt-2",
+    "reference": "Philippians 4:6-7",
+    "text_en": "Do not be anxious about anything, but in every situation, by prayer and petition, with thanksgiving, present your requests to God. And the peace of God, which transcends all understanding, will guard your hearts and your minds in Christ Jesus.",
+    "text_ko": "아무 것도 염려하지 말고 다만 모든 일에 기도와 간구로 너희 구할 것을 감사함으로 하나님께 아뢰라. 그리하면 모든 지각에 뛰어난 하나님의 평강이 그리스도 예수 안에서 너희 마음과 생각을 지키시리라.",
+    "icon": "🌸",
+    "color_hex": "#FFB7C5",
+    "date": "2026-04-06",
+    "is_completed": false
+  },
+  {
+    "id": "qt-3",
+    "reference": "Isaiah 40:31",
+    "text_en": "But those who hope in the Lord will renew their strength. They will soar on wings like eagles; they will run and not grow weary, they will walk and not be faint.",
+    "text_ko": "오직 여호와를 앙망하는 자는 새 힘을 얻으리니 독수리가 날개치며 올라감 같을 것이요 달음박질하여도 곤비하지 아니하겠고 걸어가도 피곤하지 아니하리로다.",
+    "icon": "🐦",
+    "color_hex": "#B3E5FC",
+    "date": "2026-04-06",
+    "is_completed": true
+  },
+  {
+    "id": "qt-4",
+    "reference": "Proverbs 3:5-6",
+    "text_en": "Trust in the Lord with all your heart and lean not on your own understanding; in all your ways submit to him, and he will make your paths straight.",
+    "text_ko": "너는 마음을 다하여 여호와를 신뢰하고 네 명철을 의지하지 말라. 너는 범사에 그를 인정하라 그리하면 네 길을 지도하시리라.",
+    "icon": "☀️",
+    "color_hex": "#FFCCBC",
+    "date": "2026-04-06",
+    "is_completed": false
+  },
+  {
+    "id": "qt-5",
+    "reference": "Jeremiah 29:11",
+    "text_en": "For I know the plans I have for you, declares the Lord, plans to prosper you and not to harm you, plans to give you hope and a future.",
+    "text_ko": "여호와의 말씀이니라 너희를 향한 나의 생각은 내가 아노니 평안이요 재앙이 아니니라 너희에게 미래와 희망을 주는 것이니라.",
+    "icon": "🌱",
+    "color_hex": "#D1C4E9",
+    "date": "2026-04-06",
+    "is_completed": false
+  }
+]

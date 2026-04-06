@@ -1,0 +1,232 @@
+import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+
+import '../../../l10n/generated/app_localizations.dart';
+import '../../../theme/abba_theme.dart';
+import '../../../widgets/abba_button.dart';
+
+class WritePostView extends StatefulWidget {
+  const WritePostView({super.key});
+
+  @override
+  State<WritePostView> createState() => _WritePostViewState();
+}
+
+class _WritePostViewState extends State<WritePostView> {
+  bool _isAnonymous = true;
+  String _category = 'testimony';
+  final _textController = TextEditingController();
+
+  @override
+  void dispose() {
+    _textController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+
+    return Scaffold(
+      backgroundColor: AbbaColors.cream,
+      appBar: AppBar(
+        leading: IconButton(
+          onPressed: () => context.pop(),
+          icon: const Icon(Icons.close),
+        ),
+        title: Text(
+          '${l10n.writePostTitle} 🌸',
+          style: AbbaTypography.h1,
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => context.pop(),
+            child: Text(
+              l10n.sharePostButton,
+              style: AbbaTypography.body.copyWith(
+                color: AbbaColors.sage,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ),
+        ],
+      ),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(AbbaSpacing.lg),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Anonymous/Real name toggle
+            Container(
+              padding: const EdgeInsets.all(AbbaSpacing.sm),
+              decoration: BoxDecoration(
+                color: AbbaColors.white,
+                borderRadius: BorderRadius.circular(AbbaRadius.xl),
+              ),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: GestureDetector(
+                      onTap: () => setState(() => _isAnonymous = true),
+                      child: Container(
+                        height: abbaButtonHeight,
+                        decoration: BoxDecoration(
+                          color: _isAnonymous
+                              ? AbbaColors.sage
+                              : Colors.transparent,
+                          borderRadius:
+                              BorderRadius.circular(AbbaRadius.xl),
+                        ),
+                        alignment: Alignment.center,
+                        child: Text(
+                          '🌿 ${l10n.anonymousToggle}',
+                          style: AbbaTypography.body.copyWith(
+                            color: _isAnonymous
+                                ? AbbaColors.white
+                                : AbbaColors.warmBrown,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: GestureDetector(
+                      onTap: () => setState(() => _isAnonymous = false),
+                      child: Container(
+                        height: abbaButtonHeight,
+                        decoration: BoxDecoration(
+                          color: !_isAnonymous
+                              ? AbbaColors.sage
+                              : Colors.transparent,
+                          borderRadius:
+                              BorderRadius.circular(AbbaRadius.xl),
+                        ),
+                        alignment: Alignment.center,
+                        child: Text(
+                          l10n.realNameToggle,
+                          style: AbbaTypography.body.copyWith(
+                            color: !_isAnonymous
+                                ? AbbaColors.white
+                                : AbbaColors.warmBrown,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: AbbaSpacing.lg),
+            // Category chips
+            Row(
+              children: [
+                _CategoryChip(
+                  label: l10n.categoryTestimony,
+                  isSelected: _category == 'testimony',
+                  onTap: () => setState(() => _category = 'testimony'),
+                ),
+                const SizedBox(width: AbbaSpacing.sm),
+                _CategoryChip(
+                  label: l10n.categoryPrayerRequest,
+                  isSelected: _category == 'prayer_request',
+                  onTap: () =>
+                      setState(() => _category = 'prayer_request'),
+                ),
+              ],
+            ),
+            const SizedBox(height: AbbaSpacing.lg),
+            // Text input
+            TextField(
+              controller: _textController,
+              maxLines: null,
+              minLines: 8,
+              style: AbbaTypography.body,
+              decoration: InputDecoration(
+                hintText: l10n.writePostHint,
+                hintStyle:
+                    AbbaTypography.body.copyWith(color: AbbaColors.muted),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(AbbaRadius.lg),
+                  borderSide: BorderSide.none,
+                ),
+                filled: true,
+                fillColor: AbbaColors.white,
+                contentPadding: const EdgeInsets.all(AbbaSpacing.md),
+              ),
+            ),
+            const SizedBox(height: AbbaSpacing.md),
+            // Import from prayer
+            OutlinedButton.icon(
+              onPressed: () {
+                _textController.text =
+                    'Dear Lord, I thank you for this beautiful morning. '
+                    'Please guide my steps today and help me to be a blessing '
+                    'to others.';
+              },
+              icon: const Text('🎙️', style: TextStyle(fontSize: 18)),
+              label: Text(
+                l10n.importFromPrayer,
+                style: AbbaTypography.body.copyWith(color: AbbaColors.sage),
+              ),
+              style: OutlinedButton.styleFrom(
+                minimumSize: const Size(double.infinity, abbaButtonHeight),
+                side: const BorderSide(color: AbbaColors.sage),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(AbbaRadius.lg),
+                ),
+              ),
+            ),
+            const SizedBox(height: AbbaSpacing.xl),
+            // Share button
+            AbbaButton(
+              label: '${l10n.sharePostButton} 🌱',
+              onPressed: () => context.pop(),
+              isHero: true,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _CategoryChip extends StatelessWidget {
+  final String label;
+  final bool isSelected;
+  final VoidCallback onTap;
+
+  const _CategoryChip({
+    required this.label,
+    required this.isSelected,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        padding: const EdgeInsets.symmetric(
+          horizontal: AbbaSpacing.lg,
+          vertical: AbbaSpacing.md,
+        ),
+        decoration: BoxDecoration(
+          color: isSelected ? AbbaColors.sage : AbbaColors.white,
+          borderRadius: BorderRadius.circular(AbbaRadius.xl),
+          border: Border.all(
+            color: isSelected ? AbbaColors.sage : AbbaColors.muted,
+          ),
+        ),
+        child: Text(
+          label,
+          style: AbbaTypography.body.copyWith(
+            color: isSelected ? AbbaColors.white : AbbaColors.warmBrown,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+      ),
+    );
+  }
+}

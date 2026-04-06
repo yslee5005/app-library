@@ -1,0 +1,14 @@
+{
+  "id": "mock-user-1",
+  "name": "Grace",
+  "email": "grace@example.com",
+  "avatar_url": null,
+  "total_prayers": 45,
+  "current_streak": 7,
+  "best_streak": 21,
+  "subscription": "free",
+  "locale": "en",
+  "voice_preference": "warm",
+  "reminder_time": "06:00",
+  "dark_mode": false
+}

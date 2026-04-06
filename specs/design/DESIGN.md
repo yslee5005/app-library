@@ -23,13 +23,15 @@ app-library/
 │   └── security/SECURITY.md
 │
 ├── packages/
-│   ├── core/                           # Tier 1: 순수 Dart
+│   ├── core/                           # Tier 1: 순수 Dart (의존성 0)
 │   │   ├── lib/
 │   │   │   ├── src/
 │   │   │   │   ├── errors/             # AppException, NetworkException, ...
 │   │   │   │   ├── models/             # PaginatedResult, AppConfig, ...
 │   │   │   │   ├── utils/              # Result<T>, validators
-│   │   │   │   └── constants/          # 공유 상수
+│   │   │   │   ├── constants/          # 공유 상수
+│   │   │   │   ├── environment/        # AppEnvironment, EnvValidator, ScreenSize
+│   │   │   │   └── feature_flags/      # FeatureFlag, FeatureFlagRegistry
 │   │   │   └── core.dart               # barrel export
 │   │   ├── test/
 │   │   └── pubspec.yaml
@@ -74,7 +76,7 @@ app-library/
 │   │
 │   ├── error_logging/
 │   │   ├── lib/src/
-│   │   │   ├── services/               # ErrorLoggingService (Sentry wrapper)
+│   │   │   ├── services/               # ErrorLoggingService, EnvironmentAwareLogging
 │   │   │   ├── filters/                # SensitiveDataFilter
 │   │   │   └── providers/              # errorLoggingProvider
 │   │   └── pubspec.yaml

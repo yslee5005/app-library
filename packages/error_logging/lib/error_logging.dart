@@ -2,6 +2,7 @@
 library;
 
 // Services
+export 'src/services/environment_aware_logging.dart';
 export 'src/services/error_level.dart';
 export 'src/services/error_logging_service.dart';
 

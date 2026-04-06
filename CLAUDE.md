@@ -17,10 +17,10 @@ Flutter (Dart 3.9+), Riverpod 3.0, Supabase, go_router, freezed, Sentry
 ```
 app-library/              ← 이 repo (마스터)
 ├── packages/             ← 레퍼런스 구현 (복붙 소스)
-│   ├── core/             ← Result, Exception, 모델
+│   ├── core/             ← Result, Exception, 모델, EnvValidator, AppEnvironment, ScreenSize, FeatureFlag
 │   ├── supabase_client/  ← app_id 스코핑 패턴
 │   ├── auth/             ← Google/Apple/Email 인증
-│   ├── error_logging/    ← Sentry 래퍼 + 필터
+│   ├── error_logging/    ← Sentry 래퍼 + 필터 + EnvironmentAwareLogging
 │   ├── cache/            ← 메모리+디스크 캐시
 │   ├── pagination/       ← 커서 페이지네이션
 │   ├── comments/         ← 댓글/좋아요
@@ -83,7 +83,11 @@ UI 디자인 받아서 DESIGN.md에 반영
 |------------|-------------------|-----------------|
 | 인증 | `packages/auth/` | provider, UI |
 | DB 연결 | `packages/supabase_client/` | APP_ID, .env |
-| 에러 로깅 | `packages/error_logging/` | DSN, 필터 규칙 |
+| 에러 로깅 | `packages/error_logging/` | DSN, 필터 규칙, AppEnvironment 연결 |
+| 환경 분기 | `packages/core/` environment/ | AppEnvironment enum만 사용 |
+| .env 검증 | `packages/core/` environment/ | 앱별 필수 키 목록만 수정 |
+| 피처 플래그 | `packages/core/` feature_flags/ | 앱별 플래그 정의 |
+| 반응형 | `packages/core/` environment/ | ScreenSize enum 사용 |
 | 캐시 | `packages/cache/` | TTL, 키 |
 | 페이지네이션 | `packages/pagination/` | 위젯 UI |
 | 댓글 | `packages/comments/` | content_type |
@@ -93,6 +97,37 @@ UI 디자인 받아서 DESIGN.md에 반영
 
 **원칙: 복붙 후 앱에 맞게 자유롭게 수정. 마스터와 동기화 강제 없음.**
 
+## 앱 시작 필수 패턴
+
+```dart
+void main() {
+  // 1. 환경 결정
+  const envName = String.fromEnvironment('ENV', defaultValue: 'dev');
+  final env = AppEnvironment.fromString(envName);
+
+  // 2. .env 검증
+  EnvValidator.validate(
+    required: ['SUPABASE_URL', 'SUPABASE_ANON_KEY', 'APP_ID'],
+    optional: ['SENTRY_DSN'],
+    values: { /* String.fromEnvironment()로 주입 */ },
+  );
+
+  // 3. 피처 플래그 초기화
+  FeatureFlagRegistry.init({
+    'notifications': true,
+    'dark_mode': false,
+  });
+
+  // 4. 환경별 로깅 설정
+  final logger = EnvironmentAwareLogging(
+    inner: SentryLoggingService(),
+    environment: env,
+  );
+
+  runApp(const MyApp());
+}
+```
+
 ## 배포 전 AI 체크리스트
 
 앱 배포 전 AI에게 확인 요청:
@@ -100,6 +135,9 @@ UI 디자인 받아서 DESIGN.md에 반영
 - [ ] RLS app_id 스코핑 정상 작동하는지
 - [ ] Sentry에 민감 정보 필터 적용됐는지
 - [ ] 마스터 대비 보안 관련 코드 차이 확인 (중요 버그 수정 누락 여부)
+- [ ] `EnvValidator.validate()` 호출이 main()에 있는지
+- [ ] `AppEnvironment`이 prod인지 확인 (로그, 스택트레이스 비활성화)
+- [ ] 새 기능이 `FeatureFlag`로 래핑되어 있는지
 
 ## 추천 pub.dev 패키지 (래핑 불필요, 앱에서 직접 사용)
 
