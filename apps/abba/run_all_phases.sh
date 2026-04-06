@@ -1,8 +1,8 @@
 #!/bin/zsh
 # ═══════════════════════════════════════════════════════
-# Abba App — 전체 Phase 순차 실행 (검증 포함)
+# Abba App — Phase별 순차 실행 스크립트
 # 사용법: chmod +x run_all_phases.sh && ./run_all_phases.sh
-# 특정 Phase부터: ./run_all_phases.sh 3  (Phase 3부터 시작)
+# 특정 Phase부터: ./run_all_phases.sh 3
 # ═══════════════════════════════════════════════════════
 
 START_PHASE=${1:-1}
@@ -31,8 +31,9 @@ run_phase() {
   echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 
   cd "$ROOT_DIR"
-  claude --prompt "$(cat <<EOF
-@$PROMPT_FILE 를 읽고 Phase $PHASE를 실행해.
+
+  # Claude Code 대화형 세션에 프롬프트 전달
+  echo "@$PROMPT_FILE 를 읽고 Phase $PHASE를 실행해.
 
 실행 규칙:
 1. 각 체크리스트 항목마다 Sequential Thinking 5단계 분석
@@ -47,9 +48,7 @@ run_phase() {
 - apps/abba/specs/REQUIREMENTS.md
 - apps/abba/specs/DESIGN.md
 
-시작해.
-EOF
-)"
+시작해." | claude
 
   local EXIT_CODE=$?
 
@@ -62,24 +61,14 @@ EOF
   # Phase 간 검증
   echo ""
   echo "  📋 Phase $PHASE 후 검증 중..."
-  cd "$ROOT_DIR"
 
-  # flutter analyze 실행 (앱 디렉토리가 있으면)
   if [ -f "$APP_DIR/pubspec.yaml" ]; then
     cd "$APP_DIR"
     flutter analyze 2>&1 | tail -5
-    local ANALYZE_EXIT=$?
     cd "$ROOT_DIR"
-
-    if [ $ANALYZE_EXIT -ne 0 ]; then
-      echo "  ⚠️ Phase $PHASE analyze 경고/에러 있음"
-      echo "  계속 진행합니다... (Phase 5에서 최종 수정)"
-    else
-      echo "  ✅ Phase $PHASE analyze 통과"
-    fi
   fi
 
-  # git 커밋 (Phase 완료 단위)
+  # git 커밋
   cd "$ROOT_DIR"
   git add -A
   git commit -m "feat(abba): complete Phase $PHASE
