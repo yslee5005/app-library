@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../l10n/generated/app_localizations.dart';
 import '../../../providers/providers.dart';
+import '../../../services/error_logging_service.dart';
 import '../../../theme/abba_theme.dart';
 import '../../../widgets/abba_button.dart';
 
@@ -29,6 +30,10 @@ class _RecordingOverlayState extends ConsumerState<RecordingOverlay>
   @override
   void initState() {
     super.initState();
+    ErrorLoggingService.addBreadcrumb(
+      'Recording started',
+      category: 'recording',
+    );
     _pulseController = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 1500),
@@ -39,7 +44,9 @@ class _RecordingOverlayState extends ConsumerState<RecordingOverlay>
 
   void _startStt() {
     final stt = ref.read(sttServiceProvider);
+    final locale = ref.read(localeProvider);
     stt.initialize().then((_) {
+      stt.setLocale(locale == 'ko' ? 'ko_KR' : 'en_US');
       stt.startListening(
         onResult: (text, isFinal) {
           setState(() => _transcript = text);
@@ -87,6 +94,11 @@ class _RecordingOverlayState extends ConsumerState<RecordingOverlay>
   }
 
   void _finishRecording() {
+    ErrorLoggingService.addBreadcrumb(
+      'Recording finished',
+      category: 'recording',
+    );
+
     final transcript =
         _isTextMode ? _textController.text : _transcript;
     ref.read(sttServiceProvider).stopListening();
@@ -289,7 +301,7 @@ class _RecordingOverlayState extends ConsumerState<RecordingOverlay>
                   const SizedBox(width: AbbaSpacing.md),
                   Expanded(
                     child: AbbaButton(
-                      label: '✅ ${l10n.finishPrayer}',
+                      label: l10n.finishPrayer,
                       onPressed: _finishRecording,
                     ),
                   ),

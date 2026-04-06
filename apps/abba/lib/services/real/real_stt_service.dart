@@ -1,4 +1,3 @@
-import 'package:speech_to_text/speech_recognition_result.dart';
 import 'package:speech_to_text/speech_to_text.dart' as stt;
 
 import '../stt_service.dart';
@@ -8,16 +7,27 @@ class RealSttService implements SttService {
   bool _listening = false;
   String _accumulatedText = '';
   void Function(String, bool)? _onResult;
+  void Function(String)? _onError;
+  String _localeId = 'en_US';
 
   @override
   Future<bool> initialize() async {
     return _speech.initialize(
       onStatus: (status) {
         if (status == 'notListening' && _listening) {
+          // Auto-restart for 1-min session limit
           _restartListening();
         }
       },
+      onError: (error) {
+        _onError?.call(error.errorMsg);
+      },
     );
+  }
+
+  @override
+  void setLocale(String localeId) {
+    _localeId = localeId;
   }
 
   @override
@@ -28,17 +38,23 @@ class RealSttService implements SttService {
     _listening = true;
     _accumulatedText = '';
     _onResult = onResult;
+    _onError = onError;
 
-    void handleResult(SpeechRecognitionResult result) {
-      final text = _accumulatedText + result.recognizedWords;
-      onResult(text, result.finalResult);
-    }
+    await _doListen();
+  }
 
+  Future<void> _doListen() async {
     await _speech.listen(
-      onResult: handleResult,
+      onResult: (result) {
+        final text = _accumulatedText + result.recognizedWords;
+        _onResult?.call(text, result.finalResult);
+        if (result.finalResult) {
+          _accumulatedText = '$text ';
+        }
+      },
       listenFor: const Duration(seconds: 59),
       pauseFor: const Duration(seconds: 10),
-      localeId: 'en_US',
+      localeId: _localeId,
       listenOptions: stt.SpeechListenOptions(
         onDevice: true,
         cancelOnError: false,
@@ -47,22 +63,8 @@ class RealSttService implements SttService {
   }
 
   void _restartListening() {
-    if (!_listening || _onResult == null) return;
-
-    void handleResult(SpeechRecognitionResult result) {
-      final text = _accumulatedText + result.recognizedWords;
-      _onResult?.call(text, result.finalResult);
-    }
-
-    _speech.listen(
-      onResult: handleResult,
-      listenFor: const Duration(seconds: 59),
-      pauseFor: const Duration(seconds: 10),
-      listenOptions: stt.SpeechListenOptions(
-        onDevice: true,
-        cancelOnError: false,
-      ),
-    );
+    if (!_listening) return;
+    _doListen();
   }
 
   @override

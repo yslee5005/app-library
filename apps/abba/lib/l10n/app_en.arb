@@ -95,5 +95,10 @@
   "@appVersion": { "placeholders": { "version": {} } },
   "anonymous": "Anonymous",
   "timeAgo": "{time} ago",
-  "@timeAgo": { "placeholders": { "time": {} } }
+  "@timeAgo": { "placeholders": { "time": {} } },
+  "emailLabel": "Email",
+  "passwordLabel": "Password",
+  "signIn": "Sign In",
+  "cancel": "Cancel",
+  "noPrayersRecorded": "No prayers recorded"
 }

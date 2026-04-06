@@ -74,6 +74,35 @@ final communityPostsProvider = FutureProvider<List<CommunityPost>>((ref) {
 });
 
 // ---------------------------------------------------------------------------
+// Calendar & Prayer data providers (Phase 2)
+// ---------------------------------------------------------------------------
+
+/// Prayers for a specific date (used by Calendar day detail)
+final calendarPrayersProvider =
+    FutureProvider.family<List<Prayer>, DateTime>((ref, date) {
+  final repo = ref.watch(prayerRepositoryProvider);
+  return repo.getPrayersByDate(date);
+});
+
+/// Monthly prayer dates (for calendar markers)
+final monthlyPrayerDaysProvider = FutureProvider.family<Set<DateTime>,
+    ({int year, int month})>((ref, params) async {
+  final repo = ref.watch(prayerRepositoryProvider);
+  final prayers = await repo.getPrayersByMonth(params.year, params.month);
+  return prayers.map((p) {
+    final d = p.createdAt;
+    return DateTime(d.year, d.month, d.day);
+  }).toSet();
+});
+
+/// Streak data from repository
+final streakProvider =
+    FutureProvider<({int current, int best})>((ref) {
+  final repo = ref.watch(prayerRepositoryProvider);
+  return repo.getStreak();
+});
+
+// ---------------------------------------------------------------------------
 // App state
 // ---------------------------------------------------------------------------
 final localeProvider = StateProvider<String>((ref) => 'en');

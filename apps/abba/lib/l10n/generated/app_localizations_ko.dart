@@ -289,4 +289,19 @@ class AppLocalizationsKo extends AppLocalizations {
   String timeAgo(Object time) {
     return '$time 전';
   }
+
+  @override
+  String get emailLabel => '이메일';
+
+  @override
+  String get passwordLabel => '비밀번호';
+
+  @override
+  String get signIn => '로그인';
+
+  @override
+  String get cancel => '취소';
+
+  @override
+  String get noPrayersRecorded => '기도 기록이 없습니다';
 }

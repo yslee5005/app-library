@@ -25,4 +25,19 @@ class AppConfig {
 
   /// true when running with real backend services
   static bool get isProduction => env == 'prod';
+
+  /// Validate required environment variables.
+  /// Skipped in mock mode — real mode requires Supabase + OpenAI keys.
+  static void validate() {
+    if (useMock) return;
+    final missing = <String>[];
+    if (supabaseUrl.isEmpty) missing.add('SUPABASE_URL');
+    if (supabaseAnonKey.isEmpty) missing.add('SUPABASE_ANON_KEY');
+    if (openAiApiKey.isEmpty) missing.add('OPENAI_API_KEY');
+    if (missing.isNotEmpty) {
+      throw StateError(
+        'Missing required environment variables: ${missing.join(', ')}',
+      );
+    }
+  }
 }

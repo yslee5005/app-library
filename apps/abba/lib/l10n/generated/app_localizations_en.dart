@@ -290,4 +290,19 @@ class AppLocalizationsEn extends AppLocalizations {
   String timeAgo(Object time) {
     return '$time ago';
   }
+
+  @override
+  String get emailLabel => 'Email';
+
+  @override
+  String get passwordLabel => 'Password';
+
+  @override
+  String get signIn => 'Sign In';
+
+  @override
+  String get cancel => 'Cancel';
+
+  @override
+  String get noPrayersRecorded => 'No prayers recorded';
 }

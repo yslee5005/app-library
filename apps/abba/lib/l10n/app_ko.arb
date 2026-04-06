@@ -95,5 +95,10 @@
   "@appVersion": { "placeholders": { "version": {} } },
   "anonymous": "익명",
   "timeAgo": "{time} 전",
-  "@timeAgo": { "placeholders": { "time": {} } }
+  "@timeAgo": { "placeholders": { "time": {} } },
+  "emailLabel": "이메일",
+  "passwordLabel": "비밀번호",
+  "signIn": "로그인",
+  "cancel": "취소",
+  "noPrayersRecorded": "기도 기록이 없습니다"
 }

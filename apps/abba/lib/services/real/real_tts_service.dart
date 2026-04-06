@@ -7,6 +7,7 @@ import 'package:just_audio/just_audio.dart';
 import 'package:path_provider/path_provider.dart' show getTemporaryDirectory;
 
 import '../../config/app_config.dart';
+import '../error_logging_service.dart';
 import '../tts_service.dart';
 
 /// Maps voice preference to OpenAI TTS voice
@@ -16,11 +17,18 @@ const _voiceMap = {
   'strong': 'onyx',
 };
 
+/// Maximum number of cached audio files before cleanup
+const _maxCacheEntries = 10;
+
 class RealTtsService implements TtsService {
   final _player = AudioPlayer();
   final _controller = StreamController<TtsPlaybackState>.broadcast();
-  String? _cachedAudioPath;
-  String? _cachedTextHash;
+
+  /// Cache: textHash -> filePath
+  final Map<String, String> _cache = {};
+
+  /// Track insertion order for LRU eviction
+  final List<String> _cacheOrder = [];
 
   RealTtsService() {
     // Forward player state to our stream
@@ -42,44 +50,83 @@ class RealTtsService implements TtsService {
     final openAiVoice = _voiceMap[voice] ?? 'alloy';
 
     // Check cache
-    if (_cachedTextHash == textHash && _cachedAudioPath != null) {
-      final file = File(_cachedAudioPath!);
+    if (_cache.containsKey(textHash)) {
+      final cachedPath = _cache[textHash]!;
+      final file = File(cachedPath);
       if (file.existsSync()) {
-        await _player.setFilePath(_cachedAudioPath!);
+        await _player.setFilePath(cachedPath);
         await _player.play();
         return;
+      } else {
+        // Stale cache entry
+        _cache.remove(textHash);
+        _cacheOrder.remove(textHash);
       }
     }
 
-    // Call OpenAI TTS API
-    final response = await http.post(
-      Uri.parse('https://api.openai.com/v1/audio/speech'),
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ${AppConfig.openAiApiKey}',
-      },
-      body: jsonEncode({
-        'model': 'tts-1',
-        'input': text,
-        'voice': openAiVoice,
-        'response_format': 'mp3',
-      }),
+    ErrorLoggingService.addBreadcrumb(
+      'TTS API call started',
+      category: 'tts',
     );
 
-    if (response.statusCode != 200) {
-      throw Exception('TTS API failed: ${response.statusCode}');
+    try {
+      // Call OpenAI TTS API
+      final response = await http.post(
+        Uri.parse('https://api.openai.com/v1/audio/speech'),
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ${AppConfig.openAiApiKey}',
+        },
+        body: jsonEncode({
+          'model': 'tts-1',
+          'input': text,
+          'voice': openAiVoice,
+          'response_format': 'mp3',
+        }),
+      );
+
+      if (response.statusCode != 200) {
+        ErrorLoggingService.addBreadcrumb(
+          'TTS API failed: ${response.statusCode}',
+          category: 'tts',
+        );
+        throw Exception('TTS API failed: ${response.statusCode}');
+      }
+
+      // Save to temp file
+      final dir = await getTemporaryDirectory();
+      final filePath = '${dir.path}/abba_tts_$textHash.mp3';
+      await File(filePath).writeAsBytes(response.bodyBytes);
+
+      // Manage cache size
+      _cache[textHash] = filePath;
+      _cacheOrder.add(textHash);
+      await _evictOldCacheEntries();
+
+      await _player.setFilePath(filePath);
+      await _player.play();
+    } catch (e, stackTrace) {
+      ErrorLoggingService.captureException(e, stackTrace);
+      rethrow;
     }
+  }
 
-    // Save to temp file
-    final dir = await getTemporaryDirectory();
-    final filePath = '${dir.path}/abba_tts_$textHash.mp3';
-    await File(filePath).writeAsBytes(response.bodyBytes);
-
-    _cachedAudioPath = filePath;
-    _cachedTextHash = textHash;
-
-    await _player.setFilePath(filePath);
-    await _player.play();
+  /// Remove oldest cache entries when exceeding max size
+  Future<void> _evictOldCacheEntries() async {
+    while (_cacheOrder.length > _maxCacheEntries) {
+      final oldest = _cacheOrder.removeAt(0);
+      final path = _cache.remove(oldest);
+      if (path != null) {
+        try {
+          final file = File(path);
+          if (file.existsSync()) {
+            await file.delete();
+          }
+        } catch (_) {
+          // Ignore deletion errors for temp files
+        }
+      }
+    }
   }
 
   @override

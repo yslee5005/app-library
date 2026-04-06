@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import '../../../l10n/generated/app_localizations.dart';
 import '../../../providers/providers.dart';
 import '../../../services/auth_service.dart';
+import '../../../services/error_logging_service.dart';
 import '../../../theme/abba_theme.dart';
 
 class LoginView extends ConsumerWidget {
@@ -19,8 +20,9 @@ class LoginView extends ConsumerWidget {
         ref.read(authStateProvider.notifier).state =
             const AbbaAuthState(status: AuthStatus.loading);
         await signIn();
-        // Auth state will be updated by the service → redirect handles navigation
-      } catch (e) {
+        // Auth state will be updated by the service
+      } catch (e, stackTrace) {
+        ErrorLoggingService.captureException(e, stackTrace);
         ref.read(authStateProvider.notifier).state =
             AbbaAuthState(status: AuthStatus.unauthenticated, error: '$e');
         if (context.mounted) {
@@ -63,6 +65,10 @@ class LoginView extends ConsumerWidget {
                     status: AuthStatus.authenticated,
                     user: profile,
                   );
+                  ErrorLoggingService.addBreadcrumb(
+                    'Login success: Apple',
+                    category: 'auth',
+                  );
                   if (context.mounted) context.go('/home');
                 }),
               ),
@@ -79,6 +85,10 @@ class LoginView extends ConsumerWidget {
                     status: AuthStatus.authenticated,
                     user: profile,
                   );
+                  ErrorLoggingService.addBreadcrumb(
+                    'Login success: Google',
+                    category: 'auth',
+                  );
                   if (context.mounted) context.go('/home');
                 }),
               ),
@@ -89,14 +99,20 @@ class LoginView extends ConsumerWidget {
                 backgroundColor: AbbaColors.sage,
                 textColor: AbbaColors.white,
                 onTap: () => handleSignIn(() async {
+                  final credentials = await _showEmailDialog(context, l10n);
+                  if (credentials == null) return;
                   final auth = ref.read(authServiceProvider);
                   final profile = await auth.signInWithEmail(
-                    'demo@abba.app',
-                    'demo1234',
+                    credentials.$1,
+                    credentials.$2,
                   );
                   ref.read(authStateProvider.notifier).state = AbbaAuthState(
                     status: AuthStatus.authenticated,
                     user: profile,
+                  );
+                  ErrorLoggingService.addBreadcrumb(
+                    'Login success: Email',
+                    category: 'auth',
                   );
                   if (context.mounted) context.go('/home');
                 }),
@@ -108,6 +124,66 @@ class LoginView extends ConsumerWidget {
       ),
     );
   }
+}
+
+Future<(String, String)?> _showEmailDialog(
+  BuildContext context,
+  AppLocalizations l10n,
+) {
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+  return showDialog<(String, String)>(
+    context: context,
+    builder: (context) => AlertDialog(
+      title: Text(l10n.signInWithEmail, style: AbbaTypography.h2),
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          TextField(
+            controller: emailController,
+            keyboardType: TextInputType.emailAddress,
+            style: AbbaTypography.body,
+            decoration: InputDecoration(
+              labelText: l10n.emailLabel,
+              labelStyle: AbbaTypography.bodySmall,
+            ),
+          ),
+          const SizedBox(height: AbbaSpacing.md),
+          TextField(
+            controller: passwordController,
+            obscureText: true,
+            style: AbbaTypography.body,
+            decoration: InputDecoration(
+              labelText: l10n.passwordLabel,
+              labelStyle: AbbaTypography.bodySmall,
+            ),
+          ),
+        ],
+      ),
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.pop(context),
+          child: Text(l10n.cancel),
+        ),
+        ElevatedButton(
+          onPressed: () {
+            final email = emailController.text.trim();
+            final password = passwordController.text;
+            if (email.isNotEmpty && password.length >= 6) {
+              Navigator.pop(context, (email, password));
+            }
+          },
+          style: ElevatedButton.styleFrom(
+            backgroundColor: AbbaColors.sage,
+          ),
+          child: Text(
+            l10n.signIn,
+            style: const TextStyle(color: AbbaColors.white),
+          ),
+        ),
+      ],
+    ),
+  );
 }
 
 class _LoginButton extends StatelessWidget {

@@ -22,6 +22,11 @@ class MockSttService implements SttService {
   }
 
   @override
+  void setLocale(String localeId) {
+    // No-op for mock
+  }
+
+  @override
   Future<void> startListening({
     required void Function(String text, bool isFinal) onResult,
     required void Function(String error) onError,

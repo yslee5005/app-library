@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../l10n/generated/app_localizations.dart';
 import '../../../providers/providers.dart';
@@ -47,7 +48,7 @@ class HomeView extends ConsumerWidget {
               const SizedBox(height: AbbaSpacing.xl),
               // Pray button
               AbbaButton(
-                label: '🎙️  ${l10n.prayButton}',
+                label: l10n.prayButton,
                 onPressed: () => _showRecording(context, ref),
                 isHero: true,
                 backgroundColor: AbbaColors.sage,
@@ -55,7 +56,7 @@ class HomeView extends ConsumerWidget {
               const SizedBox(height: AbbaSpacing.md),
               // QT button
               AbbaButton(
-                label: '📖  ${l10n.qtButton}',
+                label: l10n.qtButton,
                 onPressed: () => context.go('/home/qt'),
                 isHero: true,
                 backgroundColor: AbbaColors.softGold,
@@ -67,7 +68,7 @@ class HomeView extends ConsumerWidget {
                   margin: EdgeInsets.zero,
                   child: Row(
                     children: [
-                      const Text('🔥', style: TextStyle(fontSize: 32)),
+                      const Text('', style: TextStyle(fontSize: 32)),
                       const SizedBox(width: AbbaSpacing.md),
                       Expanded(
                         child: Text(
@@ -93,7 +94,7 @@ class HomeView extends ConsumerWidget {
                       children: [
                         Row(
                           children: [
-                            const Text('📜', style: TextStyle(fontSize: 24)),
+                            const Text('', style: TextStyle(fontSize: 24)),
                             const SizedBox(width: AbbaSpacing.sm),
                             Text(l10n.dailyVerse, style: AbbaTypography.h2),
                           ],
@@ -134,20 +135,26 @@ class HomeView extends ConsumerWidget {
   }
 
   Future<void> _showRecording(BuildContext context, WidgetRef ref) async {
-    // Check free user limit
+    // Check free user limit (persisted with SharedPreferences)
     final profile = ref.read(userProfileProvider).valueOrNull;
     final isFree = profile?.subscription == SubscriptionStatus.free;
-    final todayCount = ref.read(todayPrayerCountProvider);
 
-    if (isFree && todayCount >= 1) {
-      if (context.mounted) {
-        await showPremiumModal(context);
+    if (isFree) {
+      final prefs = await SharedPreferences.getInstance();
+      final today = DateTime.now().toIso8601String().substring(0, 10);
+      final lastDate = prefs.getString('last_prayer_date') ?? '';
+      final count =
+          lastDate == today ? (prefs.getInt('today_prayer_count') ?? 0) : 0;
+
+      if (count >= 1) {
+        if (context.mounted) await showPremiumModal(context);
+        return;
       }
-      return;
-    }
 
-    // Increment count
-    ref.read(todayPrayerCountProvider.notifier).state = todayCount + 1;
+      // Increment and save
+      await prefs.setString('last_prayer_date', today);
+      await prefs.setInt('today_prayer_count', count + 1);
+    }
 
     if (!context.mounted) return;
     showModalBottomSheet(

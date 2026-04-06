@@ -7,6 +7,7 @@ import 'package:go_router/go_router.dart';
 import '../../../l10n/generated/app_localizations.dart';
 import '../../../models/prayer.dart';
 import '../../../providers/providers.dart';
+import '../../../services/error_logging_service.dart';
 import '../../../theme/abba_theme.dart';
 
 class AiLoadingView extends ConsumerStatefulWidget {
@@ -54,6 +55,11 @@ class _AiLoadingViewState extends ConsumerState<AiLoadingView>
       _navigateIfReady();
     });
 
+    ErrorLoggingService.addBreadcrumb(
+      'AI loading started',
+      category: 'prayer',
+    );
+
     // Call AI service
     _analyzeWithAi();
   }
@@ -62,6 +68,10 @@ class _AiLoadingViewState extends ConsumerState<AiLoadingView>
     final transcript = ref.read(currentTranscriptProvider);
     final locale = ref.read(localeProvider);
     final aiService = ref.read(aiServiceProvider);
+
+    // Get actual user id from auth state
+    final authState = ref.read(authStateProvider);
+    final userId = authState.user?.id ?? 'anonymous';
 
     try {
       final result = await aiService.analyzePrayer(
@@ -74,19 +84,31 @@ class _AiLoadingViewState extends ConsumerState<AiLoadingView>
       final repo = ref.read(prayerRepositoryProvider);
       await repo.savePrayer(Prayer(
         id: DateTime.now().millisecondsSinceEpoch.toString(),
-        userId: 'mock-user',
+        userId: userId,
         transcript: transcript,
         mode: 'prayer',
         createdAt: DateTime.now(),
         result: result,
       ));
       await repo.updateStreak();
-    } catch (e) {
+
+      ErrorLoggingService.addBreadcrumb(
+        'Prayer saved successfully',
+        category: 'prayer',
+      );
+    } catch (e, stackTrace) {
+      ErrorLoggingService.captureException(e, stackTrace);
       ref.read(prayerResultProvider.notifier).state =
           AsyncValue.error(e, StackTrace.current);
     }
 
     _aiDone = true;
+
+    ErrorLoggingService.addBreadcrumb(
+      'AI loading finished',
+      category: 'prayer',
+    );
+
     _navigateIfReady();
   }
 

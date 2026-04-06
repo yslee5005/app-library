@@ -5,6 +5,7 @@ import 'package:http/http.dart' as http;
 import '../../config/app_config.dart';
 import '../../models/prayer.dart';
 import '../ai_service.dart';
+import '../error_logging_service.dart';
 
 class OpenAiService implements AiService {
   static const _baseUrl = 'https://api.openai.com/v1/chat/completions';
@@ -16,33 +17,13 @@ class OpenAiService implements AiService {
   }) async {
     final langName = locale == 'ko' ? 'Korean' : 'English';
 
-    final response = await http.post(
-      Uri.parse(_baseUrl),
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ${AppConfig.openAiApiKey}',
-      },
-      body: jsonEncode({
-        'model': 'gpt-4o-mini',
-        'response_format': {'type': 'json_object'},
-        'messages': [
-          {
-            'role': 'system',
-            'content': _buildSystemPrompt(langName),
-          },
-          {
-            'role': 'user',
-            'content': transcript,
-          },
-        ],
-        'temperature': 0.7,
-        'max_tokens': 2000,
-      }),
+    ErrorLoggingService.addBreadcrumb(
+      'AI API call started',
+      category: 'ai',
     );
 
-    if (response.statusCode != 200) {
-      // Retry once
-      final retry = await http.post(
+    try {
+      final response = await http.post(
         Uri.parse(_baseUrl),
         headers: {
           'Content-Type': 'application/json',
@@ -66,13 +47,56 @@ class OpenAiService implements AiService {
         }),
       );
 
-      if (retry.statusCode != 200) {
-        return _fallbackResult();
-      }
-      return _parseResponse(retry.body);
-    }
+      if (response.statusCode != 200) {
+        ErrorLoggingService.addBreadcrumb(
+          'AI API first attempt failed: ${response.statusCode}',
+          category: 'ai',
+        );
 
-    return _parseResponse(response.body);
+        // Retry once
+        final retry = await http.post(
+          Uri.parse(_baseUrl),
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ${AppConfig.openAiApiKey}',
+          },
+          body: jsonEncode({
+            'model': 'gpt-4o-mini',
+            'response_format': {'type': 'json_object'},
+            'messages': [
+              {
+                'role': 'system',
+                'content': _buildSystemPrompt(langName),
+              },
+              {
+                'role': 'user',
+                'content': transcript,
+              },
+            ],
+            'temperature': 0.7,
+            'max_tokens': 2000,
+          }),
+        );
+
+        if (retry.statusCode != 200) {
+          ErrorLoggingService.addBreadcrumb(
+            'AI API retry also failed: ${retry.statusCode}',
+            category: 'ai',
+          );
+          return _fallbackResult();
+        }
+        return _parseResponse(retry.body);
+      }
+
+      ErrorLoggingService.addBreadcrumb(
+        'AI API call succeeded',
+        category: 'ai',
+      );
+      return _parseResponse(response.body);
+    } catch (e, stackTrace) {
+      ErrorLoggingService.captureException(e, stackTrace);
+      return _fallbackResult();
+    }
   }
 
   PrayerResult _parseResponse(String body) {
@@ -82,7 +106,8 @@ class OpenAiService implements AiService {
           json['choices'][0]['message']['content'] as String;
       final data = jsonDecode(content) as Map<String, dynamic>;
       return PrayerResult.fromJson(data);
-    } catch (_) {
+    } catch (e, stackTrace) {
+      ErrorLoggingService.captureException(e, stackTrace);
       return _fallbackResult();
     }
   }

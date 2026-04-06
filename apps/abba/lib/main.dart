@@ -5,6 +5,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import 'app.dart';
 import 'config/app_config.dart';
 import 'providers/providers.dart';
+import 'services/error_logging_service.dart';
 import 'services/mock/mock_ai_service.dart';
 import 'services/mock/mock_auth_service.dart';
 import 'services/mock/mock_prayer_repository.dart';
@@ -20,6 +21,12 @@ import 'services/real/supabase_prayer_repository.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
+  // Validate environment variables (skipped in mock mode)
+  AppConfig.validate();
+
+  // Initialize Sentry error logging
+  await ErrorLoggingService.initialize();
+
   final overrides = <Override>[];
 
   if (AppConfig.useMock) {
@@ -30,8 +37,7 @@ Future<void> main() async {
       aiServiceProvider.overrideWithValue(MockAiService(mockData)),
       sttServiceProvider.overrideWithValue(MockSttService()),
       ttsServiceProvider.overrideWithValue(MockTtsService()),
-      prayerRepositoryProvider
-          .overrideWithValue(MockPrayerRepository()),
+      prayerRepositoryProvider.overrideWithValue(MockPrayerRepository()),
     ]);
   } else {
     // Real mode — connect to Supabase, OpenAI, etc.
@@ -42,8 +48,7 @@ Future<void> main() async {
     final supabase = Supabase.instance.client;
 
     overrides.addAll([
-      authServiceProvider
-          .overrideWithValue(SupabaseAuthService(supabase)),
+      authServiceProvider.overrideWithValue(SupabaseAuthService(supabase)),
       aiServiceProvider.overrideWithValue(OpenAiService()),
       sttServiceProvider.overrideWithValue(RealSttService()),
       ttsServiceProvider.overrideWithValue(RealTtsService()),

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
+import '../config/app_config.dart';
 import '../features/ai_loading/view/ai_loading_view.dart';
 import '../features/calendar/view/calendar_view.dart';
 import '../features/community/view/community_view.dart';
@@ -18,6 +20,19 @@ final _rootNavigatorKey = GlobalKey<NavigatorState>();
 final appRouter = GoRouter(
   navigatorKey: _rootNavigatorKey,
   initialLocation: '/welcome',
+  redirect: (context, state) {
+    // Skip auth redirect in mock mode
+    if (AppConfig.useMock) return null;
+
+    final isLoggedIn =
+        Supabase.instance.client.auth.currentSession != null;
+    final isAuthRoute = state.matchedLocation == '/welcome' ||
+        state.matchedLocation == '/login';
+
+    if (!isLoggedIn && !isAuthRoute) return '/welcome';
+    if (isLoggedIn && isAuthRoute) return '/home';
+    return null;
+  },
   routes: [
     GoRoute(
       path: '/welcome',

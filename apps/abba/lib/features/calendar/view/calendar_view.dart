@@ -18,26 +18,24 @@ class _CalendarViewState extends ConsumerState<CalendarView> {
   late DateTime _currentMonth;
   DateTime? _selectedDate;
 
-  // Mock: last 7 days have prayers
-  late final Set<DateTime> _prayerDays;
-
   @override
   void initState() {
     super.initState();
     final now = DateTime.now();
     _currentMonth = DateTime(now.year, now.month);
-    _prayerDays = {};
-    for (int i = 0; i < 7; i++) {
-      final day = now.subtract(Duration(days: i));
-      _prayerDays.add(DateTime(day.year, day.month, day.day));
-    }
   }
 
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     final locale = ref.watch(localeProvider);
-    final profileAsync = ref.watch(userProfileProvider);
+    final streakAsync = ref.watch(streakProvider);
+    final prayerDaysAsync = ref.watch(
+      monthlyPrayerDaysProvider((
+        year: _currentMonth.year,
+        month: _currentMonth.month,
+      )),
+    );
 
     return Scaffold(
       backgroundColor: AbbaColors.cream,
@@ -52,8 +50,8 @@ class _CalendarViewState extends ConsumerState<CalendarView> {
         child: Column(
           children: [
             // Streak card
-            profileAsync.when(
-              data: (profile) => AbbaCard(
+            streakAsync.when(
+              data: (streak) => AbbaCard(
                 margin: const EdgeInsets.only(bottom: AbbaSpacing.md),
                 child: Row(
                   children: [
@@ -63,7 +61,7 @@ class _CalendarViewState extends ConsumerState<CalendarView> {
                           const Text('🔥', style: TextStyle(fontSize: 32)),
                           const SizedBox(height: AbbaSpacing.xs),
                           Text(
-                            '${profile.currentStreak}',
+                            '${streak.current}',
                             style: AbbaTypography.hero,
                           ),
                           Text(
@@ -84,7 +82,7 @@ class _CalendarViewState extends ConsumerState<CalendarView> {
                           const Text('🏆', style: TextStyle(fontSize: 32)),
                           const SizedBox(height: AbbaSpacing.xs),
                           Text(
-                            '${profile.bestStreak}',
+                            '${streak.best}',
                             style: AbbaTypography.hero,
                           ),
                           Text(
@@ -97,7 +95,10 @@ class _CalendarViewState extends ConsumerState<CalendarView> {
                   ],
                 ),
               ),
-              loading: () => const SizedBox.shrink(),
+              loading: () => const Padding(
+                padding: EdgeInsets.only(bottom: AbbaSpacing.md),
+                child: Center(child: CircularProgressIndicator()),
+              ),
               error: (e, s) => const SizedBox.shrink(),
             ),
             // Month navigation
@@ -151,7 +152,11 @@ class _CalendarViewState extends ConsumerState<CalendarView> {
             ),
             const SizedBox(height: AbbaSpacing.sm),
             // Calendar grid
-            _buildCalendarGrid(),
+            prayerDaysAsync.when(
+              data: (prayerDays) => _buildCalendarGrid(prayerDays),
+              loading: () => _buildCalendarGrid({}),
+              error: (e, s) => _buildCalendarGrid({}),
+            ),
             // Selected date prayers
             if (_selectedDate != null) ...[
               const SizedBox(height: AbbaSpacing.md),
@@ -163,7 +168,7 @@ class _CalendarViewState extends ConsumerState<CalendarView> {
     );
   }
 
-  Widget _buildCalendarGrid() {
+  Widget _buildCalendarGrid(Set<DateTime> prayerDays) {
     final firstDay = DateTime(_currentMonth.year, _currentMonth.month, 1);
     final lastDay =
         DateTime(_currentMonth.year, _currentMonth.month + 1, 0);
@@ -182,7 +187,7 @@ class _CalendarViewState extends ConsumerState<CalendarView> {
     for (int day = 1; day <= lastDay.day; day++) {
       final date = DateTime(_currentMonth.year, _currentMonth.month, day);
       final isToday = date == today;
-      final hasPrayer = _prayerDays.contains(date);
+      final hasPrayer = prayerDays.contains(date);
       final isSelected = _selectedDate == date;
 
       cells.add(
@@ -232,42 +237,73 @@ class _CalendarViewState extends ConsumerState<CalendarView> {
   }
 
   Widget _buildDayDetail(AppLocalizations l10n) {
-    final hasPrayer = _prayerDays.contains(_selectedDate);
+    final prayersAsync = ref.watch(calendarPrayersProvider(_selectedDate!));
 
-    return AbbaCard(
-      margin: EdgeInsets.zero,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            DateFormat.yMMMMd().format(_selectedDate!),
-            style: AbbaTypography.h2,
-          ),
-          const SizedBox(height: AbbaSpacing.sm),
-          if (hasPrayer)
-            Row(
+    return prayersAsync.when(
+      data: (prayers) {
+        if (prayers.isEmpty) {
+          return AbbaCard(
+            margin: EdgeInsets.zero,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text('🌸', style: TextStyle(fontSize: 20)),
-                const SizedBox(width: AbbaSpacing.sm),
-                Expanded(
-                  child: Text(
-                    'Morning Prayer',
-                    style: AbbaTypography.body,
+                Text(
+                  DateFormat.yMMMMd().format(_selectedDate!),
+                  style: AbbaTypography.h2,
+                ),
+                const SizedBox(height: AbbaSpacing.sm),
+                Text(
+                  l10n.noPrayersRecorded,
+                  style: AbbaTypography.body.copyWith(
+                    color: AbbaColors.muted,
                   ),
                 ),
-                Icon(
-                  Icons.chevron_right,
-                  color: AbbaColors.muted,
-                ),
               ],
-            )
-          else
-            Text(
-              'No prayers recorded',
-              style:
-                  AbbaTypography.body.copyWith(color: AbbaColors.muted),
             ),
-        ],
+          );
+        }
+
+        return AbbaCard(
+          margin: EdgeInsets.zero,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                DateFormat.yMMMMd().format(_selectedDate!),
+                style: AbbaTypography.h2,
+              ),
+              const SizedBox(height: AbbaSpacing.sm),
+              ...prayers.map(
+                (prayer) => Padding(
+                  padding: const EdgeInsets.only(bottom: AbbaSpacing.sm),
+                  child: Row(
+                    children: [
+                      const Text('🌸', style: TextStyle(fontSize: 20)),
+                      const SizedBox(width: AbbaSpacing.sm),
+                      Expanded(
+                        child: Text(
+                          prayer.mode == 'qt'
+                              ? 'Quiet Time'
+                              : 'Morning Prayer',
+                          style: AbbaTypography.body,
+                        ),
+                      ),
+                      Icon(
+                        Icons.chevron_right,
+                        color: AbbaColors.muted,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+      loading: () => const Center(child: CircularProgressIndicator()),
+      error: (e, s) => AbbaCard(
+        margin: EdgeInsets.zero,
+        child: Text('Error: $e', style: AbbaTypography.body),
       ),
     );
   }
