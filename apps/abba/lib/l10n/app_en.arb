@@ -105,5 +105,21 @@
   "reportPost": "Report",
   "reportSubmitted": "Report submitted. Thank you.",
   "deleteConfirmTitle": "Delete Post",
-  "deleteConfirmMessage": "Are you sure you want to delete this post?"
+  "deleteConfirmMessage": "Are you sure you want to delete this post?",
+  "errorNetwork": "Please check your internet connection and try again.",
+  "errorAiFallback": "We couldn't reach AI right now. Here's a verse for you.",
+  "errorSttFailed": "Voice recognition is not available. Please type instead.",
+  "errorPayment": "There was a problem with payment. Please try again in Settings.",
+  "errorGeneric": "Something went wrong. Please try again later.",
+  "offlineNotice": "You are offline. Some features may be limited.",
+  "retryButton": "Try Again",
+  "groupSection": "My Groups",
+  "createGroup": "Create a Prayer Group",
+  "inviteFriends": "Invite Friends",
+  "groupInviteMessage": "Let's pray together! Join my prayer group on Abba.",
+  "noGroups": "Join or create a group to pray together.",
+  "promoTitle": "Launch Special",
+  "promoBanner": "First 3 months at $3.99/mo!",
+  "promoEndsOn": "Offer ends {date}",
+  "@promoEndsOn": { "placeholders": { "date": {} } }
 }

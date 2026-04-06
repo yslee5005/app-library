@@ -26,7 +26,10 @@ class AbbaButton extends StatelessWidget {
     final bgColor = backgroundColor ?? AbbaColors.sage;
     final fgColor = textColor ?? AbbaColors.white;
 
-    return SizedBox(
+    return Semantics(
+      button: true,
+      label: label,
+      child: SizedBox(
       width: double.infinity,
       height: height,
       child: ElevatedButton(
@@ -57,6 +60,7 @@ class AbbaButton extends StatelessWidget {
           ],
         ),
       ),
+    ),
     );
   }
 }

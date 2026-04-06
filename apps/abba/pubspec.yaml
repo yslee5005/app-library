@@ -15,7 +15,6 @@ dependencies:
   flutter_riverpod: ^2.6.1
   go_router: ^14.8.1
   google_fonts: ^6.2.1
-  cupertino_icons: ^1.0.8
   # Phase 2
   supabase_flutter: ^2.8.0
   http: ^1.2.0
@@ -26,14 +25,38 @@ dependencies:
   path_provider: ^2.1.0
   # Phase 3
   purchases_flutter: ^8.9.0
+  # Phase 4
+  share_plus: ^10.1.4
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^6.0.0
+  flutter_launcher_icons: ^0.14.3
+  flutter_native_splash: ^2.4.6
+
+# --- flutter_launcher_icons ---
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/icon/app_icon.png"
+  adaptive_icon_background: "#FFF8F0"
+  adaptive_icon_foreground: "assets/icon/app_icon_foreground.png"
+  min_sdk_android: 21
+
+# --- flutter_native_splash ---
+flutter_native_splash:
+  color: "#FFF8F0"
+  image: "assets/icon/app_icon.png"
+  android_12:
+    color: "#FFF8F0"
+    image: "assets/icon/app_icon.png"
+  ios: true
+  android: true
 
 flutter:
   generate: true
   uses-material-design: true
   assets:
     - assets/mock/
+    - assets/icon/

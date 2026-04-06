@@ -9,6 +9,7 @@ import '../../../providers/providers.dart';
 import '../../../services/error_logging_service.dart';
 import '../../../theme/abba_theme.dart';
 import '../../../widgets/abba_button.dart';
+import '../../../widgets/abba_snackbar.dart';
 
 class RecordingOverlay extends ConsumerStatefulWidget {
   const RecordingOverlay({super.key});
@@ -37,7 +38,14 @@ class _RecordingOverlayState extends ConsumerState<RecordingOverlay>
     _pulseController = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 1500),
-    )..repeat(reverse: true);
+    );
+    // Respect reduced motion accessibility setting
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final reduceMotion = MediaQuery.of(context).disableAnimations;
+      if (!reduceMotion) {
+        _pulseController.repeat(reverse: true);
+      }
+    });
     _startTimer();
     _startStt();
   }
@@ -46,7 +54,14 @@ class _RecordingOverlayState extends ConsumerState<RecordingOverlay>
     final stt = ref.read(sttServiceProvider);
     final locale = ref.read(localeProvider);
     stt.initialize().then((_) {
-      stt.setLocale(locale == 'ko' ? 'ko_KR' : 'en_US');
+      final sttLocale = switch (locale) {
+        'ko' => 'ko_KR',
+        'ja' => 'ja_JP',
+        'es' => 'es_ES',
+        'zh' => 'zh_CN',
+        _ => 'en_US',
+      };
+      stt.setLocale(sttLocale);
       stt.startListening(
         onResult: (text, isFinal) {
           setState(() => _transcript = text);
@@ -54,6 +69,13 @@ class _RecordingOverlayState extends ConsumerState<RecordingOverlay>
         onError: (error) {
           // Fallback: switch to text mode on STT error
           setState(() => _isTextMode = true);
+          if (mounted) {
+            final l10n = AppLocalizations.of(context);
+            showAbbaSnackBar(
+              context,
+              message: l10n?.errorSttFailed ?? 'Voice recognition unavailable.',
+            );
+          }
         },
       );
     });
@@ -132,13 +154,17 @@ class _RecordingOverlayState extends ConsumerState<RecordingOverlay>
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  IconButton(
-                    onPressed: () {
-                      ref.read(sttServiceProvider).cancelListening();
-                      Navigator.of(context).pop();
-                    },
-                    icon: const Icon(Icons.close, size: 28),
-                    color: AbbaColors.warmBrown,
+                  Semantics(
+                    label: 'Close recording',
+                    button: true,
+                    child: IconButton(
+                      onPressed: () {
+                        ref.read(sttServiceProvider).cancelListening();
+                        Navigator.of(context).pop();
+                      },
+                      icon: const Icon(Icons.close, size: 28),
+                      color: AbbaColors.warmBrown,
+                    ),
                   ),
                   Text(l10n.recordingTitle, style: AbbaTypography.h2),
                   TextButton.icon(

@@ -319,4 +319,51 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get deleteConfirmMessage => '이 글을 삭제하시겠습니까?';
+
+  @override
+  String get errorNetwork => '인터넷 연결을 확인하고 다시 시도해주세요.';
+
+  @override
+  String get errorAiFallback => 'AI에 연결할 수 없습니다. 오늘의 말씀을 보여드릴게요.';
+
+  @override
+  String get errorSttFailed => '음성 인식을 사용할 수 없습니다. 텍스트로 입력해주세요.';
+
+  @override
+  String get errorPayment => '결제에 문제가 있습니다. 설정에서 다시 시도해주세요.';
+
+  @override
+  String get errorGeneric => '잠시 후 다시 시도해주세요.';
+
+  @override
+  String get offlineNotice => '오프라인 상태입니다. 일부 기능이 제한될 수 있습니다.';
+
+  @override
+  String get retryButton => '다시 시도';
+
+  @override
+  String get groupSection => '내 그룹';
+
+  @override
+  String get createGroup => '기도 그룹 만들기';
+
+  @override
+  String get inviteFriends => '친구 초대하기';
+
+  @override
+  String get groupInviteMessage => '같이 기도해요! Abba에서 기도 그룹에 참여하세요.';
+
+  @override
+  String get noGroups => '그룹에 참여하거나 만들어 함께 기도하세요.';
+
+  @override
+  String get promoTitle => '런칭 특가';
+
+  @override
+  String get promoBanner => '3개월간 ₩5,900/월!';
+
+  @override
+  String promoEndsOn(Object date) {
+    return '$date까지 특가';
+  }
 }

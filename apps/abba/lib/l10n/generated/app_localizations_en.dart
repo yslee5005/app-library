@@ -321,4 +321,56 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get deleteConfirmMessage =>
       'Are you sure you want to delete this post?';
+
+  @override
+  String get errorNetwork =>
+      'Please check your internet connection and try again.';
+
+  @override
+  String get errorAiFallback =>
+      'We couldn\'t reach AI right now. Here\'s a verse for you.';
+
+  @override
+  String get errorSttFailed =>
+      'Voice recognition is not available. Please type instead.';
+
+  @override
+  String get errorPayment =>
+      'There was a problem with payment. Please try again in Settings.';
+
+  @override
+  String get errorGeneric => 'Something went wrong. Please try again later.';
+
+  @override
+  String get offlineNotice => 'You are offline. Some features may be limited.';
+
+  @override
+  String get retryButton => 'Try Again';
+
+  @override
+  String get groupSection => 'My Groups';
+
+  @override
+  String get createGroup => 'Create a Prayer Group';
+
+  @override
+  String get inviteFriends => 'Invite Friends';
+
+  @override
+  String get groupInviteMessage =>
+      'Let\'s pray together! Join my prayer group on Abba.';
+
+  @override
+  String get noGroups => 'Join or create a group to pray together.';
+
+  @override
+  String get promoTitle => 'Launch Special';
+
+  @override
+  String get promoBanner => 'First 3 months at \$3.99/mo!';
+
+  @override
+  String promoEndsOn(Object date) {
+    return 'Offer ends $date';
+  }
 }

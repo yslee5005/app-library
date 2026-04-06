@@ -16,6 +16,7 @@ import 'services/mock/mock_stt_service.dart';
 import 'services/mock/mock_subscription_service.dart';
 import 'services/mock/mock_tts_service.dart';
 import 'services/mock_data.dart';
+import 'services/cached_ai_service.dart';
 import 'services/real/openai_service.dart';
 import 'services/real/real_notification_service.dart';
 import 'services/real/real_stt_service.dart';
@@ -65,7 +66,7 @@ Future<void> main() async {
 
     overrides.addAll([
       authServiceProvider.overrideWithValue(SupabaseAuthService(supabase)),
-      aiServiceProvider.overrideWithValue(OpenAiService()),
+      aiServiceProvider.overrideWithValue(CachedAiService(OpenAiService())),
       sttServiceProvider.overrideWithValue(RealSttService()),
       ttsServiceProvider.overrideWithValue(RealTtsService()),
       prayerRepositoryProvider

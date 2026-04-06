@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../theme/abba_theme.dart';
+import 'milestone_share_card.dart';
 
 /// Milestone data for celebration modals
 class MilestoneInfo {
@@ -63,8 +64,10 @@ const milestoneInfoMap = <String, MilestoneInfo>{
 Future<void> showMilestoneModal(
   BuildContext context,
   String milestoneType,
-  String locale,
-) async {
+  String locale, {
+  int streakDays = 0,
+  String userName = '',
+}) async {
   final info = milestoneInfoMap[milestoneType];
   if (info == null) return;
 
@@ -94,6 +97,38 @@ Future<void> showMilestoneModal(
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: AbbaSpacing.xl),
+            // Share button
+            if (streakDays > 0)
+              SizedBox(
+                width: double.infinity,
+                height: abbaButtonHeight,
+                child: OutlinedButton.icon(
+                  onPressed: () {
+                    Navigator.pop(ctx);
+                    MilestoneShareCard.share(
+                      context: context,
+                      streakDays: streakDays,
+                      userName: userName,
+                      locale: locale,
+                    );
+                  },
+                  icon: const Icon(Icons.share, color: AbbaColors.sage),
+                  label: Text(
+                    locale == 'ko' ? '공유하기' : 'Share',
+                    style: AbbaTypography.body.copyWith(
+                      color: AbbaColors.sage,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  style: OutlinedButton.styleFrom(
+                    side: const BorderSide(color: AbbaColors.sage),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(AbbaRadius.lg),
+                    ),
+                  ),
+                ),
+              ),
+            if (streakDays > 0) const SizedBox(height: AbbaSpacing.sm),
             SizedBox(
               width: double.infinity,
               height: abbaButtonHeight,

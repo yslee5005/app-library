@@ -8,6 +8,7 @@ import '../../../l10n/generated/app_localizations.dart';
 import '../../../models/prayer.dart';
 import '../../../providers/providers.dart';
 import '../../../services/error_logging_service.dart';
+import '../../../services/network_checker.dart';
 import '../../../theme/abba_theme.dart';
 
 class AiLoadingView extends ConsumerStatefulWidget {
@@ -73,6 +74,15 @@ class _AiLoadingViewState extends ConsumerState<AiLoadingView>
     final authState = ref.read(authStateProvider);
     final userId = authState.user?.id ?? 'anonymous';
 
+    // Check network before calling AI API
+    final hasNetwork = await NetworkChecker.hasConnection();
+    if (!hasNetwork) {
+      _setFallbackResult(transcript);
+      _aiDone = true;
+      _navigateIfReady();
+      return;
+    }
+
     try {
       final result = await aiService.analyzePrayer(
         transcript: transcript,
@@ -98,8 +108,7 @@ class _AiLoadingViewState extends ConsumerState<AiLoadingView>
       );
     } catch (e, stackTrace) {
       ErrorLoggingService.captureException(e, stackTrace);
-      ref.read(prayerResultProvider.notifier).state =
-          AsyncValue.error(e, StackTrace.current);
+      _setFallbackResult(transcript);
     }
 
     _aiDone = true;
@@ -110,6 +119,25 @@ class _AiLoadingViewState extends ConsumerState<AiLoadingView>
     );
 
     _navigateIfReady();
+  }
+
+  void _setFallbackResult(String transcript) {
+    ref.read(prayerResultProvider.notifier).state = AsyncValue.data(
+      PrayerResult(
+        scripture: const Scripture(
+          verseEn: 'The LORD is my shepherd; I shall not want.',
+          verseKo: '여호와는 나의 목자시니 내게 부족함이 없으리로다',
+          reference: 'Psalm 23:1',
+        ),
+        bibleStory: const BibleStory(
+          titleEn: 'God is faithful',
+          titleKo: '하나님은 신실하십니다',
+          summaryEn: 'Even when we cannot see the way, God is faithfully guiding our steps.',
+          summaryKo: '우리가 길을 볼 수 없을 때에도, 하나님은 신실하게 우리의 발걸음을 인도하십니다.',
+        ),
+        testimony: transcript,
+      ),
+    );
   }
 
   void _navigateIfReady() {

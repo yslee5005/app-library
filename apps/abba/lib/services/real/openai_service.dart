@@ -15,7 +15,7 @@ class OpenAiService implements AiService {
     required String transcript,
     required String locale,
   }) async {
-    final langName = locale == 'ko' ? 'Korean' : 'English';
+    final langName = _localeName(locale);
 
     ErrorLoggingService.addBreadcrumb(
       'AI API call started',
@@ -127,6 +127,16 @@ class OpenAiService implements AiService {
       ),
       testimony: '',
     );
+  }
+
+  static String _localeName(String locale) {
+    return switch (locale) {
+      'ko' => 'Korean',
+      'ja' => 'Japanese',
+      'es' => 'Spanish',
+      'zh' => 'Chinese (Simplified)',
+      _ => 'English',
+    };
   }
 
   String _buildSystemPrompt(String langName) {

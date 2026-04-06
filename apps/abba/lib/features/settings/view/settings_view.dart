@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:share_plus/share_plus.dart' show Share;
 
 import '../../../l10n/generated/app_localizations.dart';
 import '../../../providers/providers.dart';
 import '../../../services/auth_service.dart';
 import '../../../theme/abba_theme.dart';
 import '../../../widgets/abba_card.dart';
+import '../../../widgets/abba_snackbar.dart';
 
 class SettingsView extends ConsumerStatefulWidget {
   const SettingsView({super.key});
@@ -95,6 +97,10 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
             _buildPremiumCard(l10n),
             const SizedBox(height: AbbaSpacing.md),
 
+            // Groups section
+            _buildGroupSection(l10n),
+            const SizedBox(height: AbbaSpacing.md),
+
             // Settings list
             _buildNotificationSettings(l10n),
             const SizedBox(height: AbbaSpacing.md),
@@ -151,6 +157,18 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
                         DropdownMenuItem(
                           value: 'ko',
                           child: Text('한국어'),
+                        ),
+                        DropdownMenuItem(
+                          value: 'ja',
+                          child: Text('日本語'),
+                        ),
+                        DropdownMenuItem(
+                          value: 'es',
+                          child: Text('Español'),
+                        ),
+                        DropdownMenuItem(
+                          value: 'zh',
+                          child: Text('中文'),
                         ),
                       ],
                       onChanged: (v) {
@@ -285,28 +303,42 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
               ),
             ),
           ] else ...[
-            // Promo banner
-            Container(
-              width: double.infinity,
-              padding: const EdgeInsets.all(AbbaSpacing.md),
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [
-                    AbbaColors.softGold.withValues(alpha: 0.3),
-                    AbbaColors.softPink.withValues(alpha: 0.3),
+            // Promo banner (auto-hidden after promo end date)
+            if (_isPromoActive) ...[
+              Container(
+                width: double.infinity,
+                padding: const EdgeInsets.all(AbbaSpacing.md),
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [
+                      AbbaColors.softGold.withValues(alpha: 0.3),
+                      AbbaColors.softPink.withValues(alpha: 0.3),
+                    ],
+                  ),
+                  borderRadius: BorderRadius.circular(AbbaRadius.md),
+                ),
+                child: Column(
+                  children: [
+                    Text(
+                      '🌸 ${l10n.promoBanner}',
+                      style: AbbaTypography.body.copyWith(
+                        fontWeight: FontWeight.w600,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                    const SizedBox(height: AbbaSpacing.xs),
+                    Text(
+                      l10n.promoEndsOn(
+                        '${_promoEndDate.year}-${_promoEndDate.month.toString().padLeft(2, '0')}-${_promoEndDate.day.toString().padLeft(2, '0')}',
+                      ),
+                      style: AbbaTypography.caption,
+                      textAlign: TextAlign.center,
+                    ),
                   ],
                 ),
-                borderRadius: BorderRadius.circular(AbbaRadius.md),
               ),
-              child: Text(
-                '🌸 ${l10n.launchPromo}',
-                style: AbbaTypography.body.copyWith(
-                  fontWeight: FontWeight.w600,
-                ),
-                textAlign: TextAlign.center,
-              ),
-            ),
-            const SizedBox(height: AbbaSpacing.md),
+              const SizedBox(height: AbbaSpacing.md),
+            ],
             // Price comparison
             Row(
               children: [
@@ -352,9 +384,15 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
               height: abbaButtonHeight,
               child: ElevatedButton(
                 onPressed: () async {
-                  final service = ref.read(subscriptionServiceProvider);
-                  final success = await service.purchaseMonthly();
-                  if (success) ref.invalidate(isPremiumProvider);
+                  try {
+                    final service = ref.read(subscriptionServiceProvider);
+                    final success = await service.purchaseMonthly();
+                    if (success) ref.invalidate(isPremiumProvider);
+                  } catch (_) {
+                    if (mounted) {
+                      showAbbaSnackBar(context, message: l10n.errorPayment);
+                    }
+                  }
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: AbbaColors.premium,
@@ -379,9 +417,15 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
               height: abbaButtonHeight,
               child: OutlinedButton(
                 onPressed: () async {
-                  final service = ref.read(subscriptionServiceProvider);
-                  final success = await service.purchaseYearly();
-                  if (success) ref.invalidate(isPremiumProvider);
+                  try {
+                    final service = ref.read(subscriptionServiceProvider);
+                    final success = await service.purchaseYearly();
+                    if (success) ref.invalidate(isPremiumProvider);
+                  } catch (_) {
+                    if (mounted) {
+                      showAbbaSnackBar(context, message: l10n.errorPayment);
+                    }
+                  }
                 },
                 style: OutlinedButton.styleFrom(
                   side: const BorderSide(color: AbbaColors.premium),
@@ -399,6 +443,55 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
               ),
             ),
           ],
+        ],
+      ),
+    );
+  }
+
+  /// Promotion end date — after this date, the promo banner is hidden.
+  static final _promoEndDate = DateTime(2026, 7, 6); // 3 months from launch
+
+  bool get _isPromoActive => DateTime.now().isBefore(_promoEndDate);
+
+  Widget _buildGroupSection(AppLocalizations l10n) {
+    return AbbaCard(
+      margin: EdgeInsets.zero,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              const Text('🌻', style: TextStyle(fontSize: 24)),
+              const SizedBox(width: AbbaSpacing.sm),
+              Text(l10n.groupSection, style: AbbaTypography.h2),
+            ],
+          ),
+          const SizedBox(height: AbbaSpacing.md),
+          Text(
+            l10n.noGroups,
+            style: AbbaTypography.bodySmall.copyWith(color: AbbaColors.muted),
+          ),
+          const SizedBox(height: AbbaSpacing.md),
+          SizedBox(
+            width: double.infinity,
+            height: abbaButtonHeight,
+            child: OutlinedButton.icon(
+              onPressed: () {
+                Share.share(l10n.groupInviteMessage);
+              },
+              icon: const Icon(Icons.person_add, color: AbbaColors.sage),
+              label: Text(
+                l10n.inviteFriends,
+                style: AbbaTypography.body.copyWith(color: AbbaColors.sage),
+              ),
+              style: OutlinedButton.styleFrom(
+                side: const BorderSide(color: AbbaColors.sage),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(AbbaRadius.lg),
+                ),
+              ),
+            ),
+          ),
         ],
       ),
     );

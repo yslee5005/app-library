@@ -6,7 +6,10 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:intl/intl.dart' as intl;
 
 import 'app_localizations_en.dart';
+import 'app_localizations_es.dart';
+import 'app_localizations_ja.dart';
 import 'app_localizations_ko.dart';
+import 'app_localizations_zh.dart';
 
 // ignore_for_file: type=lint
 
@@ -95,7 +98,10 @@ abstract class AppLocalizations {
   /// A list of this localizations delegate's supported locales.
   static const List<Locale> supportedLocales = <Locale>[
     Locale('en'),
+    Locale('es'),
+    Locale('ja'),
     Locale('ko'),
+    Locale('zh'),
   ];
 
   /// No description provided for @appName.
@@ -697,6 +703,96 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Are you sure you want to delete this post?'**
   String get deleteConfirmMessage;
+
+  /// No description provided for @errorNetwork.
+  ///
+  /// In en, this message translates to:
+  /// **'Please check your internet connection and try again.'**
+  String get errorNetwork;
+
+  /// No description provided for @errorAiFallback.
+  ///
+  /// In en, this message translates to:
+  /// **'We couldn\'t reach AI right now. Here\'s a verse for you.'**
+  String get errorAiFallback;
+
+  /// No description provided for @errorSttFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Voice recognition is not available. Please type instead.'**
+  String get errorSttFailed;
+
+  /// No description provided for @errorPayment.
+  ///
+  /// In en, this message translates to:
+  /// **'There was a problem with payment. Please try again in Settings.'**
+  String get errorPayment;
+
+  /// No description provided for @errorGeneric.
+  ///
+  /// In en, this message translates to:
+  /// **'Something went wrong. Please try again later.'**
+  String get errorGeneric;
+
+  /// No description provided for @offlineNotice.
+  ///
+  /// In en, this message translates to:
+  /// **'You are offline. Some features may be limited.'**
+  String get offlineNotice;
+
+  /// No description provided for @retryButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Try Again'**
+  String get retryButton;
+
+  /// No description provided for @groupSection.
+  ///
+  /// In en, this message translates to:
+  /// **'My Groups'**
+  String get groupSection;
+
+  /// No description provided for @createGroup.
+  ///
+  /// In en, this message translates to:
+  /// **'Create a Prayer Group'**
+  String get createGroup;
+
+  /// No description provided for @inviteFriends.
+  ///
+  /// In en, this message translates to:
+  /// **'Invite Friends'**
+  String get inviteFriends;
+
+  /// No description provided for @groupInviteMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Let\'s pray together! Join my prayer group on Abba.'**
+  String get groupInviteMessage;
+
+  /// No description provided for @noGroups.
+  ///
+  /// In en, this message translates to:
+  /// **'Join or create a group to pray together.'**
+  String get noGroups;
+
+  /// No description provided for @promoTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Launch Special'**
+  String get promoTitle;
+
+  /// No description provided for @promoBanner.
+  ///
+  /// In en, this message translates to:
+  /// **'First 3 months at \$3.99/mo!'**
+  String get promoBanner;
+
+  /// No description provided for @promoEndsOn.
+  ///
+  /// In en, this message translates to:
+  /// **'Offer ends {date}'**
+  String promoEndsOn(Object date);
 }
 
 class _AppLocalizationsDelegate
@@ -710,7 +806,7 @@ class _AppLocalizationsDelegate
 
   @override
   bool isSupported(Locale locale) =>
-      <String>['en', 'ko'].contains(locale.languageCode);
+      <String>['en', 'es', 'ja', 'ko', 'zh'].contains(locale.languageCode);
 
   @override
   bool shouldReload(_AppLocalizationsDelegate old) => false;
@@ -721,8 +817,14 @@ AppLocalizations lookupAppLocalizations(Locale locale) {
   switch (locale.languageCode) {
     case 'en':
       return AppLocalizationsEn();
+    case 'es':
+      return AppLocalizationsEs();
+    case 'ja':
+      return AppLocalizationsJa();
     case 'ko':
       return AppLocalizationsKo();
+    case 'zh':
+      return AppLocalizationsZh();
   }
 
   throw FlutterError(

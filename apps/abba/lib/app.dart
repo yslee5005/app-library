@@ -28,6 +28,9 @@ class AbbaApp extends ConsumerWidget {
       supportedLocales: const [
         Locale('en'),
         Locale('ko'),
+        Locale('ja'),
+        Locale('es'),
+        Locale('zh'),
       ],
       routerConfig: appRouter,
     );

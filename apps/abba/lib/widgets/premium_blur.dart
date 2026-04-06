@@ -22,7 +22,9 @@ class PremiumBlur extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return Semantics(
+      label: isLocked ? '$title - Premium content locked' : title,
+      child: Container(
       margin: const EdgeInsets.symmetric(
         horizontal: AbbaSpacing.md,
         vertical: AbbaSpacing.sm,
@@ -133,6 +135,7 @@ class PremiumBlur extends StatelessWidget {
             ),
         ],
       ),
+    ),
     );
   }
 }
