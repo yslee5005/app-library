@@ -8,6 +8,8 @@ import '../features/calendar/view/calendar_view.dart';
 import '../features/community/view/community_view.dart';
 import '../features/community/view/write_post_view.dart';
 import '../features/dashboard/view/dashboard_view.dart';
+import '../features/dashboard/view/prayer_dashboard_view.dart';
+import '../features/dashboard/view/qt_dashboard_view.dart';
 import '../features/home/view/home_view.dart';
 import '../features/login/view/login_view.dart';
 import '../features/qt/view/qt_view.dart';
@@ -55,6 +57,15 @@ final appRouter = GoRouter(
                 GoRoute(
                   path: 'dashboard',
                   builder: (context, state) => const DashboardView(),
+                ),
+                GoRoute(
+                  path: 'prayer-dashboard',
+                  builder: (context, state) =>
+                      const PrayerDashboardView(),
+                ),
+                GoRoute(
+                  path: 'qt-dashboard',
+                  builder: (context, state) => const QtDashboardView(),
                 ),
                 GoRoute(
                   path: 'qt',

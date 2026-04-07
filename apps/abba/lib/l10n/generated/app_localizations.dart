@@ -985,6 +985,120 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Type instead'**
   String get switchToTextMode;
+
+  /// No description provided for @prayerDashboardTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Prayer Garden'**
+  String get prayerDashboardTitle;
+
+  /// No description provided for @qtDashboardTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'QT Garden'**
+  String get qtDashboardTitle;
+
+  /// No description provided for @prayerSummaryTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Prayer Summary'**
+  String get prayerSummaryTitle;
+
+  /// No description provided for @gratitudeLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Gratitude'**
+  String get gratitudeLabel;
+
+  /// No description provided for @petitionLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Petition'**
+  String get petitionLabel;
+
+  /// No description provided for @intercessionLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Intercession'**
+  String get intercessionLabel;
+
+  /// No description provided for @historicalStoryTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Story from History'**
+  String get historicalStoryTitle;
+
+  /// No description provided for @todayLesson.
+  ///
+  /// In en, this message translates to:
+  /// **'Today\'s Lesson'**
+  String get todayLesson;
+
+  /// No description provided for @meditationAnalysisTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Meditation Analysis'**
+  String get meditationAnalysisTitle;
+
+  /// No description provided for @keyThemeLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Key Theme'**
+  String get keyThemeLabel;
+
+  /// No description provided for @applicationTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Today\'s Application'**
+  String get applicationTitle;
+
+  /// No description provided for @applicationWhat.
+  ///
+  /// In en, this message translates to:
+  /// **'What'**
+  String get applicationWhat;
+
+  /// No description provided for @applicationWhen.
+  ///
+  /// In en, this message translates to:
+  /// **'When'**
+  String get applicationWhen;
+
+  /// No description provided for @applicationContext.
+  ///
+  /// In en, this message translates to:
+  /// **'Where'**
+  String get applicationContext;
+
+  /// No description provided for @relatedKnowledgeTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Related Knowledge'**
+  String get relatedKnowledgeTitle;
+
+  /// No description provided for @originalWordLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Original Word'**
+  String get originalWordLabel;
+
+  /// No description provided for @historicalContextLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Historical Context'**
+  String get historicalContextLabel;
+
+  /// No description provided for @crossReferencesLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cross References'**
+  String get crossReferencesLabel;
+
+  /// No description provided for @growthStoryTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Growth Story'**
+  String get growthStoryTitle;
 }
 
 class _AppLocalizationsDelegate

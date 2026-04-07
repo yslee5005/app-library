@@ -464,4 +464,61 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get switchToTextMode => '텍스트로 전환';
+
+  @override
+  String get prayerDashboardTitle => '기도 정원';
+
+  @override
+  String get qtDashboardTitle => 'QT 정원';
+
+  @override
+  String get prayerSummaryTitle => '기도 요약';
+
+  @override
+  String get gratitudeLabel => '감사';
+
+  @override
+  String get petitionLabel => '간구';
+
+  @override
+  String get intercessionLabel => '중보';
+
+  @override
+  String get historicalStoryTitle => '역사 속 이야기';
+
+  @override
+  String get todayLesson => '오늘의 교훈';
+
+  @override
+  String get meditationAnalysisTitle => '묵상 분석';
+
+  @override
+  String get keyThemeLabel => '핵심 테마';
+
+  @override
+  String get applicationTitle => '오늘의 적용';
+
+  @override
+  String get applicationWhat => '무엇을';
+
+  @override
+  String get applicationWhen => '언제';
+
+  @override
+  String get applicationContext => '어디서';
+
+  @override
+  String get relatedKnowledgeTitle => '관련 지식';
+
+  @override
+  String get originalWordLabel => '원어';
+
+  @override
+  String get historicalContextLabel => '역사적 배경';
+
+  @override
+  String get crossReferencesLabel => '관련 구절';
+
+  @override
+  String get growthStoryTitle => '영적 성장 이야기';
 }

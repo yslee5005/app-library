@@ -475,4 +475,61 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get switchToTextMode => 'Escribir en su lugar';
+
+  @override
+  String get prayerDashboardTitle => 'Jardín de Oración';
+
+  @override
+  String get qtDashboardTitle => 'Jardín Devocional';
+
+  @override
+  String get prayerSummaryTitle => 'Resumen de Oración';
+
+  @override
+  String get gratitudeLabel => 'Gratitud';
+
+  @override
+  String get petitionLabel => 'Petición';
+
+  @override
+  String get intercessionLabel => 'Intercesión';
+
+  @override
+  String get historicalStoryTitle => 'Historia';
+
+  @override
+  String get todayLesson => 'Lección de hoy';
+
+  @override
+  String get meditationAnalysisTitle => 'Análisis de Meditación';
+
+  @override
+  String get keyThemeLabel => 'Tema clave';
+
+  @override
+  String get applicationTitle => 'Aplicación de hoy';
+
+  @override
+  String get applicationWhat => 'Qué';
+
+  @override
+  String get applicationWhen => 'Cuándo';
+
+  @override
+  String get applicationContext => 'Dónde';
+
+  @override
+  String get relatedKnowledgeTitle => 'Conocimiento Relacionado';
+
+  @override
+  String get originalWordLabel => 'Palabra original';
+
+  @override
+  String get historicalContextLabel => 'Contexto histórico';
+
+  @override
+  String get crossReferencesLabel => 'Referencias cruzadas';
+
+  @override
+  String get growthStoryTitle => 'Historia de Crecimiento';
 }

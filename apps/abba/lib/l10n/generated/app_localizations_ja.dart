@@ -464,4 +464,61 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get switchToTextMode => 'テキストに切替';
+
+  @override
+  String get prayerDashboardTitle => '祈りの庭';
+
+  @override
+  String get qtDashboardTitle => 'QTの庭';
+
+  @override
+  String get prayerSummaryTitle => '祈りの要約';
+
+  @override
+  String get gratitudeLabel => '感謝';
+
+  @override
+  String get petitionLabel => '願い';
+
+  @override
+  String get intercessionLabel => 'とりなし';
+
+  @override
+  String get historicalStoryTitle => '歴史の物語';
+
+  @override
+  String get todayLesson => '今日の教訓';
+
+  @override
+  String get meditationAnalysisTitle => '黙想分析';
+
+  @override
+  String get keyThemeLabel => 'キーテーマ';
+
+  @override
+  String get applicationTitle => '今日の適用';
+
+  @override
+  String get applicationWhat => '何を';
+
+  @override
+  String get applicationWhen => 'いつ';
+
+  @override
+  String get applicationContext => 'どこで';
+
+  @override
+  String get relatedKnowledgeTitle => '関連知識';
+
+  @override
+  String get originalWordLabel => '原語';
+
+  @override
+  String get historicalContextLabel => '歴史的背景';
+
+  @override
+  String get crossReferencesLabel => '関連聖句';
+
+  @override
+  String get growthStoryTitle => '霊的成長の物語';
 }

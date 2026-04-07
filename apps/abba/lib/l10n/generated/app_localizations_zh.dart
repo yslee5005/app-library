@@ -464,4 +464,61 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get switchToTextMode => '切换到文字输入';
+
+  @override
+  String get prayerDashboardTitle => '祷告花园';
+
+  @override
+  String get qtDashboardTitle => '灵修花园';
+
+  @override
+  String get prayerSummaryTitle => '祷告摘要';
+
+  @override
+  String get gratitudeLabel => '感恩';
+
+  @override
+  String get petitionLabel => '祈求';
+
+  @override
+  String get intercessionLabel => '代祷';
+
+  @override
+  String get historicalStoryTitle => '历史故事';
+
+  @override
+  String get todayLesson => '今日教训';
+
+  @override
+  String get meditationAnalysisTitle => '默想分析';
+
+  @override
+  String get keyThemeLabel => '核心主题';
+
+  @override
+  String get applicationTitle => '今日应用';
+
+  @override
+  String get applicationWhat => '做什么';
+
+  @override
+  String get applicationWhen => '何时';
+
+  @override
+  String get applicationContext => '何地';
+
+  @override
+  String get relatedKnowledgeTitle => '相关知识';
+
+  @override
+  String get originalWordLabel => '原文';
+
+  @override
+  String get historicalContextLabel => '历史背景';
+
+  @override
+  String get crossReferencesLabel => '相关经文';
+
+  @override
+  String get growthStoryTitle => '成长故事';
 }

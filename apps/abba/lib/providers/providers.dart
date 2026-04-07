@@ -2,6 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../models/post.dart';
 import '../models/prayer.dart';
+import '../models/qt_meditation_result.dart';
 import '../models/qt_passage.dart';
 import '../models/user_profile.dart';
 import '../services/ai_service.dart';
@@ -172,6 +173,21 @@ final localeProvider = StateProvider<String>((ref) => 'ko');
 
 /// Tracks current prayer transcript from recording
 final currentTranscriptProvider = StateProvider<String>((ref) => '');
+
+/// Current prayer mode: 'prayer' or 'qt'
+final currentPrayerModeProvider = StateProvider<String>((ref) => 'prayer');
+
+/// QT meditation result (separate from prayer result)
+final qtMeditationResultProvider =
+    StateProvider<AsyncValue<QtMeditationResult>>((ref) {
+  return const AsyncValue.loading();
+});
+
+/// Current QT passage reference for meditation
+final currentPassageRefProvider = StateProvider<String>((ref) => '');
+
+/// Current QT passage text for meditation
+final currentPassageTextProvider = StateProvider<String>((ref) => '');
 
 /// Today's prayer count for free user limiting
 final todayPrayerCountProvider = StateProvider<int>((ref) => 0);

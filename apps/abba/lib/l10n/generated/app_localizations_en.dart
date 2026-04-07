@@ -472,4 +472,61 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get switchToTextMode => 'Type instead';
+
+  @override
+  String get prayerDashboardTitle => 'Prayer Garden';
+
+  @override
+  String get qtDashboardTitle => 'QT Garden';
+
+  @override
+  String get prayerSummaryTitle => 'Prayer Summary';
+
+  @override
+  String get gratitudeLabel => 'Gratitude';
+
+  @override
+  String get petitionLabel => 'Petition';
+
+  @override
+  String get intercessionLabel => 'Intercession';
+
+  @override
+  String get historicalStoryTitle => 'Story from History';
+
+  @override
+  String get todayLesson => 'Today\'s Lesson';
+
+  @override
+  String get meditationAnalysisTitle => 'Meditation Analysis';
+
+  @override
+  String get keyThemeLabel => 'Key Theme';
+
+  @override
+  String get applicationTitle => 'Today\'s Application';
+
+  @override
+  String get applicationWhat => 'What';
+
+  @override
+  String get applicationWhen => 'When';
+
+  @override
+  String get applicationContext => 'Where';
+
+  @override
+  String get relatedKnowledgeTitle => 'Related Knowledge';
+
+  @override
+  String get originalWordLabel => 'Original Word';
+
+  @override
+  String get historicalContextLabel => 'Historical Context';
+
+  @override
+  String get crossReferencesLabel => 'Cross References';
+
+  @override
+  String get growthStoryTitle => 'Growth Story';
 }

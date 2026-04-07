@@ -19,9 +19,9 @@ void main() {
       expect(result.scripture.verseKo, isNotEmpty);
       expect(result.bibleStory.titleEn, isNotEmpty);
       expect(result.testimony, isNotEmpty);
-      expect(result.guidance, isNotNull);
       expect(result.aiPrayer, isNotNull);
-      expect(result.originalLanguage, isNotNull);
+      expect(result.prayerSummary, isNotNull);
+      expect(result.historicalStory, isNotNull);
     });
 
     test('getPrayerResult caches result', () async {

@@ -303,6 +303,14 @@ class _QtCard extends StatelessWidget {
   }
 
   void _showRecording(BuildContext context) {
+    // Set QT mode and passage info before recording
+    final container = ProviderScope.containerOf(context);
+    container.read(currentPrayerModeProvider.notifier).state = 'qt';
+    container.read(currentPassageRefProvider.notifier).state =
+        passage.reference;
+    container.read(currentPassageTextProvider.notifier).state =
+        passage.text(locale);
+
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,

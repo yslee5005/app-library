@@ -32,6 +32,77 @@ class Prayer {
   }
 }
 
+class PrayerSummary {
+  final List<String> gratitude;
+  final List<String> petition;
+  final List<String> intercession;
+  final int durationSeconds;
+
+  const PrayerSummary({
+    required this.gratitude,
+    required this.petition,
+    required this.intercession,
+    this.durationSeconds = 0,
+  });
+
+  factory PrayerSummary.fromJson(Map<String, dynamic> json) {
+    return PrayerSummary(
+      gratitude: (json['gratitude'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
+      petition: (json['petition'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
+      intercession: (json['intercession'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
+      durationSeconds: json['duration_seconds'] as int? ?? 0,
+    );
+  }
+}
+
+class HistoricalStory {
+  final String titleEn;
+  final String titleKo;
+  final String reference;
+  final String summaryEn;
+  final String summaryKo;
+  final String lessonEn;
+  final String lessonKo;
+  final bool isPremium;
+
+  const HistoricalStory({
+    required this.titleEn,
+    required this.titleKo,
+    required this.reference,
+    required this.summaryEn,
+    required this.summaryKo,
+    required this.lessonEn,
+    required this.lessonKo,
+    required this.isPremium,
+  });
+
+  factory HistoricalStory.fromJson(Map<String, dynamic> json) {
+    return HistoricalStory(
+      titleEn: json['title_en'] as String,
+      titleKo: json['title_ko'] as String,
+      reference: json['reference'] as String,
+      summaryEn: json['summary_en'] as String,
+      summaryKo: json['summary_ko'] as String,
+      lessonEn: json['lesson_en'] as String,
+      lessonKo: json['lesson_ko'] as String,
+      isPremium: json['is_premium'] as bool? ?? true,
+    );
+  }
+
+  String title(String locale) => locale == 'ko' ? titleKo : titleEn;
+  String summary(String locale) => locale == 'ko' ? summaryKo : summaryEn;
+  String lesson(String locale) => locale == 'ko' ? lessonKo : lessonEn;
+}
+
 class PrayerResult {
   final Scripture scripture;
   final BibleStory bibleStory;
@@ -39,6 +110,8 @@ class PrayerResult {
   final Guidance? guidance;
   final AiPrayer? aiPrayer;
   final OriginalLanguage? originalLanguage;
+  final PrayerSummary? prayerSummary;
+  final HistoricalStory? historicalStory;
 
   const PrayerResult({
     required this.scripture,
@@ -47,6 +120,8 @@ class PrayerResult {
     this.guidance,
     this.aiPrayer,
     this.originalLanguage,
+    this.prayerSummary,
+    this.historicalStory,
   });
 
   factory PrayerResult.fromJson(Map<String, dynamic> json) {
@@ -65,6 +140,16 @@ class PrayerResult {
       originalLanguage: json['original_language'] != null
           ? OriginalLanguage.fromJson(
               json['original_language'] as Map<String, dynamic>,
+            )
+          : null,
+      prayerSummary: json['prayer_summary'] != null
+          ? PrayerSummary.fromJson(
+              json['prayer_summary'] as Map<String, dynamic>,
+            )
+          : null,
+      historicalStory: json['historical_story'] != null
+          ? HistoricalStory.fromJson(
+              json['historical_story'] as Map<String, dynamic>,
             )
           : null,
     );

@@ -1,0 +1,37 @@
+{
+  "analysis": {
+    "key_theme_en": "Rest and Peace",
+    "key_theme_ko": "쉼과 평안",
+    "insight_en": "Your meditation reveals a deep longing for rest in God's presence. You are recognizing that true peace comes not from external circumstances but from trusting the Shepherd who leads you beside still waters.",
+    "insight_ko": "당신의 묵상에서 하나님 안에서의 쉼에 대한 깊은 갈망이 느껴집니다. 진정한 평안은 외부 환경이 아니라 잔잔한 물가로 인도하시는 목자를 신뢰하는 데서 온다는 것을 인식하고 계십니다."
+  },
+  "application": {
+    "action_en": "Take 15 minutes of intentional rest today",
+    "action_ko": "오늘 15분간 의도적으로 쉬는 시간을 가져보세요",
+    "when_en": "During lunch break",
+    "when_ko": "점심시간에",
+    "context_en": "At your workplace or a quiet corner",
+    "context_ko": "직장이나 조용한 공간에서"
+  },
+  "knowledge": {
+    "original_word": {
+      "word": "מְנֻחוֹת",
+      "transliteration": "menukhot",
+      "language": "Hebrew",
+      "meaning_en": "Still waters, waters of rest — reflects sheep's fear of rushing water. The shepherd reshapes the environment for the flock's comfort.",
+      "meaning_ko": "쉴만한 물, 안식의 물 — 급류를 두려워하는 양의 습성에서 나온 표현. 목자는 양떼의 편안함을 위해 환경까지 바꿉니다."
+    },
+    "historical_context_en": "Ancient Palestinian shepherds would create calm pools by damming streams, because sheep refuse to drink from rushing water. The shepherd's care extended to reshaping the environment for the flock's comfort. This image powerfully depicts how God actively creates conditions of peace for His people.",
+    "historical_context_ko": "고대 팔레스타인 목자는 양이 급류에서 물을 마시지 않으므로 시냇물에 둑을 쌓아 잔잔한 웅덩이를 만들어주었습니다. 목자의 돌봄은 양떼의 편안함을 위해 환경까지 바꾸는 것이었습니다. 이 이미지는 하나님이 자기 백성을 위해 적극적으로 평안의 조건을 만드시는 모습을 강력하게 묘사합니다.",
+    "cross_references": ["Matthew 11:28", "Hebrews 4:9-11", "Psalm 46:10"]
+  },
+  "growth_story": {
+    "title_en": "Corrie ten Boom — Finding Peace in a Concentration Camp",
+    "title_ko": "코리 텐 붐 — 수용소에서 평안을 찾다",
+    "summary_en": "During World War II, Corrie ten Boom was imprisoned in a Nazi concentration camp for hiding Jewish families. Even in the darkest conditions, she found God's peace through daily Scripture meditation and prayer with her sister Betsie. When everything was stripped away, God's presence remained their source of rest.",
+    "summary_ko": "2차 세계대전 중 코리 텐 붐은 유대인 가족을 숨겨준 죄로 나치 수용소에 갇혔습니다. 가장 어두운 환경 속에서도 언니 벳시와 함께 매일 말씀 묵상과 기도를 통해 하나님의 평안을 찾았습니다. 모든 것이 빼앗겼을 때에도, 하나님의 임재가 그들의 안식의 원천이 되었습니다.",
+    "lesson_en": "True rest is not the absence of hardship, but the presence of God in any circumstance.",
+    "lesson_ko": "진정한 안식은 고난이 없는 것이 아니라, 어떤 상황에서든 하나님이 함께 계시는 것입니다.",
+    "is_premium": true
+  }
+}

@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../l10n/generated/app_localizations.dart';
 import '../../../models/prayer.dart';
+import '../../../models/qt_meditation_result.dart';
 import '../../../providers/providers.dart';
 import '../../../services/error_logging_service.dart';
 import '../../../services/network_checker.dart';
@@ -59,8 +60,13 @@ class _AiLoadingViewState extends ConsumerState<AiLoadingView>
 
     ErrorLoggingService.addBreadcrumb('AI loading started', category: 'prayer');
 
-    // Call AI service
-    _analyzeWithAi();
+    // Call AI service based on mode
+    final mode = ref.read(currentPrayerModeProvider);
+    if (mode == 'qt') {
+      _analyzeQtMeditation();
+    } else {
+      _analyzeWithAi();
+    }
   }
 
   Future<void> _analyzeWithAi() async {
@@ -121,6 +127,61 @@ class _AiLoadingViewState extends ConsumerState<AiLoadingView>
     _navigateIfReady();
   }
 
+  Future<void> _analyzeQtMeditation() async {
+    final meditationText = ref.read(currentTranscriptProvider);
+    final passageRef = ref.read(currentPassageRefProvider);
+    final passageText = ref.read(currentPassageTextProvider);
+    final locale = ref.read(localeProvider);
+    final aiService = ref.read(aiServiceProvider);
+
+    final authState = ref.read(authStateProvider);
+    final userId = authState.user?.id ?? 'anonymous';
+
+    final hasNetwork = await NetworkChecker.hasConnection();
+    if (!hasNetwork) {
+      _setFallbackMeditationResult();
+      _aiDone = true;
+      _navigateIfReady();
+      return;
+    }
+
+    try {
+      final result = await aiService.analyzeMeditation(
+        passageReference: passageRef,
+        passageText: passageText,
+        meditationText: meditationText,
+        locale: locale,
+      );
+      ref.read(qtMeditationResultProvider.notifier).state =
+          AsyncValue.data(result);
+
+      // Save as QT prayer
+      final repo = ref.read(prayerRepositoryProvider);
+      await repo.savePrayer(
+        Prayer(
+          id: DateTime.now().millisecondsSinceEpoch.toString(),
+          userId: userId,
+          transcript: meditationText,
+          mode: 'qt',
+          qtPassageRef: passageRef,
+          createdAt: DateTime.now(),
+        ),
+      );
+      await repo.updateStreak();
+
+      ErrorLoggingService.addBreadcrumb(
+        'QT meditation saved successfully',
+        category: 'qt',
+      );
+    } catch (e, stackTrace) {
+      ErrorLoggingService.captureException(e, stackTrace);
+      _setFallbackMeditationResult();
+    }
+
+    _aiDone = true;
+    _navigateIfReady();
+  }
+
   void _setFallbackResult(String transcript) {
     ref.read(prayerResultProvider.notifier).state = AsyncValue.data(
       PrayerResult(
@@ -141,9 +202,42 @@ class _AiLoadingViewState extends ConsumerState<AiLoadingView>
     );
   }
 
+  void _setFallbackMeditationResult() {
+    ref.read(qtMeditationResultProvider.notifier).state = const AsyncValue.data(
+      QtMeditationResult(
+        analysis: MeditationAnalysis(
+          keyThemeEn: 'God\'s Faithfulness',
+          keyThemeKo: '하나님의 신실하심',
+          insightEn:
+              'Your meditation reveals a heart seeking God\'s guidance and peace.',
+          insightKo: '당신의 묵상에서 하나님의 인도와 평안을 구하는 마음이 느껴집니다.',
+        ),
+        application: ApplicationSuggestion(
+          actionEn: 'Take a moment of quiet reflection today',
+          actionKo: '오늘 잠시 조용히 묵상하는 시간을 가져보세요',
+          whenEn: 'During a quiet moment',
+          whenKo: '조용한 시간에',
+          contextEn: 'Wherever you are',
+          contextKo: '어디에서든',
+        ),
+        knowledge: RelatedKnowledge(
+          historicalContextEn:
+              'The biblical concept of meditation involves deep reflection on God\'s Word.',
+          historicalContextKo: '성경에서의 묵상은 하나님의 말씀에 대한 깊은 성찰을 의미합니다.',
+          crossReferences: ['Psalm 1:2', 'Joshua 1:8'],
+        ),
+      ),
+    );
+  }
+
   void _navigateIfReady() {
     if (_aiDone && _minTimePassed && mounted) {
-      context.go('/home/dashboard');
+      final mode = ref.read(currentPrayerModeProvider);
+      if (mode == 'qt') {
+        context.go('/home/qt-dashboard');
+      } else {
+        context.go('/home/prayer-dashboard');
+      }
     }
   }
 

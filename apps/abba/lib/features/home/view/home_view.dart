@@ -132,6 +132,7 @@ class _HomeViewState extends ConsumerState<HomeView>
 
     final transcript = _isTextMode ? _textController.text : _transcript;
     ref.read(currentTranscriptProvider.notifier).state = transcript;
+    ref.read(currentPrayerModeProvider.notifier).state = 'prayer';
 
     ErrorLoggingService.addBreadcrumb('Prayer finished', category: 'prayer');
 
