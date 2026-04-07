@@ -151,5 +151,8 @@
   "closeRecording": "Cerrar grabación",
   "qtRevealMessage": "Abramos la Palabra de hoy",
   "qtSelectPrompt": "Elige una y comienza el QT de hoy 🌿",
-  "qtTopicLabel": "Tema"
+  "qtTopicLabel": "Tema",
+  "prayerStartPrompt": "Comienza tu oración",
+  "startPrayerButton": "Iniciar oración",
+  "switchToTextMode": "Escribir en su lugar"
 }

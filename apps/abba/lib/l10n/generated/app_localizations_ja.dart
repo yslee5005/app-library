@@ -455,4 +455,13 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get qtTopicLabel => 'テーマ';
+
+  @override
+  String get prayerStartPrompt => 'お祈りを始めましょう';
+
+  @override
+  String get startPrayerButton => 'お祈り開始';
+
+  @override
+  String get switchToTextMode => 'テキストに切替';
 }

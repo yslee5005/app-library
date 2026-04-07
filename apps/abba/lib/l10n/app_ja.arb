@@ -151,5 +151,8 @@
   "closeRecording": "録音を閉じる",
   "qtRevealMessage": "今日のみ言葉を開いてみましょう",
   "qtSelectPrompt": "一つを選んで今日のQTを始めましょう 🌿",
-  "qtTopicLabel": "テーマ"
+  "qtTopicLabel": "テーマ",
+  "prayerStartPrompt": "お祈りを始めましょう",
+  "startPrayerButton": "お祈り開始",
+  "switchToTextMode": "テキストに切替"
 }

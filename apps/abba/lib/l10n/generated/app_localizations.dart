@@ -967,6 +967,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Topic'**
   String get qtTopicLabel;
+
+  /// No description provided for @prayerStartPrompt.
+  ///
+  /// In en, this message translates to:
+  /// **'Start your prayer'**
+  String get prayerStartPrompt;
+
+  /// No description provided for @startPrayerButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Begin Prayer'**
+  String get startPrayerButton;
+
+  /// No description provided for @switchToTextMode.
+  ///
+  /// In en, this message translates to:
+  /// **'Type instead'**
+  String get switchToTextMode;
 }
 
 class _AppLocalizationsDelegate

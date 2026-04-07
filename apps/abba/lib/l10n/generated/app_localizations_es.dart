@@ -466,4 +466,13 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get qtTopicLabel => 'Tema';
+
+  @override
+  String get prayerStartPrompt => 'Comienza tu oración';
+
+  @override
+  String get startPrayerButton => 'Iniciar oración';
+
+  @override
+  String get switchToTextMode => 'Escribir en su lugar';
 }

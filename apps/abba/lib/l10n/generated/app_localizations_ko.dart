@@ -455,4 +455,13 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get qtTopicLabel => '주제';
+
+  @override
+  String get prayerStartPrompt => '기도를 시작하세요';
+
+  @override
+  String get startPrayerButton => '기도 시작하기';
+
+  @override
+  String get switchToTextMode => '텍스트로 전환';
 }

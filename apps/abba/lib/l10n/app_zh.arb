@@ -151,5 +151,8 @@
   "closeRecording": "关闭录音",
   "qtRevealMessage": "让我们打开今天的话语",
   "qtSelectPrompt": "选择一个开始今天的灵修 🌿",
-  "qtTopicLabel": "主题"
+  "qtTopicLabel": "主题",
+  "prayerStartPrompt": "开始祷告",
+  "startPrayerButton": "开始祷告",
+  "switchToTextMode": "切换到文字输入"
 }

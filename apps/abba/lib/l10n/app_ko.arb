@@ -151,5 +151,8 @@
   "closeRecording": "녹음 닫기",
   "qtRevealMessage": "오늘의 말씀을 펼쳐볼까요?",
   "qtSelectPrompt": "하나를 선택해서 오늘 QT를 해보아요 🌿",
-  "qtTopicLabel": "주제"
+  "qtTopicLabel": "주제",
+  "prayerStartPrompt": "기도를 시작하세요",
+  "startPrayerButton": "기도 시작하기",
+  "switchToTextMode": "텍스트로 전환"
 }

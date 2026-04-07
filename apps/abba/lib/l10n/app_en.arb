@@ -151,5 +151,8 @@
   "closeRecording": "Close recording",
   "qtRevealMessage": "Let's open today's Word",
   "qtSelectPrompt": "Choose one and start today's QT",
-  "qtTopicLabel": "Topic"
+  "qtTopicLabel": "Topic",
+  "prayerStartPrompt": "Start your prayer",
+  "startPrayerButton": "Begin Prayer",
+  "switchToTextMode": "Type instead"
 }

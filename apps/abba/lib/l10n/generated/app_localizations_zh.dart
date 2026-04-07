@@ -455,4 +455,13 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get qtTopicLabel => '主题';
+
+  @override
+  String get prayerStartPrompt => '开始祷告';
+
+  @override
+  String get startPrayerButton => '开始祷告';
+
+  @override
+  String get switchToTextMode => '切换到文字输入';
 }
