@@ -53,7 +53,9 @@ export 'src/feedback/badge_widget.dart';
 export 'src/feedback/empty_state_view.dart';
 export 'src/feedback/error_state_view.dart';
 export 'src/feedback/shimmer_widget.dart';
+export 'src/feedback/premium_gate.dart';
 export 'src/feedback/skeleton_loader.dart';
+export 'src/feedback/streak_badge.dart';
 
 // ── Media / Content ────────────────────────────────────────────────
 export 'src/media/app_avatar.dart';

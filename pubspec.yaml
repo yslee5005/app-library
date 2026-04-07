@@ -24,3 +24,6 @@ workspace:
   - packages/error_logging
   - packages/auth
   - packages/comments
+  - packages/subscriptions
+  - packages/gamification
+  - packages/feed
