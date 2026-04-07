@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../l10n/generated/app_localizations.dart';
 import '../theme/abba_theme.dart';
 
 class AbbaTabBar extends StatelessWidget {
@@ -14,6 +15,7 @@ class AbbaTabBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return NavigationBar(
       height: abbaTabBarHeight,
       backgroundColor: AbbaColors.white,
@@ -21,26 +23,26 @@ class AbbaTabBar extends StatelessWidget {
       selectedIndex: currentIndex,
       onDestinationSelected: onTap,
       labelBehavior: NavigationDestinationLabelBehavior.alwaysShow,
-      destinations: const [
+      destinations: [
         NavigationDestination(
-          icon: Text('🌳', style: TextStyle(fontSize: 24)),
-          selectedIcon: Text('🌳', style: TextStyle(fontSize: 24)),
-          label: 'Home',
+          icon: const Text('🌳', style: TextStyle(fontSize: 24)),
+          selectedIcon: const Text('🌳', style: TextStyle(fontSize: 24)),
+          label: l10n.tabHome,
         ),
         NavigationDestination(
-          icon: Text('📅', style: TextStyle(fontSize: 24)),
-          selectedIcon: Text('📅', style: TextStyle(fontSize: 24)),
-          label: 'Calendar',
+          icon: const Text('📅', style: TextStyle(fontSize: 24)),
+          selectedIcon: const Text('📅', style: TextStyle(fontSize: 24)),
+          label: l10n.tabCalendar,
         ),
         NavigationDestination(
-          icon: Text('🌻', style: TextStyle(fontSize: 24)),
-          selectedIcon: Text('🌻', style: TextStyle(fontSize: 24)),
-          label: 'Community',
+          icon: const Text('🌻', style: TextStyle(fontSize: 24)),
+          selectedIcon: const Text('🌻', style: TextStyle(fontSize: 24)),
+          label: l10n.tabCommunity,
         ),
         NavigationDestination(
-          icon: Text('⚙️', style: TextStyle(fontSize: 24)),
-          selectedIcon: Text('⚙️', style: TextStyle(fontSize: 24)),
-          label: 'Settings',
+          icon: const Text('⚙️', style: TextStyle(fontSize: 24)),
+          selectedIcon: const Text('⚙️', style: TextStyle(fontSize: 24)),
+          label: l10n.tabSettings,
         ),
       ],
     );

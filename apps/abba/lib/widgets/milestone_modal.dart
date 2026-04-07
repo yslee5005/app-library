@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../l10n/generated/app_localizations.dart';
 import '../theme/abba_theme.dart';
 import 'milestone_share_card.dart';
 
@@ -71,6 +72,8 @@ Future<void> showMilestoneModal(
   final info = milestoneInfoMap[milestoneType];
   if (info == null) return;
 
+  final l10n = AppLocalizations.of(context)!;
+
   await showDialog(
     context: context,
     builder: (ctx) => Dialog(
@@ -114,7 +117,7 @@ Future<void> showMilestoneModal(
                   },
                   icon: const Icon(Icons.share, color: AbbaColors.sage),
                   label: Text(
-                    locale == 'ko' ? '공유하기' : 'Share',
+                    l10n.milestoneShare,
                     style: AbbaTypography.body.copyWith(
                       color: AbbaColors.sage,
                       fontWeight: FontWeight.w600,
@@ -142,7 +145,7 @@ Future<void> showMilestoneModal(
                   ),
                 ),
                 child: Text(
-                  locale == 'ko' ? '감사합니다' : 'Thank God',
+                  l10n.milestoneThankGod,
                   style: AbbaTypography.body.copyWith(
                     color: AbbaColors.white,
                     fontWeight: FontWeight.w600,

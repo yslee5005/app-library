@@ -6,6 +6,7 @@ import 'package:flutter/rendering.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:share_plus/share_plus.dart' show Share, XFile;
 
+import '../l10n/generated/app_localizations.dart';
 import '../theme/abba_theme.dart';
 
 /// Captures a milestone card as an image and shares it.
@@ -17,6 +18,7 @@ class MilestoneShareCard {
     required String userName,
     required String locale,
   }) async {
+    final l10n = AppLocalizations.of(context)!;
     final key = GlobalKey();
 
     final overlay = OverlayEntry(
@@ -27,7 +29,8 @@ class MilestoneShareCard {
           child: _MilestoneCardWidget(
             streakDays: streakDays,
             userName: userName,
-            locale: locale,
+            daysLabel: l10n.shareDaysLabel,
+            subtitle: l10n.shareSubtitle,
           ),
         ),
       ),
@@ -51,33 +54,24 @@ class MilestoneShareCard {
 
       await Share.shareXFiles([
         XFile(file.path),
-      ], text: _shareText(streakDays, locale));
+      ], text: l10n.shareStreakText(streakDays));
     } finally {
       overlay.remove();
     }
-  }
-
-  static String _shareText(int days, String locale) {
-    return switch (locale) {
-      'ko' => '$days일 연속 기도! Abba와 함께하는 기도 여정 #Abba #기도',
-      'ja' => '$days日連続の祈り！Abbaとの祈りの旅 #Abba #祈り',
-      'es' =>
-        '¡$days días seguidos de oración! Mi viaje con Abba #Abba #Oración',
-      'zh' => '连续$days天祷告！与Abba同行的祷告之旅 #Abba #祷告',
-      _ => '$days day prayer streak! My prayer journey with Abba #Abba #Prayer',
-    };
   }
 }
 
 class _MilestoneCardWidget extends StatelessWidget {
   final int streakDays;
   final String userName;
-  final String locale;
+  final String daysLabel;
+  final String subtitle;
 
   const _MilestoneCardWidget({
     required this.streakDays,
     required this.userName,
-    required this.locale,
+    required this.daysLabel,
+    required this.subtitle,
   });
 
   @override
@@ -108,12 +102,12 @@ class _MilestoneCardWidget extends StatelessWidget {
               ),
             ),
             Text(
-              _daysLabel,
+              daysLabel,
               style: AbbaTypography.h1.copyWith(color: AbbaColors.warmBrown),
             ),
             const SizedBox(height: AbbaSpacing.lg),
             Text(
-              _subtitle,
+              subtitle,
               style: AbbaTypography.body.copyWith(color: AbbaColors.muted),
               textAlign: TextAlign.center,
             ),
@@ -145,20 +139,4 @@ class _MilestoneCardWidget extends StatelessWidget {
     if (streakDays >= 7) return '🌱';
     return '🌱';
   }
-
-  String get _daysLabel => switch (locale) {
-    'ko' => '일 연속 기도',
-    'ja' => '日連続の祈り',
-    'es' => 'días de oración',
-    'zh' => '天连续祷告',
-    _ => 'day prayer streak',
-  };
-
-  String get _subtitle => switch (locale) {
-    'ko' => '하나님과 함께하는 매일의 기도',
-    'ja' => '神と共にある毎日の祈り',
-    'es' => 'Oración diaria con Dios',
-    'zh' => '与上帝同行的每日祷告',
-    _ => 'Daily prayer with God',
-  };
 }

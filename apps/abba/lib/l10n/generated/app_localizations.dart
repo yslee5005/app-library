@@ -865,6 +865,90 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Morning Prayer'**
   String get morningPrayerLabel;
+
+  /// No description provided for @gardenSeed.
+  ///
+  /// In en, this message translates to:
+  /// **'A seed of faith'**
+  String get gardenSeed;
+
+  /// No description provided for @gardenSprout.
+  ///
+  /// In en, this message translates to:
+  /// **'Growing sprout'**
+  String get gardenSprout;
+
+  /// No description provided for @gardenBud.
+  ///
+  /// In en, this message translates to:
+  /// **'Budding flower'**
+  String get gardenBud;
+
+  /// No description provided for @gardenBloom.
+  ///
+  /// In en, this message translates to:
+  /// **'Full bloom'**
+  String get gardenBloom;
+
+  /// No description provided for @gardenTree.
+  ///
+  /// In en, this message translates to:
+  /// **'Strong tree'**
+  String get gardenTree;
+
+  /// No description provided for @milestoneShare.
+  ///
+  /// In en, this message translates to:
+  /// **'Share'**
+  String get milestoneShare;
+
+  /// No description provided for @milestoneThankGod.
+  ///
+  /// In en, this message translates to:
+  /// **'Thank God!'**
+  String get milestoneThankGod;
+
+  /// No description provided for @shareStreakText.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} day prayer streak! My prayer journey with Abba #Abba #Prayer'**
+  String shareStreakText(Object count);
+
+  /// No description provided for @shareDaysLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'day prayer streak'**
+  String get shareDaysLabel;
+
+  /// No description provided for @shareSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Daily prayer with God'**
+  String get shareSubtitle;
+
+  /// No description provided for @premiumActive.
+  ///
+  /// In en, this message translates to:
+  /// **'Premium Active'**
+  String get premiumActive;
+
+  /// No description provided for @planOncePerDay.
+  ///
+  /// In en, this message translates to:
+  /// **'1x/day'**
+  String get planOncePerDay;
+
+  /// No description provided for @planUnlimited.
+  ///
+  /// In en, this message translates to:
+  /// **'Unlimited'**
+  String get planUnlimited;
+
+  /// No description provided for @closeRecording.
+  ///
+  /// In en, this message translates to:
+  /// **'Close recording'**
+  String get closeRecording;
 }
 
 class _AppLocalizationsDelegate

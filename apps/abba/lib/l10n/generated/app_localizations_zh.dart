@@ -402,4 +402,48 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get morningPrayerLabel => '早祷';
+
+  @override
+  String get gardenSeed => '信心的种子';
+
+  @override
+  String get gardenSprout => '成长的嫩芽';
+
+  @override
+  String get gardenBud => '花蕾';
+
+  @override
+  String get gardenBloom => '盛开的花';
+
+  @override
+  String get gardenTree => '参天大树';
+
+  @override
+  String get milestoneShare => '分享';
+
+  @override
+  String get milestoneThankGod => '感谢上帝!';
+
+  @override
+  String shareStreakText(Object count) {
+    return '连续$count天祷告！与Abba同行的祷告之旅 #Abba #祷告';
+  }
+
+  @override
+  String get shareDaysLabel => '天连续祷告';
+
+  @override
+  String get shareSubtitle => '与上帝同行的每日祷告';
+
+  @override
+  String get premiumActive => '已订阅Premium';
+
+  @override
+  String get planOncePerDay => '每天1次';
+
+  @override
+  String get planUnlimited => '无限';
+
+  @override
+  String get closeRecording => '关闭录音';
 }

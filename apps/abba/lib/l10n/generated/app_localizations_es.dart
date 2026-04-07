@@ -413,4 +413,48 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get morningPrayerLabel => 'Oración matutina';
+
+  @override
+  String get gardenSeed => 'Semilla de fe';
+
+  @override
+  String get gardenSprout => 'Brote creciendo';
+
+  @override
+  String get gardenBud => 'Capullo';
+
+  @override
+  String get gardenBloom => 'Flor en plena';
+
+  @override
+  String get gardenTree => 'Árbol fuerte';
+
+  @override
+  String get milestoneShare => 'Compartir';
+
+  @override
+  String get milestoneThankGod => '¡Gracias a Dios!';
+
+  @override
+  String shareStreakText(Object count) {
+    return '¡$count días seguidos de oración! Mi viaje con Abba #Abba #Oración';
+  }
+
+  @override
+  String get shareDaysLabel => 'días de oración';
+
+  @override
+  String get shareSubtitle => 'Oración diaria con Dios';
+
+  @override
+  String get premiumActive => 'Premium Activo';
+
+  @override
+  String get planOncePerDay => '1x/día';
+
+  @override
+  String get planUnlimited => 'Ilimitado';
+
+  @override
+  String get closeRecording => 'Cerrar grabación';
 }

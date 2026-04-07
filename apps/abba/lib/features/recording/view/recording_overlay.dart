@@ -157,7 +157,7 @@ class _RecordingOverlayState extends ConsumerState<RecordingOverlay>
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Semantics(
-                    label: 'Close recording',
+                    label: l10n.closeRecording,
                     button: true,
                     child: IconButton(
                       onPressed: () {

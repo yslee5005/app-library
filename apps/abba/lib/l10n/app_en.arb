@@ -133,5 +133,20 @@
   "streakRecovery": "It's okay, you can start again 🌱",
   "prayerSaved": "Prayer saved successfully",
   "quietTimeLabel": "Quiet Time",
-  "morningPrayerLabel": "Morning Prayer"
+  "morningPrayerLabel": "Morning Prayer",
+  "gardenSeed": "A seed of faith",
+  "gardenSprout": "Growing sprout",
+  "gardenBud": "Budding flower",
+  "gardenBloom": "Full bloom",
+  "gardenTree": "Strong tree",
+  "milestoneShare": "Share",
+  "milestoneThankGod": "Thank God!",
+  "shareStreakText": "{count} day prayer streak! My prayer journey with Abba #Abba #Prayer",
+  "@shareStreakText": { "placeholders": { "count": {} } },
+  "shareDaysLabel": "day prayer streak",
+  "shareSubtitle": "Daily prayer with God",
+  "premiumActive": "Premium Active",
+  "planOncePerDay": "1x/day",
+  "planUnlimited": "Unlimited",
+  "closeRecording": "Close recording"
 }

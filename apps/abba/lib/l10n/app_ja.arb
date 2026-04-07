@@ -133,5 +133,20 @@
   "streakRecovery": "大丈夫、また始めましょう 🌱",
   "prayerSaved": "祈りが保存されました",
   "quietTimeLabel": "QT",
-  "morningPrayerLabel": "朝の祈り"
+  "morningPrayerLabel": "朝の祈り",
+  "gardenSeed": "信仰の種",
+  "gardenSprout": "育つ芽",
+  "gardenBud": "つぼみ",
+  "gardenBloom": "満開の花",
+  "gardenTree": "大きな木",
+  "milestoneShare": "共有する",
+  "milestoneThankGod": "神に感謝!",
+  "shareStreakText": "{count}日連続の祈り！Abbaとの祈りの旅 #Abba #祈り",
+  "@shareStreakText": { "placeholders": { "count": {} } },
+  "shareDaysLabel": "日連続の祈り",
+  "shareSubtitle": "神と共にある毎日の祈り",
+  "premiumActive": "プレミアム有効",
+  "planOncePerDay": "1日1回",
+  "planUnlimited": "無制限",
+  "closeRecording": "録音を閉じる"
 }

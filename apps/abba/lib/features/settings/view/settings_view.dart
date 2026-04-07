@@ -260,7 +260,7 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    '✅ Premium',
+                    '✅ ${l10n.premiumActive}',
                     style: AbbaTypography.h2.copyWith(
                       fontWeight: FontWeight.w600,
                     ),
@@ -333,7 +333,7 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
                   child: _PlanColumn(
                     title: l10n.freePlan,
                     price: '\$0',
-                    features: const ['1x/day', '📜', '📖', '✍️'],
+                    features: [l10n.planOncePerDay, '📜', '📖', '✍️'],
                     isActive: true,
                   ),
                 ),
@@ -343,7 +343,7 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
                     title: l10n.premiumPlan,
                     price: l10n.monthlyPrice,
                     features: [
-                      l10n.unlimited,
+                      l10n.planUnlimited,
                       '📜📖✍️',
                       '💬 AI',
                       '🔊 TTS',

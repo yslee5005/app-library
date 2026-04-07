@@ -133,5 +133,20 @@
   "streakRecovery": "没关系，重新开始吧 🌱",
   "prayerSaved": "祷告已保存",
   "quietTimeLabel": "灵修",
-  "morningPrayerLabel": "早祷"
+  "morningPrayerLabel": "早祷",
+  "gardenSeed": "信心的种子",
+  "gardenSprout": "成长的嫩芽",
+  "gardenBud": "花蕾",
+  "gardenBloom": "盛开的花",
+  "gardenTree": "参天大树",
+  "milestoneShare": "分享",
+  "milestoneThankGod": "感谢上帝!",
+  "shareStreakText": "连续{count}天祷告！与Abba同行的祷告之旅 #Abba #祷告",
+  "@shareStreakText": { "placeholders": { "count": {} } },
+  "shareDaysLabel": "天连续祷告",
+  "shareSubtitle": "与上帝同行的每日祷告",
+  "premiumActive": "已订阅Premium",
+  "planOncePerDay": "每天1次",
+  "planUnlimited": "无限",
+  "closeRecording": "关闭录音"
 }

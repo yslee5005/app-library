@@ -1,3 +1,5 @@
+import '../l10n/generated/app_localizations.dart';
+
 /// Returns the growth icon for the current streak
 String streakGardenIcon(int days) {
   if (days >= 60) return '🌳';
@@ -7,18 +9,11 @@ String streakGardenIcon(int days) {
   return '🌱';
 }
 
-/// Returns the growth label for the current streak
-String streakGardenLabel(int days, String locale) {
-  if (locale == 'ko') {
-    if (days >= 60) return '나무가 되었습니다';
-    if (days >= 31) return '꽃이 만개했습니다';
-    if (days >= 15) return '꽃봉오리가 맺혔습니다';
-    if (days >= 8) return '새싹이 자라고 있습니다';
-    return '씨앗이 심어졌습니다';
-  }
-  if (days >= 60) return 'A mighty tree';
-  if (days >= 31) return 'In full bloom';
-  if (days >= 15) return 'A bud is forming';
-  if (days >= 8) return 'A sprout is growing';
-  return 'A seed is planted';
+/// Returns the growth label for the current streak using l10n
+String streakGardenLabel(int days, AppLocalizations l10n) {
+  if (days >= 60) return l10n.gardenTree;
+  if (days >= 31) return l10n.gardenBloom;
+  if (days >= 15) return l10n.gardenBud;
+  if (days >= 8) return l10n.gardenSprout;
+  return l10n.gardenSeed;
 }

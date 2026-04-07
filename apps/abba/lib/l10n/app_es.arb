@@ -133,5 +133,20 @@
   "streakRecovery": "Está bien, puedes empezar de nuevo 🌱",
   "prayerSaved": "Oración guardada exitosamente",
   "quietTimeLabel": "Tiempo de quietud",
-  "morningPrayerLabel": "Oración matutina"
+  "morningPrayerLabel": "Oración matutina",
+  "gardenSeed": "Semilla de fe",
+  "gardenSprout": "Brote creciendo",
+  "gardenBud": "Capullo",
+  "gardenBloom": "Flor en plena",
+  "gardenTree": "Árbol fuerte",
+  "milestoneShare": "Compartir",
+  "milestoneThankGod": "¡Gracias a Dios!",
+  "shareStreakText": "¡{count} días seguidos de oración! Mi viaje con Abba #Abba #Oración",
+  "@shareStreakText": { "placeholders": { "count": {} } },
+  "shareDaysLabel": "días de oración",
+  "shareSubtitle": "Oración diaria con Dios",
+  "premiumActive": "Premium Activo",
+  "planOncePerDay": "1x/día",
+  "planUnlimited": "Ilimitado",
+  "closeRecording": "Cerrar grabación"
 }

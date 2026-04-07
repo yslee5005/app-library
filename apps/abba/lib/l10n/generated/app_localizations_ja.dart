@@ -402,4 +402,48 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get morningPrayerLabel => '朝の祈り';
+
+  @override
+  String get gardenSeed => '信仰の種';
+
+  @override
+  String get gardenSprout => '育つ芽';
+
+  @override
+  String get gardenBud => 'つぼみ';
+
+  @override
+  String get gardenBloom => '満開の花';
+
+  @override
+  String get gardenTree => '大きな木';
+
+  @override
+  String get milestoneShare => '共有する';
+
+  @override
+  String get milestoneThankGod => '神に感謝!';
+
+  @override
+  String shareStreakText(Object count) {
+    return '$count日連続の祈り！Abbaとの祈りの旅 #Abba #祈り';
+  }
+
+  @override
+  String get shareDaysLabel => '日連続の祈り';
+
+  @override
+  String get shareSubtitle => '神と共にある毎日の祈り';
+
+  @override
+  String get premiumActive => 'プレミアム有効';
+
+  @override
+  String get planOncePerDay => '1日1回';
+
+  @override
+  String get planUnlimited => '無制限';
+
+  @override
+  String get closeRecording => '録音を閉じる';
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../l10n/generated/app_localizations.dart';
 import '../theme/abba_theme.dart';
 
 /// Shows a soft, themed snackbar for errors and notices.
@@ -25,7 +26,7 @@ void showAbbaSnackBar(
       duration: duration,
       action: onRetry != null
           ? SnackBarAction(
-              label: retryLabel ?? 'Retry',
+              label: retryLabel ?? AppLocalizations.of(context)?.retryButton ?? 'Retry',
               textColor: AbbaColors.sage,
               onPressed: onRetry,
             )

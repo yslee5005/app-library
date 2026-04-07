@@ -402,4 +402,48 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get morningPrayerLabel => '아침 기도';
+
+  @override
+  String get gardenSeed => '믿음의 씨앗';
+
+  @override
+  String get gardenSprout => '자라나는 새싹';
+
+  @override
+  String get gardenBud => '꽃봉오리';
+
+  @override
+  String get gardenBloom => '만개한 꽃';
+
+  @override
+  String get gardenTree => '든든한 나무';
+
+  @override
+  String get milestoneShare => '공유하기';
+
+  @override
+  String get milestoneThankGod => '감사합니다!';
+
+  @override
+  String shareStreakText(Object count) {
+    return '$count일 연속 기도! Abba와 함께하는 기도 여정 #Abba #기도';
+  }
+
+  @override
+  String get shareDaysLabel => '일 연속 기도';
+
+  @override
+  String get shareSubtitle => '하나님과 함께하는 매일의 기도';
+
+  @override
+  String get premiumActive => '프리미엄 활성';
+
+  @override
+  String get planOncePerDay => '1일 1회';
+
+  @override
+  String get planUnlimited => '무제한';
+
+  @override
+  String get closeRecording => '녹음 닫기';
 }

@@ -1,5 +1,8 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:abba/widgets/streak_garden.dart';
+import 'package:abba/l10n/generated/app_localizations_en.dart';
+import 'package:abba/l10n/generated/app_localizations_ko.dart';
+import 'package:abba/l10n/generated/app_localizations_ja.dart';
 
 void main() {
   group('streakGardenIcon', () {
@@ -30,24 +33,28 @@ void main() {
   });
 
   group('streakGardenLabel', () {
+    final enL10n = AppLocalizationsEn();
+    final koL10n = AppLocalizationsKo();
+    final jaL10n = AppLocalizationsJa();
+
     test('English labels for each tier', () {
-      expect(streakGardenLabel(0, 'en'), 'A seed is planted');
-      expect(streakGardenLabel(8, 'en'), 'A sprout is growing');
-      expect(streakGardenLabel(15, 'en'), 'A bud is forming');
-      expect(streakGardenLabel(31, 'en'), 'In full bloom');
-      expect(streakGardenLabel(60, 'en'), 'A mighty tree');
+      expect(streakGardenLabel(0, enL10n), 'A seed of faith');
+      expect(streakGardenLabel(8, enL10n), 'Growing sprout');
+      expect(streakGardenLabel(15, enL10n), 'Budding flower');
+      expect(streakGardenLabel(31, enL10n), 'Full bloom');
+      expect(streakGardenLabel(60, enL10n), 'Strong tree');
     });
 
     test('Korean labels for each tier', () {
-      expect(streakGardenLabel(0, 'ko'), contains('씨앗'));
-      expect(streakGardenLabel(8, 'ko'), contains('새싹'));
-      expect(streakGardenLabel(15, 'ko'), contains('꽃봉오리'));
-      expect(streakGardenLabel(31, 'ko'), contains('만개'));
-      expect(streakGardenLabel(60, 'ko'), contains('나무'));
+      expect(streakGardenLabel(0, koL10n), contains('씨앗'));
+      expect(streakGardenLabel(8, koL10n), contains('새싹'));
+      expect(streakGardenLabel(15, koL10n), contains('꽃봉오리'));
+      expect(streakGardenLabel(31, koL10n), contains('만개'));
+      expect(streakGardenLabel(60, koL10n), contains('나무'));
     });
 
-    test('non-ko locale falls back to English', () {
-      expect(streakGardenLabel(0, 'ja'), 'A seed is planted');
+    test('Japanese labels use l10n', () {
+      expect(streakGardenLabel(0, jaL10n), '信仰の種');
     });
   });
 }

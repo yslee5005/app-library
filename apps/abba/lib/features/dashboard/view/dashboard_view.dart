@@ -44,7 +44,7 @@ class DashboardView extends ConsumerWidget {
         data: (result) =>
             _buildContent(context, ref, result, l10n, locale, isPremium),
         loading: () => const Center(child: CircularProgressIndicator()),
-        error: (e, s) => Center(child: Text('Error: $e')),
+        error: (e, s) => Center(child: Text(l10n.errorGeneric)),
       ),
     );
   }

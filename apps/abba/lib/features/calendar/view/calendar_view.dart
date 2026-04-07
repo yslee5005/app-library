@@ -153,23 +153,24 @@ class _CalendarViewState extends ConsumerState<CalendarView> {
               ],
             ),
             const SizedBox(height: AbbaSpacing.sm),
-            // Weekday headers
+            // Weekday headers (locale-aware)
             Row(
-              children: ['S', 'M', 'T', 'W', 'T', 'F', 'S']
-                  .map(
-                    (d) => Expanded(
-                      child: Center(
-                        child: Text(
-                          d,
-                          style: AbbaTypography.bodySmall.copyWith(
-                            color: AbbaColors.muted,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
+              children: List.generate(7, (i) {
+                // Sunday=0 .. Saturday=6; 2024-01-07 is a Sunday
+                final date = DateTime(2024, 1, 7 + i);
+                final label = DateFormat.E(locale).format(date)[0].toUpperCase();
+                return Expanded(
+                  child: Center(
+                    child: Text(
+                      label,
+                      style: AbbaTypography.bodySmall.copyWith(
+                        color: AbbaColors.muted,
+                        fontWeight: FontWeight.w600,
                       ),
                     ),
-                  )
-                  .toList(),
+                  ),
+                );
+              }),
             ),
             const SizedBox(height: AbbaSpacing.sm),
             // Calendar grid
@@ -335,7 +336,7 @@ class _CalendarViewState extends ConsumerState<CalendarView> {
       loading: () => const Center(child: CircularProgressIndicator()),
       error: (e, s) => AbbaCard(
         margin: EdgeInsets.zero,
-        child: Text('Error: $e', style: AbbaTypography.body),
+        child: Text(l10n.errorGeneric, style: AbbaTypography.body),
       ),
     );
   }

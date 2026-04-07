@@ -62,11 +62,10 @@ class HomeView extends ConsumerWidget {
               // Streak card with growing garden
               profileAsync.when(
                 data: (profile) {
-                  final locale = ref.watch(localeProvider);
                   final icon = streakGardenIcon(profile.currentStreak);
                   final label = streakGardenLabel(
                     profile.currentStreak,
-                    locale,
+                    l10n,
                   );
                   return AbbaCard(
                     margin: EdgeInsets.zero,

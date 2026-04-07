@@ -133,5 +133,20 @@
   "streakRecovery": "괜찮아요, 다시 시작하면 돼요 🌱",
   "prayerSaved": "기도가 저장되었습니다",
   "quietTimeLabel": "큐티",
-  "morningPrayerLabel": "아침 기도"
+  "morningPrayerLabel": "아침 기도",
+  "gardenSeed": "믿음의 씨앗",
+  "gardenSprout": "자라나는 새싹",
+  "gardenBud": "꽃봉오리",
+  "gardenBloom": "만개한 꽃",
+  "gardenTree": "든든한 나무",
+  "milestoneShare": "공유하기",
+  "milestoneThankGod": "감사합니다!",
+  "shareStreakText": "{count}일 연속 기도! Abba와 함께하는 기도 여정 #Abba #기도",
+  "@shareStreakText": { "placeholders": { "count": {} } },
+  "shareDaysLabel": "일 연속 기도",
+  "shareSubtitle": "하나님과 함께하는 매일의 기도",
+  "premiumActive": "프리미엄 활성",
+  "planOncePerDay": "1일 1회",
+  "planUnlimited": "무제한",
+  "closeRecording": "녹음 닫기"
 }

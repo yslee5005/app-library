@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
+import '../l10n/generated/app_localizations.dart';
 import '../theme/abba_theme.dart';
 
 class PremiumBlur extends StatelessWidget {
@@ -22,8 +23,9 @@ class PremiumBlur extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Semantics(
-      label: isLocked ? '$title - Premium content locked' : title,
+      label: isLocked ? '$title - ${l10n.premiumUnlock}' : title,
       child: Container(
         margin: const EdgeInsets.symmetric(
           horizontal: AbbaSpacing.md,
@@ -89,7 +91,7 @@ class PremiumBlur extends StatelessWidget {
                             style: TextStyle(fontSize: 18),
                           ),
                           label: Text(
-                            'Premium',
+                            l10n.premiumUnlock,
                             style: AbbaTypography.body.copyWith(
                               color: AbbaColors.white,
                               fontWeight: FontWeight.w600,
