@@ -26,7 +26,7 @@ class ErrorLoggingService {
     final message = event.message?.formatted;
     if (message != null) {
       final masked = _maskSensitive(message);
-      return event.copyWith(message: SentryMessage(masked));
+      event.message = SentryMessage(masked);
     }
     return event;
   }
