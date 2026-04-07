@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
 import '../../../l10n/generated/app_localizations.dart';
 import '../../../providers/providers.dart';
 import '../../../theme/abba_theme.dart';
@@ -150,27 +148,20 @@ class HomeView extends ConsumerWidget {
   }
 
   Future<void> _showRecording(BuildContext context, WidgetRef ref) async {
-    // Check free user limit (persisted with SharedPreferences)
+    // Check free user limit (in-memory, resets on app restart)
     final profile = ref.read(userProfileProvider).valueOrNull;
     final isFree = profile?.subscription == SubscriptionStatus.free;
+    final todayCount = ref.read(todayPrayerCountProvider);
 
-    if (isFree) {
-      final prefs = await SharedPreferences.getInstance();
-      final today = DateTime.now().toIso8601String().substring(0, 10);
-      final lastDate = prefs.getString('last_prayer_date') ?? '';
-      final count = lastDate == today
-          ? (prefs.getInt('today_prayer_count') ?? 0)
-          : 0;
-
-      if (count >= 1) {
-        if (context.mounted) await showPremiumModal(context);
-        return;
+    if (isFree && todayCount >= 1) {
+      if (context.mounted) {
+        final purchased = await showPremiumModal(context);
+        if (!purchased) return;
       }
-
-      // Increment and save
-      await prefs.setString('last_prayer_date', today);
-      await prefs.setInt('today_prayer_count', count + 1);
     }
+
+    // Increment in-memory count (resets on app restart)
+    ref.read(todayPrayerCountProvider.notifier).state = todayCount + 1;
 
     if (!context.mounted) return;
     showModalBottomSheet(
