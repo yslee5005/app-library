@@ -33,7 +33,7 @@ class _RecordingOverlayState extends ConsumerState<RecordingOverlay>
   @override
   void initState() {
     super.initState();
-    _sttService = _sttService;
+    _sttService = ref.read(sttServiceProvider);
     ErrorLoggingService.addBreadcrumb(
       'Recording started',
       category: 'recording',

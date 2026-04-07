@@ -33,7 +33,10 @@ class _PremiumModalContentState extends ConsumerState<_PremiumModalContent> {
     final l10n = AppLocalizations.of(context)!;
 
     return Container(
-      padding: const EdgeInsets.all(AbbaSpacing.xl),
+      padding: const EdgeInsets.symmetric(
+        horizontal: AbbaSpacing.xl,
+        vertical: AbbaSpacing.lg,
+      ),
       decoration: const BoxDecoration(
         color: AbbaColors.cream,
         borderRadius: BorderRadius.vertical(
