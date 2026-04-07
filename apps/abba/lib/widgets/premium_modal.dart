@@ -41,9 +41,10 @@ class _PremiumModalContentState extends ConsumerState<_PremiumModalContent> {
         ),
       ),
       child: SafeArea(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
             const Text('🌸', style: TextStyle(fontSize: 48)),
             const SizedBox(height: AbbaSpacing.md),
             Text(
@@ -119,7 +120,8 @@ class _PremiumModalContentState extends ConsumerState<_PremiumModalContent> {
                 style: AbbaTypography.body.copyWith(color: AbbaColors.muted),
               ),
             ),
-          ],
+            ],
+          ),
         ),
       ),
     );

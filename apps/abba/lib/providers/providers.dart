@@ -168,7 +168,7 @@ final streakProvider = FutureProvider<({int current, int best})>((ref) {
 // ---------------------------------------------------------------------------
 // App state
 // ---------------------------------------------------------------------------
-final localeProvider = StateProvider<String>((ref) => 'en');
+final localeProvider = StateProvider<String>((ref) => 'ko');
 
 /// Tracks current prayer transcript from recording
 final currentTranscriptProvider = StateProvider<String>((ref) => '');
