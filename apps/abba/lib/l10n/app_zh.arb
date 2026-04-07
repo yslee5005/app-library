@@ -182,5 +182,18 @@
   "qtGuide1": "请阅读经文并安静默想",
   "qtGuide2": "请分享您的领悟——说出来或写下来",
   "qtGuide3": "Abba会帮助您将话语应用到日常生活中",
-  "scriptureReasonLabel": "选择这段经文的原因"
+  "scriptureReasonLabel": "选择这段经文的原因",
+  "seeMore": "查看更多",
+  "seeAllComments": "查看全部{count}条评论",
+  "@seeAllComments": { "placeholders": { "count": {} } },
+  "likedBy": "{name}和其他{count}人点赞了",
+  "@likedBy": { "placeholders": { "name": {}, "count": {} } },
+  "commentsTitle": "评论",
+  "myPageTitle": "我的祷告花园",
+  "myPrayers": "我的祷告",
+  "myTestimonies": "我的见证",
+  "savedPosts": "已收藏",
+  "totalPrayersCount": "祷告",
+  "streakCount": "连续",
+  "testimoniesCount": "见证"
 }

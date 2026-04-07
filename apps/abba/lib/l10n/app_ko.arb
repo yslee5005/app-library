@@ -182,5 +182,18 @@
   "qtGuide1": "말씀을 읽고 조용히 묵상해 주세요",
   "qtGuide2": "깨달은 것을 소리 내어 나누거나 글로 적어주세요",
   "qtGuide3": "아바가 말씀을 삶에 적용할 수 있도록 도와드려요",
-  "scriptureReasonLabel": "이 말씀을 드리는 이유"
+  "scriptureReasonLabel": "이 말씀을 드리는 이유",
+  "seeMore": "더 보기",
+  "seeAllComments": "댓글 {count}개 모두 보기",
+  "@seeAllComments": { "placeholders": { "count": {} } },
+  "likedBy": "{name} 외 {count}명이 좋아합니다",
+  "@likedBy": { "placeholders": { "name": {}, "count": {} } },
+  "commentsTitle": "댓글",
+  "myPageTitle": "내 기도 정원",
+  "myPrayers": "내 기도",
+  "myTestimonies": "내 간증",
+  "savedPosts": "저장됨",
+  "totalPrayersCount": "기도",
+  "streakCount": "연속",
+  "testimoniesCount": "간증"
 }

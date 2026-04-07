@@ -558,4 +558,41 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get scriptureReasonLabel => 'Why this Scripture';
+
+  @override
+  String get seeMore => 'See more';
+
+  @override
+  String seeAllComments(Object count) {
+    return 'View all $count comments';
+  }
+
+  @override
+  String likedBy(Object name, Object count) {
+    return '$name and $count others liked this';
+  }
+
+  @override
+  String get commentsTitle => 'Comments';
+
+  @override
+  String get myPageTitle => 'My Prayer Garden';
+
+  @override
+  String get myPrayers => 'My Prayers';
+
+  @override
+  String get myTestimonies => 'My Testimonies';
+
+  @override
+  String get savedPosts => 'Saved';
+
+  @override
+  String get totalPrayersCount => 'Prayers';
+
+  @override
+  String get streakCount => 'Streak';
+
+  @override
+  String get testimoniesCount => 'Testimonies';
 }

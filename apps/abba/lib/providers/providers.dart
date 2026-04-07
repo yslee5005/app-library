@@ -133,6 +133,14 @@ final savedPostsProvider = FutureProvider<List<CommunityPost>>((ref) {
   return repo.getSavedPosts();
 });
 
+/// My posts (current user's posts only)
+final myPostsProvider = FutureProvider<List<CommunityPost>>((ref) async {
+  final repo = ref.watch(communityRepositoryProvider);
+  final userId = ref.watch(authStateProvider).user?.id ?? '';
+  final allPosts = await repo.getPosts();
+  return allPosts.where((p) => p.userId == userId).toList();
+});
+
 // ---------------------------------------------------------------------------
 // Calendar & Prayer data providers (Phase 2)
 // ---------------------------------------------------------------------------

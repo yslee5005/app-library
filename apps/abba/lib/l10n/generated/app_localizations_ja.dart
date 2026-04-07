@@ -548,4 +548,41 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get scriptureReasonLabel => 'このみ言葉を選んだ理由';
+
+  @override
+  String get seeMore => 'もっと見る';
+
+  @override
+  String seeAllComments(Object count) {
+    return 'コメント$count件すべて見る';
+  }
+
+  @override
+  String likedBy(Object name, Object count) {
+    return '$nameと他$count人がいいねしました';
+  }
+
+  @override
+  String get commentsTitle => 'コメント';
+
+  @override
+  String get myPageTitle => '祈りの庭';
+
+  @override
+  String get myPrayers => '私の祈り';
+
+  @override
+  String get myTestimonies => '私の証し';
+
+  @override
+  String get savedPosts => '保存済み';
+
+  @override
+  String get totalPrayersCount => '祈り';
+
+  @override
+  String get streakCount => '連続';
+
+  @override
+  String get testimoniesCount => '証し';
 }

@@ -182,5 +182,18 @@
   "qtGuide1": "Read the passage and meditate quietly",
   "qtGuide2": "Share what you discovered — speak or type your reflection",
   "qtGuide3": "Abba will help you apply the Word to your daily life",
-  "scriptureReasonLabel": "Why this Scripture"
+  "scriptureReasonLabel": "Why this Scripture",
+  "seeMore": "See more",
+  "seeAllComments": "View all {count} comments",
+  "@seeAllComments": { "placeholders": { "count": {} } },
+  "likedBy": "{name} and {count} others liked this",
+  "@likedBy": { "placeholders": { "name": {}, "count": {} } },
+  "commentsTitle": "Comments",
+  "myPageTitle": "My Prayer Garden",
+  "myPrayers": "My Prayers",
+  "myTestimonies": "My Testimonies",
+  "savedPosts": "Saved",
+  "totalPrayersCount": "Prayers",
+  "streakCount": "Streak",
+  "testimoniesCount": "Testimonies"
 }

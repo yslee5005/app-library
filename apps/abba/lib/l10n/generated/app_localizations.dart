@@ -1153,6 +1153,72 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Why this Scripture'**
   String get scriptureReasonLabel;
+
+  /// No description provided for @seeMore.
+  ///
+  /// In en, this message translates to:
+  /// **'See more'**
+  String get seeMore;
+
+  /// No description provided for @seeAllComments.
+  ///
+  /// In en, this message translates to:
+  /// **'View all {count} comments'**
+  String seeAllComments(Object count);
+
+  /// No description provided for @likedBy.
+  ///
+  /// In en, this message translates to:
+  /// **'{name} and {count} others liked this'**
+  String likedBy(Object name, Object count);
+
+  /// No description provided for @commentsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Comments'**
+  String get commentsTitle;
+
+  /// No description provided for @myPageTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'My Prayer Garden'**
+  String get myPageTitle;
+
+  /// No description provided for @myPrayers.
+  ///
+  /// In en, this message translates to:
+  /// **'My Prayers'**
+  String get myPrayers;
+
+  /// No description provided for @myTestimonies.
+  ///
+  /// In en, this message translates to:
+  /// **'My Testimonies'**
+  String get myTestimonies;
+
+  /// No description provided for @savedPosts.
+  ///
+  /// In en, this message translates to:
+  /// **'Saved'**
+  String get savedPosts;
+
+  /// No description provided for @totalPrayersCount.
+  ///
+  /// In en, this message translates to:
+  /// **'Prayers'**
+  String get totalPrayersCount;
+
+  /// No description provided for @streakCount.
+  ///
+  /// In en, this message translates to:
+  /// **'Streak'**
+  String get streakCount;
+
+  /// No description provided for @testimoniesCount.
+  ///
+  /// In en, this message translates to:
+  /// **'Testimonies'**
+  String get testimoniesCount;
 }
 
 class _AppLocalizationsDelegate

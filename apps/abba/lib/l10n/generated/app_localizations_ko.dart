@@ -548,4 +548,41 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get scriptureReasonLabel => '이 말씀을 드리는 이유';
+
+  @override
+  String get seeMore => '더 보기';
+
+  @override
+  String seeAllComments(Object count) {
+    return '댓글 $count개 모두 보기';
+  }
+
+  @override
+  String likedBy(Object name, Object count) {
+    return '$name 외 $count명이 좋아합니다';
+  }
+
+  @override
+  String get commentsTitle => '댓글';
+
+  @override
+  String get myPageTitle => '내 기도 정원';
+
+  @override
+  String get myPrayers => '내 기도';
+
+  @override
+  String get myTestimonies => '내 간증';
+
+  @override
+  String get savedPosts => '저장됨';
+
+  @override
+  String get totalPrayersCount => '기도';
+
+  @override
+  String get streakCount => '연속';
+
+  @override
+  String get testimoniesCount => '간증';
 }

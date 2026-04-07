@@ -21,7 +21,7 @@ For _fastlane_ installation instructions, see [Installing _fastlane_](https://do
 [bundle exec] fastlane ios deploy
 ```
 
-Full pipeline: register → build → TestFlight
+Full pipeline: register → sign → build → TestFlight
 
 ----
 

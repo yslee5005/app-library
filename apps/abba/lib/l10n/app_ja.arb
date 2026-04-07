@@ -182,5 +182,18 @@
   "qtGuide1": "み言葉を読んで静かに黙想してください",
   "qtGuide2": "気づいたことを声に出すか書いてください",
   "qtGuide3": "アバがみ言葉を生活に適用できるようお手伝いします",
-  "scriptureReasonLabel": "このみ言葉を選んだ理由"
+  "scriptureReasonLabel": "このみ言葉を選んだ理由",
+  "seeMore": "もっと見る",
+  "seeAllComments": "コメント{count}件すべて見る",
+  "@seeAllComments": { "placeholders": { "count": {} } },
+  "likedBy": "{name}と他{count}人がいいねしました",
+  "@likedBy": { "placeholders": { "name": {}, "count": {} } },
+  "commentsTitle": "コメント",
+  "myPageTitle": "祈りの庭",
+  "myPrayers": "私の祈り",
+  "myTestimonies": "私の証し",
+  "savedPosts": "保存済み",
+  "totalPrayersCount": "祈り",
+  "streakCount": "連続",
+  "testimoniesCount": "証し"
 }

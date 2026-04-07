@@ -13,6 +13,7 @@ import '../features/dashboard/view/qt_dashboard_view.dart';
 import '../features/home/view/home_view.dart';
 import '../features/login/view/login_view.dart';
 import '../features/qt/view/qt_view.dart';
+import '../features/my_page/view/my_page_view.dart';
 import '../features/settings/view/settings_view.dart';
 import '../features/welcome/view/welcome_view.dart';
 import '../widgets/abba_tab_bar.dart';
@@ -105,6 +106,12 @@ final appRouter = GoRouter(
             GoRoute(
               path: '/settings',
               builder: (context, state) => const SettingsView(),
+              routes: [
+                GoRoute(
+                  path: 'my-page',
+                  builder: (context, state) => const MyPageView(),
+                ),
+              ],
             ),
           ],
         ),

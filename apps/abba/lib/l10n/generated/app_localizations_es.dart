@@ -562,4 +562,41 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get scriptureReasonLabel => 'Por qué esta Escritura';
+
+  @override
+  String get seeMore => 'Ver más';
+
+  @override
+  String seeAllComments(Object count) {
+    return 'Ver los $count comentarios';
+  }
+
+  @override
+  String likedBy(Object name, Object count) {
+    return 'A $name y $count más les gustó';
+  }
+
+  @override
+  String get commentsTitle => 'Comentarios';
+
+  @override
+  String get myPageTitle => 'Mi Jardín de Oración';
+
+  @override
+  String get myPrayers => 'Mis Oraciones';
+
+  @override
+  String get myTestimonies => 'Mis Testimonios';
+
+  @override
+  String get savedPosts => 'Guardados';
+
+  @override
+  String get totalPrayersCount => 'Oraciones';
+
+  @override
+  String get streakCount => 'Racha';
+
+  @override
+  String get testimoniesCount => 'Testimonios';
 }

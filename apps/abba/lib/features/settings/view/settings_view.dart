@@ -89,6 +89,22 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
               error: (e, s) => const SizedBox.shrink(),
             ),
 
+            // My Prayer Garden button
+            AbbaCard(
+              margin: const EdgeInsets.only(bottom: AbbaSpacing.md),
+              padding: EdgeInsets.zero,
+              child: ListTile(
+                leading: const Text('\ud83c\udf3f', style: TextStyle(fontSize: 24)),
+                title: Text(l10n.myPageTitle, style: AbbaTypography.body),
+                trailing: const Icon(Icons.chevron_right, color: AbbaColors.muted),
+                onTap: () => context.go('/settings/my-page'),
+                contentPadding: const EdgeInsets.symmetric(
+                  horizontal: AbbaSpacing.md,
+                  vertical: AbbaSpacing.xs,
+                ),
+              ),
+            ),
+
             // Premium card
             _buildPremiumCard(l10n),
             const SizedBox(height: AbbaSpacing.md),

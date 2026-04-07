@@ -548,4 +548,41 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get scriptureReasonLabel => '选择这段经文的原因';
+
+  @override
+  String get seeMore => '查看更多';
+
+  @override
+  String seeAllComments(Object count) {
+    return '查看全部$count条评论';
+  }
+
+  @override
+  String likedBy(Object name, Object count) {
+    return '$name和其他$count人点赞了';
+  }
+
+  @override
+  String get commentsTitle => '评论';
+
+  @override
+  String get myPageTitle => '我的祷告花园';
+
+  @override
+  String get myPrayers => '我的祷告';
+
+  @override
+  String get myTestimonies => '我的见证';
+
+  @override
+  String get savedPosts => '已收藏';
+
+  @override
+  String get totalPrayersCount => '祷告';
+
+  @override
+  String get streakCount => '连续';
+
+  @override
+  String get testimoniesCount => '见证';
 }

@@ -182,5 +182,18 @@
   "qtGuide1": "Lee el pasaje y medita en silencio",
   "qtGuide2": "Comparte lo que descubriste en voz alta o por escrito",
   "qtGuide3": "Abba te ayudará a aplicar la Palabra a tu vida diaria",
-  "scriptureReasonLabel": "Por qué esta Escritura"
+  "scriptureReasonLabel": "Por qué esta Escritura",
+  "seeMore": "Ver más",
+  "seeAllComments": "Ver los {count} comentarios",
+  "@seeAllComments": { "placeholders": { "count": {} } },
+  "likedBy": "A {name} y {count} más les gustó",
+  "@likedBy": { "placeholders": { "name": {}, "count": {} } },
+  "commentsTitle": "Comentarios",
+  "myPageTitle": "Mi Jardín de Oración",
+  "myPrayers": "Mis Oraciones",
+  "myTestimonies": "Mis Testimonios",
+  "savedPosts": "Guardados",
+  "totalPrayersCount": "Oraciones",
+  "streakCount": "Racha",
+  "testimoniesCount": "Testimonios"
 }
