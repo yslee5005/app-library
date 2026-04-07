@@ -148,5 +148,8 @@
   "premiumActive": "Premium Active",
   "planOncePerDay": "1x/day",
   "planUnlimited": "Unlimited",
-  "closeRecording": "Close recording"
+  "closeRecording": "Close recording",
+  "qtRevealMessage": "Let's open today's Word",
+  "qtSelectPrompt": "Choose one and start today's QT",
+  "qtTopicLabel": "Topic"
 }

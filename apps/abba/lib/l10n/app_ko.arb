@@ -148,5 +148,8 @@
   "premiumActive": "프리미엄 활성",
   "planOncePerDay": "1일 1회",
   "planUnlimited": "무제한",
-  "closeRecording": "녹음 닫기"
+  "closeRecording": "녹음 닫기",
+  "qtRevealMessage": "오늘의 말씀을 펼쳐볼까요?",
+  "qtSelectPrompt": "하나를 선택해서 오늘 QT를 해보아요 🌿",
+  "qtTopicLabel": "주제"
 }

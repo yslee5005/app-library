@@ -131,7 +131,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get originalLangTitle => '원어의 깊은 뜻';
 
   @override
-  String get premiumUnlock => 'Premium으로 보기';
+  String get premiumUnlock => '프리미엄으로 보기';
 
   @override
   String get qtPageTitle => '아침 정원';
@@ -239,7 +239,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get launchPromo => '3개월간 ₩5,900/월!';
 
   @override
-  String get startPremium => 'Premium 시작하기';
+  String get startPremium => '프리미엄 시작하기';
 
   @override
   String get comingSoon => '곧 출시됩니다';
@@ -371,7 +371,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get premiumLimitTitle => '오늘의 기도를 마쳤습니다';
 
   @override
-  String get premiumLimitBody => '내일 다시 만나요!\nPremium으로 무제한 기도하기';
+  String get premiumLimitBody => '내일 다시 만나요!\n프리미엄으로 무제한 기도하기';
 
   @override
   String get laterButton => '다음에 하기';
@@ -446,4 +446,13 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get closeRecording => '녹음 닫기';
+
+  @override
+  String get qtRevealMessage => '오늘의 말씀을 펼쳐볼까요?';
+
+  @override
+  String get qtSelectPrompt => '하나를 선택해서 오늘 QT를 해보아요 🌿';
+
+  @override
+  String get qtTopicLabel => '주제';
 }

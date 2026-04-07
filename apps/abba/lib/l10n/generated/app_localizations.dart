@@ -949,6 +949,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Close recording'**
   String get closeRecording;
+
+  /// No description provided for @qtRevealMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Let\'s open today\'s Word'**
+  String get qtRevealMessage;
+
+  /// No description provided for @qtSelectPrompt.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose one and start today\'s QT'**
+  String get qtSelectPrompt;
+
+  /// No description provided for @qtTopicLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Topic'**
+  String get qtTopicLabel;
 }
 
 class _AppLocalizationsDelegate

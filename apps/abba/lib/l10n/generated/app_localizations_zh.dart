@@ -446,4 +446,13 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get closeRecording => '关闭录音';
+
+  @override
+  String get qtRevealMessage => '让我们打开今天的话语';
+
+  @override
+  String get qtSelectPrompt => '选择一个开始今天的灵修 🌿';
+
+  @override
+  String get qtTopicLabel => '主题';
 }

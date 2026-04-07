@@ -148,5 +148,8 @@
   "premiumActive": "已订阅Premium",
   "planOncePerDay": "每天1次",
   "planUnlimited": "无限",
-  "closeRecording": "关闭录音"
+  "closeRecording": "关闭录音",
+  "qtRevealMessage": "让我们打开今天的话语",
+  "qtSelectPrompt": "选择一个开始今天的灵修 🌿",
+  "qtTopicLabel": "主题"
 }

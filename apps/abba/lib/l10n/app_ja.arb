@@ -148,5 +148,8 @@
   "premiumActive": "プレミアム有効",
   "planOncePerDay": "1日1回",
   "planUnlimited": "無制限",
-  "closeRecording": "録音を閉じる"
+  "closeRecording": "録音を閉じる",
+  "qtRevealMessage": "今日のみ言葉を開いてみましょう",
+  "qtSelectPrompt": "一つを選んで今日のQTを始めましょう 🌿",
+  "qtTopicLabel": "テーマ"
 }

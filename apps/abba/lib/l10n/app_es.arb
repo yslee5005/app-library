@@ -148,5 +148,8 @@
   "premiumActive": "Premium Activo",
   "planOncePerDay": "1x/día",
   "planUnlimited": "Ilimitado",
-  "closeRecording": "Cerrar grabación"
+  "closeRecording": "Cerrar grabación",
+  "qtRevealMessage": "Abramos la Palabra de hoy",
+  "qtSelectPrompt": "Elige una y comienza el QT de hoy 🌿",
+  "qtTopicLabel": "Tema"
 }

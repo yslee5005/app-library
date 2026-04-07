@@ -457,4 +457,13 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get closeRecording => 'Cerrar grabación';
+
+  @override
+  String get qtRevealMessage => 'Abramos la Palabra de hoy';
+
+  @override
+  String get qtSelectPrompt => 'Elige una y comienza el QT de hoy 🌿';
+
+  @override
+  String get qtTopicLabel => 'Tema';
 }

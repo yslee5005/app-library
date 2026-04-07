@@ -446,4 +446,13 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get closeRecording => '録音を閉じる';
+
+  @override
+  String get qtRevealMessage => '今日のみ言葉を開いてみましょう';
+
+  @override
+  String get qtSelectPrompt => '一つを選んで今日のQTを始めましょう 🌿';
+
+  @override
+  String get qtTopicLabel => 'テーマ';
 }

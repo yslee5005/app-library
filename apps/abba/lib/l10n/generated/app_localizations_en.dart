@@ -454,4 +454,13 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get closeRecording => 'Close recording';
+
+  @override
+  String get qtRevealMessage => 'Let\'s open today\'s Word';
+
+  @override
+  String get qtSelectPrompt => 'Choose one and start today\'s QT';
+
+  @override
+  String get qtTopicLabel => 'Topic';
 }
