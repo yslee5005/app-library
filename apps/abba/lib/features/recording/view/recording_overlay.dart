@@ -7,6 +7,7 @@ import 'package:go_router/go_router.dart';
 import '../../../l10n/generated/app_localizations.dart';
 import '../../../providers/providers.dart';
 import '../../../services/error_logging_service.dart';
+import '../../../services/stt_service.dart';
 import '../../../theme/abba_theme.dart';
 import '../../../widgets/abba_button.dart';
 import '../../../widgets/abba_snackbar.dart';
@@ -27,10 +28,12 @@ class _RecordingOverlayState extends ConsumerState<RecordingOverlay>
   String _transcript = '';
   final _textController = TextEditingController();
   late AnimationController _pulseController;
+  late final SttService _sttService;
 
   @override
   void initState() {
     super.initState();
+    _sttService = _sttService;
     ErrorLoggingService.addBreadcrumb(
       'Recording started',
       category: 'recording',
@@ -51,9 +54,8 @@ class _RecordingOverlayState extends ConsumerState<RecordingOverlay>
   }
 
   void _startStt() {
-    final stt = ref.read(sttServiceProvider);
     final locale = ref.read(localeProvider);
-    stt.initialize().then((_) {
+    _sttService.initialize().then((_) {
       final sttLocale = switch (locale) {
         'ko' => 'ko_KR',
         'ja' => 'ja_JP',
@@ -61,8 +63,8 @@ class _RecordingOverlayState extends ConsumerState<RecordingOverlay>
         'zh' => 'zh_CN',
         _ => 'en_US',
       };
-      stt.setLocale(sttLocale);
-      stt.startListening(
+      _sttService.setLocale(sttLocale);
+      _sttService.startListening(
         onResult: (text, isFinal) {
           setState(() => _transcript = text);
         },
@@ -94,7 +96,7 @@ class _RecordingOverlayState extends ConsumerState<RecordingOverlay>
     _timer?.cancel();
     _pulseController.dispose();
     _textController.dispose();
-    ref.read(sttServiceProvider).stopListening();
+    _sttService.stopListening();
     super.dispose();
   }
 
@@ -108,7 +110,7 @@ class _RecordingOverlayState extends ConsumerState<RecordingOverlay>
     setState(() => _isPaused = !_isPaused);
     if (_isPaused) {
       _pulseController.stop();
-      ref.read(sttServiceProvider).stopListening();
+      _sttService.stopListening();
     } else {
       _pulseController.repeat(reverse: true);
       _startStt();
@@ -122,7 +124,7 @@ class _RecordingOverlayState extends ConsumerState<RecordingOverlay>
     );
 
     final transcript = _isTextMode ? _textController.text : _transcript;
-    ref.read(sttServiceProvider).stopListening();
+    _sttService.stopListening();
 
     // Store transcript for AI processing
     ref.read(currentTranscriptProvider.notifier).state = transcript;
@@ -145,7 +147,7 @@ class _RecordingOverlayState extends ConsumerState<RecordingOverlay>
       child: SafeArea(
         child: Column(
           children: [
-            // Top bar
+            // Top bar — fixed at top
             Padding(
               padding: const EdgeInsets.symmetric(
                 horizontal: AbbaSpacing.md,
@@ -159,7 +161,7 @@ class _RecordingOverlayState extends ConsumerState<RecordingOverlay>
                     button: true,
                     child: IconButton(
                       onPressed: () {
-                        ref.read(sttServiceProvider).cancelListening();
+                        _sttService.cancelListening();
                         Navigator.of(context).pop();
                       },
                       icon: const Icon(Icons.close, size: 28),
@@ -171,7 +173,7 @@ class _RecordingOverlayState extends ConsumerState<RecordingOverlay>
                     onPressed: () {
                       setState(() => _isTextMode = !_isTextMode);
                       if (_isTextMode) {
-                        ref.read(sttServiceProvider).stopListening();
+                        _sttService.stopListening();
                         _textController.text = _transcript;
                       } else {
                         _startStt();
@@ -191,8 +193,11 @@ class _RecordingOverlayState extends ConsumerState<RecordingOverlay>
                 ],
               ),
             ),
-            const Spacer(),
-            // Pulse animation or text input
+            // Pulse animation or text input — scrollable middle area
+            Expanded(child: SingleChildScrollView(child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+            const SizedBox(height: AbbaSpacing.xl),
             if (_isTextMode)
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: AbbaSpacing.xl),
@@ -284,8 +289,10 @@ class _RecordingOverlayState extends ConsumerState<RecordingOverlay>
               _formattedTime,
               style: AbbaTypography.hero.copyWith(fontSize: 36),
             ),
-            const Spacer(),
-            // Buttons
+            const SizedBox(height: AbbaSpacing.xl),
+              ],
+            ))),
+            // Buttons — fixed at bottom
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: AbbaSpacing.xl),
               child: Row(
