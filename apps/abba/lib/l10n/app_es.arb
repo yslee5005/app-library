@@ -173,5 +173,13 @@
   "originalWordLabel": "Palabra original",
   "historicalContextLabel": "Contexto histórico",
   "crossReferencesLabel": "Referencias cruzadas",
-  "growthStoryTitle": "Historia de Crecimiento"
+  "growthStoryTitle": "Historia de Crecimiento",
+  "prayerGuideTitle": "Cómo orar con Abba",
+  "prayerGuide1": "Ora en voz alta, por favor",
+  "prayerGuide2": "Abba escucha tu oración y encuentra versículos para tu corazón",
+  "prayerGuide3": "También puedes escribir tu oración",
+  "qtGuideTitle": "Cómo meditar con Abba",
+  "qtGuide1": "Lee el pasaje y medita en silencio",
+  "qtGuide2": "Comparte lo que descubriste en voz alta o por escrito",
+  "qtGuide3": "Abba te ayudará a aplicar la Palabra a tu vida diaria"
 }

@@ -521,4 +521,28 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get growthStoryTitle => '영적 성장 이야기';
+
+  @override
+  String get prayerGuideTitle => '이렇게 기도해 보세요';
+
+  @override
+  String get prayerGuide1 => '소리 내어 기도해 주세요';
+
+  @override
+  String get prayerGuide2 => '아바가 기도를 듣고 마음에 와닿는 말씀을 찾아드려요';
+
+  @override
+  String get prayerGuide3 => '텍스트로 입력하셔도 괜찮아요';
+
+  @override
+  String get qtGuideTitle => '이렇게 묵상해 보세요';
+
+  @override
+  String get qtGuide1 => '말씀을 읽고 조용히 묵상해 주세요';
+
+  @override
+  String get qtGuide2 => '깨달은 것을 소리 내어 나누거나 글로 적어주세요';
+
+  @override
+  String get qtGuide3 => '아바가 말씀을 삶에 적용할 수 있도록 도와드려요';
 }

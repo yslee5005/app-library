@@ -173,5 +173,13 @@
   "originalWordLabel": "原文",
   "historicalContextLabel": "历史背景",
   "crossReferencesLabel": "相关经文",
-  "growthStoryTitle": "成长故事"
+  "growthStoryTitle": "成长故事",
+  "prayerGuideTitle": "请这样祷告",
+  "prayerGuide1": "请出声祷告",
+  "prayerGuide2": "Abba会聆听您的祷告，找到触动心灵的经文",
+  "prayerGuide3": "您也可以用文字输入祷告",
+  "qtGuideTitle": "请这样默想",
+  "qtGuide1": "请阅读经文并安静默想",
+  "qtGuide2": "请分享您的领悟——说出来或写下来",
+  "qtGuide3": "Abba会帮助您将话语应用到日常生活中"
 }

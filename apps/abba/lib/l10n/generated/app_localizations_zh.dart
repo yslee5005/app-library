@@ -521,4 +521,28 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get growthStoryTitle => '成长故事';
+
+  @override
+  String get prayerGuideTitle => '请这样祷告';
+
+  @override
+  String get prayerGuide1 => '请出声祷告';
+
+  @override
+  String get prayerGuide2 => 'Abba会聆听您的祷告，找到触动心灵的经文';
+
+  @override
+  String get prayerGuide3 => '您也可以用文字输入祷告';
+
+  @override
+  String get qtGuideTitle => '请这样默想';
+
+  @override
+  String get qtGuide1 => '请阅读经文并安静默想';
+
+  @override
+  String get qtGuide2 => '请分享您的领悟——说出来或写下来';
+
+  @override
+  String get qtGuide3 => 'Abba会帮助您将话语应用到日常生活中';
 }

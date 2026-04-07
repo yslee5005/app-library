@@ -1099,6 +1099,54 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Growth Story'**
   String get growthStoryTitle;
+
+  /// No description provided for @prayerGuideTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'How to pray with Abba'**
+  String get prayerGuideTitle;
+
+  /// No description provided for @prayerGuide1.
+  ///
+  /// In en, this message translates to:
+  /// **'Pray out loud or in a clear voice'**
+  String get prayerGuide1;
+
+  /// No description provided for @prayerGuide2.
+  ///
+  /// In en, this message translates to:
+  /// **'Abba listens to your words and finds Scripture that speaks to your heart'**
+  String get prayerGuide2;
+
+  /// No description provided for @prayerGuide3.
+  ///
+  /// In en, this message translates to:
+  /// **'You can also type your prayer if you prefer'**
+  String get prayerGuide3;
+
+  /// No description provided for @qtGuideTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'How to do QT with Abba'**
+  String get qtGuideTitle;
+
+  /// No description provided for @qtGuide1.
+  ///
+  /// In en, this message translates to:
+  /// **'Read the passage and meditate quietly'**
+  String get qtGuide1;
+
+  /// No description provided for @qtGuide2.
+  ///
+  /// In en, this message translates to:
+  /// **'Share what you discovered — speak or type your reflection'**
+  String get qtGuide2;
+
+  /// No description provided for @qtGuide3.
+  ///
+  /// In en, this message translates to:
+  /// **'Abba will help you apply the Word to your daily life'**
+  String get qtGuide3;
 }
 
 class _AppLocalizationsDelegate

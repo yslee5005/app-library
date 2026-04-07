@@ -173,5 +173,13 @@
   "originalWordLabel": "Original Word",
   "historicalContextLabel": "Historical Context",
   "crossReferencesLabel": "Cross References",
-  "growthStoryTitle": "Growth Story"
+  "growthStoryTitle": "Growth Story",
+  "prayerGuideTitle": "How to pray with Abba",
+  "prayerGuide1": "Pray out loud or in a clear voice",
+  "prayerGuide2": "Abba listens to your words and finds Scripture that speaks to your heart",
+  "prayerGuide3": "You can also type your prayer if you prefer",
+  "qtGuideTitle": "How to do QT with Abba",
+  "qtGuide1": "Read the passage and meditate quietly",
+  "qtGuide2": "Share what you discovered — speak or type your reflection",
+  "qtGuide3": "Abba will help you apply the Word to your daily life"
 }

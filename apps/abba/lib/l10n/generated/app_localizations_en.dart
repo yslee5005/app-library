@@ -529,4 +529,30 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get growthStoryTitle => 'Growth Story';
+
+  @override
+  String get prayerGuideTitle => 'How to pray with Abba';
+
+  @override
+  String get prayerGuide1 => 'Pray out loud or in a clear voice';
+
+  @override
+  String get prayerGuide2 =>
+      'Abba listens to your words and finds Scripture that speaks to your heart';
+
+  @override
+  String get prayerGuide3 => 'You can also type your prayer if you prefer';
+
+  @override
+  String get qtGuideTitle => 'How to do QT with Abba';
+
+  @override
+  String get qtGuide1 => 'Read the passage and meditate quietly';
+
+  @override
+  String get qtGuide2 =>
+      'Share what you discovered — speak or type your reflection';
+
+  @override
+  String get qtGuide3 => 'Abba will help you apply the Word to your daily life';
 }

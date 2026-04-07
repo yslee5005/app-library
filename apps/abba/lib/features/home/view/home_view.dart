@@ -327,20 +327,42 @@ class _HomeViewState extends ConsumerState<HomeView>
             ),
           ),
         ),
-        const SizedBox(height: AbbaSpacing.xl),
+        const SizedBox(height: AbbaSpacing.lg),
         Text(
           l10n.prayerStartPrompt,
-          style: AbbaTypography.body.copyWith(color: AbbaColors.muted),
+          style: AbbaTypography.h2.copyWith(color: AbbaColors.warmBrown),
         ),
-        const SizedBox(height: AbbaSpacing.sm),
-        Text(
-          '00:00',
-          style: AbbaTypography.hero.copyWith(
-            fontSize: 36,
-            color: AbbaColors.muted.withValues(alpha: 0.5),
+        const SizedBox(height: AbbaSpacing.lg),
+        // Guide tips
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: AbbaSpacing.xl),
+          child: Container(
+            padding: const EdgeInsets.all(AbbaSpacing.md),
+            decoration: BoxDecoration(
+              color: AbbaColors.sage.withValues(alpha: 0.08),
+              borderRadius: BorderRadius.circular(AbbaRadius.lg),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  l10n.prayerGuideTitle,
+                  style: AbbaTypography.body.copyWith(
+                    fontWeight: FontWeight.w600,
+                    color: AbbaColors.sage,
+                  ),
+                ),
+                const SizedBox(height: AbbaSpacing.sm),
+                _GuideRow(icon: '🎙️', text: l10n.prayerGuide1),
+                const SizedBox(height: AbbaSpacing.xs),
+                _GuideRow(icon: '✝️', text: l10n.prayerGuide2),
+                const SizedBox(height: AbbaSpacing.xs),
+                _GuideRow(icon: '⌨️', text: l10n.prayerGuide3),
+              ],
+            ),
           ),
         ),
-        const SizedBox(height: AbbaSpacing.xxl),
+        const SizedBox(height: AbbaSpacing.xl),
         // Start button
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: AbbaSpacing.xl),
@@ -539,7 +561,35 @@ class _HomeViewState extends ConsumerState<HomeView>
               style: AbbaTypography.h2,
               textAlign: TextAlign.center,
             ),
-            const SizedBox(height: AbbaSpacing.xxl * 2),
+            const SizedBox(height: AbbaSpacing.xl),
+            // Guide tips
+            Container(
+              padding: const EdgeInsets.all(AbbaSpacing.md),
+              margin: const EdgeInsets.symmetric(horizontal: AbbaSpacing.md),
+              decoration: BoxDecoration(
+                color: AbbaColors.softGold.withValues(alpha: 0.1),
+                borderRadius: BorderRadius.circular(AbbaRadius.lg),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    l10n.qtGuideTitle,
+                    style: AbbaTypography.body.copyWith(
+                      fontWeight: FontWeight.w600,
+                      color: AbbaColors.softGold,
+                    ),
+                  ),
+                  const SizedBox(height: AbbaSpacing.sm),
+                  _GuideRow(icon: '📖', text: l10n.qtGuide1),
+                  const SizedBox(height: AbbaSpacing.xs),
+                  _GuideRow(icon: '💬', text: l10n.qtGuide2),
+                  const SizedBox(height: AbbaSpacing.xs),
+                  _GuideRow(icon: '✏️', text: l10n.qtGuide3),
+                ],
+              ),
+            ),
+            const SizedBox(height: AbbaSpacing.xl),
             AbbaButton(
               label: l10n.qtButton,
               onPressed: () => context.go('/home/qt'),
@@ -550,6 +600,33 @@ class _HomeViewState extends ConsumerState<HomeView>
           ],
         ),
       ),
+    );
+  }
+}
+
+class _GuideRow extends StatelessWidget {
+  final String icon;
+  final String text;
+
+  const _GuideRow({required this.icon, required this.text});
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(icon, style: const TextStyle(fontSize: 16)),
+        const SizedBox(width: AbbaSpacing.sm),
+        Expanded(
+          child: Text(
+            text,
+            style: AbbaTypography.bodySmall.copyWith(
+              color: AbbaColors.warmBrown,
+              height: 1.4,
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

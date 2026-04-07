@@ -173,5 +173,13 @@
   "originalWordLabel": "원어",
   "historicalContextLabel": "역사적 배경",
   "crossReferencesLabel": "관련 구절",
-  "growthStoryTitle": "영적 성장 이야기"
+  "growthStoryTitle": "영적 성장 이야기",
+  "prayerGuideTitle": "이렇게 기도해 보세요",
+  "prayerGuide1": "소리 내어 기도해 주세요",
+  "prayerGuide2": "아바가 기도를 듣고 마음에 와닿는 말씀을 찾아드려요",
+  "prayerGuide3": "텍스트로 입력하셔도 괜찮아요",
+  "qtGuideTitle": "이렇게 묵상해 보세요",
+  "qtGuide1": "말씀을 읽고 조용히 묵상해 주세요",
+  "qtGuide2": "깨달은 것을 소리 내어 나누거나 글로 적어주세요",
+  "qtGuide3": "아바가 말씀을 삶에 적용할 수 있도록 도와드려요"
 }

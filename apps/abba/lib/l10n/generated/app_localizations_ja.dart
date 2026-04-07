@@ -521,4 +521,28 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get growthStoryTitle => '霊的成長の物語';
+
+  @override
+  String get prayerGuideTitle => 'このようにお祈りしてください';
+
+  @override
+  String get prayerGuide1 => '声に出してお祈りしてください';
+
+  @override
+  String get prayerGuide2 => 'アバがお祈りを聞いて心に響く聖句を見つけます';
+
+  @override
+  String get prayerGuide3 => 'テキストで入力しても大丈夫です';
+
+  @override
+  String get qtGuideTitle => 'このように黙想してください';
+
+  @override
+  String get qtGuide1 => 'み言葉を読んで静かに黙想してください';
+
+  @override
+  String get qtGuide2 => '気づいたことを声に出すか書いてください';
+
+  @override
+  String get qtGuide3 => 'アバがみ言葉を生活に適用できるようお手伝いします';
 }

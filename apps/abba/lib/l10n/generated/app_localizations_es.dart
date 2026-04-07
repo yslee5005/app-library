@@ -532,4 +532,31 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get growthStoryTitle => 'Historia de Crecimiento';
+
+  @override
+  String get prayerGuideTitle => 'Cómo orar con Abba';
+
+  @override
+  String get prayerGuide1 => 'Ora en voz alta, por favor';
+
+  @override
+  String get prayerGuide2 =>
+      'Abba escucha tu oración y encuentra versículos para tu corazón';
+
+  @override
+  String get prayerGuide3 => 'También puedes escribir tu oración';
+
+  @override
+  String get qtGuideTitle => 'Cómo meditar con Abba';
+
+  @override
+  String get qtGuide1 => 'Lee el pasaje y medita en silencio';
+
+  @override
+  String get qtGuide2 =>
+      'Comparte lo que descubriste en voz alta o por escrito';
+
+  @override
+  String get qtGuide3 =>
+      'Abba te ayudará a aplicar la Palabra a tu vida diaria';
 }
