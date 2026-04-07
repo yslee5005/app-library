@@ -1,0 +1,42 @@
+default_platform(:ios)
+
+# App Store Connect API Key
+api_key = app_store_connect_api_key(
+  key_id: "92BADV9F52",
+  issuer_id: "44f25ef3-5982-4b3b-b575-864a88de8c72",
+  key_filepath: File.expand_path("~/.appstoreconnect/private_keys/AuthKey_92BADV9F52.p8"),
+)
+
+platform :ios do
+
+  desc "Full pipeline: register → build → TestFlight"
+  lane :deploy do
+    # 1. App Store Connect에 앱 등록 (이미 등록되어 있으면 스킵)
+    begin
+      create_app_online(
+        api_key: api_key,
+        app_identifier: "com.ystech.abba",
+        app_name: "Abba",
+        language: "Korean",
+        sku: "com.ystech.abba",
+        platforms: ["IOS"],
+      )
+      UI.success("✅ App registered!")
+    rescue => e
+      UI.important("ℹ️  App already registered, skipping. (#{e.message})")
+    end
+
+    # 2. Flutter IPA 빌드
+    sh("cd ../.. && flutter build ipa --release --obfuscate --split-debug-info=build/debug-info")
+    UI.success("✅ Build complete!")
+
+    # 3. TestFlight 업로드
+    upload_to_testflight(
+      api_key: api_key,
+      ipa: "../../build/ios/ipa/abba.ipa",
+      skip_waiting_for_build_processing: true,
+    )
+    UI.success("✅ Uploaded to TestFlight!")
+  end
+
+end

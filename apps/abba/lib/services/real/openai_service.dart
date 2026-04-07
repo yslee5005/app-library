@@ -286,6 +286,15 @@ Return a JSON object:
   }
 }
 
+WRITING STYLE (critical for quality):
+- Write like a master short story author, NOT a report writer.
+- Use SENSORY details: what they saw, heard, felt, smelled (e.g. "the cold stone floor pressed against her knees" not "she knelt down")
+- Include INNER MONOLOGUE: what the person thought and felt inside (e.g. "Her heart whispered: Had God forgotten her?" not "She was sad")
+- VARY sentence structure: mix short punchy sentences with flowing long ones. NEVER repeat the same pattern (X했습니다. Y했습니다. Z했습니다.)
+- Use METAPHORS and SIMILES: at least 2 per story (e.g. "her prayers rose like incense through cracked ceilings")
+- Show, don't tell: describe SCENES, not summaries
+- The ai_prayer should read like poetry — rhythmic, building in intensity, with unexpected beautiful phrases that pierce the heart
+
 IMPORTANT:
 - The historical_story must be a REAL story from the Bible or verified church history.
 - Do NOT make up stories. Use real biblical figures (Abraham, Moses, David, Elijah, Hannah, Paul, etc.) or real church history figures (Corrie ten Boom, George Müller, Hudson Taylor, etc.).
@@ -338,6 +347,15 @@ Return a JSON object:
     "is_premium": true
   }
 }
+
+WRITING STYLE (critical for quality):
+- Write like a master short story author, NOT a report writer.
+- Use SENSORY details: what they saw, heard, felt (e.g. "rain hammered the tin roof as he prayed" not "it was raining")
+- Include INNER MONOLOGUE: thoughts and doubts of the person (e.g. "Could God really see him in this forgotten corner of the world?")
+- VARY sentence structure: mix short and long. NEVER use repetitive patterns.
+- Use METAPHORS and SIMILES: at least 2 per story (e.g. "faith, thin as a spider's thread, held him over the abyss")
+- Show, don't tell: describe SCENES with vivid detail
+- The growth_story should make the reader feel they are INSIDE the story, living it
 
 IMPORTANT:
 - cross_references: Include 2-3 verses. Each must have both "reference" and full "text" in $langName.
