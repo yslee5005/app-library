@@ -210,7 +210,7 @@ class _PostCardState extends ConsumerState<_PostCard> {
                     radius: 20,
                     backgroundColor: AbbaColors.sage.withValues(alpha: 0.2),
                     child: Text(
-                      post.displayName != null
+                      (post.displayName != null && post.displayName!.isNotEmpty)
                           ? post.displayName![0].toUpperCase()
                           : '🌿',
                       style: AbbaTypography.body,
@@ -645,7 +645,7 @@ class _CommentWidget extends StatelessWidget {
             radius: 14,
             backgroundColor: AbbaColors.sage.withValues(alpha: 0.15),
             child: Text(
-              comment.displayName != null
+              (comment.displayName != null && comment.displayName!.isNotEmpty)
                   ? comment.displayName![0].toUpperCase()
                   : '🌿',
               style: AbbaTypography.caption,

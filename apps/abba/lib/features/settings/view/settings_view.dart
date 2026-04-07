@@ -47,7 +47,7 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
                       radius: 32,
                       backgroundColor: AbbaColors.sage.withValues(alpha: 0.2),
                       child: Text(
-                        profile.name[0].toUpperCase(),
+                        profile.name.isNotEmpty ? profile.name[0].toUpperCase() : '?',
                         style: AbbaTypography.h1.copyWith(
                           color: AbbaColors.sage,
                         ),

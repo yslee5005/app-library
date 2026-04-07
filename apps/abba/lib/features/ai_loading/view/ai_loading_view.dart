@@ -52,6 +52,7 @@ class _AiLoadingViewState extends ConsumerState<AiLoadingView>
 
     // Minimum 3 seconds display
     Future.delayed(const Duration(seconds: 3), () {
+      if (!mounted) return;
       _minTimePassed = true;
       _navigateIfReady();
     });
