@@ -555,4 +555,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get qtGuide3 => 'Abba will help you apply the Word to your daily life';
+
+  @override
+  String get scriptureReasonLabel => 'Why this Scripture';
 }

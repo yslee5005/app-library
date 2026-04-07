@@ -213,18 +213,16 @@ class _AiLoadingViewState extends ConsumerState<AiLoadingView>
           insightKo: '당신의 묵상에서 하나님의 인도와 평안을 구하는 마음이 느껴집니다.',
         ),
         application: ApplicationSuggestion(
-          actionEn: 'Take a moment of quiet reflection today',
-          actionKo: '오늘 잠시 조용히 묵상하는 시간을 가져보세요',
-          whenEn: 'During a quiet moment',
-          whenKo: '조용한 시간에',
-          contextEn: 'Wherever you are',
-          contextKo: '어디에서든',
+          action: '오늘 잠시 조용히 묵상하는 시간을 가져보세요',
         ),
         knowledge: RelatedKnowledge(
           historicalContextEn:
               'The biblical concept of meditation involves deep reflection on God\'s Word.',
           historicalContextKo: '성경에서의 묵상은 하나님의 말씀에 대한 깊은 성찰을 의미합니다.',
-          crossReferences: ['Psalm 1:2', 'Joshua 1:8'],
+          crossReferences: [
+            CrossReference(reference: 'Psalm 1:2', text: ''),
+            CrossReference(reference: 'Joshua 1:8', text: ''),
+          ],
         ),
       ),
     );

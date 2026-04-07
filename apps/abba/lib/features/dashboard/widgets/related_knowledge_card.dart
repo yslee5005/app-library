@@ -100,29 +100,30 @@ class RelatedKnowledgeCard extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 4),
-            Wrap(
-              spacing: AbbaSpacing.sm,
-              runSpacing: 4,
-              children: knowledge.crossReferences.map((ref) {
-                return Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: AbbaSpacing.sm,
-                    vertical: 4,
-                  ),
-                  decoration: BoxDecoration(
-                    color: AbbaColors.softGold.withValues(alpha: 0.2),
-                    borderRadius: BorderRadius.circular(AbbaRadius.sm),
-                  ),
-                  child: Text(
-                    ref,
-                    style: AbbaTypography.caption.copyWith(
-                      color: AbbaColors.warmBrown,
-                      fontWeight: FontWeight.w600,
+            for (final ref in knowledge.crossReferences)
+              Padding(
+                padding: const EdgeInsets.only(bottom: AbbaSpacing.sm),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      ref.reference,
+                      style: AbbaTypography.bodySmall.copyWith(
+                        fontWeight: FontWeight.w600,
+                        color: AbbaColors.sage,
+                      ),
                     ),
-                  ),
-                );
-              }).toList(),
-            ),
+                    if (ref.text.isNotEmpty)
+                      Text(
+                        ref.text,
+                        style: AbbaTypography.bodySmall.copyWith(
+                          fontStyle: FontStyle.italic,
+                          height: 1.5,
+                        ),
+                      ),
+                  ],
+                ),
+              ),
           ],
         ],
       ),

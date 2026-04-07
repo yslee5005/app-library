@@ -545,4 +545,7 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get qtGuide3 => '아바가 말씀을 삶에 적용할 수 있도록 도와드려요';
+
+  @override
+  String get scriptureReasonLabel => '이 말씀을 드리는 이유';
 }

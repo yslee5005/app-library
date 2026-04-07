@@ -559,4 +559,7 @@ class AppLocalizationsEs extends AppLocalizations {
   @override
   String get qtGuide3 =>
       'Abba te ayudará a aplicar la Palabra a tu vida diaria';
+
+  @override
+  String get scriptureReasonLabel => 'Por qué esta Escritura';
 }

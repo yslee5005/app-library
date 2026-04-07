@@ -545,4 +545,7 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get qtGuide3 => 'Abba会帮助您将话语应用到日常生活中';
+
+  @override
+  String get scriptureReasonLabel => '选择这段经文的原因';
 }

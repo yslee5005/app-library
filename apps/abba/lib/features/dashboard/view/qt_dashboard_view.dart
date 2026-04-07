@@ -69,10 +69,6 @@ class QtDashboardView extends ConsumerWidget {
         ApplicationCard(
           application: result.application,
           title: l10n.applicationTitle,
-          whatLabel: l10n.applicationWhat,
-          whenLabel: l10n.applicationWhen,
-          contextLabel: l10n.applicationContext,
-          locale: locale,
         ),
         // 3. Related Knowledge Card
         RelatedKnowledgeCard(

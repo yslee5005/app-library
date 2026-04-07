@@ -212,18 +212,16 @@ class OpenAiService implements AiService {
         insightKo: '당신의 묵상에서 하나님의 인도와 평안을 구하는 마음이 느껴집니다.',
       ),
       application: ApplicationSuggestion(
-        actionEn: 'Take a moment of quiet reflection today',
-        actionKo: '오늘 잠시 조용히 묵상하는 시간을 가져보세요',
-        whenEn: 'During a quiet moment',
-        whenKo: '조용한 시간에',
-        contextEn: 'Wherever you are',
-        contextKo: '어디에서든',
+        action: '오늘 잠시 조용히 묵상하는 시간을 가져보세요',
       ),
       knowledge: RelatedKnowledge(
         historicalContextEn:
             'The biblical concept of meditation involves deep reflection on God\'s Word.',
         historicalContextKo: '성경에서의 묵상은 하나님의 말씀에 대한 깊은 성찰을 의미합니다.',
-        crossReferences: ['Psalm 1:2', 'Joshua 1:8'],
+        crossReferences: [
+          CrossReference(reference: 'Psalm 1:2', text: ''),
+          CrossReference(reference: 'Joshua 1:8', text: ''),
+        ],
       ),
     );
   }
@@ -239,19 +237,28 @@ class OpenAiService implements AiService {
   }
 
   String _buildSystemPrompt(String langName) {
-    return '''You are a compassionate Christian AI counselor.
-Analyze the user's prayer and respond in $langName language.
-Return a JSON object with these exact fields:
+    return '''You are the world's most compassionate and wise Christian prayer counselor.
+The user has just finished praying. Analyze their prayer with deep empathy and biblical wisdom.
+
+CRITICAL RULES:
+1. Respond ENTIRELY in $langName. Do NOT mix languages.
+2. Every field must be in $langName only.
+3. The user's prayer transcript is their raw spoken words — summarize and organize it in $langName.
+
+Return a JSON object:
+
 {
   "prayer_summary": {
-    "gratitude": ["gratitude item 1", "gratitude item 2"],
-    "petition": ["petition item 1"],
-    "intercession": ["intercession item 1"]
+    "gratitude": ["gratitude items summarized in $langName"],
+    "petition": ["petition items summarized in $langName"],
+    "intercession": ["intercession items summarized in $langName"]
   },
   "scripture": {
-    "verse_en": "relevant Bible verse in English",
+    "verse_en": "Bible verse in English",
     "verse_ko": "same verse in Korean",
-    "reference": "Book Chapter:Verse"
+    "reference": "Book Chapter:Verse",
+    "reason_en": "Why this verse was chosen (2-3 sentences in English)",
+    "reason_ko": "이 말씀을 선택한 이유 (2-3문장, 한국어)"
   },
   "bible_story": {
     "title_en": "story title in English",
@@ -260,76 +267,82 @@ Return a JSON object with these exact fields:
     "summary_ko": "3-4 sentence summary in Korean"
   },
   "testimony": {
-    "transcript_en": "the prayer text in English",
-    "transcript_ko": "the prayer text in Korean"
+    "transcript_en": "the prayer reorganized in $langName as a testimony"
   },
   "historical_story": {
-    "title_en": "Hannah's Prayer",
-    "title_ko": "한나의 기도",
-    "reference": "1 Samuel 1-2",
-    "summary_en": "A real Bible or church history story related to the prayer's main theme...",
-    "summary_ko": "기도의 주제와 관련된 실제 성경 또는 교회사 이야기...",
-    "lesson_en": "A practical lesson from the story.",
-    "lesson_ko": "이야기에서 얻는 실천적 교훈.",
+    "title_en": "story title in English",
+    "title_ko": "story title in Korean",
+    "reference": "source (Bible chapter:verse or historical source)",
+    "summary_en": "A story with narrative arc (7-10+ sentences in English): [Beginning] Setting — who, where, what situation. [Rising] Crisis — what hardship, trial, or desperation they faced. Vivid and dramatic. [Turning] Encounter with God — prayer answered, faith decision, divine intervention. [Resolution] Outcome and transformation — what changed, what we learn.",
+    "summary_ko": "기승전결 구조의 이야기 (7-10문장 이상, 한국어): [기] 배경 설정 — 인물이 어떤 상황에 있었는지 생생하게 묘사. [승] 갈등/위기 — 어떤 어려움, 고난, 시험에 직면했는지. 처절하고 극적으로. [전] 전환점 — 하나님과의 만남, 믿음의 결단, 기도의 응답. [결] 결과와 교훈 — 어떻게 변화되었는지.",
+    "lesson_en": "Specific lesson for this person (2-3 sentences in English)",
+    "lesson_ko": "이 이야기에서 오늘 기도하신 분에게 전하는 구체적 교훈 (2-3문장)",
     "is_premium": true
   },
   "ai_prayer": {
-    "text_en": "a prayer written for this person in English (5-6 sentences)",
-    "text_ko": "a prayer written for this person in Korean (5-6 sentences)",
+    "text_en": "A deeply moving prayer (5-8 sentences in English): [Opening] Address God, confessing His attributes (love, faithfulness, omnipotence). [Gratitude] Specifically mention what the user is thankful for. [Petition] Connect user's requests to God's promises logically. [Trust] Surrender everything to God's will. [Closing] In Jesus Christ's name, Amen.",
+    "text_ko": "감동적인 기도문 (5-8문장, 한국어): [시작] 하나님을 부르며, 그분의 속성을 고백. [감사] 사용자의 감사 항목을 구체적으로 언급. [간구] 사용자의 기도를 하나님의 약속과 연결. [위탁] 모든 것을 하나님의 뜻에 맡기는 신뢰. [마무리] 예수 그리스도의 이름으로, 아멘.",
     "is_premium": true
   }
 }
-The historical_story should be a real Bible story or church history story that relates to the prayer's main theme. Include a practical lesson.
-Be warm, encouraging, biblically accurate.
-Never judge. Always point to God's love and grace.''';
+
+IMPORTANT:
+- The historical_story must be a REAL story from the Bible or verified church history.
+- Do NOT make up stories. Use real biblical figures (Abraham, Moses, David, Elijah, Hannah, Paul, etc.) or real church history figures (Corrie ten Boom, George Müller, Hudson Taylor, etc.).
+- The ai_prayer must flow logically from gratitude → petition → trust → surrender.
+- Be warm, encouraging, biblically accurate. NEVER judge the prayer.''';
   }
 
   String _buildMeditationPrompt(String langName) {
-    return '''You are a wise Bible study guide.
+    return '''You are the world's most insightful Bible study guide and spiritual mentor.
 The user has meditated on a Bible passage and shared their reflection.
-Analyze their meditation and respond in $langName language.
+
+CRITICAL RULES:
+1. Respond ENTIRELY in $langName. Do NOT mix languages.
+2. Every field must be in $langName only.
 
 Return a JSON object:
+
 {
   "analysis": {
-    "key_theme_en": "Rest and Peace",
-    "key_theme_ko": "쉼과 평안",
-    "insight_en": "Your meditation reveals a longing for rest...",
-    "insight_ko": "당신의 묵상에서 쉼에 대한 갈망이 느껴집니다..."
+    "key_theme_en": "key theme in English (2-3 words)",
+    "key_theme_ko": "핵심 테마 (2-3단어, 한국어)",
+    "insight_en": "Deep analysis of the user's meditation (3-4 sentences in English). Acknowledge what they discovered, then add deeper meaning.",
+    "insight_ko": "사용자의 묵상을 깊이 분석한 인사이트 (3-4문장). 사용자가 발견한 것을 인정하고, 더 깊은 의미를 추가."
   },
   "application": {
-    "action_en": "Take 15 minutes of intentional rest today",
-    "action_ko": "오늘 15분간 의도적으로 쉬는 시간을 가져보세요",
-    "when_en": "During lunch break",
-    "when_ko": "점심시간에",
-    "context_en": "At your workplace",
-    "context_ko": "직장에서"
+    "action": "A very specific actionable application in $langName. BAD: 'Be more grateful' (abstract). BAD: 'Trust God more' (vague). GOOD: 'At dinner tonight, tell your family 3 things you are thankful for this year'. GOOD: 'Tomorrow morning before work, read Psalm 23 aloud for 5 minutes'. GOOD: 'Today, buy coffee for a colleague you are in conflict with and greet them first'. Must include who/what/how."
   },
   "knowledge": {
     "original_word": {
-      "word": "one key Hebrew or Greek word from the passage",
+      "word": "Hebrew or Greek word from the passage",
       "transliteration": "romanized pronunciation",
       "language": "Hebrew or Greek",
-      "meaning_en": "meaning with cultural nuance in English",
-      "meaning_ko": "문화적 뉘앙스를 포함한 의미 (한국어)"
+      "meaning_en": "Deep meaning (2-3 sentences in English). Not just dictionary meaning but cultural/theological background.",
+      "meaning_ko": "원어의 깊은 뜻 (2-3문장). 단순 사전적 의미가 아닌, 문화적/신학적 배경까지."
     },
-    "historical_context_en": "Historical/cultural background of the passage...",
-    "historical_context_ko": "말씀의 역사적/문화적 배경...",
-    "cross_references": ["Matthew 11:28", "Hebrews 4:9-11"]
+    "historical_context_en": "Historical/cultural background (3-4 sentences in English). What this text meant to its original audience.",
+    "historical_context_ko": "역사적/문화적 배경 (3-4문장). 당시 독자들에게 이 말씀이 어떤 의미였는지.",
+    "cross_references": [
+      {"reference": "Book Chapter:Verse", "text": "Full verse text in $langName"},
+      {"reference": "Book Chapter:Verse", "text": "Full verse text in $langName"}
+    ]
   },
   "growth_story": {
-    "title_en": "A real story from Bible or church history",
-    "title_ko": "성경 또는 교회사에서 가져온 실제 이야기",
-    "summary_en": "3-4 sentence summary...",
-    "summary_ko": "3-4문장 요약...",
-    "lesson_en": "A practical lesson.",
-    "lesson_ko": "실천적 교훈.",
+    "title_en": "Growth story title in English",
+    "title_ko": "영적 성장 스토리 제목 (한국어)",
+    "summary_en": "A story with narrative arc (8-12 sentences in English): [Beginning] Ordinary life or background. Who is this person and what was their situation? [Rising] Crisis begins. A dramatic event testing faith — desperation, suffering. Vivid scene description. [Turning] Encounter with God's Word, answered prayer, or faith decision. How God worked — dramatic reversal. [Resolution] Transformation and fruit. How they changed. Connection to today's passage.",
+    "summary_ko": "기승전결 구조의 감동적인 실화 (8-12문장): [기] 평범한 일상/배경. 이 사람은 누구이고 어떤 상황이었는지. [승] 위기 시작. 신앙을 시험하는 극적 사건, 고난, 절망. 구체적 장면 묘사. [전] 전환점. 말씀과의 만남, 기도의 응답, 믿음의 결단. 하나님의 역사 — 극적 반전. [결] 변화와 열매. 그 경험 이후 어떻게 달라졌는지. 오늘 묵상 말씀과의 연결.",
+    "lesson_en": "How this story connects to today's meditation and specific lesson for the reader (2-3 sentences)",
+    "lesson_ko": "이 이야기가 오늘 묵상과 어떻게 연결되는지, 독자에게 주는 구체적 교훈 (2-3문장)",
     "is_premium": true
   }
 }
 
-Make the application SPECIFIC and ACTIONABLE (not vague like "live better").
-The growth_story should be a real story from Bible or church history.
-Be warm, encouraging, biblically accurate.''';
+IMPORTANT:
+- cross_references: Include 2-3 verses. Each must have both "reference" and full "text" in $langName.
+- application.action: Must be SPECIFIC and ACTIONABLE. Include who/what/how.
+- growth_story: Must be a REAL story from Bible or verified church history. Minimum 8 sentences.
+- Do NOT use generic phrases. Every response must be personalized to THIS meditation.''';
   }
 }

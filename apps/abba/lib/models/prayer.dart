@@ -160,22 +160,29 @@ class Scripture {
   final String verseEn;
   final String verseKo;
   final String reference;
+  final String reasonEn;
+  final String reasonKo;
 
   const Scripture({
     required this.verseEn,
     required this.verseKo,
     required this.reference,
+    this.reasonEn = '',
+    this.reasonKo = '',
   });
 
   factory Scripture.fromJson(Map<String, dynamic> json) {
     return Scripture(
-      verseEn: json['verse_en'] as String,
-      verseKo: json['verse_ko'] as String,
+      verseEn: json['verse_en'] as String? ?? json['verse'] as String? ?? '',
+      verseKo: json['verse_ko'] as String? ?? json['verse'] as String? ?? '',
       reference: json['reference'] as String,
+      reasonEn: json['reason_en'] as String? ?? json['reason'] as String? ?? '',
+      reasonKo: json['reason_ko'] as String? ?? json['reason'] as String? ?? '',
     );
   }
 
   String verse(String locale) => locale == 'ko' ? verseKo : verseEn;
+  String reason(String locale) => locale == 'ko' ? reasonKo : reasonEn;
 }
 
 class BibleStory {

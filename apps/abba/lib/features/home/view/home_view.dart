@@ -410,7 +410,7 @@ class _HomeViewState extends ConsumerState<HomeView>
             ),
           ),
         ),
-        const Spacer(flex: 1),
+        const SizedBox(height: AbbaSpacing.md),
         // Pulse circle or text input
         if (_isTextMode)
           Padding(
@@ -437,67 +437,66 @@ class _HomeViewState extends ConsumerState<HomeView>
             ),
           )
         else
-          Column(
-            children: [
-              AnimatedBuilder(
-                animation: _pulseController,
-                builder: (context, child) {
-                  final scale = 1.0 + (_pulseController.value * 0.12);
-                  return Transform.scale(
-                    scale: _isPaused ? 1.0 : scale,
+          AnimatedBuilder(
+            animation: _pulseController,
+            builder: (context, child) {
+              final scale = 1.0 + (_pulseController.value * 0.12);
+              return Transform.scale(
+                scale: _isPaused ? 1.0 : scale,
+                child: Container(
+                  width: 140,
+                  height: 140,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: AbbaColors.sage.withValues(
+                      alpha: 0.15 + (_pulseController.value * 0.1),
+                    ),
+                  ),
+                  child: Center(
                     child: Container(
-                      width: 180,
-                      height: 180,
-                      decoration: BoxDecoration(
+                      width: 100,
+                      height: 100,
+                      decoration: const BoxDecoration(
                         shape: BoxShape.circle,
-                        color: AbbaColors.sage.withValues(
-                          alpha: 0.15 + (_pulseController.value * 0.1),
-                        ),
+                        color: AbbaColors.sage,
                       ),
-                      child: Center(
-                        child: Container(
-                          width: 120,
-                          height: 120,
-                          decoration: const BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: AbbaColors.sage,
-                          ),
-                          child: Icon(
-                            _isPaused ? Icons.pause : Icons.mic,
-                            size: 48,
-                            color: AbbaColors.white,
-                          ),
-                        ),
+                      child: Icon(
+                        _isPaused ? Icons.pause : Icons.mic,
+                        size: 48,
+                        color: AbbaColors.white,
                       ),
                     ),
-                  );
-                },
-              ),
-              if (_transcript.isNotEmpty) ...[
-                const SizedBox(height: AbbaSpacing.md),
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: AbbaSpacing.xl),
-                  child: Text(
-                    _transcript,
-                    style: AbbaTypography.bodySmall.copyWith(
-                      color: AbbaColors.muted,
-                    ),
-                    textAlign: TextAlign.center,
-                    maxLines: 3,
-                    overflow: TextOverflow.ellipsis,
                   ),
                 ),
-              ],
-            ],
+              );
+            },
           ),
-        const SizedBox(height: AbbaSpacing.lg),
+        const SizedBox(height: AbbaSpacing.md),
         // Timer
         Text(
           _formattedTime,
           style: AbbaTypography.hero.copyWith(fontSize: 36),
         ),
-        const Spacer(flex: 2),
+        const SizedBox(height: AbbaSpacing.md),
+        // Transcript accumulation area
+        if (!_isTextMode)
+          Expanded(
+            child: SingleChildScrollView(
+              reverse: true,
+              padding:
+                  const EdgeInsets.symmetric(horizontal: AbbaSpacing.xl),
+              child: Text(
+                _transcript,
+                style: AbbaTypography.body.copyWith(
+                  color: AbbaColors.warmBrown,
+                  height: 1.6,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ),
+          )
+        else
+          const Spacer(),
         // Controls
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: AbbaSpacing.xl),

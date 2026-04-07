@@ -58,43 +58,41 @@ class MeditationAnalysis {
 }
 
 class ApplicationSuggestion {
-  final String actionEn;
-  final String actionKo;
-  final String whenEn;
-  final String whenKo;
-  final String contextEn;
-  final String contextKo;
+  final String action;
 
-  const ApplicationSuggestion({
-    required this.actionEn,
-    required this.actionKo,
-    required this.whenEn,
-    required this.whenKo,
-    required this.contextEn,
-    required this.contextKo,
-  });
+  const ApplicationSuggestion({required this.action});
 
   factory ApplicationSuggestion.fromJson(Map<String, dynamic> json) {
+    // New format (single action)
+    if (json.containsKey('action') && json['action'] is String) {
+      return ApplicationSuggestion(action: json['action'] as String);
+    }
+    // Legacy format fallback (action_ko or action_en)
     return ApplicationSuggestion(
-      actionEn: json['action_en'] as String,
-      actionKo: json['action_ko'] as String,
-      whenEn: json['when_en'] as String,
-      whenKo: json['when_ko'] as String,
-      contextEn: json['context_en'] as String,
-      contextKo: json['context_ko'] as String,
+      action: json['action_ko'] as String? ?? json['action_en'] as String? ?? '',
     );
   }
+}
 
-  String action(String locale) => locale == 'ko' ? actionKo : actionEn;
-  String when(String locale) => locale == 'ko' ? whenKo : whenEn;
-  String context(String locale) => locale == 'ko' ? contextKo : contextEn;
+class CrossReference {
+  final String reference;
+  final String text;
+
+  const CrossReference({required this.reference, required this.text});
+
+  factory CrossReference.fromJson(Map<String, dynamic> json) {
+    return CrossReference(
+      reference: json['reference'] as String,
+      text: json['text'] as String? ?? '',
+    );
+  }
 }
 
 class RelatedKnowledge {
   final OriginalWord? originalWord;
   final String historicalContextEn;
   final String historicalContextKo;
-  final List<String> crossReferences;
+  final List<CrossReference> crossReferences;
 
   const RelatedKnowledge({
     this.originalWord,
@@ -110,10 +108,17 @@ class RelatedKnowledge {
               json['original_word'] as Map<String, dynamic>,
             )
           : null,
-      historicalContextEn: json['historical_context_en'] as String,
-      historicalContextKo: json['historical_context_ko'] as String,
+      historicalContextEn: json['historical_context_en'] as String? ??
+          json['historical_context'] as String? ??
+          '',
+      historicalContextKo: json['historical_context_ko'] as String? ??
+          json['historical_context'] as String? ??
+          '',
       crossReferences: (json['cross_references'] as List<dynamic>?)
-              ?.map((e) => e as String)
+              ?.map((e) {
+                if (e is String) return CrossReference(reference: e, text: '');
+                return CrossReference.fromJson(e as Map<String, dynamic>);
+              })
               .toList() ??
           [],
     );

@@ -545,4 +545,7 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get qtGuide3 => 'アバがみ言葉を生活に適用できるようお手伝いします';
+
+  @override
+  String get scriptureReasonLabel => 'このみ言葉を選んだ理由';
 }

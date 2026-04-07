@@ -1147,6 +1147,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Abba will help you apply the Word to your daily life'**
   String get qtGuide3;
+
+  /// No description provided for @scriptureReasonLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Why this Scripture'**
+  String get scriptureReasonLabel;
 }
 
 class _AppLocalizationsDelegate

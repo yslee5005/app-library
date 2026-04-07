@@ -102,17 +102,12 @@ class _CountingAiService implements AiService {
         insightKo: '테스트 인사이트',
       ),
       application: ApplicationSuggestion(
-        actionEn: 'Test action',
-        actionKo: '테스트 행동',
-        whenEn: 'Today',
-        whenKo: '오늘',
-        contextEn: 'Here',
-        contextKo: '여기서',
+        action: '테스트 행동',
       ),
       knowledge: RelatedKnowledge(
         historicalContextEn: 'Test context',
         historicalContextKo: '테스트 배경',
-        crossReferences: ['Test 1:1'],
+        crossReferences: [CrossReference(reference: 'Test 1:1', text: '')],
       ),
     );
   }
