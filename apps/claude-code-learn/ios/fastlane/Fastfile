@@ -1,0 +1,349 @@
+default_platform(:ios)
+
+# Absolute path to app root
+APP_ROOT = File.expand_path('../..', __dir__)
+
+# App Store Connect API Key
+API_KEY = app_store_connect_api_key(
+  key_id: "SHNMQK2FLD",
+  issuer_id: "44f25ef3-5982-4b3b-b575-864a88de8c72",
+  key_filepath: File.expand_path("~/.appstoreconnect/private_keys/AuthKey_SHNMQK2FLD.p8"),
+)
+
+TEAM_ID = "287896ZJHM"
+APP_IDENTIFIER = "com.ystech.claudecodelearn"
+APP_NAME = "Claude Code Learn"
+
+# Internal tester로 자동 추가할 이메일 목록
+INTERNAL_TESTERS = [
+  { email: "ystech5005@gmail.com", firstName: "yeonsim", lastName: "lee" },
+  { email: "rrallvv@gmail.com", firstName: "Yonghun", lastName: "Jeong" },
+]
+
+# JWT 생성 + Apple REST API로 Bundle ID 등록하는 스크립트
+def register_bundle_id_via_api(app_identifier, app_name, team_id)
+  require 'jwt'
+  require 'net/http'
+  require 'json'
+  require 'uri'
+
+  key_id = "SHNMQK2FLD"
+  issuer_id = "44f25ef3-5982-4b3b-b575-864a88de8c72"
+  key_path = File.expand_path("~/.appstoreconnect/private_keys/AuthKey_SHNMQK2FLD.p8")
+
+  # JWT 생성
+  private_key = OpenSSL::PKey::EC.new(File.read(key_path))
+  payload = {
+    iss: issuer_id,
+    iat: Time.now.to_i,
+    exp: Time.now.to_i + 1200,
+    aud: "appstoreconnect-v1",
+  }
+  token = JWT.encode(payload, private_key, "ES256", { kid: key_id, typ: "JWT" })
+
+  headers = {
+    "Authorization" => "Bearer #{token}",
+    "Content-Type" => "application/json",
+  }
+
+  begin
+    # 1. Bundle ID가 이미 있는지 확인
+    uri = URI("https://api.appstoreconnect.apple.com/v1/bundleIds?filter[identifier]=#{app_identifier}")
+    http = Net::HTTP.new(uri.host, uri.port)
+    http.use_ssl = true
+    req = Net::HTTP::Get.new(uri, headers)
+    res = http.request(req)
+    data = JSON.parse(res.body)
+
+    if data["data"] && data["data"].length > 0
+      Fastlane::UI.important("ℹ️  Bundle ID '#{app_identifier}' already exists.")
+      return true
+    end
+
+    # 2. Bundle ID 등록
+    uri = URI("https://api.appstoreconnect.apple.com/v1/bundleIds")
+    http = Net::HTTP.new(uri.host, uri.port)
+    http.use_ssl = true
+    req = Net::HTTP::Post.new(uri, headers)
+    req.body = {
+      data: {
+        type: "bundleIds",
+        attributes: {
+          name: app_name,
+          identifier: app_identifier,
+          platform: "IOS",
+        },
+      },
+    }.to_json
+
+    res = http.request(req)
+    if res.code.to_i >= 200 && res.code.to_i < 300
+      Fastlane::UI.success("✅ Bundle ID '#{app_identifier}' registered!")
+      return true
+    else
+      error_body = JSON.parse(res.body) rescue res.body
+      Fastlane::UI.important("ℹ️  Bundle ID registration skipped/failed: #{error_body}")
+      return false
+    end
+  rescue => e
+    Fastlane::UI.important("ℹ️  Bundle ID API step skipped: #{e.class} #{e.message}")
+    return false
+  end
+end
+
+def register_app_via_api(app_identifier, app_name)
+  require 'jwt'
+  require 'net/http'
+  require 'json'
+  require 'uri'
+
+  key_id = "SHNMQK2FLD"
+  issuer_id = "44f25ef3-5982-4b3b-b575-864a88de8c72"
+  key_path = File.expand_path("~/.appstoreconnect/private_keys/AuthKey_SHNMQK2FLD.p8")
+
+  private_key = OpenSSL::PKey::EC.new(File.read(key_path))
+  payload = {
+    iss: issuer_id,
+    iat: Time.now.to_i,
+    exp: Time.now.to_i + 1200,
+    aud: "appstoreconnect-v1",
+  }
+  token = JWT.encode(payload, private_key, "ES256", { kid: key_id, typ: "JWT" })
+
+  headers = {
+    "Authorization" => "Bearer #{token}",
+    "Content-Type" => "application/json",
+  }
+
+  begin
+    # 앱이 이미 있는지 확인
+    uri = URI("https://api.appstoreconnect.apple.com/v1/apps?filter[bundleId]=#{app_identifier}")
+    http = Net::HTTP.new(uri.host, uri.port)
+    http.use_ssl = true
+    req = Net::HTTP::Get.new(uri, headers)
+    res = http.request(req)
+    data = JSON.parse(res.body)
+
+    if data["data"] && data["data"].length > 0
+      Fastlane::UI.important("ℹ️  App '#{app_identifier}' already exists on App Store Connect.")
+      return true
+    end
+  rescue => e
+    Fastlane::UI.important("ℹ️  App lookup API step skipped: #{e.class} #{e.message}")
+  end
+
+  # Apple 정책상 App Store Connect 앱 생성은 자동화가 불안정/제한될 수 있으므로
+  # Fastlane에서는 생성 API를 호출하지 않고 수동 생성만 안내한다.
+  Fastlane::UI.important("ℹ️  Automatic App Store Connect app creation is disabled by policy.")
+  Fastlane::UI.important("ℹ️  Please create app manually once: #{app_name} (#{app_identifier})")
+  return true
+end
+
+def ensure_internal_testers(app_identifier, testers)
+  require 'jwt'
+  require 'net/http'
+  require 'json'
+  require 'uri'
+
+  key_id = "SHNMQK2FLD"
+  issuer_id = "44f25ef3-5982-4b3b-b575-864a88de8c72"
+  key_path = File.expand_path("~/.appstoreconnect/private_keys/AuthKey_SHNMQK2FLD.p8")
+
+  private_key = OpenSSL::PKey::EC.new(File.read(key_path))
+  payload = {
+    iss: issuer_id,
+    iat: Time.now.to_i,
+    exp: Time.now.to_i + 1200,
+    aud: "appstoreconnect-v1",
+  }
+  token = JWT.encode(payload, private_key, "ES256", { kid: key_id, typ: "JWT" })
+
+  headers = {
+    "Authorization" => "Bearer #{token}",
+    "Content-Type" => "application/json",
+  }
+
+  begin
+    # 앱 ID 조회
+    uri = URI("https://api.appstoreconnect.apple.com/v1/apps?filter[bundleId]=#{app_identifier}")
+    http = Net::HTTP.new(uri.host, uri.port)
+    http.use_ssl = true
+    req = Net::HTTP::Get.new(uri, headers)
+    res = http.request(req)
+    app_data = JSON.parse(res.body)
+    return unless app_data["data"] && app_data["data"].length > 0
+    app_id = app_data["data"][0]["id"]
+
+    # Internal beta group 조회
+    uri = URI("https://api.appstoreconnect.apple.com/v1/apps/#{app_id}/betaGroups")
+    http = Net::HTTP.new(uri.host, uri.port)
+    http.use_ssl = true
+    req = Net::HTTP::Get.new(uri, headers)
+    res = http.request(req)
+    groups = JSON.parse(res.body)
+    internal_group = groups["data"].find { |g| g["attributes"]["isInternalGroup"] == true }
+
+    # Internal group이 없으면 생성
+    unless internal_group
+      uri = URI("https://api.appstoreconnect.apple.com/v1/betaGroups")
+      http = Net::HTTP.new(uri.host, uri.port)
+      http.use_ssl = true
+      req = Net::HTTP::Post.new(uri, headers)
+      req.body = {
+        data: {
+          type: "betaGroups",
+          attributes: {
+            name: "ystech",
+            isInternalGroup: true,
+          },
+          relationships: {
+            app: {
+              data: { type: "apps", id: app_id }
+            }
+          }
+        }
+      }.to_json
+      res = http.request(req)
+      if res.code.to_i >= 200 && res.code.to_i < 300
+        internal_group = JSON.parse(res.body)["data"]
+        Fastlane::UI.success("✅ Created internal beta group")
+      else
+        Fastlane::UI.important("ℹ️  Could not create internal beta group")
+        return
+      end
+    end
+    group_id = internal_group["id"]
+
+    # 기존 테스터 목록 조회
+    uri = URI("https://api.appstoreconnect.apple.com/v1/betaGroups/#{group_id}/betaTesters?limit=200")
+    http = Net::HTTP.new(uri.host, uri.port)
+    http.use_ssl = true
+    req = Net::HTTP::Get.new(uri, headers)
+    res = http.request(req)
+    existing = JSON.parse(res.body)
+    existing_emails = existing["data"].map { |t| t["attributes"]["email"].downcase }
+
+    # 빠진 테스터 추가
+    testers.each do |tester|
+      next if existing_emails.include?(tester[:email].downcase)
+
+      uri = URI("https://api.appstoreconnect.apple.com/v1/betaTesters")
+      http = Net::HTTP.new(uri.host, uri.port)
+      http.use_ssl = true
+      req = Net::HTTP::Post.new(uri, headers)
+      req.body = {
+        data: {
+          type: "betaTesters",
+          attributes: {
+            email: tester[:email],
+            firstName: tester[:firstName],
+            lastName: tester[:lastName],
+          },
+          relationships: {
+            betaGroups: {
+              data: [{ type: "betaGroups", id: group_id }]
+            }
+          }
+        }
+      }.to_json
+      res = http.request(req)
+      if res.code.to_i >= 200 && res.code.to_i < 300
+        Fastlane::UI.success("✅ Added tester: #{tester[:email]}")
+      else
+        Fastlane::UI.important("ℹ️  Tester #{tester[:email]} already exists or could not be added")
+      end
+    end
+  rescue => e
+    Fastlane::UI.important("ℹ️  Internal tester step skipped: #{e.class} #{e.message}")
+  end
+end
+
+platform :ios do
+
+  desc "Full pipeline: register → sign → build → TestFlight"
+  lane :deploy do
+
+    # 0. 키체인 잠금 해제
+    keychain_password = ENV["KEYCHAIN_PASSWORD"]
+    if keychain_password && !keychain_password.empty?
+      sh("security unlock-keychain -p '#{keychain_password}' ~/Library/Keychains/login.keychain-db")
+      UI.success("✅ Keychain unlocked!")
+    end
+
+    # 1. Bundle ID 등록 (Apple REST API 직접 호출)
+    register_bundle_id_via_api(APP_IDENTIFIER, APP_NAME, TEAM_ID)
+
+    # 2. App Store Connect 앱 등록
+    register_app_via_api(APP_IDENTIFIER, APP_NAME)
+
+    # 3. Distribution 인증서
+    cert(
+      api_key: API_KEY,
+      team_id: TEAM_ID,
+    )
+    UI.success("✅ Distribution certificate ready!")
+
+    # 4. Provisioning Profile
+    sigh(
+      api_key: API_KEY,
+      app_identifier: APP_IDENTIFIER,
+      team_id: TEAM_ID,
+    )
+    UI.success("✅ Provisioning profile ready!")
+
+    # 5. 빌드 번호 자동 증가
+    latest = latest_testflight_build_number(
+      api_key: API_KEY,
+      app_identifier: APP_IDENTIFIER,
+    )
+    new_build_number = latest + 1
+    UI.success("✅ Build number: #{new_build_number}")
+
+    # 6. Internal tester 그룹/테스터 확인 (빌드 전에 준비)
+    ensure_internal_testers(APP_IDENTIFIER, INTERNAL_TESTERS)
+    UI.success("✅ Internal testers verified!")
+
+    # 7. ExportOptions.plist 업데이트
+    profile_name = lane_context[SharedValues::SIGH_NAME]
+    export_options_path = "#{APP_ROOT}/ios/ExportOptions.plist"
+    export_options = {
+      method: "app-store",
+      teamID: TEAM_ID,
+      signingStyle: "manual",
+      signingCertificate: "Apple Distribution",
+      provisioningProfiles: {
+        APP_IDENTIFIER => profile_name,
+      },
+      uploadBitcode: false,
+      uploadSymbols: true,
+    }
+    require 'plist'
+    File.write(export_options_path, export_options.to_plist)
+    UI.success("✅ ExportOptions.plist updated with profile: #{profile_name}")
+
+    # 8. Flutter pub get + pod install + Flutter IPA 빌드
+    sh("cd '#{APP_ROOT}' && flutter pub get")
+    cocoapods(
+      podfile: "#{APP_ROOT}/ios/Podfile",
+      clean_install: true,
+    )
+    sh("cd '#{APP_ROOT}' && flutter build ipa --release --obfuscate --split-debug-info=build/debug-info --export-options-plist=ios/ExportOptions.plist --build-number=#{new_build_number}")
+    UI.success("✅ Build complete!")
+
+    # 9. TestFlight 업로드
+    ipa_path = Dir.glob("#{APP_ROOT}/build/ios/ipa/*.ipa").first
+    if ipa_path.nil?
+      UI.user_error!("❌ IPA file not found in #{APP_ROOT}/build/ios/ipa/")
+    end
+
+    upload_to_testflight(
+      api_key: API_KEY,
+      ipa: ipa_path,
+      skip_waiting_for_build_processing: false,
+      uses_non_exempt_encryption: false,
+    )
+    UI.success("✅ Uploaded to TestFlight!")
+
+  end
+
+end
