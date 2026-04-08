@@ -45,7 +45,15 @@ class _StaggeredFadeInState extends State<StaggeredFadeIn>
       curve: Curves.easeOut,
     ));
 
-    // prefers-reduced-motion 존중
+  }
+
+  bool _started = false;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (_started) return;
+    _started = true;
     final reducedMotion = MediaQuery.of(context).disableAnimations;
     if (reducedMotion) {
       _controller.value = 1.0;

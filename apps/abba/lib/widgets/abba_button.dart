@@ -46,22 +46,27 @@ class AbbaButton extends StatelessWidget {
             ),
             elevation: 2,
           ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              if (icon != null) ...[
-                Icon(icon, size: isHero ? 28 : 24),
-                const SizedBox(width: AbbaSpacing.sm),
-              ],
-              Text(
-                label,
-                style: AbbaTypography.body.copyWith(
-                  fontWeight: FontWeight.w600,
-                  color: fgColor,
-                  fontSize: isHero ? 26 : 22,
+          child: FittedBox(
+            fit: BoxFit.scaleDown,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                if (icon != null) ...[
+                  Icon(icon, size: isHero ? 28 : 24),
+                  const SizedBox(width: AbbaSpacing.sm),
+                ],
+                Text(
+                  label,
+                  maxLines: 1,
+                  style: AbbaTypography.body.copyWith(
+                    fontWeight: FontWeight.w600,
+                    color: fgColor,
+                    fontSize: isHero ? 24 : 20,
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

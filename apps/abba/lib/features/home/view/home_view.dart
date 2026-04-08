@@ -144,45 +144,48 @@ class _HomeViewState extends ConsumerState<HomeView>
           style: AbbaTypography.body,
           textAlign: TextAlign.center,
         ),
-        actionsAlignment: MainAxisAlignment.center,
         actionsPadding: const EdgeInsets.fromLTRB(
           AbbaSpacing.lg, 0, AbbaSpacing.lg, AbbaSpacing.lg,
         ),
         actions: [
-          SizedBox(
-            height: abbaButtonHeight,
-            child: OutlinedButton(
-              onPressed: () => Navigator.pop(context, false),
-              style: OutlinedButton.styleFrom(
-                side: const BorderSide(color: AbbaColors.sage),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(AbbaRadius.md),
+          Column(
+            children: [
+              SizedBox(
+                width: double.infinity,
+                height: abbaButtonHeight,
+                child: ElevatedButton(
+                  onPressed: () => Navigator.pop(context, true),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: AbbaColors.sage,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(AbbaRadius.md),
+                    ),
+                  ),
+                  child: Text(
+                    l10n.finishPrayer,
+                    style: AbbaTypography.body.copyWith(color: AbbaColors.white),
+                  ),
                 ),
-                padding: const EdgeInsets.symmetric(horizontal: AbbaSpacing.lg),
               ),
-              child: Text(
-                l10n.recordingResume,
-                style: AbbaTypography.body.copyWith(color: AbbaColors.sage),
-              ),
-            ),
-          ),
-          const SizedBox(width: AbbaSpacing.sm),
-          SizedBox(
-            height: abbaButtonHeight,
-            child: ElevatedButton(
-              onPressed: () => Navigator.pop(context, true),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: AbbaColors.sage,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(AbbaRadius.md),
+              const SizedBox(height: AbbaSpacing.sm),
+              SizedBox(
+                width: double.infinity,
+                height: abbaButtonHeight,
+                child: OutlinedButton(
+                  onPressed: () => Navigator.pop(context, false),
+                  style: OutlinedButton.styleFrom(
+                    side: const BorderSide(color: AbbaColors.sage),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(AbbaRadius.md),
+                    ),
+                  ),
+                  child: Text(
+                    l10n.recordingResume,
+                    style: AbbaTypography.body.copyWith(color: AbbaColors.sage),
+                  ),
                 ),
-                padding: const EdgeInsets.symmetric(horizontal: AbbaSpacing.lg),
               ),
-              child: Text(
-                l10n.finishPrayer,
-                style: AbbaTypography.body.copyWith(color: AbbaColors.white),
-              ),
-            ),
+            ],
           ),
         ],
       ),
@@ -310,12 +313,19 @@ class _HomeViewState extends ConsumerState<HomeView>
             color: selected ? AbbaColors.sage : Colors.transparent,
             borderRadius: BorderRadius.circular(AbbaRadius.xl - 2),
           ),
-          child: Text(
-            label,
-            textAlign: TextAlign.center,
-            style: AbbaTypography.body.copyWith(
-              color: selected ? AbbaColors.white : AbbaColors.warmBrown,
-              fontWeight: selected ? FontWeight.w700 : FontWeight.w400,
+          child: FittedBox(
+            fit: BoxFit.scaleDown,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: AbbaSpacing.xs),
+              child: Text(
+                label,
+                textAlign: TextAlign.center,
+                maxLines: 1,
+                style: AbbaTypography.body.copyWith(
+                  color: selected ? AbbaColors.white : AbbaColors.warmBrown,
+                  fontWeight: selected ? FontWeight.w700 : FontWeight.w400,
+                ),
+              ),
             ),
           ),
         ),
@@ -537,21 +547,30 @@ class _HomeViewState extends ConsumerState<HomeView>
               Expanded(
                 child: SizedBox(
                   height: abbaButtonHeight,
-                  child: OutlinedButton.icon(
+                  child: OutlinedButton(
                     onPressed: _togglePause,
-                    icon: Icon(
-                      _isPaused ? Icons.play_arrow : Icons.pause,
-                      color: AbbaColors.sage,
-                    ),
-                    label: Text(
-                      _isPaused ? l10n.recordingResume : l10n.recordingPause,
-                      style:
-                          AbbaTypography.body.copyWith(color: AbbaColors.sage),
-                    ),
                     style: OutlinedButton.styleFrom(
                       side: const BorderSide(color: AbbaColors.sage),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(AbbaRadius.lg),
+                      ),
+                    ),
+                    child: FittedBox(
+                      fit: BoxFit.scaleDown,
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Icon(
+                            _isPaused ? Icons.play_arrow : Icons.pause,
+                            color: AbbaColors.sage,
+                            size: 20,
+                          ),
+                          const SizedBox(width: 4),
+                          Text(
+                            _isPaused ? l10n.recordingResume : l10n.recordingPause,
+                            style: AbbaTypography.bodySmall.copyWith(color: AbbaColors.sage),
+                          ),
+                        ],
                       ),
                     ),
                   ),
