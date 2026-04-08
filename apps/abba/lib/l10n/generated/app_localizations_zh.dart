@@ -89,6 +89,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get finishPrayer => '结束祷告';
 
   @override
+  String get finishPrayerConfirm => '您确定要结束祷告吗？';
+
+  @override
   String get switchToText => '文字输入';
 
   @override

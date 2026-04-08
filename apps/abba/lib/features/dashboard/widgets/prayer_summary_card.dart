@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../models/prayer.dart';
 import '../../../theme/abba_theme.dart';
-import '../../../widgets/abba_card.dart';
+import '../../../widgets/expandable_card.dart';
 
 class PrayerSummaryCard extends StatelessWidget {
   final PrayerSummary prayerSummary;
@@ -20,20 +20,29 @@ class PrayerSummaryCard extends StatelessWidget {
     required this.intercessionLabel,
   });
 
+  String get _summary {
+    final parts = <String>[];
+    if (prayerSummary.gratitude.isNotEmpty) {
+      parts.add('$gratitudeLabel ${prayerSummary.gratitude.length}');
+    }
+    if (prayerSummary.petition.isNotEmpty) {
+      parts.add('$petitionLabel ${prayerSummary.petition.length}');
+    }
+    if (prayerSummary.intercession.isNotEmpty) {
+      parts.add('$intercessionLabel ${prayerSummary.intercession.length}');
+    }
+    return parts.join(' · ');
+  }
+
   @override
   Widget build(BuildContext context) {
-    return AbbaCard(
-      child: Column(
+    return ExpandableCard(
+      icon: '📋',
+      title: title,
+      summary: _summary,
+      expandedContent: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            children: [
-              const Text('📋', style: TextStyle(fontSize: 24)),
-              const SizedBox(width: AbbaSpacing.sm),
-              Text(title, style: AbbaTypography.h2),
-            ],
-          ),
-          const SizedBox(height: AbbaSpacing.md),
           if (prayerSummary.gratitude.isNotEmpty)
             _buildSection(gratitudeLabel, prayerSummary.gratitude, AbbaColors.sage),
           if (prayerSummary.petition.isNotEmpty)
@@ -81,12 +90,7 @@ class PrayerSummaryCard extends StatelessWidget {
                 children: [
                   Text('• ', style: AbbaTypography.bodySmall),
                   Expanded(
-                    child: Text(
-                      item,
-                      style: AbbaTypography.bodySmall,
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                    ),
+                    child: Text(item, style: AbbaTypography.bodySmall),
                   ),
                 ],
               ),

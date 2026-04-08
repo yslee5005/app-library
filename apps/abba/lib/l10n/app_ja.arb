@@ -28,6 +28,7 @@
   "recordingPause": "一時停止",
   "recordingResume": "再開",
   "finishPrayer": "祈りを終える",
+  "finishPrayerConfirm": "祈りを終えますか？",
   "switchToText": "テキストに切替",
   "textInputHint": "祈りを入力してください...",
   "aiLoadingText": "あなたの祈りを黙想しています...",

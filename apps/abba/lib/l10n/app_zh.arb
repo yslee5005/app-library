@@ -28,6 +28,7 @@
   "recordingPause": "暂停",
   "recordingResume": "继续",
   "finishPrayer": "结束祷告",
+  "finishPrayerConfirm": "您确定要结束祷告吗？",
   "switchToText": "文字输入",
   "textInputHint": "在这里输入你的祷告...",
   "aiLoadingText": "正在默想你的祷告...",

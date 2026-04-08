@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 
 import '../../../models/qt_meditation_result.dart';
 import '../../../theme/abba_theme.dart';
-import '../../../widgets/abba_card.dart';
+import '../../../widgets/expandable_card.dart';
 
 class MeditationAnalysisCard extends StatelessWidget {
   final MeditationAnalysis analysis;
   final String title;
   final String keyThemeLabel;
   final String locale;
+  final bool initiallyExpanded;
 
   const MeditationAnalysisCard({
     super.key,
@@ -16,22 +17,19 @@ class MeditationAnalysisCard extends StatelessWidget {
     required this.title,
     required this.keyThemeLabel,
     required this.locale,
+    this.initiallyExpanded = false,
   });
 
   @override
   Widget build(BuildContext context) {
-    return AbbaCard(
-      child: Column(
+    return ExpandableCard(
+      icon: '🔍',
+      title: title,
+      summary: analysis.keyTheme(locale),
+      initiallyExpanded: initiallyExpanded,
+      expandedContent: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            children: [
-              const Text('🔍', style: TextStyle(fontSize: 24)),
-              const SizedBox(width: AbbaSpacing.sm),
-              Text(title, style: AbbaTypography.h2),
-            ],
-          ),
-          const SizedBox(height: AbbaSpacing.md),
           Container(
             padding: const EdgeInsets.symmetric(
               horizontal: AbbaSpacing.sm,
@@ -50,10 +48,7 @@ class MeditationAnalysisCard extends StatelessWidget {
             ),
           ),
           const SizedBox(height: AbbaSpacing.md),
-          Text(
-            analysis.insight(locale),
-            style: AbbaTypography.body,
-          ),
+          Text(analysis.insight(locale), style: AbbaTypography.body),
         ],
       ),
     );

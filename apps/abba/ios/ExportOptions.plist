@@ -4,13 +4,20 @@
 <dict>
 	<key>method</key>
 	<string>app-store</string>
+	<key>provisioningProfiles</key>
+	<dict>
+		<key>com.ystech.abba</key>
+		<string>com.ystech.abba AppStore</string>
+	</dict>
+	<key>signingCertificate</key>
+	<string>Apple Distribution</string>
+	<key>signingStyle</key>
+	<string>manual</string>
 	<key>teamID</key>
 	<string>287896ZJHM</string>
 	<key>uploadBitcode</key>
 	<false/>
 	<key>uploadSymbols</key>
 	<true/>
-	<key>signingStyle</key>
-	<string>automatic</string>
 </dict>
 </plist>

@@ -89,6 +89,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get finishPrayer => '기도를 마칩니다';
 
   @override
+  String get finishPrayerConfirm => '기도를 마치시겠습니까?';
+
+  @override
   String get switchToText => '텍스트로 전환';
 
   @override

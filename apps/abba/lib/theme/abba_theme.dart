@@ -7,7 +7,7 @@ class AbbaColors {
   // Primary
   static const sage = Color(0xFF8FBC8F);
   static const cream = Color(0xFFFFF8F0);
-  static const warmBrown = Color(0xFF5D4E37);
+  static const warmBrown = Color(0xFF3D2E17); // 대비율 7:1+ (AAA) — 기존 #5D4E37에서 강화
   static const softGold = Color(0xFFD4A574);
 
   // Pastels (QT cards)
@@ -28,45 +28,46 @@ class AbbaColors {
 class AbbaTypography {
   AbbaTypography._();
 
+  // 시니어 최적화: 본문 22pt, 제목 30pt (논문 근거: 22pt에서 고령자 성능 = 청년)
   static TextStyle hero = GoogleFonts.nunito(
-    fontSize: 32,
+    fontSize: 36,
     fontWeight: FontWeight.w600,
     color: AbbaColors.warmBrown,
   );
 
   static TextStyle h1 = GoogleFonts.nunito(
-    fontSize: 24,
+    fontSize: 30,
     fontWeight: FontWeight.w600,
     color: AbbaColors.warmBrown,
   );
 
   static TextStyle h2 = GoogleFonts.nunito(
-    fontSize: 20,
+    fontSize: 24,
     fontWeight: FontWeight.w500,
     color: AbbaColors.warmBrown,
   );
 
   static TextStyle body = GoogleFonts.nunito(
-    fontSize: 18,
+    fontSize: 22,
     fontWeight: FontWeight.w400,
-    height: 1.6,
+    height: 1.8, // 줄 간격 1.6→1.8 (가독성 향상)
     color: AbbaColors.warmBrown,
   );
 
   static TextStyle bodySmall = GoogleFonts.nunito(
-    fontSize: 16,
+    fontSize: 18,
     fontWeight: FontWeight.w400,
     color: AbbaColors.warmBrown,
   );
 
   static TextStyle label = GoogleFonts.nunito(
-    fontSize: 14,
+    fontSize: 16,
     fontWeight: FontWeight.w500,
     color: AbbaColors.warmBrown,
   );
 
   static TextStyle caption = GoogleFonts.nunito(
-    fontSize: 12,
+    fontSize: 14,
     fontWeight: FontWeight.w400,
     color: AbbaColors.muted,
   );
@@ -93,9 +94,10 @@ class AbbaRadius {
   static const double full = 999.0;
 }
 
-const double abbaButtonHeight = 56.0;
-const double abbaHeroButtonHeight = 80.0;
-const double abbaTabBarHeight = 56.0;
+// 시니어 최적화: 버튼 72dp (20mm+), 히어로 96dp (Yu 2022: 80% 선호, 96% 정확도)
+const double abbaButtonHeight = 72.0;
+const double abbaHeroButtonHeight = 96.0;
+const double abbaTabBarHeight = 72.0; // 탭 바도 확대
 
 ThemeData abbaTheme() {
   return ThemeData(

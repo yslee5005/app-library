@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../models/prayer.dart';
 import '../../../theme/abba_theme.dart';
-import '../../../widgets/abba_card.dart';
+import '../../../widgets/expandable_card.dart';
 
 class BibleStoryCard extends StatelessWidget {
   final BibleStory bibleStory;
@@ -18,18 +18,13 @@ class BibleStoryCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AbbaCard(
-      child: Column(
+    return ExpandableCard(
+      icon: '📖',
+      title: title,
+      summary: bibleStory.title(locale),
+      expandedContent: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            children: [
-              const Text('📖', style: TextStyle(fontSize: 24)),
-              const SizedBox(width: AbbaSpacing.sm),
-              Expanded(child: Text(title, style: AbbaTypography.h2)),
-            ],
-          ),
-          const SizedBox(height: AbbaSpacing.sm),
           Text(
             bibleStory.title(locale),
             style: AbbaTypography.body.copyWith(fontWeight: FontWeight.w600),

@@ -8,6 +8,7 @@ import '../../../providers/providers.dart';
 import '../../../theme/abba_theme.dart';
 import '../../../widgets/abba_button.dart';
 import '../../../widgets/premium_modal.dart';
+import '../../../widgets/staggered_fade_in.dart';
 import '../widgets/ai_prayer_card.dart';
 import '../widgets/bible_story_card.dart';
 import '../widgets/guidance_card.dart';
@@ -65,55 +66,81 @@ class DashboardView extends ConsumerWidget {
 
     final testimonyText = locale == 'ko' ? result.testimony : result.testimony;
 
+    int i = 0;
     return ListView(
       padding: const EdgeInsets.only(bottom: AbbaSpacing.xl),
       children: [
-        ScriptureCard(
-          scripture: result.scripture,
-          title: l10n.scriptureTitle,
-          locale: locale,
+        StaggeredFadeIn(
+          index: i++,
+          child: ScriptureCard(
+            scripture: result.scripture,
+            title: l10n.scriptureTitle,
+            locale: locale,
+            initiallyExpanded: true,
+          ),
         ),
-        BibleStoryCard(
-          bibleStory: result.bibleStory,
-          title: l10n.bibleStoryTitle,
-          locale: locale,
+        StaggeredFadeIn(
+          index: i++,
+          child: BibleStoryCard(
+            bibleStory: result.bibleStory,
+            title: l10n.bibleStoryTitle,
+            locale: locale,
+          ),
         ),
-        TestimonyCard(
-          testimony: testimonyText,
-          title: l10n.testimonyTitle,
-          editLabel: l10n.testimonyEdit,
+        StaggeredFadeIn(
+          index: i++,
+          child: TestimonyCard(
+            testimony: testimonyText,
+            title: l10n.testimonyTitle,
+            editLabel: l10n.testimonyEdit,
+          ),
         ),
         if (result.guidance != null)
-          GuidanceCard(
-            guidance: result.guidance!,
-            title: l10n.guidanceTitle,
-            locale: locale,
-            onUnlock: showPremiumUpgrade,
-            isUserPremium: isPremium,
+          StaggeredFadeIn(
+            index: i++,
+            child: GuidanceCard(
+              guidance: result.guidance!,
+              title: l10n.guidanceTitle,
+              locale: locale,
+              onUnlock: showPremiumUpgrade,
+              isUserPremium: isPremium,
+            ),
           ),
         if (result.aiPrayer != null)
-          AiPrayerCard(
-            aiPrayer: result.aiPrayer!,
-            title: l10n.aiPrayerTitle,
-            locale: locale,
-            onUnlock: showPremiumUpgrade,
-            isUserPremium: isPremium,
+          StaggeredFadeIn(
+            index: i++,
+            child: AiPrayerCard(
+              aiPrayer: result.aiPrayer!,
+              title: l10n.aiPrayerTitle,
+              locale: locale,
+              onUnlock: showPremiumUpgrade,
+              isUserPremium: isPremium,
+            ),
           ),
         if (result.originalLanguage != null)
-          OriginalLangCard(
-            originalLanguage: result.originalLanguage!,
-            title: l10n.originalLangTitle,
-            locale: locale,
-            onUnlock: showPremiumUpgrade,
-            isUserPremium: isPremium,
+          StaggeredFadeIn(
+            index: i++,
+            child: OriginalLangCard(
+              originalLanguage: result.originalLanguage!,
+              title: l10n.originalLangTitle,
+              locale: locale,
+              onUnlock: showPremiumUpgrade,
+              isUserPremium: isPremium,
+            ),
           ),
-        const SizedBox(height: AbbaSpacing.lg),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: AbbaSpacing.md),
-          child: AbbaButton(
-            label: '🏠 ${l10n.backToHome}',
-            onPressed: () => context.go('/home'),
-            isHero: true,
+        StaggeredFadeIn(
+          index: i++,
+          child: Padding(
+            padding: const EdgeInsets.only(
+              left: AbbaSpacing.md,
+              right: AbbaSpacing.md,
+              top: AbbaSpacing.lg,
+            ),
+            child: AbbaButton(
+              label: '🏠 ${l10n.backToHome}',
+              onPressed: () => context.go('/home'),
+              isHero: true,
+            ),
           ),
         ),
       ],

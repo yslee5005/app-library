@@ -28,6 +28,7 @@
   "recordingPause": "Pause",
   "recordingResume": "Resume",
   "finishPrayer": "Finish Prayer",
+  "finishPrayerConfirm": "Would you like to finish your prayer?",
   "switchToText": "Type instead",
   "textInputHint": "Type your prayer here...",
   "aiLoadingText": "Reflecting on your prayer...",

@@ -248,6 +248,12 @@ abstract class AppLocalizations {
   /// **'Finish Prayer'**
   String get finishPrayer;
 
+  /// No description provided for @finishPrayerConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Would you like to finish your prayer?'**
+  String get finishPrayerConfirm;
+
   /// No description provided for @switchToText.
   ///
   /// In en, this message translates to:

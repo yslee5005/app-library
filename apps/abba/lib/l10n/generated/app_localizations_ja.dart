@@ -89,6 +89,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get finishPrayer => '祈りを終える';
 
   @override
+  String get finishPrayerConfirm => '祈りを終えますか？';
+
+  @override
   String get switchToText => 'テキストに切替';
 
   @override

@@ -8,6 +8,7 @@ import '../../../providers/providers.dart';
 import '../../../theme/abba_theme.dart';
 import '../../../widgets/abba_button.dart';
 import '../../../widgets/premium_modal.dart';
+import '../../../widgets/staggered_fade_in.dart';
 import '../widgets/ai_prayer_card.dart';
 import '../widgets/historical_story_card.dart';
 import '../widgets/prayer_summary_card.dart';
@@ -64,56 +65,79 @@ class PrayerDashboardView extends ConsumerWidget {
 
     final testimonyText = locale == 'ko' ? result.testimony : result.testimony;
 
+    int i = 0;
     return ListView(
       padding: const EdgeInsets.only(bottom: AbbaSpacing.xl),
       children: [
         // 1. Prayer Summary Card
         if (result.prayerSummary != null)
-          PrayerSummaryCard(
-            prayerSummary: result.prayerSummary!,
-            title: l10n.prayerSummaryTitle,
-            gratitudeLabel: l10n.gratitudeLabel,
-            petitionLabel: l10n.petitionLabel,
-            intercessionLabel: l10n.intercessionLabel,
+          StaggeredFadeIn(
+            index: i++,
+            child: PrayerSummaryCard(
+              prayerSummary: result.prayerSummary!,
+              title: l10n.prayerSummaryTitle,
+              gratitudeLabel: l10n.gratitudeLabel,
+              petitionLabel: l10n.petitionLabel,
+              intercessionLabel: l10n.intercessionLabel,
+            ),
           ),
-        // 2. Scripture Card
-        ScriptureCard(
-          scripture: result.scripture,
-          title: l10n.scriptureTitle,
-          locale: locale,
+        // 2. Scripture Card (첫 번째 카드 자동 펼침)
+        StaggeredFadeIn(
+          index: i++,
+          child: ScriptureCard(
+            scripture: result.scripture,
+            title: l10n.scriptureTitle,
+            locale: locale,
+            initiallyExpanded: true,
+          ),
         ),
         // 3. Testimony Card
-        TestimonyCard(
-          testimony: testimonyText,
-          title: l10n.testimonyTitle,
-          editLabel: l10n.testimonyEdit,
+        StaggeredFadeIn(
+          index: i++,
+          child: TestimonyCard(
+            testimony: testimonyText,
+            title: l10n.testimonyTitle,
+            editLabel: l10n.testimonyEdit,
+          ),
         ),
         // 4. Historical Story Card (Premium)
         if (result.historicalStory != null)
-          HistoricalStoryCard(
-            historicalStory: result.historicalStory!,
-            title: l10n.historicalStoryTitle,
-            lessonLabel: l10n.todayLesson,
-            locale: locale,
-            onUnlock: showPremiumUpgrade,
-            isUserPremium: isPremium,
+          StaggeredFadeIn(
+            index: i++,
+            child: HistoricalStoryCard(
+              historicalStory: result.historicalStory!,
+              title: l10n.historicalStoryTitle,
+              lessonLabel: l10n.todayLesson,
+              locale: locale,
+              onUnlock: showPremiumUpgrade,
+              isUserPremium: isPremium,
+            ),
           ),
         // 5. AI Prayer Card (Premium)
         if (result.aiPrayer != null)
-          AiPrayerCard(
-            aiPrayer: result.aiPrayer!,
-            title: l10n.aiPrayerTitle,
-            locale: locale,
-            onUnlock: showPremiumUpgrade,
-            isUserPremium: isPremium,
+          StaggeredFadeIn(
+            index: i++,
+            child: AiPrayerCard(
+              aiPrayer: result.aiPrayer!,
+              title: l10n.aiPrayerTitle,
+              locale: locale,
+              onUnlock: showPremiumUpgrade,
+              isUserPremium: isPremium,
+            ),
           ),
-        const SizedBox(height: AbbaSpacing.lg),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: AbbaSpacing.md),
-          child: AbbaButton(
-            label: l10n.backToHome,
-            onPressed: () => context.go('/home'),
-            isHero: true,
+        StaggeredFadeIn(
+          index: i++,
+          child: Padding(
+            padding: const EdgeInsets.only(
+              left: AbbaSpacing.md,
+              right: AbbaSpacing.md,
+              top: AbbaSpacing.lg,
+            ),
+            child: AbbaButton(
+              label: l10n.backToHome,
+              onPressed: () => context.go('/home'),
+              isHero: true,
+            ),
           ),
         ),
       ],

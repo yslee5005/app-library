@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../theme/abba_theme.dart';
 
@@ -33,7 +34,10 @@ class AbbaButton extends StatelessWidget {
         width: double.infinity,
         height: height,
         child: ElevatedButton(
-          onPressed: onPressed,
+          onPressed: () {
+            HapticFeedback.mediumImpact();
+            onPressed();
+          },
           style: ElevatedButton.styleFrom(
             backgroundColor: bgColor,
             foregroundColor: fgColor,
@@ -54,7 +58,7 @@ class AbbaButton extends StatelessWidget {
                 style: AbbaTypography.body.copyWith(
                   fontWeight: FontWeight.w600,
                   color: fgColor,
-                  fontSize: isHero ? 20 : 18,
+                  fontSize: isHero ? 26 : 22,
                 ),
               ),
             ],

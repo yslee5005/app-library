@@ -8,6 +8,7 @@ import '../../../providers/providers.dart';
 import '../../../theme/abba_theme.dart';
 import '../../../widgets/abba_button.dart';
 import '../../../widgets/premium_modal.dart';
+import '../../../widgets/staggered_fade_in.dart';
 import '../widgets/application_card.dart';
 import '../widgets/growth_story_card.dart';
 import '../widgets/meditation_analysis_card.dart';
@@ -55,47 +56,67 @@ class QtDashboardView extends ConsumerWidget {
       });
     }
 
+    int i = 0;
     return ListView(
       padding: const EdgeInsets.only(bottom: AbbaSpacing.xl),
       children: [
         // 1. Meditation Analysis Card
-        MeditationAnalysisCard(
-          analysis: result.analysis,
-          title: l10n.meditationAnalysisTitle,
-          keyThemeLabel: l10n.keyThemeLabel,
-          locale: locale,
+        StaggeredFadeIn(
+          index: i++,
+          child: MeditationAnalysisCard(
+            analysis: result.analysis,
+            title: l10n.meditationAnalysisTitle,
+            keyThemeLabel: l10n.keyThemeLabel,
+            locale: locale,
+            initiallyExpanded: true,
+          ),
         ),
         // 2. Application Card
-        ApplicationCard(
-          application: result.application,
-          title: l10n.applicationTitle,
+        StaggeredFadeIn(
+          index: i++,
+          child: ApplicationCard(
+            application: result.application,
+            title: l10n.applicationTitle,
+          ),
         ),
         // 3. Related Knowledge Card
-        RelatedKnowledgeCard(
-          knowledge: result.knowledge,
-          title: l10n.relatedKnowledgeTitle,
-          originalWordLabel: l10n.originalWordLabel,
-          historicalContextLabel: l10n.historicalContextLabel,
-          crossReferencesLabel: l10n.crossReferencesLabel,
-          locale: locale,
+        StaggeredFadeIn(
+          index: i++,
+          child: RelatedKnowledgeCard(
+            knowledge: result.knowledge,
+            title: l10n.relatedKnowledgeTitle,
+            originalWordLabel: l10n.originalWordLabel,
+            historicalContextLabel: l10n.historicalContextLabel,
+            crossReferencesLabel: l10n.crossReferencesLabel,
+            locale: locale,
+          ),
         ),
         // 4. Growth Story Card (Premium)
         if (result.growthStory != null)
-          GrowthStoryCard(
-            growthStory: result.growthStory!,
-            title: l10n.growthStoryTitle,
-            lessonLabel: l10n.todayLesson,
-            locale: locale,
-            onUnlock: showPremiumUpgrade,
-            isUserPremium: isPremium,
+          StaggeredFadeIn(
+            index: i++,
+            child: GrowthStoryCard(
+              growthStory: result.growthStory!,
+              title: l10n.growthStoryTitle,
+              lessonLabel: l10n.todayLesson,
+              locale: locale,
+              onUnlock: showPremiumUpgrade,
+              isUserPremium: isPremium,
+            ),
           ),
-        const SizedBox(height: AbbaSpacing.lg),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: AbbaSpacing.md),
-          child: AbbaButton(
-            label: l10n.backToHome,
-            onPressed: () => context.go('/home'),
-            isHero: true,
+        StaggeredFadeIn(
+          index: i++,
+          child: Padding(
+            padding: const EdgeInsets.only(
+              left: AbbaSpacing.md,
+              right: AbbaSpacing.md,
+              top: AbbaSpacing.lg,
+            ),
+            child: AbbaButton(
+              label: l10n.backToHome,
+              onPressed: () => context.go('/home'),
+              isHero: true,
+            ),
           ),
         ),
       ],

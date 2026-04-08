@@ -89,6 +89,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get finishPrayer => 'Finish Prayer';
 
   @override
+  String get finishPrayerConfirm => 'Would you like to finish your prayer?';
+
+  @override
   String get switchToText => 'Type instead';
 
   @override

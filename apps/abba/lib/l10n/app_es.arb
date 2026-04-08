@@ -28,6 +28,7 @@
   "recordingPause": "Pausar",
   "recordingResume": "Reanudar",
   "finishPrayer": "Terminar oración",
+  "finishPrayerConfirm": "¿Desea terminar su oración?",
   "switchToText": "Escribir",
   "textInputHint": "Escribe tu oración aquí...",
   "aiLoadingText": "Meditando en tu oración...",

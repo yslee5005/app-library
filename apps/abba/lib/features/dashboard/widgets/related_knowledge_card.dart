@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../models/qt_meditation_result.dart';
 import '../../../theme/abba_theme.dart';
-import '../../../widgets/abba_card.dart';
+import '../../../widgets/expandable_card.dart';
 
 class RelatedKnowledgeCard extends StatelessWidget {
   final RelatedKnowledge knowledge;
@@ -22,20 +22,23 @@ class RelatedKnowledgeCard extends StatelessWidget {
     required this.locale,
   });
 
+  String get _summary {
+    final parts = <String>[];
+    if (knowledge.originalWord != null) parts.add('원어');
+    parts.add('역사');
+    if (knowledge.crossReferences.isNotEmpty) parts.add('교차참조');
+    return parts.join(' · ');
+  }
+
   @override
   Widget build(BuildContext context) {
-    return AbbaCard(
-      child: Column(
+    return ExpandableCard(
+      icon: '🔤',
+      title: title,
+      summary: _summary,
+      expandedContent: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            children: [
-              const Text('🔤', style: TextStyle(fontSize: 24)),
-              const SizedBox(width: AbbaSpacing.sm),
-              Text(title, style: AbbaTypography.h2),
-            ],
-          ),
-          const SizedBox(height: AbbaSpacing.md),
           // Original Word
           if (knowledge.originalWord != null) ...[
             Text(
@@ -58,7 +61,7 @@ class RelatedKnowledgeCard extends StatelessWidget {
                 children: [
                   Text(
                     '${knowledge.originalWord!.word}  (${knowledge.originalWord!.transliteration})',
-                    style: AbbaTypography.h2.copyWith(fontSize: 20),
+                    style: AbbaTypography.h2,
                   ),
                   Text(
                     knowledge.originalWord!.language,

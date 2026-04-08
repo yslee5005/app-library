@@ -3,36 +3,34 @@ import 'package:flutter/material.dart';
 import '../../../l10n/generated/app_localizations.dart';
 import '../../../models/prayer.dart';
 import '../../../theme/abba_theme.dart';
-import '../../../widgets/abba_card.dart';
+import '../../../widgets/expandable_card.dart';
 
 class ScriptureCard extends StatelessWidget {
   final Scripture scripture;
   final String title;
   final String locale;
+  final bool initiallyExpanded;
 
   const ScriptureCard({
     super.key,
     required this.scripture,
     required this.title,
     required this.locale,
+    this.initiallyExpanded = false,
   });
 
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
 
-    return AbbaCard(
-      child: Column(
+    return ExpandableCard(
+      icon: '📜',
+      title: title,
+      summary: scripture.reference,
+      initiallyExpanded: initiallyExpanded,
+      expandedContent: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            children: [
-              const Text('📜', style: TextStyle(fontSize: 24)),
-              const SizedBox(width: AbbaSpacing.sm),
-              Text(title, style: AbbaTypography.h2),
-            ],
-          ),
-          const SizedBox(height: AbbaSpacing.md),
           Text(scripture.verse(locale), style: AbbaTypography.body),
           const SizedBox(height: AbbaSpacing.sm),
           Text(

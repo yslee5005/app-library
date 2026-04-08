@@ -28,6 +28,7 @@
   "recordingPause": "일시정지",
   "recordingResume": "계속하기",
   "finishPrayer": "기도를 마칩니다",
+  "finishPrayerConfirm": "기도를 마치시겠습니까?",
   "switchToText": "텍스트로 전환",
   "textInputHint": "기도를 적어주세요...",
   "aiLoadingText": "당신의 기도를 묵상하고 있습니다...",

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../theme/abba_theme.dart';
-import '../../../widgets/abba_card.dart';
+import '../../../widgets/expandable_card.dart';
 
 class TestimonyCard extends StatelessWidget {
   final String testimony;
@@ -15,31 +15,35 @@ class TestimonyCard extends StatelessWidget {
     required this.editLabel,
   });
 
+  String get _summary {
+    if (testimony.length <= 40) return testimony;
+    return '${testimony.substring(0, 40)}...';
+  }
+
   @override
   Widget build(BuildContext context) {
-    return AbbaCard(
-      child: Column(
+    return ExpandableCard(
+      icon: '✍️',
+      title: title,
+      summary: _summary,
+      expandedContent: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            children: [
-              const Text('✍️', style: TextStyle(fontSize: 24)),
-              const SizedBox(width: AbbaSpacing.sm),
-              Expanded(child: Text(title, style: AbbaTypography.h2)),
-              TextButton.icon(
-                onPressed: () {},
-                icon: const Icon(Icons.edit, size: 18, color: AbbaColors.sage),
-                label: Text(
-                  editLabel,
-                  style: AbbaTypography.bodySmall.copyWith(
-                    color: AbbaColors.sage,
-                  ),
+          Text(testimony, style: AbbaTypography.body),
+          const SizedBox(height: AbbaSpacing.md),
+          Align(
+            alignment: Alignment.centerRight,
+            child: TextButton.icon(
+              onPressed: () {},
+              icon: const Icon(Icons.edit, size: 18, color: AbbaColors.sage),
+              label: Text(
+                editLabel,
+                style: AbbaTypography.bodySmall.copyWith(
+                  color: AbbaColors.sage,
                 ),
               ),
-            ],
+            ),
           ),
-          const SizedBox(height: AbbaSpacing.md),
-          Text(testimony, style: AbbaTypography.body),
         ],
       ),
     );

@@ -11,7 +11,6 @@ import '../../../services/error_logging_service.dart';
 import '../../../services/stt_service.dart';
 import '../../../theme/abba_theme.dart';
 import '../../../widgets/abba_button.dart';
-import '../../../widgets/abba_card.dart';
 import '../../../widgets/premium_modal.dart';
 import '../../../widgets/streak_garden.dart';
 
@@ -125,7 +124,72 @@ class _HomeViewState extends ConsumerState<HomeView>
     }
   }
 
-  void _finishPrayer() {
+  Future<void> _finishPrayer() async {
+    final l10n = AppLocalizations.of(context)!;
+
+    // 기도 완료 확인 다이얼로그 (실수 방지)
+    final confirmed = await showDialog<bool>(
+      context: context,
+      builder: (context) => AlertDialog(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(AbbaRadius.lg),
+        ),
+        title: Text(
+          '🙏 ${l10n.finishPrayer}',
+          style: AbbaTypography.h2,
+          textAlign: TextAlign.center,
+        ),
+        content: Text(
+          l10n.finishPrayerConfirm,
+          style: AbbaTypography.body,
+          textAlign: TextAlign.center,
+        ),
+        actionsAlignment: MainAxisAlignment.center,
+        actionsPadding: const EdgeInsets.fromLTRB(
+          AbbaSpacing.lg, 0, AbbaSpacing.lg, AbbaSpacing.lg,
+        ),
+        actions: [
+          SizedBox(
+            height: abbaButtonHeight,
+            child: OutlinedButton(
+              onPressed: () => Navigator.pop(context, false),
+              style: OutlinedButton.styleFrom(
+                side: const BorderSide(color: AbbaColors.sage),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(AbbaRadius.md),
+                ),
+                padding: const EdgeInsets.symmetric(horizontal: AbbaSpacing.lg),
+              ),
+              child: Text(
+                l10n.recordingResume,
+                style: AbbaTypography.body.copyWith(color: AbbaColors.sage),
+              ),
+            ),
+          ),
+          const SizedBox(width: AbbaSpacing.sm),
+          SizedBox(
+            height: abbaButtonHeight,
+            child: ElevatedButton(
+              onPressed: () => Navigator.pop(context, true),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: AbbaColors.sage,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(AbbaRadius.md),
+                ),
+                padding: const EdgeInsets.symmetric(horizontal: AbbaSpacing.lg),
+              ),
+              child: Text(
+                l10n.finishPrayer,
+                style: AbbaTypography.body.copyWith(color: AbbaColors.white),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+
+    if (confirmed != true) return;
+
     _timer?.cancel();
     _pulseController.stop();
     _sttService.stopListening();
@@ -137,17 +201,10 @@ class _HomeViewState extends ConsumerState<HomeView>
     ErrorLoggingService.addBreadcrumb('Prayer finished', category: 'prayer');
 
     setState(() => _isPraying = false);
-    context.go('/home/ai-loading');
+    if (mounted) context.go('/home/ai-loading');
   }
 
   // --- Build ---
-
-  String _getGreeting(AppLocalizations l10n, String name) {
-    final hour = DateTime.now().hour;
-    if (hour < 12) return l10n.greetingMorning(name);
-    if (hour < 18) return l10n.greetingAfternoon(name);
-    return l10n.greetingEvening(name);
-  }
 
   String get _formattedTime {
     final m = (_seconds ~/ 60).toString().padLeft(2, '0');
@@ -165,58 +222,54 @@ class _HomeViewState extends ConsumerState<HomeView>
       body: SafeArea(
         child: Column(
           children: [
-            // --- TOP: Greeting + Streak ---
+            // --- TOP: Tab bar + Streak (single row, no scrolling) ---
             Padding(
               padding: const EdgeInsets.fromLTRB(
-                AbbaSpacing.lg, AbbaSpacing.md, AbbaSpacing.lg, 0,
+                AbbaSpacing.md, AbbaSpacing.sm, AbbaSpacing.md, 0,
               ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+              child: Row(
                 children: [
-                  profileAsync.when(
-                    data: (p) => Text(
-                      _getGreeting(l10n, p.name),
-                      style: AbbaTypography.h1,
-                    ),
-                    loading: () => Text(
-                      _getGreeting(l10n, ''),
-                      style: AbbaTypography.h1,
-                    ),
-                    error: (e, s) => Text(
-                      _getGreeting(l10n, ''),
-                      style: AbbaTypography.h1,
+                  // Tab bar (takes available space)
+                  Expanded(
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: AbbaColors.warmBrown.withValues(alpha: 0.08),
+                        borderRadius: BorderRadius.circular(AbbaRadius.xl),
+                      ),
+                      padding: const EdgeInsets.all(3),
+                      child: Row(
+                        children: [
+                          _buildTab(0, '🎙️ ${l10n.prayButton}'),
+                          _buildTab(1, '📖 ${l10n.qtButton}'),
+                        ],
+                      ),
                     ),
                   ),
-                  const SizedBox(height: AbbaSpacing.md),
-                  // Streak card
+                  const SizedBox(width: AbbaSpacing.sm),
+                  // Streak badge (compact)
                   profileAsync.when(
-                    data: (profile) => AbbaCard(
-                      margin: EdgeInsets.zero,
+                    data: (profile) => Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: AbbaSpacing.sm + 2,
+                        vertical: AbbaSpacing.sm,
+                      ),
+                      decoration: BoxDecoration(
+                        color: AbbaColors.sage.withValues(alpha: 0.1),
+                        borderRadius: BorderRadius.circular(AbbaRadius.xl),
+                      ),
                       child: Row(
+                        mainAxisSize: MainAxisSize.min,
                         children: [
                           Text(
                             streakGardenIcon(profile.currentStreak),
-                            style: const TextStyle(fontSize: 36),
+                            style: const TextStyle(fontSize: 18),
                           ),
-                          const SizedBox(width: AbbaSpacing.md),
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  l10n.streakDays(profile.currentStreak),
-                                  style: AbbaTypography.h2,
-                                ),
-                                Text(
-                                  streakGardenLabel(
-                                    profile.currentStreak,
-                                    l10n,
-                                  ),
-                                  style: AbbaTypography.caption.copyWith(
-                                    color: AbbaColors.muted,
-                                  ),
-                                ),
-                              ],
+                          const SizedBox(width: 4),
+                          Text(
+                            '${profile.currentStreak}',
+                            style: AbbaTypography.body.copyWith(
+                              fontWeight: FontWeight.w700,
+                              color: AbbaColors.sage,
                             ),
                           ),
                         ],
@@ -229,28 +282,7 @@ class _HomeViewState extends ConsumerState<HomeView>
               ),
             ),
 
-            const SizedBox(height: AbbaSpacing.md),
-
-            // --- TAB BAR ---
-            Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: AbbaSpacing.lg),
-              child: Container(
-                decoration: BoxDecoration(
-                  color: AbbaColors.warmBrown.withValues(alpha: 0.08),
-                  borderRadius: BorderRadius.circular(AbbaRadius.xl),
-                ),
-                padding: const EdgeInsets.all(4),
-                child: Row(
-                  children: [
-                    _buildTab(0, '🎙️ ${l10n.prayButton}'),
-                    _buildTab(1, '📖 ${l10n.qtButton}'),
-                  ],
-                ),
-              ),
-            ),
-
-            const SizedBox(height: AbbaSpacing.md),
+            const SizedBox(height: AbbaSpacing.sm),
 
             // --- CONTENT ---
             Expanded(
@@ -611,21 +643,24 @@ class _GuideRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(icon, style: const TextStyle(fontSize: 16)),
-        const SizedBox(width: AbbaSpacing.sm),
-        Expanded(
-          child: Text(
-            text,
-            style: AbbaTypography.bodySmall.copyWith(
-              color: AbbaColors.warmBrown,
-              height: 1.4,
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: AbbaSpacing.xs),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(icon, style: const TextStyle(fontSize: 22)),
+          const SizedBox(width: AbbaSpacing.md),
+          Expanded(
+            child: Text(
+              text,
+              style: AbbaTypography.bodySmall.copyWith(
+                color: AbbaColors.warmBrown,
+                height: 1.6,
+              ),
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

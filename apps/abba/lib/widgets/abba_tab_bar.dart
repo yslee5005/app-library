@@ -25,23 +25,23 @@ class AbbaTabBar extends StatelessWidget {
       labelBehavior: NavigationDestinationLabelBehavior.alwaysShow,
       destinations: [
         NavigationDestination(
-          icon: const Text('🌳', style: TextStyle(fontSize: 24)),
-          selectedIcon: const Text('🌳', style: TextStyle(fontSize: 24)),
+          icon: const Text('🌳', style: TextStyle(fontSize: 28)),
+          selectedIcon: const Text('🌳', style: TextStyle(fontSize: 28)),
           label: l10n.tabHome,
         ),
         NavigationDestination(
-          icon: const Text('📅', style: TextStyle(fontSize: 24)),
-          selectedIcon: const Text('📅', style: TextStyle(fontSize: 24)),
+          icon: const Text('📅', style: TextStyle(fontSize: 28)),
+          selectedIcon: const Text('📅', style: TextStyle(fontSize: 28)),
           label: l10n.tabCalendar,
         ),
         NavigationDestination(
-          icon: const Text('🌻', style: TextStyle(fontSize: 24)),
-          selectedIcon: const Text('🌻', style: TextStyle(fontSize: 24)),
+          icon: const Text('🌻', style: TextStyle(fontSize: 28)),
+          selectedIcon: const Text('🌻', style: TextStyle(fontSize: 28)),
           label: l10n.tabCommunity,
         ),
         NavigationDestination(
-          icon: const Text('⚙️', style: TextStyle(fontSize: 24)),
-          selectedIcon: const Text('⚙️', style: TextStyle(fontSize: 24)),
+          icon: const Text('⚙️', style: TextStyle(fontSize: 28)),
+          selectedIcon: const Text('⚙️', style: TextStyle(fontSize: 28)),
           label: l10n.tabSettings,
         ),
       ],

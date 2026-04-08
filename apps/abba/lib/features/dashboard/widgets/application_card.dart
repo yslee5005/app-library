@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../models/qt_meditation_result.dart';
 import '../../../theme/abba_theme.dart';
-import '../../../widgets/abba_card.dart';
+import '../../../widgets/expandable_card.dart';
 
 class ApplicationCard extends StatelessWidget {
   final ApplicationSuggestion application;
@@ -14,28 +14,24 @@ class ApplicationCard extends StatelessWidget {
     required this.title,
   });
 
+  String get _summary {
+    final text = application.action;
+    if (text.length <= 40) return text;
+    return '${text.substring(0, 40)}...';
+  }
+
   @override
   Widget build(BuildContext context) {
-    return AbbaCard(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              const Text('✏️', style: TextStyle(fontSize: 24)),
-              const SizedBox(width: AbbaSpacing.sm),
-              Text(title, style: AbbaTypography.h2),
-            ],
-          ),
-          const SizedBox(height: AbbaSpacing.md),
-          Text(
-            application.action,
-            style: AbbaTypography.body.copyWith(
-              color: AbbaColors.warmBrown,
-              height: 1.6,
-            ),
-          ),
-        ],
+    return ExpandableCard(
+      icon: '✏️',
+      title: title,
+      summary: _summary,
+      expandedContent: Text(
+        application.action,
+        style: AbbaTypography.body.copyWith(
+          color: AbbaColors.warmBrown,
+          height: 1.8,
+        ),
       ),
     );
   }
