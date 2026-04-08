@@ -27,3 +27,4 @@ workspace:
   - packages/subscriptions
   - packages/gamification
   - packages/feed
+  - apps/claude-code-learn

@@ -78,11 +78,17 @@ screen_*.png
 # Claude Code
 .claude/settings.local.json
 
-# Secrets
+# Secrets & Certificates
 *.key
 *.pem
 *.p12
 *.jks
+*.cer
+*.certSigningRequest
+*.mobileprovision
 credentials.json
 google-services.json
 GoogleService-Info.plist
+
+# Fastlane generated
+**/fastlane/report.xml

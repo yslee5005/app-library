@@ -17,6 +17,20 @@ apps/{name}/lib/
         └── view/         # 앱별 독립 작성
 ```
 
+## 네이밍 컨벤션
+
+| 항목 | 패턴 | 예시 |
+|------|------|------|
+| Bundle ID (iOS) | `com.ystech.{앱이름}` | `com.ystech.abba` |
+| Application ID (Android) | `com.ystech.{앱이름}` | `com.ystech.abba` |
+| 앱 폴더명 | `apps/{앱이름}/` | `apps/abba/` |
+| APP_ID (.env) | `{앱이름}` (하이픈 허용) | `abba`, `pet-life` |
+| SKU (App Store Connect) | `com.ystech.{앱이름}` | `com.ystech.abba` |
+| 패키지명 prefix | `app_lib_` | `app_lib_core` |
+
+- 앱이름은 **소문자 + 하이픈만** (예: `pet-life`, `abba`, `mart-scanner`)
+- Bundle ID에는 하이픈 대신 **언더스코어 또는 제거** (예: `pet-life` → `com.ystech.petlife`)
+
 ## 새 앱 생성 순서
 1. Step 0: YC 4P 검증 → IDEA.md 생성
 2. Step 1: specs/REQUIREMENTS.md 작성
@@ -47,3 +61,9 @@ apps/{name}/lib/
 - 공유 패키지에서 Provider 가져다 쓰기 (ref.watch)
 - Provider override로 앱별 커스텀 가능
 - ViewModel/View는 항상 앱별 독립 작성
+
+## 배포 규칙
+- 모든 앱의 Info.plist에 ITSAppUsesNonExemptEncryption = false 필수
+- Bundle ID: com.ystech.{앱이름}
+- fastlane deploy로 배포 (ios/fastlane/ 디렉토리)
+- App Store Connect 앱 등록은 1회 수동 (Apple 정책)
