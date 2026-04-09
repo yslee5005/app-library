@@ -17,8 +17,8 @@
   --color-border: #222222;
   --color-divider: #1A1A1A;
 
-  --font-heading: 'Inter', 'Noto Sans KR', sans-serif;
-  --font-body: 'Inter', 'Noto Sans KR', sans-serif;
+  --font-heading: 'NanumSquare', sans-serif;
+  --font-body: 'NanumSquare', sans-serif;
 }
 
 body {
@@ -47,4 +47,31 @@ body {
 
 ::-webkit-scrollbar-thumb:hover {
   background: #C5A46C;
+}
+
+/* Lilsquare style animations */
+@keyframes title-fade {
+  0% { opacity: 0 }
+  100% { opacity: 1 }
+}
+
+@keyframes slow-zoom {
+  0% { transform: scale(1) }
+  100% { transform: scale(1.05) }
+}
+
+@keyframes spin-slow {
+  100% { transform: rotate(360deg) }
+}
+
+.animate-title-fade {
+  animation: title-fade 1s ease forwards;
+}
+
+.animate-slow-zoom {
+  animation: slow-zoom 8s ease-out forwards;
+}
+
+.animate-spin-slow {
+  animation: spin-slow 20s linear infinite;
 }
