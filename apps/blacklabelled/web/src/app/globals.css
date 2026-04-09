@@ -80,3 +80,17 @@ body {
   0% { opacity: 0 }
   100% { opacity: 1 }
 }
+
+@keyframes kenBurns {
+  0% { transform: scale(1) }
+  100% { transform: scale(1.08) }
+}
+
+@keyframes heroTitleFade {
+  0% { opacity: 0; transform: translateY(20px) }
+  100% { opacity: 1; transform: translateY(0) }
+}
+
+/* Hide scrollbar for category filter */
+.scrollbar-none::-webkit-scrollbar { display: none }
+.scrollbar-none { -ms-overflow-style: none; scrollbar-width: none }
