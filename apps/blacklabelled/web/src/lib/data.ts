@@ -211,6 +211,12 @@ export function getMapProducts(): MapProduct[] {
   });
 }
 
+export function getLayoutDesignProducts(): Product[] {
+  return Object.values(getProductsMap())
+    .filter((p) => p.main_category_name === "Layout_Design")
+    .sort((a, b) => b.id - a.id);
+}
+
 export function getBeforeAfterPair(product: Product): BeforeAfterPair | null {
   if (product.main_category_name !== "Residence") return null;
 
