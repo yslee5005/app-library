@@ -92,3 +92,13 @@ GoogleService-Info.plist
 
 # Fastlane generated
 **/fastlane/report.xml
+
+# Blacklabelled data/build (large files)
+apps/blacklabelled/data/
+apps/blacklabelled/admin/
+apps/blacklabelled/crawl/
+
+# Next.js build output
+**/.next/
+**/out/
+**/node_modules/
