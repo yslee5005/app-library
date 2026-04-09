@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import Navigation from "@/components/Navigation";
-import Footer from "@/components/Footer";
+import LayoutShell from "@/components/LayoutShell";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://blacklabelled.co.kr"),
@@ -29,9 +28,7 @@ export default function RootLayout({
         />
       </head>
       <body className="bg-bg-primary text-text-primary font-body min-h-screen flex flex-col antialiased">
-        <Navigation />
-        <main className="flex-1">{children}</main>
-        <Footer />
+        <LayoutShell>{children}</LayoutShell>
       </body>
     </html>
   );
