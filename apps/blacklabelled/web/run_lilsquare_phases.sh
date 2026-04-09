@@ -2,7 +2,7 @@
 # ═══════════════════════════════════════════════════════
 # Lilsquare 스타일 페이지 — 순차 Phase 실행
 # 사용법: ./run_lilsquare_phases.sh        (전체 실행)
-#        ./run_lilsquare_phases.sh 3       (Phase 3부터)
+#        ./run_lilsquare_phases.sh 6       (Phase 6부터)
 # ═══════════════════════════════════════════════════════
 
 START_PHASE=${1:-1}
@@ -10,18 +10,20 @@ SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 PROMPTS_DIR="$SCRIPT_DIR/prompts"
 ROOT_DIR="$(cd "$SCRIPT_DIR/../../.." && pwd)"
 
-FILES=("PHASE1_NAV_LAYOUT.md" "PHASE2_PROJECTS.md" "PHASE3_PROJECT_DETAIL.md" "PHASE4_ABOUT_PROCESS.md" "PHASE5_CONTACT_MAP.md")
-DESCS=("Phase 1 — Navigation + Layout Shell" "Phase 2 — Projects 목록 + 카테고리 필터" "Phase 3 — Project 상세 (갤러리)" "Phase 4 — About + Process" "Phase 5 — Contact + Map")
+FILES=("PHASE1_NAV_LAYOUT.md" "PHASE2_PROJECTS.md" "PHASE3_PROJECT_DETAIL.md" "PHASE4_ABOUT_PROCESS.md" "PHASE5_CONTACT_MAP.md" "PHASE6_NAV_FULLSCREEN.md" "PHASE7_SERVICES.md" "PHASE8_REVIEWS_EPISODES.md" "PHASE9_PROPOSALS_LAYOUTS.md")
+DESCS=("Phase 1 — Navigation + Layout Shell" "Phase 2 — Projects 목록" "Phase 3 — Project 상세" "Phase 4 — About + Process" "Phase 5 — Contact + Map" "Phase 6 — Fullscreen Nav Menu" "Phase 7 — Services" "Phase 8 — Reviews + Episodes" "Phase 9 — Proposals + Layouts")
+
+TOTAL=${#FILES[@]}
 
 echo "════════════════════════════════════════════════"
 echo "  Lilsquare Style Pages — Sequential Build"
-echo "  Starting from Phase $START_PHASE"
+echo "  Starting from Phase $START_PHASE (total: $TOTAL)"
 echo "════════════════════════════════════════════════"
 echo ""
 
 cd "$ROOT_DIR"
 
-for idx in 0 1 2 3 4; do
+for idx in $(seq 0 $((TOTAL - 1))); do
   PHASE_NUM=$((idx + 1))
   FILE="${FILES[$idx]}"
   DESC="${DESCS[$idx]}"
@@ -39,7 +41,7 @@ for idx in 0 1 2 3 4; do
   fi
 
   echo ""
-  echo "🚀 Starting $DESC"
+  echo "🚀 [$PHASE_NUM/$TOTAL] Starting $DESC"
   echo "────────────────────────────────────────────────"
 
   echo "@apps/blacklabelled/web/prompts/$FILE 를 읽고 실행해.
@@ -49,12 +51,14 @@ for idx in 0 1 2 3 4; do
 2. AGENTS.md 읽고 Next.js 버전 주의
 3. 구현 완료 후 npx tsc --noEmit 검증
 4. 기존 / 라우트 페이지에 영향 없게 주의
+5. /lilsquare 하위 페이지만 수정/생성
 
 필수 참고:
 - apps/blacklabelled/web/AGENTS.md
 - apps/blacklabelled/web/src/lib/data.ts
 - apps/blacklabelled/web/src/hooks/useScrollReveal.ts
 - apps/blacklabelled/web/src/app/globals.css
+- apps/blacklabelled/web/src/components/lilsquare/ (기존 컴포넌트들)
 
 시작해." | claude
 
@@ -62,15 +66,14 @@ for idx in 0 1 2 3 4; do
 
   if [[ $EXIT_CODE -ne 0 ]]; then
     echo "❌ $DESC failed with exit code $EXIT_CODE"
-    echo "   Fix the issue and re-run: ./run_lilsquare_phases.sh $PHASE_NUM"
+    echo "   Fix and re-run: ./run_lilsquare_phases.sh $PHASE_NUM"
     exit $EXIT_CODE
   fi
 
   echo "✅ $DESC completed"
-  echo ""
 
   # Git 커밋
-  echo "📦 Committing $DESC..."
+  echo "📦 Committing..."
   cd "$ROOT_DIR"
   git add apps/blacklabelled/web/
   git commit -m "feat(blacklabelled/lilsquare): $DESC
@@ -81,13 +84,18 @@ Co-Authored-By: Claude Opus 4.6 (1M context) <noreply@anthropic.com>" 2>/dev/nul
 done
 
 echo ""
-echo "🎉 All phases completed!"
+echo "🎉 All $TOTAL phases completed!"
 echo ""
-echo "Visit: http://localhost:3000/lilsquare"
-echo "  /lilsquare           — Main"
-echo "  /lilsquare/projects  — Projects"
-echo "  /lilsquare/projects/[slug] — Detail"
-echo "  /lilsquare/about     — About"
-echo "  /lilsquare/process   — Process"
-echo "  /lilsquare/contact   — Contact"
-echo "  /lilsquare/map       — Map"
+echo "Pages:"
+echo "  /lilsquare              — Main"
+echo "  /lilsquare/projects     — Projects"
+echo "  /lilsquare/projects/[s] — Detail"
+echo "  /lilsquare/about        — About"
+echo "  /lilsquare/process      — Process"
+echo "  /lilsquare/contact      — Contact"
+echo "  /lilsquare/map          — Map"
+echo "  /lilsquare/services     — Services"
+echo "  /lilsquare/reviews      — Reviews"
+echo "  /lilsquare/episodes     — Episodes"
+echo "  /lilsquare/proposals    — Proposals"
+echo "  /lilsquare/layouts      — Layouts"
