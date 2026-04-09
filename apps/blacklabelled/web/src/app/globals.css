@@ -91,6 +91,14 @@ body {
   100% { opacity: 1; transform: translateY(0) }
 }
 
+.animate-kenburns {
+  animation: kenBurns 12s ease-out forwards;
+}
+
+.animate-heroTitle {
+  animation: heroTitleFade 1s ease forwards;
+}
+
 /* Hide scrollbar for category filter */
 .scrollbar-none::-webkit-scrollbar { display: none }
 .scrollbar-none { -ms-overflow-style: none; scrollbar-width: none }
