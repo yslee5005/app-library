@@ -169,9 +169,9 @@ export default function ContactContent() {
                 주소
               </p>
               <p className="text-text-primary font-body mt-2 leading-relaxed">
-                경기도 성남시 중원구 양현로 411
+                경기도 성남시 분당구 판교로610번길 5
                 <br />
-                시티오피스타워 605호
+                2층 (주소지1층) 블랙라벨드
               </p>
             </div>
             <div>
@@ -179,27 +179,22 @@ export default function ContactContent() {
                 전화
               </p>
               <p className="text-text-primary font-body mt-2">010-9887-2826</p>
+              <p className="text-text-primary font-body mt-1">010-9046-3487</p>
             </div>
             <div>
               <p className="text-text-muted text-xs tracking-[0.15em] uppercase font-body">
                 이메일
               </p>
               <p className="text-text-primary font-body mt-2">
-                blacklabelled@naver.com
+                info@blacklabelled.co.kr
               </p>
-            </div>
-            <div>
-              <p className="text-text-muted text-xs tracking-[0.15em] uppercase font-body">
-                카카오톡
-              </p>
-              <p className="text-text-primary font-body mt-2">블랙라벨드</p>
             </div>
             <div>
               <p className="text-text-muted text-xs tracking-[0.15em] uppercase font-body">
                 영업시간
               </p>
               <p className="text-text-primary font-body mt-2">
-                월 – 금 9:30 ~ 18:30
+                평일 10:00 – 18:00
               </p>
             </div>
           </motion.div>
