@@ -97,9 +97,7 @@ export function getProductBySlug(slug: string): Product | undefined {
 
 export function getDisplayProducts(): Product[] {
   return getProducts().filter(
-    (p) =>
-      p.main_category_name !== "Layout_Design" &&
-      p.main_category_name !== "DEVELOPMENT"
+    (p) => p.main_category_name !== "DEVELOPMENT"
   );
 }
 
@@ -108,7 +106,6 @@ export function getFilterCategories(): Category[] {
   return cats.filter(
     (c) =>
       (c.parent_name === "PROJECT" || c.parent_name === "FURNITURE") &&
-      c.name !== "Layout_Design" &&
       c.name !== "DEVELOPMENT" &&
       c.product_count > 0
   );

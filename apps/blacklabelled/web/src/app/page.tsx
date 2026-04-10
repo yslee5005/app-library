@@ -13,13 +13,13 @@ export default function Home() {
   const project1 = p1 ? {
     id: p1.id,
     name: p1.name,
-    images: p1.images.filter(img => img.type === "detail").slice(0, 2).map(img => `/api/images/${img.path}`),
+    images: [`/api/images/${p1.main_image}`],
   } : undefined;
 
   const project2 = p2 ? {
     id: p2.id,
     name: p2.name,
-    images: p2.images.filter(img => img.type === "detail").slice(0, 2).map(img => `/api/images/${img.path}`),
+    images: [`/api/images/${p2.main_image}`],
   } : undefined;
 
   return (
