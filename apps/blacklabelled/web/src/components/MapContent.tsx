@@ -56,7 +56,7 @@ export default function MapContent({ products, categories }: MapContentProps) {
       const map = new mapboxgl.Map({
         container: mapContainer.current,
         style: "mapbox://styles/mapbox/dark-v11",
-        center: [127.1, 37.4],
+        center: [127.13, 37.41],
         zoom: 14,
         attributionControl: false,
       });
