@@ -19,15 +19,36 @@ export default function ProjectsGrid({
   const [activeFilter, setActiveFilter] = useState<number | null>(null);
   const [visibleCount, setVisibleCount] = useState(ITEMS_PER_PAGE);
 
+  // 3 카테고리만 표시: Residence, Layout Design, Commercial
+  const ALLOWED_CATEGORIES = ["residence", "layout_design", "commercial"];
   const filters = useMemo(() => {
-    const sorted = [...categories].sort((a, b) => b.product_count - a.product_count);
-    return [{ id: null, name: "ALL" }, ...sorted.map((c) => ({ id: c.id, name: c.name.toUpperCase().replace(/_/g, " ") }))];
+    const filtered = categories.filter((c) =>
+      ALLOWED_CATEGORIES.includes(c.name.toLowerCase().replace(/ /g, "_"))
+    );
+    const sorted = filtered.sort((a, b) => b.product_count - a.product_count);
+    return [
+      { id: null, name: "ALL" },
+      ...sorted.map((c) => ({
+        id: c.id,
+        name: c.name.toUpperCase().replace(/_/g, " "),
+      })),
+    ];
+  }, [categories]);
+
+  // furniture 제외 — 허용된 카테고리만
+  const allowedCategoryIds = useMemo(() => {
+    return categories
+      .filter((c) => ALLOWED_CATEGORIES.includes(c.name.toLowerCase().replace(/ /g, "_")))
+      .map((c) => c.id);
   }, [categories]);
 
   const filtered = useMemo(() => {
-    if (!activeFilter) return products;
-    return products.filter((p) => p.categories.includes(activeFilter));
-  }, [products, activeFilter]);
+    const base = products.filter((p) =>
+      p.categories.some((cid) => allowedCategoryIds.includes(cid))
+    );
+    if (!activeFilter) return base;
+    return base.filter((p) => p.categories.includes(activeFilter));
+  }, [products, activeFilter, allowedCategoryIds]);
 
   const visible = filtered.slice(0, visibleCount);
   const hasMore = visibleCount < filtered.length;
@@ -59,7 +80,7 @@ export default function ProjectsGrid({
       {/* Grid */}
       <motion.div
         layout
-        className="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-1"
+        className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
       >
         <AnimatePresence mode="popLayout">
           {visible.map((product) => (
@@ -71,7 +92,7 @@ export default function ProjectsGrid({
               exit={{ opacity: 0, scale: 0.95 }}
               transition={{ duration: 0.3 }}
             >
-              <ProjectCard product={product} showInfo />
+              <ProjectCard product={product} showTitle />
             </motion.div>
           ))}
         </AnimatePresence>
