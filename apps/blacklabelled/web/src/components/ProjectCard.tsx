@@ -7,9 +7,10 @@ import type { Product } from "@/lib/data";
 interface ProjectCardProps {
   product: Product;
   showInfo?: boolean;
+  showTitle?: boolean;
 }
 
-export default function ProjectCard({ product, showInfo }: ProjectCardProps) {
+export default function ProjectCard({ product, showInfo, showTitle }: ProjectCardProps) {
   const cardRef = useRef<HTMLDivElement>(null);
   const [transform, setTransform] = useState("");
 
@@ -45,22 +46,19 @@ export default function ProjectCard({ product, showInfo }: ProjectCardProps) {
             }}
           />
           {/* Hover overlay */}
-          <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-all duration-500 flex items-end p-5 opacity-0 group-hover:opacity-100">
-            <div>
-              <p className="text-text-primary text-lg font-body">
-                {product.name}
-              </p>
-              <p className="text-gold text-xs tracking-[0.15em] uppercase mt-1 font-body">
-                {product.main_category_name}
-                {showInfo && product.image_count > 0 && (
-                  <span className="text-text-muted ml-2">
-                    · {product.image_count} images
-                  </span>
-                )}
-              </p>
-            </div>
-          </div>
+          <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-500" />
         </div>
+        {/* Title below image */}
+        {showTitle && (
+          <div className="mt-3">
+            <p className="text-[11px] text-text-muted tracking-[0.12em] uppercase">
+              PROJECT NO.{product.id}
+            </p>
+            <p className="text-text-primary text-[15px] mt-1 font-light">
+              {product.name}
+            </p>
+          </div>
+        )}
       </div>
     </Link>
   );

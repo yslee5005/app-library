@@ -2,60 +2,98 @@ import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer className="border-t border-border">
-      <div className="max-w-7xl mx-auto px-6 md:px-10 py-10 flex flex-col md:flex-row items-center justify-between gap-6">
-        <p className="text-text-muted text-sm tracking-wider">
-          © 2026 BLACKLABELLED
-        </p>
+    <footer className="bg-bg-primary border-t border-border">
+      <div className="max-w-[1400px] mx-auto px-6 md:px-10 py-16">
+        {/* 4-column layout */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 md:gap-16">
+          {/* Logo + tagline */}
+          <div>
+            <h3 className="text-white text-lg tracking-[0.15em] font-bold">
+              BLACKLABELLED
+            </h3>
+            <p className="text-text-muted text-sm mt-3">
+              Your space is &apos;black label&apos;
+            </p>
+          </div>
 
-        <div className="flex items-center gap-6">
-          {/* Instagram */}
-          <Link
-            href="https://instagram.com/blacklabelled"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-gold hover:text-gold-light transition-colors duration-300"
-            aria-label="Instagram"
-          >
-            <svg
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <rect x="2" y="2" width="20" height="20" rx="5" />
-              <circle cx="12" cy="12" r="5" />
-              <circle cx="17.5" cy="6.5" r="1" fill="currentColor" />
-            </svg>
-          </Link>
+          {/* SNS */}
+          <div>
+            <h4 className="text-text-muted text-[11px] tracking-[0.2em] uppercase font-bold mb-4">
+              SNS
+            </h4>
+            <div className="flex flex-col gap-3">
+              <Link
+                href="https://instagram.com/blacklabelled"
+                target="_blank"
+                className="text-text-secondary text-sm hover:text-white transition-colors"
+              >
+                Instagram
+              </Link>
+              <Link
+                href="https://youtube.com"
+                target="_blank"
+                className="text-text-secondary text-sm hover:text-white transition-colors"
+              >
+                YouTube
+              </Link>
+              <Link
+                href="https://blog.naver.com/blacklabelled"
+                target="_blank"
+                className="text-text-secondary text-sm hover:text-white transition-colors"
+              >
+                Blog
+              </Link>
+            </div>
+          </div>
 
-          {/* Blog */}
-          <Link
-            href="https://blog.naver.com/blacklabelled"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-gold hover:text-gold-light transition-colors duration-300"
-            aria-label="Blog"
-          >
-            <svg
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
+          {/* INFO */}
+          <div>
+            <h4 className="text-text-muted text-[11px] tracking-[0.2em] uppercase font-bold mb-4">
+              INFO
+            </h4>
+            <div className="flex flex-col gap-3 text-text-secondary text-sm">
+              <p>경기도 성남시 분당구</p>
+              <p>Tel. 031-000-0000</p>
+              <p>info@blacklabelled.co.kr</p>
+            </div>
+          </div>
+
+          {/* CONTACT */}
+          <div>
+            <h4 className="text-text-muted text-[11px] tracking-[0.2em] uppercase font-bold mb-4">
+              CONTACT
+            </h4>
+            <div className="flex flex-col gap-3 text-text-secondary text-sm">
+              <p>상담시간: 평일 10:00 – 18:00</p>
+              <Link
+                href="/contact"
+                className="text-white hover:text-text-secondary transition-colors"
+              >
+                온라인 상담신청 →
+              </Link>
+            </div>
+          </div>
+        </div>
+
+        {/* Bottom bar */}
+        <div className="mt-16 pt-6 border-t border-border flex flex-col sm:flex-row items-center justify-between gap-4">
+          <p className="text-text-muted text-xs">
+            © 2026 BLACKLABELLED. All rights reserved.
+          </p>
+          <div className="flex gap-6">
+            <Link
+              href="#"
+              className="text-text-muted text-xs hover:text-text-secondary transition-colors underline"
             >
-              <path d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z" />
-              <path d="M8 10h8" />
-              <path d="M8 14h5" />
-            </svg>
-          </Link>
+              개인정보처리방침
+            </Link>
+            <Link
+              href="#"
+              className="text-text-muted text-xs hover:text-text-secondary transition-colors underline"
+            >
+              이용약관
+            </Link>
+          </div>
         </div>
       </div>
     </footer>

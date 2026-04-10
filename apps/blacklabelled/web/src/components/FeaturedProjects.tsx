@@ -22,7 +22,7 @@ export default function FeaturedProjects({ products }: FeaturedProjectsProps) {
         SELECTED WORKS
       </motion.h2>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-1">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {products.map((product, i) => (
           <motion.div
             key={product.id}
@@ -31,7 +31,7 @@ export default function FeaturedProjects({ products }: FeaturedProjectsProps) {
             viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.6, delay: i * 0.1 }}
           >
-            <ProjectCard product={product} />
+            <ProjectCard product={product} showTitle />
           </motion.div>
         ))}
       </div>
