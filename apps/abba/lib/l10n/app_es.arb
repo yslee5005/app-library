@@ -196,5 +196,11 @@
   "savedPosts": "Guardados",
   "totalPrayersCount": "Oraciones",
   "streakCount": "Racha",
-  "testimoniesCount": "Testimonios"
+  "testimoniesCount": "Testimonios",
+  "linkAccountTitle": "Vincular cuenta",
+  "linkAccountDescription": "Vincula tu cuenta para conservar tus registros de oración al cambiar de dispositivo",
+  "linkWithApple": "Vincular con Apple",
+  "linkWithGoogle": "Vincular con Google",
+  "linkAccountSuccess": "¡Cuenta vinculada exitosamente!",
+  "anonymousUser": "Guerrero de oración"
 }

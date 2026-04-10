@@ -1225,6 +1225,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Testimonies'**
   String get testimoniesCount;
+
+  /// No description provided for @linkAccountTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Link Account'**
+  String get linkAccountTitle;
+
+  /// No description provided for @linkAccountDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Link your account to keep prayer records when switching devices'**
+  String get linkAccountDescription;
+
+  /// No description provided for @linkWithApple.
+  ///
+  /// In en, this message translates to:
+  /// **'Link with Apple'**
+  String get linkWithApple;
+
+  /// No description provided for @linkWithGoogle.
+  ///
+  /// In en, this message translates to:
+  /// **'Link with Google'**
+  String get linkWithGoogle;
+
+  /// No description provided for @linkAccountSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Account linked successfully!'**
+  String get linkAccountSuccess;
+
+  /// No description provided for @anonymousUser.
+  ///
+  /// In en, this message translates to:
+  /// **'Prayer Warrior'**
+  String get anonymousUser;
 }
 
 class _AppLocalizationsDelegate

@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:share_plus/share_plus.dart' show Share;
 
 import '../../../l10n/generated/app_localizations.dart';
+import '../../../models/user_profile.dart';
 import '../../../providers/providers.dart';
 import '../../../services/auth_service.dart';
 import '../../../theme/abba_theme.dart';
@@ -38,56 +39,11 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Profile section
-            profileAsync.when(
-              data: (profile) => AbbaCard(
-                margin: const EdgeInsets.only(bottom: AbbaSpacing.md),
-                child: Row(
-                  children: [
-                    CircleAvatar(
-                      radius: 32,
-                      backgroundColor: AbbaColors.sage.withValues(alpha: 0.2),
-                      child: Text(
-                        profile.name.isNotEmpty ? profile.name[0].toUpperCase() : '?',
-                        style: AbbaTypography.h1.copyWith(
-                          color: AbbaColors.sage,
-                        ),
-                      ),
-                    ),
-                    const SizedBox(width: AbbaSpacing.md),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(profile.name, style: AbbaTypography.h2),
-                          Text(
-                            profile.email,
-                            style: AbbaTypography.bodySmall.copyWith(
-                              color: AbbaColors.muted,
-                            ),
-                          ),
-                          const SizedBox(height: AbbaSpacing.sm),
-                          Row(
-                            children: [
-                              _StatBadge(
-                                label: l10n.totalPrayers,
-                                value: '${profile.totalPrayers}',
-                              ),
-                              const SizedBox(width: AbbaSpacing.md),
-                              _StatBadge(
-                                label: l10n.consecutiveDays,
-                                value: '${profile.currentStreak}',
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              loading: () => const SizedBox.shrink(),
-              error: (e, s) => const SizedBox.shrink(),
-            ),
+            _buildProfileSection(l10n, profileAsync),
+
+            // Link account section (anonymous only)
+            if (ref.read(authServiceProvider).isAnonymous)
+              _buildLinkAccountCard(l10n),
 
             // My Prayer Garden button
             AbbaCard(
@@ -219,18 +175,20 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
                     title: l10n.privacyPolicy,
                     onTap: () {},
                   ),
-                  const Divider(height: 1),
-                  _SettingsTile(
-                    icon: Icons.logout,
-                    title: l10n.logout,
-                    titleColor: AbbaColors.error,
-                    onTap: () async {
-                      await ref.read(authServiceProvider).signOut();
-                      ref.read(authStateProvider.notifier).state =
-                          const AbbaAuthState();
-                      if (context.mounted) context.go('/welcome');
-                    },
-                  ),
+                  if (!ref.read(authServiceProvider).isAnonymous) ...[
+                    const Divider(height: 1),
+                    _SettingsTile(
+                      icon: Icons.logout,
+                      title: l10n.logout,
+                      titleColor: AbbaColors.error,
+                      onTap: () async {
+                        await ref.read(authServiceProvider).signOut();
+                        ref.read(authStateProvider.notifier).state =
+                            const AbbaAuthState();
+                        if (context.mounted) context.go('/welcome');
+                      },
+                    ),
+                  ],
                 ],
               ),
             ),
@@ -247,6 +205,149 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
         ),
       ),
     );
+  }
+
+  Widget _buildProfileSection(
+    AppLocalizations l10n,
+    AsyncValue<UserProfile> profileAsync,
+  ) {
+    final isAnon = ref.read(authServiceProvider).isAnonymous;
+
+    return profileAsync.when(
+      data: (profile) => AbbaCard(
+        margin: const EdgeInsets.only(bottom: AbbaSpacing.md),
+        child: Row(
+          children: [
+            CircleAvatar(
+              radius: 32,
+              backgroundColor: AbbaColors.sage.withValues(alpha: 0.2),
+              child: Text(
+                isAnon
+                    ? '\u{1F64F}'
+                    : (profile.name.isNotEmpty
+                        ? profile.name[0].toUpperCase()
+                        : '?'),
+                style: AbbaTypography.h1.copyWith(color: AbbaColors.sage),
+              ),
+            ),
+            const SizedBox(width: AbbaSpacing.md),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    isAnon ? l10n.anonymousUser : profile.name,
+                    style: AbbaTypography.h2,
+                  ),
+                  if (!isAnon)
+                    Text(
+                      profile.email,
+                      style: AbbaTypography.bodySmall.copyWith(
+                        color: AbbaColors.muted,
+                      ),
+                    ),
+                  const SizedBox(height: AbbaSpacing.sm),
+                  Row(
+                    children: [
+                      _StatBadge(
+                        label: l10n.totalPrayers,
+                        value: '${profile.totalPrayers}',
+                      ),
+                      const SizedBox(width: AbbaSpacing.md),
+                      _StatBadge(
+                        label: l10n.consecutiveDays,
+                        value: '${profile.currentStreak}',
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+      loading: () => const SizedBox.shrink(),
+      error: (e, s) => const SizedBox.shrink(),
+    );
+  }
+
+  Widget _buildLinkAccountCard(AppLocalizations l10n) {
+    return AbbaCard(
+      margin: const EdgeInsets.only(bottom: AbbaSpacing.md),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Icon(Icons.cloud_outlined, color: AbbaColors.sage),
+              const SizedBox(width: AbbaSpacing.sm),
+              Text(l10n.linkAccountTitle, style: AbbaTypography.h2),
+            ],
+          ),
+          const SizedBox(height: AbbaSpacing.sm),
+          Text(
+            l10n.linkAccountDescription,
+            style: AbbaTypography.bodySmall.copyWith(color: AbbaColors.muted),
+          ),
+          const SizedBox(height: AbbaSpacing.md),
+          // Apple link button
+          SizedBox(
+            width: double.infinity,
+            height: abbaButtonHeight,
+            child: ElevatedButton.icon(
+              icon: const Icon(Icons.apple),
+              label: Text(l10n.linkWithApple),
+              onPressed: () => _linkAccount('apple'),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: AbbaColors.warmBrown,
+                foregroundColor: AbbaColors.white,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(AbbaRadius.lg),
+                ),
+              ),
+            ),
+          ),
+          const SizedBox(height: AbbaSpacing.sm),
+          // Google link button
+          SizedBox(
+            width: double.infinity,
+            height: abbaButtonHeight,
+            child: OutlinedButton.icon(
+              icon: const Icon(Icons.g_mobiledata),
+              label: Text(l10n.linkWithGoogle),
+              onPressed: () => _linkAccount('google'),
+              style: OutlinedButton.styleFrom(
+                side: const BorderSide(color: AbbaColors.sage),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(AbbaRadius.lg),
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Future<void> _linkAccount(String provider) async {
+    final l10n = AppLocalizations.of(context)!;
+    try {
+      final auth = ref.read(authServiceProvider);
+      if (provider == 'apple') {
+        await auth.linkWithApple();
+      } else {
+        await auth.linkWithGoogle();
+      }
+      ref.invalidate(userProfileProvider);
+      if (mounted) {
+        setState(() {}); // Refresh to hide link card
+        showAbbaSnackBar(context, message: l10n.linkAccountSuccess);
+      }
+    } catch (e) {
+      if (mounted) {
+        showAbbaSnackBar(context, message: l10n.errorGeneric);
+      }
+    }
   }
 
   Widget _buildPremiumCard(AppLocalizations l10n) {

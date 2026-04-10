@@ -598,4 +598,23 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get testimoniesCount => 'Testimonies';
+
+  @override
+  String get linkAccountTitle => 'Link Account';
+
+  @override
+  String get linkAccountDescription =>
+      'Link your account to keep prayer records when switching devices';
+
+  @override
+  String get linkWithApple => 'Link with Apple';
+
+  @override
+  String get linkWithGoogle => 'Link with Google';
+
+  @override
+  String get linkAccountSuccess => 'Account linked successfully!';
+
+  @override
+  String get anonymousUser => 'Prayer Warrior';
 }

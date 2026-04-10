@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 
-import '../config/app_config.dart';
 import '../features/ai_loading/view/ai_loading_view.dart';
 import '../features/calendar/view/calendar_view.dart';
 import '../features/community/view/community_view.dart';
@@ -11,7 +9,6 @@ import '../features/dashboard/view/dashboard_view.dart';
 import '../features/dashboard/view/prayer_dashboard_view.dart';
 import '../features/dashboard/view/qt_dashboard_view.dart';
 import '../features/home/view/home_view.dart';
-import '../features/login/view/login_view.dart';
 import '../features/qt/view/qt_view.dart';
 import '../features/my_page/view/my_page_view.dart';
 import '../features/settings/view/settings_view.dart';
@@ -24,21 +21,13 @@ final appRouter = GoRouter(
   navigatorKey: _rootNavigatorKey,
   initialLocation: '/welcome',
   redirect: (context, state) {
-    // Skip auth redirect in mock mode
-    if (AppConfig.useMock) return null;
-
-    final isLoggedIn = Supabase.instance.client.auth.currentSession != null;
-    final isAuthRoute =
-        state.matchedLocation == '/welcome' ||
-        state.matchedLocation == '/login';
-
-    if (!isLoggedIn && !isAuthRoute) return '/welcome';
-    if (isLoggedIn && isAuthRoute) return '/home';
+    // Anonymous-first: no auth redirect needed
+    // Welcome is shown only on first launch (handled by initial location)
+    if (state.matchedLocation == '/login') return '/home';
     return null;
   },
   routes: [
     GoRoute(path: '/welcome', builder: (context, state) => const WelcomeView()),
-    GoRoute(path: '/login', builder: (context, state) => const LoginView()),
     StatefulShellRoute.indexedStack(
       builder: (context, state, navigationShell) {
         return _ScaffoldWithNavBar(navigationShell: navigationShell);

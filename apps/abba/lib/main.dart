@@ -5,6 +5,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import 'app.dart';
 import 'config/app_config.dart';
 import 'providers/providers.dart';
+import 'services/auth_service.dart';
 import 'services/error_logging_service.dart';
 import 'services/mock/mock_ai_service.dart';
 import 'services/mock/mock_auth_service.dart';
@@ -38,11 +39,14 @@ Future<void> main() async {
 
   final overrides = <Override>[];
 
+  AuthService authService;
+
   if (AppConfig.useMock) {
     // Mock mode — all services return JSON data
     final mockData = MockDataService();
+    authService = MockAuthService(mockData);
     overrides.addAll([
-      authServiceProvider.overrideWithValue(MockAuthService(mockData)),
+      authServiceProvider.overrideWithValue(authService),
       aiServiceProvider.overrideWithValue(MockAiService(mockData)),
       sttServiceProvider.overrideWithValue(MockSttService()),
       ttsServiceProvider.overrideWithValue(MockTtsService()),
@@ -61,9 +65,10 @@ Future<void> main() async {
       anonKey: AppConfig.supabaseAnonKey,
     );
     final supabase = Supabase.instance.client;
+    authService = SupabaseAuthService(supabase);
 
     overrides.addAll([
-      authServiceProvider.overrideWithValue(SupabaseAuthService(supabase)),
+      authServiceProvider.overrideWithValue(authService),
       aiServiceProvider.overrideWithValue(CachedAiService(OpenAiService())),
       sttServiceProvider.overrideWithValue(RealSttService()),
       ttsServiceProvider.overrideWithValue(RealTtsService()),
@@ -81,6 +86,12 @@ Future<void> main() async {
       ),
       qtRepositoryProvider.overrideWithValue(SupabaseQtRepository(supabase)),
     ]);
+  }
+
+  // Anonymous-first: auto sign in if no existing session
+  final currentUser = await authService.getCurrentUser();
+  if (currentUser == null) {
+    await authService.signInAnonymously();
   }
 
   runApp(ProviderScope(overrides: overrides, child: const AbbaApp()));

@@ -62,7 +62,7 @@ class WelcomeView extends StatelessWidget {
               // Get Started button
               AbbaButton(
                 label: l10n.getStarted,
-                onPressed: () => context.go('/login'),
+                onPressed: () => context.go('/home'),
                 isHero: true,
               ),
               const SizedBox(height: AbbaSpacing.xxl),

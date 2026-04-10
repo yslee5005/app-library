@@ -196,5 +196,11 @@
   "savedPosts": "저장됨",
   "totalPrayersCount": "기도",
   "streakCount": "연속",
-  "testimoniesCount": "간증"
+  "testimoniesCount": "간증",
+  "linkAccountTitle": "계정 연결",
+  "linkAccountDescription": "계정을 연결하면 기기를 변경해도 기도 기록이 유지됩니다",
+  "linkWithApple": "Apple로 연결",
+  "linkWithGoogle": "Google로 연결",
+  "linkAccountSuccess": "계정이 연결되었습니다!",
+  "anonymousUser": "기도하는 사람"
 }

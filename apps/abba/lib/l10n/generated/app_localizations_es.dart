@@ -602,4 +602,23 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get testimoniesCount => 'Testimonios';
+
+  @override
+  String get linkAccountTitle => 'Vincular cuenta';
+
+  @override
+  String get linkAccountDescription =>
+      'Vincula tu cuenta para conservar tus registros de oración al cambiar de dispositivo';
+
+  @override
+  String get linkWithApple => 'Vincular con Apple';
+
+  @override
+  String get linkWithGoogle => 'Vincular con Google';
+
+  @override
+  String get linkAccountSuccess => '¡Cuenta vinculada exitosamente!';
+
+  @override
+  String get anonymousUser => 'Guerrero de oración';
 }

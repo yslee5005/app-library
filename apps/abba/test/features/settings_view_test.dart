@@ -12,11 +12,15 @@ void main() {
       expect(find.textContaining('Settings'), findsOneWidget);
     });
 
-    testWidgets('renders logout button', (tester) async {
+    testWidgets('renders link account section for anonymous user', (tester) async {
       await tester.pumpWidget(buildTestApp(const SettingsView()));
       await tester.pump(const Duration(milliseconds: 100));
 
-      expect(find.text('Log Out'), findsOneWidget);
+      expect(find.text('Link Account'), findsOneWidget);
+      expect(find.text('Link with Apple'), findsOneWidget);
+      expect(find.text('Link with Google'), findsOneWidget);
+      // Logout hidden for anonymous users
+      expect(find.text('Log Out'), findsNothing);
     });
 
     testWidgets('renders in Korean', (tester) async {
@@ -24,7 +28,7 @@ void main() {
       await tester.pump(const Duration(milliseconds: 100));
 
       expect(find.textContaining('설정'), findsOneWidget);
-      expect(find.text('로그아웃'), findsOneWidget);
+      expect(find.text('계정 연결'), findsOneWidget);
     });
   });
 }

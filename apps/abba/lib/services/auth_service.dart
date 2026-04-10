@@ -36,4 +36,11 @@ abstract class AuthService {
   Future<void> signOut();
   Future<UserProfile?> getCurrentUser();
   Stream<AbbaAuthState> get authStateChanges;
+
+  // Anonymous auth
+  Future<UserProfile> signInAnonymously();
+  Future<UserProfile> linkWithGoogle();
+  Future<UserProfile> linkWithApple();
+  Future<UserProfile> linkWithEmail(String email, String password);
+  bool get isAnonymous;
 }

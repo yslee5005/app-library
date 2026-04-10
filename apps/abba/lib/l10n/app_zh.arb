@@ -196,5 +196,11 @@
   "savedPosts": "已收藏",
   "totalPrayersCount": "祷告",
   "streakCount": "连续",
-  "testimoniesCount": "见证"
+  "testimoniesCount": "见证",
+  "linkAccountTitle": "关联账号",
+  "linkAccountDescription": "关联账号后，更换设备时祷告记录将会保留",
+  "linkWithApple": "通过Apple关联",
+  "linkWithGoogle": "通过Google关联",
+  "linkAccountSuccess": "账号关联成功！",
+  "anonymousUser": "祷告勇士"
 }

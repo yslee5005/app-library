@@ -77,6 +77,42 @@ class SupabaseAuthService implements AuthService {
   }
 
   @override
+  Future<UserProfile> signInAnonymously() async {
+    final response = await _client.auth.signInAnonymously();
+    if (response.user == null) {
+      throw Exception('Anonymous sign-in failed');
+    }
+    return _ensureProfile(response.user!);
+  }
+
+  @override
+  bool get isAnonymous {
+    final user = _client.auth.currentUser;
+    return user?.isAnonymous ?? true;
+  }
+
+  @override
+  Future<UserProfile> linkWithGoogle() async {
+    await _client.auth.linkIdentity(OAuthProvider.google);
+    return _waitForProfile();
+  }
+
+  @override
+  Future<UserProfile> linkWithApple() async {
+    await _client.auth.linkIdentity(OAuthProvider.apple);
+    return _waitForProfile();
+  }
+
+  @override
+  Future<UserProfile> linkWithEmail(String email, String password) async {
+    await _client.auth.updateUser(
+      UserAttributes(email: email, password: password),
+    );
+    final user = _client.auth.currentUser!;
+    return _ensureProfile(user);
+  }
+
+  @override
   Stream<AbbaAuthState> get authStateChanges => _controller.stream;
 
   Future<UserProfile> _ensureProfile(User user) async {

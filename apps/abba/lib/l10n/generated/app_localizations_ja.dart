@@ -588,4 +588,22 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get testimoniesCount => '証し';
+
+  @override
+  String get linkAccountTitle => 'アカウント連携';
+
+  @override
+  String get linkAccountDescription => 'アカウントを連携すると、デバイスを変えても祈りの記録が保持されます';
+
+  @override
+  String get linkWithApple => 'Appleで連携';
+
+  @override
+  String get linkWithGoogle => 'Googleで連携';
+
+  @override
+  String get linkAccountSuccess => 'アカウントが連携されました！';
+
+  @override
+  String get anonymousUser => '祈りの人';
 }

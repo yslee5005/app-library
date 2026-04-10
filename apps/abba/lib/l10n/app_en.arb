@@ -196,5 +196,11 @@
   "savedPosts": "Saved",
   "totalPrayersCount": "Prayers",
   "streakCount": "Streak",
-  "testimoniesCount": "Testimonies"
+  "testimoniesCount": "Testimonies",
+  "linkAccountTitle": "Link Account",
+  "linkAccountDescription": "Link your account to keep prayer records when switching devices",
+  "linkWithApple": "Link with Apple",
+  "linkWithGoogle": "Link with Google",
+  "linkAccountSuccess": "Account linked successfully!",
+  "anonymousUser": "Prayer Warrior"
 }

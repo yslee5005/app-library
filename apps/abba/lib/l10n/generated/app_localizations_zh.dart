@@ -588,4 +588,22 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get testimoniesCount => '见证';
+
+  @override
+  String get linkAccountTitle => '关联账号';
+
+  @override
+  String get linkAccountDescription => '关联账号后，更换设备时祷告记录将会保留';
+
+  @override
+  String get linkWithApple => '通过Apple关联';
+
+  @override
+  String get linkWithGoogle => '通过Google关联';
+
+  @override
+  String get linkAccountSuccess => '账号关联成功！';
+
+  @override
+  String get anonymousUser => '祷告勇士';
 }

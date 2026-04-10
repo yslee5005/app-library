@@ -196,5 +196,11 @@
   "savedPosts": "保存済み",
   "totalPrayersCount": "祈り",
   "streakCount": "連続",
-  "testimoniesCount": "証し"
+  "testimoniesCount": "証し",
+  "linkAccountTitle": "アカウント連携",
+  "linkAccountDescription": "アカウントを連携すると、デバイスを変えても祈りの記録が保持されます",
+  "linkWithApple": "Appleで連携",
+  "linkWithGoogle": "Googleで連携",
+  "linkAccountSuccess": "アカウントが連携されました！",
+  "anonymousUser": "祈りの人"
 }

@@ -588,4 +588,22 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get testimoniesCount => '간증';
+
+  @override
+  String get linkAccountTitle => '계정 연결';
+
+  @override
+  String get linkAccountDescription => '계정을 연결하면 기기를 변경해도 기도 기록이 유지됩니다';
+
+  @override
+  String get linkWithApple => 'Apple로 연결';
+
+  @override
+  String get linkWithGoogle => 'Google로 연결';
+
+  @override
+  String get linkAccountSuccess => '계정이 연결되었습니다!';
+
+  @override
+  String get anonymousUser => '기도하는 사람';
 }
