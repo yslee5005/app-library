@@ -37,12 +37,16 @@ export default function ProjectCard({ product, showInfo, showTitle }: ProjectCar
         className="group overflow-hidden transition-transform duration-500 ease-out"
         style={{ transform: transform || undefined }}
       >
-        {/* Image */}
+        {/* Image — Layout Design uses first detail image */}
         <div className="relative aspect-[4/3] overflow-hidden bg-bg-card">
           <div
             className="absolute inset-0 bg-cover bg-center transition-all duration-600 group-hover:brightness-110"
             style={{
-              backgroundImage: `url(/api/images/${product.main_image})`,
+              backgroundImage: `url(/api/images/${
+                product.main_category_name === "Layout_Design" && product.images.length > 0
+                  ? product.images.filter(i => i.type === "detail").sort((a, b) => a.path.localeCompare(b.path))[0]?.path || product.main_image
+                  : product.main_image
+              })`,
             }}
           />
           {/* Hover overlay */}
