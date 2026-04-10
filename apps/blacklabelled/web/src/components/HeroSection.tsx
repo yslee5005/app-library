@@ -43,7 +43,7 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.5 }}
-          className="font-heading text-gold text-5xl md:text-7xl lg:text-8xl font-light tracking-[0.15em]"
+          className="font-heading text-white text-5xl md:text-7xl lg:text-8xl font-light tracking-[0.15em]"
         >
           BLACKLABELLED
         </motion.h1>
@@ -57,29 +57,60 @@ export default function HeroSection() {
         </motion.p>
       </div>
 
-      {/* Scroll arrow */}
+      {/* EXPLORE rotating circle — click to scroll down */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 1.5 }}
-        className="absolute bottom-10 z-10"
+        transition={{ delay: 1.5, duration: 1 }}
+        className="absolute bottom-16 z-10 cursor-pointer"
+        onClick={() => {
+          window.scrollTo({
+            top: window.innerHeight,
+            behavior: "smooth",
+          });
+        }}
       >
-        <motion.div
-          animate={{ opacity: [0.3, 1, 0.3] }}
-          transition={{ duration: 2, repeat: Infinity }}
-          className="text-text-secondary"
-        >
+        <div className="relative w-[200px] h-[200px]">
+          {/* Rotating circular text */}
           <svg
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1"
+            className="w-full h-full animate-spin-slow"
+            viewBox="0 0 200 200"
           >
-            <path d="M12 5v14M5 12l7 7 7-7" />
+            <defs>
+              <path
+                id="circlePath"
+                d="M100,100 m-75,0 a75,75 0 1,1 150,0 a75,75 0 1,1 -150,0"
+                fill="none"
+              />
+            </defs>
+            <text
+              className="fill-white"
+              style={{
+                fontSize: "12px",
+                letterSpacing: "0.25em",
+                textTransform: "uppercase",
+              }}
+            >
+              <textPath href="#circlePath">
+                BLACKLABELLED · DESIGN STUDIO · LIFE MAKES SENSE ·
+              </textPath>
+            </text>
           </svg>
-        </motion.div>
+
+          {/* Center EXPLORE + arrow */}
+          <div className="absolute inset-0 flex flex-col items-center justify-center">
+            <span className="text-white text-[13px] tracking-[0.2em] font-light">
+              EXPLORE
+            </span>
+            <motion.span
+              animate={{ y: [0, 4, 0] }}
+              transition={{ duration: 1.5, repeat: Infinity }}
+              className="text-white mt-1 text-lg"
+            >
+              ↓
+            </motion.span>
+          </div>
+        </div>
       </motion.div>
     </section>
   );

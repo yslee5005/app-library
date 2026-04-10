@@ -4,11 +4,13 @@ import { useState, useEffect } from "react";
 interface ImageCrossfadeProps {
   images: string[];
   interval?: number;
+  aspectRatio?: string;
 }
 
 export default function ImageCrossfade({
   images,
   interval = 3000,
+  aspectRatio = "4/3",
 }: ImageCrossfadeProps) {
   const [current, setCurrent] = useState(0);
 
@@ -21,7 +23,10 @@ export default function ImageCrossfade({
   }, [images, interval]);
 
   return (
-    <div className="relative aspect-[4/3] overflow-hidden bg-bg-card">
+    <div
+      className="relative overflow-hidden bg-bg-card"
+      style={{ aspectRatio }}
+    >
       {images.map((src, i) => (
         <div
           key={i}

@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import Link from "next/link";
 import type { Product } from "@/lib/data";
 import ImageCrossfade from "./ImageCrossfade";
@@ -11,26 +11,84 @@ interface LilsquareHomeProps {
   featured: Product[];
 }
 
-/* ───────────────────────── Hero ───────────────────────── */
-function HeroSection({ product }: { product: Product }) {
+/* ───────────────────────── Hero (5-project carousel) ───────────────────────── */
+function HeroSection({ products }: { products: Product[] }) {
+  const heroProducts = products.slice(0, 5);
+  const [current, setCurrent] = useState(0);
+
+  useEffect(() => {
+    if (heroProducts.length <= 1) return;
+    const timer = setInterval(() => {
+      setCurrent((prev) => (prev + 1) % heroProducts.length);
+    }, 3000);
+    return () => clearInterval(timer);
+  }, [heroProducts.length]);
+
+  const product = heroProducts[current] || heroProducts[0];
+  if (!product) return null;
+
   return (
     <section className="relative h-screen overflow-hidden">
-      {/* Background — Ken Burns subtle zoom */}
-      <div
-        className="absolute inset-0 bg-cover bg-center animate-slow-zoom"
-        style={{
-          backgroundImage: `url(/api/images/${product.main_image})`,
-        }}
-      />
+      {/* Background images — crossfade */}
+      {heroProducts.map((p, i) => (
+        <div
+          key={p.id}
+          className="absolute inset-0 bg-cover bg-center transition-opacity duration-[1500ms]"
+          style={{
+            backgroundImage: `url(/api/images/${p.main_image})`,
+            opacity: i === current ? 1 : 0,
+          }}
+        />
+      ))}
 
       {/* Dark overlay */}
       <div className="absolute inset-0 bg-black/30" />
 
-      {/* Title — sequential fade */}
-      <div className="absolute inset-0 flex items-center justify-center z-10">
+      {/* Project info — bottom left */}
+      <div className="absolute bottom-[140px] left-[40px] md:left-[60px] z-10">
+        <p
+          className="text-white/70 text-[11px] tracking-[0.15em] uppercase transition-opacity duration-500"
+          key={`no-${current}`}
+        >
+          PROJECT NO.{product.id}
+        </p>
+        <h2
+          className="text-white text-2xl md:text-4xl font-light mt-1 transition-opacity duration-500"
+          key={`name-${current}`}
+        >
+          {product.name}
+        </h2>
+        {product.description && (
+          <p className="text-white/60 mt-3 max-w-[400px] text-sm leading-[1.6]">
+            {product.description.substring(0, 80)}
+            {product.description.length > 80 ? "..." : ""}
+          </p>
+        )}
+        <Link
+          href={`/lilsquare/projects/${product.slug}`}
+          className="inline-block mt-4 text-white text-[13px] border-b border-white pb-1 tracking-wider hover:text-text-secondary hover:border-text-secondary transition-colors"
+        >
+          VIEW PROJECT
+        </Link>
+      </div>
+
+      {/* Carousel indicators — bottom center */}
+      <div className="absolute bottom-[110px] left-1/2 -translate-x-1/2 z-10 flex gap-2">
+        {heroProducts.map((_, i) => (
+          <button
+            key={i}
+            onClick={() => setCurrent(i)}
+            className={`w-8 h-[3px] transition-all duration-300 ${
+              i === current ? "bg-white" : "bg-white/30"
+            }`}
+          />
+        ))}
+      </div>
+
+      {/* Title — center */}
+      <div className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none">
         <h1
           className="text-white text-[6vw] md:text-[3vw] font-light tracking-[0.25em] text-center"
-          style={{ fontFamily: "'Inter', sans-serif" }}
         >
           {["Your", "space", "is", "'black", "label'"].map((word, i) => (
             <span
@@ -44,29 +102,30 @@ function HeroSection({ product }: { product: Product }) {
         </h1>
       </div>
 
-      {/* EXPLORE spinning circle */}
-      <div className="absolute bottom-[110px] left-1/2 -translate-x-1/2 z-10 text-center">
-        <div className="relative">
+      {/* EXPLORE spinning circle — click to scroll */}
+      <div
+        className="absolute bottom-4 left-1/2 -translate-x-1/2 z-10 text-center cursor-pointer"
+        onClick={() => window.scrollTo({ top: window.innerHeight, behavior: "smooth" })}
+      >
+        <div className="relative w-[140px] h-[140px] md:w-[160px] md:h-[160px]">
           <svg
-            className="w-[160px] h-[160px] md:w-[200px] md:h-[200px] animate-spin-slow"
+            className="w-full h-full animate-spin-slow"
             viewBox="0 0 200 200"
           >
             <path
               id="circlePath"
-              d="M100,100 m-80,0 a80,80 0 1,1 160,0 a80,80 0 1,1 -160,0"
+              d="M100,100 m-75,0 a75,75 0 1,1 150,0 a75,75 0 1,1 -150,0"
               fill="none"
             />
-            <text className="fill-white text-[11px] tracking-[0.3em] uppercase">
+            <text className="fill-white text-[11px] tracking-[0.25em] uppercase">
               <textPath href="#circlePath">
-                Blacklabelled · Design Studio · Life Makes Sense ·
+                BLACKLABELLED · DESIGN STUDIO · LIFE MAKES SENSE ·
               </textPath>
             </text>
           </svg>
           <div className="absolute inset-0 flex flex-col items-center justify-center">
-            <span className="text-white text-sm tracking-[0.2em]">
-              EXPLORE
-            </span>
-            <span className="text-white mt-2">↓</span>
+            <span className="text-white text-[12px] tracking-[0.2em]">EXPLORE</span>
+            <span className="text-white mt-1 text-sm">↓</span>
           </div>
         </div>
       </div>
@@ -262,19 +321,18 @@ export default function LilsquareHome({
   products,
   featured,
 }: LilsquareHomeProps) {
-  const heroProject = featured[0] ?? products[0];
   const project1 = featured[0] ?? products[0];
   const project2 = featured[1] ?? products[1];
   const fullscreenProject = featured[2] ?? products[2];
   const scrollRef = useRef<HTMLDivElement>(null);
 
-  if (!heroProject || !project1 || !project2) {
+  if (products.length === 0) {
     return <div className="h-screen flex items-center justify-center text-text-muted">No projects found</div>;
   }
 
   return (
     <div ref={scrollRef}>
-      <HeroSection product={heroProject} />
+      <HeroSection products={products} />
       <IntroSection project1={project1} project2={project2} />
       {fullscreenProject && (
         <FullscreenProject product={fullscreenProject} />
