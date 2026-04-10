@@ -146,7 +146,7 @@ export default function AboutContent() {
                   전화
                 </p>
                 <p className="text-text-primary font-body mt-1">
-                  010-9887-2826
+                  010-9887-2826(TR)
                 </p>
               </div>
             </div>

@@ -61,7 +61,7 @@ function InfoCards() {
               전화
             </p>
             <p className="text-gold text-3xl md:text-4xl font-light tracking-wider mt-2">
-              010-9887-2826
+              010-9887-2826(TR)
             </p>
           </div>
           <div>

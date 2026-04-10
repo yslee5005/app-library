@@ -54,8 +54,8 @@ export default function Footer() {
             <div className="flex flex-col gap-3 text-text-secondary text-sm">
               <p>경기도 성남시 분당구 판교로610번길 5</p>
               <p>2층 (주소지1층) 블랙라벨드</p>
-              <p>Tel. 010-9887-2826</p>
-              <p>Tel. 010-9046-3487</p>
+              <p>Tel. 010-9887-2826(TR)</p>
+              <p>Tel. 010-9046-3487(TD)</p>
               <p>info@blacklabelled.co.kr</p>
             </div>
           </div>
@@ -66,7 +66,7 @@ export default function Footer() {
               CONTACT
             </h4>
             <div className="flex flex-col gap-3 text-text-secondary text-sm">
-              <p>상담시간: 평일 10:00 – 18:00</p>
+              <p>상담시간: 평일 9:30 – 18:30</p>
               <Link
                 href="/contact"
                 className="text-white hover:text-text-secondary transition-colors"

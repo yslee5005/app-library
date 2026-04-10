@@ -302,7 +302,7 @@ function TeamSection() {
                 <p className="text-text-muted text-xs tracking-[0.15em] uppercase">
                   전화
                 </p>
-                <p className="text-text-primary text-sm mt-1">010-9887-2826</p>
+                <p className="text-text-primary text-sm mt-1">010-9887-2826(TR)</p>
               </div>
               <div>
                 <p className="text-text-muted text-xs tracking-[0.15em] uppercase">

@@ -178,8 +178,8 @@ export default function ContactContent() {
               <p className="text-text-muted text-xs tracking-[0.15em] uppercase font-body">
                 전화
               </p>
-              <p className="text-text-primary font-body mt-2">010-9887-2826</p>
-              <p className="text-text-primary font-body mt-1">010-9046-3487</p>
+              <p className="text-text-primary font-body mt-2">010-9887-2826(TR)</p>
+              <p className="text-text-primary font-body mt-1">010-9046-3487(TD)</p>
             </div>
             <div>
               <p className="text-text-muted text-xs tracking-[0.15em] uppercase font-body">
@@ -194,7 +194,7 @@ export default function ContactContent() {
                 영업시간
               </p>
               <p className="text-text-primary font-body mt-2">
-                평일 10:00 – 18:00
+                평일 9:30 – 18:30
               </p>
             </div>
           </motion.div>

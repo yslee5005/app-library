@@ -75,7 +75,7 @@ export default function LilsquareFooter() {
               CONTACT
             </h4>
             <ul className="space-y-3 text-text-muted text-sm">
-              <li>상담시간: 평일 10:00 – 18:00</li>
+              <li>상담시간: 평일 9:30 – 18:30</li>
               <li>
                 <Link
                   href="/lilsquare/contact"
