@@ -57,7 +57,7 @@ export default function MapContent({ products, categories }: MapContentProps) {
         container: mapContainer.current,
         style: "mapbox://styles/mapbox/dark-v11",
         center: [127.1, 37.4],
-        zoom: 12,
+        zoom: 14,
         attributionControl: false,
       });
 
@@ -95,21 +95,41 @@ export default function MapContent({ products, categories }: MapContentProps) {
       const mapboxgl = (await import("mapbox-gl")).default;
       const map = mapRef.current!;
 
-      filteredProducts.forEach((product) => {
-        // Custom SVG marker
+      // Offset overlapping coordinates
+      const coordMap = new Map<string, number>();
+      const offsetProducts = filteredProducts.map((product) => {
+        const key = `${product.coordinates[0].toFixed(3)},${product.coordinates[1].toFixed(3)}`;
+        const count = coordMap.get(key) || 0;
+        coordMap.set(key, count + 1);
+        // Spread overlapping pins in a circle
+        const angle = (count * 137.5 * Math.PI) / 180; // golden angle
+        const radius = count * 0.0008;
+        return {
+          ...product,
+          coordinates: [
+            product.coordinates[0] + Math.cos(angle) * radius,
+            product.coordinates[1] + Math.sin(angle) * radius,
+          ] as [number, number],
+        };
+      });
+
+      offsetProducts.forEach((product) => {
+        // Custom SVG marker with proper anchor
         const el = document.createElement("div");
         el.className = "bl-map-marker";
+        el.style.width = "12px";
+        el.style.height = "12px";
         el.innerHTML = `
           <svg width="12" height="12" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="6" cy="6" r="5" fill="#C5A46C" stroke="#0A0A0A" stroke-width="1"/>
+            <circle cx="6" cy="6" r="5" fill="#FFFFFF" stroke="#0A0A0A" stroke-width="1"/>
           </svg>
         `;
         el.style.cursor = "pointer";
-        el.style.transition = "transform 0.2s ease, filter 0.2s ease";
 
+        // Use CSS class for hover instead of inline transform (prevents anchor jump)
         el.addEventListener("mouseenter", () => {
-          el.style.transform = "scale(1.8)";
-          el.style.filter = "drop-shadow(0 0 6px #C5A46C)";
+          el.querySelector("circle")?.setAttribute("r", "6");
+          el.querySelector("circle")?.setAttribute("fill", "#FFFFFF");
 
           // Show popup
           if (popupRef.current) popupRef.current.remove();
@@ -125,8 +145,8 @@ export default function MapContent({ products, categories }: MapContentProps) {
               `<div style="background:#141414;padding:8px;border-radius:2px;min-width:180px;border:1px solid #222;">
                 <div style="width:100%;height:60px;background:url(/api/images/${product.mainImage}) center/cover;border-radius:1px;margin-bottom:6px;"></div>
                 <div style="font-family:Inter,sans-serif;font-size:14px;color:#F5F5F0;font-weight:400;margin-bottom:2px;">${product.name}</div>
-                <div style="font-family:Inter,sans-serif;font-size:10px;color:#C5A46C;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px;">${product.category}</div>
-                <div style="font-family:Inter,sans-serif;font-size:11px;color:#C5A46C;cursor:pointer;" data-slug="${product.slug}">View Project →</div>
+                <div style="font-family:NanumSquare,sans-serif;font-size:10px;color:#999;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px;">${product.category}</div>
+                <div style="font-family:NanumSquare,sans-serif;font-size:11px;color:#FFF;cursor:pointer;" data-slug="${product.slug}">View Project →</div>
               </div>`
             )
             .addTo(map);
@@ -144,8 +164,8 @@ export default function MapContent({ products, categories }: MapContentProps) {
         });
 
         el.addEventListener("mouseleave", () => {
-          el.style.transform = "scale(1)";
-          el.style.filter = "none";
+          el.querySelector("circle")?.setAttribute("r", "5");
+          el.querySelector("circle")?.setAttribute("fill", "#FFFFFF");
         });
 
         el.addEventListener("click", () => {
