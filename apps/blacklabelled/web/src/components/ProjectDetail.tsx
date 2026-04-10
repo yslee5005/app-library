@@ -25,9 +25,12 @@ export default function ProjectDetail({
   const [lightboxIndex, setLightboxIndex] = useState(0);
   const [galleryMode, setGalleryMode] = useState<"3d" | "grid">("3d");
 
-  const galleryImages = product.images
+  // main.jpg를 맨 앞에, 나머지 detail 이미지 뒤에
+  const mainImage = `/api/images/${product.main_image}`;
+  const detailImages = product.images
     .filter((img) => img.type === "detail")
     .map((img) => `/api/images/${img.path}`);
+  const galleryImages = [mainImage, ...detailImages];
 
   const openLightbox = useCallback((index: number) => {
     setLightboxIndex(index);
