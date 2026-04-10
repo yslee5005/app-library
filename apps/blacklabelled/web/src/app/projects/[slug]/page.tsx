@@ -3,6 +3,7 @@ import {
   getProductBySlug,
   getRelatedProducts,
   getBeforeAfterPair,
+  getFloorPlanImage,
 } from "@/lib/data";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
@@ -40,12 +41,14 @@ export default async function ProjectDetailPage({ params }: PageProps) {
 
   const related = getRelatedProducts(product, 3);
   const beforeAfter = getBeforeAfterPair(product);
+  const floorPlanImage = getFloorPlanImage(product);
 
   return (
     <ProjectDetail
       product={JSON.parse(JSON.stringify(product))}
       related={JSON.parse(JSON.stringify(related))}
       beforeAfter={beforeAfter ? JSON.parse(JSON.stringify(beforeAfter)) : null}
+      floorPlanImage={floorPlanImage}
     />
   );
 }

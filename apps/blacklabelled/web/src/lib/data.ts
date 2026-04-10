@@ -214,6 +214,29 @@ export function getLayoutDesignProducts(): Product[] {
     .sort((a, b) => b.id - a.id);
 }
 
+/**
+ * 프로젝트의 도면(layout_design) 이미지를 찾아 반환
+ * residence 프로젝트 → 매칭되는 layout_design의 main 이미지
+ */
+export function getFloorPlanImage(product: Product): string | null {
+  if (product.main_category_name !== "Residence") return null;
+
+  const nameParts = product.name.replace(/[_\s]+/g, " ").toLowerCase();
+  const layoutProducts = Object.values(getProductsMap()).filter(
+    (p) => p.main_category_name === "Layout_Design"
+  );
+
+  for (const lp of layoutProducts) {
+    const lpName = lp.name.replace(/[_\s]+/g, " ").toLowerCase();
+    const residenceWords = nameParts.split(" ").filter((w) => w.length > 1);
+    const matchCount = residenceWords.filter((w) => lpName.includes(w)).length;
+    if (matchCount >= Math.max(1, residenceWords.length * 0.5)) {
+      return lp.main_image;
+    }
+  }
+  return null;
+}
+
 export function getBeforeAfterPair(product: Product): BeforeAfterPair | null {
   if (product.main_category_name !== "Residence") return null;
 

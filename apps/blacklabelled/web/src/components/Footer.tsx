@@ -52,8 +52,10 @@ export default function Footer() {
               INFO
             </h4>
             <div className="flex flex-col gap-3 text-text-secondary text-sm">
-              <p>경기도 성남시 분당구</p>
-              <p>Tel. 031-000-0000</p>
+              <p>경기도 성남시 분당구 판교로610번길 5</p>
+              <p>2층 (주소지1층) 블랙라벨드</p>
+              <p>Tel. 010-9887-2826</p>
+              <p>Tel. 010-9046-3487</p>
               <p>info@blacklabelled.co.kr</p>
             </div>
           </div>

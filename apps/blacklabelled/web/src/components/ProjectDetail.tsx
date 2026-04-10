@@ -1,36 +1,42 @@
 "use client";
 
-import { useState, useCallback, lazy, Suspense } from "react";
+import { useState, useCallback } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import type { Product, BeforeAfterPair } from "@/lib/data";
 import BeforeAfterSlider from "./BeforeAfterSlider";
 import Lightbox from "./Lightbox";
+import ImageCarousel from "./ImageCarousel";
 import ProjectCard from "./ProjectCard";
-
-const DepthGallery = lazy(() => import("./DepthGallery"));
 
 interface ProjectDetailProps {
   product: Product;
   related: Product[];
   beforeAfter: BeforeAfterPair | null;
+  floorPlanImage?: string | null;
 }
 
 export default function ProjectDetail({
   product,
   related,
   beforeAfter,
+  floorPlanImage,
 }: ProjectDetailProps) {
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
-  const [galleryMode, setGalleryMode] = useState<"3d" | "grid">("3d");
 
-  // main.jpg를 맨 앞에, 나머지 detail 이미지 뒤에
-  const mainImage = `/api/images/${product.main_image}`;
+  // 이미지 순서: 1.도면(있으면) → 2.main.jpg → 3.나머지 이름순
   const detailImages = product.images
     .filter((img) => img.type === "detail")
+    .sort((a, b) => a.path.localeCompare(b.path))
     .map((img) => `/api/images/${img.path}`);
-  const galleryImages = [mainImage, ...detailImages];
+  const mainImage = `/api/images/${product.main_image}`;
+  const floorPlan = floorPlanImage ? `/api/images/${floorPlanImage}` : null;
+  const galleryImages = [
+    ...(floorPlan ? [floorPlan] : []),
+    mainImage,
+    ...detailImages,
+  ];
 
   const openLightbox = useCallback((index: number) => {
     setLightboxIndex(index);
@@ -102,70 +108,17 @@ export default function ProjectDetail({
         </section>
       )}
 
-      {/* Gallery */}
+      {/* Gallery — Carousel */}
       {galleryImages.length > 0 && (
         <section className="py-16 md:py-24 px-6 md:px-10">
           <div className="max-w-7xl mx-auto">
-            <div className="flex items-center justify-between mb-8">
-              <h2 className="text-gold text-xs tracking-[0.2em] uppercase font-body">
-                GALLERY · {galleryImages.length} IMAGES
-              </h2>
-              <div className="flex gap-2">
-                <button
-                  onClick={() => setGalleryMode("3d")}
-                  className={`text-xs tracking-[0.15em] uppercase font-body px-3 py-1.5 border transition-colors duration-300 ${
-                    galleryMode === "3d"
-                      ? "border-gold text-gold"
-                      : "border-border text-text-muted hover:text-text-secondary"
-                  }`}
-                >
-                  3D
-                </button>
-                <button
-                  onClick={() => setGalleryMode("grid")}
-                  className={`text-xs tracking-[0.15em] uppercase font-body px-3 py-1.5 border transition-colors duration-300 ${
-                    galleryMode === "grid"
-                      ? "border-gold text-gold"
-                      : "border-border text-text-muted hover:text-text-secondary"
-                  }`}
-                >
-                  GRID
-                </button>
-              </div>
-            </div>
-
-            {galleryMode === "3d" ? (
-              <Suspense
-                fallback={
-                  <div className="h-[50vh] flex items-center justify-center">
-                    <div className="text-text-muted text-sm tracking-[0.15em] uppercase">
-                      Loading 3D Gallery...
-                    </div>
-                  </div>
-                }
-              >
-                <DepthGallery images={galleryImages} />
-              </Suspense>
-            ) : (
-              <div className="grid grid-cols-2 lg:grid-cols-3 gap-1">
-                {galleryImages.map((src, i) => (
-                  <motion.div
-                    key={i}
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    viewport={{ once: true, margin: "-50px" }}
-                    transition={{ duration: 0.5, delay: i * 0.05 }}
-                    className="relative aspect-[4/3] overflow-hidden cursor-pointer group bg-bg-card"
-                    onClick={() => openLightbox(i)}
-                  >
-                    <div
-                      className="absolute inset-0 bg-cover bg-center transition-all duration-500 group-hover:scale-105 group-hover:brightness-110"
-                      style={{ backgroundImage: `url(${src})` }}
-                    />
-                  </motion.div>
-                ))}
-              </div>
-            )}
+            <h2 className="text-white text-xs tracking-[0.2em] uppercase font-body mb-8">
+              GALLERY · {galleryImages.length} IMAGES
+            </h2>
+            <ImageCarousel
+              images={galleryImages}
+              onImageClick={(index) => openLightbox(index)}
+            />
           </div>
         </section>
       )}
