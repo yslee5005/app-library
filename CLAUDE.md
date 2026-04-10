@@ -159,6 +159,41 @@ void main() {
 
 이 패키지들은 이미 수백만 다운로드로 검증됨. 직접 구현하지 말 것.
 
+## Anonymous-First 인증 (모든 앱 표준)
+
+모든 앱은 **로그인 없이 시작**한다. 클라우드 저장은 Supabase 익명 계정으로 자동 처리.
+
+### 원칙
+1. **로그인 화면 없음** — 앱 설치 → Welcome (1장) → 바로 Home
+2. **익명 자동 인증** — `signInAnonymously()` 앱 시작 시 자동 호출
+3. **클라우드 저장** — 익명 UUID로 Supabase에 저장 (RLS 정상 동작)
+4. **구독 구매** — Apple/Google 결제는 앱 계정 불필요 (RevenueCat anonymous ID)
+5. **계정 연결 (선택)** — Settings에서 Apple/Google/Email 연결 가능
+6. **데이터 병합** — `linkIdentity()` 호출 시 익명 데이터 → 실제 계정으로 자동 병합
+7. **커뮤니티** — 익명으로 글쓰기 가능 (이름: "익명 🌿")
+
+### 구현 패턴
+```dart
+// main.dart — 앱 시작 시
+final currentUser = await authService.getCurrentUser();
+if (currentUser == null) {
+  await authService.signInAnonymously();
+}
+
+// Settings — 계정 연결
+await supabase.auth.linkIdentity(OAuthProvider.google);
+
+// AuthService 인터페이스 필수 메서드
+Future<UserProfile> signInAnonymously();
+Future<UserProfile> linkWithGoogle();
+Future<UserProfile> linkWithApple();
+bool get isAnonymous;
+```
+
+### 로그인이 필요한 유일한 순간
+- 기기 변경 시 데이터 이전 (계정 연결 필요)
+- 그 외 **없음**
+
 ## Boundaries (컴팩션 후에도 유지되도록 여기에 명시)
 
 ### Always
@@ -167,6 +202,7 @@ void main() {
 - flutter_secure_storage로 민감 데이터 저장
 - .env → .gitignore
 - 릴리스 → --obfuscate
+- **Anonymous-First** — 모든 앱은 로그인 없이 시작
 
 ### Never
 - service_role 키 클라이언트 포함
@@ -176,6 +212,7 @@ void main() {
 - pub.dev 배포
 - rm -rf
 - .env 파일 커밋
+- **로그인을 앱 시작의 필수 조건으로 만들기**
 
 ### Ask First
 - Supabase 스키마/RLS 변경
