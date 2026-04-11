@@ -22,19 +22,41 @@ except ImportError:
 
 # ── 경로 설정 ──────────────────────────────────
 CRAWL_DIR = os.path.dirname(os.path.abspath(__file__))
+PROJECT_ROOT = os.path.join(CRAWL_DIR, "..", "..", "..")
 DATA_DIR = os.path.join(CRAWL_DIR, "..", "data", "db")
 
 PRODUCTS_JSON = os.path.join(DATA_DIR, "products.json")
 CATEGORIES_JSON = os.path.join(DATA_DIR, "categories.json")
 MANIFEST_JSON = os.path.join(DATA_DIR, "manifest.json")
 
-# ── 테넌트 ID (seed SQL과 일치) ──────────────────
-TENANT_ID = "00000000-0000-0000-0000-000000000001"
+# ── 설정 ──────────────────────────────────────
+TENANT_SLUG = "blacklabelled"
 SCHEMA = "blacklabelled"
+
+# ── .env 로드 (프로젝트 루트) ─────────────────────
+def load_env(path):
+    """프로젝트 .env 파일에서 환경변수 로드"""
+    if not os.path.exists(path):
+        return
+    with open(path) as f:
+        for line in f:
+            line = line.strip()
+            if not line or line.startswith("#") or "=" not in line:
+                continue
+            key, val = line.split("=", 1)
+            os.environ.setdefault(key.strip(), val.strip())
+
+load_env(os.path.join(PROJECT_ROOT, ".env"))
 
 # ── Supabase 연결 ────────────────────────────────
 SUPABASE_URL = os.environ.get("SUPABASE_URL")
 SUPABASE_KEY = os.environ.get("SUPABASE_SERVICE_ROLE_KEY")
+
+
+def get_tenant_id(supabase):
+    """slug로 tenant UUID 조회"""
+    result = supabase.table("tenants").select("id").eq("slug", TENANT_SLUG).single().execute()
+    return result.data["id"]
 
 
 def load_json(path):
@@ -43,138 +65,142 @@ def load_json(path):
         return json.load(f)
 
 
-def migrate_categories(supabase, categories_raw):
+def migrate_categories(supabase, tenant_id, categories_raw):
     """categories.json → blacklabelled.categories INSERT
     부모 카테고리를 먼저 삽입 (parent_id 순서)
+    old integer ID → new UUID 매핑 반환
     """
     print("\n📂 카테고리 마이그레이션...")
+
+    # old_id → UUID 매핑 테이블
+    id_map = {}
 
     # 부모 없는 것(root) 먼저, 그다음 자식
     parents = []
     children = []
     for cid, c in categories_raw.items():
+        old_id = c["id"]
         row = {
-            "id": c["id"],
-            "tenant_id": TENANT_ID,
+            "tenant_id": tenant_id,
             "name": c["name"],
             "slug": c["name"].lower().replace(" ", "_"),
-            "parent_id": None,  # 먼저 NULL로 삽입
+            "parent_id": None,
             "description": None,
             "is_visible": c.get("product_count", 0) > 0,
             "sort_order": 0,
         }
         if c.get("parent_id") is None:
-            parents.append(row)
+            parents.append((old_id, row))
         else:
-            children.append((row, c["parent_id"]))
+            children.append((old_id, row, c["parent_id"]))
 
-    # 1단계: 모든 카테고리 삽입 (parent_id = NULL)
-    all_rows = parents + [row for row, _ in children]
-    for row in all_rows:
-        supabase.schema(SCHEMA).table("categories").upsert(row).execute()
+    # 1단계: 부모 카테고리 삽입 → UUID 매핑
+    for old_id, row in parents:
+        result = supabase.schema(SCHEMA).table("categories").insert(row).execute()
+        id_map[old_id] = result.data[0]["id"]
 
-    # 2단계: 자식 카테고리 parent_id 업데이트
-    for row, parent_id in children:
-        supabase.schema(SCHEMA).table("categories").update(
-            {"parent_id": parent_id}
-        ).eq("id", row["id"]).execute()
+    # 2단계: 자식 카테고리 삽입 (parent_id를 매핑된 UUID로)
+    for old_id, row, old_parent_id in children:
+        row["parent_id"] = id_map.get(old_parent_id)
+        result = supabase.schema(SCHEMA).table("categories").insert(row).execute()
+        id_map[old_id] = result.data[0]["id"]
 
-    print(f"  ✅ {len(all_rows)}개 카테고리 완료")
-    return len(all_rows)
+    print(f"  ✅ {len(id_map)}개 카테고리 완료")
+    return id_map
 
 
-def migrate_products(supabase, products_raw):
+def migrate_products(supabase, tenant_id, products_raw, category_id_map):
     """products.json → blacklabelled.products INSERT
-    재활용: convert_to_db.py의 정규화 로직
+    old integer ID → new UUID 매핑 반환
+    main_category_id도 category_id_map으로 변환
     """
     print("\n📦 상품 마이그레이션...")
 
+    id_map = {}  # old_id → new UUID
     count = 0
-    batch = []
     for pid, p in products_raw.items():
+        old_id = p["id"]
         meta = p.get("meta", {})
+        old_main_cat = p.get("main_category")
         row = {
-            "id": p["id"],
-            "tenant_id": TENANT_ID,
+            "tenant_id": tenant_id,
             "name": p["name"],
             "slug": p["slug"],
             "description": p.get("description", ""),
             "price": p.get("price", 0),
-            "status": "published",  # 기존 데이터는 전부 공개
-            "main_category_id": p.get("main_category"),
+            "status": "published",
+            "main_category_id": category_id_map.get(old_main_cat),
             "source_url": p.get("source_url", ""),
-            "meta_title": (meta.get("ogTitle") or "")[:70] or None,
-            "meta_description": (meta.get("ogDescription") or "")[:160] or None,
-            "published_at": "now()",
         }
-        batch.append(row)
+        result = supabase.schema(SCHEMA).table("products").insert(row).execute()
+        id_map[old_id] = result.data[0]["id"]
         count += 1
 
-        # 50개씩 배치 upsert
-        if len(batch) >= 50:
-            supabase.schema(SCHEMA).table("products").upsert(batch).execute()
+        if count % 50 == 0:
             print(f"  ... {count}개 처리")
-            batch = []
-
-    # 나머지
-    if batch:
-        supabase.schema(SCHEMA).table("products").upsert(batch).execute()
 
     print(f"  ✅ {count}개 상품 완료")
-    return count
+    return id_map
 
 
-def migrate_product_categories(supabase, products_raw):
-    """products.categories[] 배열 → blacklabelled.product_categories M:N INSERT"""
+def migrate_product_categories(supabase, products_raw, product_id_map, category_id_map):
+    """products.categories[] 배열 → blacklabelled.product_categories M:N INSERT
+    old integer ID들을 UUID로 변환
+    """
     print("\n🔗 상품-카테고리 관계 마이그레이션...")
 
     count = 0
     batch = []
     for pid, p in products_raw.items():
-        for cat_id in p.get("categories", []):
+        new_product_id = product_id_map.get(p["id"])
+        if not new_product_id:
+            continue
+        for old_cat_id in p.get("categories", []):
+            new_cat_id = category_id_map.get(old_cat_id)
+            if not new_cat_id:
+                continue
             batch.append({
-                "product_id": p["id"],
-                "category_id": cat_id,
+                "product_id": new_product_id,
+                "category_id": new_cat_id,
             })
             count += 1
 
             if len(batch) >= 100:
-                supabase.schema(SCHEMA).table("product_categories").upsert(batch).execute()
+                supabase.schema(SCHEMA).table("product_categories").insert(batch).execute()
                 batch = []
 
     if batch:
-        supabase.schema(SCHEMA).table("product_categories").upsert(batch).execute()
+        supabase.schema(SCHEMA).table("product_categories").insert(batch).execute()
 
     print(f"  ✅ {count}개 관계 완료")
     return count
 
 
-def migrate_product_images(supabase, products_raw):
+def migrate_product_images(supabase, tenant_id, products_raw, product_id_map):
     """products.json의 images[] → blacklabelled.product_images INSERT
-    재활용: convert_to_db.py의 이미지 분리 로직
-    storage_path = {tenant_id}/{product_id}/{filename}
+    storage_path = {tenant_uuid}/{product_uuid}/{filename}
     """
     print("\n🖼️ 이미지 메타데이터 마이그레이션...")
 
     count = 0
     batch = []
     for pid, p in products_raw.items():
+        new_product_id = product_id_map.get(p["id"])
+        if not new_product_id:
+            continue
         for img in p.get("images", []):
-            # 파일명 추출: path의 마지막 부분
             filename = os.path.basename(img["path"])
 
             row = {
-                "product_id": p["id"],
-                "tenant_id": TENANT_ID,
+                "product_id": new_product_id,
+                "tenant_id": tenant_id,
                 "type": img["type"],
                 "sort_order": img["order"],
-                "storage_path": f"{TENANT_ID}/{p['id']}/{filename}",
+                "storage_path": f"{new_product_id}/{filename}",
                 "original_url": img.get("original_url", ""),
                 "original_filename": img.get("original_filename", ""),
-                "alt_text": None,
                 "width": img.get("width", 0) or None,
                 "height": img.get("height", 0) or None,
-                "file_size": None,
             }
             batch.append(row)
             count += 1
@@ -207,6 +233,10 @@ def main():
     supabase = create_client(SUPABASE_URL, SUPABASE_KEY)
     print(f"🔌 Supabase 연결 완료: {SUPABASE_URL}")
 
+    # tenant UUID 조회
+    tenant_id = get_tenant_id(supabase)
+    print(f"🏢 Tenant: {TENANT_SLUG} → {tenant_id}")
+
     # 데이터 로드
     products_raw = load_json(PRODUCTS_JSON)
     categories_raw = load_json(CATEGORIES_JSON)
@@ -218,14 +248,31 @@ def main():
     print(f"   이미지: {total_images}개")
 
     # 마이그레이션 실행 (순서 중요: FK 의존성)
-    cat_count = migrate_categories(supabase, categories_raw)
-    prod_count = migrate_products(supabase, products_raw)
-    rel_count = migrate_product_categories(supabase, products_raw)
-    img_count = migrate_product_images(supabase, products_raw)
+    # 1. 카테고리 → old_id:UUID 매핑
+    category_id_map = migrate_categories(supabase, tenant_id, categories_raw)
+
+    # 2. 상품 → old_id:UUID 매핑 (main_category_id 변환 포함)
+    product_id_map = migrate_products(supabase, tenant_id, products_raw, category_id_map)
+
+    # 3. M:N 관계 (양쪽 UUID 변환)
+    rel_count = migrate_product_categories(supabase, products_raw, product_id_map, category_id_map)
+
+    # 4. 이미지 메타 (product UUID + tenant UUID)
+    img_count = migrate_product_images(supabase, tenant_id, products_raw, product_id_map)
+
+    # ID 매핑 저장 (upload_images에서 사용)
+    mapping_file = os.path.join(CRAWL_DIR, "id_mapping.json")
+    with open(mapping_file, "w") as f:
+        json.dump({
+            "tenant_id": tenant_id,
+            "categories": {str(k): v for k, v in category_id_map.items()},
+            "products": {str(k): v for k, v in product_id_map.items()},
+        }, f, indent=2)
+    print(f"\n💾 ID 매핑 저장: {mapping_file}")
 
     print(f"\n🎉 마이그레이션 완료!")
-    print(f"   카테고리: {cat_count}")
-    print(f"   상품: {prod_count}")
+    print(f"   카테고리: {len(category_id_map)}")
+    print(f"   상품: {len(product_id_map)}")
     print(f"   상품-카테고리: {rel_count}")
     print(f"   이미지 메타: {img_count}")
 

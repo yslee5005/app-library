@@ -10,6 +10,10 @@ export default async function Home() {
   const p1 = allProducts[0];
   const p2 = allProducts[1];
 
+  // Hero 배경: Residence 카테고리 첫 번째 상품의 메인 이미지
+  const heroProduct = allProducts.find((p) => p.main_category_name === "Residence");
+  const heroImageUrl = heroProduct ? getImageUrl(heroProduct.main_image) : "";
+
   const project1 = p1 ? {
     id: p1.id,
     name: p1.name,
@@ -24,7 +28,7 @@ export default async function Home() {
 
   return (
     <>
-      <HeroSection />
+      <HeroSection backgroundImage={heroImageUrl} />
       <StudioIntro project1={project1} project2={project2} />
       <FeaturedCarousel products={allProducts} />
       <FeaturedProjects products={allProducts.slice(0, 12)} />

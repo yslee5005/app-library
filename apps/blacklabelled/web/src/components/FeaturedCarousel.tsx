@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { getImageUrl } from "@/lib/data";
 import type { Product } from "@/lib/data";
 
 interface FeaturedCarouselProps {
@@ -31,7 +32,7 @@ export default function FeaturedCarousel({ products }: FeaturedCarouselProps) {
           key={p.id}
           className="absolute inset-0 bg-cover bg-center transition-opacity duration-[1500ms]"
           style={{
-            backgroundImage: `url(/api/images/${p.main_image})`,
+            backgroundImage: `url(${getImageUrl(p.main_image)})`,
             opacity: i === current ? 1 : 0,
           }}
         />

@@ -3,6 +3,7 @@
 import { useState, useCallback } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { getImageUrl } from "@/lib/data";
 import type { Product, BeforeAfterPair } from "@/lib/data";
 import BeforeAfterSlider from "./BeforeAfterSlider";
 import Lightbox from "./Lightbox";
@@ -29,9 +30,9 @@ export default function ProjectDetail({
   const detailImages = product.images
     .filter((img) => img.type === "detail")
     .sort((a, b) => a.path.localeCompare(b.path))
-    .map((img) => `/api/images/${img.path}`);
-  const mainImage = `/api/images/${product.main_image}`;
-  const floorPlan = floorPlanImage ? `/api/images/${floorPlanImage}` : null;
+    .map((img) => getImageUrl(img.path));
+  const mainImage = getImageUrl(product.main_image);
+  const floorPlan = floorPlanImage ? getImageUrl(floorPlanImage) : null;
   const galleryImages = [
     ...(floorPlan ? [floorPlan] : []),
     mainImage,
@@ -50,7 +51,7 @@ export default function ProjectDetail({
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{
-            backgroundImage: `url(/api/images/${product.main_image})`,
+            backgroundImage: `url(${getImageUrl(product.main_image)})`,
           }}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-bg-primary via-bg-primary/30 to-transparent" />
@@ -101,8 +102,8 @@ export default function ProjectDetail({
               DESIGN → REALITY
             </h2>
             <BeforeAfterSlider
-              beforeImage={`/api/images/${beforeAfter.designProduct.main_image}`}
-              afterImage={`/api/images/${beforeAfter.realityProduct.main_image}`}
+              beforeImage={getImageUrl(beforeAfter.designProduct.main_image)}
+              afterImage={getImageUrl(beforeAfter.realityProduct.main_image)}
             />
           </div>
         </section>

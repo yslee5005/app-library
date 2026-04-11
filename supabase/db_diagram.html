@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>App Library — DB Schema Diagram</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: #0f1117;
+    color: #e1e4e8;
+    min-height: 100vh;
+    overflow: auto;
+  }
+
+  h1 {
+    text-align: center;
+    padding: 40px 0 8px;
+    font-size: 28px;
+    font-weight: 600;
+    letter-spacing: -0.5px;
+  }
+  .subtitle {
+    text-align: center;
+    color: #8b949e;
+    font-size: 14px;
+    margin-bottom: 40px;
+  }
+
+  .canvas {
+    position: relative;
+    width: 1700px;
+    margin: 0 auto 80px;
+    min-height: 1300px;
+  }
+
+  /* Schema group boxes */
+  .schema-group {
+    position: absolute;
+    border-radius: 16px;
+    padding: 20px;
+  }
+  .schema-group .schema-label {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+    padding: 6px 14px;
+    border-radius: 6px;
+    display: inline-block;
+  }
+
+  .group-public {
+    top: 0; left: 0; width: 620px; height: 1260px;
+    background: rgba(56, 139, 253, 0.05);
+    border: 1px solid rgba(56, 139, 253, 0.12);
+  }
+  .group-public .schema-label { background: rgba(56, 139, 253, 0.15); color: #58a6ff; }
+
+  .group-bl {
+    top: 0; left: 660px; width: 720px; height: 1260px;
+    background: rgba(238, 175, 60, 0.05);
+    border: 1px solid rgba(238, 175, 60, 0.12);
+  }
+  .group-bl .schema-label { background: rgba(238, 175, 60, 0.15); color: #eeaf3c; }
+
+  .group-storage {
+    top: 0; left: 1420px; width: 260px; height: 320px;
+    background: rgba(63, 185, 80, 0.05);
+    border: 1px solid rgba(63, 185, 80, 0.12);
+  }
+  .group-storage .schema-label { background: rgba(63, 185, 80, 0.15); color: #3fb950; }
+
+  /* Table card */
+  .table-card {
+    position: absolute;
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    font-size: 13px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .table-card:hover {
+    border-color: #58a6ff;
+    box-shadow: 0 0 0 1px #58a6ff, 0 6px 24px rgba(56,139,253,0.15);
+    z-index: 10;
+  }
+
+  .table-header {
+    padding: 10px 16px;
+    font-weight: 700;
+    font-size: 14px;
+    border-bottom: 1px solid #30363d;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .table-header-public { background: rgba(56,139,253,0.1); color: #79c0ff; }
+  .table-header-bl { background: rgba(238,175,60,0.1); color: #eeaf3c; }
+  .table-header-storage { background: rgba(63,185,80,0.1); color: #7ee787; }
+
+  .table-body { padding: 8px 0; }
+
+  .col-row {
+    display: flex;
+    align-items: center;
+    padding: 4px 16px;
+    gap: 8px;
+    line-height: 1.6;
+  }
+  .col-row:hover { background: rgba(255,255,255,0.03); }
+
+  .badge-group {
+    display: flex;
+    gap: 3px;
+    min-width: 56px;
+    justify-content: flex-end;
+  }
+
+  .col-badge {
+    font-size: 9px;
+    font-weight: 700;
+    padding: 2px 6px;
+    border-radius: 3px;
+    flex-shrink: 0;
+    text-align: center;
+  }
+  .badge-pk { background: #da3633; color: #fff; }
+  .badge-fk { background: #1f6feb; color: #fff; }
+  .badge-uk { background: #8957e5; color: #fff; }
+  .badge-ck { background: #238636; color: #fff; }
+  .badge-nn { background: #6e4000; color: #eeaf3c; font-size: 8px; }
+
+  .col-name { color: #e1e4e8; font-weight: 500; min-width: 120px; }
+  .col-type { color: #8b949e; margin-left: auto; font-size: 12px; text-align: right; }
+
+  .col-divider {
+    border-top: 1px solid #21262d;
+    margin: 6px 16px;
+  }
+
+  /* SVG lines */
+  svg.lines {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    overflow: visible;
+  }
+  svg.lines path {
+    fill: none;
+    stroke-width: 2;
+  }
+  svg.lines .rel-public { stroke: #58a6ff; opacity: 0.45; }
+  svg.lines .rel-bl { stroke: #eeaf3c; opacity: 0.45; }
+  svg.lines .rel-cross { stroke: #f47067; opacity: 0.5; stroke-dasharray: 8,4; }
+  svg.lines .rel-storage { stroke: #3fb950; opacity: 0.45; stroke-dasharray: 4,4; }
+
+  svg.lines circle { r: 4; }
+  svg.lines .dot-public { fill: #58a6ff; }
+  svg.lines .dot-bl { fill: #eeaf3c; }
+  svg.lines .dot-cross { fill: #f47067; }
+  svg.lines .dot-storage { fill: #3fb950; }
+
+  /* FK label on line */
+  svg.lines text {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+  }
+  .label-public { fill: #58a6ff; }
+  .label-bl { fill: #eeaf3c; }
+  .label-cross { fill: #f47067; }
+  .label-storage { fill: #3fb950; }
+
+  /* Cardinality symbols */
+  .card-symbol {
+    font-size: 13px;
+    font-weight: 700;
+  }
+
+  /* Legend */
+  .legend {
+    display: flex;
+    justify-content: center;
+    gap: 28px;
+    margin-bottom: 32px;
+    flex-wrap: wrap;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: #8b949e;
+  }
+  .legend-line {
+    width: 24px;
+    height: 3px;
+    border-radius: 2px;
+  }
+  .legend-line-dash {
+    width: 24px;
+    height: 0;
+    border-top: 3px dashed;
+  }
+
+  /* RLS badge */
+  .rls-badge {
+    font-size: 9px;
+    padding: 2px 8px;
+    border-radius: 4px;
+    background: rgba(63,185,80,0.15);
+    color: #3fb950;
+    font-weight: 600;
+  }
+
+  /* Notes */
+  .note {
+    position: absolute;
+    font-size: 11px;
+    color: #8b949e;
+    line-height: 1.5;
+    background: rgba(22,27,34,0.9);
+    padding: 10px 14px;
+    border-radius: 8px;
+    border: 1px solid #21262d;
+  }
+  .note strong { color: #c9d1d9; }
+</style>
+</head>
+<body>
+
+<h1>App Library — Database Schema</h1>
+<p class="subtitle">Multi-Tenant Infrastructure + BlackLabelled Portfolio &nbsp;|&nbsp; All PKs: UUID &nbsp;|&nbsp; All Tables: RLS Enabled</p>
+
+<div class="legend">
+  <div class="legend-item"><div class="legend-line" style="background:#58a6ff"></div>public FK</div>
+  <div class="legend-item"><div class="legend-line" style="background:#eeaf3c"></div>blacklabelled FK</div>
+  <div class="legend-item"><div class="legend-line-dash" style="border-color:#f47067"></div>cross-schema FK</div>
+  <div class="legend-item"><div class="legend-line-dash" style="border-color:#3fb950"></div>storage link</div>
+  <div class="legend-item"><span class="col-badge badge-pk" style="font-size:11px">PK</span>Primary Key</div>
+  <div class="legend-item"><span class="col-badge badge-fk" style="font-size:11px">FK</span>Foreign Key</div>
+  <div class="legend-item"><span class="col-badge badge-uk" style="font-size:11px">UK</span>Unique</div>
+  <div class="legend-item"><span class="col-badge badge-ck" style="font-size:11px">CK</span>Check</div>
+</div>
+
+<div class="canvas">
+
+  <!-- ════════════ SCHEMA GROUPS ════════════ -->
+  <div class="schema-group group-public"><span class="schema-label">public schema</span></div>
+  <div class="schema-group group-bl"><span class="schema-label">blacklabelled schema</span></div>
+  <div class="schema-group group-storage"><span class="schema-label">supabase storage</span></div>
+
+  <!-- ════════════════════════════════════════════════ -->
+  <!-- PUBLIC SCHEMA TABLES                            -->
+  <!-- ════════════════════════════════════════════════ -->
+
+  <!-- tenants — top-left, the hub -->
+  <div class="table-card" style="top:70px; left:40px; width:280px;" id="tenants">
+    <div class="table-header table-header-public">tenants <span class="rls-badge">RLS</span></div>
+    <div class="table-body">
+      <div class="col-row"><div class="badge-group"><span class="col-badge badge-pk">PK</span></div><span class="col-name">id</span><span class="col-type">UUID</span></div>
+      <div class="col-row"><div class="badge-group"></div><span class="col-name">name</span><span class="col-type">TEXT NOT NULL</span></div>
+      <div class="col-row"><div class="badge-group"><span class="col-badge badge-uk">UK</span></div><span class="col-name">slug</span><span class="col-type">TEXT NOT NULL</span></div>
+      <div class="col-row"><div class="badge-group"></div><span class="col-name">plan</span><span class="col-type">TEXT 'free'</span></div>
+      <div class="col-row"><div class="badge-group"></div><span class="col-name">is_active</span><span class="col-type">BOOL true</span></div>
+      <div class="col-row"><div class="badge-group"></div><span class="col-name">created_at</span><span class="col-type">TIMESTAMPTZ</span></div>
+    </div>
+  </div>
+
+  <!-- user_tenants -->
+  <div class="table-card" style="top:70px; left:360px; width:240px;" id="user_tenants">
+    <div class="table-header table-header-public">user_tenants <span class="rls-badge">RLS</span></div>
+    <div class="table-body">
+      <div class="col-row"><div class="badge-group"><span class="col-badge badge-pk">PK</span><span class="col-badge badge-fk">FK</span></div><span class="col-name">user_id</span><span class="col-type">UUID</span></div>
+      <div class="col-row"><div class="badge-group"><span class="col-badge badge-pk">PK</span><span class="col-badge badge-fk">FK</span></div><span class="col-name">tenant_id</span><span class="col-type">UUID</span></div>
+      <div class="col-divider"></div>
+      <div class="col-row"><div class="badge-group"></div><span class="col-name">role</span><span class="col-type">TEXT 'viewer'</span></div>
+      <div class="col-row"><div class="badge-group"></div><span class="col-name">created_at</span><span class="col-type">TIMESTAMPTZ</span></div>
+    </div>
+  </div>
+
+  <!-- tenant_settings -->
+  <div class="table-card" style="top:340px; left:40px; width:280px;" id="tenant_settings">
+    <div class="table-header table-header-public">tenant_settings <span class="rls-badge">RLS</span></div>
+    <div class="table-body">
+      <div class="col-row"><div class="badge-group"><span class="col-badge badge-pk">PK</span><span class="col-badge badge-fk">FK</span></div><span class="col-name">tenant_id</span><span class="col-type">UUID</span></div>
+      <div class="col-divider"></div>
+      <div class="col-row"><div class="badge-group"></div><span class="col-name">theme</span><span class="col-type">TEXT 'default'</span></div>
+      <div class="col-row"><div class="badge-group"></div><span class="col-name">logo_url</span><span class="col-type">TEXT</span></div>
+      <div class="col-row"><div class="badge-group"></div><span class="col-name">locale</span><span class="col-type">TEXT 'ko'</span></div>
+      <div class="col-row"><div class="badge-group"></div><span class="col-name">feature_flags</span><span class="col-type">JSONB {}</span></div>
+    </div>
+  </div>
+
+  <!-- languages -->
+  <div class="table-card" style="top:640px; left:40px; width:240px;" id="languages">
+    <div class="table-header table-header-public">languages <span class="rls-badge">RLS</span></div>
+    <div class="table-body">
+      <div class="col-row"><div class="badge-group"><span class="col-badge badge-pk">PK</span></div><span class="col-name">code</span><span class="col-type">TEXT</span></div>
+      <div class="col-row"><div class="badge-group"></div><span class="col-name">name</span><span class="col-type">TEXT NOT NULL</span></div>
+      <div class="col-row"><div class="badge-group"></div><span class="col-name">is_active</span><span class="col-type">BOOL true</span></div>
+    </div>
+  </div>
+
+  <!-- translations -->
+  <div class="table-card" style="top:640px; left:320px; width:280px;" id="translations">
+    <div class="table-header table-header-public">translations <span class="rls-badge">RLS</span></div>
+    <div class="table-body">
+      <div class="col-row"><div class="badge-group"><span class="col-badge badge-pk">PK</span></div><span class="col-name">id</span><span class="col-type">SERIAL</span></div>
+      <div class="col-divider"></div>
+      <div class="col-row"><div class="badge-group"><span class="col-badge badge-uk">UK</span></div><span class="col-name">table_schema</span><span class="col-type">TEXT NOT NULL</span></div>
+      <div class="col-row"><div class="badge-group"><span class="col-badge badge-uk">UK</span></div><span class="col-name">table_name</span><span class="col-type">TEXT NOT NULL</span></div>
+      <div class="col-row"><div class="badge-group"><span class="col-badge badge-uk">UK</span></div><span class="col-name">record_id</span><span class="col-type">UUID NOT NULL</span></div>
+      <div class="col-row"><div class="badge-group"><span class="col-badge badge-uk">UK</span></div><span class="col-name">field_name</span><span class="col-type">TEXT NOT NULL</span></div>
+      <div class="col-row"><div class="badge-group"><span class="col-badge badge-fk">FK</span><span class="col-badge badge-uk">UK</span></div><span class="col-name">lang_code</span><span class="col-type">TEXT NOT NULL</span></div>
+      <div class="col-divider"></div>
+      <div class="col-row"><div class="badge-group"></div><span class="col-name">value</span><span class="col-type">TEXT NOT NULL</span></div>
+      <div class="col-row"><div class="badge-group"></div><span class="col-name">created_at</span><span class="col-type">TIMESTAMPTZ</span></div>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════════════ -->
+  <!-- BLACKLABELLED SCHEMA TABLES                     -->
+  <!-- ════════════════════════════════════════════════ -->
+
+  <!-- categories -->
+  <div class="table-card" style="top:70px; left:700px; width:300px;" id="bl_categories">
+    <div class="table-header table-header-bl">categories <span class="rls-badge">RLS</span></div>
+    <div class="table-body">
+      <div class="col-row"><div class="badge-group"><span class="col-badge badge-pk">PK</span></div><span class="col-name">id</span><span class="col-type">UUID</span></div>
+      <div class="col-row"><div class="badge-group"><span class="col-badge badge-fk">FK</span></div><span class="col-name">tenant_id</span><span class="col-type">UUID NOT NULL</span></div>
+      <div class="col-divider"></div>
+      <div class="col-row"><div class="badge-group"></div><span class="col-name">name</span><span class="col-type">TEXT NOT NULL</span></div>
+      <div class="col-row"><div class="badge-group"><span class="col-badge badge-uk">UK</span></div><span class="col-name">slug</span><span class="col-type">TEXT NOT NULL</span></div>
+      <div class="col-row"><div class="badge-group"><span class="col-badge badge-fk">FK</span></div><span class="col-name">parent_id</span><span class="col-type">UUID (self)</span></div>
+      <div class="col-row"><div class="badge-group"></div><span class="col-name">description</span><span class="col-type">TEXT</span></div>
+      <div class="col-row"><div class="badge-group"></div><span class="col-name">is_visible</span><span class="col-type">BOOL true</span></div>
+      <div class="col-row"><div class="badge-group"></div><span class="col-name">sort_order</span><span class="col-type">INT 0</span></div>
+      <div class="col-row"><div class="badge-group"></div><span class="col-name">created_at</span><span class="col-type">TIMESTAMPTZ</span></div>
+      <div class="col-row"><div class="badge-group"></div><span class="col-name">updated_at</span><span class="col-type">TIMESTAMPTZ</span></div>
+    </div>
+  </div>
+
+  <!-- product_categories (M:N junction) -->
+  <div class="table-card" style="top:70px; left:1060px; width:280px;" id="bl_product_categories">
+    <div class="table-header table-header-bl">product_categories <span class="rls-badge">RLS</span></div>
+    <div class="table-body">
+      <div class="col-row"><div class="badge-group"><span class="col-badge badge-pk">PK</span><span class="col-badge badge-fk">FK</span></div><span class="col-name">product_id</span><span class="col-type">UUID</span></div>
+      <div class="col-row"><div class="badge-group"><span class="col-badge badge-pk">PK</span><span class="col-badge badge-fk">FK</span></div><span class="col-name">category_id</span><span class="col-type">UUID</span></div>
+    </div>
+  </div>
+
+  <!-- products -->
+  <div class="table-card" style="top:480px; left:700px; width:300px;" id="bl_products">
+    <div class="table-header table-header-bl">products <span class="rls-badge">RLS</span></div>
+    <div class="table-body">
+      <div class="col-row"><div class="badge-group"><span class="col-badge badge-pk">PK</span></div><span class="col-name">id</span><span class="col-type">UUID</span></div>
+      <div class="col-row"><div class="badge-group"><span class="col-badge badge-fk">FK</span></div><span class="col-name">tenant_id</span><span class="col-type">UUID NOT NULL</span></div>
+      <div class="col-divider"></div>
+      <div class="col-row"><div class="badge-group"></div><span class="col-name">name</span><span class="col-type">TEXT NOT NULL</span></div>
+      <div class="col-row"><div class="badge-group"></div><span class="col-name">slug</span><span class="col-type">TEXT NOT NULL</span></div>
+      <div class="col-row"><div class="badge-group"></div><span class="col-name">description</span><span class="col-type">TEXT</span></div>
+      <div class="col-row"><div class="badge-group"></div><span class="col-name">price</span><span class="col-type">NUMERIC 0</span></div>
+      <div class="col-row"><div class="badge-group"></div><span class="col-name">status</span><span class="col-type">TEXT 'published'</span></div>
+      <div class="col-row"><div class="badge-group"><span class="col-badge badge-fk">FK</span></div><span class="col-name">main_category_id</span><span class="col-type">UUID</span></div>
+      <div class="col-row"><div class="badge-group"></div><span class="col-name">source_url</span><span class="col-type">TEXT</span></div>
+      <div class="col-row"><div class="badge-group"></div><span class="col-name">published_at</span><span class="col-type">TIMESTAMPTZ</span></div>
+      <div class="col-row"><div class="badge-group"></div><span class="col-name">created_at</span><span class="col-type">TIMESTAMPTZ</span></div>
+      <div class="col-row"><div class="badge-group"></div><span class="col-name">updated_at</span><span class="col-type">TIMESTAMPTZ</span></div>
+      <div class="col-row"><div class="badge-group"></div><span class="col-name">deleted_at</span><span class="col-type">TIMESTAMPTZ</span></div>
+    </div>
+  </div>
+
+  <!-- product_images -->
+  <div class="table-card" style="top:920px; left:700px; width:300px;" id="bl_product_images">
+    <div class="table-header table-header-bl">product_images <span class="rls-badge">RLS</span></div>
+    <div class="table-body">
+      <div class="col-row"><div class="badge-group"><span class="col-badge badge-pk">PK</span></div><span class="col-name">id</span><span class="col-type">UUID</span></div>
+      <div class="col-row"><div class="badge-group"><span class="col-badge badge-fk">FK</span></div><span class="col-name">product_id</span><span class="col-type">UUID NOT NULL</span></div>
+      <div class="col-row"><div class="badge-group"><span class="col-badge badge-fk">FK</span></div><span class="col-name">tenant_id</span><span class="col-type">UUID NOT NULL</span></div>
+      <div class="col-divider"></div>
+      <div class="col-row"><div class="badge-group"><span class="col-badge badge-ck">CK</span></div><span class="col-name">type</span><span class="col-type">'main' | 'detail'</span></div>
+      <div class="col-row"><div class="badge-group"></div><span class="col-name">sort_order</span><span class="col-type">INT 0</span></div>
+      <div class="col-row"><div class="badge-group"></div><span class="col-name">storage_path</span><span class="col-type">TEXT NOT NULL</span></div>
+      <div class="col-row"><div class="badge-group"></div><span class="col-name">original_filename</span><span class="col-type">TEXT</span></div>
+      <div class="col-row"><div class="badge-group"></div><span class="col-name">width</span><span class="col-type">INT</span></div>
+      <div class="col-row"><div class="badge-group"></div><span class="col-name">height</span><span class="col-type">INT</span></div>
+      <div class="col-row"><div class="badge-group"></div><span class="col-name">file_size</span><span class="col-type">BIGINT</span></div>
+      <div class="col-row"><div class="badge-group"></div><span class="col-name">created_at</span><span class="col-type">TIMESTAMPTZ</span></div>
+      <div class="col-row"><div class="badge-group"></div><span class="col-name">deleted_at</span><span class="col-type">TIMESTAMPTZ</span></div>
+    </div>
+  </div>
+
+  <!-- ════════════ STORAGE ════════════ -->
+  <div class="table-card" style="top:70px; left:1440px; width:220px;" id="storage">
+    <div class="table-header table-header-storage">portfolio-images</div>
+    <div class="table-body">
+      <div class="col-row"><div class="badge-group"></div><span class="col-name">path</span><span class="col-type">TEXT</span></div>
+      <div class="col-row"><div class="badge-group"></div><span class="col-name">content_type</span><span class="col-type">TEXT</span></div>
+      <div class="col-row"><div class="badge-group"></div><span class="col-name">size</span><span class="col-type">BIGINT</span></div>
+    </div>
+  </div>
+
+  <!-- ════════════ NOTES ════════════ -->
+
+  <div class="note" style="top:220px; left:1440px; width:220px;">
+    <strong>Storage Path Format</strong><br>
+    {tenant_uuid}/<br>
+    &nbsp;&nbsp;{product_uuid}/<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;{filename}.jpg
+  </div>
+
+  <div class="note" style="top:920px; left:40px; width:260px;">
+    <strong>translations (EAV)</strong><br>
+    어떤 테이블이든 <code>record_id</code> +<br>
+    <code>field_name</code>으로 다국어 연결 가능<br>
+    <code>UNIQUE(schema, table, record, field, lang)</code>
+  </div>
+
+  <div class="note" style="top:1100px; left:40px; width:260px;">
+    <strong>Soft Delete</strong><br>
+    products, product_images에 <code>deleted_at</code><br>
+    RLS 정책: <code>deleted_at IS NULL</code> 필터
+  </div>
+
+  <div class="note" style="top:1200px; left:700px; width:300px;">
+    <strong>Triggers</strong>&nbsp; categories, products → <code>update_updated_at()</code> 자동 호출
+  </div>
+
+  <!-- ════════════════════════════════════════════════ -->
+  <!-- RELATIONSHIP LINES (SVG)                        -->
+  <!-- ════════════════════════════════════════════════ -->
+  <svg class="lines" viewBox="0 0 1700 1300" xmlns="http://www.w3.org/2000/svg">
+
+    <!-- ──── PUBLIC SCHEMA FKs ──── -->
+
+    <!-- tenants.id → user_tenants.tenant_id -->
+    <path class="rel-public" d="M 320,140 C 340,140 340,140 360,140" />
+    <circle class="dot-public" cx="320" cy="140" />
+    <circle class="dot-public" cx="360" cy="140" />
+    <text class="label-public" x="322" y="132">tenant_id</text>
+
+    <!-- tenants.id → tenant_settings.tenant_id -->
+    <path class="rel-public" d="M 180,270 L 180,340" />
+    <circle class="dot-public" cx="180" cy="270" />
+    <circle class="dot-public" cx="180" cy="340" />
+    <text class="label-public" x="188" y="310">tenant_id</text>
+
+    <!-- languages.code → translations.lang_code -->
+    <path class="rel-public" d="M 280,720 C 300,720 300,810 320,810" />
+    <circle class="dot-public" cx="280" cy="720" />
+    <circle class="dot-public" cx="320" cy="810" />
+    <text class="label-public" x="286" y="770">lang_code</text>
+
+    <!-- ──── CROSS-SCHEMA FKs (tenants → blacklabelled) ──── -->
+
+    <!-- tenants.id → bl.categories.tenant_id -->
+    <path class="rel-cross" d="M 320,105 C 510,105 510,140 700,140" />
+    <circle class="dot-cross" cx="320" cy="105" />
+    <circle class="dot-cross" cx="700" cy="140" />
+    <text class="label-cross" x="490" y="97">tenant_id</text>
+
+    <!-- tenants.id → bl.products.tenant_id -->
+    <path class="rel-cross" d="M 320,120 C 530,120 530,550 700,550" />
+    <circle class="dot-cross" cx="320" cy="120" />
+    <circle class="dot-cross" cx="700" cy="550" />
+    <text class="label-cross" x="510" y="340">tenant_id</text>
+
+    <!-- tenants.id → bl.product_images.tenant_id -->
+    <path class="rel-cross" d="M 320,135 C 550,135 550,1000 700,1000" />
+    <circle class="dot-cross" cx="320" cy="135" />
+    <circle class="dot-cross" cx="700" cy="1000" />
+    <text class="label-cross" x="500" y="600">tenant_id</text>
+
+    <!-- ──── BLACKLABELLED SCHEMA FKs ──── -->
+
+    <!-- categories self-ref (parent_id → id) -->
+    <path class="rel-bl" d="M 1000,230 C 1030,230 1030,100 1000,100" />
+    <circle class="dot-bl" cx="1000" cy="230" />
+    <circle class="dot-bl" cx="1000" cy="100" />
+    <text class="label-bl" x="1035" y="170">parent_id → id</text>
+
+    <!-- categories.id → products.main_category_id -->
+    <path class="rel-bl" d="M 850,380 L 850,480" />
+    <circle class="dot-bl" cx="850" cy="380" />
+    <circle class="dot-bl" cx="850" cy="480" />
+    <text class="label-bl" x="860" y="440">main_category_id</text>
+
+    <!-- categories.id → product_categories.category_id -->
+    <path class="rel-bl" d="M 1000,160 C 1060,160 1060,142 1060,142" />
+    <circle class="dot-bl" cx="1000" cy="160" />
+    <circle class="dot-bl" cx="1060" cy="142" />
+    <text class="label-bl" x="1010" y="175">category_id</text>
+
+    <!-- products.id → product_categories.product_id -->
+    <path class="rel-bl" d="M 850,480 C 850,350 1100,350 1100,165" />
+    <circle class="dot-bl" cx="850" cy="480" />
+    <circle class="dot-bl" cx="1100" cy="165" />
+    <text class="label-bl" x="990" y="310">product_id</text>
+
+    <!-- products.id → product_images.product_id -->
+    <path class="rel-bl" d="M 850,870 L 850,920" />
+    <circle class="dot-bl" cx="850" cy="870" />
+    <circle class="dot-bl" cx="850" cy="920" />
+    <text class="label-bl" x="860" y="900">product_id</text>
+
+    <!-- ──── STORAGE LINK ──── -->
+
+    <!-- product_images.storage_path → storage bucket -->
+    <path class="rel-storage" d="M 1000,1080 C 1300,1080 1450,300 1550,190" />
+    <circle class="dot-storage" cx="1000" cy="1080" />
+    <circle class="dot-storage" cx="1550" cy="190" />
+    <text class="label-storage" x="1300" y="600">storage_path</text>
+
+  </svg>
+
+</div>
+
+</body>
+</html>

@@ -3,7 +3,11 @@
 import { useRef, useState, useCallback } from "react";
 import { motion } from "framer-motion";
 
-export default function HeroSection() {
+interface HeroSectionProps {
+  backgroundImage?: string;
+}
+
+export default function HeroSection({ backgroundImage }: HeroSectionProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [mousePos, setMousePos] = useState({ x: 50, y: 50 });
 
@@ -28,7 +32,7 @@ export default function HeroSection() {
       <div
         className="absolute inset-0 bg-cover bg-center transition-[mask-position,_-webkit-mask-position] duration-100"
         style={{
-          backgroundImage: `url(/api/images/project/residence/잠실트리지움_532/main.jpg)`,
+          backgroundImage: backgroundImage ? `url(${backgroundImage})` : undefined,
           maskImage: `radial-gradient(circle 250px at ${mousePos.x}% ${mousePos.y}%, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.2) 60%, transparent 100%)`,
           WebkitMaskImage: `radial-gradient(circle 250px at ${mousePos.x}% ${mousePos.y}%, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.2) 60%, transparent 100%)`,
         }}

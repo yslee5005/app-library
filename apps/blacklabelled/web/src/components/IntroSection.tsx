@@ -33,8 +33,8 @@ export default function IntroSection() {
           transition={{ duration: 0.8, delay: 0.2 }}
         >
           <BeforeAfterSlider
-            beforeImage="/api/images/project/layout_design/서현_풍림아이원플러스_오피스텔_12PY_Design_254/main.png"
-            afterImage="/api/images/project/residence/이촌동_북한강_성원아파트_252/main.jpg"
+            beforeImage={`${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/blacklabelled/intro/before.png`}
+            afterImage={`${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/blacklabelled/intro/after.jpg`}
           />
         </motion.div>
       </div>

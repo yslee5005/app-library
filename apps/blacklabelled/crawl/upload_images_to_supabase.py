@@ -28,15 +28,32 @@ except ImportError:
 
 # ── 경로 설정 ──────────────────────────────────
 CRAWL_DIR = os.path.dirname(os.path.abspath(__file__))
+PROJECT_ROOT = os.path.join(CRAWL_DIR, "..", "..", "..")
 DATA_DIR = os.path.join(CRAWL_DIR, "..", "data")
 IMAGES_DIR = os.path.join(DATA_DIR, "images")
 PRODUCTS_JSON = os.path.join(DATA_DIR, "db", "products.json")
 PROGRESS_FILE = os.path.join(CRAWL_DIR, "progress_upload.json")
+ID_MAPPING_FILE = os.path.join(CRAWL_DIR, "id_mapping.json")
 
 # ── 설정 ─────────────────────────────────────
-TENANT_ID = "00000000-0000-0000-0000-000000000001"
-BUCKET = "portfolio-images"
+TENANT_SLUG = "blacklabelled"
+BUCKET = "blacklabelled"
 MAX_RETRIES = 3
+
+# ── .env 로드 (프로젝트 루트) ─────────────────────
+def load_env(path):
+    """프로젝트 .env 파일에서 환경변수 로드"""
+    if not os.path.exists(path):
+        return
+    with open(path) as f:
+        for line in f:
+            line = line.strip()
+            if not line or line.startswith("#") or "=" not in line:
+                continue
+            key, val = line.split("=", 1)
+            os.environ.setdefault(key.strip(), val.strip())
+
+load_env(os.path.join(PROJECT_ROOT, ".env"))
 
 # ── Supabase 연결 ────────────────────────────────
 SUPABASE_URL = os.environ.get("SUPABASE_URL")
@@ -99,21 +116,35 @@ def main():
         print(f"❌ products.json 파일이 없습니다: {PRODUCTS_JSON}")
         sys.exit(1)
 
+    if not os.path.exists(ID_MAPPING_FILE):
+        print(f"❌ id_mapping.json 파일이 없습니다. migrate_to_supabase.py를 먼저 실행하세요.")
+        sys.exit(1)
+
     # Supabase 연결
     supabase = create_client(SUPABASE_URL, SUPABASE_KEY)
     print(f"🔌 Supabase 연결 완료: {SUPABASE_URL}")
+
+    # ID 매핑 로드 (migrate_to_supabase.py에서 생성)
+    with open(ID_MAPPING_FILE, "r") as f:
+        id_mapping = json.load(f)
+    tenant_id = id_mapping["tenant_id"]
+    product_id_map = id_mapping["products"]  # old_id(str) → UUID
+    print(f"🏢 Tenant: {tenant_id}")
 
     # 데이터 로드
     with open(PRODUCTS_JSON, "r", encoding="utf-8") as f:
         products_raw = json.load(f)
 
-    # 업로드 작업 목록 생성
+    # 업로드 작업 목록 생성 (UUID 기반 storage path)
     upload_tasks = []
     for pid, p in products_raw.items():
+        new_product_id = product_id_map.get(str(p["id"]))
+        if not new_product_id:
+            continue
         for img in p.get("images", []):
             local_path = os.path.join(IMAGES_DIR, img["path"])
             filename = os.path.basename(img["path"])
-            storage_path = f"{TENANT_ID}/{p['id']}/{filename}"
+            storage_path = f"{new_product_id}/{filename}"
 
             if os.path.exists(local_path):
                 upload_tasks.append({

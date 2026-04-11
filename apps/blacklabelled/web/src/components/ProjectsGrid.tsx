@@ -16,7 +16,7 @@ export default function ProjectsGrid({
   products,
   categories,
 }: ProjectsGridProps) {
-  const [activeFilter, setActiveFilter] = useState<number | null>(null);
+  const [activeFilter, setActiveFilter] = useState<string | null>(null);
   const [visibleCount, setVisibleCount] = useState(ITEMS_PER_PAGE);
 
   // 3 카테고리만 표시: Residence, Layout Design, Commercial
@@ -53,7 +53,7 @@ export default function ProjectsGrid({
   const visible = filtered.slice(0, visibleCount);
   const hasMore = visibleCount < filtered.length;
 
-  const handleFilter = (id: number | null) => {
+  const handleFilter = (id: string | null) => {
     setActiveFilter(id);
     setVisibleCount(ITEMS_PER_PAGE);
   };

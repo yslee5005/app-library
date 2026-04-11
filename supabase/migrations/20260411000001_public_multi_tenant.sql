@@ -54,7 +54,7 @@ CREATE TABLE IF NOT EXISTS translations (
   id SERIAL PRIMARY KEY,
   table_schema TEXT NOT NULL,
   table_name TEXT NOT NULL,
-  record_id INTEGER NOT NULL,
+  record_id UUID NOT NULL,
   field_name TEXT NOT NULL,
   lang_code TEXT NOT NULL REFERENCES languages(code),
   value TEXT NOT NULL,

@@ -19,14 +19,14 @@ export interface ProductImage {
 }
 
 export interface Product {
-  id: number;
+  id: string;
   name: string;
   slug: string;
   description: string;
   price: number;
-  categories: number[];
+  categories: string[];
   category_names: string[];
-  main_category: number;
+  main_category: string;
   main_category_name: string;
   image_folder: string;
   main_image: string;
@@ -35,18 +35,19 @@ export interface Product {
 }
 
 export interface Category {
-  id: number;
+  id: string;
   name: string;
-  parent_id: number | null;
+  parent_id: string | null;
   parent_name: string | null;
   folder_path: string;
   product_count: number;
-  product_ids: number[];
+  product_ids: string[];
+  is_visible?: boolean;
 }
 
 // ── Supabase Storage URL helper ─────────────────────────
 
-const STORAGE_URL = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/portfolio-images`;
+const STORAGE_URL = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/blacklabelled`;
 
 function storageUrl(path: string): string {
   return `${STORAGE_URL}/${path}`;
@@ -55,20 +56,18 @@ function storageUrl(path: string): string {
 // ── DB row → Product 변환 ───────────────────────────────
 
 interface DbProduct {
-  id: number;
+  id: string;
   name: string;
   slug: string;
   description: string | null;
   price: number;
   status: string;
-  main_category_id: number | null;
+  main_category_id: string | null;
   source_url: string | null;
-  meta_title: string | null;
-  meta_description: string | null;
   deleted_at: string | null;
-  product_categories: { category_id: number }[];
+  product_categories: { category_id: string }[];
   product_images: DbProductImage[];
-  categories: { id: number; name: string; parent_id: number | null } | null;
+  categories: { id: string; name: string; parent_id: string | null } | null;
 }
 
 interface DbProductImage {
@@ -83,20 +82,25 @@ interface DbProductImage {
 }
 
 // Category name cache
-let _categoryMap: Map<number, { name: string; parent_name: string | null }> | null = null;
+let _categoryMap: Map<string, { name: string; parent_name: string | null }> | null = null;
 
 async function getCategoryMap() {
   if (_categoryMap) return _categoryMap;
+  // 자기참조 JOIN 대신 전체 로드 후 메모리에서 parent 매핑
   const { data } = await supabase
     .from("categories")
-    .select("id, name, parent_id, categories!categories_parent_id_fkey(name)")
-    .is("is_visible", true);
+    .select("id, name, parent_id, is_visible");
 
   _categoryMap = new Map();
   if (data) {
+    // 먼저 id→name 맵 구축
+    const nameById = new Map(data.map((c) => [c.id, c.name]));
     for (const c of data) {
-      const parentName = (c as any).categories?.name ?? null;
-      _categoryMap.set(c.id, { name: c.name, parent_name: parentName });
+      if (c.is_visible === false) continue;
+      _categoryMap.set(c.id, {
+        name: c.name,
+        parent_name: c.parent_id ? nameById.get(c.parent_id) ?? null : null,
+      });
     }
   }
   return _categoryMap;
@@ -105,7 +109,7 @@ async function getCategoryMap() {
 async function dbToProduct(row: any): Promise<Product> {
   const catMap = await getCategoryMap();
   const catIds = (row.product_categories || []).map((pc: any) => pc.category_id);
-  const catNames = catIds.map((id: number) => catMap.get(id)?.name ?? "");
+  const catNames = catIds.map((id: string) => catMap.get(id)?.name ?? "");
   const mainCatInfo = row.main_category_id ? catMap.get(row.main_category_id) : null;
 
   const images: ProductImage[] = (row.product_images || [])
@@ -131,7 +135,7 @@ async function dbToProduct(row: any): Promise<Product> {
     price: row.price ?? 0,
     categories: catIds,
     category_names: catNames,
-    main_category: row.main_category_id ?? 0,
+    main_category: row.main_category_id ?? "",
     main_category_name: mainCatInfo?.name ?? "",
     image_folder: "",
     main_image: mainImage,
@@ -144,7 +148,7 @@ async function dbToProduct(row: any): Promise<Product> {
 
 const PRODUCT_SELECT = `
   id, name, slug, description, price, status, main_category_id, source_url,
-  meta_title, meta_description, deleted_at,
+  deleted_at,
   product_categories(category_id),
   product_images(sort_order, type, storage_path, original_url, original_filename, width, height, deleted_at)
 `;
@@ -163,7 +167,7 @@ export async function getProducts(): Promise<Product[]> {
   return Promise.all(data.map(dbToProduct));
 }
 
-export async function getProduct(id: number): Promise<Product | undefined> {
+export async function getProduct(id: string): Promise<Product | undefined> {
   const { data } = await supabase
     .from("products")
     .select(PRODUCT_SELECT)
@@ -194,6 +198,7 @@ export async function getCategories(): Promise<Category[]> {
     folder_path: "",
     product_count: 0,
     product_ids: [],
+    is_visible: c.is_visible ?? true,
   }));
 }
 
@@ -254,7 +259,7 @@ export async function getLayoutDesignProducts(): Promise<Product[]> {
   const products = await getProducts();
   return products
     .filter((p) => p.main_category_name === "Layout_Design")
-    .sort((a, b) => b.id - a.id);
+    .sort((a, b) => b.id.localeCompare(a.id));
 }
 
 // ── Image URL helpers ────────────────────────────────────
@@ -309,7 +314,7 @@ const LOCATION_MAP: Record<string, [number, number]> = {
 const DEFAULT_CENTER: [number, number] = [127.14, 37.42];
 
 export interface MapProduct {
-  id: number;
+  id: string;
   name: string;
   slug: string;
   category: string;
@@ -318,10 +323,10 @@ export interface MapProduct {
 }
 
 export async function getMapProducts(): Promise<MapProduct[]> {
-  const PROJECT_CATEGORIES = [42, 43, 44, 49];
+  const PROJECT_CATEGORY_NAMES = ["Residence", "Commercial", "Layout_Design"];
   const products = await getDisplayProducts();
   const projectOnly = products.filter((p) =>
-    PROJECT_CATEGORIES.includes(p.main_category)
+    PROJECT_CATEGORY_NAMES.includes(p.main_category_name)
   );
 
   return projectOnly.map((p) => {
@@ -333,8 +338,13 @@ export async function getMapProducts(): Promise<MapProduct[]> {
       }
     }
     if (!coords) {
-      const offsetLng = ((p.id * 7919) % 1000) / 100000 - 0.005;
-      const offsetLat = ((p.id * 6271) % 1000) / 100000 - 0.005;
+      // Hash the UUID string to get a deterministic numeric offset
+      let hash = 0;
+      for (let i = 0; i < p.id.length; i++) {
+        hash = ((hash << 5) - hash + p.id.charCodeAt(i)) | 0;
+      }
+      const offsetLng = ((Math.abs(hash * 7919)) % 1000) / 100000 - 0.005;
+      const offsetLat = ((Math.abs(hash * 6271)) % 1000) / 100000 - 0.005;
       coords = [DEFAULT_CENTER[0] + offsetLng, DEFAULT_CENTER[1] + offsetLat];
     }
     return {

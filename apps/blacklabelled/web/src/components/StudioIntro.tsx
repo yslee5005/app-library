@@ -5,8 +5,8 @@ import { useScrollReveal } from "@/hooks/useScrollReveal";
 import ImageCrossfade from "./ImageCrossfade";
 
 interface StudioIntroProps {
-  project1?: { id: number; name: string; images: string[] };
-  project2?: { id: number; name: string; images: string[] };
+  project1?: { id: string; name: string; images: string[] };
+  project2?: { id: string; name: string; images: string[] };
 }
 
 export default function StudioIntro({ project1, project2 }: StudioIntroProps) {
