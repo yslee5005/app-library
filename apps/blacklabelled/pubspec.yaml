@@ -32,6 +32,9 @@ dependencies:
   # Storage
   shared_preferences: ^2.3.5
 
+  # Backend
+  supabase_flutter: ^2.8.4
+
   # Fonts
   google_fonts: ^6.2.1
   flutter_animate: ^4.5.2

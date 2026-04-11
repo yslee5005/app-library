@@ -1,26 +1,36 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
-import '../data/local/local_furniture_repository.dart';
 import '../data/local/local_magazine_repository.dart';
-import '../data/local/local_project_repository.dart';
 import '../data/local/local_scrap_repository.dart';
+import '../data/supabase/supabase_project_repository.dart';
+import '../data/supabase/supabase_furniture_repository.dart';
 import '../data/repositories/furniture_repository.dart';
 import '../data/repositories/magazine_repository.dart';
 import '../data/repositories/project_repository.dart';
 import '../data/repositories/scrap_repository.dart';
 
+/// Supabase client — initialized in main.dart
+final supabaseClientProvider = Provider<SupabaseClient>(
+  (ref) => Supabase.instance.client,
+);
+
+/// Projects: Supabase backend
 final projectRepositoryProvider = Provider<ProjectRepository>(
-  (ref) => LocalProjectRepository(),
+  (ref) => SupabaseProjectRepository(ref.watch(supabaseClientProvider)),
 );
 
+/// Furniture: Supabase backend
 final furnitureRepositoryProvider = Provider<FurnitureRepository>(
-  (ref) => LocalFurnitureRepository(),
+  (ref) => SupabaseFurnitureRepository(ref.watch(supabaseClientProvider)),
 );
 
+/// Magazines: still local (no Supabase table yet)
 final magazineRepositoryProvider = Provider<MagazineRepository>(
   (ref) => LocalMagazineRepository(),
 );
 
+/// Scraps: still local (SharedPreferences)
 final scrapRepositoryProvider = Provider<ScrapRepository>(
   (ref) => LocalScrapRepository(),
 );
