@@ -96,7 +96,8 @@ GoogleService-Info.plist
 # Blacklabelled data/build (large files)
 apps/blacklabelled/data/
 apps/blacklabelled/admin/
-apps/blacklabelled/crawl/
+apps/blacklabelled/crawl/output/
+apps/blacklabelled/crawl/progress_*.json
 
 # Next.js build output
 **/.next/
