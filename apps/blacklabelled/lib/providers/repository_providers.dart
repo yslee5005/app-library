@@ -1,10 +1,10 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-import '../data/local/local_magazine_repository.dart';
-import '../data/local/local_scrap_repository.dart';
 import '../data/supabase/supabase_project_repository.dart';
 import '../data/supabase/supabase_furniture_repository.dart';
+import '../data/supabase/supabase_magazine_repository.dart';
+import '../data/supabase/supabase_scrap_repository.dart';
 import '../data/repositories/furniture_repository.dart';
 import '../data/repositories/magazine_repository.dart';
 import '../data/repositories/project_repository.dart';
@@ -25,12 +25,12 @@ final furnitureRepositoryProvider = Provider<FurnitureRepository>(
   (ref) => SupabaseFurnitureRepository(ref.watch(supabaseClientProvider)),
 );
 
-/// Magazines: still local (no Supabase table yet)
+/// Magazines: Supabase backend
 final magazineRepositoryProvider = Provider<MagazineRepository>(
-  (ref) => LocalMagazineRepository(),
+  (ref) => SupabaseMagazineRepository(ref.watch(supabaseClientProvider)),
 );
 
-/// Scraps: still local (SharedPreferences)
+/// Scraps: Supabase backend (Anonymous-First)
 final scrapRepositoryProvider = Provider<ScrapRepository>(
-  (ref) => LocalScrapRepository(),
+  (ref) => SupabaseScrapRepository(ref.watch(supabaseClientProvider)),
 );
