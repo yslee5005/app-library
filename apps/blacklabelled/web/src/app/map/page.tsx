@@ -12,9 +12,9 @@ export const metadata: Metadata = {
   },
 };
 
-export default function MapPage() {
-  const products = getMapProducts();
-  const categories = getFilterCategories();
+export default async function MapPage() {
+  const products = await getMapProducts();
+  const categories = await getFilterCategories();
   const categoryNames = [...new Set(products.map((p) => p.category))].sort();
 
   return (

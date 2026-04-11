@@ -1,5 +1,12 @@
-import { readFileSync } from "fs";
-import path from "path";
+/**
+ * Supabase-backed data layer for BlackLabelled
+ * Drop-in replacement for data.ts — same function signatures, Supabase backend
+ *
+ * Migration: rename this file to data.ts when ready to switch
+ */
+import { supabase } from "./supabase";
+
+// ── Interfaces (unchanged from data.ts) ─────────────────
 
 export interface ProductImage {
   order: number;
@@ -37,52 +44,169 @@ export interface Category {
   product_ids: number[];
 }
 
-const DATA_DIR = path.resolve(process.cwd(), "..", "data", "db");
+// ── Supabase Storage URL helper ─────────────────────────
 
-function loadJSON<T>(filename: string): T {
-  const filePath = path.join(DATA_DIR, filename);
-  const raw = readFileSync(filePath, "utf-8");
-  return JSON.parse(raw) as T;
+const STORAGE_URL = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/portfolio-images`;
+
+function storageUrl(path: string): string {
+  return `${STORAGE_URL}/${path}`;
 }
 
-let _products: Record<string, Product> | null = null;
-let _categories: Record<string, Category> | null = null;
+// ── DB row → Product 변환 ───────────────────────────────
 
-function getProductsMap(): Record<string, Product> {
-  if (!_products) {
-    _products = loadJSON<Record<string, Product>>("products.json");
+interface DbProduct {
+  id: number;
+  name: string;
+  slug: string;
+  description: string | null;
+  price: number;
+  status: string;
+  main_category_id: number | null;
+  source_url: string | null;
+  meta_title: string | null;
+  meta_description: string | null;
+  deleted_at: string | null;
+  product_categories: { category_id: number }[];
+  product_images: DbProductImage[];
+  categories: { id: number; name: string; parent_id: number | null } | null;
+}
+
+interface DbProductImage {
+  sort_order: number;
+  type: string;
+  storage_path: string;
+  original_url: string | null;
+  original_filename: string | null;
+  width: number | null;
+  height: number | null;
+  deleted_at: string | null;
+}
+
+// Category name cache
+let _categoryMap: Map<number, { name: string; parent_name: string | null }> | null = null;
+
+async function getCategoryMap() {
+  if (_categoryMap) return _categoryMap;
+  const { data } = await supabase
+    .from("categories")
+    .select("id, name, parent_id, categories!categories_parent_id_fkey(name)")
+    .is("is_visible", true);
+
+  _categoryMap = new Map();
+  if (data) {
+    for (const c of data) {
+      const parentName = (c as any).categories?.name ?? null;
+      _categoryMap.set(c.id, { name: c.name, parent_name: parentName });
+    }
   }
-  return _products;
+  return _categoryMap;
 }
 
-function getCategoriesMap(): Record<string, Category> {
-  if (!_categories) {
-    _categories = loadJSON<Record<string, Category>>("categories.json");
-  }
-  return _categories;
+async function dbToProduct(row: any): Promise<Product> {
+  const catMap = await getCategoryMap();
+  const catIds = (row.product_categories || []).map((pc: any) => pc.category_id);
+  const catNames = catIds.map((id: number) => catMap.get(id)?.name ?? "");
+  const mainCatInfo = row.main_category_id ? catMap.get(row.main_category_id) : null;
+
+  const images: ProductImage[] = (row.product_images || [])
+    .filter((img: DbProductImage) => !img.deleted_at)
+    .sort((a: DbProductImage, b: DbProductImage) => a.sort_order - b.sort_order)
+    .map((img: DbProductImage) => ({
+      order: img.sort_order,
+      type: img.type,
+      path: img.storage_path,
+      original_url: img.original_url ?? "",
+      original_filename: img.original_filename ?? "",
+      width: img.width ?? 0,
+      height: img.height ?? 0,
+    }));
+
+  const mainImage = images.find((i) => i.type === "main")?.path ?? images[0]?.path ?? "";
+
+  return {
+    id: row.id,
+    name: row.name,
+    slug: row.slug,
+    description: row.description ?? "",
+    price: row.price ?? 0,
+    categories: catIds,
+    category_names: catNames,
+    main_category: row.main_category_id ?? 0,
+    main_category_name: mainCatInfo?.name ?? "",
+    image_folder: "",
+    main_image: mainImage,
+    image_count: images.length,
+    images,
+  };
 }
 
-export function getProducts(): Product[] {
-  return Object.values(getProductsMap()).sort((a, b) => b.id - a.id);
+// ── Query helpers ───────────────────────────────────────
+
+const PRODUCT_SELECT = `
+  id, name, slug, description, price, status, main_category_id, source_url,
+  meta_title, meta_description, deleted_at,
+  product_categories(category_id),
+  product_images(sort_order, type, storage_path, original_url, original_filename, width, height, deleted_at)
+`;
+
+// ── Public API (same signatures as data.ts) ──────────────
+
+export async function getProducts(): Promise<Product[]> {
+  const { data } = await supabase
+    .from("products")
+    .select(PRODUCT_SELECT)
+    .is("deleted_at", null)
+    .eq("status", "published")
+    .order("id", { ascending: false });
+
+  if (!data) return [];
+  return Promise.all(data.map(dbToProduct));
 }
 
-export function getProduct(id: number): Product | undefined {
-  return getProductsMap()[String(id)];
+export async function getProduct(id: number): Promise<Product | undefined> {
+  const { data } = await supabase
+    .from("products")
+    .select(PRODUCT_SELECT)
+    .eq("id", id)
+    .is("deleted_at", null)
+    .single();
+
+  if (!data) return undefined;
+  return dbToProduct(data);
 }
 
-export function getCategories(): Category[] {
-  return Object.values(getCategoriesMap());
+export async function getCategories(): Promise<Category[]> {
+  const { data } = await supabase
+    .from("categories")
+    .select("id, name, parent_id, is_visible, sort_order")
+    .order("sort_order");
+
+  if (!data) return [];
+
+  // Build parent name map
+  const nameMap = new Map(data.map((c) => [c.id, c.name]));
+
+  return data.map((c) => ({
+    id: c.id,
+    name: c.name,
+    parent_id: c.parent_id,
+    parent_name: c.parent_id ? nameMap.get(c.parent_id) ?? null : null,
+    folder_path: "",
+    product_count: 0,
+    product_ids: [],
+  }));
 }
 
-export function getProjectCategories(): Category[] {
-  return Object.values(getCategoriesMap()).filter(
-    (c) =>
-      c.parent_name === "PROJECT" && c.name !== "Layout_Design"
+export async function getProjectCategories(): Promise<Category[]> {
+  const cats = await getCategories();
+  return cats.filter(
+    (c) => c.parent_name === "PROJECT" && c.name !== "Layout_Design"
   );
 }
 
-export function getFeaturedProducts(count = 6): Product[] {
-  return getProducts()
+export async function getFeaturedProducts(count = 6): Promise<Product[]> {
+  const products = await getProducts();
+  return products
     .filter(
       (p) =>
         p.main_category_name !== "Layout_Design" &&
@@ -91,40 +215,63 @@ export function getFeaturedProducts(count = 6): Product[] {
     .slice(0, count);
 }
 
-export function getProductBySlug(slug: string): Product | undefined {
-  return Object.values(getProductsMap()).find((p) => p.slug === slug);
+export async function getProductBySlug(slug: string): Promise<Product | undefined> {
+  const { data } = await supabase
+    .from("products")
+    .select(PRODUCT_SELECT)
+    .eq("slug", slug)
+    .is("deleted_at", null)
+    .eq("status", "published")
+    .single();
+
+  if (!data) return undefined;
+  return dbToProduct(data);
 }
 
-export function getDisplayProducts(): Product[] {
-  return getProducts().filter(
-    (p) => p.main_category_name !== "DEVELOPMENT"
-  );
+export async function getDisplayProducts(): Promise<Product[]> {
+  const products = await getProducts();
+  return products.filter((p) => p.main_category_name !== "DEVELOPMENT");
 }
 
-export function getFilterCategories(): Category[] {
-  const cats = Object.values(getCategoriesMap());
+export async function getFilterCategories(): Promise<Category[]> {
+  const cats = await getCategories();
   return cats.filter(
     (c) =>
       (c.parent_name === "PROJECT" || c.parent_name === "FURNITURE") &&
       c.name !== "DEVELOPMENT" &&
-      c.product_count > 0
+      c.is_visible !== false
   );
 }
 
-export function getRelatedProducts(product: Product, count = 3): Product[] {
-  return getDisplayProducts()
-    .filter(
-      (p) => p.id !== product.id && p.main_category === product.main_category
-    )
+export async function getRelatedProducts(product: Product, count = 3): Promise<Product[]> {
+  const products = await getDisplayProducts();
+  return products
+    .filter((p) => p.id !== product.id && p.main_category === product.main_category)
     .slice(0, count);
 }
 
-export interface BeforeAfterPair {
-  designProduct: Product;
-  realityProduct: Product;
+export async function getLayoutDesignProducts(): Promise<Product[]> {
+  const products = await getProducts();
+  return products
+    .filter((p) => p.main_category_name === "Layout_Design")
+    .sort((a, b) => b.id - a.id);
 }
 
-// Location mapping for map pins
+// ── Image URL helpers ────────────────────────────────────
+
+/**
+ * Convert storage_path to public CDN URL
+ * Use this in components: <Image src={getImageUrl(product.main_image)} />
+ */
+export function getImageUrl(storagePath: string): string {
+  if (!storagePath) return "";
+  // If already a full URL, return as-is
+  if (storagePath.startsWith("http")) return storagePath;
+  return storageUrl(storagePath);
+}
+
+// ── Map/Location (unchanged logic) ──────────────────────
+
 const LOCATION_MAP: Record<string, [number, number]> = {
   잠실: [127.0862, 37.5133],
   서현: [127.0549, 37.3843],
@@ -159,7 +306,7 @@ const LOCATION_MAP: Record<string, [number, number]> = {
   천안: [127.1135, 36.8151],
 };
 
-const DEFAULT_CENTER: [number, number] = [127.14, 37.42]; // 성남
+const DEFAULT_CENTER: [number, number] = [127.14, 37.42];
 
 export interface MapProduct {
   id: number;
@@ -170,84 +317,65 @@ export interface MapProduct {
   coordinates: [number, number];
 }
 
-export function getMapProducts(): MapProduct[] {
-  // 지도에는 PROJECT만 (Furniture, Layout_Design, Development 제외)
-  const PROJECT_CATEGORIES = [42, 43, 44, 49]; // Boutiques, Cosmetics, Residence, Commercial
-  const projectOnly = getDisplayProducts().filter((p) =>
+export async function getMapProducts(): Promise<MapProduct[]> {
+  const PROJECT_CATEGORIES = [42, 43, 44, 49];
+  const products = await getDisplayProducts();
+  const projectOnly = products.filter((p) =>
     PROJECT_CATEGORIES.includes(p.main_category)
   );
+
   return projectOnly.map((p) => {
     let coords: [number, number] | null = null;
-
-    // Try to match location from product name
     for (const [location, lngLat] of Object.entries(LOCATION_MAP)) {
       if (p.name.includes(location)) {
         coords = lngLat;
         break;
       }
     }
-
-    // Default: 성남 center with small random offset (seeded by id)
     if (!coords) {
       const offsetLng = ((p.id * 7919) % 1000) / 100000 - 0.005;
       const offsetLat = ((p.id * 6271) % 1000) / 100000 - 0.005;
-      coords = [
-        DEFAULT_CENTER[0] + offsetLng,
-        DEFAULT_CENTER[1] + offsetLat,
-      ];
+      coords = [DEFAULT_CENTER[0] + offsetLng, DEFAULT_CENTER[1] + offsetLat];
     }
-
     return {
       id: p.id,
       name: p.name,
       slug: p.slug,
       category: p.main_category_name,
-      mainImage: p.main_image,
+      mainImage: getImageUrl(p.main_image),
       coordinates: coords,
     };
   });
 }
 
-export function getLayoutDesignProducts(): Product[] {
-  return Object.values(getProductsMap())
-    .filter((p) => p.main_category_name === "Layout_Design")
-    .sort((a, b) => b.id - a.id);
+export interface BeforeAfterPair {
+  designProduct: Product;
+  realityProduct: Product;
 }
 
-/**
- * 프로젝트의 도면(layout_design) 이미지를 찾아 반환
- * residence 프로젝트 → 매칭되는 layout_design의 main 이미지
- */
-export function getFloorPlanImage(product: Product): string | null {
+export async function getFloorPlanImage(product: Product): Promise<string | null> {
   if (product.main_category_name !== "Residence") return null;
-
+  const layoutProducts = await getLayoutDesignProducts();
   const nameParts = product.name.replace(/[_\s]+/g, " ").toLowerCase();
-  const layoutProducts = Object.values(getProductsMap()).filter(
-    (p) => p.main_category_name === "Layout_Design"
-  );
 
   for (const lp of layoutProducts) {
     const lpName = lp.name.replace(/[_\s]+/g, " ").toLowerCase();
     const residenceWords = nameParts.split(" ").filter((w) => w.length > 1);
     const matchCount = residenceWords.filter((w) => lpName.includes(w)).length;
     if (matchCount >= Math.max(1, residenceWords.length * 0.5)) {
-      return lp.main_image;
+      return getImageUrl(lp.main_image);
     }
   }
   return null;
 }
 
-export function getBeforeAfterPair(product: Product): BeforeAfterPair | null {
+export async function getBeforeAfterPair(product: Product): Promise<BeforeAfterPair | null> {
   if (product.main_category_name !== "Residence") return null;
-
+  const layoutProducts = await getLayoutDesignProducts();
   const nameParts = product.name.replace(/[_\s]+/g, " ").toLowerCase();
-  const layoutProducts = Object.values(getProductsMap()).filter(
-    (p) => p.main_category_name === "Layout_Design"
-  );
 
   for (const lp of layoutProducts) {
     const lpName = lp.name.replace(/[_\s]+/g, " ").toLowerCase();
-    // Match if the layout design name contains a significant portion of the residence name
     const residenceWords = nameParts.split(" ").filter((w) => w.length > 1);
     const matchCount = residenceWords.filter((w) => lpName.includes(w)).length;
     if (matchCount >= Math.max(1, residenceWords.length * 0.5)) {

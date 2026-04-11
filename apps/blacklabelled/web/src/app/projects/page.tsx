@@ -12,9 +12,9 @@ export const metadata: Metadata = {
   },
 };
 
-export default function ProjectsPage() {
-  const products = getDisplayProducts();
-  const categories = getFilterCategories();
+export default async function ProjectsPage() {
+  const products = await getDisplayProducts();
+  const categories = await getFilterCategories();
 
   return (
     <section className="pt-32 pb-20 px-6 md:px-10">

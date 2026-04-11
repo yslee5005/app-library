@@ -4,6 +4,7 @@ import {
   getRelatedProducts,
   getBeforeAfterPair,
   getFloorPlanImage,
+  getImageUrl,
 } from "@/lib/data";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
@@ -14,13 +15,13 @@ interface PageProps {
 }
 
 export async function generateStaticParams() {
-  const products = getDisplayProducts();
+  const products = await getDisplayProducts();
   return products.map((p) => ({ slug: p.slug }));
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-  const product = getProductBySlug(decodeURIComponent(slug));
+  const product = await getProductBySlug(decodeURIComponent(slug));
   if (!product) return { title: "Not Found" };
 
   return {
@@ -29,19 +30,19 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     openGraph: {
       title: product.name,
       description: product.description || `${product.name} 인테리어 프로젝트`,
-      images: [`/api/images/${product.main_image}`],
+      images: [getImageUrl(product.main_image)],
     },
   };
 }
 
 export default async function ProjectDetailPage({ params }: PageProps) {
   const { slug } = await params;
-  const product = getProductBySlug(decodeURIComponent(slug));
+  const product = await getProductBySlug(decodeURIComponent(slug));
   if (!product) notFound();
 
-  const related = getRelatedProducts(product, 3);
-  const beforeAfter = getBeforeAfterPair(product);
-  const floorPlanImage = getFloorPlanImage(product);
+  const related = await getRelatedProducts(product, 3);
+  const beforeAfter = await getBeforeAfterPair(product);
+  const floorPlanImage = await getFloorPlanImage(product);
 
   return (
     <ProjectDetail

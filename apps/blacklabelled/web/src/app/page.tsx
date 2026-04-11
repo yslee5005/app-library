@@ -2,24 +2,24 @@ import HeroSection from "@/components/HeroSection";
 import StudioIntro from "@/components/StudioIntro";
 import FeaturedCarousel from "@/components/FeaturedCarousel";
 import FeaturedProjects from "@/components/FeaturedProjects";
-import { getFeaturedProducts, getProducts } from "@/lib/data";
+import { getFeaturedProducts, getProducts, getImageUrl } from "@/lib/data";
 
-export default function Home() {
-  const featured = getFeaturedProducts(8);
-  const allProducts = getProducts();
+export default async function Home() {
+  const featured = await getFeaturedProducts(8);
+  const allProducts = await getProducts();
   const p1 = allProducts[0];
   const p2 = allProducts[1];
 
   const project1 = p1 ? {
     id: p1.id,
     name: p1.name,
-    images: [`/api/images/${p1.main_image}`],
+    images: [getImageUrl(p1.main_image)],
   } : undefined;
 
   const project2 = p2 ? {
     id: p2.id,
     name: p2.name,
-    images: [`/api/images/${p2.main_image}`],
+    images: [getImageUrl(p2.main_image)],
   } : undefined;
 
   return (
