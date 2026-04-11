@@ -262,6 +262,17 @@ export async function getLayoutDesignProducts(): Promise<Product[]> {
     .sort((a, b) => b.id.localeCompare(a.id));
 }
 
+// ── Page Content (CMS) ───────────────────────────────────
+
+export async function getPageContent(pageKey: string): Promise<Record<string, any> | null> {
+  const { data } = await supabase
+    .from("page_content")
+    .select("content")
+    .eq("page_key", pageKey)
+    .single();
+  return data?.content ?? null;
+}
+
 // ── Image URL helpers ────────────────────────────────────
 
 /**

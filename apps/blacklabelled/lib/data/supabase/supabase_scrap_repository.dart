@@ -49,9 +49,15 @@ class SupabaseScrapRepository implements ScrapRepository {
     return (response as List).map((row) => _fromRow(row)).toList();
   }
 
+  static const _validContentTypes = {'product', 'magazine'};
+
   @override
   Future<void> toggle(String contentType, String contentId) async {
     if (_userId == null) return;
+    assert(
+      _validContentTypes.contains(contentType),
+      'content_type must be "product" or "magazine", got "$contentType"',
+    );
 
     final existing = await _scraps
         .select('id')
@@ -62,7 +68,7 @@ class SupabaseScrapRepository implements ScrapRepository {
 
     if (existing != null) {
       // Remove scrap
-      await _scraps.delete().eq('id', existing['id']).execute();
+      await _scraps.delete().eq('id', existing['id']);
     } else {
       // Add scrap
       final tenantId = await _getTenantId();
@@ -71,7 +77,7 @@ class SupabaseScrapRepository implements ScrapRepository {
         'user_id': _userId!,
         'content_type': contentType,
         'content_id': contentId,
-      }).execute();
+      });
     }
   }
 

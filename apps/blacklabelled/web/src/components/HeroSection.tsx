@@ -5,9 +5,11 @@ import { motion } from "framer-motion";
 
 interface HeroSectionProps {
   backgroundImage?: string;
+  title?: string;
+  subtitle?: string;
 }
 
-export default function HeroSection({ backgroundImage }: HeroSectionProps) {
+export default function HeroSection({ backgroundImage, title, subtitle }: HeroSectionProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [mousePos, setMousePos] = useState({ x: 50, y: 50 });
 
@@ -49,7 +51,7 @@ export default function HeroSection({ backgroundImage }: HeroSectionProps) {
           transition={{ duration: 1, delay: 0.5 }}
           className="font-heading text-white text-5xl md:text-7xl lg:text-8xl font-light tracking-[0.15em]"
         >
-          BLACKLABELLED
+          {title ?? "BLACKLABELLED"}
         </motion.h1>
         <motion.p
           initial={{ opacity: 0 }}
@@ -57,7 +59,7 @@ export default function HeroSection({ backgroundImage }: HeroSectionProps) {
           transition={{ duration: 1, delay: 1 }}
           className="mt-6 font-body text-text-secondary text-base md:text-lg tracking-wider"
         >
-          Your space is &apos;black label&apos;
+          {subtitle ?? "Your space is 'black label'"}
         </motion.p>
       </div>
 

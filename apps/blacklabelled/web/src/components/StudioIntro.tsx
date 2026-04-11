@@ -7,9 +7,13 @@ import ImageCrossfade from "./ImageCrossfade";
 interface StudioIntroProps {
   project1?: { id: string; name: string; images: string[] };
   project2?: { id: string; name: string; images: string[] };
+  heading?: string;
+  description?: string;
+  linkText?: string;
+  linkUrl?: string;
 }
 
-export default function StudioIntro({ project1, project2 }: StudioIntroProps) {
+export default function StudioIntro({ project1, project2, heading, description, linkText, linkUrl }: StudioIntroProps) {
   const { ref, visible } = useScrollReveal(0.15);
 
   return (
@@ -28,21 +32,21 @@ export default function StudioIntro({ project1, project2 }: StudioIntroProps) {
         {/* Left — Text */}
         <div className="md:w-[35%] flex flex-col justify-center">
           <h2 className="text-3xl md:text-[40px] text-text-primary font-light leading-[1.3] tracking-wide">
-            Residential Space
-            <br />
-            Design Studio
+            {(heading ?? "Residential Space\nDesign Studio").split("\n").map((line, i, arr) => (
+              <span key={i}>
+                {line}
+                {i < arr.length - 1 && <br />}
+              </span>
+            ))}
           </h2>
           <p className="mt-8 text-text-secondary text-[15px] leading-[1.8]">
-            공간과 사용자 사이에는 보이지 않는 수많은 이야기가 혼재합니다.
-            블랙라벨드는 그 이야기를 읽어내고, 설계를 통해 공간에 생명을
-            부여합니다. 427개 이상의 프로젝트를 통해 쌓아온 경험으로, 당신만의
-            공간을 블랙라벨로 만들어 드립니다.
+            {description ?? "공간과 사용자 사이에는 보이지 않는 수많은 이야기가 혼재합니다. 블랙라벨드는 그 이야기를 읽어내고, 설계를 통해 공간에 생명을 부여합니다. 427개 이상의 프로젝트를 통해 쌓아온 경험으로, 당신만의 공간을 블랙라벨로 만들어 드립니다."}
           </p>
           <Link
-            href="/about"
+            href={linkUrl ?? "/about"}
             className="inline-block mt-12 text-lg font-medium text-white border-b-2 border-white pb-1 tracking-wider hover:text-text-secondary hover:border-text-secondary transition-colors duration-300 w-fit"
           >
-            LEARN MORE
+            {linkText ?? "LEARN MORE"}
           </Link>
         </div>
 
