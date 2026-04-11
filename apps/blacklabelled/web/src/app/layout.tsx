@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import LayoutShell from "@/components/LayoutShell";
+import { Geist } from "next/font/google";
+import { cn } from "@/lib/utils";
+
+const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://blacklabelled.co.kr"),
@@ -20,7 +24,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ko" className="dark">
+    <html lang="ko" className={cn("dark", "font-sans", geist.variable)}>
       <head>
         <link
           rel="stylesheet"

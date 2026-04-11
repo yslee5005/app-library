@@ -24,12 +24,16 @@ FOR SELECT USING (true);
 -- soft delete 필터
 FOR SELECT USING (deleted_at IS NULL);
 
--- 향후 관리자 쓰기 정책 추가 시
+-- 관리자 쓰기 정책
+-- ⚠️ INSERT의 WITH CHECK에서 NEW. 접두사 사용 금지!
+-- Supabase RLS는 INSERT 시 NEW 참조를 지원하지 않음.
+-- 컬럼명을 직접 사용해야 함 (tenant_id, NOT NEW.tenant_id)
 FOR INSERT WITH CHECK (
   EXISTS (
     SELECT 1 FROM public.user_tenants ut
     WHERE ut.user_id = auth.uid()
-      AND ut.tenant_id = NEW.tenant_id
+      AND ut.tenant_id = tenant_id          -- ✅ 올바름
+      -- AND ut.tenant_id = NEW.tenant_id   -- ❌ 에러 발생
       AND ut.role IN ('owner', 'admin')
   )
 );
