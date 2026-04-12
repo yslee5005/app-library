@@ -10,7 +10,7 @@ export default async function DashboardPage() {
   const stats = await getAdminStats();
 
   const items = [
-    { title: "Products", value: stats.products, icon: "\u{1F4E6}" },
+    { title: "Projects", value: stats.products, icon: "\u{1F4E6}" },
     { title: "Categories", value: stats.categories, icon: "\u{1F3F7}\uFE0F" },
     { title: "Images", value: stats.images, icon: "\u{1F5BC}\uFE0F" },
     { title: "Magazines", value: stats.magazines, icon: "\u{1F4D6}" },

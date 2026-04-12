@@ -81,33 +81,31 @@ interface DbProductImage {
   deleted_at: string | null;
 }
 
-// Category name cache
-let _categoryMap: Map<string, { name: string; parent_name: string | null }> | null = null;
+// Category map type
+type CategoryMap = Map<string, { name: string; parent_name: string | null }>;
 
-async function getCategoryMap() {
-  if (_categoryMap) return _categoryMap;
-  // 자기참조 JOIN 대신 전체 로드 후 메모리에서 parent 매핑
+// 캐시 없음 — Admin에서 변경 시 즉시 반영
+async function getCategoryMap(): Promise<CategoryMap> {
   const { data } = await supabase
     .from("categories")
     .select("id, name, parent_id, is_visible");
 
-  _categoryMap = new Map();
+  const map: CategoryMap = new Map();
   if (data) {
-    // 먼저 id→name 맵 구축
     const nameById = new Map(data.map((c) => [c.id, c.name]));
     for (const c of data) {
       if (c.is_visible === false) continue;
-      _categoryMap.set(c.id, {
+      map.set(c.id, {
         name: c.name,
         parent_name: c.parent_id ? nameById.get(c.parent_id) ?? null : null,
       });
     }
   }
-  return _categoryMap;
+  return map;
 }
 
-async function dbToProduct(row: any): Promise<Product> {
-  const catMap = await getCategoryMap();
+// Sync — catMap must be pre-loaded and passed in
+function dbToProduct(row: any, catMap: CategoryMap): Product {
   const catIds = (row.product_categories || []).map((pc: any) => pc.category_id);
   const catNames = catIds.map((id: string) => catMap.get(id)?.name ?? "");
   const mainCatInfo = row.main_category_id ? catMap.get(row.main_category_id) : null;
@@ -173,52 +171,61 @@ export async function getProducts(): Promise<Product[]> {
 
   if (!data) return [];
 
-  // main 이미지를 한번에 가져오기 (product_id별 첫 번째)
-  const productIds = data.map((p: any) => p.id);
-  const { data: allImages } = await supabase
-    .from("product_images")
-    .select("product_id, sort_order, type, storage_path")
-    .in("product_id", productIds)
-    .is("deleted_at", null)
-    .order("sort_order", { ascending: true });
+  // Pre-load category map ONCE
+  const catMap = await getCategoryMap();
 
-  // product_id → main image path 매핑
+  // main 이미지 전체 조회 (type=main만, IN 절 없이)
+  const { data: mainImages } = await supabase
+    .from("product_images")
+    .select("product_id, storage_path")
+    .eq("type", "main")
+    .is("deleted_at", null);
+
   const mainImageMap = new Map<string, string>();
-  if (allImages) {
-    for (const img of allImages) {
-      if (!mainImageMap.has(img.product_id)) {
-        if (img.type === "main") {
+  if (mainImages) {
+    for (const img of mainImages) {
+      mainImageMap.set(img.product_id, img.storage_path);
+    }
+  }
+
+  // main이 없는 상품은 첫 번째 이미지로 폴백
+  if (mainImages && mainImageMap.size < data.length) {
+    const { data: firstImages } = await supabase
+      .from("product_images")
+      .select("product_id, storage_path")
+      .is("deleted_at", null)
+      .order("sort_order", { ascending: true });
+
+    if (firstImages) {
+      for (const img of firstImages) {
+        if (!mainImageMap.has(img.product_id)) {
           mainImageMap.set(img.product_id, img.storage_path);
         }
       }
     }
-    // main 타입이 없으면 첫 번째 이미지
-    for (const img of allImages) {
-      if (!mainImageMap.has(img.product_id)) {
-        mainImageMap.set(img.product_id, img.storage_path);
-      }
-    }
   }
 
-  return Promise.all(
-    data.map(async (row: any) => {
-      const product = await dbToProduct(row);
-      product.main_image = mainImageMap.get(row.id) ?? "";
-      return product;
-    })
-  );
+  // Sync map — no Promise.all needed
+  return data.map((row: any) => {
+    const product = dbToProduct(row, catMap);
+    product.main_image = mainImageMap.get(row.id) ?? "";
+    return product;
+  });
 }
 
 export async function getProduct(id: string): Promise<Product | undefined> {
-  const { data } = await supabase
-    .from("products")
-    .select(PRODUCT_DETAIL_SELECT)
-    .eq("id", id)
-    .is("deleted_at", null)
-    .single();
+  const [{ data }, catMap] = await Promise.all([
+    supabase
+      .from("products")
+      .select(PRODUCT_DETAIL_SELECT)
+      .eq("id", id)
+      .is("deleted_at", null)
+      .single(),
+    getCategoryMap(),
+  ]);
 
   if (!data) return undefined;
-  return dbToProduct(data);
+  return dbToProduct(data, catMap);
 }
 
 export async function getCategories(): Promise<Category[]> {
@@ -252,32 +259,120 @@ export async function getProjectCategories(): Promise<Category[]> {
 }
 
 export async function getFeaturedProducts(count = 6): Promise<Product[]> {
-  const products = await getProducts();
-  return products
-    .filter(
-      (p) =>
-        p.main_category_name !== "Layout_Design" &&
-        p.main_category_name !== "DEVELOPMENT"
-    )
-    .slice(0, count);
+  const catMap = await getCategoryMap();
+
+  // Find category IDs to exclude
+  const excludeCatIds = [...catMap.entries()]
+    .filter(([, v]) => v.name === "Layout_Design" || v.name === "DEVELOPMENT")
+    .map(([id]) => id);
+
+  let query = supabase
+    .from("products")
+    .select(PRODUCT_LIST_SELECT)
+    .is("deleted_at", null)
+    .eq("status", "published")
+    .order("id", { ascending: false });
+
+  // Exclude unwanted categories
+  for (const catId of excludeCatIds) {
+    query = query.neq("main_category_id", catId);
+  }
+
+  const { data } = await query.limit(count);
+  if (!data || data.length === 0) return [];
+
+  // Get main images
+  const ids = data.map((r: any) => r.id);
+  const { data: mainImgs } = await supabase
+    .from("product_images")
+    .select("product_id, storage_path")
+    .eq("type", "main")
+    .in("product_id", ids)
+    .is("deleted_at", null);
+
+  const imgMap = new Map<string, string>();
+  if (mainImgs) {
+    for (const img of mainImgs) imgMap.set(img.product_id, img.storage_path);
+  }
+
+  return data.map((row: any) => {
+    const p = dbToProduct(row, catMap);
+    p.main_image = imgMap.get(row.id) ?? "";
+    return p;
+  });
 }
 
 export async function getProductBySlug(slug: string): Promise<Product | undefined> {
-  const { data } = await supabase
-    .from("products")
-    .select(PRODUCT_DETAIL_SELECT)
-    .eq("slug", slug)
-    .is("deleted_at", null)
-    .eq("status", "published")
-    .single();
+  const [{ data }, catMap] = await Promise.all([
+    supabase
+      .from("products")
+      .select(PRODUCT_DETAIL_SELECT)
+      .eq("slug", slug)
+      .is("deleted_at", null)
+      .eq("status", "published")
+      .single(),
+    getCategoryMap(),
+  ]);
 
   if (!data) return undefined;
-  return dbToProduct(data);
+  return dbToProduct(data, catMap);
 }
 
 export async function getDisplayProducts(): Promise<Product[]> {
-  const products = await getProducts();
-  return products.filter((p) => p.main_category_name !== "DEVELOPMENT");
+  const catMap = await getCategoryMap();
+
+  // Find DEVELOPMENT category ID to exclude
+  const devCatId = [...catMap.entries()]
+    .find(([, v]) => v.name === "DEVELOPMENT")?.[0];
+
+  let query = supabase
+    .from("products")
+    .select(PRODUCT_LIST_SELECT)
+    .is("deleted_at", null)
+    .eq("status", "published")
+    .order("id", { ascending: false });
+
+  if (devCatId) {
+    query = query.neq("main_category_id", devCatId);
+  }
+
+  const { data } = await query;
+  if (!data) return [];
+
+  // main 이미지 전체 조회
+  const { data: mainImages } = await supabase
+    .from("product_images")
+    .select("product_id, storage_path")
+    .eq("type", "main")
+    .is("deleted_at", null);
+
+  const mainImageMap = new Map<string, string>();
+  if (mainImages) {
+    for (const img of mainImages) mainImageMap.set(img.product_id, img.storage_path);
+  }
+
+  // main이 없는 상품은 첫 번째 이미지로 폴백
+  if (mainImages && mainImageMap.size < data.length) {
+    const { data: firstImages } = await supabase
+      .from("product_images")
+      .select("product_id, storage_path")
+      .is("deleted_at", null)
+      .order("sort_order", { ascending: true });
+
+    if (firstImages) {
+      for (const img of firstImages) {
+        if (!mainImageMap.has(img.product_id)) {
+          mainImageMap.set(img.product_id, img.storage_path);
+        }
+      }
+    }
+  }
+
+  return data.map((row: any) => {
+    const p = dbToProduct(row, catMap);
+    p.main_image = mainImageMap.get(row.id) ?? "";
+    return p;
+  });
 }
 
 export async function getFilterCategories(): Promise<Category[]> {
@@ -291,17 +386,91 @@ export async function getFilterCategories(): Promise<Category[]> {
 }
 
 export async function getRelatedProducts(product: Product, count = 3): Promise<Product[]> {
-  const products = await getDisplayProducts();
-  return products
-    .filter((p) => p.id !== product.id && p.main_category === product.main_category)
-    .slice(0, count);
+  // Query directly with limit instead of loading ALL products
+  const catMap = await getCategoryMap();
+
+  // Find category IDs that are NOT "DEVELOPMENT"
+  const devCatIds = [...catMap.entries()]
+    .filter(([, v]) => v.name === "DEVELOPMENT")
+    .map(([id]) => id);
+
+  let query = supabase
+    .from("products")
+    .select(PRODUCT_LIST_SELECT)
+    .is("deleted_at", null)
+    .eq("status", "published")
+    .neq("id", product.id);
+
+  if (product.main_category) {
+    query = query.eq("main_category_id", product.main_category);
+  }
+
+  const { data } = await query.order("id", { ascending: false }).limit(count);
+  if (!data || data.length === 0) return [];
+
+  // Get main images for these few products
+  const ids = data.map((r: any) => r.id);
+  const { data: mainImgs } = await supabase
+    .from("product_images")
+    .select("product_id, storage_path")
+    .eq("type", "main")
+    .in("product_id", ids)
+    .is("deleted_at", null);
+
+  const imgMap = new Map<string, string>();
+  if (mainImgs) {
+    for (const img of mainImgs) imgMap.set(img.product_id, img.storage_path);
+  }
+
+  return data
+    .map((row: any) => {
+      const p = dbToProduct(row, catMap);
+      p.main_image = imgMap.get(row.id) ?? "";
+      return p;
+    })
+    .filter((p) => p.main_category_name !== "DEVELOPMENT");
 }
 
 export async function getLayoutDesignProducts(): Promise<Product[]> {
-  const products = await getProducts();
-  return products
-    .filter((p) => p.main_category_name === "Layout_Design")
-    .sort((a, b) => b.id.localeCompare(a.id));
+  const catMap = await getCategoryMap();
+
+  // Find the Layout_Design category ID
+  const layoutCatId = [...catMap.entries()]
+    .find(([, v]) => v.name === "Layout_Design")?.[0];
+
+  if (!layoutCatId) return [];
+
+  const { data } = await supabase
+    .from("products")
+    .select(PRODUCT_LIST_SELECT)
+    .is("deleted_at", null)
+    .eq("status", "published")
+    .eq("main_category_id", layoutCatId)
+    .order("id", { ascending: false });
+
+  if (!data) return [];
+
+  // Get main images
+  const ids = data.map((r: any) => r.id);
+  const { data: mainImgs } = ids.length > 0
+    ? await supabase
+        .from("product_images")
+        .select("product_id, storage_path")
+        .eq("type", "main")
+        .in("product_id", ids)
+        .is("deleted_at", null)
+    : { data: [] };
+
+  const imgMap = new Map<string, string>();
+  if (mainImgs) {
+    for (const img of mainImgs) imgMap.set(img.product_id, img.storage_path);
+  }
+
+  return data.map((row: any) => {
+    const p = dbToProduct(row, catMap);
+    p.main_image = imgMap.get(row.id) ?? "";
+    return p;
+  });
 }
 
 // ── Page Content (CMS) ───────────────────────────────────

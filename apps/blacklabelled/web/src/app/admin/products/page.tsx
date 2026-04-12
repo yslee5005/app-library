@@ -19,7 +19,7 @@ import {
 } from "@/lib/admin-actions";
 import { getImageUrl } from "@/lib/data";
 
-const ITEMS_PER_PAGE = 20;
+const ITEMS_PER_PAGE = 10;
 
 export default async function ProductsPage({
   searchParams,
@@ -58,10 +58,10 @@ export default async function ProductsPage({
     <div>
       {/* Header */}
       <div className="mb-6 flex items-center justify-between">
-        <h1 className="text-2xl font-bold text-zinc-100">Products</h1>
+        <h1 className="text-2xl font-bold text-zinc-100">Projects</h1>
         <Link href="/admin/products/new">
           <Button className="bg-zinc-100 text-zinc-900 hover:bg-zinc-200">
-            New Product
+            New Project
           </Button>
         </Link>
       </div>
@@ -99,7 +99,7 @@ export default async function ProductsPage({
                   colSpan={6}
                   className="h-24 text-center text-zinc-500"
                 >
-                  No products found.
+                  No projects found.
                 </TableCell>
               </TableRow>
             ) : (
@@ -159,7 +159,7 @@ export default async function ProductsPage({
       {totalPages > 1 && (
         <div className="mt-4 flex items-center justify-between">
           <p className="text-sm text-zinc-500">
-            Page {page} of {totalPages} ({total} products)
+            Page {page} of {totalPages} ({total} projects)
           </p>
           <div className="flex gap-2">
             {page > 1 && (

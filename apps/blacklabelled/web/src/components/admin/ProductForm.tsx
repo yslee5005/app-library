@@ -134,7 +134,7 @@ export default function ProductForm({
           if ("error" in result) {
             toast.error(result.error);
           } else {
-            toast.success("Product created");
+            toast.success("Project created");
             router.push(`/admin/products/${result.id}/edit`);
           }
         } else if (productId) {
@@ -142,7 +142,7 @@ export default function ProductForm({
           if ("error" in result) {
             toast.error(result.error);
           } else {
-            toast.success("Product updated");
+            toast.success("Project updated");
             router.refresh();
           }
         }
@@ -161,7 +161,7 @@ export default function ProductForm({
         if ("error" in result) {
           toast.error(result.error);
         } else {
-          toast.success("Product deleted");
+          toast.success("Project deleted");
           router.push("/admin/products");
         }
         setShowDeleteDialog(false);
@@ -176,7 +176,7 @@ export default function ProductForm({
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
         <Card className="border-zinc-800 bg-zinc-900">
           <CardHeader>
-            <CardTitle className="text-zinc-100">Product Details</CardTitle>
+            <CardTitle className="text-zinc-100">Project Details</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             {/* Name */}
@@ -188,7 +188,7 @@ export default function ProductForm({
                 id="name"
                 {...register("name")}
                 className="border-zinc-700 bg-zinc-800 text-zinc-100 placeholder:text-zinc-500"
-                placeholder="Product name"
+                placeholder="Project name"
               />
               {errors.name && (
                 <p className="text-sm text-red-400">{errors.name.message}</p>
@@ -224,7 +224,7 @@ export default function ProductForm({
                 id="description"
                 {...register("description")}
                 className="min-h-[120px] border-zinc-700 bg-zinc-800 text-zinc-100 placeholder:text-zinc-500"
-                placeholder="Product description"
+                placeholder="Project description"
               />
             </div>
 
@@ -290,7 +290,7 @@ export default function ProductForm({
             {saving
               ? "Saving..."
               : mode === "create"
-                ? "Create Product"
+                ? "Create Project"
                 : "Save Changes"}
           </Button>
 
@@ -321,9 +321,9 @@ export default function ProductForm({
       <Dialog open={showDeleteDialog} onOpenChange={setShowDeleteDialog}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Delete Product</DialogTitle>
+            <DialogTitle>Delete Project</DialogTitle>
             <DialogDescription>
-              Are you sure you want to delete this product? This action can be
+              Are you sure you want to delete this project? This action can be
               undone by an administrator.
             </DialogDescription>
           </DialogHeader>

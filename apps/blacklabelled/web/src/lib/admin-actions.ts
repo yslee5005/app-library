@@ -2,6 +2,82 @@
 
 import { createSupabaseServerClient } from "./supabase-server";
 import { createSupabaseServerClientPublic } from "./supabase-server";
+import { redirect } from "next/navigation";
+import { revalidatePath } from "next/cache";
+
+// ── Auth ─────────────────────────────────────────────────
+
+export async function loginWithPassword(formData: FormData) {
+  const email = formData.get("email") as string;
+  const password = formData.get("password") as string;
+
+  if (!email || !password) {
+    return { error: "Email and password are required" };
+  }
+
+  const supabase = await createSupabaseServerClientPublic();
+  const { error } = await supabase.auth.signInWithPassword({ email, password });
+
+  if (error) {
+    return { error: error.message };
+  }
+
+  // Check admin role
+  const { data: { user } } = await supabase.auth.getUser();
+  if (!user) {
+    return { error: "User not found" };
+  }
+
+  const { data: tenantData } = await supabase
+    .from("user_tenants")
+    .select("role")
+    .eq("user_id", user.id)
+    .in("role", ["owner", "admin"])
+    .limit(1)
+    .single();
+
+  if (!tenantData) {
+    await supabase.auth.signOut();
+    return { error: "You do not have admin access." };
+  }
+
+  redirect("/admin/dashboard");
+}
+
+export async function loginWithMagicLink(formData: FormData) {
+  const email = formData.get("email") as string;
+  const origin = formData.get("origin") as string;
+
+  if (!email) {
+    return { error: "Email is required" };
+  }
+
+  const supabase = await createSupabaseServerClientPublic();
+  const { error } = await supabase.auth.signInWithOtp({
+    email,
+    options: {
+      emailRedirectTo: `${origin}/admin/auth/callback`,
+    },
+  });
+
+  if (error) {
+    return { error: error.message };
+  }
+
+  return { success: true };
+}
+
+export async function logout() {
+  const supabase = await createSupabaseServerClientPublic();
+  await supabase.auth.signOut();
+  redirect("/admin/login");
+}
+
+export async function getSessionUser() {
+  const supabase = await createSupabaseServerClientPublic();
+  const { data: { user } } = await supabase.auth.getUser();
+  return user;
+}
 
 // ── Tenant helper ────────────────────────────────────────
 
@@ -133,7 +209,7 @@ export async function getAdminProducts(params: {
   const tenantId = await getTenantId();
 
   const page = params.page ?? 1;
-  const limit = params.limit ?? 20;
+  const limit = params.limit ?? 10;
   const offset = (page - 1) * limit;
 
   // Build product query
@@ -305,6 +381,9 @@ export async function createProduct(
     return { error: error.message };
   }
 
+  revalidatePath("/");
+  revalidatePath("/projects");
+  revalidatePath("/map");
   return { id: data.id };
 }
 
@@ -347,6 +426,9 @@ export async function updateProduct(
     return { error: error.message };
   }
 
+  revalidatePath("/");
+  revalidatePath("/projects");
+  revalidatePath("/map");
   return { success: true };
 }
 
@@ -374,6 +456,9 @@ export async function deleteProduct(
     .eq("product_id", id)
     .is("deleted_at", null);
 
+  revalidatePath("/");
+  revalidatePath("/projects");
+  revalidatePath("/map");
   return { success: true };
 }
 
@@ -457,6 +542,8 @@ export async function uploadProductImage(
     return { error: insertError?.message ?? "Failed to save image record" };
   }
 
+  revalidatePath("/");
+  revalidatePath("/projects");
   return data as AdminProductImage;
 }
 
@@ -481,6 +568,7 @@ export async function reorderProductImages(
     }
   }
 
+  revalidatePath("/projects");
   return { success: true };
 }
 
@@ -501,6 +589,8 @@ export async function deleteProductImage(
     return { error: error.message };
   }
 
+  revalidatePath("/");
+  revalidatePath("/projects");
   return { success: true };
 }
 
@@ -541,6 +631,8 @@ export async function setImageType(
     return { error: error.message };
   }
 
+  revalidatePath("/");
+  revalidatePath("/projects");
   return { success: true };
 }
 
@@ -621,6 +713,9 @@ export async function updateCategory(
     return { error: error.message };
   }
 
+  revalidatePath("/");
+  revalidatePath("/projects");
+  revalidatePath("/map");
   return { success: true };
 }
 
@@ -643,6 +738,9 @@ export async function batchUpdateCategories(
     }
   }
 
+  revalidatePath("/");
+  revalidatePath("/projects");
+  revalidatePath("/map");
   return { success: true };
 }
 
@@ -668,22 +766,26 @@ export async function updatePageContent(
 ): Promise<{ success: true } | { error: string }> {
   const supabase = await createSupabaseServerClient();
 
+  // Debug: check if server has authenticated session
+  const { data: { user } } = await supabase.auth.getUser();
+  if (!user) {
+    return { error: "Not authenticated. Please log in again." };
+  }
+
   const { error } = await supabase
     .from("page_content")
-    .upsert(
-      {
-        page_key: pageKey,
-        content,
-        updated_at: new Date().toISOString(),
-      },
-      { onConflict: "page_key" }
-    );
+    .update({
+      content,
+      updated_at: new Date().toISOString(),
+    })
+    .eq("page_key", pageKey);
 
   if (error) {
     console.error("updatePageContent error:", error);
     return { error: error.message };
   }
 
+  revalidatePath("/");
   return { success: true };
 }
 
@@ -809,6 +911,24 @@ export async function deleteMagazine(
   }
 
   return { success: true };
+}
+
+// ── Product Images - By Product ID ──────────────────────
+
+export async function getProductImages(
+  productId: string,
+  offset = 0,
+  limit = 4
+): Promise<{ images: { id: string; storage_path: string; type: string; sort_order: number }[]; total: number }> {
+  const supabase = await createSupabaseServerClient();
+  const { data, count } = await supabase
+    .from("product_images")
+    .select("id, storage_path, type, sort_order", { count: "exact" })
+    .eq("product_id", productId)
+    .is("deleted_at", null)
+    .order("sort_order")
+    .range(offset, offset + limit - 1);
+  return { images: data ?? [], total: count ?? 0 };
 }
 
 export async function uploadMagazineThumbnail(

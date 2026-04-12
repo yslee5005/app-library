@@ -2,12 +2,12 @@
 
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { supabase } from "@/lib/supabase";
 import { useEffect, useState } from "react";
+import { logout, getSessionUser } from "@/lib/admin-actions";
 
 const navItems = [
   { href: "/admin/dashboard", label: "Dashboard", icon: "\u{1F4CA}", match: "/admin/dashboard" },
-  { href: "/admin/products", label: "Products", icon: "\u{1F4E6}", match: "/admin/products" },
+  { href: "/admin/products", label: "Projects", icon: "\u{1F4E6}", match: "/admin/products" },
   { href: "/admin/categories", label: "Categories", icon: "\u{1F3F7}\uFE0F", match: "/admin/categories" },
   { href: "/admin/pages/home", label: "Pages", icon: "\u{1F4C4}", match: "/admin/pages" },
   { href: "/admin/magazines", label: "Magazines", icon: "\u{1F4D6}", match: "/admin/magazines" },
@@ -24,24 +24,24 @@ export default function AdminLayout({
   const [authChecked, setAuthChecked] = useState(false);
 
   useEffect(() => {
-    // Skip auth check on login page
+    // Skip auth check on login/callback pages
     if (pathname.startsWith("/admin/login") || pathname.startsWith("/admin/auth")) {
       setAuthChecked(true);
       return;
     }
-    supabase.auth.getUser().then(({ data }) => {
-      if (!data.user) {
+    // Server action으로 쿠키 기반 세션 확인
+    getSessionUser().then((user) => {
+      if (!user) {
         router.replace("/admin/login");
       } else {
-        setUserEmail(data.user.email ?? null);
+        setUserEmail(user.email ?? null);
         setAuthChecked(true);
       }
     });
   }, [pathname, router]);
 
   const handleLogout = async () => {
-    await supabase.auth.signOut();
-    router.push("/admin/login");
+    await logout();
   };
 
   // Login/callback pages don't need the admin shell

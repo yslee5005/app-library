@@ -62,7 +62,7 @@ export default function ProductsToolbar({
   return (
     <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
       <Input
-        placeholder="Search products..."
+        placeholder="Search projects..."
         value={searchValue}
         onChange={handleSearchChange}
         className="max-w-sm border-zinc-700 bg-zinc-800 text-zinc-100 placeholder:text-zinc-500"

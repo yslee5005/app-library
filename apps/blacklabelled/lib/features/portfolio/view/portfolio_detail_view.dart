@@ -27,19 +27,10 @@ class _PortfolioDetailViewState extends ConsumerState<PortfolioDetailView> {
     super.dispose();
   }
 
-  Future<void> _toggleScrap() async {
-    await ref.read(scrapRepositoryProvider).toggle('project', widget.id);
-    ref.invalidate(isScrappedProvider);
-    ref.invalidate(scrapsProvider);
-  }
-
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final projectAsync = ref.watch(projectByIdProvider(widget.id));
-    final isScrappedAsync = ref.watch(
-      isScrappedProvider((contentType: 'project', contentId: widget.id)),
-    );
     final allProjectsAsync = ref.watch(allProjectsProvider);
 
     return Scaffold(
@@ -48,20 +39,6 @@ class _PortfolioDetailViewState extends ConsumerState<PortfolioDetailView> {
           icon: const Icon(Icons.arrow_back),
           onPressed: () => context.pop(),
         ),
-        actions: [
-          IconButton(
-            icon: Icon(
-              isScrappedAsync.valueOrNull == true
-                  ? Icons.favorite
-                  : Icons.favorite_border,
-              color:
-                  isScrappedAsync.valueOrNull == true
-                      ? Colors.red
-                      : theme.colorScheme.primary,
-            ),
-            onPressed: _toggleScrap,
-          ),
-        ],
       ),
       body: projectAsync.when(
         data: (project) {

@@ -28,12 +28,6 @@ class _FurnitureDetailViewState extends ConsumerState<FurnitureDetailView> {
     super.dispose();
   }
 
-  Future<void> _toggleScrap() async {
-    await ref.read(scrapRepositoryProvider).toggle('furniture', widget.id);
-    ref.invalidate(isScrappedProvider);
-    ref.invalidate(scrapsProvider);
-  }
-
   Future<void> _launchPhone() async {
     final uri = Uri.parse('tel:010-9887-2826');
     if (await canLaunchUrl(uri)) {
@@ -52,9 +46,6 @@ class _FurnitureDetailViewState extends ConsumerState<FurnitureDetailView> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final furnitureAsync = ref.watch(furnitureByIdProvider(widget.id));
-    final isScrappedAsync = ref.watch(
-      isScrappedProvider((contentType: 'furniture', contentId: widget.id)),
-    );
 
     return Scaffold(
       appBar: AppBar(
@@ -62,20 +53,6 @@ class _FurnitureDetailViewState extends ConsumerState<FurnitureDetailView> {
           icon: const Icon(Icons.arrow_back),
           onPressed: () => context.pop(),
         ),
-        actions: [
-          IconButton(
-            icon: Icon(
-              isScrappedAsync.valueOrNull == true
-                  ? Icons.favorite
-                  : Icons.favorite_border,
-              color:
-                  isScrappedAsync.valueOrNull == true
-                      ? Colors.red
-                      : theme.colorScheme.primary,
-            ),
-            onPressed: _toggleScrap,
-          ),
-        ],
       ),
       body: furnitureAsync.when(
         data: (furniture) {

@@ -2,6 +2,9 @@ import { getDisplayProducts, getFilterCategories } from "@/lib/data";
 import type { Metadata } from "next";
 import ProjectsGrid from "@/components/ProjectsGrid";
 
+// Admin에서 카테고리 변경 시 즉시 반영
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
   title: "PROJECTS | BLACKLABELLED",
   description:

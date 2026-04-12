@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { getMapProducts, getFilterCategories } from "@/lib/data";
 import MapContent from "@/components/MapContent";
 
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
   title: "MAP | BLACKLABELLED",
   description:

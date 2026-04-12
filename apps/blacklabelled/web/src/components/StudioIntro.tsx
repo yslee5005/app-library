@@ -5,8 +5,8 @@ import { useScrollReveal } from "@/hooks/useScrollReveal";
 import ImageCrossfade from "./ImageCrossfade";
 
 interface StudioIntroProps {
-  project1?: { id: string; name: string; images: string[] };
-  project2?: { id: string; name: string; images: string[] };
+  project1?: { id: string; slug: string; name: string; images: string[] };
+  project2?: { id: string; slug: string; name: string; images: string[] };
   heading?: string;
   description?: string;
   linkText?: string;
@@ -60,7 +60,7 @@ export default function StudioIntro({ project1, project2, heading, description, 
           style={{ transitionTimingFunction: "cubic-bezier(0.19, 1, 0.22, 1)" }}
         >
           {project1 ? (
-            <>
+            <Link href={`/projects/${encodeURIComponent(project1.slug)}`} className="block group cursor-pointer">
               <ImageCrossfade
                 images={project1.images.slice(0, 2)}
                 interval={3000}
@@ -68,13 +68,13 @@ export default function StudioIntro({ project1, project2, heading, description, 
               />
               <div className="mt-4">
                 <p className="text-[11px] text-text-muted tracking-[0.15em] uppercase">
-                  PROJECT NO.{project1.id}
+                  PROJECT NO.{project1.id.slice(0, 8)}
                 </p>
-                <h3 className="text-xl text-text-primary font-light mt-1">
+                <h3 className="text-xl text-text-primary font-light mt-1 group-hover:text-white transition-colors">
                   {project1.name} _ by.BLACKLABELLED
                 </h3>
               </div>
-            </>
+            </Link>
           ) : (
             <div className="aspect-[4/3] bg-bg-card" />
           )}
@@ -90,7 +90,7 @@ export default function StudioIntro({ project1, project2, heading, description, 
           style={{ transitionTimingFunction: "cubic-bezier(0.19, 1, 0.22, 1)" }}
         >
           {project2 ? (
-            <>
+            <Link href={`/projects/${encodeURIComponent(project2.slug)}`} className="block group cursor-pointer">
               <ImageCrossfade
                 images={project2.images.slice(0, 2)}
                 interval={3500}
@@ -98,13 +98,13 @@ export default function StudioIntro({ project1, project2, heading, description, 
               />
               <div className="mt-4">
                 <p className="text-[11px] text-text-muted tracking-[0.15em] uppercase">
-                  PROJECT NO.{project2.id}
+                  PROJECT NO.{project2.id.slice(0, 8)}
                 </p>
-                <h3 className="text-xl text-text-primary font-light mt-1">
+                <h3 className="text-xl text-text-primary font-light mt-1 group-hover:text-white transition-colors">
                   {project2.name}
                 </h3>
               </div>
-            </>
+            </Link>
           ) : (
             <div className="aspect-[4/3] bg-bg-card" />
           )}

@@ -25,7 +25,7 @@ export default async function EditProductPage({
   return (
     <div>
       <h1 className="mb-6 text-2xl font-bold text-zinc-100">
-        Edit Product:{" "}
+        Edit Project:{" "}
         <span className="text-zinc-400">{product.name}</span>
       </h1>
       <div className="max-w-2xl space-y-6">
