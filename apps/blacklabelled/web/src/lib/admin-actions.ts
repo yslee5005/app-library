@@ -368,7 +368,7 @@ export async function createProduct(
       price,
       status,
       main_category_id: mainCategoryId,
-      published_at: status === "published" ? new Date().toISOString() : null,
+      published_at: new Date().toISOString(),
     })
     .select("id")
     .single();
@@ -379,6 +379,14 @@ export async function createProduct(
     }
     console.error("createProduct error:", error);
     return { error: error.message };
+  }
+
+  // M:N 관계: main_category_id를 product_categories에도 INSERT
+  if (mainCategoryId && data) {
+    await supabase.from("product_categories").insert({
+      product_id: data.id,
+      category_id: mainCategoryId,
+    });
   }
 
   revalidatePath("/");
@@ -416,7 +424,7 @@ export async function updateProduct(
       price,
       status,
       main_category_id: mainCategoryId,
-      published_at: status === "published" ? new Date().toISOString() : null,
+      published_at: new Date().toISOString(),
       updated_at: new Date().toISOString(),
     })
     .eq("id", id);
@@ -424,6 +432,15 @@ export async function updateProduct(
   if (error) {
     console.error("updateProduct error:", error);
     return { error: error.message };
+  }
+
+  // M:N 관계: 카테고리 변경 시 product_categories 갱신
+  if (mainCategoryId) {
+    await supabase.from("product_categories").delete().eq("product_id", id);
+    await supabase.from("product_categories").insert({
+      product_id: id,
+      category_id: mainCategoryId,
+    });
   }
 
   revalidatePath("/");

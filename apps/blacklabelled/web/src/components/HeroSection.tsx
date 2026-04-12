@@ -35,8 +35,8 @@ export default function HeroSection({ backgroundImage, title, subtitle }: HeroSe
         className="absolute inset-0 bg-cover bg-center transition-[mask-position,_-webkit-mask-position] duration-100"
         style={{
           backgroundImage: backgroundImage ? `url(${backgroundImage})` : undefined,
-          maskImage: `radial-gradient(circle 250px at ${mousePos.x}% ${mousePos.y}%, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.2) 60%, transparent 100%)`,
-          WebkitMaskImage: `radial-gradient(circle 250px at ${mousePos.x}% ${mousePos.y}%, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.2) 60%, transparent 100%)`,
+          maskImage: `radial-gradient(circle 350px at ${mousePos.x}% ${mousePos.y}%, rgba(0,0,0,1) 0%, rgba(0,0,0,0.6) 50%, transparent 100%)`,
+          WebkitMaskImage: `radial-gradient(circle 350px at ${mousePos.x}% ${mousePos.y}%, rgba(0,0,0,1) 0%, rgba(0,0,0,0.6) 50%, transparent 100%)`,
         }}
       />
 

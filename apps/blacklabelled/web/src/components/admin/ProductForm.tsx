@@ -55,6 +55,7 @@ interface ProductFormProps {
   productId?: string;
   defaultValues?: Partial<ProductFormValues>;
   categories: Category[];
+  onCreated?: (id: string) => void;
 }
 
 function generateSlug(name: string): string {
@@ -71,6 +72,7 @@ export default function ProductForm({
   productId,
   defaultValues,
   categories,
+  onCreated,
 }: ProductFormProps) {
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
@@ -134,8 +136,12 @@ export default function ProductForm({
           if ("error" in result) {
             toast.error(result.error);
           } else {
-            toast.success("Project created");
-            router.push(`/admin/products/${result.id}/edit`);
+            toast.success("Project created — now add images below");
+            if (onCreated) {
+              onCreated(result.id);
+            } else {
+              router.push(`/admin/products/${result.id}/edit`);
+            }
           }
         } else if (productId) {
           const result = await updateProduct(productId, formData);

@@ -247,6 +247,7 @@ export default function ImageManager({
         toast.error(result.error);
         setImages(initialImages); // rollback
       } else {
+        toast.success("Order saved");
         router.refresh();
       }
     });
@@ -303,6 +304,7 @@ export default function ImageManager({
           <CardTitle className="text-zinc-100">
             Images ({images.length})
           </CardTitle>
+          <p className="text-xs text-zinc-500">Images are saved automatically when uploaded, reordered, or deleted.</p>
         </CardHeader>
         <CardContent className="space-y-4">
           {/* Upload zone */}
