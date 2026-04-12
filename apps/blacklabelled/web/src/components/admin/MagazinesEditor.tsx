@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
+import { Badge } from "@/components/ui/badge";
 import {
   Table,
   TableHeader,
@@ -194,6 +195,7 @@ export default function MagazinesEditor({
                 <TableHead className="w-16">Thumb</TableHead>
                 <TableHead>Title</TableHead>
                 <TableHead>Summary</TableHead>
+                <TableHead className="w-24">Status</TableHead>
                 <TableHead className="w-28">Date</TableHead>
                 <TableHead className="w-32 text-right">Actions</TableHead>
               </TableRow>
@@ -202,7 +204,7 @@ export default function MagazinesEditor({
               {magazines.length === 0 && (
                 <TableRow>
                   <TableCell
-                    colSpan={5}
+                    colSpan={6}
                     className="py-8 text-center text-zinc-600"
                   >
                     No magazines yet.
@@ -233,6 +235,22 @@ export default function MagazinesEditor({
                   </TableCell>
                   <TableCell className="text-zinc-400 max-w-xs truncate">
                     {mag.summary ?? "-"}
+                  </TableCell>
+                  <TableCell>
+                    <div className="flex items-center gap-1">
+                      <Badge
+                        variant={
+                          mag.status === "published" ? "success" : "warning"
+                        }
+                      >
+                        {mag.status === "published" ? "Published" : "Draft"}
+                      </Badge>
+                      {mag.ai_generated && (
+                        <Badge variant="secondary" className="bg-blue-500/10 text-blue-400 border-transparent">
+                          AI
+                        </Badge>
+                      )}
+                    </div>
                   </TableCell>
                   <TableCell className="text-zinc-400 tabular-nums">
                     {mag.date?.split("T")[0] ?? "-"}

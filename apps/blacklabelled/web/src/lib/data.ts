@@ -616,3 +616,35 @@ export async function getBeforeAfterPair(product: Product): Promise<BeforeAfterP
   }
   return null;
 }
+
+// ── Magazines (public) ──────────────────────────────────
+
+export interface Magazine {
+  id: string;
+  title: string;
+  summary: string | null;
+  html_content: string | null;
+  slug: string | null;
+  date: string | null;
+  thumbnail_path: string | null;
+  tags: string[] | null;
+}
+
+export async function getMagazines(): Promise<Magazine[]> {
+  const { data } = await supabase
+    .from("magazines")
+    .select("id, title, summary, html_content, slug, date, thumbnail_path, tags")
+    .eq("status", "published")
+    .order("date", { ascending: false });
+  return data ?? [];
+}
+
+export async function getMagazineBySlug(slug: string): Promise<Magazine | null> {
+  const { data } = await supabase
+    .from("magazines")
+    .select("id, title, summary, html_content, slug, date, thumbnail_path, tags")
+    .eq("slug", slug)
+    .eq("status", "published")
+    .single();
+  return data ?? null;
+}

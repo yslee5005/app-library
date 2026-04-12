@@ -814,6 +814,8 @@ export interface AdminMagazine {
   summary: string | null;
   thumbnail_path: string | null;
   date: string;
+  status: string | null;
+  ai_generated: boolean | null;
   created_at: string;
   updated_at: string;
 }
@@ -824,7 +826,7 @@ export async function getAdminMagazines(): Promise<AdminMagazine[]> {
 
   const { data, error } = await supabase
     .from("magazines")
-    .select("id, title, summary, thumbnail_path, date, created_at, updated_at")
+    .select("id, title, summary, thumbnail_path, date, status, ai_generated, created_at, updated_at")
     .eq("tenant_id", tenantId)
     .order("date", { ascending: false });
 
@@ -991,4 +993,101 @@ export async function uploadMagazineThumbnail(
   }
 
   return { path: storagePath };
+}
+
+// ── AI Magazine ─────────────────────────────────────────
+
+function generateMagazineSlug(title: string): string {
+  const randomSuffix = Math.random().toString(36).substring(2, 6);
+  const base = title
+    .trim()
+    .replace(/\s+/g, "-")
+    .replace(/[^\w가-힣\-]/g, "")
+    .toLowerCase();
+  return `${base}-${randomSuffix}`;
+}
+
+export async function createAIMagazine(params: {
+  title: string;
+  htmlContent: string;
+  summary: string;
+  projectId: string;
+  tags: string[];
+  seoKeywords: string[];
+}): Promise<{ id: string } | { error: string }> {
+  const supabase = await createSupabaseServerClient();
+  const tenantId = await getTenantId();
+
+  const slug = generateMagazineSlug(params.title);
+
+  const { data, error } = await supabase
+    .from("magazines")
+    .insert({
+      tenant_id: tenantId,
+      title: params.title,
+      summary: params.summary,
+      html_content: params.htmlContent,
+      status: "draft",
+      project_id: params.projectId,
+      tags: params.tags,
+      seo_keywords: params.seoKeywords,
+      slug,
+      ai_generated: true,
+      date: new Date().toISOString().split("T")[0],
+    })
+    .select("id")
+    .single();
+
+  if (error) {
+    console.error("createAIMagazine error:", error);
+    return { error: error.message };
+  }
+
+  revalidatePath("/admin/magazines");
+  return { id: data.id };
+}
+
+export async function updateMagazineContent(
+  id: string,
+  htmlContent: string
+): Promise<{ success: true } | { error: string }> {
+  const supabase = await createSupabaseServerClient();
+
+  const { error } = await supabase
+    .from("magazines")
+    .update({
+      html_content: htmlContent,
+      updated_at: new Date().toISOString(),
+    })
+    .eq("id", id);
+
+  if (error) {
+    console.error("updateMagazineContent error:", error);
+    return { error: error.message };
+  }
+
+  revalidatePath("/admin/magazines");
+  return { success: true };
+}
+
+export async function publishMagazine(
+  id: string
+): Promise<{ success: true } | { error: string }> {
+  const supabase = await createSupabaseServerClient();
+
+  const { error } = await supabase
+    .from("magazines")
+    .update({
+      status: "published",
+      updated_at: new Date().toISOString(),
+    })
+    .eq("id", id);
+
+  if (error) {
+    console.error("publishMagazine error:", error);
+    return { error: error.message };
+  }
+
+  revalidatePath("/admin/magazines");
+  return { success: true };
 }

@@ -9,6 +9,7 @@ const NAV_LINKS = [
   { href: "/map", label: "MAP" },
   { href: "/about", label: "ABOUT" },
   { href: "/process", label: "PROCESS" },
+  { href: "/magazines", label: "MAGAZINE" },
   { href: "/contact", label: "CONTACT" },
 ];
 
@@ -178,6 +179,7 @@ export default function Navigation() {
               <div className="flex-1 flex flex-wrap content-center gap-x-20 gap-y-6 pl-10">
                 {[
                   { href: "/projects", label: "Projects", count: 427 },
+                  { href: "/magazines", label: "Magazine" },
                   { href: "/contact", label: "Contact" },
                   { href: "/map", label: "Map" },
                 ].map((item, i) => (
