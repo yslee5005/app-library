@@ -6,13 +6,13 @@ import Footer from "./Footer";
 
 export default function LayoutShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
-  const isLilsquare = pathname.startsWith("/lilsquare");
+  const hideShell = pathname.startsWith("/lilsquare") || pathname.startsWith("/admin");
 
   return (
     <>
-      {!isLilsquare && <Navigation />}
+      {!hideShell && <Navigation />}
       <main className="flex-1">{children}</main>
-      {!isLilsquare && <Footer />}
+      {!hideShell && <Footer />}
     </>
   );
 }

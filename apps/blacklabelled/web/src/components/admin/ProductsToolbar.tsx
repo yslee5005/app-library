@@ -73,12 +73,29 @@ export default function ProductsToolbar({
         className="max-w-[200px] border-zinc-700 bg-zinc-800 text-zinc-100"
       >
         <option value="">All Categories</option>
-        {categories.map((cat) => (
-          <option key={cat.id} value={cat.id}>
-            {cat.parent_name ? `${cat.parent_name} / ` : ""}
-            {cat.name}
-          </option>
-        ))}
+        {(() => {
+          const groups = new Map<string, Category[]>();
+          const noParent: Category[] = [];
+          categories.forEach((cat) => {
+            if (cat.parent_name) {
+              if (!groups.has(cat.parent_name)) groups.set(cat.parent_name, []);
+              groups.get(cat.parent_name)!.push(cat);
+            } else {
+              noParent.push(cat);
+            }
+          });
+          return (
+            <>
+              {Array.from(groups.entries()).map(([parent, children]) => (
+                <optgroup key={parent} label={parent}>
+                  {children.map((cat) => (
+                    <option key={cat.id} value={cat.id}>{cat.name}</option>
+                  ))}
+                </optgroup>
+              ))}
+            </>
+          );
+        })()}
       </Select>
     </div>
   );

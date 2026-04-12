@@ -19,28 +19,33 @@ export default function ProjectsGrid({
   const [activeFilter, setActiveFilter] = useState<string | null>(null);
   const [visibleCount, setVisibleCount] = useState(ITEMS_PER_PAGE);
 
-  // 3 카테고리만 표시: Residence, Layout Design, Commercial
-  const ALLOWED_CATEGORIES = ["residence", "layout_design", "commercial"];
-  const filters = useMemo(() => {
-    const filtered = categories.filter((c) =>
-      ALLOWED_CATEGORIES.includes(c.name.toLowerCase().replace(/ /g, "_"))
-    );
-    const sorted = filtered.sort((a, b) => b.product_count - a.product_count);
-    return [
-      { id: null, name: "ALL" },
-      ...sorted.map((c) => ({
-        id: c.id,
-        name: c.name.toUpperCase().replace(/_/g, " "),
-      })),
-    ];
+  // 카테고리를 parent_name별로 그룹핑
+  const PARENT_GROUPS = ["PROJECT", "FURNITURE"];
+  const groupedFilters = useMemo(() => {
+    const groups: { parent: string; children: { id: string; name: string }[] }[] = [];
+    for (const parent of PARENT_GROUPS) {
+      const children = categories
+        .filter(
+          (c) =>
+            c.parent_name === parent &&
+            c.is_visible !== false &&
+            c.name !== "DEVELOPMENT"
+        )
+        .map((c) => ({
+          id: c.id,
+          name: c.name.replace(/_/g, " "),
+        }));
+      if (children.length > 0) {
+        groups.push({ parent, children });
+      }
+    }
+    return groups;
   }, [categories]);
 
-  // furniture 제외 — 허용된 카테고리만
+  // 모든 표시 카테고리 ID
   const allowedCategoryIds = useMemo(() => {
-    return categories
-      .filter((c) => ALLOWED_CATEGORIES.includes(c.name.toLowerCase().replace(/ /g, "_")))
-      .map((c) => c.id);
-  }, [categories]);
+    return groupedFilters.flatMap((g) => g.children.map((c) => c.id));
+  }, [groupedFilters]);
 
   const filtered = useMemo(() => {
     const base = products.filter((p) =>
@@ -60,20 +65,38 @@ export default function ProjectsGrid({
 
   return (
     <>
-      {/* Filter bar */}
-      <div className="mt-10 flex flex-wrap justify-center gap-x-6 gap-y-3">
-        {filters.map((f) => (
-          <button
-            key={f.id ?? "all"}
-            onClick={() => handleFilter(f.id)}
-            className={`text-xs tracking-[0.15em] font-body pb-2 border-b-2 transition-all duration-300 ${
-              activeFilter === f.id
-                ? "text-gold border-gold"
-                : "text-text-muted border-transparent hover:text-text-primary"
-            }`}
-          >
-            {f.name}
-          </button>
+      {/* Filter bar — hierarchy */}
+      <div className="mt-10 flex flex-wrap justify-center gap-x-4 gap-y-3 items-center">
+        <button
+          onClick={() => handleFilter(null)}
+          className={`text-xs tracking-[0.15em] font-body pb-2 border-b-2 transition-all duration-300 ${
+            activeFilter === null
+              ? "text-gold border-gold"
+              : "text-text-muted border-transparent hover:text-text-primary"
+          }`}
+        >
+          ALL
+        </button>
+
+        {groupedFilters.map((group) => (
+          <div key={group.parent} className="flex items-center gap-x-3">
+            <span className="text-[10px] tracking-[0.2em] text-zinc-600 uppercase select-none px-1">
+              {group.parent}
+            </span>
+            {group.children.map((c) => (
+              <button
+                key={c.id}
+                onClick={() => handleFilter(c.id)}
+                className={`text-xs tracking-[0.15em] font-body pb-2 border-b-2 transition-all duration-300 ${
+                  activeFilter === c.id
+                    ? "text-gold border-gold"
+                    : "text-text-muted border-transparent hover:text-text-primary"
+                }`}
+              >
+                {c.name.toUpperCase()}
+              </button>
+            ))}
+          </div>
         ))}
       </div>
 
