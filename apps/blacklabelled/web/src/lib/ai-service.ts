@@ -19,7 +19,7 @@ function getImageUrl(storagePath: string): string {
 
 async function callGemini(
   prompt: string,
-  model = "gemini-2.0-flash"
+  model = "gemini-2.5-flash"
 ): Promise<string> {
   const apiKey = process.env.GEMINI_API_KEY;
   if (!apiKey) throw new Error("GEMINI_API_KEY is not configured");
@@ -46,7 +46,7 @@ async function callGemini(
 async function callGeminiVision(
   prompt: string,
   imageUrl: string,
-  model = "gemini-2.0-flash"
+  model = "gemini-2.5-flash"
 ): Promise<string> {
   const apiKey = process.env.GEMINI_API_KEY;
   if (!apiKey) throw new Error("GEMINI_API_KEY is not configured");
@@ -176,7 +176,7 @@ export async function analyzeProductImage(
     .select("analysis")
     .eq("target_type", "product_image")
     .eq("target_id", imageId)
-    .eq("model", "gemini-2.0-flash")
+    .eq("model", "gemini-2.5-flash")
     .single();
 
   if (cached?.analysis) {
@@ -198,7 +198,7 @@ export async function analyzeProductImage(
     target_type: "product_image",
     target_id: imageId,
     analysis: analysis,
-    model: "gemini-2.0-flash",
+    model: "gemini-2.5-flash",
   });
 
   return analysis;
@@ -412,4 +412,44 @@ ${html.substring(0, 5000)}
     : [];
 
   return { tags, keywords, summary };
+}
+
+/**
+ * 5. Inline edit — 전체 HTML 맥락을 유지하면서 선택된 부분만 수정
+ */
+export async function inlineEditHtml(params: {
+  fullHtml: string;
+  selectedText: string;
+  userComment: string;
+}): Promise<string> {
+  const prompt = `당신은 BlackLabelled 인테리어 디자인 스튜디오의 전문 블로그 에디터입니다.
+
+아래 블로그 HTML 전문에서, 유저가 선택한 부분을 유저의 요청에 맞게 수정해주세요.
+
+===== 규칙 =====
+1. 전체 글의 문맥, 톤, 스타일을 유지하면서 선택된 부분만 자연스럽게 수정
+2. 나머지 HTML은 절대 변경하지 마세요
+3. HTML 태그와 인라인 스타일은 기존 형식 유지
+4. 네이버 블로그 HTML 규칙 준수 (flex, box-shadow 금지)
+5. 수정된 전체 HTML을 반환
+
+===== 전체 HTML =====
+${params.fullHtml}
+
+===== 유저가 선택한 텍스트 =====
+${params.selectedText}
+
+===== 유저의 수정 요청 =====
+${params.userComment}
+
+===== 출력 =====
+수정된 전체 HTML만 출력하세요. 설명이나 주석 없이 HTML만 반환하세요.`;
+
+  const result = await callGemini(prompt);
+
+  // Clean up — remove markdown code fences if present
+  return result
+    .replace(/^```html?\n?/i, "")
+    .replace(/\n?```$/i, "")
+    .trim();
 }

@@ -28,6 +28,7 @@ import {
   suggestTitles,
   analyzeProductImage,
   generateBlogPost,
+  inlineEditHtml,
 } from "@/lib/ai-service";
 import ImagePicker from "@/components/admin/ImagePicker";
 
@@ -92,9 +93,36 @@ export default function NewMagazineClient({
   const [newTag, setNewTag] = useState("");
   const [newKeyword, setNewKeyword] = useState("");
 
+  // Inline AI edit
+  const [selectedText, setSelectedText] = useState("");
+  const [editComment, setEditComment] = useState("");
+  const [showEditPopover, setShowEditPopover] = useState(false);
+  const [editingInline, setEditingInline] = useState(false);
+
   // Derived
   const selectedProduct = products.find((p) => p.id === selectedProductId);
   const finalTitle = selectedTitle || customTitle;
+
+  // ── Inline AI Edit Handler ───────────────────────────
+
+  const handleInlineEdit = async () => {
+    if (!editComment.trim() || !selectedText.trim()) return;
+    setEditingInline(true);
+    try {
+      const updatedHtml = await inlineEditHtml({
+        fullHtml: editHtml,
+        selectedText,
+        userComment: editComment,
+      });
+      setEditHtml(updatedHtml);
+      setShowEditPopover(false);
+      toast.success("AI 수정 완료");
+    } catch (err) {
+      toast.error("AI 수정 실패: " + (err instanceof Error ? err.message : "Unknown error"));
+    } finally {
+      setEditingInline(false);
+    }
+  };
 
   // ── Handlers ──────────────────────────────────────────
 
@@ -648,14 +676,70 @@ ${editHtml}
           <CardContent className="space-y-4">
             <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
               {/* Editor */}
-              <div className="space-y-2">
-                <Label className="text-zinc-400 text-xs">HTML Content</Label>
+              <div className="relative space-y-2">
+                <Label className="text-zinc-400 text-xs">
+                  HTML Content
+                  <span className="ml-2 text-zinc-600">(텍스트를 드래그하여 선택 → AI 수정 요청)</span>
+                </Label>
                 <textarea
                   value={editHtml}
                   onChange={(e) => setEditHtml(e.target.value)}
+                  onMouseUp={(e) => {
+                    const target = e.target as HTMLTextAreaElement;
+                    const selected = target.value.substring(
+                      target.selectionStart,
+                      target.selectionEnd
+                    );
+                    if (selected.trim().length > 5) {
+                      setSelectedText(selected);
+                      setEditComment("");
+                      setShowEditPopover(true);
+                    } else {
+                      setShowEditPopover(false);
+                    }
+                  }}
                   className="h-[500px] w-full resize-none rounded-lg border border-zinc-700 bg-zinc-950 p-3 font-mono text-xs text-zinc-300 focus:border-zinc-500 focus:outline-none"
                   spellCheck={false}
                 />
+
+                {/* AI Inline Edit Popover */}
+                {showEditPopover && (
+                  <div className="absolute bottom-4 left-4 right-4 z-10 rounded-lg border border-zinc-600 bg-zinc-800 p-4 shadow-xl">
+                    <div className="mb-2 text-xs text-zinc-400">
+                      선택된 텍스트: <span className="text-zinc-200">&quot;{selectedText.length > 80 ? selectedText.substring(0, 80) + "..." : selectedText}&quot;</span>
+                    </div>
+                    <div className="flex gap-2">
+                      <Input
+                        value={editComment}
+                        onChange={(e) => setEditComment(e.target.value)}
+                        placeholder="수정 요청 (예: 더 전문적으로, 자재명 추가, 줄여줘)"
+                        className="flex-1 border-zinc-600 bg-zinc-900 text-zinc-200 text-sm placeholder:text-zinc-500"
+                        onKeyDown={(e) => {
+                          if (e.key === "Enter" && editComment.trim()) {
+                            e.preventDefault();
+                            handleInlineEdit();
+                          }
+                        }}
+                      />
+                      <Button
+                        size="sm"
+                        disabled={!editComment.trim() || editingInline}
+                        onClick={handleInlineEdit}
+                        className="bg-zinc-100 text-zinc-900 hover:bg-zinc-200 disabled:opacity-50"
+                      >
+                        {editingInline ? "수정 중..." : "AI 수정"}
+                      </Button>
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        onClick={() => setShowEditPopover(false)}
+                        className="border-zinc-600 text-zinc-400 hover:text-zinc-200"
+                      >
+                        ✕
+                      </Button>
+                    </div>
+                  </div>
+                )}
               </div>
 
               {/* Preview */}
