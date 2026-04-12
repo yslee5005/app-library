@@ -27,9 +27,13 @@ import {
 import {
   suggestTitles,
   analyzeProductImage,
+  generateBlogOutline,
+  generateBlogSection,
+  generateTagsAndKeywords,
   generateBlogPost,
   inlineEditHtml,
 } from "@/lib/ai-service";
+import { assembleBlogHtml } from "@/lib/blog-utils";
 import ImagePicker from "@/components/admin/ImagePicker";
 
 // ── Types ──────────────────────────────────────────────
@@ -50,6 +54,19 @@ interface ImageOption {
 
 interface NewMagazineClientProps {
   products: ProductOption[];
+}
+
+interface OutlineSection {
+  title: string;
+  description: string;
+  imageIndices: number[];
+}
+
+type GenerationStepStatus = "pending" | "active" | "done" | "error";
+
+interface GenerationStep {
+  label: string;
+  status: GenerationStepStatus;
 }
 
 // ── Component ──────────────────────────────────────────
@@ -80,8 +97,10 @@ export default function NewMagazineClient({
   // Step 3: Memo
   const [userMemo, setUserMemo] = useState("");
 
-  // Step 4: Generation
+  // Step 4: Generation (multi-step)
   const [generating, setGenerating] = useState(false);
+  const [generationSteps, setGenerationSteps] = useState<GenerationStep[]>([]);
+  const [generationProgress, setGenerationProgress] = useState(0);
   const [generatedHtml, setGeneratedHtml] = useState("");
   const [generatedTags, setGeneratedTags] = useState<string[]>([]);
   const [generatedKeywords, setGeneratedKeywords] = useState<string[]>([]);
@@ -102,6 +121,20 @@ export default function NewMagazineClient({
   // Derived
   const selectedProduct = products.find((p) => p.id === selectedProductId);
   const finalTitle = selectedTitle || customTitle;
+
+  // ── Helper: Update generation step status ──────────────
+
+  const updateStep = (index: number, status: GenerationStepStatus) => {
+    setGenerationSteps((prev) =>
+      prev.map((s, i) => (i === index ? { ...s, status } : s))
+    );
+  };
+
+  const updateStepLabel = (index: number, label: string) => {
+    setGenerationSteps((prev) =>
+      prev.map((s, i) => (i === index ? { ...s, label } : s))
+    );
+  };
 
   // ── Inline AI Edit Handler ───────────────────────────
 
@@ -170,8 +203,17 @@ export default function NewMagazineClient({
     if (!selectedProduct || !finalTitle) return;
 
     setGenerating(true);
+    setGenerationProgress(0);
+
+    // Initialize steps: image analysis + outline + placeholder sections + tags
+    const initialSteps: GenerationStep[] = [
+      { label: "이미지 분석 중...", status: "active" },
+      { label: "목차 생성 중...", status: "pending" },
+    ];
+    setGenerationSteps(initialSteps);
+
     try {
-      // 1. Analyze images
+      // ── Phase 1: Analyze images ─────────────────────
       const imageAnalyses: { path: string; analysis: string }[] = [];
       for (const img of productImages) {
         try {
@@ -184,29 +226,118 @@ export default function NewMagazineClient({
           // Skip failed analysis
         }
       }
+      updateStep(0, "done");
+      setGenerationSteps((prev) => {
+        const updated = [...prev];
+        updated[0] = { label: `이미지 분석 완료 (${imageAnalyses.length}장)`, status: "done" };
+        return updated;
+      });
+      setGenerationProgress(10);
 
-      // 2. Generate blog post
-      const result = await generateBlogPost({
+      // ── Phase 2: Generate outline ───────────────────
+      updateStep(1, "active");
+      const { sections: outline } = await generateBlogOutline({
         title: finalTitle,
         projectName: selectedProduct.name,
         projectDescription: selectedProduct.description ?? "",
-        imageAnalyses,
+        imageCount: imageAnalyses.length,
         userMemo: userMemo || undefined,
       });
 
-      setGeneratedHtml(result.html);
-      setGeneratedTags(result.tags);
-      setGeneratedKeywords(result.keywords);
+      setGenerationSteps((prev) => {
+        const updated = [...prev];
+        updated[1] = { label: `목차 생성 완료 (${outline.length}개 섹션)`, status: "done" };
+        // Add section steps + tags step
+        const sectionSteps: GenerationStep[] = outline.map((s) => ({
+          label: s.title,
+          status: "pending" as GenerationStepStatus,
+        }));
+        return [
+          ...updated,
+          ...sectionSteps,
+          { label: "태그/키워드 생성", status: "pending" },
+        ];
+      });
+      setGenerationProgress(20);
+
+      // ── Phase 3: Generate each section sequentially ──
+      const sectionHtmls: string[] = [];
+      const totalSections = outline.length;
+      const sectionProgressShare = 60; // 60% of progress for sections
+
+      for (let i = 0; i < totalSections; i++) {
+        const section = outline[i];
+        const stepIndex = i + 2; // offset by image analysis + outline steps
+
+        // Update current section to active
+        updateStep(stepIndex, "active");
+        updateStepLabel(stepIndex, `${section.title} (${i + 1}/${totalSections})`);
+
+        // Get images for this section
+        const sectionImages = section.imageIndices
+          .filter((idx: number) => idx >= 0 && idx < imageAnalyses.length)
+          .map((idx: number) => imageAnalyses[idx]);
+
+        const sectionHtml = await generateBlogSection({
+          sectionIndex: i,
+          sectionTitle: section.title,
+          sectionDescription: section.description,
+          projectName: selectedProduct.name,
+          projectDescription: selectedProduct.description ?? "",
+          imageAnalyses: sectionImages,
+          blogTitle: finalTitle,
+          isFirst: i === 0,
+          isLast: i === totalSections - 1,
+          userMemo: userMemo || undefined,
+        });
+
+        sectionHtmls.push(sectionHtml);
+        updateStep(stepIndex, "done");
+        updateStepLabel(stepIndex, section.title);
+
+        const sectionProgress = 20 + ((i + 1) / totalSections) * sectionProgressShare;
+        setGenerationProgress(Math.round(sectionProgress));
+      }
+
+      // ── Phase 4: Generate tags & keywords ──────────
+      const tagsStepIndex = 2 + totalSections;
+      updateStep(tagsStepIndex, "active");
+      updateStepLabel(tagsStepIndex, "태그/키워드 생성 중...");
+
+      const { tags, keywords } = await generateTagsAndKeywords({
+        title: finalTitle,
+        projectName: selectedProduct.name,
+      });
+
+      updateStep(tagsStepIndex, "done");
+      updateStepLabel(tagsStepIndex, "태그/키워드 생성 완료");
+      setGenerationProgress(90);
+
+      // ── Phase 5: Assemble final HTML (client-side) ──
+      const finalHtml = assembleBlogHtml(sectionHtmls);
+
+      setGeneratedHtml(finalHtml);
+      setGeneratedTags(tags);
+      setGeneratedKeywords(keywords);
 
       // Pre-fill edit step
-      setEditHtml(result.html);
-      setEditTags(result.tags);
-      setEditKeywords(result.keywords);
+      setEditHtml(finalHtml);
+      setEditTags(tags);
+      setEditKeywords(keywords);
 
-      setCurrentStep(5);
+      setGenerationProgress(100);
+
+      // Small delay to show 100% before moving
+      setTimeout(() => {
+        setCurrentStep(5);
+      }, 500);
     } catch (err) {
       toast.error(
         err instanceof Error ? err.message : "Failed to generate magazine"
+      );
+      // Mark any active step as error
+      setGenerationSteps((prev) =>
+        prev.map((s) => (s.status === "active" ? { ...s, status: "error" } : s))
       );
     } finally {
       setGenerating(false);
@@ -596,7 +727,7 @@ ${editHtml}
         </Card>
       )}
 
-      {/* Step 4: AI Generation */}
+      {/* Step 4: AI Generation (Multi-step with progress) */}
       {currentStep === 4 && (
         <Card className="border-zinc-800 bg-zinc-900">
           <CardHeader>
@@ -604,7 +735,7 @@ ${editHtml}
               Step 4: Generate Magazine
             </CardTitle>
             <CardDescription className="text-zinc-500">
-              AI가 매거진 콘텐츠를 생성합니다
+              AI가 매거진 콘텐츠를 단계별로 생성합니다
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
@@ -635,11 +766,66 @@ ${editHtml}
             </div>
 
             {generating ? (
-              <div className="flex flex-col items-center justify-center py-12 space-y-4">
-                <div className="h-8 w-8 animate-spin rounded-full border-2 border-zinc-600 border-t-zinc-100" />
-                <p className="text-sm text-zinc-400">
-                  AI가 매거진을 작성 중입니다... (10-15초)
+              <div className="rounded-lg border border-zinc-800 bg-zinc-950 p-6 space-y-4">
+                <p className="text-sm font-medium text-zinc-200">
+                  AI가 매거진을 작성하고 있습니다
                 </p>
+
+                {/* Step list */}
+                <div className="space-y-2">
+                  {generationSteps.map((step, i) => (
+                    <div key={i} className="flex items-center gap-3 text-sm">
+                      {step.status === "done" ? (
+                        <span className="flex h-5 w-5 items-center justify-center text-emerald-400">
+                          <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                          </svg>
+                        </span>
+                      ) : step.status === "active" ? (
+                        <span className="flex h-5 w-5 items-center justify-center">
+                          <span className="h-3 w-3 animate-spin rounded-full border-2 border-zinc-600 border-t-zinc-100" />
+                        </span>
+                      ) : step.status === "error" ? (
+                        <span className="flex h-5 w-5 items-center justify-center text-red-400">
+                          <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                          </svg>
+                        </span>
+                      ) : (
+                        <span className="flex h-5 w-5 items-center justify-center">
+                          <span className="h-2 w-2 rounded-full bg-zinc-700" />
+                        </span>
+                      )}
+                      <span
+                        className={
+                          step.status === "done"
+                            ? "text-zinc-300"
+                            : step.status === "active"
+                              ? "text-zinc-100 font-medium"
+                              : step.status === "error"
+                                ? "text-red-400"
+                                : "text-zinc-600"
+                        }
+                      >
+                        {step.label}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Progress bar */}
+                <div className="space-y-1">
+                  <div className="flex justify-between text-xs text-zinc-500">
+                    <span>진행률</span>
+                    <span>{generationProgress}%</span>
+                  </div>
+                  <div className="h-2 w-full rounded-full bg-zinc-800">
+                    <div
+                      className="h-2 rounded-full bg-zinc-100 transition-all duration-500"
+                      style={{ width: `${generationProgress}%` }}
+                    />
+                  </div>
+                </div>
               </div>
             ) : (
               <div className="flex justify-between">

@@ -15,6 +15,61 @@ function getImageUrl(storagePath: string): string {
   return `${SUPABASE_URL}/storage/v1/object/public/blacklabelled/${storagePath}`;
 }
 
+// ── BlackLabelled Brand Style Guide ─────────────────────
+
+const BRAND_STYLE_GUIDE = `
+===== BlackLabelled 브랜드 스타일 가이드 =====
+
+1. 색상 팔레트:
+   - 주요 강조: #C5A572 (골드) — 섹션 제목, 테두리, 하이라이트
+   - 보조 강조: #8B7355 (다크 골드) — 미묘한 요소
+   - 하이라이트 배경: #FAF6EE (따뜻한 크림) — 형광펜 대체
+   - 정보 카드 배경: #FAF8F5 (따뜻한 라이트)
+   - 콜아웃 박스: border-left: 5px solid #C5A572; background: #FAF6EE;
+   - 본문 텍스트: #2C2C2C (다크 그레이, 순수 검정 아님)
+   - 제목 텍스트: #1A1A1A
+
+2. 타이포그래피 (인라인 스타일 필수 — 네이버 호환):
+   - 본문: font-family: 'NanumSquare', 'Noto Sans KR', sans-serif; font-size: 15px; line-height: 1.9; color: #2C2C2C;
+   - 섹션 제목: font-size: 20px; font-weight: bold; border-left: 5px solid #C5A572; padding-left: 12px; color: #1A1A1A;
+   - 임팩트 오프닝: font-size: 26px; font-weight: bold; text-align: center; color: #C5A572;
+   - 구분선: <p style="text-align:center; font-size:14px; color:#C5A572; letter-spacing:8px;">━━━ ◆ ━━━</p>
+   - 하이라이트: <span style="background-color:#FAF6EE; padding:2px 4px;"><b>텍스트</b></span>
+   - 인용/콜아웃 박스: <div style="border-left:5px solid #C5A572; padding:15px 20px; background:#FAF6EE; margin:20px 0;"><b>제목</b><br><br>내용</div>
+   - 정보 표 셀: background:#FAF8F5; border:1px solid #E8E0D4;
+   - 숫자 하이라이트: <span style="font-size:28px; font-weight:bold; color:#C5A572;">427+</span>
+   - 캡션: <p style="text-align:center; font-size:13px; color:#999; font-style:italic;">▲ 캡션</p>
+   - 해시태그: <p style="text-align:center; color:#B8A080; font-size:14px;">#인테리어 #블랙라벨드 ...</p>
+   - 이미지: <p style="text-align:center; margin:25px 0;"><img src="URL" style="max-width:100%; border:1px solid #E8E0D4;" /></p>
+
+3. 문체:
+   - 전문적이고 고급스러운 ~습니다 체
+   - 인테리어 전문 용어 적극 활용 (공간, 마감, 자재, 동선, 시공 등)
+   - 독자: "여러분" 존칭
+   - 브랜드명: BlackLabelled (블랙라벨드)
+   - 슬로건: "Your space is 'black label'"
+
+4. HTML 기술 규칙:
+   필수 사용:
+   - <b>, <i>, <u> 텍스트 서식
+   - <span style="color:..."> 색상 강조
+   - <span style="background-color:#FAF6EE; padding:2px 4px;"> 하이라이트 (형광펜 대체)
+   - border-left + background 인용구/콜아웃 박스
+   - border + background 정보 카드
+   - <table> inline style 표 (셀 배경: #FAF8F5, 테두리: #E8E0D4)
+   - 인라인 스타일만 사용
+
+   절대 금지:
+   - float, flex, display:flex
+   - box-shadow, linear-gradient
+   - border-radius:50%
+   - background 단독 사용 (border 없이)
+   - <s> 취소선
+   - padding-left 들여쓰기
+   - <details> 접기
+   - #2DB400 (네이버 초록) 사용 금지 → #C5A572 (골드) 사용
+`;
+
 // ── Gemini API helpers ──────────────────────────────────
 
 async function callGemini(
@@ -204,21 +259,94 @@ export async function analyzeProductImage(
   return analysis;
 }
 
+// ── 3-Step Blog Generation ──────────────────────────────
+
 /**
- * 3. Generate a full blog post (HTML) for Naver blog.
- *    Uses naver blog template rules for formatting.
+ * Step A: Generate a blog outline with 4-6 sections.
+ * Fast (~5 seconds) because it only generates structure, no full content.
  */
-export async function generateBlogPost(params: {
+export async function generateBlogOutline(params: {
   title: string;
   projectName: string;
   projectDescription: string;
-  imageAnalyses: { path: string; analysis: string }[];
+  imageCount: number;
   userMemo?: string;
-}): Promise<{ html: string; tags: string[]; keywords: string[] }> {
+}): Promise<{
+  sections: { title: string; description: string; imageIndices: number[] }[];
+}> {
+  const memoClause = params.userMemo
+    ? `\n\n사용자 추가 메모:\n${params.userMemo}`
+    : "";
+
+  const prompt = `당신은 BlackLabelled 인테리어 디자인 스튜디오의 전문 블로그 에디터입니다.
+
+아래 프로젝트 정보를 바탕으로 네이버 블로그 포스트의 목차(outline)를 생성해주세요.
+
+제목: ${params.title}
+프로젝트명: ${params.projectName}
+프로젝트 설명: ${params.projectDescription}
+사용 가능한 이미지 수: ${params.imageCount}장 (인덱스 0~${params.imageCount - 1})${memoClause}
+
+===== 규칙 =====
+- 4~6개 섹션으로 구성
+- 첫 번째 섹션: 임팩트 오프닝 + 인트로 + 대표 이미지 + 프로젝트 정보 카드
+- 중간 섹션들: 공간별/주제별 디자인 분석 (각각 이미지 포함)
+- 마지막 섹션: 총평 + 마무리 + 해시태그
+- 각 섹션에 들어갈 이미지 인덱스를 배정 (모든 이미지가 최소 1번은 사용되도록)
+
+===== 출력 형식 (JSON만 출력) =====
+\`\`\`json
+[
+  {
+    "title": "섹션 제목",
+    "description": "이 섹션에서 작성할 내용 설명 (2~3문장)",
+    "imageIndices": [0, 1]
+  }
+]
+\`\`\`
+
+JSON 배열만 출력하세요. 다른 설명은 불필요합니다.`;
+
+  const result = await callGemini(prompt);
+
+  // Parse JSON from response
+  const jsonMatch = result.match(/\[[\s\S]*\]/);
+  if (!jsonMatch) {
+    throw new Error("Failed to parse outline JSON from AI response");
+  }
+
+  try {
+    const sections = JSON.parse(jsonMatch[0]) as {
+      title: string;
+      description: string;
+      imageIndices: number[];
+    }[];
+    return { sections };
+  } catch {
+    throw new Error("Failed to parse outline JSON: invalid format");
+  }
+}
+
+/**
+ * Step B: Generate HTML for ONE section of the blog post.
+ * Each call takes ~8 seconds, well within Vercel's 10s limit.
+ */
+export async function generateBlogSection(params: {
+  sectionIndex: number;
+  sectionTitle: string;
+  sectionDescription: string;
+  projectName: string;
+  projectDescription: string;
+  imageAnalyses: { path: string; analysis: string }[];
+  blogTitle: string;
+  isFirst: boolean;
+  isLast: boolean;
+  userMemo?: string;
+}): Promise<string> {
   const imageSection = params.imageAnalyses
     .map(
       (img, i) =>
-        `사진 ${i + 1}: ${img.analysis}\n  이미지 URL: ${getImageUrl(img.path)}`
+        `이미지 ${i + 1}: ${img.analysis}\n  URL: ${getImageUrl(img.path)}`
     )
     .join("\n\n");
 
@@ -226,84 +354,88 @@ export async function generateBlogPost(params: {
     ? `\n\n사용자 추가 메모:\n${params.userMemo}`
     : "";
 
-  const prompt = `당신은 BlackLabelled 인테리어 디자인 스튜디오의 전문 블로그 에디터입니다.
-아래 정보를 바탕으로 네이버 블로그 포스트를 작성해주세요.
+  const positionGuide = params.isFirst
+    ? `이 섹션은 블로그의 첫 번째 섹션입니다. 반드시 포함:
+   1. 임팩트 오프닝 (큰 텍스트, 가운데 정렬, 골드색)
+      예: <p style="font-size:26px; font-weight:bold; text-align:center; color:#C5A572;">공간의 가치를 완성하다</p>
+   2. 장식 구분선
+      예: <p style="text-align:center; font-size:14px; color:#C5A572; letter-spacing:8px;">━━━ ◆ ━━━</p>
+   3. 인트로 텍스트 (프로젝트 배경, 2~3문장, 본문 스타일)
+   4. 이미지들 (캡션 포함)
+   5. 프로젝트 정보 카드 (테이블 형식, 프로젝트명/위치/면적/스타일 등)`
+    : params.isLast
+      ? `이 섹션은 블로그의 마지막 섹션입니다. 반드시 포함:
+   1. 섹션 본문 (총평 느낌으로)
+   2. 마무리 메시지 + 독자 소통 유도 (콜아웃 박스)
+   3. 해시태그 (가운데 정렬, #B8A080 색)
+      예: <p style="text-align:center; color:#B8A080; font-size:14px;">#인테리어 #블랙라벨드 #인테리어디자인 ...</p>`
+      : `이 섹션은 블로그의 중간 섹션입니다. 반드시 포함:
+   1. 섹션 제목 (왼쪽 골드 보더)
+      예: <p style="font-size:20px; font-weight:bold; border-left:5px solid #C5A572; padding-left:12px; color:#1A1A1A;">섹션 제목</p>
+   2. 본문 텍스트 (2~4문단, 전문적)
+   3. 이미지들 (캡션 포함)
+   4. 하이라이트 또는 콜아웃 박스 (최소 1개)`;
 
-제목: ${params.title}
+  const prompt = `당신은 BlackLabelled 인테리어 디자인 스튜디오의 전문 블로그 에디터입니다.
+블로그 포스트의 한 섹션 HTML을 작성해주세요.
+
+===== 블로그 정보 =====
+블로그 제목: ${params.blogTitle}
 프로젝트명: ${params.projectName}
 프로젝트 설명: ${params.projectDescription}
 
-사진 분석 결과:
-${imageSection}${memoClause}
+===== 이 섹션 정보 =====
+섹션 번호: ${params.sectionIndex + 1}
+섹션 제목: ${params.sectionTitle}
+작성 지침: ${params.sectionDescription}
 
-===== HTML 작성 규칙 =====
+이 섹션에 사용할 이미지:
+${imageSection || "(이미지 없음)"}${memoClause}
 
-1. 글 구조 (14단계 흐름):
-   (1) 임팩트 오프닝 (큰 텍스트 + 이모지)
-   (2) 개성 구분선 (유니코드 장식)
-   (3) 인트로 텍스트 (프로젝트 배경, 2~3문장)
-   (4) 대표 이미지
-   (5) 정보 카드 (테두리 박스 - 프로젝트 기본 정보)
-   (6) 공간별 설명
-   (7) 사진들 (분석된 이미지 사용)
-   (8) 디자인 본문 (전문적 설명)
-   (9) 추가 사진들
-   (10) TIP/포인트 콜아웃 박스
-   (11) 총평
-   (12) 마무리 + 독자 소통 유도
-   (13) 해시태그 (가운데 정렬, 회색)
+===== 섹션 위치 가이드 =====
+${positionGuide}
 
-2. HTML 기술 규칙:
-   필수 사용:
-   - <b>, <i>, <u> 텍스트 서식
-   - <span style="color:..."> 색상 강조
-   - <span style="background-color:..."> 형광펜
-   - border-left + background 인용구/콜아웃 박스
-   - border + background 정보 카드
-   - <table> inline style 표
-   - <hr> 구분선 + 유니코드 장식 구분선
-   - 인라인 스타일만 사용
+${BRAND_STYLE_GUIDE}
 
-   절대 금지:
-   - float, flex, display:flex
-   - box-shadow, linear-gradient
-   - border-radius:50%
-   - background 단독 사용 (border 없이)
-   - <s> 취소선
-   - padding-left 들여쓰기
-   - <details> 접기
+===== SEO 규칙 =====
+- 각 섹션 최소 300자 이상
+- 키워드(프로젝트명, 인테리어 관련 용어) 자연스럽게 포함
+- 한 문단 2~4문장
+- 텍스트 5~7줄마다 시각적 요소 (이미지, 콜아웃, 하이라이트 등)
 
-3. 이미지 삽입:
-   - 제공된 이미지 URL을 사용하여 <img> 태그로 직접 삽입
-   - 형식: <p style="text-align:center;"><img src="이미지URL" style="max-width:100%;" /></p>
-   - 이미지 아래 캡션: <p style="text-align:center; font-size:13px; color:#999;">설명</p>
+===== 출력 =====
+이 섹션의 HTML만 출력하세요. 마커나 설명 없이 순수 HTML만 반환하세요.
+<body> 안의 콘텐츠만 (<!DOCTYPE>, <html>, <head>, <body> 태그 제외).
+모든 스타일은 인라인으로 작성하세요.`;
 
-4. SEO 규칙:
-   - 본문 1,500자 이상
-   - 키워드 밀도 1~2%
-   - 키워드 위치: 첫 문단, 소제목, 마지막 문단
+  const result = await callGemini(prompt);
 
-5. 가독성:
-   - 한 문단 2~4문장
-   - 텍스트 5~7줄마다 시각적 요소
-   - 소제목 500~700자마다
+  // Clean up — remove markdown code fences if present
+  return result
+    .replace(/^```html?\n?/i, "")
+    .replace(/\n?```$/i, "")
+    .trim();
+}
 
-6. 브랜드 가이드:
-   - 브랜드명: BlackLabelled (블랙라벨드)
-   - 슬로건: "Your space is 'black label'"
-   - 브랜드 컬러: #C5A572 (골드), #1A1A1A (블랙), #FFFFFF (화이트)
-   - 강조색으로 #2DB400 대신 #C5A572 (골드) 사용
-   - 전문적이고 고급스러운 한국어 문체
-   - 인테리어 전문 용어 적극 사용 (시공, 자재, 마감, 레이아웃, 동선 등)
-   - 독자 호칭: "여러분" 또는 존칭
+/**
+ * Generate tags and keywords for the blog post.
+ */
+export async function generateTagsAndKeywords(params: {
+  title: string;
+  projectName: string;
+}): Promise<{ tags: string[]; keywords: string[] }> {
+  const prompt = `당신은 BlackLabelled 인테리어 디자인 스튜디오의 SEO 전문가입니다.
+
+아래 블로그 정보를 바탕으로 네이버 블로그용 태그와 SEO 키워드를 생성해주세요.
+
+블로그 제목: ${params.title}
+프로젝트명: ${params.projectName}
+
+===== 규칙 =====
+태그: 10개, 네이버 블로그 해시태그용 (# 없이)
+키워드: 5개, SEO 검색 키워드 (롱테일 포함)
 
 ===== 출력 형식 =====
-
-아래 형식으로 정확히 출력하세요:
-
----HTML_START---
-(여기에 <body> 안의 HTML 콘텐츠만 출력. <!DOCTYPE>, <html>, <head>, <body> 태그 제외)
----HTML_END---
 
 ---TAGS_START---
 태그1,태그2,태그3,태그4,태그5,태그6,태그7,태그8,태그9,태그10
@@ -315,13 +447,6 @@ ${imageSection}${memoClause}
 
   const result = await callGemini(prompt);
 
-  // Parse HTML
-  const htmlMatch = result.match(
-    /---HTML_START---([\s\S]*?)---HTML_END---/
-  );
-  let html = htmlMatch?.[1]?.trim() ?? result;
-
-  // Parse tags
   const tagsMatch = result.match(
     /---TAGS_START---([\s\S]*?)---TAGS_END---/
   );
@@ -333,7 +458,6 @@ ${imageSection}${memoClause}
         .filter(Boolean)
     : [];
 
-  // Parse keywords
   const keywordsMatch = result.match(
     /---KEYWORDS_START---([\s\S]*?)---KEYWORDS_END---/
   );
@@ -345,14 +469,63 @@ ${imageSection}${memoClause}
         .filter(Boolean)
     : [];
 
-  // If parsing failed (no markers), try to extract from raw result
-  if (!htmlMatch) {
-    // Remove any tag/keyword sections that might be at the end
-    html = result
-      .replace(/태그:.*$/m, "")
-      .replace(/키워드:.*$/m, "")
-      .trim();
+  return { tags, keywords };
+}
+
+// ── Legacy: generateBlogPost (backward compatibility) ───
+
+/**
+ * 3. Generate a full blog post (HTML) for Naver blog.
+ *    Now uses 3-step internally. Kept for backward compatibility.
+ */
+export async function generateBlogPost(params: {
+  title: string;
+  projectName: string;
+  projectDescription: string;
+  imageAnalyses: { path: string; analysis: string }[];
+  userMemo?: string;
+}): Promise<{ html: string; tags: string[]; keywords: string[] }> {
+  // Step A: Generate outline
+  const { sections } = await generateBlogOutline({
+    title: params.title,
+    projectName: params.projectName,
+    projectDescription: params.projectDescription,
+    imageCount: params.imageAnalyses.length,
+    userMemo: params.userMemo,
+  });
+
+  // Step B: Generate each section
+  const sectionHtmls: string[] = [];
+  for (let i = 0; i < sections.length; i++) {
+    const section = sections[i];
+    const sectionImages = section.imageIndices
+      .filter((idx) => idx >= 0 && idx < params.imageAnalyses.length)
+      .map((idx) => params.imageAnalyses[idx]);
+
+    const html = await generateBlogSection({
+      sectionIndex: i,
+      sectionTitle: section.title,
+      sectionDescription: section.description,
+      projectName: params.projectName,
+      projectDescription: params.projectDescription,
+      imageAnalyses: sectionImages,
+      blogTitle: params.title,
+      isFirst: i === 0,
+      isLast: i === sections.length - 1,
+      userMemo: params.userMemo,
+    });
+    sectionHtmls.push(html);
   }
+
+  // Step C: Assemble (inline — no import needed for server context)
+  const divider = `\n<p style="text-align:center; font-size:14px; color:#C5A572; letter-spacing:8px;">━━━ ◆ ━━━</p>\n`;
+  const html = sectionHtmls.join(divider);
+
+  // Generate tags & keywords
+  const { tags, keywords } = await generateTagsAndKeywords({
+    title: params.title,
+    projectName: params.projectName,
+  });
 
   return { html, tags, keywords };
 }
@@ -432,6 +605,8 @@ export async function inlineEditHtml(params: {
 3. HTML 태그와 인라인 스타일은 기존 형식 유지
 4. 네이버 블로그 HTML 규칙 준수 (flex, box-shadow 금지)
 5. 수정된 전체 HTML을 반환
+
+${BRAND_STYLE_GUIDE}
 
 ===== 전체 HTML =====
 ${params.fullHtml}
