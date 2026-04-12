@@ -5,16 +5,11 @@ import { cookies } from "next/headers";
 export async function GET(request: Request) {
   const { searchParams, origin } = new URL(request.url);
   const code = searchParams.get("code");
-
-  if (!code) {
-    return NextResponse.redirect(
-      new URL("/admin/login?error=unauthorized", origin)
-    );
-  }
+  const accessToken = searchParams.get("access_token");
+  const refreshToken = searchParams.get("refresh_token");
 
   const cookieStore = await cookies();
 
-  // Create a Supabase client that can exchange the code for a session
   const supabase = createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
@@ -32,11 +27,29 @@ export async function GET(request: Request) {
     }
   );
 
-  // Exchange the code for a session
-  const { error: exchangeError } =
-    await supabase.auth.exchangeCodeForSession(code);
-
-  if (exchangeError) {
+  // Try PKCE flow (code exchange)
+  if (code) {
+    const { error } = await supabase.auth.exchangeCodeForSession(code);
+    if (error) {
+      return NextResponse.redirect(
+        new URL("/admin/login?error=unauthorized", origin)
+      );
+    }
+  }
+  // Try implicit flow (access_token in query params)
+  else if (accessToken && refreshToken) {
+    const { error } = await supabase.auth.setSession({
+      access_token: accessToken,
+      refresh_token: refreshToken,
+    });
+    if (error) {
+      return NextResponse.redirect(
+        new URL("/admin/login?error=unauthorized", origin)
+      );
+    }
+  }
+  // No auth params
+  else {
     return NextResponse.redirect(
       new URL("/admin/login?error=unauthorized", origin)
     );
@@ -53,7 +66,7 @@ export async function GET(request: Request) {
     );
   }
 
-  // Check if user has admin/owner role in user_tenants (public schema)
+  // Check admin/owner role in user_tenants (public schema)
   const supabasePublic = createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
@@ -80,13 +93,11 @@ export async function GET(request: Request) {
     .single();
 
   if (!tenantData) {
-    // User doesn't have admin/owner role — sign them out and redirect
     await supabase.auth.signOut();
     return NextResponse.redirect(
       new URL("/admin/login?error=unauthorized", origin)
     );
   }
 
-  // User is authorized — redirect to dashboard
   return NextResponse.redirect(new URL("/admin/dashboard", origin));
 }

@@ -179,8 +179,25 @@ platform :ios do
     new_build_number = latest + 1
     UI.success("✅ Build number: #{new_build_number}")
 
-    # 6. Flutter IPA 빌드
-    sh("cd '#{APP_ROOT}' && flutter build ipa --release --obfuscate --split-debug-info=build/debug-info --export-options-plist=ios/ExportOptions.plist --build-number=#{new_build_number}")
+    # 6. Flutter IPA 빌드 (Supabase 키를 프로젝트 루트 .env에서 읽음)
+    env_path = File.expand_path("../../../../.env", __dir__)
+    env_vars = {}
+    if File.exist?(env_path)
+      File.readlines(env_path).each do |line|
+        line = line.strip
+        next if line.empty? || line.start_with?("#")
+        key, val = line.split("=", 2)
+        env_vars[key.strip] = val.strip if key && val
+      end
+    end
+    supabase_url = env_vars["SUPABASE_URL"] || ENV["SUPABASE_URL"] || ""
+    supabase_key = env_vars["SUPABASE_ANON_KEY"] || ENV["SUPABASE_ANON_KEY"] || ""
+
+    if supabase_url.empty? || supabase_key.empty?
+      UI.user_error!("❌ SUPABASE_URL / SUPABASE_ANON_KEY not found in .env or ENV")
+    end
+
+    sh("cd '#{APP_ROOT}' && flutter build ipa --release --obfuscate --split-debug-info=build/debug-info --export-options-plist=ios/ExportOptions.plist --build-number=#{new_build_number} --dart-define=SUPABASE_URL=#{supabase_url} --dart-define=SUPABASE_ANON_KEY=#{supabase_key}")
     UI.success("✅ Build complete!")
 
     # 6. TestFlight 업로드

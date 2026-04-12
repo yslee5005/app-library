@@ -2,11 +2,8 @@
 
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { createClient } from "@supabase/supabase-js";
+import { supabase } from "@/lib/supabase";
 import { useEffect, useState } from "react";
-
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
 
 const navItems = [
   { href: "/admin/dashboard", label: "Dashboard", icon: "\u{1F4CA}", match: "/admin/dashboard" },
@@ -24,19 +21,42 @@ export default function AdminLayout({
   const pathname = usePathname();
   const router = useRouter();
   const [userEmail, setUserEmail] = useState<string | null>(null);
+  const [authChecked, setAuthChecked] = useState(false);
 
   useEffect(() => {
-    const supabase = createClient(supabaseUrl, supabaseAnonKey);
+    // Skip auth check on login page
+    if (pathname.startsWith("/admin/login") || pathname.startsWith("/admin/auth")) {
+      setAuthChecked(true);
+      return;
+    }
     supabase.auth.getUser().then(({ data }) => {
-      setUserEmail(data.user?.email ?? null);
+      if (!data.user) {
+        router.replace("/admin/login");
+      } else {
+        setUserEmail(data.user.email ?? null);
+        setAuthChecked(true);
+      }
     });
-  }, []);
+  }, [pathname, router]);
 
   const handleLogout = async () => {
-    const supabase = createClient(supabaseUrl, supabaseAnonKey);
     await supabase.auth.signOut();
     router.push("/admin/login");
   };
+
+  // Login/callback pages don't need the admin shell
+  if (pathname.startsWith("/admin/login") || pathname.startsWith("/admin/auth")) {
+    return <>{children}</>;
+  }
+
+  // Show nothing while checking auth
+  if (!authChecked) {
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-zinc-950">
+        <p className="text-zinc-500">Loading...</p>
+      </div>
+    );
+  }
 
   return (
     <div className="flex min-h-screen bg-zinc-950">

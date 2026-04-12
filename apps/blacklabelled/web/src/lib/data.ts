@@ -146,7 +146,15 @@ async function dbToProduct(row: any): Promise<Product> {
 
 // ── Query helpers ───────────────────────────────────────
 
-const PRODUCT_SELECT = `
+// 목록용: 이미지 제외 (427개 한번에 로드 시 stack overflow 방지)
+const PRODUCT_LIST_SELECT = `
+  id, name, slug, description, price, status, main_category_id, source_url,
+  deleted_at,
+  product_categories(category_id)
+`;
+
+// 상세용: 이미지 포함
+const PRODUCT_DETAIL_SELECT = `
   id, name, slug, description, price, status, main_category_id, source_url,
   deleted_at,
   product_categories(category_id),
@@ -158,19 +166,53 @@ const PRODUCT_SELECT = `
 export async function getProducts(): Promise<Product[]> {
   const { data } = await supabase
     .from("products")
-    .select(PRODUCT_SELECT)
+    .select(PRODUCT_LIST_SELECT)
     .is("deleted_at", null)
     .eq("status", "published")
     .order("id", { ascending: false });
 
   if (!data) return [];
-  return Promise.all(data.map(dbToProduct));
+
+  // main 이미지를 한번에 가져오기 (product_id별 첫 번째)
+  const productIds = data.map((p: any) => p.id);
+  const { data: allImages } = await supabase
+    .from("product_images")
+    .select("product_id, sort_order, type, storage_path")
+    .in("product_id", productIds)
+    .is("deleted_at", null)
+    .order("sort_order", { ascending: true });
+
+  // product_id → main image path 매핑
+  const mainImageMap = new Map<string, string>();
+  if (allImages) {
+    for (const img of allImages) {
+      if (!mainImageMap.has(img.product_id)) {
+        if (img.type === "main") {
+          mainImageMap.set(img.product_id, img.storage_path);
+        }
+      }
+    }
+    // main 타입이 없으면 첫 번째 이미지
+    for (const img of allImages) {
+      if (!mainImageMap.has(img.product_id)) {
+        mainImageMap.set(img.product_id, img.storage_path);
+      }
+    }
+  }
+
+  return Promise.all(
+    data.map(async (row: any) => {
+      const product = await dbToProduct(row);
+      product.main_image = mainImageMap.get(row.id) ?? "";
+      return product;
+    })
+  );
 }
 
 export async function getProduct(id: string): Promise<Product | undefined> {
   const { data } = await supabase
     .from("products")
-    .select(PRODUCT_SELECT)
+    .select(PRODUCT_DETAIL_SELECT)
     .eq("id", id)
     .is("deleted_at", null)
     .single();
@@ -223,7 +265,7 @@ export async function getFeaturedProducts(count = 6): Promise<Product[]> {
 export async function getProductBySlug(slug: string): Promise<Product | undefined> {
   const { data } = await supabase
     .from("products")
-    .select(PRODUCT_SELECT)
+    .select(PRODUCT_DETAIL_SELECT)
     .eq("slug", slug)
     .is("deleted_at", null)
     .eq("status", "published")
