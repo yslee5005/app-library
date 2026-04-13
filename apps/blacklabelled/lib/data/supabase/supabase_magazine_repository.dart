@@ -1,3 +1,4 @@
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../models/magazine.dart';
@@ -13,8 +14,7 @@ class SupabaseMagazineRepository implements MagazineRepository {
 
   SupabaseMagazineRepository(this._client);
 
-  static const _supabaseUrl =
-      String.fromEnvironment('SUPABASE_URL', defaultValue: '');
+  static final _supabaseUrl = dotenv.env['SUPABASE_URL'] ?? '';
 
   SupabaseQueryBuilder get _magazines =>
       _client.schema('blacklabelled').from('magazines');

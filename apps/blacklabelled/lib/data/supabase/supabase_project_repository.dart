@@ -1,3 +1,4 @@
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../models/project.dart';
@@ -11,7 +12,7 @@ import '../repositories/project_repository.dart';
 class SupabaseProjectRepository implements ProjectRepository {
   final SupabaseClient _client;
 
-  static const _supabaseUrl = String.fromEnvironment('SUPABASE_URL');
+  static final _supabaseUrl = dotenv.env['SUPABASE_URL'] ?? '';
 
   /// Cached PROJECT child category UUIDs (loaded once from DB)
   List<String>? _projectCategoryIds;

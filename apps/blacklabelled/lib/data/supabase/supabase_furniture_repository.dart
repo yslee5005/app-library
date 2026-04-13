@@ -1,3 +1,4 @@
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../models/furniture.dart';
@@ -11,7 +12,7 @@ import '../repositories/furniture_repository.dart';
 class SupabaseFurnitureRepository implements FurnitureRepository {
   final SupabaseClient _client;
 
-  static const _supabaseUrl = String.fromEnvironment('SUPABASE_URL');
+  static final _supabaseUrl = dotenv.env['SUPABASE_URL'] ?? '';
 
   /// Cached FURNITURE child category UUIDs (loaded once from DB)
   List<String>? _furnitureCategoryIds;
