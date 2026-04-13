@@ -99,34 +99,48 @@ UI 디자인 받아서 DESIGN.md에 반영
 
 ## 앱 시작 필수 패턴
 
+**환경변수는 `flutter_dotenv`로 런타임 로딩** (`String.fromEnvironment` 사용 금지)
+
+```yaml
+# pubspec.yaml
+dependencies:
+  flutter_dotenv: ^6.0.0
+
+flutter:
+  assets:
+    - .env.client
+```
+
 ```dart
-void main() {
-  // 1. 환경 결정
-  const envName = String.fromEnvironment('ENV', defaultValue: 'dev');
-  final env = AppEnvironment.fromString(envName);
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-  // 2. .env 검증
-  EnvValidator.validate(
-    required: ['SUPABASE_URL', 'SUPABASE_ANON_KEY', 'APP_ID'],
-    optional: ['SENTRY_DSN'],
-    values: { /* String.fromEnvironment()로 주입 */ },
-  );
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
 
-  // 3. 피처 플래그 초기화
-  FeatureFlagRegistry.init({
-    'notifications': true,
-    'dark_mode': false,
-  });
+  // 1. .env.client 로딩 (런타임)
+  await dotenv.load(fileName: '.env.client');
 
-  // 4. 환경별 로깅 설정
-  final logger = EnvironmentAwareLogging(
-    inner: SentryLoggingService(),
-    environment: env,
+  // 2. Supabase 초기화
+  await Supabase.initialize(
+    url: dotenv.env['SUPABASE_URL']!,
+    anonKey: dotenv.env['SUPABASE_ANON_KEY']!,
   );
 
   runApp(const MyApp());
 }
+
+// 다른 파일에서 접근:
+// import 'package:flutter_dotenv/flutter_dotenv.dart';
+// final url = dotenv.env['SUPABASE_URL'] ?? '';
 ```
+
+`.env.client` 파일 (프로젝트 루트):
+```
+SUPABASE_URL=https://xxx.supabase.co
+SUPABASE_ANON_KEY=eyJ...
+```
+
+실행: `flutter run` (추가 플래그 불필요)
 
 ## 배포 전 AI 체크리스트
 
