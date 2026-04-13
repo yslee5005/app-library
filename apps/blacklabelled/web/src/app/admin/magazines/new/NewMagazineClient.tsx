@@ -30,7 +30,6 @@ import {
   generateBlogOutline,
   generateBlogSection,
   generateTagsAndKeywords,
-  generateBlogPost,
   inlineEditHtml,
 } from "@/lib/ai-service";
 import { assembleBlogHtml } from "@/lib/blog-utils";

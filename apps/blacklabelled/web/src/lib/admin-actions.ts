@@ -415,18 +415,33 @@ export async function updateProduct(
     return { error: "Name is required" };
   }
 
+  // Build update object — only set published_at on first publish
+  const updateData: Record<string, unknown> = {
+    name,
+    slug,
+    description,
+    price,
+    status,
+    main_category_id: mainCategoryId,
+    updated_at: new Date().toISOString(),
+  };
+
+  if (status === "published") {
+    // Only set published_at if not already published
+    const { data: existing } = await supabase
+      .from("products")
+      .select("published_at")
+      .eq("id", id)
+      .single();
+
+    if (!existing?.published_at) {
+      updateData.published_at = new Date().toISOString();
+    }
+  }
+
   const { error } = await supabase
     .from("products")
-    .update({
-      name,
-      slug,
-      description,
-      price,
-      status,
-      main_category_id: mainCategoryId,
-      published_at: new Date().toISOString(),
-      updated_at: new Date().toISOString(),
-    })
+    .update(updateData)
     .eq("id", id);
 
   if (error) {
@@ -435,8 +450,9 @@ export async function updateProduct(
   }
 
   // M:N 관계: 카테고리 변경 시 product_categories 갱신
+  // Always delete old rows first (handles category cleared case)
+  await supabase.from("product_categories").delete().eq("product_id", id);
   if (mainCategoryId) {
-    await supabase.from("product_categories").delete().eq("product_id", id);
     await supabase.from("product_categories").insert({
       product_id: id,
       category_id: mainCategoryId,
@@ -1044,6 +1060,7 @@ export async function createAIMagazine(params: {
   }
 
   revalidatePath("/admin/magazines");
+  revalidatePath("/magazines");
   return { id: data.id };
 }
 
@@ -1089,5 +1106,6 @@ export async function publishMagazine(
   }
 
   revalidatePath("/admin/magazines");
+  revalidatePath("/magazines");
   return { success: true };
 }
