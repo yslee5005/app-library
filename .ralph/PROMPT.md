@@ -94,12 +94,30 @@ Apps: showcase (demo app), pet-life (consumer app)
 ### Per Loop
 1. Pick ONE package (or one phase sub-task)
 2. Read existing implementation files first
-3. Fix issues or add missing components
+3. **Type-First 순서로 작업:**
+
+   **■ 새 코드 작성 시 (누락 컴포넌트 추가):**
+   a. 모델/타입 먼저 (freezed 클래스, sealed class, enum, typedef)
+   b. `dart run build_runner build --delete-conflicting-outputs` 실행 → 생성 파일 확인
+   c. 인터페이스 정의 (abstract class, repository interface)
+   d. 구현 (data layer — implements interface)
+   e. Provider 정의 (Riverpod providers)
+   f. 위젯 (UI layer — 타입이 확정된 상태에서 작성)
+
+   **■ 기존 코드 수정 시:**
+   a. 모델/타입 변경이 있으면 → 모델 먼저 수정
+   b. `dart run build_runner build --delete-conflicting-outputs` 실행 → 생성 파일 갱신
+   c. 영향받는 구현/provider/위젯 순서대로 수정
+
+   **■ 공통 원칙:**
+   - 타입이 확정되지 않은 상태에서 구현 코드 작성 금지
+   - build_runner 대상 파일(freezed/riverpod) 수정 후 반드시 즉시 실행
+   - import 경로는 barrel export 기준으로 통일
+
 4. Run tests: `dart test` (pure Dart) or `flutter test` (Flutter)
 5. Run analyzer: `dart analyze`
 6. 0 errors required before moving on
-7. Run `dart run build_runner build --delete-conflicting-outputs` after freezed/riverpod changes
-8. Git commit in Korean with descriptive message
+7. Git commit in Korean with descriptive message
 
 ### Package Test Commands
 | Package | Type | Test Command |
