@@ -7,7 +7,6 @@ import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Select } from "@/components/ui/select";
 import {
@@ -63,39 +62,9 @@ export default function HomePageEditor({
     initialContent?.hero?.subtitle ?? ""
   );
 
-  // Intro
-  const [introHeading, setIntroHeading] = useState(
-    initialContent?.intro?.heading ?? ""
-  );
-  const [introDescription, setIntroDescription] = useState(
-    initialContent?.intro?.description ?? ""
-  );
-  const [introLinkText, setIntroLinkText] = useState(
-    initialContent?.intro?.link_text ?? ""
-  );
-  const [introLinkUrl, setIntroLinkUrl] = useState(
-    initialContent?.intro?.link_url ?? ""
-  );
-  const [introProject1Slug, setIntroProject1Slug] = useState(
-    initialContent?.intro?.project1_slug ?? ""
-  );
-  const [introProject1ImagePath, setIntroProject1ImagePath] = useState(
-    initialContent?.intro?.project1_image_path ?? ""
-  );
-  const [introProject2Slug, setIntroProject2Slug] = useState(
-    initialContent?.intro?.project2_slug ?? ""
-  );
-  const [introProject2ImagePath, setIntroProject2ImagePath] = useState(
-    initialContent?.intro?.project2_image_path ?? ""
-  );
-
-  // Image data for each picker (first 4 only, rest loaded via ImagePicker)
+  // Image data for hero picker
   const [heroImages, setHeroImages] = useState<{ images: ProductImageOption[]; total: number }>({ images: [], total: 0 });
-  const [p1Images, setP1Images] = useState<{ images: ProductImageOption[]; total: number }>({ images: [], total: 0 });
-  const [p2Images, setP2Images] = useState<{ images: ProductImageOption[]; total: number }>({ images: [], total: 0 });
   const [loadingHero, setLoadingHero] = useState(false);
-  const [loadingP1, setLoadingP1] = useState(false);
-  const [loadingP2, setLoadingP2] = useState(false);
 
   // Carousel
   const [carouselSlugs, setCarouselSlugs] = useState<string[]>(
@@ -107,15 +76,18 @@ export default function HomePageEditor({
   const [carouselImages, setCarouselImages] = useState<Record<number, { images: ProductImageOption[]; total: number }>>({});
   const [carouselLoading, setCarouselLoading] = useState<Record<number, boolean>>({});
 
-  // Grid
+  // Grid (Projects)
   const [gridMaxCount, setGridMaxCount] = useState(
     initialContent?.grid?.max_count ?? 12
   );
 
+  // Magazine
+  const [magazineMaxCount, setMagazineMaxCount] = useState(
+    initialContent?.magazine?.max_count ?? 4
+  );
+
   // Find selected products
   const heroProduct = products.find((p) => p.slug === heroProductSlug);
-  const introProduct1 = products.find((p) => p.slug === introProject1Slug);
-  const introProduct2 = products.find((p) => p.slug === introProject2Slug);
 
   // Fetch first 4 images for hero
   useEffect(() => {
@@ -129,32 +101,6 @@ export default function HomePageEditor({
       setHeroImages({ images: [], total: 0 });
     }
   }, [heroProduct?.id]);
-
-  // Fetch first 4 images for project 1
-  useEffect(() => {
-    if (introProduct1) {
-      setLoadingP1(true);
-      getProductImages(introProduct1.id, 0, 4)
-        .then(setP1Images)
-        .catch(() => setP1Images({ images: [], total: 0 }))
-        .finally(() => setLoadingP1(false));
-    } else {
-      setP1Images({ images: [], total: 0 });
-    }
-  }, [introProduct1?.id]);
-
-  // Fetch first 4 images for project 2
-  useEffect(() => {
-    if (introProduct2) {
-      setLoadingP2(true);
-      getProductImages(introProduct2.id, 0, 4)
-        .then(setP2Images)
-        .catch(() => setP2Images({ images: [], total: 0 }))
-        .finally(() => setLoadingP2(false));
-    } else {
-      setP2Images({ images: [], total: 0 });
-    }
-  }, [introProduct2?.id]);
 
   // Fetch carousel product images
   const fetchCarouselImages = async (index: number, productId: string) => {
@@ -194,22 +140,15 @@ export default function HomePageEditor({
           title: heroTitle,
           subtitle: heroSubtitle,
         },
-        intro: {
-          heading: introHeading,
-          description: introDescription,
-          link_text: introLinkText,
-          link_url: introLinkUrl,
-          project1_slug: introProject1Slug,
-          project1_image_path: introProject1ImagePath,
-          project2_slug: introProject2Slug,
-          project2_image_path: introProject2ImagePath,
-        },
         carousel: {
           product_slugs: carouselSlugs.filter(Boolean),
           image_paths: carouselImagePaths,
         },
         grid: {
           max_count: gridMaxCount,
+        },
+        magazine: {
+          max_count: magazineMaxCount,
         },
       };
 
@@ -314,125 +253,6 @@ export default function HomePageEditor({
               className="border-zinc-700 bg-zinc-800 text-zinc-100"
               placeholder="Hero subtitle"
             />
-          </div>
-        </CardContent>
-      </Card>
-
-      {/* Intro Section */}
-      <Card className="border-zinc-800 bg-zinc-900">
-        <CardHeader>
-          <CardTitle className="text-zinc-100">Intro Section</CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          <div className="space-y-2">
-            <Label className="text-zinc-300">Heading</Label>
-            <Textarea
-              value={introHeading}
-              onChange={(e) => setIntroHeading(e.target.value)}
-              className="min-h-[80px] border-zinc-700 bg-zinc-800 text-zinc-100"
-              placeholder="Intro heading"
-            />
-          </div>
-
-          <div className="space-y-2">
-            <Label className="text-zinc-300">Description</Label>
-            <Textarea
-              value={introDescription}
-              onChange={(e) => setIntroDescription(e.target.value)}
-              className="min-h-[100px] border-zinc-700 bg-zinc-800 text-zinc-100"
-              placeholder="Intro description"
-            />
-          </div>
-
-          <div className="grid grid-cols-2 gap-4">
-            <div className="space-y-2">
-              <Label className="text-zinc-300">Link Text</Label>
-              <Input
-                value={introLinkText}
-                onChange={(e) => setIntroLinkText(e.target.value)}
-                className="border-zinc-700 bg-zinc-800 text-zinc-100"
-                placeholder="View all"
-              />
-            </div>
-            <div className="space-y-2">
-              <Label className="text-zinc-300">Link URL</Label>
-              <Input
-                value={introLinkUrl}
-                onChange={(e) => setIntroLinkUrl(e.target.value)}
-                className="border-zinc-700 bg-zinc-800 text-zinc-100"
-                placeholder="/projects"
-              />
-            </div>
-          </div>
-
-          {/* Project 1 */}
-          <div className="space-y-3">
-            <Label className="text-zinc-300">Project 1</Label>
-            <Select
-              value={introProject1Slug}
-              onChange={(e) => { setIntroProject1Slug(e.target.value); setIntroProject1ImagePath(""); }}
-              className="border-zinc-700 bg-zinc-800 text-zinc-100"
-            >
-              <option value="">Select...</option>
-              {products.map((p) => (
-                <option key={p.id} value={p.slug}>{p.name}</option>
-              ))}
-            </Select>
-            {introProduct1 && (
-              <>
-                {loadingP1 ? (
-                  <p className="text-sm text-zinc-500">Loading images...</p>
-                ) : p1Images.total > 0 ? (
-                  <ImagePicker
-                    productId={introProduct1.id}
-                    initialImages={p1Images.images}
-                    initialTotal={p1Images.total}
-                    selectedPath={introProject1ImagePath}
-                    onSelect={setIntroProject1ImagePath}
-                  />
-                ) : null}
-                {(introProject1ImagePath || introProduct1.main_image) && (
-                  <div className="relative w-full aspect-[4/3] rounded-lg overflow-hidden border border-zinc-700">
-                    <Image src={getImageUrl(introProject1ImagePath || introProduct1.main_image || "")} alt="Project 1 preview" fill className="object-cover" sizes="400px" />
-                  </div>
-                )}
-              </>
-            )}
-          </div>
-
-          {/* Project 2 */}
-          <div className="space-y-3">
-            <Label className="text-zinc-300">Project 2</Label>
-            <Select
-              value={introProject2Slug}
-              onChange={(e) => { setIntroProject2Slug(e.target.value); setIntroProject2ImagePath(""); }}
-              className="border-zinc-700 bg-zinc-800 text-zinc-100"
-            >
-              <option value="">Select...</option>
-              {products.map((p) => (
-                <option key={p.id} value={p.slug}>{p.name}</option>
-              ))}
-            </Select>
-            {introProduct2 && (
-              <>
-                {loadingP2 ? (
-                  <p className="text-sm text-zinc-500">Loading images...</p>
-                ) : p2Images.total > 0 ? (
-                  <ImagePicker
-                    productId={introProduct2.id}
-                    initialImages={p2Images.images}
-                    initialTotal={p2Images.total}
-                    selectedPath={introProject2ImagePath}
-                    onSelect={setIntroProject2ImagePath}
-                  />
-                ) : null}
-                {(introProject2ImagePath || introProduct2.main_image) && (
-                  <div className="relative w-full aspect-[4/3] rounded-lg overflow-hidden border border-zinc-700">
-                    <Image src={getImageUrl(introProject2ImagePath || introProduct2.main_image || "")} alt="Project 2 preview" fill className="object-cover" sizes="400px" />
-                  </div>
-                )}
-              </>
-            )}
           </div>
         </CardContent>
       </Card>
@@ -547,10 +367,10 @@ export default function HomePageEditor({
         </CardContent>
       </Card>
 
-      {/* Grid Section */}
+      {/* Projects Section */}
       <Card className="border-zinc-800 bg-zinc-900">
         <CardHeader>
-          <CardTitle className="text-zinc-100">Grid Section</CardTitle>
+          <CardTitle className="text-zinc-100">Projects Section</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="space-y-2">
@@ -564,6 +384,28 @@ export default function HomePageEditor({
               className="w-24 border-zinc-700 bg-zinc-800 text-zinc-100"
               min={1}
               max={50}
+            />
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Magazine Section */}
+      <Card className="border-zinc-800 bg-zinc-900">
+        <CardHeader>
+          <CardTitle className="text-zinc-100">Magazine Section</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="space-y-2">
+            <Label className="text-zinc-300">Max Magazines to Show</Label>
+            <Input
+              type="number"
+              value={magazineMaxCount}
+              onChange={(e) =>
+                setMagazineMaxCount(parseInt(e.target.value, 10) || 0)
+              }
+              className="w-24 border-zinc-700 bg-zinc-800 text-zinc-100"
+              min={1}
+              max={20}
             />
           </div>
         </CardContent>

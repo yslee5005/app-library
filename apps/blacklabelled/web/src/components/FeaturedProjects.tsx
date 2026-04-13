@@ -19,7 +19,7 @@ export default function FeaturedProjects({ products }: FeaturedProjectsProps) {
         transition={{ duration: 0.8 }}
         className="font-heading text-3xl md:text-4xl text-text-primary text-center tracking-[0.1em] font-light mb-16"
       >
-        SELECTED WORKS
+        PROJECTS
       </motion.h2>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">

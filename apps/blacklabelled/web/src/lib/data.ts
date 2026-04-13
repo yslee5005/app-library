@@ -431,6 +431,53 @@ export async function getRelatedProducts(product: Product, count = 3): Promise<P
     .filter((p) => p.main_category_name !== "DEVELOPMENT");
 }
 
+export async function getResidenceProducts(count?: number): Promise<Product[]> {
+  const catMap = await getCategoryMap();
+
+  // Find the Residence category ID
+  const residenceCatId = [...catMap.entries()]
+    .find(([, v]) => v.name === "Residence")?.[0];
+
+  if (!residenceCatId) return [];
+
+  let query = supabase
+    .from("products")
+    .select(PRODUCT_LIST_SELECT)
+    .is("deleted_at", null)
+    .eq("status", "published")
+    .eq("main_category_id", residenceCatId)
+    .order("id", { ascending: false });
+
+  if (count) {
+    query = query.limit(count);
+  }
+
+  const { data } = await query;
+  if (!data) return [];
+
+  // Get main images
+  const ids = data.map((r: any) => r.id);
+  const { data: mainImgs } = ids.length > 0
+    ? await supabase
+        .from("product_images")
+        .select("product_id, storage_path")
+        .eq("type", "main")
+        .in("product_id", ids)
+        .is("deleted_at", null)
+    : { data: [] };
+
+  const imgMap = new Map<string, string>();
+  if (mainImgs) {
+    for (const img of mainImgs) imgMap.set(img.product_id, img.storage_path);
+  }
+
+  return data.map((row: any) => {
+    const p = dbToProduct(row, catMap);
+    p.main_image = imgMap.get(row.id) ?? "";
+    return p;
+  });
+}
+
 export async function getLayoutDesignProducts(): Promise<Product[]> {
   const catMap = await getCategoryMap();
 
@@ -637,6 +684,80 @@ export async function getMagazines(): Promise<Magazine[]> {
     .eq("status", "published")
     .order("date", { ascending: false });
   return data ?? [];
+}
+
+// ── Magazines with resolved images ──────────────────────
+
+export interface MagazineWithImage {
+  id: string;
+  title: string;
+  summary: string | null;
+  slug: string | null;
+  date: string | null;
+  tags: string[] | null;
+  imageUrl: string; // resolved image URL
+}
+
+export async function getMagazinesWithImages(): Promise<MagazineWithImage[]> {
+  const { data: magazines } = await supabase
+    .from("magazines")
+    .select("id, title, summary, slug, date, tags, thumbnail_path, project_id")
+    .eq("status", "published")
+    .order("date", { ascending: false });
+
+  if (!magazines || magazines.length === 0) return [];
+
+  // Collect project_ids that need image resolution
+  const projectIds = magazines
+    .map((m: any) => m.project_id)
+    .filter(Boolean) as string[];
+
+  // Batch-fetch main images for all referenced projects
+  const projectImageMap = new Map<string, string>();
+  if (projectIds.length > 0) {
+    const { data: mainImgs } = await supabase
+      .from("product_images")
+      .select("product_id, storage_path, type, sort_order")
+      .in("product_id", projectIds)
+      .is("deleted_at", null)
+      .order("sort_order", { ascending: true });
+
+    if (mainImgs) {
+      // For each project, prefer type='main', fallback to first by sort_order
+      const mainByProject = new Map<string, string>();
+      const firstByProject = new Map<string, string>();
+      for (const img of mainImgs) {
+        if (img.type === "main" && !mainByProject.has(img.product_id)) {
+          mainByProject.set(img.product_id, img.storage_path);
+        }
+        if (!firstByProject.has(img.product_id)) {
+          firstByProject.set(img.product_id, img.storage_path);
+        }
+      }
+      for (const pid of projectIds) {
+        const path = mainByProject.get(pid) ?? firstByProject.get(pid);
+        if (path) projectImageMap.set(pid, path);
+      }
+    }
+  }
+
+  return magazines.map((m: any) => {
+    let imageUrl = "";
+    if (m.project_id && projectImageMap.has(m.project_id)) {
+      imageUrl = getImageUrl(projectImageMap.get(m.project_id)!);
+    } else if (m.thumbnail_path) {
+      imageUrl = getImageUrl(m.thumbnail_path);
+    }
+    return {
+      id: m.id,
+      title: m.title,
+      summary: m.summary,
+      slug: m.slug,
+      date: m.date,
+      tags: m.tags,
+      imageUrl,
+    };
+  });
 }
 
 export async function getMagazineBySlug(slug: string): Promise<Magazine | null> {

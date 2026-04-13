@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState, useTransition } from "react";
+import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { toast } from "sonner";
@@ -29,9 +29,7 @@ import {
 import { getImageUrl } from "@/lib/data";
 import {
   createMagazine,
-  updateMagazine,
   deleteMagazine,
-  uploadMagazineThumbnail,
   type AdminMagazine,
 } from "@/lib/admin-actions";
 
@@ -39,7 +37,7 @@ interface MagazinesEditorProps {
   initialMagazines: AdminMagazine[];
 }
 
-type DialogMode = "create" | "edit" | "delete" | null;
+type DialogMode = "create" | "delete" | null;
 
 export default function MagazinesEditor({
   initialMagazines,
@@ -51,11 +49,10 @@ export default function MagazinesEditor({
   const [dialogMode, setDialogMode] = useState<DialogMode>(null);
   const [selectedId, setSelectedId] = useState<string | null>(null);
 
-  // Form fields
+  // Form fields (create only)
   const [title, setTitle] = useState("");
   const [summary, setSummary] = useState("");
   const [date, setDate] = useState("");
-  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const selected = magazines.find((m) => m.id === selectedId);
 
@@ -65,14 +62,6 @@ export default function MagazinesEditor({
     setTitle("");
     setSummary("");
     setDate(new Date().toISOString().split("T")[0]);
-  };
-
-  const openEdit = (mag: AdminMagazine) => {
-    setDialogMode("edit");
-    setSelectedId(mag.id);
-    setTitle(mag.title);
-    setSummary(mag.summary ?? "");
-    setDate(mag.date?.split("T")[0] ?? "");
   };
 
   const openDelete = (id: string) => {
@@ -103,32 +92,6 @@ export default function MagazinesEditor({
     });
   };
 
-  const handleUpdate = () => {
-    if (!selectedId) return;
-    startTransition(async () => {
-      const fd = new FormData();
-      fd.set("title", title);
-      fd.set("summary", summary);
-      fd.set("date", date);
-
-      const result = await updateMagazine(selectedId, fd);
-      if ("error" in result) {
-        toast.error(result.error);
-      } else {
-        toast.success("Magazine updated");
-        setMagazines((prev) =>
-          prev.map((m) =>
-            m.id === selectedId
-              ? { ...m, title, summary, date }
-              : m
-          )
-        );
-        closeDialog();
-        router.refresh();
-      }
-    });
-  };
-
   const handleDelete = () => {
     if (!selectedId) return;
     startTransition(async () => {
@@ -142,35 +105,6 @@ export default function MagazinesEditor({
         router.refresh();
       }
     });
-  };
-
-  const handleThumbnailUpload = (
-    magazineId: string,
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-
-    startTransition(async () => {
-      const fd = new FormData();
-      fd.set("file", file);
-
-      const result = await uploadMagazineThumbnail(magazineId, fd);
-      if ("error" in result) {
-        toast.error(result.error);
-      } else {
-        toast.success("Thumbnail uploaded");
-        setMagazines((prev) =>
-          prev.map((m) =>
-            m.id === magazineId
-              ? { ...m, thumbnail_path: result.path }
-              : m
-          )
-        );
-        router.refresh();
-      }
-    });
-    e.target.value = "";
   };
 
   return (
@@ -197,7 +131,7 @@ export default function MagazinesEditor({
                 <TableHead>Summary</TableHead>
                 <TableHead className="w-24">Status</TableHead>
                 <TableHead className="w-28">Date</TableHead>
-                <TableHead className="w-32 text-right">Actions</TableHead>
+                <TableHead className="w-24 text-right">Actions</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -257,23 +191,12 @@ export default function MagazinesEditor({
                   </TableCell>
                   <TableCell className="text-right">
                     <div className="flex items-center justify-end gap-1">
-                      <label className="cursor-pointer">
-                        <input
-                          type="file"
-                          accept="image/*"
-                          className="hidden"
-                          onChange={(e) =>
-                            handleThumbnailUpload(mag.id, e)
-                          }
-                        />
-                        <span className="inline-flex h-7 items-center rounded px-2 text-xs text-zinc-400 transition-colors hover:bg-zinc-800 hover:text-zinc-200">
-                          Img
-                        </span>
-                      </label>
                       <Button
                         variant="ghost"
                         size="xs"
-                        onClick={() => openEdit(mag)}
+                        onClick={() =>
+                          router.push(`/admin/magazines/${mag.id}/edit`)
+                        }
                         className="text-zinc-400 hover:text-zinc-200"
                       >
                         Edit
@@ -295,22 +218,16 @@ export default function MagazinesEditor({
         </div>
       </div>
 
-      {/* Create / Edit Dialog */}
+      {/* Create Dialog */}
       <Dialog
-        open={dialogMode === "create" || dialogMode === "edit"}
+        open={dialogMode === "create"}
         onOpenChange={(open) => !open && closeDialog()}
       >
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>
-              {dialogMode === "create"
-                ? "New Magazine"
-                : "Edit Magazine"}
-            </DialogTitle>
+            <DialogTitle>New Magazine</DialogTitle>
             <DialogDescription>
-              {dialogMode === "create"
-                ? "Create a new magazine entry."
-                : "Update the magazine details."}
+              Create a new magazine entry.
             </DialogDescription>
           </DialogHeader>
 
@@ -355,17 +272,11 @@ export default function MagazinesEditor({
               Cancel
             </Button>
             <Button
-              onClick={
-                dialogMode === "create" ? handleCreate : handleUpdate
-              }
+              onClick={handleCreate}
               disabled={isPending || !title.trim()}
               className="bg-zinc-100 text-zinc-900 hover:bg-zinc-200 disabled:opacity-50"
             >
-              {isPending
-                ? "Saving..."
-                : dialogMode === "create"
-                  ? "Create"
-                  : "Update"}
+              {isPending ? "Saving..." : "Create"}
             </Button>
           </DialogFooter>
         </DialogContent>

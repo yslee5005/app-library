@@ -1087,6 +1087,77 @@ export async function updateMagazineContent(
   return { success: true };
 }
 
+export async function getAdminMagazine(
+  id: string
+): Promise<
+  | (AdminMagazine & {
+      html_content: string | null;
+      tags: string[] | null;
+      seo_keywords: string[] | null;
+    })
+  | null
+> {
+  const supabase = await createSupabaseServerClient();
+
+  const { data, error } = await supabase
+    .from("magazines")
+    .select(
+      "id, title, summary, thumbnail_path, date, status, ai_generated, html_content, tags, seo_keywords, created_at, updated_at"
+    )
+    .eq("id", id)
+    .single();
+
+  if (error || !data) return null;
+
+  return data as AdminMagazine & {
+    html_content: string | null;
+    tags: string[] | null;
+    seo_keywords: string[] | null;
+  };
+}
+
+export async function updateMagazineFull(
+  id: string,
+  data: {
+    title: string;
+    summary: string;
+    date: string;
+    html_content: string;
+    tags: string[];
+    seo_keywords: string[];
+    status: string;
+  }
+): Promise<{ success: true } | { error: string }> {
+  const supabase = await createSupabaseServerClient();
+
+  if (!data.title) {
+    return { error: "Title is required" };
+  }
+
+  const { error } = await supabase
+    .from("magazines")
+    .update({
+      title: data.title,
+      summary: data.summary,
+      date: data.date,
+      html_content: data.html_content,
+      tags: data.tags,
+      seo_keywords: data.seo_keywords,
+      status: data.status,
+      updated_at: new Date().toISOString(),
+    })
+    .eq("id", id);
+
+  if (error) {
+    console.error("updateMagazineFull error:", error);
+    return { error: error.message };
+  }
+
+  revalidatePath("/magazines");
+  revalidatePath("/admin/magazines");
+  return { success: true };
+}
+
 export async function publishMagazine(
   id: string
 ): Promise<{ success: true } | { error: string }> {
