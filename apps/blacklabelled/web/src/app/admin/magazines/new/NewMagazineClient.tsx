@@ -213,19 +213,17 @@ export default function NewMagazineClient({
     setGenerationSteps(initialSteps);
 
     try {
-      // ── Phase 1: Analyze images ─────────────────────
-      const imageAnalyses: { path: string; analysis: string }[] = [];
-      for (const img of productImages) {
-        try {
-          const analysis = await analyzeProductImage(
-            img.storage_path,
-            img.id
-          );
-          imageAnalyses.push({ path: img.storage_path, analysis });
-        } catch {
-          // Skip failed analysis
-        }
-      }
+      // ── Phase 1: Analyze images (parallel) ─────────────────────
+      const imageResults = await Promise.allSettled(
+        productImages.map((img) =>
+          analyzeProductImage(img.storage_path, img.id).then(
+            (analysis) => ({ path: img.storage_path, analysis })
+          )
+        )
+      );
+      const imageAnalyses = imageResults
+        .filter((r): r is PromiseFulfilledResult<{ path: string; analysis: string }> => r.status === "fulfilled")
+        .map((r) => r.value);
       updateStep(0, "done");
       setGenerationSteps((prev) => {
         const updated = [...prev];
@@ -260,25 +258,23 @@ export default function NewMagazineClient({
       });
       setGenerationProgress(20);
 
-      // ── Phase 3: Generate each section sequentially ──
-      const sectionHtmls: string[] = [];
+      // ── Phase 3: Generate all sections in parallel ──
       const totalSections = outline.length;
-      const sectionProgressShare = 60; // 60% of progress for sections
+      const sectionProgressShare = 60;
+      let completedSections = 0;
 
+      // Mark all sections as active
       for (let i = 0; i < totalSections; i++) {
-        const section = outline[i];
-        const stepIndex = i + 2; // offset by image analysis + outline steps
+        updateStep(i + 2, "active");
+        updateStepLabel(i + 2, `${outline[i].title} (대기중)`);
+      }
 
-        // Update current section to active
-        updateStep(stepIndex, "active");
-        updateStepLabel(stepIndex, `${section.title} (${i + 1}/${totalSections})`);
-
-        // Get images for this section
+      const sectionPromises = outline.map((section, i) => {
         const sectionImages = section.imageIndices
           .filter((idx: number) => idx >= 0 && idx < imageAnalyses.length)
           .map((idx: number) => imageAnalyses[idx]);
 
-        const sectionHtml = await generateBlogSection({
+        return generateBlogSection({
           sectionIndex: i,
           sectionTitle: section.title,
           sectionDescription: section.description,
@@ -289,15 +285,20 @@ export default function NewMagazineClient({
           isFirst: i === 0,
           isLast: i === totalSections - 1,
           userMemo: userMemo || undefined,
+        }).then((html) => {
+          completedSections++;
+          updateStep(i + 2, "done");
+          updateStepLabel(i + 2, section.title);
+          const sectionProgress = 20 + (completedSections / totalSections) * sectionProgressShare;
+          setGenerationProgress(Math.round(sectionProgress));
+          return { index: i, html };
         });
+      });
 
-        sectionHtmls.push(sectionHtml);
-        updateStep(stepIndex, "done");
-        updateStepLabel(stepIndex, section.title);
-
-        const sectionProgress = 20 + ((i + 1) / totalSections) * sectionProgressShare;
-        setGenerationProgress(Math.round(sectionProgress));
-      }
+      const results = await Promise.all(sectionPromises);
+      const sectionHtmls = results
+        .sort((a, b) => a.index - b.index)
+        .map((r) => r.html);
 
       // ── Phase 4: Generate tags & keywords ──────────
       const tagsStepIndex = 2 + totalSections;
