@@ -92,12 +92,22 @@ GoogleService-Info.plist
 
 # Fastlane generated
 **/fastlane/report.xml
+**/fastlane/README.md
 
 # Blacklabelled data/build (large files)
 apps/blacklabelled/data/
 apps/blacklabelled/admin/
-apps/blacklabelled/crawl/output/
-apps/blacklabelled/crawl/progress_*.json
+apps/blacklabelled/crawl/
+apps/blacklabelled/naver/
+
+# iOS/Linux/Windows auto-generated symlinks
+**/ios/.symlinks/
+**/linux/flutter/ephemeral/.plugin_symlinks/
+**/windows/flutter/ephemeral/.plugin_symlinks/
+
+# Supabase temp/pending
+supabase/.temp/
+supabase/migrations_pending/
 
 # Next.js build output
 **/.next/
