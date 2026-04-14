@@ -64,7 +64,7 @@ class DashboardView extends ConsumerWidget {
       });
     }
 
-    final testimonyText = locale == 'ko' ? result.testimony : result.testimony;
+    final testimonyText = result.testimony(locale);
 
     int i = 0;
     return ListView(
@@ -76,7 +76,7 @@ class DashboardView extends ConsumerWidget {
             scripture: result.scripture,
             title: l10n.scriptureTitle,
             locale: locale,
-            initiallyExpanded: true,
+            initiallyExpanded: false,
           ),
         ),
         StaggeredFadeIn(

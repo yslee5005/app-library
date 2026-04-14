@@ -76,7 +76,8 @@ const testPrayerResult = PrayerResult(
     summaryEn: 'David was a shepherd.',
     summaryKo: '다윗은 양치기였습니다.',
   ),
-  testimony: 'Test prayer transcript.',
+  testimonyEn: 'Test prayer transcript.',
+  testimonyKo: '테스트 기도 내용.',
   guidance: Guidance(
     contentEn: 'Guidance content.',
     contentKo: '조언 내용.',

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -31,6 +32,9 @@ import 'services/real/supabase_prayer_repository.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
+  // Load .env.client (runtime)
+  await dotenv.load(fileName: '.env.client');
+
   // Validate environment variables (skipped in mock mode)
   AppConfig.validate();
 
@@ -60,12 +64,46 @@ Future<void> main() async {
     ]);
   } else {
     // Real mode — connect to Supabase, OpenAI, etc.
-    await Supabase.initialize(
-      url: AppConfig.supabaseUrl,
-      anonKey: AppConfig.supabaseAnonKey,
-    );
+    try {
+      await Supabase.initialize(
+        url: AppConfig.supabaseUrl,
+        anonKey: AppConfig.supabaseAnonKey,
+      );
+    } catch (e) {
+      debugPrint('Supabase init failed: $e — falling back to mock mode');
+      // Fall back to mock mode if Supabase fails to initialize
+      final mockData = MockDataService();
+      authService = MockAuthService(mockData);
+      overrides.addAll([
+        authServiceProvider.overrideWithValue(authService),
+        aiServiceProvider.overrideWithValue(MockAiService(mockData)),
+        sttServiceProvider.overrideWithValue(MockSttService()),
+        ttsServiceProvider.overrideWithValue(MockTtsService()),
+        prayerRepositoryProvider.overrideWithValue(MockPrayerRepository()),
+        communityRepositoryProvider.overrideWithValue(
+          MockCommunityRepository(mockData),
+        ),
+        subscriptionServiceProvider
+            .overrideWithValue(MockSubscriptionService()),
+        notificationServiceProvider
+            .overrideWithValue(MockNotificationService()),
+        qtRepositoryProvider.overrideWithValue(MockQtRepository(mockData)),
+      ]);
+
+      // Anonymous-first: auto sign in if no existing session
+      final currentUser = await authService.getCurrentUser();
+      if (currentUser == null) {
+        await authService.signInAnonymously();
+      }
+
+      runApp(ProviderScope(overrides: overrides, child: const AbbaApp()));
+      return;
+    }
+
     final supabase = Supabase.instance.client;
-    authService = SupabaseAuthService(supabase);
+    final supabaseAuth = SupabaseAuthService(supabase);
+    supabaseAuth.init(); // Attach listener after Supabase is confirmed ready
+    authService = supabaseAuth;
 
     overrides.addAll([
       authServiceProvider.overrideWithValue(authService),

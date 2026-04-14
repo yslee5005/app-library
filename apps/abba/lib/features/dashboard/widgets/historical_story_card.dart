@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../models/prayer.dart';
 import '../../../theme/abba_theme.dart';
+import '../../../widgets/expandable_card.dart';
 import '../../../widgets/premium_blur.dart';
 
 class HistoricalStoryCard extends StatelessWidget {
@@ -26,19 +27,27 @@ class HistoricalStoryCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final isLocked = historicalStory.isPremium && !isUserPremium;
 
-    return PremiumBlur(
-      title: title,
+    // Locked: show PremiumBlur with 3-line preview
+    if (isLocked) {
+      return PremiumBlur(
+        title: title,
+        icon: '📖',
+        isLocked: true,
+        onUnlock: onUnlock,
+        previewText: historicalStory.summary(locale),
+        content: const SizedBox.shrink(),
+      );
+    }
+
+    // Unlocked: show ExpandableCard, collapsed by default with 3-line summary
+    return ExpandableCard(
       icon: '📖',
-      isLocked: isLocked,
-      onUnlock: onUnlock,
-      content: Column(
+      title: title,
+      summary: historicalStory.title(locale),
+      initiallyExpanded: false,
+      expandedContent: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            historicalStory.title(locale),
-            style: AbbaTypography.body.copyWith(fontWeight: FontWeight.w700),
-          ),
-          const SizedBox(height: 4),
           Text(
             historicalStory.reference,
             style: AbbaTypography.caption.copyWith(

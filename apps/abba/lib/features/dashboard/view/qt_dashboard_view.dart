@@ -68,7 +68,7 @@ class QtDashboardView extends ConsumerWidget {
             title: l10n.meditationAnalysisTitle,
             keyThemeLabel: l10n.keyThemeLabel,
             locale: locale,
-            initiallyExpanded: true,
+            initiallyExpanded: false,
           ),
         ),
         // 2. Application Card

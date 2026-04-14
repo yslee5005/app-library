@@ -9,7 +9,12 @@ class SupabaseAuthService implements AuthService {
   final SupabaseClient _client;
   final _controller = StreamController<AbbaAuthState>.broadcast();
 
-  SupabaseAuthService(this._client) {
+  SupabaseAuthService(this._client);
+
+  /// Attach the auth state listener.
+  /// Call this after Supabase is confirmed initialized — NOT in the constructor
+  /// to avoid EXC_BAD_ACCESS when the client is in an invalid state.
+  void init() {
     _client.auth.onAuthStateChange.listen((data) {
       final session = data.session;
       if (session != null) {

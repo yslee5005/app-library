@@ -197,7 +197,8 @@ class _AiLoadingViewState extends ConsumerState<AiLoadingView>
               'Even when we cannot see the way, God is faithfully guiding our steps.',
           summaryKo: '우리가 길을 볼 수 없을 때에도, 하나님은 신실하게 우리의 발걸음을 인도하십니다.',
         ),
-        testimony: transcript,
+        testimonyEn: transcript,
+        testimonyKo: transcript,
       ),
     );
   }

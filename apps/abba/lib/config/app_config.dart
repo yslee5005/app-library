@@ -1,38 +1,22 @@
-/// App configuration loaded from --dart-define or --dart-define-from-file
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+
+/// App configuration loaded from .env.client via flutter_dotenv (runtime).
 class AppConfig {
   AppConfig._();
 
-  static const String env = String.fromEnvironment('ENV', defaultValue: 'mock');
+  static String get env => dotenv.env['ENV'] ?? 'mock';
 
-  static const String appId = String.fromEnvironment(
-    'APP_ID',
-    defaultValue: 'abba',
-  );
+  static String get appId => dotenv.env['APP_ID'] ?? 'abba';
 
-  static const String supabaseUrl = String.fromEnvironment(
-    'SUPABASE_URL',
-    defaultValue: '',
-  );
+  static String get supabaseUrl => dotenv.env['SUPABASE_URL'] ?? '';
 
-  static const String supabaseAnonKey = String.fromEnvironment(
-    'SUPABASE_ANON_KEY',
-    defaultValue: '',
-  );
+  static String get supabaseAnonKey => dotenv.env['SUPABASE_ANON_KEY'] ?? '';
 
-  static const String openAiApiKey = String.fromEnvironment(
-    'OPENAI_API_KEY',
-    defaultValue: '',
-  );
+  static String get openAiApiKey => dotenv.env['OPENAI_API_KEY'] ?? '';
 
-  static const String sentryDsn = String.fromEnvironment(
-    'SENTRY_DSN',
-    defaultValue: '',
-  );
+  static String get sentryDsn => dotenv.env['SENTRY_DSN'] ?? '';
 
-  static const String revenueCatApiKey = String.fromEnvironment(
-    'REVENUECAT_API_KEY',
-    defaultValue: '',
-  );
+  static String get revenueCatApiKey => dotenv.env['REVENUECAT_API_KEY'] ?? '';
 
   /// true when running in mock mode (JSON data, no external services)
   static bool get useMock => env == 'mock';

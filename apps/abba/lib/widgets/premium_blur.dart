@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 
 import '../l10n/generated/app_localizations.dart';
@@ -11,6 +9,7 @@ class PremiumBlur extends StatelessWidget {
   final Widget content;
   final bool isLocked;
   final VoidCallback onUnlock;
+  final String? previewText;
 
   const PremiumBlur({
     super.key,
@@ -19,6 +18,7 @@ class PremiumBlur extends StatelessWidget {
     required this.content,
     required this.isLocked,
     required this.onUnlock,
+    this.previewText,
   });
 
   @override
@@ -56,62 +56,75 @@ class PremiumBlur extends StatelessWidget {
                 ],
               ),
             ),
-            // Content — blurred if locked
+            // Content — preview + fade if locked
             if (isLocked)
-              ClipRRect(
-                borderRadius: const BorderRadius.only(
-                  bottomLeft: Radius.circular(AbbaRadius.lg),
-                  bottomRight: Radius.circular(AbbaRadius.lg),
-                ),
-                child: Stack(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(
-                        AbbaSpacing.md,
-                        0,
-                        AbbaSpacing.md,
-                        AbbaSpacing.md,
-                      ),
-                      child: content,
-                    ),
-                    Positioned.fill(
-                      child: BackdropFilter(
-                        filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-                        child: Container(
-                          color: AbbaColors.white.withValues(alpha: 0.3),
-                        ),
-                      ),
-                    ),
-                    Positioned.fill(
-                      child: Center(
-                        child: ElevatedButton.icon(
-                          onPressed: onUnlock,
-                          icon: const Text(
-                            '💎',
-                            style: TextStyle(fontSize: 18),
+              Column(
+                children: [
+                  // 3-line preview with fade
+                  if (previewText != null && previewText!.isNotEmpty)
+                    Stack(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: AbbaSpacing.md,
                           ),
-                          label: Text(
-                            l10n.premiumUnlock,
-                            style: AbbaTypography.body.copyWith(
-                              color: AbbaColors.white,
-                              fontWeight: FontWeight.w600,
+                          child: Text(
+                            previewText!,
+                            maxLines: 3,
+                            overflow: TextOverflow.ellipsis,
+                            style: AbbaTypography.bodySmall.copyWith(
+                              color: AbbaColors.warmBrown,
+                              height: 1.6,
                             ),
                           ),
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: AbbaColors.premium,
-                            foregroundColor: AbbaColors.white,
-                            minimumSize: const Size(200, abbaButtonHeight),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(
-                                AbbaRadius.xl,
+                        ),
+                        // Fade gradient overlay
+                        Positioned(
+                          left: 0,
+                          right: 0,
+                          bottom: 0,
+                          height: 30,
+                          child: Container(
+                            decoration: const BoxDecoration(
+                              gradient: LinearGradient(
+                                begin: Alignment.topCenter,
+                                end: Alignment.bottomCenter,
+                                colors: [
+                                  Color(0x00FFFFFF),
+                                  Color(0xFFFFFFFF),
+                                ],
                               ),
                             ),
                           ),
                         ),
+                      ],
+                    ),
+                  // Premium button
+                  Padding(
+                    padding: const EdgeInsets.all(AbbaSpacing.sm),
+                    child: Center(
+                      child: ElevatedButton.icon(
+                        onPressed: onUnlock,
+                        icon: const Text('💎', style: TextStyle(fontSize: 14)),
+                        label: Text(
+                          l10n.premiumUnlock,
+                          style: AbbaTypography.bodySmall.copyWith(
+                            color: AbbaColors.white,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: AbbaColors.premium,
+                          foregroundColor: AbbaColors.white,
+                          minimumSize: const Size(160, 36),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(AbbaRadius.xl),
+                          ),
+                        ),
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               )
             else
               Padding(

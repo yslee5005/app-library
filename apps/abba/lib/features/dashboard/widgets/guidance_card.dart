@@ -27,6 +27,7 @@ class GuidanceCard extends StatelessWidget {
       icon: '💬',
       isLocked: guidance.isPremium && !isUserPremium,
       onUnlock: onUnlock,
+      previewText: guidance.content(locale),
       content: Text(guidance.content(locale), style: AbbaTypography.body),
     );
   }

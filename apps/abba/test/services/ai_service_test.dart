@@ -82,7 +82,8 @@ class _CountingAiService implements AiService {
         summaryEn: 'Test story',
         summaryKo: '테스트 이야기',
       ),
-      testimony: 'Test transcript',
+      testimonyEn: 'Test transcript',
+      testimonyKo: '테스트 간증',
     );
   }
 

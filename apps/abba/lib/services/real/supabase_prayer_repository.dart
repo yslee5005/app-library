@@ -228,8 +228,8 @@ class SupabasePrayerRepository implements PrayerRepository {
         'summary_ko': result.bibleStory.summaryKo,
       },
       'testimony': {
-        'transcript_en': result.testimony,
-        'transcript_ko': result.testimony,
+        'transcript_en': result.testimonyEn,
+        'transcript_ko': result.testimonyKo,
       },
       if (result.guidance != null)
         'guidance': {

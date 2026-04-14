@@ -106,7 +106,10 @@ class HistoricalStory {
 class PrayerResult {
   final Scripture scripture;
   final BibleStory bibleStory;
-  final String testimony;
+  final String testimonyEn;
+  final String testimonyKo;
+
+  String testimony(String locale) => locale == 'ko' ? testimonyKo : testimonyEn;
   final Guidance? guidance;
   final AiPrayer? aiPrayer;
   final OriginalLanguage? originalLanguage;
@@ -116,7 +119,8 @@ class PrayerResult {
   const PrayerResult({
     required this.scripture,
     required this.bibleStory,
-    required this.testimony,
+    required this.testimonyEn,
+    required this.testimonyKo,
     this.guidance,
     this.aiPrayer,
     this.originalLanguage,
@@ -130,7 +134,8 @@ class PrayerResult {
       bibleStory: BibleStory.fromJson(
         json['bible_story'] as Map<String, dynamic>,
       ),
-      testimony: json['testimony']?['transcript_en'] as String? ?? '',
+      testimonyEn: json['testimony']?['transcript_en'] as String? ?? '',
+      testimonyKo: json['testimony']?['transcript_ko'] as String? ?? '',
       guidance: json['guidance'] != null
           ? Guidance.fromJson(json['guidance'] as Map<String, dynamic>)
           : null,

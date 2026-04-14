@@ -191,7 +191,8 @@ class _WritePostViewState extends ConsumerState<WritePostView> {
     final result = ref.read(prayerResultProvider);
     result.when(
       data: (prayerResult) {
-        _textController.text = prayerResult.testimony;
+        final locale = ref.read(localeProvider);
+        _textController.text = prayerResult.testimony(locale);
       },
       loading: () {},
       error: (e, s) {},

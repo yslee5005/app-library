@@ -341,84 +341,88 @@ class _HomeViewState extends ConsumerState<HomeView>
   }
 
   Widget _buildPrayerIdle(AppLocalizations l10n) {
-    return SingleChildScrollView(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: AbbaSpacing.xl),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final h = constraints.maxHeight;
+        final circleSize = (h * 0.15).clamp(60.0, 110.0);
+        final innerCircle = circleSize * 0.65;
+        final emojiSize = circleSize * 0.3;
+        final gap = (h * 0.02).clamp(4.0, 12.0);
+
+        return Column(
           children: [
-        // Static circle
-        Container(
-          width: 180,
-          height: 180,
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            color: AbbaColors.sage.withValues(alpha: 0.15),
-          ),
-          child: Center(
-            child: Container(
-              width: 120,
-              height: 120,
-              decoration: const BoxDecoration(
+            const Spacer(flex: 1),
+            // Circle
+            Container(
+              width: circleSize,
+              height: circleSize,
+              decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: AbbaColors.sage,
+                color: AbbaColors.sage.withValues(alpha: 0.15),
               ),
-              child: const Center(
-                child: Text('🙏', style: TextStyle(fontSize: 48)),
-              ),
-            ),
-          ),
-        ),
-        const SizedBox(height: AbbaSpacing.lg),
-        Text(
-          l10n.prayerStartPrompt,
-          style: AbbaTypography.h2.copyWith(color: AbbaColors.warmBrown),
-        ),
-        const SizedBox(height: AbbaSpacing.lg),
-        // Guide tips
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: AbbaSpacing.xl),
-          child: Container(
-            padding: const EdgeInsets.all(AbbaSpacing.md),
-            decoration: BoxDecoration(
-              color: AbbaColors.sage.withValues(alpha: 0.08),
-              borderRadius: BorderRadius.circular(AbbaRadius.lg),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  l10n.prayerGuideTitle,
-                  style: AbbaTypography.body.copyWith(
-                    fontWeight: FontWeight.w600,
+              child: Center(
+                child: Container(
+                  width: innerCircle,
+                  height: innerCircle,
+                  decoration: const BoxDecoration(
+                    shape: BoxShape.circle,
                     color: AbbaColors.sage,
                   ),
+                  child: Center(
+                    child: Text('🙏', style: TextStyle(fontSize: emojiSize)),
+                  ),
                 ),
-                const SizedBox(height: AbbaSpacing.sm),
-                _GuideRow(icon: '🎙️', text: l10n.prayerGuide1),
-                const SizedBox(height: AbbaSpacing.xs),
-                _GuideRow(icon: '✝️', text: l10n.prayerGuide2),
-                const SizedBox(height: AbbaSpacing.xs),
-                _GuideRow(icon: '⌨️', text: l10n.prayerGuide3),
-              ],
+              ),
             ),
-          ),
-        ),
-        const SizedBox(height: AbbaSpacing.xl),
-        // Start button
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: AbbaSpacing.xl),
-          child: AbbaButton(
-            label: l10n.startPrayerButton,
-            onPressed: _startPrayer,
-            isHero: true,
-            backgroundColor: AbbaColors.sage,
-          ),
-        ),
-        const SizedBox(height: AbbaSpacing.lg),
+            SizedBox(height: gap),
+            Text(
+              l10n.prayerStartPrompt,
+              style: AbbaTypography.h2.copyWith(color: AbbaColors.warmBrown),
+            ),
+            SizedBox(height: gap),
+            // Guide tips
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: AbbaSpacing.lg),
+              child: Container(
+                padding: const EdgeInsets.all(AbbaSpacing.sm),
+                decoration: BoxDecoration(
+                  color: AbbaColors.sage.withValues(alpha: 0.08),
+                  borderRadius: BorderRadius.circular(AbbaRadius.lg),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      l10n.prayerGuideTitle,
+                      style: AbbaTypography.body.copyWith(
+                        fontWeight: FontWeight.w600,
+                        color: AbbaColors.sage,
+                      ),
+                    ),
+                    const SizedBox(height: AbbaSpacing.xs),
+                    _GuideRow(icon: '🎙️', text: l10n.prayerGuide1),
+                    const SizedBox(height: 2),
+                    _GuideRow(icon: '✝️', text: l10n.prayerGuide2),
+                    const SizedBox(height: 2),
+                    _GuideRow(icon: '⌨️', text: l10n.prayerGuide3),
+                  ],
+                ),
+              ),
+            ),
+            SizedBox(height: gap),
+            // Start button
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: AbbaSpacing.lg),
+              child: AbbaButton(
+                label: l10n.startPrayerButton,
+                onPressed: _startPrayer,
+                backgroundColor: AbbaColors.sage,
+              ),
+            ),
+            const Spacer(flex: 1),
           ],
-        ),
-      ),
+        );
+      },
     );
   }
 
@@ -594,62 +598,65 @@ class _HomeViewState extends ConsumerState<HomeView>
   // --- QT Tab ---
 
   Widget _buildQtTab(AppLocalizations l10n) {
-    return SingleChildScrollView(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(
-          horizontal: AbbaSpacing.md,
-          vertical: AbbaSpacing.xl,
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final h = constraints.maxHeight;
+        final emojiSize = (h * 0.08).clamp(32.0, 48.0);
+        final gap = (h * 0.02).clamp(4.0, 12.0);
+
+        return Column(
           children: [
-            const SizedBox(height: AbbaSpacing.xxl),
-            const Text('📖', style: TextStyle(fontSize: 64)),
-            const SizedBox(height: AbbaSpacing.lg),
+            const Spacer(flex: 1),
+            Text('📖', style: TextStyle(fontSize: emojiSize)),
+            SizedBox(height: gap),
             Text(
               l10n.qtRevealMessage,
               style: AbbaTypography.h2,
               textAlign: TextAlign.center,
             ),
-            const SizedBox(height: AbbaSpacing.xl),
+            SizedBox(height: gap),
             // Guide tips
-            Container(
-              padding: const EdgeInsets.all(AbbaSpacing.md),
-              margin: const EdgeInsets.symmetric(horizontal: AbbaSpacing.md),
-              decoration: BoxDecoration(
-                color: AbbaColors.softGold.withValues(alpha: 0.1),
-                borderRadius: BorderRadius.circular(AbbaRadius.lg),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    l10n.qtGuideTitle,
-                    style: AbbaTypography.body.copyWith(
-                      fontWeight: FontWeight.w600,
-                      color: AbbaColors.softGold,
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: AbbaSpacing.lg),
+              child: Container(
+                padding: const EdgeInsets.all(AbbaSpacing.sm),
+                decoration: BoxDecoration(
+                  color: AbbaColors.softGold.withValues(alpha: 0.1),
+                  borderRadius: BorderRadius.circular(AbbaRadius.lg),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      l10n.qtGuideTitle,
+                      style: AbbaTypography.body.copyWith(
+                        fontWeight: FontWeight.w600,
+                        color: AbbaColors.softGold,
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: AbbaSpacing.sm),
-                  _GuideRow(icon: '📖', text: l10n.qtGuide1),
-                  const SizedBox(height: AbbaSpacing.xs),
-                  _GuideRow(icon: '💬', text: l10n.qtGuide2),
-                  const SizedBox(height: AbbaSpacing.xs),
-                  _GuideRow(icon: '✏️', text: l10n.qtGuide3),
-                ],
+                    const SizedBox(height: AbbaSpacing.xs),
+                    _GuideRow(icon: '📖', text: l10n.qtGuide1),
+                    const SizedBox(height: 2),
+                    _GuideRow(icon: '💬', text: l10n.qtGuide2),
+                    const SizedBox(height: 2),
+                    _GuideRow(icon: '✏️', text: l10n.qtGuide3),
+                  ],
+                ),
               ),
             ),
-            const SizedBox(height: AbbaSpacing.xl),
-            AbbaButton(
-              label: l10n.qtButton,
-              onPressed: () => context.go('/home/qt'),
-              isHero: true,
-              backgroundColor: AbbaColors.softGold,
+            SizedBox(height: gap),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: AbbaSpacing.lg),
+              child: AbbaButton(
+                label: l10n.qtButton,
+                onPressed: () => context.go('/home/qt'),
+                backgroundColor: AbbaColors.softGold,
+              ),
             ),
-            const SizedBox(height: AbbaSpacing.lg),
+            const Spacer(flex: 1),
           ],
-        ),
-      ),
+        );
+      },
     );
   }
 }
