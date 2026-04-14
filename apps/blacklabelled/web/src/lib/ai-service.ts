@@ -403,6 +403,12 @@ ${BRAND_STYLE_GUIDE}
 - 한 문단 2~4문장
 - 텍스트 5~7줄마다 시각적 요소 (이미지, 콜아웃, 하이라이트 등)
 
+===== ⚠️ 이미지 URL 규칙 (필수) =====
+- 위에 제공된 이미지 URL을 한 글자도 수정하지 마세요
+- URL을 그대로 복사하여 <img src=""> 에 붙여넣으세요
+- UUID를 축약하거나 변경하면 이미지가 깨집니다
+- 예: a5f5b91a-ec85-48ba-86bd-c743c892acab → 이 UUID를 절대 줄이지 마세요
+
 ===== 출력 =====
 이 섹션의 HTML만 출력하세요. 마커나 설명 없이 순수 HTML만 반환하세요.
 <body> 안의 콘텐츠만 (<!DOCTYPE>, <html>, <head>, <body> 태그 제외).
@@ -512,4 +518,39 @@ ${params.userComment}
     .replace(/^```html?\n?/i, "")
     .replace(/\n?```$/i, "")
     .trim();
+}
+
+/**
+ * 6. 유저 메모를 AI로 강화 — 체계적으로 정리 + 빠진 항목 보완
+ */
+export async function enhanceMemo(params: {
+  memo: string;
+  projectName: string;
+  projectDescription: string;
+}): Promise<string> {
+  const prompt = `당신은 BlackLabelled 인테리어 디자인 스튜디오의 전문 에디터입니다.
+
+유저가 블로그 작성을 위해 메모를 작성했습니다. 이 메모를 아래 기준으로 강화해주세요:
+
+1. 기존 내용은 유지하되 더 구체적이고 전문적으로 보완
+2. 빠진 항목이 있으면 프로젝트 정보를 기반으로 추측하여 채워주세요
+3. 인테리어 전문 용어를 적절히 활용
+4. 아래 템플릿 형식을 유지
+
+프로젝트명: ${params.projectName}
+프로젝트 설명: ${params.projectDescription}
+
+유저 메모:
+${params.memo}
+
+아래 형식으로 강화된 메모를 작성하세요 (설명 없이 메모만 출력):
+
+[콘셉트] (디자인 콘셉트 1-2문장)
+[공간 특징] (강조할 공간/구조 설명)
+[자재/마감] (주요 자재명과 특징)
+[고객 요청] (핵심 요구사항)
+[시공 포인트] (시공 시 특별했던 점)
+[추가 정보] (블로그에 담고 싶은 추가 내용)`;
+
+  return await callGemini(prompt);
 }

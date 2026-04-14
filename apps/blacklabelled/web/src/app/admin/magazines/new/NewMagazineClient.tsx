@@ -25,15 +25,15 @@ import {
   publishMagazine,
 } from "@/lib/admin-actions";
 import {
-  suggestTitles,
   analyzeProductImage,
   generateBlogOutline,
   generateBlogSection,
   generateTagsAndKeywords,
   inlineEditHtml,
+  enhanceMemo,
 } from "@/lib/ai-service";
-import { assembleBlogHtml } from "@/lib/blog-utils";
-import ImagePicker from "@/components/admin/ImagePicker";
+import { assembleBlogHtml, fixImageUrls } from "@/lib/blog-utils";
+import ImagePickerMulti from "@/components/admin/ImagePickerMulti";
 
 // ── Types ──────────────────────────────────────────────
 
@@ -76,27 +76,25 @@ export default function NewMagazineClient({
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
 
-  // Wizard state
+  // Wizard state — 3 steps
   const [currentStep, setCurrentStep] = useState(1);
-  const totalSteps = 6;
+  const totalSteps = 3;
 
   // Step 1: Project selection
   const [selectedProductId, setSelectedProductId] = useState("");
   const [productImages, setProductImages] = useState<ImageOption[]>([]);
   const [productImagesTotal, setProductImagesTotal] = useState(0);
-  const [selectedImagePath, setSelectedImagePath] = useState("");
+  const [selectedImagePaths, setSelectedImagePaths] = useState<string[]>([]);
   const [loadingImages, setLoadingImages] = useState(false);
 
-  // Step 2: Title
-  const [suggestedTitles, setSuggestedTitles] = useState<string[]>([]);
-  const [selectedTitle, setSelectedTitle] = useState("");
+  // Step 1: Title
   const [customTitle, setCustomTitle] = useState("");
-  const [loadingTitles, setLoadingTitles] = useState(false);
 
-  // Step 3: Memo
+  // Step 1: Memo
   const [userMemo, setUserMemo] = useState("");
+  const [enhancingMemo, setEnhancingMemo] = useState(false);
 
-  // Step 4: Generation (multi-step)
+  // Step 1: Generation (multi-step progress)
   const [generating, setGenerating] = useState(false);
   const [generationSteps, setGenerationSteps] = useState<GenerationStep[]>([]);
   const [generationProgress, setGenerationProgress] = useState(0);
@@ -104,7 +102,7 @@ export default function NewMagazineClient({
   const [generatedTags, setGeneratedTags] = useState<string[]>([]);
   const [generatedKeywords, setGeneratedKeywords] = useState<string[]>([]);
 
-  // Step 5: Edit
+  // Step 2: Edit
   const [editHtml, setEditHtml] = useState("");
   const [editTags, setEditTags] = useState<string[]>([]);
   const [editKeywords, setEditKeywords] = useState<string[]>([]);
@@ -119,7 +117,11 @@ export default function NewMagazineClient({
 
   // Derived
   const selectedProduct = products.find((p) => p.id === selectedProductId);
-  const finalTitle = selectedTitle || customTitle;
+  const finalTitle = customTitle;
+  const canGenerate =
+    !!selectedProductId &&
+    selectedImagePaths.length > 0 &&
+    !!finalTitle.trim();
 
   // ── Helper: Update generation step status ──────────────
 
@@ -161,7 +163,7 @@ export default function NewMagazineClient({
   const handleSelectProduct = useCallback(
     async (productId: string) => {
       setSelectedProductId(productId);
-      setSelectedImagePath("");
+      setSelectedImagePaths([]);
       setProductImages([]);
       setProductImagesTotal(0);
 
@@ -181,23 +183,6 @@ export default function NewMagazineClient({
     []
   );
 
-  const handleGenerateTitles = useCallback(async () => {
-    if (!selectedProduct) return;
-    setLoadingTitles(true);
-    try {
-      const titles = await suggestTitles({
-        projectName: selectedProduct.name,
-        projectDescription: selectedProduct.description ?? "",
-        excludeTitles: suggestedTitles,
-      });
-      setSuggestedTitles((prev) => [...prev, ...titles]);
-    } catch {
-      toast.error("Failed to generate titles");
-    } finally {
-      setLoadingTitles(false);
-    }
-  }, [selectedProduct, suggestedTitles]);
-
   const handleGenerate = useCallback(async () => {
     if (!selectedProduct || !finalTitle) return;
 
@@ -212,9 +197,13 @@ export default function NewMagazineClient({
     setGenerationSteps(initialSteps);
 
     try {
-      // ── Phase 1: Analyze images (parallel) ─────────────────────
+      // ── Phase 1: Analyze selected images only (parallel) ─────────
+      const selectedImages = productImages.filter((img) =>
+        selectedImagePaths.includes(img.storage_path)
+      );
+      updateStepLabel(0, `이미지 분석 중... (${selectedImages.length}장)`);
       const imageResults = await Promise.allSettled(
-        productImages.map((img) =>
+        selectedImages.map((img) =>
           analyzeProductImage(img.storage_path, img.id).then(
             (analysis) => ({ path: img.storage_path, analysis })
           )
@@ -314,7 +303,11 @@ export default function NewMagazineClient({
       setGenerationProgress(90);
 
       // ── Phase 5: Assemble final HTML (client-side) ──
-      const finalHtml = assembleBlogHtml(sectionHtmls);
+      const assembledHtml = assembleBlogHtml(sectionHtmls);
+
+      // Fix broken image URLs (AI sometimes truncates UUIDs)
+      const validImageUrls = selectedImagePaths.map((p) => getImageUrl(p));
+      const finalHtml = fixImageUrls(assembledHtml, validImageUrls);
 
       setGeneratedHtml(finalHtml);
       setGeneratedTags(tags);
@@ -327,9 +320,9 @@ export default function NewMagazineClient({
 
       setGenerationProgress(100);
 
-      // Small delay to show 100% before moving
+      // Small delay to show 100% before moving to Step 2 (Edit)
       setTimeout(() => {
-        setCurrentStep(5);
+        setCurrentStep(2);
       }, 500);
     } catch (err) {
       toast.error(
@@ -342,7 +335,7 @@ export default function NewMagazineClient({
     } finally {
       setGenerating(false);
     }
-  }, [selectedProduct, finalTitle, productImages, userMemo]);
+  }, [selectedProduct, finalTitle, productImages, selectedImagePaths, userMemo]);
 
   const handleSaveDraft = useCallback(() => {
     if (!selectedProduct) return;
@@ -470,6 +463,7 @@ ${editHtml}
           const step = i + 1;
           const isActive = step === currentStep;
           const isComplete = step < currentStep;
+          const stepLabels = ["Input + Generate", "Edit", "Save"];
           return (
             <div key={step} className="flex items-center gap-2">
               <div
@@ -499,6 +493,17 @@ ${editHtml}
                   step
                 )}
               </div>
+              <span
+                className={`hidden text-xs sm:inline ${
+                  isActive
+                    ? "text-zinc-200"
+                    : isComplete
+                      ? "text-zinc-500"
+                      : "text-zinc-600"
+                }`}
+              >
+                {stepLabels[i]}
+              </span>
               {step < totalSteps && (
                 <div
                   className={`h-px w-6 ${
@@ -514,346 +519,273 @@ ${editHtml}
         </span>
       </div>
 
-      {/* Step 1: Project Selection */}
+      {/* ════════════════════════════════════════════════════════════
+          Step 1: Input + Generate
+          ════════════════════════════════════════════════════════════ */}
       {currentStep === 1 && (
-        <Card className="border-zinc-800 bg-zinc-900">
-          <CardHeader>
-            <CardTitle className="text-zinc-100">
-              Step 1: Select Project
-            </CardTitle>
-            <CardDescription className="text-zinc-500">
-              매거진을 작성할 프로젝트를 선택하세요
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="space-y-2">
-              <Label className="text-zinc-300">Project</Label>
-              <Select
-                value={selectedProductId}
-                onChange={(e) => handleSelectProduct(e.target.value)}
+        <div className="space-y-6">
+          {/* ── Title Card ── */}
+          <Card className="border-zinc-800 bg-zinc-900">
+            <CardHeader>
+              <CardTitle className="text-zinc-100">제목</CardTitle>
+              <CardDescription className="text-zinc-500">
+                직접 입력하거나 AI 추천을 받으세요
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <Input
+                value={customTitle}
+                onChange={(e) => setCustomTitle(e.target.value)}
+                placeholder="매거진 제목을 입력하세요..."
                 className="border-zinc-700 bg-zinc-800 text-zinc-100"
-              >
-                <option value="">-- Select a project --</option>
-                {products.map((p) => (
-                  <option key={p.id} value={p.id}>
-                    {p.name}
-                  </option>
-                ))}
-              </Select>
-            </div>
+              />
+            </CardContent>
+          </Card>
 
-            {selectedProduct && (
-              <div className="space-y-3 rounded-lg border border-zinc-800 bg-zinc-950 p-4">
-                <div>
-                  <h3 className="font-medium text-zinc-200">
-                    {selectedProduct.name}
-                  </h3>
-                  {selectedProduct.description && (
-                    <p className="mt-1 text-sm text-zinc-400">
-                      {selectedProduct.description}
+          {/* ── Memo Card (Template) ── */}
+          <Card className="border-zinc-800 bg-zinc-900">
+            <CardHeader className="pb-2">
+              <CardTitle className="text-sm text-zinc-400">
+                추가 메모 (선택사항)
+              </CardTitle>
+              <CardDescription className="text-zinc-600 text-xs">
+                아래 항목을 참고하여 작성하면 더 좋은 매거진이 생성됩니다
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-3">
+              <Textarea
+                value={userMemo}
+                onChange={(e) => setUserMemo(e.target.value)}
+                disabled={enhancingMemo}
+                placeholder={`[콘셉트] 이 프로젝트의 디자인 콘셉트 (예: 미니멀 모던, 내추럴 우드)\n[공간 특징] 특별히 강조할 공간이나 구조 (예: 오픈 키친, 팬트리)\n[자재/마감] 사용된 주요 자재 (예: 포세린 타일, 월넛 무늬목)\n[고객 요청] 고객이 원했던 핵심 요구사항\n[시공 포인트] 시공 시 특별했던 점이나 난이도\n[추가 정보] 그 외 블로그에 담고 싶은 내용`}
+                className="min-h-[180px] border-zinc-700 bg-zinc-800 text-zinc-100 placeholder:text-zinc-600 placeholder:leading-relaxed disabled:opacity-50 disabled:cursor-not-allowed"
+              />
+              <Button
+                onClick={async () => {
+                  if (!userMemo.trim()) return;
+                  setEnhancingMemo(true);
+                  try {
+                    const enhanced = await enhanceMemo({
+                      memo: userMemo,
+                      projectName: selectedProduct?.name || "",
+                      projectDescription: selectedProduct?.description || "",
+                    });
+                    setUserMemo(enhanced);
+                    toast.success("메모가 강화되었습니다");
+                  } catch {
+                    toast.error("메모 강화 실패");
+                  } finally {
+                    setEnhancingMemo(false);
+                  }
+                }}
+                disabled={enhancingMemo || !userMemo.trim()}
+                variant="outline"
+                size="sm"
+                className="border-zinc-700 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800 disabled:opacity-50"
+              >
+                {enhancingMemo ? "강화 중..." : "✨ AI로 메모 강화하기"}
+              </Button>
+            </CardContent>
+          </Card>
+
+          {/* ── Project & Image Selection Card ── */}
+          <Card className="border-zinc-800 bg-zinc-900">
+            <CardHeader>
+              <CardTitle className="text-zinc-100">
+                프로젝트 &amp; 이미지
+              </CardTitle>
+              <CardDescription className="text-zinc-500">
+                매거진을 작성할 프로젝트를 선택하고 이미지를 골라주세요
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="space-y-2">
+                <Label className="text-zinc-300">Project</Label>
+                <Select
+                  value={selectedProductId}
+                  onChange={(e) => handleSelectProduct(e.target.value)}
+                  className="border-zinc-700 bg-zinc-800 text-zinc-100"
+                >
+                  <option value="">-- Select a project --</option>
+                  {products.map((p) => (
+                    <option key={p.id} value={p.id}>
+                      {p.name}
+                    </option>
+                  ))}
+                </Select>
+              </div>
+
+              {selectedProduct && (
+                <div className="space-y-3 rounded-lg border border-zinc-800 bg-zinc-950 p-4">
+                  <div>
+                    <h3 className="font-medium text-zinc-200">
+                      {selectedProduct.name}
+                    </h3>
+                    {selectedProduct.description && (
+                      <p className="mt-1 text-sm text-zinc-400">
+                        {selectedProduct.description}
+                      </p>
+                    )}
+                  </div>
+
+                  {loadingImages ? (
+                    <p className="text-sm text-zinc-500">Loading images...</p>
+                  ) : productImages.length > 0 ? (
+                    <div className="space-y-2">
+                      <Label className="text-zinc-400 text-xs">
+                        Project Images ({productImagesTotal} total)
+                        {selectedImagePaths.length > 0 && (
+                          <span className="ml-2 text-zinc-200 font-medium">
+                            — {selectedImagePaths.length} images selected
+                          </span>
+                        )}
+                      </Label>
+                      <ImagePickerMulti
+                        productId={selectedProductId}
+                        initialImages={productImages}
+                        initialTotal={productImagesTotal}
+                        selectedPaths={selectedImagePaths}
+                        onToggle={(path) =>
+                          setSelectedImagePaths((prev) =>
+                            prev.includes(path)
+                              ? prev.filter((p) => p !== path)
+                              : [...prev, path]
+                          )
+                        }
+                      />
+                    </div>
+                  ) : (
+                    <p className="text-sm text-zinc-500">
+                      No images available for this project
                     </p>
                   )}
                 </div>
+              )}
+            </CardContent>
+          </Card>
 
-                {loadingImages ? (
-                  <p className="text-sm text-zinc-500">Loading images...</p>
-                ) : productImages.length > 0 ? (
-                  <div className="space-y-2">
-                    <Label className="text-zinc-400 text-xs">
-                      Project Images ({productImagesTotal} total)
-                    </Label>
-                    <ImagePicker
-                      productId={selectedProductId}
-                      initialImages={productImages}
-                      initialTotal={productImagesTotal}
-                      selectedPath={selectedImagePath}
-                      onSelect={setSelectedImagePath}
-                    />
+          {/* ── Generate Button + Progress ── */}
+          {generating ? (
+            <Card className="border-zinc-800 bg-zinc-900">
+              <CardHeader>
+                <CardTitle className="text-zinc-100">
+                  매거진 생성 중
+                </CardTitle>
+                <CardDescription className="text-zinc-500">
+                  AI가 매거진 콘텐츠를 단계별로 생성합니다
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                {/* Summary */}
+                <div className="rounded-lg border border-zinc-800 bg-zinc-950 p-4 space-y-2">
+                  <div className="flex gap-2 text-sm">
+                    <span className="text-zinc-500">Project:</span>
+                    <span className="text-zinc-200">{selectedProduct?.name}</span>
                   </div>
-                ) : (
-                  <p className="text-sm text-zinc-500">
-                    No images available for this project
-                  </p>
-                )}
-              </div>
-            )}
+                  <div className="flex gap-2 text-sm">
+                    <span className="text-zinc-500">Title:</span>
+                    <span className="text-zinc-200">{finalTitle}</span>
+                  </div>
+                  <div className="flex gap-2 text-sm">
+                    <span className="text-zinc-500">Images:</span>
+                    <span className="text-zinc-200">
+                      {selectedImagePaths.length} selected
+                    </span>
+                  </div>
+                  {userMemo && (
+                    <div className="flex gap-2 text-sm">
+                      <span className="text-zinc-500">Memo:</span>
+                      <span className="text-zinc-200 line-clamp-2">
+                        {userMemo}
+                      </span>
+                    </div>
+                  )}
+                </div>
 
+                {/* Step list */}
+                <div className="rounded-lg border border-zinc-800 bg-zinc-950 p-6 space-y-4">
+                  <p className="text-sm font-medium text-zinc-200">
+                    AI가 매거진을 작성하고 있습니다
+                  </p>
+                  <div className="space-y-2">
+                    {generationSteps.map((step, i) => (
+                      <div key={i} className="flex items-center gap-3 text-sm">
+                        {step.status === "done" ? (
+                          <span className="flex h-5 w-5 items-center justify-center text-emerald-400">
+                            <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                              <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                            </svg>
+                          </span>
+                        ) : step.status === "active" ? (
+                          <span className="flex h-5 w-5 items-center justify-center">
+                            <span className="h-3 w-3 animate-spin rounded-full border-2 border-zinc-600 border-t-zinc-100" />
+                          </span>
+                        ) : step.status === "error" ? (
+                          <span className="flex h-5 w-5 items-center justify-center text-red-400">
+                            <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                              <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                          </span>
+                        ) : (
+                          <span className="flex h-5 w-5 items-center justify-center">
+                            <span className="h-2 w-2 rounded-full bg-zinc-700" />
+                          </span>
+                        )}
+                        <span
+                          className={
+                            step.status === "done"
+                              ? "text-zinc-300"
+                              : step.status === "active"
+                                ? "text-zinc-100 font-medium"
+                                : step.status === "error"
+                                  ? "text-red-400"
+                                  : "text-zinc-600"
+                          }
+                        >
+                          {step.label}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Progress bar */}
+                  <div className="space-y-1">
+                    <div className="flex justify-between text-xs text-zinc-500">
+                      <span>진행률</span>
+                      <span>{generationProgress}%</span>
+                    </div>
+                    <div className="h-2 w-full rounded-full bg-zinc-800">
+                      <div
+                        className="h-2 rounded-full bg-zinc-100 transition-all duration-500"
+                        style={{ width: `${generationProgress}%` }}
+                      />
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          ) : (
             <div className="flex justify-end">
               <Button
-                onClick={() => setCurrentStep(2)}
-                disabled={!selectedProductId}
-                className="bg-zinc-100 text-zinc-900 hover:bg-zinc-200 disabled:opacity-50"
+                onClick={handleGenerate}
+                disabled={!canGenerate}
+                className="bg-zinc-100 text-zinc-900 hover:bg-zinc-200 disabled:opacity-50 px-8 py-2 text-base"
               >
-                Next
+                매거진 생성
               </Button>
             </div>
-          </CardContent>
-        </Card>
+          )}
+        </div>
       )}
 
-      {/* Step 2: AI Title Suggestions */}
+      {/* ════════════════════════════════════════════════════════════
+          Step 2: Edit + Preview (was Step 5)
+          ════════════════════════════════════════════════════════════ */}
       {currentStep === 2 && (
         <Card className="border-zinc-800 bg-zinc-900">
           <CardHeader>
             <CardTitle className="text-zinc-100">
-              Step 2: Choose a Title
-            </CardTitle>
-            <CardDescription className="text-zinc-500">
-              AI가 제안하는 제목을 선택하거나 직접 입력하세요
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="flex gap-2">
-              <Button
-                onClick={handleGenerateTitles}
-                disabled={loadingTitles}
-                className="bg-zinc-100 text-zinc-900 hover:bg-zinc-200 disabled:opacity-50"
-              >
-                {loadingTitles
-                  ? "Generating..."
-                  : suggestedTitles.length === 0
-                    ? "Generate Titles"
-                    : "More Suggestions"}
-              </Button>
-            </div>
-
-            {suggestedTitles.length > 0 && (
-              <div className="grid gap-2">
-                {suggestedTitles.map((title, i) => (
-                  <button
-                    key={i}
-                    onClick={() => {
-                      setSelectedTitle(title);
-                      setCustomTitle("");
-                    }}
-                    className={`rounded-lg border p-3 text-left text-sm transition-colors ${
-                      selectedTitle === title
-                        ? "border-zinc-100 bg-zinc-800 text-zinc-100"
-                        : "border-zinc-700 bg-zinc-950 text-zinc-300 hover:border-zinc-600 hover:bg-zinc-800/50"
-                    }`}
-                  >
-                    {title}
-                  </button>
-                ))}
-              </div>
-            )}
-
-            <div className="space-y-2">
-              <Label className="text-zinc-400 text-xs">
-                Or type a custom title
-              </Label>
-              <Input
-                value={customTitle}
-                onChange={(e) => {
-                  setCustomTitle(e.target.value);
-                  setSelectedTitle("");
-                }}
-                placeholder="Custom title..."
-                className="border-zinc-700 bg-zinc-800 text-zinc-100"
-              />
-            </div>
-
-            {finalTitle && (
-              <div className="rounded-lg border border-zinc-700 bg-zinc-950 p-3">
-                <p className="text-xs text-zinc-500">Selected title:</p>
-                <p className="mt-1 font-medium text-zinc-100">{finalTitle}</p>
-              </div>
-            )}
-
-            <div className="flex justify-between">
-              <Button
-                variant="ghost"
-                onClick={() => setCurrentStep(1)}
-                className="text-zinc-400 hover:text-zinc-200"
-              >
-                Back
-              </Button>
-              <Button
-                onClick={() => setCurrentStep(3)}
-                disabled={!finalTitle}
-                className="bg-zinc-100 text-zinc-900 hover:bg-zinc-200 disabled:opacity-50"
-              >
-                Next
-              </Button>
-            </div>
-          </CardContent>
-        </Card>
-      )}
-
-      {/* Step 3: Additional Notes */}
-      {currentStep === 3 && (
-        <Card className="border-zinc-800 bg-zinc-900">
-          <CardHeader>
-            <CardTitle className="text-zinc-100">
-              Step 3: Additional Notes
-            </CardTitle>
-            <CardDescription className="text-zinc-500">
-              강조하고 싶은 점이나 추가 정보를 적어주세요 (선택사항)
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <Textarea
-              value={userMemo}
-              onChange={(e) => setUserMemo(e.target.value)}
-              placeholder="추가 메모 (선택사항) — 강조하고 싶은 점이나 추가 정보를 적어주세요"
-              className="min-h-[120px] border-zinc-700 bg-zinc-800 text-zinc-100"
-            />
-
-            <div className="flex justify-between">
-              <Button
-                variant="ghost"
-                onClick={() => setCurrentStep(2)}
-                className="text-zinc-400 hover:text-zinc-200"
-              >
-                Back
-              </Button>
-              <div className="flex gap-2">
-                <Button
-                  variant="ghost"
-                  onClick={() => setCurrentStep(4)}
-                  className="text-zinc-400 hover:text-zinc-200"
-                >
-                  Skip
-                </Button>
-                <Button
-                  onClick={() => setCurrentStep(4)}
-                  className="bg-zinc-100 text-zinc-900 hover:bg-zinc-200"
-                >
-                  Next
-                </Button>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-      )}
-
-      {/* Step 4: AI Generation (Multi-step with progress) */}
-      {currentStep === 4 && (
-        <Card className="border-zinc-800 bg-zinc-900">
-          <CardHeader>
-            <CardTitle className="text-zinc-100">
-              Step 4: Generate Magazine
-            </CardTitle>
-            <CardDescription className="text-zinc-500">
-              AI가 매거진 콘텐츠를 단계별로 생성합니다
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            {/* Summary */}
-            <div className="rounded-lg border border-zinc-800 bg-zinc-950 p-4 space-y-2">
-              <div className="flex gap-2 text-sm">
-                <span className="text-zinc-500">Project:</span>
-                <span className="text-zinc-200">{selectedProduct?.name}</span>
-              </div>
-              <div className="flex gap-2 text-sm">
-                <span className="text-zinc-500">Title:</span>
-                <span className="text-zinc-200">{finalTitle}</span>
-              </div>
-              <div className="flex gap-2 text-sm">
-                <span className="text-zinc-500">Images:</span>
-                <span className="text-zinc-200">
-                  {productImages.length} selected
-                </span>
-              </div>
-              {userMemo && (
-                <div className="flex gap-2 text-sm">
-                  <span className="text-zinc-500">Memo:</span>
-                  <span className="text-zinc-200 line-clamp-2">
-                    {userMemo}
-                  </span>
-                </div>
-              )}
-            </div>
-
-            {generating ? (
-              <div className="rounded-lg border border-zinc-800 bg-zinc-950 p-6 space-y-4">
-                <p className="text-sm font-medium text-zinc-200">
-                  AI가 매거진을 작성하고 있습니다
-                </p>
-
-                {/* Step list */}
-                <div className="space-y-2">
-                  {generationSteps.map((step, i) => (
-                    <div key={i} className="flex items-center gap-3 text-sm">
-                      {step.status === "done" ? (
-                        <span className="flex h-5 w-5 items-center justify-center text-emerald-400">
-                          <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                          </svg>
-                        </span>
-                      ) : step.status === "active" ? (
-                        <span className="flex h-5 w-5 items-center justify-center">
-                          <span className="h-3 w-3 animate-spin rounded-full border-2 border-zinc-600 border-t-zinc-100" />
-                        </span>
-                      ) : step.status === "error" ? (
-                        <span className="flex h-5 w-5 items-center justify-center text-red-400">
-                          <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-                          </svg>
-                        </span>
-                      ) : (
-                        <span className="flex h-5 w-5 items-center justify-center">
-                          <span className="h-2 w-2 rounded-full bg-zinc-700" />
-                        </span>
-                      )}
-                      <span
-                        className={
-                          step.status === "done"
-                            ? "text-zinc-300"
-                            : step.status === "active"
-                              ? "text-zinc-100 font-medium"
-                              : step.status === "error"
-                                ? "text-red-400"
-                                : "text-zinc-600"
-                        }
-                      >
-                        {step.label}
-                      </span>
-                    </div>
-                  ))}
-                </div>
-
-                {/* Progress bar */}
-                <div className="space-y-1">
-                  <div className="flex justify-between text-xs text-zinc-500">
-                    <span>진행률</span>
-                    <span>{generationProgress}%</span>
-                  </div>
-                  <div className="h-2 w-full rounded-full bg-zinc-800">
-                    <div
-                      className="h-2 rounded-full bg-zinc-100 transition-all duration-500"
-                      style={{ width: `${generationProgress}%` }}
-                    />
-                  </div>
-                </div>
-              </div>
-            ) : (
-              <div className="flex justify-between">
-                <Button
-                  variant="ghost"
-                  onClick={() => setCurrentStep(3)}
-                  className="text-zinc-400 hover:text-zinc-200"
-                >
-                  Back
-                </Button>
-                <Button
-                  onClick={handleGenerate}
-                  className="bg-zinc-100 text-zinc-900 hover:bg-zinc-200"
-                >
-                  Generate Magazine
-                </Button>
-              </div>
-            )}
-          </CardContent>
-        </Card>
-      )}
-
-      {/* Step 5: Edit + Preview */}
-      {currentStep === 5 && (
-        <Card className="border-zinc-800 bg-zinc-900">
-          <CardHeader>
-            <CardTitle className="text-zinc-100">
-              Step 5: Edit &amp; Preview
+              Step 2: Edit &amp; Preview
             </CardTitle>
             <CardDescription className="text-zinc-500">
               HTML을 수정하고 실시간 미리보기를 확인하세요
@@ -1019,13 +951,13 @@ ${editHtml}
             <div className="flex justify-between">
               <Button
                 variant="ghost"
-                onClick={() => setCurrentStep(4)}
+                onClick={() => setCurrentStep(1)}
                 className="text-zinc-400 hover:text-zinc-200"
               >
                 Back
               </Button>
               <Button
-                onClick={() => setCurrentStep(6)}
+                onClick={() => setCurrentStep(3)}
                 className="bg-zinc-100 text-zinc-900 hover:bg-zinc-200"
               >
                 Next
@@ -1035,12 +967,14 @@ ${editHtml}
         </Card>
       )}
 
-      {/* Step 6: Save + Publish + Download */}
-      {currentStep === 6 && (
+      {/* ════════════════════════════════════════════════════════════
+          Step 3: Save + Publish + Download (was Step 6)
+          ════════════════════════════════════════════════════════════ */}
+      {currentStep === 3 && (
         <Card className="border-zinc-800 bg-zinc-900">
           <CardHeader>
             <CardTitle className="text-zinc-100">
-              Step 6: Save &amp; Publish
+              Step 3: Save &amp; Publish
             </CardTitle>
             <CardDescription className="text-zinc-500">
               매거진을 저장하거나 바로 발행하세요
@@ -1080,7 +1014,7 @@ ${editHtml}
             {/* Mini Preview */}
             <div className="space-y-2">
               <Label className="text-zinc-400 text-xs">Preview</Label>
-              <div className="max-h-[200px] overflow-y-auto rounded-lg border border-zinc-700 bg-white p-3">
+              <div className="h-[50vh] overflow-y-auto rounded-lg border border-zinc-700 bg-white p-4">
                 <div
                   className="mx-auto max-w-[700px]"
                   style={{
@@ -1098,7 +1032,7 @@ ${editHtml}
             <div className="flex flex-col gap-3 sm:flex-row sm:justify-between">
               <Button
                 variant="ghost"
-                onClick={() => setCurrentStep(5)}
+                onClick={() => setCurrentStep(2)}
                 className="text-zinc-400 hover:text-zinc-200"
               >
                 Back to Edit
