@@ -18,56 +18,90 @@ function getImageUrl(storagePath: string): string {
 // ── BlackLabelled Brand Style Guide ─────────────────────
 
 const BRAND_STYLE_GUIDE = `
-===== BlackLabelled 브랜드 스타일 가이드 =====
+===== BlackLabelled 블로그 스타일 가이드 =====
+(기존 블로그 5개 포스트 분석 기반)
 
-1. 색상 팔레트:
+1. 제목 공식:
+   [평수] [건물타입] 인테리어 | [지역 + 건물명] | [감성 키워드 + 디자인 요소] | 블랙라벨드
+   - 길이: 60-75자
+   - 예: "47평 아파트 인테리어 | 서현 시범한양 | 간결한 라인과 조명, 그레이&화이트 매치 | 블랙라벨드"
+   - 감성 형용사 필수: 포근한, 깊이 있는, 간결한, 현대적, 세련된 등
+   - 재료/색상 키워드 필수: 그레이, 우드, 오크톤, 화이트무드 등
+
+2. 글 구조 (기존 블로그 패턴):
+   (1) 오프닝 — 프로젝트 메타 (평수, 위치, 건물명, 건물 연식)
+   (2) 디자인 콘셉트 — 색상 팔레트, 스타일, 주요 재료 (1-2문단)
+   (3) 공간별 상세 설명 — 각 공간 1-2문단 + 이미지 2-5장
+       - 거실/리빙 → 주방/키친 → 침실 → 욕실 → 복도/현관 순서
+       - 각 공간: 기능성 + 감성 병행
+       - 가구/조명 선택 이유 설명
+   (4) 클로징 — 종합 평가, 완성 소감 + 브랜드명
+   (5) 해시태그 15-20개
+
+3. 문체 규칙 (분석 결과):
+   - ~습니다 체 + ~요 체 혼합 (격식 있되 친근하게)
+   - Before/개선 전 언급 금지 → 긍정적 포커싱만 (완성된 상태 강조)
+   - 감성 형용사 + 전문 용어 혼합: "포근한 그레이지 감성", "오크톤 마루의 따뜻한 질감"
+   - 독자 호칭: "여러분", "고객님"
+   - 브랜드명: BlackLabelled (블랙라벨드)
+
+4. 이미지 배치 규칙:
+   - 200-300자마다 이미지 1장 (이미지 중심 레이아웃)
+   - 모든 이미지에 캡션 필수 (설명적, 짧게)
+   - 캡션 예: "모던하게 완성된 거실", "화이트 톤의 주방 공간"
+   - 이미지 비중: 전체 콘텐츠의 70% 이미지, 30% 텍스트
+
+5. 색상 팔레트:
    - 주요 강조: #C5A572 (골드) — 섹션 제목, 테두리, 하이라이트
-   - 보조 강조: #8B7355 (다크 골드) — 미묘한 요소
-   - 하이라이트 배경: #FAF6EE (따뜻한 크림) — 형광펜 대체
-   - 정보 카드 배경: #FAF8F5 (따뜻한 라이트)
+   - 하이라이트 배경: #FAF6EE (따뜻한 크림)
    - 콜아웃 박스: border-left: 5px solid #C5A572; background: #FAF6EE;
-   - 본문 텍스트: #2C2C2C (다크 그레이, 순수 검정 아님)
+   - 본문 텍스트: #2C2C2C
    - 제목 텍스트: #1A1A1A
 
-2. 타이포그래피 (인라인 스타일 필수 — 네이버 호환):
-   - 본문: font-family: 'NanumSquare', 'Noto Sans KR', sans-serif; font-size: 15px; line-height: 1.9; color: #2C2C2C;
+6. 타이포그래피 (인라인 스타일 필수 — 네이버 호환):
+   - 본문: font-size: 15px; line-height: 1.9; color: #2C2C2C;
    - 섹션 제목: font-size: 20px; font-weight: bold; border-left: 5px solid #C5A572; padding-left: 12px; color: #1A1A1A;
    - 임팩트 오프닝: font-size: 26px; font-weight: bold; text-align: center; color: #C5A572;
    - 구분선: <p style="text-align:center; font-size:14px; color:#C5A572; letter-spacing:8px;">━━━ ◆ ━━━</p>
    - 하이라이트: <span style="background-color:#FAF6EE; padding:2px 4px;"><b>텍스트</b></span>
    - 인용/콜아웃 박스: <div style="border-left:5px solid #C5A572; padding:15px 20px; background:#FAF6EE; margin:20px 0;"><b>제목</b><br><br>내용</div>
-   - 정보 표 셀: background:#FAF8F5; border:1px solid #E8E0D4;
-   - 숫자 하이라이트: <span style="font-size:28px; font-weight:bold; color:#C5A572;">427+</span>
    - 캡션: <p style="text-align:center; font-size:13px; color:#999; font-style:italic;">▲ 캡션</p>
-   - 해시태그: <p style="text-align:center; color:#B8A080; font-size:14px;">#인테리어 #블랙라벨드 ...</p>
    - 이미지: <p style="text-align:center; margin:25px 0;"><img src="URL" style="max-width:100%; border:1px solid #E8E0D4;" /></p>
 
-3. 문체:
-   - 전문적이고 고급스러운 ~습니다 체
-   - 인테리어 전문 용어 적극 활용 (공간, 마감, 자재, 동선, 시공 등)
-   - 독자: "여러분" 존칭
-   - 브랜드명: BlackLabelled (블랙라벨드)
-   - 슬로건: "Your space is 'black label'"
+7. 해시태그 규칙 (15-20개):
+   - 위치 기반 4개: #분당, #서현동, #성남인테리어 등
+   - 주제 기반 4개: #아파트인테리어, #인테리어, #리모델링 등
+   - 스타일 기반 4개: #모던인테리어, #미니멀, #화이트인테리어 등
+   - 건물/브랜드 3-4개: #시범한양, #블랙라벨드, #BlackLabelled 등
+   - 형식: <p style="text-align:center; color:#B8A080; font-size:14px;">#태그1 #태그2 ...</p>
 
-4. HTML 기술 규칙:
+8. HTML 기술 규칙:
    필수 사용:
-   - <b>, <i>, <u> 텍스트 서식
-   - <span style="color:..."> 색상 강조
-   - <span style="background-color:#FAF6EE; padding:2px 4px;"> 하이라이트 (형광펜 대체)
-   - border-left + background 인용구/콜아웃 박스
-   - border + background 정보 카드
-   - <table> inline style 표 (셀 배경: #FAF8F5, 테두리: #E8E0D4)
+   - <b> 텍스트 강조
+   - <span style="background-color:#FAF6EE; padding:2px 4px;"> 하이라이트
+   - border-left + background 콜아웃 박스
    - 인라인 스타일만 사용
 
    절대 금지:
    - float, flex, display:flex
    - box-shadow, linear-gradient
    - border-radius:50%
-   - background 단독 사용 (border 없이)
    - <s> 취소선
-   - padding-left 들여쓰기
    - <details> 접기
-   - #2DB400 (네이버 초록) 사용 금지 → #C5A572 (골드) 사용
+   - #2DB400 (네이버 초록) 사용 금지
+
+9. 콘텐츠 DO / DON'T:
+   DO:
+   - 지역명 + 건물명 반복 (SEO)
+   - 공간별 기능성 + 감성 병행
+   - 디자인 형용사 적극 사용
+   - 재료/브랜드명 명시 (포세린 타일, 월넛 무늬목 등)
+
+   DON'T:
+   - "개선 전 문제점" 언급 (부정적 표현)
+   - 500자 이상 한 문단 (가독성)
+   - 영문 혼용 (Grey → 그레이로 통일)
+   - 이미지 캡션 생략
 `;
 
 // ── Gemini API helpers ──────────────────────────────────
