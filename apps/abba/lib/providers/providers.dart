@@ -146,7 +146,7 @@ final myPostsProvider = FutureProvider<List<CommunityPost>>((ref) async {
 // ---------------------------------------------------------------------------
 
 /// Prayers for a specific date (used by Calendar day detail)
-final calendarPrayersProvider = FutureProvider.family<List<Prayer>, DateTime>((
+final calendarPrayersProvider = FutureProvider.autoDispose.family<List<Prayer>, DateTime>((
   ref,
   date,
 ) {
@@ -156,7 +156,7 @@ final calendarPrayersProvider = FutureProvider.family<List<Prayer>, DateTime>((
 
 /// Monthly prayer dates (for calendar markers)
 final monthlyPrayerDaysProvider =
-    FutureProvider.family<Set<DateTime>, ({int year, int month})>((
+    FutureProvider.autoDispose.family<Set<DateTime>, ({int year, int month})>((
       ref,
       params,
     ) async {

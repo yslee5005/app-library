@@ -218,7 +218,6 @@ class _HomeViewState extends ConsumerState<HomeView>
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    final profileAsync = ref.watch(userProfileProvider);
 
     return Scaffold(
       backgroundColor: AbbaColors.cream,
@@ -249,46 +248,27 @@ class _HomeViewState extends ConsumerState<HomeView>
                     ),
                   ),
                   const SizedBox(width: AbbaSpacing.sm),
-                  // Streak badge (compact) — tap to open calendar/history
-                  profileAsync.when(
-                    data: (profile) => GestureDetector(
-                      onTap: () => context.go('/calendar'),
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: AbbaSpacing.sm + 2,
-                          vertical: AbbaSpacing.sm,
-                        ),
-                        decoration: BoxDecoration(
-                          color: AbbaColors.sage.withValues(alpha: 0.1),
-                          borderRadius: BorderRadius.circular(AbbaRadius.xl),
-                        ),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Text(
-                              streakGardenIcon(profile.currentStreak),
-                              style: const TextStyle(fontSize: 18),
-                            ),
-                            const SizedBox(width: 4),
-                            Text(
-                              '${profile.currentStreak}',
-                              style: AbbaTypography.body.copyWith(
-                                fontWeight: FontWeight.w700,
-                                color: AbbaColors.sage,
-                              ),
-                            ),
-                            const SizedBox(width: 2),
-                            Icon(
-                              Icons.chevron_right,
-                              size: 16,
-                              color: AbbaColors.sage.withValues(alpha: 0.6),
-                            ),
-                          ],
-                        ),
+                  // History button — tap to open prayer/qt history
+                  GestureDetector(
+                    onTap: () {
+                      if (_selectedTab == 0) {
+                        context.go('/home/history/prayer');
+                      } else {
+                        context.go('/home/history/qt');
+                      }
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.all(AbbaSpacing.sm + 2),
+                      decoration: BoxDecoration(
+                        color: AbbaColors.sage.withValues(alpha: 0.1),
+                        borderRadius: BorderRadius.circular(AbbaRadius.xl),
+                      ),
+                      child: const Icon(
+                        Icons.history,
+                        size: 24,
+                        color: AbbaColors.sage,
                       ),
                     ),
-                    loading: () => const SizedBox.shrink(),
-                    error: (e, s) => const SizedBox.shrink(),
                   ),
                 ],
               ),
@@ -657,35 +637,8 @@ class _HomeViewState extends ConsumerState<HomeView>
               textAlign: TextAlign.center,
             ),
             SizedBox(height: gap),
-            // Guide tips
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: AbbaSpacing.lg),
-              child: Container(
-                padding: const EdgeInsets.all(AbbaSpacing.sm),
-                decoration: BoxDecoration(
-                  color: AbbaColors.softGold.withValues(alpha: 0.1),
-                  borderRadius: BorderRadius.circular(AbbaRadius.lg),
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      l10n.qtGuideTitle,
-                      style: AbbaTypography.body.copyWith(
-                        fontWeight: FontWeight.w600,
-                        color: AbbaColors.softGold,
-                      ),
-                    ),
-                    const SizedBox(height: AbbaSpacing.xs),
-                    _GuideRow(icon: '📖', text: l10n.qtGuide1),
-                    const SizedBox(height: 2),
-                    _GuideRow(icon: '💬', text: l10n.qtGuide2),
-                    const SizedBox(height: 2),
-                    _GuideRow(icon: '✏️', text: l10n.qtGuide3),
-                  ],
-                ),
-              ),
-            ),
+            // Streak card
+            _buildStreakCard(l10n),
             SizedBox(height: gap),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: AbbaSpacing.lg),
@@ -703,32 +656,3 @@ class _HomeViewState extends ConsumerState<HomeView>
   }
 }
 
-class _GuideRow extends StatelessWidget {
-  final String icon;
-  final String text;
-
-  const _GuideRow({required this.icon, required this.text});
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: AbbaSpacing.xs),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(icon, style: const TextStyle(fontSize: 22)),
-          const SizedBox(width: AbbaSpacing.md),
-          Expanded(
-            child: Text(
-              text,
-              style: AbbaTypography.bodySmall.copyWith(
-                color: AbbaColors.warmBrown,
-                height: 1.6,
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}

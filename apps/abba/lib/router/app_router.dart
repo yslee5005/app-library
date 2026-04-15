@@ -8,6 +8,8 @@ import '../features/community/view/write_post_view.dart';
 import '../features/dashboard/view/dashboard_view.dart';
 import '../features/dashboard/view/prayer_dashboard_view.dart';
 import '../features/dashboard/view/qt_dashboard_view.dart';
+import '../features/history/view/prayer_history_view.dart';
+import '../features/history/view/qt_history_view.dart';
 import '../features/home/view/home_view.dart';
 import '../features/qt/view/qt_view.dart';
 import '../features/my_page/view/my_page_view.dart';
@@ -60,6 +62,15 @@ final appRouter = GoRouter(
                 GoRoute(
                   path: 'qt',
                   builder: (context, state) => const QtView(),
+                ),
+                GoRoute(
+                  path: 'history/prayer',
+                  builder: (context, state) =>
+                      const PrayerHistoryView(),
+                ),
+                GoRoute(
+                  path: 'history/qt',
+                  builder: (context, state) => const QtHistoryView(),
                 ),
               ],
             ),

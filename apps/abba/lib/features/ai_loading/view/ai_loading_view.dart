@@ -108,6 +108,10 @@ class _AiLoadingViewState extends ConsumerState<AiLoadingView>
       );
       await repo.updateStreak();
 
+      // Invalidate providers so calendar/history refresh
+      ref.invalidate(streakProvider);
+      ref.invalidate(userProfileProvider);
+
       ErrorLoggingService.addBreadcrumb(
         'Prayer saved successfully',
         category: 'prayer',
@@ -168,6 +172,10 @@ class _AiLoadingViewState extends ConsumerState<AiLoadingView>
         ),
       );
       await repo.updateStreak();
+
+      // Invalidate providers so calendar/history refresh
+      ref.invalidate(streakProvider);
+      ref.invalidate(userProfileProvider);
 
       ErrorLoggingService.addBreadcrumb(
         'QT meditation saved successfully',
