@@ -1,0 +1,712 @@
+// ignore: unused_import
+import 'package:intl/intl.dart' as intl;
+import 'app_localizations.dart';
+
+// ignore_for_file: type=lint
+
+/// The translations for Croatian (`hr`).
+class AppLocalizationsHr extends AppLocalizations {
+  AppLocalizationsHr([String locale = 'hr']) : super(locale);
+
+  @override
+  String get appName => 'Abba';
+
+  @override
+  String get welcomeTitle => 'Kada se moliš,\nBog odgovara.';
+
+  @override
+  String get welcomeSubtitle =>
+      'Tvoj svakodnevni pratilac za molitvu i tihi sat';
+
+  @override
+  String get getStarted => 'Započni';
+
+  @override
+  String get loginTitle => 'Dobrodošli u Abba';
+
+  @override
+  String get loginSubtitle => 'Prijavite se da započnete svoj molitveni put';
+
+  @override
+  String get signInWithApple => 'Nastavi s Apple';
+
+  @override
+  String get signInWithGoogle => 'Nastavi s Google';
+
+  @override
+  String get signInWithEmail => 'Nastavi s e-poštom';
+
+  @override
+  String greetingMorning(Object name) {
+    return 'Dobro jutro, $name';
+  }
+
+  @override
+  String greetingAfternoon(Object name) {
+    return 'Dobar dan, $name';
+  }
+
+  @override
+  String greetingEvening(Object name) {
+    return 'Dobra večer, $name';
+  }
+
+  @override
+  String get prayButton => 'Moli se';
+
+  @override
+  String get qtButton => 'Tihi sat';
+
+  @override
+  String streakDays(Object count) {
+    return '$count dana neprekidne molitve';
+  }
+
+  @override
+  String get dailyVerse => 'Stih dana';
+
+  @override
+  String get tabHome => 'Početna';
+
+  @override
+  String get tabCalendar => 'Kalendar';
+
+  @override
+  String get tabCommunity => 'Zajednica';
+
+  @override
+  String get tabSettings => 'Postavke';
+
+  @override
+  String get recordingTitle => 'Molim se...';
+
+  @override
+  String get recordingPause => 'Pauza';
+
+  @override
+  String get recordingResume => 'Nastavi';
+
+  @override
+  String get finishPrayer => 'Završi molitvu';
+
+  @override
+  String get finishPrayerConfirm => 'Želite li završiti molitvu?';
+
+  @override
+  String get switchToText => 'Upiši umjesto toga';
+
+  @override
+  String get textInputHint => 'Upiši svoju molitvu ovdje...';
+
+  @override
+  String get aiLoadingText => 'Razmišljam o tvojoj molitvi...';
+
+  @override
+  String get aiLoadingVerse =>
+      'Utišajte se i spoznajte da sam ja Bog.\n— Psalam 46:10';
+
+  @override
+  String get dashboardTitle => 'Molitveni Vrt';
+
+  @override
+  String get shareButton => 'Podijeli';
+
+  @override
+  String get backToHome => 'Natrag na početnu';
+
+  @override
+  String get scriptureTitle => 'Svetopisamski odlomak dana';
+
+  @override
+  String get bibleStoryTitle => 'Biblijska priča';
+
+  @override
+  String get testimonyTitle => 'Moje svjedočanstvo';
+
+  @override
+  String get testimonyEdit => 'Uredi';
+
+  @override
+  String get guidanceTitle => 'AI vodstvo';
+
+  @override
+  String get aiPrayerTitle => 'Molitva za tebe';
+
+  @override
+  String get originalLangTitle => 'Izvorni jezik';
+
+  @override
+  String get premiumUnlock => 'Otključaj s Premium';
+
+  @override
+  String get qtPageTitle => 'Jutarnji Vrt';
+
+  @override
+  String get qtMeditateButton => 'Započni meditaciju';
+
+  @override
+  String get qtCompleted => 'Završeno';
+
+  @override
+  String get communityTitle => 'Molitveni Vrt';
+
+  @override
+  String get filterAll => 'Sve';
+
+  @override
+  String get filterTestimony => 'Svjedočanstvo';
+
+  @override
+  String get filterPrayerRequest => 'Molitvena namjera';
+
+  @override
+  String get likeButton => 'Sviđa mi se';
+
+  @override
+  String get commentButton => 'Komentar';
+
+  @override
+  String get saveButton => 'Spremi';
+
+  @override
+  String get replyButton => 'Odgovori';
+
+  @override
+  String get writePostTitle => 'Podijeli';
+
+  @override
+  String get cancelButton => 'Odustani';
+
+  @override
+  String get sharePostButton => 'Objavi';
+
+  @override
+  String get anonymousToggle => 'Anonimno';
+
+  @override
+  String get realNameToggle => 'Pravo ime';
+
+  @override
+  String get categoryTestimony => 'Svjedočanstvo';
+
+  @override
+  String get categoryPrayerRequest => 'Molitvena namjera';
+
+  @override
+  String get writePostHint =>
+      'Podijeli svoje svjedočanstvo ili molitvenu namjeru...';
+
+  @override
+  String get importFromPrayer => 'Uvezi iz molitve';
+
+  @override
+  String get calendarTitle => 'Molitveni kalendar';
+
+  @override
+  String get currentStreak => 'Trenutni niz';
+
+  @override
+  String get bestStreak => 'Najbolji niz';
+
+  @override
+  String get days => 'dana';
+
+  @override
+  String calendarRecordCount(Object count) {
+    return '$count zapisa';
+  }
+
+  @override
+  String get todayVerse => 'Stih dana';
+
+  @override
+  String get settingsTitle => 'Postavke';
+
+  @override
+  String get profileSection => 'Profil';
+
+  @override
+  String get totalPrayers => 'Ukupno molitava';
+
+  @override
+  String get consecutiveDays => 'Uzastopnih dana';
+
+  @override
+  String get premiumSection => 'Premium';
+
+  @override
+  String get freePlan => 'Besplatno';
+
+  @override
+  String get premiumPlan => 'Premium';
+
+  @override
+  String get monthlyPrice => '3,49€/mj';
+
+  @override
+  String get yearlyPrice => '24,99€/god';
+
+  @override
+  String get yearlySave => 'Uštedi 40%';
+
+  @override
+  String get launchPromo => '3 mjeseca po 3,99€/mj!';
+
+  @override
+  String get startPremium => 'Započni Premium';
+
+  @override
+  String get comingSoon => 'Uskoro';
+
+  @override
+  String get notificationSetting => 'Obavijesti';
+
+  @override
+  String get aiVoiceSetting => 'AI glas';
+
+  @override
+  String get voiceWarm => 'Topao';
+
+  @override
+  String get voiceCalm => 'Smiren';
+
+  @override
+  String get voiceStrong => 'Snažan';
+
+  @override
+  String get languageSetting => 'Jezik';
+
+  @override
+  String get darkModeSetting => 'Tamni način';
+
+  @override
+  String get helpCenter => 'Centar za pomoć';
+
+  @override
+  String get termsOfService => 'Uvjeti korištenja';
+
+  @override
+  String get privacyPolicy => 'Pravila privatnosti';
+
+  @override
+  String get logout => 'Odjava';
+
+  @override
+  String appVersion(Object version) {
+    return 'Verzija $version';
+  }
+
+  @override
+  String get anonymous => 'Anonimno';
+
+  @override
+  String timeAgo(Object time) {
+    return 'prije $time';
+  }
+
+  @override
+  String get emailLabel => 'E-pošta';
+
+  @override
+  String get passwordLabel => 'Lozinka';
+
+  @override
+  String get signIn => 'Prijava';
+
+  @override
+  String get cancel => 'Odustani';
+
+  @override
+  String get noPrayersRecorded => 'Nema zabilježenih molitava';
+
+  @override
+  String get deletePost => 'Obriši';
+
+  @override
+  String get reportPost => 'Prijavi';
+
+  @override
+  String get reportSubmitted => 'Prijava je poslana. Hvala.';
+
+  @override
+  String get reportReasonHint =>
+      'Opišite razlog prijave. Bit će poslana putem e-pošte.';
+
+  @override
+  String get reportReasonPlaceholder => 'Unesite razlog prijave...';
+
+  @override
+  String get reportSubmitButton => 'Prijavi';
+
+  @override
+  String get deleteConfirmTitle => 'Obriši objavu';
+
+  @override
+  String get deleteConfirmMessage =>
+      'Jeste li sigurni da želite obrisati ovu objavu?';
+
+  @override
+  String get errorNetwork => 'Provjerite internetsku vezu i pokušajte ponovo.';
+
+  @override
+  String get errorAiFallback =>
+      'Nismo uspjeli povezati se s AI-jem. Evo stiha za vas.';
+
+  @override
+  String get errorSttFailed =>
+      'Prepoznavanje govora nije dostupno. Molimo unesite tekst.';
+
+  @override
+  String get errorPayment =>
+      'Došlo je do problema s plaćanjem. Pokušajte ponovo u Postavkama.';
+
+  @override
+  String get errorGeneric =>
+      'Nešto je pošlo po krivu. Pokušajte ponovo kasnije.';
+
+  @override
+  String get offlineNotice =>
+      'Izvan mreže ste. Neke značajke mogu biti ograničene.';
+
+  @override
+  String get retryButton => 'Pokušaj ponovo';
+
+  @override
+  String get groupSection => 'Moje grupe';
+
+  @override
+  String get createGroup => 'Stvori molitvenu grupu';
+
+  @override
+  String get inviteFriends => 'Pozovi prijatelje';
+
+  @override
+  String get groupInviteMessage =>
+      'Molimo se zajedno! Pridruži se mojoj molitvenoj grupi na Abba.';
+
+  @override
+  String get noGroups => 'Pridruži se ili stvori grupu za zajedničku molitvu.';
+
+  @override
+  String get promoTitle => 'Posebna ponuda';
+
+  @override
+  String get promoBanner => 'Prva 3 mjeseca po 3,99€/mj!';
+
+  @override
+  String promoEndsOn(Object date) {
+    return 'Ponuda istječe $date';
+  }
+
+  @override
+  String get premiumLimitTitle => 'Današnja molitva je završena';
+
+  @override
+  String get premiumLimitBody =>
+      'Vidimo se sutra!\nMoli se neograničeno s Premium';
+
+  @override
+  String get laterButton => 'Možda kasnije';
+
+  @override
+  String get premiumPromptTitle => 'Pro značajka';
+
+  @override
+  String get premiumPromptBody =>
+      'Ova značajka je dostupna s Pro.\nŽelite li vidjeti planove?';
+
+  @override
+  String get viewProducts => 'Pogledaj planove';
+
+  @override
+  String get maybeLater => 'Možda kasnije';
+
+  @override
+  String get premiumHeadline => 'Bliže Bogu, svaki dan';
+
+  @override
+  String get premiumBenefit1 => 'Neograničena molitva & tihi sat';
+
+  @override
+  String get premiumBenefit2 => 'AI molitva & vodstvo';
+
+  @override
+  String get premiumBenefit3 => 'Priče vjere iz povijesti';
+
+  @override
+  String get premiumBenefit4 => 'Čitanje molitve naglas (TTS)';
+
+  @override
+  String get premiumBenefit5 => 'Proučavanje Biblije na izvornom jeziku';
+
+  @override
+  String get bestValue => 'NAJBOLJA VRIJEDNOST';
+
+  @override
+  String get perMonth => 'mj';
+
+  @override
+  String get cancelAnytime => 'Otkaži bilo kada';
+
+  @override
+  String get restorePurchase => 'Vrati kupnju';
+
+  @override
+  String get yearlyPriceMonthly => '2,08€/mj';
+
+  @override
+  String get morningPrayerReminder => 'Jutarnja molitva';
+
+  @override
+  String get eveningGratitudeReminder => 'Večernja zahvalnost';
+
+  @override
+  String get streakReminder => 'Podsjetnik za niz';
+
+  @override
+  String get afternoonNudgeReminder => 'Podsjetnik za popodnevnu molitvu';
+
+  @override
+  String get weeklySummaryReminder => 'Tjedni sažetak';
+
+  @override
+  String get unlimited => 'Neograničeno';
+
+  @override
+  String get streakRecovery => 'U redu je, možeš početi ispočetka 🌱';
+
+  @override
+  String get prayerSaved => 'Molitva je spremljena';
+
+  @override
+  String get quietTimeLabel => 'Tihi sat';
+
+  @override
+  String get morningPrayerLabel => 'Jutarnja molitva';
+
+  @override
+  String get gardenSeed => 'Sjeme vjere';
+
+  @override
+  String get gardenSprout => 'Klica koja raste';
+
+  @override
+  String get gardenBud => 'Pupoljak';
+
+  @override
+  String get gardenBloom => 'Puni cvat';
+
+  @override
+  String get gardenTree => 'Snažno stablo';
+
+  @override
+  String get gardenForest => 'Šuma molitve';
+
+  @override
+  String get milestoneShare => 'Podijeli';
+
+  @override
+  String get milestoneThankGod => 'Hvala Bogu!';
+
+  @override
+  String shareStreakText(Object count) {
+    return '$count dana neprekidne molitve! Moj molitveni put s Abba #Abba #Molitva';
+  }
+
+  @override
+  String get shareDaysLabel => 'dana neprekidne molitve';
+
+  @override
+  String get shareSubtitle => 'Svakodnevna molitva s Bogom';
+
+  @override
+  String get premiumActive => 'Premium aktivan';
+
+  @override
+  String get planOncePerDay => '1x/dan';
+
+  @override
+  String get planUnlimited => 'Neograničeno';
+
+  @override
+  String get closeRecording => 'Zatvori snimanje';
+
+  @override
+  String get qtRevealMessage => 'Otvorimo današnju Riječ';
+
+  @override
+  String get qtSelectPrompt => 'Odaberi temu i započni današnji tihi sat';
+
+  @override
+  String get qtTopicLabel => 'Tema';
+
+  @override
+  String get prayerStartPrompt => 'Započni svoju molitvu';
+
+  @override
+  String get startPrayerButton => 'Započni molitvu';
+
+  @override
+  String get switchToTextMode => 'Upiši umjesto toga';
+
+  @override
+  String get prayerDashboardTitle => 'Molitveni Vrt';
+
+  @override
+  String get qtDashboardTitle => 'Vrt tihog sata';
+
+  @override
+  String get prayerSummaryTitle => 'Sažetak molitve';
+
+  @override
+  String get gratitudeLabel => 'Zahvalnost';
+
+  @override
+  String get petitionLabel => 'Prošnja';
+
+  @override
+  String get intercessionLabel => 'Zagovor';
+
+  @override
+  String get historicalStoryTitle => 'Priča iz povijesti';
+
+  @override
+  String get todayLesson => 'Današnja pouka';
+
+  @override
+  String get meditationAnalysisTitle => 'Analiza meditacije';
+
+  @override
+  String get keyThemeLabel => 'Ključna tema';
+
+  @override
+  String get applicationTitle => 'Današnja primjena';
+
+  @override
+  String get applicationWhat => 'Što';
+
+  @override
+  String get applicationWhen => 'Kada';
+
+  @override
+  String get applicationContext => 'Gdje';
+
+  @override
+  String get relatedKnowledgeTitle => 'Povezano znanje';
+
+  @override
+  String get originalWordLabel => 'Izvorna riječ';
+
+  @override
+  String get historicalContextLabel => 'Povijesni kontekst';
+
+  @override
+  String get crossReferencesLabel => 'Unakrsne reference';
+
+  @override
+  String get growthStoryTitle => 'Priča o rastu';
+
+  @override
+  String get prayerGuideTitle => 'Kako se moliti s Abba';
+
+  @override
+  String get prayerGuide1 => 'Moli se glasno ili jasnim glasom';
+
+  @override
+  String get prayerGuide2 =>
+      'Abba sluša tvoju molitvu i pronalazi stihove koji govore tvom srcu';
+
+  @override
+  String get prayerGuide3 => 'Svoju molitvu možeš i napisati';
+
+  @override
+  String get qtGuideTitle => 'Kako provesti tihi sat s Abba';
+
+  @override
+  String get qtGuide1 => 'Pročitaj odlomak i tiho meditiraj';
+
+  @override
+  String get qtGuide2 =>
+      'Podijeli što si otkrio/la — izgovori ili napiši svoja razmišljanja';
+
+  @override
+  String get qtGuide3 =>
+      'Abba će ti pomoći primijeniti Riječ u svakodnevnom životu';
+
+  @override
+  String get scriptureReasonLabel => 'Zašto ovaj stih';
+
+  @override
+  String get seeMore => 'Vidi više';
+
+  @override
+  String seeAllComments(Object count) {
+    return 'Pogledaj svih $count komentara';
+  }
+
+  @override
+  String likedBy(Object name, Object count) {
+    return '$name i još $count osoba lajkali su ovo';
+  }
+
+  @override
+  String get commentsTitle => 'Komentari';
+
+  @override
+  String get myPageTitle => 'Moj Molitveni Vrt';
+
+  @override
+  String get myPrayers => 'Moje molitve';
+
+  @override
+  String get myTestimonies => 'Moja svjedočanstva';
+
+  @override
+  String get savedPosts => 'Spremljeno';
+
+  @override
+  String get totalPrayersCount => 'Molitve';
+
+  @override
+  String get streakCount => 'Niz';
+
+  @override
+  String get testimoniesCount => 'Svjedočanstva';
+
+  @override
+  String get linkAccountTitle => 'Poveži račun';
+
+  @override
+  String get linkAccountDescription =>
+      'Poveži svoj račun kako bi sačuvao/la molitvene zapise pri promjeni uređaja';
+
+  @override
+  String get linkWithApple => 'Poveži s Apple';
+
+  @override
+  String get linkWithGoogle => 'Poveži s Google';
+
+  @override
+  String get linkAccountSuccess => 'Račun je uspješno povezan!';
+
+  @override
+  String get anonymousUser => 'Molitveni ratnik';
+
+  @override
+  String showReplies(Object count) {
+    return 'Prikaži $count odgovora';
+  }
+
+  @override
+  String get hideReplies => 'Sakrij odgovore';
+
+  @override
+  String replyingTo(Object name) {
+    return 'Odgovaraš na $name';
+  }
+
+  @override
+  String viewAllComments(Object count) {
+    return 'Pogledaj svih $count komentara';
+  }
+}

@@ -88,6 +88,21 @@ class _CountingAiService implements AiService {
   }
 
   @override
+  Future<PrayerResult> analyzePrayerCore({
+    required String transcript,
+    required String locale,
+  }) => analyzePrayer(transcript: transcript, locale: locale);
+
+  @override
+  Future<PremiumContent> analyzePrayerPremium({
+    required String transcript,
+    required String locale,
+  }) async {
+    callCount++;
+    return const PremiumContent();
+  }
+
+  @override
   Future<QtMeditationResult> analyzeMeditation({
     required String passageReference,
     required String passageText,

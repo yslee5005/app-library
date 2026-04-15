@@ -279,14 +279,18 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
                   const SizedBox(height: AbbaSpacing.sm),
                   Row(
                     children: [
-                      _StatBadge(
-                        label: l10n.totalPrayers,
-                        value: '${profile.totalPrayers}',
+                      Expanded(
+                        child: _StatBadge(
+                          label: l10n.totalPrayers,
+                          value: '${profile.totalPrayers}',
+                        ),
                       ),
-                      const SizedBox(width: AbbaSpacing.md),
-                      _StatBadge(
-                        label: l10n.consecutiveDays,
-                        value: '${profile.currentStreak}',
+                      const SizedBox(width: AbbaSpacing.sm),
+                      Expanded(
+                        child: _StatBadge(
+                          label: l10n.consecutiveDays,
+                          value: '${profile.currentStreak}',
+                        ),
                       ),
                     ],
                   ),
