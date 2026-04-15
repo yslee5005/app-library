@@ -108,6 +108,9 @@
   "deletePost": "削除",
   "reportPost": "報告",
   "reportSubmitted": "報告が送信されました。ありがとうございます。",
+  "reportReasonHint": "報告の理由を記入してください。メールで送信されます。",
+  "reportReasonPlaceholder": "報告の理由を入力してください...",
+  "reportSubmitButton": "報告する",
   "deleteConfirmTitle": "投稿を削除",
   "deleteConfirmMessage": "この投稿を削除しますか？",
   "errorNetwork": "インターネット接続を確認してもう一度お試しください。",
@@ -222,5 +225,12 @@
   "linkWithApple": "Appleで連携",
   "linkWithGoogle": "Googleで連携",
   "linkAccountSuccess": "アカウントが連携されました！",
-  "anonymousUser": "祈りの人"
+  "anonymousUser": "祈りの人",
+  "showReplies": "返信{count}件を見る",
+  "@showReplies": { "placeholders": { "count": {} } },
+  "hideReplies": "返信を隠す",
+  "replyingTo": "{name}に返信中",
+  "@replyingTo": { "placeholders": { "name": {} } },
+  "viewAllComments": "コメント{count}件すべて見る",
+  "@viewAllComments": { "placeholders": { "count": {} } }
 }

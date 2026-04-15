@@ -108,6 +108,9 @@
   "deletePost": "삭제",
   "reportPost": "신고",
   "reportSubmitted": "신고가 접수되었습니다. 감사합니다.",
+  "reportReasonHint": "신고 사유를 작성해주세요. 이메일로 전송됩니다.",
+  "reportReasonPlaceholder": "신고 사유를 입력하세요...",
+  "reportSubmitButton": "신고하기",
   "deleteConfirmTitle": "글 삭제",
   "deleteConfirmMessage": "이 글을 삭제하시겠습니까?",
   "errorNetwork": "인터넷 연결을 확인하고 다시 시도해주세요.",
@@ -222,5 +225,12 @@
   "linkWithApple": "Apple로 연결",
   "linkWithGoogle": "Google로 연결",
   "linkAccountSuccess": "계정이 연결되었습니다!",
-  "anonymousUser": "기도하는 사람"
+  "anonymousUser": "기도하는 사람",
+  "showReplies": "답글 {count}개 보기",
+  "@showReplies": { "placeholders": { "count": {} } },
+  "hideReplies": "답글 숨기기",
+  "replyingTo": "{name}에게 답글 작성 중",
+  "@replyingTo": { "placeholders": { "name": {} } },
+  "viewAllComments": "댓글 {count}개 모두 보기",
+  "@viewAllComments": { "placeholders": { "count": {} } }
 }

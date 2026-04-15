@@ -212,6 +212,32 @@ class SupabaseCommunityRepository implements CommunityRepository {
     }
   }
 
+  @override
+  Future<void> toggleCommentLike(String commentId) async {
+    final existing = await _client
+        .from('comment_likes')
+        .select('id')
+        .eq('comment_id', commentId)
+        .eq('user_id', _userId)
+        .eq('app_id', 'abba')
+        .maybeSingle();
+
+    if (existing != null) {
+      await _client
+          .from('comment_likes')
+          .delete()
+          .eq('comment_id', commentId)
+          .eq('user_id', _userId)
+          .eq('app_id', 'abba');
+    } else {
+      await _client.from('comment_likes').insert({
+        'app_id': 'abba',
+        'comment_id': commentId,
+        'user_id': _userId,
+      });
+    }
+  }
+
   // --- Saves ---
 
   @override

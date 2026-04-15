@@ -103,6 +103,9 @@ class Comment {
   final String? displayName;
   final String content;
   final String? parentCommentId;
+  final int likeCount;
+  final bool isLiked;
+  final List<Comment> replies;
   final DateTime createdAt;
 
   const Comment({
@@ -111,8 +114,29 @@ class Comment {
     this.displayName,
     required this.content,
     this.parentCommentId,
+    this.likeCount = 0,
+    this.isLiked = false,
+    this.replies = const [],
     required this.createdAt,
   });
+
+  Comment copyWith({
+    int? likeCount,
+    bool? isLiked,
+    List<Comment>? replies,
+  }) {
+    return Comment(
+      id: id,
+      userId: userId,
+      displayName: displayName,
+      content: content,
+      parentCommentId: parentCommentId,
+      likeCount: likeCount ?? this.likeCount,
+      isLiked: isLiked ?? this.isLiked,
+      replies: replies ?? this.replies,
+      createdAt: createdAt,
+    );
+  }
 
   factory Comment.fromJson(Map<String, dynamic> json) {
     return Comment(
@@ -121,6 +145,12 @@ class Comment {
       displayName: json['display_name'] as String?,
       content: json['content'] as String,
       parentCommentId: json['parent_comment_id'] as String?,
+      likeCount: json['like_count'] as int? ?? 0,
+      isLiked: json['is_liked'] as bool? ?? false,
+      replies: (json['replies'] as List<dynamic>?)
+              ?.map((e) => Comment.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
       createdAt: DateTime.parse(json['created_at'] as String),
     );
   }
@@ -132,6 +162,9 @@ class Comment {
       'display_name': displayName,
       'content': content,
       'parent_comment_id': parentCommentId,
+      'like_count': likeCount,
+      'is_liked': isLiked,
+      'replies': replies.map((r) => r.toJson()).toList(),
       'created_at': createdAt.toIso8601String(),
     };
   }

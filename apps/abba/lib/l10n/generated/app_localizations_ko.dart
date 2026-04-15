@@ -326,6 +326,15 @@ class AppLocalizationsKo extends AppLocalizations {
   String get reportSubmitted => '신고가 접수되었습니다. 감사합니다.';
 
   @override
+  String get reportReasonHint => '신고 사유를 작성해주세요. 이메일로 전송됩니다.';
+
+  @override
+  String get reportReasonPlaceholder => '신고 사유를 입력하세요...';
+
+  @override
+  String get reportSubmitButton => '신고하기';
+
+  @override
   String get deleteConfirmTitle => '글 삭제';
 
   @override
@@ -665,4 +674,22 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get anonymousUser => '기도하는 사람';
+
+  @override
+  String showReplies(Object count) {
+    return '답글 $count개 보기';
+  }
+
+  @override
+  String get hideReplies => '답글 숨기기';
+
+  @override
+  String replyingTo(Object name) {
+    return '$name에게 답글 작성 중';
+  }
+
+  @override
+  String viewAllComments(Object count) {
+    return '댓글 $count개 모두 보기';
+  }
 }

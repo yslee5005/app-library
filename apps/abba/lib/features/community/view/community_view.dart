@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../l10n/generated/app_localizations.dart';
 import '../../../models/post.dart';
@@ -466,8 +467,90 @@ class _PostItemState extends ConsumerState<_PostItem> {
             ),
           ),
 
-        // Comment preview
-        if (post.commentCount > 0)
+        // Inline comment previews (first 2 top-level comments)
+        if (post.comments.isNotEmpty)
+          Padding(
+            padding: const EdgeInsets.only(
+              left: AbbaSpacing.md,
+              right: AbbaSpacing.md,
+              top: AbbaSpacing.sm,
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // Show up to 2 top-level comment previews
+                ...post.comments
+                    .where((c) => c.parentCommentId == null)
+                    .take(2)
+                    .map(
+                      (c) => Padding(
+                        padding: const EdgeInsets.only(bottom: AbbaSpacing.xs),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            CircleAvatar(
+                              radius: 10,
+                              backgroundColor:
+                                  AbbaColors.sage.withValues(alpha: 0.15),
+                              child: Text(
+                                (c.displayName != null &&
+                                        c.displayName!.isNotEmpty)
+                                    ? c.displayName![0].toUpperCase()
+                                    : '\ud83c\udf3f',
+                                style: AbbaTypography.caption
+                                    .copyWith(fontSize: 9),
+                              ),
+                            ),
+                            const SizedBox(width: AbbaSpacing.xs),
+                            Expanded(
+                              child: RichText(
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                text: TextSpan(
+                                  children: [
+                                    TextSpan(
+                                      text:
+                                          '${c.displayName ?? l10n.anonymous} ',
+                                      style: AbbaTypography.caption.copyWith(
+                                        fontWeight: FontWeight.w600,
+                                        color: AbbaColors.warmBrown,
+                                      ),
+                                    ),
+                                    TextSpan(
+                                      text: c.content,
+                                      style: AbbaTypography.caption.copyWith(
+                                        color: AbbaColors.warmBrown,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                // "View all N comments" button
+                if (post.commentCount > 2)
+                  GestureDetector(
+                    onTap: () => _showCommentsSheet(context, post, l10n),
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: AbbaSpacing.xs),
+                      child: Text(
+                        l10n.viewAllComments(post.commentCount),
+                        style: AbbaTypography.caption.copyWith(
+                          color: AbbaColors.muted,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ),
+                  ),
+              ],
+            ),
+          ),
+
+        // Fallback: "view all comments" when comments not loaded inline
+        if (post.comments.isEmpty && post.commentCount > 0)
           Padding(
             padding: const EdgeInsets.only(
               left: AbbaSpacing.md,
@@ -477,7 +560,7 @@ class _PostItemState extends ConsumerState<_PostItem> {
             child: GestureDetector(
               onTap: () => _showCommentsSheet(context, post, l10n),
               child: Text(
-                l10n.seeAllComments(post.commentCount),
+                l10n.viewAllComments(post.commentCount),
                 style: AbbaTypography.bodySmall.copyWith(
                   color: AbbaColors.muted,
                   fontSize: 14,
@@ -562,16 +645,39 @@ class _PostItemState extends ConsumerState<_PostItem> {
       builder: (ctx) {
         final controller = TextEditingController();
         return AlertDialog(
-          title: Text('\ud83d\udeab', style: AbbaTypography.h2),
-          content: TextField(
-            controller: controller,
-            style: AbbaTypography.body,
-            decoration: InputDecoration(
-              hintText: l10n.writePostHint,
-              hintStyle:
-                  AbbaTypography.body.copyWith(color: AbbaColors.muted),
-            ),
-            maxLines: 3,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(AbbaRadius.lg),
+          ),
+          title: Row(
+            children: [
+              const Text('🚨', style: TextStyle(fontSize: 24)),
+              const SizedBox(width: AbbaSpacing.sm),
+              Text(l10n.reportPost, style: AbbaTypography.h2),
+            ],
+          ),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                l10n.reportReasonHint,
+                style: AbbaTypography.bodySmall.copyWith(color: AbbaColors.muted),
+              ),
+              const SizedBox(height: AbbaSpacing.sm),
+              TextField(
+                controller: controller,
+                style: AbbaTypography.body,
+                decoration: InputDecoration(
+                  hintText: l10n.reportReasonPlaceholder,
+                  hintStyle:
+                      AbbaTypography.body.copyWith(color: AbbaColors.muted),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(AbbaRadius.md),
+                  ),
+                ),
+                maxLines: 3,
+              ),
+            ],
           ),
           actions: [
             TextButton(
@@ -580,7 +686,10 @@ class _PostItemState extends ConsumerState<_PostItem> {
             ),
             TextButton(
               onPressed: () => Navigator.pop(ctx, controller.text),
-              child: Text(l10n.sharePostButton),
+              child: Text(
+                l10n.reportSubmitButton,
+                style: const TextStyle(color: Colors.red),
+              ),
             ),
           ],
         );
@@ -588,8 +697,17 @@ class _PostItemState extends ConsumerState<_PostItem> {
     );
 
     if (reason != null && reason.isNotEmpty) {
-      final repo = ref.read(communityRepositoryProvider);
-      await repo.reportPost(postId, reason);
+      // Send report via email
+      final uri = Uri(
+        scheme: 'mailto',
+        path: 'ystech5005@gmail.com',
+        queryParameters: {
+          'subject': '[Abba] Post Report: $postId',
+          'body': 'Post ID: $postId\nReason: $reason',
+        },
+      );
+      await launchUrl(uri);
+
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text(l10n.reportSubmitted)),
@@ -700,7 +818,7 @@ class _ExpandableTextState extends State<_ExpandableText> {
 }
 
 // ---------------------------------------------------------------------------
-// Comments bottom sheet
+// Comments bottom sheet — Instagram-style threaded view
 // ---------------------------------------------------------------------------
 class _CommentsSheet extends ConsumerStatefulWidget {
   final CommunityPost post;
@@ -728,10 +846,15 @@ class _CommentsSheetState extends ConsumerState<_CommentsSheet> {
     super.dispose();
   }
 
+  /// Get top-level comments only (replies are nested inside each comment).
+  List<Comment> get _topLevelComments =>
+      widget.post.comments.where((c) => c.parentCommentId == null).toList();
+
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     final post = widget.post;
+    final topLevel = _topLevelComments;
 
     return Column(
       children: [
@@ -751,9 +874,9 @@ class _CommentsSheetState extends ConsumerState<_CommentsSheet> {
           child: Text(l10n.commentsTitle, style: AbbaTypography.h2),
         ),
         const Divider(height: 1),
-        // Comment list
+        // Threaded comment list
         Expanded(
-          child: post.comments.isEmpty
+          child: topLevel.isEmpty
               ? Center(
                   child: Text(
                     l10n.commentButton,
@@ -768,24 +891,22 @@ class _CommentsSheetState extends ConsumerState<_CommentsSheet> {
                     horizontal: AbbaSpacing.md,
                     vertical: AbbaSpacing.sm,
                   ),
-                  itemCount: post.comments.length,
+                  itemCount: topLevel.length,
                   itemBuilder: (context, index) {
-                    final comment = post.comments[index];
-                    final isReply = comment.parentCommentId != null;
-                    return _CommentTile(
+                    final comment = topLevel[index];
+                    return _ThreadedCommentTile(
                       comment: comment,
-                      isReply: isReply,
+                      isReply: false,
                       anonymousLabel: l10n.anonymous,
-                      onReply: isReply
-                          ? null
-                          : () => setState(() {
-                                _replyToCommentId = comment.id;
-                                _replyToName =
-                                    comment.displayName ?? l10n.anonymous;
-                              }),
+                      onReply: () => setState(() {
+                        _replyToCommentId = comment.id;
+                        _replyToName =
+                            comment.displayName ?? l10n.anonymous;
+                      }),
                       onDelete: () => _handleDeleteComment(comment.id),
                       isOwner: ref.read(authStateProvider).user?.id ==
                           comment.userId,
+                      onCommentLike: (id) => _handleCommentLike(id),
                     );
                   },
                 ),
@@ -795,16 +916,26 @@ class _CommentsSheetState extends ConsumerState<_CommentsSheet> {
           Container(
             padding: const EdgeInsets.symmetric(
               horizontal: AbbaSpacing.md,
-              vertical: AbbaSpacing.xs,
+              vertical: AbbaSpacing.sm,
             ),
-            color: AbbaColors.sage.withValues(alpha: 0.1),
+            decoration: BoxDecoration(
+              color: AbbaColors.sage.withValues(alpha: 0.1),
+              border: Border(
+                top: BorderSide(
+                  color: AbbaColors.sage.withValues(alpha: 0.2),
+                ),
+              ),
+            ),
             child: Row(
               children: [
+                Icon(Icons.reply, size: 16, color: AbbaColors.sage),
+                const SizedBox(width: AbbaSpacing.xs),
                 Expanded(
                   child: Text(
-                    '\u21a9\ufe0f $_replyToName',
+                    l10n.replyingTo(_replyToName ?? ''),
                     style: AbbaTypography.caption.copyWith(
                       color: AbbaColors.sage,
+                      fontWeight: FontWeight.w500,
                     ),
                   ),
                 ),
@@ -813,7 +944,11 @@ class _CommentsSheetState extends ConsumerState<_CommentsSheet> {
                     _replyToCommentId = null;
                     _replyToName = null;
                   }),
-                  child: Icon(Icons.close, size: 16, color: AbbaColors.muted),
+                  child: Padding(
+                    padding: const EdgeInsets.all(AbbaSpacing.xs),
+                    child:
+                        Icon(Icons.close, size: 18, color: AbbaColors.muted),
+                  ),
                 ),
               ],
             ),
@@ -908,99 +1043,241 @@ class _CommentsSheetState extends ConsumerState<_CommentsSheet> {
     widget.onRefresh();
     if (mounted) Navigator.pop(context);
   }
+
+  Future<void> _handleCommentLike(String commentId) async {
+    final repo = ref.read(communityRepositoryProvider);
+    await repo.toggleCommentLike(commentId);
+    widget.onRefresh();
+  }
 }
 
 // ---------------------------------------------------------------------------
-// Comment tile for bottom sheet
+// Threaded comment tile — supports top-level + nested replies
 // ---------------------------------------------------------------------------
-class _CommentTile extends StatelessWidget {
+class _ThreadedCommentTile extends StatefulWidget {
   final Comment comment;
   final bool isReply;
   final String anonymousLabel;
   final VoidCallback? onReply;
   final VoidCallback onDelete;
   final bool isOwner;
+  final ValueChanged<String> onCommentLike;
 
-  const _CommentTile({
+  const _ThreadedCommentTile({
     required this.comment,
     required this.isReply,
     required this.anonymousLabel,
     this.onReply,
     required this.onDelete,
     required this.isOwner,
+    required this.onCommentLike,
   });
+
+  @override
+  State<_ThreadedCommentTile> createState() => _ThreadedCommentTileState();
+}
+
+class _ThreadedCommentTileState extends State<_ThreadedCommentTile> {
+  bool _showReplies = false;
 
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    return Padding(
-      padding: EdgeInsets.only(
-        left: isReply ? AbbaSpacing.xl : 0,
-        bottom: AbbaSpacing.md,
-      ),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          CircleAvatar(
-            radius: 14,
-            backgroundColor: AbbaColors.sage.withValues(alpha: 0.15),
-            child: Text(
-              (comment.displayName != null && comment.displayName!.isNotEmpty)
-                  ? comment.displayName![0].toUpperCase()
-                  : '\ud83c\udf3f',
-              style: AbbaTypography.caption,
-            ),
+    final comment = widget.comment;
+    final avatarRadius = widget.isReply ? 12.0 : 14.0;
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        // The comment itself
+        Padding(
+          padding: EdgeInsets.only(
+            left: widget.isReply ? 40.0 : 0,
+            bottom: AbbaSpacing.sm,
           ),
-          const SizedBox(width: AbbaSpacing.sm),
-          Expanded(
-            child: Column(
+          child: Container(
+            decoration: widget.isReply
+                ? BoxDecoration(
+                    border: Border(
+                      left: BorderSide(
+                        color: AbbaColors.sage.withValues(alpha: 0.2),
+                        width: 2,
+                      ),
+                    ),
+                  )
+                : null,
+            padding: widget.isReply
+                ? const EdgeInsets.only(left: AbbaSpacing.sm)
+                : null,
+            child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
-                  children: [
-                    Text(
-                      comment.displayName ?? anonymousLabel,
-                      style: AbbaTypography.bodySmall.copyWith(
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                    const SizedBox(width: AbbaSpacing.sm),
-                    Text(
-                      _formatTime(comment.createdAt),
-                      style: AbbaTypography.caption,
-                    ),
-                    const Spacer(),
-                    if (isOwner)
-                      GestureDetector(
-                        onTap: onDelete,
-                        child: Icon(
-                          Icons.close,
-                          size: 14,
-                          color: AbbaColors.muted,
-                        ),
-                      ),
-                  ],
-                ),
-                Text(comment.content, style: AbbaTypography.bodySmall),
-                if (onReply != null)
-                  GestureDetector(
-                    onTap: onReply,
-                    child: Padding(
-                      padding: const EdgeInsets.only(top: AbbaSpacing.xs),
-                      child: Text(
-                        l10n.replyButton,
-                        style: AbbaTypography.caption.copyWith(
-                          color: AbbaColors.sage,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
+                CircleAvatar(
+                  radius: avatarRadius,
+                  backgroundColor: AbbaColors.sage.withValues(alpha: 0.15),
+                  child: Text(
+                    (comment.displayName != null &&
+                            comment.displayName!.isNotEmpty)
+                        ? comment.displayName![0].toUpperCase()
+                        : '\ud83c\udf3f',
+                    style: AbbaTypography.caption.copyWith(
+                      fontSize: widget.isReply ? 10 : 12,
                     ),
                   ),
+                ),
+                const SizedBox(width: AbbaSpacing.sm),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // Header row: name · time · (heart like) · (delete)
+                      Row(
+                        children: [
+                          Flexible(
+                            child: Text(
+                              comment.displayName ?? widget.anonymousLabel,
+                              style: AbbaTypography.bodySmall.copyWith(
+                                fontWeight: FontWeight.w600,
+                                fontSize: widget.isReply ? 15 : 16,
+                              ),
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ),
+                          const SizedBox(width: AbbaSpacing.xs),
+                          Text(
+                            _formatTime(comment.createdAt),
+                            style: AbbaTypography.caption,
+                          ),
+                          const Spacer(),
+                          // Comment like button
+                          GestureDetector(
+                            onTap: () =>
+                                widget.onCommentLike(comment.id),
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 4),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Icon(
+                                    comment.isLiked
+                                        ? Icons.favorite
+                                        : Icons.favorite_border,
+                                    size: 14,
+                                    color: comment.isLiked
+                                        ? AbbaColors.error
+                                        : AbbaColors.muted,
+                                  ),
+                                  if (comment.likeCount > 0) ...[
+                                    const SizedBox(width: 2),
+                                    Text(
+                                      '${comment.likeCount}',
+                                      style: AbbaTypography.caption.copyWith(
+                                        fontSize: 12,
+                                        color: comment.isLiked
+                                            ? AbbaColors.error
+                                            : AbbaColors.muted,
+                                      ),
+                                    ),
+                                  ],
+                                ],
+                              ),
+                            ),
+                          ),
+                          if (widget.isOwner)
+                            GestureDetector(
+                              onTap: widget.onDelete,
+                              child: Padding(
+                                padding: const EdgeInsets.only(
+                                    left: AbbaSpacing.xs),
+                                child: Icon(
+                                  Icons.close,
+                                  size: 14,
+                                  color: AbbaColors.muted,
+                                ),
+                              ),
+                            ),
+                        ],
+                      ),
+                      const SizedBox(height: 2),
+                      // Comment content
+                      Text(
+                        comment.content,
+                        style: AbbaTypography.bodySmall.copyWith(
+                          fontSize: widget.isReply ? 15 : 16,
+                        ),
+                      ),
+                      // Reply button (only for top-level comments)
+                      if (widget.onReply != null)
+                        GestureDetector(
+                          onTap: widget.onReply,
+                          child: Padding(
+                            padding:
+                                const EdgeInsets.only(top: AbbaSpacing.xs),
+                            child: Text(
+                              l10n.replyButton,
+                              style: AbbaTypography.caption.copyWith(
+                                color: AbbaColors.sage,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ),
+                        ),
+                    ],
+                  ),
+                ),
               ],
             ),
           ),
+        ),
+        // Nested replies toggle and list
+        if (!widget.isReply && comment.replies.isNotEmpty) ...[
+          // Show/hide replies toggle
+          GestureDetector(
+            onTap: () => setState(() => _showReplies = !_showReplies),
+            child: Padding(
+              padding: const EdgeInsets.only(
+                left: 40.0 + AbbaSpacing.sm,
+                bottom: AbbaSpacing.sm,
+              ),
+              child: Row(
+                children: [
+                  Container(
+                    width: 24,
+                    height: 1,
+                    color: AbbaColors.muted.withValues(alpha: 0.3),
+                  ),
+                  const SizedBox(width: AbbaSpacing.xs),
+                  Text(
+                    _showReplies
+                        ? l10n.hideReplies
+                        : l10n.showReplies(comment.replies.length),
+                    style: AbbaTypography.caption.copyWith(
+                      color: AbbaColors.sage,
+                      fontWeight: FontWeight.w600,
+                      fontSize: 13,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          // Show replies (max 2 initially when expanded, all when fully expanded)
+          if (_showReplies)
+            ...comment.replies.map(
+              (reply) => _ThreadedCommentTile(
+                comment: reply,
+                isReply: true,
+                anonymousLabel: widget.anonymousLabel,
+                onReply: null, // No nested reply on replies
+                onDelete: () {}, // Simplified for replies
+                isOwner: false,
+                onCommentLike: widget.onCommentLike,
+              ),
+            ),
         ],
-      ),
+      ],
     );
   }
 

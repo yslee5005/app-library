@@ -329,6 +329,16 @@ class AppLocalizationsEs extends AppLocalizations {
   String get reportSubmitted => 'Reporte enviado. Gracias.';
 
   @override
+  String get reportReasonHint =>
+      'Describe el motivo de la denuncia. Se enviará por correo electrónico.';
+
+  @override
+  String get reportReasonPlaceholder => 'Ingrese el motivo de la denuncia...';
+
+  @override
+  String get reportSubmitButton => 'Reportar';
+
+  @override
   String get deleteConfirmTitle => 'Eliminar publicación';
 
   @override
@@ -681,4 +691,22 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get anonymousUser => 'Guerrero de oración';
+
+  @override
+  String showReplies(Object count) {
+    return 'Ver $count respuestas';
+  }
+
+  @override
+  String get hideReplies => 'Ocultar respuestas';
+
+  @override
+  String replyingTo(Object name) {
+    return 'Respondiendo a $name';
+  }
+
+  @override
+  String viewAllComments(Object count) {
+    return 'Ver los $count comentarios';
+  }
 }

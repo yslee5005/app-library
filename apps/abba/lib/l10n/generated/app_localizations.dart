@@ -710,6 +710,24 @@ abstract class AppLocalizations {
   /// **'Report submitted. Thank you.'**
   String get reportSubmitted;
 
+  /// No description provided for @reportReasonHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Please describe the reason for reporting. It will be sent via email.'**
+  String get reportReasonHint;
+
+  /// No description provided for @reportReasonPlaceholder.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter the reason for reporting...'**
+  String get reportReasonPlaceholder;
+
+  /// No description provided for @reportSubmitButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Report'**
+  String get reportSubmitButton;
+
   /// No description provided for @deleteConfirmTitle.
   ///
   /// In en, this message translates to:
@@ -1375,6 +1393,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Prayer Warrior'**
   String get anonymousUser;
+
+  /// No description provided for @showReplies.
+  ///
+  /// In en, this message translates to:
+  /// **'View {count} replies'**
+  String showReplies(Object count);
+
+  /// No description provided for @hideReplies.
+  ///
+  /// In en, this message translates to:
+  /// **'Hide replies'**
+  String get hideReplies;
+
+  /// No description provided for @replyingTo.
+  ///
+  /// In en, this message translates to:
+  /// **'Replying to {name}'**
+  String replyingTo(Object name);
+
+  /// No description provided for @viewAllComments.
+  ///
+  /// In en, this message translates to:
+  /// **'View all {count} comments'**
+  String viewAllComments(Object count);
 }
 
 class _AppLocalizationsDelegate

@@ -108,6 +108,9 @@
   "deletePost": "删除",
   "reportPost": "举报",
   "reportSubmitted": "举报已提交。谢谢。",
+  "reportReasonHint": "请填写举报原因。将通过电子邮件发送。",
+  "reportReasonPlaceholder": "请输入举报原因...",
+  "reportSubmitButton": "举报",
   "deleteConfirmTitle": "删除帖子",
   "deleteConfirmMessage": "确定要删除这条帖子吗？",
   "errorNetwork": "请检查网络连接后重试。",
@@ -222,5 +225,12 @@
   "linkWithApple": "通过Apple关联",
   "linkWithGoogle": "通过Google关联",
   "linkAccountSuccess": "账号关联成功！",
-  "anonymousUser": "祷告勇士"
+  "anonymousUser": "祷告勇士",
+  "showReplies": "查看{count}条回复",
+  "@showReplies": { "placeholders": { "count": {} } },
+  "hideReplies": "隐藏回复",
+  "replyingTo": "正在回复{name}",
+  "@replyingTo": { "placeholders": { "name": {} } },
+  "viewAllComments": "查看全部{count}条评论",
+  "@viewAllComments": { "placeholders": { "count": {} } }
 }

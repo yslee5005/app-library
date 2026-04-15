@@ -34,6 +34,8 @@ abstract class CommunityRepository {
   // --- Likes ---
   Future<bool> toggleLike(String postId);
 
+  Future<void> toggleCommentLike(String commentId);
+
   // --- Saves ---
   Future<bool> toggleSave(String postId);
 

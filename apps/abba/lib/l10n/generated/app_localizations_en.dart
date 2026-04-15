@@ -327,6 +327,16 @@ class AppLocalizationsEn extends AppLocalizations {
   String get reportSubmitted => 'Report submitted. Thank you.';
 
   @override
+  String get reportReasonHint =>
+      'Please describe the reason for reporting. It will be sent via email.';
+
+  @override
+  String get reportReasonPlaceholder => 'Enter the reason for reporting...';
+
+  @override
+  String get reportSubmitButton => 'Report';
+
+  @override
   String get deleteConfirmTitle => 'Delete Post';
 
   @override
@@ -677,4 +687,22 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get anonymousUser => 'Prayer Warrior';
+
+  @override
+  String showReplies(Object count) {
+    return 'View $count replies';
+  }
+
+  @override
+  String get hideReplies => 'Hide replies';
+
+  @override
+  String replyingTo(Object name) {
+    return 'Replying to $name';
+  }
+
+  @override
+  String viewAllComments(Object count) {
+    return 'View all $count comments';
+  }
 }

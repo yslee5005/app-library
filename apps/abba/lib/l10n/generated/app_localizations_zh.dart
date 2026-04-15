@@ -326,6 +326,15 @@ class AppLocalizationsZh extends AppLocalizations {
   String get reportSubmitted => '举报已提交。谢谢。';
 
   @override
+  String get reportReasonHint => '请填写举报原因。将通过电子邮件发送。';
+
+  @override
+  String get reportReasonPlaceholder => '请输入举报原因...';
+
+  @override
+  String get reportSubmitButton => '举报';
+
+  @override
   String get deleteConfirmTitle => '删除帖子';
 
   @override
@@ -665,4 +674,22 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get anonymousUser => '祷告勇士';
+
+  @override
+  String showReplies(Object count) {
+    return '查看$count条回复';
+  }
+
+  @override
+  String get hideReplies => '隐藏回复';
+
+  @override
+  String replyingTo(Object name) {
+    return '正在回复$name';
+  }
+
+  @override
+  String viewAllComments(Object count) {
+    return '查看全部$count条评论';
+  }
 }

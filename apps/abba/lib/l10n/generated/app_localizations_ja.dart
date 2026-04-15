@@ -326,6 +326,15 @@ class AppLocalizationsJa extends AppLocalizations {
   String get reportSubmitted => '報告が送信されました。ありがとうございます。';
 
   @override
+  String get reportReasonHint => '報告の理由を記入してください。メールで送信されます。';
+
+  @override
+  String get reportReasonPlaceholder => '報告の理由を入力してください...';
+
+  @override
+  String get reportSubmitButton => '報告する';
+
+  @override
   String get deleteConfirmTitle => '投稿を削除';
 
   @override
@@ -665,4 +674,22 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get anonymousUser => '祈りの人';
+
+  @override
+  String showReplies(Object count) {
+    return '返信$count件を見る';
+  }
+
+  @override
+  String get hideReplies => '返信を隠す';
+
+  @override
+  String replyingTo(Object name) {
+    return '$nameに返信中';
+  }
+
+  @override
+  String viewAllComments(Object count) {
+    return 'コメント$count件すべて見る';
+  }
 }

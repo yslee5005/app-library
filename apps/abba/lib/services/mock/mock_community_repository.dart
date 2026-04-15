@@ -6,6 +6,7 @@ class MockCommunityRepository implements CommunityRepository {
   final MockDataService _mockData;
   final List<CommunityPost> _posts = [];
   final Set<String> _likedPostIds = {};
+  final Set<String> _likedCommentIds = {};
   final Set<String> _savedPostIds = {};
   bool _initialized = false;
 
@@ -14,8 +15,44 @@ class MockCommunityRepository implements CommunityRepository {
   Future<void> _ensureInitialized() async {
     if (_initialized) return;
     final posts = await _mockData.getCommunityPosts();
-    _posts.addAll(posts);
+    // Build threaded comments: nest replies under parent comments
+    for (final post in posts) {
+      final enriched = _buildThreadedComments(post.comments);
+      _posts.add(post.copyWith(comments: enriched));
+    }
     _initialized = true;
+  }
+
+  /// Organize flat comments into threaded structure with replies nested under parents.
+  List<Comment> _buildThreadedComments(List<Comment> flat) {
+    final Map<String, Comment> byId = {};
+    final List<String> topLevelIds = [];
+
+    // First pass: index all comments with mock like counts
+    for (final c in flat) {
+      byId[c.id] = c.copyWith(
+        likeCount: (c.id.hashCode % 5).abs(),
+      );
+    }
+
+    // Second pass: attach replies to parents
+    for (final c in flat) {
+      final enriched = byId[c.id]!;
+      if (c.parentCommentId != null && byId.containsKey(c.parentCommentId)) {
+        final parent = byId[c.parentCommentId!]!;
+        byId[c.parentCommentId!] = parent.copyWith(
+          replies: [...parent.replies, enriched],
+        );
+      } else if (c.parentCommentId == null) {
+        topLevelIds.add(c.id);
+      }
+    }
+
+    return topLevelIds
+        .map((id) => byId[id])
+        .where((c) => c != null)
+        .cast<Comment>()
+        .toList();
   }
 
   @override
@@ -206,5 +243,51 @@ class MockCommunityRepository implements CommunityRepository {
   @override
   Future<void> reportComment(String commentId, String reason) async {
     // Mock: no-op, just acknowledge
+  }
+
+  @override
+  Future<void> toggleCommentLike(String commentId) async {
+    await _ensureInitialized();
+    if (_likedCommentIds.contains(commentId)) {
+      _likedCommentIds.remove(commentId);
+    } else {
+      _likedCommentIds.add(commentId);
+    }
+    // Update comment like counts in posts
+    for (int i = 0; i < _posts.length; i++) {
+      final updated = _updateCommentLikeInList(
+        _posts[i].comments,
+        commentId,
+      );
+      if (updated != null) {
+        _posts[i] = _posts[i].copyWith(comments: updated);
+        break;
+      }
+    }
+  }
+
+  List<Comment>? _updateCommentLikeInList(
+    List<Comment> comments,
+    String commentId,
+  ) {
+    bool found = false;
+    final result = comments.map((c) {
+      if (c.id == commentId) {
+        found = true;
+        final liked = _likedCommentIds.contains(commentId);
+        return c.copyWith(
+          isLiked: liked,
+          likeCount: c.likeCount + (liked ? 1 : -1),
+        );
+      }
+      // Check replies recursively
+      final updatedReplies = _updateCommentLikeInList(c.replies, commentId);
+      if (updatedReplies != null) {
+        found = true;
+        return c.copyWith(replies: updatedReplies);
+      }
+      return c;
+    }).toList();
+    return found ? result : null;
   }
 }

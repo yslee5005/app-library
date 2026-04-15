@@ -108,6 +108,9 @@
   "deletePost": "Delete",
   "reportPost": "Report",
   "reportSubmitted": "Report submitted. Thank you.",
+  "reportReasonHint": "Please describe the reason for reporting. It will be sent via email.",
+  "reportReasonPlaceholder": "Enter the reason for reporting...",
+  "reportSubmitButton": "Report",
   "deleteConfirmTitle": "Delete Post",
   "deleteConfirmMessage": "Are you sure you want to delete this post?",
   "errorNetwork": "Please check your internet connection and try again.",
@@ -222,5 +225,12 @@
   "linkWithApple": "Link with Apple",
   "linkWithGoogle": "Link with Google",
   "linkAccountSuccess": "Account linked successfully!",
-  "anonymousUser": "Prayer Warrior"
+  "anonymousUser": "Prayer Warrior",
+  "showReplies": "View {count} replies",
+  "@showReplies": { "placeholders": { "count": {} } },
+  "hideReplies": "Hide replies",
+  "replyingTo": "Replying to {name}",
+  "@replyingTo": { "placeholders": { "name": {} } },
+  "viewAllComments": "View all {count} comments",
+  "@viewAllComments": { "placeholders": { "count": {} } }
 }

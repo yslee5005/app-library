@@ -29,6 +29,7 @@ dependencies:
   purchases_flutter: ^8.9.0
   # Phase 4
   share_plus: ^10.1.4
+  url_launcher: ^6.3.0
   # Notifications
   flutter_local_notifications: ^19.0.0
   timezone: ^0.10.0

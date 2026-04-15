@@ -108,6 +108,9 @@
   "deletePost": "Eliminar",
   "reportPost": "Reportar",
   "reportSubmitted": "Reporte enviado. Gracias.",
+  "reportReasonHint": "Describe el motivo de la denuncia. Se enviará por correo electrónico.",
+  "reportReasonPlaceholder": "Ingrese el motivo de la denuncia...",
+  "reportSubmitButton": "Reportar",
   "deleteConfirmTitle": "Eliminar publicación",
   "deleteConfirmMessage": "¿Estás seguro de que quieres eliminar esta publicación?",
   "errorNetwork": "Revisa tu conexión a internet e intenta de nuevo.",
@@ -222,5 +225,12 @@
   "linkWithApple": "Vincular con Apple",
   "linkWithGoogle": "Vincular con Google",
   "linkAccountSuccess": "¡Cuenta vinculada exitosamente!",
-  "anonymousUser": "Guerrero de oración"
+  "anonymousUser": "Guerrero de oración",
+  "showReplies": "Ver {count} respuestas",
+  "@showReplies": { "placeholders": { "count": {} } },
+  "hideReplies": "Ocultar respuestas",
+  "replyingTo": "Respondiendo a {name}",
+  "@replyingTo": { "placeholders": { "name": {} } },
+  "viewAllComments": "Ver los {count} comentarios",
+  "@viewAllComments": { "placeholders": { "count": {} } }
 }
