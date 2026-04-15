@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../l10n/generated/app_localizations.dart';
 import '../theme/abba_theme.dart';
+import 'abba_card.dart';
 
 class PremiumBlur extends StatelessWidget {
   final String title;
@@ -24,119 +26,114 @@ class PremiumBlur extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    return Semantics(
-      label: isLocked ? '$title - ${l10n.premiumUnlock}' : title,
-      child: Container(
-        margin: const EdgeInsets.symmetric(
-          horizontal: AbbaSpacing.md,
-          vertical: AbbaSpacing.sm,
-        ),
-        decoration: BoxDecoration(
-          color: AbbaColors.white,
-          borderRadius: BorderRadius.circular(AbbaRadius.lg),
-          boxShadow: [
-            BoxShadow(
-              color: AbbaColors.warmBrown.withValues(alpha: 0.08),
-              blurRadius: 8,
-              offset: const Offset(0, 2),
-            ),
-          ],
-        ),
+
+    if (!isLocked) {
+      // Unlocked — just show content in a card
+      return AbbaCard(
+        padding: EdgeInsets.zero,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Title — always visible
             Padding(
-              padding: const EdgeInsets.all(AbbaSpacing.md),
+              padding: const EdgeInsets.all(AbbaSpacing.md + 4),
               child: Row(
                 children: [
-                  Text(icon, style: const TextStyle(fontSize: 24)),
-                  const SizedBox(width: AbbaSpacing.sm),
+                  Text(icon, style: const TextStyle(fontSize: 28)),
+                  const SizedBox(width: AbbaSpacing.md),
                   Expanded(child: Text(title, style: AbbaTypography.h2)),
                 ],
               ),
             ),
-            // Content — preview + fade if locked
-            if (isLocked)
-              Column(
+            Padding(
+              padding: const EdgeInsets.fromLTRB(
+                AbbaSpacing.md + 4, 0, AbbaSpacing.md + 4, AbbaSpacing.md + 4,
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // 3-line preview with fade
-                  if (previewText != null && previewText!.isNotEmpty)
-                    Stack(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: AbbaSpacing.md,
+                  Divider(
+                    color: AbbaColors.warmBrown.withValues(alpha: 0.1),
+                    height: 1,
+                  ),
+                  const SizedBox(height: AbbaSpacing.md),
+                  content,
+                ],
+              ),
+            ),
+          ],
+        ),
+      );
+    }
+
+    // Locked — same card style as ExpandableCard, tap to unlock
+    return Semantics(
+      label: '$title - ${l10n.premiumUnlock}',
+      child: AbbaCard(
+        padding: EdgeInsets.zero,
+        child: InkWell(
+          onTap: () {
+            HapticFeedback.lightImpact();
+            onUnlock();
+          },
+          borderRadius: BorderRadius.circular(AbbaRadius.lg),
+          child: Padding(
+            padding: const EdgeInsets.all(AbbaSpacing.md + 4),
+            child: Row(
+              children: [
+                Text(icon, style: const TextStyle(fontSize: 28)),
+                const SizedBox(width: AbbaSpacing.md),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(title, style: AbbaTypography.h2),
+                      if (previewText != null && previewText!.isNotEmpty) ...[
+                        const SizedBox(height: AbbaSpacing.xs),
+                        Text(
+                          previewText!,
+                          style: AbbaTypography.bodySmall.copyWith(
+                            color: AbbaColors.muted,
                           ),
-                          child: Text(
-                            previewText!,
-                            maxLines: 3,
-                            overflow: TextOverflow.ellipsis,
-                            style: AbbaTypography.bodySmall.copyWith(
-                              color: AbbaColors.warmBrown,
-                              height: 1.6,
-                            ),
-                          ),
-                        ),
-                        // Fade gradient overlay
-                        Positioned(
-                          left: 0,
-                          right: 0,
-                          bottom: 0,
-                          height: 30,
-                          child: Container(
-                            decoration: const BoxDecoration(
-                              gradient: LinearGradient(
-                                begin: Alignment.topCenter,
-                                end: Alignment.bottomCenter,
-                                colors: [
-                                  Color(0x00FFFFFF),
-                                  Color(0xFFFFFFFF),
-                                ],
-                              ),
-                            ),
-                          ),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
                         ),
                       ],
-                    ),
-                  // Premium button
-                  Padding(
-                    padding: const EdgeInsets.all(AbbaSpacing.sm),
-                    child: Center(
-                      child: ElevatedButton.icon(
-                        onPressed: onUnlock,
-                        icon: const Text('💎', style: TextStyle(fontSize: 14)),
-                        label: Text(
-                          l10n.premiumUnlock,
-                          style: AbbaTypography.bodySmall.copyWith(
-                            color: AbbaColors.white,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: AbbaColors.premium,
-                          foregroundColor: AbbaColors.white,
-                          minimumSize: const Size(160, 36),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(AbbaRadius.xl),
-                          ),
+                    ],
+                  ),
+                ),
+                Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: AbbaSpacing.sm,
+                    vertical: AbbaSpacing.xs,
+                  ),
+                  decoration: BoxDecoration(
+                    color: AbbaColors.premium.withValues(alpha: 0.1),
+                    borderRadius: BorderRadius.circular(AbbaRadius.md),
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const Text('💎', style: TextStyle(fontSize: 12)),
+                      const SizedBox(width: 4),
+                      Text(
+                        'PRO',
+                        style: AbbaTypography.caption.copyWith(
+                          color: AbbaColors.premium,
+                          fontWeight: FontWeight.w700,
                         ),
                       ),
-                    ),
+                    ],
                   ),
-                ],
-              )
-            else
-              Padding(
-                padding: const EdgeInsets.fromLTRB(
-                  AbbaSpacing.md,
-                  0,
-                  AbbaSpacing.md,
-                  AbbaSpacing.md,
                 ),
-                child: content,
-              ),
-          ],
+                const SizedBox(width: AbbaSpacing.sm),
+                Icon(
+                  Icons.keyboard_arrow_down,
+                  size: 32,
+                  color: AbbaColors.muted,
+                ),
+              ],
+            ),
+          ),
         ),
       ),
     );

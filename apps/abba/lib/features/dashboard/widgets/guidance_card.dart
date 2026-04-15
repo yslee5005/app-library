@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../models/prayer.dart';
 import '../../../theme/abba_theme.dart';
+import '../../../widgets/expandable_card.dart';
 import '../../../widgets/premium_blur.dart';
 
 class GuidanceCard extends StatelessWidget {
@@ -22,13 +23,31 @@ class GuidanceCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return PremiumBlur(
-      title: title,
+    final isLocked = guidance.isPremium && !isUserPremium;
+
+    if (isLocked) {
+      return PremiumBlur(
+        title: title,
+        icon: '💬',
+        isLocked: true,
+        onUnlock: onUnlock,
+        content: const SizedBox.shrink(),
+      );
+    }
+
+    final content = guidance.content(locale);
+
+    return ExpandableCard(
       icon: '💬',
-      isLocked: guidance.isPremium && !isUserPremium,
-      onUnlock: onUnlock,
-      previewText: guidance.content(locale),
-      content: Text(guidance.content(locale), style: AbbaTypography.body),
+      title: title,
+      summary: content,
+      expandedContent: Text(
+        content,
+        style: AbbaTypography.body.copyWith(
+          color: AbbaColors.warmBrown,
+          height: 1.6,
+        ),
+      ),
     );
   }
 }

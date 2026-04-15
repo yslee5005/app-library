@@ -34,7 +34,6 @@ class HistoricalStoryCard extends StatelessWidget {
         icon: '📖',
         isLocked: true,
         onUnlock: onUnlock,
-        previewText: historicalStory.summary(locale),
         content: const SizedBox.shrink(),
       );
     }
