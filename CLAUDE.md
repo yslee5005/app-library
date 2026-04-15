@@ -231,3 +231,25 @@ bool get isAnonymous;
 ### Ask First
 - Supabase 스키마/RLS 변경
 - 마스터 레퍼런스 코드의 인터페이스 변경
+
+## MoAI 워크플로우 규칙
+
+### Approach-First (코드 작성 전 필수)
+- 3개+ 파일 변경 시 → TaskCreate로 파일별 분리 후 순차 실행
+- 코드 작성 전 구현 방향 1~2줄 설명
+- 기억에 의존하지 말고 **수정 전 반드시 해당 파일 Read**
+
+### Post-Implementation Review (코드 작성 후 필수)
+- `flutter analyze` (정적 분석)
+- 로직 셀프 리뷰: "이 메서드가 의도대로 동작하는가?" 확인
+- 잠재 이슈 리스트 + 테스트 제안
+
+### Ralph Loop (품질 피드백)
+- 버그 수정: 실패 시나리오 먼저 확인 후 수정
+- 최대 반복: 10회
+- 완료 조건: zero errors + 로직 검증
+
+### 컨텍스트 관리
+- 대화 1개 = 1개 기능 단위 (SPEC)
+- 대화 길어지면 → 커밋 → 새 대화 시작
+- Plan과 Run은 가능하면 별도 대화로 분리
