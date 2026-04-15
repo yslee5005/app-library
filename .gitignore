@@ -59,6 +59,7 @@ screen_*.png
 # Android build cache
 **/.gradle/
 **/app/.cxx/
+**/android/local.properties
 
 # iOS/macOS/Linux auto-generated
 **/ios/Flutter/Generated.xcconfig
