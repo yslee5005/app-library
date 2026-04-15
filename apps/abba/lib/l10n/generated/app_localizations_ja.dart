@@ -422,6 +422,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get gardenTree => '大きな木';
 
   @override
+  String get gardenForest => '祈りの森';
+
+  @override
   String get milestoneShare => '共有する';
 
   @override

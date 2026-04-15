@@ -23,7 +23,9 @@ import 'services/real/openai_service.dart';
 import 'services/real/real_notification_service.dart';
 import 'services/real/real_stt_service.dart';
 import 'services/real/supabase_qt_repository.dart';
-import 'services/real/real_tts_service.dart';
+import 'services/real/google_cloud_tts_service.dart';
+import 'services/real/on_device_tts_service.dart';
+import 'services/real/hybrid_tts_service.dart';
 import 'services/real/revenuecat_subscription_service.dart';
 import 'services/real/supabase_auth_service.dart';
 import 'services/real/supabase_community_repository.dart';
@@ -53,7 +55,12 @@ Future<void> main() async {
       authServiceProvider.overrideWithValue(authService),
       aiServiceProvider.overrideWithValue(MockAiService(mockData)),
       sttServiceProvider.overrideWithValue(MockSttService()),
-      ttsServiceProvider.overrideWithValue(MockTtsService()),
+      ttsServiceProvider.overrideWithValue(
+        HybridTtsService(
+          primary: GoogleCloudTtsService(),
+          fallback: OnDeviceTtsService(),
+        ),
+      ),
       prayerRepositoryProvider.overrideWithValue(MockPrayerRepository()),
       communityRepositoryProvider.overrideWithValue(
         MockCommunityRepository(mockData),
@@ -109,7 +116,12 @@ Future<void> main() async {
       authServiceProvider.overrideWithValue(authService),
       aiServiceProvider.overrideWithValue(CachedAiService(OpenAiService())),
       sttServiceProvider.overrideWithValue(RealSttService()),
-      ttsServiceProvider.overrideWithValue(RealTtsService()),
+      ttsServiceProvider.overrideWithValue(
+        HybridTtsService(
+          primary: GoogleCloudTtsService(),
+          fallback: OnDeviceTtsService(),
+        ),
+      ),
       prayerRepositoryProvider.overrideWithValue(
         SupabasePrayerRepository(supabase),
       ),

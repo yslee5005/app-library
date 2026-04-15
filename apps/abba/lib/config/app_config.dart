@@ -18,6 +18,9 @@ class AppConfig {
 
   static String get revenueCatApiKey => dotenv.env['REVENUECAT_API_KEY'] ?? '';
 
+  static String get googleCloudTtsApiKey =>
+      dotenv.env['GOOGLE_CLOUD_TTS_API_KEY'] ?? '';
+
   /// true when running in mock mode (JSON data, no external services)
   static bool get useMock => env == 'mock';
 

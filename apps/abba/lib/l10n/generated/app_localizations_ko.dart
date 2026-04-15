@@ -422,6 +422,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get gardenTree => '든든한 나무';
 
   @override
+  String get gardenForest => '기도의 숲';
+
+  @override
   String get milestoneShare => '공유하기';
 
   @override

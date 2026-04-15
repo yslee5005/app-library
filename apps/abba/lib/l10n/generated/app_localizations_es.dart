@@ -433,6 +433,9 @@ class AppLocalizationsEs extends AppLocalizations {
   String get gardenTree => 'Árbol fuerte';
 
   @override
+  String get gardenForest => 'Bosque de oración';
+
+  @override
   String get milestoneShare => 'Compartir';
 
   @override

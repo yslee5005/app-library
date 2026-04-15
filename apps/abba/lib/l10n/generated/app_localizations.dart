@@ -902,6 +902,12 @@ abstract class AppLocalizations {
   /// **'Strong tree'**
   String get gardenTree;
 
+  /// No description provided for @gardenForest.
+  ///
+  /// In en, this message translates to:
+  /// **'Forest of prayer'**
+  String get gardenForest;
+
   /// No description provided for @milestoneShare.
   ///
   /// In en, this message translates to:

@@ -249,33 +249,42 @@ class _HomeViewState extends ConsumerState<HomeView>
                     ),
                   ),
                   const SizedBox(width: AbbaSpacing.sm),
-                  // Streak badge (compact)
+                  // Streak badge (compact) — tap to open calendar/history
                   profileAsync.when(
-                    data: (profile) => Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: AbbaSpacing.sm + 2,
-                        vertical: AbbaSpacing.sm,
-                      ),
-                      decoration: BoxDecoration(
-                        color: AbbaColors.sage.withValues(alpha: 0.1),
-                        borderRadius: BorderRadius.circular(AbbaRadius.xl),
-                      ),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text(
-                            streakGardenIcon(profile.currentStreak),
-                            style: const TextStyle(fontSize: 18),
-                          ),
-                          const SizedBox(width: 4),
-                          Text(
-                            '${profile.currentStreak}',
-                            style: AbbaTypography.body.copyWith(
-                              fontWeight: FontWeight.w700,
-                              color: AbbaColors.sage,
+                    data: (profile) => GestureDetector(
+                      onTap: () => context.go('/calendar'),
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: AbbaSpacing.sm + 2,
+                          vertical: AbbaSpacing.sm,
+                        ),
+                        decoration: BoxDecoration(
+                          color: AbbaColors.sage.withValues(alpha: 0.1),
+                          borderRadius: BorderRadius.circular(AbbaRadius.xl),
+                        ),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(
+                              streakGardenIcon(profile.currentStreak),
+                              style: const TextStyle(fontSize: 18),
                             ),
-                          ),
-                        ],
+                            const SizedBox(width: 4),
+                            Text(
+                              '${profile.currentStreak}',
+                              style: AbbaTypography.body.copyWith(
+                                fontWeight: FontWeight.w700,
+                                color: AbbaColors.sage,
+                              ),
+                            ),
+                            const SizedBox(width: 2),
+                            Icon(
+                              Icons.chevron_right,
+                              size: 16,
+                              color: AbbaColors.sage.withValues(alpha: 0.6),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                     loading: () => const SizedBox.shrink(),
@@ -380,35 +389,8 @@ class _HomeViewState extends ConsumerState<HomeView>
               style: AbbaTypography.h2.copyWith(color: AbbaColors.warmBrown),
             ),
             SizedBox(height: gap),
-            // Guide tips
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: AbbaSpacing.lg),
-              child: Container(
-                padding: const EdgeInsets.all(AbbaSpacing.sm),
-                decoration: BoxDecoration(
-                  color: AbbaColors.sage.withValues(alpha: 0.08),
-                  borderRadius: BorderRadius.circular(AbbaRadius.lg),
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      l10n.prayerGuideTitle,
-                      style: AbbaTypography.body.copyWith(
-                        fontWeight: FontWeight.w600,
-                        color: AbbaColors.sage,
-                      ),
-                    ),
-                    const SizedBox(height: AbbaSpacing.xs),
-                    _GuideRow(icon: '🎙️', text: l10n.prayerGuide1),
-                    const SizedBox(height: 2),
-                    _GuideRow(icon: '✝️', text: l10n.prayerGuide2),
-                    const SizedBox(height: 2),
-                    _GuideRow(icon: '⌨️', text: l10n.prayerGuide3),
-                  ],
-                ),
-              ),
-            ),
+            // Streak card
+            _buildStreakCard(l10n),
             SizedBox(height: gap),
             // Start button
             Padding(
@@ -423,6 +405,66 @@ class _HomeViewState extends ConsumerState<HomeView>
           ],
         );
       },
+    );
+  }
+
+  Widget _buildStreakCard(AppLocalizations l10n) {
+    final profileAsync = ref.watch(userProfileProvider);
+
+    return profileAsync.when(
+      data: (profile) {
+        final streak = profile.currentStreak;
+        final best = profile.bestStreak;
+        final icon = streakGardenIcon(streak);
+        final label = streakGardenLabel(streak, l10n);
+
+        return Padding(
+          padding: const EdgeInsets.symmetric(horizontal: AbbaSpacing.lg),
+          child: Container(
+            padding: const EdgeInsets.symmetric(
+              horizontal: AbbaSpacing.lg,
+              vertical: AbbaSpacing.md,
+            ),
+            decoration: BoxDecoration(
+              color: AbbaColors.sage.withValues(alpha: 0.08),
+              borderRadius: BorderRadius.circular(AbbaRadius.lg),
+            ),
+            child: Column(
+              children: [
+                Text(icon, style: const TextStyle(fontSize: 40)),
+                const SizedBox(height: AbbaSpacing.xs),
+                Text(
+                  streak == 0
+                      ? l10n.prayerStartPrompt
+                      : l10n.streakDays(streak),
+                  style: AbbaTypography.h2.copyWith(
+                    color: AbbaColors.sage,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+                const SizedBox(height: AbbaSpacing.xs),
+                Text(
+                  label,
+                  style: AbbaTypography.bodySmall.copyWith(
+                    color: AbbaColors.warmBrown,
+                  ),
+                ),
+                if (best > 0) ...[
+                  const SizedBox(height: AbbaSpacing.xs),
+                  Text(
+                    '${l10n.bestStreak}: ${l10n.streakDays(best)} 🏆',
+                    style: AbbaTypography.caption.copyWith(
+                      color: AbbaColors.muted,
+                    ),
+                  ),
+                ],
+              ],
+            ),
+          ),
+        );
+      },
+      loading: () => const SizedBox.shrink(),
+      error: (_, _) => const SizedBox.shrink(),
     );
   }
 

@@ -19,7 +19,7 @@ final _rootNavigatorKey = GlobalKey<NavigatorState>();
 
 final appRouter = GoRouter(
   navigatorKey: _rootNavigatorKey,
-  initialLocation: '/welcome',
+  initialLocation: '/home',
   redirect: (context, state) {
     // Anonymous-first: no auth redirect needed
     // Welcome is shown only on first launch (handled by initial location)

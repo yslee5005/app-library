@@ -422,6 +422,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get gardenTree => '参天大树';
 
   @override
+  String get gardenForest => '祷告之林';
+
+  @override
   String get milestoneShare => '分享';
 
   @override

@@ -430,6 +430,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get gardenTree => 'Strong tree';
 
   @override
+  String get gardenForest => 'Forest of prayer';
+
+  @override
   String get milestoneShare => 'Share';
 
   @override
