@@ -210,6 +210,14 @@ class AppLocalizationsEn extends AppLocalizations {
   String get days => 'days';
 
   @override
+  String calendarRecordCount(Object count) {
+    return '$count records';
+  }
+
+  @override
+  String get todayVerse => 'Today\'s Verse';
+
+  @override
   String get settingsTitle => 'Settings';
 
   @override
@@ -231,10 +239,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get premiumPlan => 'Premium';
 
   @override
-  String get monthlyPrice => '\$6.99/mo';
+  String get monthlyPrice => '\$3.49/mo';
 
   @override
-  String get yearlyPrice => '\$49.99/yr';
+  String get yearlyPrice => '\$24.99/yr';
 
   @override
   String get yearlySave => 'Save 40%';
@@ -388,6 +396,52 @@ class AppLocalizationsEn extends AppLocalizations {
   String get laterButton => 'Maybe later';
 
   @override
+  String get premiumPromptTitle => 'Pro Feature';
+
+  @override
+  String get premiumPromptBody =>
+      'This feature is available with Pro.\nWould you like to see our plans?';
+
+  @override
+  String get viewProducts => 'View Plans';
+
+  @override
+  String get maybeLater => 'Maybe later';
+
+  @override
+  String get premiumHeadline => 'Closer to God, every day';
+
+  @override
+  String get premiumBenefit1 => 'Unlimited Prayer & QT';
+
+  @override
+  String get premiumBenefit2 => 'AI-powered prayer & guidance';
+
+  @override
+  String get premiumBenefit3 => 'Stories of faith from history';
+
+  @override
+  String get premiumBenefit4 => 'Prayer read-aloud (TTS)';
+
+  @override
+  String get premiumBenefit5 => 'Original language Bible study';
+
+  @override
+  String get bestValue => 'BEST VALUE';
+
+  @override
+  String get perMonth => 'mo';
+
+  @override
+  String get cancelAnytime => 'Cancel anytime';
+
+  @override
+  String get restorePurchase => 'Restore purchase';
+
+  @override
+  String get yearlyPriceMonthly => '\$2.08/mo';
+
+  @override
   String get morningPrayerReminder => 'Morning Prayer';
 
   @override
@@ -395,6 +449,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get streakReminder => 'Streak Reminder';
+
+  @override
+  String get afternoonNudgeReminder => 'Afternoon Prayer Nudge';
 
   @override
   String get weeklySummaryReminder => 'Weekly Summary';

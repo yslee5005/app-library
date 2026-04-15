@@ -17,6 +17,12 @@ abstract class NotificationService {
   /// Schedule evening gratitude reminder
   Future<void> scheduleEveningReminder();
 
+  /// Schedule afternoon nudge (14:00) — only shows if user hasn't prayed today
+  Future<void> scheduleAfternoonNudge();
+
+  /// Show streak celebration notification for milestone days
+  Future<void> showStreakCelebration(int streakCount);
+
   /// Cancel all scheduled reminders
   Future<void> cancelAllReminders();
 
@@ -25,6 +31,7 @@ abstract class NotificationService {
     bool? morningReminder,
     String? morningTime,
     bool? eveningReminder,
+    bool? afternoonNudge,
     bool? streakReminder,
     bool? weeklySummary,
   });
@@ -37,6 +44,7 @@ class NotificationSettings {
   final bool morningReminder;
   final String morningTime;
   final bool eveningReminder;
+  final bool afternoonNudge;
   final bool streakReminder;
   final bool weeklySummary;
 
@@ -44,6 +52,7 @@ class NotificationSettings {
     this.morningReminder = true,
     this.morningTime = '06:00',
     this.eveningReminder = false,
+    this.afternoonNudge = true,
     this.streakReminder = true,
     this.weeklySummary = true,
   });
@@ -52,6 +61,7 @@ class NotificationSettings {
     bool? morningReminder,
     String? morningTime,
     bool? eveningReminder,
+    bool? afternoonNudge,
     bool? streakReminder,
     bool? weeklySummary,
   }) {
@@ -59,6 +69,7 @@ class NotificationSettings {
       morningReminder: morningReminder ?? this.morningReminder,
       morningTime: morningTime ?? this.morningTime,
       eveningReminder: eveningReminder ?? this.eveningReminder,
+      afternoonNudge: afternoonNudge ?? this.afternoonNudge,
       streakReminder: streakReminder ?? this.streakReminder,
       weeklySummary: weeklySummary ?? this.weeklySummary,
     );
@@ -69,6 +80,7 @@ class NotificationSettings {
       morningReminder: json['morning_reminder'] as bool? ?? true,
       morningTime: json['morning_time'] as String? ?? '06:00',
       eveningReminder: json['evening_reminder'] as bool? ?? false,
+      afternoonNudge: json['afternoon_nudge'] as bool? ?? true,
       streakReminder: json['streak_reminder'] as bool? ?? true,
       weeklySummary: json['weekly_summary'] as bool? ?? true,
     );

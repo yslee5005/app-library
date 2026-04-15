@@ -212,6 +212,14 @@ class AppLocalizationsEs extends AppLocalizations {
   String get days => 'días';
 
   @override
+  String calendarRecordCount(Object count) {
+    return '$count registros';
+  }
+
+  @override
+  String get todayVerse => 'Versículo del día';
+
+  @override
   String get settingsTitle => 'Ajustes';
 
   @override
@@ -233,10 +241,10 @@ class AppLocalizationsEs extends AppLocalizations {
   String get premiumPlan => 'Premium';
 
   @override
-  String get monthlyPrice => '\$6.99/mes';
+  String get monthlyPrice => '\$3.49/mes';
 
   @override
-  String get yearlyPrice => '\$49.99/año';
+  String get yearlyPrice => '\$24.99/año';
 
   @override
   String get yearlySave => 'Ahorra 40%';
@@ -391,6 +399,52 @@ class AppLocalizationsEs extends AppLocalizations {
   String get laterButton => 'Quizás después';
 
   @override
+  String get premiumPromptTitle => 'Función Pro';
+
+  @override
+  String get premiumPromptBody =>
+      'Esta función está disponible con Pro.\n¿Te gustaría ver nuestros planes?';
+
+  @override
+  String get viewProducts => 'Ver planes';
+
+  @override
+  String get maybeLater => 'Quizás después';
+
+  @override
+  String get premiumHeadline => 'Más cerca de Dios, cada día';
+
+  @override
+  String get premiumBenefit1 => 'Oración & QT ilimitados';
+
+  @override
+  String get premiumBenefit2 => 'Oración y guía con IA';
+
+  @override
+  String get premiumBenefit3 => 'Historias de fe';
+
+  @override
+  String get premiumBenefit4 => 'Lectura de oración (TTS)';
+
+  @override
+  String get premiumBenefit5 => 'Estudio bíblico en idioma original';
+
+  @override
+  String get bestValue => 'MEJOR VALOR';
+
+  @override
+  String get perMonth => 'mes';
+
+  @override
+  String get cancelAnytime => 'Cancela cuando quieras';
+
+  @override
+  String get restorePurchase => 'Restaurar compra';
+
+  @override
+  String get yearlyPriceMonthly => '\$2.08/mes';
+
+  @override
   String get morningPrayerReminder => 'Oración matutina';
 
   @override
@@ -398,6 +452,9 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get streakReminder => 'Recordatorio de racha';
+
+  @override
+  String get afternoonNudgeReminder => 'Recordatorio de oración vespertina';
 
   @override
   String get weeklySummaryReminder => 'Resumen semanal';

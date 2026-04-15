@@ -488,6 +488,18 @@ abstract class AppLocalizations {
   /// **'days'**
   String get days;
 
+  /// No description provided for @calendarRecordCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} records'**
+  String calendarRecordCount(Object count);
+
+  /// No description provided for @todayVerse.
+  ///
+  /// In en, this message translates to:
+  /// **'Today\'s Verse'**
+  String get todayVerse;
+
   /// No description provided for @settingsTitle.
   ///
   /// In en, this message translates to:
@@ -533,13 +545,13 @@ abstract class AppLocalizations {
   /// No description provided for @monthlyPrice.
   ///
   /// In en, this message translates to:
-  /// **'\$6.99/mo'**
+  /// **'\$3.49/mo'**
   String get monthlyPrice;
 
   /// No description provided for @yearlyPrice.
   ///
   /// In en, this message translates to:
-  /// **'\$49.99/yr'**
+  /// **'\$24.99/yr'**
   String get yearlyPrice;
 
   /// No description provided for @yearlySave.
@@ -818,6 +830,96 @@ abstract class AppLocalizations {
   /// **'Maybe later'**
   String get laterButton;
 
+  /// No description provided for @premiumPromptTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Pro Feature'**
+  String get premiumPromptTitle;
+
+  /// No description provided for @premiumPromptBody.
+  ///
+  /// In en, this message translates to:
+  /// **'This feature is available with Pro.\nWould you like to see our plans?'**
+  String get premiumPromptBody;
+
+  /// No description provided for @viewProducts.
+  ///
+  /// In en, this message translates to:
+  /// **'View Plans'**
+  String get viewProducts;
+
+  /// No description provided for @maybeLater.
+  ///
+  /// In en, this message translates to:
+  /// **'Maybe later'**
+  String get maybeLater;
+
+  /// No description provided for @premiumHeadline.
+  ///
+  /// In en, this message translates to:
+  /// **'Closer to God, every day'**
+  String get premiumHeadline;
+
+  /// No description provided for @premiumBenefit1.
+  ///
+  /// In en, this message translates to:
+  /// **'Unlimited Prayer & QT'**
+  String get premiumBenefit1;
+
+  /// No description provided for @premiumBenefit2.
+  ///
+  /// In en, this message translates to:
+  /// **'AI-powered prayer & guidance'**
+  String get premiumBenefit2;
+
+  /// No description provided for @premiumBenefit3.
+  ///
+  /// In en, this message translates to:
+  /// **'Stories of faith from history'**
+  String get premiumBenefit3;
+
+  /// No description provided for @premiumBenefit4.
+  ///
+  /// In en, this message translates to:
+  /// **'Prayer read-aloud (TTS)'**
+  String get premiumBenefit4;
+
+  /// No description provided for @premiumBenefit5.
+  ///
+  /// In en, this message translates to:
+  /// **'Original language Bible study'**
+  String get premiumBenefit5;
+
+  /// No description provided for @bestValue.
+  ///
+  /// In en, this message translates to:
+  /// **'BEST VALUE'**
+  String get bestValue;
+
+  /// No description provided for @perMonth.
+  ///
+  /// In en, this message translates to:
+  /// **'mo'**
+  String get perMonth;
+
+  /// No description provided for @cancelAnytime.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel anytime'**
+  String get cancelAnytime;
+
+  /// No description provided for @restorePurchase.
+  ///
+  /// In en, this message translates to:
+  /// **'Restore purchase'**
+  String get restorePurchase;
+
+  /// No description provided for @yearlyPriceMonthly.
+  ///
+  /// In en, this message translates to:
+  /// **'\$2.08/mo'**
+  String get yearlyPriceMonthly;
+
   /// No description provided for @morningPrayerReminder.
   ///
   /// In en, this message translates to:
@@ -835,6 +937,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Streak Reminder'**
   String get streakReminder;
+
+  /// No description provided for @afternoonNudgeReminder.
+  ///
+  /// In en, this message translates to:
+  /// **'Afternoon Prayer Nudge'**
+  String get afternoonNudgeReminder;
 
   /// No description provided for @weeklySummaryReminder.
   ///

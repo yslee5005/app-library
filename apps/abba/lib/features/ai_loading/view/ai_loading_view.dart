@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -27,6 +28,7 @@ class _AiLoadingViewState extends ConsumerState<AiLoadingView>
   Timer? _stageTimer;
   bool _aiDone = false;
   bool _minTimePassed = false;
+  bool _navigated = false;
 
   static const _icons = ['🌱', '🌿', '🌸'];
 
@@ -88,7 +90,7 @@ class _AiLoadingViewState extends ConsumerState<AiLoadingView>
     }
 
     try {
-      final result = await aiService.analyzePrayer(
+      final result = await aiService.analyzePrayerCore(
         transcript: transcript,
         locale: locale,
       );
@@ -98,7 +100,7 @@ class _AiLoadingViewState extends ConsumerState<AiLoadingView>
       final repo = ref.read(prayerRepositoryProvider);
       await repo.savePrayer(
         Prayer(
-          id: DateTime.now().millisecondsSinceEpoch.toString(),
+          id: _generateId(),
           userId: userId,
           transcript: transcript,
           mode: 'prayer',
@@ -111,6 +113,9 @@ class _AiLoadingViewState extends ConsumerState<AiLoadingView>
       // Invalidate providers so calendar/history refresh
       ref.invalidate(streakProvider);
       ref.invalidate(userProfileProvider);
+
+      // Show streak celebration notification for milestones
+      await _checkStreakCelebration();
 
       ErrorLoggingService.addBreadcrumb(
         'Prayer saved successfully',
@@ -163,7 +168,7 @@ class _AiLoadingViewState extends ConsumerState<AiLoadingView>
       final repo = ref.read(prayerRepositoryProvider);
       await repo.savePrayer(
         Prayer(
-          id: DateTime.now().millisecondsSinceEpoch.toString(),
+          id: _generateId(),
           userId: userId,
           transcript: meditationText,
           mode: 'qt',
@@ -177,6 +182,9 @@ class _AiLoadingViewState extends ConsumerState<AiLoadingView>
       ref.invalidate(streakProvider);
       ref.invalidate(userProfileProvider);
 
+      // Show streak celebration notification for milestones
+      await _checkStreakCelebration();
+
       ErrorLoggingService.addBreadcrumb(
         'QT meditation saved successfully',
         category: 'qt',
@@ -188,6 +196,21 @@ class _AiLoadingViewState extends ConsumerState<AiLoadingView>
 
     _aiDone = true;
     _navigateIfReady();
+  }
+
+  /// Check current streak and show celebration notification for milestones
+  Future<void> _checkStreakCelebration() async {
+    try {
+      final repo = ref.read(prayerRepositoryProvider);
+      final streak = await repo.getStreak();
+      final currentStreak = streak.current;
+
+      final notificationService = ref.read(notificationServiceProvider);
+      await notificationService.showStreakCelebration(currentStreak);
+    } catch (e) {
+      // Non-fatal — don't block prayer flow for notification errors
+      debugPrint('Streak celebration check failed: $e');
+    }
   }
 
   void _setFallbackResult(String transcript) {
@@ -237,8 +260,17 @@ class _AiLoadingViewState extends ConsumerState<AiLoadingView>
     );
   }
 
+  /// Generate a unique ID: timestamp + random hex suffix
+  static String _generateId() {
+    final now = DateTime.now().millisecondsSinceEpoch;
+    final rand = Random().nextInt(0xFFFFFF).toRadixString(16).padLeft(6, '0');
+    return '$now-$rand';
+  }
+
   void _navigateIfReady() {
+    if (_navigated) return;
     if (_aiDone && _minTimePassed && mounted) {
+      _navigated = true;
       final mode = ref.read(currentPrayerModeProvider);
       if (mode == 'qt') {
         context.go('/home/qt-dashboard');

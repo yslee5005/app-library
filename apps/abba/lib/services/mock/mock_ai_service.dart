@@ -13,9 +13,38 @@ class MockAiService implements AiService {
     required String transcript,
     required String locale,
   }) async {
-    // Simulate AI processing time
     await Future<void>.delayed(const Duration(seconds: 2));
     return _mockData.getPrayerResult();
+  }
+
+  @override
+  Future<PrayerResult> analyzePrayerCore({
+    required String transcript,
+    required String locale,
+  }) async {
+    await Future<void>.delayed(const Duration(seconds: 1));
+    final full = await _mockData.getPrayerResult();
+    return PrayerResult(
+      scripture: full.scripture,
+      bibleStory: full.bibleStory,
+      testimonyEn: full.testimonyEn,
+      testimonyKo: full.testimonyKo,
+      prayerSummary: full.prayerSummary,
+    );
+  }
+
+  @override
+  Future<PremiumContent> analyzePrayerPremium({
+    required String transcript,
+    required String locale,
+  }) async {
+    await Future<void>.delayed(const Duration(seconds: 1));
+    final full = await _mockData.getPrayerResult();
+    return PremiumContent(
+      historicalStory: full.historicalStory,
+      aiPrayer: full.aiPrayer,
+      guidance: full.guidance,
+    );
   }
 
   @override
@@ -25,7 +54,6 @@ class MockAiService implements AiService {
     required String meditationText,
     required String locale,
   }) async {
-    // Simulate AI processing time
     await Future<void>.delayed(const Duration(seconds: 2));
     return _mockData.getQtMeditationResult();
   }

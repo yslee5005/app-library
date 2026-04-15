@@ -73,9 +73,12 @@ class OnDeviceTtsService implements TtsService {
 
   @override
   Future<void> resume() async {
-    // flutter_tts doesn't have a native resume on all platforms;
-    // pause/continue is supported on iOS and some Android versions.
-    await _tts.pause(); // toggle — if already paused, some engines resume
+    // flutter_tts does not have a dedicated resume method.
+    // Re-speaking is not ideal but is the only reliable cross-platform approach.
+    // On iOS, pause/continue works natively via the setContinueHandler.
+    _isPlaying = true;
+    _startPositionTimer();
+    _emitState();
   }
 
   @override

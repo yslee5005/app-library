@@ -10,8 +10,13 @@ class HybridTtsService implements TtsService {
   final TtsService fallback;
 
   TtsService? _active;
+  late final StreamController<TtsPlaybackState> _controller;
 
-  HybridTtsService({required this.primary, required this.fallback});
+  HybridTtsService({required this.primary, required this.fallback}) {
+    _controller = StreamController<TtsPlaybackState>.broadcast();
+    primary.playbackState.listen(_controller.add);
+    fallback.playbackState.listen(_controller.add);
+  }
 
   @override
   Future<void> speak({required String text, required String voice}) async {
@@ -44,11 +49,5 @@ class HybridTtsService implements TtsService {
   }
 
   @override
-  Stream<TtsPlaybackState> get playbackState {
-    // Merge both streams — only the active one emits during playback
-    final controller = StreamController<TtsPlaybackState>.broadcast();
-    primary.playbackState.listen(controller.add);
-    fallback.playbackState.listen(controller.add);
-    return controller.stream;
-  }
+  Stream<TtsPlaybackState> get playbackState => _controller.stream;
 }

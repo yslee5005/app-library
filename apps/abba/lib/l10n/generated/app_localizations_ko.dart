@@ -209,6 +209,14 @@ class AppLocalizationsKo extends AppLocalizations {
   String get days => '일';
 
   @override
+  String calendarRecordCount(Object count) {
+    return '$count개의 기록';
+  }
+
+  @override
+  String get todayVerse => '오늘의 한 줄';
+
+  @override
   String get settingsTitle => '설정';
 
   @override
@@ -230,10 +238,10 @@ class AppLocalizationsKo extends AppLocalizations {
   String get premiumPlan => '프리미엄';
 
   @override
-  String get monthlyPrice => '₩9,900/월';
+  String get monthlyPrice => '₩4,700/월';
 
   @override
-  String get yearlyPrice => '₩69,000/년';
+  String get yearlyPrice => '₩33,700/년';
 
   @override
   String get yearlySave => '40% 절약';
@@ -380,6 +388,51 @@ class AppLocalizationsKo extends AppLocalizations {
   String get laterButton => '다음에 하기';
 
   @override
+  String get premiumPromptTitle => 'Pro 기능이에요';
+
+  @override
+  String get premiumPromptBody => '이 기능은 Pro에서 사용할 수 있어요.\n프리미엄 상품을 확인해보시겠어요?';
+
+  @override
+  String get viewProducts => '상품 보기';
+
+  @override
+  String get maybeLater => '다음에 할게요';
+
+  @override
+  String get premiumHeadline => '매일 하나님과 더 가까이';
+
+  @override
+  String get premiumBenefit1 => '무제한 기도 & QT';
+
+  @override
+  String get premiumBenefit2 => 'AI 맞춤 기도문 & 조언';
+
+  @override
+  String get premiumBenefit3 => '역사 속 믿음의 이야기';
+
+  @override
+  String get premiumBenefit4 => '기도문 읽어주기 (TTS)';
+
+  @override
+  String get premiumBenefit5 => '원어 성경 해석';
+
+  @override
+  String get bestValue => 'BEST VALUE';
+
+  @override
+  String get perMonth => '월';
+
+  @override
+  String get cancelAnytime => '언제든 취소 가능';
+
+  @override
+  String get restorePurchase => '구독 복원';
+
+  @override
+  String get yearlyPriceMonthly => '₩2,800/월';
+
+  @override
   String get morningPrayerReminder => '아침 기도';
 
   @override
@@ -387,6 +440,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get streakReminder => '스트릭 알림';
+
+  @override
+  String get afternoonNudgeReminder => '오후 기도 알림';
 
   @override
   String get weeklySummaryReminder => '주간 요약';

@@ -105,6 +105,10 @@ final prayerResultProvider = StateProvider<AsyncValue<PrayerResult>>((ref) {
   return const AsyncValue.loading();
 });
 
+/// Premium content loaded on-demand when user expands premium cards
+final premiumContentProvider =
+    StateProvider<AsyncValue<PremiumContent>?>((ref) => null);
+
 final qtPassagesProvider = FutureProvider<List<QTPassage>>((ref) {
   final repo = ref.watch(qtRepositoryProvider);
   return repo.getTodayPassages();

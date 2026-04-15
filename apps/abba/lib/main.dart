@@ -18,6 +18,7 @@ import 'services/mock/mock_stt_service.dart';
 import 'services/mock/mock_subscription_service.dart';
 import 'services/mock/mock_tts_service.dart';
 import 'services/mock_data.dart';
+import 'services/notification_service.dart';
 import 'services/cached_ai_service.dart';
 import 'services/real/openai_service.dart';
 import 'services/real/real_notification_service.dart';
@@ -47,6 +48,16 @@ Future<void> main() async {
 
   AuthService authService;
 
+  // Initialize notification service (local-only, works in both mock/real)
+  NotificationService notificationService = RealNotificationService();
+  try {
+    await notificationService.initialize();
+    await notificationService.requestPermission();
+  } catch (e) {
+    debugPrint('Notification init failed: $e — falling back to mock');
+    notificationService = MockNotificationService();
+  }
+
   if (AppConfig.useMock) {
     // Mock mode — all services return JSON data
     final mockData = MockDataService();
@@ -66,7 +77,7 @@ Future<void> main() async {
         MockCommunityRepository(mockData),
       ),
       subscriptionServiceProvider.overrideWithValue(MockSubscriptionService()),
-      notificationServiceProvider.overrideWithValue(MockNotificationService()),
+      notificationServiceProvider.overrideWithValue(notificationService),
       qtRepositoryProvider.overrideWithValue(MockQtRepository(mockData)),
     ]);
   } else {
@@ -93,7 +104,7 @@ Future<void> main() async {
         subscriptionServiceProvider
             .overrideWithValue(MockSubscriptionService()),
         notificationServiceProvider
-            .overrideWithValue(MockNotificationService()),
+            .overrideWithValue(notificationService),
         qtRepositoryProvider.overrideWithValue(MockQtRepository(mockData)),
       ]);
 
@@ -131,9 +142,7 @@ Future<void> main() async {
       subscriptionServiceProvider.overrideWithValue(
         RevenueCatSubscriptionService(),
       ),
-      notificationServiceProvider.overrideWithValue(
-        RealNotificationService(supabase),
-      ),
+      notificationServiceProvider.overrideWithValue(notificationService),
       qtRepositoryProvider.overrideWithValue(SupabaseQtRepository(supabase)),
     ]);
   }

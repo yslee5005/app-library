@@ -9,6 +9,7 @@ class CachedAiService implements AiService {
   static const int _maxCacheSize = 50;
 
   final _prayerCache = <String, PrayerResult>{};
+  final _premiumCache = <String, PremiumContent>{};
   final _meditationCache = <String, QtMeditationResult>{};
 
   CachedAiService(this._inner);
@@ -16,32 +17,70 @@ class CachedAiService implements AiService {
   String _key(String text, String locale) =>
       '${locale}_${text.hashCode}';
 
+  T? _getFromCache<T>(Map<String, T> cache, String key) {
+    if (cache.containsKey(key)) {
+      final value = cache.remove(key) as T;
+      cache[key] = value;
+      return value;
+    }
+    return null;
+  }
+
+  void _putInCache<T>(Map<String, T> cache, String key, T value) {
+    cache[key] = value;
+    while (cache.length > _maxCacheSize) {
+      cache.remove(cache.keys.first);
+    }
+  }
+
   @override
   Future<PrayerResult> analyzePrayer({
     required String transcript,
     required String locale,
   }) async {
     final key = _key(transcript, locale);
-
-    if (_prayerCache.containsKey(key)) {
-      // Move to end (most recently used)
-      final value = _prayerCache.remove(key)!;
-      _prayerCache[key] = value;
-      return value;
-    }
+    final cached = _getFromCache(_prayerCache, key);
+    if (cached != null) return cached;
 
     final result = await _inner.analyzePrayer(
       transcript: transcript,
       locale: locale,
     );
+    _putInCache(_prayerCache, key, result);
+    return result;
+  }
 
-    _prayerCache[key] = result;
+  @override
+  Future<PrayerResult> analyzePrayerCore({
+    required String transcript,
+    required String locale,
+  }) async {
+    final key = '${_key(transcript, locale)}_core';
+    final cached = _getFromCache(_prayerCache, key);
+    if (cached != null) return cached;
 
-    // Evict oldest if over limit
-    while (_prayerCache.length > _maxCacheSize) {
-      _prayerCache.remove(_prayerCache.keys.first);
-    }
+    final result = await _inner.analyzePrayerCore(
+      transcript: transcript,
+      locale: locale,
+    );
+    _putInCache(_prayerCache, key, result);
+    return result;
+  }
 
+  @override
+  Future<PremiumContent> analyzePrayerPremium({
+    required String transcript,
+    required String locale,
+  }) async {
+    final key = _key(transcript, locale);
+    final cached = _getFromCache(_premiumCache, key);
+    if (cached != null) return cached;
+
+    final result = await _inner.analyzePrayerPremium(
+      transcript: transcript,
+      locale: locale,
+    );
+    _putInCache(_premiumCache, key, result);
     return result;
   }
 
@@ -53,12 +92,8 @@ class CachedAiService implements AiService {
     required String locale,
   }) async {
     final key = _key('$passageReference$meditationText', locale);
-
-    if (_meditationCache.containsKey(key)) {
-      final value = _meditationCache.remove(key)!;
-      _meditationCache[key] = value;
-      return value;
-    }
+    final cached = _getFromCache(_meditationCache, key);
+    if (cached != null) return cached;
 
     final result = await _inner.analyzeMeditation(
       passageReference: passageReference,
@@ -66,13 +101,7 @@ class CachedAiService implements AiService {
       meditationText: meditationText,
       locale: locale,
     );
-
-    _meditationCache[key] = result;
-
-    while (_meditationCache.length > _maxCacheSize) {
-      _meditationCache.remove(_meditationCache.keys.first);
-    }
-
+    _putInCache(_meditationCache, key, result);
     return result;
   }
 }

@@ -101,6 +101,18 @@ class HistoricalStory {
   String title(String locale) => locale == 'ko' ? titleKo : titleEn;
   String summary(String locale) => locale == 'ko' ? summaryKo : summaryEn;
   String lesson(String locale) => locale == 'ko' ? lessonKo : lessonEn;
+
+  /// Placeholder for locked premium card display
+  factory HistoricalStory.placeholder() => const HistoricalStory(
+        titleEn: 'A Story of Faith',
+        titleKo: '믿음의 이야기',
+        reference: '',
+        summaryEn: 'Unlock to discover a powerful story from Bible history...',
+        summaryKo: '성경 역사 속 감동적인 이야기를 만나보세요...',
+        lessonEn: '',
+        lessonKo: '',
+        isPremium: true,
+      );
 }
 
 class PrayerResult {
@@ -127,6 +139,25 @@ class PrayerResult {
     this.prayerSummary,
     this.historicalStory,
   });
+
+  /// Merge premium content into an existing core result
+  PrayerResult copyWithPremium({
+    HistoricalStory? historicalStory,
+    AiPrayer? aiPrayer,
+    Guidance? guidance,
+  }) {
+    return PrayerResult(
+      scripture: scripture,
+      bibleStory: bibleStory,
+      testimonyEn: testimonyEn,
+      testimonyKo: testimonyKo,
+      prayerSummary: prayerSummary,
+      originalLanguage: originalLanguage,
+      historicalStory: historicalStory ?? this.historicalStory,
+      aiPrayer: aiPrayer ?? this.aiPrayer,
+      guidance: guidance ?? this.guidance,
+    );
+  }
 
   factory PrayerResult.fromJson(Map<String, dynamic> json) {
     return PrayerResult(
@@ -261,6 +292,13 @@ class AiPrayer {
   }
 
   String text(String locale) => locale == 'ko' ? textKo : textEn;
+
+  /// Placeholder for locked premium card display
+  factory AiPrayer.placeholder() => const AiPrayer(
+        textEn: 'Unlock to receive a personalized prayer...',
+        textKo: '당신만을 위한 기도문을 받아보세요...',
+        isPremium: true,
+      );
 }
 
 class OriginalLanguage {

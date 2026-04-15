@@ -66,7 +66,7 @@ class _HomeViewState extends ConsumerState<HomeView>
 
     if (isFree && todayCount >= 1) {
       if (context.mounted) {
-        final purchased = await showPremiumModal(context);
+        final purchased = await showPremiumPrompt(context);
         if (!purchased) return;
       }
     }

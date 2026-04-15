@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import '../../../l10n/generated/app_localizations.dart';
 import '../../../models/prayer.dart';
 import '../../../providers/providers.dart';
+import '../../../services/ai_service.dart';
 import '../../../theme/abba_theme.dart';
 import '../../../widgets/abba_button.dart';
 import '../../../widgets/premium_modal.dart';
@@ -15,11 +16,58 @@ import '../widgets/prayer_summary_card.dart';
 import '../widgets/scripture_card.dart';
 import '../widgets/testimony_card.dart';
 
-class PrayerDashboardView extends ConsumerWidget {
+class PrayerDashboardView extends ConsumerStatefulWidget {
   const PrayerDashboardView({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<PrayerDashboardView> createState() =>
+      _PrayerDashboardViewState();
+}
+
+class _PrayerDashboardViewState extends ConsumerState<PrayerDashboardView> {
+  bool _premiumLoading = false;
+  PremiumContent? _premiumContent;
+
+  Future<void> _loadPremiumContent() async {
+    if (_premiumLoading || _premiumContent != null) return;
+
+    setState(() => _premiumLoading = true);
+
+    try {
+      final transcript = ref.read(currentTranscriptProvider);
+      final locale = ref.read(localeProvider);
+      final aiService = ref.read(aiServiceProvider);
+
+      final content = await aiService.analyzePrayerPremium(
+        transcript: transcript,
+        locale: locale,
+      );
+
+      if (mounted) {
+        setState(() {
+          _premiumContent = content;
+          _premiumLoading = false;
+        });
+
+        // Merge premium content into prayerResultProvider
+        final currentResult = ref.read(prayerResultProvider).valueOrNull;
+        if (currentResult != null) {
+          ref.read(prayerResultProvider.notifier).state = AsyncValue.data(
+            currentResult.copyWithPremium(
+              historicalStory: content.historicalStory,
+              aiPrayer: content.aiPrayer,
+              guidance: content.guidance,
+            ),
+          );
+        }
+      }
+    } catch (_) {
+      if (mounted) setState(() => _premiumLoading = false);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     final locale = ref.watch(localeProvider);
     final resultAsync = ref.watch(prayerResultProvider);
@@ -42,7 +90,7 @@ class PrayerDashboardView extends ConsumerWidget {
       ),
       body: resultAsync.when(
         data: (result) =>
-            _buildContent(context, ref, result, l10n, locale, isPremium),
+            _buildContent(context, result, l10n, locale, isPremium),
         loading: () => const Center(child: CircularProgressIndicator()),
         error: (e, s) => Center(child: Text(l10n.errorGeneric)),
       ),
@@ -51,19 +99,23 @@ class PrayerDashboardView extends ConsumerWidget {
 
   Widget _buildContent(
     BuildContext context,
-    WidgetRef ref,
     PrayerResult result,
     AppLocalizations l10n,
     String locale,
     bool isPremium,
   ) {
     void showPremiumUpgrade() {
-      showPremiumModal(context).then((purchased) {
+      showPremiumPrompt(context).then((purchased) {
         if (purchased) ref.invalidate(isPremiumProvider);
       });
     }
 
     final testimonyText = result.testimony(locale);
+
+    // Check if premium content is available (from full analyzePrayer or on-demand)
+    final hasHistoricalStory = result.historicalStory != null;
+    final hasAiPrayer = result.aiPrayer != null;
+    final showPremiumSection = isPremium && (!hasHistoricalStory || !hasAiPrayer);
 
     int i = 0;
     return ListView(
@@ -81,7 +133,7 @@ class PrayerDashboardView extends ConsumerWidget {
               intercessionLabel: l10n.intercessionLabel,
             ),
           ),
-        // 2. Scripture Card (첫 번째 카드 자동 펼침)
+        // 2. Scripture Card
         StaggeredFadeIn(
           index: i++,
           child: ScriptureCard(
@@ -100,8 +152,8 @@ class PrayerDashboardView extends ConsumerWidget {
             editLabel: l10n.testimonyEdit,
           ),
         ),
-        // 4. Historical Story Card (Premium)
-        if (result.historicalStory != null)
+        // 4. Historical Story Card (Premium — on-demand)
+        if (hasHistoricalStory)
           StaggeredFadeIn(
             index: i++,
             child: HistoricalStoryCard(
@@ -113,8 +165,8 @@ class PrayerDashboardView extends ConsumerWidget {
               isUserPremium: isPremium,
             ),
           ),
-        // 5. AI Prayer Card (Premium)
-        if (result.aiPrayer != null)
+        // 5. AI Prayer Card (Premium — on-demand)
+        if (hasAiPrayer)
           StaggeredFadeIn(
             index: i++,
             child: AiPrayerCard(
@@ -123,6 +175,67 @@ class PrayerDashboardView extends ConsumerWidget {
               locale: locale,
               onUnlock: showPremiumUpgrade,
               isUserPremium: isPremium,
+            ),
+          ),
+        // 6. Load premium button (if premium user but content not yet loaded)
+        if (showPremiumSection)
+          StaggeredFadeIn(
+            index: i++,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: AbbaSpacing.md,
+                vertical: AbbaSpacing.sm,
+              ),
+              child: _premiumLoading
+                  ? const Center(
+                      child: Padding(
+                        padding: EdgeInsets.all(AbbaSpacing.md),
+                        child: CircularProgressIndicator(),
+                      ),
+                    )
+                  : OutlinedButton.icon(
+                      onPressed: _loadPremiumContent,
+                      icon: const Text('✨', style: TextStyle(fontSize: 18)),
+                      label: Text(
+                        l10n.historicalStoryTitle,
+                        style: AbbaTypography.body.copyWith(
+                          color: AbbaColors.sage,
+                        ),
+                      ),
+                      style: OutlinedButton.styleFrom(
+                        side: BorderSide(
+                          color: AbbaColors.sage.withValues(alpha: 0.3),
+                        ),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(AbbaRadius.lg),
+                        ),
+                        padding: const EdgeInsets.all(AbbaSpacing.md),
+                      ),
+                    ),
+            ),
+          ),
+        // Non-premium user: show locked cards to encourage upgrade
+        if (!isPremium && !hasHistoricalStory)
+          StaggeredFadeIn(
+            index: i++,
+            child: HistoricalStoryCard(
+              historicalStory: HistoricalStory.placeholder(),
+              title: l10n.historicalStoryTitle,
+              lessonLabel: l10n.todayLesson,
+              locale: locale,
+              onUnlock: showPremiumUpgrade,
+              isUserPremium: false,
+            ),
+          ),
+        if (!isPremium && !hasAiPrayer)
+          StaggeredFadeIn(
+            index: i++,
+            child: AiPrayerCard(
+              aiPrayer: AiPrayer.placeholder(),
+              title: l10n.aiPrayerTitle,
+              locale: locale,
+              onUnlock: showPremiumUpgrade,
+              isUserPremium: false,
             ),
           ),
         StaggeredFadeIn(

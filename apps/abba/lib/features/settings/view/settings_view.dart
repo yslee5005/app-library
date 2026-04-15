@@ -354,200 +354,259 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
     final premiumAsync = ref.watch(isPremiumProvider);
     final isPremium = premiumAsync.valueOrNull ?? false;
 
+    if (isPremium) {
+      return _buildActivePremiumCard(l10n);
+    }
+    return _buildUpgradeCard(l10n);
+  }
+
+  Widget _buildActivePremiumCard(AppLocalizations l10n) {
     return AbbaCard(
       margin: EdgeInsets.zero,
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          if (isPremium) ...[
-            // Active premium banner
+          Container(
+            width: double.infinity,
+            padding: const EdgeInsets.all(AbbaSpacing.lg),
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [
+                  AbbaColors.sage.withValues(alpha: 0.15),
+                  AbbaColors.softGold.withValues(alpha: 0.15),
+                ],
+              ),
+              borderRadius: BorderRadius.circular(AbbaRadius.lg),
+            ),
+            child: Column(
+              children: [
+                const Text('🌳', style: TextStyle(fontSize: 36)),
+                const SizedBox(height: AbbaSpacing.sm),
+                Text(
+                  '✅ ${l10n.premiumActive}',
+                  style: AbbaTypography.h2.copyWith(
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: AbbaSpacing.md),
+          TextButton(
+            onPressed: () async {
+              final service = ref.read(subscriptionServiceProvider);
+              await service.restorePurchases();
+            },
+            child: Text(
+              l10n.restorePurchase,
+              style:
+                  AbbaTypography.bodySmall.copyWith(color: AbbaColors.muted),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildUpgradeCard(AppLocalizations l10n) {
+    return AbbaCard(
+      margin: EdgeInsets.zero,
+      padding: const EdgeInsets.all(AbbaSpacing.lg),
+      child: Column(
+        children: [
+          // Promo banner (if active)
+          if (_isPromoActive) ...[
             Container(
               width: double.infinity,
-              padding: const EdgeInsets.all(AbbaSpacing.md),
+              padding: const EdgeInsets.symmetric(
+                horizontal: AbbaSpacing.md,
+                vertical: AbbaSpacing.sm,
+              ),
               decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [
-                    AbbaColors.softGold.withValues(alpha: 0.3),
-                    AbbaColors.sage.withValues(alpha: 0.3),
-                  ],
-                ),
+                color: AbbaColors.softGold.withValues(alpha: 0.15),
                 borderRadius: BorderRadius.circular(AbbaRadius.md),
               ),
+              child: Text(
+                '🌸 ${l10n.promoBanner}',
+                style: AbbaTypography.bodySmall.copyWith(
+                  fontWeight: FontWeight.w600,
+                  color: AbbaColors.warmBrown,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ),
+            const SizedBox(height: AbbaSpacing.md),
+          ],
+          // Headline
+          const Text('🌿', style: TextStyle(fontSize: 40)),
+          const SizedBox(height: AbbaSpacing.md),
+          Text(
+            l10n.premiumHeadline,
+            style: AbbaTypography.h1,
+            textAlign: TextAlign.center,
+          ),
+          const SizedBox(height: AbbaSpacing.lg),
+          // Benefits list
+          ...[
+            l10n.premiumBenefit1,
+            l10n.premiumBenefit2,
+            l10n.premiumBenefit3,
+            l10n.premiumBenefit4,
+            l10n.premiumBenefit5,
+          ].map(
+            (benefit) => Padding(
+              padding: const EdgeInsets.only(bottom: AbbaSpacing.sm),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(
-                    '✅ ${l10n.premiumActive}',
-                    style: AbbaTypography.h2.copyWith(
-                      fontWeight: FontWeight.w600,
+                  Icon(
+                    Icons.check_circle,
+                    size: 20,
+                    color: AbbaColors.sage,
+                  ),
+                  const SizedBox(width: AbbaSpacing.sm),
+                  Expanded(
+                    child: Text(
+                      benefit,
+                      style: AbbaTypography.body.copyWith(
+                        color: AbbaColors.warmBrown,
+                      ),
                     ),
                   ),
                 ],
               ),
             ),
-            const SizedBox(height: AbbaSpacing.md),
-            SizedBox(
-              width: double.infinity,
-              height: abbaButtonHeight,
-              child: OutlinedButton(
-                onPressed: () async {
-                  final service = ref.read(subscriptionServiceProvider);
-                  await service.restorePurchases();
-                },
-                style: OutlinedButton.styleFrom(
-                  side: const BorderSide(color: AbbaColors.sage),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(AbbaRadius.lg),
-                  ),
-                ),
-                child: Text(
-                  l10n.comingSoon, // "Manage Subscription"
-                  style: AbbaTypography.body.copyWith(color: AbbaColors.sage),
-                ),
+          ),
+          const SizedBox(height: AbbaSpacing.lg),
+          // Yearly plan card (BEST VALUE)
+          _buildPlanOption(
+            label: l10n.bestValue,
+            price: l10n.yearlyPrice,
+            subPrice: '${l10n.yearlyPriceMonthly} · ${l10n.yearlySave}',
+            isHighlighted: true,
+            onTap: () async {
+              try {
+                final service = ref.read(subscriptionServiceProvider);
+                final success = await service.purchaseYearly();
+                if (success) ref.invalidate(isPremiumProvider);
+              } catch (_) {
+                if (mounted) {
+                  showAbbaSnackBar(context, message: l10n.errorPayment);
+                }
+              }
+            },
+          ),
+          const SizedBox(height: AbbaSpacing.sm),
+          // Monthly plan card
+          _buildPlanOption(
+            price: '${l10n.monthlyPrice}/${l10n.perMonth}',
+            onTap: () async {
+              try {
+                final service = ref.read(subscriptionServiceProvider);
+                final success = await service.purchaseMonthly();
+                if (success) ref.invalidate(isPremiumProvider);
+              } catch (_) {
+                if (mounted) {
+                  showAbbaSnackBar(context, message: l10n.errorPayment);
+                }
+              }
+            },
+          ),
+          const SizedBox(height: AbbaSpacing.lg),
+          // Cancel anytime + restore
+          Text(
+            l10n.cancelAnytime,
+            style: AbbaTypography.caption.copyWith(color: AbbaColors.muted),
+          ),
+          const SizedBox(height: AbbaSpacing.xs),
+          GestureDetector(
+            onTap: () async {
+              final service = ref.read(subscriptionServiceProvider);
+              await service.restorePurchases();
+            },
+            child: Text(
+              l10n.restorePurchase,
+              style: AbbaTypography.caption.copyWith(
+                color: AbbaColors.sage,
+                decoration: TextDecoration.underline,
               ),
             ),
-          ] else ...[
-            // Promo banner (auto-hidden after promo end date)
-            if (_isPromoActive) ...[
-              Container(
-                width: double.infinity,
-                padding: const EdgeInsets.all(AbbaSpacing.md),
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [
-                      AbbaColors.softGold.withValues(alpha: 0.3),
-                      AbbaColors.softPink.withValues(alpha: 0.3),
-                    ],
-                  ),
-                  borderRadius: BorderRadius.circular(AbbaRadius.md),
-                ),
-                child: Column(
-                  children: [
-                    Text(
-                      '🌸 ${l10n.promoBanner}',
-                      style: AbbaTypography.body.copyWith(
-                        fontWeight: FontWeight.w600,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildPlanOption({
+    String? label,
+    required String price,
+    String? subPrice,
+    bool isHighlighted = false,
+    required VoidCallback onTap,
+  }) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        width: double.infinity,
+        padding: const EdgeInsets.all(AbbaSpacing.md),
+        decoration: BoxDecoration(
+          color: isHighlighted
+              ? AbbaColors.sage.withValues(alpha: 0.08)
+              : null,
+          borderRadius: BorderRadius.circular(AbbaRadius.lg),
+          border: Border.all(
+            color: isHighlighted
+                ? AbbaColors.sage
+                : AbbaColors.muted.withValues(alpha: 0.3),
+            width: isHighlighted ? 2 : 1,
+          ),
+        ),
+        child: Row(
+          children: [
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  if (label != null)
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: AbbaSpacing.sm,
+                        vertical: 2,
                       ),
-                      textAlign: TextAlign.center,
-                    ),
-                    const SizedBox(height: AbbaSpacing.xs),
-                    Text(
-                      l10n.promoEndsOn(
-                        '${_promoEndDate.year}-${_promoEndDate.month.toString().padLeft(2, '0')}-${_promoEndDate.day.toString().padLeft(2, '0')}',
+                      margin: const EdgeInsets.only(bottom: AbbaSpacing.xs),
+                      decoration: BoxDecoration(
+                        color: AbbaColors.sage,
+                        borderRadius: BorderRadius.circular(AbbaRadius.sm),
                       ),
-                      style: AbbaTypography.caption,
-                      textAlign: TextAlign.center,
+                      child: Text(
+                        label,
+                        style: AbbaTypography.caption.copyWith(
+                          color: AbbaColors.white,
+                          fontWeight: FontWeight.w700,
+                          fontSize: 10,
+                        ),
+                      ),
                     ),
-                  ],
-                ),
-              ),
-              const SizedBox(height: AbbaSpacing.md),
-            ],
-            // Price comparison
-            Row(
-              children: [
-                Expanded(
-                  child: _PlanColumn(
-                    title: l10n.freePlan,
-                    price: '\$0',
-                    features: [l10n.planOncePerDay, '📜', '📖', '✍️'],
-                    isActive: true,
+                  Text(
+                    price,
+                    style: AbbaTypography.h2.copyWith(
+                      fontWeight: FontWeight.w700,
+                    ),
                   ),
-                ),
-                const SizedBox(width: AbbaSpacing.md),
-                Expanded(
-                  child: _PlanColumn(
-                    title: l10n.premiumPlan,
-                    price: l10n.monthlyPrice,
-                    features: [
-                      l10n.planUnlimited,
-                      '📜📖✍️',
-                      '💬 AI',
-                      '🔊 TTS',
-                      '🔤',
-                    ],
-                    isActive: false,
-                    isPremium: true,
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: AbbaSpacing.sm),
-            Center(
-              child: Text(
-                '${l10n.yearlyPrice} (${l10n.yearlySave})',
-                style: AbbaTypography.bodySmall.copyWith(
-                  color: AbbaColors.muted,
-                ),
+                  if (subPrice != null)
+                    Text(
+                      subPrice,
+                      style: AbbaTypography.caption.copyWith(
+                        color: AbbaColors.muted,
+                      ),
+                    ),
+                ],
               ),
             ),
-            const SizedBox(height: AbbaSpacing.md),
-            // Monthly CTA
-            SizedBox(
-              width: double.infinity,
-              height: abbaButtonHeight,
-              child: ElevatedButton(
-                onPressed: () async {
-                  try {
-                    final service = ref.read(subscriptionServiceProvider);
-                    final success = await service.purchaseMonthly();
-                    if (success) ref.invalidate(isPremiumProvider);
-                  } catch (_) {
-                    if (mounted) {
-                      showAbbaSnackBar(context, message: l10n.errorPayment);
-                    }
-                  }
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: AbbaColors.premium,
-                  foregroundColor: AbbaColors.white,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(AbbaRadius.lg),
-                  ),
-                ),
-                child: Text(
-                  '💎 ${l10n.startPremium} — ${l10n.monthlyPrice}',
-                  style: AbbaTypography.body.copyWith(
-                    color: AbbaColors.white,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-              ),
-            ),
-            const SizedBox(height: AbbaSpacing.sm),
-            // Yearly CTA
-            SizedBox(
-              width: double.infinity,
-              height: abbaButtonHeight,
-              child: OutlinedButton(
-                onPressed: () async {
-                  try {
-                    final service = ref.read(subscriptionServiceProvider);
-                    final success = await service.purchaseYearly();
-                    if (success) ref.invalidate(isPremiumProvider);
-                  } catch (_) {
-                    if (mounted) {
-                      showAbbaSnackBar(context, message: l10n.errorPayment);
-                    }
-                  }
-                },
-                style: OutlinedButton.styleFrom(
-                  side: const BorderSide(color: AbbaColors.premium),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(AbbaRadius.lg),
-                  ),
-                ),
-                child: Text(
-                  '${l10n.yearlyPrice} (${l10n.yearlySave})',
-                  style: AbbaTypography.body.copyWith(
-                    color: AbbaColors.premium,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-              ),
+            Icon(
+              Icons.chevron_right,
+              color: isHighlighted ? AbbaColors.sage : AbbaColors.muted,
             ),
           ],
-        ],
+        ),
       ),
     );
   }
@@ -678,6 +737,22 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
             ),
           ),
           const Divider(height: 1),
+          // Afternoon nudge
+          _SettingsTile(
+            icon: Icons.wb_sunny,
+            title: l10n.afternoonNudgeReminder,
+            trailing: Switch(
+              value: settings?.afternoonNudge ?? true,
+              onChanged: (v) {
+                ref
+                    .read(notificationServiceProvider)
+                    .updateSettings(afternoonNudge: v);
+                ref.invalidate(notificationSettingsProvider);
+              },
+              activeTrackColor: AbbaColors.sage,
+            ),
+          ),
+          const Divider(height: 1),
           // Streak reminder
           _SettingsTile(
             icon: Icons.local_fire_department_outlined,
@@ -772,52 +847,3 @@ class _SettingsTile extends StatelessWidget {
   }
 }
 
-class _PlanColumn extends StatelessWidget {
-  final String title;
-  final String price;
-  final List<String> features;
-  final bool isActive;
-  final bool isPremium;
-
-  const _PlanColumn({
-    required this.title,
-    required this.price,
-    required this.features,
-    this.isActive = false,
-    this.isPremium = false,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(AbbaSpacing.md),
-      decoration: BoxDecoration(
-        color: isPremium
-            ? AbbaColors.softGold.withValues(alpha: 0.1)
-            : AbbaColors.cream,
-        borderRadius: BorderRadius.circular(AbbaRadius.md),
-        border: isActive
-            ? Border.all(color: AbbaColors.sage, width: 2)
-            : isPremium
-            ? Border.all(color: AbbaColors.softGold, width: 2)
-            : null,
-      ),
-      child: Column(
-        children: [
-          Text(
-            title,
-            style: AbbaTypography.body.copyWith(fontWeight: FontWeight.w600),
-          ),
-          Text(price, style: AbbaTypography.h2),
-          const SizedBox(height: AbbaSpacing.sm),
-          ...features.map(
-            (f) => Padding(
-              padding: const EdgeInsets.only(bottom: 2),
-              child: Text(f, style: AbbaTypography.caption),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}

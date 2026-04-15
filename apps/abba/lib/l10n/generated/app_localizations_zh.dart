@@ -209,6 +209,14 @@ class AppLocalizationsZh extends AppLocalizations {
   String get days => '天';
 
   @override
+  String calendarRecordCount(Object count) {
+    return '$count条记录';
+  }
+
+  @override
+  String get todayVerse => '今日金句';
+
+  @override
   String get settingsTitle => '设置';
 
   @override
@@ -230,10 +238,10 @@ class AppLocalizationsZh extends AppLocalizations {
   String get premiumPlan => '高级版';
 
   @override
-  String get monthlyPrice => '¥45/月';
+  String get monthlyPrice => '¥25/月';
 
   @override
-  String get yearlyPrice => '¥328/年';
+  String get yearlyPrice => '¥178/年';
 
   @override
   String get yearlySave => '省40%';
@@ -380,6 +388,51 @@ class AppLocalizationsZh extends AppLocalizations {
   String get laterButton => '以后再说';
 
   @override
+  String get premiumPromptTitle => 'Pro功能';
+
+  @override
+  String get premiumPromptBody => '此功能需要Pro版本。\n要查看我们的方案吗？';
+
+  @override
+  String get viewProducts => '查看方案';
+
+  @override
+  String get maybeLater => '下次再说';
+
+  @override
+  String get premiumHeadline => '每天与神更亲近';
+
+  @override
+  String get premiumBenefit1 => '无限祷告 & 灵修';
+
+  @override
+  String get premiumBenefit2 => 'AI定制祷告与指导';
+
+  @override
+  String get premiumBenefit3 => '历史信仰故事';
+
+  @override
+  String get premiumBenefit4 => '祷告朗读 (TTS)';
+
+  @override
+  String get premiumBenefit5 => '原文圣经解读';
+
+  @override
+  String get bestValue => '最划算';
+
+  @override
+  String get perMonth => '月';
+
+  @override
+  String get cancelAnytime => '随时取消';
+
+  @override
+  String get restorePurchase => '恢复购买';
+
+  @override
+  String get yearlyPriceMonthly => '¥15/月';
+
+  @override
   String get morningPrayerReminder => '早祷';
 
   @override
@@ -387,6 +440,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get streakReminder => '连续记录提醒';
+
+  @override
+  String get afternoonNudgeReminder => '下午祷告提醒';
 
   @override
   String get weeklySummaryReminder => '每周总结';

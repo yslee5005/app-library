@@ -209,6 +209,14 @@ class AppLocalizationsJa extends AppLocalizations {
   String get days => '日';
 
   @override
+  String calendarRecordCount(Object count) {
+    return '$count件の記録';
+  }
+
+  @override
+  String get todayVerse => '今日のみことば';
+
+  @override
   String get settingsTitle => '設定';
 
   @override
@@ -230,10 +238,10 @@ class AppLocalizationsJa extends AppLocalizations {
   String get premiumPlan => 'プレミアム';
 
   @override
-  String get monthlyPrice => '¥980/月';
+  String get monthlyPrice => '¥500/月';
 
   @override
-  String get yearlyPrice => '¥6,800/年';
+  String get yearlyPrice => '¥3,600/年';
 
   @override
   String get yearlySave => '40%お得';
@@ -380,6 +388,51 @@ class AppLocalizationsJa extends AppLocalizations {
   String get laterButton => '後で';
 
   @override
+  String get premiumPromptTitle => 'Pro機能です';
+
+  @override
+  String get premiumPromptBody => 'この機能はProでご利用いただけます。\nプランを確認しますか？';
+
+  @override
+  String get viewProducts => 'プランを見る';
+
+  @override
+  String get maybeLater => 'また今度';
+
+  @override
+  String get premiumHeadline => '毎日、神様とより近く';
+
+  @override
+  String get premiumBenefit1 => '無制限の祈り & QT';
+
+  @override
+  String get premiumBenefit2 => 'AI祈りと導き';
+
+  @override
+  String get premiumBenefit3 => '歴史の中の信仰物語';
+
+  @override
+  String get premiumBenefit4 => '祈り読み上げ (TTS)';
+
+  @override
+  String get premiumBenefit5 => '原語聖書解釈';
+
+  @override
+  String get bestValue => 'お得';
+
+  @override
+  String get perMonth => '月';
+
+  @override
+  String get cancelAnytime => 'いつでもキャンセル可能';
+
+  @override
+  String get restorePurchase => '購入を復元';
+
+  @override
+  String get yearlyPriceMonthly => '¥300/月';
+
+  @override
   String get morningPrayerReminder => '朝の祈り';
 
   @override
@@ -387,6 +440,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get streakReminder => '連続記録リマインダー';
+
+  @override
+  String get afternoonNudgeReminder => '午後の祈りリマインダー';
 
   @override
   String get weeklySummaryReminder => '週間まとめ';

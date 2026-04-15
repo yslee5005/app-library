@@ -59,7 +59,7 @@ class DashboardView extends ConsumerWidget {
     bool isPremium,
   ) {
     void showPremiumUpgrade() {
-      showPremiumModal(context).then((purchased) {
+      showPremiumPrompt(context).then((purchased) {
         if (purchased) ref.invalidate(isPremiumProvider);
       });
     }
