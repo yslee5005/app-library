@@ -239,7 +239,7 @@ class _NotificationCard extends StatelessWidget {
               ),
             ],
           ),
-          ?extraWidget,
+          if (extraWidget != null) extraWidget!,
         ],
       ),
     );

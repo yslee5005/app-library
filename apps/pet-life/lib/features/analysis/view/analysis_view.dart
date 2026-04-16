@@ -754,22 +754,6 @@ class _AnalysisViewState extends State<AnalysisView> {
     return 10;
   }
 
-  String _getWalkTip() {
-    final current = _getWeeklyCount('walk');
-    final rec = _getRecommendedWeeklyWalks();
-    final deficit = rec - current;
-    if (deficit <= 0) return '충분히 산책하고 있어요!';
-    if (deficit <= 4) return '하루 ${(deficit / 7).ceil()}번 더 가면 권장량 달성!';
-    return '산책이 부족해요. 매일 산책이 치매 위험 6.47배 낮춰줘요';
-  }
-
-  String _getTeethTip() {
-    final current = _getWeeklyCount('care');
-    if (current >= 7) return '매일 양치 완벽!';
-    if (current >= 3) return '주 ${7 - current}회 더 하면 치주질환 예방에 효과적!';
-    return '3세 이상 80-90%가 치주질환. 양치를 시작해보세요';
-  }
-
   String _formatNumber(int number) {
     if (number >= 1000) {
       return '${(number / 1000).toStringAsFixed(1)}K';

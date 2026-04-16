@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 /// An activity the dog loves, with age-based availability data.
 class FavoriteActivity {
   final String id;

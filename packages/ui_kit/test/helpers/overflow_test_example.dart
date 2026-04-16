@@ -26,8 +26,7 @@ void main() {
   testResponsive(
     'ErrorStateView',
     widget: const ErrorStateView(
-      title: 'Something went wrong',
-      subtitle: 'Please try again',
+      message: 'Something went wrong',
     ),
     sizes: [
       TestScreenSizes.compact,

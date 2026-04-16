@@ -24,13 +24,6 @@ final errorLoggingServiceProvider = Provider<ErrorLoggingService>(
   ),
 );
 
-/// Provider for the [SensitiveDataFilter].
-///
-/// Available immediately without override.
-final sensitiveDataFilterProvider = Provider<SensitiveDataFilter>(
-  (ref) => const SensitiveDataFilter(),
-);
-
 /// Convenience provider that logs with automatic sensitive-data masking.
 ///
 /// Usage:
@@ -41,22 +34,20 @@ final sensitiveDataFilterProvider = Provider<SensitiveDataFilter>(
 final safeLoggerProvider = Provider<SafeLogger>((ref) {
   return SafeLogger(
     service: ref.watch(errorLoggingServiceProvider),
-    filter: ref.watch(sensitiveDataFilterProvider),
   );
 });
 
 /// Logger that automatically masks sensitive data before sending.
 class SafeLogger {
-  const SafeLogger({required this.service, required this.filter});
+  const SafeLogger({required this.service});
 
   final ErrorLoggingService service;
-  final SensitiveDataFilter filter;
 
   Future<void> log(
     String message, {
     ErrorLevel level = ErrorLevel.info,
   }) {
-    return service.log(filter.mask(message), level: level);
+    return service.log(SensitiveDataFilter.mask(message), level: level);
   }
 
   Future<void> captureException(

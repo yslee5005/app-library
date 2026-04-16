@@ -402,7 +402,7 @@ class _SettingsViewState extends State<SettingsView> {
   }
 
   void _showDisclaimer() {
-    showDialog(
+    showDialog<void>(
       context: context,
       builder: (ctx) => AlertDialog(
         backgroundColor: AppConfig.backgroundColor,
@@ -426,7 +426,7 @@ class _SettingsViewState extends State<SettingsView> {
   }
 
   void _showSources() {
-    showDialog(
+    showDialog<void>(
       context: context,
       builder: (ctx) => AlertDialog(
         backgroundColor: AppConfig.backgroundColor,
@@ -460,7 +460,7 @@ class _SettingsViewState extends State<SettingsView> {
   }
 
   void _confirmReset() {
-    showDialog(
+    showDialog<void>(
       context: context,
       builder: (ctx) => AlertDialog(
         backgroundColor: AppConfig.backgroundColor,

@@ -225,7 +225,7 @@ class CareStandards {
 
   int get _earCleaningFrequency {
     // Floppy ear breeds need more frequent cleaning
-    final breedName = breed?.name?.toLowerCase() ?? '';
+    final breedName = breed?.name.toLowerCase() ?? '';
     if (breedName.contains('cocker') ||
         breedName.contains('basset') ||
         breedName.contains('beagle') ||
