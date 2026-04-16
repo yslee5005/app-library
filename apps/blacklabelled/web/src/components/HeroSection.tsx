@@ -44,12 +44,12 @@ export default function HeroSection({ backgroundImage, title, subtitle }: HeroSe
       <div className="absolute inset-0 bg-bg-primary/40" />
 
       {/* Content */}
-      <div className="relative z-10 text-center">
+      <div className="relative z-10 text-center w-full px-6">
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.5 }}
-          className="font-heading text-white text-5xl md:text-7xl lg:text-8xl font-light tracking-[0.15em]"
+          className="font-heading text-white text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-light tracking-[0.08em] sm:tracking-[0.15em]"
         >
           {title ?? "BLACKLABELLED"}
         </motion.h1>

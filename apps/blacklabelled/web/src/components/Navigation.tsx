@@ -143,10 +143,10 @@ export default function Navigation() {
               </div>
             </div>
 
-            {/* Menu content */}
-            <div className="flex-1 flex px-10 md:px-20 py-10">
+            {/* Menu content — mobile: single column / desktop: two columns */}
+            <div className="flex-1 flex flex-col md:flex-row px-6 md:px-20 py-8 md:py-10 overflow-y-auto">
               {/* Left — large links */}
-              <div className="flex flex-col justify-center gap-2 w-1/3">
+              <div className="flex flex-col justify-center gap-3 md:gap-2 md:w-1/3">
                 <motion.div
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
@@ -155,7 +155,7 @@ export default function Navigation() {
                   <Link
                     href="/about"
                     onClick={() => setMobileOpen(false)}
-                    className="text-5xl md:text-7xl font-black text-black hover:text-gray-500 transition-colors"
+                    className="text-4xl md:text-7xl font-black text-black hover:text-gray-500 transition-colors"
                   >
                     About
                   </Link>
@@ -168,15 +168,18 @@ export default function Navigation() {
                   <Link
                     href="/process"
                     onClick={() => setMobileOpen(false)}
-                    className="text-5xl md:text-7xl font-black text-black hover:text-gray-500 transition-colors"
+                    className="text-4xl md:text-7xl font-black text-black hover:text-gray-500 transition-colors"
                   >
                     Process
                   </Link>
                 </motion.div>
               </div>
 
+              {/* Divider — mobile only */}
+              <div className="my-6 border-t border-gray-200 md:hidden" />
+
               {/* Right — links with counts */}
-              <div className="flex-1 flex flex-wrap content-center gap-x-20 gap-y-6 pl-10">
+              <div className="flex-1 flex flex-col md:flex-row md:flex-wrap md:content-center gap-y-4 md:gap-x-20 md:gap-y-6 md:pl-10">
                 {[
                   { href: "/projects", label: "Projects", count: 427 },
                   { href: "/magazines", label: "Magazine" },
@@ -192,11 +195,11 @@ export default function Navigation() {
                     <Link
                       href={item.href}
                       onClick={() => setMobileOpen(false)}
-                      className="text-3xl md:text-5xl font-bold text-black hover:text-gray-500 transition-colors relative"
+                      className="text-2xl md:text-5xl font-bold text-black hover:text-gray-500 transition-colors relative inline-block"
                     >
                       {item.label}
                       {item.count && (
-                        <span className="absolute -top-2 -right-8 bg-red-500 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full">
+                        <span className="absolute -top-1 -right-7 md:-top-2 md:-right-8 bg-red-500 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full">
                           {item.count}
                         </span>
                       )}
