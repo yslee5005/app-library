@@ -545,26 +545,7 @@ class _HomeViewState extends ConsumerState<HomeView>
           _formattedTime,
           style: AbbaTypography.hero.copyWith(fontSize: 36),
         ),
-        const SizedBox(height: AbbaSpacing.md),
-        // Transcript accumulation area
-        if (!_isTextMode)
-          Expanded(
-            child: SingleChildScrollView(
-              reverse: true,
-              padding:
-                  const EdgeInsets.symmetric(horizontal: AbbaSpacing.xl),
-              child: Text(
-                _transcript,
-                style: AbbaTypography.body.copyWith(
-                  color: AbbaColors.warmBrown,
-                  height: 1.6,
-                ),
-                textAlign: TextAlign.center,
-              ),
-            ),
-          )
-        else
-          const Spacer(),
+        const Spacer(),
         // Controls
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: AbbaSpacing.xl),
