@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+
+<html lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-variant": "#ffdbce",
+                    "surface-container-high": "#ffe2d9",
+                    "secondary": "#745c00",
+                    "secondary-fixed": "#ffe087",
+                    "outline": "#a26e5b",
+                    "surface-dim": "#ffd0bf",
+                    "surface-container-highest": "#ffdbce",
+                    "tertiary-container": "#b4fdb4",
+                    "primary-fixed-dim": "#e8786e",
+                    "primary-container": "#f8847b",
+                    "on-surface-variant": "#835342",
+                    "tertiary-dim": "#1a5f29",
+                    "error": "#a8364b",
+                    "background": "#fff8f6",
+                    "on-primary": "#fff7f6",
+                    "inverse-surface": "#1b0904",
+                    "primary": "#9f403a",
+                    "on-error-container": "#6e0523",
+                    "surface-bright": "#fff8f6",
+                    "outline-variant": "#dfa48f",
+                    "on-tertiary-container": "#1f632c",
+                    "surface-tint": "#9f403a",
+                    "on-secondary": "#fff8ee",
+                    "secondary-dim": "#665100",
+                    "inverse-primary": "#f8847b",
+                    "error-dim": "#6b0221",
+                    "on-tertiary-fixed-variant": "#2a6e35",
+                    "on-tertiary-fixed": "#03501b",
+                    "on-tertiary": "#e9ffe4",
+                    "on-primary-container": "#540809",
+                    "surface": "#fff8f6",
+                    "on-background": "#4e2819",
+                    "tertiary-fixed": "#b4fdb4",
+                    "primary-dim": "#90352f",
+                    "surface-container": "#ffe9e2",
+                    "primary-fixed": "#f8847b",
+                    "on-surface": "#4e2819",
+                    "secondary-fixed-dim": "#fad04b",
+                    "on-secondary-container": "#644f00",
+                    "surface-container-lowest": "#ffffff",
+                    "tertiary-fixed-dim": "#a6eea7",
+                    "on-primary-fixed-variant": "#611211",
+                    "error-container": "#f97386",
+                    "on-error": "#fff7f7",
+                    "surface-container-low": "#fff1ec",
+                    "on-secondary-fixed": "#4e3d00",
+                    "secondary-container": "#ffe087",
+                    "on-primary-fixed": "#170000",
+                    "tertiary": "#286c34",
+                    "on-secondary-fixed-variant": "#705900",
+                    "inverse-on-surface": "#b89589"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Plus Jakarta Sans"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .step-path-svg {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            stroke-dasharray: 8 8;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-[#FFF8E1] text-[#3E2723] font-body min-h-screen pb-32">
+<!-- TopAppBar Component -->
+<header class="fixed top-0 left-0 w-full z-50 flex items-center px-4 h-16 bg-[#FFF8E1] dark:bg-stone-950 shadow-sm border-b border-[#8D6E63]/10 dark:border-stone-800">
+<button class="mr-4 p-2 active:scale-95 transition-transform text-[#8D6E63] hover:bg-[#FFD54F]/20 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="arrow_back">arrow_back</span>
+</button>
+<div class="flex flex-col">
+<h1 class="font-['Plus_Jakarta_Sans'] font-bold text-[#3E2723] dark:text-stone-100 text-lg leading-tight">Serve and Return Guide</h1>
+<p class="text-[#8D6E63] text-xs font-medium">아기 뇌 발달의 핵심</p>
+</div>
+</header>
+<main class="pt-20 px-5 space-y-6 max-w-2xl mx-auto">
+<!-- Intro Card -->
+<section class="bg-white rounded-[12px] p-6 shadow-[0_2px_8px_rgba(62,39,35,0.08)] relative overflow-hidden">
+<div class="inline-flex items-center gap-1.5 bg-[#81C784]/10 text-[#286c34] px-3 py-1 rounded-full text-xs font-bold mb-4">
+<span class="material-symbols-outlined text-sm" data-icon="school">school</span>
+                하버드 아동발달센터 연구 기반
+            </div>
+<div class="flex items-start gap-4">
+<div class="flex-1">
+<p class="text-lg font-headline font-bold leading-snug mb-2">
+                        아기가 <span class="text-[#FF8A80]">신호(Serve)</span>를 보내면,<br/>
+                        부모가 <span class="text-[#FF8A80]">응답(Return)</span>하면,<br/>
+                        뇌 연결이 만들어져요!
+                    </p>
+<p class="text-[#8D6E63] text-sm leading-relaxed">
+                        핑퐁 게임처럼 주고받는 상호작용이 아기의 두뇌를 형성하는 가장 강력한 영양분입니다.
+                    </p>
+</div>
+<div class="w-24 h-24 flex-shrink-0 bg-[#FFF1EC] rounded-2xl flex items-center justify-center">
+<img alt="Heart and brain illustration" class="w-16 h-16" data-alt="whimsical 3D illustration of a warm glowing heart and a soft brain character connecting with a golden light thread on a cream background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDGKx5hXc_us3UGdMWkGGHO5LjaiXNAj1CrlEnGP1splrmwGNG02TJ7nH3G5zCASRLpVXG36RHYBqZm2HpPwK3SP3s3w1jt0QcAJvy6AlLJ1PybvqjdzGC8mr3BCMM3kLco-0LoLdYn2klyvXrA-3XIPuj2tqJdlNyw7lpDbCg-MvlxvuXMOZpDm_EcOBrQrf0okCK0b9n-YhczZCXijZ4-SivBtN9odrjgc4ouPr8nGyiJx9DhVFSGC7NtQTQtKGuMemO-swi3tzOy"/>
+</div>
+</div>
+</section>
+<!-- Game Step Map -->
+<section class="relative py-8">
+<h2 class="text-center font-headline font-extrabold text-[#3E2723] mb-12">마스터 여정 🗺️</h2>
+<div class="relative min-h-[600px]">
+<!-- Winding Path (SVG Background) -->
+<svg class="step-path-svg" preserveaspectratio="none" viewbox="0 0 100 600">
+<path d="M 50 0 C 80 50, 80 100, 50 150 C 20 200, 20 250, 50 300 C 80 350, 80 400, 50 450 C 20 500, 20 550, 50 600" fill="none" stroke="#dfa48f" stroke-width="2"></path>
+</svg>
+<div class="space-y-16 relative z-10">
+<!-- Step 1: Completed -->
+<div class="flex items-center justify-center translate-x-[15%]">
+<div class="flex flex-col items-center max-w-[140px] text-center">
+<div class="w-12 h-12 bg-[#81C784] rounded-full flex items-center justify-center text-white shadow-lg border-4 border-white mb-2">
+<span class="material-symbols-outlined" data-icon="check">check</span>
+</div>
+<span class="font-bold text-sm">신호 알아차리기</span>
+<span class="text-[10px] text-[#8D6E63]">아기 표정, 소리 관찰</span>
+</div>
+</div>
+<!-- Step 2: Completed -->
+<div class="flex items-center justify-center -translate-x-[15%]">
+<div class="flex flex-col items-center max-w-[140px] text-center">
+<div class="w-12 h-12 bg-[#81C784] rounded-full flex items-center justify-center text-white shadow-lg border-4 border-white mb-2">
+<span class="material-symbols-outlined" data-icon="check">check</span>
+</div>
+<span class="font-bold text-sm">멈추고 주목하기</span>
+<span class="text-[10px] text-[#8D6E63]">하던 일을 멈춰요</span>
+</div>
+</div>
+<!-- Step 3: Current (Active) -->
+<div class="flex items-center justify-center translate-x-[15%]">
+<div class="flex flex-col items-center max-w-[140px] text-center relative">
+<div class="absolute -inset-2 bg-[#FF8A80]/20 rounded-full animate-pulse"></div>
+<div class="w-14 h-14 bg-[#FF8A80] rounded-full flex items-center justify-center text-white shadow-lg border-4 border-white mb-2 relative z-10">
+<span class="material-symbols-outlined text-3xl" data-icon="reply">reply</span>
+</div>
+<span class="font-extrabold text-[#9f403a] text-sm">응답하기</span>
+<span class="text-[10px] font-semibold text-[#FF8A80]">2초 안에! 눈맞춤 + 말</span>
+</div>
+</div>
+<!-- Step 4: Locked -->
+<div class="flex items-center justify-center -translate-x-[15%] opacity-50">
+<div class="flex flex-col items-center max-w-[140px] text-center">
+<div class="w-12 h-12 bg-[#dfa48f] rounded-full flex items-center justify-center text-white shadow-md border-4 border-white mb-2">
+<span class="material-symbols-outlined" data-icon="lock">lock</span>
+</div>
+<span class="font-bold text-sm">기다리기</span>
+<span class="text-[10px] text-[#8D6E63]">아기의 다음 반응</span>
+</div>
+</div>
+<!-- Step 5: Locked -->
+<div class="flex items-center justify-center opacity-50">
+<div class="flex flex-col items-center max-w-[140px] text-center">
+<div class="w-12 h-12 bg-[#dfa48f] rounded-full flex items-center justify-center text-white shadow-md border-4 border-white mb-2">
+<span class="material-symbols-outlined" data-icon="lock">lock</span>
+</div>
+<span class="font-bold text-sm">반복하기</span>
+<span class="text-[10px] text-[#8D6E63]">왔다 갔다 핑퐁!</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Challenge Card -->
+<section class="bg-[#FFD54F] rounded-[12px] p-6 shadow-[0_4px_12px_rgba(255,213,79,0.3)] border-2 border-white">
+<div class="flex items-center justify-between mb-4">
+<h3 class="font-headline font-extrabold text-[#3E2723] flex items-center gap-2">
+<span class="material-symbols-outlined text-[#3E2723]" data-icon="bolt">bolt</span>
+                    오늘의 챌린지
+                </h3>
+<div class="bg-white/40 px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-sm" data-icon="timer">timer</span>
+                    00:02
+                </div>
+</div>
+<p class="text-lg font-bold mb-6 text-[#3E2723]">"아기의 눈맞춤에 2초 안에 반응하기!"</p>
+<div class="space-y-2">
+<div class="flex justify-between items-center text-xs font-bold text-[#3E2723]/70 uppercase">
+<span>이번 주 성공률</span>
+<span>60% (3/5회)</span>
+</div>
+<div class="h-3 w-full bg-white/30 rounded-full overflow-hidden">
+<div class="h-full bg-[#3E2723] rounded-full" style="width: 60%"></div>
+</div>
+</div>
+</section>
+<!-- Reference Card -->
+<section class="bg-white rounded-[12px] p-5 shadow-[0_2px_8px_rgba(62,39,35,0.08)] border-l-4 border-[#64B5F6] flex items-center justify-between group cursor-pointer hover:bg-slate-50 transition-colors">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-[#64B5F6]/10 rounded-xl flex items-center justify-center">
+<span class="material-symbols-outlined text-[#64B5F6]" data-icon="menu_book">menu_book</span>
+</div>
+<div>
+<h4 class="font-bold text-sm">더 알아보기</h4>
+<p class="text-[#8D6E63] text-xs">무반응이 아기에게 주는 영향: Still Face 실험</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-[#8D6E63] group-hover:translate-x-1 transition-transform" data-icon="chevron_right">chevron_right</span>
+</section>
+</main>
+<!-- BottomNavBar Component -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-safe h-20 bg-white dark:bg-stone-900 shadow-[0_-2px_10px_rgba(62,39,35,0.05)] border-t border-[#8D6E63]/10 dark:border-stone-800 rounded-t-2xl">
+<button class="flex flex-col items-center justify-center text-[#8D6E63] dark:text-stone-400 hover:text-[#FF8A80] transition-colors active:scale-90 transition-transform">
+<span class="material-symbols-outlined" data-icon="mail">mail</span>
+<span class="font-['Inter'] text-[12px] font-medium">Letters</span>
+</button>
+<button class="flex flex-col items-center justify-center text-[#FF8A80] dark:text-[#FF8A80] bg-[#FFF8E1] dark:bg-stone-800 rounded-xl px-3 py-1 active:scale-90 transition-transform">
+<span class="material-symbols-outlined" data-icon="map">map</span>
+<span class="font-['Inter'] text-[12px] font-medium">Guide</span>
+</button>
+<button class="flex flex-col items-center justify-center text-[#8D6E63] dark:text-stone-400 hover:text-[#FF8A80] transition-colors active:scale-90 transition-transform">
+<span class="material-symbols-outlined" data-icon="child_care">child_care</span>
+<span class="font-['Inter'] text-[12px] font-medium">Growth</span>
+</button>
+<button class="flex flex-col items-center justify-center text-[#8D6E63] dark:text-stone-400 hover:text-[#FF8A80] transition-colors active:scale-90 transition-transform">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-['Inter'] text-[12px] font-medium">Profile</span>
+</button>
+</nav>
+</body></html>

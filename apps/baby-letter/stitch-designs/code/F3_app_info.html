@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+
+<html lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "outline": "#a26e5b",
+                    "secondary-fixed": "#ffe087",
+                    "on-tertiary-fixed-variant": "#2a6e35",
+                    "on-surface-variant": "#835342",
+                    "surface-container-highest": "#ffdbce",
+                    "primary-dim": "#90352f",
+                    "error-dim": "#6b0221",
+                    "on-primary": "#fff7f6",
+                    "tertiary-dim": "#1a5f29",
+                    "on-primary-fixed": "#170000",
+                    "surface-variant": "#ffdbce",
+                    "inverse-on-surface": "#b89589",
+                    "on-tertiary-fixed": "#03501b",
+                    "on-primary-fixed-variant": "#611211",
+                    "inverse-primary": "#f8847b",
+                    "primary-fixed": "#f8847b",
+                    "on-secondary": "#fff8ee",
+                    "primary": "#9f403a",
+                    "on-surface": "#4e2819",
+                    "error-container": "#f97386",
+                    "background": "#fff8f6",
+                    "primary-fixed-dim": "#e8786e",
+                    "secondary-container": "#ffe087",
+                    "on-secondary-fixed-variant": "#705900",
+                    "inverse-surface": "#1b0904",
+                    "secondary": "#745c00",
+                    "surface-dim": "#ffd0bf",
+                    "surface-container-high": "#ffe2d9",
+                    "outline-variant": "#dfa48f",
+                    "on-tertiary-container": "#1f632c",
+                    "error": "#a8364b",
+                    "surface-container-low": "#fff1ec",
+                    "tertiary-fixed-dim": "#a6eea7",
+                    "surface": "#fff8f6",
+                    "on-primary-container": "#540809",
+                    "primary-container": "#f8847b",
+                    "surface-tint": "#9f403a",
+                    "tertiary-fixed": "#b4fdb4",
+                    "surface-container-lowest": "#ffffff",
+                    "on-secondary-container": "#644f00",
+                    "surface-container": "#ffe9e2",
+                    "on-tertiary": "#e9ffe4",
+                    "on-error": "#fff7f7",
+                    "secondary-dim": "#665100",
+                    "secondary-fixed-dim": "#fad04b",
+                    "tertiary-container": "#b4fdb4",
+                    "on-background": "#4e2819",
+                    "surface-bright": "#fff8f6",
+                    "on-error-container": "#6e0523",
+                    "on-secondary-fixed": "#4e3d00",
+                    "tertiary": "#286c34"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Plus Jakarta Sans"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #FFF8E1;
+            font-family: 'Inter', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .font-plus-jakarta { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-[#FFF8E1] text-[#3E2723] min-h-screen flex flex-col">
+<header class="bg-[#FFF8E1] flex items-center px-5 h-16 w-full fixed top-0 z-50 border-b border-[#8D6E63]/10 shadow-sm">
+<button class="transition-transform active:scale-95 p-2 -ml-2 rounded-full hover:bg-[#FF8A80]/10 text-[#FF8A80]">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<h1 class="ml-2 font-['Plus_Jakarta_Sans'] font-bold text-[#3E2723] text-lg">App Info</h1>
+</header>
+<main class="pt-24 pb-32 px-5 flex-grow max-w-lg mx-auto w-full">
+<section class="flex flex-col items-center mb-10">
+<div class="w-32 h-32 rounded-[28px] bg-gradient-to-br from-[#FF8A80] to-[#f8847b] flex items-center justify-center shadow-lg mb-6 transform transition-transform hover:scale-105">
+<span class="material-symbols-outlined text-white text-6xl" style="font-variation-settings: 'FILL' 1;">mail</span>
+</div>
+<h2 class="font-['Plus_Jakarta_Sans'] font-extrabold text-2xl text-[#3E2723] tracking-tight mb-1">아기의 편지</h2>
+<span class="text-[#8D6E63] font-medium text-sm mb-4">v1.0.0 (Build 1)</span>
+<p class="text-center text-[#8D6E63] leading-relaxed max-w-[240px]">
+                아기가 보내는 편지로 성장을 함께하는 육아 앱
+            </p>
+</section>
+<section class="space-y-3">
+<a class="flex items-center justify-between p-4 bg-white rounded-xl shadow-[0_2px_8px_rgba(62,39,35,0.06)] border border-[#8D6E63]/5 hover:bg-[#FF8A80]/5 transition-colors group" href="#">
+<span class="font-medium text-[#3E2723]">이용약관</span>
+<span class="material-symbols-outlined text-[#8D6E63] group-hover:text-[#FF8A80] transition-colors">chevron_right</span>
+</a>
+<a class="flex items-center justify-between p-4 bg-white rounded-xl shadow-[0_2px_8px_rgba(62,39,35,0.06)] border border-[#8D6E63]/5 hover:bg-[#FF8A80]/5 transition-colors group" href="#">
+<span class="font-medium text-[#3E2723]">개인정보 처리방침</span>
+<span class="material-symbols-outlined text-[#8D6E63] group-hover:text-[#FF8A80] transition-colors">chevron_right</span>
+</a>
+<a class="flex items-center justify-between p-4 bg-white rounded-xl shadow-[0_2px_8px_rgba(62,39,35,0.06)] border border-[#8D6E63]/5 hover:bg-[#FF8A80]/5 transition-colors group" href="#">
+<span class="font-medium text-[#3E2723]">오픈소스 라이선스</span>
+<span class="material-symbols-outlined text-[#8D6E63] group-hover:text-[#FF8A80] transition-colors">chevron_right</span>
+</a>
+<a class="flex items-center justify-between p-4 bg-white rounded-xl shadow-[0_2px_8_rgba(62,39,35,0.06)] border border-[#8D6E63]/5 hover:bg-[#FF8A80]/5 transition-colors group" href="#">
+<span class="font-medium text-[#3E2723]">문의하기</span>
+<span class="material-symbols-outlined text-[#8D6E63] group-hover:text-[#FF8A80] transition-colors">chevron_right</span>
+</a>
+<a class="flex items-center justify-between p-4 bg-[#FF8A80]/10 rounded-xl border border-[#FF8A80]/20 hover:bg-[#FF8A80]/20 transition-all active:scale-[0.98] mt-6 group" href="#">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-[#FF8A80]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-bold text-[#9f403a]">별점 남기기</span>
+</div>
+<span class="material-symbols-outlined text-[#FF8A80]">chevron_right</span>
+</a>
+</section>
+<section class="mt-16 flex flex-col items-center">
+<p class="text-sm font-['Plus_Jakarta_Sans'] font-medium text-[#8D6E63] mb-6 flex items-center gap-1">
+                Made with <span class="text-[#FF8A80] material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">favorite</span> by YS Tech
+            </p>
+<div class="flex gap-6">
+<a class="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-sm border border-[#8D6E63]/10 text-[#8D6E63] hover:text-[#FF8A80] transition-colors" href="#">
+<span class="material-symbols-outlined">public</span>
+</a>
+<a class="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-sm border border-[#8D6E63]/10 text-[#8D6E63] hover:text-[#FF8A80] transition-colors" href="#">
+<span class="material-symbols-outlined">alternate_email</span>
+</a>
+<a class="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-sm border border-[#8D6E63]/10 text-[#8D6E63] hover:text-[#FF8A80] transition-colors" href="#">
+<span class="material-symbols-outlined">share</span>
+</a>
+</div>
+</section>
+</main>
+<nav class="fixed bottom-0 w-full z-50 flex justify-around items-center px-6 py-3 pb-safe bg-white shadow-[0_-2px_8px_rgba(62,39,35,0.08)] rounded-t-3xl border-t border-[#8D6E63]/5">
+<a class="flex flex-col items-center justify-center text-[#8D6E63] transition-all active:scale-90 tap-highlight-transparent hover:bg-stone-100 p-2 rounded-xl" href="#">
+<span class="material-symbols-outlined">mail</span>
+<span class="font-['Plus_Jakarta_Sans'] font-medium text-[12px]">Letters</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#8D6E63] transition-all active:scale-90 tap-highlight-transparent hover:bg-stone-100 p-2 rounded-xl" href="#">
+<span class="material-symbols-outlined">child_care</span>
+<span class="font-['Plus_Jakarta_Sans'] font-medium text-[12px]">Growth</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-[#FF8A80]/10 text-[#FF8A80] rounded-2xl px-4 py-1 transition-all active:scale-90 tap-highlight-transparent" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">settings</span>
+<span class="font-['Plus_Jakarta_Sans'] font-medium text-[12px]">Settings</span>
+</a>
+</nav>
+</body></html>

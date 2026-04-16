@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+
+<html lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>알림 설정 - BabyLetter</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-low": "#fff1ec",
+                        "on-secondary-fixed": "#4e3d00",
+                        "secondary-container": "#ffe087",
+                        "on-primary-fixed": "#170000",
+                        "tertiary": "#286c34",
+                        "inverse-on-surface": "#b89589",
+                        "on-secondary-fixed-variant": "#705900",
+                        "tertiary-fixed-dim": "#a6eea7",
+                        "on-primary-fixed-variant": "#611211",
+                        "error-container": "#f97386",
+                        "on-error": "#fff7f7",
+                        "surface-container": "#ffe9e2",
+                        "primary-fixed": "#f8847b",
+                        "on-surface": "#4e2819",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-fixed-dim": "#fad04b",
+                        "on-secondary-container": "#644f00",
+                        "on-tertiary": "#e9ffe4",
+                        "on-primary-container": "#540809",
+                        "tertiary-fixed": "#b4fdb4",
+                        "primary-dim": "#90352f",
+                        "surface": "#fff8f6",
+                        "on-background": "#4e2819",
+                        "error-dim": "#6b0221",
+                        "secondary-dim": "#665100",
+                        "inverse-primary": "#f8847b",
+                        "on-tertiary-fixed-variant": "#2a6e35",
+                        "on-tertiary-fixed": "#03501b",
+                        "primary": "#9f403a",
+                        "on-error-container": "#6e0523",
+                        "surface-bright": "#fff8f6",
+                        "inverse-surface": "#1b0904",
+                        "surface-tint": "#9f403a",
+                        "outline-variant": "#dfa48f",
+                        "on-tertiary-container": "#1f632c",
+                        "on-secondary": "#fff8ee",
+                        "tertiary-dim": "#1a5f29",
+                        "error": "#a8364b",
+                        "background": "#fff8f6",
+                        "on-primary": "#fff7f6",
+                        "surface-variant": "#ffdbce",
+                        "surface-container-high": "#ffe2d9",
+                        "secondary": "#745c00",
+                        "surface-dim": "#ffd0bf",
+                        "surface-container-highest": "#ffdbce",
+                        "tertiary-container": "#b4fdb4",
+                        "secondary-fixed": "#ffe087",
+                        "outline": "#a26e5b",
+                        "primary-fixed-dim": "#e8786e",
+                        "on-surface-variant": "#835342",
+                        "primary-container": "#f8847b"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Plus Jakarta Sans"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #FFF8E1; /* Design System Background Cream */
+            font-family: 'Inter', sans-serif;
+            color: #3E2723;
+        }
+        .header-font { font-family: 'Plus Jakarta Sans', sans-serif; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="min-h-screen pb-32">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-[#FFF8E1] dark:bg-stone-950 border-b border-[#3E2723]/5 shadow-sm flex items-center justify-between px-5 h-16 w-full">
+<div class="flex items-center gap-4">
+<button class="hover:bg-[#FF8A80]/10 transition-colors p-2 rounded-full active:scale-95 duration-150">
+<span class="material-symbols-outlined text-[#FF8A80] dark:text-[#FF8A80]" data-icon="arrow_back">arrow_back</span>
+</button>
+<h1 class="font-['Plus_Jakarta_Sans'] font-bold text-lg text-[#3E2723] dark:text-stone-100">알림 설정</h1>
+</div>
+<div class="w-10"></div> <!-- Spacer for center-ish alignment -->
+</header>
+<main class="pt-24 px-5 max-w-2xl mx-auto space-y-6">
+<!-- Master Toggle Row -->
+<section class="bg-white rounded-xl p-5 flex items-center justify-between shadow-[0_2px_8px_rgba(62,39,35,0.08)]">
+<div class="flex flex-col">
+<span class="font-bold text-[#3E2723] text-lg">전체 알림</span>
+<span class="text-[#8D6E63] text-sm">모든 소식을 놓치지 않게 받아보세요</span>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-12 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#FF8A80]"></div>
+</label>
+</section>
+<!-- Category Card -->
+<section class="bg-white rounded-xl overflow-hidden shadow-[0_2px_8px_rgba(62,39,35,0.08)]">
+<div class="px-5 py-4 border-b border-[#3E2723]/5">
+<h2 class="font-bold text-[#3E2723]">카테고리별 설정</h2>
+</div>
+<div class="divide-y divide-[#3E2723]/5">
+<!-- Row: 아기 편지 -->
+<div class="flex items-center justify-between px-5 py-4 hover:bg-[#FFF8E1]/20 transition-colors">
+<div class="flex items-center gap-3">
+<span class="text-xl">💌</span>
+<span class="font-medium text-[#3E2723]">아기 편지</span>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-gray-200 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#FF8A80]"></div>
+</label>
+</div>
+<!-- Row: 오늘의 미션 -->
+<div class="flex items-center justify-between px-5 py-4">
+<div class="flex items-center gap-3">
+<span class="text-xl">🎯</span>
+<span class="font-medium text-[#3E2723]">오늘의 미션</span>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-gray-200 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#FF8A80]"></div>
+</label>
+</div>
+<!-- Row: 주간 리포트 -->
+<div class="flex items-center justify-between px-5 py-4">
+<div class="flex items-center gap-3">
+<span class="text-xl">📊</span>
+<span class="font-medium text-[#3E2723]">주간 리포트</span>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-gray-200 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#FF8A80]"></div>
+</label>
+</div>
+<!-- Row: 발달 팁 -->
+<div class="flex items-center justify-between px-5 py-4">
+<div class="flex items-center gap-3">
+<span class="text-xl">💡</span>
+<span class="font-medium text-[#3E2723]">발달 팁</span>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-gray-200 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#FF8A80]"></div>
+</label>
+</div>
+<!-- Row: 배려 넛지 -->
+<div class="flex items-center justify-between px-5 py-4">
+<div class="flex items-center gap-3">
+<span class="text-xl">💛</span>
+<span class="font-medium text-[#3E2723]">배려 넛지</span>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-gray-200 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#FF8A80]"></div>
+</label>
+</div>
+<!-- Row: 뱃지/레벨업 -->
+<div class="flex items-center justify-between px-5 py-4">
+<div class="flex items-center gap-3">
+<span class="text-xl">🏆</span>
+<span class="font-medium text-[#3E2723]">뱃지/레벨업</span>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-gray-200 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#FF8A80]"></div>
+</label>
+</div>
+<!-- Row: 커뮤니티 -->
+<div class="flex items-center justify-between px-5 py-4">
+<div class="flex items-center gap-3">
+<span class="text-xl">🧑‍🤝‍🧑</span>
+<span class="font-medium text-[#3E2723]">커뮤니티</span>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-gray-200 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#FF8A80]"></div>
+</label>
+</div>
+</div>
+</section>
+<!-- Quiet Hours Section -->
+<section class="space-y-3">
+<h3 class="px-1 font-bold text-[#3E2723]">방해금지 시간</h3>
+<div class="bg-white rounded-xl p-5 shadow-[0_2px_8px_rgba(62,39,35,0.08)] flex items-center justify-between">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-[#8D6E63]" data-icon="bedtime">bedtime</span>
+<span class="text-[#3E2723] font-medium">시간 설정</span>
+</div>
+<div class="flex items-center gap-2 bg-[#FFF8E1] px-4 py-2 rounded-lg text-[#FF8A80] font-bold">
+<span>22:00</span>
+<span class="text-[#8D6E63] font-normal text-xs">~</span>
+<span>07:00</span>
+</div>
+</div>
+</section>
+<!-- Sound Settings -->
+<section class="space-y-3">
+<h3 class="px-1 font-bold text-[#3E2723]">알림 소리</h3>
+<button class="w-full bg-white rounded-xl p-5 shadow-[0_2px_8px_rgba(62,39,35,0.08)] flex items-center justify-between active:scale-[0.98] transition-transform">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-[#8D6E63]" data-icon="volume_up">volume_up</span>
+<span class="text-[#3E2723] font-medium">기본 알림음</span>
+</div>
+<div class="flex items-center gap-1 text-[#8D6E63]">
+<span class="text-sm">따뜻한 방울소리</span>
+<span class="material-symbols-outlined text-lg" data-icon="chevron_right">chevron_right</span>
+</div>
+</button>
+</section>
+<!-- Preview Button -->
+<div class="pt-4 flex justify-center">
+<button class="bg-[#FF8A80]/10 text-[#FF8A80] px-8 py-3 rounded-xl font-bold text-sm flex items-center gap-2 border border-[#FF8A80]/20 active:scale-95 transition-all">
+<span class="material-symbols-outlined text-lg" data-icon="notifications_active">notifications_active</span>
+                샘플 알림 보내기
+            </button>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full z-50 rounded-t-xl bg-white dark:bg-stone-900 border-t border-[#3E2723]/10 shadow-[0_-2px_8px_rgba(62,39,35,0.08)] flex justify-around items-center h-20 pb-safe px-4">
+<div class="flex flex-col items-center justify-center text-[#8D6E63] dark:text-stone-400 hover:text-[#FF8A80] active:scale-90 transition-transform">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-['Inter'] text-[11px] font-medium">홈</span>
+</div>
+<div class="flex flex-col items-center justify-center text-[#8D6E63] dark:text-stone-400 hover:text-[#FF8A80] active:scale-90 transition-transform">
+<span class="material-symbols-outlined" data-icon="mail">mail</span>
+<span class="font-['Inter'] text-[11px] font-medium">편지</span>
+</div>
+<div class="flex flex-col items-center justify-center text-[#8D6E63] dark:text-stone-400 hover:text-[#FF8A80] active:scale-90 transition-transform">
+<span class="material-symbols-outlined" data-icon="monitoring">monitoring</span>
+<span class="font-['Inter'] text-[11px] font-medium">성장</span>
+</div>
+<div class="flex flex-col items-center justify-center text-[#FF8A80] bg-[#FFF8E1] dark:bg-stone-800 rounded-xl px-3 py-1 active:scale-90 transition-transform">
+<span class="material-symbols-outlined" data-icon="settings" data-weight="fill" style="font-variation-settings: 'FILL' 1;">settings</span>
+<span class="font-['Inter'] text-[11px] font-medium">설정</span>
+</div>
+</nav>
+</body></html>

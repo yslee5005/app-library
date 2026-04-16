@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+
+<html lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-surface-variant": "#835342",
+                    "on-primary-container": "#540809",
+                    "on-tertiary-fixed-variant": "#2a6e35",
+                    "on-secondary-fixed-variant": "#705900",
+                    "surface-container-lowest": "#ffffff",
+                    "tertiary-container": "#b4fdb4",
+                    "outline": "#a26e5b",
+                    "primary": "#9f403a",
+                    "surface-container-highest": "#ffdbce",
+                    "on-secondary-fixed": "#4e3d00",
+                    "primary-dim": "#90352f",
+                    "tertiary": "#286c34",
+                    "on-surface": "#4e2819",
+                    "inverse-surface": "#1b0904",
+                    "on-primary": "#fff7f6",
+                    "outline-variant": "#dfa48f",
+                    "surface-container-low": "#fff1ec",
+                    "error": "#a8364b",
+                    "error-container": "#f97386",
+                    "on-primary-fixed": "#170000",
+                    "secondary": "#745c00",
+                    "tertiary-fixed-dim": "#a6eea7",
+                    "primary-fixed-dim": "#e8786e",
+                    "on-error": "#fff7f7",
+                    "secondary-fixed": "#ffe087",
+                    "on-secondary": "#fff8ee",
+                    "inverse-on-surface": "#b89589",
+                    "surface-tint": "#9f403a",
+                    "tertiary-dim": "#1a5f29",
+                    "on-error-container": "#6e0523",
+                    "primary-fixed": "#f8847b",
+                    "surface-variant": "#ffdbce",
+                    "on-primary-fixed-variant": "#611211",
+                    "on-secondary-container": "#644f00",
+                    "on-background": "#4e2819",
+                    "inverse-primary": "#f8847b",
+                    "surface-container": "#ffe9e2",
+                    "on-tertiary-container": "#1f632c",
+                    "background": "#fff8f6",
+                    "surface-dim": "#ffd0bf",
+                    "on-tertiary": "#e9ffe4",
+                    "secondary-container": "#ffe087",
+                    "primary-container": "#f8847b",
+                    "surface-container-high": "#ffe2d9",
+                    "surface-bright": "#fff8f6",
+                    "tertiary-fixed": "#b4fdb4",
+                    "on-tertiary-fixed": "#03501b",
+                    "error-dim": "#6b0221",
+                    "surface": "#fff8f6",
+                    "secondary-fixed-dim": "#fad04b",
+                    "secondary-dim": "#665100"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Plus Jakarta Sans"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; background-color: #FFF8E1; color: #3E2723; }
+        .font-headline { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .progress-ring { transform: rotate(-90deg); }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="min-h-screen pb-24">
+<!-- TopAppBar -->
+<header class="flex items-center w-full px-5 h-16 bg-[#FFF8E1] dark:bg-stone-950 fixed top-0 z-50">
+<button class="transition-transform active:scale-95 hover:bg-[#FFD54F]/20 dark:hover:bg-stone-800 p-2 rounded-full">
+<span class="material-symbols-outlined text-[#FF8A80] dark:text-[#FF8A80]" data-icon="arrow_back">arrow_back</span>
+</button>
+<h1 class="ml-2 font-['Plus_Jakarta_Sans'] font-bold text-[#3E2723] dark:text-stone-100 text-lg">나의 성장 여정</h1>
+</header>
+<main class="mt-16 px-5 space-y-6">
+<!-- Character Evolution Display (Hero Area) -->
+<section class="relative flex flex-col items-center py-8">
+<!-- Background Pedestal -->
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-gradient-to-b from-[#FFF8E1] to-[#FF8A80]/10 rounded-full blur-3xl -z-10"></div>
+<div class="relative w-48 h-48 flex items-center justify-center">
+<!-- Progress Ring -->
+<svg class="progress-ring w-full h-full">
+<circle class="text-[#3E2723]/5" cx="96" cy="96" fill="transparent" r="88" stroke="currentColor" stroke-width="8"></circle>
+<circle class="text-[#FF8A80]" cx="96" cy="96" fill="transparent" r="88" stroke="currentColor" stroke-dasharray="552.92" stroke-dashoffset="193.52" stroke-linecap="round" stroke-width="8"></circle>
+</svg>
+<!-- Character Placeholder -->
+<div class="absolute inset-0 flex items-center justify-center">
+<div class="w-32 h-32 bg-[#FFFFFF] rounded-full shadow-lg flex items-center justify-center overflow-hidden border-4 border-[#FFF8E1]">
+<img alt="Current Level Character" class="w-20 h-20" data-alt="a cute stylized illustration of a pink tulip bud starting to bloom with soft pastel colors and a friendly face" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBKjlZp4aOypu8plkzwOIyhkUCxFziLJSQovX8k4kYJW_4Jr-oj3LA917Bm184TotXUUxNyO3vIRsY_w0VgyklEWN0ybE5aRkmqdx45XaUGrm1YMNKomMhbkN1mE9oqd6BttM8BBo3W_JxRcVWSJlmz5sjuv6-wzOYW2RLLnnmkU7dqcMyB6fklObAzB4P1vn_B2SWfH5VJdwo2G8OZHdZ_CflW4kDIFWKKiWAQblAd8s_LQ5RSbBsOhqqbPyU_pmS4XQHrXzehoZzQ"/>
+</div>
+</div>
+</div>
+<div class="mt-6 text-center">
+<div class="inline-flex items-center px-3 py-1 bg-[#FFD54F] text-[#3E2723] text-xs font-bold rounded-full mb-2">
+                    다음 레벨까지 750 XP
+                </div>
+<h2 class="font-headline text-2xl font-extrabold text-[#3E2723]">Level 3 · 꽃봉오리</h2>
+<p class="text-[#8D6E63] font-medium mt-1">1,250 / 2,000 XP</p>
+</div>
+</section>
+<!-- Evolution Path -->
+<section>
+<div class="overflow-x-auto no-scrollbar py-4">
+<div class="flex items-center min-w-max px-4">
+<!-- Lv 1 -->
+<div class="flex flex-col items-center space-y-2">
+<div class="w-10 h-10 rounded-full bg-[#81C784] flex items-center justify-center text-white shadow-sm">
+<span class="material-symbols-outlined text-sm" data-icon="check" style="font-variation-settings: 'FILL' 0, 'wght' 700;">check</span>
+</div>
+<span class="text-[11px] font-bold text-[#8D6E63]">🌱 씨앗</span>
+</div>
+<div class="w-8 h-[2px] bg-[#81C784] -mt-6"></div>
+<!-- Lv 2 -->
+<div class="flex flex-col items-center space-y-2">
+<div class="w-10 h-10 rounded-full bg-[#81C784] flex items-center justify-center text-white shadow-sm">
+<span class="material-symbols-outlined text-sm" data-icon="check" style="font-variation-settings: 'FILL' 0, 'wght' 700;">check</span>
+</div>
+<span class="text-[11px] font-bold text-[#8D6E63]">🌿 새싹</span>
+</div>
+<div class="w-8 h-[2px] bg-[#FF8A80] -mt-6"></div>
+<!-- Lv 3 (Current) -->
+<div class="flex flex-col items-center space-y-2 relative">
+<div class="absolute -top-1 -right-1 w-3 h-3 bg-[#FF8A80] rounded-full animate-ping opacity-75"></div>
+<div class="w-12 h-12 rounded-full border-4 border-[#FF8A80] bg-white flex items-center justify-center text-[#FF8A80] shadow-md z-10">
+<span class="material-symbols-outlined text-2xl" data-icon="auto_awesome" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+</div>
+<span class="text-[11px] font-extrabold text-[#FF8A80]">🌷 꽃봉오리</span>
+</div>
+<div class="w-8 h-[2px] bg-[#3E2723]/10 -mt-6"></div>
+<!-- Lv 4 -->
+<div class="flex flex-col items-center space-y-2">
+<div class="w-10 h-10 rounded-full bg-white border-2 border-dashed border-[#3E2723]/20 flex items-center justify-center text-[#3E2723]/20">
+<span class="material-symbols-outlined text-lg" data-icon="lock" style="font-variation-settings: 'FILL' 1;">lock</span>
+</div>
+<span class="text-[11px] font-medium text-[#8D6E63]/50">🌸 꽃</span>
+</div>
+<div class="w-8 h-[2px] bg-[#3E2723]/10 -mt-6"></div>
+<!-- Lv 5 -->
+<div class="flex flex-col items-center space-y-2">
+<div class="w-10 h-10 rounded-full bg-white border-2 border-dashed border-[#3E2723]/20 flex items-center justify-center text-[#3E2723]/20">
+<span class="material-symbols-outlined text-lg" data-icon="lock" style="font-variation-settings: 'FILL' 1;">lock</span>
+</div>
+<span class="text-[11px] font-medium text-[#8D6E63]/50">🍎 열매</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Today's XP Breakdown -->
+<section class="bg-white rounded-[12px] p-5 shadow-[0_2px_8px_rgba(62,39,35,0.08)]">
+<h3 class="font-headline font-bold text-[#3E2723] mb-4">오늘 획득한 XP</h3>
+<ul class="space-y-4">
+<li class="flex justify-between items-center">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-[#81C784]" data-icon="edit_note">edit_note</span>
+<span class="text-sm font-medium text-[#3E2723]">📝 기록 완료</span>
+</div>
+<span class="text-[#FF8A80] font-bold text-sm">+10 XP</span>
+</li>
+<li class="flex justify-between items-center">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-[#64B5F6]" data-icon="mail">mail</span>
+<span class="text-sm font-medium text-[#3E2723]">💌 편지 읽기</span>
+</div>
+<span class="text-[#FF8A80] font-bold text-sm">+15 XP</span>
+</li>
+<li class="flex justify-between items-center">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-[#FFD54F]" data-icon="psychology">psychology</span>
+<span class="text-sm font-medium text-[#3E2723]">🧠 Serve &amp; Return 실천</span>
+</div>
+<span class="text-[#FF8A80] font-bold text-sm">+20 XP</span>
+</li>
+<li class="flex justify-between items-center">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-[#81C784]" data-icon="diversity_1">diversity_1</span>
+<span class="text-sm font-medium text-[#3E2723]">🫂 가족 미션 완료</span>
+</div>
+<span class="text-[#FF8A80] font-bold text-sm">+30 XP</span>
+</li>
+<li class="flex justify-between items-center">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-[#64B5F6]" data-icon="bar_chart">bar_chart</span>
+<span class="text-sm font-medium text-[#3E2723]">📊 성장 기록</span>
+</div>
+<span class="text-[#FF8A80] font-bold text-sm">+10 XP</span>
+</li>
+</ul>
+<div class="mt-6 pt-4 border-t border-[#3E2723]/5 flex justify-center">
+<div class="bg-[#FF8A80] text-white px-4 py-1.5 rounded-full font-bold text-sm shadow-sm">
+                    오늘 +85 XP
+                </div>
+</div>
+</section>
+<!-- Streak Section -->
+<section class="grid grid-cols-2 gap-4">
+<div class="bg-white rounded-[12px] p-5 shadow-[0_2px_8px_rgba(62,39,35,0.08)]">
+<div class="flex items-center gap-1 mb-2">
+<span class="material-symbols-outlined text-[#EF5350] text-lg" data-icon="local_fire_department" style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
+<h3 class="font-headline font-bold text-[#3E2723] text-sm">연속 기록</h3>
+</div>
+<div class="flex items-baseline gap-1">
+<span class="text-3xl font-extrabold text-[#3E2723]">12</span>
+<span class="text-sm font-bold text-[#3E2723]">일</span>
+</div>
+<p class="text-[10px] text-[#8D6E63] mt-1">역대 최장 기록: 15일</p>
+<div class="flex justify-between mt-3">
+<div class="w-3 h-3 rounded-full bg-[#FF8A80]"></div>
+<div class="w-3 h-3 rounded-full bg-[#FF8A80]"></div>
+<div class="w-3 h-3 rounded-full bg-[#FF8A80]"></div>
+<div class="w-3 h-3 rounded-full bg-[#FF8A80]"></div>
+<div class="w-3 h-3 rounded-full bg-[#FF8A80]"></div>
+<div class="w-3 h-3 rounded-full bg-[#FF8A80]"></div>
+<div class="w-3 h-3 rounded-full bg-[#FF8A80]"></div>
+</div>
+</div>
+<div class="bg-white rounded-[12px] p-5 shadow-[0_2px_8px_rgba(62,39,35,0.08)] flex flex-col justify-between">
+<div>
+<h3 class="font-headline font-bold text-[#3E2723] text-sm">내일의 예고</h3>
+<p class="text-[11px] leading-tight text-[#8D6E63] mt-2">내일도 기록하면 보너스 <span class="text-[#FF8A80] font-bold">+50 XP</span>!</p>
+</div>
+<div class="bg-[#FFF8E1] rounded-lg p-2 mt-2">
+<span class="material-symbols-outlined text-[#FFD54F] block text-center" data-icon="stars" style="font-variation-settings: 'FILL' 1;">stars</span>
+</div>
+</div>
+</section>
+<!-- Weekly XP Chart -->
+<section class="bg-white rounded-[12px] p-5 shadow-[0_2px_8px_rgba(62,39,35,0.08)] mb-4">
+<div class="flex justify-between items-end mb-6">
+<h3 class="font-headline font-bold text-[#3E2723]">주간 XP 변화</h3>
+<span class="text-[11px] text-[#8D6E63]">평균 70 XP</span>
+</div>
+<div class="relative h-32 flex items-end justify-between px-2">
+<!-- Grid Line -->
+<div class="absolute top-1/2 w-full h-[1px] border-t border-dashed border-[#3E2723]/10 z-0"></div>
+<!-- Bars -->
+<div class="flex flex-col items-center gap-2 z-10">
+<div class="w-4 bg-[#FF8A80] rounded-t-sm" style="height: 40px;"></div>
+<span class="text-[10px] font-medium text-[#8D6E63]">월</span>
+</div>
+<div class="flex flex-col items-center gap-2 z-10">
+<div class="w-4 bg-[#FF8A80] rounded-t-sm" style="height: 60px;"></div>
+<span class="text-[10px] font-medium text-[#8D6E63]">화</span>
+</div>
+<div class="flex flex-col items-center gap-2 z-10">
+<div class="w-4 bg-[#FF8A80] rounded-t-sm" style="height: 85px;"></div>
+<span class="text-[10px] font-medium text-[#8D6E63]">수</span>
+</div>
+<div class="flex flex-col items-center gap-2 z-10">
+<div class="w-4 bg-[#FF8A80] rounded-t-sm" style="height: 55px;"></div>
+<span class="text-[10px] font-medium text-[#8D6E63]">목</span>
+</div>
+<div class="flex flex-col items-center gap-2 z-10">
+<div class="w-4 bg-[#FF8A80] rounded-t-sm" style="height: 90px;"></div>
+<span class="text-[10px] font-medium text-[#8D6E63]">금</span>
+</div>
+<div class="flex flex-col items-center gap-2 z-10">
+<div class="w-4 bg-[#FF8A80] rounded-t-sm" style="height: 70px;"></div>
+<span class="text-[10px] font-medium text-[#8D6E63]">토</span>
+</div>
+<div class="flex flex-col items-center gap-2 z-10">
+<div class="w-4 bg-[#FF8A80] rounded-t-sm opacity-50" style="height: 30px;"></div>
+<span class="text-[10px] font-medium text-[#FF8A80]">일</span>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full z-50 flex justify-around items-center h-20 pb-safe px-6 bg-white dark:bg-stone-900 border-t border-[#3E2723]/5 dark:border-white/5 shadow-[0_-2px_10px_rgba(62,39,35,0.05)] rounded-t-[20px]">
+<button class="flex flex-col items-center justify-center text-[#8D6E63] dark:text-stone-400 hover:opacity-80 active:scale-90 transition-all duration-200">
+<span class="material-symbols-outlined" data-icon="mail">mail</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[11px] font-medium">편지</span>
+</button>
+<button class="flex flex-col items-center justify-center text-[#FF8A80] dark:text-[#FF8A80] font-bold hover:opacity-80 active:scale-90 transition-all duration-200">
+<span class="material-symbols-outlined" data-icon="auto_awesome" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[11px]">성장</span>
+</button>
+<button class="flex flex-col items-center justify-center text-[#8D6E63] dark:text-stone-400 hover:opacity-80 active:scale-90 transition-all duration-200">
+<span class="material-symbols-outlined" data-icon="groups">groups</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[11px] font-medium">커뮤니티</span>
+</button>
+<button class="flex flex-col items-center justify-center text-[#8D6E63] dark:text-stone-400 hover:opacity-80 active:scale-90 transition-all duration-200">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[11px] font-medium">설정</span>
+</button>
+</nav>
+</body></html>

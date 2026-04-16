@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+
+<html lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary-container": "#f8847b",
+                    "secondary-container": "#ffe087",
+                    "surface-container-lowest": "#ffffff",
+                    "secondary-fixed-dim": "#fad04b",
+                    "tertiary-container": "#b4fdb4",
+                    "inverse-primary": "#f8847b",
+                    "surface-tint": "#9f403a",
+                    "on-tertiary": "#e9ffe4",
+                    "primary-fixed-dim": "#e8786e",
+                    "on-primary-fixed-variant": "#611211",
+                    "outline": "#a26e5b",
+                    "on-tertiary-container": "#1f632c",
+                    "on-primary-fixed": "#170000",
+                    "surface-container": "#ffe9e2",
+                    "tertiary": "#286c34",
+                    "on-secondary-fixed": "#4e3d00",
+                    "surface-container-highest": "#ffdbce",
+                    "on-tertiary-fixed-variant": "#2a6e35",
+                    "surface-variant": "#ffdbce",
+                    "background": "#fff8f6",
+                    "secondary-dim": "#665100",
+                    "error": "#a8364b",
+                    "tertiary-fixed": "#b4fdb4",
+                    "secondary": "#745c00",
+                    "on-error": "#fff7f7",
+                    "inverse-surface": "#1b0904",
+                    "surface-bright": "#fff8f6",
+                    "surface-dim": "#ffd0bf",
+                    "error-dim": "#6b0221",
+                    "on-surface": "#4e2819",
+                    "on-secondary-fixed-variant": "#705900",
+                    "outline-variant": "#dfa48f",
+                    "tertiary-dim": "#1a5f29",
+                    "on-surface-variant": "#835342",
+                    "on-primary-container": "#540809",
+                    "inverse-on-surface": "#b89589",
+                    "error-container": "#f97386",
+                    "on-tertiary-fixed": "#03501b",
+                    "primary-fixed": "#f8847b",
+                    "on-error-container": "#6e0523",
+                    "primary-dim": "#90352f",
+                    "primary": "#9f403a",
+                    "surface-container-low": "#fff1ec",
+                    "surface-container-high": "#ffe2d9",
+                    "on-primary": "#fff7f6",
+                    "on-secondary": "#fff8ee",
+                    "surface": "#fff8f6",
+                    "secondary-fixed": "#ffe087",
+                    "on-secondary-container": "#644f00",
+                    "tertiary-fixed-dim": "#a6eea7",
+                    "on-background": "#4e2819"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Plus Jakarta Sans"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { background-color: #FFF8E1; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .speech-bubble {
+            position: relative;
+            background: #ffffff;
+            border-radius: 1.5rem;
+            padding: 12px 20px;
+        }
+        .speech-bubble:after {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            width: 0;
+            height: 0;
+            border: 10px solid transparent;
+            border-right-color: #ffffff;
+            border-left: 0;
+            margin-top: -10px;
+            margin-left: -10px;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="font-body text-on-surface min-h-screen flex flex-col items-center">
+<!-- Top AppBar (JSON Mapping) -->
+<nav class="flex items-center justify-between px-5 h-16 w-full bg-amber-50 dark:bg-stone-950 fixed top-0 z-50">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-coral-500 dark:text-coral-400">arrow_back</span>
+<h1 class="font-['Plus_Jakarta_Sans'] font-bold text-xl text-stone-800 dark:text-stone-100">BabyLetter</h1>
+</div>
+<div class="flex gap-2">
+<div class="w-2.5 h-2.5 rounded-full bg-primary-container"></div>
+<div class="w-2.5 h-2.5 rounded-full bg-outline-variant/30"></div>
+<div class="w-2.5 h-2.5 rounded-full bg-outline-variant/30"></div>
+</div>
+</nav>
+<main class="w-full max-w-md px-6 pt-24 pb-12 flex flex-col flex-grow">
+<!-- Upper Content: Baby Voice -->
+<section class="flex items-center gap-4 mb-10">
+<div class="relative">
+<div class="w-20 h-20 rounded-full bg-primary-container p-1 flex items-center justify-center overflow-hidden shadow-sm">
+<img class="w-full h-full object-cover rounded-full bg-white" data-alt="cute animated baby character with a sweet smile, soft pastel illustration style, circular framing" src="https://lh3.googleusercontent.com/aida-public/AB6AXuALrkW6qccUdVRtLt6h3DltOyv2TQOJ7WY7HXv6U9YKBEORChrD2A5snpPo-miSaTXl_xW3Td-pabZ9AvCfimPcQq_jo9m7zltLAtanDBP-dMGV-ar1bfQTg6ANPj6nlOtBy70y8AJt845k_84j1frbIrdJyQppQXcx4yhKI3gXoYko0EnwY0OmHjMzPH9Cj2TKmwAmc3PWeuizDHRQvzGWtAgq0LaC86LMpdbg2k-moof7Gudfl_Zf0ieIaI9rmlCENS09FxZ5kcbj"/>
+</div>
+</div>
+<div class="speech-bubble shadow-sm">
+<p class="text-on-surface font-medium text-base">엄마, 언제 만나?</p>
+</div>
+</section>
+<!-- Main Content -->
+<section class="flex-grow">
+<h2 class="font-headline font-bold text-2xl mb-8 leading-tight">출산 예정일이 언제예요?</h2>
+<!-- Calendar Widget -->
+<div class="bg-white rounded-[12px] shadow-[0_2px_8px_rgba(62,39,35,0.08)] p-6 mb-6">
+<div class="flex items-center justify-between mb-6">
+<span class="font-bold text-lg">2024년 10월</span>
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer">chevron_left</span>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer">chevron_right</span>
+</div>
+</div>
+<div class="grid grid-cols-7 gap-y-4 text-center">
+<div class="text-xs text-on-surface-variant font-medium">일</div>
+<div class="text-xs text-on-surface-variant font-medium">월</div>
+<div class="text-xs text-on-surface-variant font-medium">화</div>
+<div class="text-xs text-on-surface-variant font-medium">수</div>
+<div class="text-xs text-on-surface-variant font-medium">목</div>
+<div class="text-xs text-on-surface-variant font-medium">금</div>
+<div class="text-xs text-on-surface-variant font-medium">토</div>
+<!-- Calendar Days Example -->
+<div class="py-2 text-outline-variant">29</div>
+<div class="py-2 text-outline-variant">30</div>
+<div class="py-2">1</div>
+<div class="py-2">2</div>
+<div class="py-2">3</div>
+<div class="py-2">4</div>
+<div class="py-2">5</div>
+<div class="py-2">6</div>
+<div class="py-2">7</div>
+<div class="py-2">8</div>
+<div class="py-2">9</div>
+<div class="py-2">10</div>
+<div class="py-2">11</div>
+<div class="py-2">12</div>
+<div class="py-2">13</div>
+<div class="py-2">14</div>
+<!-- Selected Date -->
+<div class="py-1 relative flex items-center justify-center">
+<div class="w-10 h-10 bg-primary-container rounded-full flex items-center justify-center text-white font-bold">
+                            15
+                            <div class="absolute -top-1 -right-1 bg-white rounded-full p-0.5 shadow-sm">
+<span class="material-symbols-outlined text-[14px] text-primary" data-weight="fill" style="font-variation-settings: 'FILL' 1;">favorite</span>
+</div>
+</div>
+</div>
+<div class="py-2">16</div>
+<div class="py-2">17</div>
+<div class="py-2">18</div>
+<div class="py-2">19</div>
+</div>
+</div>
+<!-- Dynamic Info -->
+<div class="bg-primary-container/10 border border-primary-container/20 rounded-xl p-4 flex items-center justify-center gap-2">
+<span class="text-primary font-bold text-lg">지금 24주 3일이에요! 🎉</span>
+</div>
+</section>
+<!-- Bottom Actions -->
+<footer class="mt-12 flex flex-col gap-4">
+<button class="w-full bg-primary-container text-white font-bold py-4 rounded-[8px] text-lg shadow-md hover:opacity-90 active:scale-[0.98] transition-all">
+                다음
+            </button>
+<button class="w-full py-2 text-on-surface-variant font-medium text-sm hover:underline">
+                건너뛰기
+            </button>
+</footer>
+</main>
+<!-- Bottom Navigation Suppressed per Rules (Onboarding Flow) -->
+</body></html>

@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+
+<html lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>BabyLetter - 기록</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface": "#fff8f6",
+                        "secondary-fixed": "#ffe087",
+                        "tertiary": "#286c34",
+                        "on-secondary-fixed": "#4e3d00",
+                        "surface-container-lowest": "#ffffff",
+                        "inverse-surface": "#1b0904",
+                        "on-tertiary-fixed": "#03501b",
+                        "tertiary-fixed-dim": "#a6eea7",
+                        "surface-container-highest": "#ffdbce",
+                        "secondary-fixed-dim": "#fad04b",
+                        "outline": "#a26e5b",
+                        "surface-variant": "#ffdbce",
+                        "surface-container-low": "#fff1ec",
+                        "surface-bright": "#fff8f6",
+                        "on-primary-fixed": "#170000",
+                        "on-tertiary-container": "#1f632c",
+                        "surface-dim": "#ffd0bf",
+                        "on-tertiary": "#e9ffe4",
+                        "primary-fixed": "#f8847b",
+                        "primary": "#9f403a",
+                        "on-surface": "#4e2819",
+                        "primary-dim": "#90352f",
+                        "on-primary": "#fff7f6",
+                        "on-error": "#fff7f7",
+                        "on-tertiary-fixed-variant": "#2a6e35",
+                        "on-primary-fixed-variant": "#611211",
+                        "secondary-container": "#ffe087",
+                        "on-surface-variant": "#835342",
+                        "on-background": "#4e2819",
+                        "surface-container": "#ffe9e2",
+                        "on-secondary": "#fff8ee",
+                        "tertiary-fixed": "#b4fdb4",
+                        "outline-variant": "#dfa48f",
+                        "primary-fixed-dim": "#e8786e",
+                        "on-error-container": "#6e0523",
+                        "background": "#fff8f6",
+                        "secondary": "#745c00",
+                        "on-primary-container": "#540809",
+                        "inverse-primary": "#f8847b",
+                        "inverse-on-surface": "#b89589",
+                        "on-secondary-fixed-variant": "#705900",
+                        "error-dim": "#6b0221",
+                        "on-secondary-container": "#644f00",
+                        "error": "#a8364b",
+                        "error-container": "#f97386",
+                        "tertiary-dim": "#1a5f29",
+                        "secondary-dim": "#665100",
+                        "primary-container": "#f8847b",
+                        "tertiary-container": "#b4fdb4",
+                        "surface-tint": "#9f403a",
+                        "surface-container-high": "#ffe2d9"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Plus Jakarta Sans"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #FFF8E1; /* Specified Brand Background */
+            font-family: 'Inter', sans-serif;
+            color: #3E2723;
+        }
+        .progress-ring-circle {
+            transition: stroke-dashoffset 0.35s;
+            transform: rotate(-90deg);
+            transform-origin: 50% 50%;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="min-h-screen pb-24">
+<!-- TopAppBar (Shared Component) -->
+<header class="bg-[#FFF8E1] fixed top-0 w-full h-16 z-50 flex items-center justify-between px-5">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-white/50 shadow-sm">
+<img class="w-full h-full object-cover" data-alt="cute animated baby profile icon with soft pastel colors and a friendly smiling face" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBzS7s-i8MQukikg3cwJqW4_cvHzRKSTxA_zgZL-PSYeVqUnH6Lqf65aBnOYJDBRs8kjVqQxCOsA72CqCcfxoWc6iO60vBABWdaVGCNrvql5qCQ-LUYj-E-X7Elc_cOsEZ6jOkUQ_WPS-1JNUy-vi9wsSfpFoS3jtzTH4QEPlQv3Zq8uniiFNlwgjL5GgO7mydCOdsBGvA5S0z5RZfxtYZkkt_mY3aE2HbunFQirGJZdCdmuvOIgY7l1qWSSfuU0JNHdQFPfYp4LpP4"/>
+</div>
+<h1 class="font-['Plus_Jakarta_Sans'] font-bold text-[#3E2723] text-lg tracking-tight">기록</h1>
+</div>
+<div class="flex items-center gap-2">
+<span class="bg-[#FF8A80] text-white text-[11px] font-bold px-3 py-1 rounded-full shadow-sm">D+45</span>
+<span class="bg-white/80 backdrop-blur-sm text-[#FF8A80] text-[11px] font-bold px-3 py-1 rounded-full border border-[#FF8A80]/20 flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
+                14일
+            </span>
+</div>
+</header>
+<main class="pt-20 px-5 space-y-6">
+<!-- Today's Summary Card -->
+<section class="bg-white rounded-[24px] p-6 shadow-[0_2px_12px_rgba(62,39,35,0.06)] relative overflow-hidden">
+<div class="absolute top-0 right-0 p-4 opacity-10">
+<span class="material-symbols-outlined text-5xl">auto_awesome</span>
+</div>
+<div class="flex justify-between items-center mb-6">
+<h2 class="text-[#3E2723] font-bold text-lg font-headline">오늘의 우리 아기</h2>
+<span class="text-[#8D6E63] text-xs font-medium">10월 24일</span>
+</div>
+<div class="flex justify-between items-start mb-8">
+<!-- Feeding Progress -->
+<div class="flex flex-col items-center flex-1">
+<div class="relative w-16 h-16 flex items-center justify-center">
+<svg class="w-full h-full">
+<circle class="text-[#f1f1f1]" cx="32" cy="32" fill="transparent" r="28" stroke="currentColor" stroke-width="6"></circle>
+<circle class="text-[#FF8A80] progress-ring-circle" cx="32" cy="32" fill="transparent" r="28" stroke="currentColor" stroke-dasharray="175.9" stroke-dashoffset="35.1" stroke-linecap="round" stroke-width="6"></circle>
+</svg>
+<span class="absolute text-[13px] font-bold text-[#3E2723]">8/10</span>
+</div>
+<span class="text-[12px] font-bold mt-2 text-[#3E2723]">수유</span>
+<span class="text-[10px] text-[#FF8A80] font-medium">딱 좋아요!</span>
+</div>
+<!-- Sleep Progress -->
+<div class="flex flex-col items-center flex-1 border-x border-[#3E2723]/5">
+<div class="relative w-16 h-16 flex items-center justify-center">
+<svg class="w-full h-full">
+<circle class="text-[#f1f1f1]" cx="32" cy="32" fill="transparent" r="28" stroke="currentColor" stroke-width="6"></circle>
+<circle class="text-[#9C27B0]/60 progress-ring-circle" cx="32" cy="32" fill="transparent" r="28" stroke="currentColor" stroke-dasharray="175.9" stroke-dashoffset="19.3" stroke-linecap="round" stroke-width="6"></circle>
+</svg>
+<span class="absolute text-[11px] font-bold text-[#3E2723]">14.2h</span>
+</div>
+<span class="text-[12px] font-bold mt-2 text-[#3E2723]">수면</span>
+<span class="text-[10px] text-[#9C27B0]/70 font-medium">잘 자고 있어요</span>
+</div>
+<!-- Diaper Progress -->
+<div class="flex flex-col items-center flex-1">
+<div class="relative w-16 h-16 flex items-center justify-center">
+<svg class="w-full h-full">
+<circle class="text-[#f1f1f1]" cx="32" cy="32" fill="transparent" r="28" stroke="currentColor" stroke-width="6"></circle>
+<circle class="text-[#81C784] progress-ring-circle" cx="32" cy="32" fill="transparent" r="28" stroke="currentColor" stroke-dasharray="175.9" stroke-dashoffset="44" stroke-linecap="round" stroke-width="6"></circle>
+</svg>
+<span class="absolute text-[13px] font-bold text-[#3E2723]">6/8</span>
+</div>
+<span class="text-[12px] font-bold mt-2 text-[#3E2723]">기저귀</span>
+<span class="text-[10px] text-[#81C784] font-medium">정상 범위</span>
+</div>
+</div>
+<div class="bg-[#F1F8E9] rounded-xl py-3 px-4 flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[#81C784] text-lg" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<p class="text-[#2E7D32] text-[13px] font-medium leading-tight">콩이가 건강하게 자라고 있어요</p>
+</div>
+</section>
+<!-- Quick Record Grid -->
+<section class="grid grid-cols-3 gap-4">
+<!-- Feeding -->
+<button class="flex flex-col items-center space-y-2 group active:scale-95 transition-transform">
+<div class="w-[70px] h-[70px] rounded-2xl bg-[#E3F2FD] flex items-center justify-center shadow-sm group-hover:shadow-md transition-shadow">
+<span class="material-symbols-outlined text-[#64B5F6] text-3xl">child_care</span>
+</div>
+<div class="text-center">
+<p class="text-[13px] font-bold text-[#3E2723]">수유</p>
+<p class="text-[10px] text-[#64B5F6]">30분 전</p>
+</div>
+</button>
+<!-- Sleep -->
+<button class="flex flex-col items-center space-y-2 group active:scale-95 transition-transform">
+<div class="w-[70px] h-[70px] rounded-2xl bg-[#F3E5F5] flex items-center justify-center shadow-sm group-hover:shadow-md transition-shadow">
+<span class="material-symbols-outlined text-[#BA68C8] text-3xl">bedtime</span>
+</div>
+<div class="text-center">
+<p class="text-[13px] font-bold text-[#3E2723]">수면</p>
+<p class="text-[10px] text-[#BA68C8]">1시간 전</p>
+</div>
+</button>
+<!-- Diaper -->
+<button class="flex flex-col items-center space-y-2 group active:scale-95 transition-transform">
+<div class="w-[70px] h-[70px] rounded-2xl bg-[#E8F5E9] flex items-center justify-center shadow-sm group-hover:shadow-md transition-shadow">
+<span class="material-symbols-outlined text-[#81C784] text-3xl">apparel</span>
+</div>
+<div class="text-center">
+<p class="text-[13px] font-bold text-[#3E2723]">기저귀</p>
+<p class="text-[10px] text-[#81C784]">45분 전</p>
+</div>
+</button>
+<!-- Memo -->
+<button class="flex flex-col items-center space-y-2 group active:scale-95 transition-transform">
+<div class="w-[70px] h-[70px] rounded-2xl bg-[#FFF8E1] flex items-center justify-center shadow-sm group-hover:shadow-md transition-shadow">
+<span class="material-symbols-outlined text-[#FFD54F] text-3xl">edit_note</span>
+</div>
+<div class="text-center">
+<p class="text-[13px] font-bold text-[#3E2723]">메모</p>
+</div>
+</button>
+<!-- Meds -->
+<button class="flex flex-col items-center space-y-2 group active:scale-95 transition-transform">
+<div class="w-[70px] h-[70px] rounded-2xl bg-[#FFEBEE] flex items-center justify-center shadow-sm group-hover:shadow-md transition-shadow">
+<span class="material-symbols-outlined text-[#EF5350] text-3xl">medical_services</span>
+</div>
+<div class="text-center">
+<p class="text-[13px] font-bold text-[#3E2723]">약/비타민</p>
+</div>
+</button>
+<!-- Temp -->
+<button class="flex flex-col items-center space-y-2 group active:scale-95 transition-transform">
+<div class="w-[70px] h-[70px] rounded-2xl bg-[#FFF3E0] flex items-center justify-center shadow-sm group-hover:shadow-md transition-shadow">
+<span class="material-symbols-outlined text-[#FF8A80] text-3xl">thermostat</span>
+</div>
+<div class="text-center">
+<p class="text-[13px] font-bold text-[#3E2723]">체온</p>
+</div>
+</button>
+</section>
+<!-- Today's Timeline -->
+<section class="space-y-4">
+<h2 class="text-[#3E2723] font-bold text-lg font-headline pl-1">시간별 기록</h2>
+<div class="relative pl-6 space-y-8 before:content-[''] before:absolute before:left-[11px] before:top-2 before:bottom-2 before:w-[2px] before:bg-[#3E2723]/5">
+<!-- Timeline Item: Sleep End -->
+<div class="relative">
+<div class="absolute left-[-19px] top-1.5 w-3 h-3 rounded-full bg-[#BA68C8] ring-4 ring-[#FFF8E1]"></div>
+<div class="flex items-center gap-4">
+<span class="text-[13px] font-medium text-[#8D6E63] w-12">12:00</span>
+<div class="bg-white px-4 py-3 rounded-2xl shadow-sm border border-[#3E2723]/5 flex-1">
+<p class="text-[14px] text-[#3E2723] font-medium">😴 낮잠 끝 <span class="text-[12px] text-[#8D6E63] ml-1">(1h 45m)</span></p>
+</div>
+</div>
+</div>
+<!-- Timeline Item: Sleep Start -->
+<div class="relative">
+<div class="absolute left-[-19px] top-1.5 w-3 h-3 rounded-full bg-[#BA68C8] ring-4 ring-[#FFF8E1]"></div>
+<div class="flex items-center gap-4">
+<span class="text-[13px] font-medium text-[#8D6E63] w-12">10:15</span>
+<div class="bg-white px-4 py-3 rounded-2xl shadow-sm border border-[#3E2723]/5 flex-1">
+<p class="text-[14px] text-[#3E2723] font-medium">😴 낮잠 시작</p>
+</div>
+</div>
+</div>
+<!-- Timeline Item: Diaper -->
+<div class="relative">
+<div class="absolute left-[-19px] top-1.5 w-3 h-3 rounded-full bg-[#81C784] ring-4 ring-[#FFF8E1]"></div>
+<div class="flex items-center gap-4">
+<span class="text-[13px] font-medium text-[#8D6E63] w-12">09:30</span>
+<div class="bg-white px-4 py-3 rounded-2xl shadow-sm border border-[#3E2723]/5 flex-1">
+<p class="text-[14px] text-[#3E2723] font-medium">🧷 소변, 정상</p>
+</div>
+</div>
+</div>
+<!-- Timeline Item: Feeding -->
+<div class="relative">
+<div class="absolute left-[-19px] top-1.5 w-3 h-3 rounded-full bg-[#64B5F6] ring-4 ring-[#FFF8E1]"></div>
+<div class="flex items-center gap-4">
+<span class="text-[13px] font-medium text-[#8D6E63] w-12">09:00</span>
+<div class="bg-white px-4 py-3 rounded-2xl shadow-sm border border-[#3E2723]/5 flex-1">
+<p class="text-[14px] text-[#3E2723] font-medium">🍼 모유 좌 8분, 우 7분</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Bottom Action Links -->
+<section class="flex gap-4 pt-4">
+<button class="flex-1 bg-white border border-[#3E2723]/10 h-12 rounded-2xl flex items-center justify-center gap-2 text-[#3E2723] font-bold text-[14px] active:scale-[0.98] transition-transform">
+<span class="material-symbols-outlined text-[20px] text-[#FF8A80]">insert_chart</span>
+                패턴 보기
+            </button>
+<button class="flex-1 bg-white border border-[#3E2723]/10 h-12 rounded-2xl flex items-center justify-center gap-2 text-[#3E2723] font-bold text-[14px] active:scale-[0.98] transition-transform">
+<span class="material-symbols-outlined text-[20px] text-[#FF8A80]">calendar_today</span>
+                캘린더
+            </button>
+</section>
+</main>
+<!-- BottomNavBar (Shared Component) -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center h-20 pb-safe px-4 bg-white/80 dark:bg-stone-900/80 backdrop-blur-md shadow-[0_-2px_10px_rgba(62,39,35,0.04)] border-t border-stone-200">
+<button class="flex flex-col items-center justify-center text-[#FF8A80] font-bold">
+<span class="material-symbols-outlined">edit_note</span>
+<span class="font-['Plus_Jakarta_Sans'] font-medium text-[11px]">기록</span>
+</button>
+<button class="flex flex-col items-center justify-center text-[#8D6E63] hover:text-[#FF8A80] transition-colors">
+<span class="material-symbols-outlined">insert_chart</span>
+<span class="font-['Plus_Jakarta_Sans'] font-medium text-[11px]">통계</span>
+</button>
+<button class="flex flex-col items-center justify-center text-[#8D6E63] hover:text-[#FF8A80] transition-colors">
+<span class="material-symbols-outlined">calendar_month</span>
+<span class="font-['Plus_Jakarta_Sans'] font-medium text-[11px]">캘린더</span>
+</button>
+<button class="flex flex-col items-center justify-center text-[#8D6E63] hover:text-[#FF8A80] transition-colors">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-['Plus_Jakarta_Sans'] font-medium text-[11px]">설정</span>
+</button>
+</nav>
+<!-- Floating Action Button (Contextual Support) -->
+<button class="fixed bottom-24 right-6 w-14 h-14 bg-[#FF8A80] text-white rounded-full shadow-lg shadow-[#FF8A80]/30 flex items-center justify-center active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-3xl">add</span>
+</button>
+</body></html>

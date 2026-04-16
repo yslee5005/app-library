@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+
+<html lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "error-dim": "#6b0221",
+                    "on-secondary-fixed-variant": "#705900",
+                    "background": "#fff8f6",
+                    "tertiary-container": "#b4fdb4",
+                    "secondary-dim": "#665100",
+                    "on-primary-fixed-variant": "#611211",
+                    "surface-variant": "#ffdbce",
+                    "on-primary-fixed": "#170000",
+                    "on-surface": "#4e2819",
+                    "surface-bright": "#fff8f6",
+                    "surface-container": "#ffe9e2",
+                    "primary-container": "#f8847b",
+                    "primary-fixed": "#f8847b",
+                    "on-tertiary-fixed": "#03501b",
+                    "surface": "#fff8f6",
+                    "tertiary": "#286c34",
+                    "secondary": "#745c00",
+                    "inverse-primary": "#f8847b",
+                    "outline-variant": "#dfa48f",
+                    "on-secondary-container": "#644f00",
+                    "inverse-surface": "#1b0904",
+                    "tertiary-fixed-dim": "#a6eea7",
+                    "surface-container-highest": "#ffdbce",
+                    "surface-tint": "#9f403a",
+                    "on-surface-variant": "#835342",
+                    "outline": "#a26e5b",
+                    "surface-dim": "#ffd0bf",
+                    "secondary-fixed-dim": "#fad04b",
+                    "on-error": "#fff7f7",
+                    "inverse-on-surface": "#b89589",
+                    "error": "#a8364b",
+                    "surface-container-high": "#ffe2d9",
+                    "primary-fixed-dim": "#e8786e",
+                    "on-primary-container": "#540809",
+                    "secondary-fixed": "#ffe087",
+                    "tertiary-dim": "#1a5f29",
+                    "on-primary": "#fff7f6",
+                    "error-container": "#f97386",
+                    "on-secondary": "#fff8ee",
+                    "primary-dim": "#90352f",
+                    "surface-container-low": "#fff1ec",
+                    "primary": "#9f403a",
+                    "on-background": "#4e2819",
+                    "secondary-container": "#ffe087",
+                    "on-error-container": "#6e0523",
+                    "on-tertiary": "#e9ffe4",
+                    "surface-container-lowest": "#ffffff",
+                    "on-tertiary-fixed-variant": "#2a6e35",
+                    "on-secondary-fixed": "#4e3d00",
+                    "tertiary-fixed": "#b4fdb4",
+                    "on-tertiary-container": "#1f632c"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Plus Jakarta Sans"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Inter', sans-serif; background-color: #FFF8E1; }
+        h1, h2, h3 { font-family: 'Plus Jakarta Sans', sans-serif; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="text-on-surface min-h-screen pb-32">
+<!-- TopAppBar -->
+<header class="fixed top-0 left-0 w-full z-50 flex items-center px-4 h-16 bg-[#FFF8E1] dark:bg-stone-950 border-b border-[#8D6E63]/10 dark:border-stone-800 shadow-sm">
+<button class="w-10 h-10 flex items-center justify-center text-[#8D6E63] hover:bg-black/5 rounded-full transition-transform active:scale-95">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<h1 class="flex-grow text-center font-['Plus_Jakarta_Sans'] font-bold text-[#3E2723] dark:text-stone-100 text-lg">기저귀 기록</h1>
+<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-[#FF8A80]/20">
+<img alt="Profile" class="w-full h-full object-cover" data-alt="Close up of a happy young mother holding her smiling infant baby, soft natural window light, warm cozy atmosphere" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBoFFeQCfS8J_Mpa0B4FM6olAdxt6ngZLPteCtyS2dkBeuJctv5LosfDmTOVbtpOvF07inKhjqtpPiwTirS6OldsT3lISrGqNHXJUVYn1wnpVycBlUU4vVgRjGG_GMFaRkRcZI3_IkIit91D0S6hBNzJixVy2yxq_jSJe8KrX3q1cwntae6ilXkTH9kFudVRWmF11BcxHVtI0EIyW0X_E1sg-Ry5wiN8fBYrDHsqHll5m2VwIlY2IfHVB9VlXnt38eKXU2lQwBp6gao"/>
+</div>
+</header>
+<main class="pt-20 px-5 space-y-6">
+<!-- Insight Message -->
+<div class="bg-primary-container/10 border border-primary-container/20 p-4 rounded-xl flex items-start gap-3">
+<span class="material-symbols-outlined text-primary-container shrink-0">chat_bubble</span>
+<p class="text-on-surface text-sm font-medium leading-relaxed">
+<span class="block text-primary font-bold mb-0.5">베비의 한마디</span>
+                기저귀 횟수로 수분 섭취를 확인할 수 있어요
+            </p>
+</div>
+<!-- Logging Interface -->
+<section class="space-y-4">
+<h2 class="text-lg font-bold text-[#3E2723]">어떤 기저귀인가요?</h2>
+<div class="grid grid-cols-3 gap-3">
+<button class="flex flex-col items-center justify-center p-4 rounded-xl bg-white shadow-sm border border-transparent hover:border-primary-container transition-all active:scale-95 group">
+<span class="text-2xl mb-1 group-active:scale-110 transition-transform">💧</span>
+<span class="text-sm font-semibold text-on-surface">소변</span>
+</button>
+<button class="flex flex-col items-center justify-center p-4 rounded-xl bg-primary-container shadow-md border-2 border-primary transition-all active:scale-95 group">
+<span class="text-2xl mb-1 group-active:scale-110 transition-transform">💩</span>
+<span class="text-sm font-semibold text-on-primary-container">대변</span>
+</button>
+<button class="flex flex-col items-center justify-center p-4 rounded-xl bg-white shadow-sm border border-transparent hover:border-primary-container transition-all active:scale-95 group">
+<span class="text-2xl mb-1 group-active:scale-110 transition-transform">✨</span>
+<span class="text-sm font-semibold text-on-surface">혼합</span>
+</button>
+</div>
+</section>
+<!-- Stool Details (Active State) -->
+<section class="bg-white p-5 rounded-2xl shadow-[0_2px_8px_rgba(62,39,35,0.08)] space-y-6">
+<!-- Stool Color -->
+<div class="space-y-3">
+<div class="flex items-center justify-between">
+<h3 class="text-sm font-bold text-[#8D6E63]">대변 색상</h3>
+<span class="text-xs text-secondary font-medium">정상 범위예요</span>
+</div>
+<div class="flex justify-between items-center px-1">
+<button class="w-8 h-8 rounded-full bg-[#E6D5AC] ring-2 ring-offset-2 ring-primary transition-all"></button>
+<button class="w-8 h-8 rounded-full bg-[#D4C36F] hover:scale-110 transition-transform"></button>
+<button class="w-8 h-8 rounded-full bg-[#8B9B49] hover:scale-110 transition-transform"></button>
+<button class="w-8 h-8 rounded-full bg-[#A67C52] hover:scale-110 transition-transform"></button>
+<button class="w-8 h-8 rounded-full bg-[#7D5A3C] hover:scale-110 transition-transform"></button>
+<button class="w-8 h-8 rounded-full bg-[#5D4037] hover:scale-110 transition-transform"></button>
+</div>
+</div>
+<!-- Texture Selector -->
+<div class="space-y-3">
+<h3 class="text-sm font-bold text-[#8D6E63]">변의 상태</h3>
+<div class="flex gap-2">
+<button class="flex-1 py-2.5 px-4 rounded-lg border border-outline-variant text-sm font-medium text-on-surface hover:bg-surface-container-low transition-colors">물범</button>
+<button class="flex-1 py-2.5 px-4 rounded-lg bg-secondary-container border border-secondary text-sm font-bold text-on-secondary-container">무른</button>
+<button class="flex-1 py-2.5 px-4 rounded-lg border border-outline-variant text-sm font-medium text-on-surface hover:bg-surface-container-low transition-colors">딱딱</button>
+</div>
+</div>
+</section>
+<!-- Summary & Gauge -->
+<section class="bg-white p-5 rounded-2xl shadow-[0_2px_8px_rgba(62,39,35,0.08)] space-y-4">
+<div class="flex justify-between items-end">
+<div>
+<p class="text-xs text-secondary-dim font-medium mb-1">오늘의 기록</p>
+<h2 class="text-xl font-extrabold text-on-surface">오늘 6회 <span class="text-sm font-normal text-secondary">(소변 4 / 대변 2)</span></h2>
+</div>
+<div class="text-right">
+<span class="text-[10px] bg-tertiary-container text-on-tertiary-container px-2 py-0.5 rounded-full font-bold">Good</span>
+</div>
+</div>
+<div class="space-y-2">
+<div class="relative h-3 w-full bg-surface-container rounded-full overflow-hidden">
+<div class="absolute left-0 top-0 h-full bg-primary-container w-[75%] rounded-full"></div>
+<!-- Reference Marker -->
+<div class="absolute left-[65%] top-0 h-full w-0.5 bg-on-surface-variant/30"></div>
+</div>
+<div class="flex justify-between text-[11px] font-medium text-[#8D6E63]">
+<span>0회</span>
+<span>같은 또래 평균: 6-8회/일</span>
+<span>12회+</span>
+</div>
+</div>
+</section>
+<!-- Visuals: 7-day trend -->
+<section class="bg-white p-5 rounded-2xl shadow-[0_2px_8px_rgba(62,39,35,0.08)]">
+<h3 class="text-sm font-bold text-[#8D6E63] mb-4">최근 7일 트렌드</h3>
+<div class="flex items-end justify-between h-24 px-2">
+<div class="flex flex-col items-center gap-2">
+<div class="w-4 bg-surface-container-highest rounded-t-sm h-12"></div>
+<span class="text-[10px] text-secondary">월</span>
+</div>
+<div class="flex flex-col items-center gap-2">
+<div class="w-4 bg-surface-container-highest rounded-t-sm h-16"></div>
+<span class="text-[10px] text-secondary">화</span>
+</div>
+<div class="flex flex-col items-center gap-2">
+<div class="w-4 bg-surface-container-highest rounded-t-sm h-14"></div>
+<span class="text-[10px] text-secondary">수</span>
+</div>
+<div class="flex flex-col items-center gap-2">
+<div class="w-4 bg-surface-container-highest rounded-t-sm h-10"></div>
+<span class="text-[10px] text-secondary">목</span>
+</div>
+<div class="flex flex-col items-center gap-2">
+<div class="w-4 bg-surface-container-highest rounded-t-sm h-18"></div>
+<span class="text-[10px] text-secondary">금</span>
+</div>
+<div class="flex flex-col items-center gap-2">
+<div class="w-4 bg-primary-container rounded-t-sm h-20"></div>
+<span class="text-[10px] font-bold text-primary">토</span>
+</div>
+<div class="flex flex-col items-center gap-2">
+<div class="w-4 bg-surface-container-highest rounded-t-sm h-12"></div>
+<span class="text-[10px] text-secondary">일</span>
+</div>
+</div>
+</section>
+<!-- Timeline -->
+<section class="space-y-4">
+<h3 class="text-sm font-bold text-[#8D6E63]">오늘의 타임라인</h3>
+<div class="space-y-0 relative before:absolute before:left-3 before:top-2 before:bottom-2 before:w-[1px] before:bg-[#8D6E63]/20">
+<div class="relative pl-10 pb-6">
+<div class="absolute left-1.5 top-1.5 w-3 h-3 rounded-full bg-primary border-2 border-white shadow-sm"></div>
+<div class="flex justify-between items-center bg-white p-3 rounded-xl shadow-sm">
+<div>
+<p class="text-sm font-bold text-on-surface">대변 (무른, 황색)</p>
+<p class="text-xs text-secondary">오후 1:24</p>
+</div>
+<button class="text-outline hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-xl">edit</span>
+</button>
+</div>
+</div>
+<div class="relative pl-10 pb-6">
+<div class="absolute left-1.5 top-1.5 w-3 h-3 rounded-full bg-primary-container border-2 border-white shadow-sm"></div>
+<div class="flex justify-between items-center bg-white/60 p-3 rounded-xl">
+<div>
+<p class="text-sm font-medium text-on-surface">소변</p>
+<p class="text-xs text-secondary">오전 10:15</p>
+</div>
+</div>
+</div>
+<div class="relative pl-10">
+<div class="absolute left-1.5 top-1.5 w-3 h-3 rounded-full bg-primary-container border-2 border-white shadow-sm"></div>
+<div class="flex justify-between items-center bg-white/60 p-3 rounded-xl">
+<div>
+<p class="text-sm font-medium text-on-surface">소변</p>
+<p class="text-xs text-secondary">오전 08:30</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- CTA & FAB -->
+<div class="fixed bottom-20 left-0 w-full px-5 py-4 pointer-events-none">
+<button class="pointer-events-auto w-full h-14 bg-[#FF8A80] hover:bg-[#ff7b6f] text-white font-bold rounded-2xl shadow-lg flex items-center justify-center gap-2 transition-transform active:scale-95">
+<span class="material-symbols-outlined">save</span>
+            기록 저장하기
+        </button>
+</div>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-2 py-3 bg-white dark:bg-stone-900 border-t border-[#8D6E63]/10 dark:border-stone-800 shadow-[0_-2px_10px_rgba(62,39,35,0.08)] rounded-t-xl">
+<a class="flex flex-col items-center justify-center text-[#8D6E63] dark:text-stone-400 hover:opacity-80 transition-all duration-200" href="#">
+<span class="material-symbols-outlined">mail</span>
+<span class="font-['Inter'] text-[12px] font-medium mt-1">Letters</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#FF8A80] bg-[#FFF8E1] dark:bg-stone-800 rounded-xl px-3 py-1 transition-all duration-200" href="#">
+<span class="material-symbols-outlined">baby_changing_station</span>
+<span class="font-['Inter'] text-[12px] font-medium mt-1">Logs</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#8D6E63] dark:text-stone-400 hover:opacity-80 transition-all duration-200" href="#">
+<span class="material-symbols-outlined">monitoring</span>
+<span class="font-['Inter'] text-[12px] font-medium mt-1">Stats</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#8D6E63] dark:text-stone-400 hover:opacity-80 transition-all duration-200" href="#">
+<span class="material-symbols-outlined">straighten</span>
+<span class="font-['Inter'] text-[12px] font-medium mt-1">Growth</span>
+</a>
+</nav>
+</body></html>

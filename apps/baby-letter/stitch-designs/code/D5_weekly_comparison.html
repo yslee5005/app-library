@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+
+<html lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>주간 비교 리포트</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-container": "#f8847b",
+                        "inverse-surface": "#1b0904",
+                        "surface-tint": "#9f403a",
+                        "primary-dim": "#90352f",
+                        "primary": "#9f403a",
+                        "on-tertiary-container": "#1f632c",
+                        "on-surface": "#4e2819",
+                        "on-secondary-fixed-variant": "#705900",
+                        "inverse-primary": "#f8847b",
+                        "on-secondary-container": "#644f00",
+                        "secondary": "#745c00",
+                        "on-error": "#fff7f7",
+                        "tertiary-fixed-dim": "#a6eea7",
+                        "surface": "#fff8f6",
+                        "tertiary-container": "#b4fdb4",
+                        "on-tertiary": "#e9ffe4",
+                        "surface-dim": "#ffd0bf",
+                        "secondary-container": "#ffe087",
+                        "on-background": "#4e2819",
+                        "secondary-dim": "#665100",
+                        "outline": "#a26e5b",
+                        "secondary-fixed-dim": "#fad04b",
+                        "surface-container-high": "#ffe2d9",
+                        "tertiary-fixed": "#b4fdb4",
+                        "secondary-fixed": "#ffe087",
+                        "tertiary": "#286c34",
+                        "surface-variant": "#ffdbce",
+                        "primary-fixed-dim": "#e8786e",
+                        "on-secondary": "#fff8ee",
+                        "on-primary-container": "#540809",
+                        "on-error-container": "#6e0523",
+                        "surface-container-low": "#fff1ec",
+                        "surface-container-lowest": "#ffffff",
+                        "primary-fixed": "#f8847b",
+                        "on-tertiary-fixed-variant": "#2a6e35",
+                        "on-surface-variant": "#835342",
+                        "tertiary-dim": "#1a5f29",
+                        "on-tertiary-fixed": "#03501b",
+                        "outline-variant": "#dfa48f",
+                        "surface-bright": "#fff8f6",
+                        "on-primary-fixed": "#170000",
+                        "on-primary": "#fff7f6",
+                        "inverse-on-surface": "#b89589",
+                        "surface-container": "#ffe9e2",
+                        "on-secondary-fixed": "#4e3d00",
+                        "on-primary-fixed-variant": "#611211",
+                        "error-dim": "#6b0221",
+                        "error-container": "#f97386",
+                        "background": "#fff8f6",
+                        "surface-container-highest": "#ffdbce",
+                        "error": "#a8364b",
+                        "sage-green": "#81C784",
+                        "warm-gray": "#8D6E63",
+                        "cream-bg": "#FFF8E1",
+                        "baby-coral": "#FF8A80"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "2xl": "12px",
+                        "btn": "8px",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Plus Jakarta Sans"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3 { font-family: 'Plus Jakarta Sans', sans-serif; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-[#FFF8E1] text-[#3E2723] min-h-screen pb-24">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-[#FFF8E1] border-b border-[#8D6E63]/10 flex items-center justify-between px-5 h-16 shadow-sm">
+<button class="material-symbols-outlined text-[#FF8A80] p-2 hover:bg-[#FFD54F]/20 transition-colors active:scale-95" data-icon="arrow_back">arrow_back</button>
+<h1 class="font-['Plus_Jakarta_Sans'] font-bold text-[#3E2723] text-lg">주간 비교 리포트</h1>
+<button class="material-symbols-outlined text-[#FF8A80] p-2 hover:bg-[#FFD54F]/20 transition-colors active:scale-95" data-icon="more_vert">more_vert</button>
+</header>
+<main class="mt-16 px-5 pt-6 pb-20 max-w-md mx-auto">
+<!-- Date Range -->
+<div class="flex items-center justify-between mb-6">
+<span class="text-[#8D6E63] font-medium text-sm">4월 8일 - 4월 14일</span>
+<div class="bg-white/60 px-3 py-1 rounded-full flex items-center gap-1">
+<span class="material-symbols-outlined text-xs" data-icon="calendar_today">calendar_today</span>
+<span class="text-[12px] font-semibold">이번 주</span>
+</div>
+</div>
+<!-- Overview Card: 이번 주 요약 -->
+<section class="bg-white rounded-2xl p-5 shadow-[0_2px_8px_rgba(62,39,35,0.08)] mb-6">
+<h2 class="text-lg font-bold mb-4 flex items-center gap-2">
+<span class="w-2 h-6 bg-[#FF8A80] rounded-full"></span>
+                이번 주 요약
+            </h2>
+<div class="grid grid-cols-2 gap-4">
+<!-- Sleep -->
+<div class="p-3 bg-on-primary/5 rounded-xl border border-on-primary-container/5">
+<p class="text-[12px] text-[#8D6E63] mb-1">수면</p>
+<p class="text-lg font-bold">14.2h/일</p>
+<p class="text-[11px] text-[#81C784] font-medium flex items-center">
+<span class="material-symbols-outlined text-xs" data-icon="arrow_drop_up">arrow_drop_up</span>
+                        +0.5h
+                    </p>
+</div>
+<!-- Feeding -->
+<div class="p-3 bg-on-primary/5 rounded-xl border border-on-primary-container/5">
+<p class="text-[12px] text-[#8D6E63] mb-1">수유</p>
+<p class="text-lg font-bold">8회/일</p>
+<p class="text-[11px] text-[#8D6E63] font-medium flex items-center">
+<span class="material-symbols-outlined text-xs" data-icon="arrow_drop_down">arrow_drop_down</span>
+                        -1
+                    </p>
+</div>
+<!-- Diapers -->
+<div class="p-3 bg-on-primary/5 rounded-xl border border-on-primary-container/5">
+<p class="text-[12px] text-[#8D6E63] mb-1">기저귀</p>
+<p class="text-lg font-bold">6회</p>
+<p class="text-[11px] text-[#8D6E63] font-medium flex items-center">
+<span class="material-symbols-outlined text-xs" data-icon="horizontal_rule">horizontal_rule</span>
+                        같음
+                    </p>
+</div>
+<!-- Weight -->
+<div class="p-3 bg-on-primary/5 rounded-xl border border-on-primary-container/5">
+<p class="text-[12px] text-[#8D6E63] mb-1">체중</p>
+<p class="text-lg font-bold">+200g</p>
+<p class="text-[11px] text-[#81C784] font-medium flex items-center">
+<span class="material-symbols-outlined text-xs" data-icon="arrow_drop_up">arrow_drop_up</span>
+                        +50g
+                    </p>
+</div>
+</div>
+</section>
+<!-- Charts Section -->
+<section class="space-y-4 mb-6">
+<h2 class="text-sm font-bold text-[#8D6E63] uppercase tracking-wider px-1">7일 트렌드 분석</h2>
+<!-- Sleep Chart Card -->
+<div class="bg-white rounded-2xl p-4 shadow-[0_2px_8px_rgba(62,39,35,0.08)]">
+<div class="flex justify-between items-center mb-3">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[#FF8A80] text-lg" data-icon="bedtime">bedtime</span>
+<span class="font-bold text-sm">수면</span>
+</div>
+<span class="text-[11px] text-[#8D6E63]">단위: 시간</span>
+</div>
+<div class="h-20 w-full flex items-end justify-between px-2 gap-1">
+<div class="w-full bg-[#FF8A80]/10 rounded-t-lg h-[60%]"></div>
+<div class="w-full bg-[#FF8A80]/10 rounded-t-lg h-[75%]"></div>
+<div class="w-full bg-[#FF8A80]/10 rounded-t-lg h-[65%]"></div>
+<div class="w-full bg-[#FF8A80]/10 rounded-t-lg h-[90%]"></div>
+<div class="w-full bg-[#FF8A80]/10 rounded-t-lg h-[80%]"></div>
+<div class="w-full bg-[#FF8A80]/10 rounded-t-lg h-[85%]"></div>
+<div class="w-full bg-[#FF8A80] rounded-t-lg h-[95%]"></div>
+</div>
+</div>
+<!-- Feeding Chart Card -->
+<div class="bg-white rounded-2xl p-4 shadow-[0_2px_8px_rgba(62,39,35,0.08)]">
+<div class="flex justify-between items-center mb-3">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[#FF8A80] text-lg" data-icon="child_care">child_care</span>
+<span class="font-bold text-sm">수유</span>
+</div>
+<span class="text-[11px] text-[#8D6E63]">단위: 횟수</span>
+</div>
+<div class="h-16 w-full flex items-center justify-between px-2">
+<div class="w-full h-[2px] bg-[#FF8A80]/20 relative">
+<div class="absolute inset-0 flex justify-between items-center">
+<div class="w-2 h-2 rounded-full bg-[#FF8A80] -mt-[0px]"></div>
+<div class="w-2 h-2 rounded-full bg-[#FF8A80] mt-[4px]"></div>
+<div class="w-2 h-2 rounded-full bg-[#FF8A80] -mt-[6px]"></div>
+<div class="w-2 h-2 rounded-full bg-[#FF8A80] mt-[2px]"></div>
+<div class="w-2 h-2 rounded-full bg-[#FF8A80] -mt-[2px]"></div>
+<div class="w-2 h-2 rounded-full bg-[#FF8A80] mt-[8px]"></div>
+<div class="w-2 h-2 rounded-full bg-[#FF8A80] -mt-[4px]"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Diaper Chart Card -->
+<div class="bg-white rounded-2xl p-4 shadow-[0_2px_8px_rgba(62,39,35,0.08)]">
+<div class="flex justify-between items-center mb-3">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[#FF8A80] text-lg" data-icon="cleaning_services">cleaning_services</span>
+<span class="font-bold text-sm">기저귀</span>
+</div>
+</div>
+<div class="flex gap-2">
+<div class="flex-1 h-2 bg-[#FF8A80] rounded-full"></div>
+<div class="flex-1 h-2 bg-[#FF8A80]/40 rounded-full"></div>
+<div class="flex-1 h-2 bg-[#FF8A80] rounded-full"></div>
+<div class="flex-1 h-2 bg-[#FF8A80]/60 rounded-full"></div>
+<div class="flex-1 h-2 bg-[#FF8A80] rounded-full"></div>
+<div class="flex-1 h-2 bg-[#FF8A80] rounded-full"></div>
+<div class="flex-1 h-2 bg-[#FF8A80]/20 rounded-full"></div>
+</div>
+</div>
+</section>
+<!-- Side-by-Side Comparison -->
+<section class="bg-[#3E2723] text-white rounded-2xl p-6 shadow-lg mb-6">
+<h2 class="text-lg font-bold mb-6 text-center">지난 주 vs 이번 주</h2>
+<div class="space-y-4">
+<div class="grid grid-cols-3 items-center text-center">
+<div class="text-stone-400 text-[11px]">지난 주</div>
+<div class="text-[#FFD54F] font-bold text-sm">지표</div>
+<div class="text-stone-400 text-[11px]">이번 주</div>
+</div>
+<div class="h-px bg-white/10"></div>
+<div class="grid grid-cols-3 items-center text-center">
+<div class="text-white/80 font-medium">13.7h</div>
+<div class="text-[12px] bg-white/10 py-1 rounded-full mx-2 text-white/60">평균 수면</div>
+<div class="text-white font-bold">14.2h</div>
+</div>
+<div class="grid grid-cols-3 items-center text-center">
+<div class="text-white/80 font-medium">9회</div>
+<div class="text-[12px] bg-white/10 py-1 rounded-full mx-2 text-white/60">평균 수유</div>
+<div class="text-white font-bold">8회</div>
+</div>
+<div class="grid grid-cols-3 items-center text-center">
+<div class="text-white/80 font-medium">4.2kg</div>
+<div class="text-[12px] bg-white/10 py-1 rounded-full mx-2 text-white/60">현재 체중</div>
+<div class="text-white font-bold">4.4kg</div>
+</div>
+</div>
+</section>
+<!-- AI Insight Card -->
+<section class="bg-[#FFFDE7] border border-[#FFD54F]/30 rounded-2xl p-5 mb-8">
+<div class="flex items-start gap-3">
+<div class="bg-[#FFD54F] p-2 rounded-lg">
+<span class="material-symbols-outlined text-[#3E2723]" data-icon="lightbulb" style="font-variation-settings: 'FILL' 1;">lightbulb</span>
+</div>
+<div>
+<h3 class="font-bold text-[#3E2723] mb-1">주간 인사이트</h3>
+<p class="text-sm text-[#3E2723]/80 leading-relaxed">
+                        수면 패턴이 안정되고 있어요. 수유 간격이 늘어나는 것은 자연스러운 성장 신호예요.
+                    </p>
+</div>
+</div>
+</section>
+<!-- Action Button -->
+<button class="w-full bg-[#FF8A80] text-white font-bold py-4 rounded-xl shadow-md active:scale-95 transition-transform flex items-center justify-center gap-2 mb-10">
+<span class="material-symbols-outlined" data-icon="share">share</span>
+            리포트 공유하기
+        </button>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center h-20 pb-safe px-6 bg-white/90 backdrop-blur-md border-t border-[#8D6E63]/5 shadow-[0_-2px_10px_rgba(62,39,35,0.05)] rounded-t-2xl z-50">
+<a class="flex flex-col items-center justify-center text-[#8D6E63] hover:opacity-80 active:scale-90 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="mail">mail</span>
+<span class="font-['Inter'] text-[11px] font-medium">편지</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#FF8A80] font-semibold hover:opacity-80 active:scale-90 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="equalizer" style="font-variation-settings: 'FILL' 1;">equalizer</span>
+<span class="font-['Inter'] text-[11px] font-medium">성장</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#8D6E63] hover:opacity-80 active:scale-90 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="groups">groups</span>
+<span class="font-['Inter'] text-[11px] font-medium">커뮤니티</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#8D6E63] hover:opacity-80 active:scale-90 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-['Inter'] text-[11px] font-medium">설정</span>
+</a>
+</nav>
+</body></html>

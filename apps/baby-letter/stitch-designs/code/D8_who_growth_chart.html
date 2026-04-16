@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+
+<html lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-variant": "#ffdbce",
+                        "on-tertiary-container": "#1f632c",
+                        "primary-fixed-dim": "#e8786e",
+                        "background": "#FFF8E1",
+                        "surface-container": "#ffe9e2",
+                        "error-dim": "#6b0221",
+                        "secondary-container": "#ffe087",
+                        "primary-fixed": "#f8847b",
+                        "surface-container-low": "#fff1ec",
+                        "surface-container-high": "#ffe2d9",
+                        "on-primary-fixed-variant": "#611211",
+                        "surface-tint": "#9f403a",
+                        "outline-variant": "#dfa48f",
+                        "on-secondary-container": "#644f00",
+                        "secondary-dim": "#665100",
+                        "on-primary-container": "#540809",
+                        "on-error": "#fff7f7",
+                        "error": "#a8364b",
+                        "on-tertiary-fixed-variant": "#2a6e35",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary": "#286c34",
+                        "on-secondary-fixed": "#4e3d00",
+                        "primary-container": "#f8847b",
+                        "error-container": "#f97386",
+                        "primary-dim": "#90352f",
+                        "inverse-surface": "#1b0904",
+                        "secondary": "#745c00",
+                        "secondary-fixed-dim": "#fad04b",
+                        "on-error-container": "#6e0523",
+                        "tertiary-fixed-dim": "#a6eea7",
+                        "on-secondary-fixed-variant": "#705900",
+                        "surface-bright": "#fff8f6",
+                        "on-surface": "#4e2819",
+                        "inverse-primary": "#f8847b",
+                        "tertiary-fixed": "#b4fdb4",
+                        "on-primary-fixed": "#170000",
+                        "tertiary-dim": "#1a5f29",
+                        "tertiary-container": "#b4fdb4",
+                        "primary": "#FF8A80",
+                        "on-surface-variant": "#835342",
+                        "on-tertiary": "#e9ffe4",
+                        "surface-dim": "#ffd0bf",
+                        "on-background": "#3E2723",
+                        "on-tertiary-fixed": "#03501b",
+                        "on-secondary": "#fff8ee",
+                        "secondary-fixed": "#ffe087",
+                        "surface": "#ffffff",
+                        "outline": "#a26e5b",
+                        "on-primary": "#fff7f6",
+                        "inverse-on-surface": "#b89589",
+                        "surface-container-highest": "#ffdbce"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "12px",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Plus Jakarta Sans"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FFF8E1;
+            color: #3E2723;
+        }
+        .headline-font {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        .chart-container {
+            position: relative;
+            height: 240px;
+        }
+        .curve-line {
+            fill: none;
+            stroke-width: 1.5;
+        }
+        .percentile-label {
+            font-size: 10px;
+            fill: #8D6E63;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen pb-24">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-[#FFF8E1] flex items-center justify-between px-5 h-16 w-full">
+<div class="flex items-center gap-4">
+<button class="hover:bg-[#FFD54F]/20 transition-colors active:scale-95 duration-150 p-2 rounded-full">
+<span class="material-symbols-outlined text-[#FF8A80]" data-icon="arrow_back">arrow_back</span>
+</button>
+<h1 class="font-['Plus_Jakarta_Sans'] font-bold text-[#3E2723] text-lg">성장 차트</h1>
+</div>
+<button class="flex items-center gap-1 bg-white px-3 py-1.5 rounded-full shadow-sm hover:bg-[#FFD54F]/10 transition-colors active:scale-95 duration-150 border border-[#3E2723]/5">
+<span class="text-sm font-medium text-[#8D6E63]">3개월</span>
+<span class="material-symbols-outlined text-sm text-[#8D6E63]" data-icon="expand_more">expand_more</span>
+</button>
+</header>
+<main class="pt-20 px-5 space-y-6">
+<!-- Tab Bar -->
+<nav class="flex border-b border-[#3E2723]/10">
+<button class="flex-1 pb-3 text-center font-semibold text-[#FF8A80] border-b-2 border-[#FF8A80]">
+                체중
+            </button>
+<button class="flex-1 pb-3 text-center font-medium text-[#8D6E63]">
+                신장
+            </button>
+<button class="flex-1 pb-3 text-center font-medium text-[#8D6E63]">
+                머리둘레
+            </button>
+</nav>
+<!-- Chart Section -->
+<div class="bg-white rounded-xl p-5 shadow-[0_2px_8px_rgba(62,39,35,0.08)]">
+<div class="flex justify-between items-center mb-4">
+<span class="text-xs font-bold text-[#8D6E63]">kg</span>
+<div class="flex gap-3">
+<div class="flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-[#FF8A80]"></span>
+<span class="text-[10px] text-[#8D6E63]">우리 아기</span>
+</div>
+<div class="flex items-center gap-1">
+<span class="w-2 h-0.5 bg-[#8D6E63]/30"></span>
+<span class="text-[10px] text-[#8D6E63]">WHO 표준</span>
+</div>
+</div>
+</div>
+<div class="chart-container w-full overflow-hidden">
+<svg class="w-full h-full overflow-visible" viewbox="0 0 320 200">
+<!-- Y Axis Labels -->
+<text class="percentile-label" x="0" y="190">3.0</text>
+<text class="percentile-label" x="0" y="140">4.5</text>
+<text class="percentile-label" x="0" y="90">6.0</text>
+<text class="percentile-label" x="0" y="40">7.5</text>
+<!-- Percentile Bands (Reference) -->
+<!-- 97th Dashed -->
+<path d="M40 160 Q 140 100 280 40" fill="none" opacity="0.2" stroke="#8D6E63" stroke-dasharray="4" stroke-width="1"></path>
+<text class="percentile-label" x="285" y="45">97th</text>
+<!-- 75th -->
+<path d="M40 170 Q 140 115 280 60" fill="none" opacity="0.15" stroke="#8D6E63" stroke-width="1"></path>
+<!-- 50th (Solid Bolder) -->
+<path d="M40 180 Q 140 130 280 80" fill="none" opacity="0.3" stroke="#8D6E63" stroke-width="2"></path>
+<text class="percentile-label" x="285" y="85">50th</text>
+<!-- 25th -->
+<path d="M40 185 Q 140 145 280 100" fill="none" opacity="0.15" stroke="#8D6E63" stroke-width="1"></path>
+<!-- 3rd Dashed -->
+<path d="M40 195 Q 140 165 280 125" fill="none" opacity="0.2" stroke="#8D6E63" stroke-dasharray="4" stroke-width="1"></path>
+<text class="percentile-label" x="285" y="130">3rd</text>
+<!-- Baby's Data Line -->
+<path d="M40 185 L 120 155 L 200 120 L 280 95" fill="none" stroke="#FF8A80" stroke-width="3"></path>
+<!-- Data Dots -->
+<circle cx="40" cy="185" fill="#FF8A80" r="4"></circle>
+<circle cx="120" cy="155" fill="#FF8A80" r="4"></circle>
+<circle cx="200" cy="120" fill="#FF8A80" r="4"></circle>
+<!-- Pulse Effect Current Point -->
+<circle cx="280" cy="95" fill="#FF8A80" opacity="0.2" r="8"></circle>
+<circle cx="280" cy="95" fill="#FF8A80" r="5"></circle>
+<!-- Badge on current dot -->
+<rect fill="#FF8A80" height="22" rx="11" width="50" x="255" y="60"></rect>
+<text fill="white" font-size="10" font-weight="bold" text-anchor="middle" x="280" y="75">5.8kg</text>
+</svg>
+<!-- X Axis Labels -->
+<div class="flex justify-between px-10 mt-2">
+<span class="text-[10px] text-[#8D6E63] font-medium">0개월</span>
+<span class="text-[10px] text-[#8D6E63] font-medium">1개월</span>
+<span class="text-[10px] text-[#8D6E63] font-medium">2개월</span>
+<span class="text-[10px] text-[#8D6E63] font-medium">3개월</span>
+</div>
+</div>
+</div>
+<!-- Comparison Gauge -->
+<div class="space-y-4">
+<div class="flex justify-between items-end">
+<div>
+<h3 class="font-bold text-[#3E2723] text-lg">65번째 백분위</h3>
+<p class="text-sm text-[#8D6E63]">같은 또래 100명 중 65번째 크기예요</p>
+</div>
+<div class="bg-[#E8F5E9] text-[#2E7D32] px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1">
+                    정상 범위 안에 있어요 <span class="material-symbols-outlined text-[14px]">check</span>
+</div>
+</div>
+<div class="relative w-full h-3 bg-gradient-to-r from-[#FFF8E1] to-[#8D6E63]/20 rounded-full overflow-visible">
+<!-- Gauge Markers -->
+<div class="absolute left-0 top-full mt-1 text-[10px] text-[#8D6E63]">작음</div>
+<div class="absolute right-0 top-full mt-1 text-[10px] text-[#8D6E63]">큼</div>
+<div class="absolute left-[50%] top-full mt-1 -translate-x-1/2 text-[10px] text-[#8D6E63]">보통</div>
+<!-- Active Marker -->
+<div class="absolute top-1/2 left-[65%] -translate-x-1/2 -translate-y-1/2">
+<div class="w-4 h-4 bg-white border-2 border-[#FF8A80] rounded-full shadow-md"></div>
+<div class="absolute -bottom-6 left-1/2 -translate-x-1/2 w-0.5 h-2 bg-[#FF8A80]/50"></div>
+</div>
+</div>
+</div>
+<!-- Insight Card -->
+<div class="bg-white rounded-xl p-5 shadow-[0_2px_8px_rgba(62,39,35,0.08)] relative overflow-hidden">
+<div class="absolute top-0 right-0 w-24 h-24 bg-[#FF8A80]/5 rounded-bl-full -mr-8 -mt-8"></div>
+<div class="flex items-center gap-2 mb-3">
+<span class="text-lg">💡</span>
+<h3 class="font-bold text-[#3E2723] headline-font">성장 인사이트</h3>
+</div>
+<p class="text-[15px] leading-relaxed text-[#3E2723] mb-3">
+                지난 1개월간 하루 평균 <span class="font-bold text-[#FF8A80]">28g</span>씩 늘었어요. WHO 기준 정상 증가량 (25-35g/일) 범위 내입니다.
+            </p>
+<p class="text-[10px] text-[#8D6E63]/60 italic uppercase tracking-tight">
+                WHO Child Growth Standards, 2006
+            </p>
+</div>
+<!-- Record Button -->
+<button class="w-full py-4 rounded-xl border-2 border-dashed border-[#FF8A80] text-[#FF8A80] font-bold flex items-center justify-center gap-2 hover:bg-[#FF8A80]/5 transition-colors active:scale-[0.98]">
+<span class="material-symbols-outlined" data-icon="edit_note">edit_note</span>
+            새 측정값 기록하기
+        </button>
+<!-- Aesthetic Texture/Decoration -->
+<div class="flex justify-center py-4">
+<div class="w-1 h-1 rounded-full bg-[#FFD54F] mx-1"></div>
+<div class="w-1 h-1 rounded-full bg-[#FFD54F] mx-1"></div>
+<div class="w-1 h-1 rounded-full bg-[#FFD54F] mx-1"></div>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center px-4 pt-2 pb-6 bg-white dark:bg-stone-900 rounded-t-3xl shadow-[0_-2px_10px_rgba(62,39,35,0.05)] z-50">
+<div class="flex flex-col items-center justify-center text-[#8D6E63] dark:text-stone-400 hover:opacity-80 transition-opacity">
+<span class="material-symbols-outlined text-[24px]" data-icon="mail">mail</span>
+<span class="font-['Inter'] text-[11px] font-medium mt-1">Letters</span>
+</div>
+<div class="flex flex-col items-center justify-center text-[#FF8A80] dark:text-[#FF8A80] bg-[#FFF8E1] dark:bg-[#3E2723] rounded-2xl px-4 py-1">
+<span class="material-symbols-outlined text-[24px]" data-icon="show_chart" style="font-variation-settings: 'FILL' 1;">show_chart</span>
+<span class="font-['Inter'] text-[11px] font-medium mt-1">Growth</span>
+</div>
+<div class="flex flex-col items-center justify-center text-[#8D6E63] dark:text-stone-400 hover:opacity-80 transition-opacity">
+<span class="material-symbols-outlined text-[24px]" data-icon="medical_services">medical_services</span>
+<span class="font-['Inter'] text-[11px] font-medium mt-1">Health</span>
+</div>
+<div class="flex flex-col items-center justify-center text-[#8D6E63] dark:text-stone-400 hover:opacity-80 transition-opacity">
+<span class="material-symbols-outlined text-[24px]" data-icon="face">face</span>
+<span class="font-['Inter'] text-[11px] font-medium mt-1">Me</span>
+</div>
+</nav>
+</body></html>

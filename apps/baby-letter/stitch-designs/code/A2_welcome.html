@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+
+<html class="light" lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>BabyLetter - Welcome</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&amp;family=Inter:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-tertiary-container": "#1f632c",
+                    "inverse-surface": "#1b0904",
+                    "surface-dim": "#ffd0bf",
+                    "tertiary-fixed-dim": "#a6eea7",
+                    "on-secondary-fixed": "#4e3d00",
+                    "tertiary": "#286c34",
+                    "on-primary": "#fff7f6",
+                    "surface": "#fff8f6",
+                    "error-dim": "#6b0221",
+                    "surface-tint": "#9f403a",
+                    "tertiary-dim": "#1a5f29",
+                    "surface-container": "#ffe9e2",
+                    "on-error-container": "#6e0523",
+                    "secondary-dim": "#665100",
+                    "tertiary-fixed": "#b4fdb4",
+                    "surface-bright": "#fff8f6",
+                    "on-secondary-container": "#644f00",
+                    "background": "#fff8f6",
+                    "primary-fixed": "#f8847b",
+                    "surface-container-lowest": "#ffffff",
+                    "on-tertiary": "#e9ffe4",
+                    "on-background": "#4e2819",
+                    "secondary": "#745c00",
+                    "inverse-primary": "#f8847b",
+                    "secondary-container": "#ffe087",
+                    "surface-container-high": "#ffe2d9",
+                    "on-secondary": "#fff8ee",
+                    "on-primary-container": "#540809",
+                    "error-container": "#f97386",
+                    "on-surface": "#4e2819",
+                    "outline-variant": "#dfa48f",
+                    "primary-dim": "#90352f",
+                    "on-tertiary-fixed": "#03501b",
+                    "on-secondary-fixed-variant": "#705900",
+                    "on-primary-fixed-variant": "#611211",
+                    "tertiary-container": "#b4fdb4",
+                    "surface-variant": "#ffdbce",
+                    "secondary-fixed-dim": "#fad04b",
+                    "secondary-fixed": "#ffe087",
+                    "on-tertiary-fixed-variant": "#2a6e35",
+                    "primary-fixed-dim": "#e8786e",
+                    "outline": "#a26e5b",
+                    "error": "#a8364b",
+                    "on-error": "#fff7f7",
+                    "primary-container": "#f8847b",
+                    "on-surface-variant": "#835342",
+                    "on-primary-fixed": "#170000",
+                    "surface-container-low": "#fff1ec",
+                    "surface-container-highest": "#ffdbce",
+                    "inverse-on-surface": "#b89589",
+                    "primary": "#9f403a"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "12px",
+                    "full": "9999px"
+            },
+            "spacing": {},
+            "fontFamily": {
+                    "headline": ["Plus Jakarta Sans"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .wave-pattern {
+            background-color: transparent;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23FFD54F' fill-opacity='0.2' d='M0,160L48,176C96,192,192,224,288,213.3C384,203,480,149,576,149.3C672,149,768,203,864,213.3C960,224,1056,192,1152,181.3C1248,171,1344,181,1392,186.7L1440,192L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-[#FFF8E1] font-body text-on-surface min-h-screen flex flex-col">
+<header class="bg-[#FFF8E1] dark:bg-stone-950 flex justify-between items-center w-full px-5 py-2 docked full-width top-0 z-50">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-secondary-container flex items-center justify-center overflow-hidden">
+<span class="material-symbols-outlined text-secondary" data-icon="child_care">child_care</span>
+</div>
+<span class="text-xl font-bold text-[#3E2723] dark:text-stone-100 font-headline">BabyLetter</span>
+</div>
+<button class="text-[#8D6E63] hover:opacity-80 transition-opacity tap-highlight-transparent active:scale-95 transition-transform">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+</header>
+<main class="flex-grow flex flex-col">
+<section class="h-[397px] relative overflow-hidden flex items-end justify-center pb-8">
+<img alt="watercolor illustration of a cozy nursery with soft pastel colors" class="absolute inset-0 w-full h-full object-cover" data-alt="soft watercolor painting of a dreamy baby nursery with a crib and stars in pastel pink and amber tones" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAvcowGQQB1jnc7qIgx1Qu4Km9O70KE938yCHaBERH_684XOHslvQFevMx5qAPAjYmLDCvOqTTpOFJ7VZMEZ77eomYC9mMM4n3iKkJrpjHxIGMO5of6uWFiXKhEEKJvst_ljdWmIojvoaOFBuFBfy95Ul373XOPP-woLWX-Uyi_-G8aRj0ykU1lpTU4mswgBqLJ3yBA0wcDnok6tBY4wNM6q8_4DxOIcJLxGn0zmlAYMI1USpvyl6MlqbEqfIoUUZtfb5MfUDgFYGqw"/>
+<div class="absolute inset-0 bg-gradient-to-b from-transparent to-[#FFF8E1]"></div>
+<div class="relative z-10 text-center px-6">
+<h1 class="text-3xl font-headline font-bold text-[#3E2723] mb-2 tracking-tight">안녕하세요, 엄마!</h1>
+<p class="text-[#8D6E63] font-medium">아기가 편지를 보내기 시작했어요</p>
+</div>
+</section>
+<section class="px-5 pb-24 flex flex-col gap-4 max-w-md mx-auto w-full">
+<button class="w-full text-left bg-gradient-to-br from-[#FFF1F0] to-[#FFE4E2] p-6 rounded-xl shadow-[0_2px_8px_rgba(62,39,35,0.08)] transition-all duration-300 active:scale-[0.98] group flex items-center gap-4 border border-[#FF8A80]/10">
+<div class="w-16 h-16 bg-white rounded-full flex items-center justify-center text-3xl shadow-sm">
+                    🤰
+                </div>
+<div class="flex-grow">
+<span class="text-xs font-bold text-[#FF8A80] tracking-wider uppercase">임신 중</span>
+<h3 class="text-lg font-headline font-semibold text-[#3E2723]">아직 배 속에 있어요</h3>
+</div>
+<span class="material-symbols-outlined text-[#FF8A80] opacity-50 group-hover:opacity-100 transition-opacity" data-icon="chevron_right">chevron_right</span>
+</button>
+<button class="w-full text-left bg-gradient-to-br from-[#FFF9E6] to-[#FFF3CC] p-6 rounded-xl shadow-[0_2px_8px_rgba(62,39,35,0.08)] transition-all duration-300 active:scale-[0.98] group flex items-center gap-4 border border-[#FFD54F]/10">
+<div class="w-16 h-16 bg-white rounded-full flex items-center justify-center text-3xl shadow-sm">
+                    👶
+                </div>
+<div class="flex-grow">
+<span class="text-xs font-bold text-[#8D6E63] tracking-wider uppercase">출산 후</span>
+<h3 class="text-lg font-headline font-semibold text-[#3E2723]">이미 만났어요!</h3>
+</div>
+<span class="material-symbols-outlined text-[#8D6E63] opacity-50 group-hover:opacity-100 transition-opacity" data-icon="chevron_right">chevron_right</span>
+</button>
+<div class="mt-4 text-center">
+<p class="text-xs text-[#8D6E63] italic">"엄마의 매일이 아기에겐 특별한 이야기가 됩니다."</p>
+</div>
+</section>
+</main>
+<div class="fixed bottom-0 left-0 w-full h-32 wave-pattern pointer-events-none z-0"></div>
+</body></html>

@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+
+<html class="light" lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>BabyLetter - 성장 여정</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "error-dim": "#6b0221",
+                        "primary-container": "#f8847b",
+                        "inverse-primary": "#f8847b",
+                        "surface-variant": "#ffdbce",
+                        "on-tertiary-container": "#1f632c",
+                        "on-secondary-fixed": "#4e3d00",
+                        "on-primary-fixed-variant": "#611211",
+                        "on-background": "#4e2819",
+                        "secondary-fixed-dim": "#fad04b",
+                        "surface-tint": "#9f403a",
+                        "error-container": "#f97386",
+                        "tertiary-fixed": "#b4fdb4",
+                        "primary-fixed": "#f8847b",
+                        "tertiary-dim": "#1a5f29",
+                        "primary-fixed-dim": "#e8786e",
+                        "tertiary-fixed-dim": "#a6eea7",
+                        "on-tertiary": "#e9ffe4",
+                        "inverse-on-surface": "#b89589",
+                        "surface-container-low": "#fff1ec",
+                        "on-tertiary-fixed-variant": "#2a6e35",
+                        "on-surface-variant": "#835342",
+                        "on-secondary-container": "#644f00",
+                        "on-surface": "#4e2819",
+                        "surface-dim": "#ffd0bf",
+                        "on-error-container": "#6e0523",
+                        "on-primary-container": "#540809",
+                        "surface-container-highest": "#ffdbce",
+                        "tertiary": "#286c34",
+                        "surface-bright": "#fff8f6",
+                        "on-error": "#fff7f7",
+                        "inverse-surface": "#1b0904",
+                        "surface-container-high": "#ffe2d9",
+                        "secondary-fixed": "#ffe087",
+                        "error": "#a8364b",
+                        "tertiary-container": "#b4fdb4",
+                        "on-secondary-fixed-variant": "#705900",
+                        "surface": "#fff8f6",
+                        "on-primary-fixed": "#170000",
+                        "primary": "#9f403a",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary-fixed": "#03501b",
+                        "on-primary": "#fff7f6",
+                        "secondary": "#745c00",
+                        "background": "#fff8f6",
+                        "primary-dim": "#90352f",
+                        "outline-variant": "#dfa48f",
+                        "secondary-dim": "#665100",
+                        "surface-container": "#ffe9e2",
+                        "secondary-container": "#ffe087",
+                        "outline": "#a26e5b",
+                        "on-secondary": "#fff8ee"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Plus Jakarta Sans"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .map-path {
+            stroke-dasharray: 8 8;
+        }
+        .node-pulse {
+            box-shadow: 0 0 0 0 rgba(248, 132, 123, 0.7);
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(248, 132, 123, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 15px rgba(248, 132, 123, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(248, 132, 123, 0); }
+        }
+        .winding-path {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-[#FFF8E1] font-body text-on-surface">
+<!-- TopAppBar -->
+<nav class="bg-[#FFF8E1] dark:bg-stone-900 flex justify-between items-center px-5 h-16 w-full fixed top-0 z-50">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[#FF8A80]" data-icon="map">map</span>
+<h1 class="font-headline font-bold text-[#3E2723] dark:text-stone-100 text-xl">Our Adventure</h1>
+</div>
+<div class="flex items-center gap-3">
+<div class="bg-primary-container text-on-primary-container px-3 py-1 rounded-full text-sm font-bold">24주</div>
+<div class="w-8 h-8 rounded-full overflow-hidden border-2 border-primary-container">
+<img alt="Mom and Dad Profile" data-alt="Close up of a happy young couple smiling and leaning their heads together in soft warm sunlight" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAKky4bLHsC3II6DBbkbWBMKNnCo2lwdxtsnMprIa0kp-k5WrH_9aTMxMmZAVblqj0kIIzyWr10V-2JvFjEOnJU-Sh0ZN_xkJU1TqltB5BCUB9F2z8agnrZVgUO07LwSJ7cCIuHPnv_oEhYySjAteQK47gvoCKm9tOAQNg7rc5dmRxezgpqhjU0hbKHiunkBHOf406CwSEoS6IAH0RMmr-33RwI_RpOV82ltdIS8M5JOIruoBnSwtRX6TBoE9qrRTI_DmELUyWJX2k-"/>
+</div>
+</div>
+</nav>
+<main class="pt-24 pb-32 px-5 max-w-lg mx-auto relative overflow-hidden min-h-screen">
+<!-- Game Map Logic: SVG Path -->
+<svg class="winding-path opacity-20" fill="none" viewbox="0 0 400 1600" xmlns="http://www.w3.org/2000/svg">
+<path class="map-path" d="M200 1500 C 350 1400, 350 1300, 200 1200 C 50 1100, 50 1000, 200 900 C 350 800, 350 700, 200 600 C 50 500, 50 400, 200 300 C 350 200, 350 100, 200 0" stroke="#3E2723" stroke-linecap="round" stroke-width="4"></path>
+</svg>
+<!-- Timeline Zones (Reversed Order for Top-to-Bottom Game Flow) -->
+<!-- Zone C: Locked (Future) -->
+<div class="relative z-10 mb-20">
+<div class="flex flex-col items-center gap-12">
+<div class="bg-primary-container/20 text-primary px-4 py-1 rounded-full text-sm font-bold">🌻 후기태아</div>
+<!-- 40 Weeks -->
+<div class="flex flex-col items-center opacity-40 grayscale">
+<div class="w-16 h-16 rounded-full bg-white flex items-center justify-center border-4 border-outline-variant shadow-sm relative">
+<span class="material-symbols-outlined text-outline" data-icon="water_lemon">water</span>
+<div class="absolute -top-3 -right-3 bg-amber-400 p-1 rounded-full shadow-sm">
+<span class="material-symbols-outlined text-[16px] text-white" data-icon="star" data-weight="fill">star</span>
+</div>
+</div>
+<span class="text-xs font-bold mt-2 text-secondary">40 Weeks</span>
+<span class="text-[10px] text-outline">출산!</span>
+</div>
+<!-- 36 Weeks -->
+<div class="flex flex-col items-center opacity-40 grayscale translate-x-12">
+<div class="w-14 h-14 rounded-full bg-white flex items-center justify-center border-4 border-outline-variant shadow-sm">
+<span class="material-symbols-outlined text-outline" data-icon="lock">lock</span>
+</div>
+<span class="text-xs font-bold mt-2 text-secondary">36 Weeks</span>
+</div>
+<!-- 32 Weeks -->
+<div class="flex flex-col items-center opacity-40 grayscale -translate-x-12">
+<div class="w-14 h-14 rounded-full bg-white flex items-center justify-center border-4 border-outline-variant shadow-sm">
+<span class="material-symbols-outlined text-outline" data-icon="lock">lock</span>
+</div>
+<span class="text-xs font-bold mt-2 text-secondary">32 Weeks</span>
+</div>
+<!-- 28 Weeks -->
+<div class="flex flex-col items-center opacity-40 grayscale translate-x-10">
+<div class="w-14 h-14 rounded-full bg-white flex items-center justify-center border-4 border-outline-variant shadow-sm">
+<span class="material-symbols-outlined text-outline" data-icon="lock">lock</span>
+</div>
+<span class="text-xs font-bold mt-2 text-secondary">28 Weeks</span>
+</div>
+</div>
+</div>
+<!-- Zone B: Active (Current & Recent) -->
+<div class="relative z-10 mb-20">
+<div class="flex flex-col items-center gap-16">
+<!-- CURRENT NODE: 24 Weeks -->
+<div class="flex flex-col items-center relative">
+<!-- Baby Speech Bubble -->
+<div class="absolute -top-16 left-12 bg-white px-4 py-3 rounded-2xl rounded-bl-none shadow-lg border border-primary/10 w-48">
+<p class="text-xs font-medium text-on-surface">"엄마, 나 꿈을 꾸기 시작했어!"</p>
+<div class="absolute bottom-[-10px] left-0 w-4 h-4 bg-white rotate-45 border-r border-b border-primary/10"></div>
+</div>
+<div class="w-24 h-24 rounded-full bg-primary-container flex items-center justify-center border-8 border-white shadow-xl node-pulse z-20">
+<span class="material-symbols-outlined text-white text-4xl" data-icon="agriculture">agriculture</span> <!-- Corn approx -->
+</div>
+<div class="mt-4 flex flex-col items-center">
+<div class="bg-primary text-white text-[10px] font-black px-2 py-0.5 rounded-full mb-1">지금 여기!</div>
+<span class="text-lg font-headline font-bold text-on-background">24 Weeks</span>
+<span class="text-xs font-bold text-primary">30cm</span>
+</div>
+</div>
+<!-- 20 Weeks -->
+<div class="flex flex-col items-center -translate-x-14">
+<div class="w-14 h-14 rounded-full bg-secondary-container flex items-center justify-center border-4 border-white shadow-md">
+<span class="material-symbols-outlined text-secondary" data-icon="lunch_dining">lunch_dining</span>
+</div>
+<span class="text-xs font-bold mt-2 text-on-surface">20 Weeks</span>
+<span class="text-[10px] font-medium text-outline">25cm</span>
+</div>
+<div class="bg-secondary-fixed/30 text-on-secondary-fixed px-4 py-1 rounded-full text-sm font-bold mb-4">🌿 초기태아</div>
+<!-- 16 Weeks -->
+<div class="flex flex-col items-center translate-x-12">
+<div class="w-14 h-14 rounded-full bg-secondary-container flex items-center justify-center border-4 border-white shadow-md">
+<span class="material-symbols-outlined text-secondary" data-icon="nest_eco_leaf">nest_eco_leaf</span>
+</div>
+<span class="text-xs font-bold mt-2 text-on-surface">16 Weeks</span>
+<span class="text-[10px] font-medium text-outline">11.6cm</span>
+</div>
+<!-- 12 Weeks -->
+<div class="flex flex-col items-center -translate-x-8">
+<div class="w-14 h-14 rounded-full bg-secondary-container flex items-center justify-center border-4 border-white shadow-md">
+<span class="material-symbols-outlined text-secondary" data-icon="fiber_manual_record" data-weight="fill">fiber_manual_record</span>
+</div>
+<span class="text-xs font-bold mt-2 text-on-surface">12 Weeks</span>
+<span class="text-[10px] font-medium text-outline">5.4cm</span>
+</div>
+</div>
+</div>
+<!-- Zone A: Passed (History) -->
+<div class="relative z-10">
+<div class="flex flex-col items-center gap-12 pb-20">
+<div class="bg-tertiary-container/40 text-on-tertiary-container px-4 py-1 rounded-full text-sm font-bold">🌱 배아기</div>
+<!-- 8 Weeks -->
+<div class="flex flex-col items-center translate-x-10">
+<div class="w-12 h-12 rounded-full bg-tertiary-fixed flex items-center justify-center border-4 border-white shadow-sm opacity-60">
+<span class="material-symbols-outlined text-on-tertiary-container" data-icon="lens" data-weight="fill">lens</span>
+</div>
+<span class="text-xs font-bold mt-2 text-on-surface opacity-60">8 Weeks</span>
+<span class="text-[10px] font-medium text-outline opacity-60">1.6cm</span>
+</div>
+<!-- 4 Weeks -->
+<div class="flex flex-col items-center">
+<div class="w-10 h-10 rounded-full bg-tertiary-fixed flex items-center justify-center border-4 border-white shadow-sm opacity-60">
+<span class="material-symbols-outlined text-on-tertiary-container text-xs" data-icon="grain">grain</span>
+</div>
+<span class="text-xs font-bold mt-2 text-on-surface opacity-60">4 Weeks</span>
+<span class="text-[10px] font-medium text-outline opacity-60">1mm</span>
+</div>
+</div>
+</div>
+<!-- Footer Message -->
+<div class="text-center mt-12 mb-8">
+<p class="text-secondary font-medium italic">매주 새로운 변화가 기다리고 있어요 💛</p>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-3 bg-white/90 dark:bg-stone-950/90 backdrop-blur-md rounded-t-[24px] shadow-[0_-4px_12px_rgba(62,39,35,0.05)] border-t border-[#3E2723]/5">
+<a class="flex flex-col items-center justify-center text-[#8D6E63] dark:text-stone-400 hover:text-[#FF8A80]" href="#">
+<span class="material-symbols-outlined" data-icon="mail">mail</span>
+<span class="font-headline text-[11px] font-medium">Letters</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#FF8A80] bg-[#FF8A80]/10 rounded-xl px-3 py-1 scale-90 duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="explore">explore</span>
+<span class="font-headline text-[11px] font-medium">Map</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#8D6E63] dark:text-stone-400 hover:text-[#FF8A80]" href="#">
+<span class="material-symbols-outlined" data-icon="Child_care">child_care</span>
+<span class="font-headline text-[11px] font-medium">Growth</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#8D6E63] dark:text-stone-400 hover:text-[#FF8A80]" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-headline text-[11px] font-medium">Settings</span>
+</a>
+</nav>
+</body></html>

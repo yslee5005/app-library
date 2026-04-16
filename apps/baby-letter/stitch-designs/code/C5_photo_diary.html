@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+
+<html lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "primary-container": "#f8847b",
+                "on-background": "#4e2819",
+                "tertiary-fixed": "#b4fdb4",
+                "primary": "#9f403a",
+                "inverse-on-surface": "#b89589",
+                "error-container": "#f97386",
+                "on-primary-fixed-variant": "#611211",
+                "surface-container": "#ffe9e2",
+                "outline-variant": "#dfa48f",
+                "surface-container-highest": "#ffdbce",
+                "secondary-dim": "#665100",
+                "surface": "#fff8f6",
+                "on-error": "#fff7f7",
+                "on-error-container": "#6e0523",
+                "inverse-primary": "#f8847b",
+                "surface-container-high": "#ffe2d9",
+                "surface-container-lowest": "#ffffff",
+                "primary-fixed-dim": "#e8786e",
+                "on-secondary": "#fff8ee",
+                "on-tertiary": "#e9ffe4",
+                "on-tertiary-container": "#1f632c",
+                "tertiary-container": "#b4fdb4",
+                "secondary-fixed-dim": "#fad04b",
+                "outline": "#a26e5b",
+                "tertiary": "#286c34",
+                "surface-container-low": "#fff1ec",
+                "on-primary-container": "#540809",
+                "surface-tint": "#9f403a",
+                "surface-bright": "#fff8f6",
+                "primary-dim": "#90352f",
+                "error": "#a8364b",
+                "on-tertiary-fixed": "#03501b",
+                "error-dim": "#6b0221",
+                "on-secondary-fixed-variant": "#705900",
+                "background": "#fff8f6",
+                "on-primary": "#fff7f6",
+                "tertiary-dim": "#1a5f29",
+                "secondary-container": "#ffe087",
+                "secondary": "#745c00",
+                "surface-dim": "#ffd0bf",
+                "primary-fixed": "#f8847b",
+                "on-primary-fixed": "#170000",
+                "on-surface-variant": "#835342",
+                "secondary-fixed": "#ffe087",
+                "on-secondary-fixed": "#4e3d00",
+                "surface-variant": "#ffdbce",
+                "on-surface": "#4e2819",
+                "on-secondary-container": "#644f00",
+                "inverse-surface": "#1b0904",
+                "tertiary-fixed-dim": "#a6eea7",
+                "on-tertiary-fixed-variant": "#2a6e35"
+            },
+            "borderRadius": {
+                "DEFAULT": "0.25rem",
+                "lg": "0.5rem",
+                "xl": "0.75rem",
+                "full": "9999px"
+            },
+            "fontFamily": {
+                "headline": ["Plus Jakarta Sans"],
+                "body": ["Inter"],
+                "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { background-color: #FFF8E1; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="font-body text-on-surface antialiased">
+<header class="bg-[#FFF8E1] flex justify-between items-center w-full px-5 h-16 fixed top-0 z-50 border-b border-[#8D6E63]/10 shadow-sm">
+<div class="flex items-center gap-3">
+<button class="transition-transform active:scale-95 text-[#8D6E63]">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<h1 class="font-headline font-bold text-[#3E2723] text-lg">사진 일기</h1>
+</div>
+<div class="flex items-center">
+<div class="w-8 h-8 rounded-full overflow-hidden border-2 border-white shadow-sm transition-transform active:scale-95">
+<img alt="Mother's profile" class="w-full h-full object-cover" data-alt="portrait of a smiling mother with soft natural lighting and warm indoor background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBYm4gtvxIy_MI1bt901kqmMw92Vidj0NyihL4Azrtazae7wtO6_MBrmPNM0pE2lB2bXazP-imq7FWjsuKv0PZVXbBgQeQ0DwLF2O4cvQ83XDvaCQlnfNOZoUVcI3l33Gqf-HE1MwlotHgyQBXqzdtIueWj6IUjCBKEZDejziby1O6v8h7bxQlRvJxzNdP2NpizvHPrBUCi3CdHTkH92GmSCFNiaak--UdI1W1WNB9W_nKih_Y3H7xIDOHZqrhF0oiP2C7NkhXwNDcr"/>
+</div>
+</div>
+</header>
+<main class="pt-20 pb-32 px-5 max-w-md mx-auto space-y-6">
+<div class="flex flex-col items-center gap-2">
+<span class="bg-[#FF8A80] text-white px-4 py-1.5 rounded-full text-sm font-semibold shadow-sm">
+                2026.04.16 · 24주 3일
+            </span>
+<p class="text-[#8D6E63] text-sm italic">"엄마, 오늘 제 사진 찍어주시는 거예요?"</p>
+</div>
+<div class="relative group">
+<div class="w-full aspect-[4/5] border-2 border-dashed border-[#8D6E63]/30 rounded-xl bg-white/50 flex flex-col items-center justify-center gap-3 transition-all hover:bg-white/80 active:scale-[0.98]">
+<div class="w-16 h-16 bg-[#FFD54F]/20 rounded-full flex items-center justify-center text-[#FF8A80]">
+<span class="material-symbols-outlined text-4xl" style="font-variation-settings: 'FILL' 1;">photo_camera</span>
+</div>
+<span class="font-bold text-[#3E2723]">사진 추가</span>
+<span class="text-xs text-[#8D6E63]">가장 소중한 순간을 담아보세요</span>
+</div>
+</div>
+<div class="flex gap-2 overflow-x-auto no-scrollbar pb-1">
+<button class="whitespace-nowrap px-4 py-2 rounded-full bg-[#FF8A80] text-white text-sm font-medium shadow-sm transition-all">배 사진</button>
+<button class="whitespace-nowrap px-4 py-2 rounded-full bg-white text-[#8D6E63] border border-[#8D6E63]/10 text-sm font-medium transition-all hover:bg-[#FFD54F]/10">초음파</button>
+<button class="whitespace-nowrap px-4 py-2 rounded-full bg-white text-[#8D6E63] border border-[#8D6E63]/10 text-sm font-medium transition-all hover:bg-[#FFD54F]/10">일상</button>
+<button class="whitespace-nowrap px-4 py-2 rounded-full bg-white text-[#8D6E63] border border-[#8D6E63]/10 text-sm font-medium transition-all hover:bg-[#FFD54F]/10">특별한 순간</button>
+</div>
+<div class="bg-white p-4 rounded-xl shadow-sm border border-[#8D6E63]/5">
+<textarea class="w-full bg-transparent border-none p-0 focus:ring-0 text-[#3E2723] placeholder-[#8D6E63]/50 text-base resize-none h-24" placeholder="이 순간을 기록해보세요..."></textarea>
+</div>
+<section class="space-y-3">
+<h2 class="font-headline font-bold text-[#3E2723] text-base flex items-center gap-2">
+<span class="material-symbols-outlined text-[#FF8A80]">history</span> 최근 기록
+            </h2>
+<div class="flex gap-3 overflow-x-auto no-scrollbar">
+<div class="flex-shrink-0 relative">
+<div class="w-24 h-24 rounded-lg overflow-hidden shadow-sm">
+<img class="w-full h-full object-cover" data-alt="close-up of a pregnant woman's belly in soft sunlight with warm pastel aesthetic" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCJZkAHPpi9RohPL2XlD7aIaJUEwKpvtrXhFJ9wj3-3cwx7l5d91PlQlgAtbP6OqCOm9D2Ulge_5JMPNM80Gp8PDK8GXdsmJE90chtAAIItJ1bYhm4rwdU2lZBl4xbz645wIzMtwD-c7cDgcVicPgBvDeaVXkBpEJ1gSq7w97qZQZQWkCOSfmIdJlz3ZXwdgKI3WvL_D-dINhuWhNUVG0chYUflmvvWN8ZE-LL7NPXVhumebmW3yeuYL0prgaJojuJn0lSYBA0fZjVp"/>
+</div>
+<span class="absolute bottom-1 right-1 bg-black/40 text-white text-[10px] px-1.5 rounded-full backdrop-blur-sm">04.14</span>
+</div>
+<div class="flex-shrink-0 relative">
+<div class="w-24 h-24 rounded-lg overflow-hidden shadow-sm">
+<img class="w-full h-full object-cover" data-alt="black and white ultrasound image of a baby, clinical but heartwarming, grainy aesthetic" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCKAxUNPEv3mPUYRQuOzhRc36RAvPjTrUUm4n2F-NmkybiRCY5IciOXd-oa-ii4jgtv4JotH69ZobbqzxFDP06vb3MQIl9SrUwSy4qbMTI9B-XiZQxtfuV7IBw71OPpDB7i8TctKVV5QzxHEa4GqthlqASg5B7nGnmhPSy9ZzMr-4HKzVAT1LZKiGwl3zS7VZnPECgeOv601wpB7_v-2X5vTiSV9Kl3rIXAK88THf3UWyWQcSK0HEqHE-Hp6d0Oa65O7wUuGihA8IBH"/>
+</div>
+<span class="absolute bottom-1 right-1 bg-black/40 text-white text-[10px] px-1.5 rounded-full backdrop-blur-sm">04.12</span>
+</div>
+<div class="flex-shrink-0 relative">
+<div class="w-24 h-24 rounded-lg overflow-hidden shadow-sm">
+<img class="w-full h-full object-cover" data-alt="soft warm baby nursery details like a small pair of shoes or a rattle with morning light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD9Zjcjx7erfwApMmYu5cJGFyGBqHn9qcAMqV-j2tGOYWEjWA2JuyjqLMG8ty9lQFDKlvfn60X9AIL1jVlV_ve427FE7N15QjZmsj5PwK4jU2T-fLUSJqcAy8tcpnBTPSfy6oOCjCab8YNe3KdG69GXcuVq-FfS756iJKVJL9wbcCIQ4XLSSumP9gZ-HrWNtWTSKYFJf7dG2NmpP-u_jMSF08o1KBKxswtWOAy98Jt5ccIkgCCEE1mVB1eVzIigWOWfbztEC7U7VP0v"/>
+</div>
+<span class="absolute bottom-1 right-1 bg-black/40 text-white text-[10px] px-1.5 rounded-full backdrop-blur-sm">04.10</span>
+</div>
+</div>
+</section>
+<section class="bg-white p-5 rounded-xl shadow-sm border border-[#8D6E63]/5 space-y-4">
+<div class="flex justify-between items-center">
+<h2 class="font-headline font-bold text-[#3E2723]">2026년 4월</h2>
+<div class="flex gap-2">
+<span class="material-symbols-outlined text-[#8D6E63] text-xl">chevron_left</span>
+<span class="material-symbols-outlined text-[#8D6E63] text-xl">chevron_right</span>
+</div>
+</div>
+<div class="grid grid-cols-7 gap-y-3 text-center text-xs font-medium text-[#8D6E63]/70">
+<span>일</span><span>월</span><span>화</span><span>수</span><span>목</span><span>금</span><span>토</span>
+</div>
+<div class="grid grid-cols-7 gap-y-4 text-center">
+<div class="text-sm text-[#8D6E63]/30">29</div>
+<div class="text-sm text-[#8D6E63]/30">31</div>
+<div class="text-sm font-semibold text-[#3E2723]">1</div>
+<div class="text-sm font-semibold text-[#3E2723]">2</div>
+<div class="text-sm font-semibold text-[#3E2723]">3</div>
+<div class="text-sm font-semibold text-[#3E2723]">4</div>
+<div class="text-sm font-semibold text-[#3E2723]">5</div>
+<div class="text-sm font-semibold text-[#3E2723]">6</div>
+<div class="text-sm font-semibold text-[#3E2723] flex flex-col items-center">7<div class="w-1 h-1 bg-[#FF8A80] rounded-full mt-0.5"></div></div>
+<div class="text-sm font-semibold text-[#3E2723]">8</div>
+<div class="text-sm font-semibold text-[#3E2723]">9</div>
+<div class="text-sm font-semibold text-[#3E2723] flex flex-col items-center">10<div class="w-1 h-1 bg-[#FF8A80] rounded-full mt-0.5"></div></div>
+<div class="text-sm font-semibold text-[#3E2723]">11</div>
+<div class="text-sm font-semibold text-[#3E2723] flex flex-col items-center">12<div class="w-1 h-1 bg-[#FF8A80] rounded-full mt-0.5"></div></div>
+<div class="text-sm font-semibold text-[#3E2723]">13</div>
+<div class="text-sm font-semibold text-[#3E2723] flex flex-col items-center">14<div class="w-1 h-1 bg-[#FF8A80] rounded-full mt-0.5"></div></div>
+<div class="text-sm font-semibold text-[#3E2723]">15</div>
+<div class="relative flex justify-center">
+<div class="w-8 h-8 -mt-1.5 flex items-center justify-center bg-[#FFD54F] rounded-full text-white font-bold ring-4 ring-[#FFD54F]/20">16</div>
+</div>
+<div class="text-sm font-semibold text-[#3E2723]">17</div>
+<div class="text-sm font-semibold text-[#3E2723]">18</div>
+<div class="text-sm font-semibold text-[#3E2723]">19</div>
+</div>
+</section>
+<button class="w-full bg-[#FF8A80] hover:bg-[#ff7b70] text-white h-14 rounded-xl font-bold flex items-center justify-center gap-2 shadow-lg transition-all active:scale-[0.98]">
+<span>오늘의 일기 저장하기</span>
+<span class="bg-white/20 px-2 py-0.5 rounded text-xs">+10 XP</span>
+</button>
+</main>
+<nav class="fixed bottom-0 w-full z-50 flex justify-around items-center h-20 pb-safe px-4 bg-white border-t border-[#8D6E63]/10 shadow-[0_-2px_8px_rgba(62,39,35,0.08)] rounded-t-xl">
+<a class="flex flex-col items-center justify-center text-[#8D6E63] hover:opacity-80 transition-all active:scale-90" href="#">
+<span class="material-symbols-outlined text-2xl">mail</span>
+<span class="font-['Inter'] text-[11px] font-medium">Letters</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#FF8A80] font-semibold hover:opacity-80 transition-all active:scale-90" href="#">
+<span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1;">photo_library</span>
+<span class="font-['Inter'] text-[11px] font-medium">Diary</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#8D6E63] hover:opacity-80 transition-all active:scale-90" href="#">
+<span class="material-symbols-outlined text-2xl">monitoring</span>
+<span class="font-['Inter'] text-[11px] font-medium">Growth</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#8D6E63] hover:opacity-80 transition-all active:scale-90" href="#">
+<span class="material-symbols-outlined text-2xl">settings</span>
+<span class="font-['Inter'] text-[11px] font-medium">Settings</span>
+</a>
+</nav>
+</body></html>

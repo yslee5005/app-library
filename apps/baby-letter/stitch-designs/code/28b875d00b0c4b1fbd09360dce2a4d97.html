@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+
+<html lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>오늘의 기록 - BabyLetter</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-fixed-variant": "#611211",
+                        "on-background": "#4e2819",
+                        "inverse-surface": "#1b0904",
+                        "surface-bright": "#fff8f6",
+                        "on-error-container": "#6e0523",
+                        "primary": "#9f403a",
+                        "on-error": "#fff7f7",
+                        "surface-container-low": "#fff1ec",
+                        "surface": "#fff8f6",
+                        "tertiary-fixed": "#b4fdb4",
+                        "surface-container-lowest": "#ffffff",
+                        "error-container": "#f97386",
+                        "primary-fixed-dim": "#e8786e",
+                        "secondary-fixed-dim": "#fad04b",
+                        "tertiary-fixed-dim": "#a6eea7",
+                        "secondary-fixed": "#ffe087",
+                        "outline": "#a26e5b",
+                        "on-tertiary-container": "#1f632c",
+                        "on-surface-variant": "#835342",
+                        "inverse-primary": "#f8847b",
+                        "tertiary": "#286c34",
+                        "secondary-dim": "#665100",
+                        "surface-dim": "#ffd0bf",
+                        "on-tertiary": "#e9ffe4",
+                        "secondary": "#745c00",
+                        "surface-container": "#ffe9e2",
+                        "on-tertiary-fixed": "#03501b",
+                        "on-tertiary-fixed-variant": "#2a6e35",
+                        "on-secondary-fixed": "#4e3d00",
+                        "secondary-container": "#ffe087",
+                        "on-surface": "#4e2819",
+                        "on-secondary-container": "#644f00",
+                        "primary-container": "#f8847b",
+                        "on-secondary": "#fff8ee",
+                        "primary-dim": "#90352f",
+                        "surface-container-highest": "#ffdbce",
+                        "tertiary-dim": "#1a5f29",
+                        "on-secondary-fixed-variant": "#705900",
+                        "error-dim": "#6b0221",
+                        "outline-variant": "#dfa48f",
+                        "primary-fixed": "#f8847b",
+                        "tertiary-container": "#b4fdb4",
+                        "error": "#a8364b",
+                        "inverse-on-surface": "#b89589",
+                        "background": "#fff8f6",
+                        "surface-tint": "#9f403a",
+                        "on-primary": "#fff7f6",
+                        "on-primary-fixed": "#170000",
+                        "on-primary-container": "#540809",
+                        "surface-variant": "#ffdbce",
+                        "surface-container-high": "#ffe2d9"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Plus Jakarta Sans"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; background-color: #FFF8E1; }
+        .headline-font { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="text-on-background min-h-screen pb-24">
+<!-- TopAppBar -->
+<header class="fixed top-0 left-0 right-0 z-50 bg-[#FFF8E1] flex justify-between items-center px-5 py-4 w-full">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center overflow-hidden border-2 border-white shadow-sm">
+<img alt="Baby Avatar" class="w-full h-full object-cover" data-alt="cute minimalist 3d illustration of a smiling baby face with soft pastel colors and warm lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuADMAZaG74UA9UcAruPEd2lzq7klpSv8zROmxXVHVoVczhPAzgfLOHvS1ximEL9bdwkulJPDhG9ywNHbHI9XJqHrDk7LpQ1mJpTSbCvIeskaL7-MPuabu0VVTZSvJzq_VVHeakZ3AL053yCvHz-lJeqbHh4192BASbQO9soEHOuWfQXJ-Y2nZIHjMMUOFLnBx2IEflq4TQdilQfF9fwlIM7BFSUtp8Mxr_xezDKWqRu5sLIW5hTldnuXvO59OGrV6u1SJ1jbt5QFcQO"/>
+</div>
+<div>
+<h1 class="headline-font font-bold text-[#3E2723] text-lg leading-tight">오늘의 기록</h1>
+<p class="text-[12px] text-[#8D6E63] font-medium">4월 16일 화요일</p>
+</div>
+</div>
+<button class="w-10 h-10 flex items-center justify-center rounded-full bg-white text-[#FF8A80] shadow-sm hover:opacity-80 transition-opacity active:scale-95 transition-transform">
+<span class="material-symbols-outlined" data-icon="calendar_today">calendar_today</span>
+</button>
+</header>
+<!-- Content Canvas -->
+<main class="pt-24 px-5 space-y-8">
+<!-- Hero Visual (Baby's Voice) -->
+<section class="bg-white rounded-3xl p-5 shadow-[0_2px_8px_rgba(62,39,35,0.08)] flex items-center gap-4 border border-[#3E2723]/5">
+<div class="w-16 h-16 bg-[#FFF1EC] rounded-2xl flex items-center justify-center shrink-0">
+<span class="text-3xl">🤰</span>
+</div>
+<div>
+<p class="text-[#3E2723] font-medium text-sm leading-relaxed">
+                    "엄마, 오늘 제 움직임 어땠나요? <br/>
+<span class="text-[#FF8A80] font-bold">작은 신호 하나하나</span>가 저에겐 큰 대화예요."
+                </p>
+</div>
+</section>
+<!-- Quick Record Grid -->
+<section>
+<div class="flex items-center justify-between mb-4">
+<h2 class="headline-font font-bold text-[#3E2723] text-base">빠른 기록하기</h2>
+<span class="text-[12px] text-[#8D6E63]">어떤 일이 있었나요?</span>
+</div>
+<div class="grid grid-cols-3 gap-3">
+<!-- Row 1 -->
+<button class="aspect-square bg-white rounded-[20px] p-3 flex flex-col items-center justify-center gap-2 shadow-[0_2px_8px_rgba(62,39,35,0.05)] active:scale-95 transition-all border border-transparent hover:border-[#FF8A80]/20">
+<div class="w-10 h-10 rounded-full bg-[#FFEAE8] flex items-center justify-center text-xl">🤰</div>
+<span class="text-[11px] font-bold text-[#3E2723] text-center leading-tight">태동 카운터</span>
+</button>
+<button class="aspect-square bg-white rounded-[20px] p-3 flex flex-col items-center justify-center gap-2 shadow-[0_2px_8px_rgba(62,39,35,0.05)] active:scale-95 transition-all border border-transparent hover:border-[#FFD54F]/20">
+<div class="w-10 h-10 rounded-full bg-[#FFF9E5] flex items-center justify-center text-xl">😊</div>
+<span class="text-[11px] font-bold text-[#3E2723] text-center leading-tight">기분 일기</span>
+</button>
+<button class="aspect-square bg-white rounded-[20px] p-3 flex flex-col items-center justify-center gap-2 shadow-[0_2px_8px_rgba(62,39,35,0.05)] active:scale-95 transition-all border border-transparent hover:border-[#E8F5E9]/20">
+<div class="w-10 h-10 rounded-full bg-[#E8F5E9] flex items-center justify-center text-xl">📸</div>
+<span class="text-[11px] font-bold text-[#3E2723] text-center leading-tight">사진 일기</span>
+</button>
+<!-- Row 2 -->
+<button class="aspect-square bg-white rounded-[20px] p-3 flex flex-col items-center justify-center gap-2 shadow-[0_2px_8px_rgba(62,39,35,0.05)] active:scale-95 transition-all border border-transparent hover:border-[#E3F2FD]/20">
+<div class="w-10 h-10 rounded-full bg-[#E3F2FD] flex items-center justify-center text-xl">⚖️</div>
+<span class="text-[11px] font-bold text-[#3E2723] text-center leading-tight">체중</span>
+</button>
+<button class="aspect-square bg-white rounded-[20px] p-3 flex flex-col items-center justify-center gap-2 shadow-[0_2px_8px_rgba(62,39,35,0.05)] active:scale-95 transition-all border border-transparent hover:border-[#F3E5F5]/20">
+<div class="w-10 h-10 rounded-full bg-[#F3E5F5] flex items-center justify-center text-xl">💉</div>
+<span class="text-[11px] font-bold text-[#3E2723] text-center leading-tight">혈압</span>
+</button>
+<button class="aspect-square bg-white rounded-[20px] p-3 flex flex-col items-center justify-center gap-2 shadow-[0_2px_8px_rgba(62,39,35,0.05)] active:scale-95 transition-all border border-transparent hover:border-[#FCE4EC]/20">
+<div class="w-10 h-10 rounded-full bg-[#FCE4EC] flex items-center justify-center text-xl">🤕</div>
+<span class="text-[11px] font-bold text-[#3E2723] text-center leading-tight">증상</span>
+</button>
+</div>
+</section>
+<!-- Today's Summary Timeline -->
+<section class="space-y-4">
+<h2 class="headline-font font-bold text-[#3E2723] text-base">오늘의 요약</h2>
+<div class="bg-white rounded-3xl p-6 shadow-[0_2px_8px_rgba(62,39,35,0.08)] relative overflow-hidden">
+<div class="absolute left-[39px] top-8 bottom-8 w-[2px] bg-[#FFF1EC]"></div>
+<div class="space-y-8 relative">
+<!-- Timeline Item 1 -->
+<div class="flex gap-4 items-start">
+<div class="w-10 h-10 rounded-full bg-white border-2 border-[#FFD54F] flex items-center justify-center z-10 shrink-0">
+<span class="text-lg">😊</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-center mb-1">
+<span class="text-[#3E2723] font-bold text-sm">기분 일기</span>
+<span class="text-[11px] text-[#8D6E63]">09:30</span>
+</div>
+<p class="text-sm text-[#8D6E63] leading-relaxed">기분 좋아요! 햇살이 따뜻해서 산책하고 왔어요.</p>
+</div>
+</div>
+<!-- Timeline Item 2 -->
+<div class="flex gap-4 items-start">
+<div class="w-10 h-10 rounded-full bg-white border-2 border-[#FF8A80] flex items-center justify-center z-10 shrink-0">
+<span class="text-lg">🤰</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-center mb-1">
+<span class="text-[#3E2723] font-bold text-sm">태동 기록</span>
+<span class="text-[11px] text-[#8D6E63]">14:00</span>
+</div>
+<p class="text-sm text-[#8D6E63] leading-relaxed">활발한 움직임 10회 감지. 꿀꺽꿀꺽 소리가 나는 것 같아요.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Pregnancy Tip Card -->
+<section class="bg-[#FF8A80] rounded-3xl p-5 text-white flex items-center gap-4 shadow-lg">
+<div class="w-12 h-12 bg-white/20 rounded-2xl flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-white" data-icon="lightbulb" style="font-variation-settings: 'FILL' 1;">lightbulb</span>
+</div>
+<div>
+<h4 class="font-bold text-sm mb-1">임신 중 기록 팁</h4>
+<p class="text-[13px] opacity-90 leading-snug">규칙적인 태동은 우리 아기가 건강하게 잘 있다는 소중한 신호예요.</p>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-3 bg-white/80 backdrop-blur-md border-t border-[#3E2723]/5 shadow-[0_-2px_10px_rgba(62,39,35,0.05)] rounded-t-3xl">
+<a class="flex flex-col items-center justify-center text-[#8D6E63] hover:text-[#FF8A80] transition-all" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="mail">mail</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[10px] font-medium">Letters</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#FF8A80] font-bold scale-110 transition-transform" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="edit_note" style="font-variation-settings: 'FILL' 1;">edit_note</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[10px] font-medium">Record</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#8D6E63] hover:text-[#FF8A80] transition-all" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="auto_graph">auto_graph</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[10px] font-medium">Growth</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#8D6E63] hover:text-[#FF8A80] transition-all" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="settings">settings</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[10px] font-medium">Settings</span>
+</a>
+</nav>
+</body></html>

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+
+<html lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container": "#ffe9e2",
+                    "tertiary-fixed-dim": "#a6eea7",
+                    "on-primary-fixed": "#170000",
+                    "tertiary-container": "#b4fdb4",
+                    "on-secondary-container": "#644f00",
+                    "surface-variant": "#ffdbce",
+                    "on-primary": "#fff7f6",
+                    "secondary-fixed-dim": "#fad04b",
+                    "on-secondary": "#fff8ee",
+                    "on-secondary-fixed": "#4e3d00",
+                    "inverse-surface": "#1b0904",
+                    "surface-container-lowest": "#ffffff",
+                    "on-tertiary": "#e9ffe4",
+                    "surface-container-highest": "#ffdbce",
+                    "on-surface": "#4e2819",
+                    "outline": "#a26e5b",
+                    "primary": "#9f403a",
+                    "secondary": "#745c00",
+                    "surface-dim": "#ffd0bf",
+                    "secondary-dim": "#665100",
+                    "primary-fixed-dim": "#e8786e",
+                    "primary-fixed": "#f8847b",
+                    "surface": "#fff8f6",
+                    "inverse-on-surface": "#b89589",
+                    "background": "#fff8f6",
+                    "on-surface-variant": "#835342",
+                    "on-primary-fixed-variant": "#611211",
+                    "tertiary": "#286c34",
+                    "surface-bright": "#fff8f6",
+                    "on-error": "#fff7f7",
+                    "surface-container-high": "#ffe2d9",
+                    "on-error-container": "#6e0523",
+                    "surface-tint": "#9f403a",
+                    "on-primary-container": "#540809",
+                    "secondary-container": "#ffe087",
+                    "primary-container": "#f8847b",
+                    "inverse-primary": "#f8847b",
+                    "on-secondary-fixed-variant": "#705900",
+                    "secondary-fixed": "#ffe087",
+                    "on-tertiary-fixed": "#03501b",
+                    "outline-variant": "#dfa48f",
+                    "surface-container-low": "#fff1ec",
+                    "tertiary-fixed": "#b4fdb4",
+                    "primary-dim": "#90352f",
+                    "error": "#a8364b",
+                    "error-dim": "#6b0221",
+                    "error-container": "#f97386",
+                    "on-tertiary-fixed-variant": "#2a6e35",
+                    "tertiary-dim": "#1a5f29",
+                    "on-tertiary-container": "#1f632c",
+                    "on-background": "#4e2819"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "8px",
+                    "xl": "12px",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Plus Jakarta Sans"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        body { background-color: #FFF8E1; }
+    </style>
+<style>
+    body { min-height: max(884px, 100dvh); }
+  </style>
+</head>
+<body class="font-body text-[#3E2723] selection:bg-[#FF8A80]/30">
+<header class="w-full top-0 sticky flex items-center justify-between px-5 h-16 w-full bg-[#FFF8E1] z-50">
+<div class="flex items-center gap-4">
+<button class="hover:opacity-80 transition-opacity active:scale-95 duration-150 flex items-center justify-center">
+<span class="material-symbols-outlined text-[#FF8A80]">arrow_back</span>
+</button>
+<div class="flex flex-col">
+<h1 class="font-['Plus_Jakarta_Sans'] font-bold text-lg text-[#3E2723]">기분 일기</h1>
+</div>
+</div>
+<div class="text-[#8D6E63] font-medium text-sm">4월 16일 화요일</div>
+</header>
+<main class="max-w-md mx-auto px-5 pb-32">
+<div class="mt-6 mb-8 text-center">
+<h2 class="text-[#3E2723] font-headline font-bold text-xl mb-6">오늘 기분이 어떠신가요?</h2>
+<div class="grid grid-cols-5 gap-2">
+<button class="flex flex-col items-center gap-2 group">
+<div class="w-14 h-14 bg-white rounded-full flex items-center justify-center text-3xl shadow-sm border-2 border-[#FF8A80] transition-all active:scale-90 ring-4 ring-[#FF8A80]/10">😊</div>
+<span class="text-[10px] font-bold text-[#FF8A80]">좋아요</span>
+</button>
+<button class="flex flex-col items-center gap-2 group">
+<div class="w-14 h-14 bg-white rounded-full flex items-center justify-center text-3xl shadow-sm border border-transparent hover:border-[#FF8A80]/30 transition-all active:scale-90">🙂</div>
+<span class="text-[10px] font-medium text-[#8D6E63]">괜찮아요</span>
+</button>
+<button class="flex flex-col items-center gap-2 group">
+<div class="w-14 h-14 bg-white rounded-full flex items-center justify-center text-3xl shadow-sm border border-transparent hover:border-[#FF8A80]/30 transition-all active:scale-90">😐</div>
+<span class="text-[10px] font-medium text-[#8D6E63]">보통이에요</span>
+</button>
+<button class="flex flex-col items-center gap-2 group">
+<div class="w-14 h-14 bg-white rounded-full flex items-center justify-center text-3xl shadow-sm border border-transparent hover:border-[#FF8A80]/30 transition-all active:scale-90">😟</div>
+<span class="text-[10px] font-medium text-[#8D6E63]">힘들어요</span>
+</button>
+<button class="flex flex-col items-center gap-2 group">
+<div class="w-14 h-14 bg-white rounded-full flex items-center justify-center text-3xl shadow-sm border border-transparent hover:border-[#FF8A80]/30 transition-all active:scale-90">😢</div>
+<span class="text-[10px] font-medium text-[#8D6E63]">많이 힘들어요</span>
+</button>
+</div>
+</div>
+<div class="mb-6">
+<div class="flex overflow-x-auto hide-scrollbar gap-2 pb-2">
+<span class="flex-shrink-0 px-4 py-1.5 bg-white border border-[#3E2723]/5 rounded-full text-xs font-medium text-[#8D6E63] hover:bg-[#FF8A80]/10 hover:text-[#FF8A80] transition-colors cursor-pointer shadow-sm">#행복</span>
+<span class="flex-shrink-0 px-4 py-1.5 bg-white border border-[#3E2723]/5 rounded-full text-xs font-medium text-[#8D6E63] hover:bg-[#FF8A80]/10 hover:text-[#FF8A80] transition-colors cursor-pointer shadow-sm">#감사</span>
+<span class="flex-shrink-0 px-4 py-1.5 bg-white border border-[#3E2723]/5 rounded-full text-xs font-medium text-[#8D6E63] hover:bg-[#FF8A80]/10 hover:text-[#FF8A80] transition-colors cursor-pointer shadow-sm">#걱정</span>
+<span class="flex-shrink-0 px-4 py-1.5 bg-white border border-[#3E2723]/5 rounded-full text-xs font-medium text-[#8D6E63] hover:bg-[#FF8A80]/10 hover:text-[#FF8A80] transition-colors cursor-pointer shadow-sm">#피곤</span>
+<span class="flex-shrink-0 px-4 py-1.5 bg-white border border-[#3E2723]/5 rounded-full text-xs font-medium text-[#8D6E63] hover:bg-[#FF8A80]/10 hover:text-[#FF8A80] transition-colors cursor-pointer shadow-sm">#설렘</span>
+<span class="flex-shrink-0 px-4 py-1.5 bg-white border border-[#3E2723]/5 rounded-full text-xs font-medium text-[#8D6E63] hover:bg-[#FF8A80]/10 hover:text-[#FF8A80] transition-colors cursor-pointer shadow-sm">#불안</span>
+</div>
+</div>
+<div class="mb-8">
+<div class="bg-white rounded-xl shadow-[0_2px_8px_rgba(62,39,35,0.08)] p-5 min-h-[200px] border border-[#3E2723]/5">
+<textarea class="w-full h-40 border-none focus:ring-0 text-[#3E2723] placeholder-[#8D6E63]/50 bg-transparent resize-none leading-relaxed" placeholder="오늘의 기분을 자유롭게 적어보세요..."></textarea>
+</div>
+</div>
+<div class="mb-8 bg-white/50 rounded-xl p-5 border border-[#3E2723]/5">
+<div class="flex items-center justify-between mb-4">
+<h3 class="font-headline font-bold text-[#3E2723] text-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">bar_chart</span> 이번 주 기분 흐름
+</h3>
+<span class="text-[10px] text-[#8D6E63] font-medium italic">Baby's Voice: "엄마 아빠 기분이 좋아 보여요!"</span>
+</div>
+<div class="flex items-end justify-between h-24 gap-3 px-2">
+<div class="flex-1 flex flex-col items-center gap-2"><div class="w-full bg-[#FFD54F]/40 rounded-t-lg" style="height: 60%;"></div><span class="text-[10px] text-[#8D6E63]">Mon</span></div>
+<div class="flex-1 flex flex-col items-center gap-2"><div class="w-full bg-[#FF8A80] rounded-t-lg" style="height: 90%;"></div><span class="text-[10px] text-[#FF8A80] font-bold">Tue</span></div>
+<div class="flex-1 flex flex-col items-center gap-2"><div class="w-full bg-[#8D6E63]/20 rounded-t-lg" style="height: 40%;"></div><span class="text-[10px] text-[#8D6E63]">Wed</span></div>
+<div class="flex-1 flex flex-col items-center gap-2"><div class="w-full bg-[#FFD54F]/40 rounded-t-lg" style="height: 70%;"></div><span class="text-[10px] text-[#8D6E63]">Thu</span></div>
+<div class="flex-1 flex flex-col items-center gap-2"><div class="w-full bg-[#FFD54F]/40 rounded-t-lg" style="height: 80%;"></div><span class="text-[10px] text-[#8D6E63]">Fri</span></div>
+<div class="flex-1 flex flex-col items-center gap-2"><div class="w-full bg-[#8D6E63]/20 rounded-t-lg" style="height: 50%;"></div><span class="text-[10px] text-[#8D6E63]">Sat</span></div>
+<div class="flex-1 flex flex-col items-center gap-2"><div class="w-full bg-[#8D6E63]/20 rounded-t-lg" style="height: 30%;"></div><span class="text-[10px] text-[#8D6E63]">Sun</span></div>
+</div>
+</div>
+<div class="fixed bottom-36 right-6 z-40">
+<div class="bg-[#FFD54F] text-[#3E2723] font-bold px-4 py-2 rounded-full shadow-lg flex items-center gap-1 text-sm animate-bounce">
+<span class="material-symbols-outlined text-lg" data-weight="fill">stars</span> +10 XP
+</div>
+</div>
+<div class="space-y-4">
+<button class="w-full bg-[#FF8A80] hover:opacity-90 active:scale-95 transition-all text-white font-headline font-bold py-4 rounded-xl shadow-[0_4px_12px_rgba(255,138,128,0.3)] flex items-center justify-center gap-2">기록 저장하기 💛</button>
+<p class="text-center text-[#8D6E63] text-xs font-medium px-4 leading-relaxed">기분을 기록하는 것 자체가 마음 건강에 도움이 돼요 💛</p>
+</div>
+</main>
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center px-4 py-3 pb-safe bg-white dark:bg-stone-900 z-50 rounded-t-3xl shadow-[0_-2px_8px_rgba(62,39,35,0.08)] border-t border-[#3E2723]/5">
+<a class="flex flex-col items-center justify-center text-[#8D6E63] hover:bg-stone-100 dark:hover:bg-stone-800 transition-colors px-4 py-1" href="#"><span class="material-symbols-outlined">mail</span><span class="font-['Inter'] text-xs font-medium">Letters</span></a>
+<a class="flex flex-col items-center justify-center text-[#FF8A80] bg-[#FF8A80]/10 rounded-2xl px-4 py-1" href="#"><span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">auto_stories</span><span class="font-['Inter'] text-xs font-medium">Diary</span></a>
+<a class="flex flex-col items-center justify-center text-[#8D6E63] hover:bg-stone-100 dark:hover:bg-stone-800 transition-colors px-4 py-1" href="#"><span class="material-symbols-outlined">bar_chart</span><span class="font-['Inter'] text-xs font-medium">Stats</span></a>
+<a class="flex flex-col items-center justify-center text-[#8D6E63] hover:bg-stone-100 dark:hover:bg-stone-800 transition-colors px-4 py-1" href="#"><span class="material-symbols-outlined">person</span><span class="font-['Inter'] text-xs font-medium">Profile</span></a>
+</nav>
+</body></html>

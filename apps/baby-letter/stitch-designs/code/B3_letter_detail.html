@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+
+<html lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;family=Nanum+Pen+Script&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface-container-highest": "#ffdbce",
+              "secondary-fixed-dim": "#fad04b",
+              "surface-variant": "#ffdbce",
+              "on-primary-container": "#540809",
+              "on-tertiary-container": "#1f632c",
+              "surface-bright": "#fff8f6",
+              "on-tertiary": "#e9ffe4",
+              "on-primary-fixed": "#170000",
+              "primary-container": "#f8847b",
+              "on-secondary": "#fff8ee",
+              "error-container": "#f97386",
+              "on-error": "#fff7f7",
+              "tertiary": "#286c34",
+              "surface-tint": "#9f403a",
+              "tertiary-fixed-dim": "#a6eea7",
+              "secondary-fixed": "#ffe087",
+              "inverse-surface": "#1b0904",
+              "surface": "#fff8f6",
+              "primary-fixed-dim": "#e8786e",
+              "surface-container-low": "#fff1ec",
+              "on-surface": "#4e2819",
+              "secondary": "#745c00",
+              "outline": "#a26e5b",
+              "tertiary-fixed": "#b4fdb4",
+              "on-primary": "#fff7f6",
+              "error-dim": "#6b0221",
+              "tertiary-container": "#b4fdb4",
+              "primary-fixed": "#f8847b",
+              "surface-container": "#ffe9e2",
+              "on-tertiary-fixed": "#03501b",
+              "surface-dim": "#ffd0bf",
+              "inverse-on-surface": "#b89589",
+              "outline-variant": "#dfa48f",
+              "on-surface-variant": "#835342",
+              "on-primary-fixed-variant": "#611211",
+              "primary": "#9f403a",
+              "on-background": "#4e2819",
+              "on-tertiary-fixed-variant": "#2a6e35",
+              "tertiary-dim": "#1a5f29",
+              "inverse-primary": "#f8847b",
+              "on-secondary-container": "#644f00",
+              "on-error-container": "#6e0523",
+              "surface-container-high": "#ffe2d9",
+              "background": "#fff8f6",
+              "surface-container-lowest": "#ffffff",
+              "secondary-container": "#ffe087",
+              "on-secondary-fixed-variant": "#705900",
+              "secondary-dim": "#665100",
+              "primary-dim": "#90352f",
+              "on-secondary-fixed": "#4e3d00",
+              "error": "#a8364b"
+            },
+            borderRadius: {
+              "DEFAULT": "0.25rem",
+              "lg": "0.5rem",
+              "xl": "0.75rem",
+              "full": "9999px"
+            },
+            fontFamily: {
+              "headline": ["Plus Jakarta Sans"],
+              "body": ["Inter"],
+              "label": ["Inter"],
+              "handwriting": ["Nanum Pen Script", "cursive"]
+            }
+          },
+        },
+      }
+    </script>
+<style>.material-symbols-outlined {
+    font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24
+    }
+.paper-texture {
+    background-color: #FFF8E1;
+    background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuDUt_p9Io43uuh1KFE3l9ZNdRWsaVRi5D4C1_a-3YM1LLH2bRdfTOqcTjACRo4Au_vF5Tx9e8XHYydE4nJnYkJC31DCMtOVM5T2M2N3Bja4CYhfEYLgUxMIDxrwKM-Tl_JOBxXMDHXjMQHLAHQT4pDF-meoHDau7iOZyiVHw2fUdDwgtHLPU2HYURMUAfuEETOqW8iga825URRHI8OylqhtM6ENoUvefGoyBpyk2vhLR-vsoggXgf9L0ummG0IUn_KTlDRjoTdOQwMr)
+    }
+.letter-shadow {
+    box-shadow: 0 4px 20px rgba(62, 39, 35, 0.08)
+    }
+.line-paper {
+    background-image: linear-gradient(#e5e7eb 1px, transparent 1px);
+    background-size: 100% 2.5rem
+    }</style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="paper-texture font-body text-on-surface min-h-screen pb-32">
+<!-- TopAppBar -->
+<header class="flex items-center px-5 h-16 w-full top-0 bg-[#FFF8E1] dark:bg-stone-950 z-50">
+<button class="text-[#FF8A80] dark:text-[#FF8A80] hover:opacity-80 transition-opacity active:scale-95 duration-150">
+<span class="material-symbols-outlined" data-icon="arrow_back">arrow_back</span>
+</button>
+<h1 class="font-['Plus_Jakarta_Sans'] font-bold text-[#3E2723] dark:text-stone-100 flex-1 text-center pr-8">콩이의 편지</h1>
+</header>
+<main class="px-5 pt-4 space-y-6">
+<!-- Header Profile Section -->
+<div class="flex flex-col items-center justify-center space-y-3">
+<div class="relative">
+<div class="w-24 h-24 rounded-full p-1 bg-primary-container">
+<img alt="Cute baby ultrasound or illustration" class="w-full h-full rounded-full object-cover border-4 border-white" data-alt="Soft focused close-up of a sleeping newborn baby's face with warm natural morning light and gentle textures" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDw_pcOw0z22kEAmzDeJJ7zPZAOEZZ660SMdDUyrlBFEQdqHZbuQihP1vonULnkgfObcUQs1oX8H07O3yjUIhNYalTlhHdwBYY6o_mOohbpoU1IvNEjV9LjPqrJOYd27ys1_MjjmcYHiGIZmgMep8Tnl9XVR0Mt5xMOZbyKMmqizwc8kjt1AC8Togw3fVB694rHYuNkkRcm7JOZigqrH7ndC73FluymNpent5QDgTmrFBBuZ12BmKogW0WAZ9eAWgRad7tf6CMkxJA3"/>
+</div>
+<div class="absolute -bottom-1 -right-1 bg-secondary-fixed text-on-secondary-fixed text-xs font-bold px-3 py-1 rounded-full shadow-sm">
+                    24주차
+                </div>
+</div>
+<p class="text-on-surface-variant font-headline font-semibold text-lg italic">"24주의 콩이가"</p>
+</div>
+<!-- Letter Body (Paper Card) -->
+<article class="bg-white rounded-[12px] p-8 letter-shadow relative overflow-hidden">
+<div class="absolute top-0 right-0 w-16 h-16 bg-primary-container/10 rounded-bl-full flex items-center justify-end p-3">
+<span class="material-symbols-outlined text-primary text-xl" data-icon="mail">mail</span>
+</div>
+<div class="space-y-8 relative z-10">
+<header class="font-handwriting text-3xl text-primary mb-6">
+                    사랑하는 엄마에게
+                </header>
+<div class="text-on-surface text-xl leading-relaxed font-medium space-y-4">
+<p>
+                        엄마, <span class="bg-primary-container/30 px-1 rounded">눈꺼풀</span>이 열렸어! 어둡지만 빛이 보여.
+                    </p>
+<p>
+                        그리고 <span class="bg-primary-container/30 px-1 rounded">꿈</span>을 꾸기 시작했어 🌙
+                    </p>
+<p>
+                        엄마가 <span class="bg-primary-container/30 px-1 rounded">자장가</span>를 불러주면 내 꿈에도 나올 거야.
+                    </p>
+<p>
+                        아빠 목소리도 좋아! 낮은 소리가 편안해.
+                    </p>
+</div>
+<footer class="font-handwriting text-2xl text-right pt-6 text-on-surface-variant">
+                    엄마를 사랑하는 콩이가 💛
+                </footer>
+</div>
+<div class="absolute -bottom-10 -left-10 w-40 h-40 bg-secondary-container/20 rounded-full blur-3xl"></div>
+</article>
+<!-- Science Section (Accordion) -->
+<section class="bg-surface-container-low rounded-[12px] border border-outline-variant/30 overflow-hidden">
+<details class="group" open="">
+<summary class="flex items-center justify-between p-4 cursor-pointer list-none">
+<div class="flex items-center gap-2 font-semibold text-on-surface">
+<span class="material-symbols-outlined text-tertiary" data-icon="auto_stories">auto_stories</span>
+                        📚 과학적 근거
+                    </div>
+<span class="material-symbols-outlined transition-transform group-open:rotate-180" data-icon="expand_more">expand_more</span>
+</summary>
+<div class="px-4 pb-5 pt-0 text-sm text-on-surface-variant space-y-3">
+<p class="leading-relaxed">
+                        24주에 REM 수면이 시작되며 태아가 꿈을 꾸기 시작합니다. 외부 소리에 반응하며 특히 부모의 목소리에 대한 정서적 안정감을 형성하는 시기입니다.
+                    </p>
+<div class="text-[10px] font-medium text-outline uppercase tracking-wider bg-outline/5 inline-block px-2 py-0.5 rounded">
+                        Source: Peirano et al., Sleep Medicine Reviews, 2003
+                    </div>
+</div>
+</details>
+</section>
+</main>
+<!-- Floating Toast Message -->
+<div class="fixed bottom-28 left-1/2 -translate-x-1/2 z-50">
+<div class="bg-on-surface/90 text-white px-5 py-2.5 rounded-full shadow-lg flex items-center gap-2 animate-bounce">
+<span class="text-secondary-fixed">XP +5 획득! 💛</span>
+</div>
+</div>
+<!-- Bottom Fixed Section -->
+<footer class="fixed bottom-0 left-0 w-full bg-white/90 backdrop-blur-md px-5 py-4 pb-8 space-y-4 letter-shadow z-40">
+<div class="flex flex-col items-center gap-1 mb-2">
+<p class="text-sm font-medium text-[#8D6E63]">다음 편지는 내일 아침에 도착해요</p>
+</div>
+<div class="flex items-center gap-4">
+<button class="flex-1 bg-primary text-white h-14 rounded-xl font-bold text-lg flex items-center justify-center gap-2 active:scale-95 transition-transform">
+<span class="material-symbols-outlined" data-icon="favorite" style="font-variation-settings: 'FILL' 1;">favorite</span>
+                간직하기
+            </button>
+<button class="w-14 h-14 bg-surface-container rounded-xl flex items-center justify-center text-on-surface-variant active:scale-95 transition-transform">
+<span class="material-symbols-outlined" data-icon="share">share</span>
+</button>
+</div>
+</footer>
+</body></html>

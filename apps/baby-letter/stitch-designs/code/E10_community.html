@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+
+<html lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>BabyLetter Community</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "inverse-surface": "#1b0904",
+                    "background": "#fff8f6",
+                    "on-surface": "#4e2819",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-container": "#ffe9e2",
+                    "surface-container-low": "#fff1ec",
+                    "on-tertiary": "#e9ffe4",
+                    "secondary-container": "#ffe087",
+                    "on-primary": "#fff7f6",
+                    "error": "#a8364b",
+                    "on-primary-fixed": "#170000",
+                    "on-secondary-fixed": "#4e3d00",
+                    "on-background": "#4e2819",
+                    "outline": "#a26e5b",
+                    "tertiary-fixed": "#b4fdb4",
+                    "on-error": "#fff7f7",
+                    "surface-container-highest": "#ffdbce",
+                    "secondary": "#745c00",
+                    "primary": "#9f403a",
+                    "on-secondary-container": "#644f00",
+                    "surface-dim": "#ffd0bf",
+                    "surface-tint": "#9f403a",
+                    "surface-variant": "#ffdbce",
+                    "primary-fixed-dim": "#e8786e",
+                    "on-tertiary-fixed-variant": "#2a6e35",
+                    "secondary-fixed-dim": "#fad04b",
+                    "on-primary-fixed-variant": "#611211",
+                    "surface": "#fff8f6",
+                    "error-dim": "#6b0221",
+                    "on-tertiary-fixed": "#03501b",
+                    "on-tertiary-container": "#1f632c",
+                    "surface-container-high": "#ffe2d9",
+                    "error-container": "#f97386",
+                    "primary-dim": "#90352f",
+                    "on-secondary": "#fff8ee",
+                    "on-secondary-fixed-variant": "#705900",
+                    "tertiary": "#286c34",
+                    "surface-bright": "#fff8f6",
+                    "primary-container": "#f8847b",
+                    "outline-variant": "#dfa48f",
+                    "on-surface-variant": "#835342",
+                    "inverse-primary": "#f8847b",
+                    "tertiary-fixed-dim": "#a6eea7",
+                    "on-primary-container": "#540809",
+                    "inverse-on-surface": "#b89589",
+                    "secondary-fixed": "#ffe087",
+                    "primary-fixed": "#f8847b",
+                    "tertiary-dim": "#1a5f29",
+                    "tertiary-container": "#b4fdb4",
+                    "secondary-dim": "#665100",
+                    "on-error-container": "#6e0523"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Plus Jakarta Sans"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { background-color: #fff8f6; font-family: 'Inter', sans-serif; }
+        .font-headline { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="text-on-surface select-none">
+<header class="fixed top-0 w-full z-50 bg-amber-50 flex justify-between items-center px-5 py-2 border-b border-stone-200/50 shadow-sm">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-primary-container">
+<img alt="User Profile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCosOYXR3MT0cuRR2eDjpVOYWW1x8AbpS85vZs5TT6EmvggR7cla7XQrBLhqmkp54LMXOU9E9UIs9NrvxTF6pYL-DoIjPWpB3MK1nh5L93dKlM6CqzBhUtwpFZGubAjPlO90vFr3uBBDJP8XNh5kyYJuwJzh7SqU8q_1zK4WlxEaJs-Kg0v5spkN8zd3QxbsbfnfgDYcgueE-z1RsYS3JM4fHvldl9Yc9-nb7Q7I9_dEoxr2phGduemyxPgfEgrlbBYtkl4-EHeMwES"/>
+</div>
+<h1 class="text-xl font-bold text-stone-800 font-headline">커뮤니티</h1>
+</div>
+<div class="flex items-center gap-4 text-orange-400">
+<button class="material-symbols-outlined p-2 hover:bg-stone-100 transition-colors rounded-full">search</button>
+<button class="material-symbols-outlined p-2 hover:bg-stone-100 transition-colors rounded-full">notifications</button>
+</div>
+</header>
+<main class="pt-16 pb-32">
+<div class="sticky top-[52px] z-40 bg-white/80 backdrop-blur-md py-3 shadow-sm overflow-hidden">
+<div class="flex gap-2 px-5 overflow-x-auto hide-scrollbar">
+<button class="flex-shrink-0 px-5 py-2 bg-orange-50 text-orange-400 font-bold rounded-full text-sm">전체</button>
+<button class="flex-shrink-0 px-5 py-2 text-stone-500 hover:bg-stone-50 transition-colors rounded-full text-sm">임신 중</button>
+<button class="flex-shrink-0 px-5 py-2 text-stone-500 hover:bg-stone-50 transition-colors rounded-full text-sm">출산 후</button>
+<button class="flex-shrink-0 px-5 py-2 text-stone-500 hover:bg-stone-50 transition-colors rounded-full text-sm">육아 팁</button>
+<button class="flex-shrink-0 px-5 py-2 text-stone-500 hover:bg-stone-50 transition-colors rounded-full text-sm">Q&amp;A</button>
+<button class="flex-shrink-0 px-5 py-2 text-stone-500 hover:bg-stone-50 transition-colors rounded-full text-sm">자유</button>
+</div>
+</div>
+<section class="px-5 mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="relative bg-white p-5 rounded-[24px] shadow-[0_2px_12px_rgba(62,39,35,0.06)] border border-orange-100 overflow-hidden col-span-1 md:col-span-2">
+<div class="absolute top-0 right-0 p-4">
+<span class="flex items-center gap-1 bg-red-50 text-red-500 px-3 py-1 rounded-full text-xs font-bold">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">local_fire_department</span> HOT</span>
+</div>
+<div class="flex items-center gap-2 mb-3">
+<span class="bg-primary-container/10 text-primary px-2.5 py-1 rounded-lg text-[10px] font-bold">임신 중</span>
+<span class="text-xs text-stone-500">익명 · 10분 전</span>
+</div>
+<h3 class="text-lg font-bold text-on-surface mb-2 leading-tight">입덧 때문에 아무것도 못 먹겠어요... 다들 어떻게 버티셨나요?</h3>
+<p class="text-sm text-stone-600 line-clamp-2 mb-4 leading-relaxed">6주차인데 냄새만 맡아도 울렁거려요. 비스킷도 토하고 물도 힘들어요.</p>
+<div class="flex items-center gap-4 text-stone-400 text-xs font-medium">
+<div class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">favorite</span> 128</div>
+<div class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">chat_bubble</span> 56</div>
+<div class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">visibility</span> 1.2k</div>
+</div>
+</div>
+<div class="bg-white p-5 rounded-[24px] shadow-[0_2px_8px_rgba(62,39,35,0.06)] border border-stone-100">
+<div class="flex items-center gap-2 mb-3">
+<span class="bg-tertiary-container/30 text-tertiary px-2.5 py-1 rounded-lg text-[10px] font-bold">육아 팁</span>
+<span class="text-xs text-stone-500">튼튼맘 · 1시간 전</span>
+</div>
+<h3 class="text-md font-bold text-on-surface mb-2">밤중 수유 끊는 법 공유해요!</h3>
+<div class="flex items-center gap-4 text-stone-400 text-xs">
+<div class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">favorite</span> 42</div>
+<div class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">chat_bubble</span> 12</div>
+</div>
+</div>
+<div class="bg-white p-5 rounded-[24px] shadow-[0_2px_8px_rgba(62,39,35,0.06)] border border-stone-100">
+<div class="flex items-center gap-2 mb-3">
+<span class="bg-secondary-container/30 text-secondary px-2.5 py-1 rounded-lg text-[10px] font-bold">Q&amp;A</span>
+<span class="text-xs text-stone-500">초보대디 · 2시간 전</span>
+</div>
+<h3 class="text-md font-bold text-on-surface mb-2">유모차 디럭스 vs 절충형 고민입니다.</h3>
+<div class="flex items-center gap-4 text-stone-400 text-xs">
+<div class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">favorite</span> 15</div>
+<div class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">chat_bubble</span> 24</div>
+</div>
+</div>
+</section>
+<section class="px-5 mt-4 space-y-4">
+<div class="bg-white p-5 rounded-[24px] shadow-[0_2px_8px_rgba(62,39,35,0.06)]">
+<div class="flex items-center gap-2 mb-3">
+<span class="bg-surface-container-highest text-on-surface-variant px-2.5 py-1 rounded-lg text-[10px] font-bold">자유</span>
+<span class="text-xs text-stone-500">행복한가족 · 3시간 전</span>
+</div>
+<h3 class="text-md font-bold text-on-surface mb-2">오늘 날씨 너무 좋네요! 유모차 산책 다녀왔어요.</h3>
+<div class="w-full h-40 rounded-xl overflow-hidden mb-4">
+<img alt="Park Walk" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDgxXrcG8Ee19709ntNM1SNPaYChFI2X0xUpkkHJoEVmaLt_xd8JpG38cjXq0crnXr64z7axyjQkPHbKgERW9iz67hPRvMF6gIiFKEMzJi1FMvHC87IENAixIemBB7UFqjhQQnI35AaazUiNbBcNxmH8Cg2Aqjbppv54k0Ie250EP2sfiSJzHH909wVG3OpHbD266ILQVzmWpKQfttc2DtxjNaQuECok-p4PrVDtm51wyzjfF8-XiN7C6YjRgiy7Qu9aU7H6QJMBQY2"/>
+</div>
+<div class="flex items-center gap-4 text-stone-400 text-xs">
+<div class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">favorite</span> 89</div>
+<div class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">chat_bubble</span> 8</div>
+</div>
+</div>
+<div class="bg-white p-5 rounded-[24px] shadow-[0_2px_8px_rgba(62,39,35,0.06)]">
+<div class="flex items-center gap-2 mb-3">
+<span class="bg-blue-50 text-blue-500 px-2.5 py-1 rounded-lg text-[10px] font-bold">출산 후</span>
+<span class="text-xs text-stone-500">회복중인맘 · 4시간 전</span>
+</div>
+<h3 class="text-md font-bold text-on-surface mb-2">산후조리원 필수 준비물 리스트 정리 (실제 사용 위주)</h3>
+<p class="text-sm text-stone-600 mb-4 line-clamp-1">많은 분들이 물어보셔서 제가 직접 써보고 좋았던 것들만 정리해봤어요...</p>
+<div class="flex items-center gap-4 text-stone-400 text-xs">
+<div class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">favorite</span> 210</div>
+<div class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">chat_bubble</span> 45</div>
+</div>
+</div>
+</section>
+<div class="px-8 mt-12 mb-8 text-center">
+<p class="text-[11px] text-stone-400 leading-relaxed italic">BabyLetter 커뮤니티는 따뜻한 소통을 지향합니다.</p>
+</div>
+</main>
+<button class="fixed right-6 bottom-24 w-14 h-14 bg-[#FF8A80] text-white rounded-full shadow-lg flex items-center justify-center active:scale-95 transition-transform z-40">
+<span class="material-symbols-outlined text-2xl">edit</span>
+</button>
+<nav class="fixed bottom-0 w-full z-50 flex justify-around items-center h-16 px-4 bg-white shadow-[0_-2px_10px_rgba(62,39,35,0.05)] border-t border-stone-100">
+<a class="flex flex-col items-center justify-center text-stone-400 hover:text-orange-300 transition-colors" href="#">
+<span class="material-symbols-outlined text-2xl">mail</span>
+<span class="text-[10px] font-medium mt-0.5">Letters</span>
+</a>
+<a class="flex flex-col items-center justify-center text-orange-400 scale-110 duration-200 ease-out" href="#">
+<span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1;">groups</span>
+<span class="text-[10px] font-medium mt-0.5">Community</span>
+</a>
+<a class="flex flex-col items-center justify-center text-stone-400 hover:text-orange-300 transition-colors" href="#">
+<span class="material-symbols-outlined text-2xl">show_chart</span>
+<span class="text-[10px] font-medium mt-0.5">Growth</span>
+</a>
+<a class="flex flex-col items-center justify-center text-stone-400 hover:text-orange-300 transition-colors" href="#">
+<span class="material-symbols-outlined text-2xl">settings</span>
+<span class="text-[10px] font-medium mt-0.5">Settings</span>
+</a>
+</nav>
+</body></html>

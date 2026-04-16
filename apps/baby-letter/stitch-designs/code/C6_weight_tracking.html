@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+
+<html lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary-dim": "#1a5f29",
+                    "inverse-surface": "#1b0904",
+                    "inverse-primary": "#f8847b",
+                    "outline-variant": "#dfa48f",
+                    "on-tertiary-fixed-variant": "#2a6e35",
+                    "on-tertiary-container": "#1f632c",
+                    "surface-bright": "#fff8f6",
+                    "surface-container-highest": "#ffdbce",
+                    "on-tertiary-fixed": "#03501b",
+                    "tertiary-container": "#b4fdb4",
+                    "primary-dim": "#90352f",
+                    "surface-dim": "#ffd0bf",
+                    "on-tertiary": "#e9ffe4",
+                    "surface-container": "#ffe9e2",
+                    "error-dim": "#6b0221",
+                    "secondary-fixed-dim": "#fad04b",
+                    "surface-container-lowest": "#ffffff",
+                    "on-primary": "#fff7f6",
+                    "secondary-fixed": "#ffe087",
+                    "error-container": "#f97386",
+                    "secondary-container": "#ffe087",
+                    "surface-container-high": "#ffe2d9",
+                    "on-background": "#4e2819",
+                    "surface-container-low": "#fff1ec",
+                    "inverse-on-surface": "#b89589",
+                    "background": "#fff8f6",
+                    "on-surface-variant": "#835342",
+                    "on-surface": "#4e2819",
+                    "on-primary-fixed": "#170000",
+                    "primary-container": "#f8847b",
+                    "outline": "#a26e5b",
+                    "on-secondary-fixed-variant": "#705900",
+                    "on-secondary": "#fff8ee",
+                    "on-error-container": "#6e0523",
+                    "on-error": "#fff7f7",
+                    "tertiary-fixed-dim": "#a6eea7",
+                    "secondary": "#745c00",
+                    "primary-fixed-dim": "#e8786e",
+                    "tertiary": "#286c34",
+                    "primary": "#9f403a",
+                    "surface-variant": "#ffdbce",
+                    "surface-tint": "#9f403a",
+                    "on-secondary-fixed": "#4e3d00",
+                    "on-secondary-container": "#644f00",
+                    "secondary-dim": "#665100",
+                    "primary-fixed": "#f8847b",
+                    "on-primary-container": "#540809",
+                    "tertiary-fixed": "#b4fdb4",
+                    "surface": "#fff8f6",
+                    "on-primary-fixed-variant": "#611211",
+                    "error": "#a8364b"
+            },
+            "borderRadius": {
+                    "DEFAULT": "8px",
+                    "lg": "12px",
+                    "xl": "16px",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Plus Jakarta Sans"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .bg-cream { background-color: #FFF8E1; }
+        .text-coral { color: #FF8A80; }
+        .bg-coral { background-color: #FF8A80; }
+        .text-dark-brown { color: #3E2723; }
+        .text-warm-gray { color: #8D6E63; }
+        .bg-amber-soft { background-color: #FFD54F; }
+        .bg-sage-soft { background-color: #81C784; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-cream font-body text-dark-brown antialiased min-h-screen pb-24">
+<!-- TopAppBar -->
+<header class="flex items-center justify-between px-5 h-16 w-full fixed top-0 z-50 bg-[#FFF8E1]">
+<div class="flex items-center">
+<button class="active:scale-95 transition-transform hover:opacity-80 transition-opacity">
+<span class="material-symbols-outlined text-[#FF8A80] text-2xl">arrow_back</span>
+</button>
+<h1 class="font-headline font-bold text-[#3E2723] text-lg ml-4">Baby's Weight</h1>
+</div>
+<button class="active:scale-95 transition-transform hover:opacity-80 transition-opacity">
+<span class="material-symbols-outlined text-[#8D6E63]">more_vert</span>
+</button>
+</header>
+<main class="mt-16 px-5 space-y-6">
+<!-- Current Weight & Stepper Section -->
+<section class="pt-6">
+<div class="bg-white rounded-xl p-6 shadow-[0_2px_8px_rgba(62,39,35,0.08)] text-center relative overflow-hidden">
+<div class="absolute top-0 right-0 w-24 h-24 bg-coral/5 rounded-full -mr-8 -mt-8"></div>
+<p class="text-warm-gray text-sm font-medium mb-2">현재 체중</p>
+<div class="flex items-center justify-center gap-6">
+<button class="w-10 h-10 rounded-full border-2 border-coral text-coral flex items-center justify-center active:scale-90 transition-transform">
+<span class="material-symbols-outlined">remove</span>
+</button>
+<div class="flex flex-baseline items-end gap-1">
+<span class="text-5xl font-headline font-extrabold text-dark-brown">62.5</span>
+<span class="text-xl font-headline font-bold text-warm-gray pb-1">kg</span>
+</div>
+<button class="w-10 h-10 rounded-full bg-coral text-white flex items-center justify-center active:scale-90 transition-transform">
+<span class="material-symbols-outlined">add</span>
+</button>
+</div>
+<div class="mt-4 flex flex-col items-center gap-2">
+<span class="bg-[#FFD54F]/20 text-[#B78C00] px-3 py-1 rounded-full text-xs font-semibold">
+                        +8.5kg (임신 전 대비)
+                    </span>
+<span class="bg-sage-soft/20 text-[#388E3C] px-4 py-1.5 rounded-full text-sm font-medium inline-flex items-center">
+                        적정 체중 증가 범위 안에 있어요 <span class="material-symbols-outlined text-sm ml-1">check_circle</span>
+</span>
+</div>
+</div>
+</section>
+<!-- Trend Chart Card -->
+<section>
+<div class="bg-white rounded-xl p-6 shadow-[0_2px_8px_rgba(62,39,35,0.08)]">
+<div class="flex justify-between items-center mb-6">
+<h2 class="font-headline font-bold text-dark-brown">체중 변화 추이</h2>
+<span class="text-[10px] text-warm-gray bg-surface-container px-2 py-1 rounded">IOM 가이드라인 기준</span>
+</div>
+<!-- Simple SVG Chart Mockup -->
+<div class="relative h-48 w-full">
+<!-- Shaded Band (Recommended Range) -->
+<svg class="w-full h-full" preserveaspectratio="none" viewbox="0 0 300 150">
+<path d="M0 130 L50 125 L100 115 L150 100 L200 85 L250 65 L300 45 L300 65 L250 85 L200 105 L150 120 L100 135 L50 145 L0 150 Z" fill="#81C784" fill-opacity="0.1"></path>
+<!-- Trend Line -->
+<path d="M0 140 Q 75 130, 150 105 T 300 55" fill="none" stroke="#FF8A80" stroke-linecap="round" stroke-width="3"></path>
+<!-- Data Point -->
+<circle cx="300" cy="55" fill="#FF8A80" r="5"></circle>
+<circle cx="300" cy="55" fill="none" r="8" stroke="#FF8A80" stroke-opacity="0.3"></circle>
+</svg>
+<!-- X-Axis Labels -->
+<div class="flex justify-between mt-2 text-[10px] text-warm-gray font-medium">
+<span>8주</span>
+<span>16주</span>
+<span>24주</span>
+<span>32주</span>
+<span>40주</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Input Section -->
+<section>
+<div class="bg-white rounded-xl p-6 shadow-[0_2px_8px_rgba(62,39,35,0.08)]">
+<h2 class="font-headline font-bold text-dark-brown mb-4">체중 입력</h2>
+<div class="grid grid-cols-3 gap-3 mb-4">
+<button class="h-12 bg-surface-container-low rounded-lg font-headline font-semibold text-dark-brown hover:bg-coral/10 transition-colors">1</button>
+<button class="h-12 bg-surface-container-low rounded-lg font-headline font-semibold text-dark-brown hover:bg-coral/10 transition-colors">2</button>
+<button class="h-12 bg-surface-container-low rounded-lg font-headline font-semibold text-dark-brown hover:bg-coral/10 transition-colors">3</button>
+<button class="h-12 bg-surface-container-low rounded-lg font-headline font-semibold text-dark-brown hover:bg-coral/10 transition-colors">4</button>
+<button class="h-12 bg-surface-container-low rounded-lg font-headline font-semibold text-dark-brown hover:bg-coral/10 transition-colors">5</button>
+<button class="h-12 bg-surface-container-low rounded-lg font-headline font-semibold text-dark-brown hover:bg-coral/10 transition-colors">6</button>
+<button class="h-12 bg-surface-container-low rounded-lg font-headline font-semibold text-dark-brown hover:bg-coral/10 transition-colors">7</button>
+<button class="h-12 bg-surface-container-low rounded-lg font-headline font-semibold text-dark-brown hover:bg-coral/10 transition-colors">8</button>
+<button class="h-12 bg-surface-container-low rounded-lg font-headline font-semibold text-dark-brown hover:bg-coral/10 transition-colors">9</button>
+<button class="h-12 bg-surface-container-low rounded-lg font-headline font-semibold text-dark-brown hover:bg-coral/10 transition-colors">.</button>
+<button class="h-12 bg-surface-container-low rounded-lg font-headline font-semibold text-dark-brown hover:bg-coral/10 transition-colors">0</button>
+<button class="h-12 bg-surface-container-low rounded-lg font-headline font-semibold text-dark-brown hover:bg-coral/10 transition-colors flex items-center justify-center">
+<span class="material-symbols-outlined">backspace</span>
+</button>
+</div>
+<button class="w-full bg-coral text-white font-headline font-bold py-4 rounded-lg shadow-md active:scale-95 transition-all">
+                    체중 기록하기
+                </button>
+</div>
+</section>
+<!-- History List -->
+<section class="pb-8">
+<h2 class="font-headline font-bold text-dark-brown mb-4 px-1">최근 기록</h2>
+<div class="space-y-3">
+<div class="bg-white/60 p-4 rounded-lg flex justify-between items-center border border-white/40">
+<div class="flex flex-col">
+<span class="text-sm font-bold text-dark-brown">62.5 kg</span>
+<span class="text-[11px] text-warm-gray">2023.10.24 • 28주 4일</span>
+</div>
+<span class="material-symbols-outlined text-warm-gray text-lg">chevron_right</span>
+</div>
+<div class="bg-white/60 p-4 rounded-lg flex justify-between items-center border border-white/40 opacity-90">
+<div class="flex flex-col">
+<span class="text-sm font-bold text-dark-brown">62.2 kg</span>
+<span class="text-[11px] text-warm-gray">2023.10.17 • 27주 4일</span>
+</div>
+<span class="material-symbols-outlined text-warm-gray text-lg">chevron_right</span>
+</div>
+<div class="bg-white/60 p-4 rounded-lg flex justify-between items-center border border-white/40 opacity-80">
+<div class="flex flex-col">
+<span class="text-sm font-bold text-dark-brown">61.8 kg</span>
+<span class="text-[11px] text-warm-gray">2023.10.10 • 26주 4일</span>
+</div>
+<span class="material-symbols-outlined text-warm-gray text-lg">chevron_right</span>
+</div>
+<div class="bg-white/60 p-4 rounded-lg flex justify-between items-center border border-white/40 opacity-70">
+<div class="flex flex-col">
+<span class="text-sm font-bold text-dark-brown">61.5 kg</span>
+<span class="text-[11px] text-warm-gray">2023.10.03 • 25주 4일</span>
+</div>
+<span class="material-symbols-outlined text-warm-gray text-lg">chevron_right</span>
+</div>
+<div class="bg-white/60 p-4 rounded-lg flex justify-between items-center border border-white/40 opacity-60">
+<div class="flex flex-col">
+<span class="text-sm font-bold text-dark-brown">60.9 kg</span>
+<span class="text-[11px] text-warm-gray">2023.09.26 • 24주 4일</span>
+</div>
+<span class="material-symbols-outlined text-warm-gray text-lg">chevron_right</span>
+</div>
+</div>
+<p class="mt-4 text-[10px] text-warm-gray text-center italic">Source: IOM 임산부 적정 체중 증가 가이드라인</p>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center pt-2 pb-6 px-4 bg-white/80 backdrop-blur-md border-t border-[#3E2723]/5 shadow-[0_-2px_8px_rgba(62,39,35,0.04)]">
+<a class="flex flex-col items-center justify-center text-[#8D6E63] hover:text-[#FF8A80] transition-colors active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="mail">mail</span>
+<span class="font-['Inter'] text-[11px] font-medium mt-1">Letters</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#FF8A80] font-semibold active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="monitoring" style="font-variation-settings: 'FILL' 1;">monitoring</span>
+<span class="font-['Inter'] text-[11px] font-medium mt-1">Growth</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#8D6E63] hover:text-[#FF8A80] transition-colors active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="auto_stories">auto_stories</span>
+<span class="font-['Inter'] text-[11px] font-medium mt-1">Memories</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#8D6E63] hover:text-[#FF8A80] transition-colors active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-['Inter'] text-[11px] font-medium mt-1">Settings</span>
+</a>
+</nav>
+</body></html>

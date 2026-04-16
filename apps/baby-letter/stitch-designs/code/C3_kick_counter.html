@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+
+<html lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+<title>태동 카운터 - BabyLetter</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-primary-fixed-variant": "#611211",
+                    "inverse-surface": "#1b0904",
+                    "surface": "#fff8f6",
+                    "primary-fixed": "#f8847b",
+                    "on-secondary-fixed-variant": "#705900",
+                    "on-error": "#fff7f7",
+                    "primary": "#9f403a",
+                    "on-primary": "#fff7f6",
+                    "inverse-on-surface": "#b89589",
+                    "surface-container-highest": "#ffdbce",
+                    "surface-container-high": "#ffe2d9",
+                    "on-tertiary": "#e9ffe4",
+                    "primary-dim": "#90352f",
+                    "on-secondary": "#fff8ee",
+                    "tertiary-dim": "#1a5f29",
+                    "secondary-fixed-dim": "#fad04b",
+                    "secondary-container": "#ffe087",
+                    "error-dim": "#6b0221",
+                    "background": "#fff8f6",
+                    "surface-bright": "#fff8f6",
+                    "on-background": "#4e2819",
+                    "on-error-container": "#6e0523",
+                    "primary-container": "#f8847b",
+                    "on-tertiary-container": "#1f632c",
+                    "secondary-fixed": "#ffe087",
+                    "tertiary-container": "#b4fdb4",
+                    "inverse-primary": "#f8847b",
+                    "error": "#a8364b",
+                    "on-tertiary-fixed": "#03501b",
+                    "secondary": "#745c00",
+                    "on-surface-variant": "#835342",
+                    "on-primary-fixed": "#170000",
+                    "surface-container-low": "#fff1ec",
+                    "outline": "#a26e5b",
+                    "surface-tint": "#9f403a",
+                    "surface-variant": "#ffdbce",
+                    "on-surface": "#4e2819",
+                    "on-secondary-fixed": "#4e3d00",
+                    "on-tertiary-fixed-variant": "#2a6e35",
+                    "on-primary-container": "#540809",
+                    "primary-fixed-dim": "#e8786e",
+                    "surface-dim": "#ffd0bf",
+                    "tertiary": "#286c34",
+                    "on-secondary-container": "#644f00",
+                    "error-container": "#f97386",
+                    "outline-variant": "#dfa48f",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-container": "#ffe9e2",
+                    "tertiary-fixed": "#b4fdb4",
+                    "secondary-dim": "#665100",
+                    "tertiary-fixed-dim": "#a6eea7"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Plus Jakarta Sans"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .ripple-layer {
+            animation: ripple 3s infinite ease-out;
+        }
+        @keyframes ripple {
+            0% { transform: scale(1); opacity: 0.6; }
+            100% { transform: scale(1.6); opacity: 0; }
+        }
+        .coral-gradient {
+            background: linear-gradient(135deg, #FF8A80 0%, #EF5350 100%);
+        }
+        .warm-bg {
+            background: linear-gradient(180deg, #FFF8E1 0%, #FFE0B2 100%);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="font-body text-on-background bg-background min-h-screen">
+<!-- Top Navigation Shell -->
+<header class="bg-[#FFF8E1] dark:bg-stone-950 flex justify-between items-center px-5 h-16 w-full docked full-width top-0 z-40">
+<button class="hover:bg-[#FFD54F]/20 transition-colors active:scale-95 duration-150 p-2 rounded-full">
+<span class="material-symbols-outlined text-[#FF8A80] dark:text-[#FF8A80]">arrow_back</span>
+</button>
+<h1 class="font-['Plus_Jakarta_Sans'] font-bold text-lg text-[#3E2723] dark:text-stone-100">태동 카운터</h1>
+<button class="hover:bg-[#FFD54F]/20 transition-colors active:scale-95 duration-150 p-2 rounded-full">
+<span class="material-symbols-outlined text-[#FF8A80] dark:text-[#FF8A80]">settings</span>
+</button>
+</header>
+<main class="warm-bg min-h-[calc(100vh-64px)] flex flex-col items-center px-5 pb-32">
+<!-- Timer Display -->
+<div class="mt-8 text-center">
+<div class="text-on-background/60 font-medium text-sm mb-1">진행 시간</div>
+<div class="font-headline font-extrabold text-5xl tracking-tight text-on-background">03:24</div>
+</div>
+<!-- Counter Center Piece -->
+<div class="relative flex-1 flex flex-col items-center justify-center w-full py-12">
+<!-- Ripple Waves -->
+<div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+<div class="ripple-layer absolute w-64 h-64 border-2 border-primary/20 rounded-full"></div>
+<div class="ripple-layer absolute w-64 h-64 border-2 border-primary/20 rounded-full" style="animation-delay: 1s;"></div>
+<div class="ripple-layer absolute w-64 h-64 border-2 border-primary/20 rounded-full" style="animation-delay: 2s;"></div>
+</div>
+<!-- Interaction Button -->
+<button class="relative z-10 w-[180px] h-[180px] rounded-full coral-gradient shadow-[0_12px_40px_-8px_rgba(239,83,80,0.5)] flex flex-col items-center justify-center active:scale-90 transition-transform duration-200">
+<span class="material-symbols-outlined text-white text-4xl mb-1" style="font-variation-settings: 'FILL' 1;">child_care</span>
+<span class="text-white font-headline font-bold text-6xl">7</span>
+<div class="absolute -bottom-2 bg-white/20 backdrop-blur-md px-3 py-1 rounded-full border border-white/30">
+<span class="text-white text-[10px] font-bold">TAP TO RECORD</span>
+</div>
+</button>
+<div class="mt-12 text-center">
+<p class="font-headline font-semibold text-xl text-[#3E2723]">콩이가 움직이고 있어요! 💛</p>
+<p class="text-[#8D6E63] text-sm mt-2 opacity-80">탭할 때마다 진동 피드백</p>
+</div>
+</div>
+<!-- Progress Tracking -->
+<div class="w-full max-w-sm mb-12">
+<div class="flex justify-between items-end mb-4">
+<span class="font-headline font-bold text-2xl text-on-background">7/10회</span>
+<span class="font-medium text-primary text-sm bg-primary/10 px-3 py-1 rounded-full">3번 더 느끼면 완료!</span>
+</div>
+<div class="flex justify-between items-center gap-2 px-1">
+<!-- 7 Filled Dots -->
+<div class="flex-1 h-3 rounded-full bg-primary shadow-sm"></div>
+<div class="flex-1 h-3 rounded-full bg-primary shadow-sm"></div>
+<div class="flex-1 h-3 rounded-full bg-primary shadow-sm"></div>
+<div class="flex-1 h-3 rounded-full bg-primary shadow-sm"></div>
+<div class="flex-1 h-3 rounded-full bg-primary shadow-sm"></div>
+<div class="flex-1 h-3 rounded-full bg-primary shadow-sm"></div>
+<div class="flex-1 h-3 rounded-full bg-primary shadow-sm"></div>
+<!-- 3 Empty Dots -->
+<div class="flex-1 h-3 rounded-full bg-white/40 border border-on-background/5"></div>
+<div class="flex-1 h-3 rounded-full bg-white/40 border border-on-background/5"></div>
+<div class="flex-1 h-3 rounded-full bg-white/40 border border-on-background/5"></div>
+</div>
+</div>
+<!-- History Card -->
+<div class="w-full max-w-md bg-white rounded-[24px] p-6 shadow-[0_4px_20px_rgba(62,39,35,0.06)] border border-[#3E2723]/5">
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-[#8D6E63] text-lg">history</span>
+<h3 class="font-headline font-bold text-[#3E2723]">최근 기록</h3>
+</div>
+<div class="space-y-3">
+<div class="flex items-center justify-between p-3 rounded-xl bg-[#FFF8E1]/50 border border-[#FFF8E1]">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-[#81C784]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="text-[#3E2723] font-medium">어제</span>
+</div>
+<div class="text-right">
+<div class="text-[#3E2723] font-bold">10회 <span class="text-[#8D6E63] font-normal text-xs ml-1">(6분 42초)</span></div>
+</div>
+</div>
+<div class="flex items-center justify-between p-3 rounded-xl bg-[#FFF8E1]/50 border border-[#FFF8E1]">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-[#81C784]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="text-[#3E2723] font-medium">그저께</span>
+</div>
+<div class="text-right">
+<div class="text-[#3E2723] font-bold">10회 <span class="text-[#8D6E63] font-normal text-xs ml-1">(8분 15초)</span></div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Navigation Bar -->
+<nav class="fixed bottom-0 w-full z-50 flex justify-around items-center px-4 py-3 pb-safe bg-white dark:bg-stone-900 rounded-t-[20px] border-t border-[#3E2723]/5 shadow-[0_-2px_10px_rgba(62,39,35,0.05)]">
+<a class="flex flex-col items-center justify-center text-[#8D6E63] dark:text-stone-400 hover:text-[#FF8A80] transition-all" href="#">
+<span class="material-symbols-outlined mb-1">mail</span>
+<span class="font-['Plus_Jakarta_Sans'] font-medium text-[11px]">Letters</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#FF8A80] bg-[#FF8A80]/10 rounded-xl px-3 py-1 transition-all" href="#">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 1;">child_care</span>
+<span class="font-['Plus_Jakarta_Sans'] font-medium text-[11px]">Kicks</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#8D6E63] dark:text-stone-400 hover:text-[#FF8A80] transition-all" href="#">
+<span class="material-symbols-outlined mb-1">trending_up</span>
+<span class="font-['Plus_Jakarta_Sans'] font-medium text-[11px]">Growth</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#8D6E63] dark:text-stone-400 hover:text-[#FF8A80] transition-all" href="#">
+<span class="material-symbols-outlined mb-1">person</span>
+<span class="font-['Plus_Jakarta_Sans'] font-medium text-[11px]">Profile</span>
+</a>
+</nav>
+</body></html>

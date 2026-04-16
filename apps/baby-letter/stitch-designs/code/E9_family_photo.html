@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+
+<html lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "outline-variant": "#dfa48f",
+                "on-error": "#fff7f7",
+                "outline": "#a26e5b",
+                "tertiary": "#286c34",
+                "surface-dim": "#ffd0bf",
+                "on-secondary-container": "#644f00",
+                "error": "#a8364b",
+                "tertiary-dim": "#1a5f29",
+                "on-primary": "#fff7f6",
+                "on-primary-container": "#540809",
+                "background": "#fff8f6",
+                "inverse-primary": "#f8847b",
+                "secondary-fixed": "#ffe087",
+                "on-secondary": "#fff8ee",
+                "tertiary-container": "#b4fdb4",
+                "surface-container-low": "#fff1ec",
+                "tertiary-fixed": "#b4fdb4",
+                "on-surface-variant": "#835342",
+                "on-primary-fixed-variant": "#611211",
+                "secondary": "#745c00",
+                "primary": "#9f403a",
+                "error-dim": "#6b0221",
+                "on-secondary-fixed-variant": "#705900",
+                "on-tertiary-fixed-variant": "#2a6e35",
+                "primary-fixed": "#f8847b",
+                "on-tertiary-fixed": "#03501b",
+                "primary-dim": "#90352f",
+                "surface": "#fff8f6",
+                "secondary-container": "#ffe087",
+                "surface-container-highest": "#ffdbce",
+                "primary-container": "#f8847b",
+                "surface-variant": "#ffdbce",
+                "surface-container-lowest": "#ffffff",
+                "tertiary-fixed-dim": "#a6eea7",
+                "on-tertiary-container": "#1f632c",
+                "surface-bright": "#fff8f6",
+                "inverse-on-surface": "#b89589",
+                "on-background": "#4e2819",
+                "on-surface": "#4e2819",
+                "inverse-surface": "#1b0904",
+                "on-tertiary": "#e9ffe4",
+                "error-container": "#f97386",
+                "on-primary-fixed": "#170000",
+                "secondary-fixed-dim": "#fad04b",
+                "secondary-dim": "#665100",
+                "on-error-container": "#6e0523",
+                "surface-tint": "#9f403a",
+                "surface-container-high": "#ffe2d9",
+                "primary-fixed-dim": "#e8786e",
+                "on-secondary-fixed": "#4e3d00",
+                "surface-container": "#ffe9e2"
+            },
+            "borderRadius": {
+                "DEFAULT": "0.25rem",
+                "lg": "0.5rem",
+                "xl": "0.75rem",
+                "full": "9999px"
+            },
+            "fontFamily": {
+                "headline": ["Plus Jakarta Sans"],
+                "body": ["Inter"],
+                "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .font-headline { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .photo-masonry {
+            column-count: 2;
+            column-gap: 12px;
+        }
+        .photo-item {
+            break-inside: avoid;
+            margin-bottom: 12px;
+        }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-[#FFF8E1] text-[#3E2723] min-h-screen pb-24">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 flex items-center justify-between px-5 h-16 bg-[#FFF8E1] border-b border-[#8D6E63]/10 shadow-sm">
+<div class="flex items-center gap-4">
+<button class="active:scale-95 transition-transform text-[#8D6E63] hover:bg-[#FFD54F]/20 p-2 rounded-full">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+<h1 class="font-['Plus_Jakarta_Sans'] font-bold text-[#3E2723] text-lg">우리 가족 사진첩</h1>
+</div>
+<button class="active:scale-95 transition-transform text-[#FF8A80] hover:bg-[#FFD54F]/20 p-2 rounded-full">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+</button>
+</header>
+<main class="pt-20 px-5 space-y-6">
+<!-- Featured Hero Photo -->
+<section class="relative rounded-xl overflow-hidden shadow-[0_2px_8px_rgba(62,39,35,0.08)] bg-white group">
+<img alt="featured family moment" class="w-full h-64 object-cover" data-alt="tender close-up of a mother and father holding their newborn baby, soft natural sunlight, warm cream and pastel tones, emotional atmosphere" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAqvd6xokfrYAgDvCQLCtajKT2dWZcck3czMlZIjPthhgIVb1zTZ-2olYsctLUfxNChnq4Ax8GGfjo-VROQRsDd7ose9xg7-jEaw_opx8jF7UJzyTXVP2EJYADdlswa_K7PT_vfHiqgLNKwncCn79KMlc7AGkL8Ogd-gcUVLnNdMJiZfzjog23mkgT34ir3LpJaiTziBkdZYtmmJ5mwEO_50veXqhfbnirkS9edntRXQF3jRa2gaZi6GogGU9srjq2h9adI2Kyv4GcU"/>
+<div class="absolute bottom-4 left-4 right-4 bg-white/80 backdrop-blur-md px-4 py-2 rounded-lg flex justify-between items-center">
+<span class="font-headline font-bold text-sm text-[#3E2723]">2026.04.16 · D+45</span>
+<span class="material-symbols-outlined text-[#FF8A80] text-lg" data-icon="favorite" style="font-variation-settings: 'FILL' 1;">favorite</span>
+</div>
+</section>
+<!-- Filter Chips -->
+<nav class="flex gap-2 overflow-x-auto hide-scrollbar py-2">
+<button class="px-5 py-2 bg-[#FF8A80] text-white rounded-full text-sm font-medium shadow-sm whitespace-nowrap">모두</button>
+<button class="px-5 py-2 bg-white text-[#8D6E63] border border-[#8D6E63]/10 rounded-full text-sm font-medium whitespace-nowrap hover:bg-[#FFD54F]/10">엄마+아기</button>
+<button class="px-5 py-2 bg-white text-[#8D6E63] border border-[#8D6E63]/10 rounded-full text-sm font-medium whitespace-nowrap hover:bg-[#FFD54F]/10">아빠+아기</button>
+<button class="px-5 py-2 bg-white text-[#8D6E63] border border-[#8D6E63]/10 rounded-full text-sm font-medium whitespace-nowrap hover:bg-[#FFD54F]/10">가족</button>
+</nav>
+<!-- Monthly Section: April -->
+<section>
+<div class="flex items-center gap-3 mb-4">
+<h2 class="font-headline font-bold text-[#3E2723]">4월 2026</h2>
+<div class="h-px flex-1 bg-[#8D6E63]/10"></div>
+</div>
+<div class="photo-masonry">
+<!-- Photo 1 -->
+<div class="photo-item relative rounded-xl overflow-hidden shadow-sm bg-white">
+<img alt="baby sleeping" class="w-full h-48 object-cover" data-alt="peaceful newborn baby sleeping in a white woven basket, soft knitted blankets, warm ethereal lighting, minimalist aesthetic" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBYvpmNpC-IdG0XeyJ6G2hW64bnwns51Hie4YbqLoOu0CCS9xbhruvj9LSc3NUSUMWr9xzJnDpqiGCighq-nF_hAfvPUe5-f-hpCzoImlWK62I4SE0wV4mfST1MLyFW8NCmaJRsW7ekChLRsBVADuBf7zOSClGhtgXfXFfdR15K799B1jziO1xULzVmxvVxnaqjDOfBDCTCTJ4P-sXKM78LyvWNdGygunqhjCLhmrWrY0c3udDgH2QsmGnaAPEENMXgbEZZRpTLtYbx"/>
+<div class="absolute top-2 right-2 px-2 py-1 bg-black/30 backdrop-blur-sm text-white text-[10px] rounded-full">04.14</div>
+</div>
+<!-- Memory Card -->
+<div class="photo-item relative rounded-xl p-4 bg-[#FFD54F]/20 border border-[#FFD54F]/40 flex flex-col items-center justify-center text-center space-y-3">
+<div class="grid grid-cols-2 gap-1 w-20 h-20 rotate-3">
+<div class="bg-white p-0.5 shadow-sm rounded-sm">
+<div class="w-full h-full bg-[#f8847b]/20 rounded-sm"></div>
+</div>
+<div class="bg-white p-0.5 shadow-sm rounded-sm -rotate-6">
+<div class="w-full h-full bg-[#81C784]/20 rounded-sm"></div>
+</div>
+</div>
+<div>
+<p class="font-headline font-extrabold text-[#3E2723] text-sm">🎉 첫 100일 기념!</p>
+<p class="text-[11px] text-[#8D6E63] mt-1">우리 아기 참 잘 컸어요</p>
+</div>
+</div>
+<!-- Photo 2 -->
+<div class="photo-item relative rounded-xl overflow-hidden shadow-sm bg-white">
+<img alt="father and baby" class="w-full h-64 object-cover" data-alt="father gently kissing baby's tiny hand, cinematic warm lighting, intimate emotion, high quality studio photography" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDSa5ccmS4vcGMWXvxCtx28bHeyNf38l5JaUIWpYkEL_CK-eTBqSO_XGNz-6i5-pfqczXVfC-UR3_U-gwQnUg8gk93xU1QataUCKfwx0V8AXn7_FsL7zJO6DTUsgjSLoLRuTZvvq8sXD1aH32AKiL3KgrLR5L0Rfv7OEOvs-ui6M_nh0fUn8IfnicRBcWZTTRTDJF7Wdm0c5WZYy6MG4tiSKw4WS93_mgOKW6AZcM9N5kaaR6iuzb_vwBRpcJgxM9nhIsW3JbEm9nYE"/>
+<div class="absolute top-2 right-2 px-2 py-1 bg-black/30 backdrop-blur-sm text-white text-[10px] rounded-full">04.10</div>
+</div>
+</div>
+</section>
+<!-- Monthly Section: March -->
+<section>
+<div class="flex items-center gap-3 mb-4">
+<h2 class="font-headline font-bold text-[#3E2723]">3월 2026</h2>
+<div class="h-px flex-1 bg-[#8D6E63]/10"></div>
+</div>
+<div class="photo-masonry">
+<!-- Photo 3 -->
+<div class="photo-item relative rounded-xl overflow-hidden shadow-sm bg-white">
+<img alt="baby nursery" class="w-full h-56 object-cover" data-alt="bright modern baby nursery with wooden crib and soft plush toys, airy bright interior design, warm afternoon sun" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAKYKxFZRPwoTpmR2y5fjHaeQiqJ5-BXIZxnrmnXmRsjkVrmWah-DKWGncyLbZygZK-DETyL5O6fH0fSB3mye5ktkkHvSrD4-LarFM1ZSTTf2OM12xMrEmte7gRu-1a-L6kiwRI5rOhr6guY41km_GIqXo_nHCkOXYsn_Kob4L8bWwg9maGeVEuD2v7acEuDtM_5lqTAhQRJR04IIIonqhDx29d03gwVyT-VWCkYCvqy4cKPCB1_T4vdDaTDfWzwtv5S6MLmjVOsgAU"/>
+<div class="absolute top-2 right-2 px-2 py-1 bg-black/30 backdrop-blur-sm text-white text-[10px] rounded-full">03.28</div>
+</div>
+<!-- Photo 4 -->
+<div class="photo-item relative rounded-xl overflow-hidden shadow-sm bg-white">
+<img alt="baby feet" class="w-full h-40 object-cover" data-alt="extreme close up of newborn baby feet held in parent's hands, black and white fine art style, high contrast, tender detail" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBwaTMk7JuCSniw9NSkfrBTTviZw2wFitcfwKGdeqkuv8ro-Ftre03Vb1FsnbI7aelFFp7fYKD_30IrbYGFefYLrVeFG3Aih6xTSGvON14WNbK7hZjSRdBvxTqFajA2ILssA0TGYVHYeY3hVM3QBuG-iMxLnc9sNuya30v1z3K9mwAJ3ChmBVe7NgD7nwaWS5dTF8ujJPkDxIbTfs7uI3w6lyvvOTWkWd21rp5AKPRWQt-gLnYHL_YXQm7FW3Z3Or8PAsnBeg4v2Vpd"/>
+<div class="absolute top-2 right-2 px-2 py-1 bg-black/30 backdrop-blur-sm text-white text-[10px] rounded-full">03.15</div>
+</div>
+<!-- Photo 5 -->
+<div class="photo-item relative rounded-xl overflow-hidden shadow-sm bg-white">
+<div class="w-full h-32 bg-stone-100 flex items-center justify-center p-4">
+<p class="text-[#8D6E63] text-xs text-center italic">"오늘 처음으로 아빠랑 눈 마주치며 웃었어요!"</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- FAB -->
+<button class="fixed bottom-24 right-6 w-14 h-14 bg-[#FF8A80] text-white rounded-full shadow-lg flex items-center justify-center z-50 active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-3xl" data-icon="add">add</span>
+</button>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-safe h-20 bg-white border-t border-[#8D6E63]/10 shadow-[0_-2px_8px_rgba(62,39,35,0.08)] rounded-t-xl">
+<button class="flex flex-col items-center justify-center text-[#8D6E63] hover:text-[#FF8A80] active:translate-y-0.5 transition-all">
+<span class="material-symbols-outlined" data-icon="mail">mail</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[11px] font-medium">편지</span>
+</button>
+<button class="flex flex-col items-center justify-center text-[#FF8A80] bg-[#FF8A80]/10 rounded-xl px-3 py-1 active:translate-y-0.5 transition-all">
+<span class="material-symbols-outlined" data-icon="photo_library" style="font-variation-settings: 'FILL' 1;">photo_library</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[11px] font-medium">사진첩</span>
+</button>
+<button class="flex flex-col items-center justify-center text-[#8D6E63] hover:text-[#FF8A80] active:translate-y-0.5 transition-all">
+<span class="material-symbols-outlined" data-icon="auto_graph">auto_graph</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[11px] font-medium">성장기록</span>
+</button>
+<button class="flex flex-col items-center justify-center text-[#8D6E63] hover:text-[#FF8A80] active:translate-y-0.5 transition-all">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[11px] font-medium">설정</span>
+</button>
+</nav>
+</body></html>

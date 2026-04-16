@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+
+<html lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>BabyLetter - 전문가 가이드</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary-fixed": "#ffe087",
+                    "primary-fixed": "#f8847b",
+                    "tertiary-container": "#b4fdb4",
+                    "secondary-dim": "#665100",
+                    "on-error-container": "#6e0523",
+                    "tertiary-dim": "#1a5f29",
+                    "on-surface-variant": "#835342",
+                    "tertiary-fixed-dim": "#a6eea7",
+                    "on-primary-container": "#540809",
+                    "inverse-on-surface": "#b89589",
+                    "inverse-primary": "#f8847b",
+                    "surface-bright": "#fff8f6",
+                    "outline-variant": "#dfa48f",
+                    "primary-container": "#f8847b",
+                    "surface-container-high": "#ffe2d9",
+                    "on-secondary-fixed-variant": "#705900",
+                    "tertiary": "#286c34",
+                    "on-secondary": "#fff8ee",
+                    "error-container": "#f97386",
+                    "primary-dim": "#90352f",
+                    "surface": "#fff8f6",
+                    "error-dim": "#6b0221",
+                    "on-primary-fixed-variant": "#611211",
+                    "secondary-fixed-dim": "#fad04b",
+                    "on-tertiary-container": "#1f632c",
+                    "on-tertiary-fixed": "#03501b",
+                    "primary": "#9f403a",
+                    "on-secondary-container": "#644f00",
+                    "surface-container-highest": "#ffdbce",
+                    "secondary": "#745c00",
+                    "on-error": "#fff7f7",
+                    "surface-variant": "#ffdbce",
+                    "primary-fixed-dim": "#e8786e",
+                    "on-tertiary-fixed-variant": "#2a6e35",
+                    "surface-tint": "#9f403a",
+                    "surface-dim": "#ffd0bf",
+                    "on-secondary-fixed": "#4e3d00",
+                    "on-primary-fixed": "#170000",
+                    "error": "#a8364b",
+                    "tertiary-fixed": "#b4fdb4",
+                    "outline": "#a26e5b",
+                    "on-background": "#4e2819",
+                    "on-surface": "#4e2819",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-container": "#ffe9e2",
+                    "inverse-surface": "#1b0904",
+                    "background": "#fff8f6",
+                    "on-primary": "#fff7f6",
+                    "secondary-container": "#ffe087",
+                    "surface-container-low": "#fff1ec",
+                    "on-tertiary": "#e9ffe4"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Plus Jakarta Sans"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-[#FFF8E1] text-[#3E2723] font-body min-h-screen pb-24">
+<!-- TopAppBar Execution from JSON -->
+<header class="fixed top-0 w-full z-50 bg-[#FFF8E1] border-none flex justify-between items-center px-5 h-16 w-full max-w-md mx-auto">
+<div class="flex items-center gap-3">
+<button class="flex items-center justify-center w-10 h-10 rounded-full hover:bg-[#FFD54F]/20 active:scale-95 transition-all">
+<span class="material-symbols-outlined text-[#3E2723]">arrow_back</span>
+</button>
+<h1 class="font-headline font-bold text-xl text-[#3E2723]">전문가 가이드</h1>
+</div>
+<div class="flex items-center gap-2">
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-[#FFD54F]/20 active:scale-95 transition-all">
+<span class="material-symbols-outlined text-[#FF8A80]">search</span>
+</button>
+<div class="w-8 h-8 rounded-full overflow-hidden bg-surface-container">
+<img alt="Mom's Profile" class="w-full h-full object-cover" data-alt="professional warm portrait of a mother smiling gently with soft natural lighting and cream background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCWHdFV8ZRhjJzKxgDZGq0W9HZW2vSr2oN4B8EzqOz9dXWF3H4VmdYXEsEnCAxoX37Xzhb-zBlKXz-G4WL0BPju02xYmSMN_o9M7HVlM-S4854mg-iiluQa7m3pYOsYMPclswfqjtb82P_FsvHW51rc1ePzc23e9jKabuUtAZNhIHkhA5HQLSGsWemXGXJ5QkU6Zkfq753TBO6Q_dfby5Kavjj0olxPrVGDfx1xYHtzhyykGELtsgQ3R9KM6qQmHK7dvyH4H0f9eS-B"/>
+</div>
+</div>
+</header>
+<main class="pt-20 px-5 max-w-md mx-auto">
+<!-- Search Input -->
+<div class="mt-4 mb-6">
+<div class="relative group">
+<span class="absolute left-4 top-1/2 -translate-y-1/2 material-symbols-outlined text-[#8D6E63] text-xl">search</span>
+<input class="w-full pl-12 pr-4 py-3.5 bg-white border-none rounded-2xl shadow-[0_2px_8px_rgba(62,39,35,0.04)] focus:ring-2 focus:ring-[#FFD54F] text-sm placeholder:text-[#8D6E63]/60" placeholder="궁금한 육아 고민을 검색해보세요" type="text"/>
+</div>
+</div>
+<!-- Categories (Horizontal Scroll Chips) -->
+<div class="flex gap-2 overflow-x-auto no-scrollbar pb-2 -mx-5 px-5">
+<button class="px-5 py-2 rounded-full bg-[#FF8A80] text-white text-sm font-semibold whitespace-nowrap shadow-sm">전체</button>
+<button class="px-5 py-2 rounded-full bg-white text-[#8D6E63] text-sm font-medium whitespace-nowrap border border-[#3E2723]/5 hover:bg-[#FFD54F]/10">수면</button>
+<button class="px-5 py-2 rounded-full bg-white text-[#8D6E63] text-sm font-medium whitespace-nowrap border border-[#3E2723]/5 hover:bg-[#FFD54F]/10">수유</button>
+<button class="px-5 py-2 rounded-full bg-white text-[#8D6E63] text-sm font-medium whitespace-nowrap border border-[#3E2723]/5 hover:bg-[#FFD54F]/10">발달</button>
+<button class="px-5 py-2 rounded-full bg-white text-[#8D6E63] text-sm font-medium whitespace-nowrap border border-[#3E2723]/5 hover:bg-[#FFD54F]/10">건강</button>
+<button class="px-5 py-2 rounded-full bg-white text-[#8D6E63] text-sm font-medium whitespace-nowrap border border-[#3E2723]/5 hover:bg-[#FFD54F]/10">정서</button>
+<button class="px-5 py-2 rounded-full bg-white text-[#8D6E63] text-sm font-medium whitespace-nowrap border border-[#3E2723]/5 hover:bg-[#FFD54F]/10">안전</button>
+</div>
+<!-- Featured Section -->
+<section class="mt-8">
+<div class="flex items-end justify-between mb-4">
+<h2 class="font-headline font-bold text-[#3E2723] text-lg">오늘의 추천 가이드</h2>
+<span class="text-xs text-[#FF8A80] font-bold">더보기</span>
+</div>
+<div class="relative rounded-[24px] overflow-hidden bg-white shadow-[0_4px_20px_rgba(62,39,35,0.08)] group cursor-pointer active:scale-[0.98] transition-transform">
+<div class="relative h-56 w-full">
+<img alt="Sleeping Baby" class="w-full h-full object-cover" data-alt="peaceful newborn baby sleeping soundly on soft white linen with warm morning sunlight casting gentle shadows" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDRzRE1Ws1H-FHyalSWP06zo68AH30dalMM_j9CLDfRpIIFlKP_QJWiw61deoGR2fwPAVOfBybAQJ6NU70S9mOkUQXhD2tCy8zRVczrFKBY-M5pufB4UD-VOjRNX-UJu3dZuWkRHSTwyeeYxCRIijXrhriLCq2B37UN2tvpwkU-0uHZ3o6ka7q6USSiVJgq1CHt4ofy8xR199h_45qyq-vUYOWOLWPGOs-UeYog3OOGsyeHWLzsu88SwtJgHgdZgug5ZJw0yxiw14LU"/>
+<div class="absolute inset-0 bg-gradient-to-t from-[#3E2723]/60 to-transparent"></div>
+<button class="absolute top-4 right-4 w-10 h-10 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center text-white">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">bookmark</span>
+</button>
+</div>
+<div class="p-6">
+<div class="flex items-center gap-2 mb-2">
+<span class="px-2 py-0.5 bg-[#FFD54F]/20 text-[#665100] text-[10px] font-bold rounded uppercase tracking-wider">Must Read</span>
+<span class="text-[11px] text-[#8D6E63] flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">visibility</span> 2,541회 읽음
+                        </span>
+</div>
+<h3 class="font-headline font-bold text-xl text-[#3E2723] leading-tight mb-2">신생아 수면 가이드: 꿀잠을 위한 환경 조성</h3>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-secondary-fixed flex items-center justify-center overflow-hidden">
+<img alt="Doctor Kim" class="w-full h-full object-cover" data-alt="professional medical doctor portrait, middle-aged male with friendly expression and stethoscope" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCwUIaM3ssqhMLh4Q7HAuXf5WeH419gjfYgcvkMnX_jjChJ0-ZD-tC5D55RXjXPhBPGHH3AH5hrO8BfQTS71OdeR8LDn_L1I6_G0HqSSMc5CgvJKtYFhD6r58apcEgXkxCtxc48ubNpQkVUBrUiXyOnL8DTKBzi8aakijHCmzfywm8GO_nBtucUhuXL0SxdLbHci1R31f8bnC4O9TtyWaheLU780eNh9SKHCJeuSdtb1xRGTEqcfljjnV2PEzNbb5QpBoU76A7cuKlT"/>
+</div>
+<div>
+<p class="text-xs font-bold text-[#3E2723]">김소아과 원장</p>
+<p class="text-[10px] text-[#8D6E63]">소아청소년과 전문의</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-[#FF8A80]">arrow_forward_ios</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Guide List -->
+<section class="mt-10">
+<h2 class="font-headline font-bold text-[#3E2723] text-lg mb-4">인기 가이드</h2>
+<div class="space-y-4">
+<!-- Item 1 -->
+<div class="bg-white p-4 rounded-2xl flex gap-4 shadow-[0_2px_8px_rgba(62,39,35,0.06)] hover:shadow-md transition-shadow cursor-pointer">
+<div class="w-24 h-24 rounded-xl overflow-hidden flex-shrink-0">
+<img alt="Breastfeeding tips" class="w-full h-full object-cover" data-alt="close up of mother breastfeeding baby with soft focused background and natural lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA9JbxkHz8mbFDz73eiECHFYsmpDB_FUV5Du3Qwz84u2EmZg40IPH8tjsiAkE362cXFXUKsSSXZbVeWj3LhnVrLjMrHyBqbml5bzVnXT-xkrEciVg09xu2x5IoRbDL1VoBnTGXjmhQu95BtTyUoayAlJ5SyZLMzK5ZL0ASLPAZNnuXK8b-DiNqBRinO4K-HZNwCXxLPRusdXZenpNJQi8ubLfML756UMWxaLOlhgU4yZmRDR5xX0miUzSElb3W6mO3FyRSPeydPUhmC"/>
+</div>
+<div class="flex flex-col justify-between py-1">
+<div>
+<h4 class="font-bold text-[#3E2723] text-sm leading-snug mb-1">하이원에서 알려주는 모유 수유 팁</h4>
+<p class="text-[11px] text-[#8D6E63] font-medium">이영희 국제수유상담가</p>
+</div>
+<div class="flex items-center justify-between mt-auto">
+<div class="flex items-center gap-2 text-[10px] text-[#8D6E63]">
+<span class="flex items-center gap-0.5"><span class="material-symbols-outlined text-[14px]">schedule</span> 5분</span>
+<span class="w-1 h-1 rounded-full bg-[#8D6E63]/30"></span>
+<span class="flex items-center gap-0.5"><span class="material-symbols-outlined text-[14px]">verified</span> 전문검토완료</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="bg-white p-4 rounded-2xl flex gap-4 shadow-[0_2px_8px_rgba(62,39,35,0.06)] hover:shadow-md transition-shadow cursor-pointer">
+<div class="w-24 h-24 rounded-xl overflow-hidden flex-shrink-0">
+<img alt="Sleep training" class="w-full h-full object-cover" data-alt="cozy baby nursery with crib and soft lighting in warm tones" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAPSb24-SPEvf4fG_dfsDD3SI6g_VuSnEk-vPrDFBOaRjmwxsrj79C_1p9DaNdosj9hGkzyDu6R-Zgkphtxs1__nuyra6_2C_Knnz5LgFR_HLtx93CN9X9Nu37-2YQqQT9tzP30k4wQ8c3OaTNRAuoTsedWFnHQjhtICvabRWk6C6nEU5ZLWB1jkS2w4cN1kKWW275-Fbt2rXdRdGyotvQISFns8FMuIo5PcDoHslImGFgmawqb7KFDvm3N2rANElxe7K0QQ4sRUK4w"/>
+</div>
+<div class="flex flex-col justify-between py-1">
+<div>
+<h4 class="font-bold text-[#3E2723] text-sm leading-snug mb-1">영아 수면 교육 A to Z: 시기별 방법</h4>
+<p class="text-[11px] text-[#8D6E63] font-medium">박지민 아동심리학자</p>
+</div>
+<div class="flex items-center justify-between mt-auto">
+<div class="flex items-center gap-2 text-[10px] text-[#8D6E63]">
+<span class="flex items-center gap-0.5"><span class="material-symbols-outlined text-[14px]">schedule</span> 8분</span>
+<span class="w-1 h-1 rounded-full bg-[#8D6E63]/30"></span>
+<span class="flex items-center gap-0.5"><span class="material-symbols-outlined text-[14px]">verified</span> 전문검토완료</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Additional Item 3 for Depth -->
+<div class="bg-white p-4 rounded-2xl flex gap-4 shadow-[0_2px_8px_rgba(62,39,35,0.06)] hover:shadow-md transition-shadow cursor-pointer">
+<div class="w-24 h-24 rounded-xl overflow-hidden flex-shrink-0">
+<img alt="Nutrition guide" class="w-full h-full object-cover" data-alt="healthy baby food ingredients like organic carrots and broccoli on a wooden table" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB6NaVR-H-BsOjTPf__uqrIkdKu8SQuJcNqB6Xe60pbhi0y_j8LJB2g1fsupeoknSR43snMmFmKYJkbPV_WIsO9_Lvq3c0CQ7KNEJ5udvZaPeNYB_oUBSCeDAKzT1mqPGnl__P51hi99KlbTjLvGp6SDM8AiHh96nn0xo8HEjwTueYl699YywJ91ABGI5g4raVBaJCKMOclg27Yhr4TR20BZgO94HDp12E6GW_kQ5O9rgr95ugb47DmPzJASAELu_waKY27R4fEW9Bx"/>
+</div>
+<div class="flex flex-col justify-between py-1">
+<div>
+<h4 class="font-bold text-[#3E2723] text-sm leading-snug mb-1">초기 이유식 시작하기: 알레르기 예방</h4>
+<p class="text-[11px] text-[#8D6E63] font-medium">최은경 영양학 박사</p>
+</div>
+<div class="flex items-center justify-between mt-auto">
+<div class="flex items-center gap-2 text-[10px] text-[#8D6E63]">
+<span class="flex items-center gap-0.5"><span class="material-symbols-outlined text-[14px]">schedule</span> 6분</span>
+<span class="w-1 h-1 rounded-full bg-[#8D6E63]/30"></span>
+<span class="flex items-center gap-0.5"><span class="material-symbols-outlined text-[14px]">verified</span> 전문검토완료</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Disclaimer Footer -->
+<footer class="mt-12 mb-8 text-center px-4">
+<div class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[#3E2723]/5 border border-[#3E2723]/10">
+<span class="material-symbols-outlined text-[16px] text-[#81C784]">verified_user</span>
+<p class="text-[11px] text-[#8D6E63] leading-tight">
+                    모든 가이드는 공인된 전문가의 검토를 거칩니다.<br/>
+<span class="opacity-70 italic">All guides are reviewed by certified professionals</span>
+</p>
+</div>
+</footer>
+</main>
+<!-- BottomNavBar Execution from JSON -->
+<nav class="fixed bottom-0 left-0 w-full z-50 bg-white/90 backdrop-blur-md rounded-t-3xl shadow-[0_-4px_12px_rgba(62,39,35,0.05)] border-t border-[#3E2723]/5 flex justify-around items-center pt-3 pb-6 px-4">
+<div class="flex flex-col items-center justify-center text-[#8D6E63] active:scale-90 transition-transform">
+<span class="material-symbols-outlined">mail</span>
+<span class="font-['Inter'] text-[11px] font-medium">Letters</span>
+</div>
+<div class="flex flex-col items-center justify-center text-[#FF8A80] font-bold active:scale-90 transition-transform">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">menu_book</span>
+<span class="font-['Inter'] text-[11px] font-medium">Guides</span>
+</div>
+<div class="flex flex-col items-center justify-center text-[#8D6E63] active:scale-90 transition-transform">
+<span class="material-symbols-outlined">monitoring</span>
+<span class="font-['Inter'] text-[11px] font-medium">Growth</span>
+</div>
+<div class="flex flex-col items-center justify-center text-[#8D6E63] active:scale-90 transition-transform">
+<span class="material-symbols-outlined">auto_stories</span>
+<span class="font-['Inter'] text-[11px] font-medium">Memories</span>
+</div>
+</nav>
+</body></html>

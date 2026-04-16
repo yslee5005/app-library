@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+
+<html lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-surface-variant": "#835342",
+                    "surface-container-highest": "#ffdbce",
+                    "secondary-fixed": "#ffe087",
+                    "on-tertiary-fixed-variant": "#2a6e35",
+                    "outline": "#a26e5b",
+                    "primary-dim": "#90352f",
+                    "on-primary": "#fff7f6",
+                    "tertiary-dim": "#1a5f29",
+                    "on-primary-fixed": "#170000",
+                    "error-dim": "#6b0221",
+                    "surface-variant": "#ffdbce",
+                    "on-tertiary-fixed": "#03501b",
+                    "inverse-on-surface": "#b89589",
+                    "primary": "#9f403a",
+                    "on-surface": "#4e2819",
+                    "inverse-primary": "#f8847b",
+                    "primary-fixed": "#f8847b",
+                    "on-secondary": "#fff8ee",
+                    "on-primary-fixed-variant": "#611211",
+                    "primary-fixed-dim": "#e8786e",
+                    "error-container": "#f97386",
+                    "background": "#fff8f6",
+                    "secondary": "#745c00",
+                    "on-secondary-fixed-variant": "#705900",
+                    "inverse-surface": "#1b0904",
+                    "secondary-container": "#ffe087",
+                    "outline-variant": "#dfa48f",
+                    "on-tertiary-container": "#1f632c",
+                    "surface-container-high": "#ffe2d9",
+                    "surface-dim": "#ffd0bf",
+                    "surface-container-low": "#fff1ec",
+                    "error": "#a8364b",
+                    "primary-container": "#f8847b",
+                    "on-primary-container": "#540809",
+                    "tertiary-fixed-dim": "#a6eea7",
+                    "surface": "#fff8f6",
+                    "tertiary-fixed": "#b4fdb4",
+                    "surface-tint": "#9f403a",
+                    "surface-container": "#ffe9e2",
+                    "on-tertiary": "#e9ffe4",
+                    "on-secondary-container": "#644f00",
+                    "surface-container-lowest": "#ffffff",
+                    "secondary-dim": "#665100",
+                    "secondary-fixed-dim": "#fad04b",
+                    "on-error": "#fff7f7",
+                    "tertiary": "#286c34",
+                    "on-secondary-fixed": "#4e3d00",
+                    "tertiary-container": "#b4fdb4",
+                    "on-background": "#4e2819",
+                    "surface-bright": "#fff8f6",
+                    "on-error-container": "#6e0523"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Plus Jakarta Sans"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; background-color: #FFF8E1; }
+        .font-headline { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="text-on-surface">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 flex items-center px-5 h-16 bg-[#FFF8E1] dark:bg-stone-950 shadow-sm dark:shadow-none border-none">
+<button class="material-symbols-outlined text-[#FF8A80] dark:text-[#FF8A80] hover:bg-[#FFD54F]/20 dark:hover:bg-stone-800 transition-colors active:scale-95 duration-150 p-2 rounded-full" data-icon="arrow_back">arrow_back</button>
+<h1 class="ml-2 font-['Plus_Jakarta_Sans'] font-bold text-[#3E2723] dark:text-stone-100 text-lg">발달 팁</h1>
+</header>
+<main class="pt-20 pb-32 px-5 max-w-2xl mx-auto">
+<!-- Category & Title -->
+<div class="mb-6">
+<span class="inline-block px-3 py-1 bg-[#FF8A80] text-white text-xs font-bold rounded-full mb-3 tracking-wide">청각 발달</span>
+<h2 class="font-headline text-2xl font-bold text-[#3E2723] leading-tight">24주: 엄마 목소리를 구별할 수 있어요</h2>
+</div>
+<!-- Hero Area -->
+<div class="relative w-full h-56 rounded-[24px] overflow-hidden bg-gradient-to-br from-[#FF8A80] to-[#FFD54F] flex items-center justify-center mb-8 shadow-md">
+<div class="absolute inset-0 opacity-20" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAiCCRC-74ko0Hty5BwXBnzVotM9--c1ReZKIdnzmC1SupRjpJLwtX4093uqTbL39Drp9SDwO2AB0GpeL3uMJ63z4bijD4nVdG2IGLFoKNvNdfsi12YVakDNQ3EkaI8iEDIGUI6_ip5yzNJ8cAAPQ5XzuTC0j1RFbNv8blWczlwFKx3mv3b6U8C0xuXPi8SkL_0U85xTZA2_saChSKRZyZnDfomemFhMPKQ1Rk_ffBD2ZsW28Lg_9DbTr3rgEN_WA-OqwBhDJl1YMsX');"></div>
+<div class="relative z-10 flex flex-col items-center">
+<span class="material-symbols-outlined text-white text-[120px] drop-shadow-lg" data-icon="hearing" style="font-variation-settings: 'FILL' 1;">hearing</span>
+</div>
+<div class="absolute top-4 right-6 w-12 h-12 bg-white/20 rounded-full blur-xl"></div>
+<div class="absolute bottom-4 left-6 w-16 h-16 bg-white/10 rounded-full blur-2xl"></div>
+</div>
+<!-- Main Body Card -->
+<div class="bg-white rounded-[12px] p-6 shadow-[0_2px_8px_rgba(62,39,35,0.08)] mb-6 border border-[#3E2723]/5">
+<div class="flex items-center gap-2 mb-4">
+<div class="w-8 h-8 rounded-full bg-[#FFD54F]/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-[#745c00] text-sm" data-icon="child_care" style="font-variation-settings: 'FILL' 1;">child_care</span>
+</div>
+<span class="text-[#8D6E63] font-semibold text-sm">아기가 들려주는 이야기</span>
+</div>
+<p class="text-[#3E2723] text-lg leading-relaxed font-medium mb-8">
+                "이번 주 아기는 자궁 안에서 엄마의 목소리를 또렷하게 들을 수 있어요. 아빠 목소리도 좋아하지만, 엄마 목소리가 가장 안심이 된대요."
+            </p>
+<div class="pt-4 border-t border-[#3E2723]/5">
+<p class="text-[#8D6E63] text-[10px] italic">DeCasper &amp; Fifer, Science, 1980</p>
+</div>
+</div>
+<!-- Action Card -->
+<div class="bg-[#FFF1EC] rounded-[12px] p-5 mb-10 border-l-4 border-[#FF8A80] shadow-sm">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+<div class="flex items-center gap-3">
+<span class="text-xl">🎵</span>
+<p class="text-[#3E2723] font-bold">오늘의 실천: 좋아하는 노래 불러주기</p>
+</div>
+<button class="bg-[#FF8A80] text-white font-bold py-2.5 px-5 rounded-[8px] shadow-sm hover:brightness-105 active:scale-95 transition-all text-sm whitespace-nowrap">
+                    실천 완료 (+15 XP)
+                </button>
+</div>
+</div>
+<!-- Related Tips Section -->
+<section>
+<h3 class="font-headline text-[#3E2723] font-bold text-lg mb-4 flex items-center gap-2">
+                관련 팁 더보기
+                <span class="material-symbols-outlined text-[#FF8A80] text-sm" data-icon="arrow_forward_ios">arrow_forward_ios</span>
+</h3>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+<div class="bg-white/60 hover:bg-white rounded-[12px] p-4 flex gap-4 items-center transition-colors border border-[#3E2723]/5 group">
+<div class="w-14 h-14 rounded-xl bg-[#64B5F6]/10 flex-shrink-0 flex items-center justify-center group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-[#64B5F6]" data-icon="music_note">music_note</span>
+</div>
+<div>
+<h4 class="text-[#3E2723] font-bold text-sm mb-1">태교 음악 선택법</h4>
+<p class="text-[#8D6E63] text-xs">잔잔한 비트가 좋아요</p>
+</div>
+</div>
+<div class="bg-white/60 hover:bg-white rounded-[12px] p-4 flex gap-4 items-center transition-colors border border-[#3E2723]/5 group">
+<div class="w-14 h-14 rounded-xl bg-[#81C784]/10 flex-shrink-0 flex items-center justify-center group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-[#81C784]" data-icon="psychology">psychology</span>
+</div>
+<div>
+<h4 class="text-[#3E2723] font-bold text-sm mb-1">뇌 발달의 골든타임</h4>
+<p class="text-[#8D6E63] text-xs">20주 이후의 자극</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-3 bg-white/90 dark:bg-stone-900/90 backdrop-blur-md rounded-t-3xl shadow-[0_-4px_12px_rgba(62,39,35,0.06)] border-t border-[#3E2723]/5 dark:border-white/5 md:hidden">
+<a class="flex flex-col items-center justify-center text-[#8D6E63] dark:text-stone-400 hover:text-[#FF8A80] transition-all active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="mail">mail</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[11px] font-medium">Letters</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#FF8A80] bg-[#FF8A80]/10 rounded-xl px-3 py-1 active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="auto_graph" style="font-variation-settings: 'FILL' 1;">auto_graph</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[11px] font-medium">Growth</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#8D6E63] dark:text-stone-400 hover:text-[#FF8A80] transition-all active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="auto_awesome">auto_awesome</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[11px] font-medium">Memories</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#8D6E63] dark:text-stone-400 hover:text-[#FF8A80] transition-all active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[11px] font-medium">Settings</span>
+</a>
+</nav>
+</body></html>

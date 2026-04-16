@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+
+<html lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>BabyLetter - Milestone Celebration</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary-fixed-dim": "#fad04b",
+                    "on-primary-container": "#540809",
+                    "on-secondary-fixed": "#4e3d00",
+                    "surface-container-highest": "#ffdbce",
+                    "on-primary": "#fff7f6",
+                    "on-background": "#4e2819",
+                    "primary-fixed-dim": "#e8786e",
+                    "on-secondary-container": "#644f00",
+                    "on-secondary": "#fff8ee",
+                    "on-secondary-fixed-variant": "#705900",
+                    "on-tertiary-fixed": "#03501b",
+                    "primary-container": "#f8847b",
+                    "on-primary-fixed": "#170000",
+                    "secondary-dim": "#665100",
+                    "secondary": "#745c00",
+                    "outline": "#a26e5b",
+                    "surface-container": "#ffe9e2",
+                    "inverse-primary": "#f8847b",
+                    "surface-bright": "#fff8f6",
+                    "on-tertiary-container": "#1f632c",
+                    "primary-dim": "#90352f",
+                    "on-error-container": "#6e0523",
+                    "secondary-fixed": "#ffe087",
+                    "tertiary-dim": "#1a5f29",
+                    "on-primary-fixed-variant": "#611211",
+                    "tertiary-fixed-dim": "#a6eea7",
+                    "inverse-on-surface": "#b89589",
+                    "surface": "#fff8f6",
+                    "tertiary-fixed": "#b4fdb4",
+                    "error": "#a8364b",
+                    "tertiary-container": "#b4fdb4",
+                    "surface-dim": "#ffd0bf",
+                    "on-tertiary-fixed-variant": "#2a6e35",
+                    "surface-container-low": "#fff1ec",
+                    "error-container": "#f97386",
+                    "surface-variant": "#ffdbce",
+                    "on-tertiary": "#e9ffe4",
+                    "surface-container-high": "#ffe2d9",
+                    "on-error": "#fff7f7",
+                    "on-surface-variant": "#835342",
+                    "surface-container-lowest": "#ffffff",
+                    "inverse-surface": "#1b0904",
+                    "error-dim": "#6b0221",
+                    "on-surface": "#4e2819",
+                    "primary-fixed": "#f8847b",
+                    "outline-variant": "#dfa48f",
+                    "secondary-container": "#ffe087",
+                    "background": "#fff8f6",
+                    "surface-tint": "#9f403a",
+                    "tertiary": "#286c34",
+                    "primary": "#9f403a"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Plus Jakarta Sans"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .confetti {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+        .bg-confetti-coral { background-color: #FF8A80; }
+        .bg-confetti-sky { background-color: #64B5F6; }
+        .bg-confetti-sage { background-color: #81C784; }
+        .bg-confetti-amber { background-color: #FFD54F; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-[#FFF8E1] font-body text-on-surface overflow-hidden">
+<!-- Full Screen Celebration Mode -->
+<main class="relative h-screen w-full bg-gradient-to-b from-[#FFD54F] to-[#FFC107] flex flex-col items-center justify-between overflow-hidden">
+<!-- Confetti Particles -->
+<div class="absolute inset-0 pointer-events-none opacity-60">
+<div class="confetti bg-confetti-coral top-10 left-[10%]"></div>
+<div class="confetti bg-confetti-sky top-20 left-[80%]"></div>
+<div class="confetti bg-confetti-sage top-40 left-[30%]"></div>
+<div class="confetti bg-confetti-amber top-60 left-[60%]"></div>
+<div class="confetti bg-confetti-coral top-[70%] left-[15%]"></div>
+<div class="confetti bg-confetti-sky top-[85%] left-[75%]"></div>
+<div class="confetti bg-confetti-sage top-[30%] left-[90%]"></div>
+<div class="confetti bg-confetti-amber top-[50%] left-[5%]"></div>
+</div>
+<!-- XP Toast -->
+<div class="mt-8 z-10 px-6 py-2 bg-white/90 backdrop-blur-md rounded-full shadow-lg border border-white/50">
+<span class="text-[#FF8A80] font-bold text-sm tracking-tight">XP +50 획득!</span>
+</div>
+<!-- Main Content Center -->
+<div class="flex-1 flex flex-col items-center justify-center text-center px-5 z-10">
+<!-- Baby Character with Crown -->
+<div class="relative mb-6 transform scale-110">
+<div class="absolute -top-10 left-1/2 -translate-x-1/2 z-20">
+<span class="material-symbols-outlined text-5xl text-yellow-500 drop-shadow-md" style="font-variation-settings: 'FILL' 1;">
+                        crown
+                    </span>
+</div>
+<div class="w-48 h-48 bg-white/30 rounded-full flex items-center justify-center p-2 backdrop-blur-sm">
+<img alt="Happy Baby" class="w-full h-full object-cover rounded-full border-4 border-white shadow-xl" data-alt="adorable laughing baby rolling over on a soft cream blanket, bright joyful atmosphere with soft morning sunlight" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAH0qR7BAYcuRUrS4obyePtfhQHaCJrnD3rcKiudEXFhtFY5fy-Mkg24TeznVK15k8pnHZnjSn7GXvOKGgqKXMRwW_YCismmBKaJ_hjVPtu_DDLzV_gHS7bi0kxU5xY2DQKyRu1W8IEDPdlDqx9pdYTloqY0_kTZ57rkJV8MAyOBmOucCabRqoLb-br8dJHGisfN_w-yv9-VrGAXkBLK1Ch0N0GMIi6C16lWwKpZPMZUKAPxOH0ifJnHergOeMeCFTvIFYCKOf1CDRp"/>
+</div>
+<div class="absolute -bottom-4 left-1/2 -translate-x-1/2 bg-white rounded-full p-3 shadow-lg">
+<span class="material-symbols-outlined text-[#FFD54F] text-3xl" style="font-variation-settings: 'FILL' 1;">
+                        stars
+                    </span>
+</div>
+</div>
+<h1 class="font-headline font-extrabold text-4xl text-[#3E2723] mb-2 tracking-tight">
+                첫 뒤집기 성공! 🎉
+            </h1>
+<p class="text-white font-medium text-lg opacity-90 drop-shadow-sm">
+                D+120에 달성했어요!
+            </p>
+<!-- Badge Unlock Section -->
+<div class="mt-8 w-full max-w-sm">
+<div class="bg-white/95 p-6 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] border border-white relative overflow-hidden">
+<!-- Glow effect -->
+<div class="absolute -inset-2 bg-gradient-to-tr from-[#FFD54F]/20 to-transparent blur-2xl"></div>
+<div class="relative z-10 flex flex-col items-center">
+<span class="text-xs font-bold text-[#FF8A80] mb-3 tracking-widest">🏆 새 배지 획득!</span>
+<div class="w-16 h-16 bg-[#FFF8E1] rounded-full flex items-center justify-center mb-3">
+<span class="material-symbols-outlined text-[#FFC107] text-4xl" style="font-variation-settings: 'FILL' 1;">
+                                workspace_premium
+                            </span>
+</div>
+<h3 class="font-headline font-bold text-[#3E2723] text-xl mb-1">대근육 챔피언</h3>
+<p class="text-[#8D6E63] text-sm">첫 뒤집기를 달성했어요!</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom UI Area -->
+<div class="w-full px-5 pb-10 z-10 flex flex-col gap-8">
+<!-- Baby Speech Bubble -->
+<div class="flex items-end gap-3 self-center max-w-[85%]">
+<div class="bg-white rounded-[20px] rounded-bl-none p-4 shadow-md border-l-4 border-[#FFD54F]">
+<p class="text-[#3E2723] text-sm leading-relaxed font-medium">
+                        "엄마, 나 혼자 뒤집었어! 세상이 달라 보여!"
+                    </p>
+</div>
+</div>
+<!-- Actions -->
+<div class="flex flex-col gap-3">
+<div class="grid grid-cols-2 gap-3">
+<button class="flex items-center justify-center gap-2 px-6 py-4 bg-transparent border-2 border-white text-white font-bold rounded-xl active:scale-95 transition-all">
+<span class="material-symbols-outlined text-xl">add_a_photo</span>
+                        기념 사진 추가
+                    </button>
+<button class="flex items-center justify-center gap-2 px-6 py-4 bg-transparent border-2 border-white text-white font-bold rounded-xl active:scale-95 transition-all">
+<span class="material-symbols-outlined text-xl">share</span>
+                        가족에게 공유
+                    </button>
+</div>
+<button class="w-full py-4 bg-[#FF8A80] text-white font-bold text-lg rounded-xl shadow-lg shadow-[#FF8A80]/30 active:scale-[0.98] transition-all">
+                    감사해요 💛
+                </button>
+</div>
+</div>
+</main>
+</body></html>

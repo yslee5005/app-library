@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+
+<html lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary-fixed": "#b4fdb4", "tertiary": "#286c34", "primary-fixed": "#f8847b", "outline-variant": "#dfa48f", "primary-fixed-dim": "#e8786e", "on-primary": "#fff7f6", "on-tertiary-fixed": "#03501b", "surface-container-high": "#ffe2d9", "secondary-fixed": "#ffe087", "on-tertiary": "#e9ffe4", "outline": "#a26e5b", "on-primary-fixed": "#170000", "secondary-fixed-dim": "#fad04b", "surface-container-low": "#fff1ec", "secondary": "#745c00", "surface-tint": "#9f403a", "inverse-surface": "#1b0904", "inverse-primary": "#f8847b", "primary-container": "#f8847b", "primary": "#9f403a", "secondary-dim": "#665100", "tertiary-fixed-dim": "#a6eea7", "secondary-container": "#ffe087", "on-tertiary-fixed-variant": "#2a6e35", "tertiary-dim": "#1a5f29", "surface": "#fff8f6", "primary-dim": "#90352f", "on-secondary-fixed": "#4e3d00", "error-dim": "#6b0221", "surface-dim": "#ffd0bf", "on-background": "#4e2819", "inverse-on-surface": "#b89589", "on-secondary-fixed-variant": "#705900", "on-primary-fixed-variant": "#611211", "error": "#a8364b", "surface-container-highest": "#ffdbce", "on-secondary": "#fff8ee", "surface-container": "#ffe9e2", "background": "#fff8f6", "surface-container-lowest": "#ffffff", "surface-bright": "#fff8f6", "on-primary-container": "#540809", "on-secondary-container": "#644f00", "on-surface": "#4e2819", "surface-variant": "#ffdbce", "on-surface-variant": "#835342", "on-error-container": "#6e0523", "tertiary-container": "#b4fdb4", "on-tertiary-container": "#1f632c", "on-error": "#fff7f7", "error-container": "#f97386"
+            },
+            "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+            "fontFamily": { "headline": ["Plus Jakarta Sans"], "body": ["Inter"], "label": ["Inter"] }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+<style> body { min-height: max(884px, 100dvh); } </style>
+</head>
+<body class="bg-[#FFF8E1] font-body text-on-background min-h-screen pb-32">
+<header class="fixed top-0 w-full z-50 flex items-center justify-between px-5 h-16 bg-[#FFF8E1]">
+<div class="flex items-center gap-4">
+<button class="active:scale-95 transition-transform"><span class="material-symbols-outlined text-[#FF8A80]">arrow_back</span></button>
+<h1 class="font-headline font-bold text-lg text-[#3E2723]">성장 비교</h1>
+</div>
+<button class="hover:opacity-80 transition-opacity"><span class="material-symbols-outlined text-[#8D6E63]">more_vert</span></button>
+</header>
+<main class="pt-20 px-5 space-y-8">
+<section class="relative aspect-square w-full rounded-[24px] overflow-hidden shadow-[0_4px_16px_rgba(62,39,35,0.12)] bg-white">
+<div class="absolute inset-0 flex">
+<div class="w-1/2 h-full relative overflow-hidden border-r-2 border-white/50">
+<img class="absolute inset-0 w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDiEHZTTMjIBBQyWhvTMLQegSG0lKiCBv2VEsXlTdBdxrgp5D3yib68FqhASH2akwunx1rXHxbMOvZx7LBAmkvlocoKjtWUL1lNEL8hxEDpccfQvKIjYLMoD8kpLKuE9w6uhBoywKdo9fuYKoVQ6te-Iv6vFaL9A2J2bi9M4K1BtBz_Hlf6DUNDj5JQg7T7iUFtVbNnARD9COsPqc9DSp4QAtX-V_jegiiIVEr1EeE5NkIERqwtQlOTsWHGSUqDZKPxK7nSesKXdjSj"/>
+<div class="absolute top-4 left-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full shadow-sm"><span class="font-headline font-extrabold text-[#FF8A80] text-sm">D+1</span></div>
+</div>
+<div class="w-1/2 h-full relative overflow-hidden">
+<img class="absolute inset-0 w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEqx5qPpKIGGrSo-kM_S4ergU6aoDr0RXBBbqVQujfPTGjo7jhk9kjeag9up-0zP0h1EoxN4PGsR8uJRkbINosh12I5sMBCEj-EJZDykzZE4MP5BAXNPZhvDRWQqN2Z-YPFQZEIJ1jKW6lVNzCgkLkm3_4DMdYti1l9FZow8mn4_XjNSo2HyI2dFd7-RqqP3k-YOTw2kgh98yd7Xjk_MlU7oAx1wFBHoYAj1eVxpJPl_iHRGpO_Sqmvxw9_rzzMq_DBseZdMDFnVN_"/>
+<div class="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full shadow-sm"><span class="font-headline font-extrabold text-[#FF8A80] text-sm">D+90</span></div>
+</div>
+</div>
+<div class="absolute inset-y-0 left-1/2 -translate-x-1/2 w-1 bg-white shadow-xl flex items-center justify-center">
+<div class="w-10 h-10 rounded-full bg-white shadow-lg flex items-center justify-center text-[#FF8A80]"><span class="material-symbols-outlined text-sm font-bold">unfold_more_double</span></div>
+</div>
+</section>
+<section class="space-y-4">
+<div class="flex items-center justify-between">
+<h3 class="font-headline font-bold text-[#3E2723]">타임라인</h3>
+<span class="text-xs text-[#8D6E63] font-medium">비교할 시점을 선택하세요</span>
+</div>
+<div class="flex gap-3 overflow-x-auto hide-scrollbar pb-2">
+<div class="flex-shrink-0 flex flex-col items-center gap-2">
+<div class="w-16 h-16 rounded-xl border-4 border-[#FF8A80] overflow-hidden shadow-md"><img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA_Q94xX1xtPGmXfaitmWc5d1bpuZAKoadTpGzra8wIIE5s1jA0upIHPh4de8Ck70ncSQ3QGu5PX8ROc-dqKleXsWhf9ILqo-BNBTbFESffalkAwzZ6tFsu69CGWhZp_p4SSTDd8b2mY-UbT9vtdC6uRULIDy2UWxVzJjkwgllA3VR-ey7dNfUUxxtHB-w7ejWEc4VGnUf66Qan-M1nAJW-xM_lkafRNPUQk4-r-jGtCKwOP10tLOozvgsWDrAFpEPUFE9fZLCIJ8Hx"/></div>
+<span class="text-[11px] font-bold text-[#FF8A80]">1개월</span>
+</div>
+<div class="flex-shrink-0 flex flex-col items-center gap-2 opacity-60">
+<div class="w-16 h-16 rounded-xl border-2 border-white overflow-hidden shadow-sm"><img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC5ujtk886XZbXLmEyxqPc6jdnRmIe-JGlSDCQCMYJnw3h3F3P2SiQnAo9MaaT6aq_SMN0lPuhURzKgzpQ06XCR5p1807Es2sO7_8NRtc4sVmJ7H9KVRkVpaAcTj_aP11Mip1gCcuQDTrOPMrFfZL5eM5Su7WMk6tTwVTiKSulvleMTgVtX93rAJKRwg0ayxMxuh-X48EqGzvmSvSjuRYWT-GFjgIkyErcI0VH1_mt7M-fkoxzfKzgSgPixnCAzkqH5VpWBb5CFQWqf"/></div>
+<span class="text-[11px] font-medium text-[#8D6E63]">2개월</span>
+</div>
+<div class="flex-shrink-0 flex flex-col items-center gap-2">
+<div class="w-16 h-16 rounded-xl border-4 border-[#FF8A80] overflow-hidden shadow-md"><img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCDy5kDStH8t2Wy4O6VFpwOWDyhuGmtp5XGj_xbVkmOU5sGQz-00RjU2HvTNQNDYDcE4tqfhPcnxKIR4MSPHWmDocmJO5O0Em9wRlr0Sexb6D9-RSf1zKOSQbIpzcjCJMITz98gaeV4Zdy4ijZQG55fylG21lCZAs6hAGoXr8zbrVBvsxCc6Wn1CfIVJOZYpxhFWUr_hdcTHNnkHYh3sTgsr6cNdXKRzQdpaG83_Jif-pzYeRtSGMREGpaKFP6SiO-oWar5kwvAAeNZ"/></div>
+<span class="text-[11px] font-bold text-[#FF8A80]">3개월</span>
+</div>
+<div class="flex-shrink-0 flex flex-col items-center gap-2 opacity-40">
+<div class="w-16 h-16 rounded-xl border-2 border-white overflow-hidden shadow-sm bg-stone-100 flex items-center justify-center"><span class="material-symbols-outlined text-[#8D6E63]">add_a_photo</span></div>
+<span class="text-[11px] font-medium text-[#8D6E63]">준비중</span>
+</div>
+</div>
+</section>
+<section class="grid grid-cols-2 gap-4">
+<div class="col-span-2 p-5 bg-white rounded-[20px] shadow-[0_2px_8px_rgba(62,39,35,0.06)]">
+<div class="flex items-center justify-between mb-4"><h3 class="font-headline font-bold text-[#3E2723]">체중 변화</h3><span class="bg-tertiary-container text-on-tertiary-container text-[10px] font-bold px-2 py-0.5 rounded-full">+81.2%</span></div>
+<div class="flex items-end gap-3">
+<div class="flex flex-col"><span class="text-[10px] text-[#8D6E63] uppercase tracking-wider">D+1</span><span class="text-xl font-headline font-extrabold text-[#3E2723]">3.2kg</span></div>
+<span class="material-symbols-outlined text-[#FF8A80] pb-1">trending_flat</span>
+<div class="flex flex-col"><span class="text-[10px] text-[#8D6E63] uppercase tracking-wider">D+90</span><span class="text-xl font-headline font-extrabold text-[#FF8A80]">5.8kg</span></div>
+</div>
+</div>
+<div class="p-5 bg-white rounded-[20px] shadow-[0_2px_8px_rgba(62,39,35,0.06)]">
+<h3 class="font-headline font-bold text-[#3E2723] text-sm mb-3">신장</h3>
+<div class="space-y-1">
+<div class="flex justify-between items-baseline"><span class="text-[10px] text-[#8D6E63]">D+1</span><span class="font-bold text-[#3E2723]">50cm</span></div>
+<div class="flex justify-between items-baseline"><span class="text-[10px] text-[#8D6E63]">D+90</span><span class="font-bold text-[#FF8A80]">58cm</span></div>
+<div class="pt-2 border-t border-[#3E2723]/5 mt-2"><span class="text-[10px] font-bold text-tertiary-dim">+8cm 성장</span></div>
+</div>
+</div>
+<div class="p-5 bg-white rounded-[20px] shadow-[0_2px_8px_rgba(62,39,35,0.06)] flex flex-col justify-between">
+<h3 class="font-headline font-bold text-[#3E2723] text-sm mb-2">총 일수</h3>
+<div class="text-center"><span class="text-3xl font-headline font-black text-[#FFD54F]">90</span><span class="text-xs font-bold text-[#3E2723]"> DAYS</span></div>
+<p class="text-[9px] text-[#8D6E63] text-center mt-2 leading-tight">벌써 3달이나<br/>함께했어요!</p>
+</div>
+</section>
+<section class="text-center py-6 px-4"><p class="text-[#3E2723] font-medium leading-relaxed italic">"이렇게 많이 컸어요! <br/>매일의 작은 성장이 모여 큰 변화가 됐어요 💛"</p></section>
+<button class="w-full bg-[#FF8A80] text-white font-headline font-bold py-4 rounded-[16px] shadow-[0_8px_16px_rgba(255,138,128,0.3)] active:scale-95 transition-transform flex items-center justify-center gap-2"><span class="material-symbols-outlined">share</span> 사진 공유하기</button>
+</main>
+<nav class="fixed bottom-0 w-full z-50 flex justify-around items-center px-6 pb-6 pt-3 bg-white rounded-t-[20px] shadow-[0_-2px_8px_rgba(62,39,35,0.08)] border-t border-[#3E2723]/5">
+<a class="flex flex-col items-center justify-center text-[#8D6E63] rounded-xl px-4 py-1 transition-all active:scale-95 duration-200" href="#"><span class="material-symbols-outlined">mail</span><span class="font-['Plus_Jakarta_Sans'] font-medium text-[12px]">Letters</span></a>
+<a class="flex flex-col items-center justify-center text-[#FF8A80] font-bold rounded-xl px-4 py-1 transition-all active:scale-95 duration-200" href="#"><span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">photo_library</span><span class="font-['Plus_Jakarta_Sans'] font-medium text-[12px]">Memories</span></a>
+<a class="flex flex-col items-center justify-center text-[#8D6E63] rounded-xl px-4 py-1 transition-all active:scale-95 duration-200" href="#"><span class="material-symbols-outlined">settings</span><span class="font-['Plus_Jakarta_Sans'] font-medium text-[12px]">Settings</span></a>
+</nav>
+</body></html>

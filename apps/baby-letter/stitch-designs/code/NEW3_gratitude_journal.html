@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+
+<html lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>BabyLetter - Gratitude Journal</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-secondary": "#fff8ee",
+                    "on-primary": "#fff7f6",
+                    "error-container": "#f97386",
+                    "secondary-fixed": "#ffe087",
+                    "tertiary-dim": "#1a5f29",
+                    "primary-fixed-dim": "#e8786e",
+                    "surface-container-high": "#ffe2d9",
+                    "on-primary-container": "#540809",
+                    "inverse-on-surface": "#b89589",
+                    "error": "#a8364b",
+                    "surface-dim": "#ffd0bf",
+                    "secondary-fixed-dim": "#fad04b",
+                    "on-error": "#fff7f7",
+                    "on-tertiary-container": "#1f632c",
+                    "on-secondary-fixed": "#4e3d00",
+                    "on-tertiary-fixed-variant": "#2a6e35",
+                    "tertiary-fixed": "#b4fdb4",
+                    "on-tertiary": "#e9ffe4",
+                    "on-error-container": "#6e0523",
+                    "surface-container-lowest": "#ffffff",
+                    "secondary-container": "#ffe087",
+                    "surface-container-low": "#fff1ec",
+                    "on-background": "#4e2819",
+                    "primary": "#9f403a",
+                    "primary-dim": "#90352f",
+                    "surface-container": "#ffe9e2",
+                    "surface-bright": "#fff8f6",
+                    "on-surface": "#4e2819",
+                    "surface-variant": "#ffdbce",
+                    "on-primary-fixed": "#170000",
+                    "secondary-dim": "#665100",
+                    "on-primary-fixed-variant": "#611211",
+                    "tertiary-container": "#b4fdb4",
+                    "on-secondary-fixed-variant": "#705900",
+                    "background": "#fff8f6",
+                    "error-dim": "#6b0221",
+                    "outline": "#a26e5b",
+                    "on-surface-variant": "#835342",
+                    "surface-tint": "#9f403a",
+                    "inverse-surface": "#1b0904",
+                    "surface-container-highest": "#ffdbce",
+                    "tertiary-fixed-dim": "#a6eea7",
+                    "secondary": "#745c00",
+                    "outline-variant": "#dfa48f",
+                    "on-secondary-container": "#644f00",
+                    "inverse-primary": "#f8847b",
+                    "surface": "#fff8f6",
+                    "tertiary": "#286c34",
+                    "primary-fixed": "#f8847b",
+                    "on-tertiary-fixed": "#03501b",
+                    "primary-container": "#f8847b"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Plus Jakarta Sans"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, .font-headline { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .night-sky-bg {
+            background: linear-gradient(135deg, #1A237E 0%, #4A148C 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            opacity: 0.6;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen">
+<!-- Night Sky Wrapper -->
+<div class="night-sky-bg min-h-screen flex flex-col items-center pb-32">
+<!-- Twinkling Stars Decoration -->
+<div class="star w-0.5 h-0.5 top-10 left-10"></div>
+<div class="star w-1 h-1 top-24 right-20"></div>
+<div class="star w-0.5 h-0.5 top-40 left-1/2"></div>
+<div class="star w-1 h-1 bottom-1/4 left-10"></div>
+<div class="star w-0.5 h-0.5 top-1/3 right-1/4"></div>
+<!-- Top Navigation -->
+<nav class="flex justify-between items-center px-5 h-16 w-full z-10">
+<button class="hover:bg-white/10 rounded-full transition-colors p-2 flex items-center justify-center active:scale-95 duration-150">
+<span class="material-symbols-outlined text-orange-200">arrow_back</span>
+</button>
+<div class="flex flex-col items-center">
+<h1 class="font-headline text-lg font-bold text-orange-200">🌙 오늘 하루</h1>
+<span class="text-xs text-gray-300 font-medium tracking-wide">4월 16일 수요일</span>
+</div>
+<button class="hover:bg-white/10 rounded-full transition-colors p-2 flex items-center justify-center active:scale-95 duration-150">
+<span class="material-symbols-outlined text-orange-200">settings</span>
+</button>
+</nav>
+<!-- Main Content Area -->
+<main class="w-full max-w-md px-5 mt-8 flex-grow flex flex-col">
+<!-- Headline -->
+<div class="mb-8">
+<h2 class="text-3xl font-extrabold text-white leading-tight font-headline">
+                    오늘 가장 좋았던<br/>순간은?
+                </h2>
+</div>
+<!-- Input Section -->
+<div class="relative w-full group">
+<textarea class="w-full h-[200px] bg-white/10 backdrop-blur-md border-2 border-secondary-fixed/50 rounded-2xl p-6 text-white placeholder:text-white/40 focus:outline-none focus:border-secondary-fixed transition-all text-lg leading-relaxed resize-none" placeholder="아기가 처음으로 방긋 웃었어요..."></textarea>
+<!-- Photo Upload Prompt -->
+<button class="mt-4 flex items-center gap-2 bg-white/10 border border-white/20 hover:bg-white/20 text-white rounded-xl px-5 py-3 transition-all active:scale-95">
+<span class="material-symbols-outlined text-secondary-fixed">photo_camera</span>
+<span class="font-medium text-sm">📸 사진 추가하기</span>
+</button>
+</div>
+<!-- Baby's Feedback Card -->
+<div class="mt-10 mb-8 bg-secondary-fixed rounded-2xl p-5 shadow-lg relative flex items-start gap-4">
+<div class="w-12 h-12 rounded-full overflow-hidden flex-shrink-0 border-2 border-white shadow-inner bg-on-secondary">
+<img class="w-full h-full object-cover" data-alt="cute animated baby face with a happy smiling expression and big bright eyes, warm artistic illustration style" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDQc9lTdj8Onv7m4IyI8F0doWnMeeX_GiI6u6ExOl3juu-IrSEH9OB2SiuaJ_2KF9JK_Cd3ywCpi9zGMGqhBv2b6b-XcDxB1d26va2nczXyxCl7fRh5GRYaFf3jN5suLCX0KGnJIK3VOfBkUtN32mIvr6WsZ3C_NxeeQOrfNIvvhPzT-qVpCHUjspCb3KP4IzGA07Bhm7lscLsrV1fikFEul24llizmcWszPy51dQyfKx_m4FZO0-wqd7anhDUdmiNTJLs9Y5dUKShH"/>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-2 mb-1">
+<span class="text-[10px] font-bold text-on-secondary-fixed uppercase tracking-widest">BABY COMMENT</span>
+<div class="h-1 w-1 rounded-full bg-on-secondary-fixed/30"></div>
+</div>
+<p class="text-[#4e3d00] font-bold leading-snug">
+                        엄마, 오늘도 고마워! 내일도 같이 놀자! 💛
+                    </p>
+</div>
+<!-- Speech Bubble Tail -->
+<div class="absolute -left-2 top-8 w-4 h-4 bg-secondary-fixed rotate-45 transform"></div>
+</div>
+<!-- Action Area -->
+<div class="mt-auto mb-10 flex flex-col items-center">
+<button class="w-full py-5 bg-secondary-fixed hover:bg-secondary-fixed-dim text-on-secondary-fixed font-headline font-extrabold text-xl rounded-2xl shadow-xl shadow-black/20 transition-all active:scale-95 duration-150 flex items-center justify-center gap-2">
+                    저장하기 💛
+                </button>
+<span class="mt-3 text-secondary-fixed font-bold text-sm tracking-widest animate-pulse">XP +10 획득!</span>
+</div>
+</main>
+<!-- Bottom Navigation Shell (Consistent with Shared Components) -->
+<nav class="fixed bottom-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-3 bg-[#3E2723]/90 backdrop-blur-md rounded-t-3xl shadow-2xl border-t border-white/10">
+<div class="flex flex-col items-center justify-center text-[#8D6E63] hover:text-[#FF8A80] transition-all">
+<span class="material-symbols-outlined mb-1">mail</span>
+<span class="font-plus-jakarta text-[10px] font-medium">Letters</span>
+</div>
+<!-- Active State: Journal (Semantic Match) -->
+<div class="flex flex-col items-center justify-center bg-[#FF8A80]/20 text-[#FF8A80] rounded-xl px-4 py-2 active:scale-90 duration-200">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+<span class="font-plus-jakarta text-[10px] font-bold">Journal</span>
+</div>
+<div class="flex flex-col items-center justify-center text-[#8D6E63] hover:text-[#FF8A80] transition-all">
+<span class="material-symbols-outlined mb-1">trending_up</span>
+<span class="font-plus-jakarta text-[10px] font-medium">Growth</span>
+</div>
+<div class="flex flex-col items-center justify-center text-[#8D6E63] hover:text-[#FF8A80] transition-all">
+<span class="material-symbols-outlined mb-1">auto_stories</span>
+<span class="font-plus-jakarta text-[10px] font-medium">Memory</span>
+</div>
+</nav>
+</div>
+</body></html>

@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+
+<html lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-tertiary": "#e9ffe4",
+                    "on-secondary": "#fff8ee",
+                    "tertiary-container": "#b4fdb4",
+                    "on-tertiary-container": "#1f632c",
+                    "on-error": "#fff7f7",
+                    "surface-container-highest": "#ffdbce",
+                    "secondary-dim": "#665100",
+                    "surface": "#fff8f6",
+                    "surface-container-lowest": "#ffffff",
+                    "primary-fixed-dim": "#e8786e",
+                    "surface-container-high": "#ffe2d9",
+                    "on-error-container": "#6e0523",
+                    "inverse-primary": "#f8847b",
+                    "on-primary-fixed-variant": "#611211",
+                    "error-container": "#f97386",
+                    "surface-container": "#ffe9e2",
+                    "outline-variant": "#dfa48f",
+                    "primary-container": "#f8847b",
+                    "on-background": "#4e2819",
+                    "inverse-on-surface": "#b89589",
+                    "tertiary-fixed": "#b4fdb4",
+                    "primary": "#9f403a",
+                    "surface-variant": "#ffdbce",
+                    "on-surface-variant": "#835342",
+                    "secondary-fixed": "#ffe087",
+                    "on-secondary-fixed": "#4e3d00",
+                    "inverse-surface": "#1b0904",
+                    "on-surface": "#4e2819",
+                    "on-secondary-container": "#644f00",
+                    "tertiary-fixed-dim": "#a6eea7",
+                    "on-tertiary-fixed-variant": "#2a6e35",
+                    "on-primary-fixed": "#170000",
+                    "primary-fixed": "#f8847b",
+                    "on-primary": "#fff7f6",
+                    "background": "#fff8f6",
+                    "surface-dim": "#ffd0bf",
+                    "tertiary-dim": "#1a5f29",
+                    "secondary-container": "#ffe087",
+                    "secondary": "#745c00",
+                    "error-dim": "#6b0221",
+                    "on-tertiary-fixed": "#03501b",
+                    "on-secondary-fixed-variant": "#705900",
+                    "tertiary": "#286c34",
+                    "surface-container-low": "#fff1ec",
+                    "on-primary-container": "#540809",
+                    "secondary-fixed-dim": "#fad04b",
+                    "outline": "#a26e5b",
+                    "error": "#a8364b",
+                    "primary-dim": "#90352f",
+                    "surface-bright": "#fff8f6",
+                    "surface-tint": "#9f403a"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Plus Jakarta Sans"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .soft-amber-glow {
+            box-shadow: 0 10px 25px -5px rgba(255, 213, 79, 0.15), 0 8px 10px -6px rgba(255, 213, 79, 0.1);
+        }
+        .card-radius { border-radius: 12px; }
+        .btn-radius { border-radius: 8px; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-[#FFF8E1] text-[#3E2723] font-body min-h-screen pb-24">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 flex items-center px-5 h-16 bg-[#FFF8E1] dark:bg-stone-950">
+<button class="transition-transform active:scale-95 p-2 -ml-2 rounded-full hover:bg-[#FFD54F]/20">
+<span class="material-symbols-outlined text-[#FF8A80]">arrow_back</span>
+</button>
+<h1 class="ml-4 font-headline font-bold text-lg text-[#3E2723] dark:text-stone-100">배려 알림</h1>
+</header>
+<main class="pt-20 px-5 max-w-md mx-auto space-y-6">
+<!-- Hero Nudge Card -->
+<section class="bg-white card-radius soft-amber-glow p-6 text-center border border-[#FFD54F]/10 relative overflow-hidden">
+<div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-[#FFD54F]/10 to-transparent rounded-full -mr-16 -mt-16 blur-2xl"></div>
+<div class="flex justify-center mb-4">
+<div class="w-20 h-20 rounded-full bg-gradient-to-b from-[#FFFDE7] to-[#FFF9C4] flex items-center justify-center shadow-inner relative">
+<span class="text-3xl">💝</span>
+<div class="absolute -bottom-1 -right-1 bg-white rounded-full p-1 shadow-sm">
+<span class="material-symbols-outlined text-[#FFD54F] text-lg" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+</div>
+</div>
+<div class="inline-flex items-center px-3 py-1 rounded-full bg-[#FFFDE7] border border-[#FFD54F]/30 mb-3">
+<span class="text-[11px] font-bold text-[#FFB300] tracking-tight uppercase">아빠에게 보내는 배려</span>
+</div>
+<h2 class="font-headline font-extrabold text-2xl text-[#3E2723] mb-2 leading-tight">오늘 엄마가 힘들어 보여요</h2>
+<p class="text-[#8D6E63] text-sm leading-relaxed mb-8">
+                아기가 새벽에 3번 깼어요.<br/>엄마가 많이 피곤할 거예요.
+            </p>
+<!-- Action Suggestions -->
+<div class="space-y-3">
+<button class="w-full btn-radius py-3.5 px-4 border-2 border-[#FF8A80] text-[#FF8A80] font-bold text-sm transition-all active:scale-[0.98] flex items-center justify-center gap-2 hover:bg-[#FF8A80]/5">
+<span>☕ 따뜻한 음료 가져다주기</span>
+</button>
+<button class="w-full btn-radius py-3.5 px-4 border-2 border-[#FF8A80] text-[#FF8A80] font-bold text-sm transition-all active:scale-[0.98] flex items-center justify-center gap-2 hover:bg-[#FF8A80]/5">
+<span>💬 '수고했어' 문자 보내기</span>
+</button>
+<button class="w-full btn-radius py-4 px-4 bg-[#FF8A80] text-white font-bold text-sm transition-all active:scale-[0.98] flex items-center justify-between shadow-lg shadow-[#FF8A80]/30 relative overflow-hidden group">
+<div class="absolute inset-0 bg-white/10 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-500"></div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-white text-lg" style="font-variation-settings: 'FILL' 1;">star</span>
+<span>👶 1시간 아기 돌봐주기</span>
+</div>
+<span class="bg-white/20 px-2 py-0.5 rounded text-[10px] font-bold tracking-wider">+20 XP</span>
+</button>
+</div>
+</section>
+<!-- Context Data Card -->
+<section class="bg-white/60 backdrop-blur-sm card-radius border border-[#3E2723]/5 p-5">
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-[#8D6E63] text-lg">bar_chart</span>
+<h3 class="font-headline font-bold text-sm text-[#3E2723]">데이터 기반 인사이트</h3>
+</div>
+<div class="space-y-3">
+<div class="flex items-center justify-between p-3 bg-[#8D6E63]/5 card-radius border border-white/50">
+<div class="flex flex-col">
+<span class="text-[11px] text-[#8D6E63] mb-0.5">어제 밤 수면</span>
+<span class="text-sm font-bold text-[#3E2723]">4.5시간</span>
+</div>
+<span class="text-xs font-bold text-[#EF5350] bg-[#EF5350]/10 px-2 py-1 rounded-full">평소 대비 -2시간</span>
+</div>
+<div class="flex items-center justify-between p-3 bg-[#8D6E63]/5 card-radius border border-white/50">
+<div class="flex flex-col">
+<span class="text-[11px] text-[#8D6E63] mb-0.5">수유 횟수</span>
+<span class="text-sm font-bold text-[#3E2723]">5회</span>
+</div>
+<span class="text-xs font-bold text-[#64B5F6] bg-[#64B5F6]/10 px-2 py-1 rounded-full">평소 대비 +2회</span>
+</div>
+</div>
+</section>
+<!-- Previous Nudges -->
+<section class="pt-2">
+<div class="flex items-center justify-between mb-4">
+<h3 class="font-headline font-bold text-[#3E2723]">지난 배려 기록</h3>
+<span class="text-xs text-[#8D6E63] font-medium">전체보기</span>
+</div>
+<div class="space-y-2">
+<div class="flex items-center justify-between p-4 bg-white/40 card-radius">
+<div class="flex items-center gap-3">
+<span class="text-xs text-[#8D6E63] font-medium min-w-[36px]">4/15</span>
+<span class="text-sm text-[#3E2723]">☕ 커피 가져다줌 <span class="text-[#FF8A80] font-bold text-[10px] ml-1">(+20 XP)</span></span>
+</div>
+<span class="material-symbols-outlined text-[#81C784] text-lg" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<div class="flex items-center justify-between p-4 bg-white/40 card-radius">
+<div class="flex items-center gap-3">
+<span class="text-xs text-[#8D6E63] font-medium min-w-[36px]">4/14</span>
+<span class="text-sm text-[#3E2723]">💬 응원 문자 <span class="text-[#FF8A80] font-bold text-[10px] ml-1">(+15 XP)</span></span>
+</div>
+<span class="material-symbols-outlined text-[#81C784] text-lg" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<div class="flex items-center justify-between p-4 bg-white/40 card-radius">
+<div class="flex items-center gap-3">
+<span class="text-xs text-[#8D6E63] font-medium min-w-[36px]">4/13</span>
+<span class="text-sm text-[#3E2723]">👶 2시간 돌봄 <span class="text-[#FF8A80] font-bold text-[10px] ml-1">(+30 XP)</span></span>
+</div>
+<span class="material-symbols-outlined text-[#81C784] text-lg" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+</div>
+</section>
+<!-- Sentiment Footer -->
+<footer class="py-10 text-center">
+<p class="text-[#8D6E63] font-medium text-sm flex items-center justify-center gap-1.5">
+                작은 배려가 큰 힘이 돼요 <span class="text-lg">💛</span>
+</p>
+</footer>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full z-50 flex justify-around items-center h-16 px-4 bg-white dark:bg-stone-900 shadow-[0_-2px_8px_rgba(62,39,35,0.05)] border-t border-[#3E2723]/5">
+<a class="flex flex-col items-center justify-center text-[#8D6E63] transition-colors duration-200 hover:text-[#FF8A80]" href="#">
+<span class="material-symbols-outlined" data-icon="mail">mail</span>
+<span class="font-headline text-[10px] font-medium">편지</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#FF8A80] font-bold transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="child_care">child_care</span>
+<span class="font-headline text-[10px] font-medium">성장</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#8D6E63] transition-colors duration-200 hover:text-[#FF8A80]" href="#">
+<span class="material-symbols-outlined" data-icon="groups">groups</span>
+<span class="font-headline text-[10px] font-medium">커뮤니티</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#8D6E63] transition-colors duration-200 hover:text-[#FF8A80]" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-headline text-[10px] font-medium">설정</span>
+</a>
+</nav>
+</body></html>

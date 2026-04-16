@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+
+<html lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>BabyLetter Settings</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-high": "#ffe2d9",
+                    "on-error": "#fff7f7",
+                    "on-tertiary-fixed": "#03501b",
+                    "on-error-container": "#6e0523",
+                    "tertiary": "#286c34",
+                    "surface-dim": "#ffd0bf",
+                    "outline": "#a26e5b",
+                    "primary-fixed-dim": "#e8786e",
+                    "secondary-container": "#ffe087",
+                    "inverse-on-surface": "#b89589",
+                    "on-surface": "#4e2819",
+                    "primary": "#9f403a",
+                    "secondary-fixed-dim": "#fad04b",
+                    "primary-dim": "#90352f",
+                    "surface-variant": "#ffdbce",
+                    "surface-container": "#ffe9e2",
+                    "secondary": "#745c00",
+                    "on-primary-fixed-variant": "#611211",
+                    "surface-container-lowest": "#ffffff",
+                    "tertiary-container": "#b4fdb4",
+                    "inverse-primary": "#f8847b",
+                    "inverse-surface": "#1b0904",
+                    "on-tertiary": "#e9ffe4",
+                    "secondary-dim": "#665100",
+                    "on-tertiary-container": "#1f632c",
+                    "surface-container-low": "#fff1ec",
+                    "error": "#a8364b",
+                    "on-primary-fixed": "#170000",
+                    "on-primary-container": "#540809",
+                    "surface-tint": "#9f403a",
+                    "surface-bright": "#fff8f6",
+                    "primary-fixed": "#f8847b",
+                    "on-background": "#4e2819",
+                    "surface-container-highest": "#ffdbce",
+                    "on-surface-variant": "#835342",
+                    "secondary-fixed": "#ffe087",
+                    "tertiary-dim": "#1a5f29",
+                    "on-secondary": "#fff8ee",
+                    "error-container": "#f97386",
+                    "on-secondary-fixed": "#4e3d00",
+                    "error-dim": "#6b0221",
+                    "tertiary-fixed-dim": "#a6eea7",
+                    "primary-container": "#f8847b",
+                    "on-secondary-container": "#644f00",
+                    "surface": "#fff8f6",
+                    "background": "#fff8f6",
+                    "on-tertiary-fixed-variant": "#2a6e35",
+                    "on-secondary-fixed-variant": "#705900",
+                    "tertiary-fixed": "#b4fdb4",
+                    "on-primary": "#fff7f6",
+                    "outline-variant": "#dfa48f"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "12px",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Plus Jakarta Sans"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #FFF8E1;
+            font-family: 'Inter', sans-serif;
+            color: #3E2723;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .text-coral { color: #FF8A80; }
+        .bg-coral { background-color: #FF8A80; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="min-h-screen pb-32">
+<!-- TopAppBar -->
+<header class="w-full top-0 sticky z-40 bg-[#FFF8E1] dark:bg-stone-950 flex items-center justify-between px-5 h-16 w-full">
+<div class="flex items-center">
+<button class="p-2 -ml-2 hover:bg-[#FFD54F]/20 dark:hover:bg-stone-800 transition-colors active:scale-95 duration-150 rounded-full">
+<span class="material-symbols-outlined text-[#FF8A80]" data-icon="arrow_back">arrow_back</span>
+</button>
+</div>
+<h1 class="font-['Plus_Jakarta_Sans'] font-bold text-lg text-[#3E2723] dark:text-stone-100">Settings</h1>
+<div class="w-10"></div> <!-- Spacer for center alignment -->
+</header>
+<main class="px-5 pt-4 max-w-md mx-auto">
+<!-- Profile Card -->
+<section class="bg-white rounded-xl p-6 shadow-[0_2px_8px_rgba(62,39,35,0.08)] relative mb-8">
+<div class="flex items-center gap-4">
+<div class="relative">
+<div class="w-20 h-20 rounded-full bg-[#FFF1EC] flex items-center justify-center overflow-hidden border-2 border-surface-container">
+<img class="w-full h-full object-cover" data-alt="Soft focused studio portrait of a laughing baby with warm sunlight glow and pastel background colors" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBWtMgLW-xM9Ob5K6cZK9V9UhSnVmx2wlSyhPsMLmxvFOdVO0AyN5OSJpk_6Pr_7ASSpjHfGstyDKQEcLhInX2gRohue3i9gej0YpsHKQ8BvrMXfQT9aETkQ9iT6Y7dXser-UjBUG3ptgzbsV821HVyK-Hx9cQtephc8koqiUH4YEfDngcidhFyXU2yq7Zq5yqYGRDuGNSnSiK1E7OUWyQdVqP-wRBH8u0FoC2uTxhgYrd_AKslO5FKm8U7I10ZQOHAoO7FO0g7GHo1"/>
+</div>
+<button class="absolute bottom-0 right-0 bg-white shadow-md rounded-full p-1.5 flex items-center justify-center border border-surface-container hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-[#8D6E63] text-sm" data-icon="edit">edit</span>
+</button>
+</div>
+<div class="flex flex-col gap-1.5">
+<div class="flex items-center gap-2">
+<span class="font-headline font-bold text-xl text-[#3E2723]">콩이 엄마</span>
+</div>
+<div class="flex flex-wrap gap-2">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-[#FF8A80] text-white">
+                            임신 24주
+                        </span>
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-[#FFD54F] text-[#3E2723]">
+                            🌷 꽃봉오리 Lv.3
+                        </span>
+</div>
+</div>
+</div>
+</section>
+<!-- Settings Groups -->
+<div class="space-y-6">
+<!-- ACCOUNT Section -->
+<div class="space-y-2">
+<h3 class="px-2 text-[12px] font-bold text-[#8D6E63] tracking-wider font-headline uppercase">ACCOUNT</h3>
+<div class="bg-white rounded-xl shadow-[0_2px_8px_rgba(62,39,35,0.08)] overflow-hidden">
+<button class="w-full flex items-center justify-between p-4 hover:bg-[#FFD54F]/10 transition-colors group">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-[#8D6E63]" data-icon="person">person</span>
+<span class="text-[15px] font-medium text-[#3E2723]">프로필 수정</span>
+</div>
+<span class="material-symbols-outlined text-[#8D6E63]/40 group-hover:translate-x-1 transition-transform" data-icon="chevron_right">chevron_right</span>
+</button>
+<div class="h-[1px] bg-[#3E2723]/5 mx-4"></div>
+<button class="w-full flex items-center justify-between p-4 hover:bg-[#FFD54F]/10 transition-colors group">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-[#8D6E63]" data-icon="link">link</span>
+<span class="text-[15px] font-medium text-[#3E2723]">계정 연동 (익명)</span>
+</div>
+<span class="material-symbols-outlined text-[#8D6E63]/40 group-hover:translate-x-1 transition-transform" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</div>
+<!-- BABY INFO Section -->
+<div class="space-y-2">
+<h3 class="px-2 text-[12px] font-bold text-[#8D6E63] tracking-wider font-headline uppercase">BABY INFO</h3>
+<div class="bg-white rounded-xl shadow-[0_2px_8px_rgba(62,39,35,0.08)] overflow-hidden">
+<button class="w-full flex items-center justify-between p-4 hover:bg-[#FFD54F]/10 transition-colors group">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-[#8D6E63]" data-icon="child_care">child_care</span>
+<span class="text-[15px] font-medium text-[#3E2723]">아기 정보 수정</span>
+</div>
+<span class="material-symbols-outlined text-[#8D6E63]/40 group-hover:translate-x-1 transition-transform" data-icon="chevron_right">chevron_right</span>
+</button>
+<div class="h-[1px] bg-[#3E2723]/5 mx-4"></div>
+<button class="w-full flex items-center justify-between p-4 hover:bg-[#FFD54F]/10 transition-colors group">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-[#8D6E63]" data-icon="sync">sync</span>
+<span class="text-[15px] font-medium text-[#3E2723]">모드 전환 (임신→출산)</span>
+</div>
+<span class="material-symbols-outlined text-[#8D6E63]/40 group-hover:translate-x-1 transition-transform" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</div>
+<!-- NOTIFICATIONS Section -->
+<div class="space-y-2">
+<h3 class="px-2 text-[12px] font-bold text-[#8D6E63] tracking-wider font-headline uppercase">NOTIFICATIONS</h3>
+<div class="bg-white rounded-xl shadow-[0_2px_8px_rgba(62,39,35,0.08)] overflow-hidden">
+<button class="w-full flex items-center justify-between p-4 hover:bg-[#FFD54F]/10 transition-colors group">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-[#8D6E63]" data-icon="notifications">notifications</span>
+<span class="text-[15px] font-medium text-[#3E2723]">알림 설정</span>
+</div>
+<span class="material-symbols-outlined text-[#8D6E63]/40 group-hover:translate-x-1 transition-transform" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</div>
+<!-- DATA Section -->
+<div class="space-y-2">
+<h3 class="px-2 text-[12px] font-bold text-[#8D6E63] tracking-wider font-headline uppercase">DATA</h3>
+<div class="bg-white rounded-xl shadow-[0_2px_8px_rgba(62,39,35,0.08)] overflow-hidden">
+<button class="w-full flex items-center justify-between p-4 hover:bg-[#FFD54F]/10 transition-colors group">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-[#8D6E63]" data-icon="ios_share">ios_share</span>
+<span class="text-[15px] font-medium text-[#3E2723]">데이터 내보내기</span>
+</div>
+<span class="material-symbols-outlined text-[#8D6E63]/40 group-hover:translate-x-1 transition-transform" data-icon="chevron_right">chevron_right</span>
+</button>
+<div class="h-[1px] bg-[#3E2723]/5 mx-4"></div>
+<button class="w-full flex items-center justify-between p-4 hover:bg-[#FFD54F]/10 transition-colors group">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-[#8D6E63]" data-icon="privacy_tip">privacy_tip</span>
+<span class="text-[15px] font-medium text-[#3E2723]">개인정보 처리방침</span>
+</div>
+<span class="material-symbols-outlined text-[#8D6E63]/40 group-hover:translate-x-1 transition-transform" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</div>
+<!-- APP INFO Section -->
+<div class="space-y-2">
+<h3 class="px-2 text-[12px] font-bold text-[#8D6E63] tracking-wider font-headline uppercase">APP INFO</h3>
+<div class="bg-white rounded-xl shadow-[0_2px_8px_rgba(62,39,35,0.08)] overflow-hidden">
+<button class="w-full flex items-center justify-between p-4 hover:bg-[#FFD54F]/10 transition-colors group">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-[#8D6E63]" data-icon="info">info</span>
+<span class="text-[15px] font-medium text-[#3E2723]">앱 정보</span>
+</div>
+<span class="material-symbols-outlined text-[#8D6E63]/40 group-hover:translate-x-1 transition-transform" data-icon="chevron_right">chevron_right</span>
+</button>
+<div class="h-[1px] bg-[#3E2723]/5 mx-4"></div>
+<button class="w-full flex items-center justify-between p-4 hover:bg-[#FFD54F]/10 transition-colors group">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-[#FF8A80]" data-icon="workspace_premium" style="font-variation-settings: 'FILL' 1;">workspace_premium</span>
+<span class="text-[15px] font-bold text-[#FF8A80]">프리미엄</span>
+</div>
+<span class="material-symbols-outlined text-[#FF8A80]/40 group-hover:translate-x-1 transition-transform" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Version Info -->
+<footer class="mt-12 mb-8 text-center">
+<p class="text-[12px] font-medium text-[#8D6E63]/60 font-body">v1.0.0</p>
+</footer>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full z-50 bg-white dark:bg-stone-900 shadow-[0_-2px_8px_rgba(62,39,35,0.08)] border-t border-[#3E2723]/5 dark:border-stone-800 flex justify-around items-center h-20 pb-safe px-4">
+<button class="flex flex-col items-center justify-center text-[#8D6E63] dark:text-stone-400 hover:text-[#FF8A80] active:scale-90 transition-transform">
+<span class="material-symbols-outlined" data-icon="mail">mail</span>
+<span class="font-['Plus_Jakarta_Sans'] font-medium text-[11px]">Letters</span>
+</button>
+<button class="flex flex-col items-center justify-center text-[#8D6E63] dark:text-stone-400 hover:text-[#FF8A80] active:scale-90 transition-transform">
+<span class="material-symbols-outlined" data-icon="child_care">child_care</span>
+<span class="font-['Plus_Jakarta_Sans'] font-medium text-[11px]">Growth</span>
+</button>
+<button class="flex flex-col items-center justify-center text-[#8D6E63] dark:text-stone-400 hover:text-[#FF8A80] active:scale-90 transition-transform">
+<span class="material-symbols-outlined" data-icon="groups">groups</span>
+<span class="font-['Plus_Jakarta_Sans'] font-medium text-[11px]">Community</span>
+</button>
+<button class="flex flex-col items-center justify-center text-[#FF8A80] font-bold active:scale-90 transition-transform">
+<span class="material-symbols-outlined" data-icon="settings" style="font-variation-settings: 'FILL' 1;">settings</span>
+<span class="font-['Plus_Jakarta_Sans'] font-medium text-[11px]">Settings</span>
+</button>
+</nav>
+</body></html>

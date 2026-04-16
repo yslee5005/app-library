@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+
+<html lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "error": "#a8364b",
+                    "on-primary-fixed-variant": "#611211",
+                    "surface": "#fff8f6",
+                    "secondary-dim": "#665100",
+                    "primary-fixed": "#f8847b",
+                    "on-primary-container": "#540809",
+                    "tertiary-fixed": "#b4fdb4",
+                    "on-secondary-container": "#644f00",
+                    "surface-tint": "#9f403a",
+                    "on-secondary-fixed": "#4e3d00",
+                    "surface-variant": "#ffdbce",
+                    "primary": "#9f403a",
+                    "tertiary": "#286c34",
+                    "primary-fixed-dim": "#e8786e",
+                    "secondary": "#745c00",
+                    "tertiary-fixed-dim": "#a6eea7",
+                    "on-error": "#fff7f7",
+                    "on-error-container": "#6e0523",
+                    "on-secondary": "#fff8ee",
+                    "on-secondary-fixed-variant": "#705900",
+                    "on-primary-fixed": "#170000",
+                    "primary-container": "#f8847b",
+                    "outline": "#a26e5b",
+                    "on-surface": "#4e2819",
+                    "on-surface-variant": "#835342",
+                    "inverse-on-surface": "#b89589",
+                    "background": "#fff8f6",
+                    "surface-container-low": "#fff1ec",
+                    "surface-container-high": "#ffe2d9",
+                    "on-background": "#4e2819",
+                    "secondary-fixed": "#ffe087",
+                    "error-container": "#f97386",
+                    "secondary-container": "#ffe087",
+                    "on-primary": "#fff7f6",
+                    "secondary-fixed-dim": "#fad04b",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-container": "#ffe9e2",
+                    "error-dim": "#6b0221",
+                    "on-tertiary": "#e9ffe4",
+                    "surface-dim": "#ffd0bf",
+                    "primary-dim": "#90352f",
+                    "tertiary-container": "#b4fdb4",
+                    "surface-container-highest": "#ffdbce",
+                    "on-tertiary-fixed": "#03501b",
+                    "surface-bright": "#fff8f6",
+                    "on-tertiary-container": "#1f632c",
+                    "outline-variant": "#dfa48f",
+                    "on-tertiary-fixed-variant": "#2a6e35",
+                    "inverse-surface": "#1b0904",
+                    "inverse-primary": "#f8847b",
+                    "tertiary-dim": "#1a5f29",
+                    "brand-amber": "#FFC107",
+                    "brand-coral": "#FF8A80",
+                    "brand-cream": "#FFF8E1",
+                    "brand-brown": "#3E2723",
+                    "brand-gray": "#8D6E63",
+                    "brand-sage": "#81C784"
+            },
+            "borderRadius": {
+                    "DEFAULT": "4px",
+                    "lg": "12px",
+                    "xl": "16px",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Plus Jakarta Sans"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .bg-mesh {
+            background-color: #FFF8E1;
+            background-image:
+                radial-gradient(at 0% 0%, rgba(255, 138, 128, 0.08) 0px, transparent 50%),
+                radial-gradient(at 100% 0%, rgba(255, 213, 79, 0.08) 0px, transparent 50%);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-mesh min-h-screen font-body text-brand-brown antialiased pb-24">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full bg-[#FFF8E1] dark:bg-stone-950 shadow-sm z-50 border-b border-[#3E2723]/5 flex items-center justify-between px-5 h-16">
+<button class="active:scale-95 duration-150 text-[#FF8A80] hover:bg-[#FF8A80]/10 transition-colors p-2 rounded-full">
+<span class="material-symbols-outlined" data-icon="arrow_back">arrow_back</span>
+</button>
+<h1 class="font-['Plus_Jakarta_Sans'] font-semibold text-[#3E2723] dark:text-stone-100 text-lg">건강 알림</h1>
+<button class="active:scale-95 duration-150 text-[#FF8A80] hover:bg-[#FF8A80]/10 transition-colors p-2 rounded-full relative">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full"></span>
+</button>
+</header>
+<main class="pt-20 px-5 space-y-6 max-w-2xl mx-auto">
+<!-- LEVEL 1: ATTENTION -->
+<section class="bg-[#FFFDE7] rounded-xl border-l-[4px] border-brand-amber shadow-[0_2px_8px_rgba(62,39,35,0.08)] p-5 transition-all hover:shadow-md">
+<div class="flex items-center justify-between mb-3">
+<div class="flex items-center gap-2">
+<span class="text-xl">💡</span>
+<span class="bg-[#FFF59D] text-brand-brown px-3 py-1 rounded-full text-xs font-semibold">관심</span>
+</div>
+</div>
+<h2 class="font-headline font-bold text-lg mb-2">수면 패턴이 조금 달라졌어요</h2>
+<p class="text-brand-gray text-sm leading-relaxed mb-4">지난 3일간 낮잠 시간이 평소보다 30분 줄었어요. 아기가 성장하면서 수면 패턴이 바뀌는 건 자연스러운 일이에요.</p>
+<!-- Mini Chart Placeholder -->
+<div class="bg-white/50 rounded-lg p-4 mb-4 h-24 flex items-end justify-between gap-2">
+<div class="flex-1 bg-brand-amber/20 rounded-t-sm h-[80%]"></div>
+<div class="flex-1 bg-brand-amber/40 rounded-t-sm h-[70%]"></div>
+<div class="flex-1 bg-brand-amber/60 rounded-t-sm h-[60%]"></div>
+<div class="flex-1 bg-brand-amber rounded-t-sm h-[50%]"></div>
+</div>
+<div class="flex items-center justify-between">
+<button class="text-brand-amber font-semibold text-sm hover:underline active:scale-95 duration-150">자세히 보기</button>
+<span class="text-brand-sage text-[11px] font-medium">대부분 자연스러운 변화예요</span>
+</div>
+</section>
+<!-- LEVEL 2: ALERT -->
+<section class="bg-[#FFF1F0] rounded-xl border-l-[4px] border-brand-coral shadow-[0_2px_8px_rgba(62,39,35,0.08)] p-5 transition-all hover:shadow-md">
+<div class="flex items-center justify-between mb-3">
+<div class="flex items-center gap-2">
+<span class="text-xl">⚠️</span>
+<span class="bg-brand-coral/20 text-brand-coral px-3 py-1 rounded-full text-xs font-semibold">주의</span>
+</div>
+</div>
+<h2 class="font-headline font-bold text-lg mb-2">체중 증가가 느려지고 있어요</h2>
+<p class="text-brand-gray text-sm leading-relaxed mb-4">지난 2주간 체중 증가량이 WHO 기준 하위 10%에 해당해요. 소아과 방문을 권장드려요.</p>
+<!-- Weight Trend Chart -->
+<div class="bg-white/50 rounded-lg p-4 mb-5 relative h-32 flex items-center justify-center overflow-hidden">
+<svg class="absolute inset-0 w-full h-full" preserveaspectratio="none" viewbox="0 0 100 40">
+<path d="M0 30 Q 25 25 50 25 T 100 25" fill="none" stroke="#FF8A80" stroke-width="2"></path>
+<circle cx="0" cy="30" fill="#FF8A80" r="1.5"></circle>
+<circle cx="50" cy="25" fill="#FF8A80" r="1.5"></circle>
+<circle cx="100" cy="25" fill="#FF8A80" r="1.5"></circle>
+</svg>
+<div class="absolute bottom-2 left-4 text-[10px] text-brand-gray">2주 전</div>
+<div class="absolute bottom-2 right-4 text-[10px] text-brand-coral font-bold">현재 (정체기)</div>
+</div>
+<div class="flex flex-col gap-2 mb-4">
+<button class="w-full bg-brand-coral text-white py-3 rounded-lg font-bold text-sm shadow-sm active:scale-[0.98] transition-transform flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-base" data-icon="medical_services">medical_services</span>
+                    소아과 찾기
+                </button>
+<button class="w-full border-2 border-brand-coral text-brand-coral py-3 rounded-lg font-bold text-sm active:scale-[0.98] transition-transform">
+                    📋 체크리스트 보기
+                </button>
+<button class="w-full text-brand-coral font-semibold text-sm py-2 hover:bg-brand-coral/5 rounded-lg active:scale-95 transition-all">
+                    ⏰ 1주 후 리마인더
+                </button>
+</div>
+<p class="text-[10px] text-center text-brand-gray/60 italic">대한소아과학회 성장 가이드라인 기준</p>
+</section>
+<!-- PREVIOUS ALERTS -->
+<section class="mt-8">
+<button class="w-full flex items-center justify-between py-4 border-b border-brand-brown/10">
+<h3 class="font-headline font-bold text-base">이전 알림 기록</h3>
+<span class="material-symbols-outlined text-brand-gray" data-icon="expand_more">expand_more</span>
+</button>
+<div class="divide-y divide-brand-brown/5">
+<div class="py-4 flex items-center justify-between">
+<div>
+<p class="text-sm font-medium">10/20 수면 패턴 변화</p>
+<p class="text-xs text-brand-gray mt-0.5">상태: 확인됨</p>
+</div>
+<span class="material-symbols-outlined text-brand-sage" data-icon="check_circle">check_circle</span>
+</div>
+<div class="py-4 flex items-center justify-between">
+<div>
+<p class="text-sm font-medium">10/15 기저귀 횟수 감소</p>
+<p class="text-xs text-brand-gray mt-0.5">상태: 모니터링 중</p>
+</div>
+<span class="material-symbols-outlined text-brand-amber" data-icon="history">history</span>
+</div>
+<div class="py-4 flex items-center justify-between">
+<div>
+<p class="text-sm font-medium">10/02 예방접종 알림</p>
+<p class="text-xs text-brand-gray mt-0.5">상태: 완료</p>
+</div>
+<span class="material-symbols-outlined text-brand-sage" data-icon="check_circle">check_circle</span>
+</div>
+</div>
+</section>
+<!-- Footer Notes -->
+<footer class="pt-8 pb-12 space-y-2">
+<div class="flex items-center gap-2 justify-center opacity-60">
+<span class="material-symbols-outlined text-xs" data-icon="info">info</span>
+<p class="text-[11px] text-center">이 알림은 기록 데이터를 기반으로 생성됩니다</p>
+</div>
+<p class="text-[11px] text-center opacity-40">의학적 진단을 대체하지 않습니다</p>
+</footer>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 bg-white dark:bg-stone-900 border-t border-[#3E2723]/5 shadow-[0_-2px_10px_rgba(62,39,35,0.08)] flex justify-around items-center h-20 pb-safe rounded-t-xl">
+<a class="flex flex-col items-center justify-center text-[#8D6E63] dark:text-stone-500 hover:opacity-80 active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-['Inter'] text-[11px] font-medium mt-1">홈</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#8D6E63] dark:text-stone-500 hover:opacity-80 active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="mail">mail</span>
+<span class="font-['Inter'] text-[11px] font-medium mt-1">편지</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#FF8A80] dark:text-[#FF8A80] hover:opacity-80 active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="monitor_heart" style="font-variation-settings: 'FILL' 1;">monitor_heart</span>
+<span class="font-['Inter'] text-[11px] font-medium mt-1">건강</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#8D6E63] dark:text-stone-500 hover:opacity-80 active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="auto_graph">auto_graph</span>
+<span class="font-['Inter'] text-[11px] font-medium mt-1">성장</span>
+</a>
+</nav>
+</body></html>

@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+
+<html class="light" lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "error-container": "#f97386",
+                "secondary-container": "#ffe087",
+                "on-tertiary-container": "#1f632c",
+                "surface-container-lowest": "#ffffff",
+                "surface-container-high": "#ffe2d9",
+                "on-secondary-container": "#644f00",
+                "on-tertiary": "#e9ffe4",
+                "primary-container": "#f8847b",
+                "surface-variant": "#ffdbce",
+                "inverse-surface": "#1b0904",
+                "surface-bright": "#fff8f6",
+                "background": "#fff8f6",
+                "primary-fixed-dim": "#e8786e",
+                "surface-container-highest": "#ffdbce",
+                "inverse-on-surface": "#b89589",
+                "on-tertiary-fixed-variant": "#2a6e35",
+                "on-secondary": "#fff8ee",
+                "tertiary-dim": "#1a5f29",
+                "on-primary-fixed-variant": "#611211",
+                "secondary-dim": "#665100",
+                "on-surface-variant": "#835342",
+                "on-secondary-fixed": "#4e3d00",
+                "surface": "#fff8f6",
+                "on-background": "#4e2819",
+                "secondary-fixed": "#ffe087",
+                "on-primary-fixed": "#170000",
+                "inverse-primary": "#f8847b",
+                "secondary": "#745c00",
+                "surface-dim": "#ffd0bf",
+                "tertiary": "#286c34",
+                "surface-tint": "#9f403a",
+                "surface-container-low": "#fff1ec",
+                "on-secondary-fixed-variant": "#705900",
+                "tertiary-fixed-dim": "#a6eea7",
+                "primary-dim": "#90352f",
+                "outline-variant": "#dfa48f",
+                "tertiary-container": "#b4fdb4",
+                "secondary-fixed-dim": "#fad04b",
+                "error": "#a8364b",
+                "on-surface": "#4e2819",
+                "error-dim": "#6b0221",
+                "outline": "#a26e5b",
+                "on-primary-container": "#540809",
+                "surface-container": "#ffe9e2",
+                "primary": "#9f403a",
+                "tertiary-fixed": "#b4fdb4",
+                "on-error": "#fff7f7",
+                "primary-fixed": "#f8847b",
+                "on-tertiary-fixed": "#03501b",
+                "on-error-container": "#6e0523",
+                "on-primary": "#fff7f6"
+            },
+            "borderRadius": {
+                "DEFAULT": "0.25rem",
+                "lg": "0.5rem",
+                "xl": "0.75rem",
+                "full": "9999px"
+            },
+            "fontFamily": {
+                "headline": ["Plus Jakarta Sans"],
+                "body": ["Inter"],
+                "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; background-color: #FFF8E1; color: #3E2723; }
+        .headline-font { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; vertical-align: middle; }
+        .fill-icon { font-variation-settings: 'FILL' 1; }
+        .custom-glass { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(8px); }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="min-h-screen pb-32">
+<header class="fixed top-0 left-0 w-full z-50 bg-[#FFF8E1] flex items-center px-5 h-16 border-none">
+<div class="flex items-center justify-between w-full">
+<div class="flex items-center gap-4">
+<button class="hover:bg-[#FFD54F]/20 transition-colors rounded-full p-2 active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-[#FF8A80]" data-icon="arrow_back">arrow_back</span>
+</button>
+<h1 class="font-['Plus_Jakarta_Sans'] font-bold text-[#3E2723] text-lg">아기의 편지 모음</h1>
+</div>
+<div class="bg-[#FF8A80] text-white px-3 py-1 rounded-full text-sm font-bold shadow-sm">
+                16/28통
+            </div>
+</div>
+</header>
+<main class="pt-20 px-5 space-y-6 max-w-2xl mx-auto">
+<section class="bg-white rounded-[12px] p-5 shadow-[0_2px_8px_rgba(62,39,35,0.08)] space-y-3">
+<div class="flex justify-between items-end">
+<p class="font-headline font-bold text-[#3E2723] text-sm">28통 중 16통 수집! 💌</p>
+<span class="text-[#FF8A80] font-bold text-xs">57%</span>
+</div>
+<div class="w-full bg-[#FFF8E1] h-3 rounded-full overflow-hidden">
+<div class="bg-[#FF8A80] h-full w-[57%] rounded-full shadow-inner"></div>
+</div>
+<p class="text-[#8D6E63] text-[11px] flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-[#FFD54F] fill-icon" data-icon="stars">stars</span>
+                전부 모으면 편지수집가 배지!
+            </p>
+</section>
+<div class="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
+<button class="px-4 py-2 rounded-full bg-[#FF8A80] text-white text-sm font-medium whitespace-nowrap shadow-sm">전체</button>
+<button class="px-4 py-2 rounded-full bg-white text-[#8D6E63] text-sm font-medium whitespace-nowrap border border-[#3E2723]/5 shadow-sm">임신 중</button>
+<button class="px-4 py-2 rounded-full bg-white text-[#8D6E63] text-sm font-medium whitespace-nowrap border border-[#3E2723]/5 shadow-sm">출산 후</button>
+<button class="px-4 py-2 rounded-full bg-white text-[#FF8A80] text-sm font-medium whitespace-nowrap border border-[#3E2723]/5 shadow-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] fill-icon" data-icon="favorite">favorite</span>
+                보관함
+            </button>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div class="h-[150px] bg-white rounded-[12px] p-4 shadow-[0_2px_8px_rgba(62,39,35,0.08)] flex flex-col justify-between border border-transparent hover:border-[#FF8A80]/30 transition-all group">
+<div class="flex justify-between items-start">
+<span class="text-[10px] font-bold bg-[#FFF8E1] text-[#3E2723] px-2 py-0.5 rounded-full">8주</span>
+<span class="material-symbols-outlined text-[#FF8A80] text-sm fill-icon" data-icon="favorite">favorite</span>
+</div>
+<div class="flex flex-col items-center">
+<span class="material-symbols-outlined text-[#FF8A80] text-4xl mb-2 group-hover:scale-110 transition-transform" data-icon="drafts">drafts</span>
+<p class="text-[11px] text-[#3E2723] font-bold text-center line-clamp-1">심장이 뛰기 시작했어!</p>
+</div>
+</div>
+<div class="h-[150px] bg-white rounded-[12px] p-4 shadow-[0_2px_8px_rgba(62,39,35,0.08)] flex flex-col justify-between border border-transparent hover:border-[#FF8A80]/30 transition-all group">
+<div class="flex justify-between items-start">
+<span class="text-[10px] font-bold bg-[#FFF8E1] text-[#3E2723] px-2 py-0.5 rounded-full">12주</span>
+<span class="material-symbols-outlined text-[#8D6E63] text-sm" data-icon="favorite">favorite</span>
+</div>
+<div class="flex flex-col items-center">
+<span class="material-symbols-outlined text-[#FF8A80] text-4xl mb-2 group-hover:scale-110 transition-transform" data-icon="drafts">drafts</span>
+<p class="text-[11px] text-[#3E2723] font-bold text-center line-clamp-1">하품하는 법을 배웠어!</p>
+</div>
+</div>
+<div class="h-[150px] bg-white rounded-[12px] p-4 shadow-[0_2px_8px_rgba(62,39,35,0.08)] flex flex-col justify-between border border-transparent hover:border-[#FF8A80]/30 transition-all group">
+<div class="flex justify-between items-start">
+<span class="text-[10px] font-bold bg-[#FFF8E1] text-[#3E2723] px-2 py-0.5 rounded-full">16주</span>
+<span class="material-symbols-outlined text-[#8D6E63] text-sm" data-icon="favorite">favorite</span>
+</div>
+<div class="flex flex-col items-center">
+<span class="material-symbols-outlined text-[#FF8A80] text-4xl mb-2 group-hover:scale-110 transition-transform" data-icon="drafts">drafts</span>
+<p class="text-[11px] text-[#3E2723] font-bold text-center line-clamp-1">빛이 보여!</p>
+</div>
+</div>
+<div class="h-[150px] bg-white rounded-[12px] p-4 shadow-[0_2px_8px_rgba(62,39,35,0.12)] flex flex-col justify-between border-2 border-[#FFD54F] relative group">
+<div class="absolute -top-2 -right-1 bg-error text-white text-[9px] font-black px-2 py-0.5 rounded-full shadow-sm animate-pulse">NEW</div>
+<div class="flex justify-between items-start">
+<span class="text-[10px] font-bold bg-[#FFF8E1] text-[#3E2723] px-2 py-0.5 rounded-full">20주</span>
+</div>
+<div class="flex flex-col items-center">
+<span class="material-symbols-outlined text-[#FF8A80] text-5xl mb-2 group-hover:scale-110 transition-transform fill-icon" data-icon="mail">mail</span>
+<p class="text-[11px] text-[#FF8A80] font-black text-center">읽지 않은 편지</p>
+</div>
+</div>
+<div class="h-[150px] bg-stone-100/50 rounded-[12px] p-4 border border-dashed border-[#8D6E63]/20 flex flex-col justify-between grayscale opacity-80">
+<div class="flex justify-between items-start">
+<span class="text-[10px] font-bold bg-stone-200 text-[#8D6E63] px-2 py-0.5 rounded-full">24주</span>
+<span class="material-symbols-outlined text-[#8D6E63] text-sm" data-icon="lock">lock</span>
+</div>
+<div class="flex flex-col items-center">
+<span class="material-symbols-outlined text-[#8D6E63] text-4xl mb-2" data-icon="lock">lock</span>
+<p class="text-[10px] text-[#8D6E63] font-medium text-center">6월 15일 도착 예정 🔒</p>
+</div>
+</div>
+<div class="h-[150px] bg-stone-100/50 rounded-[12px] p-4 border border-dashed border-[#8D6E63]/20 flex flex-col justify-between grayscale opacity-80">
+<div class="flex justify-between items-start">
+<span class="text-[10px] font-bold bg-stone-200 text-[#8D6E63] px-2 py-0.5 rounded-full">28주</span>
+<span class="material-symbols-outlined text-[#8D6E63] text-sm" data-icon="lock">lock</span>
+</div>
+<div class="flex flex-col items-center">
+<span class="material-symbols-outlined text-[#8D6E63] text-4xl mb-2" data-icon="lock">lock</span>
+<p class="text-[10px] text-[#8D6E63] font-medium text-center">7월 13일 도착 예정 🔒</p>
+</div>
+</div>
+</div>
+<div class="rounded-[12px] overflow-hidden relative h-28 bg-gradient-to-r from-[#FF8A80] to-[#FFD54F] shadow-lg flex items-center p-5 group cursor-pointer">
+<div class="z-10 text-white max-w-[180px]">
+<h3 class="font-headline font-bold text-base leading-tight mb-1">편지 수집가 챌린지!</h3>
+<p class="text-[11px] opacity-90">아직 못 읽은 아기의 이야기를 모두 수집하고 특별한 선물을 받으세요.</p>
+</div>
+<div class="absolute right-[-10px] top-[-10px] opacity-30 group-hover:scale-110 transition-transform duration-500">
+<span class="material-symbols-outlined text-[100px]" data-icon="auto_stories">auto_stories</span>
+</div>
+<img class="absolute right-2 top-2 w-20 h-20 object-contain drop-shadow-xl" data-alt="a cute 3D soft clay style baby icon holding a floating glowing letter, warm lighting, soft colors" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD0sSMvyngjWfIxXnheGbw-ffpfVzVfb8dmGDQpievJ4pC6z02sfvj6h1B1ShKenoFF4Wfl5h0tXdxNCc2yLwu_A-GGvUzeUskszMBBcz_0rhlV1hev85GmBcNiIRQrqhB76d-FbKVhp76z-m8ABl8CVTi7goM33Fqx1jsCVM-2yL-R5NgfD_pnO6eSHEKrb-Y4IakETGiwUBJDOpeawhwFBZDIXx0j_3Y4C8IxM3OopNwBOnVlvpZ7MBES4-wL1utui9zkuYz3lyTe"/>
+</div>
+</main>
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pt-3 pb-6 bg-white/80 dark:bg-stone-900/80 backdrop-blur-md rounded-t-[24px] shadow-[0_-2px_10px_rgba(62,39,35,0.05)] border-t border-[#3E2723]/5">
+<div class="flex flex-col items-center justify-center text-[#8D6E63] opacity-70">
+<span class="material-symbols-outlined text-2xl" data-icon="home">home</span>
+<span class="font-['Plus_Jakarta_Sans'] font-medium text-[11px]">홈</span>
+</div>
+<div class="flex flex-col items-center justify-center text-[#FF8A80] scale-110 transition-transform">
+<span class="material-symbols-outlined text-2xl fill-icon" data-icon="mail">mail</span>
+<span class="font-['Plus_Jakarta_Sans'] font-medium text-[11px]">편지함</span>
+</div>
+<div class="flex flex-col items-center justify-center text-[#8D6E63] opacity-70">
+<span class="material-symbols-outlined text-2xl" data-icon="auto_stories">auto_stories</span>
+<span class="font-['Plus_Jakarta_Sans'] font-medium text-[11px]">성장일기</span>
+</div>
+<div class="flex flex-col items-center justify-center text-[#8D6E63] opacity-70">
+<span class="material-symbols-outlined text-2xl" data-icon="settings">settings</span>
+<span class="font-['Plus_Jakarta_Sans'] font-medium text-[11px]">설정</span>
+</div>
+</nav>
+</body></html>

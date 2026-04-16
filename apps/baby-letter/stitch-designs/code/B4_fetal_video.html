@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+
+<html lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary-fixed-dim": "#a6eea7",
+                    "primary-fixed-dim": "#e8786e",
+                    "on-error": "#fff7f7",
+                    "secondary-fixed": "#ffe087",
+                    "secondary": "#745c00",
+                    "on-primary-fixed": "#170000",
+                    "outline-variant": "#dfa48f",
+                    "error": "#a8364b",
+                    "surface-container-low": "#fff1ec",
+                    "error-container": "#f97386",
+                    "on-primary": "#fff7f6",
+                    "primary-dim": "#90352f",
+                    "on-secondary-fixed": "#4e3d00",
+                    "inverse-surface": "#1b0904",
+                    "tertiary": "#286c34",
+                    "on-surface": "#4e2819",
+                    "tertiary-container": "#b4fdb4",
+                    "outline": "#a26e5b",
+                    "surface-container-highest": "#ffdbce",
+                    "primary": "#9f403a",
+                    "surface-container-lowest": "#ffffff",
+                    "on-surface-variant": "#835342",
+                    "on-tertiary-fixed-variant": "#2a6e35",
+                    "on-primary-container": "#540809",
+                    "on-secondary-fixed-variant": "#705900",
+                    "tertiary-fixed": "#b4fdb4",
+                    "on-tertiary-fixed": "#03501b",
+                    "error-dim": "#6b0221",
+                    "surface": "#fff8f6",
+                    "secondary-fixed-dim": "#fad04b",
+                    "secondary-dim": "#665100",
+                    "secondary-container": "#ffe087",
+                    "primary-container": "#f8847b",
+                    "surface-container-high": "#ffe2d9",
+                    "surface-bright": "#fff8f6",
+                    "on-tertiary": "#e9ffe4",
+                    "surface-dim": "#ffd0bf",
+                    "surface-variant": "#ffdbce",
+                    "on-primary-fixed-variant": "#611211",
+                    "primary-fixed": "#f8847b",
+                    "on-secondary-container": "#644f00",
+                    "on-background": "#4e2819",
+                    "inverse-primary": "#f8847b",
+                    "surface-container": "#ffe9e2",
+                    "on-tertiary-container": "#1f632c",
+                    "background": "#fff8f6",
+                    "inverse-on-surface": "#b89589",
+                    "surface-tint": "#9f403a",
+                    "tertiary-dim": "#1a5f29",
+                    "on-error-container": "#6e0523",
+                    "on-secondary": "#fff8ee"
+            },
+            "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+            "fontFamily": { "headline": ["Plus Jakarta Sans"], "body": ["Inter"], "label": ["Inter"] }
+          },
+        },
+      }
+    </script>
+<style>
+        body { background-color: #0c0a09; color: #fff8f6; font-family: 'Inter', sans-serif; overflow-x: hidden; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; vertical-align: middle; }
+        .gradient-video-placeholder { background: linear-gradient(135deg, #FFE0B2 0%, #FFB74D 100%); }
+        .glass-panel { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); }
+    </style>
+<style> body { min-height: max(884px, 100dvh); } </style>
+</head>
+<body class="min-h-screen flex flex-col items-center justify-start pb-32">
+<header class="fixed top-0 w-full z-50 flex items-center justify-between px-4 h-16 w-full bg-stone-950/80">
+<button class="text-stone-300 hover:bg-stone-800/50 rounded-full transition-colors active:scale-95 duration-150 p-2"><span class="material-symbols-outlined">close</span></button>
+<h1 class="text-orange-300 font-['Plus_Jakarta_Sans'] font-bold text-lg">Baby's Video</h1>
+<button class="text-stone-300 hover:bg-stone-800/50 rounded-full transition-colors active:scale-95 duration-150 p-2"><span class="material-symbols-outlined">share</span></button>
+</header>
+<main class="w-full max-w-md px-5 mt-20 flex flex-col items-center">
+<div class="relative w-full aspect-square rounded-3xl overflow-hidden shadow-2xl group">
+<div class="w-full h-full gradient-video-placeholder flex flex-col items-center justify-center relative">
+<img alt="Baby 24 weeks" class="w-48 h-48 object-contain opacity-80 mix-blend-multiply" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBLCG2lKp4Gw59hVCdfqte-JPWe0lpcQm5JCNgAtLceDf7LqOA7GRKHElU3ruO6tE_agtlfuh1wgJq6KI5ERlSuOEw5D37dw1dTDNJu_yBb-slVSokKN6PsjNk-Q4Fmq0cbFfMQJnEHTUOATUSKyq0280tvHr6mrrOgGiB2nykxuG6zih4wH0xpuvOsCbcXa0OfrWMARfqZiEUZVDjCOWVVoXzfyS6Lifc8xhVc-T3jwcRpZokelmS0FuTV86FKFPiZLSkDwbNhonBs"/>
+<h2 class="mt-4 text-white font-headline font-extrabold text-4xl drop-shadow-md">Week 24</h2>
+<div class="absolute bottom-0 left-0 w-full p-6 bg-gradient-to-t from-black/80 via-black/40 to-transparent">
+<div class="flex flex-col gap-1">
+<span class="text-white/80 text-sm font-medium tracking-wide">약 30cm · 600g</span>
+<span class="text-white text-lg font-bold">눈꺼풀이 열렸어요! 🌙</span>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-8 w-full flex items-start gap-3">
+<div class="w-12 h-12 rounded-full overflow-hidden border-2 border-primary-container flex-shrink-0">
+<img alt="Baby Avatar" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAOjp_Uce8n8Iz4YYkj7TMo2DJKj0eNTj7ccvrVaQKB_NvmPPnYBFT4ppoeOC7cEQRYKUB6tylhCD3wyVJeDsFMl4oQs5lS9mtcTDb2jqlGKi1FRCnhzdkqfwSrucVRq0Tc8iS3CDipCvD-J_kZvK_PhSaPZtEn6aBjNerCXL3yZTbq2IasffhofwBBrzvc9UpddGbnB2L-UqviEnrXuBA7vHPb6zw_Gw-tB5AwpMf0cXS3wQTOkrLXvrNSWDilvm5fYQqWhMGX640c"/>
+</div>
+<div class="relative bg-surface-container-highest px-4 py-3 rounded-2xl rounded-tl-none max-w-[80%]">
+<p class="text-on-surface text-sm font-medium leading-relaxed">엄마, 나 지금 꿈꾸고 있어! 🌙</p>
+<div class="absolute -left-2 top-0 w-3 h-3 bg-surface-container-highest" style="clip-path: polygon(100% 0, 0 0, 100% 100%);"></div>
+</div>
+</div>
+<div class="mt-6 w-full flex justify-start">
+<div class="bg-secondary-container/20 border border-secondary-container/30 px-4 py-2 rounded-xl flex items-center gap-2">
+<span class="text-2xl">🥑</span>
+<span class="text-secondary-container font-headline font-semibold text-sm tracking-tight">아보카도만해요</span>
+</div>
+</div>
+<div class="mt-8 w-full glass-panel p-6 rounded-2xl">
+<div class="flex items-center gap-2 mb-2">
+<div class="w-1 h-4 bg-primary rounded-full"></div>
+<h3 class="text-stone-300 font-headline font-bold text-sm uppercase tracking-widest">이번 주</h3>
+</div>
+<p class="text-white text-lg font-medium leading-snug">REM 수면 시작, 꿈을 꾸기 시작해요</p>
+</div>
+<div class="mt-12 w-full flex flex-col gap-6">
+<div class="flex justify-between items-center px-2">
+<button class="flex items-center gap-1 text-stone-400 hover:text-white transition-colors group"><span class="material-symbols-outlined text-sm">chevron_left</span><span class="text-xs font-headline font-bold">Week 23</span></button>
+<button class="flex items-center gap-1 text-stone-400 hover:text-white transition-colors"><span class="text-xs font-headline font-bold">Week 25</span><span class="material-symbols-outlined text-sm">chevron_right</span></button>
+</div>
+<div class="relative w-full h-1.5 bg-stone-800 rounded-full overflow-hidden">
+<div class="absolute left-0 top-0 h-full bg-primary-container" style="width: 50%;"></div>
+<div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-4 h-4 bg-white rounded-full border-4 border-primary shadow-lg z-10"></div>
+</div>
+<div class="flex justify-between items-center text-[10px] text-stone-500 font-headline font-bold px-1 -mt-4"><span>WEEK 8</span><span>WEEK 40</span></div>
+</div>
+</main>
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-6 pb-8 pt-4 bg-stone-950/90 rounded-t-3xl border-t border-stone-800 shadow-2xl">
+<button class="text-stone-300 p-3 hover:bg-stone-800 transition-all active:scale-90 duration-200"><span class="material-symbols-outlined text-3xl">skip_previous</span></button>
+<button class="bg-orange-300/20 text-orange-300 rounded-full p-4 hover:bg-stone-800 transition-all active:scale-90 duration-200"><span class="material-symbols-outlined text-4xl" data-weight="fill">play_arrow</span></button>
+<button class="text-stone-300 p-3 hover:bg-stone-800 transition-all active:scale-90 duration-200"><span class="material-symbols-outlined text-3xl">skip_next</span></button>
+</nav>
+</body></html>

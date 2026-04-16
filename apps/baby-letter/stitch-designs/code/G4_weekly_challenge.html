@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+
+<html lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-surface-variant": "#835342",
+                    "tertiary-fixed": "#b4fdb4",
+                    "primary-fixed": "#f8847b",
+                    "surface-container-highest": "#ffdbce",
+                    "tertiary-container": "#b4fdb4",
+                    "on-secondary-container": "#644f00",
+                    "error-container": "#f97386",
+                    "surface-dim": "#ffd0bf",
+                    "secondary-fixed": "#ffe087",
+                    "secondary-dim": "#665100",
+                    "inverse-on-surface": "#b89589",
+                    "on-primary-fixed": "#170000",
+                    "on-primary-fixed-variant": "#611211",
+                    "error": "#a8364b",
+                    "on-secondary-fixed-variant": "#705900",
+                    "inverse-primary": "#f8847b",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-container-low": "#fff1ec",
+                    "secondary-fixed-dim": "#fad04b",
+                    "on-background": "#4e2819",
+                    "tertiary": "#286c34",
+                    "primary-fixed-dim": "#e8786e",
+                    "on-primary-container": "#540809",
+                    "on-error-container": "#6e0523",
+                    "on-tertiary": "#e9ffe4",
+                    "outline-variant": "#dfa48f",
+                    "surface-container-high": "#ffe2d9",
+                    "primary-container": "#f8847b",
+                    "surface-tint": "#9f403a",
+                    "error-dim": "#6b0221",
+                    "secondary": "#745c00",
+                    "outline": "#a26e5b",
+                    "on-tertiary-fixed-variant": "#2a6e35",
+                    "on-secondary-fixed": "#4e3d00",
+                    "primary-dim": "#90352f",
+                    "primary": "#9f403a",
+                    "on-tertiary-fixed": "#03501b",
+                    "surface-container": "#ffe9e2",
+                    "surface-variant": "#ffdbce",
+                    "tertiary-dim": "#1a5f29",
+                    "tertiary-fixed-dim": "#a6eea7",
+                    "on-primary": "#fff7f6",
+                    "on-error": "#fff7f7",
+                    "secondary-container": "#ffe087",
+                    "on-secondary": "#fff8ee",
+                    "inverse-surface": "#1b0904",
+                    "on-tertiary-container": "#1f632c",
+                    "surface-bright": "#fff8f6",
+                    "on-surface": "#4e2819",
+                    "surface": "#fff8f6",
+                    "background": "#fff8f6"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Plus Jakarta Sans"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #FFF8E1;
+            font-family: 'Inter', sans-serif;
+            color: #3E2723;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="min-h-screen pb-24">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-[#FFF8E1] flex items-center px-5 h-16 w-full">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-[#FF8A80] active:scale-95 transition-transform cursor-pointer" data-icon="arrow_back">arrow_back</span>
+<h1 class="font-['Plus_Jakarta_Sans'] font-bold text-[#3E2723] text-lg">이번 주 챌린지</h1>
+</div>
+</header>
+<main class="pt-20 px-5 space-y-6">
+<!-- Week Badge -->
+<div class="flex justify-start">
+<div class="inline-flex items-center px-4 py-1.5 bg-[#FF8A80]/10 rounded-full">
+<span class="text-[#FF8A80] font-headline font-bold text-sm uppercase tracking-wide">Week 16 · 4/14-4/20</span>
+</div>
+</div>
+<!-- Featured Challenge Card -->
+<section class="bg-white rounded-[12px] border-2 border-[#FF8A80] p-6 shadow-[0_2px_8px_rgba(62,39,35,0.08)]">
+<div class="flex flex-col items-center text-center space-y-6">
+<div class="space-y-1">
+<h2 class="font-headline font-extrabold text-xl text-[#3E2723]">🏆 이번 주 목표: 매일 기록하기</h2>
+<p class="text-[#8D6E63] text-sm font-medium">3/7 days completed</p>
+</div>
+<!-- Circular Progress -->
+<div class="relative w-32 h-32 flex items-center justify-center">
+<svg class="w-full h-full -rotate-90">
+<circle cx="64" cy="64" fill="none" r="56" stroke="#FFF8E1" stroke-width="12"></circle>
+<circle cx="64" cy="64" fill="none" r="56" stroke="#FF8A80" stroke-dasharray="351.8" stroke-dashoffset="201" stroke-linecap="round" stroke-width="12"></circle>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center">
+<span class="text-3xl font-headline font-bold text-[#3E2723]">43%</span>
+</div>
+</div>
+<div class="w-full bg-[#FFF8E1] rounded-lg p-3 flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[#FFD54F]" style="font-variation-settings: 'FILL' 1;">stars</span>
+<p class="text-sm font-semibold text-[#3E2723]">달성 시 특별 뱃지 + 200 XP</p>
+</div>
+</div>
+</section>
+<!-- Daily Checklist -->
+<section class="space-y-3">
+<div class="flex justify-between items-center px-1">
+<h3 class="font-headline font-bold text-[#3E2723]">일일 체크리스트</h3>
+<span class="text-xs font-medium text-[#8D6E63]">월-일 진행 현황</span>
+</div>
+<div class="grid grid-cols-7 gap-2">
+<!-- Mon (Completed) -->
+<div class="flex flex-col items-center gap-2">
+<div class="w-10 h-10 rounded-full bg-[#FF8A80] flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-white text-xl" style="font-variation-settings: 'wght' 600;">check</span>
+</div>
+<span class="text-[10px] font-bold text-[#FF8A80]">Mon</span>
+</div>
+<!-- Tue (Completed) -->
+<div class="flex flex-col items-center gap-2">
+<div class="w-10 h-10 rounded-full bg-[#FF8A80] flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-white text-xl" style="font-variation-settings: 'wght' 600;">check</span>
+</div>
+<span class="text-[10px] font-bold text-[#FF8A80]">Tue</span>
+</div>
+<!-- Wed (Completed) -->
+<div class="flex flex-col items-center gap-2">
+<div class="w-10 h-10 rounded-full bg-[#FF8A80] flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-white text-xl" style="font-variation-settings: 'wght' 600;">check</span>
+</div>
+<span class="text-[10px] font-bold text-[#FF8A80]">Wed</span>
+</div>
+<!-- Thu (Empty) -->
+<div class="flex flex-col items-center gap-2">
+<div class="w-10 h-10 rounded-full border-2 border-[#D7CCC8] bg-white flex items-center justify-center"></div>
+<span class="text-[10px] font-medium text-[#8D6E63]">Thu</span>
+</div>
+<!-- Fri (Empty) -->
+<div class="flex flex-col items-center gap-2">
+<div class="w-10 h-10 rounded-full border-2 border-[#D7CCC8] bg-white flex items-center justify-center"></div>
+<span class="text-[10px] font-medium text-[#8D6E63]">Fri</span>
+</div>
+<!-- Sat (Empty) -->
+<div class="flex flex-col items-center gap-2">
+<div class="w-10 h-10 rounded-full border-2 border-[#D7CCC8] bg-white flex items-center justify-center"></div>
+<span class="text-[10px] font-medium text-[#8D6E63]">Sat</span>
+</div>
+<!-- Sun (Empty) -->
+<div class="flex flex-col items-center gap-2">
+<div class="w-10 h-10 rounded-full border-2 border-[#D7CCC8] bg-white flex items-center justify-center"></div>
+<span class="text-[10px] font-medium text-[#8D6E63]">Sun</span>
+</div>
+</div>
+</section>
+<!-- Mini Challenges -->
+<section class="space-y-4">
+<h3 class="font-headline font-bold text-[#3E2723] text-lg">미니 챌린지</h3>
+<div class="flex overflow-x-auto pb-4 gap-4 scrollbar-hide snap-x">
+<!-- Card 1 -->
+<div class="min-w-[200px] bg-white rounded-[12px] p-4 shadow-[0_2px_8px_rgba(62,39,35,0.08)] snap-start border border-[#EFEBE9]">
+<div class="flex flex-col h-full justify-between gap-4">
+<div>
+<div class="w-10 h-10 rounded-xl bg-[#FFF8E1] flex items-center justify-center mb-3">
+<span class="material-symbols-outlined text-[#FF8A80]" data-icon="photo_camera">photo_camera</span>
+</div>
+<p class="font-bold text-[#3E2723] leading-tight">📸 사진 3장 찍기 (1/3)</p>
+</div>
+<div class="flex items-center justify-between mt-2">
+<span class="text-xs font-bold text-[#FF8A80]">+30 XP</span>
+<div class="h-1.5 w-16 bg-[#FFF8E1] rounded-full overflow-hidden">
+<div class="h-full bg-[#FF8A80] w-[33%]"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="min-w-[200px] bg-white rounded-[12px] p-4 shadow-[0_2px_8px_rgba(62,39,35,0.08)] snap-start border border-[#EFEBE9]">
+<div class="flex flex-col h-full justify-between gap-4">
+<div>
+<div class="w-10 h-10 rounded-xl bg-[#E8F5E9] flex items-center justify-center mb-3">
+<span class="material-symbols-outlined text-[#81C784]" data-icon="groups">groups</span>
+</div>
+<p class="font-bold text-[#3E2723] leading-tight">🧑‍🤝‍🧑 가족 미션 3회 (2/3)</p>
+</div>
+<div class="flex items-center justify-between mt-2">
+<span class="text-xs font-bold text-[#81C784]">+50 XP</span>
+<div class="h-1.5 w-16 bg-[#E8F5E9] rounded-full overflow-hidden">
+<div class="h-full bg-[#81C784] w-[66%]"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="min-w-[200px] bg-white rounded-[12px] p-4 shadow-[0_2px_8_px_rgba(62,39,35,0.08)] snap-start border border-[#EFEBE9]">
+<div class="flex flex-col h-full justify-between gap-4">
+<div>
+<div class="w-10 h-10 rounded-xl bg-[#E3F2FD] flex items-center justify-center mb-3">
+<span class="material-symbols-outlined text-[#64B5F6]" data-icon="description">description</span>
+</div>
+<p class="font-bold text-[#3E2723] leading-tight">📝 EPDS 체크 하기 (0/1)</p>
+</div>
+<div class="flex items-center justify-between mt-2">
+<span class="text-xs font-bold text-[#64B5F6]">+40 XP</span>
+<div class="h-1.5 w-16 bg-[#E3F2FD] rounded-full overflow-hidden">
+<div class="h-full bg-[#64B5F6] w-0"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Past Challenges -->
+<section class="pb-10">
+<div class="flex items-center justify-between py-2 border-b border-[#D7CCC8]/30 mb-4">
+<h3 class="font-headline font-bold text-[#3E2723]">지난 챌린지</h3>
+<span class="material-symbols-outlined text-[#8D6E63]" data-icon="keyboard_arrow_down">keyboard_arrow_down</span>
+</div>
+<div class="space-y-3">
+<div class="flex items-center justify-between p-4 bg-white/60 rounded-[12px] border border-white">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-[#81C784]/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-[#81C784] text-lg" style="font-variation-settings: 'wght' 600;">check</span>
+</div>
+<div>
+<p class="text-sm font-bold text-[#3E2723]">Week 15: 아기 눈 맞추기</p>
+<p class="text-[10px] text-[#8D6E63]">4/7 - 4/13 · 완료</p>
+</div>
+</div>
+<span class="text-xs font-bold text-[#81C784]">+150 XP</span>
+</div>
+<div class="flex items-center justify-between p-4 bg-white/60 rounded-[12px] border border-white">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-[#EF5350]/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-[#EF5350] text-lg" style="font-variation-settings: 'wght' 600;">horizontal_rule</span>
+</div>
+<div>
+<p class="text-sm font-bold text-[#3E2723]">Week 14: 가벼운 산책하기</p>
+<p class="text-[10px] text-[#8D6E63]">3/31 - 4/6 · 미달성</p>
+</div>
+</div>
+<span class="text-xs font-bold text-[#EF5350]">0 XP</span>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center px-4 py-3 pb-safe bg-white rounded-t-[24px] z-50 shadow-[0_-2px_10px_rgba(62,39,35,0.05)]">
+<div class="flex flex-col items-center justify-center text-[#8D6E63] px-3 py-1 hover:bg-stone-50 transition-colors cursor-pointer">
+<span class="material-symbols-outlined text-2xl" data-icon="home">home</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[10px] font-medium">홈</span>
+</div>
+<div class="flex flex-col items-center justify-center text-[#FF8A80] bg-[#FFF8E1] rounded-2xl px-3 py-1 active:scale-90 duration-200 cursor-pointer">
+<span class="material-symbols-outlined text-2xl" data-icon="emoji_events" style="font-variation-settings: 'FILL' 1;">emoji_events</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[10px] font-medium">챌린지</span>
+</div>
+<div class="flex flex-col items-center justify-center text-[#8D6E63] px-3 py-1 hover:bg-stone-50 transition-colors cursor-pointer">
+<span class="material-symbols-outlined text-2xl" data-icon="mail">mail</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[10px] font-medium">편지</span>
+</div>
+<div class="flex flex-col items-center justify-center text-[#8D6E63] px-3 py-1 hover:bg-stone-50 transition-colors cursor-pointer">
+<span class="material-symbols-outlined text-2xl" data-icon="monitoring">monitoring</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[10px] font-medium">성장기록</span>
+</div>
+</nav>
+</body></html>

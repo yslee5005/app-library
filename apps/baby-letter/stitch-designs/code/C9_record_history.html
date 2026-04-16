@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+
+<html lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>기록 히스토리 - BabyLetter</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-container": "#f8847b",
+                        "outline-variant": "#dfa48f",
+                        "surface-bright": "#fff8f6",
+                        "error-container": "#f97386",
+                        "primary-dim": "#90352f",
+                        "on-secondary": "#fff8ee",
+                        "on-secondary-fixed-variant": "#705900",
+                        "tertiary": "#286c34",
+                        "surface-container-high": "#ffe2d9",
+                        "tertiary-dim": "#1a5f29",
+                        "tertiary-container": "#b4fdb4",
+                        "secondary-dim": "#665100",
+                        "on-error-container": "#6e0523",
+                        "secondary-fixed": "#ffe087",
+                        "primary-fixed": "#f8847b",
+                        "inverse-primary": "#f8847b",
+                        "tertiary-fixed-dim": "#a6eea7",
+                        "on-primary-container": "#540809",
+                        "inverse-on-surface": "#b89589",
+                        "on-surface-variant": "#835342",
+                        "on-background": "#4e2819",
+                        "outline": "#a26e5b",
+                        "tertiary-fixed": "#b4fdb4",
+                        "error": "#a8364b",
+                        "on-primary-fixed": "#170000",
+                        "on-secondary-fixed": "#4e3d00",
+                        "surface-container-low": "#fff1ec",
+                        "on-tertiary": "#e9ffe4",
+                        "secondary-container": "#ffe087",
+                        "on-primary": "#fff7f6",
+                        "inverse-surface": "#1b0904",
+                        "background": "#fff8f6",
+                        "on-surface": "#4e2819",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container": "#ffe9e2",
+                        "on-tertiary-fixed": "#03501b",
+                        "on-tertiary-container": "#1f632c",
+                        "secondary-fixed-dim": "#fad04b",
+                        "on-primary-fixed-variant": "#611211",
+                        "surface": "#fff8f6",
+                        "error-dim": "#6b0221",
+                        "surface-dim": "#ffd0bf",
+                        "surface-tint": "#9f403a",
+                        "surface-variant": "#ffdbce",
+                        "primary-fixed-dim": "#e8786e",
+                        "on-tertiary-fixed-variant": "#2a6e35",
+                        "on-error": "#fff7f7",
+                        "surface-container-highest": "#ffdbce",
+                        "secondary": "#745c00",
+                        "primary": "#9f403a",
+                        "on-secondary-container": "#644f00",
+                        "warm-cream": "#FFF8E1",
+                        "warm-gray": "#8D6E63",
+                        "dark-brown": "#3E2723",
+                        "coral-light": "#FF8A80",
+                        "amber-accent": "#FFD54F"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "2xl": "12px",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Plus Jakarta Sans"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FFF8E1;
+        }
+        .font-headline {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-warm-cream text-dark-brown antialiased pb-24">
+<header class="bg-[#FFF8E1] flex items-center justify-between px-5 h-16 w-full sticky top-0 z-50">
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-white/50 transition-colors duration-200">
+<span class="material-symbols-outlined text-orange-400" data-icon="arrow_back">arrow_back</span>
+</button>
+<h1 class="font-['Plus_Jakarta_Sans'] font-bold text-lg text-[#3E2723]">기록 히스토리</h1>
+<div class="w-10"></div>
+</header>
+<main class="px-5 space-y-6">
+<nav class="flex overflow-x-auto gap-2 py-2 no-scrollbar -mx-5 px-5">
+<button class="whitespace-nowrap px-5 py-2 rounded-full bg-primary-fixed text-on-primary font-bold shadow-sm">전체</button>
+<button class="whitespace-nowrap px-5 py-2 rounded-full bg-white text-warm-gray font-medium shadow-sm border border-stone-100">태동</button>
+<button class="whitespace-nowrap px-5 py-2 rounded-full bg-white text-warm-gray font-medium shadow-sm border border-stone-100">기분</button>
+<button class="whitespace-nowrap px-5 py-2 rounded-full bg-white text-warm-gray font-medium shadow-sm border border-stone-100">사진</button>
+<button class="whitespace-nowrap px-5 py-2 rounded-full bg-white text-warm-gray font-medium shadow-sm border border-stone-100">체중</button>
+<button class="whitespace-nowrap px-5 py-2 rounded-full bg-white text-warm-gray font-medium shadow-sm border border-stone-100">증상</button>
+</nav>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="font-headline font-bold text-xl">2024년 4월</span>
+<span class="material-symbols-outlined text-warm-gray text-lg" data-icon="expand_more">expand_more</span>
+</div>
+<div class="bg-surface-container-low p-1 rounded-lg flex items-center">
+<button class="px-3 py-1 bg-white rounded-md shadow-sm text-xs font-bold text-primary">달력</button>
+<button class="px-3 py-1 text-xs font-medium text-warm-gray">목록</button>
+</div>
+</div>
+<section class="bg-white rounded-2xl p-4 shadow-[0_2px_8px_rgba(62,39,35,0.08)]">
+<div class="grid grid-cols-7 gap-y-4 text-center">
+<span class="text-xs font-medium text-warm-gray">일</span>
+<span class="text-xs font-medium text-warm-gray">월</span>
+<span class="text-xs font-medium text-warm-gray">화</span>
+<span class="text-xs font-medium text-warm-gray">수</span>
+<span class="text-xs font-medium text-warm-gray">목</span>
+<span class="text-xs font-medium text-warm-gray">금</span>
+<span class="text-xs font-medium text-warm-gray">토</span>
+<div class="py-2 text-sm text-stone-300">31</div>
+<div class="py-2 text-sm">1</div>
+<div class="py-2 text-sm">2</div>
+<div class="py-2 text-sm">3</div>
+<div class="py-2 text-sm">4</div>
+<div class="py-2 text-sm">5</div>
+<div class="py-2 text-sm">6</div>
+<div class="py-2 text-sm">7</div>
+<div class="py-2 text-sm">8</div>
+<div class="py-2 text-sm">9</div>
+<div class="py-2 text-sm">10</div>
+<div class="py-2 text-sm">11</div>
+<div class="py-2 text-sm">12</div>
+<div class="py-2 text-sm">13</div>
+<div class="py-2 text-sm">14</div>
+<div class="py-2 relative flex flex-col items-center">
+<span class="text-sm">15</span>
+<div class="flex gap-0.5 mt-1">
+<div class="w-1 h-1 rounded-full bg-pink-300"></div>
+<div class="w-1 h-1 rounded-full bg-blue-300"></div>
+</div>
+</div>
+<div class="py-1 relative flex flex-col items-center">
+<div class="w-8 h-8 bg-primary-container/20 rounded-full absolute -top-0.5 z-0"></div>
+<span class="text-sm font-bold text-primary relative z-10">16</span>
+<div class="flex gap-0.5 mt-1 relative z-10">
+<div class="w-1 h-1 rounded-full bg-orange-400"></div>
+<div class="w-1 h-1 rounded-full bg-amber-400"></div>
+</div>
+</div>
+<div class="py-2 text-sm">17</div>
+<div class="py-2 text-sm">18</div>
+<div class="py-2 text-sm">19</div>
+<div class="py-2 text-sm">20</div>
+</div>
+</section>
+<section class="space-y-4">
+<div class="space-y-3">
+<h3 class="font-headline font-bold text-sm text-warm-gray px-1">4월 16일 화요일</h3>
+<div class="bg-white rounded-2xl p-4 shadow-[0_2px_8px_rgba(62,39,35,0.08)] flex items-center gap-4">
+<div class="w-10 h-10 rounded-xl bg-orange-100 flex items-center justify-center">
+<span class="text-lg">🤰</span>
+</div>
+<div class="flex-1">
+<p class="font-bold text-dark-brown">태동 15회 (1시간)</p>
+<p class="text-xs text-warm-gray">오후 2:30 • 꼬물꼬물 움직임이 강해졌어요</p>
+</div>
+</div>
+<div class="bg-white rounded-2xl p-4 shadow-[0_2px_8px_rgba(62,39,35,0.08)] flex items-center gap-4">
+<div class="w-10 h-10 rounded-xl bg-amber-100 flex items-center justify-center">
+<span class="text-lg">😊</span>
+</div>
+<div class="flex-1">
+<p class="font-bold text-dark-brown">기분: 좋아요</p>
+<p class="text-xs text-warm-gray">오전 10:15 • 오늘은 컨디션이 아주 맑음!</p>
+</div>
+</div>
+</div>
+<div class="space-y-3 pt-2">
+<h3 class="font-headline font-bold text-sm text-warm-gray px-1">4월 15일 월요일</h3>
+<div class="bg-white rounded-2xl p-4 shadow-[0_2px_8px_rgba(62,39,35,0.08)] flex items-start gap-4">
+<div class="w-10 h-10 rounded-xl bg-pink-100 flex items-center justify-center shrink-0">
+<span class="text-lg">📸</span>
+</div>
+<div class="flex-1 space-y-3">
+<div>
+<p class="font-bold text-dark-brown">배 사진 24주</p>
+<p class="text-xs text-warm-gray">오후 8:00 • 주수 사진 기록하기</p>
+</div>
+<img alt="pregnancy profile photo" class="w-full h-40 object-cover rounded-xl" data-alt="close-up of a pregnant woman's belly in a cozy room with soft warm natural light from a window" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAaMmoMvjmrHD1vhP2LqpjPoLI3x1183bi5MELhtdjdFEzYB4ky-ArDaqa2-0YfB9NNvAFQkhuDh6RtawdigNCVjoJd_mHb0vW9dqI8kNznumi8IgcBXWpkhzJb5Ancs9LIMjeC1eC9BlgoPMuUKwuYRx8vu57_k1JyJrxiHVO3L_m2umS82XJl3U8J_O95cVK4uMYZfkHYEstUBGfuWiFN8SIGUCQNJIeY89-ocSTTO_l47gwo_zciTQ8RhHMthfUlLozHMacbUAmJ"/>
+</div>
+</div>
+</div>
+</section>
+</main>
+<nav class="fixed bottom-0 w-full z-50 flex justify-around items-center h-20 px-6 pb-safe bg-white/80 backdrop-blur-md shadow-[0_-2px_10px_rgba(62,39,35,0.08)] rounded-t-2xl border-t border-[#3E2723]/5">
+<button class="flex flex-col items-center justify-center text-[#8D6E63] active:scale-95 transition-transform">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[11px] font-medium mt-1">홈</span>
+</button>
+<button class="flex flex-col items-center justify-center text-[#8D6E63] active:scale-95 transition-transform">
+<span class="material-symbols-outlined" data-icon="mail">mail</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[11px] font-medium mt-1">편지</span>
+</button>
+<button class="flex flex-col items-center justify-center text-orange-400 font-bold active:scale-95 transition-transform">
+<span class="material-symbols-outlined" data-icon="history_edu" style="font-variation-settings: 'FILL' 1;">history_edu</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[11px] font-medium mt-1">기록</span>
+</button>
+<button class="flex flex-col items-center justify-center text-[#8D6E63] active:scale-95 transition-transform">
+<span class="material-symbols-outlined" data-icon="more_horiz">more_horiz</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[11px] font-medium mt-1">더보기</span>
+</button>
+</nav>
+<button class="fixed right-6 bottom-24 w-14 h-14 bg-primary rounded-full shadow-lg flex items-center justify-center text-white active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-3xl" data-icon="add">add</span>
+</button>
+</body></html>

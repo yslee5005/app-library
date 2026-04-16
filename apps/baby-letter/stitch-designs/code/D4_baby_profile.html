@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+
+<html lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary": "#FF8A80",
+                    "on-secondary-fixed": "#3E2723",
+                    "on-surface": "#3E2723",
+                    "error-dim": "#EF5350",
+                    "primary-dim": "#FF8A80",
+                    "tertiary": "#81C784",
+                    "surface-container-highest": "#FFF8E1",
+                    "on-primary-fixed-variant": "#3E2723",
+                    "error": "#EF5350",
+                    "surface-dim": "#FFF8E1",
+                    "background": "#FFF8E1",
+                    "primary-fixed-dim": "#FF8A80",
+                    "surface": "#FFFFFF",
+                    "on-primary": "#FFFFFF",
+                    "surface-tint": "#FF8A80",
+                    "on-secondary-fixed-variant": "#3E2723",
+                    "on-secondary": "#3E2723",
+                    "on-background": "#3E2723",
+                    "inverse-primary": "#FF8A80",
+                    "secondary": "#8D6E63",
+                    "error-container": "#FF8A80",
+                    "secondary-fixed": "#FFF8E1",
+                    "on-secondary-container": "#3E2723",
+                    "tertiary-container": "#81C784",
+                    "on-primary-fixed": "#FFFFFF",
+                    "on-primary-container": "#FFFFFF",
+                    "surface-container-low": "#FFFFFF",
+                    "outline-variant": "#8D6E63",
+                    "outline": "#8D6E63",
+                    "on-error-container": "#FFFFFF",
+                    "on-surface-variant": "#8D6E63",
+                    "tertiary-fixed": "#81C784",
+                    "surface-container-lowest": "#FFFFFF",
+                    "on-tertiary": "#FFFFFF",
+                    "on-tertiary-container": "#3E2723",
+                    "surface-bright": "#FFFFFF",
+                    "surface-variant": "#FFF8E1",
+                    "secondary-container": "#FFF8E1",
+                    "secondary-fixed-dim": "#FFF8E1",
+                    "surface-container-high": "#FFFFFF",
+                    "inverse-surface": "#3E2723",
+                    "secondary-dim": "#8D6E63",
+                    "inverse-on-surface": "#FFF8E1",
+                    "primary-container": "#FF8A80",
+                    "on-tertiary-fixed-variant": "#3E2723",
+                    "surface-container": "#FFFFFF",
+                    "primary-fixed": "#FF8A80",
+                    "tertiary-fixed-dim": "#81C784",
+                    "on-tertiary-fixed": "#3E2723"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "2xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Plus Jakarta Sans"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .custom-shadow {
+            box-shadow: 0 2px 8px rgba(62,39,35,0.08);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background font-body text-on-surface min-h-screen flex flex-col pb-40">
+<!-- TopAppBar -->
+<header class="flex items-center justify-between px-5 h-16 w-full fixed top-0 z-50 bg-[#FFF8E1] dark:bg-stone-950 border-none transition-opacity duration-200">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-[#FF8A80] dark:text-[#FF8A80]">child_care</span>
+<h1 class="text-lg font-bold text-[#3E2723] dark:text-stone-100 font-headline">Baby's Profile</h1>
+</div>
+<button class="hover:opacity-80 transition-opacity duration-200">
+<span class="material-symbols-outlined text-[#8D6E63]">settings</span>
+</button>
+</header>
+<main class="mt-16 px-5 w-full max-w-md mx-auto flex flex-col gap-6">
+<!-- Profile Header Section -->
+<section class="flex flex-col items-center pt-8 pb-4">
+<div class="relative">
+<div class="w-32 h-32 rounded-full border-4 border-white custom-shadow overflow-hidden bg-white">
+<img alt="Cute baby smiling" class="w-full h-full object-cover" data-alt="Close-up of a happy smiling baby with chubby cheeks wearing a soft white knit hat, bright warm morning light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCBMcV75Y2y5N1gPD3qOkhw0aHDuQLEYn14tr-90QNNKL7BwAkXuPMAs78x30fP16lq0FLkwKGNP3sux_20j5BcGiGiECavIcSaF6esACTB15NZInzB5q7eYiFQgtWUrt604G8TrhVHHtNJ05JT-T1dGjITSWMXI-lAfgVYYnTaa8ktsr7cLMgTVicpWiy2bYovD5cPuCDmxovIE2gOlYWLlQZLMKq3LptRBPIy-91OrVO7niZlxvBlgBHLI-DqwqPZWH5uVnKQUZ_x"/>
+</div>
+<div class="absolute bottom-1 right-1 bg-primary p-2 rounded-full shadow-lg border-2 border-white">
+<span class="material-symbols-outlined text-white text-sm">edit</span>
+</div>
+</div>
+<h2 class="mt-4 text-2xl font-bold font-headline text-[#3E2723]">콩이</h2>
+</section>
+<!-- Profiling Sections Stacked -->
+<div class="flex flex-col gap-4">
+<!-- Layer 1: Age Group -->
+<article class="bg-white p-5 rounded-[12px] custom-shadow flex flex-col gap-3">
+<div class="flex items-center gap-2">
+<span class="text-lg">👶</span>
+<span class="font-bold text-sm text-[#8D6E63]">연령</span>
+</div>
+<div class="flex flex-col gap-2">
+<p class="text-xl font-bold font-headline text-[#3E2723]">D+45 <span class="text-sm font-medium text-[#8D6E63] ml-1">(1개월 15일)</span></p>
+<div class="bg-[#81C784]/10 py-1.5 px-3 rounded-full flex items-center gap-2 w-fit">
+<span class="material-symbols-outlined text-[#81C784] text-sm" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="text-xs font-semibold text-[#81C784]">같은 또래 비교군이 설정되었어요</span>
+</div>
+</div>
+</article>
+<!-- Layer 2: Feeding Type -->
+<article class="bg-white p-5 rounded-[12px] custom-shadow flex flex-col gap-3">
+<div class="flex items-center gap-2">
+<span class="text-lg">🍼</span>
+<span class="font-bold text-sm text-[#8D6E63]">수유 방식</span>
+</div>
+<div class="flex gap-2">
+<button class="flex-1 py-2.5 px-2 rounded-lg bg-[#FF8A80] text-white font-bold text-sm transition-transform active:scale-95">모유</button>
+<button class="flex-1 py-2.5 px-2 rounded-lg bg-[#FFF8E1] text-[#8D6E63] font-medium text-sm transition-transform active:scale-95">분유</button>
+<button class="flex-1 py-2.5 px-2 rounded-lg bg-[#FFF8E1] text-[#8D6E63] font-medium text-sm transition-transform active:scale-95">혼합</button>
+</div>
+<p class="text-xs text-[#8D6E63]">비슷한 수유 패턴의 아기들과 비교해요</p>
+</article>
+<!-- Layer 3: Temperament -->
+<article class="bg-white p-5 rounded-[12px] custom-shadow flex flex-col gap-4">
+<div class="flex items-center gap-2">
+<span class="text-lg">🌟</span>
+<span class="font-bold text-sm text-[#8D6E63]">기질</span>
+</div>
+<div class="flex flex-col gap-4">
+<!-- Activity Scale -->
+<div class="flex flex-col gap-2">
+<div class="flex justify-between items-center text-xs font-semibold">
+<span class="text-[#3E2723]">활동성</span>
+<span class="text-[#FF8A80]">3/5</span>
+</div>
+<div class="h-2 w-full bg-[#FFF8E1] rounded-full overflow-hidden flex">
+<div class="h-full bg-[#FF8A80] w-[60%]"></div>
+</div>
+</div>
+<!-- Regularity Scale -->
+<div class="flex flex-col gap-2">
+<div class="flex justify-between items-center text-xs font-semibold">
+<span class="text-[#3E2723]">규칙성</span>
+<span class="text-[#FF8A80]">4/5</span>
+</div>
+<div class="h-2 w-full bg-[#FFF8E1] rounded-full overflow-hidden flex">
+<div class="h-full bg-[#FF8A80] w-[80%]"></div>
+</div>
+</div>
+<!-- Adaptability Scale -->
+<div class="flex flex-col gap-2">
+<div class="flex justify-between items-center text-xs font-semibold">
+<span class="text-[#3E2723]">적응성</span>
+<span class="text-[#FF8A80]">2/5</span>
+</div>
+<div class="h-2 w-full bg-[#FFF8E1] rounded-full overflow-hidden flex">
+<div class="h-full bg-[#FF8A80] w-[40%]"></div>
+</div>
+</div>
+</div>
+<p class="text-xs text-[#8D6E63]">기질에 맞는 맞춤 가이드를 제공해요</p>
+</article>
+<!-- Layer 4: Personal Baseline -->
+<article class="bg-white p-5 rounded-[12px] custom-shadow flex flex-col gap-4">
+<div class="flex items-center gap-2">
+<span class="text-lg">📊</span>
+<span class="font-bold text-sm text-[#8D6E63]">우리 아기 기준선</span>
+</div>
+<div class="aspect-square w-full max-w-[200px] mx-auto relative flex items-center justify-center">
+<!-- Placeholder for Radar Chart Visual -->
+<div class="absolute inset-0 border border-[#3E2723]/5 rounded-full"></div>
+<div class="absolute inset-4 border border-[#3E2723]/5 rounded-full"></div>
+<div class="absolute inset-8 border border-[#3E2723]/5 rounded-full"></div>
+<!-- Radar Polygon Mockup -->
+<svg class="w-full h-full transform -rotate-12" viewbox="0 0 100 100">
+<polygon fill="rgba(255, 138, 128, 0.2)" points="50,10 85,35 65,85 15,65" stroke="#FF8A80" stroke-width="2"></polygon>
+<circle cx="50" cy="10" fill="#FF8A80" r="2"></circle>
+<circle cx="85" cy="35" fill="#FF8A80" r="2"></circle>
+<circle cx="65" cy="85" fill="#FF8A80" r="2"></circle>
+<circle cx="15" cy="65" fill="#FF8A80" r="2"></circle>
+</svg>
+<div class="absolute -top-1 text-[10px] font-bold text-[#8D6E63]">수면</div>
+<div class="absolute -right-3 text-[10px] font-bold text-[#8D6E63]">수유</div>
+<div class="absolute -bottom-1 text-[10px] font-bold text-[#8D6E63]">활동</div>
+<div class="absolute -left-3 text-[10px] font-bold text-[#8D6E63]">기저귀</div>
+</div>
+<div class="flex flex-col gap-2 mt-2">
+<p class="text-xs text-[#8D6E63]">7일간 기록하면 우리 아기만의 기준이 만들어져요</p>
+<div class="h-4 w-full bg-[#FFF8E1] rounded-full overflow-hidden relative">
+<div class="h-full bg-[#FF8A80] w-[42.8%]"></div>
+<span class="absolute inset-0 flex items-center justify-center text-[10px] font-bold text-[#3E2723]">3/7일 완료</span>
+</div>
+</div>
+</article>
+<!-- Save Button -->
+<button class="w-full bg-[#FF8A80] text-white py-4 rounded-xl font-bold text-lg shadow-lg active:scale-95 transition-transform mt-2 mb-8">
+                프로필 저장하기
+            </button>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full z-50 flex justify-around items-center h-20 px-4 pb-safe bg-white dark:bg-stone-900 border-t border-[#3E2723]/5 shadow-[0_-2px_8px_rgba(62,39,35,0.08)] rounded-t-2xl">
+<div class="flex flex-col items-center justify-center text-[#8D6E63] dark:text-stone-400 hover:bg-stone-50 dark:hover:bg-stone-800 transition-transform scale-95 active:scale-90">
+<span class="material-symbols-outlined">mail</span>
+<span class="font-['Inter'] text-xs font-medium mt-1">Letters</span>
+</div>
+<div class="flex flex-col items-center justify-center text-[#8D6E63] dark:text-stone-400 hover:bg-stone-50 dark:hover:bg-stone-800 transition-transform scale-95 active:scale-90">
+<span class="material-symbols-outlined">monitoring</span>
+<span class="font-['Inter'] text-xs font-medium mt-1">Growth</span>
+</div>
+<div class="flex flex-col items-center justify-center text-[#FF8A80] dark:text-[#FF8A80] hover:bg-stone-50 dark:hover:bg-stone-800 transition-transform scale-95 active:scale-90">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">face</span>
+<span class="font-['Inter'] text-xs font-medium mt-1">Profile</span>
+</div>
+<div class="flex flex-col items-center justify-center text-[#8D6E63] dark:text-stone-400 hover:bg-stone-50 dark:hover:bg-stone-800 transition-transform scale-95 active:scale-90">
+<span class="material-symbols-outlined">auto_stories</span>
+<span class="font-['Inter'] text-xs font-medium mt-1">Memory</span>
+</div>
+</nav>
+</body></html>

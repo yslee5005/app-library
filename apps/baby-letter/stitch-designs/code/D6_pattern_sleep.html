@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+
+<html lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-primary": "#fff7f6",
+                    "background": "#fff8f6",
+                    "surface-dim": "#ffd0bf",
+                    "tertiary-dim": "#1a5f29",
+                    "secondary-container": "#ffe087",
+                    "secondary": "#745c00",
+                    "on-primary-fixed": "#170000",
+                    "primary-fixed": "#f8847b",
+                    "on-surface-variant": "#835342",
+                    "secondary-fixed": "#ffe087",
+                    "on-secondary-fixed": "#4e3d00",
+                    "surface-variant": "#ffdbce",
+                    "inverse-surface": "#1b0904",
+                    "on-surface": "#4e2819",
+                    "on-secondary-container": "#644f00",
+                    "tertiary-fixed-dim": "#a6eea7",
+                    "on-tertiary-fixed-variant": "#2a6e35",
+                    "secondary-fixed-dim": "#fad04b",
+                    "outline": "#a26e5b",
+                    "tertiary": "#286c34",
+                    "surface-container-low": "#fff1ec",
+                    "on-primary-container": "#540809",
+                    "surface-bright": "#fff8f6",
+                    "surface-tint": "#9f403a",
+                    "error": "#a8364b",
+                    "primary-dim": "#90352f",
+                    "error-dim": "#6b0221",
+                    "on-tertiary-fixed": "#03501b",
+                    "on-secondary-fixed-variant": "#705900",
+                    "surface-container-highest": "#ffdbce",
+                    "secondary-dim": "#665100",
+                    "surface": "#fff8f6",
+                    "on-error": "#fff7f7",
+                    "on-error-container": "#6e0523",
+                    "inverse-primary": "#f8847b",
+                    "surface-container-lowest": "#ffffff",
+                    "primary-fixed-dim": "#e8786e",
+                    "surface-container-high": "#ffe2d9",
+                    "on-secondary": "#fff8ee",
+                    "on-tertiary": "#e9ffe4",
+                    "tertiary-container": "#b4fdb4",
+                    "on-tertiary-container": "#1f632c",
+                    "primary-container": "#f8847b",
+                    "on-background": "#4e2819",
+                    "tertiary-fixed": "#b4fdb4",
+                    "primary": "#9f403a",
+                    "inverse-on-surface": "#b89589",
+                    "error-container": "#f97386",
+                    "on-primary-fixed-variant": "#611211",
+                    "surface-container": "#ffe9e2",
+                    "outline-variant": "#dfa48f"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Plus Jakarta Sans"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; background-color: #FFF8E1; }
+        .font-headline { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .sleep-block-night { background-color: #5C6BC0; }
+        .sleep-block-nap { background-color: #9FA8DA; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface min-h-screen pb-32">
+<header class="bg-[#FFF8E1] dark:bg-stone-900 w-full top-0 sticky z-50">
+<div class="flex items-center justify-between px-5 h-16 w-full">
+<button class="active:scale-95 transition-transform hover:opacity-80 transition-opacity text-[#FF8A80]">
+<span class="material-symbols-outlined" data-icon="arrow_back">arrow_back</span>
+</button>
+<h1 class="font-['Plus_Jakarta_Sans'] font-bold text-[#3E2723] dark:text-stone-100 text-lg">수면 패턴</h1>
+<div class="w-6"></div>
+</div>
+</header>
+<main class="px-5 pt-4 space-y-6">
+<div class="flex bg-surface-container rounded-full p-1 shadow-sm">
+<button class="flex-1 py-2 px-4 rounded-full text-sm font-medium bg-primary-container text-on-primary-container shadow-sm">1주</button>
+<button class="flex-1 py-2 px-4 rounded-full text-sm font-medium text-on-surface-variant hover:bg-surface-variant/50 transition-colors">2주</button>
+<button class="flex-1 py-2 px-4 rounded-full text-sm font-medium text-on-surface-variant hover:bg-surface-variant/50 transition-colors">1개월</button>
+</div>
+<section class="bg-surface-container-lowest rounded-xl p-5 shadow-[0_2px_8px_rgba(62,39,35,0.08)]">
+<div class="flex justify-between items-end mb-4">
+<div class="space-y-1">
+<h3 class="font-headline font-bold text-[#3E2723] text-base">최근 7일 수면 분포</h3>
+<p class="text-xs text-on-surface-variant">지난 일주일간의 수면 리듬이에요.</p>
+</div>
+<div class="flex gap-3">
+<div class="flex items-center gap-1">
+<div class="w-3 h-3 rounded-sm sleep-block-night"></div>
+<span class="text-[10px] text-on-surface-variant font-medium">밤잠</span>
+</div>
+<div class="flex items-center gap-1">
+<div class="w-3 h-3 rounded-sm sleep-block-nap"></div>
+<span class="text-[10px] text-on-surface-variant font-medium">낮잠</span>
+</div>
+</div>
+</div>
+<div class="relative overflow-x-auto pb-2">
+<div class="min-w-[400px]">
+<div class="flex ml-8 mb-2">
+<div class="flex-1 text-[10px] text-on-surface-variant text-center">00</div>
+<div class="flex-1 text-[10px] text-on-surface-variant text-center">04</div>
+<div class="flex-1 text-[10px] text-on-surface-variant text-center">08</div>
+<div class="flex-1 text-[10px] text-on-surface-variant text-center">12</div>
+<div class="flex-1 text-[10px] text-on-surface-variant text-center">16</div>
+<div class="flex-1 text-[10px] text-on-surface-variant text-center">20</div>
+<div class="flex-1 text-[10px] text-on-surface-variant text-center">24</div>
+</div>
+<div class="space-y-2">
+<div class="flex items-center gap-2">
+<span class="w-6 text-[10px] font-bold text-on-surface-variant">월</span>
+<div class="flex-1 h-6 bg-surface-container-high rounded-sm relative overflow-hidden">
+<div class="absolute h-full sleep-block-night left-[0%] w-[30%]"></div>
+<div class="absolute h-full sleep-block-nap left-[40%] w-[10%]"></div>
+<div class="absolute h-full sleep-block-nap left-[60%] w-[8%]"></div>
+<div class="absolute h-full sleep-block-night left-[85%] w-[15%]"></div>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<span class="w-6 text-[10px] font-bold text-on-surface-variant">화</span>
+<div class="flex-1 h-6 bg-surface-container-high rounded-sm relative overflow-hidden">
+<div class="absolute h-full sleep-block-night left-[0%] w-[28%]"></div>
+<div class="absolute h-full sleep-block-nap left-[42%] w-[12%]"></div>
+<div class="absolute h-full sleep-block-nap left-[65%] w-[6%]"></div>
+<div class="absolute h-full sleep-block-night left-[88%] w-[12%]"></div>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<span class="w-6 text-[10px] font-bold text-on-surface-variant">수</span>
+<div class="flex-1 h-6 bg-surface-container-high rounded-sm relative overflow-hidden">
+<div class="absolute h-full sleep-block-night left-[0%] w-[32%]"></div>
+<div class="absolute h-full sleep-block-nap left-[45%] w-[10%]"></div>
+<div class="absolute h-full sleep-block-night left-[82%] w-[18%]"></div>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<span class="w-6 text-[10px] font-bold text-on-surface-variant">목</span>
+<div class="flex-1 h-6 bg-surface-container-high rounded-sm relative overflow-hidden">
+<div class="absolute h-full sleep-block-night left-[0%] w-[25%]"></div>
+<div class="absolute h-full sleep-block-nap left-[38%] w-[15%]"></div>
+<div class="absolute h-full sleep-block-nap left-[62%] w-[10%]"></div>
+<div class="absolute h-full sleep-block-night left-[86%] w-[14%]"></div>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<span class="w-6 text-[10px] font-bold text-on-surface-variant">금</span>
+<div class="flex-1 h-6 bg-surface-container-high rounded-sm relative overflow-hidden">
+<div class="absolute h-full sleep-block-night left-[0%] w-[30%]"></div>
+<div class="absolute h-full sleep-block-nap left-[40%] w-[12%]"></div>
+<div class="absolute h-full sleep-block-nap left-[68%] w-[7%]"></div>
+<div class="absolute h-full sleep-block-night left-[85%] w-[15%]"></div>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<span class="w-6 text-[10px] font-bold text-on-surface-variant">토</span>
+<div class="flex-1 h-6 bg-surface-container-high rounded-sm relative overflow-hidden">
+<div class="absolute h-full sleep-block-night left-[0%] w-[35%]"></div>
+<div class="absolute h-full sleep-block-nap left-[48%] w-[8%]"></div>
+<div class="absolute h-full sleep-block-night left-[88%] w-[12%]"></div>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<span class="w-6 text-[10px] font-bold text-on-surface-variant text-error">일</span>
+<div class="flex-1 h-6 bg-surface-container-high rounded-sm relative overflow-hidden">
+<div class="absolute h-full sleep-block-night left-[0%] w-[29%]"></div>
+<div class="absolute h-full sleep-block-nap left-[42%] w-[10%]"></div>
+<div class="absolute h-full sleep-block-nap left-[65%] w-[10%]"></div>
+<div class="absolute h-full sleep-block-night left-[90%] w-[10%]"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p class="text-[9px] text-on-surface-variant/60 mt-4 text-center italic">Mindell et al., Sleep Medicine Reviews, 2010</p>
+</section>
+<section class="grid grid-cols-2 gap-3">
+<div class="bg-surface-container-low p-4 rounded-xl shadow-sm border border-surface-variant/30">
+<p class="text-[10px] font-medium text-on-surface-variant mb-1">평균 총 수면</p>
+<div class="flex items-baseline gap-1">
+<span class="text-xl font-bold text-[#3E2723]">14.2</span>
+<span class="text-xs font-medium text-on-surface-variant">h</span>
+</div>
+</div>
+<div class="bg-surface-container-low p-4 rounded-xl shadow-sm border border-surface-variant/30">
+<p class="text-[10px] font-medium text-on-surface-variant mb-1">기상 횟수</p>
+<div class="flex items-baseline gap-1">
+<span class="text-xl font-bold text-[#3E2723]">2.3</span>
+<span class="text-xs font-medium text-on-surface-variant">회/밤</span>
+</div>
+</div>
+<div class="bg-surface-container-low p-4 rounded-xl shadow-sm border border-surface-variant/30">
+<p class="text-[10px] font-medium text-on-surface-variant mb-1">밤잠</p>
+<div class="flex items-baseline gap-1">
+<span class="text-xl font-bold text-secondary">10.5</span>
+<span class="text-xs font-medium text-on-surface-variant">h</span>
+</div>
+</div>
+<div class="bg-surface-container-low p-4 rounded-xl shadow-sm border border-surface-variant/30">
+<p class="text-[10px] font-medium text-on-surface-variant mb-1">낮잠</p>
+<div class="flex items-baseline gap-1">
+<span class="text-xl font-bold text-secondary">3.7</span>
+<span class="text-xs font-medium text-on-surface-variant">h</span>
+</div>
+</div>
+</section>
+<div class="bg-secondary-container/30 p-5 rounded-2xl border border-secondary-container/50 relative overflow-hidden">
+<div class="absolute -top-4 -right-4 w-16 h-16 bg-secondary-container/20 rounded-full blur-xl"></div>
+<div class="flex items-start gap-4">
+<div class="bg-secondary-container p-2 rounded-full text-secondary">
+<span class="material-symbols-outlined" data-icon="auto_awesome">auto_awesome</span>
+</div>
+<div>
+<h4 class="font-headline font-bold text-secondary text-sm mb-1">우리아이 수면 인사이트</h4>
+<p class="text-sm leading-relaxed text-on-surface">수면 패턴이 정립되고 있어요! 밤 수면 시작 시간이 일정해지고 있어요.</p>
+</div>
+</div>
+</div>
+<section class="space-y-4">
+<h3 class="font-headline font-bold text-[#3E2723] px-1">더 건강한 수면을 위한 팁</h3>
+<div class="space-y-3">
+<div class="bg-surface-container-lowest p-4 rounded-xl flex gap-4 items-center shadow-sm">
+<div class="w-12 h-12 rounded-lg overflow-hidden flex-shrink-0">
+<img alt="sleep routine" class="w-full h-full object-cover" data-alt="soft warm lighting of a baby bedroom with a white noise machine and dim lamp" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCBxgN9uhM8_Oan41vqpFjkHnjl9QYBsIZ6pe6IQqj9N4yuNp7ys935ikWemQftPRgJCqBcRueescFBF9IvqH_kd61cke0q4AGd76ngXzVQQYzwK-H-FdQhtbbqZAa4zrXKwbxtK31WqA7GHRRTUWqCkSBW1N9zxQ7VqxAYim6mPkiK-AgmM-DGlVqsCycEcoBo0N82QoA44GcpMwzF6t-xike6YVMOJs4-0Dy8t6Li30VoIh5Q-MZ1kE9EI95XfUjrHrhE_jefEsJI"/>
+</div>
+<div class="flex-1">
+<h5 class="text-sm font-bold text-on-surface mb-0.5">일정한 수면 의식</h5>
+<p class="text-xs text-on-surface-variant leading-tight">목욕-마사지-책읽기 순서로 매일 같은 시간에 잠자리를 준비해주세요.</p>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-4 rounded-xl flex gap-4 items-center shadow-sm">
+<div class="w-12 h-12 rounded-lg overflow-hidden flex-shrink-0">
+<img alt="sleep environment" class="w-full h-full object-cover" data-alt="a quiet clean nursery with soft curtains and a comfortable crib in pastel colors" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCZ7F6Ug9cC-zUKA_2gx3caKhAfUyiR7e3oqsB2jgbbYKcIqChVWaDuzxqxKnxsxWT9LYjP44SiDg69A4g17yo6-zHRkTyPFNniFpRzy0140rzCU8UXDCWHedwoxkoHY8qif3M3MLT9KXHOL8Chz7vRziZzWe5hJkhVdyVlLu0N7R5IHBSsm_ub8aUC_dB7blejH6UGhLv5XfwQowiyaD0qAXLlNB5wMMz6l5oSos72AC09JCQZaXLJvkChGR0GV0rdqekxwWPPGqiC"/>
+</div>
+<div class="flex-1">
+<h5 class="text-sm font-bold text-on-surface mb-0.5">적절한 온도와 습도</h5>
+<p class="text-xs text-on-surface-variant leading-tight">온도는 22-24도, 습도는 50-60%를 유지하는 것이 숙면에 도움이 됩니다.</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center px-4 pt-2 pb-6 bg-white dark:bg-stone-950 z-50 rounded-t-[20px] border-t border-[#3E2723]/5 dark:border-white/5 shadow-[0_-2px_10px_rgba(62,39,35,0.05)]">
+<a class="flex flex-col items-center justify-center text-[#8D6E63] dark:text-stone-400 hover:bg-stone-100 dark:hover:bg-stone-800 active:scale-90 transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="mail">mail</span>
+<span class="font-['Plus_Jakarta_Sans'] font-medium text-[11px]">편지</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#FF8A80] bg-[#FF8A80]/10 rounded-xl px-3 py-1 active:scale-90 transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="equalizer" style="font-variation-settings: 'FILL' 1;">equalizer</span>
+<span class="font-['Plus_Jakarta_Sans'] font-medium text-[11px]">성장</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#8D6E63] dark:text-stone-400 hover:bg-stone-100 dark:hover:bg-stone-800 active:scale-90 transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="auto_stories">auto_stories</span>
+<span class="font-['Plus_Jakarta_Sans'] font-medium text-[11px]">추억</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#8D6E63] dark:text-stone-400 hover:bg-stone-100 dark:hover:bg-stone-800 active:scale-90 transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-['Plus_Jakarta_Sans'] font-medium text-[11px]">설정</span>
+</a>
+</nav>
+</body></html>

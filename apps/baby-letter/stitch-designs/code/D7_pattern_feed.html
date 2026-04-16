@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+
+<html lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary-container": "#b4fdb4",
+                    "outline-variant": "#dfa48f",
+                    "surface-tint": "#9f403a",
+                    "inverse-on-surface": "#b89589",
+                    "surface-dim": "#ffd0bf",
+                    "on-error-container": "#6e0523",
+                    "on-tertiary": "#e9ffe4",
+                    "on-tertiary-container": "#1f632c",
+                    "surface-container-low": "#fff1ec",
+                    "on-primary": "#fff7f6",
+                    "primary-dim": "#90352f",
+                    "secondary-fixed": "#ffe087",
+                    "surface-container-lowest": "#ffffff",
+                    "background": "#fff8f6",
+                    "inverse-surface": "#1b0904",
+                    "on-background": "#4e2819",
+                    "error": "#a8364b",
+                    "on-secondary-container": "#644f00",
+                    "surface-variant": "#ffdbce",
+                    "surface-container-highest": "#ffdbce",
+                    "primary-container": "#f8847b",
+                    "on-tertiary-fixed": "#03501b",
+                    "secondary-fixed-dim": "#fad04b",
+                    "on-error": "#fff7f7",
+                    "error-dim": "#6b0221",
+                    "tertiary-fixed": "#b4fdb4",
+                    "on-secondary": "#fff8ee",
+                    "on-secondary-fixed": "#4e3d00",
+                    "on-tertiary-fixed-variant": "#2a6e35",
+                    "surface-container": "#ffe9e2",
+                    "primary": "#9f403a",
+                    "primary-dim": "#9f403a",
+                    "secondary-container": "#ffe087",
+                    "error-container": "#f97386",
+                    "on-secondary-fixed-variant": "#705900",
+                    "on-primary-fixed-variant": "#611211",
+                    "inverse-primary": "#f8847b",
+                    "tertiary-fixed-dim": "#a6eea7",
+                    "surface": "#fff8f6",
+                    "surface-container-high": "#ffe2d9",
+                    "secondary-dim": "#665100",
+                    "outline": "#a26e5b",
+                    "on-surface": "#4e2819",
+                    "on-primary-fixed": "#170000",
+                    "tertiary": "#286c34",
+                    "tertiary-dim": "#1a5f29",
+                    "on-primary-container": "#540809",
+                    "on-surface-variant": "#835342",
+                    "primary-fixed": "#f8847b",
+                    "secondary": "#745c00",
+                    "surface-bright": "#fff8f6"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Plus Jakarta Sans"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { background-color: #FFF8E1; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .chart-grid {
+            background-image: linear-gradient(to right, rgba(62, 39, 35, 0.05) 1px, transparent 1px);
+            background-size: 4.16% 100%;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="font-body text-on-surface mb-24">
+<!-- TopAppBar -->
+<header class="w-full top-0 sticky z-50 bg-[#FFF8E1] flex items-center justify-between px-5 h-16 w-full">
+<button class="flex items-center justify-center text-[#FF8A80] active:scale-95 transition-transform">
+<span class="material-symbols-outlined" data-icon="arrow_back">arrow_back</span>
+</button>
+<h1 class="font-['Plus_Jakarta_Sans'] font-bold text-[#3E2723] text-lg">수유 패턴</h1>
+<div class="w-10"></div> <!-- Spacer for centering -->
+</header>
+<main class="px-5 pt-4 space-y-6">
+<!-- Period Tabs -->
+<div class="flex p-1 bg-surface-container rounded-xl">
+<button class="flex-1 py-2 text-sm font-semibold rounded-lg bg-[#FF8A80] text-white shadow-sm transition-all">1주</button>
+<button class="flex-1 py-2 text-sm font-medium text-secondary-dim hover:opacity-80 transition-opacity">2주</button>
+<button class="flex-1 py-2 text-sm font-medium text-secondary-dim hover:opacity-80 transition-opacity">1개월</button>
+</div>
+<!-- 24-hour timeline chart -->
+<section class="bg-white rounded-xl p-5 shadow-[0_2px_8px_rgba(62,39,35,0.08)]">
+<div class="flex justify-between items-center mb-4">
+<h2 class="font-headline font-bold text-[#3E2723]">주간 타임라인</h2>
+<div class="flex gap-3">
+<div class="flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-[#FF8A80]"></span>
+<span class="text-[10px] text-on-surface-variant font-medium">모유</span>
+</div>
+<div class="flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-[#64B5F6]"></span>
+<span class="text-[10px] text-on-surface-variant font-medium">분유</span>
+</div>
+</div>
+</div>
+<div class="relative mt-2">
+<!-- X-axis hours -->
+<div class="flex justify-between text-[9px] text-outline mb-2 px-6">
+<span>00</span><span>04</span><span>08</span><span>12</span><span>16</span><span>20</span><span>24</span>
+</div>
+<div class="space-y-4 relative chart-grid border-l border-outline/20">
+<!-- Day Rows -->
+<div class="flex items-center gap-2 group">
+<span class="text-[10px] font-bold text-outline w-4">월</span>
+<div class="flex-1 h-6 relative bg-surface-container-lowest/50 rounded-sm overflow-hidden">
+<div class="absolute left-[10%] w-3 h-full bg-[#FF8A80] opacity-30 rounded-full" title="Breastfeeding"></div>
+<div class="absolute left-[25%] w-2 h-2 top-2 bg-[#64B5F6] rounded-full shadow-sm" title="Bottle 120ml"></div>
+<div class="absolute left-[45%] w-4 h-full bg-[#FF8A80] opacity-30 rounded-full"></div>
+<div class="absolute left-[70%] w-2 h-2 top-2 bg-[#64B5F6] rounded-full shadow-sm"></div>
+<div class="absolute left-[85%] w-3 h-full bg-[#FF8A80] opacity-30 rounded-full"></div>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-[10px] font-bold text-outline w-4">화</span>
+<div class="flex-1 h-6 relative bg-surface-container-lowest/50 rounded-sm">
+<div class="absolute left-[12%] w-2 h-2 top-2 bg-[#64B5F6] rounded-full shadow-sm"></div>
+<div class="absolute left-[30%] w-4 h-full bg-[#FF8A80] opacity-30 rounded-full"></div>
+<div class="absolute left-[55%] w-2 h-2 top-2 bg-[#64B5F6] rounded-full shadow-sm"></div>
+<div class="absolute left-[78%] w-4 h-full bg-[#FF8A80] opacity-30 rounded-full"></div>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-[10px] font-bold text-outline w-4">수</span>
+<div class="flex-1 h-6 relative bg-surface-container-lowest/50 rounded-sm">
+<div class="absolute left-[5%] w-3 h-full bg-[#FF8A80] opacity-30 rounded-full"></div>
+<div class="absolute left-[20%] w-2 h-2 top-2 bg-[#64B5F6] rounded-full shadow-sm"></div>
+<div class="absolute left-[40%] w-2 h-2 top-2 bg-[#64B5F6] rounded-full shadow-sm"></div>
+<div class="absolute left-[65%] w-4 h-full bg-[#FF8A80] opacity-30 rounded-full"></div>
+<div class="absolute left-[88%] w-2 h-2 top-2 bg-[#64B5F6] rounded-full shadow-sm"></div>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-[10px] font-bold text-outline w-4">목</span>
+<div class="flex-1 h-6 relative bg-surface-container-lowest/50 rounded-sm">
+<div class="absolute left-[15%] w-4 h-full bg-[#FF8A80] opacity-30 rounded-full"></div>
+<div class="absolute left-[42%] w-2 h-2 top-2 bg-[#64B5F6] rounded-full shadow-sm"></div>
+<div class="absolute left-[70%] w-4 h-full bg-[#FF8A80] opacity-30 rounded-full"></div>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-[10px] font-bold text-outline w-4">금</span>
+<div class="flex-1 h-6 relative bg-surface-container-lowest/50 rounded-sm">
+<div class="absolute left-[8%] w-2 h-2 top-2 bg-[#64B5F6] rounded-full shadow-sm"></div>
+<div class="absolute left-[35%] w-4 h-full bg-[#FF8A80] opacity-30 rounded-full"></div>
+<div class="absolute left-[60%] w-2 h-2 top-2 bg-[#64B5F6] rounded-full shadow-sm"></div>
+<div class="absolute left-[82%] w-3 h-full bg-[#FF8A80] opacity-30 rounded-full"></div>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-[10px] font-bold text-[#FF8A80] w-4">토</span>
+<div class="flex-1 h-6 relative bg-surface-container-lowest/50 rounded-sm">
+<div class="absolute left-[18%] w-3 h-full bg-[#FF8A80] opacity-30 rounded-full"></div>
+<div class="absolute left-[48%] w-2 h-2 top-2 bg-[#64B5F6] rounded-full shadow-sm"></div>
+<div class="absolute left-[75%] w-4 h-full bg-[#FF8A80] opacity-30 rounded-full"></div>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-[10px] font-bold text-[#EF5350] w-4">일</span>
+<div class="flex-1 h-6 relative bg-surface-container-lowest/50 rounded-sm">
+<div class="absolute left-[10%] w-2 h-2 top-2 bg-[#64B5F6] rounded-full shadow-sm"></div>
+<div class="absolute left-[38%] w-4 h-full bg-[#FF8A80] opacity-30 rounded-full"></div>
+<div class="absolute left-[62%] w-2 h-2 top-2 bg-[#64B5F6] rounded-full shadow-sm"></div>
+<div class="absolute left-[85%] w-4 h-full bg-[#FF8A80] opacity-30 rounded-full"></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Summary Section Cards (Bento Grid Style) -->
+<div class="grid grid-cols-2 gap-4">
+<div class="bg-white p-4 rounded-xl shadow-[0_2px_8px_rgba(62,39,35,0.08)] col-span-2 flex items-center justify-between border-l-4 border-[#FF8A80]">
+<div>
+<p class="text-xs text-outline font-medium">평균 수유 횟수</p>
+<p class="text-xl font-bold text-[#3E2723]">평균 8.3회/일</p>
+</div>
+<div class="w-10 h-10 bg-[#FF8A80]/10 rounded-full flex items-center justify-center text-[#FF8A80]">
+<span class="material-symbols-outlined" data-icon="restaurant">restaurant</span>
+</div>
+</div>
+<div class="bg-white p-4 rounded-xl shadow-[0_2px_8px_rgba(62,39,35,0.08)]">
+<p class="text-xs text-outline font-medium">평균 간격</p>
+<p class="text-lg font-bold text-[#3E2723] mt-1">2.9시간</p>
+</div>
+<div class="bg-white p-4 rounded-xl shadow-[0_2px_8px_rgba(62,39,35,0.08)]">
+<p class="text-xs text-outline font-medium">총 섭취량</p>
+<p class="text-lg font-bold text-[#3E2723] mt-1">~960ml/일</p>
+</div>
+</div>
+<!-- Comparison Gauge -->
+<section class="bg-white rounded-xl p-5 shadow-[0_2px_8px_rgba(62,39,35,0.08)]">
+<h3 class="text-xs font-bold text-outline-variant mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="history">history</span>
+                지난주 대비 변화
+            </h3>
+<div class="flex items-end justify-between gap-4">
+<div class="flex-1">
+<div class="flex justify-between text-[11px] font-medium text-outline mb-1">
+<span>지난주 (7.1회)</span>
+<span class="text-[#81C784] font-bold">+1.2회 증가</span>
+</div>
+<div class="w-full h-3 bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-[#FF8A80] rounded-full" style="width: 83%"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- Pattern Insight Card -->
+<section class="bg-[#FFF1EC] rounded-xl p-5 border border-[#FF8A80]/20">
+<div class="flex items-start gap-4">
+<div class="w-10 h-10 shrink-0 bg-white rounded-full flex items-center justify-center text-[#FFD54F] shadow-sm">
+<span class="material-symbols-outlined" data-icon="auto_awesome" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+</div>
+<div>
+<p class="text-xs font-bold text-[#FF8A80] mb-1">우리 아기 성장 리포트</p>
+<p class="text-sm leading-relaxed text-[#3E2723] font-medium">
+                        수유 간격이 점점 늘어나고 있어요. 1회 수유량이 늘어나는 건강한 성장 신호예요!
+                    </p>
+</div>
+</div>
+</section>
+<!-- Feeding Tips Card -->
+<section class="bg-white rounded-xl p-5 shadow-[0_2px_8px_rgba(62,39,35,0.08)] border-b-4 border-[#81C784]">
+<h2 class="font-headline font-bold text-[#3E2723] mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-[#81C784]" data-icon="lightbulb">lightbulb</span>
+                더 건강한 수유를 위한 팁
+            </h2>
+<ul class="space-y-3">
+<li class="flex items-start gap-3">
+<span class="w-5 h-5 shrink-0 bg-[#81C784]/10 text-[#81C784] rounded-full flex items-center justify-center text-[10px] font-bold">1</span>
+<p class="text-sm text-on-surface-variant">수유 전 기저귀를 확인하면 아기가 더 집중해서 먹을 수 있어요.</p>
+</li>
+<li class="flex items-start gap-3">
+<span class="w-5 h-5 shrink-0 bg-[#81C784]/10 text-[#81C784] rounded-full flex items-center justify-center text-[10px] font-bold">2</span>
+<p class="text-sm text-on-surface-variant">밤중 수유 시에는 조명을 최대한 낮게 유지해 아기의 수면 흐름을 도와주세요.</p>
+</li>
+<li class="flex items-start gap-3">
+<span class="w-5 h-5 shrink-0 bg-[#81C784]/10 text-[#81C784] rounded-full flex items-center justify-center text-[10px] font-bold">3</span>
+<p class="text-sm text-on-surface-variant">아기가 트림을 하지 않아도 10분 정도는 세워서 안아주는 것이 좋아요.</p>
+</li>
+</ul>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 bg-white/90 backdrop-blur-md flex justify-around items-center px-4 pt-2 pb-6 rounded-t-[24px] border-t border-[#3E2723]/5 shadow-[0_-2px_10px_rgba(62,39,35,0.05)]">
+<button class="flex flex-col items-center justify-center text-[#8D6E63] hover:bg-[#FF8A80]/5 transition-colors active:scale-90 duration-200">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-['Inter'] text-[11px] font-medium">홈</span>
+</button>
+<button class="flex flex-col items-center justify-center text-[#8D6E63] hover:bg-[#FF8A80]/5 transition-colors active:scale-90 duration-200">
+<span class="material-symbols-outlined" data-icon="edit_note">edit_note</span>
+<span class="font-['Inter'] text-[11px] font-medium">기록</span>
+</button>
+<button class="flex flex-col items-center justify-center text-[#FF8A80] bg-[#FF8A80]/10 rounded-xl px-3 py-1 active:scale-90 transition-transform duration-200">
+<span class="material-symbols-outlined" data-icon="bar_chart" style="font-variation-settings: 'FILL' 1;">bar_chart</span>
+<span class="font-['Inter'] text-[11px] font-medium">통계</span>
+</button>
+<button class="flex flex-col items-center justify-center text-[#8D6E63] hover:bg-[#FF8A80]/5 transition-colors active:scale-90 duration-200">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-['Inter'] text-[11px] font-medium">설정</span>
+</button>
+</nav>
+</body></html>

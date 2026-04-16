@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+
+<html lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary": "#9f403a",
+                    "on-secondary": "#fff8ee",
+                    "surface-container-highest": "#ffdbce",
+                    "secondary-container": "#ffe087",
+                    "primary-container": "#f8847b",
+                    "secondary-fixed": "#ffe087",
+                    "surface-container": "#ffe9e2",
+                    "on-tertiary-container": "#1f632c",
+                    "on-primary-container": "#540809",
+                    "surface-container-lowest": "#ffffff",
+                    "secondary-dim": "#665100",
+                    "on-primary-fixed": "#170000",
+                    "on-error": "#fff7f7",
+                    "tertiary-fixed": "#b4fdb4",
+                    "surface-tint": "#9f403a",
+                    "on-secondary-fixed": "#4e3d00",
+                    "secondary": "#745c00",
+                    "error": "#a8364b",
+                    "error-dim": "#6b0221",
+                    "on-tertiary": "#e9ffe4",
+                    "inverse-primary": "#f8847b",
+                    "error-container": "#f97386",
+                    "inverse-on-surface": "#b89589",
+                    "inverse-surface": "#1b0904",
+                    "on-primary-fixed-variant": "#611211",
+                    "outline-variant": "#dfa48f",
+                    "tertiary-fixed-dim": "#a6eea7",
+                    "surface-dim": "#ffd0bf",
+                    "primary-fixed-dim": "#e8786e",
+                    "surface-container-high": "#ffe2d9",
+                    "on-error-container": "#6e0523",
+                    "surface-container-low": "#fff1ec",
+                    "on-tertiary-fixed": "#03501b",
+                    "on-secondary-fixed-variant": "#705900",
+                    "tertiary-dim": "#1a5f29",
+                    "secondary-fixed-dim": "#fad04b",
+                    "surface": "#fff8f6",
+                    "on-background": "#4e2819",
+                    "on-surface": "#4e2819",
+                    "primary-fixed": "#f8847b",
+                    "primary-dim": "#90352f",
+                    "tertiary-container": "#b4fdb4",
+                    "on-tertiary-fixed-variant": "#2a6e35",
+                    "surface-variant": "#ffdbce",
+                    "tertiary": "#286c34",
+                    "on-secondary-container": "#644f00",
+                    "surface-bright": "#fff8f6",
+                    "on-primary": "#fff7f6",
+                    "outline": "#a26e5b",
+                    "background": "#fff8f6",
+                    "on-surface-variant": "#835342"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "12px",
+                    "2xl": "16px",
+                    "3xl": "24px",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Plus Jakarta Sans"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #FFF8E1;
+            font-family: 'Inter', sans-serif;
+        }
+        .font-headline {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="flex flex-col min-h-screen text-[#3E2723]">
+<!-- TopAppBar Mapping -->
+<header class="bg-[#FFF8E1] dark:bg-stone-950 flex justify-between items-center w-full px-5 py-2 sticky top-0 z-50">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full overflow-hidden border border-[#FF8A80]/20">
+<img alt="Baby's profile" class="w-full h-full object-cover" data-alt="cute 3D render of a happy baby face soft lighting pastel colors" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCRbFGM3eyzNBaYXzGWbwNkj-PdJsRIoeMvFWRWgWZrM9_Zs2uSLPfzKsaQ0Wa6xsmpU0651HZGq_CJ0xsIeEjnRCmuWfildOrXMhT7vdShE1vHwQNlzXXHigUuk2bB-GBpZlWm4nj8Lv5RMpge4XXhdanEFYSXvUCMh88_R5yrlz-6mOa0oIkEZ13k2zROZ0BPLg2Id2sSVXvFCrQBmEiPfwsnRxOO1zHs3LMBSyXgOihyqCkvhck5sjOljELNSAkbgwKP6YSqQ9Pb"/>
+</div>
+<span class="font-['Plus_Jakarta_Sans'] font-bold text-xl text-[#3E2723] dark:text-[#FFF8E1]">BabyLetter</span>
+</div>
+<button class="text-[#FF8A80] dark:text-[#FF8A80] transition-transform duration-200 active:scale-95 hover:opacity-80">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+</header>
+<main class="flex-grow flex flex-col px-5 pt-8 pb-32 max-w-md mx-auto w-full">
+<!-- Title Section -->
+<div class="mb-10 text-center">
+<h1 class="font-headline font-extrabold text-2xl mb-2 text-[#3E2723]">💛 오늘의 한마디</h1>
+<p class="text-[#8D6E63] font-medium">솔직하게 선택해도 괜찮아요</p>
+</div>
+<!-- Emotion Grid -->
+<div class="flex justify-between items-center mb-10">
+<!-- Selected State: 좋아 -->
+<div class="flex flex-col items-center gap-3">
+<div class="relative transition-transform duration-200 active:scale-95">
+<button class="w-20 h-20 rounded-full bg-[#81C784]/20 flex items-center justify-center text-4xl border-4 border-[#FF8A80] shadow-lg ring-4 ring-[#FF8A80]/10">
+                        😊
+                    </button>
+<div class="absolute -top-1 -right-1 bg-[#FF8A80] text-white rounded-full w-6 h-6 flex items-center justify-center shadow-md">
+<span class="material-symbols-outlined text-xs" style="font-variation-settings: 'wght' 700">check</span>
+</div>
+</div>
+<span class="font-headline font-bold text-[#FF8A80]">좋아</span>
+</div>
+<!-- 그냥 -->
+<div class="flex flex-col items-center gap-3">
+<button class="w-20 h-20 rounded-full bg-[#FFD54F]/20 flex items-center justify-center text-4xl transition-transform duration-200 active:scale-95 hover:bg-[#FFD54F]/30">
+                    😐
+                </button>
+<span class="font-headline font-medium text-[#8D6E63]">그냥</span>
+</div>
+<!-- 지침 -->
+<div class="flex flex-col items-center gap-3">
+<button class="w-20 h-20 rounded-full bg-[#64B5F6]/20 flex items-center justify-center text-4xl transition-transform duration-200 active:scale-95 hover:bg-[#64B5F6]/30">
+                    😢
+                </button>
+<span class="font-headline font-medium text-[#8D6E63]">지침</span>
+</div>
+<!-- 힘들어 -->
+<div class="flex flex-col items-center gap-3">
+<button class="w-20 h-20 rounded-full bg-[#EF5350]/20 flex items-center justify-center text-4xl transition-transform duration-200 active:scale-95 hover:bg-[#EF5350]/30">
+                    😤
+                </button>
+<span class="font-headline font-medium text-[#8D6E63]">힘들어</span>
+</div>
+</div>
+<!-- Optional Input -->
+<div class="mb-8">
+<textarea class="w-full bg-white border-none rounded-xl p-4 text-[#3E2723] placeholder-[#8D6E63]/50 focus:ring-2 focus:ring-[#FF8A80]/20 shadow-[0_2px_8px_rgba(62,39,35,0.05)] h-24 resize-none transition-all" placeholder="한마디 더 하고 싶다면..."></textarea>
+</div>
+<!-- Partner Status -->
+<div class="bg-white/60 backdrop-blur-sm rounded-2xl p-4 mb-8 flex items-center gap-4 shadow-sm border border-white">
+<div class="w-12 h-12 rounded-full overflow-hidden border-2 border-white shadow-sm">
+<img alt="Partner's profile" class="w-full h-full object-cover" data-alt="minimalist avatar portrait of a smiling man warm aesthetic soft colors" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAUmgbsrR0jTHxo_QAcdg2JfsRdie_LOQs85an9Z2kwNRbsgPP5NylkuE4swdqrR6sLe2hlq45l1nqBCxvxUOjK1xhz1ELWCmQPcER4CLrmBElKEch_EuuQZo3VY_bjSuXOp4Q5yo5s2WxhcSczWqKVINKhXBakUzfDBocp_6kEdIE6WUoyS9fLmvkK3fVKnJGccHQ6lQ_WbpDqwjrGmKQaBuGPh7pItcqka-4xnICQjT_h6Kqgi6WpImT0l4zAW5gnTgmgQ1finR3_"/>
+</div>
+<div class="flex-grow">
+<p class="text-sm font-bold text-[#3E2723]">💬 파트너의 오늘: 😊 기분 좋대요!</p>
+<p class="text-[10px] text-[#8D6E63] mt-1">오후 2:30</p>
+</div>
+</div>
+<!-- Action Buttons -->
+<div class="flex flex-col gap-4">
+<button class="w-full bg-[#FF8A80] text-white font-headline font-bold py-4 rounded-xl shadow-[0_4px_12px_rgba(255,138,128,0.3)] hover:opacity-90 active:scale-[0.98] transition-all">
+                파트너에게 보내기 💛
+            </button>
+<button class="w-full py-2 text-[#8D6E63] font-medium text-sm hover:text-[#3E2723] transition-colors">
+                나중에 할게요
+            </button>
+</div>
+<!-- Footer Note -->
+<p class="mt-8 text-center text-xs text-[#8D6E63] font-medium opacity-70">
+            매일 1분, 서로의 마음을 확인해요
+        </p>
+</main>
+<!-- BottomNavBar Mapping -->
+<nav class="fixed bottom-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-3 bg-white/80 dark:bg-stone-900/80 backdrop-blur-md rounded-t-3xl border-t border-[#3E2723]/10 dark:border-white/10 shadow-[0_-2px_10px_rgba(62,39,35,0.05)]">
+<div class="flex flex-col items-center justify-center text-[#8D6E63] dark:text-stone-400 font-medium transition-all duration-300 hover:bg-[#FFF8E1] dark:hover:bg-stone-800 rounded-full px-2 py-1">
+<span class="material-symbols-outlined" data-icon="mail">mail</span>
+<span class="font-['Plus_Jakarta_Sans'] text-xs">Letters</span>
+</div>
+<!-- Active Tab: Check-in -->
+<div class="flex flex-col items-center justify-center text-[#FF8A80] dark:text-[#FF8A80] font-bold scale-110 transition-all duration-300">
+<span class="material-symbols-outlined" data-icon="mood" style="font-variation-settings: 'FILL' 1">mood</span>
+<span class="font-['Plus_Jakarta_Sans'] text-xs">Check-in</span>
+</div>
+<div class="flex flex-col items-center justify-center text-[#8D6E63] dark:text-stone-400 font-medium transition-all duration-300 hover:bg-[#FFF8E1] dark:hover:bg-stone-800 rounded-full px-2 py-1">
+<span class="material-symbols-outlined" data-icon="Child_Care">child_care</span>
+<span class="font-['Plus_Jakarta_Sans'] text-xs">Growth</span>
+</div>
+<div class="flex flex-col items-center justify-center text-[#8D6E63] dark:text-stone-400 font-medium transition-all duration-300 hover:bg-[#FFF8E1] dark:hover:bg-stone-800 rounded-full px-2 py-1">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+<span class="font-['Plus_Jakarta_Sans'] text-xs">Family</span>
+</div>
+</nav>
+</body></html>

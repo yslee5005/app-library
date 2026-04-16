@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+
+<html lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "error": "#a8364b",
+                    "surface-container": "#ffe9e2",
+                    "surface": "#fff8f6",
+                    "on-tertiary": "#e9ffe4",
+                    "secondary-dim": "#665100",
+                    "on-tertiary-container": "#1f632c",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-container-highest": "#ffdbce",
+                    "on-secondary-container": "#644f00",
+                    "primary-fixed": "#f8847b",
+                    "on-secondary-fixed": "#4e3d00",
+                    "background": "#fff8f6",
+                    "on-surface": "#4e2819",
+                    "tertiary-fixed": "#b4fdb4",
+                    "surface-variant": "#ffdbce",
+                    "on-tertiary-fixed": "#03501b",
+                    "inverse-on-surface": "#b89589",
+                    "on-secondary-fixed-variant": "#705900",
+                    "on-primary": "#fff7f6",
+                    "inverse-primary": "#f8847b",
+                    "surface-container-high": "#ffe2d9",
+                    "on-primary-fixed": "#170000",
+                    "inverse-surface": "#1b0904",
+                    "on-secondary": "#fff8ee",
+                    "surface-bright": "#fff8f6",
+                    "secondary-fixed": "#ffe087",
+                    "primary-container": "#f8847b",
+                    "on-error-container": "#6e0523",
+                    "error-dim": "#6b0221",
+                    "on-background": "#4e2819",
+                    "primary": "#9f403a",
+                    "on-error": "#fff7f7",
+                    "secondary-container": "#ffe087",
+                    "on-tertiary-fixed-variant": "#2a6e35",
+                    "surface-tint": "#9f403a",
+                    "primary-dim": "#90352f",
+                    "surface-container-low": "#fff1ec",
+                    "secondary-fixed-dim": "#fad04b",
+                    "primary-fixed-dim": "#e8786e",
+                    "error-container": "#f97386",
+                    "outline": "#a26e5b",
+                    "tertiary-container": "#b4fdb4",
+                    "on-surface-variant": "#835342",
+                    "secondary": "#745c00",
+                    "surface-dim": "#ffd0bf",
+                    "outline-variant": "#dfa48f",
+                    "on-primary-fixed-variant": "#611211",
+                    "tertiary-dim": "#1a5f29",
+                    "on-primary-container": "#540809",
+                    "tertiary-fixed-dim": "#a6eea7",
+                    "tertiary": "#286c34"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Plus Jakarta Sans"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .evolution-path {
+            background-image: radial-gradient(#dfa48f 1.5px, transparent 1.5px);
+            background-size: 24px 24px;
+            mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);
+        }
+        .pulse-coral {
+            box-shadow: 0 0 0 0 rgba(255, 138, 128, 0.7);
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(255, 138, 128, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 15px rgba(255, 138, 128, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(255, 138, 128, 0); }
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-[#FFF8E1] text-[#3E2723] font-body selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopAppBar -->
+<header class="bg-[#FFF8E1] dark:bg-stone-950 flex items-center justify-between px-5 w-full h-16 fixed top-0 z-50 border-none">
+<div class="flex items-center gap-4">
+<button class="active:scale-95 transition-transform hover:opacity-80 transition-opacity">
+<span class="material-symbols-outlined text-[#FF8A80] dark:text-[#FF8A80] text-2xl">arrow_back</span>
+</button>
+<h1 class="font-['Plus_Jakarta_Sans'] font-bold text-lg text-[#3E2723] dark:text-[#FFF8E1]">캐릭터 성장</h1>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[#8D6E63]">help_outline</span>
+</div>
+</header>
+<main class="pt-20 pb-32 px-5 min-h-screen relative overflow-hidden">
+<!-- Floating Elements -->
+<div class="absolute top-24 right-4 opacity-20 pointer-events-none">
+<span class="material-symbols-outlined text-6xl text-[#FFD54F]" style="font-variation-settings: 'FILL' 1;">eco</span>
+</div>
+<!-- Hero Section -->
+<section class="mb-12 text-center">
+<div class="inline-block bg-white px-4 py-1 rounded-full shadow-sm mb-4 border border-[#FF8A80]/20">
+<p class="text-[#FF8A80] font-bold text-sm">Lv.3 꽃봉오리</p>
+</div>
+<h2 class="font-headline font-extrabold text-2xl tracking-tight mb-2">아이가 예쁘게 피어나고 있어요</h2>
+<p class="text-[#8D6E63] text-sm">매일 쓰는 편지로 아이의 마음을 키워주세요.</p>
+</section>
+<!-- Evolution Tree Container -->
+<div class="relative max-w-md mx-auto">
+<!-- Connecting Vine -->
+<div class="absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-1 bg-[#dfa48f]/30 rounded-full"></div>
+<div class="space-y-16 relative z-10">
+<!-- Stage 1: Seed -->
+<div class="flex flex-col items-center">
+<div class="bg-[#81C784] w-12 h-12 rounded-full flex items-center justify-center text-white mb-4 shadow-lg">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">eco</span>
+</div>
+<div class="bg-white/80 backdrop-blur-sm p-4 rounded-xl shadow-[0_2px_8px_rgba(62,39,35,0.08)] w-full border-l-4 border-[#81C784]">
+<div class="flex justify-between items-start mb-1">
+<h3 class="font-headline font-bold text-[#3E2723]">🌱 씨앗</h3>
+<span class="text-[10px] bg-[#81C784]/10 text-[#81C784] px-2 py-0.5 rounded-full font-bold">완료</span>
+</div>
+<p class="text-xs text-[#8D6E63] font-medium mb-3">Lv.1 (0-200XP) • '첨 발을 내딛어요'</p>
+<div class="flex flex-wrap gap-2">
+<span class="text-[10px] text-[#81C784] flex items-center gap-0.5"><span class="material-symbols-outlined text-xs">check_circle</span> 가입 환영 배지</span>
+</div>
+</div>
+</div>
+<!-- Stage 2: Sprout -->
+<div class="flex flex-col items-center">
+<div class="bg-[#81C784] w-14 h-14 rounded-full flex items-center justify-center text-white mb-4 shadow-lg ring-4 ring-white">
+<span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">potted_plant</span>
+</div>
+<div class="bg-white/80 backdrop-blur-sm p-4 rounded-xl shadow-[0_2px_8px_rgba(62,39,35,0.08)] w-full border-l-4 border-[#81C784]">
+<div class="flex justify-between items-start mb-1">
+<h3 class="font-headline font-bold text-[#3E2723]">🌿 새싹</h3>
+<span class="text-[10px] bg-[#81C784]/10 text-[#81C784] px-2 py-0.5 rounded-full font-bold">완료</span>
+</div>
+<p class="text-xs text-[#8D6E63] font-medium mb-3">Lv.2 (200-600XP) • '조금씩 자라고 있어요'</p>
+<div class="flex flex-wrap gap-2">
+<span class="text-[10px] text-[#81C784] flex items-center gap-0.5"><span class="material-symbols-outlined text-xs">check_circle</span> 첫 편지 보상</span>
+<span class="text-[10px] text-[#81C784] flex items-center gap-0.5"><span class="material-symbols-outlined text-xs">check_circle</span> 그린 스킨</span>
+</div>
+</div>
+</div>
+<!-- Stage 3: Current - Flower Bud -->
+<div class="flex flex-col items-center">
+<div class="pulse-coral bg-[#FF8A80] w-20 h-20 rounded-full flex items-center justify-center text-white mb-6 shadow-xl relative ring-8 ring-[#FF8A80]/10">
+<span class="material-symbols-outlined text-5xl" style="font-variation-settings: 'FILL' 1;">local_florist</span>
+<div class="absolute -top-2 -right-2 bg-[#FFD54F] text-[#3E2723] text-[10px] font-bold px-2 py-1 rounded-full shadow-md">현재 단계</div>
+</div>
+<div class="bg-white p-6 rounded-[12px] shadow-[0_4px_12px_rgba(62,39,35,0.12)] w-full border-2 border-[#FF8A80]/30">
+<div class="flex justify-between items-center mb-2">
+<h3 class="font-headline font-bold text-lg text-[#3E2723]">🌷 꽃봉오리</h3>
+<span class="text-xs font-bold text-[#FF8A80]">Lv.3</span>
+</div>
+<p class="text-sm text-[#8D6E63] font-medium mb-4 italic">'곧 꽃이 필 거예요!'</p>
+<!-- Progress Bar -->
+<div class="space-y-2 mb-6">
+<div class="flex justify-between items-center text-[11px] font-bold">
+<span class="text-[#FF8A80]">성장 진행도</span>
+<span>1250 / 2000 XP</span>
+</div>
+<div class="w-full h-3 bg-[#FF8A80]/10 rounded-full overflow-hidden">
+<div class="h-full bg-[#FF8A80] rounded-full" style="width: 62.5%"></div>
+</div>
+</div>
+<!-- Rewards -->
+<div class="bg-[#FFF8F6] p-4 rounded-xl">
+<p class="text-[11px] font-extrabold text-[#3E2723] mb-3 flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">card_giftcard</span> 잠금 해제 보상
+                            </p>
+<div class="grid grid-cols-3 gap-2">
+<div class="bg-white p-2 rounded-lg text-center flex flex-col items-center">
+<span class="material-symbols-outlined text-[#FF8A80] text-xl mb-1">face</span>
+<span class="text-[9px] text-[#8D6E63]">프로필 아이콘</span>
+</div>
+<div class="bg-white p-2 rounded-lg text-center flex flex-col items-center">
+<span class="material-symbols-outlined text-[#FF8A80] text-xl mb-1">mail</span>
+<span class="text-[9px] text-[#8D6E63]">편지 스킨</span>
+</div>
+<div class="bg-white p-2 rounded-lg text-center flex flex-col items-center opacity-50 grayscale">
+<span class="material-symbols-outlined text-[#FF8A80] text-xl mb-1">lock</span>
+<span class="text-[9px] text-[#8D6E63]">비밀 보상</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Stage 4: Flower (Locked) -->
+<div class="flex flex-col items-center opacity-60">
+<div class="bg-[#8D6E63]/20 w-14 h-14 rounded-full flex items-center justify-center text-[#8D6E63] mb-4">
+<span class="material-symbols-outlined text-3xl">filter_vintage</span>
+</div>
+<div class="bg-white/40 border border-dashed border-[#8D6E63]/30 p-4 rounded-xl w-full">
+<div class="flex justify-between items-start mb-1">
+<h3 class="font-headline font-bold text-[#8D6E63]">🌸 꽃</h3>
+<span class="material-symbols-outlined text-sm">lock</span>
+</div>
+<p class="text-xs text-[#8D6E63] font-medium mb-1">Lv.4 (2000-5000XP)</p>
+<p class="text-[10px] text-[#8D6E63]/70 italic">'아름답게 피어날 거예요'</p>
+</div>
+</div>
+<!-- Stage 5: Fruit (Locked) -->
+<div class="flex flex-col items-center opacity-40">
+<div class="bg-[#8D6E63]/20 w-14 h-14 rounded-full flex items-center justify-center text-[#8D6E63] mb-4">
+<span class="material-symbols-outlined text-3xl">nutrition</span>
+</div>
+<div class="bg-white/40 border border-dashed border-[#8D6E63]/30 p-4 rounded-xl w-full">
+<div class="flex justify-between items-start mb-1">
+<h3 class="font-headline font-bold text-[#8D6E63]">🍎 열매</h3>
+<span class="material-symbols-outlined text-sm">lock</span>
+</div>
+<p class="text-xs text-[#8D6E63] font-medium mb-1">Lv.5 (5000+XP)</p>
+<p class="text-[10px] text-[#8D6E63]/70 italic">'결실을 맺을 거예요'</p>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-3 bg-white dark:bg-stone-900 shadow-[0_-2px_8px_rgba(62,39,35,0.08)] rounded-t-[20px]">
+<button class="flex flex-col items-center justify-center text-[#8D6E63] dark:text-stone-400 px-3 py-1 hover:bg-stone-50 dark:hover:bg-stone-800 active:scale-90 transition-all duration-200">
+<span class="material-symbols-outlined" data-icon="mail">mail</span>
+<span class="font-['Inter'] font-medium text-[10px]">편지</span>
+</button>
+<button class="flex flex-col items-center justify-center bg-[#FF8A80]/10 text-[#FF8A80] rounded-xl px-3 py-1 hover:bg-stone-50 dark:hover:bg-stone-800 active:scale-90 transition-all duration-200">
+<span class="material-symbols-outlined" data-icon="auto_awesome" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+<span class="font-['Inter'] font-medium text-[10px]">성장</span>
+</button>
+<button class="flex flex-col items-center justify-center text-[#8D6E63] dark:text-stone-400 px-3 py-1 hover:bg-stone-50 dark:hover:bg-stone-800 active:scale-90 transition-all duration-200">
+<span class="material-symbols-outlined" data-icon="menu_book">menu_book</span>
+<span class="font-['Inter'] font-medium text-[10px]">가이드</span>
+</button>
+<button class="flex flex-col items-center justify-center text-[#8D6E63] dark:text-stone-400 px-3 py-1 hover:bg-stone-50 dark:hover:bg-stone-800 active:scale-90 transition-all duration-200">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-['Inter'] font-medium text-[10px]">설정</span>
+</button>
+</nav>
+</body></html>

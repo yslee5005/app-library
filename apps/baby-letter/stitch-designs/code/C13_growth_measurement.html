@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+
+<html class="light" lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>성장 측정 - Baby's Growth</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-lowest": "#ffffff",
+                        "primary-fixed": "#f8847b",
+                        "secondary": "#745c00",
+                        "on-background": "#4e2819",
+                        "on-tertiary": "#e9ffe4",
+                        "secondary-dim": "#665100",
+                        "surface-container": "#ffe9e2",
+                        "on-error-container": "#6e0523",
+                        "background": "#fff8f6",
+                        "surface-bright": "#fff8f6",
+                        "on-secondary-container": "#644f00",
+                        "tertiary-fixed": "#b4fdb4",
+                        "error-dim": "#6b0221",
+                        "tertiary-dim": "#1a5f29",
+                        "surface-tint": "#9f403a",
+                        "tertiary": "#286c34",
+                        "on-primary": "#fff7f6",
+                        "tertiary-fixed-dim": "#a6eea7",
+                        "on-secondary-fixed": "#4e3d00",
+                        "surface-dim": "#ffd0bf",
+                        "inverse-surface": "#1b0904",
+                        "on-tertiary-container": "#1f632c",
+                        "surface": "#fff8f6",
+                        "surface-container-low": "#fff1ec",
+                        "on-surface-variant": "#835342",
+                        "on-primary-fixed": "#170000",
+                        "primary": "#9f403a",
+                        "inverse-on-surface": "#b89589",
+                        "surface-container-highest": "#ffdbce",
+                        "primary-fixed-dim": "#e8786e",
+                        "on-tertiary-fixed-variant": "#2a6e35",
+                        "secondary-fixed": "#ffe087",
+                        "surface-variant": "#ffdbce",
+                        "secondary-fixed-dim": "#fad04b",
+                        "primary-container": "#f8847b",
+                        "on-error": "#fff7f7",
+                        "outline": "#a26e5b",
+                        "error": "#a8364b",
+                        "on-primary-fixed-variant": "#611211",
+                        "on-secondary-fixed-variant": "#705900",
+                        "primary-dim": "#90352f",
+                        "on-tertiary-fixed": "#03501b",
+                        "outline-variant": "#dfa48f",
+                        "tertiary-container": "#b4fdb4",
+                        "on-secondary": "#fff8ee",
+                        "surface-container-high": "#ffe2d9",
+                        "secondary-container": "#ffe087",
+                        "inverse-primary": "#f8847b",
+                        "on-surface": "#4e2819",
+                        "error-container": "#f97386",
+                        "on-primary-container": "#540809"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Plus Jakarta Sans"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-[#FFF8E1] font-body text-on-surface min-h-screen pb-24">
+<!-- Top Navigation -->
+<nav class="bg-[#FFF8E1] dark:bg-stone-900 sticky top-0 z-50 flex justify-between items-center w-full px-5 py-3">
+<div class="flex items-center gap-3">
+<button class="transition-transform active:scale-95 duration-200 text-[#8D6E63]">
+<span class="material-symbols-outlined text-2xl">arrow_back_ios_new</span>
+</button>
+<h1 class="font-headline font-bold text-lg text-[#3E2723] dark:text-stone-100">성장 측정</h1>
+</div>
+<div class="w-10 h-10 rounded-full bg-surface-container-highest overflow-hidden border-2 border-primary-container">
+<img alt="Baby's profile" class="w-full h-full object-cover" data-alt="Close-up portrait of a cute smiling baby wearing a soft knitted hat with warm sunlight and soft bokeh background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDpyxR89QQcUie_4yZk2T6tOEn0KsOMZv7bX03jKEo47EifvRhZG_axwqD3OAS0bEtLYpXBJruA7AJTE1Ncw_kH6Xv7N8wPLRPSZnMnX1j1zYFyBPMmINEw3mLUlh3gITQ2DswVkLoGGwCbC3dfj7vF88tGITvOrTg0JA76Bd8WubPd3BN7IRr-oEPcPNRQsLS3zP6dmCACrpRJ80XsMPLMHWyHjZdq9p05Rw2pC5rUfjk00ImLc0LsOAQ9gS-s9Uchf5s0SUd6OpNR"/>
+</div>
+</nav>
+<main class="px-5 pt-4 space-y-6">
+<!-- Date Picker & Encouragement -->
+<section class="flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2 bg-surface-container-lowest px-4 py-2 rounded-full shadow-sm">
+<span class="material-symbols-outlined text-primary text-sm">calendar_today</span>
+<span class="text-sm font-medium text-on-surface">2024년 5월 24일</span>
+</div>
+</div>
+<div class="bg-primary-container/20 p-4 rounded-xl border border-primary-container/30">
+<p class="text-sm font-medium text-primary-dim leading-relaxed">
+                    "엄마, 아빠! 저 이만큼이나 컸어요! ✨"
+                </p>
+<div class="flex gap-4 mt-2">
+<div class="flex items-center gap-1">
+<span class="text-xs text-on-surface-variant">체중</span>
+<span class="text-xs font-bold text-primary">+0.5kg</span>
+</div>
+<div class="flex items-center gap-1">
+<span class="text-xs text-on-surface-variant">신장</span>
+<span class="text-xs font-bold text-primary">+2cm</span>
+</div>
+<div class="flex items-center gap-1">
+<span class="text-xs text-on-surface-variant">머리</span>
+<span class="text-xs font-bold text-primary">+1cm</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Measurement Inputs -->
+<section class="grid grid-cols-1 gap-4">
+<!-- Weight Card -->
+<div class="bg-white rounded-xl p-5 shadow-[0_2px_8px_rgba(62,39,35,0.08)] flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-primary-container/10 flex items-center justify-center">
+<span class="text-xl">⚖️</span>
+</div>
+<div>
+<p class="text-xs text-on-surface-variant font-medium">체중</p>
+<p class="font-headline font-bold text-lg text-on-surface">5.8kg</p>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<button class="w-8 h-8 rounded-full border border-outline-variant flex items-center justify-center text-on-surface active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-sm">remove</span>
+</button>
+<button class="w-8 h-8 rounded-full border border-outline-variant flex items-center justify-center text-on-surface active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-sm">add</span>
+</button>
+</div>
+</div>
+<!-- Height Card -->
+<div class="bg-white rounded-xl p-5 shadow-[0_2px_8px_rgba(62,39,35,0.08)] flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-tertiary-container/20 flex items-center justify-center">
+<span class="text-xl">📏</span>
+</div>
+<div>
+<p class="text-xs text-on-surface-variant font-medium">신장</p>
+<div class="flex items-baseline gap-1">
+<input class="font-headline font-bold text-lg text-on-surface bg-transparent border-none p-0 w-12 focus:ring-0" type="number" value="58"/>
+<span class="text-xs text-on-surface-variant">cm</span>
+</div>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline-variant">edit</span>
+</div>
+<!-- Head Card -->
+<div class="bg-white rounded-xl p-5 shadow-[0_2px_8px_rgba(62,39,35,0.08)] flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-secondary-container/20 flex items-center justify-center">
+<span class="text-xl">🧠</span>
+</div>
+<div>
+<p class="text-xs text-on-surface-variant font-medium">머리둘레</p>
+<div class="flex items-baseline gap-1">
+<input class="font-headline font-bold text-lg text-on-surface bg-transparent border-none p-0 w-12 focus:ring-0" type="number" value="38"/>
+<span class="text-xs text-on-surface-variant">cm</span>
+</div>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline-variant">edit</span>
+</div>
+</section>
+<!-- Trend & WHO Percentiles -->
+<section class="space-y-4">
+<h3 class="font-headline font-bold text-on-surface">성장 분석</h3>
+<!-- Bento Grid Trends -->
+<div class="grid grid-cols-2 gap-3">
+<!-- Weight Trend -->
+<div class="bg-white p-4 rounded-xl shadow-[0_2px_8px_rgba(62,39,35,0.08)] col-span-2">
+<div class="flex justify-between items-start mb-4">
+<div>
+<span class="px-2 py-0.5 bg-primary-container text-on-primary-container text-[10px] font-bold rounded-full">체중 65%ile</span>
+<p class="text-xs mt-1 text-on-surface-variant">평균보다 튼튼하게 자라고 있어요</p>
+</div>
+<div class="h-10 w-24 relative">
+<!-- SVG Placeholder for Chart -->
+<svg class="w-full h-full" viewbox="0 0 100 40">
+<path d="M0 35 Q 25 30, 50 20 T 100 10" fill="none" stroke="#FF8A80" stroke-width="2"></path>
+<circle cx="100" cy="10" fill="#FF8A80" r="3"></circle>
+</svg>
+</div>
+</div>
+<div class="w-full bg-surface-container-highest h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 65%"></div>
+</div>
+</div>
+<!-- Height Trend -->
+<div class="bg-white p-4 rounded-xl shadow-[0_2px_8px_rgba(62,39,35,0.08)]">
+<div class="flex flex-col gap-2">
+<span class="w-fit px-2 py-0.5 bg-tertiary-container text-on-tertiary-container text-[10px] font-bold rounded-full">신장 70%ile</span>
+<div class="h-8 w-full relative">
+<svg class="w-full h-full" viewbox="0 0 100 40">
+<path d="M0 38 Q 30 35, 60 20 T 100 5" fill="none" stroke="#81C784" stroke-width="2"></path>
+</svg>
+</div>
+<div class="w-full bg-surface-container-highest h-1.5 rounded-full overflow-hidden">
+<div class="bg-tertiary h-full rounded-full" style="width: 70%"></div>
+</div>
+</div>
+</div>
+<!-- Head Trend -->
+<div class="bg-white p-4 rounded-xl shadow-[0_2px_8px_rgba(62,39,35,0.08)]">
+<div class="flex flex-col gap-2">
+<span class="w-fit px-2 py-0.5 bg-secondary-container text-on-secondary-container text-[10px] font-bold rounded-full">머리 55%ile</span>
+<div class="h-8 w-full relative">
+<svg class="w-full h-full" viewbox="0 0 100 40">
+<path d="M0 30 Q 40 25, 70 22 T 100 18" fill="none" stroke="#FFD54F" stroke-width="2"></path>
+</svg>
+</div>
+<div class="w-full bg-surface-container-highest h-1.5 rounded-full overflow-hidden">
+<div class="bg-secondary h-full rounded-full" style="width: 55%"></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Growth Photo Button -->
+<button class="w-full bg-white border-2 border-dashed border-primary-container py-4 rounded-xl flex items-center justify-center gap-2 group active:bg-primary-container/5 transition-colors">
+<span class="material-symbols-outlined text-primary group-active:scale-110 transition-transform">photo_camera</span>
+<span class="font-headline font-semibold text-on-surface">성장 사진 촬영하기</span>
+</button>
+<!-- Save Button -->
+<button class="w-full bg-[#FF8A80] hover:bg-[#ff7b70] text-white font-headline font-bold py-4 rounded-xl shadow-lg shadow-[#FF8A80]/20 active:scale-[0.98] transition-all">
+            기록 저장하기
+        </button>
+<!-- Source Footer -->
+<footer class="pt-2 pb-10 flex flex-col items-center gap-1">
+<p class="text-[10px] text-[#8D6E63]/60">Source: WHO Child Growth Standards</p>
+<div class="w-16 h-1 bg-on-surface/5 rounded-full"></div>
+</footer>
+</main>
+<!-- Bottom Navigation Shell (Consistent with Shared Components) -->
+<nav class="fixed bottom-0 w-full z-50 flex justify-around items-center px-4 pb-4 pt-2 bg-white dark:bg-stone-950 border-t border-[#3E2723]/5 dark:border-white/5 shadow-[0_-2px_8px_rgba(62,39,35,0.05)] rounded-t-xl">
+<button class="flex flex-col items-center justify-center text-[#8D6E63] dark:text-stone-500 hover:text-[#FF8A80] transition-colors">
+<span class="material-symbols-outlined text-2xl">mail</span>
+<span class="font-plus-jakarta-sans text-[11px] font-medium mt-1">Letters</span>
+</button>
+<button class="flex flex-col items-center justify-center bg-[#FF8A80]/10 text-[#FF8A80] rounded-xl px-4 py-1">
+<span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1;">monitoring</span>
+<span class="font-plus-jakarta-sans text-[11px] font-medium mt-1">Growth</span>
+</button>
+<button class="flex flex-col items-center justify-center text-[#8D6E63] dark:text-stone-500 hover:text-[#FF8A80] transition-colors">
+<span class="material-symbols-outlined text-2xl">medical_services</span>
+<span class="font-plus-jakarta-sans text-[11px] font-medium mt-1">Health</span>
+</button>
+<button class="flex flex-col items-center justify-center text-[#8D6E63] dark:text-stone-500 hover:text-[#FF8A80] transition-colors">
+<span class="material-symbols-outlined text-2xl">auto_stories</span>
+<span class="font-plus-jakarta-sans text-[11px] font-medium mt-1">Memories</span>
+</button>
+</nav>
+</body></html>

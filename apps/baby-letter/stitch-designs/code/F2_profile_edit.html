@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+
+<html lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-error": "#fff7f7",
+                    "error-dim": "#6b0221",
+                    "surface-container-highest": "#ffdbce",
+                    "primary-container": "#f8847b",
+                    "on-tertiary-fixed": "#03501b",
+                    "secondary-fixed-dim": "#fad04b",
+                    "primary-fixed-dim": "#e8786e",
+                    "secondary-container": "#ffe087",
+                    "error-container": "#f97386",
+                    "on-secondary-fixed-variant": "#705900",
+                    "on-primary-fixed-variant": "#611211",
+                    "inverse-primary": "#f8847b",
+                    "tertiary-fixed": "#b4fdb4",
+                    "on-secondary": "#fff8ee",
+                    "on-secondary-fixed": "#4e3d00",
+                    "on-tertiary-fixed-variant": "#2a6e35",
+                    "surface-container": "#ffe9e2",
+                    "primary": "#9f403a",
+                    "surface-container-high": "#ffe2d9",
+                    "secondary-dim": "#665100",
+                    "outline": "#a26e5b",
+                    "on-surface": "#4e2819",
+                    "on-primary-fixed": "#170000",
+                    "tertiary-fixed-dim": "#a6eea7",
+                    "surface": "#fff8f6",
+                    "primary-fixed": "#f8847b",
+                    "secondary": "#745c00",
+                    "surface-bright": "#fff8f6",
+                    "tertiary": "#286c34",
+                    "tertiary-dim": "#1a5f29",
+                    "on-primary-container": "#540809",
+                    "on-surface-variant": "#835342",
+                    "on-tertiary": "#e9ffe4",
+                    "on-tertiary-container": "#1f632c",
+                    "tertiary-container": "#b4fdb4",
+                    "outline-variant": "#dfa48f",
+                    "surface-tint": "#9f403a",
+                    "inverse-on-surface": "#b89589",
+                    "surface-dim": "#ffd0bf",
+                    "on-error-container": "#6e0523",
+                    "surface-container-low": "#fff1ec",
+                    "on-primary": "#fff7f6",
+                    "surface-container-lowest": "#ffffff",
+                    "primary-dim": "#90352f",
+                    "secondary-fixed": "#ffe087",
+                    "error": "#a8364b",
+                    "on-secondary-container": "#644f00",
+                    "surface-variant": "#ffdbce",
+                    "background": "#fff8f6",
+                    "inverse-surface": "#1b0904",
+                    "on-background": "#4e2819"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Plus Jakarta Sans"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; background-color: #FFF8E1; }
+        .headline { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="text-on-surface min-h-screen pb-12">
+<!-- TopAppBar Section -->
+<header class="fixed top-0 left-0 w-full z-50 flex items-center justify-between px-5 h-16 bg-[#FFF8E1] dark:bg-stone-950 border-b border-[#3E2723]/10 dark:border-white/10 shadow-sm">
+<div class="flex items-center">
+<button class="material-symbols-outlined text-[#8D6E63] hover:opacity-80 transition-opacity active:scale-95 transition-transform" data-icon="arrow_back">arrow_back</button>
+</div>
+<h1 class="font-['Plus_Jakarta_Sans'] font-semibold text-lg text-[#3E2723] dark:text-stone-100">프로필 수정</h1>
+<button class="text-[#FF8A80] font-bold font-['Plus_Jakarta_Sans'] hover:opacity-80 transition-opacity active:scale-95 transition-transform">저장</button>
+</header>
+<main class="mt-20 px-5 max-w-md mx-auto">
+<!-- Avatar Section -->
+<section class="flex flex-col items-center mb-10">
+<div class="relative">
+<div class="w-28 h-28 rounded-full overflow-hidden border-4 border-white shadow-md bg-surface-container">
+<img alt="Profile Avatar" class="w-full h-full object-cover" data-alt="portrait of a warm smiling young woman with soft natural lighting and cream background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCRopRSxQefDw3-AN1Ng1tNRzgo110CWDzwKMEZmA9lgL3SCetTh7-da-nxyUPllOXczXfzge7s-WBoqg5p6joFZ76WONF3Le8p6QAOvTJv28FahwSiItpDlt6v3A09SYOp1QtKN2otpKQGSvoM1MXDY2ziJ1TJSHDnkqOfN2LOpzLism_r6ZJXTFvBAUjFi5Ih_aTC5v_BeKNaUADP5gwBNH-WY0OXx-mfJ-DR9b_li1I6Kns_eQQcq8t9oqFad6N9MJsj0QRKZK4e"/>
+</div>
+<button class="absolute bottom-0 right-0 w-9 h-9 bg-primary-fixed text-white rounded-full flex items-center justify-center shadow-lg border-2 border-white active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-[20px]" data-icon="photo_camera">photo_camera</span>
+</button>
+</div>
+<p class="mt-4 text-secondary text-sm font-medium">우리 아기와의 소중한 기록</p>
+</section>
+<!-- Form Section -->
+<div class="space-y-6">
+<div class="space-y-2">
+<label class="block text-sm font-bold text-on-surface-variant px-1">닉네임</label>
+<input class="w-full px-4 py-3 bg-white border border-outline-variant rounded-xl focus:ring-2 focus:ring-primary-container focus:border-primary-container outline-none transition-all shadow-sm" type="text" value="콩이 엄마"/>
+</div>
+<div class="space-y-2">
+<label class="block text-sm font-bold text-on-surface-variant px-1">아기 이름/태명</label>
+<input class="w-full px-4 py-3 bg-white border border-outline-variant rounded-xl focus:ring-2 focus:ring-primary-container focus:border-primary-container outline-none transition-all shadow-sm" type="text" value="콩순이"/>
+</div>
+<div class="space-y-2">
+<label class="block text-sm font-bold text-on-surface-variant px-1">모드</label>
+<div class="flex p-1 bg-surface-container-high rounded-xl">
+<button class="flex-1 py-2 text-sm font-bold bg-white text-primary rounded-lg shadow-sm">임신 중</button>
+<button class="flex-1 py-2 text-sm font-medium text-on-surface-variant">출산 후</button>
+</div>
+</div>
+<div class="space-y-2">
+<label class="block text-sm font-bold text-on-surface-variant px-1">출산예정일</label>
+<div class="relative">
+<input class="w-full px-4 py-3 bg-white border border-outline-variant rounded-xl focus:ring-2 focus:ring-primary-container outline-none transition-all shadow-sm cursor-pointer" readonly="" type="text" value="2026.08.15"/>
+<span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-outline" data-icon="calendar_today">calendar_today</span>
+</div>
+</div>
+<div class="space-y-3">
+<label class="block text-sm font-bold text-on-surface-variant px-1">수유 방법</label>
+<div class="flex flex-wrap gap-2">
+<button class="px-5 py-2 rounded-full text-sm font-bold bg-primary-fixed text-white shadow-sm transition-colors">모유</button>
+<button class="px-5 py-2 rounded-full text-sm font-medium bg-white text-on-surface-variant border border-outline-variant hover:bg-surface-container-low transition-colors">분유</button>
+<button class="px-5 py-2 rounded-full text-sm font-medium bg-white text-on-surface-variant border border-outline-variant hover:bg-surface-container-low transition-colors">혼합</button>
+</div>
+</div>
+<div class="pt-4 pb-2">
+<div class="h-px bg-outline-variant opacity-30"></div>
+</div>
+<div class="space-y-3 bg-surface-container-low p-4 rounded-2xl border border-outline-variant/20">
+<div class="flex items-center gap-2 mb-1">
+<span class="material-symbols-outlined text-primary-fixed" data-icon="favorite" style="font-variation-settings: 'FILL' 1;">favorite</span>
+<label class="text-sm font-bold text-on-surface-variant">배우자 연결</label>
+</div>
+<div class="flex gap-2">
+<input class="flex-1 px-4 py-3 bg-white border border-outline-variant rounded-xl focus:ring-2 focus:ring-primary-container outline-none transition-all text-sm" placeholder="초대 코드 입력" type="text"/>
+<button class="px-4 bg-primary-dim text-white font-bold rounded-xl text-sm whitespace-nowrap active:scale-95 transition-transform">연결</button>
+</div>
+<p class="text-[11px] text-secondary-dim px-1">코드를 공유하여 아기의 성장 기록을 함께 관리하세요.</p>
+</div>
+</div>
+<footer class="mt-16 text-center">
+<a class="text-error text-[12px] font-medium opacity-60 hover:opacity-100 transition-opacity underline underline-offset-4" href="#">회원 탈퇴</a>
+</footer>
+</main>
+</body></html>

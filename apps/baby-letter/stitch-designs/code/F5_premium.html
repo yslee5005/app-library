@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+
+<html lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "outline-variant": "#dfa48f",
+                    "surface-container": "#ffe9e2",
+                    "on-primary-fixed-variant": "#611211",
+                    "error-container": "#f97386",
+                    "inverse-on-surface": "#b89589",
+                    "primary": "#9f403a",
+                    "tertiary-fixed": "#b4fdb4",
+                    "on-background": "#4e2819",
+                    "primary-container": "#f8847b",
+                    "on-tertiary-container": "#1f632c",
+                    "tertiary-container": "#b4fdb4",
+                    "on-tertiary": "#e9ffe4",
+                    "on-secondary": "#fff8ee",
+                    "surface-container-high": "#ffe2d9",
+                    "surface-container-lowest": "#ffffff",
+                    "primary-fixed-dim": "#e8786e",
+                    "on-error-container": "#6e0523",
+                    "inverse-primary": "#f8847b",
+                    "on-error": "#fff7f7",
+                    "surface": "#fff8f6",
+                    "surface-container-highest": "#ffdbce",
+                    "secondary-dim": "#665100",
+                    "on-secondary-fixed-variant": "#705900",
+                    "on-tertiary-fixed": "#03501b",
+                    "error-dim": "#6b0221",
+                    "primary-dim": "#90352f",
+                    "error": "#a8364b",
+                    "surface-tint": "#9f403a",
+                    "surface-bright": "#fff8f6",
+                    "tertiary": "#286c34",
+                    "surface-container-low": "#fff1ec",
+                    "on-primary-container": "#540809",
+                    "secondary-fixed-dim": "#fad04b",
+                    "outline": "#a26e5b",
+                    "tertiary-fixed-dim": "#a6eea7",
+                    "on-tertiary-fixed-variant": "#2a6e35",
+                    "on-surface": "#4e2819",
+                    "on-secondary-container": "#644f00",
+                    "inverse-surface": "#1b0904",
+                    "surface-variant": "#ffdbce",
+                    "secondary-fixed": "#ffe087",
+                    "on-secondary-fixed": "#4e3d00",
+                    "on-surface-variant": "#835342",
+                    "primary-fixed": "#f8847b",
+                    "on-primary-fixed": "#170000",
+                    "tertiary-dim": "#1a5f29",
+                    "secondary-container": "#ffe087",
+                    "secondary": "#745c00",
+                    "surface-dim": "#ffd0bf",
+                    "background": "#fff8f6",
+                    "on-primary": "#fff7f6"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {},
+            "fontFamily": {
+                    "headline": ["Plus Jakarta Sans"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Inter', sans-serif; background-color: #FFF8E1; }
+        .plus-jakarta { font-family: 'Plus Jakarta Sans', sans-serif; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-[#FFF8E1] text-[#3E2723] min-h-screen pb-24">
+<!-- TopAppBar -->
+<header class="bg-[#FFF8E1] dark:bg-stone-900 flex items-center justify-between px-5 h-16 w-full fixed top-0 z-50 border-none transition-opacity">
+<button class="active:scale-95 duration-100 text-[#FF8A80]">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<h1 class="font-['Plus_Jakarta_Sans'] font-bold text-[#3E2723] dark:text-stone-100 text-lg">프리미엄</h1>
+<div class="w-6"></div> <!-- Spacer for center alignment -->
+</header>
+<main class="pt-16 max-w-md mx-auto px-5">
+<!-- Hero Section -->
+<section class="mt-4 relative overflow-hidden rounded-[24px] bg-gradient-to-br from-[#FF8A80] to-[#f8847b] p-8 text-center shadow-lg">
+<div class="absolute -top-4 -right-4 opacity-20 transform rotate-12">
+<span class="material-symbols-outlined text-9xl text-white">auto_awesome</span>
+</div>
+<div class="relative z-10">
+<div class="inline-flex items-center justify-center w-16 h-16 bg-white/20 rounded-full mb-4">
+<span class="text-3xl">👑</span>
+</div>
+<h2 class="plus-jakarta font-extrabold text-white text-2xl mb-2 tracking-tight">아기의 편지 Premium</h2>
+<p class="text-white/90 font-medium text-sm">더 자세한 성장 기록을 만나보세요</p>
+<div class="mt-4 flex justify-center gap-1">
+<span class="material-symbols-outlined text-[#FFD54F] text-xs" style="font-variation-settings: 'FILL' 1;">colors_spark</span>
+<span class="material-symbols-outlined text-[#FFD54F] text-xs" style="font-variation-settings: 'FILL' 1;">colors_spark</span>
+<span class="material-symbols-outlined text-[#FFD54F] text-xs" style="font-variation-settings: 'FILL' 1;">colors_spark</span>
+</div>
+</div>
+</section>
+<!-- Comparison Section -->
+<section class="mt-8 bg-white rounded-[20px] shadow-[0_2px_8px_rgba(62,39,35,0.08)] overflow-hidden">
+<div class="grid grid-cols-2 text-center border-b border-[#3E2723]/5">
+<div class="py-4 bg-[#F5F5F5] text-[#8D6E63] font-bold text-sm">무료</div>
+<div class="py-4 bg-[#FF8A80]/10 text-[#FF8A80] font-bold text-sm border-l border-[#3E2723]/5">프리미엄</div>
+</div>
+<div class="p-2">
+<!-- Row 1 -->
+<div class="grid grid-cols-2 py-3 border-b border-dashed border-[#3E2723]/10">
+<div class="px-4 text-center">
+<span class="block text-[11px] text-[#8D6E63] mb-1">일일 기록</span>
+<span class="material-symbols-outlined text-[#81C784]">check_circle</span>
+</div>
+<div class="px-4 text-center border-l border-dashed border-[#3E2723]/10">
+<span class="block text-[11px] text-[#FF8A80] font-bold mb-1">모든 무료 기능</span>
+<span class="material-symbols-outlined text-[#FF8A80]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+</div>
+<!-- Row 2 -->
+<div class="grid grid-cols-2 py-3 border-b border-dashed border-[#3E2723]/10">
+<div class="px-4 text-center">
+<span class="block text-[11px] text-[#8D6E63] mb-1">아기 편지</span>
+<span class="material-symbols-outlined text-[#81C784]">check_circle</span>
+</div>
+<div class="px-4 text-center border-l border-dashed border-[#3E2723]/10">
+<span class="block text-[11px] text-[#FF8A80] font-bold mb-1">WHO 성장 차트</span>
+<span class="material-symbols-outlined text-[#FF8A80]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+</div>
+<!-- Row 3 -->
+<div class="grid grid-cols-2 py-3 border-b border-dashed border-[#3E2723]/10">
+<div class="px-4 text-center">
+<span class="block text-[11px] text-[#8D6E63] mb-1">EPDS 체크</span>
+<span class="material-symbols-outlined text-[#81C784]">check_circle</span>
+</div>
+<div class="px-4 text-center border-l border-dashed border-[#3E2723]/10">
+<span class="block text-[11px] text-[#FF8A80] font-bold mb-1">AI 인사이트</span>
+<span class="material-symbols-outlined text-[#FF8A80]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+</div>
+<!-- Row 4 -->
+<div class="grid grid-cols-2 py-3 border-b border-dashed border-[#3E2723]/10">
+<div class="px-4 text-center">
+<span class="block text-[11px] text-[#8D6E63] mb-1">기본 차트</span>
+<span class="material-symbols-outlined text-[#81C784]">check_circle</span>
+</div>
+<div class="px-4 text-center border-l border-dashed border-[#3E2723]/10">
+<span class="block text-[11px] text-[#FF8A80] font-bold mb-1">패턴 시각화</span>
+<span class="material-symbols-outlined text-[#FF8A80]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+</div>
+<!-- Row 5 (Premium Only) -->
+<div class="grid grid-cols-2 py-3">
+<div class="px-4 text-center opacity-20">
+<span class="block text-[11px] text-[#8D6E63] mb-1">-</span>
+<span class="material-symbols-outlined">block</span>
+</div>
+<div class="px-4 text-center border-l border-dashed border-[#3E2723]/10">
+<span class="block text-[11px] text-[#FF8A80] font-bold mb-1">PDF 리포트 / 광고 없음</span>
+<span class="material-symbols-outlined text-[#FF8A80]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Pricing Cards -->
+<section class="mt-8 space-y-4">
+<!-- Yearly Subscription -->
+<button class="w-full relative group transition-transform active:scale-95 duration-100">
+<div class="absolute -top-3 left-6 bg-[#FFD54F] text-[#3E2723] text-[11px] font-bold px-3 py-1 rounded-full shadow-sm z-10">인기</div>
+<div class="bg-[#FF8A80] text-white p-6 rounded-[20px] shadow-lg flex justify-between items-center text-left">
+<div>
+<p class="font-bold text-lg mb-1">연구독 ₩39,000/년</p>
+<p class="text-white/80 text-sm">월 ₩3,250</p>
+</div>
+<div class="bg-white/20 p-2 rounded-full">
+<span class="material-symbols-outlined">chevron_right</span>
+</div>
+</div>
+</button>
+<!-- Monthly Subscription -->
+<button class="w-full transition-transform active:scale-95 duration-100">
+<div class="border-2 border-[#FF8A80]/30 bg-white p-6 rounded-[20px] flex justify-between items-center text-left hover:border-[#FF8A80] transition-colors">
+<div>
+<p class="font-bold text-lg text-[#3E2723] mb-1">월구독 ₩4,900/월</p>
+<p class="text-[#8D6E63] text-sm">유연하게 이용하기</p>
+</div>
+<div class="bg-[#FF8A80]/10 p-2 rounded-full text-[#FF8A80]">
+<span class="material-symbols-outlined">chevron_right</span>
+</div>
+</div>
+</button>
+</section>
+<!-- Footer -->
+<footer class="mt-8 text-center px-4">
+<p class="text-[#8D6E63] text-[11px] leading-relaxed mb-4">
+                7일 무료 체험 기간이 종료되면 선택하신 요금제로 자동 결제됩니다.<br/>
+                App Store 계정 설정에서 언제든지 해지할 수 있습니다.
+            </p>
+<button class="text-[#FF8A80] font-bold text-sm underline active:opacity-50">구매 내역 복원 (Restore purchases)</button>
+</footer>
+<!-- Decorative Image -->
+<div class="mt-12 mb-8 rounded-2xl overflow-hidden shadow-md">
+<img alt="Baby sleeping peacefully" class="w-full h-40 object-cover" data-alt="Soft focused warm image of a sleeping newborn baby on cream linen with gentle sunlight casting soft shadows" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDb1uyIcS9u345lvdbKza7FYVIfrxwoh5TeGQG3fB4ggkcNwJs54vKL5Fiq7YXSWybPld2R0UZhi2LNBe8xLZ6kh_AMQ-h8N8cnVSJwTclxtYqwxa4T8Sqgfmh_Z6ZuHdAHQ_wCWYihp15rpSFR4KOFCL7_NGPnmWmCa2xk1SygXtASoezsLeGk-IMoh0tETVS5-w43TPxbDlxBXtoWwbpIFNe_Lu0fwsdA2foAtvdkRpULLX14BTspHw47S6LV7yjqZ6_SB7dyv3zz"/>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center px-4 pt-2 pb-6 bg-white dark:bg-stone-800 border-t border-[#3E2723]/5 dark:border-white/5 shadow-[0_-2px_10px_rgba(62,39,35,0.05)] rounded-t-3xl z-50">
+<a class="flex flex-col items-center justify-center text-[#8D6E63] dark:text-stone-400 hover:bg-stone-100 dark:hover:bg-stone-700 rounded-2xl px-3 py-1 transition-transform active:scale-90" href="#">
+<span class="material-symbols-outlined mb-1">mail</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[11px] font-medium">편지</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#8D6E63] dark:text-stone-400 hover:bg-stone-100 dark:hover:bg-stone-700 rounded-2xl px-3 py-1 transition-transform active:scale-90" href="#">
+<span class="material-symbols-outlined mb-1">monitoring</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[11px] font-medium">성장</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#8D6E63] dark:text-stone-400 hover:bg-stone-100 dark:hover:bg-stone-700 rounded-2xl px-3 py-1 transition-transform active:scale-90" href="#">
+<span class="material-symbols-outlined mb-1">groups</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[11px] font-medium">커뮤니티</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#FF8A80] font-bold bg-[#FF8A80]/10 rounded-2xl px-3 py-1 transition-transform active:scale-90" href="#">
+<span class="material-symbols-outlined mb-1">person</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[11px] font-medium">마이</span>
+</a>
+</nav>
+</body></html>

@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+
+<html lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>알림 센터 - BabyLetter</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-tertiary": "#e9ffe4",
+                    "on-error": "#fff7f7",
+                    "surface-container-highest": "#ffdbce",
+                    "primary-dim": "#90352f",
+                    "surface-bright": "#fff8f6",
+                    "outline": "#a26e5b",
+                    "secondary": "#745c00",
+                    "on-surface": "#4e2819",
+                    "error-container": "#f97386",
+                    "surface-variant": "#ffdbce",
+                    "tertiary-dim": "#1a5f29",
+                    "on-surface-variant": "#835342",
+                    "primary-container": "#f8847b",
+                    "surface-dim": "#ffd0bf",
+                    "on-tertiary-fixed-variant": "#2a6e35",
+                    "error-dim": "#6b0221",
+                    "tertiary-container": "#b4fdb4",
+                    "on-secondary-fixed": "#4e3d00",
+                    "inverse-on-surface": "#b89589",
+                    "surface-tint": "#9f403a",
+                    "inverse-primary": "#f8847b",
+                    "on-tertiary-fixed": "#03501b",
+                    "tertiary-fixed-dim": "#a6eea7",
+                    "on-primary": "#fff7f6",
+                    "error": "#a8364b",
+                    "surface-container-high": "#ffe2d9",
+                    "outline-variant": "#dfa48f",
+                    "on-background": "#4e2819",
+                    "surface-container": "#ffe9e2",
+                    "secondary-fixed": "#ffe087",
+                    "on-secondary": "#fff8ee",
+                    "on-error-container": "#6e0523",
+                    "primary-fixed": "#f8847b",
+                    "secondary-fixed-dim": "#fad04b",
+                    "on-primary-fixed": "#170000",
+                    "secondary-dim": "#665100",
+                    "secondary-container": "#ffe087",
+                    "primary-fixed-dim": "#e8786e",
+                    "on-primary-container": "#540809",
+                    "tertiary-fixed": "#b4fdb4",
+                    "on-primary-fixed-variant": "#611211",
+                    "tertiary": "#286c34",
+                    "inverse-surface": "#1b0904",
+                    "primary": "#9f403a",
+                    "on-secondary-fixed-variant": "#705900",
+                    "background": "#fff8f6",
+                    "surface-container-lowest": "#ffffff",
+                    "on-tertiary-container": "#1f632c",
+                    "surface": "#fff8f6",
+                    "on-secondary-container": "#644f00",
+                    "surface-container-low": "#fff1ec"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {},
+            "fontFamily": {
+                    "headline": ["Plus Jakarta Sans"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { background-color: #FFF8E1; font-family: 'Inter', sans-serif; }
+        .font-headline { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="min-h-screen text-on-background pb-24">
+<nav class="fixed top-0 w-full z-50 bg-[#FFF8E1] dark:bg-stone-950 flex items-center justify-between px-5 h-16 border-none shadow-none">
+<div class="flex items-center gap-3">
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-[#FFD54F]/20 transition-colors active:scale-95 duration-150">
+<span class="material-symbols-outlined text-[#8D6E63]">arrow_back</span>
+</button>
+<h1 class="text-xl font-headline font-bold text-[#3E2723] dark:text-stone-100">알림</h1>
+</div>
+<button class="text-[#FF8A80] font-headline font-semibold text-sm hover:opacity-80 active:scale-95 transition-all">
+            모두 읽음
+        </button>
+</nav>
+<main class="pt-20 px-5 max-w-2xl mx-auto">
+<section class="mb-8">
+<div class="flex items-center gap-2 mb-4">
+<h2 class="font-headline font-bold text-[#3E2723] text-lg">오늘</h2>
+<span class="bg-[#FF8A80] text-white text-[10px] font-bold px-2 py-0.5 rounded-full">2</span>
+</div>
+<div class="space-y-3">
+<div class="bg-white rounded-lg p-4 shadow-[0_2px_8px_rgba(62,39,35,0.08)] border-l-4 border-[#FF8A80] relative flex items-start gap-4">
+<div class="w-12 h-12 rounded-full bg-[#FFF1EC] flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-[#FF8A80]" style="font-variation-settings: 'FILL' 1;">mail</span>
+</div>
+<div class="flex-1">
+<h3 class="text-[#3E2723] font-medium text-[15px] leading-tight mb-1">💌 콩순이가 새 편지를 보냈어요</h3>
+<p class="text-[#8D6E63] text-xs">2시간 전</p>
+</div>
+<div class="w-2 h-2 bg-[#FF8A80] rounded-full mt-2"></div>
+</div>
+<div class="bg-white rounded-lg p-4 shadow-[0_2px_8px_rgba(62,39,35,0.08)] border-l-4 border-[#FF8A80] relative flex items-start gap-4">
+<div class="w-12 h-12 rounded-full bg-[#FFF8EE] flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-[#FFD54F]" style="font-variation-settings: 'FILL' 1;">task_alt</span>
+</div>
+<div class="flex-1">
+<h3 class="text-[#3E2723] font-medium text-[15px] leading-tight mb-1">🎯 오늘의 가족 미션이 도착했어요</h3>
+<p class="text-[#8D6E63] text-xs">5시간 전</p>
+</div>
+<div class="w-2 h-2 bg-[#FF8A80] rounded-full mt-2"></div>
+</div>
+<div class="bg-white/60 rounded-lg p-4 shadow-[0_2px_4px_rgba(62,39,35,0.04)] flex items-start gap-4">
+<div class="w-12 h-12 rounded-full bg-stone-100 flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-stone-400">monitoring</span>
+</div>
+<div class="flex-1">
+<h3 class="text-[#8D6E63] font-medium text-[15px] leading-tight mb-1">📊 주간 성장 리포트가 준비됐어요</h3>
+<p class="text-stone-400 text-xs">어제</p>
+</div>
+</div>
+</div>
+</section>
+<section class="mb-12">
+<h2 class="font-headline font-bold text-[#3E2723] text-lg mb-4">어제</h2>
+<div class="space-y-3">
+<div class="bg-white/60 rounded-lg p-4 shadow-[0_2px_4px_rgba(62,39,35,0.04)] flex items-start gap-4">
+<div class="w-12 h-12 rounded-full bg-stone-100 flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-stone-400">military_tech</span>
+</div>
+<div class="flex-1">
+<h3 class="text-[#8D6E63] font-medium text-[15px] leading-tight mb-1">🏆 새 뱃지를 획득했어요! 첫 기록</h3>
+<p class="text-stone-400 text-xs">어제</p>
+</div>
+</div>
+<div class="bg-white/60 rounded-lg p-4 shadow-[0_2px_4px_rgba(62,39,35,0.04)] flex items-start gap-4">
+<div class="w-12 h-12 rounded-full bg-stone-100 flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-stone-400">favorite</span>
+</div>
+<div class="flex-1">
+<h3 class="text-[#8D6E63] font-medium text-[15px] leading-tight mb-1">💛 아빠가 감정 체크인을 완료했어요</h3>
+<p class="text-stone-400 text-xs">어제</p>
+</div>
+</div>
+</div>
+</section>
+<div class="bg-[#FFD54F]/10 rounded-2xl p-6 text-center border border-[#FFD54F]/20">
+<div class="w-16 h-16 bg-white rounded-full mx-auto mb-4 flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-[#FFD54F] text-3xl">child_care</span>
+</div>
+<p class="text-[#3E2723] font-headline font-semibold mb-1">"엄마, 오늘은 어떤 소식이 있나요?"</p>
+<p class="text-[#8D6E63] text-sm leading-relaxed">아기와의 소중한 기록들을 놓치지 않도록<br/>알림 설정을 확인해보세요.</p>
+</div>
+</main>
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center pt-3 pb-6 px-4 bg-white/80 dark:bg-stone-900/80 backdrop-blur-md z-50 rounded-t-3xl border-t border-stone-100 dark:border-stone-800 shadow-[0_-2px_10px_rgba(62,39,35,0.05)]">
+<a class="flex flex-col items-center justify-center text-[#8D6E63] hover:opacity-80 active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined mb-1">mail</span>
+<span class="font-headline font-medium text-[11px]">Letters</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#8D6E63] hover:opacity-80 active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined mb-1">task_alt</span>
+<span class="font-headline font-medium text-[11px]">Missions</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#8D6E63] hover:opacity-80 active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined mb-1">monitoring</span>
+<span class="font-headline font-medium text-[11px]">Growth</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#FF8A80] font-semibold hover:opacity-80 active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 1;">person</span>
+<span class="font-headline font-medium text-[11px]">Profile</span>
+</a>
+</nav>
+</body></html>

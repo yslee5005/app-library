@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+
+<html lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-secondary-fixed": "#4e3d00",
+                    "on-tertiary-fixed-variant": "#2a6e35",
+                    "tertiary-fixed": "#b4fdb4",
+                    "on-tertiary-container": "#1f632c",
+                    "primary-dim": "#90352f",
+                    "surface-container-low": "#fff1ec",
+                    "on-background": "#4e2819",
+                    "primary": "#9f403a",
+                    "secondary-container": "#ffe087",
+                    "on-tertiary": "#e9ffe4",
+                    "on-error-container": "#6e0523",
+                    "surface-container-lowest": "#ffffff",
+                    "secondary-fixed": "#ffe087",
+                    "tertiary-dim": "#1a5f29",
+                    "on-primary": "#fff7f6",
+                    "error-container": "#f97386",
+                    "on-error": "#fff7f7",
+                    "inverse-on-surface": "#b89589",
+                    "error": "#a8364b",
+                    "primary-fixed-dim": "#e8786e",
+                    "surface-container-high": "#ffe2d9",
+                    "on-primary-container": "#540809",
+                    "inverse-surface": "#1b0904",
+                    "surface-container-highest": "#ffdbce",
+                    "tertiary-fixed-dim": "#a6eea7",
+                    "on-surface-variant": "#835342",
+                    "surface-tint": "#9f403a",
+                    "outline": "#a26e5b",
+                    "primary-container": "#f8847b",
+                    "primary-fixed": "#f8847b",
+                    "on-tertiary-fixed": "#03501b",
+                    "surface": "#fff8f6",
+                    "tertiary": "#286c34",
+                    "secondary": "#745c00",
+                    "outline-variant": "#dfa48f",
+                    "on-secondary-container": "#644f00",
+                    "inverse-primary": "#f8847b",
+                    "on-surface": "#4e2819",
+                    "surface-variant": "#ffdbce",
+                    "on-primary-fixed": "#170000",
+                    "surface-bright": "#fff8f6",
+                    "surface-container": "#ffe9e2",
+                    "error-dim": "#6b0221",
+                    "on-secondary-fixed-variant": "#705900",
+                    "background": "#fff8f6",
+                    "tertiary-container": "#b4fdb4",
+                    "secondary-dim": "#665100",
+                    "on-primary-fixed-variant": "#611211"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Plus Jakarta Sans"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { background-color: #FFF8E1; font-family: 'Inter', sans-serif; }
+        .font-plus { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="text-on-surface">
+<!-- TopAppBar Component -->
+<header class="bg-[#FFF8E1] flex items-center justify-between px-5 h-16 w-full fixed top-0 z-50 border-none">
+<div class="flex items-center gap-3">
+<button class="text-[#FF8A80] active:scale-95 transition-transform hover:opacity-80">
+<span class="material-symbols-outlined" data-icon="arrow_back">arrow_back</span>
+</button>
+<h1 class="text-lg font-bold font-plus text-[#3E2723]">마음 건강 체크</h1>
+</div>
+<div class="text-[#FF8A80] font-plus font-bold text-sm">3 / 10</div>
+</header>
+<!-- Global Progress Bar -->
+<div class="fixed top-16 left-0 w-full h-1 bg-[#3E2723]/5 z-40">
+<div class="h-full bg-[#FF8A80] transition-all duration-500" style="width: 30%;"></div>
+</div>
+<!-- Main Content Canvas -->
+<main class="pt-24 pb-32 px-5 max-w-md mx-auto">
+<!-- Emotional Intro Card -->
+<section class="mb-6 rounded-xl p-5 bg-gradient-to-br from-[#FFF8E1] to-[#FFF1EC] border border-[#FF8A80]/10">
+<div class="flex flex-col gap-1">
+<h2 class="text-[#3E2723] font-plus font-bold text-lg leading-tight">지난 7일 동안의 마음을 돌아볼게요</h2>
+<p class="text-[#8D6E63] font-medium text-sm">솔직하게 답해주세요. 정답은 없어요 💛</p>
+<div class="mt-3 inline-flex items-center gap-1.5 px-2 py-1 bg-white/60 rounded-full w-fit">
+<span class="text-[10px] font-bold text-[#FF8A80] uppercase tracking-wider">EPDS</span>
+<span class="text-[10px] text-[#8D6E63]">Edinburgh Postnatal Depression Scale</span>
+</div>
+</div>
+</section>
+<!-- Question Card -->
+<section class="bg-white rounded-xl shadow-[0_2px_8px_rgba(62,39,35,0.08)] p-6 mb-8 relative overflow-hidden">
+<div class="flex items-center gap-3 mb-4">
+<div class="w-7 h-7 bg-[#FF8A80] rounded-full flex items-center justify-center text-white text-xs font-bold">Q3</div>
+<span class="text-[#8D6E63] text-sm font-medium">지난 7일 동안...</span>
+</div>
+<h3 class="text-[#3E2723] font-plus font-bold text-xl leading-relaxed">
+                일이 잘못되었을 때 불필요하게 자신을 탓했다
+            </h3>
+<!-- Answer Options -->
+<div class="mt-8 flex flex-col gap-3">
+<!-- Option 1 -->
+<button class="w-full flex items-center gap-4 p-4 rounded-xl border border-[#3E2723]/10 bg-white hover:bg-[#FF8A80]/5 transition-all text-left">
+<div class="w-5 h-5 rounded-full border-2 border-[#3E2723]/20 flex items-center justify-center"></div>
+<span class="text-[#3E2723] font-medium">항상 그랬다</span>
+</button>
+<!-- Option 2 -->
+<button class="w-full flex items-center gap-4 p-4 rounded-xl border border-[#3E2723]/10 bg-white hover:bg-[#FF8A80]/5 transition-all text-left">
+<div class="w-5 h-5 rounded-full border-2 border-[#3E2723]/20 flex items-center justify-center"></div>
+<span class="text-[#3E2723] font-medium">대부분 그랬다</span>
+</button>
+<!-- Option 3: SELECTED -->
+<button class="w-full flex items-center gap-4 p-4 rounded-xl border-2 border-[#FF8A80] bg-[#FF8A80]/5 transition-all text-left shadow-sm">
+<div class="w-5 h-5 rounded-full bg-[#FF8A80] flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-xs" style="font-variation-settings: 'wght' 700;">check</span>
+</div>
+<span class="text-[#3E2723] font-bold">가끔 그랬다</span>
+</button>
+<!-- Option 4 -->
+<button class="w-full flex items-center gap-4 p-4 rounded-xl border border-[#3E2723]/10 bg-white hover:bg-[#FF8A80]/5 transition-all text-left">
+<div class="w-5 h-5 rounded-full border-2 border-[#3E2723]/20 flex items-center justify-center"></div>
+<span class="text-[#3E2723] font-medium">전혀 그렇지 않았다</span>
+</button>
+</div>
+</section>
+<!-- Reassurance Footer -->
+<footer class="flex flex-col items-center gap-2 text-center px-4">
+<div class="flex items-center gap-1.5 text-[#8D6E63] text-[11px]">
+<span class="material-symbols-outlined text-xs" data-icon="lock" style="font-variation-settings: 'FILL' 1;">lock</span>
+<span>응답은 안전하게 보호됩니다</span>
+</div>
+<div class="space-y-0.5 opacity-60">
+<p class="text-[#8D6E63] text-[11px]">이 결과는 의학적 진단이 아닌 자가평가입니다</p>
+<p class="text-[#8D6E63] text-[11px]">걱정되는 부분이 있다면 전문가와 상담하세요</p>
+</div>
+</footer>
+</main>
+<!-- Navigation Buttons Shell -->
+<div class="fixed bottom-0 left-0 w-full bg-white/80 backdrop-blur-md px-5 py-4 pb-8 flex items-center justify-between gap-4 z-50">
+<button class="flex-1 py-3 text-[#8D6E63] font-bold font-plus hover:bg-[#3E2723]/5 rounded-xl transition-all active:scale-95">
+            ← 이전
+        </button>
+<button class="flex-[2] py-3 bg-[#FF8A80] text-white font-bold font-plus rounded-xl shadow-lg shadow-[#FF8A80]/20 hover:opacity-90 transition-all active:scale-95">
+            다음 →
+        </button>
+</div>
+<!-- Hidden BottomNavBar for structure reference (Suppressed as per task context) -->
+<!-- Navigation shell is suppressed here to prioritize the focused assessment journey -->
+</body></html>
