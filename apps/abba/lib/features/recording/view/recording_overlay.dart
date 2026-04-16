@@ -34,6 +34,7 @@ class _RecordingOverlayState extends ConsumerState<RecordingOverlay>
   void initState() {
     super.initState();
     _sttService = ref.read(sttServiceProvider);
+    ref.read(isRecordingProvider.notifier).state = true;
     ErrorLoggingService.addBreadcrumb(
       'Recording started',
       category: 'recording',
@@ -97,7 +98,75 @@ class _RecordingOverlayState extends ConsumerState<RecordingOverlay>
     _pulseController.dispose();
     _textController.dispose();
     _sttService.stopListening();
+    ref.read(isRecordingProvider.notifier).state = false;
     super.dispose();
+  }
+
+  Future<bool> _confirmLeave() async {
+    final l10n = AppLocalizations.of(context)!;
+    final confirmed = await showDialog<bool>(
+      context: context,
+      builder: (context) => AlertDialog(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(AbbaRadius.lg),
+        ),
+        title: Text(
+          l10n.leaveRecordingTitle,
+          style: AbbaTypography.h2,
+          textAlign: TextAlign.center,
+        ),
+        content: Text(
+          l10n.leaveRecordingMessage,
+          style: AbbaTypography.body,
+          textAlign: TextAlign.center,
+        ),
+        actionsPadding: const EdgeInsets.fromLTRB(
+          AbbaSpacing.lg, 0, AbbaSpacing.lg, AbbaSpacing.lg,
+        ),
+        actions: [
+          Column(
+            children: [
+              SizedBox(
+                width: double.infinity,
+                height: abbaButtonHeight,
+                child: ElevatedButton(
+                  onPressed: () => Navigator.pop(context, true),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: AbbaColors.error,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(AbbaRadius.md),
+                    ),
+                  ),
+                  child: Text(
+                    l10n.leaveButton,
+                    style: AbbaTypography.body.copyWith(color: AbbaColors.white),
+                  ),
+                ),
+              ),
+              const SizedBox(height: AbbaSpacing.sm),
+              SizedBox(
+                width: double.infinity,
+                height: abbaButtonHeight,
+                child: OutlinedButton(
+                  onPressed: () => Navigator.pop(context, false),
+                  style: OutlinedButton.styleFrom(
+                    side: const BorderSide(color: AbbaColors.sage),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(AbbaRadius.md),
+                    ),
+                  ),
+                  child: Text(
+                    l10n.stayButton,
+                    style: AbbaTypography.body.copyWith(color: AbbaColors.sage),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+    return confirmed == true;
   }
 
   String get _formattedTime {
@@ -137,7 +206,16 @@ class _RecordingOverlayState extends ConsumerState<RecordingOverlay>
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
 
-    return Container(
+    return PopScope(
+      canPop: false,
+      onPopInvokedWithResult: (didPop, _) async {
+        if (didPop) return;
+        if (await _confirmLeave()) {
+          _sttService.cancelListening();
+          if (context.mounted) Navigator.of(context).pop();
+        }
+      },
+      child: Container(
       decoration: const BoxDecoration(
         color: AbbaColors.cream,
         borderRadius: BorderRadius.vertical(
@@ -160,9 +238,11 @@ class _RecordingOverlayState extends ConsumerState<RecordingOverlay>
                     label: l10n.closeRecording,
                     button: true,
                     child: IconButton(
-                      onPressed: () {
-                        _sttService.cancelListening();
-                        Navigator.of(context).pop();
+                      onPressed: () async {
+                        if (await _confirmLeave()) {
+                          _sttService.cancelListening();
+                          if (context.mounted) Navigator.of(context).pop();
+                        }
                       },
                       icon: const Icon(Icons.close, size: 28),
                       color: AbbaColors.warmBrown,
@@ -337,6 +417,7 @@ class _RecordingOverlayState extends ConsumerState<RecordingOverlay>
           ],
         ),
       ),
+    ),
     );
   }
 }

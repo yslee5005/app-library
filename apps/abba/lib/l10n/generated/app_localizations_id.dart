@@ -728,4 +728,17 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get membershipActive => 'Keanggotaan Aktif';
+
+  @override
+  String get leaveRecordingTitle => 'Tinggalkan rekaman?';
+
+  @override
+  String get leaveRecordingMessage =>
+      'Rekaman Anda akan hilang. Apakah Anda yakin?';
+
+  @override
+  String get leaveButton => 'Tinggalkan';
+
+  @override
+  String get stayButton => 'Tetap di sini';
 }

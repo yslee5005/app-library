@@ -296,5 +296,9 @@
   "yearlyPlan": "Anual",
   "yearlySavings": "R$25/mês (37% de desconto)",
   "startMembership": "Começar",
-  "membershipActive": "Assinatura Ativa"
+  "membershipActive": "Assinatura Ativa",
+  "leaveRecordingTitle": "Sair da gravação?",
+  "leaveRecordingMessage": "Sua gravação será perdida. Tem certeza?",
+  "leaveButton": "Sair",
+  "stayButton": "Ficar"
 }

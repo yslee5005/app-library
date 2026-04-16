@@ -296,5 +296,9 @@
   "yearlyPlan": "ዓመታዊ",
   "yearlySavings": "$5.00/ወር (37% ቅናሽ)",
   "startMembership": "ይጀምሩ",
-  "membershipActive": "አባልነት ንቁ"
+  "membershipActive": "አባልነት ንቁ",
+  "leaveRecordingTitle": "ቀረጻውን ይተዉ?",
+  "leaveRecordingMessage": "ቀረጻዎ ይጠፋል። እርግጠኛ ነዎት?",
+  "leaveButton": "ይውጡ",
+  "stayButton": "ይቆዩ"
 }

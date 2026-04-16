@@ -728,4 +728,17 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get membershipActive => 'सदस्यता सक्रिय';
+
+  @override
+  String get leaveRecordingTitle => 'रिकॉर्डिंग छोड़ें?';
+
+  @override
+  String get leaveRecordingMessage =>
+      'आपकी रिकॉर्डिंग खो जाएगी। क्या आप निश्चित हैं?';
+
+  @override
+  String get leaveButton => 'छोड़ें';
+
+  @override
+  String get stayButton => 'रुकें';
 }

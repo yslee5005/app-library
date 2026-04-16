@@ -728,4 +728,16 @@ class AppLocalizationsUk extends AppLocalizations {
 
   @override
   String get membershipActive => 'Підписка Активна';
+
+  @override
+  String get leaveRecordingTitle => 'Залишити запис?';
+
+  @override
+  String get leaveRecordingMessage => 'Ваш запис буде втрачено. Ви впевнені?';
+
+  @override
+  String get leaveButton => 'Залишити';
+
+  @override
+  String get stayButton => 'Залишитися';
 }

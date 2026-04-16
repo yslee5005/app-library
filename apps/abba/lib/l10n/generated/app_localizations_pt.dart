@@ -729,4 +729,16 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get membershipActive => 'Assinatura Ativa';
+
+  @override
+  String get leaveRecordingTitle => 'Sair da gravação?';
+
+  @override
+  String get leaveRecordingMessage => 'Sua gravação será perdida. Tem certeza?';
+
+  @override
+  String get leaveButton => 'Sair';
+
+  @override
+  String get stayButton => 'Ficar';
 }

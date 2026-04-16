@@ -296,5 +296,9 @@
   "yearlyPlan": "Éves",
   "yearlySavings": "1 916 Ft/hó (37% kedvezmény)",
   "startMembership": "Indítás",
-  "membershipActive": "Tagság Aktív"
+  "membershipActive": "Tagság Aktív",
+  "leaveRecordingTitle": "Kilép a felvételből?",
+  "leaveRecordingMessage": "A felvétel elvész. Biztosan kilép?",
+  "leaveButton": "Kilépés",
+  "stayButton": "Maradok"
 }

@@ -732,4 +732,17 @@ class AppLocalizationsRo extends AppLocalizations {
 
   @override
   String get membershipActive => 'Abonament Activ';
+
+  @override
+  String get leaveRecordingTitle => 'Părăsești înregistrarea?';
+
+  @override
+  String get leaveRecordingMessage =>
+      'Înregistrarea ta va fi pierdută. Ești sigur?';
+
+  @override
+  String get leaveButton => 'Părăsește';
+
+  @override
+  String get stayButton => 'Rămâi';
 }

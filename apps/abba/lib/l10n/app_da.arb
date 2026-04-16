@@ -296,5 +296,9 @@
   "yearlyPlan": "Årlig",
   "yearlySavings": "37 kr/mdr (37% rabat)",
   "startMembership": "Begynd nu",
-  "membershipActive": "Medlemskab Aktivt"
+  "membershipActive": "Medlemskab Aktivt",
+  "leaveRecordingTitle": "Forlad optagelsen?",
+  "leaveRecordingMessage": "Din optagelse vil gå tabt. Er du sikker?",
+  "leaveButton": "Forlad",
+  "stayButton": "Bliv"
 }

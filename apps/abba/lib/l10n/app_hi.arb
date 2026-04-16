@@ -296,5 +296,9 @@
   "yearlyPlan": "वार्षिक",
   "yearlySavings": "₹408/माह (37% छूट)",
   "startMembership": "शुरू करें",
-  "membershipActive": "सदस्यता सक्रिय"
+  "membershipActive": "सदस्यता सक्रिय",
+  "leaveRecordingTitle": "रिकॉर्डिंग छोड़ें?",
+  "leaveRecordingMessage": "आपकी रिकॉर्डिंग खो जाएगी। क्या आप निश्चित हैं?",
+  "leaveButton": "छोड़ें",
+  "stayButton": "रुकें"
 }

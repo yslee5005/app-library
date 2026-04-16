@@ -731,4 +731,16 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get membershipActive => 'Подписка Активна';
+
+  @override
+  String get leaveRecordingTitle => 'Покинуть запись?';
+
+  @override
+  String get leaveRecordingMessage => 'Ваша запись будет потеряна. Вы уверены?';
+
+  @override
+  String get leaveButton => 'Выйти';
+
+  @override
+  String get stayButton => 'Остаться';
 }

@@ -713,4 +713,16 @@ class AppLocalizationsAm extends AppLocalizations {
 
   @override
   String get membershipActive => 'አባልነት ንቁ';
+
+  @override
+  String get leaveRecordingTitle => 'ቀረጻውን ይተዉ?';
+
+  @override
+  String get leaveRecordingMessage => 'ቀረጻዎ ይጠፋል። እርግጠኛ ነዎት?';
+
+  @override
+  String get leaveButton => 'ይውጡ';
+
+  @override
+  String get stayButton => 'ይቆዩ';
 }

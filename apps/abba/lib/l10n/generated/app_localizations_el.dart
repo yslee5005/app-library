@@ -732,4 +732,16 @@ class AppLocalizationsEl extends AppLocalizations {
 
   @override
   String get membershipActive => 'Συνδρομή Ενεργή';
+
+  @override
+  String get leaveRecordingTitle => 'Έξοδος από την εγγραφή;';
+
+  @override
+  String get leaveRecordingMessage => 'Η εγγραφή σας θα χαθεί. Είστε σίγουροι;';
+
+  @override
+  String get leaveButton => 'Έξοδος';
+
+  @override
+  String get stayButton => 'Παραμονή';
 }

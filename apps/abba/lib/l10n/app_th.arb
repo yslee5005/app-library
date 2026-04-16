@@ -296,5 +296,9 @@
   "yearlyPlan": "รายปี",
   "yearlySavings": "฿183/เดือน (ลด 33%)",
   "startMembership": "เริ่มต้น",
-  "membershipActive": "สมาชิกใช้งานอยู่"
+  "membershipActive": "สมาชิกใช้งานอยู่",
+  "leaveRecordingTitle": "ออกจากการบันทึก?",
+  "leaveRecordingMessage": "การบันทึกของคุณจะหายไป คุณแน่ใจหรือไม่?",
+  "leaveButton": "ออก",
+  "stayButton": "อยู่ต่อ"
 }

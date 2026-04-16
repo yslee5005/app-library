@@ -296,5 +296,9 @@
   "yearlyPlan": "Ročně",
   "yearlySavings": "124 Kč/měs (sleva 37%)",
   "startMembership": "Začít",
-  "membershipActive": "Členství Aktivní"
+  "membershipActive": "Členství Aktivní",
+  "leaveRecordingTitle": "Opustit nahrávání?",
+  "leaveRecordingMessage": "Vaše nahrávka bude ztracena. Jste si jisti?",
+  "leaveButton": "Opustit",
+  "stayButton": "Zůstat"
 }

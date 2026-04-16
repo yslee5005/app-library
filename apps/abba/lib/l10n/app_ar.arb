@@ -296,5 +296,9 @@
   "yearlyPlan": "سنوي",
   "yearlySavings": "$5.00/شهر (خصم 37%)",
   "startMembership": "ابدأ الآن",
-  "membershipActive": "العضوية نشطة"
+  "membershipActive": "العضوية نشطة",
+  "leaveRecordingTitle": "مغادرة التسجيل؟",
+  "leaveRecordingMessage": "سيتم فقدان تسجيلك. هل أنت متأكد؟",
+  "leaveButton": "مغادرة",
+  "stayButton": "البقاء"
 }

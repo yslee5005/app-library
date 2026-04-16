@@ -727,4 +727,17 @@ class AppLocalizationsDa extends AppLocalizations {
 
   @override
   String get membershipActive => 'Medlemskab Aktivt';
+
+  @override
+  String get leaveRecordingTitle => 'Forlad optagelsen?';
+
+  @override
+  String get leaveRecordingMessage =>
+      'Din optagelse vil gå tabt. Er du sikker?';
+
+  @override
+  String get leaveButton => 'Forlad';
+
+  @override
+  String get stayButton => 'Bliv';
 }

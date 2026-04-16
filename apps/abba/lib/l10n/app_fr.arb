@@ -296,5 +296,9 @@
   "yearlyPlan": "Annuel",
   "yearlySavings": "5,00€/mois (37% de réduction)",
   "startMembership": "Commencer",
-  "membershipActive": "Abonnement Actif"
+  "membershipActive": "Abonnement Actif",
+  "leaveRecordingTitle": "Quitter l'enregistrement ?",
+  "leaveRecordingMessage": "Votre enregistrement sera perdu. Êtes-vous sûr ?",
+  "leaveButton": "Quitter",
+  "stayButton": "Rester"
 }

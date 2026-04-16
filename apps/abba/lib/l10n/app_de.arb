@@ -296,5 +296,9 @@
   "yearlyPlan": "Jährlich",
   "yearlySavings": "5,00€/Monat (37% Rabatt)",
   "startMembership": "Jetzt starten",
-  "membershipActive": "Mitgliedschaft Aktiv"
+  "membershipActive": "Mitgliedschaft Aktiv",
+  "leaveRecordingTitle": "Aufnahme verlassen?",
+  "leaveRecordingMessage": "Ihre Aufnahme geht verloren. Sind Sie sicher?",
+  "leaveButton": "Verlassen",
+  "stayButton": "Bleiben"
 }

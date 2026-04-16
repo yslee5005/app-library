@@ -296,5 +296,9 @@
   "yearlyPlan": "Årsvis",
   "yearlySavings": "56 kr/mån (37% rabatt)",
   "startMembership": "Börja nu",
-  "membershipActive": "Medlemskap Aktivt"
+  "membershipActive": "Medlemskap Aktivt",
+  "leaveRecordingTitle": "Lämna inspelningen?",
+  "leaveRecordingMessage": "Din inspelning kommer att gå förlorad. Är du säker?",
+  "leaveButton": "Lämna",
+  "stayButton": "Stanna"
 }

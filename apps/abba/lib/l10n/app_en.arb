@@ -296,5 +296,9 @@
   "yearlyPlan": "Yearly",
   "yearlySavings": "$5.00/mo (37% off)",
   "startMembership": "Get Started",
-  "membershipActive": "Membership Active"
+  "membershipActive": "Membership Active",
+  "leaveRecordingTitle": "Leave Recording?",
+  "leaveRecordingMessage": "Your recording will be lost. Are you sure?",
+  "leaveButton": "Leave",
+  "stayButton": "Stay"
 }

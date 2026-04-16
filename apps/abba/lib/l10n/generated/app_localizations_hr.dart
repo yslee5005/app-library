@@ -730,4 +730,17 @@ class AppLocalizationsHr extends AppLocalizations {
 
   @override
   String get membershipActive => 'Članstvo Aktivno';
+
+  @override
+  String get leaveRecordingTitle => 'Napustiti snimanje?';
+
+  @override
+  String get leaveRecordingMessage =>
+      'Vaša snimka će biti izgubljena. Jeste li sigurni?';
+
+  @override
+  String get leaveButton => 'Napusti';
+
+  @override
+  String get stayButton => 'Ostani';
 }

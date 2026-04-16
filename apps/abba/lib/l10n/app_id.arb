@@ -296,5 +296,9 @@
   "yearlyPlan": "Tahunan",
   "yearlySavings": "Rp82.500/bulan (diskon 37%)",
   "startMembership": "Mulai",
-  "membershipActive": "Keanggotaan Aktif"
+  "membershipActive": "Keanggotaan Aktif",
+  "leaveRecordingTitle": "Tinggalkan rekaman?",
+  "leaveRecordingMessage": "Rekaman Anda akan hilang. Apakah Anda yakin?",
+  "leaveButton": "Tinggalkan",
+  "stayButton": "Tetap di sini"
 }

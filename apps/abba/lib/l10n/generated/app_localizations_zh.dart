@@ -713,4 +713,16 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get membershipActive => '会员已激活';
+
+  @override
+  String get leaveRecordingTitle => '离开录音？';
+
+  @override
+  String get leaveRecordingMessage => '录音内容将会丢失。确定要离开吗？';
+
+  @override
+  String get leaveButton => '离开';
+
+  @override
+  String get stayButton => '留下';
 }

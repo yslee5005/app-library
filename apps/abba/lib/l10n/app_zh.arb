@@ -296,5 +296,9 @@
   "yearlyPlan": "年度",
   "yearlySavings": "月¥43 (37%折扣)",
   "startMembership": "立即开通",
-  "membershipActive": "会员已激活"
+  "membershipActive": "会员已激活",
+  "leaveRecordingTitle": "离开录音？",
+  "leaveRecordingMessage": "录音内容将会丢失。确定要离开吗？",
+  "leaveButton": "离开",
+  "stayButton": "留下"
 }

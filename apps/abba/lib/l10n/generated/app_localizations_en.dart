@@ -726,4 +726,17 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get membershipActive => 'Membership Active';
+
+  @override
+  String get leaveRecordingTitle => 'Leave Recording?';
+
+  @override
+  String get leaveRecordingMessage =>
+      'Your recording will be lost. Are you sure?';
+
+  @override
+  String get leaveButton => 'Leave';
+
+  @override
+  String get stayButton => 'Stay';
 }

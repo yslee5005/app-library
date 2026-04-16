@@ -726,4 +726,17 @@ class AppLocalizationsSv extends AppLocalizations {
 
   @override
   String get membershipActive => 'Medlemskap Aktivt';
+
+  @override
+  String get leaveRecordingTitle => 'Lämna inspelningen?';
+
+  @override
+  String get leaveRecordingMessage =>
+      'Din inspelning kommer att gå förlorad. Är du säker?';
+
+  @override
+  String get leaveButton => 'Lämna';
+
+  @override
+  String get stayButton => 'Stanna';
 }

@@ -296,5 +296,9 @@
   "yearlyPlan": "Hàng năm",
   "yearlySavings": "125.000đ/tháng (giảm 33%)",
   "startMembership": "Bắt đầu",
-  "membershipActive": "Thành viên Hoạt động"
+  "membershipActive": "Thành viên Hoạt động",
+  "leaveRecordingTitle": "Rời khỏi bản ghi?",
+  "leaveRecordingMessage": "Bản ghi của bạn sẽ bị mất. Bạn có chắc không?",
+  "leaveButton": "Rời đi",
+  "stayButton": "Ở lại"
 }

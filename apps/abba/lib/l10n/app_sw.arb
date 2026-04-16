@@ -296,5 +296,9 @@
   "yearlyPlan": "Kwa mwaka",
   "yearlySavings": "$5.00/mwezi (punguzo 37%)",
   "startMembership": "Anza sasa",
-  "membershipActive": "Uanachama Hai"
+  "membershipActive": "Uanachama Hai",
+  "leaveRecordingTitle": "Ondoka kwenye rekodi?",
+  "leaveRecordingMessage": "Rekodi yako itapotea. Una uhakika?",
+  "leaveButton": "Ondoka",
+  "stayButton": "Kaa"
 }

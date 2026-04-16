@@ -296,5 +296,9 @@
   "yearlyPlan": "Jaarlijks",
   "yearlySavings": "€5,00/maand (37% korting)",
   "startMembership": "Begin nu",
-  "membershipActive": "Lidmaatschap Actief"
+  "membershipActive": "Lidmaatschap Actief",
+  "leaveRecordingTitle": "Opname verlaten?",
+  "leaveRecordingMessage": "Je opname gaat verloren. Weet je het zeker?",
+  "leaveButton": "Verlaten",
+  "stayButton": "Blijven"
 }

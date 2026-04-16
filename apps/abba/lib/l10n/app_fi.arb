@@ -296,5 +296,9 @@
   "yearlyPlan": "Vuosittain",
   "yearlySavings": "5,00€/kk (37% alennus)",
   "startMembership": "Aloita",
-  "membershipActive": "Jäsenyys Aktiivinen"
+  "membershipActive": "Jäsenyys Aktiivinen",
+  "leaveRecordingTitle": "Poistu nauhoituksesta?",
+  "leaveRecordingMessage": "Nauhoituksesi menetetään. Oletko varma?",
+  "leaveButton": "Poistu",
+  "stayButton": "Jää"
 }

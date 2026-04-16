@@ -728,4 +728,17 @@ class AppLocalizationsMs extends AppLocalizations {
 
   @override
   String get membershipActive => 'Keahlian Aktif';
+
+  @override
+  String get leaveRecordingTitle => 'Tinggalkan rakaman?';
+
+  @override
+  String get leaveRecordingMessage =>
+      'Rakaman anda akan hilang. Adakah anda pasti?';
+
+  @override
+  String get leaveButton => 'Tinggalkan';
+
+  @override
+  String get stayButton => 'Kekal';
 }

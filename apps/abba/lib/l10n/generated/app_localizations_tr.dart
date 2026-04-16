@@ -730,4 +730,16 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get membershipActive => 'Üyelik Aktif';
+
+  @override
+  String get leaveRecordingTitle => 'Kayıttan çıkılsın mı?';
+
+  @override
+  String get leaveRecordingMessage => 'Kaydınız kaybolacak. Emin misiniz?';
+
+  @override
+  String get leaveButton => 'Çık';
+
+  @override
+  String get stayButton => 'Kal';
 }

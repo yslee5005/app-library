@@ -713,4 +713,16 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get membershipActive => '멤버십 활성';
+
+  @override
+  String get leaveRecordingTitle => '녹음을 중단하시겠습니까?';
+
+  @override
+  String get leaveRecordingMessage => '녹음 내용이 사라집니다. 정말 나가시겠습니까?';
+
+  @override
+  String get leaveButton => '나가기';
+
+  @override
+  String get stayButton => '머무르기';
 }

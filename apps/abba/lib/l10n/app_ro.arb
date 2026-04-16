@@ -296,5 +296,9 @@
   "yearlyPlan": "Anual",
   "yearlySavings": "25 lei/lună (37% reducere)",
   "startMembership": "Începe",
-  "membershipActive": "Abonament Activ"
+  "membershipActive": "Abonament Activ",
+  "leaveRecordingTitle": "Părăsești înregistrarea?",
+  "leaveRecordingMessage": "Înregistrarea ta va fi pierdută. Ești sigur?",
+  "leaveButton": "Părăsește",
+  "stayButton": "Rămâi"
 }

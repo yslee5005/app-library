@@ -296,5 +296,9 @@
   "yearlyPlan": "年額",
   "yearlySavings": "月¥983 (33%お得)",
   "startMembership": "始める",
-  "membershipActive": "メンバーシップ有効"
+  "membershipActive": "メンバーシップ有効",
+  "leaveRecordingTitle": "録音を中断しますか？",
+  "leaveRecordingMessage": "録音内容が失われます。本当に退出しますか？",
+  "leaveButton": "退出する",
+  "stayButton": "留まる"
 }

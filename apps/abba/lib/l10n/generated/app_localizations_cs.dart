@@ -728,4 +728,17 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String get membershipActive => 'Členství Aktivní';
+
+  @override
+  String get leaveRecordingTitle => 'Opustit nahrávání?';
+
+  @override
+  String get leaveRecordingMessage =>
+      'Vaše nahrávka bude ztracena. Jste si jisti?';
+
+  @override
+  String get leaveButton => 'Opustit';
+
+  @override
+  String get stayButton => 'Zůstat';
 }

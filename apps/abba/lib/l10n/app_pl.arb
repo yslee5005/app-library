@@ -296,5 +296,9 @@
   "yearlyPlan": "Roczny",
   "yearlySavings": "21,67 zł/mies. (37% taniej)",
   "startMembership": "Rozpocznij",
-  "membershipActive": "Członkostwo Aktywne"
+  "membershipActive": "Członkostwo Aktywne",
+  "leaveRecordingTitle": "Opuścić nagrywanie?",
+  "leaveRecordingMessage": "Twoje nagranie zostanie utracone. Czy na pewno?",
+  "leaveButton": "Opuść",
+  "stayButton": "Zostań"
 }

@@ -296,5 +296,9 @@
   "yearlyPlan": "שנתי",
   "yearlySavings": "₪18.33/חודש (הנחה 37%)",
   "startMembership": "התחל",
-  "membershipActive": "מנוי פעיל"
+  "membershipActive": "מנוי פעיל",
+  "leaveRecordingTitle": "לעזוב את ההקלטה?",
+  "leaveRecordingMessage": "ההקלטה שלך תאבד. בטוח?",
+  "leaveButton": "עזוב",
+  "stayButton": "הישאר"
 }

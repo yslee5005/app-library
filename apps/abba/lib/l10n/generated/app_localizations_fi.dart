@@ -727,4 +727,16 @@ class AppLocalizationsFi extends AppLocalizations {
 
   @override
   String get membershipActive => 'Jäsenyys Aktiivinen';
+
+  @override
+  String get leaveRecordingTitle => 'Poistu nauhoituksesta?';
+
+  @override
+  String get leaveRecordingMessage => 'Nauhoituksesi menetetään. Oletko varma?';
+
+  @override
+  String get leaveButton => 'Poistu';
+
+  @override
+  String get stayButton => 'Jää';
 }

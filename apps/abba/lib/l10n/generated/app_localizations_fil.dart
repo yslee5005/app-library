@@ -736,4 +736,17 @@ class AppLocalizationsFil extends AppLocalizations {
 
   @override
   String get membershipActive => 'Membership Aktibo';
+
+  @override
+  String get leaveRecordingTitle => 'Umalis sa recording?';
+
+  @override
+  String get leaveRecordingMessage =>
+      'Mawawala ang iyong recording. Sigurado ka ba?';
+
+  @override
+  String get leaveButton => 'Umalis';
+
+  @override
+  String get stayButton => 'Manatili';
 }

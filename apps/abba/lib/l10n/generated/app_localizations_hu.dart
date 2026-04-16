@@ -730,4 +730,16 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String get membershipActive => 'Tagság Aktív';
+
+  @override
+  String get leaveRecordingTitle => 'Kilép a felvételből?';
+
+  @override
+  String get leaveRecordingMessage => 'A felvétel elvész. Biztosan kilép?';
+
+  @override
+  String get leaveButton => 'Kilépés';
+
+  @override
+  String get stayButton => 'Maradok';
 }

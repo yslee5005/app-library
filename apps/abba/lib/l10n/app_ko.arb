@@ -296,5 +296,9 @@
   "yearlyPlan": "연간",
   "yearlySavings": "월 ₩6,658 (33% 할인)",
   "startMembership": "시작하기",
-  "membershipActive": "멤버십 활성"
+  "membershipActive": "멤버십 활성",
+  "leaveRecordingTitle": "녹음을 중단하시겠습니까?",
+  "leaveRecordingMessage": "녹음 내용이 사라집니다. 정말 나가시겠습니까?",
+  "leaveButton": "나가기",
+  "stayButton": "머무르기"
 }

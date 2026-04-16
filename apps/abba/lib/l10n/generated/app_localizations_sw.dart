@@ -729,4 +729,16 @@ class AppLocalizationsSw extends AppLocalizations {
 
   @override
   String get membershipActive => 'Uanachama Hai';
+
+  @override
+  String get leaveRecordingTitle => 'Ondoka kwenye rekodi?';
+
+  @override
+  String get leaveRecordingMessage => 'Rekodi yako itapotea. Una uhakika?';
+
+  @override
+  String get leaveButton => 'Ondoka';
+
+  @override
+  String get stayButton => 'Kaa';
 }

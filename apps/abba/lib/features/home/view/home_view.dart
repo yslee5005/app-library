@@ -80,6 +80,7 @@ class _HomeViewState extends ConsumerState<HomeView>
       _transcript = '';
       _isTextMode = false;
     });
+    ref.read(isRecordingProvider.notifier).state = true;
 
     _pulseController.repeat(reverse: true);
     _timer = Timer.periodic(const Duration(seconds: 1), (_) {
@@ -203,6 +204,7 @@ class _HomeViewState extends ConsumerState<HomeView>
 
     ErrorLoggingService.addBreadcrumb('Prayer finished', category: 'prayer');
 
+    ref.read(isRecordingProvider.notifier).state = false;
     setState(() => _isPraying = false);
     if (mounted) context.go('/home/ai-loading');
   }
@@ -248,15 +250,9 @@ class _HomeViewState extends ConsumerState<HomeView>
                     ),
                   ),
                   const SizedBox(width: AbbaSpacing.sm),
-                  // History button — tap to open prayer/qt history
+                  // History button — tap to open my records
                   GestureDetector(
-                    onTap: () {
-                      if (_selectedTab == 0) {
-                        context.go('/home/history/prayer');
-                      } else {
-                        context.go('/home/history/qt');
-                      }
-                    },
+                    onTap: () => context.go('/home/my-records'),
                     child: Container(
                       padding: const EdgeInsets.all(AbbaSpacing.sm + 2),
                       decoration: BoxDecoration(

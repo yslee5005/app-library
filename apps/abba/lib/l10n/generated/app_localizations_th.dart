@@ -720,4 +720,16 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get membershipActive => 'สมาชิกใช้งานอยู่';
+
+  @override
+  String get leaveRecordingTitle => 'ออกจากการบันทึก?';
+
+  @override
+  String get leaveRecordingMessage => 'การบันทึกของคุณจะหายไป คุณแน่ใจหรือไม่?';
+
+  @override
+  String get leaveButton => 'ออก';
+
+  @override
+  String get stayButton => 'อยู่ต่อ';
 }

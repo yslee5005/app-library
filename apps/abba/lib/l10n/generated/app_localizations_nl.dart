@@ -728,4 +728,17 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get membershipActive => 'Lidmaatschap Actief';
+
+  @override
+  String get leaveRecordingTitle => 'Opname verlaten?';
+
+  @override
+  String get leaveRecordingMessage =>
+      'Je opname gaat verloren. Weet je het zeker?';
+
+  @override
+  String get leaveButton => 'Verlaten';
+
+  @override
+  String get stayButton => 'Blijven';
 }

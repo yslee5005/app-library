@@ -203,3 +203,7 @@ final currentPassageTextProvider = StateProvider<String>((ref) => '');
 
 /// Today's prayer count for free user limiting
 final todayPrayerCountProvider = StateProvider<int>((ref) => 0);
+
+/// Whether a prayer/QT recording session is currently active.
+/// Used to guard navigation (tab bar, back button) during active sessions.
+final isRecordingProvider = StateProvider<bool>((ref) => false);

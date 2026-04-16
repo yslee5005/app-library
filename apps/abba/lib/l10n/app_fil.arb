@@ -296,5 +296,9 @@
   "yearlyPlan": "Taunan",
   "yearlySavings": "₱283/buwan (37% diskwento)",
   "startMembership": "Magsimula",
-  "membershipActive": "Membership Aktibo"
+  "membershipActive": "Membership Aktibo",
+  "leaveRecordingTitle": "Umalis sa recording?",
+  "leaveRecordingMessage": "Mawawala ang iyong recording. Sigurado ka ba?",
+  "leaveButton": "Umalis",
+  "stayButton": "Manatili"
 }

@@ -1519,6 +1519,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Membership Active'**
   String get membershipActive;
+
+  /// No description provided for @leaveRecordingTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Leave Recording?'**
+  String get leaveRecordingTitle;
+
+  /// No description provided for @leaveRecordingMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Your recording will be lost. Are you sure?'**
+  String get leaveRecordingMessage;
+
+  /// No description provided for @leaveButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Leave'**
+  String get leaveButton;
+
+  /// No description provided for @stayButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Stay'**
+  String get stayButton;
 }
 
 class _AppLocalizationsDelegate

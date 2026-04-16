@@ -296,5 +296,9 @@
   "yearlyPlan": "Щороку",
   "yearlySavings": "$5.00/міс (знижка 37%)",
   "startMembership": "Розпочати",
-  "membershipActive": "Підписка Активна"
+  "membershipActive": "Підписка Активна",
+  "leaveRecordingTitle": "Залишити запис?",
+  "leaveRecordingMessage": "Ваш запис буде втрачено. Ви впевнені?",
+  "leaveButton": "Залишити",
+  "stayButton": "Залишитися"
 }

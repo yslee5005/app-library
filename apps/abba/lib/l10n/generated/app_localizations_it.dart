@@ -729,4 +729,17 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get membershipActive => 'Abbonamento Attivo';
+
+  @override
+  String get leaveRecordingTitle => 'Uscire dalla registrazione?';
+
+  @override
+  String get leaveRecordingMessage =>
+      'La registrazione andrà persa. Sei sicuro?';
+
+  @override
+  String get leaveButton => 'Esci';
+
+  @override
+  String get stayButton => 'Resta';
 }

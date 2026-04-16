@@ -296,5 +296,9 @@
   "yearlyPlan": "Tahunan",
   "yearlySavings": "RM21.66/bulan (diskaun 37%)",
   "startMembership": "Mula",
-  "membershipActive": "Keahlian Aktif"
+  "membershipActive": "Keahlian Aktif",
+  "leaveRecordingTitle": "Tinggalkan rakaman?",
+  "leaveRecordingMessage": "Rakaman anda akan hilang. Adakah anda pasti?",
+  "leaveButton": "Tinggalkan",
+  "stayButton": "Kekal"
 }

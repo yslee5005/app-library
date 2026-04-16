@@ -729,4 +729,17 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get membershipActive => 'Mitgliedschaft Aktiv';
+
+  @override
+  String get leaveRecordingTitle => 'Aufnahme verlassen?';
+
+  @override
+  String get leaveRecordingMessage =>
+      'Ihre Aufnahme geht verloren. Sind Sie sicher?';
+
+  @override
+  String get leaveButton => 'Verlassen';
+
+  @override
+  String get stayButton => 'Bleiben';
 }

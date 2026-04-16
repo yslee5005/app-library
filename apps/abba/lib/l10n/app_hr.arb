@@ -296,5 +296,9 @@
   "yearlyPlan": "Godišnje",
   "yearlySavings": "5,00€/mjes (37% popust)",
   "startMembership": "Započni",
-  "membershipActive": "Članstvo Aktivno"
+  "membershipActive": "Članstvo Aktivno",
+  "leaveRecordingTitle": "Napustiti snimanje?",
+  "leaveRecordingMessage": "Vaša snimka će biti izgubljena. Jeste li sigurni?",
+  "leaveButton": "Napusti",
+  "stayButton": "Ostani"
 }

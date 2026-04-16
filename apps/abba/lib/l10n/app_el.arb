@@ -296,5 +296,9 @@
   "yearlyPlan": "Ετήσια",
   "yearlySavings": "5,00€/μήνα (37% έκπτωση)",
   "startMembership": "Ξεκινήστε",
-  "membershipActive": "Συνδρομή Ενεργή"
+  "membershipActive": "Συνδρομή Ενεργή",
+  "leaveRecordingTitle": "Έξοδος από την εγγραφή;",
+  "leaveRecordingMessage": "Η εγγραφή σας θα χαθεί. Είστε σίγουροι;",
+  "leaveButton": "Έξοδος",
+  "stayButton": "Παραμονή"
 }

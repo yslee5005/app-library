@@ -296,5 +296,9 @@
   "yearlyPlan": "Yıllık",
   "yearlySavings": "₺158/ay (%37 indirim)",
   "startMembership": "Başla",
-  "membershipActive": "Üyelik Aktif"
+  "membershipActive": "Üyelik Aktif",
+  "leaveRecordingTitle": "Kayıttan çıkılsın mı?",
+  "leaveRecordingMessage": "Kaydınız kaybolacak. Emin misiniz?",
+  "leaveButton": "Çık",
+  "stayButton": "Kal"
 }

@@ -727,4 +727,17 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String get membershipActive => 'Thành viên Hoạt động';
+
+  @override
+  String get leaveRecordingTitle => 'Rời khỏi bản ghi?';
+
+  @override
+  String get leaveRecordingMessage =>
+      'Bản ghi của bạn sẽ bị mất. Bạn có chắc không?';
+
+  @override
+  String get leaveButton => 'Rời đi';
+
+  @override
+  String get stayButton => 'Ở lại';
 }

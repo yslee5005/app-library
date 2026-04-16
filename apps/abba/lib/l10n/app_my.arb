@@ -296,5 +296,9 @@
   "yearlyPlan": "နှစ်စဉ်",
   "yearlySavings": "$5.00/လ (37% လျှော့)",
   "startMembership": "စတင်ပါ",
-  "membershipActive": "အသင်းဝင် တက်ကြွ"
+  "membershipActive": "အသင်းဝင် တက်ကြွ",
+  "leaveRecordingTitle": "အသံဖမ်းခြင်းမှ ထွက်မလား?",
+  "leaveRecordingMessage": "သင့်အသံဖမ်းချက် ပျောက်သွားပါမည်။ သေချာပါသလား?",
+  "leaveButton": "ထွက်မည်",
+  "stayButton": "ဆက်နေမည်"
 }

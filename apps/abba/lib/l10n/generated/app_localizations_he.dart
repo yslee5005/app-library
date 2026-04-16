@@ -719,4 +719,16 @@ class AppLocalizationsHe extends AppLocalizations {
 
   @override
   String get membershipActive => 'מנוי פעיל';
+
+  @override
+  String get leaveRecordingTitle => 'לעזוב את ההקלטה?';
+
+  @override
+  String get leaveRecordingMessage => 'ההקלטה שלך תאבד. בטוח?';
+
+  @override
+  String get leaveButton => 'עזוב';
+
+  @override
+  String get stayButton => 'הישאר';
 }

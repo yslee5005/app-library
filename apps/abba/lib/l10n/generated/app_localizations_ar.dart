@@ -722,4 +722,16 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get membershipActive => 'العضوية نشطة';
+
+  @override
+  String get leaveRecordingTitle => 'مغادرة التسجيل؟';
+
+  @override
+  String get leaveRecordingMessage => 'سيتم فقدان تسجيلك. هل أنت متأكد؟';
+
+  @override
+  String get leaveButton => 'مغادرة';
+
+  @override
+  String get stayButton => 'البقاء';
 }

@@ -713,4 +713,16 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get membershipActive => 'メンバーシップ有効';
+
+  @override
+  String get leaveRecordingTitle => '録音を中断しますか？';
+
+  @override
+  String get leaveRecordingMessage => '録音内容が失われます。本当に退出しますか？';
+
+  @override
+  String get leaveButton => '退出する';
+
+  @override
+  String get stayButton => '留まる';
 }

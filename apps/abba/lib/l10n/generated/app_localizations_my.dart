@@ -728,4 +728,17 @@ class AppLocalizationsMy extends AppLocalizations {
 
   @override
   String get membershipActive => 'အသင်းဝင် တက်ကြွ';
+
+  @override
+  String get leaveRecordingTitle => 'အသံဖမ်းခြင်းမှ ထွက်မလား?';
+
+  @override
+  String get leaveRecordingMessage =>
+      'သင့်အသံဖမ်းချက် ပျောက်သွားပါမည်။ သေချာပါသလား?';
+
+  @override
+  String get leaveButton => 'ထွက်မည်';
+
+  @override
+  String get stayButton => 'ဆက်နေမည်';
 }

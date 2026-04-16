@@ -296,5 +296,9 @@
   "yearlyPlan": "Ежегодно",
   "yearlySavings": "441 ₽/мес (37% скидка)",
   "startMembership": "Начать",
-  "membershipActive": "Подписка Активна"
+  "membershipActive": "Подписка Активна",
+  "leaveRecordingTitle": "Покинуть запись?",
+  "leaveRecordingMessage": "Ваша запись будет потеряна. Вы уверены?",
+  "leaveButton": "Выйти",
+  "stayButton": "Остаться"
 }
