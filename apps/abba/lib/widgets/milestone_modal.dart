@@ -138,7 +138,7 @@ Future<void> showMilestoneModal(
               child: ElevatedButton(
                 onPressed: () => Navigator.pop(ctx),
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: AbbaColors.sage,
+                  backgroundColor: AbbaColors.sageDark,
                   foregroundColor: AbbaColors.white,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(AbbaRadius.lg),

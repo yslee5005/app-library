@@ -10,15 +10,31 @@
   "signInWithGoogle": "Google से जारी रखें",
   "signInWithEmail": "ईमेल से जारी रखें",
   "greetingMorning": "शुभ प्रभात, {name}",
-  "@greetingMorning": { "placeholders": { "name": {} } },
+  "@greetingMorning": {
+    "placeholders": {
+      "name": {}
+    }
+  },
   "greetingAfternoon": "शुभ अपराह्न, {name}",
-  "@greetingAfternoon": { "placeholders": { "name": {} } },
+  "@greetingAfternoon": {
+    "placeholders": {
+      "name": {}
+    }
+  },
   "greetingEvening": "शुभ संध्या, {name}",
-  "@greetingEvening": { "placeholders": { "name": {} } },
+  "@greetingEvening": {
+    "placeholders": {
+      "name": {}
+    }
+  },
   "prayButton": "प्रार्थना",
   "qtButton": "मनन समय",
   "streakDays": "{count} दिन लगातार प्रार्थना",
-  "@streakDays": { "placeholders": { "count": {} } },
+  "@streakDays": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "dailyVerse": "आज का वचन",
   "tabHome": "होम",
   "tabCalendar": "कैलेंडर",
@@ -69,17 +85,21 @@
   "bestStreak": "सर्वश्रेष्ठ श्रृंखला",
   "days": "दिन",
   "calendarRecordCount": "{count} रिकॉर्ड",
-  "@calendarRecordCount": { "placeholders": { "count": {} } },
+  "@calendarRecordCount": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "todayVerse": "आज का वचन",
   "settingsTitle": "सेटिंग्स",
   "profileSection": "प्रोफ़ाइल",
   "totalPrayers": "कुल प्रार्थनाएँ",
   "consecutiveDays": "लगातार दिन",
-  "premiumSection": "Premium",
+  "premiumSection": "सदस्यता",
   "freePlan": "मुफ़्त",
   "premiumPlan": "Premium",
-  "monthlyPrice": "₹299/माह",
-  "yearlyPrice": "₹1999/वर्ष",
+  "monthlyPrice": "₹649 / माह",
+  "yearlyPrice": "₹4,899 / वर्ष",
   "yearlySave": "40% बचाएँ",
   "launchPromo": "3 महीने ₹167/माह पर!",
   "startPremium": "Premium शुरू करें",
@@ -96,10 +116,18 @@
   "privacyPolicy": "गोपनीयता नीति",
   "logout": "लॉग आउट",
   "appVersion": "संस्करण {version}",
-  "@appVersion": { "placeholders": { "version": {} } },
+  "@appVersion": {
+    "placeholders": {
+      "version": {}
+    }
+  },
   "anonymous": "गुमनाम",
   "timeAgo": "{time} पहले",
-  "@timeAgo": { "placeholders": { "time": {} } },
+  "@timeAgo": {
+    "placeholders": {
+      "time": {}
+    }
+  },
   "emailLabel": "ईमेल",
   "passwordLabel": "पासवर्ड",
   "signIn": "साइन इन",
@@ -128,7 +156,11 @@
   "promoTitle": "लॉन्च ऑफ़र",
   "promoBanner": "पहले 3 महीने ₹167/माह!",
   "promoEndsOn": "ऑफ़र {date} तक",
-  "@promoEndsOn": { "placeholders": { "date": {} } },
+  "@promoEndsOn": {
+    "placeholders": {
+      "date": {}
+    }
+  },
   "premiumLimitTitle": "आज की प्रार्थना पूरी हुई",
   "premiumLimitBody": "कल मिलते हैं!\nPremium के साथ असीमित प्रार्थना करें",
   "laterButton": "बाद में",
@@ -166,10 +198,14 @@
   "milestoneShare": "साझा करें",
   "milestoneThankGod": "परमेश्वर का धन्यवाद!",
   "shareStreakText": "{count} दिन लगातार प्रार्थना! Abba के साथ मेरी प्रार्थना यात्रा #Abba #प्रार्थना",
-  "@shareStreakText": { "placeholders": { "count": {} } },
+  "@shareStreakText": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "shareDaysLabel": "दिन लगातार प्रार्थना",
   "shareSubtitle": "परमेश्वर के साथ दैनिक प्रार्थना",
-  "premiumActive": "Premium सक्रिय",
+  "premiumActive": "सदस्यता सक्रिय",
   "planOncePerDay": "1x/दिन",
   "planUnlimited": "असीमित",
   "closeRecording": "रिकॉर्डिंग बंद करें",
@@ -209,9 +245,18 @@
   "scriptureReasonLabel": "यह वचन क्यों",
   "seeMore": "और देखें",
   "seeAllComments": "सभी {count} टिप्पणियाँ देखें",
-  "@seeAllComments": { "placeholders": { "count": {} } },
+  "@seeAllComments": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "likedBy": "{name} और {count} अन्य ने पसंद किया",
-  "@likedBy": { "placeholders": { "name": {}, "count": {} } },
+  "@likedBy": {
+    "placeholders": {
+      "name": {},
+      "count": {}
+    }
+  },
   "commentsTitle": "टिप्पणियाँ",
   "myPageTitle": "मेरा प्रार्थना बगीचा",
   "myPrayers": "मेरी प्रार्थनाएँ",
@@ -227,10 +272,29 @@
   "linkAccountSuccess": "खाता सफलतापूर्वक लिंक हो गया!",
   "anonymousUser": "प्रार्थना योद्धा",
   "showReplies": "{count} उत्तर देखें",
-  "@showReplies": { "placeholders": { "count": {} } },
+  "@showReplies": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "hideReplies": "उत्तर छिपाएँ",
   "replyingTo": "{name} को उत्तर",
-  "@replyingTo": { "placeholders": { "name": {} } },
+  "@replyingTo": {
+    "placeholders": {
+      "name": {}
+    }
+  },
   "viewAllComments": "सभी {count} टिप्पणियाँ देखें",
-  "@viewAllComments": { "placeholders": { "count": {} } }
+  "@viewAllComments": {
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "membershipTitle": "सदस्यता",
+  "membershipSubtitle": "अपनी प्रार्थना को और गहरा करें",
+  "monthlyPlan": "मासिक",
+  "yearlyPlan": "वार्षिक",
+  "yearlySavings": "₹408/माह (37% छूट)",
+  "startMembership": "शुरू करें",
+  "membershipActive": "सदस्यता सक्रिय"
 }

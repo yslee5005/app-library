@@ -10,15 +10,31 @@
   "signInWithGoogle": "Folytatás Google-lel",
   "signInWithEmail": "Folytatás e-maillel",
   "greetingMorning": "Jó reggelt, {name}",
-  "@greetingMorning": { "placeholders": { "name": {} } },
+  "@greetingMorning": {
+    "placeholders": {
+      "name": {}
+    }
+  },
   "greetingAfternoon": "Jó napot, {name}",
-  "@greetingAfternoon": { "placeholders": { "name": {} } },
+  "@greetingAfternoon": {
+    "placeholders": {
+      "name": {}
+    }
+  },
   "greetingEvening": "Jó estét, {name}",
-  "@greetingEvening": { "placeholders": { "name": {} } },
+  "@greetingEvening": {
+    "placeholders": {
+      "name": {}
+    }
+  },
   "prayButton": "Imádkozz",
   "qtButton": "Csendes idő",
   "streakDays": "{count} napos imasorozat",
-  "@streakDays": { "placeholders": { "count": {} } },
+  "@streakDays": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "dailyVerse": "Napi ige",
   "tabHome": "Főoldal",
   "tabCalendar": "Naptár",
@@ -69,17 +85,21 @@
   "bestStreak": "Legjobb sorozat",
   "days": "nap",
   "calendarRecordCount": "{count} bejegyzés",
-  "@calendarRecordCount": { "placeholders": { "count": {} } },
+  "@calendarRecordCount": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "todayVerse": "Mai ige",
   "settingsTitle": "Beállítások",
   "profileSection": "Profil",
   "totalPrayers": "Összes ima",
   "consecutiveDays": "Egymást követő napok",
-  "premiumSection": "Prémium",
+  "premiumSection": "Tagság",
   "freePlan": "Ingyenes",
   "premiumPlan": "Prémium",
-  "monthlyPrice": "1390Ft/hó",
-  "yearlyPrice": "9990Ft/év",
+  "monthlyPrice": "2 990 Ft / hó",
+  "yearlyPrice": "22 990 Ft / év",
   "yearlySave": "40% megtakarítás",
   "launchPromo": "3 hónap 1590Ft/hó áron!",
   "startPremium": "Prémium indítása",
@@ -96,10 +116,18 @@
   "privacyPolicy": "Adatvédelmi irányelvek",
   "logout": "Kijelentkezés",
   "appVersion": "Verzió {version}",
-  "@appVersion": { "placeholders": { "version": {} } },
+  "@appVersion": {
+    "placeholders": {
+      "version": {}
+    }
+  },
   "anonymous": "Névtelen",
   "timeAgo": "{time} ezelőtt",
-  "@timeAgo": { "placeholders": { "time": {} } },
+  "@timeAgo": {
+    "placeholders": {
+      "time": {}
+    }
+  },
   "emailLabel": "E-mail",
   "passwordLabel": "Jelszó",
   "signIn": "Bejelentkezés",
@@ -128,7 +156,11 @@
   "promoTitle": "Bevezető akció",
   "promoBanner": "Az első 3 hónap 1590Ft/hó!",
   "promoEndsOn": "Az ajánlat lejár: {date}",
-  "@promoEndsOn": { "placeholders": { "date": {} } },
+  "@promoEndsOn": {
+    "placeholders": {
+      "date": {}
+    }
+  },
   "premiumLimitTitle": "A mai ima befejeződött",
   "premiumLimitBody": "Holnap találkozunk!\nImádkozz korlátlanul Prémiummal",
   "laterButton": "Talán később",
@@ -166,10 +198,14 @@
   "milestoneShare": "Megosztás",
   "milestoneThankGod": "Hála Istennek!",
   "shareStreakText": "{count} napos imasorozat! Az imaútam az Abba-val #Abba #Ima",
-  "@shareStreakText": { "placeholders": { "count": {} } },
+  "@shareStreakText": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "shareDaysLabel": "napos imasorozat",
   "shareSubtitle": "Mindennapi ima Istennel",
-  "premiumActive": "Prémium aktív",
+  "premiumActive": "Tagság Aktív",
   "planOncePerDay": "1x/nap",
   "planUnlimited": "Korlátlan",
   "closeRecording": "Felvétel bezárása",
@@ -209,9 +245,18 @@
   "scriptureReasonLabel": "Miért ez a Szentírás",
   "seeMore": "Több megtekintése",
   "seeAllComments": "Mind a {count} hozzászólás megtekintése",
-  "@seeAllComments": { "placeholders": { "count": {} } },
+  "@seeAllComments": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "likedBy": "{name} és még {count} másnak tetszik",
-  "@likedBy": { "placeholders": { "name": {}, "count": {} } },
+  "@likedBy": {
+    "placeholders": {
+      "name": {},
+      "count": {}
+    }
+  },
   "commentsTitle": "Hozzászólások",
   "myPageTitle": "Az én imakertem",
   "myPrayers": "Imáim",
@@ -227,10 +272,29 @@
   "linkAccountSuccess": "Fiók sikeresen összekapcsolva!",
   "anonymousUser": "Imaharcos",
   "showReplies": "{count} válasz megtekintése",
-  "@showReplies": { "placeholders": { "count": {} } },
+  "@showReplies": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "hideReplies": "Válaszok elrejtése",
   "replyingTo": "Válasz neki: {name}",
-  "@replyingTo": { "placeholders": { "name": {} } },
+  "@replyingTo": {
+    "placeholders": {
+      "name": {}
+    }
+  },
   "viewAllComments": "Mind a {count} hozzászólás megtekintése",
-  "@viewAllComments": { "placeholders": { "count": {} } }
+  "@viewAllComments": {
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "membershipTitle": "Tagság",
+  "membershipSubtitle": "Mélyítsd el imaéletedet",
+  "monthlyPlan": "Havi",
+  "yearlyPlan": "Éves",
+  "yearlySavings": "1 916 Ft/hó (37% kedvezmény)",
+  "startMembership": "Indítás",
+  "membershipActive": "Tagság Aktív"
 }

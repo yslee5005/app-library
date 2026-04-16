@@ -10,15 +10,31 @@
   "signInWithGoogle": "Nastavi s Google",
   "signInWithEmail": "Nastavi s e-poštom",
   "greetingMorning": "Dobro jutro, {name}",
-  "@greetingMorning": { "placeholders": { "name": {} } },
+  "@greetingMorning": {
+    "placeholders": {
+      "name": {}
+    }
+  },
   "greetingAfternoon": "Dobar dan, {name}",
-  "@greetingAfternoon": { "placeholders": { "name": {} } },
+  "@greetingAfternoon": {
+    "placeholders": {
+      "name": {}
+    }
+  },
   "greetingEvening": "Dobra večer, {name}",
-  "@greetingEvening": { "placeholders": { "name": {} } },
+  "@greetingEvening": {
+    "placeholders": {
+      "name": {}
+    }
+  },
   "prayButton": "Moli se",
   "qtButton": "Tihi sat",
   "streakDays": "{count} dana neprekidne molitve",
-  "@streakDays": { "placeholders": { "count": {} } },
+  "@streakDays": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "dailyVerse": "Stih dana",
   "tabHome": "Početna",
   "tabCalendar": "Kalendar",
@@ -69,17 +85,21 @@
   "bestStreak": "Najbolji niz",
   "days": "dana",
   "calendarRecordCount": "{count} zapisa",
-  "@calendarRecordCount": { "placeholders": { "count": {} } },
+  "@calendarRecordCount": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "todayVerse": "Stih dana",
   "settingsTitle": "Postavke",
   "profileSection": "Profil",
   "totalPrayers": "Ukupno molitava",
   "consecutiveDays": "Uzastopnih dana",
-  "premiumSection": "Premium",
+  "premiumSection": "Članstvo",
   "freePlan": "Besplatno",
   "premiumPlan": "Premium",
-  "monthlyPrice": "3,49€/mj",
-  "yearlyPrice": "24,99€/god",
+  "monthlyPrice": "7,99€ / mjes",
+  "yearlyPrice": "59,99€ / god",
   "yearlySave": "Uštedi 40%",
   "launchPromo": "3 mjeseca po 3,99€/mj!",
   "startPremium": "Započni Premium",
@@ -96,10 +116,18 @@
   "privacyPolicy": "Pravila privatnosti",
   "logout": "Odjava",
   "appVersion": "Verzija {version}",
-  "@appVersion": { "placeholders": { "version": {} } },
+  "@appVersion": {
+    "placeholders": {
+      "version": {}
+    }
+  },
   "anonymous": "Anonimno",
   "timeAgo": "prije {time}",
-  "@timeAgo": { "placeholders": { "time": {} } },
+  "@timeAgo": {
+    "placeholders": {
+      "time": {}
+    }
+  },
   "emailLabel": "E-pošta",
   "passwordLabel": "Lozinka",
   "signIn": "Prijava",
@@ -128,7 +156,11 @@
   "promoTitle": "Posebna ponuda",
   "promoBanner": "Prva 3 mjeseca po 3,99€/mj!",
   "promoEndsOn": "Ponuda istječe {date}",
-  "@promoEndsOn": { "placeholders": { "date": {} } },
+  "@promoEndsOn": {
+    "placeholders": {
+      "date": {}
+    }
+  },
   "premiumLimitTitle": "Današnja molitva je završena",
   "premiumLimitBody": "Vidimo se sutra!\nMoli se neograničeno s Premium",
   "laterButton": "Možda kasnije",
@@ -166,10 +198,14 @@
   "milestoneShare": "Podijeli",
   "milestoneThankGod": "Hvala Bogu!",
   "shareStreakText": "{count} dana neprekidne molitve! Moj molitveni put s Abba #Abba #Molitva",
-  "@shareStreakText": { "placeholders": { "count": {} } },
+  "@shareStreakText": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "shareDaysLabel": "dana neprekidne molitve",
   "shareSubtitle": "Svakodnevna molitva s Bogom",
-  "premiumActive": "Premium aktivan",
+  "premiumActive": "Članstvo Aktivno",
   "planOncePerDay": "1x/dan",
   "planUnlimited": "Neograničeno",
   "closeRecording": "Zatvori snimanje",
@@ -209,9 +245,18 @@
   "scriptureReasonLabel": "Zašto ovaj stih",
   "seeMore": "Vidi više",
   "seeAllComments": "Pogledaj svih {count} komentara",
-  "@seeAllComments": { "placeholders": { "count": {} } },
+  "@seeAllComments": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "likedBy": "{name} i još {count} osoba lajkali su ovo",
-  "@likedBy": { "placeholders": { "name": {}, "count": {} } },
+  "@likedBy": {
+    "placeholders": {
+      "name": {},
+      "count": {}
+    }
+  },
   "commentsTitle": "Komentari",
   "myPageTitle": "Moj Molitveni Vrt",
   "myPrayers": "Moje molitve",
@@ -227,10 +272,29 @@
   "linkAccountSuccess": "Račun je uspješno povezan!",
   "anonymousUser": "Molitveni ratnik",
   "showReplies": "Prikaži {count} odgovora",
-  "@showReplies": { "placeholders": { "count": {} } },
+  "@showReplies": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "hideReplies": "Sakrij odgovore",
   "replyingTo": "Odgovaraš na {name}",
-  "@replyingTo": { "placeholders": { "name": {} } },
+  "@replyingTo": {
+    "placeholders": {
+      "name": {}
+    }
+  },
   "viewAllComments": "Pogledaj svih {count} komentara",
-  "@viewAllComments": { "placeholders": { "count": {} } }
+  "@viewAllComments": {
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "membershipTitle": "Članstvo",
+  "membershipSubtitle": "Produbite svoj molitveni život",
+  "monthlyPlan": "Mjesečno",
+  "yearlyPlan": "Godišnje",
+  "yearlySavings": "5,00€/mjes (37% popust)",
+  "startMembership": "Započni",
+  "membershipActive": "Članstvo Aktivno"
 }

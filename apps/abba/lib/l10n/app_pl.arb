@@ -10,15 +10,31 @@
   "signInWithGoogle": "Kontynuuj z Google",
   "signInWithEmail": "Kontynuuj z E-mailem",
   "greetingMorning": "Dzień dobry, {name}",
-  "@greetingMorning": { "placeholders": { "name": {} } },
+  "@greetingMorning": {
+    "placeholders": {
+      "name": {}
+    }
+  },
   "greetingAfternoon": "Dzień dobry, {name}",
-  "@greetingAfternoon": { "placeholders": { "name": {} } },
+  "@greetingAfternoon": {
+    "placeholders": {
+      "name": {}
+    }
+  },
   "greetingEvening": "Dobry wieczór, {name}",
-  "@greetingEvening": { "placeholders": { "name": {} } },
+  "@greetingEvening": {
+    "placeholders": {
+      "name": {}
+    }
+  },
   "prayButton": "Módl się",
   "qtButton": "Cisza z Bogiem",
   "streakDays": "{count} dni ciągłej modlitwy",
-  "@streakDays": { "placeholders": { "count": {} } },
+  "@streakDays": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "dailyVerse": "Werset dnia",
   "tabHome": "Główna",
   "tabCalendar": "Kalendarz",
@@ -69,17 +85,21 @@
   "bestStreak": "Najlepsza seria",
   "days": "dni",
   "calendarRecordCount": "{count} wpisów",
-  "@calendarRecordCount": { "placeholders": { "count": {} } },
+  "@calendarRecordCount": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "todayVerse": "Werset na dziś",
   "settingsTitle": "Ustawienia",
   "profileSection": "Profil",
   "totalPrayers": "Łączna liczba modlitw",
   "consecutiveDays": "Dni z rzędu",
-  "premiumSection": "Premium",
+  "premiumSection": "Członkostwo",
   "freePlan": "Bezpłatny",
   "premiumPlan": "Premium",
-  "monthlyPrice": "14,99zł/mies.",
-  "yearlyPrice": "99,99zł/rok",
+  "monthlyPrice": "34,99 zł / mies.",
+  "yearlyPrice": "259,99 zł / rok",
   "yearlySave": "Oszczędź 40%",
   "launchPromo": "3 miesiące za 15,99zł/mies.!",
   "startPremium": "Rozpocznij Premium",
@@ -96,10 +116,18 @@
   "privacyPolicy": "Polityka prywatności",
   "logout": "Wyloguj się",
   "appVersion": "Wersja {version}",
-  "@appVersion": { "placeholders": { "version": {} } },
+  "@appVersion": {
+    "placeholders": {
+      "version": {}
+    }
+  },
   "anonymous": "Anonimowo",
   "timeAgo": "{time} temu",
-  "@timeAgo": { "placeholders": { "time": {} } },
+  "@timeAgo": {
+    "placeholders": {
+      "time": {}
+    }
+  },
   "emailLabel": "E-mail",
   "passwordLabel": "Hasło",
   "signIn": "Zaloguj się",
@@ -128,7 +156,11 @@
   "promoTitle": "Oferta premierowa",
   "promoBanner": "Pierwsze 3 miesiące za 15,99zł/mies.!",
   "promoEndsOn": "Oferta kończy się {date}",
-  "@promoEndsOn": { "placeholders": { "date": {} } },
+  "@promoEndsOn": {
+    "placeholders": {
+      "date": {}
+    }
+  },
   "premiumLimitTitle": "Dzisiejsza modlitwa zakończona",
   "premiumLimitBody": "Do jutra!\nMódl się bez limitu z Premium",
   "laterButton": "Może później",
@@ -166,10 +198,14 @@
   "milestoneShare": "Udostępnij",
   "milestoneThankGod": "Chwała Bogu!",
   "shareStreakText": "{count} dni ciągłej modlitwy! Moja droga modlitwy z Abba #Abba #Modlitwa",
-  "@shareStreakText": { "placeholders": { "count": {} } },
+  "@shareStreakText": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "shareDaysLabel": "dni ciągłej modlitwy",
   "shareSubtitle": "Codzienna modlitwa z Bogiem",
-  "premiumActive": "Premium aktywny",
+  "premiumActive": "Członkostwo Aktywne",
   "planOncePerDay": "1x/dzień",
   "planUnlimited": "Bez limitu",
   "closeRecording": "Zamknij nagrywanie",
@@ -209,9 +245,18 @@
   "scriptureReasonLabel": "Dlaczego to Pismo",
   "seeMore": "Zobacz więcej",
   "seeAllComments": "Zobacz wszystkie komentarze ({count})",
-  "@seeAllComments": { "placeholders": { "count": {} } },
+  "@seeAllComments": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "likedBy": "{name} i {count} innych polubili to",
-  "@likedBy": { "placeholders": { "name": {}, "count": {} } },
+  "@likedBy": {
+    "placeholders": {
+      "name": {},
+      "count": {}
+    }
+  },
   "commentsTitle": "Komentarze",
   "myPageTitle": "Mój ogród modlitwy",
   "myPrayers": "Moje modlitwy",
@@ -227,10 +272,29 @@
   "linkAccountSuccess": "Konto połączone pomyślnie!",
   "anonymousUser": "Wojownik modlitwy",
   "showReplies": "Pokaż {count} odpowiedzi",
-  "@showReplies": { "placeholders": { "count": {} } },
+  "@showReplies": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "hideReplies": "Ukryj odpowiedzi",
   "replyingTo": "Odpowiedź do {name}",
-  "@replyingTo": { "placeholders": { "name": {} } },
+  "@replyingTo": {
+    "placeholders": {
+      "name": {}
+    }
+  },
   "viewAllComments": "Zobacz wszystkie komentarze ({count})",
-  "@viewAllComments": { "placeholders": { "count": {} } }
+  "@viewAllComments": {
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "membershipTitle": "Członkostwo",
+  "membershipSubtitle": "Pogłęb swoje życie modlitewne",
+  "monthlyPlan": "Miesięczny",
+  "yearlyPlan": "Roczny",
+  "yearlySavings": "21,67 zł/mies. (37% taniej)",
+  "startMembership": "Rozpocznij",
+  "membershipActive": "Członkostwo Aktywne"
 }

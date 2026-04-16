@@ -10,15 +10,31 @@
   "signInWithGoogle": "Fortsæt med Google",
   "signInWithEmail": "Fortsæt med e-mail",
   "greetingMorning": "Godmorgen, {name}",
-  "@greetingMorning": { "placeholders": { "name": {} } },
+  "@greetingMorning": {
+    "placeholders": {
+      "name": {}
+    }
+  },
   "greetingAfternoon": "God eftermiddag, {name}",
-  "@greetingAfternoon": { "placeholders": { "name": {} } },
+  "@greetingAfternoon": {
+    "placeholders": {
+      "name": {}
+    }
+  },
   "greetingEvening": "Godaften, {name}",
-  "@greetingEvening": { "placeholders": { "name": {} } },
+  "@greetingEvening": {
+    "placeholders": {
+      "name": {}
+    }
+  },
   "prayButton": "Bed",
   "qtButton": "Stille stund",
   "streakDays": "{count} dages bønnerække",
-  "@streakDays": { "placeholders": { "count": {} } },
+  "@streakDays": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "dailyVerse": "Dagens vers",
   "tabHome": "Hjem",
   "tabCalendar": "Kalender",
@@ -69,17 +85,21 @@
   "bestStreak": "Bedste række",
   "days": "dage",
   "calendarRecordCount": "{count} poster",
-  "@calendarRecordCount": { "placeholders": { "count": {} } },
+  "@calendarRecordCount": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "todayVerse": "Dagens vers",
   "settingsTitle": "Indstillinger",
   "profileSection": "Profil",
   "totalPrayers": "Samlede bønner",
   "consecutiveDays": "Dage i træk",
-  "premiumSection": "Premium",
+  "premiumSection": "Medlemskab",
   "freePlan": "Gratis",
   "premiumPlan": "Premium",
-  "monthlyPrice": "25kr/md",
-  "yearlyPrice": "179kr/år",
+  "monthlyPrice": "59 kr / mdr",
+  "yearlyPrice": "449 kr / år",
   "yearlySave": "Spar 40%",
   "launchPromo": "3 måneder for 29kr/md!",
   "startPremium": "Start Premium",
@@ -96,10 +116,18 @@
   "privacyPolicy": "Privatlivspolitik",
   "logout": "Log ud",
   "appVersion": "Version {version}",
-  "@appVersion": { "placeholders": { "version": {} } },
+  "@appVersion": {
+    "placeholders": {
+      "version": {}
+    }
+  },
   "anonymous": "Anonym",
   "timeAgo": "{time} siden",
-  "@timeAgo": { "placeholders": { "time": {} } },
+  "@timeAgo": {
+    "placeholders": {
+      "time": {}
+    }
+  },
   "emailLabel": "E-mail",
   "passwordLabel": "Adgangskode",
   "signIn": "Log ind",
@@ -128,7 +156,11 @@
   "promoTitle": "Lanceringstilbud",
   "promoBanner": "Første 3 måneder for 29kr/md!",
   "promoEndsOn": "Tilbuddet udløber {date}",
-  "@promoEndsOn": { "placeholders": { "date": {} } },
+  "@promoEndsOn": {
+    "placeholders": {
+      "date": {}
+    }
+  },
   "premiumLimitTitle": "Dagens bøn er fuldført",
   "premiumLimitBody": "Vi ses i morgen!\nBed ubegrænset med Premium",
   "laterButton": "Måske senere",
@@ -166,10 +198,14 @@
   "milestoneShare": "Del",
   "milestoneThankGod": "Tak Gud!",
   "shareStreakText": "{count} dages bønnerække! Min bønnerejse med Abba #Abba #Bøn",
-  "@shareStreakText": { "placeholders": { "count": {} } },
+  "@shareStreakText": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "shareDaysLabel": "dages bønnerække",
   "shareSubtitle": "Daglig bøn med Gud",
-  "premiumActive": "Premium Aktiv",
+  "premiumActive": "Medlemskab Aktivt",
   "planOncePerDay": "1 gang/dag",
   "planUnlimited": "Ubegrænset",
   "closeRecording": "Luk optagelse",
@@ -209,9 +245,18 @@
   "scriptureReasonLabel": "Hvorfor dette skriftsted",
   "seeMore": "Se mere",
   "seeAllComments": "Se alle {count} kommentarer",
-  "@seeAllComments": { "placeholders": { "count": {} } },
+  "@seeAllComments": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "likedBy": "{name} og {count} andre kan lide dette",
-  "@likedBy": { "placeholders": { "name": {}, "count": {} } },
+  "@likedBy": {
+    "placeholders": {
+      "name": {},
+      "count": {}
+    }
+  },
   "commentsTitle": "Kommentarer",
   "myPageTitle": "Min Bønnehave",
   "myPrayers": "Mine bønner",
@@ -227,10 +272,29 @@
   "linkAccountSuccess": "Kontoen er forbundet!",
   "anonymousUser": "Bønnekriger",
   "showReplies": "Vis {count} svar",
-  "@showReplies": { "placeholders": { "count": {} } },
+  "@showReplies": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "hideReplies": "Skjul svar",
   "replyingTo": "Svarer {name}",
-  "@replyingTo": { "placeholders": { "name": {} } },
+  "@replyingTo": {
+    "placeholders": {
+      "name": {}
+    }
+  },
   "viewAllComments": "Se alle {count} kommentarer",
-  "@viewAllComments": { "placeholders": { "count": {} } }
+  "@viewAllComments": {
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "membershipTitle": "Medlemskab",
+  "membershipSubtitle": "Fordyb dit bedeliv",
+  "monthlyPlan": "Månedlig",
+  "yearlyPlan": "Årlig",
+  "yearlySavings": "37 kr/mdr (37% rabat)",
+  "startMembership": "Begynd nu",
+  "membershipActive": "Medlemskab Aktivt"
 }

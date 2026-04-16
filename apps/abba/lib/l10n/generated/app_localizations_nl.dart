@@ -230,7 +230,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get consecutiveDays => 'Opeenvolgende dagen';
 
   @override
-  String get premiumSection => 'Premium';
+  String get premiumSection => 'Lidmaatschap';
 
   @override
   String get freePlan => 'Gratis';
@@ -239,10 +239,10 @@ class AppLocalizationsNl extends AppLocalizations {
   String get premiumPlan => 'Premium';
 
   @override
-  String get monthlyPrice => '€3,49/maand';
+  String get monthlyPrice => '€7,99 / maand';
 
   @override
-  String get yearlyPrice => '€24,99/jaar';
+  String get yearlyPrice => '€59,99 / jaar';
 
   @override
   String get yearlySave => 'Bespaar 40%';
@@ -517,7 +517,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get shareSubtitle => 'Dagelijks gebed met God';
 
   @override
-  String get premiumActive => 'Premium actief';
+  String get premiumActive => 'Lidmaatschap Actief';
 
   @override
   String get planOncePerDay => '1x/dag';
@@ -707,4 +707,25 @@ class AppLocalizationsNl extends AppLocalizations {
   String viewAllComments(Object count) {
     return 'Bekijk alle $count reacties';
   }
+
+  @override
+  String get membershipTitle => 'Lidmaatschap';
+
+  @override
+  String get membershipSubtitle => 'Verdiep je gebedsleven';
+
+  @override
+  String get monthlyPlan => 'Maandelijks';
+
+  @override
+  String get yearlyPlan => 'Jaarlijks';
+
+  @override
+  String get yearlySavings => '€5,00/maand (37% korting)';
+
+  @override
+  String get startMembership => 'Begin nu';
+
+  @override
+  String get membershipActive => 'Lidmaatschap Actief';
 }

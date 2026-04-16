@@ -231,7 +231,7 @@ class AppLocalizationsCs extends AppLocalizations {
   String get consecutiveDays => 'Dní v řadě';
 
   @override
-  String get premiumSection => 'Premium';
+  String get premiumSection => 'Členství';
 
   @override
   String get freePlan => 'Zdarma';
@@ -240,10 +240,10 @@ class AppLocalizationsCs extends AppLocalizations {
   String get premiumPlan => 'Premium';
 
   @override
-  String get monthlyPrice => '89Kč/měs.';
+  String get monthlyPrice => '199 Kč / měs';
 
   @override
-  String get yearlyPrice => '599Kč/rok';
+  String get yearlyPrice => '1 490 Kč / rok';
 
   @override
   String get yearlySave => 'Ušetři 40%';
@@ -518,7 +518,7 @@ class AppLocalizationsCs extends AppLocalizations {
   String get shareSubtitle => 'Každodenní modlitba s Bohem';
 
   @override
-  String get premiumActive => 'Premium aktivní';
+  String get premiumActive => 'Členství Aktivní';
 
   @override
   String get planOncePerDay => '1x/den';
@@ -707,4 +707,25 @@ class AppLocalizationsCs extends AppLocalizations {
   String viewAllComments(Object count) {
     return 'Zobrazit všech $count komentářů';
   }
+
+  @override
+  String get membershipTitle => 'Členství';
+
+  @override
+  String get membershipSubtitle => 'Prohloubte svůj modlitební život';
+
+  @override
+  String get monthlyPlan => 'Měsíčně';
+
+  @override
+  String get yearlyPlan => 'Ročně';
+
+  @override
+  String get yearlySavings => '124 Kč/měs (sleva 37%)';
+
+  @override
+  String get startMembership => 'Začít';
+
+  @override
+  String get membershipActive => 'Členství Aktivní';
 }

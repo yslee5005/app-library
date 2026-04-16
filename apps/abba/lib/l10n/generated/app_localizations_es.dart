@@ -232,7 +232,7 @@ class AppLocalizationsEs extends AppLocalizations {
   String get consecutiveDays => 'Días consecutivos';
 
   @override
-  String get premiumSection => 'Premium';
+  String get premiumSection => 'Membresía';
 
   @override
   String get freePlan => 'Gratis';
@@ -241,10 +241,10 @@ class AppLocalizationsEs extends AppLocalizations {
   String get premiumPlan => 'Premium';
 
   @override
-  String get monthlyPrice => '\$3.49/mes';
+  String get monthlyPrice => '\$7.99 / mes';
 
   @override
-  String get yearlyPrice => '\$24.99/año';
+  String get yearlyPrice => '\$59.99 / año';
 
   @override
   String get yearlySave => 'Ahorra 40%';
@@ -520,7 +520,7 @@ class AppLocalizationsEs extends AppLocalizations {
   String get shareSubtitle => 'Oración diaria con Dios';
 
   @override
-  String get premiumActive => 'Premium Activo';
+  String get premiumActive => 'Membresía Activa';
 
   @override
   String get planOncePerDay => '1x/día';
@@ -709,4 +709,25 @@ class AppLocalizationsEs extends AppLocalizations {
   String viewAllComments(Object count) {
     return 'Ver los $count comentarios';
   }
+
+  @override
+  String get membershipTitle => 'Membresía';
+
+  @override
+  String get membershipSubtitle => 'Profundiza tu vida de oración';
+
+  @override
+  String get monthlyPlan => 'Mensual';
+
+  @override
+  String get yearlyPlan => 'Anual';
+
+  @override
+  String get yearlySavings => '\$5.00/mes (37% de descuento)';
+
+  @override
+  String get startMembership => 'Comenzar';
+
+  @override
+  String get membershipActive => 'Membresía Activa';
 }

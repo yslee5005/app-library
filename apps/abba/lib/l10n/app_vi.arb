@@ -10,15 +10,31 @@
   "signInWithGoogle": "Tiếp tục với Google",
   "signInWithEmail": "Tiếp tục với Email",
   "greetingMorning": "Chào buổi sáng, {name}",
-  "@greetingMorning": { "placeholders": { "name": {} } },
+  "@greetingMorning": {
+    "placeholders": {
+      "name": {}
+    }
+  },
   "greetingAfternoon": "Chào buổi chiều, {name}",
-  "@greetingAfternoon": { "placeholders": { "name": {} } },
+  "@greetingAfternoon": {
+    "placeholders": {
+      "name": {}
+    }
+  },
   "greetingEvening": "Chào buổi tối, {name}",
-  "@greetingEvening": { "placeholders": { "name": {} } },
+  "@greetingEvening": {
+    "placeholders": {
+      "name": {}
+    }
+  },
   "prayButton": "Cầu nguyện",
   "qtButton": "Tĩnh nguyện",
   "streakDays": "{count} ngày cầu nguyện liên tiếp",
-  "@streakDays": { "placeholders": { "count": {} } },
+  "@streakDays": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "dailyVerse": "Câu gốc hôm nay",
   "tabHome": "Trang chủ",
   "tabCalendar": "Lịch",
@@ -69,17 +85,21 @@
   "bestStreak": "Chuỗi dài nhất",
   "days": "ngày",
   "calendarRecordCount": "{count} bản ghi",
-  "@calendarRecordCount": { "placeholders": { "count": {} } },
+  "@calendarRecordCount": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "todayVerse": "Câu gốc hôm nay",
   "settingsTitle": "Cài đặt",
   "profileSection": "Hồ sơ",
   "totalPrayers": "Tổng số lần cầu nguyện",
   "consecutiveDays": "Ngày liên tiếp",
-  "premiumSection": "Premium",
+  "premiumSection": "Thành viên",
   "freePlan": "Miễn phí",
   "premiumPlan": "Premium",
-  "monthlyPrice": "89.000₫/tháng",
-  "yearlyPrice": "599.000₫/năm",
+  "monthlyPrice": "189.000đ / tháng",
+  "yearlyPrice": "1.499.000đ / năm",
   "yearlySave": "Tiết kiệm 40%",
   "launchPromo": "3 tháng chỉ 99.000₫/tháng!",
   "startPremium": "Bắt đầu Premium",
@@ -96,10 +116,18 @@
   "privacyPolicy": "Chính sách bảo mật",
   "logout": "Đăng xuất",
   "appVersion": "Phiên bản {version}",
-  "@appVersion": { "placeholders": { "version": {} } },
+  "@appVersion": {
+    "placeholders": {
+      "version": {}
+    }
+  },
   "anonymous": "Ẩn danh",
   "timeAgo": "{time} trước",
-  "@timeAgo": { "placeholders": { "time": {} } },
+  "@timeAgo": {
+    "placeholders": {
+      "time": {}
+    }
+  },
   "emailLabel": "Email",
   "passwordLabel": "Mật khẩu",
   "signIn": "Đăng nhập",
@@ -128,7 +156,11 @@
   "promoTitle": "Ưu đãi ra mắt",
   "promoBanner": "3 tháng đầu chỉ 99.000₫/tháng!",
   "promoEndsOn": "Ưu đãi kết thúc {date}",
-  "@promoEndsOn": { "placeholders": { "date": {} } },
+  "@promoEndsOn": {
+    "placeholders": {
+      "date": {}
+    }
+  },
   "premiumLimitTitle": "Lời cầu nguyện hôm nay đã hoàn tất",
   "premiumLimitBody": "Hẹn gặp bạn ngày mai!\nCầu nguyện không giới hạn với Premium",
   "laterButton": "Để sau",
@@ -166,10 +198,14 @@
   "milestoneShare": "Chia sẻ",
   "milestoneThankGod": "Tạ ơn Chúa!",
   "shareStreakText": "{count} ngày cầu nguyện liên tiếp! Hành trình cầu nguyện cùng Abba #Abba #CầuNguyện",
-  "@shareStreakText": { "placeholders": { "count": {} } },
+  "@shareStreakText": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "shareDaysLabel": "ngày cầu nguyện liên tiếp",
   "shareSubtitle": "Cầu nguyện mỗi ngày cùng Chúa",
-  "premiumActive": "Premium đang hoạt động",
+  "premiumActive": "Thành viên Hoạt động",
   "planOncePerDay": "1 lần/ngày",
   "planUnlimited": "Không giới hạn",
   "closeRecording": "Đóng ghi âm",
@@ -209,9 +245,18 @@
   "scriptureReasonLabel": "Tại sao câu Kinh Thánh này",
   "seeMore": "Xem thêm",
   "seeAllComments": "Xem tất cả {count} bình luận",
-  "@seeAllComments": { "placeholders": { "count": {} } },
+  "@seeAllComments": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "likedBy": "{name} và {count} người khác đã thích",
-  "@likedBy": { "placeholders": { "name": {}, "count": {} } },
+  "@likedBy": {
+    "placeholders": {
+      "name": {},
+      "count": {}
+    }
+  },
   "commentsTitle": "Bình luận",
   "myPageTitle": "Vườn cầu nguyện của tôi",
   "myPrayers": "Lời cầu nguyện",
@@ -227,10 +272,29 @@
   "linkAccountSuccess": "Liên kết tài khoản thành công!",
   "anonymousUser": "Chiến sĩ cầu nguyện",
   "showReplies": "Xem {count} trả lời",
-  "@showReplies": { "placeholders": { "count": {} } },
+  "@showReplies": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "hideReplies": "Ẩn trả lời",
   "replyingTo": "Đang trả lời {name}",
-  "@replyingTo": { "placeholders": { "name": {} } },
+  "@replyingTo": {
+    "placeholders": {
+      "name": {}
+    }
+  },
   "viewAllComments": "Xem tất cả {count} bình luận",
-  "@viewAllComments": { "placeholders": { "count": {} } }
+  "@viewAllComments": {
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "membershipTitle": "Thành viên",
+  "membershipSubtitle": "Làm sâu thêm đời sống cầu nguyện",
+  "monthlyPlan": "Hàng tháng",
+  "yearlyPlan": "Hàng năm",
+  "yearlySavings": "125.000đ/tháng (giảm 33%)",
+  "startMembership": "Bắt đầu",
+  "membershipActive": "Thành viên Hoạt động"
 }

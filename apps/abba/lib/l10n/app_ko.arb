@@ -10,15 +10,31 @@
   "signInWithGoogle": "Google로 계속하기",
   "signInWithEmail": "이메일로 계속하기",
   "greetingMorning": "좋은 아침이에요, {name}",
-  "@greetingMorning": { "placeholders": { "name": {} } },
+  "@greetingMorning": {
+    "placeholders": {
+      "name": {}
+    }
+  },
   "greetingAfternoon": "좋은 오후에요, {name}",
-  "@greetingAfternoon": { "placeholders": { "name": {} } },
+  "@greetingAfternoon": {
+    "placeholders": {
+      "name": {}
+    }
+  },
   "greetingEvening": "좋은 저녁이에요, {name}",
-  "@greetingEvening": { "placeholders": { "name": {} } },
+  "@greetingEvening": {
+    "placeholders": {
+      "name": {}
+    }
+  },
   "prayButton": "기도하기",
   "qtButton": "QT하기",
   "streakDays": "{count}일 연속 기도",
-  "@streakDays": { "placeholders": { "count": {} } },
+  "@streakDays": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "dailyVerse": "오늘의 말씀",
   "tabHome": "홈",
   "tabCalendar": "달력",
@@ -69,17 +85,21 @@
   "bestStreak": "최장 기록",
   "days": "일",
   "calendarRecordCount": "{count}개의 기록",
-  "@calendarRecordCount": { "placeholders": { "count": {} } },
+  "@calendarRecordCount": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "todayVerse": "오늘의 한 줄",
   "settingsTitle": "설정",
   "profileSection": "프로필",
   "totalPrayers": "총 기도 횟수",
   "consecutiveDays": "연속 기도일",
-  "premiumSection": "프리미엄",
+  "premiumSection": "멤버십",
   "freePlan": "무료",
   "premiumPlan": "프리미엄",
-  "monthlyPrice": "₩4,700/월",
-  "yearlyPrice": "₩33,700/년",
+  "monthlyPrice": "₩9,900 / 월",
+  "yearlyPrice": "₩79,900 / 년",
   "yearlySave": "40% 절약",
   "launchPromo": "3개월간 ₩5,900/월!",
   "startPremium": "프리미엄 시작하기",
@@ -96,10 +116,18 @@
   "privacyPolicy": "개인정보처리방침",
   "logout": "로그아웃",
   "appVersion": "버전 {version}",
-  "@appVersion": { "placeholders": { "version": {} } },
+  "@appVersion": {
+    "placeholders": {
+      "version": {}
+    }
+  },
   "anonymous": "익명",
   "timeAgo": "{time} 전",
-  "@timeAgo": { "placeholders": { "time": {} } },
+  "@timeAgo": {
+    "placeholders": {
+      "time": {}
+    }
+  },
   "emailLabel": "이메일",
   "passwordLabel": "비밀번호",
   "signIn": "로그인",
@@ -128,7 +156,11 @@
   "promoTitle": "런칭 특가",
   "promoBanner": "3개월간 ₩5,900/월!",
   "promoEndsOn": "{date}까지 특가",
-  "@promoEndsOn": { "placeholders": { "date": {} } },
+  "@promoEndsOn": {
+    "placeholders": {
+      "date": {}
+    }
+  },
   "premiumLimitTitle": "오늘의 기도를 마쳤습니다",
   "premiumLimitBody": "내일 다시 만나요!\n프리미엄으로 무제한 기도하기",
   "laterButton": "다음에 하기",
@@ -166,10 +198,14 @@
   "milestoneShare": "공유하기",
   "milestoneThankGod": "감사합니다!",
   "shareStreakText": "{count}일 연속 기도! Abba와 함께하는 기도 여정 #Abba #기도",
-  "@shareStreakText": { "placeholders": { "count": {} } },
+  "@shareStreakText": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "shareDaysLabel": "일 연속 기도",
   "shareSubtitle": "하나님과 함께하는 매일의 기도",
-  "premiumActive": "프리미엄 활성",
+  "premiumActive": "멤버십 활성",
   "planOncePerDay": "1일 1회",
   "planUnlimited": "무제한",
   "closeRecording": "녹음 닫기",
@@ -209,9 +245,18 @@
   "scriptureReasonLabel": "이 말씀을 드리는 이유",
   "seeMore": "더 보기",
   "seeAllComments": "댓글 {count}개 모두 보기",
-  "@seeAllComments": { "placeholders": { "count": {} } },
+  "@seeAllComments": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "likedBy": "{name} 외 {count}명이 좋아합니다",
-  "@likedBy": { "placeholders": { "name": {}, "count": {} } },
+  "@likedBy": {
+    "placeholders": {
+      "name": {},
+      "count": {}
+    }
+  },
   "commentsTitle": "댓글",
   "myPageTitle": "내 기도 정원",
   "myPrayers": "내 기도",
@@ -227,10 +272,29 @@
   "linkAccountSuccess": "계정이 연결되었습니다!",
   "anonymousUser": "기도하는 사람",
   "showReplies": "답글 {count}개 보기",
-  "@showReplies": { "placeholders": { "count": {} } },
+  "@showReplies": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "hideReplies": "답글 숨기기",
   "replyingTo": "{name}에게 답글 작성 중",
-  "@replyingTo": { "placeholders": { "name": {} } },
+  "@replyingTo": {
+    "placeholders": {
+      "name": {}
+    }
+  },
   "viewAllComments": "댓글 {count}개 모두 보기",
-  "@viewAllComments": { "placeholders": { "count": {} } }
+  "@viewAllComments": {
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "membershipTitle": "멤버십",
+  "membershipSubtitle": "기도의 깊이를 더해보세요",
+  "monthlyPlan": "월간",
+  "yearlyPlan": "연간",
+  "yearlySavings": "월 ₩6,658 (33% 할인)",
+  "startMembership": "시작하기",
+  "membershipActive": "멤버십 활성"
 }

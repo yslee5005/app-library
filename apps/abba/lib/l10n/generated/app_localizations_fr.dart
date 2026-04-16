@@ -233,7 +233,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get consecutiveDays => 'Jours Consécutifs';
 
   @override
-  String get premiumSection => 'Premium';
+  String get premiumSection => 'Abonnement';
 
   @override
   String get freePlan => 'Gratuit';
@@ -242,10 +242,10 @@ class AppLocalizationsFr extends AppLocalizations {
   String get premiumPlan => 'Premium';
 
   @override
-  String get monthlyPrice => '4,99€/mois';
+  String get monthlyPrice => '7,99€ / mois';
 
   @override
-  String get yearlyPrice => '34,99€/an';
+  String get yearlyPrice => '59,99€ / an';
 
   @override
   String get yearlySave => 'Économisez 40%';
@@ -522,7 +522,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get shareSubtitle => 'Prière quotidienne avec Dieu';
 
   @override
-  String get premiumActive => 'Premium Actif';
+  String get premiumActive => 'Abonnement Actif';
 
   @override
   String get planOncePerDay => '1x/jour';
@@ -713,4 +713,25 @@ class AppLocalizationsFr extends AppLocalizations {
   String viewAllComments(Object count) {
     return 'Voir les $count commentaires';
   }
+
+  @override
+  String get membershipTitle => 'Abonnement';
+
+  @override
+  String get membershipSubtitle => 'Approfondissez votre vie de prière';
+
+  @override
+  String get monthlyPlan => 'Mensuel';
+
+  @override
+  String get yearlyPlan => 'Annuel';
+
+  @override
+  String get yearlySavings => '5,00€/mois (37% de réduction)';
+
+  @override
+  String get startMembership => 'Commencer';
+
+  @override
+  String get membershipActive => 'Abonnement Actif';
 }

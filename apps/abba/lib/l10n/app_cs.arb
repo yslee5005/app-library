@@ -10,15 +10,31 @@
   "signInWithGoogle": "Pokračovat s Google",
   "signInWithEmail": "Pokračovat s e-mailem",
   "greetingMorning": "Dobré ráno, {name}",
-  "@greetingMorning": { "placeholders": { "name": {} } },
+  "@greetingMorning": {
+    "placeholders": {
+      "name": {}
+    }
+  },
   "greetingAfternoon": "Dobré odpoledne, {name}",
-  "@greetingAfternoon": { "placeholders": { "name": {} } },
+  "@greetingAfternoon": {
+    "placeholders": {
+      "name": {}
+    }
+  },
   "greetingEvening": "Dobrý večer, {name}",
-  "@greetingEvening": { "placeholders": { "name": {} } },
+  "@greetingEvening": {
+    "placeholders": {
+      "name": {}
+    }
+  },
   "prayButton": "Modlit se",
   "qtButton": "Tichý čas",
   "streakDays": "{count} dní nepřetržité modlitby",
-  "@streakDays": { "placeholders": { "count": {} } },
+  "@streakDays": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "dailyVerse": "Verš dne",
   "tabHome": "Domů",
   "tabCalendar": "Kalendář",
@@ -69,17 +85,21 @@
   "bestStreak": "Nejlepší série",
   "days": "dní",
   "calendarRecordCount": "{count} záznamů",
-  "@calendarRecordCount": { "placeholders": { "count": {} } },
+  "@calendarRecordCount": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "todayVerse": "Dnešní verš",
   "settingsTitle": "Nastavení",
   "profileSection": "Profil",
   "totalPrayers": "Celkem modliteb",
   "consecutiveDays": "Dní v řadě",
-  "premiumSection": "Premium",
+  "premiumSection": "Členství",
   "freePlan": "Zdarma",
   "premiumPlan": "Premium",
-  "monthlyPrice": "89Kč/měs.",
-  "yearlyPrice": "599Kč/rok",
+  "monthlyPrice": "199 Kč / měs",
+  "yearlyPrice": "1 490 Kč / rok",
   "yearlySave": "Ušetři 40%",
   "launchPromo": "3 měsíce za 99Kč/měs.!",
   "startPremium": "Začít Premium",
@@ -96,10 +116,18 @@
   "privacyPolicy": "Zásady ochrany soukromí",
   "logout": "Odhlásit se",
   "appVersion": "Verze {version}",
-  "@appVersion": { "placeholders": { "version": {} } },
+  "@appVersion": {
+    "placeholders": {
+      "version": {}
+    }
+  },
   "anonymous": "Anonymně",
   "timeAgo": "před {time}",
-  "@timeAgo": { "placeholders": { "time": {} } },
+  "@timeAgo": {
+    "placeholders": {
+      "time": {}
+    }
+  },
   "emailLabel": "E-mail",
   "passwordLabel": "Heslo",
   "signIn": "Přihlásit se",
@@ -128,7 +156,11 @@
   "promoTitle": "Úvodní akce",
   "promoBanner": "První 3 měsíce za 99Kč/měs.!",
   "promoEndsOn": "Nabídka končí {date}",
-  "@promoEndsOn": { "placeholders": { "date": {} } },
+  "@promoEndsOn": {
+    "placeholders": {
+      "date": {}
+    }
+  },
   "premiumLimitTitle": "Dnešní modlitba je dokončena",
   "premiumLimitBody": "Na shledanou zítra!\nModli se bez omezení s Premium",
   "laterButton": "Možná později",
@@ -166,10 +198,14 @@
   "milestoneShare": "Sdílet",
   "milestoneThankGod": "Díky Bohu!",
   "shareStreakText": "{count} dní nepřetržité modlitby! Moje cesta modlitby s Abba #Abba #Modlitba",
-  "@shareStreakText": { "placeholders": { "count": {} } },
+  "@shareStreakText": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "shareDaysLabel": "dní nepřetržité modlitby",
   "shareSubtitle": "Každodenní modlitba s Bohem",
-  "premiumActive": "Premium aktivní",
+  "premiumActive": "Členství Aktivní",
   "planOncePerDay": "1x/den",
   "planUnlimited": "Neomezeně",
   "closeRecording": "Zavřít nahrávání",
@@ -209,9 +245,18 @@
   "scriptureReasonLabel": "Proč toto Písmo",
   "seeMore": "Zobrazit více",
   "seeAllComments": "Zobrazit všech {count} komentářů",
-  "@seeAllComments": { "placeholders": { "count": {} } },
+  "@seeAllComments": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "likedBy": "{name} a dalším {count} se to líbí",
-  "@likedBy": { "placeholders": { "name": {}, "count": {} } },
+  "@likedBy": {
+    "placeholders": {
+      "name": {},
+      "count": {}
+    }
+  },
   "commentsTitle": "Komentáře",
   "myPageTitle": "Moje zahrada modlitby",
   "myPrayers": "Moje modlitby",
@@ -227,10 +272,29 @@
   "linkAccountSuccess": "Účet úspěšně propojen!",
   "anonymousUser": "Modlitební bojovník",
   "showReplies": "Zobrazit {count} odpovědí",
-  "@showReplies": { "placeholders": { "count": {} } },
+  "@showReplies": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "hideReplies": "Skrýt odpovědi",
   "replyingTo": "Odpověď pro {name}",
-  "@replyingTo": { "placeholders": { "name": {} } },
+  "@replyingTo": {
+    "placeholders": {
+      "name": {}
+    }
+  },
   "viewAllComments": "Zobrazit všech {count} komentářů",
-  "@viewAllComments": { "placeholders": { "count": {} } }
+  "@viewAllComments": {
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "membershipTitle": "Členství",
+  "membershipSubtitle": "Prohloubte svůj modlitební život",
+  "monthlyPlan": "Měsíčně",
+  "yearlyPlan": "Ročně",
+  "yearlySavings": "124 Kč/měs (sleva 37%)",
+  "startMembership": "Začít",
+  "membershipActive": "Členství Aktivní"
 }

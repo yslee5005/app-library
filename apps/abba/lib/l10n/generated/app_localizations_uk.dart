@@ -232,7 +232,7 @@ class AppLocalizationsUk extends AppLocalizations {
   String get consecutiveDays => 'Днів поспіль';
 
   @override
-  String get premiumSection => 'Premium';
+  String get premiumSection => 'Підписка';
 
   @override
   String get freePlan => 'Безкоштовно';
@@ -241,10 +241,10 @@ class AppLocalizationsUk extends AppLocalizations {
   String get premiumPlan => 'Premium';
 
   @override
-  String get monthlyPrice => '149₴/міс.';
+  String get monthlyPrice => '\$7.99 / міс';
 
   @override
-  String get yearlyPrice => '999₴/рік';
+  String get yearlyPrice => '\$59.99 / рік';
 
   @override
   String get yearlySave => 'Економія 40%';
@@ -518,7 +518,7 @@ class AppLocalizationsUk extends AppLocalizations {
   String get shareSubtitle => 'Щоденна молитва з Богом';
 
   @override
-  String get premiumActive => 'Premium активний';
+  String get premiumActive => 'Підписка Активна';
 
   @override
   String get planOncePerDay => '1x/день';
@@ -707,4 +707,25 @@ class AppLocalizationsUk extends AppLocalizations {
   String viewAllComments(Object count) {
     return 'Переглянути всі $count коментарів';
   }
+
+  @override
+  String get membershipTitle => 'Підписка';
+
+  @override
+  String get membershipSubtitle => 'Поглибте ваше молитовне життя';
+
+  @override
+  String get monthlyPlan => 'Щомісяця';
+
+  @override
+  String get yearlyPlan => 'Щороку';
+
+  @override
+  String get yearlySavings => '\$5.00/міс (знижка 37%)';
+
+  @override
+  String get startMembership => 'Розпочати';
+
+  @override
+  String get membershipActive => 'Підписка Активна';
 }

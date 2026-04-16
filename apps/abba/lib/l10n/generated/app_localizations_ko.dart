@@ -229,7 +229,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get consecutiveDays => '연속 기도일';
 
   @override
-  String get premiumSection => '프리미엄';
+  String get premiumSection => '멤버십';
 
   @override
   String get freePlan => '무료';
@@ -238,10 +238,10 @@ class AppLocalizationsKo extends AppLocalizations {
   String get premiumPlan => '프리미엄';
 
   @override
-  String get monthlyPrice => '₩4,700/월';
+  String get monthlyPrice => '₩9,900 / 월';
 
   @override
-  String get yearlyPrice => '₩33,700/년';
+  String get yearlyPrice => '₩79,900 / 년';
 
   @override
   String get yearlySave => '40% 절약';
@@ -507,7 +507,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get shareSubtitle => '하나님과 함께하는 매일의 기도';
 
   @override
-  String get premiumActive => '프리미엄 활성';
+  String get premiumActive => '멤버십 활성';
 
   @override
   String get planOncePerDay => '1일 1회';
@@ -692,4 +692,25 @@ class AppLocalizationsKo extends AppLocalizations {
   String viewAllComments(Object count) {
     return '댓글 $count개 모두 보기';
   }
+
+  @override
+  String get membershipTitle => '멤버십';
+
+  @override
+  String get membershipSubtitle => '기도의 깊이를 더해보세요';
+
+  @override
+  String get monthlyPlan => '월간';
+
+  @override
+  String get yearlyPlan => '연간';
+
+  @override
+  String get yearlySavings => '월 ₩6,658 (33% 할인)';
+
+  @override
+  String get startMembership => '시작하기';
+
+  @override
+  String get membershipActive => '멤버십 활성';
 }

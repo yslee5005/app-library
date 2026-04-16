@@ -10,15 +10,31 @@
   "signInWithGoogle": "Endelea na Google",
   "signInWithEmail": "Endelea na Barua pepe",
   "greetingMorning": "Habari za asubuhi, {name}",
-  "@greetingMorning": { "placeholders": { "name": {} } },
+  "@greetingMorning": {
+    "placeholders": {
+      "name": {}
+    }
+  },
   "greetingAfternoon": "Habari za mchana, {name}",
-  "@greetingAfternoon": { "placeholders": { "name": {} } },
+  "@greetingAfternoon": {
+    "placeholders": {
+      "name": {}
+    }
+  },
   "greetingEvening": "Habari za jioni, {name}",
-  "@greetingEvening": { "placeholders": { "name": {} } },
+  "@greetingEvening": {
+    "placeholders": {
+      "name": {}
+    }
+  },
   "prayButton": "Omba",
   "qtButton": "Wakati wa Tafakari",
   "streakDays": "Siku {count} mfululizo wa maombi",
-  "@streakDays": { "placeholders": { "count": {} } },
+  "@streakDays": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "dailyVerse": "Mstari wa Leo",
   "tabHome": "Nyumbani",
   "tabCalendar": "Kalenda",
@@ -69,17 +85,21 @@
   "bestStreak": "Mfululizo Bora",
   "days": "siku",
   "calendarRecordCount": "Rekodi {count}",
-  "@calendarRecordCount": { "placeholders": { "count": {} } },
+  "@calendarRecordCount": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "todayVerse": "Mstari wa Leo",
   "settingsTitle": "Mipangilio",
   "profileSection": "Wasifu",
   "totalPrayers": "Jumla ya Maombi",
   "consecutiveDays": "Siku Mfululizo",
-  "premiumSection": "Premium",
+  "premiumSection": "Uanachama",
   "freePlan": "Bure",
   "premiumPlan": "Premium",
-  "monthlyPrice": "TSh8,500/mwezi",
-  "yearlyPrice": "TSh59,900/mwaka",
+  "monthlyPrice": "$7.99 / mwezi",
+  "yearlyPrice": "$59.99 / mwaka",
   "yearlySave": "Okoa 40%",
   "launchPromo": "Miezi 3 kwa TSh4,992/mwezi!",
   "startPremium": "Anza Premium",
@@ -96,10 +116,18 @@
   "privacyPolicy": "Sera ya Faragha",
   "logout": "Toka",
   "appVersion": "Toleo {version}",
-  "@appVersion": { "placeholders": { "version": {} } },
+  "@appVersion": {
+    "placeholders": {
+      "version": {}
+    }
+  },
   "anonymous": "Bila jina",
   "timeAgo": "{time} iliyopita",
-  "@timeAgo": { "placeholders": { "time": {} } },
+  "@timeAgo": {
+    "placeholders": {
+      "time": {}
+    }
+  },
   "emailLabel": "Barua pepe",
   "passwordLabel": "Nenosiri",
   "signIn": "Ingia",
@@ -128,7 +156,11 @@
   "promoTitle": "Ofa Maalum ya Uzinduzi",
   "promoBanner": "Miezi 3 ya kwanza kwa TSh4,992/mwezi!",
   "promoEndsOn": "Ofa inaisha {date}",
-  "@promoEndsOn": { "placeholders": { "date": {} } },
+  "@promoEndsOn": {
+    "placeholders": {
+      "date": {}
+    }
+  },
   "premiumLimitTitle": "Maombi ya leo yamekamilika",
   "premiumLimitBody": "Tutaonana kesho!\nOmba bila kikomo na Premium",
   "laterButton": "Labda baadaye",
@@ -166,10 +198,14 @@
   "milestoneShare": "Shiriki",
   "milestoneThankGod": "Asante Mungu!",
   "shareStreakText": "Siku {count} mfululizo wa maombi! Safari yangu ya maombi na Abba #Abba #Maombi",
-  "@shareStreakText": { "placeholders": { "count": {} } },
+  "@shareStreakText": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "shareDaysLabel": "siku mfululizo wa maombi",
   "shareSubtitle": "Maombi ya kila siku na Mungu",
-  "premiumActive": "Premium Hai",
+  "premiumActive": "Uanachama Hai",
   "planOncePerDay": "1x/siku",
   "planUnlimited": "Bila kikomo",
   "closeRecording": "Funga rekodi",
@@ -209,9 +245,18 @@
   "scriptureReasonLabel": "Kwa nini Andiko hili",
   "seeMore": "Tazama zaidi",
   "seeAllComments": "Tazama maoni yote {count}",
-  "@seeAllComments": { "placeholders": { "count": {} } },
+  "@seeAllComments": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "likedBy": "{name} na wengine {count} walipenda",
-  "@likedBy": { "placeholders": { "name": {}, "count": {} } },
+  "@likedBy": {
+    "placeholders": {
+      "name": {},
+      "count": {}
+    }
+  },
   "commentsTitle": "Maoni",
   "myPageTitle": "Bustani Yangu ya Maombi",
   "myPrayers": "Maombi Yangu",
@@ -227,10 +272,29 @@
   "linkAccountSuccess": "Akaunti imeunganishwa!",
   "anonymousUser": "Shujaa wa Maombi",
   "showReplies": "Tazama majibu {count}",
-  "@showReplies": { "placeholders": { "count": {} } },
+  "@showReplies": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "hideReplies": "Ficha majibu",
   "replyingTo": "Unajibu {name}",
-  "@replyingTo": { "placeholders": { "name": {} } },
+  "@replyingTo": {
+    "placeholders": {
+      "name": {}
+    }
+  },
   "viewAllComments": "Tazama maoni yote {count}",
-  "@viewAllComments": { "placeholders": { "count": {} } }
+  "@viewAllComments": {
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "membershipTitle": "Uanachama",
+  "membershipSubtitle": "Ongeza kina cha maombi yako",
+  "monthlyPlan": "Kwa mwezi",
+  "yearlyPlan": "Kwa mwaka",
+  "yearlySavings": "$5.00/mwezi (punguzo 37%)",
+  "startMembership": "Anza sasa",
+  "membershipActive": "Uanachama Hai"
 }

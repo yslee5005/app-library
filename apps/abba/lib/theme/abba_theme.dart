@@ -6,6 +6,7 @@ class AbbaColors {
 
   // Primary
   static const sage = Color(0xFF8FBC8F);
+  static const sageDark = Color(0xFF5B8C5A);  // CTA 버튼용 — 흰 텍스트 대비 4.5:1+ (AA)
   static const cream = Color(0xFFFFF8F0);
   static const warmBrown = Color(0xFF3D2E17); // 대비율 7:1+ (AAA) — 기존 #5D4E37에서 강화
   static const softGold = Color(0xFFD4A574);
@@ -121,7 +122,7 @@ ThemeData abbaTheme() {
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
-        backgroundColor: AbbaColors.sage,
+        backgroundColor: AbbaColors.sageDark,
         foregroundColor: AbbaColors.white,
         minimumSize: const Size(double.infinity, abbaButtonHeight),
         shape: RoundedRectangleBorder(

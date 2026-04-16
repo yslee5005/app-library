@@ -230,7 +230,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get consecutiveDays => 'Consecutive Days';
 
   @override
-  String get premiumSection => 'Premium';
+  String get premiumSection => 'Membership';
 
   @override
   String get freePlan => 'Free';
@@ -239,10 +239,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get premiumPlan => 'Premium';
 
   @override
-  String get monthlyPrice => '\$3.49/mo';
+  String get monthlyPrice => '\$7.99 / mo';
 
   @override
-  String get yearlyPrice => '\$24.99/yr';
+  String get yearlyPrice => '\$59.99 / yr';
 
   @override
   String get yearlySave => 'Save 40%';
@@ -517,7 +517,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get shareSubtitle => 'Daily prayer with God';
 
   @override
-  String get premiumActive => 'Premium Active';
+  String get premiumActive => 'Membership Active';
 
   @override
   String get planOncePerDay => '1x/day';
@@ -705,4 +705,25 @@ class AppLocalizationsEn extends AppLocalizations {
   String viewAllComments(Object count) {
     return 'View all $count comments';
   }
+
+  @override
+  String get membershipTitle => 'Membership';
+
+  @override
+  String get membershipSubtitle => 'Deepen your prayer journey';
+
+  @override
+  String get monthlyPlan => 'Monthly';
+
+  @override
+  String get yearlyPlan => 'Yearly';
+
+  @override
+  String get yearlySavings => '\$5.00/mo (37% off)';
+
+  @override
+  String get startMembership => 'Get Started';
+
+  @override
+  String get membershipActive => 'Membership Active';
 }

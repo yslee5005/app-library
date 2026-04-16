@@ -191,7 +191,7 @@ class _QtHistoryCard extends ConsumerWidget {
         if (prayer.result != null) {
           ref.read(prayerResultProvider.notifier).state =
               AsyncValue.data(prayer.result!);
-          context.go('/home/qt-dashboard');
+          context.push('/home/qt-dashboard');
         }
       },
       child: Container(

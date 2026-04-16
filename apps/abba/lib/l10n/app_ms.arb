@@ -10,15 +10,31 @@
   "signInWithGoogle": "Teruskan dengan Google",
   "signInWithEmail": "Teruskan dengan E-mel",
   "greetingMorning": "Selamat pagi, {name}",
-  "@greetingMorning": { "placeholders": { "name": {} } },
+  "@greetingMorning": {
+    "placeholders": {
+      "name": {}
+    }
+  },
   "greetingAfternoon": "Selamat petang, {name}",
-  "@greetingAfternoon": { "placeholders": { "name": {} } },
+  "@greetingAfternoon": {
+    "placeholders": {
+      "name": {}
+    }
+  },
   "greetingEvening": "Selamat malam, {name}",
-  "@greetingEvening": { "placeholders": { "name": {} } },
+  "@greetingEvening": {
+    "placeholders": {
+      "name": {}
+    }
+  },
   "prayButton": "Berdoa",
   "qtButton": "Waktu Teduh",
   "streakDays": "{count} hari doa berturut-turut",
-  "@streakDays": { "placeholders": { "count": {} } },
+  "@streakDays": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "dailyVerse": "Ayat Hari Ini",
   "tabHome": "Utama",
   "tabCalendar": "Kalendar",
@@ -69,17 +85,21 @@
   "bestStreak": "Siri Terbaik",
   "days": "hari",
   "calendarRecordCount": "{count} rekod",
-  "@calendarRecordCount": { "placeholders": { "count": {} } },
+  "@calendarRecordCount": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "todayVerse": "Ayat Hari Ini",
   "settingsTitle": "Tetapan",
   "profileSection": "Profil",
   "totalPrayers": "Jumlah Doa",
   "consecutiveDays": "Hari Berturut-turut",
-  "premiumSection": "Premium",
+  "premiumSection": "Keahlian",
   "freePlan": "Percuma",
   "premiumPlan": "Premium",
-  "monthlyPrice": "RM14.90/bulan",
-  "yearlyPrice": "RM99.90/tahun",
+  "monthlyPrice": "RM34.90 / bulan",
+  "yearlyPrice": "RM259.90 / tahun",
   "yearlySave": "Jimat 40%",
   "launchPromo": "3 bulan pada RM16.90/bulan!",
   "startPremium": "Mulakan Premium",
@@ -96,10 +116,18 @@
   "privacyPolicy": "Dasar Privasi",
   "logout": "Log Keluar",
   "appVersion": "Versi {version}",
-  "@appVersion": { "placeholders": { "version": {} } },
+  "@appVersion": {
+    "placeholders": {
+      "version": {}
+    }
+  },
   "anonymous": "Tanpa Nama",
   "timeAgo": "{time} lalu",
-  "@timeAgo": { "placeholders": { "time": {} } },
+  "@timeAgo": {
+    "placeholders": {
+      "time": {}
+    }
+  },
   "emailLabel": "E-mel",
   "passwordLabel": "Kata Laluan",
   "signIn": "Log Masuk",
@@ -128,7 +156,11 @@
   "promoTitle": "Tawaran Pelancaran",
   "promoBanner": "3 bulan pertama pada RM16.90/bulan!",
   "promoEndsOn": "Tawaran tamat {date}",
-  "@promoEndsOn": { "placeholders": { "date": {} } },
+  "@promoEndsOn": {
+    "placeholders": {
+      "date": {}
+    }
+  },
   "premiumLimitTitle": "Doa hari ini selesai",
   "premiumLimitBody": "Jumpa esok!\nBerdoa tanpa had dengan Premium",
   "laterButton": "Mungkin nanti",
@@ -166,10 +198,14 @@
   "milestoneShare": "Kongsi",
   "milestoneThankGod": "Puji Tuhan!",
   "shareStreakText": "{count} hari doa berturut-turut! Perjalanan doa saya bersama Abba #Abba #Doa",
-  "@shareStreakText": { "placeholders": { "count": {} } },
+  "@shareStreakText": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "shareDaysLabel": "hari doa berturut-turut",
   "shareSubtitle": "Berdoa setiap hari bersama Tuhan",
-  "premiumActive": "Premium Aktif",
+  "premiumActive": "Keahlian Aktif",
   "planOncePerDay": "1x/hari",
   "planUnlimited": "Tanpa had",
   "closeRecording": "Tutup rakaman",
@@ -209,9 +245,18 @@
   "scriptureReasonLabel": "Mengapa ayat ini",
   "seeMore": "Lihat lagi",
   "seeAllComments": "Lihat semua {count} komen",
-  "@seeAllComments": { "placeholders": { "count": {} } },
+  "@seeAllComments": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "likedBy": "{name} dan {count} lagi menyukai ini",
-  "@likedBy": { "placeholders": { "name": {}, "count": {} } },
+  "@likedBy": {
+    "placeholders": {
+      "name": {},
+      "count": {}
+    }
+  },
   "commentsTitle": "Komen",
   "myPageTitle": "Taman Doa Saya",
   "myPrayers": "Doa Saya",
@@ -227,10 +272,29 @@
   "linkAccountSuccess": "Akaun berjaya dipautkan!",
   "anonymousUser": "Pejuang Doa",
   "showReplies": "Lihat {count} balasan",
-  "@showReplies": { "placeholders": { "count": {} } },
+  "@showReplies": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "hideReplies": "Sembunyikan balasan",
   "replyingTo": "Membalas {name}",
-  "@replyingTo": { "placeholders": { "name": {} } },
+  "@replyingTo": {
+    "placeholders": {
+      "name": {}
+    }
+  },
   "viewAllComments": "Lihat semua {count} komen",
-  "@viewAllComments": { "placeholders": { "count": {} } }
+  "@viewAllComments": {
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "membershipTitle": "Keahlian",
+  "membershipSubtitle": "Perdalam kehidupan doa anda",
+  "monthlyPlan": "Bulanan",
+  "yearlyPlan": "Tahunan",
+  "yearlySavings": "RM21.66/bulan (diskaun 37%)",
+  "startMembership": "Mula",
+  "membershipActive": "Keahlian Aktif"
 }

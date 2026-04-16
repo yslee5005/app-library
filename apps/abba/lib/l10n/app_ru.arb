@@ -10,15 +10,31 @@
   "signInWithGoogle": "Продолжить с Google",
   "signInWithEmail": "Продолжить с Email",
   "greetingMorning": "Доброе утро, {name}",
-  "@greetingMorning": { "placeholders": { "name": {} } },
+  "@greetingMorning": {
+    "placeholders": {
+      "name": {}
+    }
+  },
   "greetingAfternoon": "Добрый день, {name}",
-  "@greetingAfternoon": { "placeholders": { "name": {} } },
+  "@greetingAfternoon": {
+    "placeholders": {
+      "name": {}
+    }
+  },
   "greetingEvening": "Добрый вечер, {name}",
-  "@greetingEvening": { "placeholders": { "name": {} } },
+  "@greetingEvening": {
+    "placeholders": {
+      "name": {}
+    }
+  },
   "prayButton": "Молиться",
   "qtButton": "Тихое время",
   "streakDays": "{count} дней непрерывной молитвы",
-  "@streakDays": { "placeholders": { "count": {} } },
+  "@streakDays": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "dailyVerse": "Стих дня",
   "tabHome": "Главная",
   "tabCalendar": "Календарь",
@@ -69,17 +85,21 @@
   "bestStreak": "Лучшая серия",
   "days": "дней",
   "calendarRecordCount": "{count} записей",
-  "@calendarRecordCount": { "placeholders": { "count": {} } },
+  "@calendarRecordCount": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "todayVerse": "Стих на сегодня",
   "settingsTitle": "Настройки",
   "profileSection": "Профиль",
   "totalPrayers": "Всего молитв",
   "consecutiveDays": "Дней подряд",
-  "premiumSection": "Premium",
+  "premiumSection": "Подписка",
   "freePlan": "Бесплатно",
   "premiumPlan": "Premium",
-  "monthlyPrice": "349₽/мес.",
-  "yearlyPrice": "2490₽/год",
+  "monthlyPrice": "699 ₽ / мес",
+  "yearlyPrice": "5 290 ₽ / год",
   "yearlySave": "Экономия 40%",
   "launchPromo": "3 месяца за 399₽/мес.!",
   "startPremium": "Начать Premium",
@@ -96,10 +116,18 @@
   "privacyPolicy": "Политика конфиденциальности",
   "logout": "Выйти",
   "appVersion": "Версия {version}",
-  "@appVersion": { "placeholders": { "version": {} } },
+  "@appVersion": {
+    "placeholders": {
+      "version": {}
+    }
+  },
   "anonymous": "Анонимно",
   "timeAgo": "{time} назад",
-  "@timeAgo": { "placeholders": { "time": {} } },
+  "@timeAgo": {
+    "placeholders": {
+      "time": {}
+    }
+  },
   "emailLabel": "Email",
   "passwordLabel": "Пароль",
   "signIn": "Войти",
@@ -128,7 +156,11 @@
   "promoTitle": "Специальное предложение",
   "promoBanner": "Первые 3 месяца за 399₽/мес.!",
   "promoEndsOn": "Предложение действует до {date}",
-  "@promoEndsOn": { "placeholders": { "date": {} } },
+  "@promoEndsOn": {
+    "placeholders": {
+      "date": {}
+    }
+  },
   "premiumLimitTitle": "Сегодняшняя молитва завершена",
   "premiumLimitBody": "До завтра!\nМолитесь без ограничений с Premium",
   "laterButton": "Может быть позже",
@@ -166,10 +198,14 @@
   "milestoneShare": "Поделиться",
   "milestoneThankGod": "Слава Богу!",
   "shareStreakText": "{count} дней непрерывной молитвы! Мой путь молитвы с Abba #Abba #Молитва",
-  "@shareStreakText": { "placeholders": { "count": {} } },
+  "@shareStreakText": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "shareDaysLabel": "дней непрерывной молитвы",
   "shareSubtitle": "Ежедневная молитва с Богом",
-  "premiumActive": "Premium активен",
+  "premiumActive": "Подписка Активна",
   "planOncePerDay": "1x/день",
   "planUnlimited": "Безлимитно",
   "closeRecording": "Закрыть запись",
@@ -209,9 +245,18 @@
   "scriptureReasonLabel": "Почему это Писание",
   "seeMore": "Показать ещё",
   "seeAllComments": "Посмотреть все {count} комментариев",
-  "@seeAllComments": { "placeholders": { "count": {} } },
+  "@seeAllComments": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "likedBy": "{name} и ещё {count} понравилось",
-  "@likedBy": { "placeholders": { "name": {}, "count": {} } },
+  "@likedBy": {
+    "placeholders": {
+      "name": {},
+      "count": {}
+    }
+  },
   "commentsTitle": "Комментарии",
   "myPageTitle": "Мой сад молитвы",
   "myPrayers": "Мои молитвы",
@@ -227,10 +272,29 @@
   "linkAccountSuccess": "Аккаунт успешно привязан!",
   "anonymousUser": "Молитвенный воин",
   "showReplies": "Показать {count} ответов",
-  "@showReplies": { "placeholders": { "count": {} } },
+  "@showReplies": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "hideReplies": "Скрыть ответы",
   "replyingTo": "Ответ для {name}",
-  "@replyingTo": { "placeholders": { "name": {} } },
+  "@replyingTo": {
+    "placeholders": {
+      "name": {}
+    }
+  },
   "viewAllComments": "Посмотреть все {count} комментариев",
-  "@viewAllComments": { "placeholders": { "count": {} } }
+  "@viewAllComments": {
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "membershipTitle": "Подписка",
+  "membershipSubtitle": "Углубите вашу молитвенную жизнь",
+  "monthlyPlan": "Ежемесячно",
+  "yearlyPlan": "Ежегодно",
+  "yearlySavings": "441 ₽/мес (37% скидка)",
+  "startMembership": "Начать",
+  "membershipActive": "Подписка Активна"
 }

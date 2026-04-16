@@ -10,15 +10,31 @@
   "signInWithGoogle": "Continuar con Google",
   "signInWithEmail": "Continuar con correo",
   "greetingMorning": "Buenos días, {name}",
-  "@greetingMorning": { "placeholders": { "name": {} } },
+  "@greetingMorning": {
+    "placeholders": {
+      "name": {}
+    }
+  },
   "greetingAfternoon": "Buenas tardes, {name}",
-  "@greetingAfternoon": { "placeholders": { "name": {} } },
+  "@greetingAfternoon": {
+    "placeholders": {
+      "name": {}
+    }
+  },
   "greetingEvening": "Buenas noches, {name}",
-  "@greetingEvening": { "placeholders": { "name": {} } },
+  "@greetingEvening": {
+    "placeholders": {
+      "name": {}
+    }
+  },
   "prayButton": "Orar",
   "qtButton": "Devocional",
   "streakDays": "{count} días seguidos de oración",
-  "@streakDays": { "placeholders": { "count": {} } },
+  "@streakDays": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "dailyVerse": "Versículo del día",
   "tabHome": "Inicio",
   "tabCalendar": "Calendario",
@@ -69,17 +85,21 @@
   "bestStreak": "Mejor racha",
   "days": "días",
   "calendarRecordCount": "{count} registros",
-  "@calendarRecordCount": { "placeholders": { "count": {} } },
+  "@calendarRecordCount": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "todayVerse": "Versículo del día",
   "settingsTitle": "Ajustes",
   "profileSection": "Perfil",
   "totalPrayers": "Total de oraciones",
   "consecutiveDays": "Días consecutivos",
-  "premiumSection": "Premium",
+  "premiumSection": "Membresía",
   "freePlan": "Gratis",
   "premiumPlan": "Premium",
-  "monthlyPrice": "$3.49/mes",
-  "yearlyPrice": "$24.99/año",
+  "monthlyPrice": "$7.99 / mes",
+  "yearlyPrice": "$59.99 / año",
   "yearlySave": "Ahorra 40%",
   "launchPromo": "¡3 meses a $3.99/mes!",
   "startPremium": "Iniciar Premium",
@@ -96,10 +116,18 @@
   "privacyPolicy": "Política de privacidad",
   "logout": "Cerrar sesión",
   "appVersion": "Versión {version}",
-  "@appVersion": { "placeholders": { "version": {} } },
+  "@appVersion": {
+    "placeholders": {
+      "version": {}
+    }
+  },
   "anonymous": "Anónimo",
   "timeAgo": "hace {time}",
-  "@timeAgo": { "placeholders": { "time": {} } },
+  "@timeAgo": {
+    "placeholders": {
+      "time": {}
+    }
+  },
   "emailLabel": "Correo electrónico",
   "passwordLabel": "Contraseña",
   "signIn": "Iniciar sesión",
@@ -128,7 +156,11 @@
   "promoTitle": "Oferta de lanzamiento",
   "promoBanner": "¡3 meses a $3.99/mes!",
   "promoEndsOn": "Oferta hasta {date}",
-  "@promoEndsOn": { "placeholders": { "date": {} } },
+  "@promoEndsOn": {
+    "placeholders": {
+      "date": {}
+    }
+  },
   "premiumLimitTitle": "La oración de hoy está completa",
   "premiumLimitBody": "¡Nos vemos mañana!\nOra sin límites con Premium",
   "laterButton": "Quizás después",
@@ -166,10 +198,14 @@
   "milestoneShare": "Compartir",
   "milestoneThankGod": "¡Gracias a Dios!",
   "shareStreakText": "¡{count} días seguidos de oración! Mi viaje con Abba #Abba #Oración",
-  "@shareStreakText": { "placeholders": { "count": {} } },
+  "@shareStreakText": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "shareDaysLabel": "días de oración",
   "shareSubtitle": "Oración diaria con Dios",
-  "premiumActive": "Premium Activo",
+  "premiumActive": "Membresía Activa",
   "planOncePerDay": "1x/día",
   "planUnlimited": "Ilimitado",
   "closeRecording": "Cerrar grabación",
@@ -209,9 +245,18 @@
   "scriptureReasonLabel": "Por qué esta Escritura",
   "seeMore": "Ver más",
   "seeAllComments": "Ver los {count} comentarios",
-  "@seeAllComments": { "placeholders": { "count": {} } },
+  "@seeAllComments": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "likedBy": "A {name} y {count} más les gustó",
-  "@likedBy": { "placeholders": { "name": {}, "count": {} } },
+  "@likedBy": {
+    "placeholders": {
+      "name": {},
+      "count": {}
+    }
+  },
   "commentsTitle": "Comentarios",
   "myPageTitle": "Mi Jardín de Oración",
   "myPrayers": "Mis Oraciones",
@@ -227,10 +272,29 @@
   "linkAccountSuccess": "¡Cuenta vinculada exitosamente!",
   "anonymousUser": "Guerrero de oración",
   "showReplies": "Ver {count} respuestas",
-  "@showReplies": { "placeholders": { "count": {} } },
+  "@showReplies": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "hideReplies": "Ocultar respuestas",
   "replyingTo": "Respondiendo a {name}",
-  "@replyingTo": { "placeholders": { "name": {} } },
+  "@replyingTo": {
+    "placeholders": {
+      "name": {}
+    }
+  },
   "viewAllComments": "Ver los {count} comentarios",
-  "@viewAllComments": { "placeholders": { "count": {} } }
+  "@viewAllComments": {
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "membershipTitle": "Membresía",
+  "membershipSubtitle": "Profundiza tu vida de oración",
+  "monthlyPlan": "Mensual",
+  "yearlyPlan": "Anual",
+  "yearlySavings": "$5.00/mes (37% de descuento)",
+  "startMembership": "Comenzar",
+  "membershipActive": "Membresía Activa"
 }

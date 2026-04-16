@@ -99,7 +99,7 @@ class LoginView extends ConsumerWidget {
               _LoginButton(
                 label: l10n.signInWithEmail,
                 icon: Icons.email_outlined,
-                backgroundColor: AbbaColors.sage,
+                backgroundColor: AbbaColors.sageDark,
                 textColor: AbbaColors.white,
                 onTap: () => handleSignIn(() async {
                   final credentials = await _showEmailDialog(context, l10n);
@@ -176,7 +176,7 @@ Future<(String, String)?> _showEmailDialog(
               Navigator.pop(context, (email, password));
             }
           },
-          style: ElevatedButton.styleFrom(backgroundColor: AbbaColors.sage),
+          style: ElevatedButton.styleFrom(backgroundColor: AbbaColors.sageDark),
           child: Text(
             l10n.signIn,
             style: const TextStyle(color: AbbaColors.white),

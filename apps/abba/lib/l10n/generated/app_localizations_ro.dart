@@ -233,7 +233,7 @@ class AppLocalizationsRo extends AppLocalizations {
   String get consecutiveDays => 'Zile consecutive';
 
   @override
-  String get premiumSection => 'Premium';
+  String get premiumSection => 'Abonament';
 
   @override
   String get freePlan => 'Gratuit';
@@ -242,10 +242,10 @@ class AppLocalizationsRo extends AppLocalizations {
   String get premiumPlan => 'Premium';
 
   @override
-  String get monthlyPrice => '16,99lei/lună';
+  String get monthlyPrice => '39,99 lei / lună';
 
   @override
-  String get yearlyPrice => '119,99lei/an';
+  String get yearlyPrice => '299,99 lei / an';
 
   @override
   String get yearlySave => 'Economisești 40%';
@@ -522,7 +522,7 @@ class AppLocalizationsRo extends AppLocalizations {
   String get shareSubtitle => 'Rugăciune zilnică cu Dumnezeu';
 
   @override
-  String get premiumActive => 'Premium activ';
+  String get premiumActive => 'Abonament Activ';
 
   @override
   String get planOncePerDay => '1x/zi';
@@ -711,4 +711,25 @@ class AppLocalizationsRo extends AppLocalizations {
   String viewAllComments(Object count) {
     return 'Vezi toate cele $count comentarii';
   }
+
+  @override
+  String get membershipTitle => 'Abonament';
+
+  @override
+  String get membershipSubtitle => 'Aprofundează viața ta de rugăciune';
+
+  @override
+  String get monthlyPlan => 'Lunar';
+
+  @override
+  String get yearlyPlan => 'Anual';
+
+  @override
+  String get yearlySavings => '25 lei/lună (37% reducere)';
+
+  @override
+  String get startMembership => 'Începe';
+
+  @override
+  String get membershipActive => 'Abonament Activ';
 }

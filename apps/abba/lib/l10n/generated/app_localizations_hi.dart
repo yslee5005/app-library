@@ -233,7 +233,7 @@ class AppLocalizationsHi extends AppLocalizations {
   String get consecutiveDays => 'लगातार दिन';
 
   @override
-  String get premiumSection => 'Premium';
+  String get premiumSection => 'सदस्यता';
 
   @override
   String get freePlan => 'मुफ़्त';
@@ -242,10 +242,10 @@ class AppLocalizationsHi extends AppLocalizations {
   String get premiumPlan => 'Premium';
 
   @override
-  String get monthlyPrice => '₹299/माह';
+  String get monthlyPrice => '₹649 / माह';
 
   @override
-  String get yearlyPrice => '₹1999/वर्ष';
+  String get yearlyPrice => '₹4,899 / वर्ष';
 
   @override
   String get yearlySave => '40% बचाएँ';
@@ -519,7 +519,7 @@ class AppLocalizationsHi extends AppLocalizations {
   String get shareSubtitle => 'परमेश्वर के साथ दैनिक प्रार्थना';
 
   @override
-  String get premiumActive => 'Premium सक्रिय';
+  String get premiumActive => 'सदस्यता सक्रिय';
 
   @override
   String get planOncePerDay => '1x/दिन';
@@ -707,4 +707,25 @@ class AppLocalizationsHi extends AppLocalizations {
   String viewAllComments(Object count) {
     return 'सभी $count टिप्पणियाँ देखें';
   }
+
+  @override
+  String get membershipTitle => 'सदस्यता';
+
+  @override
+  String get membershipSubtitle => 'अपनी प्रार्थना को और गहरा करें';
+
+  @override
+  String get monthlyPlan => 'मासिक';
+
+  @override
+  String get yearlyPlan => 'वार्षिक';
+
+  @override
+  String get yearlySavings => '₹408/माह (37% छूट)';
+
+  @override
+  String get startMembership => 'शुरू करें';
+
+  @override
+  String get membershipActive => 'सदस्यता सक्रिय';
 }

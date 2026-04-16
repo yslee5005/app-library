@@ -10,15 +10,31 @@
   "signInWithGoogle": "Συνέχεια με Google",
   "signInWithEmail": "Συνέχεια με Email",
   "greetingMorning": "Καλημέρα, {name}",
-  "@greetingMorning": { "placeholders": { "name": {} } },
+  "@greetingMorning": {
+    "placeholders": {
+      "name": {}
+    }
+  },
   "greetingAfternoon": "Καλό απόγευμα, {name}",
-  "@greetingAfternoon": { "placeholders": { "name": {} } },
+  "@greetingAfternoon": {
+    "placeholders": {
+      "name": {}
+    }
+  },
   "greetingEvening": "Καλησπέρα, {name}",
-  "@greetingEvening": { "placeholders": { "name": {} } },
+  "@greetingEvening": {
+    "placeholders": {
+      "name": {}
+    }
+  },
   "prayButton": "Προσευχή",
   "qtButton": "Ώρα Μελέτης",
   "streakDays": "{count} ημέρες συνεχούς προσευχής",
-  "@streakDays": { "placeholders": { "count": {} } },
+  "@streakDays": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "dailyVerse": "Εδάφιο Ημέρας",
   "tabHome": "Αρχική",
   "tabCalendar": "Ημερολόγιο",
@@ -69,17 +85,21 @@
   "bestStreak": "Καλύτερο Σερί",
   "days": "ημέρες",
   "calendarRecordCount": "{count} εγγραφές",
-  "@calendarRecordCount": { "placeholders": { "count": {} } },
+  "@calendarRecordCount": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "todayVerse": "Εδάφιο Ημέρας",
   "settingsTitle": "Ρυθμίσεις",
   "profileSection": "Προφίλ",
   "totalPrayers": "Συνολικές Προσευχές",
   "consecutiveDays": "Συνεχόμενες Ημέρες",
-  "premiumSection": "Premium",
+  "premiumSection": "Συνδρομή",
   "freePlan": "Δωρεάν",
   "premiumPlan": "Premium",
-  "monthlyPrice": "3,49€/μήνα",
-  "yearlyPrice": "24,99€/έτος",
+  "monthlyPrice": "7,99€ / μήνα",
+  "yearlyPrice": "59,99€ / έτος",
   "yearlySave": "Εξοικονόμηση 40%",
   "launchPromo": "3 μήνες στα 3,99€/μήνα!",
   "startPremium": "Ξεκίνα Premium",
@@ -96,10 +116,18 @@
   "privacyPolicy": "Πολιτική Απορρήτου",
   "logout": "Αποσύνδεση",
   "appVersion": "Έκδοση {version}",
-  "@appVersion": { "placeholders": { "version": {} } },
+  "@appVersion": {
+    "placeholders": {
+      "version": {}
+    }
+  },
   "anonymous": "Ανώνυμος",
   "timeAgo": "πριν {time}",
-  "@timeAgo": { "placeholders": { "time": {} } },
+  "@timeAgo": {
+    "placeholders": {
+      "time": {}
+    }
+  },
   "emailLabel": "Email",
   "passwordLabel": "Κωδικός",
   "signIn": "Σύνδεση",
@@ -128,7 +156,11 @@
   "promoTitle": "Ειδική Προσφορά",
   "promoBanner": "3 πρώτοι μήνες στα 3,99€/μήνα!",
   "promoEndsOn": "Η προσφορά λήγει {date}",
-  "@promoEndsOn": { "placeholders": { "date": {} } },
+  "@promoEndsOn": {
+    "placeholders": {
+      "date": {}
+    }
+  },
   "premiumLimitTitle": "Η σημερινή προσευχή ολοκληρώθηκε",
   "premiumLimitBody": "Τα λέμε αύριο!\nΑπεριόριστη προσευχή με Premium",
   "laterButton": "Ίσως αργότερα",
@@ -166,10 +198,14 @@
   "milestoneShare": "Κοινοποίηση",
   "milestoneThankGod": "Δόξα τω Θεώ!",
   "shareStreakText": "{count} ημέρες συνεχούς προσευχής! Το ταξίδι προσευχής μου με Abba #Abba #Προσευχή",
-  "@shareStreakText": { "placeholders": { "count": {} } },
+  "@shareStreakText": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "shareDaysLabel": "ημέρες συνεχούς προσευχής",
   "shareSubtitle": "Καθημερινή προσευχή με τον Θεό",
-  "premiumActive": "Premium Ενεργό",
+  "premiumActive": "Συνδρομή Ενεργή",
   "planOncePerDay": "1 φορά/ημέρα",
   "planUnlimited": "Απεριόριστο",
   "closeRecording": "Κλείσιμο εγγραφής",
@@ -209,9 +245,18 @@
   "scriptureReasonLabel": "Γιατί αυτό το εδάφιο",
   "seeMore": "Δείτε περισσότερα",
   "seeAllComments": "Δείτε όλα τα {count} σχόλια",
-  "@seeAllComments": { "placeholders": { "count": {} } },
+  "@seeAllComments": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "likedBy": "{name} και {count} ακόμα αρέσει",
-  "@likedBy": { "placeholders": { "name": {}, "count": {} } },
+  "@likedBy": {
+    "placeholders": {
+      "name": {},
+      "count": {}
+    }
+  },
   "commentsTitle": "Σχόλια",
   "myPageTitle": "Ο Κήπος Προσευχής Μου",
   "myPrayers": "Οι Προσευχές Μου",
@@ -227,10 +272,29 @@
   "linkAccountSuccess": "Ο λογαριασμός συνδέθηκε επιτυχώς!",
   "anonymousUser": "Πολεμιστής Προσευχής",
   "showReplies": "Δείτε {count} απαντήσεις",
-  "@showReplies": { "placeholders": { "count": {} } },
+  "@showReplies": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "hideReplies": "Απόκρυψη απαντήσεων",
   "replyingTo": "Απάντηση στον {name}",
-  "@replyingTo": { "placeholders": { "name": {} } },
+  "@replyingTo": {
+    "placeholders": {
+      "name": {}
+    }
+  },
   "viewAllComments": "Δείτε όλα τα {count} σχόλια",
-  "@viewAllComments": { "placeholders": { "count": {} } }
+  "@viewAllComments": {
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "membershipTitle": "Συνδρομή",
+  "membershipSubtitle": "Εμβαθύνετε στη ζωή προσευχής σας",
+  "monthlyPlan": "Μηνιαία",
+  "yearlyPlan": "Ετήσια",
+  "yearlySavings": "5,00€/μήνα (37% έκπτωση)",
+  "startMembership": "Ξεκινήστε",
+  "membershipActive": "Συνδρομή Ενεργή"
 }

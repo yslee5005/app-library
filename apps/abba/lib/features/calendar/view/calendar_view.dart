@@ -505,6 +505,6 @@ class _CalendarViewState extends ConsumerState<CalendarView> {
 
     ref.read(prayerResultProvider.notifier).state =
         AsyncValue.data(prayer.result!);
-    context.go('/home/prayer-dashboard');
+    context.push('/home/prayer-dashboard');
   }
 }

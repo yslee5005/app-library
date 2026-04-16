@@ -10,15 +10,31 @@
   "signInWithGoogle": "Continuă cu Google",
   "signInWithEmail": "Continuă cu Email",
   "greetingMorning": "Bună dimineața, {name}",
-  "@greetingMorning": { "placeholders": { "name": {} } },
+  "@greetingMorning": {
+    "placeholders": {
+      "name": {}
+    }
+  },
   "greetingAfternoon": "Bună ziua, {name}",
-  "@greetingAfternoon": { "placeholders": { "name": {} } },
+  "@greetingAfternoon": {
+    "placeholders": {
+      "name": {}
+    }
+  },
   "greetingEvening": "Bună seara, {name}",
-  "@greetingEvening": { "placeholders": { "name": {} } },
+  "@greetingEvening": {
+    "placeholders": {
+      "name": {}
+    }
+  },
   "prayButton": "Roagă-te",
   "qtButton": "Timp liniștit",
   "streakDays": "{count} zile de rugăciune continuă",
-  "@streakDays": { "placeholders": { "count": {} } },
+  "@streakDays": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "dailyVerse": "Versetul zilei",
   "tabHome": "Acasă",
   "tabCalendar": "Calendar",
@@ -69,17 +85,21 @@
   "bestStreak": "Cea mai bună serie",
   "days": "zile",
   "calendarRecordCount": "{count} înregistrări",
-  "@calendarRecordCount": { "placeholders": { "count": {} } },
+  "@calendarRecordCount": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "todayVerse": "Versetul de azi",
   "settingsTitle": "Setări",
   "profileSection": "Profil",
   "totalPrayers": "Total rugăciuni",
   "consecutiveDays": "Zile consecutive",
-  "premiumSection": "Premium",
+  "premiumSection": "Abonament",
   "freePlan": "Gratuit",
   "premiumPlan": "Premium",
-  "monthlyPrice": "16,99lei/lună",
-  "yearlyPrice": "119,99lei/an",
+  "monthlyPrice": "39,99 lei / lună",
+  "yearlyPrice": "299,99 lei / an",
   "yearlySave": "Economisești 40%",
   "launchPromo": "3 luni la 17,99lei/lună!",
   "startPremium": "Începe Premium",
@@ -96,10 +116,18 @@
   "privacyPolicy": "Politica de confidențialitate",
   "logout": "Deconectează-te",
   "appVersion": "Versiunea {version}",
-  "@appVersion": { "placeholders": { "version": {} } },
+  "@appVersion": {
+    "placeholders": {
+      "version": {}
+    }
+  },
   "anonymous": "Anonim",
   "timeAgo": "acum {time}",
-  "@timeAgo": { "placeholders": { "time": {} } },
+  "@timeAgo": {
+    "placeholders": {
+      "time": {}
+    }
+  },
   "emailLabel": "Email",
   "passwordLabel": "Parolă",
   "signIn": "Conectează-te",
@@ -128,7 +156,11 @@
   "promoTitle": "Ofertă de lansare",
   "promoBanner": "Primele 3 luni la 17,99lei/lună!",
   "promoEndsOn": "Oferta expiră pe {date}",
-  "@promoEndsOn": { "placeholders": { "date": {} } },
+  "@promoEndsOn": {
+    "placeholders": {
+      "date": {}
+    }
+  },
   "premiumLimitTitle": "Rugăciunea de azi s-a încheiat",
   "premiumLimitBody": "Ne vedem mâine!\nRoagă-te nelimitat cu Premium",
   "laterButton": "Poate mai târziu",
@@ -166,10 +198,14 @@
   "milestoneShare": "Distribuie",
   "milestoneThankGod": "Slavă Domnului!",
   "shareStreakText": "{count} zile de rugăciune continuă! Călătoria mea de rugăciune cu Abba #Abba #Rugăciune",
-  "@shareStreakText": { "placeholders": { "count": {} } },
+  "@shareStreakText": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "shareDaysLabel": "zile de rugăciune continuă",
   "shareSubtitle": "Rugăciune zilnică cu Dumnezeu",
-  "premiumActive": "Premium activ",
+  "premiumActive": "Abonament Activ",
   "planOncePerDay": "1x/zi",
   "planUnlimited": "Nelimitat",
   "closeRecording": "Închide înregistrarea",
@@ -209,9 +245,18 @@
   "scriptureReasonLabel": "De ce această Scriptură",
   "seeMore": "Vezi mai mult",
   "seeAllComments": "Vezi toate cele {count} comentarii",
-  "@seeAllComments": { "placeholders": { "count": {} } },
+  "@seeAllComments": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "likedBy": "{name} și alți {count} au apreciat",
-  "@likedBy": { "placeholders": { "name": {}, "count": {} } },
+  "@likedBy": {
+    "placeholders": {
+      "name": {},
+      "count": {}
+    }
+  },
   "commentsTitle": "Comentarii",
   "myPageTitle": "Grădina mea de rugăciune",
   "myPrayers": "Rugăciunile mele",
@@ -227,10 +272,29 @@
   "linkAccountSuccess": "Cont legat cu succes!",
   "anonymousUser": "Luptător de rugăciune",
   "showReplies": "Vezi {count} răspunsuri",
-  "@showReplies": { "placeholders": { "count": {} } },
+  "@showReplies": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "hideReplies": "Ascunde răspunsurile",
   "replyingTo": "Răspunzi lui {name}",
-  "@replyingTo": { "placeholders": { "name": {} } },
+  "@replyingTo": {
+    "placeholders": {
+      "name": {}
+    }
+  },
   "viewAllComments": "Vezi toate cele {count} comentarii",
-  "@viewAllComments": { "placeholders": { "count": {} } }
+  "@viewAllComments": {
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "membershipTitle": "Abonament",
+  "membershipSubtitle": "Aprofundează viața ta de rugăciune",
+  "monthlyPlan": "Lunar",
+  "yearlyPlan": "Anual",
+  "yearlySavings": "25 lei/lună (37% reducere)",
+  "startMembership": "Începe",
+  "membershipActive": "Abonament Activ"
 }

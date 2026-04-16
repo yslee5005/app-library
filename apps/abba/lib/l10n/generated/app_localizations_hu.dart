@@ -232,7 +232,7 @@ class AppLocalizationsHu extends AppLocalizations {
   String get consecutiveDays => 'Egymást követő napok';
 
   @override
-  String get premiumSection => 'Prémium';
+  String get premiumSection => 'Tagság';
 
   @override
   String get freePlan => 'Ingyenes';
@@ -241,10 +241,10 @@ class AppLocalizationsHu extends AppLocalizations {
   String get premiumPlan => 'Prémium';
 
   @override
-  String get monthlyPrice => '1390Ft/hó';
+  String get monthlyPrice => '2 990 Ft / hó';
 
   @override
-  String get yearlyPrice => '9990Ft/év';
+  String get yearlyPrice => '22 990 Ft / év';
 
   @override
   String get yearlySave => '40% megtakarítás';
@@ -520,7 +520,7 @@ class AppLocalizationsHu extends AppLocalizations {
   String get shareSubtitle => 'Mindennapi ima Istennel';
 
   @override
-  String get premiumActive => 'Prémium aktív';
+  String get premiumActive => 'Tagság Aktív';
 
   @override
   String get planOncePerDay => '1x/nap';
@@ -709,4 +709,25 @@ class AppLocalizationsHu extends AppLocalizations {
   String viewAllComments(Object count) {
     return 'Mind a $count hozzászólás megtekintése';
   }
+
+  @override
+  String get membershipTitle => 'Tagság';
+
+  @override
+  String get membershipSubtitle => 'Mélyítsd el imaéletedet';
+
+  @override
+  String get monthlyPlan => 'Havi';
+
+  @override
+  String get yearlyPlan => 'Éves';
+
+  @override
+  String get yearlySavings => '1 916 Ft/hó (37% kedvezmény)';
+
+  @override
+  String get startMembership => 'Indítás';
+
+  @override
+  String get membershipActive => 'Tagság Aktív';
 }

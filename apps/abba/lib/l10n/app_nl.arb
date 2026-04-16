@@ -10,15 +10,31 @@
   "signInWithGoogle": "Ga verder met Google",
   "signInWithEmail": "Ga verder met E-mail",
   "greetingMorning": "Goedemorgen, {name}",
-  "@greetingMorning": { "placeholders": { "name": {} } },
+  "@greetingMorning": {
+    "placeholders": {
+      "name": {}
+    }
+  },
   "greetingAfternoon": "Goedemiddag, {name}",
-  "@greetingAfternoon": { "placeholders": { "name": {} } },
+  "@greetingAfternoon": {
+    "placeholders": {
+      "name": {}
+    }
+  },
   "greetingEvening": "Goedenavond, {name}",
-  "@greetingEvening": { "placeholders": { "name": {} } },
+  "@greetingEvening": {
+    "placeholders": {
+      "name": {}
+    }
+  },
   "prayButton": "Bid",
   "qtButton": "Stille Tijd",
   "streakDays": "{count} dagen gebedsserie",
-  "@streakDays": { "placeholders": { "count": {} } },
+  "@streakDays": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "dailyVerse": "Vers van de dag",
   "tabHome": "Home",
   "tabCalendar": "Kalender",
@@ -69,17 +85,21 @@
   "bestStreak": "Beste serie",
   "days": "dagen",
   "calendarRecordCount": "{count} registraties",
-  "@calendarRecordCount": { "placeholders": { "count": {} } },
+  "@calendarRecordCount": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "todayVerse": "Vers van vandaag",
   "settingsTitle": "Instellingen",
   "profileSection": "Profiel",
   "totalPrayers": "Totaal gebeden",
   "consecutiveDays": "Opeenvolgende dagen",
-  "premiumSection": "Premium",
+  "premiumSection": "Lidmaatschap",
   "freePlan": "Gratis",
   "premiumPlan": "Premium",
-  "monthlyPrice": "€3,49/maand",
-  "yearlyPrice": "€24,99/jaar",
+  "monthlyPrice": "€7,99 / maand",
+  "yearlyPrice": "€59,99 / jaar",
   "yearlySave": "Bespaar 40%",
   "launchPromo": "3 maanden voor €3,99/maand!",
   "startPremium": "Start Premium",
@@ -96,10 +116,18 @@
   "privacyPolicy": "Privacybeleid",
   "logout": "Uitloggen",
   "appVersion": "Versie {version}",
-  "@appVersion": { "placeholders": { "version": {} } },
+  "@appVersion": {
+    "placeholders": {
+      "version": {}
+    }
+  },
   "anonymous": "Anoniem",
   "timeAgo": "{time} geleden",
-  "@timeAgo": { "placeholders": { "time": {} } },
+  "@timeAgo": {
+    "placeholders": {
+      "time": {}
+    }
+  },
   "emailLabel": "E-mail",
   "passwordLabel": "Wachtwoord",
   "signIn": "Inloggen",
@@ -128,7 +156,11 @@
   "promoTitle": "Introductieaanbieding",
   "promoBanner": "De eerste 3 maanden voor €3,99/maand!",
   "promoEndsOn": "Aanbieding eindigt op {date}",
-  "@promoEndsOn": { "placeholders": { "date": {} } },
+  "@promoEndsOn": {
+    "placeholders": {
+      "date": {}
+    }
+  },
   "premiumLimitTitle": "Het gebed van vandaag is voltooid",
   "premiumLimitBody": "Tot morgen!\nBid onbeperkt met Premium",
   "laterButton": "Misschien later",
@@ -166,10 +198,14 @@
   "milestoneShare": "Delen",
   "milestoneThankGod": "God zij dank!",
   "shareStreakText": "{count} dagen gebedsserie! Mijn gebedsreis met Abba #Abba #Gebed",
-  "@shareStreakText": { "placeholders": { "count": {} } },
+  "@shareStreakText": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "shareDaysLabel": "dagen gebedsserie",
   "shareSubtitle": "Dagelijks gebed met God",
-  "premiumActive": "Premium actief",
+  "premiumActive": "Lidmaatschap Actief",
   "planOncePerDay": "1x/dag",
   "planUnlimited": "Onbeperkt",
   "closeRecording": "Opname sluiten",
@@ -209,9 +245,18 @@
   "scriptureReasonLabel": "Waarom deze Schrift",
   "seeMore": "Meer bekijken",
   "seeAllComments": "Bekijk alle {count} reacties",
-  "@seeAllComments": { "placeholders": { "count": {} } },
+  "@seeAllComments": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "likedBy": "{name} en {count} anderen vinden dit leuk",
-  "@likedBy": { "placeholders": { "name": {}, "count": {} } },
+  "@likedBy": {
+    "placeholders": {
+      "name": {},
+      "count": {}
+    }
+  },
   "commentsTitle": "Reacties",
   "myPageTitle": "Mijn gebetstuin",
   "myPrayers": "Mijn gebeden",
@@ -227,10 +272,29 @@
   "linkAccountSuccess": "Account succesvol gekoppeld!",
   "anonymousUser": "Gebedsstrijder",
   "showReplies": "Bekijk {count} antwoorden",
-  "@showReplies": { "placeholders": { "count": {} } },
+  "@showReplies": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "hideReplies": "Verberg antwoorden",
   "replyingTo": "Antwoord aan {name}",
-  "@replyingTo": { "placeholders": { "name": {} } },
+  "@replyingTo": {
+    "placeholders": {
+      "name": {}
+    }
+  },
   "viewAllComments": "Bekijk alle {count} reacties",
-  "@viewAllComments": { "placeholders": { "count": {} } }
+  "@viewAllComments": {
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "membershipTitle": "Lidmaatschap",
+  "membershipSubtitle": "Verdiep je gebedsleven",
+  "monthlyPlan": "Maandelijks",
+  "yearlyPlan": "Jaarlijks",
+  "yearlySavings": "€5,00/maand (37% korting)",
+  "startMembership": "Begin nu",
+  "membershipActive": "Lidmaatschap Actief"
 }

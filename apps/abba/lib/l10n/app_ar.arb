@@ -10,15 +10,31 @@
   "signInWithGoogle": "المتابعة مع Google",
   "signInWithEmail": "المتابعة بالبريد الإلكتروني",
   "greetingMorning": "صباح الخير، {name}",
-  "@greetingMorning": { "placeholders": { "name": {} } },
+  "@greetingMorning": {
+    "placeholders": {
+      "name": {}
+    }
+  },
   "greetingAfternoon": "مساء الخير، {name}",
-  "@greetingAfternoon": { "placeholders": { "name": {} } },
+  "@greetingAfternoon": {
+    "placeholders": {
+      "name": {}
+    }
+  },
   "greetingEvening": "مساء الخير، {name}",
-  "@greetingEvening": { "placeholders": { "name": {} } },
+  "@greetingEvening": {
+    "placeholders": {
+      "name": {}
+    }
+  },
   "prayButton": "صلِّ",
   "qtButton": "خلوة",
   "streakDays": "{count} يوم صلاة متواصلة",
-  "@streakDays": { "placeholders": { "count": {} } },
+  "@streakDays": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "dailyVerse": "آية اليوم",
   "tabHome": "الرئيسية",
   "tabCalendar": "التقويم",
@@ -69,17 +85,21 @@
   "bestStreak": "أفضل سلسلة",
   "days": "أيام",
   "calendarRecordCount": "{count} سجلات",
-  "@calendarRecordCount": { "placeholders": { "count": {} } },
+  "@calendarRecordCount": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "todayVerse": "آية اليوم",
   "settingsTitle": "الإعدادات",
   "profileSection": "الملف الشخصي",
   "totalPrayers": "إجمالي الصلوات",
   "consecutiveDays": "أيام متتالية",
-  "premiumSection": "Premium",
+  "premiumSection": "العضوية",
   "freePlan": "مجاني",
   "premiumPlan": "Premium",
-  "monthlyPrice": "$3.49/شهر",
-  "yearlyPrice": "$24.99/سنة",
+  "monthlyPrice": "$7.99 / شهر",
+  "yearlyPrice": "$59.99 / سنة",
   "yearlySave": "وفّر 40%",
   "launchPromo": "3 أشهر بسعر $4.99/شهر!",
   "startPremium": "ابدأ Premium",
@@ -96,10 +116,18 @@
   "privacyPolicy": "سياسة الخصوصية",
   "logout": "تسجيل الخروج",
   "appVersion": "الإصدار {version}",
-  "@appVersion": { "placeholders": { "version": {} } },
+  "@appVersion": {
+    "placeholders": {
+      "version": {}
+    }
+  },
   "anonymous": "مجهول",
   "timeAgo": "منذ {time}",
-  "@timeAgo": { "placeholders": { "time": {} } },
+  "@timeAgo": {
+    "placeholders": {
+      "time": {}
+    }
+  },
   "emailLabel": "البريد الإلكتروني",
   "passwordLabel": "كلمة المرور",
   "signIn": "تسجيل الدخول",
@@ -128,7 +156,11 @@
   "promoTitle": "عرض الإطلاق",
   "promoBanner": "أول 3 أشهر بسعر $4.99/شهر!",
   "promoEndsOn": "ينتهي العرض في {date}",
-  "@promoEndsOn": { "placeholders": { "date": {} } },
+  "@promoEndsOn": {
+    "placeholders": {
+      "date": {}
+    }
+  },
   "premiumLimitTitle": "اكتملت صلاة اليوم",
   "premiumLimitBody": "نراك غدًا!\nصلِّ بلا حدود مع Premium",
   "laterButton": "لاحقًا",
@@ -166,10 +198,14 @@
   "milestoneShare": "مشاركة",
   "milestoneThankGod": "الحمد لله!",
   "shareStreakText": "{count} يوم صلاة متواصلة! رحلتي في الصلاة مع Abba #Abba #صلاة",
-  "@shareStreakText": { "placeholders": { "count": {} } },
+  "@shareStreakText": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "shareDaysLabel": "يوم صلاة متواصلة",
   "shareSubtitle": "صلاة يومية مع الله",
-  "premiumActive": "Premium نشط",
+  "premiumActive": "العضوية نشطة",
   "planOncePerDay": "مرة/يوم",
   "planUnlimited": "غير محدود",
   "closeRecording": "إغلاق التسجيل",
@@ -209,9 +245,18 @@
   "scriptureReasonLabel": "لماذا هذه الآية",
   "seeMore": "عرض المزيد",
   "seeAllComments": "عرض جميع التعليقات ({count})",
-  "@seeAllComments": { "placeholders": { "count": {} } },
+  "@seeAllComments": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "likedBy": "{name} و{count} آخرون أعجبهم هذا",
-  "@likedBy": { "placeholders": { "name": {}, "count": {} } },
+  "@likedBy": {
+    "placeholders": {
+      "name": {},
+      "count": {}
+    }
+  },
   "commentsTitle": "التعليقات",
   "myPageTitle": "حديقة صلاتي",
   "myPrayers": "صلواتي",
@@ -227,10 +272,29 @@
   "linkAccountSuccess": "تم ربط الحساب بنجاح!",
   "anonymousUser": "محارب الصلاة",
   "showReplies": "عرض {count} ردود",
-  "@showReplies": { "placeholders": { "count": {} } },
+  "@showReplies": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "hideReplies": "إخفاء الردود",
   "replyingTo": "الرد على {name}",
-  "@replyingTo": { "placeholders": { "name": {} } },
+  "@replyingTo": {
+    "placeholders": {
+      "name": {}
+    }
+  },
   "viewAllComments": "عرض جميع التعليقات ({count})",
-  "@viewAllComments": { "placeholders": { "count": {} } }
+  "@viewAllComments": {
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "membershipTitle": "العضوية",
+  "membershipSubtitle": "عمّق حياتك في الصلاة",
+  "monthlyPlan": "شهري",
+  "yearlyPlan": "سنوي",
+  "yearlySavings": "$5.00/شهر (خصم 37%)",
+  "startMembership": "ابدأ الآن",
+  "membershipActive": "العضوية نشطة"
 }

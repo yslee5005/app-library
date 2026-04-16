@@ -229,7 +229,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get consecutiveDays => 'أيام متتالية';
 
   @override
-  String get premiumSection => 'Premium';
+  String get premiumSection => 'العضوية';
 
   @override
   String get freePlan => 'مجاني';
@@ -238,10 +238,10 @@ class AppLocalizationsAr extends AppLocalizations {
   String get premiumPlan => 'Premium';
 
   @override
-  String get monthlyPrice => '\$3.49/شهر';
+  String get monthlyPrice => '\$7.99 / شهر';
 
   @override
-  String get yearlyPrice => '\$24.99/سنة';
+  String get yearlyPrice => '\$59.99 / سنة';
 
   @override
   String get yearlySave => 'وفّر 40%';
@@ -515,7 +515,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get shareSubtitle => 'صلاة يومية مع الله';
 
   @override
-  String get premiumActive => 'Premium نشط';
+  String get premiumActive => 'العضوية نشطة';
 
   @override
   String get planOncePerDay => 'مرة/يوم';
@@ -701,4 +701,25 @@ class AppLocalizationsAr extends AppLocalizations {
   String viewAllComments(Object count) {
     return 'عرض جميع التعليقات ($count)';
   }
+
+  @override
+  String get membershipTitle => 'العضوية';
+
+  @override
+  String get membershipSubtitle => 'عمّق حياتك في الصلاة';
+
+  @override
+  String get monthlyPlan => 'شهري';
+
+  @override
+  String get yearlyPlan => 'سنوي';
+
+  @override
+  String get yearlySavings => '\$5.00/شهر (خصم 37%)';
+
+  @override
+  String get startMembership => 'ابدأ الآن';
+
+  @override
+  String get membershipActive => 'العضوية نشطة';
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:go_router/go_router.dart';
 
 import '../l10n/generated/app_localizations.dart';
 import '../theme/abba_theme.dart';
@@ -73,7 +74,7 @@ class PremiumBlur extends StatelessWidget {
         child: InkWell(
           onTap: () {
             HapticFeedback.lightImpact();
-            onUnlock();
+            context.push('/settings/membership');
           },
           borderRadius: BorderRadius.circular(AbbaRadius.lg),
           child: Padding(
@@ -107,18 +108,18 @@ class PremiumBlur extends StatelessWidget {
                     vertical: AbbaSpacing.xs,
                   ),
                   decoration: BoxDecoration(
-                    color: AbbaColors.premium.withValues(alpha: 0.1),
+                    color: AbbaColors.sage.withValues(alpha: 0.1),
                     borderRadius: BorderRadius.circular(AbbaRadius.md),
                   ),
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      const Text('💎', style: TextStyle(fontSize: 12)),
+                      const Text('🌿', style: TextStyle(fontSize: 12)),
                       const SizedBox(width: 4),
                       Text(
-                        'PRO',
+                        l10n.membershipTitle,
                         style: AbbaTypography.caption.copyWith(
-                          color: AbbaColors.premium,
+                          color: AbbaColors.sage,
                           fontWeight: FontWeight.w700,
                         ),
                       ),

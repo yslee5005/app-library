@@ -10,15 +10,31 @@
   "signInWithGoogle": "ดำเนินการต่อกับ Google",
   "signInWithEmail": "ดำเนินการต่อกับอีเมล",
   "greetingMorning": "สวัสดีตอนเช้า {name}",
-  "@greetingMorning": { "placeholders": { "name": {} } },
+  "@greetingMorning": {
+    "placeholders": {
+      "name": {}
+    }
+  },
   "greetingAfternoon": "สวัสดีตอนบ่าย {name}",
-  "@greetingAfternoon": { "placeholders": { "name": {} } },
+  "@greetingAfternoon": {
+    "placeholders": {
+      "name": {}
+    }
+  },
   "greetingEvening": "สวัสดีตอนเย็น {name}",
-  "@greetingEvening": { "placeholders": { "name": {} } },
+  "@greetingEvening": {
+    "placeholders": {
+      "name": {}
+    }
+  },
   "prayButton": "อธิษฐาน",
   "qtButton": "เฝ้าเดี่ยว",
   "streakDays": "อธิษฐานต่อเนื่อง {count} วัน",
-  "@streakDays": { "placeholders": { "count": {} } },
+  "@streakDays": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "dailyVerse": "พระวจนะประจำวัน",
   "tabHome": "หน้าแรก",
   "tabCalendar": "ปฏิทิน",
@@ -69,17 +85,21 @@
   "bestStreak": "สถิติสูงสุด",
   "days": "วัน",
   "calendarRecordCount": "{count} รายการ",
-  "@calendarRecordCount": { "placeholders": { "count": {} } },
+  "@calendarRecordCount": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "todayVerse": "พระวจนะวันนี้",
   "settingsTitle": "ตั้งค่า",
   "profileSection": "โปรไฟล์",
   "totalPrayers": "จำนวนอธิษฐานทั้งหมด",
   "consecutiveDays": "วันต่อเนื่อง",
-  "premiumSection": "Premium",
+  "premiumSection": "สมาชิก",
   "freePlan": "ฟรี",
   "premiumPlan": "Premium",
-  "monthlyPrice": "฿129/เดือน",
-  "yearlyPrice": "฿899/ปี",
+  "monthlyPrice": "฿279 / เดือน",
+  "yearlyPrice": "฿2,190 / ปี",
   "yearlySave": "ประหยัด 40%",
   "launchPromo": "3 เดือนแรก ฿159/เดือน!",
   "startPremium": "เริ่มต้น Premium",
@@ -96,10 +116,18 @@
   "privacyPolicy": "นโยบายความเป็นส่วนตัว",
   "logout": "ออกจากระบบ",
   "appVersion": "เวอร์ชัน {version}",
-  "@appVersion": { "placeholders": { "version": {} } },
+  "@appVersion": {
+    "placeholders": {
+      "version": {}
+    }
+  },
   "anonymous": "ไม่ระบุชื่อ",
   "timeAgo": "{time} ที่แล้ว",
-  "@timeAgo": { "placeholders": { "time": {} } },
+  "@timeAgo": {
+    "placeholders": {
+      "time": {}
+    }
+  },
   "emailLabel": "อีเมล",
   "passwordLabel": "รหัสผ่าน",
   "signIn": "เข้าสู่ระบบ",
@@ -128,7 +156,11 @@
   "promoTitle": "โปรโมชันพิเศษ",
   "promoBanner": "3 เดือนแรก ฿159/เดือน!",
   "promoEndsOn": "ข้อเสนอสิ้นสุด {date}",
-  "@promoEndsOn": { "placeholders": { "date": {} } },
+  "@promoEndsOn": {
+    "placeholders": {
+      "date": {}
+    }
+  },
   "premiumLimitTitle": "การอธิษฐานวันนี้เสร็จสิ้นแล้ว",
   "premiumLimitBody": "พบกันพรุ่งนี้!\nอธิษฐานไม่จำกัดด้วย Premium",
   "laterButton": "ไว้ทีหลัง",
@@ -166,10 +198,14 @@
   "milestoneShare": "แชร์",
   "milestoneThankGod": "ขอบพระคุณพระเจ้า!",
   "shareStreakText": "อธิษฐานต่อเนื่อง {count} วัน! เส้นทางการอธิษฐานกับ Abba #Abba #อธิษฐาน",
-  "@shareStreakText": { "placeholders": { "count": {} } },
+  "@shareStreakText": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "shareDaysLabel": "วันอธิษฐานต่อเนื่อง",
   "shareSubtitle": "อธิษฐานกับพระเจ้าทุกวัน",
-  "premiumActive": "Premium ใช้งานอยู่",
+  "premiumActive": "สมาชิกใช้งานอยู่",
   "planOncePerDay": "1 ครั้ง/วัน",
   "planUnlimited": "ไม่จำกัด",
   "closeRecording": "ปิดการบันทึก",
@@ -209,9 +245,18 @@
   "scriptureReasonLabel": "ทำไมพระวจนะนี้",
   "seeMore": "ดูเพิ่มเติม",
   "seeAllComments": "ดูความคิดเห็นทั้ง {count} รายการ",
-  "@seeAllComments": { "placeholders": { "count": {} } },
+  "@seeAllComments": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "likedBy": "{name} และอีก {count} คนถูกใจ",
-  "@likedBy": { "placeholders": { "name": {}, "count": {} } },
+  "@likedBy": {
+    "placeholders": {
+      "name": {},
+      "count": {}
+    }
+  },
   "commentsTitle": "ความคิดเห็น",
   "myPageTitle": "สวนอธิษฐานของฉัน",
   "myPrayers": "คำอธิษฐานของฉัน",
@@ -227,10 +272,29 @@
   "linkAccountSuccess": "เชื่อมต่อบัญชีสำเร็จ!",
   "anonymousUser": "นักอธิษฐาน",
   "showReplies": "ดู {count} การตอบกลับ",
-  "@showReplies": { "placeholders": { "count": {} } },
+  "@showReplies": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "hideReplies": "ซ่อนการตอบกลับ",
   "replyingTo": "กำลังตอบกลับ {name}",
-  "@replyingTo": { "placeholders": { "name": {} } },
+  "@replyingTo": {
+    "placeholders": {
+      "name": {}
+    }
+  },
   "viewAllComments": "ดูความคิดเห็นทั้ง {count} รายการ",
-  "@viewAllComments": { "placeholders": { "count": {} } }
+  "@viewAllComments": {
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "membershipTitle": "สมาชิก",
+  "membershipSubtitle": "ลึกซึ้งกับการอธิษฐาน",
+  "monthlyPlan": "รายเดือน",
+  "yearlyPlan": "รายปี",
+  "yearlySavings": "฿183/เดือน (ลด 33%)",
+  "startMembership": "เริ่มต้น",
+  "membershipActive": "สมาชิกใช้งานอยู่"
 }

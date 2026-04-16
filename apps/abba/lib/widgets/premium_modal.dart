@@ -59,7 +59,7 @@ Future<bool> showPremiumPrompt(BuildContext context) async {
                   ),
                 ),
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: AbbaColors.sage,
+                  backgroundColor: AbbaColors.sageDark,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(AbbaRadius.md),
                   ),
@@ -83,7 +83,7 @@ Future<bool> showPremiumPrompt(BuildContext context) async {
   );
 
   if (wantsToSee == true && context.mounted) {
-    context.go('/settings');
+    context.push('/settings/membership');
   }
 
   return false;

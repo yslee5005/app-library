@@ -194,7 +194,7 @@ class _CommunityViewState extends ConsumerState<CommunityView> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => context.go('/community/write'),
-        backgroundColor: AbbaColors.sage,
+        backgroundColor: AbbaColors.sageDark,
         child: const Text('\u270f\ufe0f', style: TextStyle(fontSize: 24)),
       ),
     );

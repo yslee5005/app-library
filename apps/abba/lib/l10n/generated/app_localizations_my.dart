@@ -231,7 +231,7 @@ class AppLocalizationsMy extends AppLocalizations {
   String get consecutiveDays => 'ဆက်တိုက်ရက်';
 
   @override
-  String get premiumSection => 'Premium';
+  String get premiumSection => 'အသင်းဝင်';
 
   @override
   String get freePlan => 'အခမဲ့';
@@ -240,10 +240,10 @@ class AppLocalizationsMy extends AppLocalizations {
   String get premiumPlan => 'Premium';
 
   @override
-  String get monthlyPrice => '\$3.49/လ';
+  String get monthlyPrice => '\$7.99 / လ';
 
   @override
-  String get yearlyPrice => '\$24.99/နှစ်';
+  String get yearlyPrice => '\$59.99 / နှစ်';
 
   @override
   String get yearlySave => '40% ချွေတာ';
@@ -517,7 +517,7 @@ class AppLocalizationsMy extends AppLocalizations {
   String get shareSubtitle => 'ဘုရားသခင်နှင့် နေ့စဉ်ဆုတောင်းခြင်း';
 
   @override
-  String get premiumActive => 'Premium အသုံးပြုနေဆဲ';
+  String get premiumActive => 'အသင်းဝင် တက်ကြွ';
 
   @override
   String get planOncePerDay => '1 ကြိမ်/ရက်';
@@ -707,4 +707,25 @@ class AppLocalizationsMy extends AppLocalizations {
   String viewAllComments(Object count) {
     return 'မှတ်ချက် $count ခုလုံးကို ကြည့်ရန်';
   }
+
+  @override
+  String get membershipTitle => 'အသင်းဝင်';
+
+  @override
+  String get membershipSubtitle => 'ဆုတောင်းခြင်းကို ပိုမိုနက်ရှိုင်းစေပါ';
+
+  @override
+  String get monthlyPlan => 'လစဉ်';
+
+  @override
+  String get yearlyPlan => 'နှစ်စဉ်';
+
+  @override
+  String get yearlySavings => '\$5.00/လ (37% လျှော့)';
+
+  @override
+  String get startMembership => 'စတင်ပါ';
+
+  @override
+  String get membershipActive => 'အသင်းဝင် တက်ကြွ';
 }

@@ -10,15 +10,31 @@
   "signInWithGoogle": "Google ဖြင့် ဆက်လက်ရန်",
   "signInWithEmail": "အီးမေးလ်ဖြင့် ဆက်လက်ရန်",
   "greetingMorning": "မင်္ဂလာနံနက်ခင်းပါ {name}",
-  "@greetingMorning": { "placeholders": { "name": {} } },
+  "@greetingMorning": {
+    "placeholders": {
+      "name": {}
+    }
+  },
   "greetingAfternoon": "မင်္ဂလာနေ့လည်ခင်းပါ {name}",
-  "@greetingAfternoon": { "placeholders": { "name": {} } },
+  "@greetingAfternoon": {
+    "placeholders": {
+      "name": {}
+    }
+  },
   "greetingEvening": "မင်္ဂလာညနေခင်းပါ {name}",
-  "@greetingEvening": { "placeholders": { "name": {} } },
+  "@greetingEvening": {
+    "placeholders": {
+      "name": {}
+    }
+  },
   "prayButton": "ဆုတောင်းရန်",
   "qtButton": "တိတ်ဆိတ်ချိန်",
   "streakDays": "{count} ရက် ဆက်တိုက်ဆုတောင်းခြင်း",
-  "@streakDays": { "placeholders": { "count": {} } },
+  "@streakDays": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "dailyVerse": "ယနေ့ကျမ်းပိုဒ်",
   "tabHome": "ပင်မ",
   "tabCalendar": "ပြက္ခဒိန်",
@@ -69,17 +85,21 @@
   "bestStreak": "အကောင်းဆုံးဆက်တိုက်",
   "days": "ရက်",
   "calendarRecordCount": "{count} မှတ်တမ်း",
-  "@calendarRecordCount": { "placeholders": { "count": {} } },
+  "@calendarRecordCount": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "todayVerse": "ယနေ့ကျမ်းပိုဒ်",
   "settingsTitle": "ဆက်တင်များ",
   "profileSection": "ပရိုဖိုင်",
   "totalPrayers": "စုစုပေါင်းဆုတောင်းချက်",
   "consecutiveDays": "ဆက်တိုက်ရက်",
-  "premiumSection": "Premium",
+  "premiumSection": "အသင်းဝင်",
   "freePlan": "အခမဲ့",
   "premiumPlan": "Premium",
-  "monthlyPrice": "$3.49/လ",
-  "yearlyPrice": "$24.99/နှစ်",
+  "monthlyPrice": "$7.99 / လ",
+  "yearlyPrice": "$59.99 / နှစ်",
   "yearlySave": "40% ချွေတာ",
   "launchPromo": "3 လ $4.99/လ ဖြင့်!",
   "startPremium": "Premium စတင်ရန်",
@@ -96,10 +116,18 @@
   "privacyPolicy": "ကိုယ်ရေးကိုယ်တာ မူဝါဒ",
   "logout": "ထွက်ရန်",
   "appVersion": "ဗားရှင်း {version}",
-  "@appVersion": { "placeholders": { "version": {} } },
+  "@appVersion": {
+    "placeholders": {
+      "version": {}
+    }
+  },
   "anonymous": "အမည်ဝှက်",
   "timeAgo": "{time} အကြာ",
-  "@timeAgo": { "placeholders": { "time": {} } },
+  "@timeAgo": {
+    "placeholders": {
+      "time": {}
+    }
+  },
   "emailLabel": "အီးမေးလ်",
   "passwordLabel": "စကားဝှက်",
   "signIn": "ဝင်ရန်",
@@ -128,7 +156,11 @@
   "promoTitle": "မိတ်ဆက်အထူးလျှော့ဈေး",
   "promoBanner": "ပထမ 3 လ $4.99/လ ဖြင့်!",
   "promoEndsOn": "ကမ်းလှမ်းချက် {date} တွင် ကုန်ဆုံးမည်",
-  "@promoEndsOn": { "placeholders": { "date": {} } },
+  "@promoEndsOn": {
+    "placeholders": {
+      "date": {}
+    }
+  },
   "premiumLimitTitle": "ယနေ့ဆုတောင်းချက် ပြီးဆုံးပါပြီ",
   "premiumLimitBody": "မနက်ဖြန် ပြန်ဆုံကြမယ်!\nPremium ဖြင့် အကန့်အသတ်မရှိ ဆုတောင်းပါ",
   "laterButton": "နောက်မှ",
@@ -166,10 +198,14 @@
   "milestoneShare": "မျှဝေရန်",
   "milestoneThankGod": "ဘုရားသခင်ကို ကျေးဇူးတင်ပါသည်!",
   "shareStreakText": "{count} ရက် ဆက်တိုက်ဆုတောင်းခြင်း! Abba နှင့် ဆုတောင်းခရီး #Abba #ဆုတောင်းခြင်း",
-  "@shareStreakText": { "placeholders": { "count": {} } },
+  "@shareStreakText": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "shareDaysLabel": "ရက် ဆက်တိုက်ဆုတောင်းခြင်း",
   "shareSubtitle": "ဘုရားသခင်နှင့် နေ့စဉ်ဆုတောင်းခြင်း",
-  "premiumActive": "Premium အသုံးပြုနေဆဲ",
+  "premiumActive": "အသင်းဝင် တက်ကြွ",
   "planOncePerDay": "1 ကြိမ်/ရက်",
   "planUnlimited": "အကန့်အသတ်မရှိ",
   "closeRecording": "အသံဖမ်းခြင်း ပိတ်ရန်",
@@ -209,9 +245,18 @@
   "scriptureReasonLabel": "ဤကျမ်းပိုဒ်ကို ဘာကြောင့်",
   "seeMore": "ပိုမိုကြည့်ရန်",
   "seeAllComments": "မှတ်ချက် {count} ခုလုံးကို ကြည့်ရန်",
-  "@seeAllComments": { "placeholders": { "count": {} } },
+  "@seeAllComments": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "likedBy": "{name} နှင့် အခြား {count} ဦး နှစ်သက်သည်",
-  "@likedBy": { "placeholders": { "name": {}, "count": {} } },
+  "@likedBy": {
+    "placeholders": {
+      "name": {},
+      "count": {}
+    }
+  },
   "commentsTitle": "မှတ်ချက်များ",
   "myPageTitle": "ကျွန်ုပ်၏ ဆုတောင်းခြင်းဥယျာဉ်",
   "myPrayers": "ကျွန်ုပ်၏ ဆုတောင်းချက်များ",
@@ -227,10 +272,29 @@
   "linkAccountSuccess": "အကောင့် ချိတ်ဆက်မှု အောင်မြင်ပါပြီ!",
   "anonymousUser": "ဆုတောင်းစစ်သည်",
   "showReplies": "ပြန်ဖြေချက် {count} ခု ကြည့်ရန်",
-  "@showReplies": { "placeholders": { "count": {} } },
+  "@showReplies": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "hideReplies": "ပြန်ဖြေချက်များ ဖျောက်ရန်",
   "replyingTo": "{name} ကို ပြန်ဖြေနေသည်",
-  "@replyingTo": { "placeholders": { "name": {} } },
+  "@replyingTo": {
+    "placeholders": {
+      "name": {}
+    }
+  },
   "viewAllComments": "မှတ်ချက် {count} ခုလုံးကို ကြည့်ရန်",
-  "@viewAllComments": { "placeholders": { "count": {} } }
+  "@viewAllComments": {
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "membershipTitle": "အသင်းဝင်",
+  "membershipSubtitle": "ဆုတောင်းခြင်းကို ပိုမိုနက်ရှိုင်းစေပါ",
+  "monthlyPlan": "လစဉ်",
+  "yearlyPlan": "နှစ်စဉ်",
+  "yearlySavings": "$5.00/လ (37% လျှော့)",
+  "startMembership": "စတင်ပါ",
+  "membershipActive": "အသင်းဝင် တက်ကြွ"
 }

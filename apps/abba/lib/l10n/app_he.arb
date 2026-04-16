@@ -10,15 +10,31 @@
   "signInWithGoogle": "המשך עם Google",
   "signInWithEmail": "המשך עם אימייל",
   "greetingMorning": "בוקר טוב, {name}",
-  "@greetingMorning": { "placeholders": { "name": {} } },
+  "@greetingMorning": {
+    "placeholders": {
+      "name": {}
+    }
+  },
   "greetingAfternoon": "צהריים טובים, {name}",
-  "@greetingAfternoon": { "placeholders": { "name": {} } },
+  "@greetingAfternoon": {
+    "placeholders": {
+      "name": {}
+    }
+  },
   "greetingEvening": "ערב טוב, {name}",
-  "@greetingEvening": { "placeholders": { "name": {} } },
+  "@greetingEvening": {
+    "placeholders": {
+      "name": {}
+    }
+  },
   "prayButton": "התפלל",
   "qtButton": "שעת שקט",
   "streakDays": "{count} ימי תפילה רצופים",
-  "@streakDays": { "placeholders": { "count": {} } },
+  "@streakDays": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "dailyVerse": "פסוק היום",
   "tabHome": "בית",
   "tabCalendar": "לוח שנה",
@@ -69,17 +85,21 @@
   "bestStreak": "רצף שיא",
   "days": "ימים",
   "calendarRecordCount": "{count} רשומות",
-  "@calendarRecordCount": { "placeholders": { "count": {} } },
+  "@calendarRecordCount": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "todayVerse": "פסוק היום",
   "settingsTitle": "הגדרות",
   "profileSection": "פרופיל",
   "totalPrayers": "סה\"כ תפילות",
   "consecutiveDays": "ימים רצופים",
-  "premiumSection": "Premium",
+  "premiumSection": "מנוי",
   "freePlan": "חינם",
   "premiumPlan": "Premium",
-  "monthlyPrice": "₪12.90/חודש",
-  "yearlyPrice": "₪89.90/שנה",
+  "monthlyPrice": "₪29.90 / חודש",
+  "yearlyPrice": "₪219.90 / שנה",
   "yearlySave": "חסכון 40%",
   "launchPromo": "3 חודשים ב-₪14.90/חודש!",
   "startPremium": "התחל Premium",
@@ -96,10 +116,18 @@
   "privacyPolicy": "מדיניות פרטיות",
   "logout": "התנתק",
   "appVersion": "גרסה {version}",
-  "@appVersion": { "placeholders": { "version": {} } },
+  "@appVersion": {
+    "placeholders": {
+      "version": {}
+    }
+  },
   "anonymous": "אנונימי",
   "timeAgo": "לפני {time}",
-  "@timeAgo": { "placeholders": { "time": {} } },
+  "@timeAgo": {
+    "placeholders": {
+      "time": {}
+    }
+  },
   "emailLabel": "אימייל",
   "passwordLabel": "סיסמה",
   "signIn": "התחבר",
@@ -128,7 +156,11 @@
   "promoTitle": "מבצע השקה",
   "promoBanner": "3 חודשים ראשונים ב-₪14.90/חודש!",
   "promoEndsOn": "המבצע נגמר ב-{date}",
-  "@promoEndsOn": { "placeholders": { "date": {} } },
+  "@promoEndsOn": {
+    "placeholders": {
+      "date": {}
+    }
+  },
   "premiumLimitTitle": "תפילת היום הושלמה",
   "premiumLimitBody": "נתראה מחר!\nתתפלל ללא הגבלה עם Premium",
   "laterButton": "אולי מאוחר יותר",
@@ -166,10 +198,14 @@
   "milestoneShare": "שתף",
   "milestoneThankGod": "תודה לאל!",
   "shareStreakText": "{count} ימי תפילה רצופים! מסע התפילה שלי עם Abba #Abba #תפילה",
-  "@shareStreakText": { "placeholders": { "count": {} } },
+  "@shareStreakText": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "shareDaysLabel": "ימי תפילה רצופים",
   "shareSubtitle": "תפילה יומית עם אלוהים",
-  "premiumActive": "Premium פעיל",
+  "premiumActive": "מנוי פעיל",
   "planOncePerDay": "פעם/יום",
   "planUnlimited": "ללא הגבלה",
   "closeRecording": "סגור הקלטה",
@@ -209,9 +245,18 @@
   "scriptureReasonLabel": "למה פסוק זה",
   "seeMore": "ראה עוד",
   "seeAllComments": "צפה בכל {count} התגובות",
-  "@seeAllComments": { "placeholders": { "count": {} } },
+  "@seeAllComments": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "likedBy": "{name} ועוד {count} אהבו את זה",
-  "@likedBy": { "placeholders": { "name": {}, "count": {} } },
+  "@likedBy": {
+    "placeholders": {
+      "name": {},
+      "count": {}
+    }
+  },
   "commentsTitle": "תגובות",
   "myPageTitle": "גן התפילה שלי",
   "myPrayers": "התפילות שלי",
@@ -227,10 +272,29 @@
   "linkAccountSuccess": "החשבון קושר בהצלחה!",
   "anonymousUser": "לוחם תפילה",
   "showReplies": "הצג {count} תשובות",
-  "@showReplies": { "placeholders": { "count": {} } },
+  "@showReplies": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "hideReplies": "הסתר תשובות",
   "replyingTo": "משיב ל-{name}",
-  "@replyingTo": { "placeholders": { "name": {} } },
+  "@replyingTo": {
+    "placeholders": {
+      "name": {}
+    }
+  },
   "viewAllComments": "צפה בכל {count} התגובות",
-  "@viewAllComments": { "placeholders": { "count": {} } }
+  "@viewAllComments": {
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "membershipTitle": "מנוי",
+  "membershipSubtitle": "העמיקו את חיי התפילה שלכם",
+  "monthlyPlan": "חודשי",
+  "yearlyPlan": "שנתי",
+  "yearlySavings": "₪18.33/חודש (הנחה 37%)",
+  "startMembership": "התחל",
+  "membershipActive": "מנוי פעיל"
 }

@@ -231,7 +231,7 @@ class AppLocalizationsVi extends AppLocalizations {
   String get consecutiveDays => 'Ngày liên tiếp';
 
   @override
-  String get premiumSection => 'Premium';
+  String get premiumSection => 'Thành viên';
 
   @override
   String get freePlan => 'Miễn phí';
@@ -240,10 +240,10 @@ class AppLocalizationsVi extends AppLocalizations {
   String get premiumPlan => 'Premium';
 
   @override
-  String get monthlyPrice => '89.000₫/tháng';
+  String get monthlyPrice => '189.000đ / tháng';
 
   @override
-  String get yearlyPrice => '599.000₫/năm';
+  String get yearlyPrice => '1.499.000đ / năm';
 
   @override
   String get yearlySave => 'Tiết kiệm 40%';
@@ -517,7 +517,7 @@ class AppLocalizationsVi extends AppLocalizations {
   String get shareSubtitle => 'Cầu nguyện mỗi ngày cùng Chúa';
 
   @override
-  String get premiumActive => 'Premium đang hoạt động';
+  String get premiumActive => 'Thành viên Hoạt động';
 
   @override
   String get planOncePerDay => '1 lần/ngày';
@@ -706,4 +706,25 @@ class AppLocalizationsVi extends AppLocalizations {
   String viewAllComments(Object count) {
     return 'Xem tất cả $count bình luận';
   }
+
+  @override
+  String get membershipTitle => 'Thành viên';
+
+  @override
+  String get membershipSubtitle => 'Làm sâu thêm đời sống cầu nguyện';
+
+  @override
+  String get monthlyPlan => 'Hàng tháng';
+
+  @override
+  String get yearlyPlan => 'Hàng năm';
+
+  @override
+  String get yearlySavings => '125.000đ/tháng (giảm 33%)';
+
+  @override
+  String get startMembership => 'Bắt đầu';
+
+  @override
+  String get membershipActive => 'Thành viên Hoạt động';
 }

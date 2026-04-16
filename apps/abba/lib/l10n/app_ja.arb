@@ -10,15 +10,31 @@
   "signInWithGoogle": "Googleで続ける",
   "signInWithEmail": "メールで続ける",
   "greetingMorning": "おはようございます、{name}さん",
-  "@greetingMorning": { "placeholders": { "name": {} } },
+  "@greetingMorning": {
+    "placeholders": {
+      "name": {}
+    }
+  },
   "greetingAfternoon": "こんにちは、{name}さん",
-  "@greetingAfternoon": { "placeholders": { "name": {} } },
+  "@greetingAfternoon": {
+    "placeholders": {
+      "name": {}
+    }
+  },
   "greetingEvening": "こんばんは、{name}さん",
-  "@greetingEvening": { "placeholders": { "name": {} } },
+  "@greetingEvening": {
+    "placeholders": {
+      "name": {}
+    }
+  },
   "prayButton": "祈る",
   "qtButton": "デボーション",
   "streakDays": "{count}日連続の祈り",
-  "@streakDays": { "placeholders": { "count": {} } },
+  "@streakDays": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "dailyVerse": "今日のみことば",
   "tabHome": "ホーム",
   "tabCalendar": "カレンダー",
@@ -69,17 +85,21 @@
   "bestStreak": "最高記録",
   "days": "日",
   "calendarRecordCount": "{count}件の記録",
-  "@calendarRecordCount": { "placeholders": { "count": {} } },
+  "@calendarRecordCount": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "todayVerse": "今日のみことば",
   "settingsTitle": "設定",
   "profileSection": "プロフィール",
   "totalPrayers": "祈りの合計",
   "consecutiveDays": "連続日数",
-  "premiumSection": "プレミアム",
+  "premiumSection": "メンバーシップ",
   "freePlan": "無料",
   "premiumPlan": "プレミアム",
-  "monthlyPrice": "¥500/月",
-  "yearlyPrice": "¥3,600/年",
+  "monthlyPrice": "¥1,500 / 月",
+  "yearlyPrice": "¥11,800 / 年",
   "yearlySave": "40%お得",
   "launchPromo": "3ヶ月間¥580/月!",
   "startPremium": "Premium開始",
@@ -96,10 +116,18 @@
   "privacyPolicy": "プライバシーポリシー",
   "logout": "ログアウト",
   "appVersion": "バージョン {version}",
-  "@appVersion": { "placeholders": { "version": {} } },
+  "@appVersion": {
+    "placeholders": {
+      "version": {}
+    }
+  },
   "anonymous": "匿名",
   "timeAgo": "{time}前",
-  "@timeAgo": { "placeholders": { "time": {} } },
+  "@timeAgo": {
+    "placeholders": {
+      "time": {}
+    }
+  },
   "emailLabel": "メール",
   "passwordLabel": "パスワード",
   "signIn": "サインイン",
@@ -128,7 +156,11 @@
   "promoTitle": "特別キャンペーン",
   "promoBanner": "3ヶ月間¥580/月!",
   "promoEndsOn": "{date}まで特別価格",
-  "@promoEndsOn": { "placeholders": { "date": {} } },
+  "@promoEndsOn": {
+    "placeholders": {
+      "date": {}
+    }
+  },
   "premiumLimitTitle": "今日の祈りが完了しました",
   "premiumLimitBody": "また明日お会いしましょう！\nPremiumで無制限に祈りましょう",
   "laterButton": "後で",
@@ -166,10 +198,14 @@
   "milestoneShare": "共有する",
   "milestoneThankGod": "神に感謝!",
   "shareStreakText": "{count}日連続の祈り！Abbaとの祈りの旅 #Abba #祈り",
-  "@shareStreakText": { "placeholders": { "count": {} } },
+  "@shareStreakText": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "shareDaysLabel": "日連続の祈り",
   "shareSubtitle": "神と共にある毎日の祈り",
-  "premiumActive": "プレミアム有効",
+  "premiumActive": "メンバーシップ有効",
   "planOncePerDay": "1日1回",
   "planUnlimited": "無制限",
   "closeRecording": "録音を閉じる",
@@ -209,9 +245,18 @@
   "scriptureReasonLabel": "このみ言葉を選んだ理由",
   "seeMore": "もっと見る",
   "seeAllComments": "コメント{count}件すべて見る",
-  "@seeAllComments": { "placeholders": { "count": {} } },
+  "@seeAllComments": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "likedBy": "{name}と他{count}人がいいねしました",
-  "@likedBy": { "placeholders": { "name": {}, "count": {} } },
+  "@likedBy": {
+    "placeholders": {
+      "name": {},
+      "count": {}
+    }
+  },
   "commentsTitle": "コメント",
   "myPageTitle": "祈りの庭",
   "myPrayers": "私の祈り",
@@ -227,10 +272,29 @@
   "linkAccountSuccess": "アカウントが連携されました！",
   "anonymousUser": "祈りの人",
   "showReplies": "返信{count}件を見る",
-  "@showReplies": { "placeholders": { "count": {} } },
+  "@showReplies": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "hideReplies": "返信を隠す",
   "replyingTo": "{name}に返信中",
-  "@replyingTo": { "placeholders": { "name": {} } },
+  "@replyingTo": {
+    "placeholders": {
+      "name": {}
+    }
+  },
   "viewAllComments": "コメント{count}件すべて見る",
-  "@viewAllComments": { "placeholders": { "count": {} } }
+  "@viewAllComments": {
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "membershipTitle": "メンバーシップ",
+  "membershipSubtitle": "祈りをもっと深く",
+  "monthlyPlan": "月額",
+  "yearlyPlan": "年額",
+  "yearlySavings": "月¥983 (33%お得)",
+  "startMembership": "始める",
+  "membershipActive": "メンバーシップ有効"
 }

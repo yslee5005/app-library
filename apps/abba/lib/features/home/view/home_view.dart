@@ -156,7 +156,7 @@ class _HomeViewState extends ConsumerState<HomeView>
                 child: ElevatedButton(
                   onPressed: () => Navigator.pop(context, true),
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: AbbaColors.sage,
+                    backgroundColor: AbbaColors.sageDark,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(AbbaRadius.md),
                     ),
@@ -378,7 +378,7 @@ class _HomeViewState extends ConsumerState<HomeView>
               child: AbbaButton(
                 label: l10n.startPrayerButton,
                 onPressed: _startPrayer,
-                backgroundColor: AbbaColors.sage,
+                backgroundColor: AbbaColors.sageDark,
               ),
             ),
             const Spacer(flex: 1),

@@ -10,15 +10,31 @@
   "signInWithGoogle": "Fortsätt med Google",
   "signInWithEmail": "Fortsätt med e-post",
   "greetingMorning": "God morgon, {name}",
-  "@greetingMorning": { "placeholders": { "name": {} } },
+  "@greetingMorning": {
+    "placeholders": {
+      "name": {}
+    }
+  },
   "greetingAfternoon": "God eftermiddag, {name}",
-  "@greetingAfternoon": { "placeholders": { "name": {} } },
+  "@greetingAfternoon": {
+    "placeholders": {
+      "name": {}
+    }
+  },
   "greetingEvening": "God kväll, {name}",
-  "@greetingEvening": { "placeholders": { "name": {} } },
+  "@greetingEvening": {
+    "placeholders": {
+      "name": {}
+    }
+  },
   "prayButton": "Be",
   "qtButton": "Stilla stund",
   "streakDays": "{count} dagars bönesvit",
-  "@streakDays": { "placeholders": { "count": {} } },
+  "@streakDays": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "dailyVerse": "Dagens vers",
   "tabHome": "Hem",
   "tabCalendar": "Kalender",
@@ -69,17 +85,21 @@
   "bestStreak": "Bästa svit",
   "days": "dagar",
   "calendarRecordCount": "{count} poster",
-  "@calendarRecordCount": { "placeholders": { "count": {} } },
+  "@calendarRecordCount": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "todayVerse": "Dagens vers",
   "settingsTitle": "Inställningar",
   "profileSection": "Profil",
   "totalPrayers": "Totalt antal böner",
   "consecutiveDays": "Dagar i rad",
-  "premiumSection": "Premium",
+  "premiumSection": "Medlemskap",
   "freePlan": "Gratis",
   "premiumPlan": "Premium",
-  "monthlyPrice": "39kr/mån",
-  "yearlyPrice": "269kr/år",
+  "monthlyPrice": "89 kr / mån",
+  "yearlyPrice": "669 kr / år",
   "yearlySave": "Spara 40%",
   "launchPromo": "3 månader för 45kr/mån!",
   "startPremium": "Starta Premium",
@@ -96,10 +116,18 @@
   "privacyPolicy": "Integritetspolicy",
   "logout": "Logga ut",
   "appVersion": "Version {version}",
-  "@appVersion": { "placeholders": { "version": {} } },
+  "@appVersion": {
+    "placeholders": {
+      "version": {}
+    }
+  },
   "anonymous": "Anonym",
   "timeAgo": "{time} sedan",
-  "@timeAgo": { "placeholders": { "time": {} } },
+  "@timeAgo": {
+    "placeholders": {
+      "time": {}
+    }
+  },
   "emailLabel": "E-post",
   "passwordLabel": "Lösenord",
   "signIn": "Logga in",
@@ -128,7 +156,11 @@
   "promoTitle": "Lanseringserbjudande",
   "promoBanner": "Första 3 månaderna för 45kr/mån!",
   "promoEndsOn": "Erbjudandet slutar {date}",
-  "@promoEndsOn": { "placeholders": { "date": {} } },
+  "@promoEndsOn": {
+    "placeholders": {
+      "date": {}
+    }
+  },
   "premiumLimitTitle": "Dagens bön är klar",
   "premiumLimitBody": "Vi ses imorgon!\nBe obegränsat med Premium",
   "laterButton": "Kanske senare",
@@ -166,10 +198,14 @@
   "milestoneShare": "Dela",
   "milestoneThankGod": "Tack Gud!",
   "shareStreakText": "{count} dagars bönesvit! Min böneresa med Abba #Abba #Bön",
-  "@shareStreakText": { "placeholders": { "count": {} } },
+  "@shareStreakText": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "shareDaysLabel": "dagars bönesvit",
   "shareSubtitle": "Daglig bön med Gud",
-  "premiumActive": "Premium Aktivt",
+  "premiumActive": "Medlemskap Aktivt",
   "planOncePerDay": "1 gång/dag",
   "planUnlimited": "Obegränsat",
   "closeRecording": "Stäng inspelning",
@@ -209,9 +245,18 @@
   "scriptureReasonLabel": "Varför detta bibelord",
   "seeMore": "Se mer",
   "seeAllComments": "Visa alla {count} kommentarer",
-  "@seeAllComments": { "placeholders": { "count": {} } },
+  "@seeAllComments": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "likedBy": "{name} och {count} andra gillade detta",
-  "@likedBy": { "placeholders": { "name": {}, "count": {} } },
+  "@likedBy": {
+    "placeholders": {
+      "name": {},
+      "count": {}
+    }
+  },
   "commentsTitle": "Kommentarer",
   "myPageTitle": "Min Böneträdgård",
   "myPrayers": "Mina böner",
@@ -227,10 +272,29 @@
   "linkAccountSuccess": "Kontot kopplades!",
   "anonymousUser": "Bönekrigar",
   "showReplies": "Visa {count} svar",
-  "@showReplies": { "placeholders": { "count": {} } },
+  "@showReplies": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "hideReplies": "Dölj svar",
   "replyingTo": "Svarar {name}",
-  "@replyingTo": { "placeholders": { "name": {} } },
+  "@replyingTo": {
+    "placeholders": {
+      "name": {}
+    }
+  },
   "viewAllComments": "Visa alla {count} kommentarer",
-  "@viewAllComments": { "placeholders": { "count": {} } }
+  "@viewAllComments": {
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "membershipTitle": "Medlemskap",
+  "membershipSubtitle": "Fördjupa ditt böneliv",
+  "monthlyPlan": "Månadsvis",
+  "yearlyPlan": "Årsvis",
+  "yearlySavings": "56 kr/mån (37% rabatt)",
+  "startMembership": "Börja nu",
+  "membershipActive": "Medlemskap Aktivt"
 }

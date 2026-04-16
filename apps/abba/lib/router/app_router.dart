@@ -13,6 +13,8 @@ import '../features/history/view/qt_history_view.dart';
 import '../features/home/view/home_view.dart';
 import '../features/qt/view/qt_view.dart';
 import '../features/my_page/view/my_page_view.dart';
+import '../features/settings/view/membership_view.dart';
+import '../features/settings/view/notification_settings_view.dart';
 import '../features/settings/view/settings_view.dart';
 import '../features/welcome/view/welcome_view.dart';
 import '../widgets/abba_tab_bar.dart';
@@ -110,6 +112,15 @@ final appRouter = GoRouter(
                 GoRoute(
                   path: 'my-page',
                   builder: (context, state) => const MyPageView(),
+                ),
+                GoRoute(
+                  path: 'notifications',
+                  builder: (context, state) =>
+                      const NotificationSettingsView(),
+                ),
+                GoRoute(
+                  path: 'membership',
+                  builder: (context, state) => const MembershipView(),
                 ),
               ],
             ),

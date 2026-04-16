@@ -10,15 +10,31 @@
   "signInWithGoogle": "Jatka Google-tilillä",
   "signInWithEmail": "Jatka sähköpostilla",
   "greetingMorning": "Hyvää huomenta, {name}",
-  "@greetingMorning": { "placeholders": { "name": {} } },
+  "@greetingMorning": {
+    "placeholders": {
+      "name": {}
+    }
+  },
   "greetingAfternoon": "Hyvää iltapäivää, {name}",
-  "@greetingAfternoon": { "placeholders": { "name": {} } },
+  "@greetingAfternoon": {
+    "placeholders": {
+      "name": {}
+    }
+  },
   "greetingEvening": "Hyvää iltaa, {name}",
-  "@greetingEvening": { "placeholders": { "name": {} } },
+  "@greetingEvening": {
+    "placeholders": {
+      "name": {}
+    }
+  },
   "prayButton": "Rukoile",
   "qtButton": "Hiljaisuuden hetki",
   "streakDays": "{count} päivän rukousputki",
-  "@streakDays": { "placeholders": { "count": {} } },
+  "@streakDays": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "dailyVerse": "Päivän jae",
   "tabHome": "Koti",
   "tabCalendar": "Kalenteri",
@@ -69,17 +85,21 @@
   "bestStreak": "Paras putki",
   "days": "päivää",
   "calendarRecordCount": "{count} merkintää",
-  "@calendarRecordCount": { "placeholders": { "count": {} } },
+  "@calendarRecordCount": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "todayVerse": "Päivän jae",
   "settingsTitle": "Asetukset",
   "profileSection": "Profiili",
   "totalPrayers": "Rukouksia yhteensä",
   "consecutiveDays": "Peräkkäiset päivät",
-  "premiumSection": "Premium",
+  "premiumSection": "Jäsenyys",
   "freePlan": "Ilmainen",
   "premiumPlan": "Premium",
-  "monthlyPrice": "3,49€/kk",
-  "yearlyPrice": "24,99€/v",
+  "monthlyPrice": "7,99€ / kk",
+  "yearlyPrice": "59,99€ / vuosi",
   "yearlySave": "Säästä 40%",
   "launchPromo": "3 kuukautta hintaan 3,99€/kk!",
   "startPremium": "Aloita Premium",
@@ -96,10 +116,18 @@
   "privacyPolicy": "Tietosuojakäytäntö",
   "logout": "Kirjaudu ulos",
   "appVersion": "Versio {version}",
-  "@appVersion": { "placeholders": { "version": {} } },
+  "@appVersion": {
+    "placeholders": {
+      "version": {}
+    }
+  },
   "anonymous": "Nimetön",
   "timeAgo": "{time} sitten",
-  "@timeAgo": { "placeholders": { "time": {} } },
+  "@timeAgo": {
+    "placeholders": {
+      "time": {}
+    }
+  },
   "emailLabel": "Sähköposti",
   "passwordLabel": "Salasana",
   "signIn": "Kirjaudu sisään",
@@ -128,7 +156,11 @@
   "promoTitle": "Lanseeraustarjous",
   "promoBanner": "3 ensimmäistä kuukautta 3,99€/kk!",
   "promoEndsOn": "Tarjous päättyy {date}",
-  "@promoEndsOn": { "placeholders": { "date": {} } },
+  "@promoEndsOn": {
+    "placeholders": {
+      "date": {}
+    }
+  },
   "premiumLimitTitle": "Päivän rukous on valmis",
   "premiumLimitBody": "Nähdään huomenna!\nRukoile rajattomasti Premiumilla",
   "laterButton": "Ehkä myöhemmin",
@@ -166,10 +198,14 @@
   "milestoneShare": "Jaa",
   "milestoneThankGod": "Kiitos Jumalalle!",
   "shareStreakText": "{count} päivän rukousputki! Rukousmatkani Abban kanssa #Abba #Rukous",
-  "@shareStreakText": { "placeholders": { "count": {} } },
+  "@shareStreakText": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "shareDaysLabel": "päivän rukousputki",
   "shareSubtitle": "Päivittäinen rukous Jumalan kanssa",
-  "premiumActive": "Premium aktiivinen",
+  "premiumActive": "Jäsenyys Aktiivinen",
   "planOncePerDay": "1x/päivä",
   "planUnlimited": "Rajaton",
   "closeRecording": "Sulje nauhoitus",
@@ -209,9 +245,18 @@
   "scriptureReasonLabel": "Miksi tämä jae",
   "seeMore": "Näytä lisää",
   "seeAllComments": "Näytä kaikki {count} kommenttia",
-  "@seeAllComments": { "placeholders": { "count": {} } },
+  "@seeAllComments": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "likedBy": "{name} ja {count} muuta tykkäsi tästä",
-  "@likedBy": { "placeholders": { "name": {}, "count": {} } },
+  "@likedBy": {
+    "placeholders": {
+      "name": {},
+      "count": {}
+    }
+  },
   "commentsTitle": "Kommentit",
   "myPageTitle": "Rukouspuutarhani",
   "myPrayers": "Rukoukseni",
@@ -227,10 +272,29 @@
   "linkAccountSuccess": "Tili yhdistetty!",
   "anonymousUser": "Rukoussotija",
   "showReplies": "Näytä {count} vastausta",
-  "@showReplies": { "placeholders": { "count": {} } },
+  "@showReplies": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "hideReplies": "Piilota vastaukset",
   "replyingTo": "Vastataan käyttäjälle {name}",
-  "@replyingTo": { "placeholders": { "name": {} } },
+  "@replyingTo": {
+    "placeholders": {
+      "name": {}
+    }
+  },
   "viewAllComments": "Näytä kaikki {count} kommenttia",
-  "@viewAllComments": { "placeholders": { "count": {} } }
+  "@viewAllComments": {
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "membershipTitle": "Jäsenyys",
+  "membershipSubtitle": "Syvennä rukouselämääsi",
+  "monthlyPlan": "Kuukausittain",
+  "yearlyPlan": "Vuosittain",
+  "yearlySavings": "5,00€/kk (37% alennus)",
+  "startMembership": "Aloita",
+  "membershipActive": "Jäsenyys Aktiivinen"
 }

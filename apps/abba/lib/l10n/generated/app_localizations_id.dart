@@ -231,7 +231,7 @@ class AppLocalizationsId extends AppLocalizations {
   String get consecutiveDays => 'Hari Berturut-turut';
 
   @override
-  String get premiumSection => 'Premium';
+  String get premiumSection => 'Keanggotaan';
 
   @override
   String get freePlan => 'Gratis';
@@ -240,10 +240,10 @@ class AppLocalizationsId extends AppLocalizations {
   String get premiumPlan => 'Premium';
 
   @override
-  String get monthlyPrice => 'Rp54.900/bln';
+  String get monthlyPrice => 'Rp129.000 / bulan';
 
   @override
-  String get yearlyPrice => 'Rp389.000/thn';
+  String get yearlyPrice => 'Rp990.000 / tahun';
 
   @override
   String get yearlySave => 'Hemat 40%';
@@ -518,7 +518,7 @@ class AppLocalizationsId extends AppLocalizations {
   String get shareSubtitle => 'Doa harian bersama Tuhan';
 
   @override
-  String get premiumActive => 'Premium Aktif';
+  String get premiumActive => 'Keanggotaan Aktif';
 
   @override
   String get planOncePerDay => '1x/hari';
@@ -707,4 +707,25 @@ class AppLocalizationsId extends AppLocalizations {
   String viewAllComments(Object count) {
     return 'Lihat semua $count komentar';
   }
+
+  @override
+  String get membershipTitle => 'Keanggotaan';
+
+  @override
+  String get membershipSubtitle => 'Perdalam kehidupan doamu';
+
+  @override
+  String get monthlyPlan => 'Bulanan';
+
+  @override
+  String get yearlyPlan => 'Tahunan';
+
+  @override
+  String get yearlySavings => 'Rp82.500/bulan (diskon 37%)';
+
+  @override
+  String get startMembership => 'Mulai';
+
+  @override
+  String get membershipActive => 'Keanggotaan Aktif';
 }

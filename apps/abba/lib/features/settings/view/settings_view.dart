@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:share_plus/share_plus.dart' show Share;
 
 import '../../../l10n/generated/app_localizations.dart';
 import '../../../models/user_profile.dart';
@@ -27,229 +26,235 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
     final l10n = AppLocalizations.of(context)!;
     final locale = ref.watch(localeProvider);
     final profileAsync = ref.watch(userProfileProvider);
+    final isAnon = ref.watch(
+      authStateProvider.select((_) => ref.read(authServiceProvider).isAnonymous),
+    );
+    final premiumAsync = ref.watch(isPremiumProvider);
+    final isPremium = premiumAsync.valueOrNull ?? false;
 
     return Scaffold(
       backgroundColor: AbbaColors.cream,
       appBar: AppBar(
-        title: Text('${l10n.settingsTitle} ⚙️', style: AbbaTypography.h1),
+        title: Text(l10n.settingsTitle, style: AbbaTypography.h1),
       ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(AbbaSpacing.md),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // Profile section
-            _buildProfileSection(l10n, profileAsync),
-
-            // Link account section (anonymous only)
-            if (ref.read(authServiceProvider).isAnonymous)
-              _buildLinkAccountCard(l10n),
-
-            // My Prayer Garden button
-            AbbaCard(
-              margin: const EdgeInsets.only(bottom: AbbaSpacing.md),
-              padding: EdgeInsets.zero,
-              child: ListTile(
-                leading: const Text('\ud83c\udf3f', style: TextStyle(fontSize: 24)),
-                title: Text(l10n.myPageTitle, style: AbbaTypography.body),
-                trailing: const Icon(Icons.chevron_right, color: AbbaColors.muted),
-                onTap: () => context.go('/settings/my-page'),
-                contentPadding: const EdgeInsets.symmetric(
-                  horizontal: AbbaSpacing.md,
-                  vertical: AbbaSpacing.xs,
-                ),
-              ),
-            ),
-
-            // Premium card
-            _buildPremiumCard(l10n),
-            const SizedBox(height: AbbaSpacing.md),
-
-            // Groups section
-            _buildGroupSection(l10n),
-            const SizedBox(height: AbbaSpacing.md),
-
-            // Settings list
-            _buildNotificationSettings(l10n),
-            const SizedBox(height: AbbaSpacing.md),
-
-            AbbaCard(
-              margin: const EdgeInsets.only(bottom: AbbaSpacing.md),
-              padding: EdgeInsets.zero,
-              child: Column(
-                children: [
-                  // AI Voice
-                  _SettingsTile(
-                    icon: Icons.record_voice_over_outlined,
-                    title: l10n.aiVoiceSetting,
-                    trailing: DropdownButton<String>(
-                      value: _voicePreference,
-                      underline: const SizedBox.shrink(),
-                      items: [
-                        DropdownMenuItem(
-                          value: 'warm',
-                          child: Text(
-                            l10n.voiceWarm,
-                            style: AbbaTypography.bodySmall,
-                          ),
-                        ),
-                        DropdownMenuItem(
-                          value: 'calm',
-                          child: Text(
-                            l10n.voiceCalm,
-                            style: AbbaTypography.bodySmall,
-                          ),
-                        ),
-                        DropdownMenuItem(
-                          value: 'strong',
-                          child: Text(
-                            l10n.voiceStrong,
-                            style: AbbaTypography.bodySmall,
-                          ),
-                        ),
-                      ],
-                      onChanged: (v) {
-                        if (v != null) {
-                          setState(() => _voicePreference = v);
-                        }
-                      },
-                    ),
-                  ),
-                  const Divider(height: 1),
-                  // Language
-                  _SettingsTile(
-                    icon: Icons.language,
-                    title: l10n.languageSetting,
-                    trailing: DropdownButton<String>(
-                      value: locale,
-                      underline: const SizedBox.shrink(),
-                      items: const [
-                        DropdownMenuItem(value: 'en', child: Text('English')),
-                        DropdownMenuItem(value: 'ko', child: Text('한국어')),
-                        DropdownMenuItem(value: 'ja', child: Text('日本語')),
-                        DropdownMenuItem(value: 'es', child: Text('Español')),
-                        DropdownMenuItem(value: 'zh', child: Text('中文')),
-                        DropdownMenuItem(value: 'pt', child: Text('Português')),
-                        DropdownMenuItem(value: 'fr', child: Text('Français')),
-                        DropdownMenuItem(value: 'hi', child: Text('हिन्दी')),
-                        DropdownMenuItem(value: 'fil', child: Text('Filipino')),
-                        DropdownMenuItem(value: 'sw', child: Text('Kiswahili')),
-                        DropdownMenuItem(value: 'de', child: Text('Deutsch')),
-                        DropdownMenuItem(value: 'it', child: Text('Italiano')),
-                        DropdownMenuItem(value: 'pl', child: Text('Polski')),
-                        DropdownMenuItem(value: 'ru', child: Text('Русский')),
-                        DropdownMenuItem(value: 'id', child: Text('Indonesia')),
-                        DropdownMenuItem(value: 'uk', child: Text('Українська')),
-                        DropdownMenuItem(value: 'ro', child: Text('Română')),
-                        DropdownMenuItem(value: 'nl', child: Text('Nederlands')),
-                        DropdownMenuItem(value: 'hu', child: Text('Magyar')),
-                        DropdownMenuItem(value: 'cs', child: Text('Čeština')),
-                        DropdownMenuItem(value: 'vi', child: Text('Tiếng Việt')),
-                        DropdownMenuItem(value: 'th', child: Text('ไทย')),
-                        DropdownMenuItem(value: 'tr', child: Text('Türkçe')),
-                        DropdownMenuItem(value: 'ar', child: Text('العربية')),
-                        DropdownMenuItem(value: 'he', child: Text('עברית')),
-                        DropdownMenuItem(value: 'el', child: Text('Ελληνικά')),
-                        DropdownMenuItem(value: 'sv', child: Text('Svenska')),
-                        DropdownMenuItem(value: 'no', child: Text('Norsk')),
-                        DropdownMenuItem(value: 'da', child: Text('Dansk')),
-                        DropdownMenuItem(value: 'fi', child: Text('Suomi')),
-                        DropdownMenuItem(value: 'hr', child: Text('Hrvatski')),
-                        DropdownMenuItem(value: 'sk', child: Text('Slovenčina')),
-                        DropdownMenuItem(value: 'ms', child: Text('Bahasa Melayu')),
-                        DropdownMenuItem(value: 'am', child: Text('አማርኛ')),
-                        DropdownMenuItem(value: 'my', child: Text('မြန်မာ')),
-                      ],
-                      onChanged: (v) {
-                        if (v != null) {
-                          ref.read(localeProvider.notifier).state = v;
-                        }
-                      },
-                    ),
-                  ),
-                  const Divider(height: 1),
-                  // Dark mode
-                  _SettingsTile(
-                    icon: Icons.dark_mode_outlined,
-                    title: l10n.darkModeSetting,
-                    trailing: Switch(
-                      value: _darkMode,
-                      onChanged: (v) => setState(() => _darkMode = v),
-                      activeTrackColor: AbbaColors.sage,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-
-            // Other settings
-            AbbaCard(
-              margin: const EdgeInsets.only(bottom: AbbaSpacing.md),
-              padding: EdgeInsets.zero,
-              child: Column(
-                children: [
-                  _SettingsTile(
-                    icon: Icons.help_outline,
-                    title: l10n.helpCenter,
-                    onTap: () {},
-                  ),
-                  const Divider(height: 1),
-                  _SettingsTile(
-                    icon: Icons.description_outlined,
-                    title: l10n.termsOfService,
-                    onTap: () {},
-                  ),
-                  const Divider(height: 1),
-                  _SettingsTile(
-                    icon: Icons.privacy_tip_outlined,
-                    title: l10n.privacyPolicy,
-                    onTap: () {},
-                  ),
-                  if (!ref.read(authServiceProvider).isAnonymous) ...[
-                    const Divider(height: 1),
-                    _SettingsTile(
-                      icon: Icons.logout,
-                      title: l10n.logout,
-                      titleColor: AbbaColors.error,
-                      onTap: () async {
-                        await ref.read(authServiceProvider).signOut();
-                        ref.read(authStateProvider.notifier).state =
-                            const AbbaAuthState();
-                        if (context.mounted) context.go('/welcome');
-                      },
-                    ),
-                  ],
-                ],
-              ),
-            ),
-
-            // Version
-            Center(
-              child: Text(
-                l10n.appVersion('1.0.0'),
-                style: AbbaTypography.caption,
-              ),
-            ),
-            const SizedBox(height: AbbaSpacing.xl),
-          ],
+      body: ListView(
+        padding: const EdgeInsets.symmetric(
+          horizontal: AbbaSpacing.md,
+          vertical: AbbaSpacing.md,
         ),
+        children: [
+          // ── Profile card ──────────────────────────────────────────
+          _buildProfileCard(l10n, profileAsync, isAnon),
+          const SizedBox(height: AbbaSpacing.lg),
+
+          // ── Account section ───────────────────────────────────────
+          _SectionHeader(title: l10n.linkAccountTitle),
+          const SizedBox(height: AbbaSpacing.sm),
+          AbbaCard(
+            margin: EdgeInsets.zero,
+            padding: EdgeInsets.zero,
+            child: Column(
+              children: [
+                // Login / Link account
+                _SettingsRow(
+                  icon: Icons.person_outline,
+                  title: isAnon ? l10n.linkAccountTitle : l10n.linkAccountTitle,
+                  trailing: isAnon
+                      ? const Icon(
+                          Icons.chevron_right,
+                          color: AbbaColors.muted,
+                        )
+                      : Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(
+                              l10n.linkAccountSuccess
+                                  .replaceAll('!', '')
+                                  .trim(),
+                              style: AbbaTypography.caption.copyWith(
+                                color: AbbaColors.sage,
+                              ),
+                            ),
+                            const SizedBox(width: AbbaSpacing.xs),
+                            const Icon(
+                              Icons.chevron_right,
+                              color: AbbaColors.muted,
+                            ),
+                          ],
+                        ),
+                  onTap: () {
+                    if (isAnon) {
+                      _showLinkAccountSheet(context, l10n);
+                    }
+                  },
+                ),
+                const Divider(height: 1, indent: 56),
+                // Membership
+                _SettingsRow(
+                  icon: Icons.workspace_premium_outlined,
+                  title: l10n.membershipTitle,
+                  trailing: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: AbbaSpacing.sm,
+                          vertical: 2,
+                        ),
+                        decoration: BoxDecoration(
+                          color: isPremium
+                              ? AbbaColors.sage.withValues(alpha: 0.15)
+                              : AbbaColors.muted.withValues(alpha: 0.12),
+                          borderRadius: BorderRadius.circular(AbbaRadius.sm),
+                        ),
+                        child: Text(
+                          isPremium ? l10n.premiumPlan : l10n.freePlan,
+                          style: AbbaTypography.caption.copyWith(
+                            color:
+                                isPremium ? AbbaColors.sage : AbbaColors.muted,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: AbbaSpacing.xs),
+                      const Icon(
+                        Icons.chevron_right,
+                        color: AbbaColors.muted,
+                      ),
+                    ],
+                  ),
+                  onTap: () => context.go('/settings/membership'),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: AbbaSpacing.lg),
+
+          // ── Settings section ──────────────────────────────────────
+          _SectionHeader(title: l10n.settingsTitle),
+          const SizedBox(height: AbbaSpacing.sm),
+          AbbaCard(
+            margin: EdgeInsets.zero,
+            padding: EdgeInsets.zero,
+            child: Column(
+              children: [
+                // AI Voice
+                _SettingsRow(
+                  icon: Icons.record_voice_over_outlined,
+                  title: l10n.aiVoiceSetting,
+                  trailing: _buildVoiceDropdown(l10n),
+                ),
+                const Divider(height: 1, indent: 56),
+                // Language
+                _SettingsRow(
+                  icon: Icons.language,
+                  title: l10n.languageSetting,
+                  trailing: _buildLanguageDropdown(locale),
+                ),
+                const Divider(height: 1, indent: 56),
+                // Dark mode
+                _SettingsRow(
+                  icon: Icons.dark_mode_outlined,
+                  title: l10n.darkModeSetting,
+                  trailing: Switch(
+                    value: _darkMode,
+                    onChanged: (v) => setState(() => _darkMode = v),
+                    activeTrackColor: AbbaColors.sage,
+                  ),
+                ),
+                const Divider(height: 1, indent: 56),
+                // Notification settings
+                _SettingsRow(
+                  icon: Icons.notifications_outlined,
+                  title: l10n.notificationSetting,
+                  trailing: const Icon(
+                    Icons.chevron_right,
+                    color: AbbaColors.muted,
+                  ),
+                  onTap: () => context.go('/settings/notifications'),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: AbbaSpacing.lg),
+
+          // ── More section ──────────────────────────────────────────
+          const _SectionHeader(title: ''),
+          const SizedBox(height: AbbaSpacing.sm),
+          AbbaCard(
+            margin: EdgeInsets.zero,
+            padding: EdgeInsets.zero,
+            child: Column(
+              children: [
+                _SettingsRow(
+                  icon: Icons.help_outline,
+                  title: l10n.helpCenter,
+                  trailing: const Icon(
+                    Icons.chevron_right,
+                    color: AbbaColors.muted,
+                  ),
+                  onTap: () {},
+                ),
+                const Divider(height: 1, indent: 56),
+                _SettingsRow(
+                  icon: Icons.description_outlined,
+                  title: l10n.termsOfService,
+                  trailing: const Icon(
+                    Icons.chevron_right,
+                    color: AbbaColors.muted,
+                  ),
+                  onTap: () {},
+                ),
+                const Divider(height: 1, indent: 56),
+                _SettingsRow(
+                  icon: Icons.privacy_tip_outlined,
+                  title: l10n.privacyPolicy,
+                  trailing: const Icon(
+                    Icons.chevron_right,
+                    color: AbbaColors.muted,
+                  ),
+                  onTap: () {},
+                ),
+                if (!isAnon) ...[
+                  const Divider(height: 1, indent: 56),
+                  _SettingsRow(
+                    icon: Icons.logout,
+                    title: l10n.logout,
+                    titleColor: AbbaColors.error,
+                    onTap: () => _showLogoutDialog(context, l10n),
+                  ),
+                ],
+              ],
+            ),
+          ),
+          const SizedBox(height: AbbaSpacing.lg),
+
+          // ── Version ───────────────────────────────────────────────
+          Center(
+            child: Text(
+              l10n.appVersion('1.0.0'),
+              style: AbbaTypography.caption,
+            ),
+          ),
+          const SizedBox(height: AbbaSpacing.xl),
+        ],
       ),
     );
   }
 
-  Widget _buildProfileSection(
+  // ── Profile card ────────────────────────────────────────────────────
+  Widget _buildProfileCard(
     AppLocalizations l10n,
     AsyncValue<UserProfile> profileAsync,
+    bool isAnon,
   ) {
-    final isAnon = ref.read(authServiceProvider).isAnonymous;
-
     return profileAsync.when(
       data: (profile) => AbbaCard(
-        margin: const EdgeInsets.only(bottom: AbbaSpacing.md),
+        margin: EdgeInsets.zero,
         child: Row(
           children: [
             CircleAvatar(
-              radius: 32,
+              radius: 24,
               backgroundColor: AbbaColors.sage.withValues(alpha: 0.2),
               child: Text(
                 isAnon
@@ -257,7 +262,7 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
                     : (profile.name.isNotEmpty
                         ? profile.name[0].toUpperCase()
                         : '?'),
-                style: AbbaTypography.h1.copyWith(color: AbbaColors.sage),
+                style: AbbaTypography.h2.copyWith(color: AbbaColors.sage),
               ),
             ),
             const SizedBox(width: AbbaSpacing.md),
@@ -268,97 +273,203 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
                   Text(
                     isAnon ? l10n.anonymousUser : profile.name,
                     style: AbbaTypography.h2,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                   ),
-                  if (!isAnon)
+                  if (!isAnon && profile.email.isNotEmpty)
                     Text(
                       profile.email,
-                      style: AbbaTypography.bodySmall.copyWith(
+                      style: AbbaTypography.caption.copyWith(
                         color: AbbaColors.muted,
                       ),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    )
+                  else if (isAnon)
+                    Text(
+                      l10n.linkAccountDescription,
+                      style: AbbaTypography.caption.copyWith(
+                        color: AbbaColors.sage,
+                      ),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
                     ),
-                  const SizedBox(height: AbbaSpacing.sm),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: _StatBadge(
-                          label: l10n.totalPrayers,
-                          value: '${profile.totalPrayers}',
-                        ),
-                      ),
-                      const SizedBox(width: AbbaSpacing.sm),
-                      Expanded(
-                        child: _StatBadge(
-                          label: l10n.consecutiveDays,
-                          value: '${profile.currentStreak}',
-                        ),
-                      ),
-                    ],
-                  ),
                 ],
               ),
             ),
           ],
         ),
       ),
-      loading: () => const SizedBox.shrink(),
-      error: (e, s) => const SizedBox.shrink(),
+      loading: () => const SizedBox(height: 72),
+      error: (_, _) => const SizedBox(height: 72),
     );
   }
 
-  Widget _buildLinkAccountCard(AppLocalizations l10n) {
-    return AbbaCard(
-      margin: const EdgeInsets.only(bottom: AbbaSpacing.md),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
+  // ── Voice dropdown ──────────────────────────────────────────────────
+  Widget _buildVoiceDropdown(AppLocalizations l10n) {
+    final voiceLabels = <String, String>{
+      'warm': l10n.voiceWarm,
+      'calm': l10n.voiceCalm,
+      'strong': l10n.voiceStrong,
+    };
+
+    return DropdownButton<String>(
+      value: _voicePreference,
+      underline: const SizedBox.shrink(),
+      icon: const SizedBox.shrink(),
+      items: voiceLabels.entries
+          .map(
+            (e) => DropdownMenuItem(
+              value: e.key,
+              child: Text(e.value, style: AbbaTypography.bodySmall),
+            ),
+          )
+          .toList(),
+      onChanged: (v) {
+        if (v != null) setState(() => _voicePreference = v);
+      },
+    );
+  }
+
+  // ── Language dropdown ───────────────────────────────────────────────
+  Widget _buildLanguageDropdown(String locale) {
+    const languages = <String, String>{
+      'en': 'English',
+      'ko': '\uD55C\uAD6D\uC5B4',
+      'ja': '\u65E5\u672C\u8A9E',
+      'es': 'Espa\u00F1ol',
+      'zh': '\u4E2D\u6587',
+      'pt': 'Portugu\u00EAs',
+      'fr': 'Fran\u00E7ais',
+      'hi': '\u0939\u093F\u0928\u094D\u0926\u0940',
+      'fil': 'Filipino',
+      'sw': 'Kiswahili',
+      'de': 'Deutsch',
+      'it': 'Italiano',
+      'pl': 'Polski',
+      'ru': '\u0420\u0443\u0441\u0441\u043A\u0438\u0439',
+      'id': 'Indonesia',
+      'uk': '\u0423\u043A\u0440\u0430\u0457\u043D\u0441\u044C\u043A\u0430',
+      'ro': 'Rom\u00E2n\u0103',
+      'nl': 'Nederlands',
+      'hu': 'Magyar',
+      'cs': '\u010Ce\u0161tina',
+      'vi': 'Ti\u1EBFng Vi\u1EC7t',
+      'th': '\u0E44\u0E17\u0E22',
+      'tr': 'T\u00FCrk\u00E7e',
+      'ar': '\u0627\u0644\u0639\u0631\u0628\u064A\u0629',
+      'he': '\u05E2\u05D1\u05E8\u05D9\u05EA',
+      'el': '\u0395\u03BB\u03BB\u03B7\u03BD\u03B9\u03BA\u03AC',
+      'sv': 'Svenska',
+      'no': 'Norsk',
+      'da': 'Dansk',
+      'fi': 'Suomi',
+      'hr': 'Hrvatski',
+      'sk': 'Sloven\u010Dina',
+      'ms': 'Bahasa Melayu',
+      'am': '\u12A0\u121B\u122D\u129B',
+      'my': '\u1019\u103C\u1014\u103A\u1019\u102C',
+    };
+
+    return DropdownButton<String>(
+      value: locale,
+      underline: const SizedBox.shrink(),
+      icon: const SizedBox.shrink(),
+      items: languages.entries
+          .map(
+            (e) => DropdownMenuItem(
+              value: e.key,
+              child: Text(e.value, style: AbbaTypography.bodySmall),
+            ),
+          )
+          .toList(),
+      onChanged: (v) {
+        if (v != null) {
+          ref.read(localeProvider.notifier).state = v;
+        }
+      },
+    );
+  }
+
+  // ── Link account bottom sheet ───────────────────────────────────────
+  void _showLinkAccountSheet(BuildContext context, AppLocalizations l10n) {
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: AbbaColors.cream,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(
+          top: Radius.circular(AbbaRadius.xl),
+        ),
+      ),
+      builder: (sheetContext) => SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(AbbaSpacing.lg),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
             children: [
-              Icon(Icons.cloud_outlined, color: AbbaColors.sage),
-              const SizedBox(width: AbbaSpacing.sm),
+              // Drag handle
+              Container(
+                width: 40,
+                height: 4,
+                decoration: BoxDecoration(
+                  color: AbbaColors.muted.withValues(alpha: 0.3),
+                  borderRadius: BorderRadius.circular(2),
+                ),
+              ),
+              const SizedBox(height: AbbaSpacing.lg),
               Text(l10n.linkAccountTitle, style: AbbaTypography.h2),
+              const SizedBox(height: AbbaSpacing.sm),
+              Text(
+                l10n.linkAccountDescription,
+                style:
+                    AbbaTypography.bodySmall.copyWith(color: AbbaColors.muted),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: AbbaSpacing.lg),
+              // Apple login button
+              SizedBox(
+                width: double.infinity,
+                height: abbaButtonHeight,
+                child: ElevatedButton.icon(
+                  icon: const Icon(Icons.apple),
+                  label: Text(l10n.linkWithApple),
+                  onPressed: () {
+                    Navigator.pop(sheetContext);
+                    _linkAccount('apple');
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: AbbaColors.warmBrown,
+                    foregroundColor: AbbaColors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(AbbaRadius.lg),
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(height: AbbaSpacing.sm),
+              // Google login button
+              SizedBox(
+                width: double.infinity,
+                height: abbaButtonHeight,
+                child: OutlinedButton.icon(
+                  icon: const Icon(Icons.g_mobiledata),
+                  label: Text(l10n.linkWithGoogle),
+                  onPressed: () {
+                    Navigator.pop(sheetContext);
+                    _linkAccount('google');
+                  },
+                  style: OutlinedButton.styleFrom(
+                    side: const BorderSide(color: AbbaColors.sage),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(AbbaRadius.lg),
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(height: AbbaSpacing.md),
             ],
           ),
-          const SizedBox(height: AbbaSpacing.sm),
-          Text(
-            l10n.linkAccountDescription,
-            style: AbbaTypography.bodySmall.copyWith(color: AbbaColors.muted),
-          ),
-          const SizedBox(height: AbbaSpacing.md),
-          // Apple link button
-          SizedBox(
-            width: double.infinity,
-            height: abbaButtonHeight,
-            child: ElevatedButton.icon(
-              icon: const Icon(Icons.apple),
-              label: Text(l10n.linkWithApple),
-              onPressed: () => _linkAccount('apple'),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: AbbaColors.warmBrown,
-                foregroundColor: AbbaColors.white,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(AbbaRadius.lg),
-                ),
-              ),
-            ),
-          ),
-          const SizedBox(height: AbbaSpacing.sm),
-          // Google link button
-          SizedBox(
-            width: double.infinity,
-            height: abbaButtonHeight,
-            child: OutlinedButton.icon(
-              icon: const Icon(Icons.g_mobiledata),
-              label: Text(l10n.linkWithGoogle),
-              onPressed: () => _linkAccount('google'),
-              style: OutlinedButton.styleFrom(
-                side: const BorderSide(color: AbbaColors.sage),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(AbbaRadius.lg),
-                ),
-              ),
-            ),
-          ),
-        ],
+        ),
       ),
     );
   }
@@ -374,7 +485,7 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
       }
       ref.invalidate(userProfileProvider);
       if (mounted) {
-        setState(() {}); // Refresh to hide link card
+        setState(() {});
         showAbbaSnackBar(context, message: l10n.linkAccountSuccess);
       }
     } catch (e) {
@@ -384,438 +495,36 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
     }
   }
 
-  Widget _buildPremiumCard(AppLocalizations l10n) {
-    final premiumAsync = ref.watch(isPremiumProvider);
-    final isPremium = premiumAsync.valueOrNull ?? false;
-
-    if (isPremium) {
-      return _buildActivePremiumCard(l10n);
-    }
-    return _buildUpgradeCard(l10n);
-  }
-
-  Widget _buildActivePremiumCard(AppLocalizations l10n) {
-    return AbbaCard(
-      margin: EdgeInsets.zero,
-      child: Column(
-        children: [
-          Container(
-            width: double.infinity,
-            padding: const EdgeInsets.all(AbbaSpacing.lg),
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: [
-                  AbbaColors.sage.withValues(alpha: 0.15),
-                  AbbaColors.softGold.withValues(alpha: 0.15),
-                ],
-              ),
-              borderRadius: BorderRadius.circular(AbbaRadius.lg),
-            ),
-            child: Column(
-              children: [
-                const Text('🌳', style: TextStyle(fontSize: 36)),
-                const SizedBox(height: AbbaSpacing.sm),
-                Text(
-                  '✅ ${l10n.premiumActive}',
-                  style: AbbaTypography.h2.copyWith(
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-              ],
+  // ── Logout dialog ───────────────────────────────────────────────────
+  void _showLogoutDialog(BuildContext context, AppLocalizations l10n) {
+    showDialog(
+      context: context,
+      builder: (dialogContext) => AlertDialog(
+        backgroundColor: AbbaColors.cream,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(AbbaRadius.lg),
+        ),
+        title: Text(l10n.logout, style: AbbaTypography.h2),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(dialogContext),
+            child: Text(
+              l10n.cancelAnytime.split(' ').first, // "언제든" → just use first word as cancel
+              style: AbbaTypography.bodySmall.copyWith(color: AbbaColors.muted),
             ),
           ),
-          const SizedBox(height: AbbaSpacing.md),
           TextButton(
             onPressed: () async {
-              final service = ref.read(subscriptionServiceProvider);
-              await service.restorePurchases();
+              Navigator.pop(dialogContext);
+              await ref.read(authServiceProvider).signOut();
+              ref.read(authStateProvider.notifier).state =
+                  const AbbaAuthState();
+              if (context.mounted) context.go('/welcome');
             },
             child: Text(
-              l10n.restorePurchase,
+              l10n.logout,
               style:
-                  AbbaTypography.bodySmall.copyWith(color: AbbaColors.muted),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildUpgradeCard(AppLocalizations l10n) {
-    return AbbaCard(
-      margin: EdgeInsets.zero,
-      padding: const EdgeInsets.all(AbbaSpacing.lg),
-      child: Column(
-        children: [
-          // Promo banner (if active)
-          if (_isPromoActive) ...[
-            Container(
-              width: double.infinity,
-              padding: const EdgeInsets.symmetric(
-                horizontal: AbbaSpacing.md,
-                vertical: AbbaSpacing.sm,
-              ),
-              decoration: BoxDecoration(
-                color: AbbaColors.softGold.withValues(alpha: 0.15),
-                borderRadius: BorderRadius.circular(AbbaRadius.md),
-              ),
-              child: Text(
-                '🌸 ${l10n.promoBanner}',
-                style: AbbaTypography.bodySmall.copyWith(
-                  fontWeight: FontWeight.w600,
-                  color: AbbaColors.warmBrown,
-                ),
-                textAlign: TextAlign.center,
-              ),
-            ),
-            const SizedBox(height: AbbaSpacing.md),
-          ],
-          // Headline
-          const Text('🌿', style: TextStyle(fontSize: 40)),
-          const SizedBox(height: AbbaSpacing.md),
-          Text(
-            l10n.premiumHeadline,
-            style: AbbaTypography.h1,
-            textAlign: TextAlign.center,
-          ),
-          const SizedBox(height: AbbaSpacing.lg),
-          // Benefits list
-          ...[
-            l10n.premiumBenefit1,
-            l10n.premiumBenefit2,
-            l10n.premiumBenefit3,
-            l10n.premiumBenefit4,
-            l10n.premiumBenefit5,
-          ].map(
-            (benefit) => Padding(
-              padding: const EdgeInsets.only(bottom: AbbaSpacing.sm),
-              child: Row(
-                children: [
-                  Icon(
-                    Icons.check_circle,
-                    size: 20,
-                    color: AbbaColors.sage,
-                  ),
-                  const SizedBox(width: AbbaSpacing.sm),
-                  Expanded(
-                    child: Text(
-                      benefit,
-                      style: AbbaTypography.body.copyWith(
-                        color: AbbaColors.warmBrown,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          const SizedBox(height: AbbaSpacing.lg),
-          // Yearly plan card (BEST VALUE)
-          _buildPlanOption(
-            label: l10n.bestValue,
-            price: l10n.yearlyPrice,
-            subPrice: '${l10n.yearlyPriceMonthly} · ${l10n.yearlySave}',
-            isHighlighted: true,
-            onTap: () async {
-              try {
-                final service = ref.read(subscriptionServiceProvider);
-                final success = await service.purchaseYearly();
-                if (success) ref.invalidate(isPremiumProvider);
-              } catch (_) {
-                if (mounted) {
-                  showAbbaSnackBar(context, message: l10n.errorPayment);
-                }
-              }
-            },
-          ),
-          const SizedBox(height: AbbaSpacing.sm),
-          // Monthly plan card
-          _buildPlanOption(
-            price: '${l10n.monthlyPrice}/${l10n.perMonth}',
-            onTap: () async {
-              try {
-                final service = ref.read(subscriptionServiceProvider);
-                final success = await service.purchaseMonthly();
-                if (success) ref.invalidate(isPremiumProvider);
-              } catch (_) {
-                if (mounted) {
-                  showAbbaSnackBar(context, message: l10n.errorPayment);
-                }
-              }
-            },
-          ),
-          const SizedBox(height: AbbaSpacing.lg),
-          // Cancel anytime + restore
-          Text(
-            l10n.cancelAnytime,
-            style: AbbaTypography.caption.copyWith(color: AbbaColors.muted),
-          ),
-          const SizedBox(height: AbbaSpacing.xs),
-          GestureDetector(
-            onTap: () async {
-              final service = ref.read(subscriptionServiceProvider);
-              await service.restorePurchases();
-            },
-            child: Text(
-              l10n.restorePurchase,
-              style: AbbaTypography.caption.copyWith(
-                color: AbbaColors.sage,
-                decoration: TextDecoration.underline,
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildPlanOption({
-    String? label,
-    required String price,
-    String? subPrice,
-    bool isHighlighted = false,
-    required VoidCallback onTap,
-  }) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        width: double.infinity,
-        padding: const EdgeInsets.all(AbbaSpacing.md),
-        decoration: BoxDecoration(
-          color: isHighlighted
-              ? AbbaColors.sage.withValues(alpha: 0.08)
-              : null,
-          borderRadius: BorderRadius.circular(AbbaRadius.lg),
-          border: Border.all(
-            color: isHighlighted
-                ? AbbaColors.sage
-                : AbbaColors.muted.withValues(alpha: 0.3),
-            width: isHighlighted ? 2 : 1,
-          ),
-        ),
-        child: Row(
-          children: [
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  if (label != null)
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: AbbaSpacing.sm,
-                        vertical: 2,
-                      ),
-                      margin: const EdgeInsets.only(bottom: AbbaSpacing.xs),
-                      decoration: BoxDecoration(
-                        color: AbbaColors.sage,
-                        borderRadius: BorderRadius.circular(AbbaRadius.sm),
-                      ),
-                      child: Text(
-                        label,
-                        style: AbbaTypography.caption.copyWith(
-                          color: AbbaColors.white,
-                          fontWeight: FontWeight.w700,
-                          fontSize: 10,
-                        ),
-                      ),
-                    ),
-                  Text(
-                    price,
-                    style: AbbaTypography.h2.copyWith(
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
-                  if (subPrice != null)
-                    Text(
-                      subPrice,
-                      style: AbbaTypography.caption.copyWith(
-                        color: AbbaColors.muted,
-                      ),
-                    ),
-                ],
-              ),
-            ),
-            Icon(
-              Icons.chevron_right,
-              color: isHighlighted ? AbbaColors.sage : AbbaColors.muted,
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  /// Promotion end date — after this date, the promo banner is hidden.
-  static final _promoEndDate = DateTime(2026, 7, 6); // 3 months from launch
-
-  bool get _isPromoActive => DateTime.now().isBefore(_promoEndDate);
-
-  Widget _buildGroupSection(AppLocalizations l10n) {
-    return AbbaCard(
-      margin: EdgeInsets.zero,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              const Text('🌻', style: TextStyle(fontSize: 24)),
-              const SizedBox(width: AbbaSpacing.sm),
-              Text(l10n.groupSection, style: AbbaTypography.h2),
-            ],
-          ),
-          const SizedBox(height: AbbaSpacing.md),
-          Text(
-            l10n.noGroups,
-            style: AbbaTypography.bodySmall.copyWith(color: AbbaColors.muted),
-          ),
-          const SizedBox(height: AbbaSpacing.md),
-          SizedBox(
-            width: double.infinity,
-            height: abbaButtonHeight,
-            child: OutlinedButton.icon(
-              onPressed: () {
-                Share.share(l10n.groupInviteMessage);
-              },
-              icon: const Icon(Icons.person_add, color: AbbaColors.sage),
-              label: Text(
-                l10n.inviteFriends,
-                style: AbbaTypography.body.copyWith(color: AbbaColors.sage),
-              ),
-              style: OutlinedButton.styleFrom(
-                side: const BorderSide(color: AbbaColors.sage),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(AbbaRadius.lg),
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildNotificationSettings(AppLocalizations l10n) {
-    final settingsAsync = ref.watch(notificationSettingsProvider);
-    final settings = settingsAsync.valueOrNull;
-
-    return AbbaCard(
-      margin: EdgeInsets.zero,
-      padding: EdgeInsets.zero,
-      child: Column(
-        children: [
-          // Section header
-          Padding(
-            padding: const EdgeInsets.fromLTRB(
-              AbbaSpacing.md,
-              AbbaSpacing.md,
-              AbbaSpacing.md,
-              0,
-            ),
-            child: Row(
-              children: [
-                Icon(Icons.notifications_outlined, color: AbbaColors.warmBrown),
-                const SizedBox(width: AbbaSpacing.sm),
-                Text(l10n.notificationSetting, style: AbbaTypography.h2),
-              ],
-            ),
-          ),
-          // Morning reminder toggle + time
-          _SettingsTile(
-            icon: Icons.wb_sunny_outlined,
-            title: l10n.morningPrayerReminder,
-            trailing: Switch(
-              value: settings?.morningReminder ?? true,
-              onChanged: (v) {
-                ref
-                    .read(notificationServiceProvider)
-                    .updateSettings(morningReminder: v);
-                ref.invalidate(notificationSettingsProvider);
-              },
-              activeTrackColor: AbbaColors.sage,
-            ),
-          ),
-          if (settings?.morningReminder ?? true) ...[
-            _SettingsTile(
-              icon: Icons.access_time,
-              title: settings?.morningTime ?? '06:00',
-              onTap: () async {
-                final time = await showTimePicker(
-                  context: context,
-                  initialTime: const TimeOfDay(hour: 6, minute: 0),
-                );
-                if (time != null) {
-                  final formatted =
-                      '${time.hour.toString().padLeft(2, '0')}:${time.minute.toString().padLeft(2, '0')}';
-                  ref
-                      .read(notificationServiceProvider)
-                      .updateSettings(morningTime: formatted);
-                  ref.invalidate(notificationSettingsProvider);
-                }
-              },
-            ),
-          ],
-          const Divider(height: 1),
-          // Evening reminder
-          _SettingsTile(
-            icon: Icons.nightlight_outlined,
-            title: l10n.eveningGratitudeReminder,
-            trailing: Switch(
-              value: settings?.eveningReminder ?? false,
-              onChanged: (v) {
-                ref
-                    .read(notificationServiceProvider)
-                    .updateSettings(eveningReminder: v);
-                ref.invalidate(notificationSettingsProvider);
-              },
-              activeTrackColor: AbbaColors.sage,
-            ),
-          ),
-          const Divider(height: 1),
-          // Afternoon nudge
-          _SettingsTile(
-            icon: Icons.wb_sunny,
-            title: l10n.afternoonNudgeReminder,
-            trailing: Switch(
-              value: settings?.afternoonNudge ?? true,
-              onChanged: (v) {
-                ref
-                    .read(notificationServiceProvider)
-                    .updateSettings(afternoonNudge: v);
-                ref.invalidate(notificationSettingsProvider);
-              },
-              activeTrackColor: AbbaColors.sage,
-            ),
-          ),
-          const Divider(height: 1),
-          // Streak reminder
-          _SettingsTile(
-            icon: Icons.local_fire_department_outlined,
-            title: l10n.streakReminder,
-            trailing: Switch(
-              value: settings?.streakReminder ?? true,
-              onChanged: (v) {
-                ref
-                    .read(notificationServiceProvider)
-                    .updateSettings(streakReminder: v);
-                ref.invalidate(notificationSettingsProvider);
-              },
-              activeTrackColor: AbbaColors.sage,
-            ),
-          ),
-          const Divider(height: 1),
-          // Weekly summary
-          _SettingsTile(
-            icon: Icons.calendar_view_week,
-            title: l10n.weeklySummaryReminder,
-            trailing: Switch(
-              value: settings?.weeklySummary ?? true,
-              onChanged: (v) {
-                ref
-                    .read(notificationServiceProvider)
-                    .updateSettings(weeklySummary: v);
-                ref.invalidate(notificationSettingsProvider);
-              },
-              activeTrackColor: AbbaColors.sage,
+                  AbbaTypography.bodySmall.copyWith(color: AbbaColors.error),
             ),
           ),
         ],
@@ -824,32 +533,37 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
   }
 }
 
-class _StatBadge extends StatelessWidget {
-  final String label;
-  final String value;
+// ── Section header ──────────────────────────────────────────────────────
+class _SectionHeader extends StatelessWidget {
+  final String title;
 
-  const _StatBadge({required this.label, required this.value});
+  const _SectionHeader({required this.title});
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(value, style: AbbaTypography.h2),
-        Text(label, style: AbbaTypography.caption),
-      ],
+    if (title.isEmpty) return const SizedBox.shrink();
+    return Padding(
+      padding: const EdgeInsets.only(left: AbbaSpacing.xs),
+      child: Text(
+        title,
+        style: AbbaTypography.label.copyWith(
+          color: AbbaColors.muted,
+          fontWeight: FontWeight.w600,
+        ),
+      ),
     );
   }
 }
 
-class _SettingsTile extends StatelessWidget {
+// ── Settings row ────────────────────────────────────────────────────────
+class _SettingsRow extends StatelessWidget {
   final IconData icon;
   final String title;
   final Widget? trailing;
   final VoidCallback? onTap;
   final Color? titleColor;
 
-  const _SettingsTile({
+  const _SettingsRow({
     required this.icon,
     required this.title,
     this.trailing,
@@ -866,12 +580,10 @@ class _SettingsTile extends StatelessWidget {
         style: AbbaTypography.body.copyWith(
           color: titleColor ?? AbbaColors.warmBrown,
         ),
+        maxLines: 1,
+        overflow: TextOverflow.ellipsis,
       ),
-      trailing:
-          trailing ??
-          (onTap != null
-              ? const Icon(Icons.chevron_right, color: AbbaColors.muted)
-              : null),
+      trailing: trailing,
       onTap: onTap,
       contentPadding: const EdgeInsets.symmetric(
         horizontal: AbbaSpacing.md,
@@ -880,4 +592,3 @@ class _SettingsTile extends StatelessWidget {
     );
   }
 }
-

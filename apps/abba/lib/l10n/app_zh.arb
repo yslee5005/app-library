@@ -10,15 +10,31 @@
   "signInWithGoogle": "通过Google继续",
   "signInWithEmail": "通过邮箱继续",
   "greetingMorning": "早上好，{name}",
-  "@greetingMorning": { "placeholders": { "name": {} } },
+  "@greetingMorning": {
+    "placeholders": {
+      "name": {}
+    }
+  },
   "greetingAfternoon": "下午好，{name}",
-  "@greetingAfternoon": { "placeholders": { "name": {} } },
+  "@greetingAfternoon": {
+    "placeholders": {
+      "name": {}
+    }
+  },
   "greetingEvening": "晚上好，{name}",
-  "@greetingEvening": { "placeholders": { "name": {} } },
+  "@greetingEvening": {
+    "placeholders": {
+      "name": {}
+    }
+  },
   "prayButton": "祷告",
   "qtButton": "灵修",
   "streakDays": "连续{count}天祷告",
-  "@streakDays": { "placeholders": { "count": {} } },
+  "@streakDays": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "dailyVerse": "今日经文",
   "tabHome": "首页",
   "tabCalendar": "日历",
@@ -69,17 +85,21 @@
   "bestStreak": "最佳记录",
   "days": "天",
   "calendarRecordCount": "{count}条记录",
-  "@calendarRecordCount": { "placeholders": { "count": {} } },
+  "@calendarRecordCount": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "todayVerse": "今日金句",
   "settingsTitle": "设置",
   "profileSection": "个人资料",
   "totalPrayers": "祷告总数",
   "consecutiveDays": "连续天数",
-  "premiumSection": "高级版",
+  "premiumSection": "会员",
   "freePlan": "免费",
   "premiumPlan": "高级版",
-  "monthlyPrice": "¥25/月",
-  "yearlyPrice": "¥178/年",
+  "monthlyPrice": "¥68 / 月",
+  "yearlyPrice": "¥518 / 年",
   "yearlySave": "省40%",
   "launchPromo": "3个月¥25/月!",
   "startPremium": "开通Premium",
@@ -96,10 +116,18 @@
   "privacyPolicy": "隐私政策",
   "logout": "退出登录",
   "appVersion": "版本 {version}",
-  "@appVersion": { "placeholders": { "version": {} } },
+  "@appVersion": {
+    "placeholders": {
+      "version": {}
+    }
+  },
   "anonymous": "匿名",
   "timeAgo": "{time}前",
-  "@timeAgo": { "placeholders": { "time": {} } },
+  "@timeAgo": {
+    "placeholders": {
+      "time": {}
+    }
+  },
   "emailLabel": "邮箱",
   "passwordLabel": "密码",
   "signIn": "登录",
@@ -128,7 +156,11 @@
   "promoTitle": "上线特惠",
   "promoBanner": "3个月¥25/月!",
   "promoEndsOn": "优惠截止{date}",
-  "@promoEndsOn": { "placeholders": { "date": {} } },
+  "@promoEndsOn": {
+    "placeholders": {
+      "date": {}
+    }
+  },
   "premiumLimitTitle": "今天的祷告已完成",
   "premiumLimitBody": "明天见！\n升级Premium无限祷告",
   "laterButton": "以后再说",
@@ -166,10 +198,14 @@
   "milestoneShare": "分享",
   "milestoneThankGod": "感谢上帝!",
   "shareStreakText": "连续{count}天祷告！与Abba同行的祷告之旅 #Abba #祷告",
-  "@shareStreakText": { "placeholders": { "count": {} } },
+  "@shareStreakText": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "shareDaysLabel": "天连续祷告",
   "shareSubtitle": "与上帝同行的每日祷告",
-  "premiumActive": "已订阅Premium",
+  "premiumActive": "会员已激活",
   "planOncePerDay": "每天1次",
   "planUnlimited": "无限",
   "closeRecording": "关闭录音",
@@ -209,9 +245,18 @@
   "scriptureReasonLabel": "选择这段经文的原因",
   "seeMore": "查看更多",
   "seeAllComments": "查看全部{count}条评论",
-  "@seeAllComments": { "placeholders": { "count": {} } },
+  "@seeAllComments": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "likedBy": "{name}和其他{count}人点赞了",
-  "@likedBy": { "placeholders": { "name": {}, "count": {} } },
+  "@likedBy": {
+    "placeholders": {
+      "name": {},
+      "count": {}
+    }
+  },
   "commentsTitle": "评论",
   "myPageTitle": "我的祷告花园",
   "myPrayers": "我的祷告",
@@ -227,10 +272,29 @@
   "linkAccountSuccess": "账号关联成功！",
   "anonymousUser": "祷告勇士",
   "showReplies": "查看{count}条回复",
-  "@showReplies": { "placeholders": { "count": {} } },
+  "@showReplies": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "hideReplies": "隐藏回复",
   "replyingTo": "正在回复{name}",
-  "@replyingTo": { "placeholders": { "name": {} } },
+  "@replyingTo": {
+    "placeholders": {
+      "name": {}
+    }
+  },
   "viewAllComments": "查看全部{count}条评论",
-  "@viewAllComments": { "placeholders": { "count": {} } }
+  "@viewAllComments": {
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "membershipTitle": "会员",
+  "membershipSubtitle": "让祷告更加深入",
+  "monthlyPlan": "月度",
+  "yearlyPlan": "年度",
+  "yearlySavings": "月¥43 (37%折扣)",
+  "startMembership": "立即开通",
+  "membershipActive": "会员已激活"
 }

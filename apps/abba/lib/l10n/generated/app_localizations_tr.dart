@@ -230,7 +230,7 @@ class AppLocalizationsTr extends AppLocalizations {
   String get consecutiveDays => 'Ardışık Gün';
 
   @override
-  String get premiumSection => 'Premium';
+  String get premiumSection => 'Üyelik';
 
   @override
   String get freePlan => 'Ücretsiz';
@@ -239,10 +239,10 @@ class AppLocalizationsTr extends AppLocalizations {
   String get premiumPlan => 'Premium';
 
   @override
-  String get monthlyPrice => '₺109/ay';
+  String get monthlyPrice => '₺249 / ay';
 
   @override
-  String get yearlyPrice => '₺749/yıl';
+  String get yearlyPrice => '₺1.890 / yıl';
 
   @override
   String get yearlySave => '%40 Tasarruf';
@@ -520,7 +520,7 @@ class AppLocalizationsTr extends AppLocalizations {
   String get shareSubtitle => 'Tanrı ile günlük dua';
 
   @override
-  String get premiumActive => 'Premium Aktif';
+  String get premiumActive => 'Üyelik Aktif';
 
   @override
   String get planOncePerDay => 'Günde 1';
@@ -709,4 +709,25 @@ class AppLocalizationsTr extends AppLocalizations {
   String viewAllComments(Object count) {
     return 'Tüm $count yorumu gör';
   }
+
+  @override
+  String get membershipTitle => 'Üyelik';
+
+  @override
+  String get membershipSubtitle => 'Dua hayatınızı derinleştirin';
+
+  @override
+  String get monthlyPlan => 'Aylık';
+
+  @override
+  String get yearlyPlan => 'Yıllık';
+
+  @override
+  String get yearlySavings => '₺158/ay (%37 indirim)';
+
+  @override
+  String get startMembership => 'Başla';
+
+  @override
+  String get membershipActive => 'Üyelik Aktif';
 }

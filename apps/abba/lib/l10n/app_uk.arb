@@ -10,15 +10,31 @@
   "signInWithGoogle": "Продовжити з Google",
   "signInWithEmail": "Продовжити з Email",
   "greetingMorning": "Доброго ранку, {name}",
-  "@greetingMorning": { "placeholders": { "name": {} } },
+  "@greetingMorning": {
+    "placeholders": {
+      "name": {}
+    }
+  },
   "greetingAfternoon": "Доброго дня, {name}",
-  "@greetingAfternoon": { "placeholders": { "name": {} } },
+  "@greetingAfternoon": {
+    "placeholders": {
+      "name": {}
+    }
+  },
   "greetingEvening": "Доброго вечора, {name}",
-  "@greetingEvening": { "placeholders": { "name": {} } },
+  "@greetingEvening": {
+    "placeholders": {
+      "name": {}
+    }
+  },
   "prayButton": "Молитися",
   "qtButton": "Тихий час",
   "streakDays": "{count} днів безперервної молитви",
-  "@streakDays": { "placeholders": { "count": {} } },
+  "@streakDays": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "dailyVerse": "Вірш дня",
   "tabHome": "Головна",
   "tabCalendar": "Календар",
@@ -69,17 +85,21 @@
   "bestStreak": "Найкраща серія",
   "days": "днів",
   "calendarRecordCount": "{count} записів",
-  "@calendarRecordCount": { "placeholders": { "count": {} } },
+  "@calendarRecordCount": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "todayVerse": "Вірш на сьогодні",
   "settingsTitle": "Налаштування",
   "profileSection": "Профіль",
   "totalPrayers": "Загалом молитов",
   "consecutiveDays": "Днів поспіль",
-  "premiumSection": "Premium",
+  "premiumSection": "Підписка",
   "freePlan": "Безкоштовно",
   "premiumPlan": "Premium",
-  "monthlyPrice": "149₴/міс.",
-  "yearlyPrice": "999₴/рік",
+  "monthlyPrice": "$7.99 / міс",
+  "yearlyPrice": "$59.99 / рік",
   "yearlySave": "Економія 40%",
   "launchPromo": "3 місяці за 159₴/міс.!",
   "startPremium": "Почати Premium",
@@ -96,10 +116,18 @@
   "privacyPolicy": "Політика конфіденційності",
   "logout": "Вийти",
   "appVersion": "Версія {version}",
-  "@appVersion": { "placeholders": { "version": {} } },
+  "@appVersion": {
+    "placeholders": {
+      "version": {}
+    }
+  },
   "anonymous": "Анонімно",
   "timeAgo": "{time} тому",
-  "@timeAgo": { "placeholders": { "time": {} } },
+  "@timeAgo": {
+    "placeholders": {
+      "time": {}
+    }
+  },
   "emailLabel": "Email",
   "passwordLabel": "Пароль",
   "signIn": "Увійти",
@@ -128,7 +156,11 @@
   "promoTitle": "Спеціальна пропозиція",
   "promoBanner": "Перші 3 місяці за 159₴/міс.!",
   "promoEndsOn": "Пропозиція діє до {date}",
-  "@promoEndsOn": { "placeholders": { "date": {} } },
+  "@promoEndsOn": {
+    "placeholders": {
+      "date": {}
+    }
+  },
   "premiumLimitTitle": "Сьогоднішня молитва завершена",
   "premiumLimitBody": "До завтра!\nМолітеся без обмежень з Premium",
   "laterButton": "Можливо пізніше",
@@ -166,10 +198,14 @@
   "milestoneShare": "Поділитися",
   "milestoneThankGod": "Слава Богу!",
   "shareStreakText": "{count} днів безперервної молитви! Мій шлях молитви з Abba #Abba #Молитва",
-  "@shareStreakText": { "placeholders": { "count": {} } },
+  "@shareStreakText": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "shareDaysLabel": "днів безперервної молитви",
   "shareSubtitle": "Щоденна молитва з Богом",
-  "premiumActive": "Premium активний",
+  "premiumActive": "Підписка Активна",
   "planOncePerDay": "1x/день",
   "planUnlimited": "Необмежено",
   "closeRecording": "Закрити запис",
@@ -209,9 +245,18 @@
   "scriptureReasonLabel": "Чому саме це Писання",
   "seeMore": "Показати більше",
   "seeAllComments": "Переглянути всі {count} коментарів",
-  "@seeAllComments": { "placeholders": { "count": {} } },
+  "@seeAllComments": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "likedBy": "{name} та ще {count} сподобалось",
-  "@likedBy": { "placeholders": { "name": {}, "count": {} } },
+  "@likedBy": {
+    "placeholders": {
+      "name": {},
+      "count": {}
+    }
+  },
   "commentsTitle": "Коментарі",
   "myPageTitle": "Мій сад молитви",
   "myPrayers": "Мої молитви",
@@ -227,10 +272,29 @@
   "linkAccountSuccess": "Акаунт успішно прив'язано!",
   "anonymousUser": "Молитовний воїн",
   "showReplies": "Показати {count} відповідей",
-  "@showReplies": { "placeholders": { "count": {} } },
+  "@showReplies": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "hideReplies": "Сховати відповіді",
   "replyingTo": "Відповідь для {name}",
-  "@replyingTo": { "placeholders": { "name": {} } },
+  "@replyingTo": {
+    "placeholders": {
+      "name": {}
+    }
+  },
   "viewAllComments": "Переглянути всі {count} коментарів",
-  "@viewAllComments": { "placeholders": { "count": {} } }
+  "@viewAllComments": {
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "membershipTitle": "Підписка",
+  "membershipSubtitle": "Поглибте ваше молитовне життя",
+  "monthlyPlan": "Щомісяця",
+  "yearlyPlan": "Щороку",
+  "yearlySavings": "$5.00/міс (знижка 37%)",
+  "startMembership": "Розпочати",
+  "membershipActive": "Підписка Активна"
 }

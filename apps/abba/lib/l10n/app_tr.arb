@@ -10,15 +10,31 @@
   "signInWithGoogle": "Google ile devam et",
   "signInWithEmail": "E-posta ile devam et",
   "greetingMorning": "Günaydın, {name}",
-  "@greetingMorning": { "placeholders": { "name": {} } },
+  "@greetingMorning": {
+    "placeholders": {
+      "name": {}
+    }
+  },
   "greetingAfternoon": "İyi günler, {name}",
-  "@greetingAfternoon": { "placeholders": { "name": {} } },
+  "@greetingAfternoon": {
+    "placeholders": {
+      "name": {}
+    }
+  },
   "greetingEvening": "İyi akşamlar, {name}",
-  "@greetingEvening": { "placeholders": { "name": {} } },
+  "@greetingEvening": {
+    "placeholders": {
+      "name": {}
+    }
+  },
   "prayButton": "Dua Et",
   "qtButton": "Sessiz Zaman",
   "streakDays": "{count} gün kesintisiz dua",
-  "@streakDays": { "placeholders": { "count": {} } },
+  "@streakDays": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "dailyVerse": "Günün Ayeti",
   "tabHome": "Ana Sayfa",
   "tabCalendar": "Takvim",
@@ -69,17 +85,21 @@
   "bestStreak": "En İyi Seri",
   "days": "gün",
   "calendarRecordCount": "{count} kayıt",
-  "@calendarRecordCount": { "placeholders": { "count": {} } },
+  "@calendarRecordCount": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "todayVerse": "Bugünün Ayeti",
   "settingsTitle": "Ayarlar",
   "profileSection": "Profil",
   "totalPrayers": "Toplam Dua",
   "consecutiveDays": "Ardışık Gün",
-  "premiumSection": "Premium",
+  "premiumSection": "Üyelik",
   "freePlan": "Ücretsiz",
   "premiumPlan": "Premium",
-  "monthlyPrice": "₺109/ay",
-  "yearlyPrice": "₺749/yıl",
+  "monthlyPrice": "₺249 / ay",
+  "yearlyPrice": "₺1.890 / yıl",
   "yearlySave": "%40 Tasarruf",
   "launchPromo": "3 ay boyunca ₺129/ay!",
   "startPremium": "Premium Başlat",
@@ -96,10 +116,18 @@
   "privacyPolicy": "Gizlilik Politikası",
   "logout": "Çıkış Yap",
   "appVersion": "Sürüm {version}",
-  "@appVersion": { "placeholders": { "version": {} } },
+  "@appVersion": {
+    "placeholders": {
+      "version": {}
+    }
+  },
   "anonymous": "Anonim",
   "timeAgo": "{time} önce",
-  "@timeAgo": { "placeholders": { "time": {} } },
+  "@timeAgo": {
+    "placeholders": {
+      "time": {}
+    }
+  },
   "emailLabel": "E-posta",
   "passwordLabel": "Şifre",
   "signIn": "Giriş Yap",
@@ -128,7 +156,11 @@
   "promoTitle": "Lansman Özel",
   "promoBanner": "İlk 3 ay ₺129/ay!",
   "promoEndsOn": "Teklif {date} tarihinde sona erer",
-  "@promoEndsOn": { "placeholders": { "date": {} } },
+  "@promoEndsOn": {
+    "placeholders": {
+      "date": {}
+    }
+  },
   "premiumLimitTitle": "Bugünkü dua tamamlandı",
   "premiumLimitBody": "Yarın görüşmek üzere!\nPremium ile sınırsız dua edin",
   "laterButton": "Daha sonra",
@@ -166,10 +198,14 @@
   "milestoneShare": "Paylaş",
   "milestoneThankGod": "Tanrı'ya Şükür!",
   "shareStreakText": "{count} gün kesintisiz dua! Abba ile dua yolculuğum #Abba #Dua",
-  "@shareStreakText": { "placeholders": { "count": {} } },
+  "@shareStreakText": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "shareDaysLabel": "gün kesintisiz dua",
   "shareSubtitle": "Tanrı ile günlük dua",
-  "premiumActive": "Premium Aktif",
+  "premiumActive": "Üyelik Aktif",
   "planOncePerDay": "Günde 1",
   "planUnlimited": "Sınırsız",
   "closeRecording": "Kaydı kapat",
@@ -209,9 +245,18 @@
   "scriptureReasonLabel": "Neden bu ayet",
   "seeMore": "Daha fazla",
   "seeAllComments": "Tüm {count} yorumu gör",
-  "@seeAllComments": { "placeholders": { "count": {} } },
+  "@seeAllComments": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "likedBy": "{name} ve {count} kişi daha beğendi",
-  "@likedBy": { "placeholders": { "name": {}, "count": {} } },
+  "@likedBy": {
+    "placeholders": {
+      "name": {},
+      "count": {}
+    }
+  },
   "commentsTitle": "Yorumlar",
   "myPageTitle": "Dua Bahçem",
   "myPrayers": "Dualarım",
@@ -227,10 +272,29 @@
   "linkAccountSuccess": "Hesap başarıyla bağlandı!",
   "anonymousUser": "Dua Savaşçısı",
   "showReplies": "{count} yanıtı gör",
-  "@showReplies": { "placeholders": { "count": {} } },
+  "@showReplies": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "hideReplies": "Yanıtları gizle",
   "replyingTo": "{name} kişisine yanıt veriliyor",
-  "@replyingTo": { "placeholders": { "name": {} } },
+  "@replyingTo": {
+    "placeholders": {
+      "name": {}
+    }
+  },
   "viewAllComments": "Tüm {count} yorumu gör",
-  "@viewAllComments": { "placeholders": { "count": {} } }
+  "@viewAllComments": {
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "membershipTitle": "Üyelik",
+  "membershipSubtitle": "Dua hayatınızı derinleştirin",
+  "monthlyPlan": "Aylık",
+  "yearlyPlan": "Yıllık",
+  "yearlySavings": "₺158/ay (%37 indirim)",
+  "startMembership": "Başla",
+  "membershipActive": "Üyelik Aktif"
 }

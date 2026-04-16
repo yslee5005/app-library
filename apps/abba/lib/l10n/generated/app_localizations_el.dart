@@ -233,7 +233,7 @@ class AppLocalizationsEl extends AppLocalizations {
   String get consecutiveDays => 'Συνεχόμενες Ημέρες';
 
   @override
-  String get premiumSection => 'Premium';
+  String get premiumSection => 'Συνδρομή';
 
   @override
   String get freePlan => 'Δωρεάν';
@@ -242,10 +242,10 @@ class AppLocalizationsEl extends AppLocalizations {
   String get premiumPlan => 'Premium';
 
   @override
-  String get monthlyPrice => '3,49€/μήνα';
+  String get monthlyPrice => '7,99€ / μήνα';
 
   @override
-  String get yearlyPrice => '24,99€/έτος';
+  String get yearlyPrice => '59,99€ / έτος';
 
   @override
   String get yearlySave => 'Εξοικονόμηση 40%';
@@ -522,7 +522,7 @@ class AppLocalizationsEl extends AppLocalizations {
   String get shareSubtitle => 'Καθημερινή προσευχή με τον Θεό';
 
   @override
-  String get premiumActive => 'Premium Ενεργό';
+  String get premiumActive => 'Συνδρομή Ενεργή';
 
   @override
   String get planOncePerDay => '1 φορά/ημέρα';
@@ -711,4 +711,25 @@ class AppLocalizationsEl extends AppLocalizations {
   String viewAllComments(Object count) {
     return 'Δείτε όλα τα $count σχόλια';
   }
+
+  @override
+  String get membershipTitle => 'Συνδρομή';
+
+  @override
+  String get membershipSubtitle => 'Εμβαθύνετε στη ζωή προσευχής σας';
+
+  @override
+  String get monthlyPlan => 'Μηνιαία';
+
+  @override
+  String get yearlyPlan => 'Ετήσια';
+
+  @override
+  String get yearlySavings => '5,00€/μήνα (37% έκπτωση)';
+
+  @override
+  String get startMembership => 'Ξεκινήστε';
+
+  @override
+  String get membershipActive => 'Συνδρομή Ενεργή';
 }

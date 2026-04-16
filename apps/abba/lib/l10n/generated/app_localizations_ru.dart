@@ -232,7 +232,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get consecutiveDays => 'Дней подряд';
 
   @override
-  String get premiumSection => 'Premium';
+  String get premiumSection => 'Подписка';
 
   @override
   String get freePlan => 'Бесплатно';
@@ -241,10 +241,10 @@ class AppLocalizationsRu extends AppLocalizations {
   String get premiumPlan => 'Premium';
 
   @override
-  String get monthlyPrice => '349₽/мес.';
+  String get monthlyPrice => '699 ₽ / мес';
 
   @override
-  String get yearlyPrice => '2490₽/год';
+  String get yearlyPrice => '5 290 ₽ / год';
 
   @override
   String get yearlySave => 'Экономия 40%';
@@ -520,7 +520,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get shareSubtitle => 'Ежедневная молитва с Богом';
 
   @override
-  String get premiumActive => 'Premium активен';
+  String get premiumActive => 'Подписка Активна';
 
   @override
   String get planOncePerDay => '1x/день';
@@ -710,4 +710,25 @@ class AppLocalizationsRu extends AppLocalizations {
   String viewAllComments(Object count) {
     return 'Посмотреть все $count комментариев';
   }
+
+  @override
+  String get membershipTitle => 'Подписка';
+
+  @override
+  String get membershipSubtitle => 'Углубите вашу молитвенную жизнь';
+
+  @override
+  String get monthlyPlan => 'Ежемесячно';
+
+  @override
+  String get yearlyPlan => 'Ежегодно';
+
+  @override
+  String get yearlySavings => '441 ₽/мес (37% скидка)';
+
+  @override
+  String get startMembership => 'Начать';
+
+  @override
+  String get membershipActive => 'Подписка Активна';
 }

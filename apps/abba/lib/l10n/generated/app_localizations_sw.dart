@@ -231,7 +231,7 @@ class AppLocalizationsSw extends AppLocalizations {
   String get consecutiveDays => 'Siku Mfululizo';
 
   @override
-  String get premiumSection => 'Premium';
+  String get premiumSection => 'Uanachama';
 
   @override
   String get freePlan => 'Bure';
@@ -240,10 +240,10 @@ class AppLocalizationsSw extends AppLocalizations {
   String get premiumPlan => 'Premium';
 
   @override
-  String get monthlyPrice => 'TSh8,500/mwezi';
+  String get monthlyPrice => '\$7.99 / mwezi';
 
   @override
-  String get yearlyPrice => 'TSh59,900/mwaka';
+  String get yearlyPrice => '\$59.99 / mwaka';
 
   @override
   String get yearlySave => 'Okoa 40%';
@@ -520,7 +520,7 @@ class AppLocalizationsSw extends AppLocalizations {
   String get shareSubtitle => 'Maombi ya kila siku na Mungu';
 
   @override
-  String get premiumActive => 'Premium Hai';
+  String get premiumActive => 'Uanachama Hai';
 
   @override
   String get planOncePerDay => '1x/siku';
@@ -708,4 +708,25 @@ class AppLocalizationsSw extends AppLocalizations {
   String viewAllComments(Object count) {
     return 'Tazama maoni yote $count';
   }
+
+  @override
+  String get membershipTitle => 'Uanachama';
+
+  @override
+  String get membershipSubtitle => 'Ongeza kina cha maombi yako';
+
+  @override
+  String get monthlyPlan => 'Kwa mwezi';
+
+  @override
+  String get yearlyPlan => 'Kwa mwaka';
+
+  @override
+  String get yearlySavings => '\$5.00/mwezi (punguzo 37%)';
+
+  @override
+  String get startMembership => 'Anza sasa';
+
+  @override
+  String get membershipActive => 'Uanachama Hai';
 }

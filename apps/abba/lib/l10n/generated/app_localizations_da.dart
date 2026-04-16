@@ -230,7 +230,7 @@ class AppLocalizationsDa extends AppLocalizations {
   String get consecutiveDays => 'Dage i træk';
 
   @override
-  String get premiumSection => 'Premium';
+  String get premiumSection => 'Medlemskab';
 
   @override
   String get freePlan => 'Gratis';
@@ -239,10 +239,10 @@ class AppLocalizationsDa extends AppLocalizations {
   String get premiumPlan => 'Premium';
 
   @override
-  String get monthlyPrice => '25kr/md';
+  String get monthlyPrice => '59 kr / mdr';
 
   @override
-  String get yearlyPrice => '179kr/år';
+  String get yearlyPrice => '449 kr / år';
 
   @override
   String get yearlySave => 'Spar 40%';
@@ -517,7 +517,7 @@ class AppLocalizationsDa extends AppLocalizations {
   String get shareSubtitle => 'Daglig bøn med Gud';
 
   @override
-  String get premiumActive => 'Premium Aktiv';
+  String get premiumActive => 'Medlemskab Aktivt';
 
   @override
   String get planOncePerDay => '1 gang/dag';
@@ -706,4 +706,25 @@ class AppLocalizationsDa extends AppLocalizations {
   String viewAllComments(Object count) {
     return 'Se alle $count kommentarer';
   }
+
+  @override
+  String get membershipTitle => 'Medlemskab';
+
+  @override
+  String get membershipSubtitle => 'Fordyb dit bedeliv';
+
+  @override
+  String get monthlyPlan => 'Månedlig';
+
+  @override
+  String get yearlyPlan => 'Årlig';
+
+  @override
+  String get yearlySavings => '37 kr/mdr (37% rabat)';
+
+  @override
+  String get startMembership => 'Begynd nu';
+
+  @override
+  String get membershipActive => 'Medlemskab Aktivt';
 }

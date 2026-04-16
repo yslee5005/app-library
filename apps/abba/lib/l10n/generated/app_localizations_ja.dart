@@ -229,7 +229,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get consecutiveDays => '連続日数';
 
   @override
-  String get premiumSection => 'プレミアム';
+  String get premiumSection => 'メンバーシップ';
 
   @override
   String get freePlan => '無料';
@@ -238,10 +238,10 @@ class AppLocalizationsJa extends AppLocalizations {
   String get premiumPlan => 'プレミアム';
 
   @override
-  String get monthlyPrice => '¥500/月';
+  String get monthlyPrice => '¥1,500 / 月';
 
   @override
-  String get yearlyPrice => '¥3,600/年';
+  String get yearlyPrice => '¥11,800 / 年';
 
   @override
   String get yearlySave => '40%お得';
@@ -507,7 +507,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get shareSubtitle => '神と共にある毎日の祈り';
 
   @override
-  String get premiumActive => 'プレミアム有効';
+  String get premiumActive => 'メンバーシップ有効';
 
   @override
   String get planOncePerDay => '1日1回';
@@ -692,4 +692,25 @@ class AppLocalizationsJa extends AppLocalizations {
   String viewAllComments(Object count) {
     return 'コメント$count件すべて見る';
   }
+
+  @override
+  String get membershipTitle => 'メンバーシップ';
+
+  @override
+  String get membershipSubtitle => '祈りをもっと深く';
+
+  @override
+  String get monthlyPlan => '月額';
+
+  @override
+  String get yearlyPlan => '年額';
+
+  @override
+  String get yearlySavings => '月¥983 (33%お得)';
+
+  @override
+  String get startMembership => '始める';
+
+  @override
+  String get membershipActive => 'メンバーシップ有効';
 }

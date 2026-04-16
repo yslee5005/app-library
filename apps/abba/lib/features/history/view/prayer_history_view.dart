@@ -193,7 +193,7 @@ class _PrayerHistoryCard extends ConsumerWidget {
         if (prayer.result != null) {
           ref.read(prayerResultProvider.notifier).state =
               AsyncValue.data(prayer.result!);
-          context.go('/home/prayer-dashboard');
+          context.push('/home/prayer-dashboard');
         }
       },
       child: Container(

@@ -231,7 +231,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get consecutiveDays => 'วันต่อเนื่อง';
 
   @override
-  String get premiumSection => 'Premium';
+  String get premiumSection => 'สมาชิก';
 
   @override
   String get freePlan => 'ฟรี';
@@ -240,10 +240,10 @@ class AppLocalizationsTh extends AppLocalizations {
   String get premiumPlan => 'Premium';
 
   @override
-  String get monthlyPrice => '฿129/เดือน';
+  String get monthlyPrice => '฿279 / เดือน';
 
   @override
-  String get yearlyPrice => '฿899/ปี';
+  String get yearlyPrice => '฿2,190 / ปี';
 
   @override
   String get yearlySave => 'ประหยัด 40%';
@@ -513,7 +513,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get shareSubtitle => 'อธิษฐานกับพระเจ้าทุกวัน';
 
   @override
-  String get premiumActive => 'Premium ใช้งานอยู่';
+  String get premiumActive => 'สมาชิกใช้งานอยู่';
 
   @override
   String get planOncePerDay => '1 ครั้ง/วัน';
@@ -699,4 +699,25 @@ class AppLocalizationsTh extends AppLocalizations {
   String viewAllComments(Object count) {
     return 'ดูความคิดเห็นทั้ง $count รายการ';
   }
+
+  @override
+  String get membershipTitle => 'สมาชิก';
+
+  @override
+  String get membershipSubtitle => 'ลึกซึ้งกับการอธิษฐาน';
+
+  @override
+  String get monthlyPlan => 'รายเดือน';
+
+  @override
+  String get yearlyPlan => 'รายปี';
+
+  @override
+  String get yearlySavings => '฿183/เดือน (ลด 33%)';
+
+  @override
+  String get startMembership => 'เริ่มต้น';
+
+  @override
+  String get membershipActive => 'สมาชิกใช้งานอยู่';
 }

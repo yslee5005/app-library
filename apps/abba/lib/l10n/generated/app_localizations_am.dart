@@ -229,7 +229,7 @@ class AppLocalizationsAm extends AppLocalizations {
   String get consecutiveDays => 'ተከታታይ ቀናት';
 
   @override
-  String get premiumSection => 'Premium';
+  String get premiumSection => 'አባልነት';
 
   @override
   String get freePlan => 'ነጻ';
@@ -238,10 +238,10 @@ class AppLocalizationsAm extends AppLocalizations {
   String get premiumPlan => 'Premium';
 
   @override
-  String get monthlyPrice => '\$3.49/ወር';
+  String get monthlyPrice => '\$7.99 / ወር';
 
   @override
-  String get yearlyPrice => '\$24.99/ዓመት';
+  String get yearlyPrice => '\$59.99 / ዓመት';
 
   @override
   String get yearlySave => '40% ቆጥብ';
@@ -507,7 +507,7 @@ class AppLocalizationsAm extends AppLocalizations {
   String get shareSubtitle => 'ከእግዚአብሔር ጋር ዕለታዊ ጸሎት';
 
   @override
-  String get premiumActive => 'Premium ንቁ ነው';
+  String get premiumActive => 'አባልነት ንቁ';
 
   @override
   String get planOncePerDay => '1 ጊዜ/ቀን';
@@ -692,4 +692,25 @@ class AppLocalizationsAm extends AppLocalizations {
   String viewAllComments(Object count) {
     return 'ሁሉንም $count አስተያየቶች ይመልከቱ';
   }
+
+  @override
+  String get membershipTitle => 'አባልነት';
+
+  @override
+  String get membershipSubtitle => 'የጸሎት ህይወትዎን ያጥልቁ';
+
+  @override
+  String get monthlyPlan => 'ወርሃዊ';
+
+  @override
+  String get yearlyPlan => 'ዓመታዊ';
+
+  @override
+  String get yearlySavings => '\$5.00/ወር (37% ቅናሽ)';
+
+  @override
+  String get startMembership => 'ይጀምሩ';
+
+  @override
+  String get membershipActive => 'አባልነት ንቁ';
 }

@@ -231,7 +231,7 @@ class AppLocalizationsFi extends AppLocalizations {
   String get consecutiveDays => 'Peräkkäiset päivät';
 
   @override
-  String get premiumSection => 'Premium';
+  String get premiumSection => 'Jäsenyys';
 
   @override
   String get freePlan => 'Ilmainen';
@@ -240,10 +240,10 @@ class AppLocalizationsFi extends AppLocalizations {
   String get premiumPlan => 'Premium';
 
   @override
-  String get monthlyPrice => '3,49€/kk';
+  String get monthlyPrice => '7,99€ / kk';
 
   @override
-  String get yearlyPrice => '24,99€/v';
+  String get yearlyPrice => '59,99€ / vuosi';
 
   @override
   String get yearlySave => 'Säästä 40%';
@@ -518,7 +518,7 @@ class AppLocalizationsFi extends AppLocalizations {
   String get shareSubtitle => 'Päivittäinen rukous Jumalan kanssa';
 
   @override
-  String get premiumActive => 'Premium aktiivinen';
+  String get premiumActive => 'Jäsenyys Aktiivinen';
 
   @override
   String get planOncePerDay => '1x/päivä';
@@ -706,4 +706,25 @@ class AppLocalizationsFi extends AppLocalizations {
   String viewAllComments(Object count) {
     return 'Näytä kaikki $count kommenttia';
   }
+
+  @override
+  String get membershipTitle => 'Jäsenyys';
+
+  @override
+  String get membershipSubtitle => 'Syvennä rukouselämääsi';
+
+  @override
+  String get monthlyPlan => 'Kuukausittain';
+
+  @override
+  String get yearlyPlan => 'Vuosittain';
+
+  @override
+  String get yearlySavings => '5,00€/kk (37% alennus)';
+
+  @override
+  String get startMembership => 'Aloita';
+
+  @override
+  String get membershipActive => 'Jäsenyys Aktiivinen';
 }

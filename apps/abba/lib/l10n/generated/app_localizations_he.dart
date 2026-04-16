@@ -230,7 +230,7 @@ class AppLocalizationsHe extends AppLocalizations {
   String get consecutiveDays => 'ימים רצופים';
 
   @override
-  String get premiumSection => 'Premium';
+  String get premiumSection => 'מנוי';
 
   @override
   String get freePlan => 'חינם';
@@ -239,10 +239,10 @@ class AppLocalizationsHe extends AppLocalizations {
   String get premiumPlan => 'Premium';
 
   @override
-  String get monthlyPrice => '₪12.90/חודש';
+  String get monthlyPrice => '₪29.90 / חודש';
 
   @override
-  String get yearlyPrice => '₪89.90/שנה';
+  String get yearlyPrice => '₪219.90 / שנה';
 
   @override
   String get yearlySave => 'חסכון 40%';
@@ -512,7 +512,7 @@ class AppLocalizationsHe extends AppLocalizations {
   String get shareSubtitle => 'תפילה יומית עם אלוהים';
 
   @override
-  String get premiumActive => 'Premium פעיל';
+  String get premiumActive => 'מנוי פעיל';
 
   @override
   String get planOncePerDay => 'פעם/יום';
@@ -698,4 +698,25 @@ class AppLocalizationsHe extends AppLocalizations {
   String viewAllComments(Object count) {
     return 'צפה בכל $count התגובות';
   }
+
+  @override
+  String get membershipTitle => 'מנוי';
+
+  @override
+  String get membershipSubtitle => 'העמיקו את חיי התפילה שלכם';
+
+  @override
+  String get monthlyPlan => 'חודשי';
+
+  @override
+  String get yearlyPlan => 'שנתי';
+
+  @override
+  String get yearlySavings => '₪18.33/חודש (הנחה 37%)';
+
+  @override
+  String get startMembership => 'התחל';
+
+  @override
+  String get membershipActive => 'מנוי פעיל';
 }

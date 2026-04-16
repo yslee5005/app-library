@@ -10,15 +10,31 @@
   "signInWithGoogle": "Continuer avec Google",
   "signInWithEmail": "Continuer avec e-mail",
   "greetingMorning": "Bonjour, {name}",
-  "@greetingMorning": { "placeholders": { "name": {} } },
+  "@greetingMorning": {
+    "placeholders": {
+      "name": {}
+    }
+  },
   "greetingAfternoon": "Bon après-midi, {name}",
-  "@greetingAfternoon": { "placeholders": { "name": {} } },
+  "@greetingAfternoon": {
+    "placeholders": {
+      "name": {}
+    }
+  },
   "greetingEvening": "Bonsoir, {name}",
-  "@greetingEvening": { "placeholders": { "name": {} } },
+  "@greetingEvening": {
+    "placeholders": {
+      "name": {}
+    }
+  },
   "prayButton": "Prier",
   "qtButton": "Temps Calme",
   "streakDays": "{count} jours de prière consécutifs",
-  "@streakDays": { "placeholders": { "count": {} } },
+  "@streakDays": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "dailyVerse": "Verset du Jour",
   "tabHome": "Accueil",
   "tabCalendar": "Calendrier",
@@ -69,17 +85,21 @@
   "bestStreak": "Meilleure Série",
   "days": "jours",
   "calendarRecordCount": "{count} enregistrements",
-  "@calendarRecordCount": { "placeholders": { "count": {} } },
+  "@calendarRecordCount": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "todayVerse": "Verset du Jour",
   "settingsTitle": "Paramètres",
   "profileSection": "Profil",
   "totalPrayers": "Total des Prières",
   "consecutiveDays": "Jours Consécutifs",
-  "premiumSection": "Premium",
+  "premiumSection": "Abonnement",
   "freePlan": "Gratuit",
   "premiumPlan": "Premium",
-  "monthlyPrice": "4,99€/mois",
-  "yearlyPrice": "34,99€/an",
+  "monthlyPrice": "7,99€ / mois",
+  "yearlyPrice": "59,99€ / an",
   "yearlySave": "Économisez 40%",
   "launchPromo": "3 mois à 2,92€/mois !",
   "startPremium": "Passer au Premium",
@@ -96,10 +116,18 @@
   "privacyPolicy": "Politique de confidentialité",
   "logout": "Se déconnecter",
   "appVersion": "Version {version}",
-  "@appVersion": { "placeholders": { "version": {} } },
+  "@appVersion": {
+    "placeholders": {
+      "version": {}
+    }
+  },
   "anonymous": "Anonyme",
   "timeAgo": "il y a {time}",
-  "@timeAgo": { "placeholders": { "time": {} } },
+  "@timeAgo": {
+    "placeholders": {
+      "time": {}
+    }
+  },
   "emailLabel": "E-mail",
   "passwordLabel": "Mot de passe",
   "signIn": "Se connecter",
@@ -128,7 +156,11 @@
   "promoTitle": "Offre de Lancement",
   "promoBanner": "Les 3 premiers mois à 2,92€/mois !",
   "promoEndsOn": "Offre valable jusqu'au {date}",
-  "@promoEndsOn": { "placeholders": { "date": {} } },
+  "@promoEndsOn": {
+    "placeholders": {
+      "date": {}
+    }
+  },
   "premiumLimitTitle": "Prière du jour terminée",
   "premiumLimitBody": "À demain !\nPriez sans limite avec Premium",
   "laterButton": "Peut-être plus tard",
@@ -166,10 +198,14 @@
   "milestoneShare": "Partager",
   "milestoneThankGod": "Merci Seigneur !",
   "shareStreakText": "{count} jours de prière consécutifs ! Mon parcours de prière avec Abba #Abba #Prière",
-  "@shareStreakText": { "placeholders": { "count": {} } },
+  "@shareStreakText": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "shareDaysLabel": "jours de prière consécutifs",
   "shareSubtitle": "Prière quotidienne avec Dieu",
-  "premiumActive": "Premium Actif",
+  "premiumActive": "Abonnement Actif",
   "planOncePerDay": "1x/jour",
   "planUnlimited": "Illimité",
   "closeRecording": "Fermer l'enregistrement",
@@ -209,9 +245,18 @@
   "scriptureReasonLabel": "Pourquoi cette Écriture",
   "seeMore": "Voir plus",
   "seeAllComments": "Voir les {count} commentaires",
-  "@seeAllComments": { "placeholders": { "count": {} } },
+  "@seeAllComments": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "likedBy": "{name} et {count} autres ont aimé",
-  "@likedBy": { "placeholders": { "name": {}, "count": {} } },
+  "@likedBy": {
+    "placeholders": {
+      "name": {},
+      "count": {}
+    }
+  },
   "commentsTitle": "Commentaires",
   "myPageTitle": "Mon Jardin de Prière",
   "myPrayers": "Mes Prières",
@@ -227,10 +272,29 @@
   "linkAccountSuccess": "Compte associé avec succès !",
   "anonymousUser": "Guerrier de Prière",
   "showReplies": "Voir {count} réponses",
-  "@showReplies": { "placeholders": { "count": {} } },
+  "@showReplies": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "hideReplies": "Masquer les réponses",
   "replyingTo": "Réponse à {name}",
-  "@replyingTo": { "placeholders": { "name": {} } },
+  "@replyingTo": {
+    "placeholders": {
+      "name": {}
+    }
+  },
   "viewAllComments": "Voir les {count} commentaires",
-  "@viewAllComments": { "placeholders": { "count": {} } }
+  "@viewAllComments": {
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "membershipTitle": "Abonnement",
+  "membershipSubtitle": "Approfondissez votre vie de prière",
+  "monthlyPlan": "Mensuel",
+  "yearlyPlan": "Annuel",
+  "yearlySavings": "5,00€/mois (37% de réduction)",
+  "startMembership": "Commencer",
+  "membershipActive": "Abonnement Actif"
 }

@@ -229,7 +229,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get consecutiveDays => '连续天数';
 
   @override
-  String get premiumSection => '高级版';
+  String get premiumSection => '会员';
 
   @override
   String get freePlan => '免费';
@@ -238,10 +238,10 @@ class AppLocalizationsZh extends AppLocalizations {
   String get premiumPlan => '高级版';
 
   @override
-  String get monthlyPrice => '¥25/月';
+  String get monthlyPrice => '¥68 / 月';
 
   @override
-  String get yearlyPrice => '¥178/年';
+  String get yearlyPrice => '¥518 / 年';
 
   @override
   String get yearlySave => '省40%';
@@ -507,7 +507,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get shareSubtitle => '与上帝同行的每日祷告';
 
   @override
-  String get premiumActive => '已订阅Premium';
+  String get premiumActive => '会员已激活';
 
   @override
   String get planOncePerDay => '每天1次';
@@ -692,4 +692,25 @@ class AppLocalizationsZh extends AppLocalizations {
   String viewAllComments(Object count) {
     return '查看全部$count条评论';
   }
+
+  @override
+  String get membershipTitle => '会员';
+
+  @override
+  String get membershipSubtitle => '让祷告更加深入';
+
+  @override
+  String get monthlyPlan => '月度';
+
+  @override
+  String get yearlyPlan => '年度';
+
+  @override
+  String get yearlySavings => '月¥43 (37%折扣)';
+
+  @override
+  String get startMembership => '立即开通';
+
+  @override
+  String get membershipActive => '会员已激活';
 }

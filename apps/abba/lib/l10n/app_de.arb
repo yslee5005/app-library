@@ -10,15 +10,31 @@
   "signInWithGoogle": "Weiter mit Google",
   "signInWithEmail": "Weiter mit E-Mail",
   "greetingMorning": "Guten Morgen, {name}",
-  "@greetingMorning": { "placeholders": { "name": {} } },
+  "@greetingMorning": {
+    "placeholders": {
+      "name": {}
+    }
+  },
   "greetingAfternoon": "Guten Tag, {name}",
-  "@greetingAfternoon": { "placeholders": { "name": {} } },
+  "@greetingAfternoon": {
+    "placeholders": {
+      "name": {}
+    }
+  },
   "greetingEvening": "Guten Abend, {name}",
-  "@greetingEvening": { "placeholders": { "name": {} } },
+  "@greetingEvening": {
+    "placeholders": {
+      "name": {}
+    }
+  },
   "prayButton": "Beten",
   "qtButton": "Stille Zeit",
   "streakDays": "{count} Tage Gebetsserie",
-  "@streakDays": { "placeholders": { "count": {} } },
+  "@streakDays": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "dailyVerse": "Tagesvers",
   "tabHome": "Start",
   "tabCalendar": "Kalender",
@@ -69,17 +85,21 @@
   "bestStreak": "Beste Serie",
   "days": "Tage",
   "calendarRecordCount": "{count} Einträge",
-  "@calendarRecordCount": { "placeholders": { "count": {} } },
+  "@calendarRecordCount": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "todayVerse": "Vers des Tages",
   "settingsTitle": "Einstellungen",
   "profileSection": "Profil",
   "totalPrayers": "Gebete gesamt",
   "consecutiveDays": "Tage in Folge",
-  "premiumSection": "Premium",
+  "premiumSection": "Mitgliedschaft",
   "freePlan": "Kostenlos",
   "premiumPlan": "Premium",
-  "monthlyPrice": "3,49€/Monat",
-  "yearlyPrice": "24,99€/Jahr",
+  "monthlyPrice": "7,99€ / Monat",
+  "yearlyPrice": "59,99€ / Jahr",
   "yearlySave": "40% sparen",
   "launchPromo": "3 Monate für 3,99€/Monat!",
   "startPremium": "Premium starten",
@@ -96,10 +116,18 @@
   "privacyPolicy": "Datenschutzrichtlinie",
   "logout": "Abmelden",
   "appVersion": "Version {version}",
-  "@appVersion": { "placeholders": { "version": {} } },
+  "@appVersion": {
+    "placeholders": {
+      "version": {}
+    }
+  },
   "anonymous": "Anonym",
   "timeAgo": "vor {time}",
-  "@timeAgo": { "placeholders": { "time": {} } },
+  "@timeAgo": {
+    "placeholders": {
+      "time": {}
+    }
+  },
   "emailLabel": "E-Mail",
   "passwordLabel": "Passwort",
   "signIn": "Anmelden",
@@ -128,7 +156,11 @@
   "promoTitle": "Einführungsaktion",
   "promoBanner": "Die ersten 3 Monate für 3,99€/Monat!",
   "promoEndsOn": "Angebot endet am {date}",
-  "@promoEndsOn": { "placeholders": { "date": {} } },
+  "@promoEndsOn": {
+    "placeholders": {
+      "date": {}
+    }
+  },
   "premiumLimitTitle": "Das heutige Gebet ist abgeschlossen",
   "premiumLimitBody": "Bis morgen!\nBete unbegrenzt mit Premium",
   "laterButton": "Vielleicht später",
@@ -166,10 +198,14 @@
   "milestoneShare": "Teilen",
   "milestoneThankGod": "Gott sei Dank!",
   "shareStreakText": "{count} Tage Gebetsserie! Meine Gebetsreise mit Abba #Abba #Gebet",
-  "@shareStreakText": { "placeholders": { "count": {} } },
+  "@shareStreakText": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "shareDaysLabel": "Tage Gebetsserie",
   "shareSubtitle": "Tägliches Gebet mit Gott",
-  "premiumActive": "Premium aktiv",
+  "premiumActive": "Mitgliedschaft Aktiv",
   "planOncePerDay": "1x/Tag",
   "planUnlimited": "Unbegrenzt",
   "closeRecording": "Aufnahme schließen",
@@ -209,9 +245,18 @@
   "scriptureReasonLabel": "Warum diese Schriftstelle",
   "seeMore": "Mehr anzeigen",
   "seeAllComments": "Alle {count} Kommentare anzeigen",
-  "@seeAllComments": { "placeholders": { "count": {} } },
+  "@seeAllComments": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "likedBy": "{name} und {count} weiteren gefällt das",
-  "@likedBy": { "placeholders": { "name": {}, "count": {} } },
+  "@likedBy": {
+    "placeholders": {
+      "name": {},
+      "count": {}
+    }
+  },
   "commentsTitle": "Kommentare",
   "myPageTitle": "Mein Gebetsgarten",
   "myPrayers": "Meine Gebete",
@@ -227,10 +272,29 @@
   "linkAccountSuccess": "Konto erfolgreich verknüpft!",
   "anonymousUser": "Gebetskrieger",
   "showReplies": "{count} Antworten anzeigen",
-  "@showReplies": { "placeholders": { "count": {} } },
+  "@showReplies": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "hideReplies": "Antworten ausblenden",
   "replyingTo": "Antwort an {name}",
-  "@replyingTo": { "placeholders": { "name": {} } },
+  "@replyingTo": {
+    "placeholders": {
+      "name": {}
+    }
+  },
   "viewAllComments": "Alle {count} Kommentare anzeigen",
-  "@viewAllComments": { "placeholders": { "count": {} } }
+  "@viewAllComments": {
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "membershipTitle": "Mitgliedschaft",
+  "membershipSubtitle": "Vertiefen Sie Ihr Gebetsleben",
+  "monthlyPlan": "Monatlich",
+  "yearlyPlan": "Jährlich",
+  "yearlySavings": "5,00€/Monat (37% Rabatt)",
+  "startMembership": "Jetzt starten",
+  "membershipActive": "Mitgliedschaft Aktiv"
 }

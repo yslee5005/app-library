@@ -235,7 +235,7 @@ class AppLocalizationsFil extends AppLocalizations {
   String get consecutiveDays => 'Sunod-sunod na Araw';
 
   @override
-  String get premiumSection => 'Premium';
+  String get premiumSection => 'Membership';
 
   @override
   String get freePlan => 'Libre';
@@ -244,10 +244,10 @@ class AppLocalizationsFil extends AppLocalizations {
   String get premiumPlan => 'Premium';
 
   @override
-  String get monthlyPrice => '₱199/buwan';
+  String get monthlyPrice => '₱449 / buwan';
 
   @override
-  String get yearlyPrice => '₱1399/taon';
+  String get yearlyPrice => '₱3,390 / taon';
 
   @override
   String get yearlySave => 'Makatipid ng 40%';
@@ -525,7 +525,7 @@ class AppLocalizationsFil extends AppLocalizations {
   String get shareSubtitle => 'Araw-araw na panalangin kasama ang Diyos';
 
   @override
-  String get premiumActive => 'Premium Aktibo';
+  String get premiumActive => 'Membership Aktibo';
 
   @override
   String get planOncePerDay => '1x/araw';
@@ -715,4 +715,25 @@ class AppLocalizationsFil extends AppLocalizations {
   String viewAllComments(Object count) {
     return 'Tingnan lahat ng $count komento';
   }
+
+  @override
+  String get membershipTitle => 'Membership';
+
+  @override
+  String get membershipSubtitle => 'Palalimin ang iyong buhay-panalangin';
+
+  @override
+  String get monthlyPlan => 'Buwanan';
+
+  @override
+  String get yearlyPlan => 'Taunan';
+
+  @override
+  String get yearlySavings => '₱283/buwan (37% diskwento)';
+
+  @override
+  String get startMembership => 'Magsimula';
+
+  @override
+  String get membershipActive => 'Membership Aktibo';
 }

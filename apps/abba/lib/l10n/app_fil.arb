@@ -10,15 +10,31 @@
   "signInWithGoogle": "Magpatuloy sa Google",
   "signInWithEmail": "Magpatuloy sa Email",
   "greetingMorning": "Magandang umaga, {name}",
-  "@greetingMorning": { "placeholders": { "name": {} } },
+  "@greetingMorning": {
+    "placeholders": {
+      "name": {}
+    }
+  },
   "greetingAfternoon": "Magandang hapon, {name}",
-  "@greetingAfternoon": { "placeholders": { "name": {} } },
+  "@greetingAfternoon": {
+    "placeholders": {
+      "name": {}
+    }
+  },
   "greetingEvening": "Magandang gabi, {name}",
-  "@greetingEvening": { "placeholders": { "name": {} } },
+  "@greetingEvening": {
+    "placeholders": {
+      "name": {}
+    }
+  },
   "prayButton": "Manalangin",
   "qtButton": "Quiet Time",
   "streakDays": "{count} araw na sunod-sunod na panalangin",
-  "@streakDays": { "placeholders": { "count": {} } },
+  "@streakDays": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "dailyVerse": "Talata ng Araw",
   "tabHome": "Home",
   "tabCalendar": "Kalendaryo",
@@ -69,17 +85,21 @@
   "bestStreak": "Pinakamataas na Streak",
   "days": "araw",
   "calendarRecordCount": "{count} tala",
-  "@calendarRecordCount": { "placeholders": { "count": {} } },
+  "@calendarRecordCount": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "todayVerse": "Talata Ngayong Araw",
   "settingsTitle": "Settings",
   "profileSection": "Profile",
   "totalPrayers": "Kabuuang Panalangin",
   "consecutiveDays": "Sunod-sunod na Araw",
-  "premiumSection": "Premium",
+  "premiumSection": "Membership",
   "freePlan": "Libre",
   "premiumPlan": "Premium",
-  "monthlyPrice": "₱199/buwan",
-  "yearlyPrice": "₱1399/taon",
+  "monthlyPrice": "₱449 / buwan",
+  "yearlyPrice": "₱3,390 / taon",
   "yearlySave": "Makatipid ng 40%",
   "launchPromo": "3 buwan sa ₱117/buwan!",
   "startPremium": "Simulan ang Premium",
@@ -96,10 +116,18 @@
   "privacyPolicy": "Patakaran sa Privacy",
   "logout": "Mag-log Out",
   "appVersion": "Bersyon {version}",
-  "@appVersion": { "placeholders": { "version": {} } },
+  "@appVersion": {
+    "placeholders": {
+      "version": {}
+    }
+  },
   "anonymous": "Anonymous",
   "timeAgo": "{time} nakalipas",
-  "@timeAgo": { "placeholders": { "time": {} } },
+  "@timeAgo": {
+    "placeholders": {
+      "time": {}
+    }
+  },
   "emailLabel": "Email",
   "passwordLabel": "Password",
   "signIn": "Mag-sign In",
@@ -128,7 +156,11 @@
   "promoTitle": "Launch Special",
   "promoBanner": "Unang 3 buwan sa ₱117/buwan!",
   "promoEndsOn": "Ang alok ay hanggang {date}",
-  "@promoEndsOn": { "placeholders": { "date": {} } },
+  "@promoEndsOn": {
+    "placeholders": {
+      "date": {}
+    }
+  },
   "premiumLimitTitle": "Tapos na ang panalangin ngayong araw",
   "premiumLimitBody": "Magkita-kita bukas!\nManalangin nang walang limitasyon sa Premium",
   "laterButton": "Mamaya na",
@@ -166,10 +198,14 @@
   "milestoneShare": "I-share",
   "milestoneThankGod": "Salamat sa Diyos!",
   "shareStreakText": "{count} araw na sunod-sunod na panalangin! Ang aking paglalakbay sa panalangin kasama ang Abba #Abba #Panalangin",
-  "@shareStreakText": { "placeholders": { "count": {} } },
+  "@shareStreakText": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "shareDaysLabel": "araw na sunod-sunod na panalangin",
   "shareSubtitle": "Araw-araw na panalangin kasama ang Diyos",
-  "premiumActive": "Premium Aktibo",
+  "premiumActive": "Membership Aktibo",
   "planOncePerDay": "1x/araw",
   "planUnlimited": "Walang limitasyon",
   "closeRecording": "Isara ang recording",
@@ -209,9 +245,18 @@
   "scriptureReasonLabel": "Bakit ang Kasulatang ito",
   "seeMore": "Tingnan pa",
   "seeAllComments": "Tingnan lahat ng {count} komento",
-  "@seeAllComments": { "placeholders": { "count": {} } },
+  "@seeAllComments": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "likedBy": "Ni-like ni {name} at {count} iba pa",
-  "@likedBy": { "placeholders": { "name": {}, "count": {} } },
+  "@likedBy": {
+    "placeholders": {
+      "name": {},
+      "count": {}
+    }
+  },
   "commentsTitle": "Mga Komento",
   "myPageTitle": "Aking Hardin ng Panalangin",
   "myPrayers": "Mga Panalangin Ko",
@@ -227,10 +272,29 @@
   "linkAccountSuccess": "Matagumpay na na-link ang account!",
   "anonymousUser": "Mandirigma ng Panalangin",
   "showReplies": "Tingnan ang {count} reply",
-  "@showReplies": { "placeholders": { "count": {} } },
+  "@showReplies": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "hideReplies": "Itago ang mga reply",
   "replyingTo": "Tumutugon kay {name}",
-  "@replyingTo": { "placeholders": { "name": {} } },
+  "@replyingTo": {
+    "placeholders": {
+      "name": {}
+    }
+  },
   "viewAllComments": "Tingnan lahat ng {count} komento",
-  "@viewAllComments": { "placeholders": { "count": {} } }
+  "@viewAllComments": {
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "membershipTitle": "Membership",
+  "membershipSubtitle": "Palalimin ang iyong buhay-panalangin",
+  "monthlyPlan": "Buwanan",
+  "yearlyPlan": "Taunan",
+  "yearlySavings": "₱283/buwan (37% diskwento)",
+  "startMembership": "Magsimula",
+  "membershipActive": "Membership Aktibo"
 }

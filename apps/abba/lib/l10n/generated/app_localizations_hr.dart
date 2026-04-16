@@ -232,7 +232,7 @@ class AppLocalizationsHr extends AppLocalizations {
   String get consecutiveDays => 'Uzastopnih dana';
 
   @override
-  String get premiumSection => 'Premium';
+  String get premiumSection => 'Članstvo';
 
   @override
   String get freePlan => 'Besplatno';
@@ -241,10 +241,10 @@ class AppLocalizationsHr extends AppLocalizations {
   String get premiumPlan => 'Premium';
 
   @override
-  String get monthlyPrice => '3,49€/mj';
+  String get monthlyPrice => '7,99€ / mjes';
 
   @override
-  String get yearlyPrice => '24,99€/god';
+  String get yearlyPrice => '59,99€ / god';
 
   @override
   String get yearlySave => 'Uštedi 40%';
@@ -520,7 +520,7 @@ class AppLocalizationsHr extends AppLocalizations {
   String get shareSubtitle => 'Svakodnevna molitva s Bogom';
 
   @override
-  String get premiumActive => 'Premium aktivan';
+  String get premiumActive => 'Članstvo Aktivno';
 
   @override
   String get planOncePerDay => '1x/dan';
@@ -709,4 +709,25 @@ class AppLocalizationsHr extends AppLocalizations {
   String viewAllComments(Object count) {
     return 'Pogledaj svih $count komentara';
   }
+
+  @override
+  String get membershipTitle => 'Članstvo';
+
+  @override
+  String get membershipSubtitle => 'Produbite svoj molitveni život';
+
+  @override
+  String get monthlyPlan => 'Mjesečno';
+
+  @override
+  String get yearlyPlan => 'Godišnje';
+
+  @override
+  String get yearlySavings => '5,00€/mjes (37% popust)';
+
+  @override
+  String get startMembership => 'Započni';
+
+  @override
+  String get membershipActive => 'Članstvo Aktivno';
 }

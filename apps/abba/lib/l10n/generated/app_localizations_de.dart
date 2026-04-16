@@ -231,7 +231,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get consecutiveDays => 'Tage in Folge';
 
   @override
-  String get premiumSection => 'Premium';
+  String get premiumSection => 'Mitgliedschaft';
 
   @override
   String get freePlan => 'Kostenlos';
@@ -240,10 +240,10 @@ class AppLocalizationsDe extends AppLocalizations {
   String get premiumPlan => 'Premium';
 
   @override
-  String get monthlyPrice => '3,49€/Monat';
+  String get monthlyPrice => '7,99€ / Monat';
 
   @override
-  String get yearlyPrice => '24,99€/Jahr';
+  String get yearlyPrice => '59,99€ / Jahr';
 
   @override
   String get yearlySave => '40% sparen';
@@ -520,7 +520,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get shareSubtitle => 'Tägliches Gebet mit Gott';
 
   @override
-  String get premiumActive => 'Premium aktiv';
+  String get premiumActive => 'Mitgliedschaft Aktiv';
 
   @override
   String get planOncePerDay => '1x/Tag';
@@ -708,4 +708,25 @@ class AppLocalizationsDe extends AppLocalizations {
   String viewAllComments(Object count) {
     return 'Alle $count Kommentare anzeigen';
   }
+
+  @override
+  String get membershipTitle => 'Mitgliedschaft';
+
+  @override
+  String get membershipSubtitle => 'Vertiefen Sie Ihr Gebetsleben';
+
+  @override
+  String get monthlyPlan => 'Monatlich';
+
+  @override
+  String get yearlyPlan => 'Jährlich';
+
+  @override
+  String get yearlySavings => '5,00€/Monat (37% Rabatt)';
+
+  @override
+  String get startMembership => 'Jetzt starten';
+
+  @override
+  String get membershipActive => 'Mitgliedschaft Aktiv';
 }

@@ -7,7 +7,6 @@ import '../../../models/qt_meditation_result.dart';
 import '../../../providers/providers.dart';
 import '../../../theme/abba_theme.dart';
 import '../../../widgets/abba_button.dart';
-import '../../../widgets/premium_modal.dart';
 import '../../../widgets/staggered_fade_in.dart';
 import '../widgets/application_card.dart';
 import '../widgets/growth_story_card.dart';
@@ -51,9 +50,7 @@ class QtDashboardView extends ConsumerWidget {
     bool isPremium,
   ) {
     void showPremiumUpgrade() {
-      showPremiumPrompt(context).then((purchased) {
-        if (purchased) ref.invalidate(isPremiumProvider);
-      });
+      context.push('/settings/membership');
     }
 
     int i = 0;

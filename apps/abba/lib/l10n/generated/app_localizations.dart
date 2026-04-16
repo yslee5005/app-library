@@ -587,7 +587,7 @@ abstract class AppLocalizations {
   /// No description provided for @premiumSection.
   ///
   /// In en, this message translates to:
-  /// **'Premium'**
+  /// **'Membership'**
   String get premiumSection;
 
   /// No description provided for @freePlan.
@@ -605,13 +605,13 @@ abstract class AppLocalizations {
   /// No description provided for @monthlyPrice.
   ///
   /// In en, this message translates to:
-  /// **'\$3.49/mo'**
+  /// **'\$7.99 / mo'**
   String get monthlyPrice;
 
   /// No description provided for @yearlyPrice.
   ///
   /// In en, this message translates to:
-  /// **'\$24.99/yr'**
+  /// **'\$59.99 / yr'**
   String get yearlyPrice;
 
   /// No description provided for @yearlySave.
@@ -1127,7 +1127,7 @@ abstract class AppLocalizations {
   /// No description provided for @premiumActive.
   ///
   /// In en, this message translates to:
-  /// **'Premium Active'**
+  /// **'Membership Active'**
   String get premiumActive;
 
   /// No description provided for @planOncePerDay.
@@ -1477,6 +1477,48 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'View all {count} comments'**
   String viewAllComments(Object count);
+
+  /// No description provided for @membershipTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Membership'**
+  String get membershipTitle;
+
+  /// No description provided for @membershipSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Deepen your prayer journey'**
+  String get membershipSubtitle;
+
+  /// No description provided for @monthlyPlan.
+  ///
+  /// In en, this message translates to:
+  /// **'Monthly'**
+  String get monthlyPlan;
+
+  /// No description provided for @yearlyPlan.
+  ///
+  /// In en, this message translates to:
+  /// **'Yearly'**
+  String get yearlyPlan;
+
+  /// No description provided for @yearlySavings.
+  ///
+  /// In en, this message translates to:
+  /// **'\$5.00/mo (37% off)'**
+  String get yearlySavings;
+
+  /// No description provided for @startMembership.
+  ///
+  /// In en, this message translates to:
+  /// **'Get Started'**
+  String get startMembership;
+
+  /// No description provided for @membershipActive.
+  ///
+  /// In en, this message translates to:
+  /// **'Membership Active'**
+  String get membershipActive;
 }
 
 class _AppLocalizationsDelegate
