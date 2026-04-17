@@ -86,7 +86,8 @@ Deno.serve(async (req) => {
 
     // 1. Get users who opted in for weekly summary
     const { data: settings, error: settingsError } = await supabase
-      .from("abba_notification_settings")
+      .schema("abba")
+      .from("notification_settings")
       .select("user_id")
       .eq("app_id", APP_ID)
       .eq("weekly_summary", true);
@@ -111,6 +112,7 @@ Deno.serve(async (req) => {
     //    Supabase JS doesn't support GROUP BY directly, so we fetch rows
     //    and aggregate in code. For scale, use an RPC function instead.
     const { data: prayers, error: prayersError } = await supabase
+      .schema("abba")
       .from("prayers")
       .select("user_id")
       .eq("app_id", APP_ID)

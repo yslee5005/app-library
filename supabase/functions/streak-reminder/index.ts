@@ -47,7 +47,8 @@ Deno.serve(async (req) => {
 
     // 1. Get users who opted in for streak reminders
     const { data: settings, error: settingsError } = await supabase
-      .from("abba_notification_settings")
+      .schema("abba")
+      .from("notification_settings")
       .select("user_id")
       .eq("app_id", APP_ID)
       .eq("streak_reminder", true);
@@ -72,6 +73,7 @@ Deno.serve(async (req) => {
     const todayEnd = `${today}T23:59:59+09:00`;
 
     const { data: prayedRows, error: prayedError } = await supabase
+      .schema("abba")
       .from("prayers")
       .select("user_id")
       .eq("app_id", APP_ID)
@@ -125,6 +127,7 @@ Deno.serve(async (req) => {
       ...new Set(devices.map((d: { user_id: string }) => d.user_id)),
     ];
     const { data: streaks } = await supabase
+      .schema("abba")
       .from("prayer_streaks")
       .select("user_id, current_streak")
       .eq("app_id", APP_ID)

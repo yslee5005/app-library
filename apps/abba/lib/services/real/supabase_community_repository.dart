@@ -8,6 +8,7 @@ class SupabaseCommunityRepository implements CommunityRepository {
 
   SupabaseCommunityRepository(this._client);
 
+  SupabaseQuerySchema get _abba => _client.schema('abba');
   String get _userId => _client.auth.currentUser!.id;
 
   // --- Posts ---
@@ -18,7 +19,7 @@ class SupabaseCommunityRepository implements CommunityRepository {
     String? cursor,
     int limit = 20,
   }) async {
-    var query = _client
+    var query = _abba
         .from('community_posts')
         .select()
         .eq('app_id', 'abba')
@@ -56,7 +57,7 @@ class SupabaseCommunityRepository implements CommunityRepository {
 
   @override
   Future<CommunityPost> getPostDetail(String postId) async {
-    final data = await _client
+    final data = await _abba
         .from('community_posts')
         .select()
         .eq('id', postId)
@@ -81,7 +82,7 @@ class SupabaseCommunityRepository implements CommunityRepository {
     required String content,
     String? displayName,
   }) async {
-    final data = await _client
+    final data = await _abba
         .from('community_posts')
         .insert({
           'app_id': 'abba',
@@ -103,7 +104,7 @@ class SupabaseCommunityRepository implements CommunityRepository {
 
   @override
   Future<void> deletePost(String postId) async {
-    await _client
+    await _abba
         .from('community_posts')
         .delete()
         .eq('id', postId)
@@ -115,7 +116,7 @@ class SupabaseCommunityRepository implements CommunityRepository {
 
   @override
   Future<List<Comment>> getComments(String postId) async {
-    final data = await _client
+    final data = await _abba
         .from('post_comments')
         .select()
         .eq('post_id', postId)
@@ -134,7 +135,7 @@ class SupabaseCommunityRepository implements CommunityRepository {
     String? displayName,
     String? parentCommentId,
   }) async {
-    final data = await _client
+    final data = await _abba
         .from('post_comments')
         .insert({
           'app_id': 'abba',
@@ -156,14 +157,14 @@ class SupabaseCommunityRepository implements CommunityRepository {
   @override
   Future<void> deleteComment(String commentId) async {
     // Get comment to find post_id before deleting
-    final comment = await _client
+    final comment = await _abba
         .from('post_comments')
         .select('post_id')
         .eq('id', commentId)
         .eq('user_id', _userId)
         .single();
 
-    await _client
+    await _abba
         .from('post_comments')
         .delete()
         .eq('id', commentId)
@@ -180,7 +181,7 @@ class SupabaseCommunityRepository implements CommunityRepository {
 
   @override
   Future<bool> toggleLike(String postId) async {
-    final existing = await _client
+    final existing = await _abba
         .from('post_likes')
         .select('id')
         .eq('post_id', postId)
@@ -190,7 +191,7 @@ class SupabaseCommunityRepository implements CommunityRepository {
 
     if (existing != null) {
       // Unlike
-      await _client
+      await _abba
           .from('post_likes')
           .delete()
           .eq('post_id', postId)
@@ -201,7 +202,7 @@ class SupabaseCommunityRepository implements CommunityRepository {
       return false;
     } else {
       // Like
-      await _client.from('post_likes').insert({
+      await _abba.from('post_likes').insert({
         'app_id': 'abba',
         'post_id': postId,
         'user_id': _userId,
@@ -214,7 +215,7 @@ class SupabaseCommunityRepository implements CommunityRepository {
 
   @override
   Future<void> toggleCommentLike(String commentId) async {
-    final existing = await _client
+    final existing = await _abba
         .from('comment_likes')
         .select('id')
         .eq('comment_id', commentId)
@@ -223,14 +224,14 @@ class SupabaseCommunityRepository implements CommunityRepository {
         .maybeSingle();
 
     if (existing != null) {
-      await _client
+      await _abba
           .from('comment_likes')
           .delete()
           .eq('comment_id', commentId)
           .eq('user_id', _userId)
           .eq('app_id', 'abba');
     } else {
-      await _client.from('comment_likes').insert({
+      await _abba.from('comment_likes').insert({
         'app_id': 'abba',
         'comment_id': commentId,
         'user_id': _userId,
@@ -242,7 +243,7 @@ class SupabaseCommunityRepository implements CommunityRepository {
 
   @override
   Future<bool> toggleSave(String postId) async {
-    final existing = await _client
+    final existing = await _abba
         .from('post_saves')
         .select('id')
         .eq('post_id', postId)
@@ -251,7 +252,7 @@ class SupabaseCommunityRepository implements CommunityRepository {
         .maybeSingle();
 
     if (existing != null) {
-      await _client
+      await _abba
           .from('post_saves')
           .delete()
           .eq('post_id', postId)
@@ -259,7 +260,7 @@ class SupabaseCommunityRepository implements CommunityRepository {
           .eq('app_id', 'abba');
       return false;
     } else {
-      await _client.from('post_saves').insert({
+      await _abba.from('post_saves').insert({
         'app_id': 'abba',
         'post_id': postId,
         'user_id': _userId,
@@ -270,7 +271,7 @@ class SupabaseCommunityRepository implements CommunityRepository {
 
   @override
   Future<List<CommunityPost>> getSavedPosts() async {
-    final savedIds = await _client
+    final savedIds = await _abba
         .from('post_saves')
         .select('post_id')
         .eq('user_id', _userId)
@@ -281,7 +282,7 @@ class SupabaseCommunityRepository implements CommunityRepository {
 
     final ids = savedIds.map((e) => e['post_id'] as String).toList();
 
-    final data = await _client
+    final data = await _abba
         .from('community_posts')
         .select()
         .eq('app_id', 'abba')
@@ -307,7 +308,7 @@ class SupabaseCommunityRepository implements CommunityRepository {
 
   @override
   Future<void> reportPost(String postId, String reason) async {
-    await _client.from('reports').insert({
+    await _abba.from('reports').insert({
       'app_id': 'abba',
       'reporter_id': _userId,
       'target_type': 'post',
@@ -316,7 +317,7 @@ class SupabaseCommunityRepository implements CommunityRepository {
     });
 
     // Check report count, auto-hide if >= 3 (via SECURITY DEFINER RPC)
-    final reports = await _client
+    final reports = await _abba
         .from('reports')
         .select('id')
         .eq('target_type', 'post')
@@ -331,7 +332,7 @@ class SupabaseCommunityRepository implements CommunityRepository {
 
   @override
   Future<void> reportComment(String commentId, String reason) async {
-    await _client.from('reports').insert({
+    await _abba.from('reports').insert({
       'app_id': 'abba',
       'reporter_id': _userId,
       'target_type': 'comment',
@@ -343,7 +344,7 @@ class SupabaseCommunityRepository implements CommunityRepository {
   // --- Helpers ---
 
   Future<bool> _isLiked(String postId) async {
-    final data = await _client
+    final data = await _abba
         .from('post_likes')
         .select('id')
         .eq('post_id', postId)
@@ -354,7 +355,7 @@ class SupabaseCommunityRepository implements CommunityRepository {
   }
 
   Future<bool> _isSaved(String postId) async {
-    final data = await _client
+    final data = await _abba
         .from('post_saves')
         .select('id')
         .eq('post_id', postId)

@@ -62,9 +62,12 @@ DB 스키마, RLS, Edge Function, Dart 코드 변경 시 반드시 아래 항목
 - [ ] "Enable Manual Linking" 활성화되어 있는가?
 - [ ] "Skip Nonce Check" (Google) 활성화되어 있는가?
 
-## 8. ��이밍 규칙
+## 8. 스키마 분리 규칙
 
-- 공통 테이블: 접두사 없음 (`profiles`, `user_devices`)
-- 앱 전용 테이블: `{app}_` 접두사 (`abba_user_settings`, `abba_notification_settings`)
-- 별도 스키마: `{app}.테이블명` (`blacklabelled.products`)
-- 마이그레이션 파일: `{timestamp}_{���명}.sql`
+- 공통 테이블: `public.*` (`profiles`, `user_devices`, `notification_settings`)
+- 앱 전용 테이블: `{app}.*` 스키마 (`abba.prayers`, `abba.user_settings`, `blacklabelled.products`)
+- 접두사 불필요 — 스키마가 네임스페이스 역할
+- Dart: `_client.schema('abba').from('prayers')` 사용
+- Edge Function: `supabase.schema("abba").from("prayers")` 사용
+- `public.*` 테이블은 `.from()` 직접 사용 (기본 스키마)
+- 마이그레이션 파일: `{timestamp}_{설명}.sql`

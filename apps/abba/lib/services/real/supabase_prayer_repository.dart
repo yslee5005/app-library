@@ -8,11 +8,12 @@ class SupabasePrayerRepository implements PrayerRepository {
 
   SupabasePrayerRepository(this._client);
 
+  SupabaseQuerySchema get _abba => _client.schema('abba');
   String get _userId => _client.auth.currentUser!.id;
 
   @override
   Future<void> savePrayer(Prayer prayer) async {
-    await _client.from('prayers').insert({
+    await _abba.from('prayers').insert({
       'app_id': 'abba',
       'user_id': _userId,
       'transcript': prayer.transcript,
@@ -102,7 +103,7 @@ class SupabasePrayerRepository implements PrayerRepository {
     final today = DateTime(now.year, now.month, now.day);
 
     if (streak == null) {
-      await _client.from('prayer_streaks').insert({
+      await _abba.from('prayer_streaks').insert({
         'app_id': 'abba',
         'user_id': _userId,
         'current_streak': 1,
@@ -202,7 +203,7 @@ class SupabasePrayerRepository implements PrayerRepository {
           .maybeSingle();
 
       if (existing == null) {
-        await _client.from('milestones').insert({
+        await _abba.from('milestones').insert({
           'app_id': 'abba',
           'user_id': _userId,
           'milestone_type': entry.key,

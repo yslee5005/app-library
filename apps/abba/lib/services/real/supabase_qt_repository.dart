@@ -12,7 +12,7 @@ class SupabaseQtRepository implements QtRepository {
   Future<List<QTPassage>> getTodayPassages() async {
     final today = DateTime.now().toIso8601String().substring(0, 10);
 
-    final data = await _client
+    final data = await _client.schema('abba')
         .from('qt_passages')
         .select()
         .eq('app_id', 'abba')
