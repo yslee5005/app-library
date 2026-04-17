@@ -90,7 +90,9 @@ class SupabaseAuthRepository implements AuthRepository {
   @override
   Future<Result<UserProfile>> signInAnonymously() async {
     try {
-      final response = await _auth.signInAnonymously();
+      final response = await _auth.signInAnonymously(
+        data: {'app_id': _client.appId},
+      );
       final user = response.user;
       if (user == null) {
         return const Result.failure(
