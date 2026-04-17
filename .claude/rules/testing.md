@@ -2,48 +2,48 @@
 paths: ["packages/**", "apps/**"]
 ---
 
-# 테스트 규칙
+# Testing Rules
 
-## 필수 테스트
+## Required Tests
 
-### 패키지 (packages/)
-- 모든 public API에 단위 테스트
-- Result 반환 함수: success + failure 케이스 모두
-- `melos test` 통과 필수
+### Packages (packages/)
+- Unit tests for all public APIs
+- Result-returning functions: test both success + failure cases
+- Must pass `melos test`
 
-### 앱 (apps/)
-- 모든 화면 위젯: 최소 1개 위젯 테스트
-- 오버플로 테스트: `testOverflow()` 사용 (compact + medium)
-- ViewModel: 상태 전이 테스트 (loading → data, loading → error)
+### Apps (apps/)
+- All screens: at least 1 widget test per screen
+- Overflow test: use `testOverflow()` (compact + medium)
+- ViewModel: state transition tests (loading → data, loading → error)
 
-## 테스트 헬퍼 사용
+## Test Helper Usage
 
-### 위젯 테스트
+### Widget Tests
 ```dart
 import 'package:app_lib_ui_kit/test/helpers/widget_test_helpers.dart';
 
-// 빠른 반응형 테스트
+// Quick responsive test
 testResponsive('MyWidget', widget: const MyWidget());
 
-// 개별 오버플로 테스트
-testOverflow('긴 텍스트 오버플로 없음',
-  widget: const MyWidget(title: '매우 긴 텍스트...'),
+// Individual overflow test
+testOverflow('No overflow with long text',
+  widget: const MyWidget(title: 'Very long text...'),
   size: TestScreenSizes.compact,
 );
 
-// 커스텀 크기 테스트
-testWidgets('태블릿 레이아웃', (tester) async {
+// Custom size test
+testWidgets('Tablet layout', (tester) async {
   await tester.binding.setSurfaceSize(TestScreenSizes.expanded);
   // ...
 });
 ```
 
-## 테스트 네이밍
-- `{기능}_test.dart` (snake_case)
-- test/는 lib/src/ 구조를 미러링
-- group()으로 클래스/기능별 그룹핑
+## Test Naming
+- `{feature}_test.dart` (snake_case)
+- test/ mirrors the lib/src/ structure
+- Group by class/feature using group()
 
-## 금지 사항
-- 기존 테스트 삭제 금지 (Ralph 규칙)
-- sleep/delay 기반 테스트 금지 → pumpAndSettle 사용
-- 테스트에서 실제 네트워크 호출 금지 → Mock 사용
+## Prohibited
+- Deleting existing tests is forbidden (Ralph rule)
+- No sleep/delay-based tests → use pumpAndSettle
+- No real network calls in tests → use Mocks

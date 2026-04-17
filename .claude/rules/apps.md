@@ -2,9 +2,9 @@
 paths: ["apps/**"]
 ---
 
-# 앱 개발 규칙
+# App Development Rules
 
-## 앱 구조 (feature-first)
+## App Structure (feature-first)
 ```
 apps/{name}/lib/
 ├── main.dart
@@ -13,57 +13,57 @@ apps/{name}/lib/
 ├── router/app_router.dart # go_router
 └── features/
     └── {feature}/
-        ├── viewmodel/    # 앱별 독립 작성
-        └── view/         # 앱별 독립 작성
+        ├── viewmodel/    # written independently per app
+        └── view/         # written independently per app
 ```
 
-## 네이밍 컨벤션
+## Naming Conventions
 
-| 항목 | 패턴 | 예시 |
-|------|------|------|
-| Bundle ID (iOS) | `com.ystech.{앱이름}` | `com.ystech.abba` |
-| Application ID (Android) | `com.ystech.{앱이름}` | `com.ystech.abba` |
-| 앱 폴더명 | `apps/{앱이름}/` | `apps/abba/` |
-| APP_ID (.env) | `{앱이름}` (하이픈 허용) | `abba`, `pet-life` |
-| SKU (App Store Connect) | `com.ystech.{앱이름}` | `com.ystech.abba` |
-| 패키지명 prefix | `app_lib_` | `app_lib_core` |
+| Item | Pattern | Example |
+|------|---------|---------|
+| Bundle ID (iOS) | `com.ystech.{app_name}` | `com.ystech.abba` |
+| Application ID (Android) | `com.ystech.{app_name}` | `com.ystech.abba` |
+| App folder name | `apps/{app_name}/` | `apps/abba/` |
+| APP_ID (.env) | `{app_name}` (hyphens allowed) | `abba`, `pet-life` |
+| SKU (App Store Connect) | `com.ystech.{app_name}` | `com.ystech.abba` |
+| Package name prefix | `app_lib_` | `app_lib_core` |
 
-- 앱이름은 **소문자 + 하이픈만** (예: `pet-life`, `abba`, `mart-scanner`)
-- Bundle ID에는 하이픈 대신 **언더스코어 또는 제거** (예: `pet-life` → `com.ystech.petlife`)
+- App names must be **lowercase + hyphens only** (e.g., `pet-life`, `abba`, `mart-scanner`)
+- Bundle IDs use **underscores or removal** instead of hyphens (e.g., `pet-life` → `com.ystech.petlife`)
 
-## 새 앱 생성 순서
-1. Step 0: YC 4P 검증 → IDEA.md 생성
-2. Step 1: specs/REQUIREMENTS.md 작성
-3. template_app 복사 → app_config.dart 수정
-4. pubspec.yaml에 필요한 패키지만 path 의존성으로 연결
-5. features/ 에 앱 고유 기능 구현
-6. 필요 시 supabase/migrations/ 에 테이블 추가
+## New App Creation Steps
+1. Step 0: YC 4P validation → generate IDEA.md
+2. Step 1: Write specs/REQUIREMENTS.md
+3. Copy template_app → modify app_config.dart
+4. Connect only needed packages as path dependencies in pubspec.yaml
+5. Implement app-specific features in features/
+6. Add tables to supabase/migrations/ if needed
 
-## 앱별 spec 템플릿
+## Per-App Spec Templates
 ```markdown
 # apps/{name}/specs/IDEA.md
 ## Persona:
 ## Problem:
 ## Promise:
 ## Product (MVP):
-## 첫 100명 유저:
+## First 100 Users:
 
 # apps/{name}/specs/REQUIREMENTS.md
-## 앱 이름:
-## 한줄 설명:
-## 핵심 기능:
-## 필요한 공유 패키지:
-## 앱 고유 기능:
-## Supabase 추가 테이블:
+## App Name:
+## One-Line Description:
+## Core Features:
+## Required Shared Packages:
+## App-Specific Features:
+## Additional Supabase Tables:
 ```
 
-## 패키지 사용
-- 공유 패키지에서 Provider 가져다 쓰기 (ref.watch)
-- Provider override로 앱별 커스텀 가능
-- ViewModel/View는 항상 앱별 독립 작성
+## Package Usage
+- Import Providers from shared packages (ref.watch)
+- Customize per-app via Provider overrides
+- ViewModel/View must always be written independently per app
 
-## 배포 규칙
-- 모든 앱의 Info.plist에 ITSAppUsesNonExemptEncryption = false 필수
-- Bundle ID: com.ystech.{앱이름}
-- fastlane deploy로 배포 (ios/fastlane/ 디렉토리)
-- App Store Connect 앱 등록은 1회 수동 (Apple 정책)
+## Deployment Rules
+- All apps must have ITSAppUsesNonExemptEncryption = false in Info.plist
+- Bundle ID: com.ystech.{app_name}
+- Deploy via fastlane (ios/fastlane/ directory)
+- App Store Connect app registration is a one-time manual step (Apple policy)

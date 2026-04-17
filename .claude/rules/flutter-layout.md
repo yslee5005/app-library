@@ -2,48 +2,48 @@
 paths: ["packages/ui_kit/**", "apps/**"]
 ---
 
-# Flutter 레이아웃 규칙 (필수 준수)
+# Flutter Layout Rules (Must Follow)
 
-## ListView / GridView 사용 규칙
-- ListView/GridView는 **반드시 높이가 제한된 부모** 안에서만 사용
-- Scaffold body에서 직접 사용: ✅ OK (Scaffold가 높이 제한함)
-- Column/Row/다른 스크롤 위젯 안에서 사용: ❌ 금지 (unbounded height 에러)
-- 불가피하면 `shrinkWrap: true` + `NeverScrollableScrollPhysics()` 사용
-- **폼 위젯은 ListView 대신 SingleChildScrollView + Column 사용**
+## ListView / GridView Usage Rules
+- ListView/GridView must **only be used inside a parent with bounded height**
+- Direct use in Scaffold body: OK (Scaffold bounds height)
+- Inside Column/Row/another scroll widget: forbidden (unbounded height error)
+- If unavoidable, use `shrinkWrap: true` + `NeverScrollableScrollPhysics()`
+- **Form widgets should use SingleChildScrollView + Column instead of ListView**
 
-## 중첩 스크롤 금지 패턴
+## Nested Scroll Prevention Patterns
 ```dart
-// ❌ 금지: ListView 안에 ListView
-ListView(children: [ListView(...)]) // → unbounded height 크래시
+// ❌ forbidden: ListView inside ListView
+ListView(children: [ListView(...)]) // → unbounded height crash
 
-// ✅ 올바른 방법 1: shrinkWrap
+// ✅ correct approach 1: shrinkWrap
 ListView(children: [
   ListView(shrinkWrap: true, physics: NeverScrollableScrollPhysics(), ...)
 ])
 
-// ✅ 올바른 방법 2: CustomScrollView + SliverList
+// ✅ correct approach 2: CustomScrollView + SliverList
 CustomScrollView(slivers: [SliverList(...), SliverList(...)])
 
-// ✅ 올바른 방법 3: SingleChildScrollView + Column (폼에 적합)
+// ✅ correct approach 3: SingleChildScrollView + Column (suitable for forms)
 SingleChildScrollView(child: Column(children: [...]))
 ```
 
-## 반응형 레이아웃 규칙
-- 고정 width/height 사용 자제 → Expanded, Flexible, FractionallySizedBox 사용
-- 화면 너비 참조: `MediaQuery.sizeOf(context).width`
-- 이미지: BoxFit.cover 또는 BoxFit.contain 사용 (overflow 방지)
-- 텍스트: maxLines + overflow: TextOverflow.ellipsis 항상 고려
+## Responsive Layout Rules
+- Avoid fixed width/height → use Expanded, Flexible, FractionallySizedBox
+- Reference screen width: `MediaQuery.sizeOf(context).width`
+- Images: use BoxFit.cover or BoxFit.contain (prevent overflow)
+- Text: always consider maxLines + overflow: TextOverflow.ellipsis
 
-## 위젯 크기 규칙
-- 부모가 unbounded면 자식에게 명시적 크기 제공
-- Expanded는 Flex(Row/Column) 안에서만 사용
-- AspectRatio로 비율 고정 시 부모의 cross-axis가 bounded인지 확인
+## Widget Sizing Rules
+- If parent is unbounded, provide explicit size to children
+- Expanded must only be used inside Flex (Row/Column)
+- When fixing ratio with AspectRatio, verify parent's cross-axis is bounded
 
 ## SafeArea
-- 최상위 Scaffold에서 SafeArea 사용 (노치/홈인디케이터 대응)
-- 중첩 SafeArea 금지 (padding 중복)
+- Use SafeArea in the top-level Scaffold (handles notch/home indicator)
+- Nested SafeArea is forbidden (causes padding duplication)
 
-## 성능
-- 긴 리스트: ListView.builder 사용 (ListView(children:[]) 금지)
-- const 생성자 최대한 사용
-- RepaintBoundary: 자주 변경되는 위젯에 감싸기
+## Performance
+- Long lists: use ListView.builder (ListView(children:[]) is forbidden)
+- Maximize const constructor usage
+- RepaintBoundary: wrap frequently changing widgets

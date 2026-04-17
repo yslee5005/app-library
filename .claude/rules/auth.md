@@ -2,59 +2,59 @@
 paths: ["apps/**", "**/auth*"]
 ---
 
-# Anonymous-First 인증
+# Anonymous-First Authentication (익명 우선 인증)
 
-모든 앱은 로그인 없이 시작. 클라우드 저장은 Supabase 익명 계정으로 자동 처리.
+All apps start without login. Cloud storage is handled automatically via Supabase anonymous accounts.
 
-## 원칙
-1. 로그인 화면 없음 — Welcome → 바로 Home
-2. `signInAnonymously()` 앱 시작 시 자동 호출
-3. 익명 UUID로 Supabase 저장 (RLS 정상)
-4. 구독: RevenueCat anonymous ID (앱 계정 불필요)
-5. Settings에서 Apple/Google/Email 연결 (선택)
-6. `linkIdentityWithIdToken()` 사용 — 네이티브 + 익명 UUID 보존
-7. 브라우저 기반 `signInWithOAuth` / `linkIdentity` 사용 금지
+## Principles
+1. No login screen — Welcome → straight to Home
+2. `signInAnonymously()` called automatically on app start
+3. Saved to Supabase with anonymous UUID (RLS works normally)
+4. Subscriptions: RevenueCat anonymous ID (no app account required)
+5. Link Apple/Google/Email in Settings (optional)
+6. Use `linkIdentityWithIdToken()` — preserves native + anonymous UUID
+7. Never use browser-based `signInWithOAuth` / `linkIdentity`
 
-## 로그인이 필요한 유일한 순간
-- 기기 변경 시 데이터 이전
+## The Only Moment Login Is Required
+- Data migration when switching devices
 
-## 네이티브 로그인 (packages/auth)
+## Native Login (packages/auth)
 
-### Sign In (신규 로그인)
+### Sign In (New Login)
 - Google: `google_sign_in` → `signInWithIdToken`
 - Apple: `sign_in_with_apple` + nonce(crypto) → `signInWithIdToken`
 - Email: `signInWithPassword`
 
-### Link (Anonymous → 계정 연결)
+### Link (Anonymous → Account Linking)
 - Google: `google_sign_in` → `linkIdentityWithIdToken`
 - Apple: `sign_in_with_apple` + nonce → `linkIdentityWithIdToken`
 - Email: `updateUser(email, password)`
-- `identity_already_exists` 에러 시 → `signInWithIdToken` fallback (기존 계정 복구)
+- On `identity_already_exists` error → `signInWithIdToken` fallback (recover existing account)
 
-### Supabase Dashboard 필수 설정
-- Authentication > Providers > **"Enable Manual Linking"** 활성화
+### Supabase Dashboard Required Settings
+- Authentication > Providers > **"Enable Manual Linking"** must be enabled
 
-## 멀티앱 Provider 설정
+## Multi-App Provider Configuration
 
-Supabase 1개 프로젝트에서 여러 앱이 소셜 로그인을 공유하는 방법:
+How multiple apps share social login on a single Supabase project:
 
 ### Apple Provider
-Client IDs 필드에 콤마로 모든 bundle ID 나열:
+List all bundle IDs comma-separated in the Client IDs field:
 ```
 com.ystech.abba, com.ystech.blacklabelled, com.ystech.babyletter
 ```
-Apple Developer Console에서 App Grouping 권장 (동일 sub 보장).
+App Grouping in Apple Developer Console is recommended (ensures same sub).
 
 ### Google Provider
-Client IDs 필드에 Web 먼저, 나머지 콤마:
+List Web first, then others comma-separated in Client IDs field:
 ```
 WEB_CLIENT_ID, ABBA_IOS_ID, BL_IOS_ID, BABYLETTER_IOS_ID
 ```
-"Skip Nonce Check" 활성화 필수.
+"Skip Nonce Check" must be enabled.
 
-### 앱별 .env.client
+### Per-App .env.client
 ```
-GOOGLE_WEB_CLIENT_ID=공유-web-client-id     (모든 앱 동일)
-GOOGLE_IOS_CLIENT_ID=앱별-ios-client-id     (앱마다 다름)
+GOOGLE_WEB_CLIENT_ID=shared-web-client-id     (same for all apps)
+GOOGLE_IOS_CLIENT_ID=per-app-ios-client-id     (different per app)
 ```
-Apple은 bundle ID를 자동 사용하므로 별도 설정 불필요.
+Apple uses the bundle ID automatically, so no additional configuration is needed.

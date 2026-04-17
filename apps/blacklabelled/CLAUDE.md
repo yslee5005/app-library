@@ -1,45 +1,45 @@
 # BlackLabelled
 
-인테리어 디자인 스튜디오 앱. 포트폴리오 쇼케이스 + 상담 예약.
+Interior design studio app. Portfolio showcase + consultation booking.
 
-## 도메인 컨텍스트
+## Domain Context
 
-- 타겟: 인테리어 디자인에 관심 있는 고객 (B2C) + 스튜디오 관리 (B2B)
-- 핵심 가치: 프리미엄 포트폴리오 + 원클릭 상담 신청
-- UX 원칙: 다크 프리미엄 테마 전용 (`BlackLabelledTheme.darkTheme`), 고급스러운 톤
-- 듀얼 플랫폼: Flutter 앱 + Next.js 웹 (`apps/blacklabelled/web/`)
+- Target: Customers interested in interior design (B2C) + studio management (B2B)
+- Core value: Premium portfolio + one-click consultation request
+- UX principles: Dark premium theme only (`BlackLabelledTheme.darkTheme`), upscale tone
+- Dual platform: Flutter app + Next.js web (`apps/blacklabelled/web/`)
 
-## 기능 구조
+## Feature Structure
 
 ```
 lib/features/
-├── home/           # 메인 (포트폴리오 하이라이트)
-├── portfolio/      # 포트폴리오 갤러리 (사진/영상)
-├── furniture/      # 가구/자재 카탈로그
-├── consult/        # 상담 예약/신청
-├── mypage/         # 마이페이지
-└── shell/          # 앱 셸 (네비게이션)
+├── home/           # Main (portfolio highlights)
+├── portfolio/      # Portfolio gallery (photos/videos)
+├── furniture/      # Furniture/materials catalog
+├── consult/        # Consultation booking/request
+├── mypage/         # My page
+└── shell/          # App shell (navigation)
 ```
 
-## 앱 고유 명령어
+## App-Specific Commands
 
 ```bash
-# Flutter 앱
+# Flutter app
 flutter run apps/blacklabelled
 
-# Next.js 웹 (별도)
+# Next.js web (separate)
 cd apps/blacklabelled/web && npm run build
 cd apps/blacklabelled/web && npx vitest run
 ```
 
-## Supabase 스키마
+## Supabase Schema
 
-- 스키마명: `blacklabelled`
-- 주요 테이블: portfolios, portfolio_images, consultations, furniture_items
-- 포트폴리오 이미지: Supabase Storage 사용
+- Schema name: `blacklabelled`
+- Main tables: portfolios, portfolio_images, consultations, furniture_items
+- Portfolio images: Uses Supabase Storage
 
-## 주의사항
+## Notes
 
-- 다크 테마 전용 — `themeMode: ThemeMode.dark` 고정
-- Next.js 웹은 독립 코드베이스 (`web/CLAUDE.md`에 별도 규칙)
-- B2B 성격: 관리자 기능은 웹에서만 제공
+- Dark theme only — `themeMode: ThemeMode.dark` fixed
+- Next.js web is a separate codebase (see `web/CLAUDE.md` for separate rules)
+- B2B nature: Admin features are provided only on the web

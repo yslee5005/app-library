@@ -1,40 +1,40 @@
-# 반응형 레이아웃 규칙
+# Responsive Layout Rules
 
-## ScreenSize 사용 필수
+## ScreenSize Usage Required
 
-모든 화면은 `ScreenSize`로 분기:
+All screens must branch using `ScreenSize`:
 
 ```dart
 final size = ScreenSize.fromWidth(MediaQuery.sizeOf(context).width);
 ```
 
-## 브레이크포인트 (Material 3 Window Size Classes)
+## Breakpoints (Material 3 Window Size Classes)
 
-| ScreenSize | 폭 | 컬럼 | 대상 |
-|------------|-----|------|------|
-| compact | < 600 | 4 | 폰 세로 |
-| medium | 600-839 | 8 | 폰 가로, 작은 태블릿 |
-| expanded | 840-1199 | 12 | 태블릿, 소형 데스크톱 |
-| large | >= 1200 | 12 | 대형 태블릿, 데스크톱 |
+| ScreenSize | Width | Columns | Target |
+|------------|-------|---------|--------|
+| compact | < 600 | 4 | Phone portrait |
+| medium | 600-839 | 8 | Phone landscape, small tablet |
+| expanded | 840-1199 | 12 | Tablet, small desktop |
+| large | >= 1200 | 12 | Large tablet, desktop |
 
-## 필수 규칙
+## Required Rules
 
-### 레이아웃
-- 하드코딩된 width/height 금지 → LayoutBuilder 또는 ScreenSize 사용
-- compact에서 오버플로 없어야 함 (320dp 최소 지원)
-- 텍스트: maxLines + overflow: TextOverflow.ellipsis 필수
-- 리스트: Expanded 또는 Flexible 래핑 (unbounded height 방지)
+### Layout
+- Hardcoded width/height is forbidden → use LayoutBuilder or ScreenSize
+- No overflow on compact (minimum 320dp support)
+- Text: maxLines + overflow: TextOverflow.ellipsis required
+- Lists: wrap with Expanded or Flexible (prevent unbounded height)
 
-### 패딩/마진
-- ScreenSize.horizontalPadding 사용
-- 하드코딩 패딩은 compact 기준으로만 (medium 이상은 ScreenSize에서 가져옴)
+### Padding/Margin
+- Use ScreenSize.horizontalPadding
+- Hardcoded padding only for compact baseline (medium and above pulled from ScreenSize)
 
-### 이미지
-- BoxFit.cover 또는 BoxFit.contain 필수
-- 가로/세로 비율 하드코딩 금지 → AspectRatio 위젯 사용
+### Images
+- BoxFit.cover or BoxFit.contain required
+- Hardcoded aspect ratios forbidden → use AspectRatio widget
 
-### 테스트
-- 모든 화면 위젯 테스트에 최소 2개 크기 테스트:
+### Testing
+- All screen widget tests must include at least 2 size tests:
   - compact (320 x 568)
   - medium (768 x 1024)
-- 오버플로 테스트 필수 (tester.pumpWidget 후 FlutterError 체크)
+- Overflow testing required (check FlutterError after tester.pumpWidget)

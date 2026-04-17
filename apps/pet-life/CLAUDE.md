@@ -1,34 +1,34 @@
-# Pet Life (펫 라이프)
+# Pet Life
 
-말 못하는 반려견의 상태를 대변하는 앱. 인생 여정, 건강 인사이트, 데일리 루틴.
+An app that speaks on behalf of your dog — life journey, health insights, daily routines.
 
-## 도메인 컨텍스트
+## Domain Context
 
-- 타겟: 반려견 보호자 (초보~경험자 모두)
-- 핵심 가치: "이 앱은 반려견의 목소리가 되어줍니다" — 강아지가 말하는 컨셉
-- UX 원칙: 다크 프리미엄 배경 (#1C1C2E), Lottie 캐릭터 애니메이션, 감성적 말풍선
-- 견종별 맞춤: 130종 데이터베이스, 견종 기반 적정 체중/산책량 추천
+- Target: Dog owners (beginners to experienced)
+- Core value: "This app becomes your dog's voice" — concept where the dog speaks
+- UX principles: Dark premium background (#1C1C2E), Lottie character animations, emotional speech bubbles
+- Breed-specific customization: 130-breed database, breed-based optimal weight/walk recommendations
 
-## 기능 구조
+## Feature Structure
 
 ```
 lib/features/
-├── onboarding/     # 강아지 등록 (이름, 견종, 생년월일, 체중, 루틴)
-├── home/           # 히어로 캐릭터 + 상태 말풍선 + 미니 타임라인
-├── records/        # 데일리 로그 (산책, 식사, 건강 체크)
-├── analysis/       # 건강 인사이트/분석 (체중 추이, 활동량)
-├── guide/          # 견종별 가이드 (산책, 영양, 건강)
-└── settings/       # 설정
+├── onboarding/     # Dog registration (name, breed, birthdate, weight, routines)
+├── home/           # Hero character + status speech bubble + mini timeline
+├── records/        # Daily log (walks, meals, health checks)
+├── analysis/       # Health insights/analysis (weight trends, activity levels)
+├── guide/          # Breed-specific guide (walks, nutrition, health)
+└── settings/       # Settings
 ```
 
-## 주의사항
+## Notes
 
-- 로컬 우선 앱: 현재 Supabase 미사용, SharedPreferences + 로컬 모델
-- Lottie 애니메이션 필수: 캐릭터 상태별 다른 애니메이션
-- 강아지 상태 메시지: 행복/산책요청/배고픔/슬픔/경고 — 톤이 1인칭 강아지 시점
-- 견종 데이터: 로컬 JSON (130종, 적정 체중/산책량/수명 포함)
-- 데일리 루틴: 기본 추천 + 사용자 커스텀 가능
+- Local-first app: Currently not using Supabase, uses SharedPreferences + local models
+- Lottie animations required: Different animations per character state
+- Dog status messages: Happy/walk request/hungry/sad/warning — tone is first-person from the dog's perspective
+- Breed data: Local JSON (130 breeds, includes optimal weight/walk distance/lifespan)
+- Daily routines: Default recommendations + user customization available
 
-## 참고 문서
+## Reference Documents
 
 @specs/REQUIREMENTS.md
