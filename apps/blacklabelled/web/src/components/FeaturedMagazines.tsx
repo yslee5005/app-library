@@ -20,6 +20,7 @@ function formatDate(dateStr: string | null): string {
 }
 
 function MagazineCard({ magazine }: { magazine: MagazineWithImage }) {
+  if (!magazine.slug) return null;
   return (
     <Link href={`/magazines/${magazine.slug}`}>
       <div className="group overflow-hidden transition-transform duration-500 ease-out">

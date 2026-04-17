@@ -34,10 +34,8 @@ export default async function MagazinesPage() {
           </p>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-16">
-            {magazines.map((magazine) => {
-              const href = magazine.slug
-                ? `/magazines/${magazine.slug}`
-                : `/magazines/${magazine.id}`;
+            {magazines.filter((m) => m.slug).map((magazine) => {
+              const href = `/magazines/${magazine.slug}`;
               const thumbnailUrl = magazine.thumbnail_path
                 ? getImageUrl(magazine.thumbnail_path)
                 : null;

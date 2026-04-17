@@ -769,3 +769,12 @@ export async function getMagazineBySlug(slug: string): Promise<Magazine | null> 
     .single();
   return data ?? null;
 }
+
+export async function getMagazineSlugById(id: string): Promise<string | null> {
+  const { data } = await supabase
+    .from("magazines")
+    .select("slug")
+    .eq("id", id)
+    .single();
+  return data?.slug ?? null;
+}

@@ -872,6 +872,7 @@ export async function createMagazine(
       title,
       summary,
       date,
+      slug: generateMagazineSlug(title),
     })
     .select("id")
     .single();

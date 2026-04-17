@@ -1,9 +1,11 @@
-import { getMagazineBySlug } from "@/lib/data";
-import { notFound } from "next/navigation";
+import { getMagazineBySlug, getMagazineSlugById } from "@/lib/data";
+import { notFound, permanentRedirect } from "next/navigation";
 import type { Metadata } from "next";
 import Link from "next/link";
 
 export const dynamic = "force-dynamic";
+
+const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -11,7 +13,11 @@ interface PageProps {
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-  const magazine = await getMagazineBySlug(decodeURIComponent(slug));
+  const decoded = decodeURIComponent(slug);
+  if (UUID_RE.test(decoded)) {
+    return { title: "Redirecting…" };
+  }
+  const magazine = await getMagazineBySlug(decoded);
   if (!magazine) return { title: "Not Found" };
 
   return {
@@ -28,7 +34,15 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function MagazineDetailPage({ params }: PageProps) {
   const { slug } = await params;
-  const magazine = await getMagazineBySlug(decodeURIComponent(slug));
+  const decoded = decodeURIComponent(slug);
+
+  if (UUID_RE.test(decoded)) {
+    const actualSlug = await getMagazineSlugById(decoded);
+    if (!actualSlug) notFound();
+    permanentRedirect(`/magazines/${actualSlug}`);
+  }
+
+  const magazine = await getMagazineBySlug(decoded);
   if (!magazine) notFound();
 
   const dateStr = magazine.date
