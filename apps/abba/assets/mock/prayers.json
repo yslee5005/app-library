@@ -1,0 +1,390 @@
+[
+  {
+    "id": "mock-001",
+    "user_id": "mock-user",
+    "transcript": "주님 감사합니다. 오늘 하루도 은혜로 시작하게 하심에 감사드립니다. 가족들을 지켜주시고 건강하게 해주세요.",
+    "mode": "prayer",
+    "duration_seconds": 360,
+    "created_at": "2026-04-17T06:30:00"
+  },
+  {
+    "id": "mock-002",
+    "user_id": "mock-user",
+    "transcript": "하나님 아버지, 오늘 직장에서 좋은 결과가 있게 해주세요. 동료들과의 관계도 축복해 주세요.",
+    "mode": "prayer",
+    "duration_seconds": 240,
+    "created_at": "2026-04-17T12:15:00"
+  },
+  {
+    "id": "mock-003",
+    "user_id": "mock-user",
+    "transcript": "여호와는 나의 목자시니 내게 부족함이 없으리로다. 이 말씀처럼 주님만 의지하며 살겠습니다.",
+    "mode": "qt",
+    "qt_passage_ref": "Psalm 23:1-6",
+    "duration_seconds": 480,
+    "created_at": "2026-04-16T06:00:00"
+  },
+  {
+    "id": "mock-004",
+    "user_id": "mock-user",
+    "transcript": "주님, 어머니의 건강을 위해 기도합니다. 수술이 잘 되게 해주시고 빠른 회복을 주세요.",
+    "mode": "prayer",
+    "duration_seconds": 300,
+    "created_at": "2026-04-16T21:00:00"
+  },
+  {
+    "id": "mock-005",
+    "user_id": "mock-user",
+    "transcript": "하나님, 오늘 말씀을 통해 평안을 주셔서 감사합니다. 염려하지 않고 기도로 아뢰겠습니다.",
+    "mode": "qt",
+    "qt_passage_ref": "Philippians 4:6-7",
+    "duration_seconds": 420,
+    "created_at": "2026-04-15T05:45:00"
+  },
+  {
+    "id": "mock-006",
+    "user_id": "mock-user",
+    "transcript": "주님, 이웃 김 집사님의 아들이 취업할 수 있도록 기도합니다. 좋은 곳에서 일하게 해주세요.",
+    "mode": "prayer",
+    "duration_seconds": 180,
+    "created_at": "2026-04-15T20:30:00"
+  },
+  {
+    "id": "mock-007",
+    "user_id": "mock-user",
+    "transcript": "하나님 아버지, 감사합니다. 오늘도 건강하게 일어나게 하시니 감사합니다. 교회 봉사를 잘 감당하게 해주세요.",
+    "mode": "prayer",
+    "duration_seconds": 300,
+    "created_at": "2026-04-14T06:15:00"
+  },
+  {
+    "id": "mock-008",
+    "user_id": "mock-user",
+    "transcript": "오직 여호와를 앙망하는 자는 새 힘을 얻으리니. 주님, 지친 마음에 새 힘을 부어주세요.",
+    "mode": "qt",
+    "qt_passage_ref": "Isaiah 40:31",
+    "duration_seconds": 540,
+    "created_at": "2026-04-13T06:00:00"
+  },
+  {
+    "id": "mock-009",
+    "user_id": "mock-user",
+    "transcript": "주님, 손주들이 건강하게 자라게 해주세요. 믿음 안에서 성장하도록 인도해 주세요.",
+    "mode": "prayer",
+    "duration_seconds": 240,
+    "created_at": "2026-04-13T19:00:00"
+  },
+  {
+    "id": "mock-010",
+    "user_id": "mock-user",
+    "transcript": "하나님, 우리 교회가 부흥하게 해주세요. 목사님께 지혜를 주시고 성도들이 하나되게 해주세요.",
+    "mode": "prayer",
+    "duration_seconds": 360,
+    "created_at": "2026-04-12T06:30:00"
+  },
+  {
+    "id": "mock-011",
+    "user_id": "mock-user",
+    "transcript": "너는 마음을 다하여 여호와를 신뢰하고 네 명철을 의지하지 말라. 주님, 내 뜻이 아닌 주의 뜻대로 되게 해주세요.",
+    "mode": "qt",
+    "qt_passage_ref": "Proverbs 3:5-6",
+    "duration_seconds": 600,
+    "created_at": "2026-04-11T05:30:00"
+  },
+  {
+    "id": "mock-012",
+    "user_id": "mock-user",
+    "transcript": "주님 감사합니다. 7일째 연속 기도하고 있습니다. 이 습관을 계속 지킬 수 있도록 도와주세요.",
+    "mode": "prayer",
+    "duration_seconds": 180,
+    "created_at": "2026-04-11T21:30:00"
+  },
+  {
+    "id": "mock-013",
+    "user_id": "mock-user",
+    "transcript": "주님, 요즘 마음이 무겁습니다. 걱정이 많아지는데 주님 앞에 다 내려놓겠습니다. 평안을 주세요.",
+    "mode": "prayer",
+    "duration_seconds": 420,
+    "created_at": "2026-04-07T06:45:00"
+  },
+  {
+    "id": "mock-014",
+    "user_id": "mock-user",
+    "transcript": "여호와의 말씀이니라 너희를 향한 나의 생각은 평안이요 재앙이 아니니라. 감사합니다 주님.",
+    "mode": "qt",
+    "qt_passage_ref": "Jeremiah 29:11",
+    "duration_seconds": 360,
+    "created_at": "2026-04-06T06:00:00"
+  },
+  {
+    "id": "mock-015",
+    "user_id": "mock-user",
+    "transcript": "하나님, 며느리와의 관계가 회복되도록 기도합니다. 서로 이해하고 사랑할 수 있게 해주세요.",
+    "mode": "prayer",
+    "duration_seconds": 300,
+    "created_at": "2026-04-05T20:00:00"
+  },
+  {
+    "id": "mock-016",
+    "user_id": "mock-user",
+    "transcript": "주님, 새벽에 눈을 떠서 기도할 수 있음에 감사합니다. 오늘 하루 주님과 동행하겠습니다.",
+    "mode": "prayer",
+    "duration_seconds": 240,
+    "created_at": "2026-04-04T05:00:00"
+  },
+  {
+    "id": "mock-017",
+    "user_id": "mock-user",
+    "transcript": "하나님, 나라와 민족을 위해 기도합니다. 평화를 주시고 지도자들에게 지혜를 주세요.",
+    "mode": "prayer",
+    "duration_seconds": 480,
+    "created_at": "2026-04-04T19:30:00"
+  },
+  {
+    "id": "mock-018",
+    "user_id": "mock-user",
+    "transcript": "주님, 건강 검진 결과가 좋았습니다. 감사합니다. 앞으로도 건강을 지켜주세요.",
+    "mode": "prayer",
+    "duration_seconds": 180,
+    "created_at": "2026-04-03T07:00:00"
+  },
+  {
+    "id": "mock-019",
+    "user_id": "mock-user",
+    "transcript": "강하고 담대하라 두려워하지 말며 놀라지 말라. 이 말씀을 붙잡고 오늘 하루를 시작합니다.",
+    "mode": "qt",
+    "qt_passage_ref": "Joshua 1:9",
+    "duration_seconds": 540,
+    "created_at": "2026-04-02T06:00:00"
+  },
+  {
+    "id": "mock-020",
+    "user_id": "mock-user",
+    "transcript": "하나님 아버지, 선교사님들을 위해 기도합니다. 건강과 안전을 지켜주시고 사역에 열매를 주세요.",
+    "mode": "prayer",
+    "duration_seconds": 360,
+    "created_at": "2026-04-01T06:30:00"
+  },
+  {
+    "id": "mock-021",
+    "user_id": "mock-user",
+    "transcript": "주님, 3월 한 달도 감사합니다. 새로운 달도 주님과 함께 시작합니다.",
+    "mode": "prayer",
+    "duration_seconds": 240,
+    "created_at": "2026-04-01T21:00:00"
+  },
+  {
+    "id": "mock-022",
+    "user_id": "mock-user",
+    "transcript": "하나님, 아들의 사업이 잘 되게 해주세요. 정직하게 일하며 복을 받게 해주세요.",
+    "mode": "prayer",
+    "duration_seconds": 300,
+    "created_at": "2026-03-31T06:15:00"
+  },
+  {
+    "id": "mock-023",
+    "user_id": "mock-user",
+    "transcript": "주께서 네게 복을 주시고 너를 지키시기를 원하며. 민수기 말씀으로 축복을 선포합니다.",
+    "mode": "qt",
+    "qt_passage_ref": "Numbers 6:24-26",
+    "duration_seconds": 420,
+    "created_at": "2026-03-30T06:00:00"
+  },
+  {
+    "id": "mock-024",
+    "user_id": "mock-user",
+    "transcript": "주님, 교회 소그룹 모임이 은혜로웠습니다. 함께 기도하는 형제자매에게 감사합니다.",
+    "mode": "prayer",
+    "duration_seconds": 180,
+    "created_at": "2026-03-29T20:30:00"
+  },
+  {
+    "id": "mock-025",
+    "user_id": "mock-user",
+    "transcript": "하나님, 잠이 오지 않는 밤에 주님 생각합니다. 평안한 밤을 주시고 내일도 인도해 주세요.",
+    "mode": "prayer",
+    "duration_seconds": 360,
+    "created_at": "2026-03-28T23:00:00"
+  },
+  {
+    "id": "mock-026",
+    "user_id": "mock-user",
+    "transcript": "주님, 딸이 해외에서 잘 지내고 있습니다. 감사합니다. 계속 보호해 주세요.",
+    "mode": "prayer",
+    "duration_seconds": 240,
+    "created_at": "2026-03-27T06:30:00"
+  },
+  {
+    "id": "mock-027",
+    "user_id": "mock-user",
+    "transcript": "내가 산을 향하여 눈을 들리라 나의 도움이 어디서 올까. 주님이 나의 도움이십니다.",
+    "mode": "qt",
+    "qt_passage_ref": "Psalm 121:1-2",
+    "duration_seconds": 480,
+    "created_at": "2026-03-26T05:45:00"
+  },
+  {
+    "id": "mock-028",
+    "user_id": "mock-user",
+    "transcript": "하나님, 비가 오는 날에도 감사합니다. 농부들에게 좋은 비를 내려주세요.",
+    "mode": "prayer",
+    "duration_seconds": 180,
+    "created_at": "2026-03-25T07:00:00"
+  },
+  {
+    "id": "mock-029",
+    "user_id": "mock-user",
+    "transcript": "주님, 교회 건축 헌금을 드릴 수 있어서 감사합니다. 하나님의 집이 세워지게 해주세요.",
+    "mode": "prayer",
+    "duration_seconds": 300,
+    "created_at": "2026-03-23T06:30:00"
+  },
+  {
+    "id": "mock-030",
+    "user_id": "mock-user",
+    "transcript": "하나님, 오늘 병원에 가는데 좋은 결과가 있게 해주세요. 의사 선생님에게 지혜를 주세요.",
+    "mode": "prayer",
+    "duration_seconds": 360,
+    "created_at": "2026-03-22T05:30:00"
+  },
+  {
+    "id": "mock-031",
+    "user_id": "mock-user",
+    "transcript": "주님, 봄이 왔습니다. 새 생명을 주시는 하나님 감사합니다. 내 마음에도 새 봄을 주세요.",
+    "mode": "prayer",
+    "duration_seconds": 240,
+    "created_at": "2026-03-20T06:00:00"
+  },
+  {
+    "id": "mock-032",
+    "user_id": "mock-user",
+    "transcript": "여호와를 기뻐하라 그가 네 마음의 소원을 이루어주시리로다. 주님을 기뻐하며 살겠습니다.",
+    "mode": "qt",
+    "qt_passage_ref": "Psalm 37:4",
+    "duration_seconds": 540,
+    "created_at": "2026-03-19T06:00:00"
+  },
+  {
+    "id": "mock-033",
+    "user_id": "mock-user",
+    "transcript": "하나님, 옛 친구를 오래간만에 만났습니다. 우정을 주셔서 감사합니다.",
+    "mode": "prayer",
+    "duration_seconds": 180,
+    "created_at": "2026-03-18T20:00:00"
+  },
+  {
+    "id": "mock-034",
+    "user_id": "mock-user",
+    "transcript": "주님, 손주가 태어났습니다! 건강하게 태어나게 해주셔서 감사합니다. 이 아이를 축복해 주세요.",
+    "mode": "prayer",
+    "duration_seconds": 720,
+    "created_at": "2026-03-17T08:00:00"
+  },
+  {
+    "id": "mock-035",
+    "user_id": "mock-user",
+    "transcript": "하나님, 목사님의 설교가 마음에 와닿았습니다. 말씀대로 살 수 있도록 도와주세요.",
+    "mode": "prayer",
+    "duration_seconds": 300,
+    "created_at": "2026-03-16T13:00:00"
+  },
+  {
+    "id": "mock-036",
+    "user_id": "mock-user",
+    "transcript": "주님, 새벽기도회에 나갈 힘을 주세요. 게으른 마음을 이기게 해주세요.",
+    "mode": "prayer",
+    "duration_seconds": 180,
+    "created_at": "2026-03-14T05:00:00"
+  },
+  {
+    "id": "mock-037",
+    "user_id": "mock-user",
+    "transcript": "범사에 감사하라 이것이 그리스도 예수 안에서 너희를 향하신 하나님의 뜻이니라.",
+    "mode": "qt",
+    "qt_passage_ref": "1 Thessalonians 5:18",
+    "duration_seconds": 480,
+    "created_at": "2026-03-12T06:00:00"
+  },
+  {
+    "id": "mock-038",
+    "user_id": "mock-user",
+    "transcript": "하나님, 남편의 건강을 위해 기도합니다. 혈압이 안정되게 해주시고 건강한 생활을 하게 해주세요.",
+    "mode": "prayer",
+    "duration_seconds": 360,
+    "created_at": "2026-03-10T06:30:00"
+  },
+  {
+    "id": "mock-039",
+    "user_id": "mock-user",
+    "transcript": "주님, 세상이 어지럽습니다. 그래도 주님이 다스리심을 믿습니다. 평화를 주세요.",
+    "mode": "prayer",
+    "duration_seconds": 240,
+    "created_at": "2026-03-08T07:00:00"
+  },
+  {
+    "id": "mock-040",
+    "user_id": "mock-user",
+    "transcript": "하나님이 세상을 이처럼 사랑하사 독생자를 주셨으니. 이 큰 사랑에 감사드립니다.",
+    "mode": "qt",
+    "qt_passage_ref": "John 3:16",
+    "duration_seconds": 600,
+    "created_at": "2026-03-06T06:00:00"
+  },
+  {
+    "id": "mock-041",
+    "user_id": "mock-user",
+    "transcript": "주님, 교회 봉사하면서 힘들 때도 있지만 보람을 느낍니다. 계속 섬길 수 있게 해주세요.",
+    "mode": "prayer",
+    "duration_seconds": 300,
+    "created_at": "2026-03-04T19:00:00"
+  },
+  {
+    "id": "mock-042",
+    "user_id": "mock-user",
+    "transcript": "하나님, 이번 주도 감사합니다. 예배드릴 수 있는 자유를 주셔서 감사합니다.",
+    "mode": "prayer",
+    "duration_seconds": 180,
+    "created_at": "2026-03-02T10:00:00"
+  },
+  {
+    "id": "mock-043",
+    "user_id": "mock-user",
+    "transcript": "주님, 2월이 끝나고 3월이 시작됩니다. 새 달에도 주님과 함께하겠습니다.",
+    "mode": "prayer",
+    "duration_seconds": 240,
+    "created_at": "2026-03-01T06:00:00"
+  },
+  {
+    "id": "mock-044",
+    "user_id": "mock-user",
+    "transcript": "나의 힘이 되신 여호와여 내가 주를 사랑하나이다. 주님은 나의 반석이시요 나의 요새이십니다.",
+    "mode": "qt",
+    "qt_passage_ref": "Psalm 18:1-2",
+    "duration_seconds": 540,
+    "created_at": "2026-02-27T06:00:00"
+  },
+  {
+    "id": "mock-045",
+    "user_id": "mock-user",
+    "transcript": "하나님, 추운 겨울을 지나 봄이 오고 있습니다. 만물을 새롭게 하시는 주님 감사합니다.",
+    "mode": "prayer",
+    "duration_seconds": 360,
+    "created_at": "2026-02-24T06:30:00"
+  },
+  {
+    "id": "mock-046",
+    "user_id": "mock-user",
+    "transcript": "주님, 오래 기도해온 것들이 하나씩 이뤄지고 있습니다. 응답해 주셔서 감사합니다.",
+    "mode": "prayer",
+    "duration_seconds": 480,
+    "created_at": "2026-02-21T07:00:00"
+  },
+  {
+    "id": "mock-047",
+    "user_id": "mock-user",
+    "transcript": "하나님, 처음으로 이 앱으로 기도합니다. 매일 기도하는 습관을 만들게 도와주세요.",
+    "mode": "prayer",
+    "duration_seconds": 120,
+    "created_at": "2026-02-18T06:00:00"
+  }
+]

@@ -169,6 +169,43 @@ final streakProvider = FutureProvider<({int current, int best})>((ref) {
   return repo.getStreak();
 });
 
+/// Heatmap cell data: count + total minutes for a day.
+class HeatmapDay {
+  final int count;
+  final int minutes;
+  const HeatmapDay({this.count = 0, this.minutes = 0});
+  HeatmapDay add(int durationSeconds) => HeatmapDay(
+    count: count + 1,
+    minutes: minutes + (durationSeconds ~/ 60),
+  );
+}
+
+/// Prayer heatmap data: daily prayer counts + duration for last 84 days.
+final prayerHeatmapProvider =
+    FutureProvider.autoDispose<Map<DateTime, HeatmapDay>>((ref) async {
+  final repo = ref.watch(prayerRepositoryProvider);
+  final now = DateTime.now();
+  final result = <DateTime, HeatmapDay>{};
+
+  final months = <({int year, int month})>{};
+  for (int i = 0; i <= 84; i++) {
+    final d = now.subtract(Duration(days: i));
+    months.add((year: d.year, month: d.month));
+  }
+
+  for (final m in months) {
+    final prayers = await repo.getPrayersByMonth(m.year, m.month);
+    for (final p in prayers) {
+      final dateKey = DateTime(p.createdAt.year, p.createdAt.month, p.createdAt.day);
+      final daysAgo = now.difference(dateKey).inDays;
+      if (daysAgo <= 84) {
+        result[dateKey] = (result[dateKey] ?? const HeatmapDay()).add(p.durationSeconds);
+      }
+    }
+  }
+  return result;
+});
+
 // ---------------------------------------------------------------------------
 // App state
 // ---------------------------------------------------------------------------

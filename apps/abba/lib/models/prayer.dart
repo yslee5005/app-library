@@ -4,6 +4,7 @@ class Prayer {
   final String transcript;
   final String mode; // 'prayer' | 'qt'
   final String? qtPassageRef;
+  final int durationSeconds;
   final DateTime createdAt;
   final PrayerResult? result;
 
@@ -13,6 +14,7 @@ class Prayer {
     required this.transcript,
     required this.mode,
     this.qtPassageRef,
+    this.durationSeconds = 0,
     required this.createdAt,
     this.result,
   });
@@ -24,6 +26,7 @@ class Prayer {
       transcript: json['transcript'] as String,
       mode: json['mode'] as String,
       qtPassageRef: json['qt_passage_ref'] as String?,
+      durationSeconds: json['duration_seconds'] as int? ?? 0,
       createdAt: DateTime.parse(json['created_at'] as String),
       result: json['result'] != null
           ? PrayerResult.fromJson(json['result'] as Map<String, dynamic>)

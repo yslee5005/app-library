@@ -53,6 +53,11 @@ supabase db push --linked
 
 ## MoAI 워크플로우
 
+### Decision Gate (기능 결정 시 /decide 필수)
+- 유저 동작/경험이 바뀌는 변경 → `/decide` 실행 후 옵션 제시 → STOP
+- 버그 수정/리팩토링 → 6하원칙 분석 → STOP
+- **코드 수정은 "실행" 후에만** — 옵션 선택 없이 임의로 결정 금지
+
 ### 분석/계획 ("계획해" = 분석만, 코드 수정 금지)
 - Agent로 deep research + 파일 Read 필수
 - 결과: 문제정의 / 핵심발견 / 실행계획 / 예상결과
