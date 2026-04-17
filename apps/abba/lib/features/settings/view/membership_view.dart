@@ -22,7 +22,7 @@ class _MembershipViewState extends ConsumerState<MembershipView> {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     final premiumAsync = ref.watch(isPremiumProvider);
-    final isPremium = premiumAsync.valueOrNull ?? false;
+    final isPremium = premiumAsync.value ?? false;
 
     return Scaffold(
       backgroundColor: AbbaColors.cream,

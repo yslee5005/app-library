@@ -41,6 +41,40 @@ class EmailAuthService {
     }
   }
 
+  /// Links email/password to the current anonymous user.
+  ///
+  /// Uses [updateUser] to add email + password credentials to the
+  /// existing anonymous session, preserving the user's UUID.
+  Future<Result<void>> linkEmail({
+    required String email,
+    required String password,
+  }) async {
+    try {
+      await _auth.updateUser(
+        UserAttributes(email: email, password: password),
+      );
+      return const Result.success(null);
+    } on AuthApiException catch (e, st) {
+      return Result.failure(
+        AuthException(
+          message: e.message,
+          code: e.code,
+          originalError: e,
+          stackTrace: st,
+        ),
+      );
+    } catch (e, st) {
+      return Result.failure(
+        AuthException(
+          message: 'Email link failed: $e',
+          code: 'email_link_error',
+          originalError: e,
+          stackTrace: st,
+        ),
+      );
+    }
+  }
+
   /// Creates a new account with email and password.
   Future<Result<AuthResponse>> signUp({
     required String email,

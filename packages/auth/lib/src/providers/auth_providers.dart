@@ -133,6 +133,72 @@ class AuthNotifier extends AsyncNotifier<AuthState> {
     };
   }
 
+  /// Signs in anonymously. Used for Anonymous-First pattern.
+  Future<void> signInAnonymously() async {
+    state = const AsyncLoading();
+    final result = await _repo.signInAnonymously();
+    state = switch (result) {
+      Success(:final value) => AsyncData(Authenticated(user: value)),
+      Failure(:final exception) => AsyncData(
+          AuthError(
+            message: exception.message,
+            code: exception is AuthException ? exception.code : null,
+          ),
+        ),
+    };
+  }
+
+  /// Links the current anonymous account with Google.
+  Future<void> linkWithGoogle() async {
+    state = const AsyncLoading();
+    final result = await _repo.linkWithGoogle();
+    state = switch (result) {
+      Success(:final value) => AsyncData(Authenticated(user: value)),
+      Failure(:final exception) => AsyncData(
+          AuthError(
+            message: exception.message,
+            code: exception is AuthException ? exception.code : null,
+          ),
+        ),
+    };
+  }
+
+  /// Links the current anonymous account with Apple.
+  Future<void> linkWithApple() async {
+    state = const AsyncLoading();
+    final result = await _repo.linkWithApple();
+    state = switch (result) {
+      Success(:final value) => AsyncData(Authenticated(user: value)),
+      Failure(:final exception) => AsyncData(
+          AuthError(
+            message: exception.message,
+            code: exception is AuthException ? exception.code : null,
+          ),
+        ),
+    };
+  }
+
+  /// Links the current anonymous account with email/password.
+  Future<void> linkWithEmail({
+    required String email,
+    required String password,
+  }) async {
+    state = const AsyncLoading();
+    final result = await _repo.linkWithEmail(
+      email: email,
+      password: password,
+    );
+    state = switch (result) {
+      Success(:final value) => AsyncData(Authenticated(user: value)),
+      Failure(:final exception) => AsyncData(
+          AuthError(
+            message: exception.message,
+            code: exception is AuthException ? exception.code : null,
+          ),
+        ),
+    };
+  }
+
   /// Signs out the current user.
   Future<void> signOut() async {
     state = const AsyncLoading();
@@ -148,6 +214,20 @@ class AuthNotifier extends AsyncNotifier<AuthState> {
     };
   }
 }
+
+/// Whether the current user is anonymous.
+///
+/// Reactively updates when auth state changes (sign-in, link, sign-out).
+/// Returns `true` when no user is logged in or the user is anonymous.
+final isAnonymousProvider = Provider<bool>((ref) {
+  // Watch authNotifierProvider to trigger rebuild on state changes.
+  final authState = ref.watch(authNotifierProvider);
+  return switch (authState) {
+    AsyncData(value: Authenticated()) =>
+      ref.read(authRepositoryProvider).isAnonymous,
+    _ => true,
+  };
+});
 
 /// Derives the current [UserProfile] from the auth state.
 ///

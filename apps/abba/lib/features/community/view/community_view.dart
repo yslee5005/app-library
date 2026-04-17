@@ -340,8 +340,8 @@ class _PostItemState extends ConsumerState<_PostItem> {
                 padding: EdgeInsets.zero,
                 onSelected: (value) => _handleMenuAction(value, post, l10n),
                 itemBuilder: (context) {
-                  final authState = ref.read(authStateProvider);
-                  final isOwner = authState.user?.id == post.userId;
+                  final currentUser = ref.read(currentUserProvider);
+                  final isOwner = currentUser?.id == post.userId;
                   return [
                     if (isOwner)
                       PopupMenuItem(
@@ -904,7 +904,7 @@ class _CommentsSheetState extends ConsumerState<_CommentsSheet> {
                             comment.displayName ?? l10n.anonymous;
                       }),
                       onDelete: () => _handleDeleteComment(comment.id),
-                      isOwner: ref.read(authStateProvider).user?.id ==
+                      isOwner: ref.read(currentUserProvider)?.id ==
                           comment.userId,
                       onCommentLike: (id) => _handleCommentLike(id),
                     );
@@ -1019,7 +1019,7 @@ class _CommentsSheetState extends ConsumerState<_CommentsSheet> {
     if (text.isEmpty) return;
 
     final repo = ref.read(communityRepositoryProvider);
-    final profile = ref.read(userProfileProvider).valueOrNull;
+    final profile = ref.read(userProfileProvider).value;
 
     await repo.createComment(
       postId: postId,

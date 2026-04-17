@@ -88,6 +88,94 @@ class SupabaseAuthRepository implements AuthRepository {
   }
 
   @override
+  Future<Result<UserProfile>> signInAnonymously() async {
+    try {
+      final response = await _auth.signInAnonymously();
+      final user = response.user;
+      if (user == null) {
+        return const Result.failure(
+          AuthException(
+            message: 'Anonymous sign-in failed',
+            code: 'anonymous_sign_in_error',
+          ),
+        );
+      }
+      return _fetchOrCreateProfile(response, 'anonymous');
+    } catch (e, st) {
+      return Result.failure(
+        AuthException(
+          message: 'Anonymous sign-in failed: $e',
+          code: 'anonymous_sign_in_error',
+          originalError: e,
+          stackTrace: st,
+        ),
+      );
+    }
+  }
+
+  @override
+  Future<Result<UserProfile>> linkWithGoogle() async {
+    final result = await _googleAuth.link();
+    return switch (result) {
+      Success(:final value) => _fetchOrCreateProfile(value, 'google'),
+      Failure(:final exception) => Result.failure(exception),
+    };
+  }
+
+  @override
+  Future<Result<UserProfile>> linkWithApple() async {
+    final result = await _appleAuth.link();
+    return switch (result) {
+      Success(:final value) => _fetchOrCreateProfile(value, 'apple'),
+      Failure(:final exception) => Result.failure(exception),
+    };
+  }
+
+  @override
+  Future<Result<UserProfile>> linkWithEmail({
+    required String email,
+    required String password,
+  }) async {
+    final result = await _emailAuth.linkEmail(
+      email: email,
+      password: password,
+    );
+    return switch (result) {
+      Success() => _refreshProfile(),
+      Failure(:final exception) => Result.failure(exception),
+    };
+  }
+
+  @override
+  bool get isAnonymous {
+    final user = _auth.currentUser;
+    return user?.isAnonymous ?? true;
+  }
+
+  /// Refreshes the current user's profile after a link operation.
+  Future<Result<UserProfile>> _refreshProfile() async {
+    final user = _auth.currentUser;
+    if (user == null) {
+      return const Result.failure(
+        AuthException(message: 'No authenticated user', code: 'not_auth'),
+      );
+    }
+    final data = await _client
+        .from('profiles')
+        .eq('id', user.id)
+        .maybeSingle();
+    if (data == null) {
+      return const Result.failure(
+        AuthException(
+          message: 'Profile not found after linking',
+          code: 'fetch_profile_error',
+        ),
+      );
+    }
+    return Result.success(UserProfile.fromJson(data));
+  }
+
+  @override
   Future<Result<void>> signOut() async {
     try {
       await _googleAuth.signOut();

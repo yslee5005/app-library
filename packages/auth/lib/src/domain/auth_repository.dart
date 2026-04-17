@@ -45,6 +45,26 @@ abstract interface class AuthRepository {
     bool? onboardingCompleted,
   });
 
+  /// Signs in anonymously. Used for Anonymous-First pattern.
+  Future<Result<UserProfile>> signInAnonymously();
+
+  /// Links the current anonymous user's account with Google.
+  /// Uses [linkIdentityWithIdToken] to preserve the anonymous UUID and data.
+  Future<Result<UserProfile>> linkWithGoogle();
+
+  /// Links the current anonymous user's account with Apple.
+  /// Uses [linkIdentityWithIdToken] to preserve the anonymous UUID and data.
+  Future<Result<UserProfile>> linkWithApple();
+
+  /// Links the current anonymous user's account with email/password.
+  Future<Result<UserProfile>> linkWithEmail({
+    required String email,
+    required String password,
+  });
+
+  /// Whether the current user is anonymous.
+  bool get isAnonymous;
+
   /// Stream of authentication state changes.
   Stream<AuthState> onAuthStateChange();
 }

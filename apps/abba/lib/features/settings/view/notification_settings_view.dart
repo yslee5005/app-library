@@ -13,7 +13,7 @@ class NotificationSettingsView extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context)!;
     final settingsAsync = ref.watch(notificationSettingsProvider);
-    final settings = settingsAsync.valueOrNull;
+    final settings = settingsAsync.value;
 
     return Scaffold(
       backgroundColor: AbbaColors.cream,

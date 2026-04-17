@@ -60,7 +60,7 @@ class _HomeViewState extends ConsumerState<HomeView>
 
   Future<void> _startPrayer() async {
     // Free user check
-    final profile = ref.read(userProfileProvider).valueOrNull;
+    final profile = ref.read(userProfileProvider).value;
     final isFree = profile?.subscription == SubscriptionStatus.free;
     final todayCount = ref.read(todayPrayerCountProvider);
 

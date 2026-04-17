@@ -5,7 +5,6 @@ import 'package:go_router/go_router.dart';
 import '../../../l10n/generated/app_localizations.dart';
 import '../../../models/user_profile.dart';
 import '../../../providers/providers.dart';
-import '../../../services/auth_service.dart';
 import '../../../theme/abba_theme.dart';
 import '../../../widgets/abba_card.dart';
 import '../../../widgets/abba_snackbar.dart';
@@ -26,11 +25,9 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
     final l10n = AppLocalizations.of(context)!;
     final locale = ref.watch(localeProvider);
     final profileAsync = ref.watch(userProfileProvider);
-    final isAnon = ref.watch(
-      authStateProvider.select((_) => ref.read(authServiceProvider).isAnonymous),
-    );
+    final isAnon = ref.watch(isAnonymousProvider);
     final premiumAsync = ref.watch(isPremiumProvider);
-    final isPremium = premiumAsync.valueOrNull ?? false;
+    final isPremium = premiumAsync.value ?? false;
 
     return Scaffold(
       backgroundColor: AbbaColors.cream,
@@ -477,11 +474,11 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
   Future<void> _linkAccount(String provider) async {
     final l10n = AppLocalizations.of(context)!;
     try {
-      final auth = ref.read(authServiceProvider);
+      final notifier = ref.read(authNotifierProvider.notifier);
       if (provider == 'apple') {
-        await auth.linkWithApple();
+        await notifier.linkWithApple();
       } else {
-        await auth.linkWithGoogle();
+        await notifier.linkWithGoogle();
       }
       ref.invalidate(userProfileProvider);
       if (mounted) {
@@ -516,9 +513,7 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
           TextButton(
             onPressed: () async {
               Navigator.pop(dialogContext);
-              await ref.read(authServiceProvider).signOut();
-              ref.read(authStateProvider.notifier).state =
-                  const AbbaAuthState();
+              await ref.read(authNotifierProvider.notifier).signOut();
               if (context.mounted) context.go('/welcome');
             },
             child: Text(

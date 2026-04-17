@@ -11,6 +11,7 @@ flutter:
   uses-material-design: true
 
 workspace:
+  - apps/abba
   - apps/showcase
   - apps/pet-life
   - packages/ui_kit

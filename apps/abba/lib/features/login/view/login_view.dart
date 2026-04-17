@@ -4,7 +4,6 @@ import 'package:go_router/go_router.dart';
 
 import '../../../l10n/generated/app_localizations.dart';
 import '../../../providers/providers.dart';
-import '../../../services/auth_service.dart';
 import '../../../services/error_logging_service.dart';
 import '../../../theme/abba_theme.dart';
 
@@ -15,19 +14,19 @@ class LoginView extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context)!;
 
-    Future<void> handleSignIn(Future<void> Function() signIn) async {
+    Future<void> handleSignIn(
+      Future<void> Function() signIn,
+      String provider,
+    ) async {
       try {
-        ref.read(authStateProvider.notifier).state = const AbbaAuthState(
-          status: AuthStatus.loading,
-        );
         await signIn();
-        // Auth state will be updated by the service
+        ErrorLoggingService.addBreadcrumb(
+          'Login success: $provider',
+          category: 'auth',
+        );
+        if (context.mounted) context.go('/home');
       } catch (e, stackTrace) {
         ErrorLoggingService.captureException(e, stackTrace);
-        ref.read(authStateProvider.notifier).state = AbbaAuthState(
-          status: AuthStatus.unauthenticated,
-          error: '$e',
-        );
         if (context.mounted) {
           ScaffoldMessenger.of(
             context,
@@ -61,19 +60,12 @@ class LoginView extends ConsumerWidget {
                 icon: Icons.apple,
                 backgroundColor: AbbaColors.warmBrown,
                 textColor: AbbaColors.white,
-                onTap: () => handleSignIn(() async {
-                  final auth = ref.read(authServiceProvider);
-                  final profile = await auth.signInWithApple();
-                  ref.read(authStateProvider.notifier).state = AbbaAuthState(
-                    status: AuthStatus.authenticated,
-                    user: profile,
-                  );
-                  ErrorLoggingService.addBreadcrumb(
-                    'Login success: Apple',
-                    category: 'auth',
-                  );
-                  if (context.mounted) context.go('/home');
-                }),
+                onTap: () => handleSignIn(
+                  () => ref
+                      .read(authNotifierProvider.notifier)
+                      .signInWithApple(),
+                  'Apple',
+                ),
               ),
               const SizedBox(height: AbbaSpacing.md),
               _LoginButton(
@@ -81,19 +73,12 @@ class LoginView extends ConsumerWidget {
                 icon: Icons.g_mobiledata,
                 backgroundColor: AbbaColors.white,
                 textColor: AbbaColors.warmBrown,
-                onTap: () => handleSignIn(() async {
-                  final auth = ref.read(authServiceProvider);
-                  final profile = await auth.signInWithGoogle();
-                  ref.read(authStateProvider.notifier).state = AbbaAuthState(
-                    status: AuthStatus.authenticated,
-                    user: profile,
-                  );
-                  ErrorLoggingService.addBreadcrumb(
-                    'Login success: Google',
-                    category: 'auth',
-                  );
-                  if (context.mounted) context.go('/home');
-                }),
+                onTap: () => handleSignIn(
+                  () => ref
+                      .read(authNotifierProvider.notifier)
+                      .signInWithGoogle(),
+                  'Google',
+                ),
               ),
               const SizedBox(height: AbbaSpacing.md),
               _LoginButton(
@@ -101,24 +86,19 @@ class LoginView extends ConsumerWidget {
                 icon: Icons.email_outlined,
                 backgroundColor: AbbaColors.sageDark,
                 textColor: AbbaColors.white,
-                onTap: () => handleSignIn(() async {
-                  final credentials = await _showEmailDialog(context, l10n);
-                  if (credentials == null) return;
-                  final auth = ref.read(authServiceProvider);
-                  final profile = await auth.signInWithEmail(
-                    credentials.$1,
-                    credentials.$2,
-                  );
-                  ref.read(authStateProvider.notifier).state = AbbaAuthState(
-                    status: AuthStatus.authenticated,
-                    user: profile,
-                  );
-                  ErrorLoggingService.addBreadcrumb(
-                    'Login success: Email',
-                    category: 'auth',
-                  );
-                  if (context.mounted) context.go('/home');
-                }),
+                onTap: () => handleSignIn(
+                  () async {
+                    final credentials = await _showEmailDialog(context, l10n);
+                    if (credentials == null) return;
+                    await ref
+                        .read(authNotifierProvider.notifier)
+                        .signInWithEmail(
+                          email: credentials.$1,
+                          password: credentials.$2,
+                        );
+                  },
+                  'Email',
+                ),
               ),
               const Spacer(flex: 3),
             ],

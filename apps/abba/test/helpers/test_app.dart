@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:abba/l10n/generated/app_localizations.dart';
 import 'package:abba/models/prayer.dart';
 import 'package:abba/providers/providers.dart';
+import 'package:abba/services/mock/mock_auth_repository.dart';
 import 'package:abba/services/mock/mock_community_repository.dart';
 import 'package:abba/services/mock/mock_notification_service.dart';
 import 'package:abba/services/mock/mock_prayer_repository.dart';
@@ -14,19 +15,18 @@ import 'package:abba/services/mock/mock_subscription_service.dart';
 import 'package:abba/services/mock/mock_tts_service.dart';
 import 'package:abba/services/mock_data.dart';
 import 'package:abba/services/mock/mock_ai_service.dart';
-import 'package:abba/services/mock/mock_auth_service.dart';
 import 'package:abba/theme/abba_theme.dart';
 
 /// Wraps a widget with all necessary providers for testing
 Widget buildTestApp(
   Widget child, {
   String locale = 'en',
-  List<Override>? overrides,
+  List<dynamic>? overrides,
 }) {
   final mockData = MockDataService();
 
-  final defaultOverrides = <Override>[
-    authServiceProvider.overrideWithValue(MockAuthService(mockData)),
+  final defaultOverrides = [
+    authRepositoryProvider.overrideWithValue(MockAuthRepository(mockData)),
     aiServiceProvider.overrideWithValue(MockAiService(mockData)),
     sttServiceProvider.overrideWithValue(MockSttService()),
     ttsServiceProvider.overrideWithValue(MockTtsService()),
@@ -41,7 +41,7 @@ Widget buildTestApp(
   ];
 
   return ProviderScope(
-    overrides: [...defaultOverrides, ...?overrides],
+    overrides: [...defaultOverrides, if (overrides != null) ...overrides],
     child: MaterialApp(
       home: child,
       theme: abbaTheme(),

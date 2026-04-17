@@ -49,7 +49,7 @@ class _PrayerDashboardViewState extends ConsumerState<PrayerDashboardView> {
         });
 
         // Merge premium content into prayerResultProvider
-        final currentResult = ref.read(prayerResultProvider).valueOrNull;
+        final currentResult = ref.read(prayerResultProvider).value;
         if (currentResult != null) {
           ref.read(prayerResultProvider.notifier).state = AsyncValue.data(
             currentResult.copyWithPremium(
@@ -70,7 +70,7 @@ class _PrayerDashboardViewState extends ConsumerState<PrayerDashboardView> {
     final l10n = AppLocalizations.of(context)!;
     final locale = ref.watch(localeProvider);
     final resultAsync = ref.watch(prayerResultProvider);
-    final isPremium = ref.watch(isPremiumProvider).valueOrNull ?? false;
+    final isPremium = ref.watch(isPremiumProvider).value ?? false;
 
     return Scaffold(
       backgroundColor: AbbaColors.cream,

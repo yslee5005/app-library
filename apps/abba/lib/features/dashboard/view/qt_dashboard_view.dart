@@ -21,7 +21,7 @@ class QtDashboardView extends ConsumerWidget {
     final l10n = AppLocalizations.of(context)!;
     final locale = ref.watch(localeProvider);
     final resultAsync = ref.watch(qtMeditationResultProvider);
-    final isPremium = ref.watch(isPremiumProvider).valueOrNull ?? false;
+    final isPremium = ref.watch(isPremiumProvider).value ?? false;
 
     return Scaffold(
       backgroundColor: AbbaColors.cream,

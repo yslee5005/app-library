@@ -45,7 +45,7 @@ class _MyPageViewState extends ConsumerState<MyPageView>
           // Profile section
           profileAsync.when(
             data: (profile) {
-              final streak = streakAsync.valueOrNull;
+              final streak = streakAsync.value;
               return Padding(
                 padding: const EdgeInsets.all(AbbaSpacing.md),
                 child: Column(

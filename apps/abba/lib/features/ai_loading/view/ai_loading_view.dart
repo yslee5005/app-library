@@ -77,8 +77,7 @@ class _AiLoadingViewState extends ConsumerState<AiLoadingView>
     final aiService = ref.read(aiServiceProvider);
 
     // Get actual user id from auth state
-    final authState = ref.read(authStateProvider);
-    final userId = authState.user?.id ?? 'anonymous';
+    final userId = ref.read(currentUserProvider)?.id ?? 'anonymous';
 
     // Check network before calling AI API
     final hasNetwork = await NetworkChecker.hasConnection();
@@ -143,8 +142,7 @@ class _AiLoadingViewState extends ConsumerState<AiLoadingView>
     final locale = ref.read(localeProvider);
     final aiService = ref.read(aiServiceProvider);
 
-    final authState = ref.read(authStateProvider);
-    final userId = authState.user?.id ?? 'anonymous';
+    final userId = ref.read(currentUserProvider)?.id ?? 'anonymous';
 
     final hasNetwork = await NetworkChecker.hasConnection();
     if (!hasNetwork) {

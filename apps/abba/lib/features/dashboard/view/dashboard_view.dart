@@ -23,7 +23,7 @@ class DashboardView extends ConsumerWidget {
     final l10n = AppLocalizations.of(context)!;
     final locale = ref.watch(localeProvider);
     final resultAsync = ref.watch(prayerResultProvider);
-    final isPremium = ref.watch(isPremiumProvider).valueOrNull ?? false;
+    final isPremium = ref.watch(isPremiumProvider).value ?? false;
 
     return Scaffold(
       backgroundColor: AbbaColors.cream,

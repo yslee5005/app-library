@@ -5,7 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:abba/app.dart';
 import 'package:abba/providers/providers.dart';
 import 'package:abba/services/mock/mock_ai_service.dart';
-import 'package:abba/services/mock/mock_auth_service.dart';
+import 'package:abba/services/mock/mock_auth_repository.dart';
 import 'package:abba/services/mock/mock_community_repository.dart';
 import 'package:abba/services/mock/mock_notification_service.dart';
 import 'package:abba/services/mock/mock_prayer_repository.dart';
@@ -25,8 +25,8 @@ void main() {
       await tester.pumpWidget(
         ProviderScope(
           overrides: [
-            authServiceProvider
-                .overrideWithValue(MockAuthService(mockData)),
+            authRepositoryProvider
+                .overrideWithValue(MockAuthRepository(mockData)),
             aiServiceProvider
                 .overrideWithValue(MockAiService(mockData)),
             sttServiceProvider.overrideWithValue(MockSttService()),
@@ -71,8 +71,8 @@ void main() {
       await tester.pumpWidget(
         ProviderScope(
           overrides: [
-            authServiceProvider
-                .overrideWithValue(MockAuthService(mockData)),
+            authRepositoryProvider
+                .overrideWithValue(MockAuthRepository(mockData)),
             aiServiceProvider
                 .overrideWithValue(MockAiService(mockData)),
             sttServiceProvider.overrideWithValue(MockSttService()),

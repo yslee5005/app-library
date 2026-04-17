@@ -207,7 +207,7 @@ class _WritePostViewState extends ConsumerState<WritePostView> {
 
     try {
       final repo = ref.read(communityRepositoryProvider);
-      final profile = ref.read(userProfileProvider).valueOrNull;
+      final profile = ref.read(userProfileProvider).value;
 
       await repo.createPost(
         category: _category,

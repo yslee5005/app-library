@@ -1,4 +1,10 @@
+import 'package:app_lib_auth/auth.dart' hide UserProfile;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_riverpod/legacy.dart';
+
+// Re-export auth providers for views (without UserProfile to avoid collision)
+export 'package:app_lib_auth/auth.dart'
+    show authRepositoryProvider, authNotifierProvider, currentUserProvider, isAnonymousProvider;
 
 import '../models/post.dart';
 import '../models/prayer.dart';
@@ -6,7 +12,6 @@ import '../models/qt_meditation_result.dart';
 import '../models/qt_passage.dart';
 import '../models/user_profile.dart';
 import '../services/ai_service.dart';
-import '../services/auth_service.dart';
 import '../services/community_repository.dart';
 import '../services/mock_data.dart';
 import '../services/notification_service.dart';
@@ -24,12 +29,9 @@ final mockDataServiceProvider = Provider<MockDataService>((ref) {
 });
 
 // ---------------------------------------------------------------------------
-// Service providers — mock/real branching via AppConfig.useMock
-// These are overridden in main.dart with concrete implementations
+// Auth — from packages/auth (authRepositoryProvider, authNotifierProvider,
+// currentUserProvider, isAnonymousProvider are re-exported from app_lib_auth)
 // ---------------------------------------------------------------------------
-final authServiceProvider = Provider<AuthService>((ref) {
-  throw UnimplementedError('authServiceProvider must be overridden');
-});
 
 final aiServiceProvider = Provider<AiService>((ref) {
   throw UnimplementedError('aiServiceProvider must be overridden');
@@ -84,20 +86,9 @@ final isPremiumProvider = FutureProvider<bool>((ref) {
 });
 
 // ---------------------------------------------------------------------------
-// Auth state
-// ---------------------------------------------------------------------------
-final authStateProvider = StateProvider<AbbaAuthState>((ref) {
-  return const AbbaAuthState();
-});
-
-// ---------------------------------------------------------------------------
 // Data providers
 // ---------------------------------------------------------------------------
 final userProfileProvider = FutureProvider<UserProfile>((ref) {
-  final authState = ref.watch(authStateProvider);
-  if (authState.isAuthenticated && authState.user != null) {
-    return Future.value(authState.user!);
-  }
   return ref.watch(mockDataServiceProvider).getUserProfile();
 });
 
@@ -140,7 +131,7 @@ final savedPostsProvider = FutureProvider<List<CommunityPost>>((ref) {
 /// My posts (current user's posts only)
 final myPostsProvider = FutureProvider<List<CommunityPost>>((ref) async {
   final repo = ref.watch(communityRepositoryProvider);
-  final userId = ref.watch(authStateProvider).user?.id ?? '';
+  final userId = ref.watch(currentUserProvider)?.id ?? '';
   final allPosts = await repo.getPosts();
   return allPosts.where((p) => p.userId == userId).toList();
 });

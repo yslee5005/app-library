@@ -1,15 +1,18 @@
+import 'package:app_lib_auth/auth.dart' hide UserProfile;
+import 'package:app_lib_core/core.dart';
+import 'package:app_lib_supabase_client/supabase_client.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:supabase_flutter/supabase_flutter.dart' hide AuthState;
 
 import 'app.dart';
 import 'config/app_config.dart';
 import 'providers/providers.dart';
-import 'services/auth_service.dart';
 import 'services/error_logging_service.dart';
 import 'services/mock/mock_ai_service.dart';
-import 'services/mock/mock_auth_service.dart';
+import 'services/mock/mock_auth_repository.dart';
 import 'services/mock/mock_community_repository.dart';
 import 'services/mock/mock_notification_service.dart';
 import 'services/mock/mock_prayer_repository.dart';
@@ -28,7 +31,6 @@ import 'services/real/google_cloud_tts_service.dart';
 import 'services/real/on_device_tts_service.dart';
 import 'services/real/hybrid_tts_service.dart';
 import 'services/real/revenuecat_subscription_service.dart';
-import 'services/real/supabase_auth_service.dart';
 import 'services/real/supabase_community_repository.dart';
 import 'services/real/supabase_prayer_repository.dart';
 
@@ -44,9 +46,14 @@ Future<void> main() async {
   // Initialize Sentry error logging
   await ErrorLoggingService.initialize();
 
-  final overrides = <Override>[];
+  final overrides = [
+    // Seed list with a dummy override so Dart infers the correct type.
+    // Immediately replaced below based on mock/real mode.
+    authRepositoryProvider.overrideWithValue(MockAuthRepository(MockDataService())),
+  ];
+  overrides.clear();
 
-  AuthService authService;
+  AuthRepository authRepo;
 
   // Initialize notification service (local-only, works in both mock/real)
   NotificationService notificationService = RealNotificationService();
@@ -61,9 +68,9 @@ Future<void> main() async {
   if (AppConfig.useMock) {
     // Mock mode — all services return JSON data
     final mockData = MockDataService();
-    authService = MockAuthService(mockData);
+    authRepo = MockAuthRepository(mockData);
     overrides.addAll([
-      authServiceProvider.overrideWithValue(authService),
+      authRepositoryProvider.overrideWithValue(authRepo),
       aiServiceProvider.overrideWithValue(MockAiService(mockData)),
       sttServiceProvider.overrideWithValue(MockSttService()),
       ttsServiceProvider.overrideWithValue(
@@ -89,11 +96,10 @@ Future<void> main() async {
       );
     } catch (e) {
       debugPrint('Supabase init failed: $e — falling back to mock mode');
-      // Fall back to mock mode if Supabase fails to initialize
       final mockData = MockDataService();
-      authService = MockAuthService(mockData);
+      authRepo = MockAuthRepository(mockData);
       overrides.addAll([
-        authServiceProvider.overrideWithValue(authService),
+        authRepositoryProvider.overrideWithValue(authRepo),
         aiServiceProvider.overrideWithValue(MockAiService(mockData)),
         sttServiceProvider.overrideWithValue(MockSttService()),
         ttsServiceProvider.overrideWithValue(MockTtsService()),
@@ -103,28 +109,46 @@ Future<void> main() async {
         ),
         subscriptionServiceProvider
             .overrideWithValue(MockSubscriptionService()),
-        notificationServiceProvider
-            .overrideWithValue(notificationService),
+        notificationServiceProvider.overrideWithValue(notificationService),
         qtRepositoryProvider.overrideWithValue(MockQtRepository(mockData)),
       ]);
 
       // Anonymous-first: auto sign in if no existing session
-      final currentUser = await authService.getCurrentUser();
-      if (currentUser == null) {
-        await authService.signInAnonymously();
-      }
+      await authRepo.signInAnonymously();
 
       runApp(ProviderScope(overrides: overrides, child: const AbbaApp()));
       return;
     }
 
     final supabase = Supabase.instance.client;
-    final supabaseAuth = SupabaseAuthService(supabase);
-    supabaseAuth.init(); // Attach listener after Supabase is confirmed ready
-    authService = supabaseAuth;
+    final appClient = AppSupabaseClient(
+      config: SupabaseConfig(
+        url: AppConfig.supabaseUrl,
+        anonKey: AppConfig.supabaseAnonKey,
+        appId: 'abba',
+      ),
+      client: supabase,
+    );
+
+    final googleAuth = GoogleAuthService(
+      auth: supabase.auth,
+      googleSignIn: GoogleSignIn(
+        clientId: AppConfig.googleIosClientId,
+        serverClientId: AppConfig.googleWebClientId,
+      ),
+    );
+    final appleAuth = AppleAuthService(auth: supabase.auth);
+    final emailAuth = EmailAuthService(auth: supabase.auth);
+
+    authRepo = SupabaseAuthRepository(
+      client: appClient,
+      googleAuth: googleAuth,
+      appleAuth: appleAuth,
+      emailAuth: emailAuth,
+    );
 
     overrides.addAll([
-      authServiceProvider.overrideWithValue(authService),
+      authRepositoryProvider.overrideWithValue(authRepo),
       aiServiceProvider.overrideWithValue(CachedAiService(OpenAiService())),
       sttServiceProvider.overrideWithValue(RealSttService()),
       ttsServiceProvider.overrideWithValue(
@@ -148,9 +172,9 @@ Future<void> main() async {
   }
 
   // Anonymous-first: auto sign in if no existing session
-  final currentUser = await authService.getCurrentUser();
-  if (currentUser == null) {
-    await authService.signInAnonymously();
+  final currentUser = await authRepo.getCurrentUser();
+  if (currentUser case Success(value: null)) {
+    await authRepo.signInAnonymously();
   }
 
   runApp(ProviderScope(overrides: overrides, child: const AbbaApp()));
