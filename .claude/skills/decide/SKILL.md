@@ -1,92 +1,92 @@
 ---
 name: decide
-description: 기능 결정 게이트. 코드 수정 전 분류 → 옵션 → STOP. "실행" 후에만 코드 수정.
+description: Feature decision gate. Classify → present options → STOP before code modification. Code changes only after "실행" (execute).
 ---
 
 # Decision Gate
 
-코드 수정 전 필수 프로세스. 요청을 분류하고 옵션을 제시한 후 STOP.
+Required process before code modification. Classify the request, present options, then STOP.
 
-## Step 1: 컨텍스트 수집
+## Step 1: Collect Context
 
-1. CLAUDE.md Boundaries (Always/Never/Ask First) 읽기
-2. 해당 앱의 CLAUDE.md 읽기 (apps/{app}/CLAUDE.md)
-3. 관련 코드 파일 Read (기억 의존 금지)
-4. memory/ 관련 피드백 확인
+1. Read CLAUDE.md Boundaries (Always/Never/Ask First)
+2. Read the target app's CLAUDE.md (apps/{app}/CLAUDE.md)
+3. Read related code files (never rely on memory)
+4. Check memory/ for related feedback
 
-## Step 2: 분류
+## Step 2: Classify
 
-| 분류 | 기준 | 예시 |
-|------|------|------|
-| **버그 수정** | 기존 동작이 깨진 것 | 크래시, 에러, 잘못된 표시 |
-| **기능 결정** | 유저 동작/경험이 바뀌는 것 | 제한 추가/제거, 새 UI, 로직 변경 |
-| **리팩토링** | 동작 변경 없이 구조만 | 파일 분리, 네이밍, 패턴 변경 |
-| **아키텍처** | 여러 앱/패키지에 영향 | DB 스키마, 인프라, 공유 코드 |
+| Classification | Criteria | Examples |
+|----------------|----------|----------|
+| **Bug Fix** | Existing behavior is broken | Crash, error, incorrect display |
+| **Feature Decision** | User behavior/experience changes | Add/remove restrictions, new UI, logic change |
+| **Refactoring** | Structure only, no behavior change | File splitting, naming, pattern change |
+| **Architecture** | Affects multiple apps/packages | DB schema, infra, shared code |
 
-## Step 3: 분류별 대응
+## Step 3: Response by Classification
 
-### 버그 수정 → 6하원칙 분석
+### Bug Fix → 5W1H Analysis
 ```
-누가 (Who)    — 어떤 유저가
-언제 (When)   — 어떤 시점에
-어디서 (Where) — 어떤 화면에서
-무엇을 (What)  — 뭘 하면
-어떻게 (How)   — 어떻게 동작하는데
-왜 (Why)      — 왜 문제인지
+Who    — Which user
+When   — At what point
+Where  — On which screen
+What   — Doing what
+How    — How it behaves
+Why    — Why it is a problem
 ```
-→ 수정 계획 제시 → **STOP**
+→ Present fix plan → **STOP**
 
-### 기능 결정 → 옵션 제시 (필수 2개 이상)
+### Feature Decision → Present Options (minimum 2)
 ```
-옵션 A: [접근법]
-  장점:
-  단점:
-  영향 범위:
+Option A: [approach]
+  Pros:
+  Cons:
+  Blast radius:
 
-옵션 B: [접근법]
-  장점:
-  단점:
-  영향 범위:
+Option B: [approach]
+  Pros:
+  Cons:
+  Blast radius:
 ```
-→ **STOP** — 유저가 옵션 선택 + "실행" 할 때까지 대기
+→ **STOP** — Wait until user selects an option + says "실행" (execute)
 
-### 리팩토링 → 범위 + 리스크
+### Refactoring → Scope + Risk
 ```
-범위: 어떤 파일들
-목표: 뭐가 좋아지는지
-리스크: 뭐가 깨질 수 있는지
+Scope: Which files
+Goal: What improves
+Risk: What could break
 ```
 → **STOP**
 
-### 아키텍처 → CLAUDE.md "Ask First" 규칙 적용
+### Architecture → Apply CLAUDE.md "Ask First" Rule
 ```
-영향: 어떤 앱/패키지에
-마이그레이션: 필요 여부
-호환성: 기존 코드 영향
+Impact: Which apps/packages
+Migration: Whether needed
+Compatibility: Effect on existing code
 ```
 → **STOP**
 
 ## Step 4: STOP
 
-**절대 코드 수정하지 않는다.**
+**Never modify code.**
 
-유저가 다음 중 하나를 말할 때까지 대기:
+Wait until the user says one of the following:
 - "실행"
 - "실행해"
 - "옵션 A로 실행"
 - "go ahead"
 
-## 과최적화 체크
+## Over-Optimization Check
 
-모든 옵션에 대해:
-- "MVP에 이거 지금 필요한가?"
-- "나중에 해도 되는 건 아닌가?"
-- "이 변경의 blast radius는?"
+For every option:
+- "Is this really needed for MVP right now?"
+- "Can this be done later?"
+- "What is the blast radius of this change?"
 
-## Boundaries 체크리스트
+## Boundaries Checklist
 
-코드 수정 전 자동 확인:
-- [ ] Always 규칙 위반 없는지
-- [ ] Never 규칙 위반 없는지
-- [ ] Ask First 항목인지
-- [ ] 보안 관련 변경인지 (.env, 키, RLS)
+Auto-verify before code modification:
+- [ ] No Always rule violations
+- [ ] No Never rule violations
+- [ ] Is this an Ask First item
+- [ ] Is this a security-related change (.env, keys, RLS)

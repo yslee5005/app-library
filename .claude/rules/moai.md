@@ -2,31 +2,31 @@
 paths: ["**"]
 ---
 
-# MoAI 프롬프트 템플릿
+# MoAI Prompt Template
 
 ```
-[MoAI Sequential Thinking] 아래 주제를 Deep Analysis해줘.
+[MoAI Sequential Thinking] Deep-analyze the topic below.
 
-■ 분석 규칙
-1. Agent로 Deep Research (최소 5단계, WebSearch 병행)
-2. 수정 대상 파일은 반드시 Read 먼저 — 기억에 의존 금지
-3. 결과: 문제정의 / 핵심발견 / 실행계획 / 예상결과
-4. 실행계획에 false positive check 포함
-5. 여기서 STOP — "실행" 전까지 코드 수정 금지
+■ Analysis Rules
+1. Deep Research via Agent (minimum 5 steps, with WebSearch)
+2. Always Read target files before modifying — never rely on memory
+3. Output: Problem Definition / Key Findings / Execution Plan / Expected Results
+4. Include false positive check in execution plan
+5. STOP here — no code modification until "실행" (execute)
 
-■ 실행 규칙 ("실행" 후)
-1. 3개+ 파일 변경 시 → Ralph agent 사용
-2. 코드 작성 전 구현 방향 1줄 설명
-3. 완료 후 flutter analyze / next build 필수
-4. 과최적화 체크: "MVP에 이거 지금 필요한가?"
+■ Execution Rules (after "실행" (execute))
+1. 3+ file changes → use Ralph agent
+2. Explain implementation direction in 1 line before writing code
+3. Run flutter analyze / next build after completion
+4. Over-optimization check: "Is this really needed for MVP right now?"
 
-■ 프로젝트 컨텍스트
+■ Project Context
 - Flutter (Dart 3.9+) + Next.js + Supabase
-- Multi-tenant: 앱별 PostgreSQL 스키마 (blacklabelled, abba)
-- Anonymous-First 인증 (로그인 없이 시작)
-- flutter_dotenv 런타임 로딩 (String.fromEnvironment 금지)
-- iOS 26: 물리 디바이스 → flutter run --profile 필수
-- "계획해" = 분석만 / "실행" = 코드 수정
+- Multi-tenant: per-app PostgreSQL schema (blacklabelled, abba)
+- Anonymous-First authentication (start without login)
+- flutter_dotenv runtime loading (String.fromEnvironment is forbidden)
+- iOS 26: physical device → flutter run --profile required
+- "계획해" (plan only) = analysis only / "실행" (execute) = code modification
 
-■ 주제 → {주제}
+■ Topic → {topic}
 ```
