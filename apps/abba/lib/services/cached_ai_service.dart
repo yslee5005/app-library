@@ -14,8 +14,10 @@ class CachedAiService implements AiService {
 
   CachedAiService(this._inner);
 
-  String _key(String text, String locale) =>
-      '${locale}_${text.hashCode}';
+  String _key(String text, String locale) {
+    final today = DateTime.now().toIso8601String().substring(0, 10);
+    return '${locale}_${today}_${text.hashCode}';
+  }
 
   T? _getFromCache<T>(Map<String, T> cache, String key) {
     if (cache.containsKey(key)) {

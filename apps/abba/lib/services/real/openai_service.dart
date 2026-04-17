@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:math';
 
 import 'package:http/http.dart' as http;
 
@@ -31,10 +32,13 @@ class OpenAiService implements AiService {
           'model': 'gpt-4o-mini',
           'response_format': {'type': 'json_object'},
           'messages': [
-            {'role': 'system', 'content': _buildSystemPrompt(langName)},
+            {'role': 'system', 'content': _buildSystemPrompt(langName) + _diversityHint()},
             {'role': 'user', 'content': transcript},
           ],
-          'temperature': 0.7,
+          'temperature': 0.9,
+          'top_p': 0.95,
+          'frequency_penalty': 0.3,
+          'presence_penalty': 0.6,
           'max_tokens': 2000,
         }),
       );
@@ -115,11 +119,14 @@ class OpenAiService implements AiService {
           'messages': [
             {
               'role': 'system',
-              'content': _buildMeditationPrompt(langName),
+              'content': _buildMeditationPrompt(langName) + _diversityHint(),
             },
             {'role': 'user', 'content': userMessage},
           ],
-          'temperature': 0.7,
+          'temperature': 0.9,
+          'top_p': 0.95,
+          'frequency_penalty': 0.3,
+          'presence_penalty': 0.6,
           'max_tokens': 2000,
         }),
       );
@@ -244,10 +251,13 @@ class OpenAiService implements AiService {
       'model': 'gpt-4o-mini',
       'response_format': {'type': 'json_object'},
       'messages': [
-        {'role': 'system', 'content': systemPrompt},
+        {'role': 'system', 'content': systemPrompt + _diversityHint()},
         {'role': 'user', 'content': userMessage},
       ],
-      'temperature': 0.7,
+      'temperature': 0.9,
+      'top_p': 0.95,
+      'frequency_penalty': 0.3,
+      'presence_penalty': 0.6,
       'max_tokens': maxTokens,
     });
     final headers = {
@@ -342,6 +352,29 @@ class OpenAiService implements AiService {
         ],
       ),
     );
+  }
+
+  /// Adds a random creative direction hint per request for variety.
+  String _diversityHint() {
+    const hints = [
+      'TODAY: Focus on a lesser-known character from the Old Testament.',
+      'TODAY: Find a connection to one of Jesus\' parables.',
+      'TODAY: Choose a verse from the Prophets (Isaiah-Malachi).',
+      'TODAY: Select a verse from Wisdom Literature (Job, Proverbs, Ecclesiastes, Song of Solomon).',
+      'TODAY: Feature a woman of faith from the Bible.',
+      'TODAY: Connect to a story from the book of Acts.',
+      'TODAY: Find a Psalm that is NOT commonly cited (avoid Psalm 23, 91, 121).',
+      'TODAY: Use a story from the period of the Judges.',
+      'TODAY: Choose a verse from one of Paul\'s lesser-read epistles (Philemon, Titus, 2 Timothy).',
+      'TODAY: Feature a story about answered prayer from the Bible.',
+      'TODAY: Explore a verse about God\'s faithfulness from the minor prophets.',
+      'TODAY: Connect to a story about transformation and new beginnings.',
+      'TODAY: Use a verse from Genesis or Exodus that is not commonly quoted.',
+      'TODAY: Feature a church history figure (not biblical) in the historical story.',
+      'TODAY: Choose a verse from Hebrews, James, or 1 Peter.',
+    ];
+    final index = (DateTime.now().millisecondsSinceEpoch ~/ 1000 + Random().nextInt(hints.length)) % hints.length;
+    return '\n\n${ hints[index]}';
   }
 
   static String _localeName(String locale) {
@@ -448,7 +481,16 @@ IMPORTANT:
 - The historical_story must be a REAL story from the Bible or verified church history.
 - Do NOT make up stories. Use real biblical figures (Abraham, Moses, David, Elijah, Hannah, Paul, etc.) or real church history figures (Corrie ten Boom, George Müller, Hudson Taylor, etc.).
 - The ai_prayer must flow logically from gratitude → petition → trust → surrender.
-- Be warm, encouraging, biblically accurate. NEVER judge the prayer.''';
+- Be warm, encouraging, biblically accurate. NEVER judge the prayer.
+
+DIVERSITY (equally important as accuracy):
+- NEVER default to "popular" verses (Psalm 23, Jeremiah 29:11, Philippians 4:13, Romans 8:28) unless they are genuinely the BEST fit. Prefer surprising, lesser-known connections.
+- Choose from the FULL canon of 66 books. Rotate between Old Testament and New Testament.
+- Prefer lesser-cited books: Habakkuk, Zephaniah, Micah, Nahum, Philemon, 2 John, 3 John, Jude, Song of Solomon, Ecclesiastes, Ruth, Esther, Nehemiah, Obadiah, Haggai, Malachi.
+- For bible_story: rotate through DIFFERENT biblical eras — Patriarchs, Exodus, Judges, United Kingdom, Divided Kingdom, Exile/Return, Prophets, Gospels, Early Church.
+- For historical_story: alternate between biblical figures (70%) and church history figures (30%): Corrie ten Boom, George Müller, Hudson Taylor, Dietrich Bonhoeffer, Brother Lawrence, Amy Carmichael, Watchman Nee, Gladys Aylward, Fanny Crosby, Richard Wurmbrand.
+- For original_language: explore DIFFERENT Hebrew/Greek words each time. The Bible has thousands of unique words.
+- For ai_prayer: vary the opening style — sometimes praise, sometimes confession, sometimes intimate ("Abba, Father"), sometimes formal ("Almighty God").''';
   }
 
   String _buildCoreSystemPrompt(String langName) {
