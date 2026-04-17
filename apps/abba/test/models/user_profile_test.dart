@@ -93,7 +93,7 @@ void main() {
     test('copyWith creates modified copy', () {
       const profile = UserProfile(
         id: 'user-1',
-        name: 'Grace',
+        displayName: 'Grace',
         email: 'grace@example.com',
         locale: 'en',
       );
