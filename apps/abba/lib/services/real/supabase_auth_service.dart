@@ -43,36 +43,42 @@ class SupabaseAuthService implements AuthService {
 
   @override
   Future<UserProfile> signInWithGoogle() async {
-    final googleSignIn = GoogleSignIn(
-      clientId: AppConfig.googleIosClientId,
-      serverClientId: AppConfig.googleWebClientId,
-    );
-    final googleUser = await googleSignIn.signIn();
-    if (googleUser == null) throw Exception('Google sign-in cancelled');
-
-    final googleAuth = await googleUser.authentication;
-    final idToken = googleAuth.idToken;
-    final accessToken = googleAuth.accessToken;
-
-    if (idToken == null) throw Exception('No Google ID token');
-
+    final (idToken, accessToken) = await _getGoogleAuth();
     await _client.auth.signInWithIdToken(
       provider: OAuthProvider.google,
       idToken: idToken,
       accessToken: accessToken,
     );
-
     return _fetchOrCreateProfile();
   }
 
   @override
   Future<UserProfile> linkWithGoogle() async {
-    if (!isAnonymous) {
-      // Already linked — just return current profile
-      return _fetchOrCreateProfile();
+    if (!isAnonymous) return _fetchOrCreateProfile();
+
+    final (idToken, accessToken) = await _getGoogleAuth();
+
+    try {
+      // 1차: linkIdentityWithIdToken — UUID 보존
+      await _client.auth.linkIdentityWithIdToken(
+        provider: OAuthProvider.google,
+        idToken: idToken,
+        accessToken: accessToken,
+      );
+    } on AuthException catch (e) {
+      if (e.code == 'identity_already_exists') {
+        // 2차: 이미 다른 유저에 연결됨 → 기존 계정으로 로그인
+        await _client.auth.signInWithIdToken(
+          provider: OAuthProvider.google,
+          idToken: idToken,
+          accessToken: accessToken,
+        );
+      } else {
+        rethrow;
+      }
     }
-    // For anonymous users, signInWithIdToken automatically links the identity
-    return signInWithGoogle();
+
+    return _fetchOrCreateProfile();
   }
 
   // ---------------------------------------------------------------------------
@@ -81,37 +87,42 @@ class SupabaseAuthService implements AuthService {
 
   @override
   Future<UserProfile> signInWithApple() async {
-    final rawNonce = _generateNonce();
-    final hashedNonce = sha256.convert(utf8.encode(rawNonce)).toString();
-
-    final credential = await SignInWithApple.getAppleIDCredential(
-      scopes: [
-        AppleIDAuthorizationScopes.email,
-        AppleIDAuthorizationScopes.fullName,
-      ],
-      nonce: hashedNonce,
-    );
-
-    final idToken = credential.identityToken;
-    if (idToken == null) throw Exception('No Apple ID token');
-
+    final (idToken, rawNonce) = await _getAppleAuth();
     await _client.auth.signInWithIdToken(
       provider: OAuthProvider.apple,
       idToken: idToken,
       nonce: rawNonce,
     );
-
     return _fetchOrCreateProfile();
   }
 
   @override
   Future<UserProfile> linkWithApple() async {
-    if (!isAnonymous) {
-      // Already linked — just return current profile
-      return _fetchOrCreateProfile();
+    if (!isAnonymous) return _fetchOrCreateProfile();
+
+    final (idToken, rawNonce) = await _getAppleAuth();
+
+    try {
+      // 1차: linkIdentityWithIdToken — UUID 보존
+      await _client.auth.linkIdentityWithIdToken(
+        provider: OAuthProvider.apple,
+        idToken: idToken,
+        nonce: rawNonce,
+      );
+    } on AuthException catch (e) {
+      if (e.code == 'identity_already_exists') {
+        // 2차: 이미 다른 유저에 연결됨 → 기존 계정으로 로그인
+        await _client.auth.signInWithIdToken(
+          provider: OAuthProvider.apple,
+          idToken: idToken,
+          nonce: rawNonce,
+        );
+      } else {
+        rethrow;
+      }
     }
-    // For anonymous users, signInWithIdToken automatically links the identity
-    return signInWithApple();
+
+    return _fetchOrCreateProfile();
   }
 
   // ---------------------------------------------------------------------------
@@ -225,6 +236,39 @@ class SupabaseAuthService implements AuthService {
     } catch (_) {
       return null;
     }
+  }
+
+  /// Google native auth — returns (idToken, accessToken)
+  Future<(String, String?)> _getGoogleAuth() async {
+    final googleSignIn = GoogleSignIn(
+      clientId: AppConfig.googleIosClientId,
+      serverClientId: AppConfig.googleWebClientId,
+    );
+    final googleUser = await googleSignIn.signIn();
+    if (googleUser == null) throw Exception('Google sign-in cancelled');
+
+    final googleAuth = await googleUser.authentication;
+    final idToken = googleAuth.idToken;
+    if (idToken == null) throw Exception('No Google ID token');
+    return (idToken, googleAuth.accessToken);
+  }
+
+  /// Apple native auth — returns (idToken, rawNonce)
+  Future<(String, String)> _getAppleAuth() async {
+    final rawNonce = _generateNonce();
+    final hashedNonce = sha256.convert(utf8.encode(rawNonce)).toString();
+
+    final credential = await SignInWithApple.getAppleIDCredential(
+      scopes: [
+        AppleIDAuthorizationScopes.email,
+        AppleIDAuthorizationScopes.fullName,
+      ],
+      nonce: hashedNonce,
+    );
+
+    final idToken = credential.identityToken;
+    if (idToken == null) throw Exception('No Apple ID token');
+    return (idToken, rawNonce);
   }
 
   /// Generate a cryptographically secure random nonce for Apple Sign In.
