@@ -9,8 +9,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { Select } from "@/components/ui/select";
 import { Badge } from "@/components/ui/badge";
+import ProjectCombobox, { type ProjectItem } from "@/components/admin/ProjectCombobox";
 import {
   Card,
   CardHeader,
@@ -37,22 +37,11 @@ import ImagePickerMulti from "@/components/admin/ImagePickerMulti";
 
 // ── Types ──────────────────────────────────────────────
 
-interface ProductOption {
-  id: string;
-  name: string;
-  slug: string;
-  description: string | null;
-}
-
 interface ImageOption {
   id: string;
   storage_path: string;
   type: string;
   sort_order: number;
-}
-
-interface NewMagazineClientProps {
-  products: ProductOption[];
 }
 
 interface OutlineSection {
@@ -70,9 +59,7 @@ interface GenerationStep {
 
 // ── Component ──────────────────────────────────────────
 
-export default function NewMagazineClient({
-  products,
-}: NewMagazineClientProps) {
+export default function NewMagazineClient() {
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
 
@@ -82,6 +69,7 @@ export default function NewMagazineClient({
 
   // Step 1: Project selection
   const [selectedProductId, setSelectedProductId] = useState("");
+  const [selectedProduct, setSelectedProduct] = useState<ProjectItem | null>(null);
   const [productImages, setProductImages] = useState<ImageOption[]>([]);
   const [productImagesTotal, setProductImagesTotal] = useState(0);
   const [selectedImagePaths, setSelectedImagePaths] = useState<string[]>([]);
@@ -116,7 +104,6 @@ export default function NewMagazineClient({
   const [editingInline, setEditingInline] = useState(false);
 
   // Derived
-  const selectedProduct = products.find((p) => p.id === selectedProductId);
   const finalTitle = customTitle;
   const canGenerate =
     !!selectedProductId &&
@@ -161,8 +148,9 @@ export default function NewMagazineClient({
   // ── Handlers ──────────────────────────────────────────
 
   const handleSelectProduct = useCallback(
-    async (productId: string) => {
+    async (productId: string, item: ProjectItem | null) => {
       setSelectedProductId(productId);
+      setSelectedProduct(item);
       setSelectedImagePaths([]);
       setProductImages([]);
       setProductImagesTotal(0);
@@ -601,18 +589,11 @@ ${editHtml}
             <CardContent className="space-y-4">
               <div className="space-y-2">
                 <Label className="text-zinc-300">Project</Label>
-                <Select
+                <ProjectCombobox
                   value={selectedProductId}
-                  onChange={(e) => handleSelectProduct(e.target.value)}
-                  className="border-zinc-700 bg-zinc-800 text-zinc-100"
-                >
-                  <option value="">-- Select a project --</option>
-                  {products.map((p) => (
-                    <option key={p.id} value={p.id}>
-                      {p.name}
-                    </option>
-                  ))}
-                </Select>
+                  onChange={handleSelectProduct}
+                  placeholder="-- Select a project --"
+                />
               </div>
 
               {selectedProduct && (
