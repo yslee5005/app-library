@@ -19,6 +19,18 @@ class _WritePostViewState extends ConsumerState<WritePostView> {
   String _category = 'testimony';
   final _textController = TextEditingController();
   bool _isSubmitting = false;
+  bool _hasContent = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _textController.addListener(() {
+      final hasContent = _textController.text.isNotEmpty;
+      if (hasContent != _hasContent) {
+        setState(() => _hasContent = hasContent);
+      }
+    });
+  }
 
   @override
   void dispose() {
@@ -30,11 +42,24 @@ class _WritePostViewState extends ConsumerState<WritePostView> {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
 
-    return Scaffold(
+    return PopScope(
+      canPop: !_hasContent,
+      onPopInvokedWithResult: (didPop, result) {
+        if (!didPop) {
+          _showDiscardDialog();
+        }
+      },
+      child: Scaffold(
       backgroundColor: AbbaColors.cream,
       appBar: AppBar(
         leading: IconButton(
-          onPressed: () => context.pop(),
+          onPressed: () {
+            if (_textController.text.isEmpty) {
+              context.pop();
+            } else {
+              _showDiscardDialog();
+            }
+          },
           icon: const Icon(Icons.close),
         ),
         title: Text('${l10n.writePostTitle} 🌸', style: AbbaTypography.h1),
@@ -183,6 +208,40 @@ class _WritePostViewState extends ConsumerState<WritePostView> {
           ],
         ),
       ),
+    ),
+    );
+  }
+
+  void _showDiscardDialog() {
+    final l10n = AppLocalizations.of(context)!;
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(AbbaRadius.lg),
+        ),
+        title: Text(l10n.leaveRecordingTitle, style: AbbaTypography.h2),
+        content: Text(l10n.leaveRecordingMessage, style: AbbaTypography.body),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(ctx),
+            child: Text(
+              l10n.stayButton,
+              style: AbbaTypography.bodySmall.copyWith(color: AbbaColors.muted),
+            ),
+          ),
+          TextButton(
+            onPressed: () {
+              Navigator.pop(ctx);
+              context.pop();
+            },
+            child: Text(
+              l10n.leaveButton,
+              style: AbbaTypography.bodySmall.copyWith(color: AbbaColors.error),
+            ),
+          ),
+        ],
+      ),
     );
   }
 
@@ -218,7 +277,7 @@ class _WritePostViewState extends ConsumerState<WritePostView> {
       // Refresh community posts
       ref.invalidate(filteredCommunityPostsProvider);
 
-      if (mounted) context.pop();
+      if (mounted) context.pop(true);
     } finally {
       if (mounted) setState(() => _isSubmitting = false);
     }

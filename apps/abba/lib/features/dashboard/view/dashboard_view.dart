@@ -35,7 +35,7 @@ class DashboardView extends ConsumerWidget {
         title: Text('${l10n.dashboardTitle} 🌸', style: AbbaTypography.h1),
         actions: [
           IconButton(
-            onPressed: () => context.go('/community/write'),
+            onPressed: () => context.push('/community/write'),
             icon: const Icon(Icons.share),
           ),
         ],
@@ -89,7 +89,6 @@ class DashboardView extends ConsumerWidget {
           child: TestimonyCard(
             testimony: testimonyText,
             title: l10n.testimonyTitle,
-            editLabel: l10n.testimonyEdit,
           ),
         ),
         if (result.guidance != null)

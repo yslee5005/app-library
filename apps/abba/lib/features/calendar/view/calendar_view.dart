@@ -78,16 +78,30 @@ class _CalendarViewState extends ConsumerState<CalendarView> {
                   ),
                   const SizedBox(width: AbbaSpacing.md),
                   GestureDetector(
-                    onTap: () => setState(() {
-                      _currentMonth = DateTime(
-                        _currentMonth.year,
-                        _currentMonth.month + 1,
-                      );
-                    }),
-                    child: Icon(
-                      Icons.chevron_right,
-                      size: 28,
-                      color: AbbaColors.warmBrown.withValues(alpha: 0.5),
+                    onTap: () {
+                      final now = DateTime.now();
+                      if (_currentMonth.year > now.year ||
+                          (_currentMonth.year == now.year && _currentMonth.month >= now.month)) {
+                        return;
+                      }
+                      setState(() {
+                        _currentMonth = DateTime(
+                          _currentMonth.year,
+                          _currentMonth.month + 1,
+                        );
+                      });
+                    },
+                    child: Builder(
+                      builder: (context) {
+                        final now = DateTime.now();
+                        final isFuture = _currentMonth.year > now.year ||
+                            (_currentMonth.year == now.year && _currentMonth.month >= now.month);
+                        return Icon(
+                          Icons.chevron_right,
+                          size: 28,
+                          color: AbbaColors.warmBrown.withValues(alpha: isFuture ? 0.15 : 0.5),
+                        );
+                      },
                     ),
                   ),
                 ],
@@ -280,7 +294,7 @@ class _CalendarViewState extends ConsumerState<CalendarView> {
               shape: BoxShape.circle,
               color: isSelected ? AbbaColors.sage : null,
               border: isToday && !isSelected
-                  ? Border.all(color: AbbaColors.sage, width: 1.5)
+                  ? Border.all(color: AbbaColors.softGold, width: 1.5)
                   : null,
             ),
             child: Center(

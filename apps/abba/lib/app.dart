@@ -13,6 +13,8 @@ class AbbaApp extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final locale = ref.watch(localeProvider);
+    // Dark mode disabled for MVP — AbbaColors.cream backgrounds clash with dark theme.
+    // themeModeProvider kept for future use but not applied to MaterialApp.
 
     return MaterialApp.router(
       title: 'Abba',

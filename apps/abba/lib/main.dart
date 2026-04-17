@@ -5,10 +5,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:supabase_flutter/supabase_flutter.dart' hide AuthState;
 
 import 'app.dart';
 import 'config/app_config.dart';
+import 'router/app_router.dart';
 import 'providers/providers.dart';
 import 'services/error_logging_service.dart';
 import 'services/mock/mock_ai_service.dart';
@@ -116,6 +118,12 @@ Future<void> main() async {
       // Anonymous-first: auto sign in if no existing session
       await authRepo.signInAnonymously();
 
+      final fallbackPrefs = await SharedPreferences.getInstance();
+      final fallbackSeen = fallbackPrefs.getBool('has_seen_welcome') ?? false;
+      appRouter = createAppRouter(
+        initialLocation: fallbackSeen ? '/home' : '/welcome',
+      );
+
       runApp(ProviderScope(overrides: overrides, child: const AbbaApp()));
       return;
     }
@@ -176,6 +184,28 @@ Future<void> main() async {
   if (currentUser case Success(value: null)) {
     await authRepo.signInAnonymously();
   }
+
+  // Load persisted settings
+  final prefs = await SharedPreferences.getInstance();
+  final hasSeenWelcome = prefs.getBool('has_seen_welcome') ?? false;
+  final savedLocale = prefs.getString('locale');
+  final savedDarkMode = prefs.getBool('dark_mode') ?? false;
+  final savedVoice = prefs.getString('voice_preference');
+
+  if (savedLocale != null) {
+    overrides.add(localeProvider.overrideWith((ref) => savedLocale));
+  }
+  if (savedDarkMode) {
+    overrides.add(themeModeProvider.overrideWith((ref) => ThemeMode.dark));
+  }
+  if (savedVoice != null) {
+    overrides.add(voicePreferenceProvider.overrideWith((ref) => savedVoice));
+  }
+
+  // Create router with correct initial location (skip welcome if already seen)
+  appRouter = createAppRouter(
+    initialLocation: hasSeenWelcome ? '/home' : '/welcome',
+  );
 
   runApp(ProviderScope(overrides: overrides, child: const AbbaApp()));
 }

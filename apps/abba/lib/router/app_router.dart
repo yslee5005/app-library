@@ -23,12 +23,16 @@ import '../widgets/abba_tab_bar.dart';
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
 
-final appRouter = GoRouter(
+/// Call [createAppRouter] from main.dart after reading SharedPreferences.
+late final GoRouter appRouter;
+
+GoRouter createAppRouter({required String initialLocation}) {
+  return GoRouter(
   navigatorKey: _rootNavigatorKey,
-  initialLocation: '/home',
+  initialLocation: initialLocation,
   redirect: (context, state) {
     // Anonymous-first: no auth redirect needed
-    // Welcome is shown only on first launch (handled by initial location)
+    // Welcome screen checks SharedPreferences and auto-redirects to /home if seen
     if (state.matchedLocation == '/login') return '/home';
     return null;
   },
@@ -127,6 +131,7 @@ final appRouter = GoRouter(
     ),
   ],
 );
+}
 
 class _ScaffoldWithNavBar extends ConsumerWidget {
   final StatefulNavigationShell navigationShell;

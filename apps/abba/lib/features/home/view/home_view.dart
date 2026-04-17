@@ -58,36 +58,45 @@ class _HomeViewState extends ConsumerState<HomeView>
 
   // --- Prayer controls ---
 
+  bool _isStarting = false;
+
   Future<void> _startPrayer() async {
-    // Free user check
-    final isPremium = ref.read(isPremiumProvider).value ?? false;
-    final todayCount = ref.read(todayPrayerCountProvider);
+    if (_isStarting) return;
+    _isStarting = true;
 
-    if (!isPremium && todayCount >= 1) {
-      if (context.mounted) {
-        final purchased = await showPremiumPrompt(context);
-        if (!purchased) return;
+    try {
+      // Free user check
+      final isPremium = ref.read(isPremiumProvider).value ?? false;
+      final todayCount = ref.read(todayPrayerCountProvider);
+
+      if (!isPremium && todayCount >= 1) {
+        if (context.mounted) {
+          final purchased = await showPremiumPrompt(context);
+          if (!purchased) return;
+        }
       }
+
+      ref.read(todayPrayerCountProvider.notifier).state = todayCount + 1;
+
+      setState(() {
+        _isPraying = true;
+        _isPaused = false;
+        _seconds = 0;
+        _transcript = '';
+        _isTextMode = false;
+      });
+      ref.read(isRecordingProvider.notifier).state = true;
+
+      _pulseController.repeat(reverse: true);
+      _timer = Timer.periodic(const Duration(seconds: 1), (_) {
+        if (!_isPaused && mounted) setState(() => _seconds++);
+      });
+
+      ErrorLoggingService.addBreadcrumb('Prayer started', category: 'prayer');
+      _startStt();
+    } finally {
+      _isStarting = false;
     }
-
-    ref.read(todayPrayerCountProvider.notifier).state = todayCount + 1;
-
-    setState(() {
-      _isPraying = true;
-      _isPaused = false;
-      _seconds = 0;
-      _transcript = '';
-      _isTextMode = false;
-    });
-    ref.read(isRecordingProvider.notifier).state = true;
-
-    _pulseController.repeat(reverse: true);
-    _timer = Timer.periodic(const Duration(seconds: 1), (_) {
-      if (!_isPaused && mounted) setState(() => _seconds++);
-    });
-
-    ErrorLoggingService.addBreadcrumb('Prayer started', category: 'prayer');
-    _startStt();
   }
 
   void _startStt() {

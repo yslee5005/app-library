@@ -82,7 +82,7 @@ class _PrayerDashboardViewState extends ConsumerState<PrayerDashboardView> {
         title: Text(l10n.prayerDashboardTitle, style: AbbaTypography.h1),
         actions: [
           IconButton(
-            onPressed: () => context.go('/community/write'),
+            onPressed: () => context.push('/community/write'),
             icon: const Icon(Icons.share),
           ),
         ],
@@ -146,7 +146,6 @@ class _PrayerDashboardViewState extends ConsumerState<PrayerDashboardView> {
           child: TestimonyCard(
             testimony: testimonyText,
             title: l10n.testimonyTitle,
-            editLabel: l10n.testimonyEdit,
           ),
         ),
         // 4. Historical Story Card (Premium — on-demand)

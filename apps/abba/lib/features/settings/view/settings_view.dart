@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../l10n/generated/app_localizations.dart';
 import '../../../models/user_profile.dart';
@@ -17,9 +19,6 @@ class SettingsView extends ConsumerStatefulWidget {
 }
 
 class _SettingsViewState extends ConsumerState<SettingsView> {
-  String _voicePreference = 'warm';
-  bool _darkMode = false;
-
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
@@ -149,14 +148,15 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
                   trailing: _buildLanguageDropdown(locale),
                 ),
                 const Divider(height: 1, indent: 56),
-                // Dark mode
+                // Dark mode (disabled for MVP — hardcoded AbbaColors.cream backgrounds clash)
                 _SettingsRow(
                   icon: Icons.dark_mode_outlined,
                   title: l10n.darkModeSetting,
-                  trailing: Switch(
-                    value: _darkMode,
-                    onChanged: (v) => setState(() => _darkMode = v),
-                    activeTrackColor: AbbaColors.sage,
+                  trailing: Text(
+                    'Coming soon',
+                    style: AbbaTypography.caption.copyWith(
+                      color: AbbaColors.muted,
+                    ),
                   ),
                 ),
                 const Divider(height: 1, indent: 56),
@@ -190,7 +190,7 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
                     Icons.chevron_right,
                     color: AbbaColors.muted,
                   ),
-                  onTap: () {},
+                  onTap: () => _launchUrlSafe(Uri.parse('https://abba.ystech.app/help')),
                 ),
                 const Divider(height: 1, indent: 56),
                 _SettingsRow(
@@ -200,7 +200,7 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
                     Icons.chevron_right,
                     color: AbbaColors.muted,
                   ),
-                  onTap: () {},
+                  onTap: () => _launchUrlSafe(Uri.parse('https://abba.ystech.app/terms')),
                 ),
                 const Divider(height: 1, indent: 56),
                 _SettingsRow(
@@ -210,7 +210,7 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
                     Icons.chevron_right,
                     color: AbbaColors.muted,
                   ),
-                  onTap: () {},
+                  onTap: () => _launchUrlSafe(Uri.parse('https://abba.ystech.app/privacy')),
                 ),
                 if (!isAnon) ...[
                   const Divider(height: 1, indent: 56),
@@ -310,8 +310,10 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
       'strong': l10n.voiceStrong,
     };
 
+    final voicePref = ref.watch(voicePreferenceProvider);
+
     return DropdownButton<String>(
-      value: _voicePreference,
+      value: voicePref,
       underline: const SizedBox.shrink(),
       icon: const SizedBox.shrink(),
       items: voiceLabels.entries
@@ -322,8 +324,12 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
             ),
           )
           .toList(),
-      onChanged: (v) {
-        if (v != null) setState(() => _voicePreference = v);
+      onChanged: (v) async {
+        if (v != null) {
+          ref.read(voicePreferenceProvider.notifier).state = v;
+          final prefs = await SharedPreferences.getInstance();
+          await prefs.setString('voice_preference', v);
+        }
       },
     );
   }
@@ -380,12 +386,27 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
             ),
           )
           .toList(),
-      onChanged: (v) {
+      onChanged: (v) async {
         if (v != null) {
           ref.read(localeProvider.notifier).state = v;
+          final prefs = await SharedPreferences.getInstance();
+          await prefs.setString('locale', v);
         }
       },
     );
+  }
+
+  // ── URL launch with fallback ────────────────────────────────────────
+  Future<void> _launchUrlSafe(Uri url) async {
+    if (await canLaunchUrl(url)) {
+      await launchUrl(url, mode: LaunchMode.externalApplication);
+    } else {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Coming soon')),
+        );
+      }
+    }
   }
 
   // ── Link account bottom sheet ───────────────────────────────────────

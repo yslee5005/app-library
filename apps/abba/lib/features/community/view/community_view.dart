@@ -25,10 +25,13 @@ class _CommunityViewState extends ConsumerState<CommunityView> {
   String? _cursor;
   bool _initialLoaded = false;
 
+  bool _isLoadingInitial = false;
+
   @override
   void initState() {
     super.initState();
     _scrollController.addListener(_onScroll);
+    _loadInitial();
   }
 
   @override
@@ -68,6 +71,9 @@ class _CommunityViewState extends ConsumerState<CommunityView> {
   }
 
   Future<void> _loadInitial() async {
+    if (_isLoadingInitial) return;
+    _isLoadingInitial = true;
+
     final repo = ref.read(communityRepositoryProvider);
     final filter = ref.read(communityFilterProvider);
     final posts = await repo.getPosts(
@@ -82,6 +88,7 @@ class _CommunityViewState extends ConsumerState<CommunityView> {
           posts.isNotEmpty ? posts.last.createdAt.toIso8601String() : null;
       _hasMore = posts.length >= 20;
       _initialLoaded = true;
+      _isLoadingInitial = false;
     });
   }
 
@@ -91,6 +98,7 @@ class _CommunityViewState extends ConsumerState<CommunityView> {
       _cursor = null;
       _hasMore = true;
       _initialLoaded = false;
+      _isLoadingInitial = false;
     });
     await _loadInitial();
   }
@@ -105,9 +113,8 @@ class _CommunityViewState extends ConsumerState<CommunityView> {
       if (prev != next) _refresh();
     });
 
-    // Initial load
+    // Show loading state until initial load completes
     if (!_initialLoaded) {
-      _loadInitial();
       return Scaffold(
         backgroundColor: AbbaColors.cream,
         appBar: AppBar(
@@ -193,7 +200,10 @@ class _CommunityViewState extends ConsumerState<CommunityView> {
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => context.go('/community/write'),
+        onPressed: () async {
+          final result = await context.push<bool>('/community/write');
+          if (result == true) _refresh();
+        },
         backgroundColor: AbbaColors.sageDark,
         child: const Text('\u270f\ufe0f', style: TextStyle(fontSize: 24)),
       ),

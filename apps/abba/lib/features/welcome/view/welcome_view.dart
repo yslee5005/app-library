@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../l10n/generated/app_localizations.dart';
 import '../../../theme/abba_theme.dart';
@@ -7,6 +8,12 @@ import '../../../widgets/abba_button.dart';
 
 class WelcomeView extends StatelessWidget {
   const WelcomeView({super.key});
+
+  Future<void> _onGetStarted(BuildContext context) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('has_seen_welcome', true);
+    if (context.mounted) context.go('/home');
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +69,7 @@ class WelcomeView extends StatelessWidget {
               // Get Started button
               AbbaButton(
                 label: l10n.getStarted,
-                onPressed: () => context.go('/home'),
+                onPressed: () => _onGetStarted(context),
                 isHero: true,
               ),
               const SizedBox(height: AbbaSpacing.xxl),

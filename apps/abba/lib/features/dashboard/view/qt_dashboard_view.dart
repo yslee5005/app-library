@@ -31,6 +31,12 @@ class QtDashboardView extends ConsumerWidget {
           icon: const Icon(Icons.arrow_back),
         ),
         title: Text(l10n.qtDashboardTitle, style: AbbaTypography.h1),
+        actions: [
+          IconButton(
+            onPressed: () => context.push('/community/write'),
+            icon: const Icon(Icons.share),
+          ),
+        ],
       ),
       body: resultAsync.when(
         data: (result) =>

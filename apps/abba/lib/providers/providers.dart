@@ -1,4 +1,5 @@
 import 'package:app_lib_auth/auth.dart' hide UserProfile;
+import 'package:flutter/material.dart' show ThemeMode;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/legacy.dart';
 
@@ -210,6 +211,12 @@ final prayerHeatmapProvider =
 // App state
 // ---------------------------------------------------------------------------
 final localeProvider = StateProvider<String>((ref) => 'ko');
+
+/// Theme mode provider for dark mode support
+final themeModeProvider = StateProvider<ThemeMode>((ref) => ThemeMode.light);
+
+/// Voice preference provider
+final voicePreferenceProvider = StateProvider<String>((ref) => 'warm');
 
 /// Tracks current prayer transcript from recording
 final currentTranscriptProvider = StateProvider<String>((ref) => '');

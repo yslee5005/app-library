@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../l10n/generated/app_localizations.dart';
 import '../../../models/post.dart';
@@ -246,17 +247,38 @@ class _PrayerDayTile extends ConsumerWidget {
                 ),
                 const SizedBox(height: AbbaSpacing.xs),
                 ...prayers.map(
-                  (p) => Padding(
-                    padding: const EdgeInsets.only(bottom: AbbaSpacing.xs),
-                    child: Text(
-                      p.transcript.length > 80
-                          ? '${p.transcript.substring(0, 80)}...'
-                          : p.transcript,
-                      style: AbbaTypography.bodySmall.copyWith(
-                        color: AbbaColors.muted,
+                  (p) => GestureDetector(
+                    onTap: () {
+                      if (p.result != null) {
+                        ref.read(prayerResultProvider.notifier).state =
+                            AsyncValue.data(p.result!);
+                        context.push('/home/prayer-dashboard');
+                      }
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.only(bottom: AbbaSpacing.xs),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Text(
+                              p.transcript.length > 80
+                                  ? '${p.transcript.substring(0, 80)}...'
+                                  : p.transcript,
+                              style: AbbaTypography.bodySmall.copyWith(
+                                color: AbbaColors.muted,
+                              ),
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ),
+                          if (p.result != null)
+                            Icon(
+                              Icons.chevron_right,
+                              size: 18,
+                              color: AbbaColors.muted.withValues(alpha: 0.4),
+                            ),
+                        ],
                       ),
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
                     ),
                   ),
                 ),
