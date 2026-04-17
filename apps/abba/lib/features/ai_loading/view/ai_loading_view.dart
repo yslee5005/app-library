@@ -200,11 +200,23 @@ class _AiLoadingViewState extends ConsumerState<AiLoadingView>
   Future<void> _checkStreakCelebration() async {
     try {
       final repo = ref.read(prayerRepositoryProvider);
-      final streak = await repo.getStreak();
-      final currentStreak = streak.current;
 
+      // checkMilestones returns only NEWLY achieved milestones
+      // (already achieved ones are skipped via UNIQUE constraint)
+      final newMilestones = await repo.checkMilestones();
+
+      if (newMilestones.isEmpty) return;
+
+      final streak = await repo.getStreak();
       final notificationService = ref.read(notificationServiceProvider);
-      await notificationService.showStreakCelebration(currentStreak);
+
+      // Only show celebration if the streak milestone is new
+      for (final milestone in newMilestones) {
+        if (milestone.endsWith('_day_streak')) {
+          await notificationService.showStreakCelebration(streak.current);
+          break; // one celebration per prayer
+        }
+      }
     } catch (e) {
       // Non-fatal — don't block prayer flow for notification errors
       debugPrint('Streak celebration check failed: $e');

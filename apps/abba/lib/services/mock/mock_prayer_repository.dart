@@ -7,6 +7,7 @@ import '../prayer_repository.dart';
 
 class MockPrayerRepository implements PrayerRepository {
   final List<Prayer> _prayers = [];
+  final Set<String> _achievedMilestones = {};
   bool _initialized = false;
 
   /// Lazy-load seed data from JSON on first read access.
@@ -92,12 +93,16 @@ class MockPrayerRepository implements PrayerRepository {
   Future<List<String>> checkMilestones() async {
     await _ensureInitialized();
     final streak = _calculateStreak();
-    final milestones = <String>[];
-    if (_prayers.length == 1) milestones.add('first_prayer');
-    if (streak.current == 7) milestones.add('7_day_streak');
-    if (streak.current == 30) milestones.add('30_day_streak');
-    if (_prayers.length == 100) milestones.add('100_prayers');
-    return milestones;
+    final candidates = <String>[];
+    if (_prayers.length == 1) candidates.add('first_prayer');
+    if (streak.current == 7) candidates.add('7_day_streak');
+    if (streak.current == 30) candidates.add('30_day_streak');
+    if (_prayers.length == 100) candidates.add('100_prayers');
+
+    // Return only NEW milestones (not already achieved)
+    final newMilestones = candidates.where((m) => !_achievedMilestones.contains(m)).toList();
+    _achievedMilestones.addAll(newMilestones);
+    return newMilestones;
   }
 
   /// Calculate current and best streak from actual prayer dates.

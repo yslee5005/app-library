@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../config/app_config.dart';
 import '../../../l10n/generated/app_localizations.dart';
 import '../../../providers/providers.dart';
 import '../../../services/error_logging_service.dart';
