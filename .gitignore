@@ -55,6 +55,14 @@ Thumbs.db
 
 # Debug screenshots
 screen_*.png
+screenshot_*.png
+flutter_*.png
+
+# DevTools auto-generated
+**/devtools_options.yaml
+
+# JDK (should not be in repo)
+*.jdk/
 
 # Android build cache
 **/.gradle/
