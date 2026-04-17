@@ -1,7 +1,13 @@
 import 'dart:async';
+import 'dart:convert';
+import 'dart:math';
 
+import 'package:crypto/crypto.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
+import '../../config/app_config.dart';
 import '../../models/user_profile.dart';
 import '../auth_service.dart';
 
@@ -31,23 +37,86 @@ class SupabaseAuthService implements AuthService {
     });
   }
 
+  // ---------------------------------------------------------------------------
+  // Google — native sign-in via google_sign_in + signInWithIdToken
+  // ---------------------------------------------------------------------------
+
   @override
   Future<UserProfile> signInWithGoogle() async {
-    await _client.auth.signInWithOAuth(
-      OAuthProvider.google,
-      redirectTo: 'com.ystech.abba://callback',
+    final googleSignIn = GoogleSignIn(
+      clientId: AppConfig.googleIosClientId,
+      serverClientId: AppConfig.googleWebClientId,
     );
-    return _waitForProfile();
+    final googleUser = await googleSignIn.signIn();
+    if (googleUser == null) throw Exception('Google sign-in cancelled');
+
+    final googleAuth = await googleUser.authentication;
+    final idToken = googleAuth.idToken;
+    final accessToken = googleAuth.accessToken;
+
+    if (idToken == null) throw Exception('No Google ID token');
+
+    await _client.auth.signInWithIdToken(
+      provider: OAuthProvider.google,
+      idToken: idToken,
+      accessToken: accessToken,
+    );
+
+    return _fetchOrCreateProfile();
   }
 
   @override
-  Future<UserProfile> signInWithApple() async {
-    await _client.auth.signInWithOAuth(
-      OAuthProvider.apple,
-      redirectTo: 'com.ystech.abba://callback',
-    );
-    return _waitForProfile();
+  Future<UserProfile> linkWithGoogle() async {
+    if (!isAnonymous) {
+      // Already linked — just return current profile
+      return _fetchOrCreateProfile();
+    }
+    // For anonymous users, signInWithIdToken automatically links the identity
+    return signInWithGoogle();
   }
+
+  // ---------------------------------------------------------------------------
+  // Apple — native sign-in via sign_in_with_apple + signInWithIdToken
+  // ---------------------------------------------------------------------------
+
+  @override
+  Future<UserProfile> signInWithApple() async {
+    final rawNonce = _generateNonce();
+    final hashedNonce = sha256.convert(utf8.encode(rawNonce)).toString();
+
+    final credential = await SignInWithApple.getAppleIDCredential(
+      scopes: [
+        AppleIDAuthorizationScopes.email,
+        AppleIDAuthorizationScopes.fullName,
+      ],
+      nonce: hashedNonce,
+    );
+
+    final idToken = credential.identityToken;
+    if (idToken == null) throw Exception('No Apple ID token');
+
+    await _client.auth.signInWithIdToken(
+      provider: OAuthProvider.apple,
+      idToken: idToken,
+      nonce: rawNonce,
+    );
+
+    return _fetchOrCreateProfile();
+  }
+
+  @override
+  Future<UserProfile> linkWithApple() async {
+    if (!isAnonymous) {
+      // Already linked — just return current profile
+      return _fetchOrCreateProfile();
+    }
+    // For anonymous users, signInWithIdToken automatically links the identity
+    return signInWithApple();
+  }
+
+  // ---------------------------------------------------------------------------
+  // Email
+  // ---------------------------------------------------------------------------
 
   @override
   Future<UserProfile> signInWithEmail(String email, String password) async {
@@ -67,6 +136,19 @@ class SupabaseAuthService implements AuthService {
     }
     return _ensureProfile(response.user!);
   }
+
+  @override
+  Future<UserProfile> linkWithEmail(String email, String password) async {
+    await _client.auth.updateUser(
+      UserAttributes(email: email, password: password),
+    );
+    final user = _client.auth.currentUser!;
+    return _ensureProfile(user);
+  }
+
+  // ---------------------------------------------------------------------------
+  // Sign-out / Anonymous / State
+  // ---------------------------------------------------------------------------
 
   @override
   Future<void> signOut() async {
@@ -97,28 +179,17 @@ class SupabaseAuthService implements AuthService {
   }
 
   @override
-  Future<UserProfile> linkWithGoogle() async {
-    await _client.auth.linkIdentity(OAuthProvider.google);
-    return _waitForProfile();
-  }
+  Stream<AbbaAuthState> get authStateChanges => _controller.stream;
 
-  @override
-  Future<UserProfile> linkWithApple() async {
-    await _client.auth.linkIdentity(OAuthProvider.apple);
-    return _waitForProfile();
-  }
+  // ---------------------------------------------------------------------------
+  // Private helpers
+  // ---------------------------------------------------------------------------
 
-  @override
-  Future<UserProfile> linkWithEmail(String email, String password) async {
-    await _client.auth.updateUser(
-      UserAttributes(email: email, password: password),
-    );
-    final user = _client.auth.currentUser!;
+  Future<UserProfile> _fetchOrCreateProfile() async {
+    final user = _client.auth.currentUser;
+    if (user == null) throw Exception('No authenticated user');
     return _ensureProfile(user);
   }
-
-  @override
-  Stream<AbbaAuthState> get authStateChanges => _controller.stream;
 
   Future<UserProfile> _ensureProfile(User user) async {
     final existing = await _fetchProfile(user.id);
@@ -156,10 +227,14 @@ class SupabaseAuthService implements AuthService {
     }
   }
 
-  Future<UserProfile> _waitForProfile() async {
-    final state = await authStateChanges.firstWhere(
-      (s) => s.status == AuthStatus.authenticated,
-    );
-    return state.user!;
+  /// Generate a cryptographically secure random nonce for Apple Sign In.
+  String _generateNonce([int length = 32]) {
+    const charset =
+        '0123456789ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvwxyz-._';
+    final random = Random.secure();
+    return List.generate(
+      length,
+      (_) => charset[random.nextInt(charset.length)],
+    ).join();
   }
 }

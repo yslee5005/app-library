@@ -18,6 +18,12 @@ class AppConfig {
 
   static String get revenueCatApiKey => dotenv.env['REVENUECAT_API_KEY'] ?? '';
 
+  static String get googleWebClientId =>
+      '679272934784-vb0b580p3h1nsbbdau86p1fml4dq8pl3.apps.googleusercontent.com';
+
+  static String get googleIosClientId =>
+      '679272934784-lt34jqllmcr15v1qomp906tkr74dtjol.apps.googleusercontent.com';
+
   static String get googleCloudTtsApiKey =>
       dotenv.env['GOOGLE_CLOUD_TTS_API_KEY'] ?? '';
 
