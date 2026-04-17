@@ -67,10 +67,7 @@ export default function StudioIntro({ project1, project2, heading, description, 
                 aspectRatio="4/3"
               />
               <div className="mt-4">
-                <p className="text-[11px] text-text-muted tracking-[0.15em] uppercase">
-                  PROJECT NO.{project1.id.slice(0, 8)}
-                </p>
-                <h3 className="text-xl text-text-primary font-light mt-1 group-hover:text-white transition-colors">
+                <h3 className="text-xl text-text-primary font-light group-hover:text-white transition-colors">
                   {project1.name} _ by.BLACKLABELLED
                 </h3>
               </div>
@@ -97,10 +94,7 @@ export default function StudioIntro({ project1, project2, heading, description, 
                 aspectRatio="4/3"
               />
               <div className="mt-4">
-                <p className="text-[11px] text-text-muted tracking-[0.15em] uppercase">
-                  PROJECT NO.{project2.id.slice(0, 8)}
-                </p>
-                <h3 className="text-xl text-text-primary font-light mt-1 group-hover:text-white transition-colors">
+                <h3 className="text-xl text-text-primary font-light group-hover:text-white transition-colors">
                   {project2.name}
                 </h3>
               </div>

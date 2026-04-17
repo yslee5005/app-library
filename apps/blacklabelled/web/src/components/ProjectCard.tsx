@@ -56,10 +56,7 @@ export default function ProjectCard({ product, showInfo, showTitle }: ProjectCar
         {/* Title below image */}
         {showTitle && (
           <div className="mt-3">
-            <p className="text-[11px] text-text-muted tracking-[0.12em] uppercase">
-              PROJECT NO.{product.id}
-            </p>
-            <p className="text-text-primary text-[15px] mt-1 font-light">
+            <p className="text-text-primary text-[15px] font-light">
               {product.name}
             </p>
           </div>

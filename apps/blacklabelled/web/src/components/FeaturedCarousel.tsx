@@ -43,10 +43,7 @@ export default function FeaturedCarousel({ products }: FeaturedCarouselProps) {
 
       {/* Project info — bottom left */}
       <div className="absolute bottom-[80px] left-[40px] md:left-[60px] z-10">
-        <p className="text-white/60 text-[11px] tracking-[0.15em] uppercase">
-          PROJECT NO.{product.id}
-        </p>
-        <h2 className="text-white text-2xl md:text-4xl font-light mt-1">
+        <h2 className="text-white text-2xl md:text-4xl font-light">
           {product.name}
         </h2>
         {product.description && (
