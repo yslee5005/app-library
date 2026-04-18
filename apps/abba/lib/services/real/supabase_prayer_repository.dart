@@ -35,7 +35,7 @@ class SupabasePrayerRepository implements PrayerRepository {
     final startOfDay = DateTime(date.year, date.month, date.day);
     final endOfDay = startOfDay.add(const Duration(days: 1));
 
-    final data = await _client
+    final data = await _abba
         .from('prayers')
         .select()
         .eq('app_id', 'abba')
@@ -52,7 +52,7 @@ class SupabasePrayerRepository implements PrayerRepository {
     final start = DateTime(year, month);
     final end = DateTime(year, month + 1);
 
-    final data = await _client
+    final data = await _abba
         .from('prayers')
         .select()
         .eq('app_id', 'abba')
@@ -66,7 +66,7 @@ class SupabasePrayerRepository implements PrayerRepository {
 
   @override
   Future<Prayer?> getLatestPrayer() async {
-    final data = await _client
+    final data = await _abba
         .from('prayers')
         .select()
         .eq('app_id', 'abba')
@@ -85,7 +85,7 @@ class SupabasePrayerRepository implements PrayerRepository {
     final startOfDay = DateTime(now.year, now.month, now.day);
     final endOfDay = startOfDay.add(const Duration(days: 1));
 
-    final data = await _client
+    final data = await _abba
         .from('prayers')
         .select('id')
         .eq('app_id', 'abba')
@@ -98,7 +98,7 @@ class SupabasePrayerRepository implements PrayerRepository {
 
   @override
   Future<void> updateStreak() async {
-    final streak = await _client
+    final streak = await _abba
         .from('prayer_streaks')
         .select()
         .eq('app_id', 'abba')
@@ -144,7 +144,7 @@ class SupabasePrayerRepository implements PrayerRepository {
 
     if (current > best) best = current;
 
-    await _client
+    await _abba
         .from('prayer_streaks')
         .update({
           'current_streak': current,
@@ -158,7 +158,7 @@ class SupabasePrayerRepository implements PrayerRepository {
 
   @override
   Future<({int current, int best})> getStreak() async {
-    final data = await _client
+    final data = await _abba
         .from('prayer_streaks')
         .select()
         .eq('app_id', 'abba')
@@ -174,7 +174,7 @@ class SupabasePrayerRepository implements PrayerRepository {
 
   @override
   Future<int> getTotalPrayerCount() async {
-    final data = await _client
+    final data = await _abba
         .from('prayers')
         .select('id')
         .eq('app_id', 'abba')
@@ -200,7 +200,7 @@ class SupabasePrayerRepository implements PrayerRepository {
       if (!entry.value) continue;
 
       // Check if already achieved
-      final existing = await _client
+      final existing = await _abba
           .from('milestones')
           .select('id')
           .eq('app_id', 'abba')

@@ -160,33 +160,18 @@ class SupabaseCommunityRepository implements CommunityRepository {
         .select()
         .single();
 
-    // Update comment count
-    await _client.rpc('increment_comment_count', params: {'p_post_id': postId});
-
+    // comment_count는 트리거가 자동 동기화
     return Comment.fromJson(data);
   }
 
   @override
   Future<void> deleteComment(String commentId) async {
-    // Get comment to find post_id before deleting
-    final comment = await _abba
-        .from('post_comments')
-        .select('post_id')
-        .eq('id', commentId)
-        .eq('user_id', _userId)
-        .single();
-
     await _abba
         .from('post_comments')
         .delete()
         .eq('id', commentId)
         .eq('user_id', _userId);
-
-    // Decrement comment count
-    await _client.rpc(
-      'decrement_comment_count',
-      params: {'p_post_id': comment['post_id']},
-    );
+    // comment_count는 트리거가 자동 동기화
   }
 
   // --- Likes ---
@@ -210,7 +195,7 @@ class SupabaseCommunityRepository implements CommunityRepository {
           .eq('user_id', _userId)
           .eq('app_id', 'abba');
 
-      await _client.rpc('decrement_like_count', params: {'p_post_id': postId});
+      // like_count는 트리거가 자동 동기화
       return false;
     } else {
       // Like
@@ -219,8 +204,7 @@ class SupabaseCommunityRepository implements CommunityRepository {
         'post_id': postId,
         'user_id': _userId,
       });
-
-      await _client.rpc('increment_like_count', params: {'p_post_id': postId});
+      // like_count는 트리거가 자동 동기화
       return true;
     }
   }
@@ -328,18 +312,7 @@ class SupabaseCommunityRepository implements CommunityRepository {
       'reason': reason,
     });
 
-    // Check report count, auto-hide if >= 3 (via SECURITY DEFINER RPC)
-    final reports = await _abba
-        .from('reports')
-        .select('id')
-        .eq('target_type', 'post')
-        .eq('target_id', postId)
-        .eq('app_id', 'abba');
-
-    await _client.rpc(
-      'update_report_count',
-      params: {'p_post_id': postId, 'p_count': (reports as List).length},
-    );
+    // report_count + auto-hide는 트리거가 자동 동기화
   }
 
   @override
