@@ -1,0 +1,709 @@
+[
+  {
+    "table_name": "comment_likes",
+    "column_name": "id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": "gen_random_uuid()"
+  },
+  {
+    "table_name": "comment_likes",
+    "column_name": "app_id",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": "'abba'::text"
+  },
+  {
+    "table_name": "comment_likes",
+    "column_name": "comment_id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_name": "comment_likes",
+    "column_name": "user_id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_name": "comment_likes",
+    "column_name": "created_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "NO",
+    "column_default": "now()"
+  },
+  {
+    "table_name": "community_posts",
+    "column_name": "id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": "gen_random_uuid()"
+  },
+  {
+    "table_name": "community_posts",
+    "column_name": "app_id",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": "'abba'::text"
+  },
+  {
+    "table_name": "community_posts",
+    "column_name": "user_id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_name": "community_posts",
+    "column_name": "display_name",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_name": "community_posts",
+    "column_name": "avatar_url",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_name": "community_posts",
+    "column_name": "category",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_name": "community_posts",
+    "column_name": "content",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_name": "community_posts",
+    "column_name": "like_count",
+    "data_type": "integer",
+    "is_nullable": "NO",
+    "column_default": "0"
+  },
+  {
+    "table_name": "community_posts",
+    "column_name": "comment_count",
+    "data_type": "integer",
+    "is_nullable": "NO",
+    "column_default": "0"
+  },
+  {
+    "table_name": "community_posts",
+    "column_name": "is_hidden",
+    "data_type": "boolean",
+    "is_nullable": "NO",
+    "column_default": "false"
+  },
+  {
+    "table_name": "community_posts",
+    "column_name": "report_count",
+    "data_type": "integer",
+    "is_nullable": "NO",
+    "column_default": "0"
+  },
+  {
+    "table_name": "community_posts",
+    "column_name": "created_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "NO",
+    "column_default": "now()"
+  },
+  {
+    "table_name": "community_posts",
+    "column_name": "updated_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "NO",
+    "column_default": "now()"
+  },
+  {
+    "table_name": "milestones",
+    "column_name": "id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": "gen_random_uuid()"
+  },
+  {
+    "table_name": "milestones",
+    "column_name": "app_id",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": "'abba'::text"
+  },
+  {
+    "table_name": "milestones",
+    "column_name": "user_id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_name": "milestones",
+    "column_name": "milestone_type",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_name": "milestones",
+    "column_name": "achieved_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "NO",
+    "column_default": "now()"
+  },
+  {
+    "table_name": "notification_settings",
+    "column_name": "user_id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_name": "notification_settings",
+    "column_name": "app_id",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": "'abba'::text"
+  },
+  {
+    "table_name": "notification_settings",
+    "column_name": "morning_reminder",
+    "data_type": "boolean",
+    "is_nullable": "NO",
+    "column_default": "true"
+  },
+  {
+    "table_name": "notification_settings",
+    "column_name": "morning_time",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": "'06:00'::text"
+  },
+  {
+    "table_name": "notification_settings",
+    "column_name": "evening_reminder",
+    "data_type": "boolean",
+    "is_nullable": "NO",
+    "column_default": "false"
+  },
+  {
+    "table_name": "notification_settings",
+    "column_name": "afternoon_nudge",
+    "data_type": "boolean",
+    "is_nullable": "NO",
+    "column_default": "true"
+  },
+  {
+    "table_name": "notification_settings",
+    "column_name": "streak_reminder",
+    "data_type": "boolean",
+    "is_nullable": "NO",
+    "column_default": "true"
+  },
+  {
+    "table_name": "notification_settings",
+    "column_name": "weekly_summary",
+    "data_type": "boolean",
+    "is_nullable": "NO",
+    "column_default": "true"
+  },
+  {
+    "table_name": "notification_settings",
+    "column_name": "updated_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "NO",
+    "column_default": "now()"
+  },
+  {
+    "table_name": "post_comments",
+    "column_name": "id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": "gen_random_uuid()"
+  },
+  {
+    "table_name": "post_comments",
+    "column_name": "app_id",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": "'abba'::text"
+  },
+  {
+    "table_name": "post_comments",
+    "column_name": "post_id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_name": "post_comments",
+    "column_name": "user_id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_name": "post_comments",
+    "column_name": "display_name",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_name": "post_comments",
+    "column_name": "content",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_name": "post_comments",
+    "column_name": "parent_comment_id",
+    "data_type": "uuid",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_name": "post_comments",
+    "column_name": "like_count",
+    "data_type": "integer",
+    "is_nullable": "NO",
+    "column_default": "0"
+  },
+  {
+    "table_name": "post_comments",
+    "column_name": "created_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "NO",
+    "column_default": "now()"
+  },
+  {
+    "table_name": "post_comments",
+    "column_name": "updated_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "NO",
+    "column_default": "now()"
+  },
+  {
+    "table_name": "post_likes",
+    "column_name": "id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": "gen_random_uuid()"
+  },
+  {
+    "table_name": "post_likes",
+    "column_name": "app_id",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": "'abba'::text"
+  },
+  {
+    "table_name": "post_likes",
+    "column_name": "post_id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_name": "post_likes",
+    "column_name": "user_id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_name": "post_likes",
+    "column_name": "created_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "NO",
+    "column_default": "now()"
+  },
+  {
+    "table_name": "post_saves",
+    "column_name": "id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": "gen_random_uuid()"
+  },
+  {
+    "table_name": "post_saves",
+    "column_name": "app_id",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": "'abba'::text"
+  },
+  {
+    "table_name": "post_saves",
+    "column_name": "post_id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_name": "post_saves",
+    "column_name": "user_id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_name": "post_saves",
+    "column_name": "created_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "NO",
+    "column_default": "now()"
+  },
+  {
+    "table_name": "prayer_streaks",
+    "column_name": "id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": "gen_random_uuid()"
+  },
+  {
+    "table_name": "prayer_streaks",
+    "column_name": "app_id",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": "'abba'::text"
+  },
+  {
+    "table_name": "prayer_streaks",
+    "column_name": "user_id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_name": "prayer_streaks",
+    "column_name": "current_streak",
+    "data_type": "integer",
+    "is_nullable": "NO",
+    "column_default": "0"
+  },
+  {
+    "table_name": "prayer_streaks",
+    "column_name": "best_streak",
+    "data_type": "integer",
+    "is_nullable": "NO",
+    "column_default": "0"
+  },
+  {
+    "table_name": "prayer_streaks",
+    "column_name": "last_prayer_date",
+    "data_type": "date",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_name": "prayer_streaks",
+    "column_name": "updated_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "NO",
+    "column_default": "now()"
+  },
+  {
+    "table_name": "prayers",
+    "column_name": "id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": "gen_random_uuid()"
+  },
+  {
+    "table_name": "prayers",
+    "column_name": "app_id",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": "'abba'::text"
+  },
+  {
+    "table_name": "prayers",
+    "column_name": "user_id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_name": "prayers",
+    "column_name": "transcript",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_name": "prayers",
+    "column_name": "mode",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_name": "prayers",
+    "column_name": "qt_passage_ref",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_name": "prayers",
+    "column_name": "duration_seconds",
+    "data_type": "integer",
+    "is_nullable": "NO",
+    "column_default": "0"
+  },
+  {
+    "table_name": "prayers",
+    "column_name": "audio_storage_path",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_name": "prayers",
+    "column_name": "result",
+    "data_type": "jsonb",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_name": "prayers",
+    "column_name": "created_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "NO",
+    "column_default": "now()"
+  },
+  {
+    "table_name": "prayers",
+    "column_name": "updated_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "NO",
+    "column_default": "now()"
+  },
+  {
+    "table_name": "qt_passages",
+    "column_name": "id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": "gen_random_uuid()"
+  },
+  {
+    "table_name": "qt_passages",
+    "column_name": "app_id",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": "'abba'::text"
+  },
+  {
+    "table_name": "qt_passages",
+    "column_name": "reference",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_name": "qt_passages",
+    "column_name": "locale",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_name": "qt_passages",
+    "column_name": "text",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_name": "qt_passages",
+    "column_name": "topic",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_name": "qt_passages",
+    "column_name": "theme",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_name": "qt_passages",
+    "column_name": "icon",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": "'🌿'::text"
+  },
+  {
+    "table_name": "qt_passages",
+    "column_name": "color_hex",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": "'#B2DFDB'::text"
+  },
+  {
+    "table_name": "qt_passages",
+    "column_name": "date",
+    "data_type": "date",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_name": "qt_passages",
+    "column_name": "batch_slot",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": "'morning'::text"
+  },
+  {
+    "table_name": "qt_passages",
+    "column_name": "created_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "NO",
+    "column_default": "now()"
+  },
+  {
+    "table_name": "reports",
+    "column_name": "id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": "gen_random_uuid()"
+  },
+  {
+    "table_name": "reports",
+    "column_name": "app_id",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": "'abba'::text"
+  },
+  {
+    "table_name": "reports",
+    "column_name": "reporter_id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_name": "reports",
+    "column_name": "target_type",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_name": "reports",
+    "column_name": "target_id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_name": "reports",
+    "column_name": "reason",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_name": "reports",
+    "column_name": "created_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "NO",
+    "column_default": "now()"
+  },
+  {
+    "table_name": "user_settings",
+    "column_name": "user_id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_name": "user_settings",
+    "column_name": "app_id",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": "'abba'::text"
+  },
+  {
+    "table_name": "user_settings",
+    "column_name": "total_prayers",
+    "data_type": "integer",
+    "is_nullable": "NO",
+    "column_default": "0"
+  },
+  {
+    "table_name": "user_settings",
+    "column_name": "current_streak",
+    "data_type": "integer",
+    "is_nullable": "NO",
+    "column_default": "0"
+  },
+  {
+    "table_name": "user_settings",
+    "column_name": "best_streak",
+    "data_type": "integer",
+    "is_nullable": "NO",
+    "column_default": "0"
+  },
+  {
+    "table_name": "user_settings",
+    "column_name": "subscription",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": "'free'::text"
+  },
+  {
+    "table_name": "user_settings",
+    "column_name": "locale",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": "'en'::text"
+  },
+  {
+    "table_name": "user_settings",
+    "column_name": "voice_preference",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": "'warm'::text"
+  },
+  {
+    "table_name": "user_settings",
+    "column_name": "reminder_time",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": "'06:00'::text"
+  },
+  {
+    "table_name": "user_settings",
+    "column_name": "dark_mode",
+    "data_type": "boolean",
+    "is_nullable": "NO",
+    "column_default": "false"
+  },
+  {
+    "table_name": "user_settings",
+    "column_name": "created_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "NO",
+    "column_default": "now()"
+  },
+  {
+    "table_name": "user_settings",
+    "column_name": "updated_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "NO",
+    "column_default": "now()"
+  }
+]

@@ -9,7 +9,13 @@ class SupabasePrayerRepository implements PrayerRepository {
   SupabasePrayerRepository(this._client);
 
   SupabaseQuerySchema get _abba => _client.schema('abba');
-  String get _userId => _client.auth.currentUser!.id;
+  String get _userId {
+    final user = _client.auth.currentUser;
+    if (user == null) {
+      throw StateError('No authenticated user — call signInAnonymously first');
+    }
+    return user.id;
+  }
 
   @override
   Future<void> savePrayer(Prayer prayer) async {

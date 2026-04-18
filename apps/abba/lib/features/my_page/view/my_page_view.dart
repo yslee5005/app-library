@@ -1,9 +1,12 @@
+import 'package:app_lib_logging/logging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:intl/intl.dart';
 
 import '../../../l10n/generated/app_localizations.dart';
 import '../../../models/post.dart';
+import '../../../models/prayer.dart';
 import '../../../providers/providers.dart';
 import '../../../theme/abba_theme.dart';
 
@@ -60,7 +63,7 @@ class _MyPageViewState extends ConsumerState<MyPageView>
               ),
               tabs: [
                 Tab(text: '\ud83d\ude4f ${l10n.myPrayers}'),
-                Tab(text: '\u270d\ufe0f ${l10n.myTestimonies}'),
+                Tab(text: '\ud83d\udcd6 QT'),
                 Tab(text: '\ud83d\udd16 ${l10n.savedPosts}'),
               ],
             ),
@@ -71,8 +74,8 @@ class _MyPageViewState extends ConsumerState<MyPageView>
             child: TabBarView(
               controller: _tabController,
               children: [
-                _MyPrayersTab(),
-                _MyTestimoniesTab(),
+                _PrayerListTab(mode: 'prayer'),
+                _PrayerListTab(mode: 'qt'),
                 _SavedPostsTab(),
               ],
             ),
@@ -84,137 +87,43 @@ class _MyPageViewState extends ConsumerState<MyPageView>
 }
 
 // ---------------------------------------------------------------------------
-// My Prayers tab
+// Prayer / QT list tab (filtered by mode)
 // ---------------------------------------------------------------------------
-class _MyPrayersTab extends ConsumerWidget {
+
+/// Provider: monthly prayers filtered by mode, sorted newest first.
+final _monthlyPrayersByModeProvider = FutureProvider.autoDispose
+    .family<List<Prayer>, ({int year, int month, String mode})>((ref, params) async {
+  try {
+    final repo = ref.watch(prayerRepositoryProvider);
+    final all = await repo.getPrayersByMonth(params.year, params.month);
+    prayerLog.debug('getPrayersByMonth returned ${all.length} items');
+    final filtered = all.where((p) => p.mode == params.mode).toList()
+      ..sort((a, b) => b.createdAt.compareTo(a.createdAt));
+    return filtered;
+  } catch (e, st) {
+    prayerLog.error('_monthlyPrayersByModeProvider failed: $e\n$st');
+    rethrow;
+  }
+});
+
+class _PrayerListTab extends ConsumerWidget {
+  final String mode; // 'prayer' or 'qt'
+
+  const _PrayerListTab({required this.mode});
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context)!;
-    // Use current month prayers
+    final locale = Localizations.localeOf(context).languageCode;
     final now = DateTime.now();
     final prayersAsync = ref.watch(
-      monthlyPrayerDaysProvider((year: now.year, month: now.month)),
+      _monthlyPrayersByModeProvider((year: now.year, month: now.month, mode: mode)),
     );
-
-    return prayersAsync.when(
-      data: (prayerDays) {
-        if (prayerDays.isEmpty) {
-          return Center(
-            child: Text(
-              l10n.noPrayersRecorded,
-              style: AbbaTypography.body.copyWith(color: AbbaColors.muted),
-            ),
-          );
-        }
-        final sortedDays = prayerDays.toList()
-          ..sort((a, b) => b.compareTo(a));
-        return ListView.builder(
-          padding: const EdgeInsets.all(AbbaSpacing.md),
-          itemCount: sortedDays.length,
-          itemBuilder: (context, index) {
-            final day = sortedDays[index];
-            return _PrayerDayTile(date: day);
-          },
-        );
-      },
-      loading: () => const Center(child: CircularProgressIndicator()),
-      error: (_, st) => Center(
-        child: Text(l10n.errorGeneric,
-            style: AbbaTypography.body.copyWith(color: AbbaColors.muted)),
-      ),
-    );
-  }
-}
-
-class _PrayerDayTile extends ConsumerWidget {
-  final DateTime date;
-
-  const _PrayerDayTile({required this.date});
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final prayersAsync = ref.watch(calendarPrayersProvider(date));
 
     return prayersAsync.when(
       data: (prayers) {
-        if (prayers.isEmpty) return const SizedBox.shrink();
-        return Padding(
-          padding: const EdgeInsets.only(bottom: AbbaSpacing.sm),
-          child: Container(
-            padding: const EdgeInsets.all(AbbaSpacing.md),
-            decoration: BoxDecoration(
-              color: AbbaColors.white,
-              borderRadius: BorderRadius.circular(AbbaRadius.md),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  '${date.year}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}',
-                  style: AbbaTypography.bodySmall.copyWith(
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-                const SizedBox(height: AbbaSpacing.xs),
-                ...prayers.map(
-                  (p) => GestureDetector(
-                    onTap: () {
-                      if (p.result != null) {
-                        ref.read(prayerResultProvider.notifier).state =
-                            AsyncValue.data(p.result!);
-                        context.push('/home/prayer-dashboard');
-                      }
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.only(bottom: AbbaSpacing.xs),
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child: Text(
-                              p.transcript.length > 80
-                                  ? '${p.transcript.substring(0, 80)}...'
-                                  : p.transcript,
-                              style: AbbaTypography.bodySmall.copyWith(
-                                color: AbbaColors.muted,
-                              ),
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                          ),
-                          if (p.result != null)
-                            Icon(
-                              Icons.chevron_right,
-                              size: 18,
-                              color: AbbaColors.muted.withValues(alpha: 0.4),
-                            ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        );
-      },
-      loading: () => const SizedBox.shrink(),
-      error: (_, st) => const SizedBox.shrink(),
-    );
-  }
-}
-
-// ---------------------------------------------------------------------------
-// My Testimonies tab
-// ---------------------------------------------------------------------------
-class _MyTestimoniesTab extends ConsumerWidget {
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final l10n = AppLocalizations.of(context)!;
-    final postsAsync = ref.watch(myPostsProvider);
-
-    return postsAsync.when(
-      data: (posts) {
-        if (posts.isEmpty) {
+        prayerLog.debug('History $mode tab: ${prayers.length} items found');
+        if (prayers.isEmpty) {
           return Center(
             child: Text(
               l10n.noPrayersRecorded,
@@ -224,20 +133,176 @@ class _MyTestimoniesTab extends ConsumerWidget {
         }
         return ListView.builder(
           padding: const EdgeInsets.all(AbbaSpacing.md),
-          itemCount: posts.length,
-          itemBuilder: (context, index) => _PostTile(
-            post: posts[index],
-            onTap: () => context.push(
-              '/home/my-records/testimony',
-              extra: posts[index],
-            ),
-          ),
+          itemCount: prayers.length,
+          itemBuilder: (context, index) =>
+              _PrayerItemCard(prayer: prayers[index], locale: locale),
         );
       },
-      loading: () => const Center(child: CircularProgressIndicator()),
-      error: (_, st) => Center(
-        child: Text(l10n.errorGeneric,
-            style: AbbaTypography.body.copyWith(color: AbbaColors.muted)),
+      loading: () {
+        prayerLog.debug('History $mode tab: loading...');
+        return const Center(child: CircularProgressIndicator());
+      },
+      error: (e, st) {
+        prayerLog.error('History $mode tab error: $e');
+        return Center(
+          child: Text(l10n.errorGeneric,
+              style: AbbaTypography.body.copyWith(color: AbbaColors.muted)),
+        );
+      },
+    );
+  }
+}
+
+class _PrayerItemCard extends ConsumerWidget {
+  final Prayer prayer;
+  final String locale;
+
+  const _PrayerItemCard({required this.prayer, required this.locale});
+
+  String _formatDuration(int seconds) {
+    final m = seconds ~/ 60;
+    final s = seconds % 60;
+    return '${m.toString().padLeft(2, '0')}:${s.toString().padLeft(2, '0')}';
+  }
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final dateFormat = DateFormat.yMMMd(locale);
+    final timeFormat = DateFormat.jm(locale);
+    final isQt = prayer.mode == 'qt';
+
+    return GestureDetector(
+      onTap: () {
+        if (prayer.result != null) {
+          ref.read(prayerResultProvider.notifier).state =
+              AsyncValue.data(prayer.result!);
+          prayerLog.info('History item tapped: ${prayer.id}, navigating to dashboard');
+          context.push('/home/prayer-dashboard');
+        } else {
+          prayerLog.warning('History item tapped: ${prayer.id}, but no result available');
+        }
+      },
+      child: Padding(
+        padding: const EdgeInsets.only(bottom: AbbaSpacing.sm),
+        child: Container(
+          padding: const EdgeInsets.all(AbbaSpacing.md),
+          decoration: BoxDecoration(
+            color: AbbaColors.white,
+            borderRadius: BorderRadius.circular(AbbaRadius.md),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Date + time row
+              Row(
+                children: [
+                  Text(
+                    dateFormat.format(prayer.createdAt),
+                    style: AbbaTypography.bodySmall.copyWith(
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  const SizedBox(width: AbbaSpacing.sm),
+                  Text(
+                    timeFormat.format(prayer.createdAt),
+                    style: AbbaTypography.caption.copyWith(
+                      color: AbbaColors.muted,
+                    ),
+                  ),
+                  const Spacer(),
+                  // Duration badge
+                  if (prayer.durationSeconds > 0)
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: AbbaSpacing.sm,
+                        vertical: 2,
+                      ),
+                      decoration: BoxDecoration(
+                        color: (isQt ? AbbaColors.softGold : AbbaColors.sage)
+                            .withValues(alpha: 0.15),
+                        borderRadius: BorderRadius.circular(AbbaRadius.sm),
+                      ),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Icon(
+                            Icons.timer_outlined,
+                            size: 14,
+                            color: isQt ? AbbaColors.softGold : AbbaColors.sage,
+                          ),
+                          const SizedBox(width: 3),
+                          Text(
+                            _formatDuration(prayer.durationSeconds),
+                            style: AbbaTypography.caption.copyWith(
+                              color: isQt
+                                  ? AbbaColors.softGold
+                                  : AbbaColors.sage,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                ],
+              ),
+
+              // QT passage reference
+              if (isQt && prayer.qtPassageRef != null) ...[
+                const SizedBox(height: AbbaSpacing.xs),
+                Row(
+                  children: [
+                    Icon(Icons.menu_book_outlined,
+                        size: 14, color: AbbaColors.softGold),
+                    const SizedBox(width: AbbaSpacing.xs),
+                    Expanded(
+                      child: Text(
+                        prayer.qtPassageRef!,
+                        style: AbbaTypography.bodySmall.copyWith(
+                          color: AbbaColors.softGold,
+                          fontWeight: FontWeight.w500,
+                        ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+
+              const SizedBox(height: AbbaSpacing.xs),
+              // Transcript preview
+              Row(
+                children: [
+                  Expanded(
+                    child: Text(
+                      prayer.transcript,
+                      style: AbbaTypography.bodySmall.copyWith(
+                        color: AbbaColors.muted,
+                      ),
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                  if (prayer.audioStoragePath != null)
+                    Padding(
+                      padding: const EdgeInsets.only(right: AbbaSpacing.xs),
+                      child: Icon(
+                        Icons.volume_up_rounded,
+                        size: 16,
+                        color: AbbaColors.sage.withValues(alpha: 0.6),
+                      ),
+                    ),
+                  if (prayer.result != null)
+                    Icon(
+                      Icons.chevron_right,
+                      size: 18,
+                      color: AbbaColors.muted.withValues(alpha: 0.4),
+                    ),
+                ],
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
