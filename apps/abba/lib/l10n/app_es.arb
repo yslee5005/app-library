@@ -215,6 +215,7 @@
   "prayerStartPrompt": "Comienza tu oración",
   "startPrayerButton": "Iniciar oración",
   "switchToTextMode": "Escribir en su lugar",
+  "switchToVoiceMode": "Hablar",
   "prayerDashboardTitle": "Jardín de Oración",
   "qtDashboardTitle": "Jardín Devocional",
   "prayerSummaryTitle": "Resumen de Oración",
@@ -300,5 +301,14 @@
   "leaveRecordingTitle": "¿Salir de la grabación?",
   "leaveRecordingMessage": "Se perderá tu grabación. ¿Estás seguro?",
   "leaveButton": "Salir",
-  "stayButton": "Quedarme"
+  "stayButton": "Quedarme",
+  "likedByCount": "{count} personas empatizaron",
+  "@likedByCount": {
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "actionLike": "Me gusta",
+  "actionComment": "Comentar",
+  "actionSave": "Guardar"
 }

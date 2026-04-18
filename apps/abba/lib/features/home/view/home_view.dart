@@ -6,13 +6,13 @@ import 'package:go_router/go_router.dart';
 
 import '../../../l10n/generated/app_localizations.dart';
 import '../../../providers/providers.dart';
-import '../../../services/error_logging_service.dart';
+import 'package:app_lib_logging/logging.dart';
+
 import '../../../services/stt_service.dart';
 import '../../../theme/abba_theme.dart';
 import '../../../widgets/abba_button.dart';
 import '../../../widgets/premium_modal.dart';
 import '../../../widgets/prayer_heatmap.dart';
-import '../../../widgets/streak_garden.dart';
 
 class HomeView extends ConsumerStatefulWidget {
   const HomeView({super.key});
@@ -92,7 +92,7 @@ class _HomeViewState extends ConsumerState<HomeView>
         if (!_isPaused && mounted) setState(() => _seconds++);
       });
 
-      ErrorLoggingService.addBreadcrumb('Prayer started', category: 'prayer');
+      prayerLog.info('Prayer started');
       _startStt();
     } finally {
       _isStarting = false;
@@ -113,7 +113,10 @@ class _HomeViewState extends ConsumerState<HomeView>
       _sttService.setLocale(sttLocale);
       _sttService.startListening(
         onResult: (text, isFinal) {
-          if (mounted) setState(() => _transcript = text);
+          if (mounted) {
+            setState(() => _transcript = text);
+            sttLog.debug('STT partial result: ${text.length} chars');
+          }
         },
         onError: (_) {
           if (mounted) setState(() => _isTextMode = true);
@@ -127,9 +130,11 @@ class _HomeViewState extends ConsumerState<HomeView>
     if (_isPaused) {
       _pulseController.stop();
       _sttService.stopListening();
+      sttLog.info('Recording paused');
     } else {
       _pulseController.repeat(reverse: true);
       _startStt();
+      sttLog.info('Recording resumed');
     }
   }
 
@@ -210,7 +215,7 @@ class _HomeViewState extends ConsumerState<HomeView>
     ref.read(currentTranscriptProvider.notifier).state = transcript;
     ref.read(currentPrayerModeProvider.notifier).state = 'prayer';
 
-    ErrorLoggingService.addBreadcrumb('Prayer finished', category: 'prayer');
+    sttLog.info('Prayer finished, transcript length=${transcript.length}');
 
     ref.read(isRecordingProvider.notifier).state = false;
     setState(() => _isPraying = false);
@@ -297,7 +302,11 @@ class _HomeViewState extends ConsumerState<HomeView>
     return Expanded(
       child: GestureDetector(
         onTap: () {
-          if (!_isPraying) setState(() => _selectedTab = index);
+          if (!_isPraying) {
+            setState(() => _selectedTab = index);
+            final mode = index == 0 ? 'prayer' : 'qt';
+            prayerLog.debug('Tab switched to $mode');
+          }
         },
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 200),
@@ -369,10 +378,10 @@ class _HomeViewState extends ConsumerState<HomeView>
             ),
             SizedBox(height: gap),
             // Streak status message
-            _buildStreakStatus(),
+            _buildStreakStatus('prayer'),
             SizedBox(height: gap),
             // Prayer contribution heatmap
-            _buildHeatmapCard(),
+            _buildHeatmapCard('prayer'),
             SizedBox(height: gap),
             // Start button — "기도를 시작하세요"
             Padding(
@@ -390,68 +399,63 @@ class _HomeViewState extends ConsumerState<HomeView>
     );
   }
 
-  Widget _buildStreakStatus() {
-    final profileAsync = ref.watch(userProfileProvider);
-    final heatmapAsync = ref.watch(prayerHeatmapProvider);
+  Widget _buildStreakStatus(String mode) {
+    final heatmapAsync = ref.watch(prayerHeatmapProvider(mode));
+    final streakAsync = ref.watch(streakByModeProvider(mode));
 
-    return profileAsync.when(
-      data: (profile) {
-        final streak = profile.currentStreak;
-        final now = DateTime.now();
-        final today = DateTime(now.year, now.month, now.day);
+    final streak = streakAsync.value?.current ?? 0;
+    final now = DateTime.now();
+    final today = DateTime(now.year, now.month, now.day);
 
-        // 며칠째 안 했는지 계산 (heatmap 데이터에서)
-        int daysSinceLastPrayer = -1;
-        final heatmapData = heatmapAsync.value;
-        if (heatmapData != null) {
-          for (int i = 0; i <= 84; i++) {
-            final checkDate = today.subtract(Duration(days: i));
-            final dateKey = DateTime(checkDate.year, checkDate.month, checkDate.day);
-            if (heatmapData.containsKey(dateKey) && (heatmapData[dateKey]?.count ?? 0) > 0) {
-              daysSinceLastPrayer = i;
-              break;
-            }
-          }
+    // 며칠째 안 했는지 계산 (heatmap 데이터에서)
+    int daysSinceLastActivity = -1;
+    final heatmapData = heatmapAsync.value;
+    if (heatmapData != null) {
+      for (int i = 0; i <= 84; i++) {
+        final checkDate = today.subtract(Duration(days: i));
+        final dateKey = DateTime(checkDate.year, checkDate.month, checkDate.day);
+        if (heatmapData.containsKey(dateKey) && (heatmapData[dateKey]?.count ?? 0) > 0) {
+          daysSinceLastActivity = i;
+          break;
         }
+      }
+    }
 
-        String emoji;
-        String message;
+    final isPrayer = mode == 'prayer';
+    final activityName = isPrayer ? '기도' : 'QT';
+    String emoji;
+    String message;
 
-        if (streak > 0 && daysSinceLastPrayer <= 1) {
-          // 연속 기도 중 (오늘 또는 어제까지)
-          emoji = '🔥';
-          message = '$streak일째 연속 기도 중';
-        } else if (daysSinceLastPrayer == -1 || daysSinceLastPrayer > 84) {
-          // 기록 없음
-          emoji = '🌱';
-          message = '첫 기도를 시작해보세요';
-        } else if (daysSinceLastPrayer >= 2) {
-          // 쉬고 있음
-          emoji = '😴';
-          message = '$daysSinceLastPrayer일째 기도를 쉬고 있어요';
-        } else {
-          emoji = '🙏';
-          message = '오늘도 기도해보세요';
-        }
+    if (streak > 0 && daysSinceLastActivity <= 1) {
+      emoji = '🔥';
+      message = '$streak일째 연속 $activityName 중';
+    } else if (daysSinceLastActivity == -1 || daysSinceLastActivity > 84) {
+      emoji = '🌱';
+      message = isPrayer ? '첫 기도를 시작해보세요' : '첫 QT를 시작해보세요';
+    } else if (daysSinceLastActivity >= 2) {
+      emoji = '😴';
+      message = '$daysSinceLastActivity일째 $activityName을 쉬고 있어요';
+    } else {
+      emoji = isPrayer ? '🙏' : '📖';
+      message = '오늘도 $activityName해보세요';
+    }
 
-        return Text(
-          '$emoji $message',
-          style: AbbaTypography.body.copyWith(
-            color: AbbaColors.warmBrown,
-            fontWeight: FontWeight.w600,
-          ),
-          textAlign: TextAlign.center,
-        );
-      },
-      loading: () => const SizedBox.shrink(),
-      error: (_, _) => const SizedBox.shrink(),
+    return Text(
+      '$emoji $message',
+      style: AbbaTypography.body.copyWith(
+        color: AbbaColors.warmBrown,
+        fontWeight: FontWeight.w600,
+      ),
+      textAlign: TextAlign.center,
     );
   }
 
-  Widget _buildHeatmapCard() {
-    final heatmapAsync = ref.watch(prayerHeatmapProvider);
-    final profileAsync = ref.watch(userProfileProvider);
-    final streak = profileAsync.value?.currentStreak ?? 0;
+  Widget _buildHeatmapCard(String mode) {
+    final heatmapAsync = ref.watch(prayerHeatmapProvider(mode));
+    final streakAsync = ref.watch(streakByModeProvider(mode));
+    final streak = streakAsync.value?.current ?? 0;
+    final isQtMode = mode == 'qt';
+    final accentColor = isQtMode ? AbbaColors.softGold : AbbaColors.sage;
 
     return heatmapAsync.when(
       data: (data) {
@@ -463,21 +467,19 @@ class _HomeViewState extends ConsumerState<HomeView>
               vertical: AbbaSpacing.md,
             ),
             decoration: BoxDecoration(
-              color: AbbaColors.sage.withValues(alpha: 0.06),
+              color: accentColor.withValues(alpha: 0.06),
               borderRadius: BorderRadius.circular(AbbaRadius.lg),
               border: Border.all(
-                color: AbbaColors.sage.withValues(alpha: 0.12),
+                color: accentColor.withValues(alpha: 0.12),
               ),
             ),
             child: LayoutBuilder(
               builder: (context, constraints) {
-                // 화면 너비에 맞게 셀 크기 자동 계산
-                // 전체 너비 = labelWidth(20) + cols * (cellSize + spacing) - spacing + padding
                 const labelWidth = 24.0;
                 const spacing = 3.0;
                 const weeks = 8;
                 final availableWidth = constraints.maxWidth - labelWidth - AbbaSpacing.md * 2;
-                final cols = weeks + 1; // extra for partial week
+                final cols = weeks + 1;
                 final cellSize = (availableWidth - (cols - 1) * spacing) / cols;
 
                 return PrayerHeatmap(
@@ -486,68 +488,11 @@ class _HomeViewState extends ConsumerState<HomeView>
                   weeks: weeks,
                   cellSize: cellSize.clamp(12.0, 30.0),
                   cellSpacing: spacing,
+                  colorScheme: isQtMode
+                      ? HeatmapColorScheme.gold
+                      : HeatmapColorScheme.sage,
                 );
               },
-            ),
-          ),
-        );
-      },
-      loading: () => const SizedBox.shrink(),
-      error: (_, _) => const SizedBox.shrink(),
-    );
-  }
-
-  Widget _buildStreakCard(AppLocalizations l10n) {
-    final profileAsync = ref.watch(userProfileProvider);
-
-    return profileAsync.when(
-      data: (profile) {
-        final streak = profile.currentStreak;
-        final best = profile.bestStreak;
-        final icon = streakGardenIcon(streak);
-        final label = streakGardenLabel(streak, l10n);
-
-        return Padding(
-          padding: const EdgeInsets.symmetric(horizontal: AbbaSpacing.lg),
-          child: Container(
-            padding: const EdgeInsets.symmetric(
-              horizontal: AbbaSpacing.lg,
-              vertical: AbbaSpacing.md,
-            ),
-            decoration: BoxDecoration(
-              color: AbbaColors.sage.withValues(alpha: 0.08),
-              borderRadius: BorderRadius.circular(AbbaRadius.lg),
-            ),
-            child: Column(
-              children: [
-                Text(icon, style: const TextStyle(fontSize: 40)),
-                const SizedBox(height: AbbaSpacing.xs),
-                Text(
-                  streak == 0
-                      ? l10n.prayerStartPrompt
-                      : l10n.streakDays(streak),
-                  style: AbbaTypography.h2.copyWith(
-                    color: AbbaColors.sage,
-                    fontWeight: FontWeight.w700,
-                  ),
-                ),
-                const SizedBox(height: AbbaSpacing.xs),
-                Text(
-                  label,
-                  style: AbbaTypography.bodySmall.copyWith(
-                    color: AbbaColors.warmBrown,
-                  ),
-                ),
-                if (best > 0) ...[
-                  const SizedBox(height: AbbaSpacing.xs),
-                  Text(
-                    '${l10n.bestStreak}: ${l10n.streakDays(best)} 🏆',
-                    style: AbbaTypography.caption.copyWith(
-                      color: AbbaColors.muted,
-                    ),
-                  ),
-                ],
-              ],
             ),
           ),
         );
@@ -571,8 +516,10 @@ class _HomeViewState extends ConsumerState<HomeView>
                 if (_isTextMode) {
                   _sttService.stopListening();
                   _textController.text = _transcript;
+                  sttLog.info('Switched to text mode');
                 } else {
                   _startStt();
+                  sttLog.info('Switched to voice mode');
                 }
               },
               icon: Icon(
@@ -581,7 +528,7 @@ class _HomeViewState extends ConsumerState<HomeView>
                 color: AbbaColors.sage,
               ),
               label: Text(
-                l10n.switchToTextMode,
+                _isTextMode ? l10n.switchToVoiceMode : l10n.switchToTextMode,
                 style: AbbaTypography.caption.copyWith(color: AbbaColors.sage),
               ),
             ),
@@ -713,23 +660,44 @@ class _HomeViewState extends ConsumerState<HomeView>
     return LayoutBuilder(
       builder: (context, constraints) {
         final h = constraints.maxHeight;
-        final emojiSize = (h * 0.08).clamp(32.0, 48.0);
-        final gap = (h * 0.02).clamp(4.0, 12.0);
+        final circleSize = (h * 0.12).clamp(50.0, 90.0);
+        final innerCircle = circleSize * 0.65;
+        final emojiSize = circleSize * 0.3;
+        final gap = (h * 0.015).clamp(4.0, 10.0);
 
         return Column(
           children: [
             const Spacer(flex: 1),
-            Text('📖', style: TextStyle(fontSize: emojiSize)),
-            SizedBox(height: gap),
-            Text(
-              l10n.qtRevealMessage,
-              style: AbbaTypography.h2,
-              textAlign: TextAlign.center,
+            // Circle (gold accent)
+            Container(
+              width: circleSize,
+              height: circleSize,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: AbbaColors.softGold.withValues(alpha: 0.15),
+              ),
+              child: Center(
+                child: Container(
+                  width: innerCircle,
+                  height: innerCircle,
+                  decoration: const BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: AbbaColors.softGold,
+                  ),
+                  child: Center(
+                    child: Text('\u{1F4D6}', style: TextStyle(fontSize: emojiSize)),
+                  ),
+                ),
+              ),
             ),
             SizedBox(height: gap),
-            // Streak card
-            _buildStreakCard(l10n),
+            // Streak status message (QT)
+            _buildStreakStatus('qt'),
             SizedBox(height: gap),
+            // QT contribution heatmap
+            _buildHeatmapCard('qt'),
+            SizedBox(height: gap),
+            // Start button
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: AbbaSpacing.lg),
               child: AbbaButton(

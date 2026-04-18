@@ -552,6 +552,9 @@ class AppLocalizationsEl extends AppLocalizations {
   String get switchToTextMode => 'Γράψε αντί αυτού';
 
   @override
+  String get switchToVoiceMode => 'Μιλήστε';
+
+  @override
   String get prayerDashboardTitle => 'Κήπος Προσευχής';
 
   @override
@@ -744,4 +747,18 @@ class AppLocalizationsEl extends AppLocalizations {
 
   @override
   String get stayButton => 'Παραμονή';
+
+  @override
+  String likedByCount(Object count) {
+    return '$count άτομα συμπόνεσαν';
+  }
+
+  @override
+  String get actionLike => 'Μου αρέσει';
+
+  @override
+  String get actionComment => 'Σχόλιο';
+
+  @override
+  String get actionSave => 'Αποθήκευση';
 }

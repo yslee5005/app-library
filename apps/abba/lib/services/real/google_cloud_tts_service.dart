@@ -7,7 +7,7 @@ import 'package:just_audio/just_audio.dart';
 import 'package:path_provider/path_provider.dart' show getTemporaryDirectory;
 
 import '../../config/app_config.dart';
-import '../error_logging_service.dart';
+import 'package:app_lib_logging/logging.dart';
 import '../tts_service.dart';
 
 /// Maps voice preference to Google Cloud Neural2 Korean voices
@@ -56,10 +56,7 @@ class GoogleCloudTtsService implements TtsService {
       }
     }
 
-    ErrorLoggingService.addBreadcrumb(
-      'Google Cloud TTS API call started',
-      category: 'tts',
-    );
+    ttsLog.info('Google Cloud TTS API call started');
 
     try {
       final response = await http.post(
@@ -83,10 +80,7 @@ class GoogleCloudTtsService implements TtsService {
       );
 
       if (response.statusCode != 200) {
-        ErrorLoggingService.addBreadcrumb(
-          'Google Cloud TTS failed: ${response.statusCode}',
-          category: 'tts',
-        );
+        ttsLog.info('Google Cloud TTS failed: ${response.statusCode}');
         throw Exception('Google Cloud TTS failed: ${response.statusCode}');
       }
 
@@ -107,7 +101,7 @@ class GoogleCloudTtsService implements TtsService {
       await _player.setFilePath(filePath);
       await _player.play();
     } catch (e, stackTrace) {
-      ErrorLoggingService.captureException(e, stackTrace);
+      ttsLog.error('Google Cloud TTS failed', error: e, stackTrace: stackTrace);
       rethrow;
     }
   }

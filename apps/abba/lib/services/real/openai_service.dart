@@ -7,7 +7,7 @@ import '../../config/app_config.dart';
 import '../../models/prayer.dart';
 import '../../models/qt_meditation_result.dart';
 import '../ai_service.dart';
-import '../error_logging_service.dart';
+import 'package:app_lib_logging/logging.dart';
 
 class OpenAiService implements AiService {
   static const _baseUrl = 'https://api.openai.com/v1/chat/completions';
@@ -19,7 +19,7 @@ class OpenAiService implements AiService {
   }) async {
     final langName = _localeName(locale);
 
-    ErrorLoggingService.addBreadcrumb('AI API call started', category: 'ai');
+    apiLog.info('AI API call started');
 
     try {
       final response = await http.post(
@@ -44,10 +44,7 @@ class OpenAiService implements AiService {
       );
 
       if (response.statusCode != 200) {
-        ErrorLoggingService.addBreadcrumb(
-          'AI API first attempt failed: ${response.statusCode}',
-          category: 'ai',
-        );
+        apiLog.info('AI API first attempt failed: ${response.statusCode}');
 
         // Retry once
         final retry = await http.post(
@@ -69,22 +66,16 @@ class OpenAiService implements AiService {
         );
 
         if (retry.statusCode != 200) {
-          ErrorLoggingService.addBreadcrumb(
-            'AI API retry also failed: ${retry.statusCode}',
-            category: 'ai',
-          );
+          apiLog.info('AI API retry also failed: ${retry.statusCode}');
           return _fallbackPrayerResult();
         }
         return _parsePrayerResponse(retry.body);
       }
 
-      ErrorLoggingService.addBreadcrumb(
-        'AI API call succeeded',
-        category: 'ai',
-      );
+      apiLog.info('AI API call succeeded');
       return _parsePrayerResponse(response.body);
     } catch (e, stackTrace) {
-      ErrorLoggingService.captureException(e, stackTrace);
+      apiLog.error('Prayer analysis failed', error: e, stackTrace: stackTrace);
       return _fallbackPrayerResult();
     }
   }
@@ -98,10 +89,7 @@ class OpenAiService implements AiService {
   }) async {
     final langName = _localeName(locale);
 
-    ErrorLoggingService.addBreadcrumb(
-      'QT meditation AI call started',
-      category: 'ai',
-    );
+    apiLog.info('QT meditation AI call started');
 
     try {
       final userMessage =
@@ -162,7 +150,7 @@ class OpenAiService implements AiService {
 
       return _parseMeditationResponse(response.body);
     } catch (e, stackTrace) {
-      ErrorLoggingService.captureException(e, stackTrace);
+      apiLog.error('Meditation analysis failed', error: e, stackTrace: stackTrace);
       return _fallbackMeditationResult();
     }
   }
@@ -174,7 +162,7 @@ class OpenAiService implements AiService {
       final data = jsonDecode(content) as Map<String, dynamic>;
       return PrayerResult.fromJson(data);
     } catch (e, stackTrace) {
-      ErrorLoggingService.captureException(e, stackTrace);
+      apiLog.error('Prayer response parsing failed', error: e, stackTrace: stackTrace);
       return _fallbackPrayerResult();
     }
   }
@@ -186,7 +174,7 @@ class OpenAiService implements AiService {
       final data = jsonDecode(content) as Map<String, dynamic>;
       return QtMeditationResult.fromJson(data);
     } catch (e, stackTrace) {
-      ErrorLoggingService.captureException(e, stackTrace);
+      apiLog.error('Meditation response parsing failed', error: e, stackTrace: stackTrace);
       return _fallbackMeditationResult();
     }
   }
@@ -198,10 +186,7 @@ class OpenAiService implements AiService {
   }) async {
     final langName = _localeName(locale);
 
-    ErrorLoggingService.addBreadcrumb(
-      'AI Core API call started',
-      category: 'ai',
-    );
+    apiLog.info('AI Core API call started');
 
     try {
       final response = await _callApi(
@@ -211,7 +196,7 @@ class OpenAiService implements AiService {
       );
       return _parsePrayerResponse(response);
     } catch (e, stackTrace) {
-      ErrorLoggingService.captureException(e, stackTrace);
+      apiLog.error('Core prayer analysis failed', error: e, stackTrace: stackTrace);
       return _fallbackPrayerResult();
     }
   }
@@ -223,10 +208,7 @@ class OpenAiService implements AiService {
   }) async {
     final langName = _localeName(locale);
 
-    ErrorLoggingService.addBreadcrumb(
-      'AI Premium API call started',
-      category: 'ai',
-    );
+    apiLog.info('AI Premium API call started');
 
     try {
       final response = await _callApi(
@@ -236,7 +218,7 @@ class OpenAiService implements AiService {
       );
       return _parsePremiumResponse(response);
     } catch (e, stackTrace) {
-      ErrorLoggingService.captureException(e, stackTrace);
+      apiLog.error('Premium analysis failed', error: e, stackTrace: stackTrace);
       return const PremiumContent();
     }
   }
@@ -306,7 +288,7 @@ class OpenAiService implements AiService {
             : null,
       );
     } catch (e, stackTrace) {
-      ErrorLoggingService.captureException(e, stackTrace);
+      apiLog.error('Premium response parsing failed', error: e, stackTrace: stackTrace);
       return const PremiumContent();
     }
   }

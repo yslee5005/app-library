@@ -537,6 +537,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get switchToTextMode => '텍스트로 전환';
 
   @override
+  String get switchToVoiceMode => '음성으로 전환';
+
+  @override
   String get prayerDashboardTitle => '기도 정원';
 
   @override
@@ -725,4 +728,18 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get stayButton => '머무르기';
+
+  @override
+  String likedByCount(Object count) {
+    return '$count명이 공감했습니다';
+  }
+
+  @override
+  String get actionLike => '공감';
+
+  @override
+  String get actionComment => '댓글';
+
+  @override
+  String get actionSave => '저장';
 }

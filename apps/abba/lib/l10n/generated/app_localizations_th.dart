@@ -543,6 +543,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get switchToTextMode => 'พิมพ์แทน';
 
   @override
+  String get switchToVoiceMode => 'พูดแทน';
+
+  @override
   String get prayerDashboardTitle => 'สวนอธิษฐาน';
 
   @override
@@ -732,4 +735,18 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get stayButton => 'อยู่ต่อ';
+
+  @override
+  String likedByCount(Object count) {
+    return '$count คนเห็นด้วย';
+  }
+
+  @override
+  String get actionLike => 'ชอบ';
+
+  @override
+  String get actionComment => 'แสดงความคิดเห็น';
+
+  @override
+  String get actionSave => 'บันทึก';
 }

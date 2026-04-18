@@ -537,6 +537,9 @@ class AppLocalizationsAm extends AppLocalizations {
   String get switchToTextMode => 'ይልቁንስ ይፃፉ';
 
   @override
+  String get switchToVoiceMode => 'በድምጽ ቀይር';
+
+  @override
   String get prayerDashboardTitle => 'የጸሎት ገነት';
 
   @override
@@ -725,4 +728,18 @@ class AppLocalizationsAm extends AppLocalizations {
 
   @override
   String get stayButton => 'ይቆዩ';
+
+  @override
+  String likedByCount(Object count) {
+    return '$count ሰዎች ተመስጥዎታል';
+  }
+
+  @override
+  String get actionLike => 'ወደድኩ';
+
+  @override
+  String get actionComment => 'አስተያየት';
+
+  @override
+  String get actionSave => 'ያስቀምጡ';
 }

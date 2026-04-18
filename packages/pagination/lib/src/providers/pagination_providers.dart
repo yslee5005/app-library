@@ -77,6 +77,7 @@ class PaginationNotifier<T> extends AsyncNotifier<PaginationState<T>> {
           items: value.items,
           hasMore: value.hasMore,
           cursor: value.cursor,
+          cursorId: value.cursorId,
           totalCount: value.totalCount,
         ),
       Failure(:final exception) => PaginationError<T>(exception: exception),
@@ -95,7 +96,10 @@ class PaginationNotifier<T> extends AsyncNotifier<PaginationState<T>> {
     state = AsyncData(PaginationLoading<T>(items: current.items));
 
     final result = await repository.fetchPage(
-      PaginationParams(cursor: current.cursor),
+      PaginationParams(
+        cursor: current.cursor,
+        cursorId: current.cursorId,
+      ),
     );
 
     state = switch (result) {
@@ -118,11 +122,56 @@ class PaginationNotifier<T> extends AsyncNotifier<PaginationState<T>> {
             items: value.items,
             hasMore: value.hasMore,
             cursor: value.cursor,
+            cursorId: value.cursorId,
             totalCount: value.totalCount,
           ),
         ),
       Failure(:final exception) =>
         AsyncData(PaginationError<T>(exception: exception)),
     };
+  }
+
+  // --- Mutation helpers ---
+
+  /// Append a single item to the end (for ascending-order lists).
+  ///
+  /// No-op if state is not [PaginationLoaded].
+  void appendItem(T item) {
+    final current = state.value;
+    if (current is PaginationLoaded<T>) {
+      state = AsyncData(current.appendItem(item));
+    }
+  }
+
+  /// Prepend a single item (for optimistic adds).
+  ///
+  /// No-op if state is not [PaginationLoaded].
+  void prependItem(T item) {
+    final current = state.value;
+    if (current is PaginationLoaded<T>) {
+      state = AsyncData(current.prependItem(item));
+    }
+  }
+
+  /// Update an item in-place by predicate.
+  ///
+  /// Finds the first item matching [test] and replaces it with the result
+  /// of [update]. No-op if state is not [PaginationLoaded].
+  void updateItem(bool Function(T) test, T Function(T) update) {
+    final current = state.value;
+    if (current is PaginationLoaded<T>) {
+      state = AsyncData(current.updateItem(test, update));
+    }
+  }
+
+  /// Remove an item by predicate.
+  ///
+  /// Removes the first item matching [test].
+  /// No-op if state is not [PaginationLoaded].
+  void removeItem(bool Function(T) test) {
+    final current = state.value;
+    if (current is PaginationLoaded<T>) {
+      state = AsyncData(current.removeItem(test));
+    }
   }
 }

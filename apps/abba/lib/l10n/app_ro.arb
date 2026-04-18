@@ -215,6 +215,7 @@
   "prayerStartPrompt": "Începe rugăciunea",
   "startPrayerButton": "Începe să te rogi",
   "switchToTextMode": "Scrie în schimb",
+  "switchToVoiceMode": "Vorbeste",
   "prayerDashboardTitle": "Grădina rugăciunii",
   "qtDashboardTitle": "Grădina timpului liniștit",
   "prayerSummaryTitle": "Rezumatul rugăciunii",
@@ -300,5 +301,14 @@
   "leaveRecordingTitle": "Părăsești înregistrarea?",
   "leaveRecordingMessage": "Înregistrarea ta va fi pierdută. Ești sigur?",
   "leaveButton": "Părăsește",
-  "stayButton": "Rămâi"
+  "stayButton": "Rămâi",
+  "likedByCount": "{count} persoane au empatizat",
+  "@likedByCount": {
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "actionLike": "Apreciez",
+  "actionComment": "Comentariu",
+  "actionSave": "Salvează"
 }

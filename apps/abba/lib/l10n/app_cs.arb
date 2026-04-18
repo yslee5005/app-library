@@ -215,6 +215,7 @@
   "prayerStartPrompt": "Začni svou modlitbu",
   "startPrayerButton": "Začít se modlit",
   "switchToTextMode": "Raději napsat",
+  "switchToVoiceMode": "Mluvit",
   "prayerDashboardTitle": "Zahrada modlitby",
   "qtDashboardTitle": "Zahrada tichého času",
   "prayerSummaryTitle": "Shrnutí modlitby",
@@ -300,5 +301,14 @@
   "leaveRecordingTitle": "Opustit nahrávání?",
   "leaveRecordingMessage": "Vaše nahrávka bude ztracena. Jste si jisti?",
   "leaveButton": "Opustit",
-  "stayButton": "Zůstat"
+  "stayButton": "Zůstat",
+  "likedByCount": "{count} lidí projevilo soucit",
+  "@likedByCount": {
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "actionLike": "To se mi líbí",
+  "actionComment": "Komentář",
+  "actionSave": "Uložit"
 }

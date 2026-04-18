@@ -547,6 +547,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get switchToTextMode => 'Type instead';
 
   @override
+  String get switchToVoiceMode => 'Speak instead';
+
+  @override
   String get prayerDashboardTitle => 'Prayer Garden';
 
   @override
@@ -739,4 +742,18 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get stayButton => 'Stay';
+
+  @override
+  String likedByCount(Object count) {
+    return '$count people empathized';
+  }
+
+  @override
+  String get actionLike => 'Like';
+
+  @override
+  String get actionComment => 'Comment';
+
+  @override
+  String get actionSave => 'Save';
 }

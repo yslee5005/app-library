@@ -542,6 +542,9 @@ class AppLocalizationsHe extends AppLocalizations {
   String get switchToTextMode => 'הקלד במקום';
 
   @override
+  String get switchToVoiceMode => 'דבר במקום';
+
+  @override
   String get prayerDashboardTitle => 'גן התפילה';
 
   @override
@@ -731,4 +734,18 @@ class AppLocalizationsHe extends AppLocalizations {
 
   @override
   String get stayButton => 'הישאר';
+
+  @override
+  String likedByCount(Object count) {
+    return '$count אנשים הזדהו';
+  }
+
+  @override
+  String get actionLike => 'אהבתי';
+
+  @override
+  String get actionComment => 'תגובה';
+
+  @override
+  String get actionSave => 'שמירה';
 }

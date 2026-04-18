@@ -215,6 +215,7 @@
   "prayerStartPrompt": "ጸሎትዎን ይጀምሩ",
   "startPrayerButton": "ጸሎት ጀምር",
   "switchToTextMode": "ይልቁንስ ይፃፉ",
+  "switchToVoiceMode": "በድምጽ ቀይር",
   "prayerDashboardTitle": "የጸሎት ገነት",
   "qtDashboardTitle": "የፀጥታ ጊዜ ገነት",
   "prayerSummaryTitle": "የጸሎት ማጠቃለያ",
@@ -300,5 +301,14 @@
   "leaveRecordingTitle": "ቀረጻውን ይተዉ?",
   "leaveRecordingMessage": "ቀረጻዎ ይጠፋል። እርግጠኛ ነዎት?",
   "leaveButton": "ይውጡ",
-  "stayButton": "ይቆዩ"
+  "stayButton": "ይቆዩ",
+  "likedByCount": "{count} ሰዎች ተመስጥዎታል",
+  "@likedByCount": {
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "actionLike": "ወደድኩ",
+  "actionComment": "አስተያየት",
+  "actionSave": "ያስቀምጡ"
 }

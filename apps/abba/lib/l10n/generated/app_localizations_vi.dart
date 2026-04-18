@@ -547,6 +547,9 @@ class AppLocalizationsVi extends AppLocalizations {
   String get switchToTextMode => 'Nhập văn bản';
 
   @override
+  String get switchToVoiceMode => 'Noi';
+
+  @override
   String get prayerDashboardTitle => 'Vườn Cầu Nguyện';
 
   @override
@@ -740,4 +743,18 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String get stayButton => 'Ở lại';
+
+  @override
+  String likedByCount(Object count) {
+    return '$count người đã đồng cảm';
+  }
+
+  @override
+  String get actionLike => 'Thích';
+
+  @override
+  String get actionComment => 'Bình luận';
+
+  @override
+  String get actionSave => 'Lưu';
 }

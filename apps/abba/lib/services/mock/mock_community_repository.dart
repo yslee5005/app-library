@@ -123,7 +123,11 @@ class MockCommunityRepository implements CommunityRepository {
   }
 
   @override
-  Future<List<Comment>> getComments(String postId) async {
+  Future<List<Comment>> getComments(
+    String postId, {
+    String? cursor,
+    int limit = 20,
+  }) async {
     await _ensureInitialized();
     final post = _posts.firstWhere(
       (p) => p.id == postId,
@@ -135,7 +139,32 @@ class MockCommunityRepository implements CommunityRepository {
         createdAt: DateTime.now(),
       ),
     );
-    return post.comments;
+
+    // Top-level comments only (replies are nested inside each comment)
+    var topLevel = post.comments
+        .where((c) => c.parentCommentId == null)
+        .toList()
+      ..sort((a, b) => b.createdAt.compareTo(a.createdAt)); // newest first
+
+    // Cursor-based filtering
+    if (cursor != null) {
+      final cursorTime = DateTime.parse(cursor);
+      topLevel = topLevel
+          .where((c) => c.createdAt.isBefore(cursorTime))
+          .toList();
+    }
+
+    if (topLevel.length > limit) topLevel = topLevel.sublist(0, limit);
+
+    // Enrich with like state
+    return topLevel.map((c) {
+      return c.copyWith(
+        isLiked: _likedCommentIds.contains(c.id),
+        replies: c.replies.map((r) {
+          return r.copyWith(isLiked: _likedCommentIds.contains(r.id));
+        }).toList(),
+      );
+    }).toList();
   }
 
   @override

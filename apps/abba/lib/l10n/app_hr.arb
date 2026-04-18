@@ -215,6 +215,7 @@
   "prayerStartPrompt": "Započni svoju molitvu",
   "startPrayerButton": "Započni molitvu",
   "switchToTextMode": "Upiši umjesto toga",
+  "switchToVoiceMode": "Govorite",
   "prayerDashboardTitle": "Molitveni Vrt",
   "qtDashboardTitle": "Vrt tihog sata",
   "prayerSummaryTitle": "Sažetak molitve",
@@ -300,5 +301,14 @@
   "leaveRecordingTitle": "Napustiti snimanje?",
   "leaveRecordingMessage": "Vaša snimka će biti izgubljena. Jeste li sigurni?",
   "leaveButton": "Napusti",
-  "stayButton": "Ostani"
+  "stayButton": "Ostani",
+  "likedByCount": "{count} osoba je suosjećalo",
+  "@likedByCount": {
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "actionLike": "Sviđa mi se",
+  "actionComment": "Komentar",
+  "actionSave": "Spremi"
 }

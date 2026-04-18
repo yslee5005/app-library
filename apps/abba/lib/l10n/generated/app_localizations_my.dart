@@ -548,6 +548,9 @@ class AppLocalizationsMy extends AppLocalizations {
   String get switchToTextMode => 'စာရိုက်ရန်';
 
   @override
+  String get switchToVoiceMode => 'စကားပြော';
+
+  @override
   String get prayerDashboardTitle => 'ဆုတောင်းခြင်းဥယျာဉ်';
 
   @override
@@ -741,4 +744,18 @@ class AppLocalizationsMy extends AppLocalizations {
 
   @override
   String get stayButton => 'ဆက်နေမည်';
+
+  @override
+  String likedByCount(Object count) {
+    return '$count ဦး စာနာခဲ့သည်';
+  }
+
+  @override
+  String get actionLike => 'နှစ်သက်';
+
+  @override
+  String get actionComment => 'မှတ်ချက်';
+
+  @override
+  String get actionSave => 'သိမ်းဆည်း';
 }

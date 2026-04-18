@@ -215,6 +215,7 @@
   "prayerStartPrompt": "Begin je gebed",
   "startPrayerButton": "Begin met bidden",
   "switchToTextMode": "Liever typen",
+  "switchToVoiceMode": "Spreken",
   "prayerDashboardTitle": "Gebetstuin",
   "qtDashboardTitle": "Stille Tijd-tuin",
   "prayerSummaryTitle": "Gebedsoverzicht",
@@ -300,5 +301,14 @@
   "leaveRecordingTitle": "Opname verlaten?",
   "leaveRecordingMessage": "Je opname gaat verloren. Weet je het zeker?",
   "leaveButton": "Verlaten",
-  "stayButton": "Blijven"
+  "stayButton": "Blijven",
+  "likedByCount": "{count} mensen leefden mee",
+  "@likedByCount": {
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "actionLike": "Leuk",
+  "actionComment": "Reageer",
+  "actionSave": "Opslaan"
 }

@@ -6,7 +6,8 @@ import 'package:go_router/go_router.dart';
 
 import '../../../l10n/generated/app_localizations.dart';
 import '../../../providers/providers.dart';
-import '../../../services/error_logging_service.dart';
+import 'package:app_lib_logging/logging.dart';
+
 import '../../../services/stt_service.dart';
 import '../../../theme/abba_theme.dart';
 import '../../../widgets/abba_button.dart';
@@ -34,11 +35,10 @@ class _RecordingOverlayState extends ConsumerState<RecordingOverlay>
   void initState() {
     super.initState();
     _sttService = ref.read(sttServiceProvider);
-    ref.read(isRecordingProvider.notifier).state = true;
-    ErrorLoggingService.addBreadcrumb(
-      'Recording started',
-      category: 'recording',
-    );
+    Future(() {
+      ref.read(isRecordingProvider.notifier).state = true;
+    });
+    sttLog.info('Recording started');
     _pulseController = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 1500),
@@ -68,6 +68,7 @@ class _RecordingOverlayState extends ConsumerState<RecordingOverlay>
       _sttService.startListening(
         onResult: (text, isFinal) {
           setState(() => _transcript = text);
+          sttLog.debug('STT partial result: ${text.length} chars');
         },
         onError: (error) {
           // Fallback: switch to text mode on STT error
@@ -180,19 +181,17 @@ class _RecordingOverlayState extends ConsumerState<RecordingOverlay>
     if (_isPaused) {
       _pulseController.stop();
       _sttService.stopListening();
+      sttLog.info('Recording paused');
     } else {
       _pulseController.repeat(reverse: true);
       _startStt();
+      sttLog.info('Recording resumed');
     }
   }
 
   void _finishRecording() {
-    ErrorLoggingService.addBreadcrumb(
-      'Recording finished',
-      category: 'recording',
-    );
-
     final transcript = _isTextMode ? _textController.text : _transcript;
+    sttLog.info('Prayer finished, transcript length=${transcript.length}');
     _sttService.stopListening();
 
     // Store transcript for AI processing
@@ -255,8 +254,10 @@ class _RecordingOverlayState extends ConsumerState<RecordingOverlay>
                       if (_isTextMode) {
                         _sttService.stopListening();
                         _textController.text = _transcript;
+                        sttLog.info('Switched to text mode');
                       } else {
                         _startStt();
+                        sttLog.info('Switched to voice mode');
                       }
                     },
                     icon: Icon(

@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:app_lib_logging/logging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -68,6 +69,7 @@ class _CommunityViewState extends ConsumerState<CommunityView> {
       _hasMore = newPosts.length >= 20;
       _isLoadingMore = false;
     });
+    communityLog.debug('Loaded ${newPosts.length} more posts, cursor=$_cursor');
   }
 
   Future<void> _loadInitial() async {
@@ -90,6 +92,7 @@ class _CommunityViewState extends ConsumerState<CommunityView> {
       _initialLoaded = true;
       _isLoadingInitial = false;
     });
+    communityLog.info('Loaded ${posts.length} posts, filter=$filter');
   }
 
   Future<void> _refresh() async {
@@ -255,7 +258,7 @@ class _FilterChip extends StatelessWidget {
 }
 
 // ---------------------------------------------------------------------------
-// Instagram-style post item (full-width, no card)
+// Facebook-style post card (rounded card with shadow)
 // ---------------------------------------------------------------------------
 class _PostItem extends ConsumerStatefulWidget {
   final CommunityPost post;
@@ -289,268 +292,227 @@ class _PostItemState extends ConsumerState<_PostItem> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // Header: avatar + name + category pill + time + overflow menu
-        Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: AbbaSpacing.md,
-            vertical: AbbaSpacing.sm,
-          ),
-          child: Row(
-            children: [
-              CircleAvatar(
-                radius: 18,
-                backgroundColor: AbbaColors.sage.withValues(alpha: 0.2),
-                child: Text(
-                  (post.displayName != null && post.displayName!.isNotEmpty)
-                      ? post.displayName![0].toUpperCase()
-                      : '\ud83c\udf3f',
-                  style: AbbaTypography.bodySmall,
-                ),
-              ),
-              const SizedBox(width: AbbaSpacing.sm),
-              Text(
-                post.displayName ?? l10n.anonymous,
-                style: AbbaTypography.body.copyWith(
-                  fontWeight: FontWeight.w600,
-                  fontSize: 16,
-                ),
-              ),
-              const SizedBox(width: AbbaSpacing.sm),
-              // Category pill
-              Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: AbbaSpacing.sm,
-                  vertical: 2,
-                ),
-                decoration: BoxDecoration(
-                  color: post.category == 'testimony'
-                      ? AbbaColors.softPink.withValues(alpha: 0.3)
-                      : AbbaColors.softSky.withValues(alpha: 0.3),
-                  borderRadius: BorderRadius.circular(AbbaRadius.sm),
-                ),
-                child: Text(
-                  post.category == 'testimony'
-                      ? l10n.filterTestimony
-                      : l10n.filterPrayerRequest,
-                  style: AbbaTypography.caption.copyWith(
-                    color: AbbaColors.warmBrown,
-                    fontSize: 11,
-                  ),
-                ),
-              ),
-              const SizedBox(width: AbbaSpacing.sm),
-              Text(
-                _formatTime(post.createdAt),
-                style: AbbaTypography.caption,
-              ),
-              const Spacer(),
-              // Overflow menu
-              PopupMenuButton<String>(
-                icon: Icon(Icons.more_horiz, color: AbbaColors.muted, size: 20),
-                padding: EdgeInsets.zero,
-                onSelected: (value) => _handleMenuAction(value, post, l10n),
-                itemBuilder: (context) {
-                  final currentUser = ref.read(currentUserProvider);
-                  final isOwner = currentUser?.id == post.userId;
-                  return [
-                    if (isOwner)
-                      PopupMenuItem(
-                        value: 'delete',
-                        child: Row(
-                          children: [
-                            Icon(Icons.delete_outline,
-                                size: 18, color: AbbaColors.error),
-                            const SizedBox(width: AbbaSpacing.sm),
-                            Text(l10n.deletePost),
-                          ],
-                        ),
-                      ),
-                    PopupMenuItem(
-                      value: 'report',
-                      child: Row(
-                        children: [
-                          Icon(Icons.flag_outlined,
-                              size: 18, color: AbbaColors.muted),
-                          const SizedBox(width: AbbaSpacing.sm),
-                          Text(l10n.reportPost),
-                        ],
-                      ),
-                    ),
-                  ];
-                },
+        // ── Facebook-style card ──
+        Container(
+          margin: const EdgeInsets.symmetric(horizontal: AbbaSpacing.md, vertical: 6),
+          decoration: BoxDecoration(
+            color: AbbaColors.white,
+            borderRadius: BorderRadius.circular(AbbaRadius.lg), // 16px
+            boxShadow: [
+              BoxShadow(
+                color: AbbaColors.warmBrown.withValues(alpha: 0.06),
+                blurRadius: 12,
+                offset: const Offset(0, 2),
               ),
             ],
           ),
-        ),
-
-        // Content with double-tap like
-        GestureDetector(
-          onDoubleTap: () {
-            if (!_isLiked) _handleLike();
-            setState(() => _showHeartAnimation = true);
-            Future.delayed(const Duration(milliseconds: 800), () {
-              if (mounted) setState(() => _showHeartAnimation = false);
-            });
-          },
-          child: Stack(
-            alignment: Alignment.center,
-            children: [
-              // Post text
-              SizedBox(
-                width: double.infinity,
-                child: Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: AbbaSpacing.md),
-                  child: _ExpandableText(
-                    text: post.content,
-                    maxLines: 3,
-                    seeMoreLabel: l10n.seeMore,
-                  ),
-                ),
-              ),
-              // Heart animation overlay
-              if (_showHeartAnimation)
-                TweenAnimationBuilder<double>(
-                  tween: Tween(begin: 0, end: 1),
-                  duration: const Duration(milliseconds: 300),
-                  builder: (context, value, child) => Opacity(
-                    opacity: value > 0.5 ? 2 - value * 2 : value * 2,
-                    child: Transform.scale(
-                      scale: 0.5 + value * 0.5,
-                      child: Icon(Icons.favorite,
-                          size: 80, color: AbbaColors.error),
-                    ),
-                  ),
-                ),
-            ],
-          ),
-        ),
-
-        const SizedBox(height: AbbaSpacing.sm),
-
-        // Action buttons row
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: AbbaSpacing.md),
-          child: Row(
-            children: [
-              _ActionButton(
-                icon: _isLiked ? Icons.favorite : Icons.favorite_border,
-                label: '$_likeCount',
-                color: _isLiked ? AbbaColors.error : AbbaColors.warmBrown,
-                onTap: _handleLike,
-              ),
-              const SizedBox(width: AbbaSpacing.lg),
-              _ActionButton(
-                icon: Icons.chat_bubble_outline,
-                label: '${post.commentCount}',
-                color: AbbaColors.warmBrown,
-                onTap: () => _showCommentsSheet(context, post, l10n),
-              ),
-              const Spacer(),
-              _ActionButton(
-                icon: _isSaved ? Icons.bookmark : Icons.bookmark_border,
-                label: '',
-                color: _isSaved ? AbbaColors.softGold : AbbaColors.warmBrown,
-                onTap: _handleSave,
-              ),
-            ],
-          ),
-        ),
-
-        // Like summary
-        if (_likeCount > 0)
-          Padding(
-            padding: const EdgeInsets.only(
-              left: AbbaSpacing.md,
-              right: AbbaSpacing.md,
-              top: AbbaSpacing.xs,
-            ),
-            child: Text(
-              l10n.likedBy(
-                post.displayName ?? l10n.anonymous,
-                _likeCount - 1,
-              ),
-              style: AbbaTypography.bodySmall.copyWith(
-                fontWeight: FontWeight.w600,
-                fontSize: 14,
-              ),
-            ),
-          ),
-
-        // Inline comment previews (first 2 top-level comments)
-        if (post.comments.isNotEmpty)
-          Padding(
-            padding: const EdgeInsets.only(
-              left: AbbaSpacing.md,
-              right: AbbaSpacing.md,
-              top: AbbaSpacing.sm,
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+          child: GestureDetector(
+            onDoubleTap: () {
+              if (!_isLiked) _handleLike();
+              setState(() => _showHeartAnimation = true);
+              Future.delayed(const Duration(milliseconds: 800), () {
+                if (mounted) setState(() => _showHeartAnimation = false);
+              });
+            },
+            child: Stack(
               children: [
-                // Show up to 2 top-level comment previews
-                ...post.comments
-                    .where((c) => c.parentCommentId == null)
-                    .take(2)
-                    .map(
-                      (c) => Padding(
-                        padding: const EdgeInsets.only(bottom: AbbaSpacing.xs),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            CircleAvatar(
-                              radius: 10,
-                              backgroundColor:
-                                  AbbaColors.sage.withValues(alpha: 0.15),
-                              child: Text(
-                                (c.displayName != null &&
-                                        c.displayName!.isNotEmpty)
-                                    ? c.displayName![0].toUpperCase()
-                                    : '\ud83c\udf3f',
-                                style: AbbaTypography.caption
-                                    .copyWith(fontSize: 9),
-                              ),
+                Padding(
+                  padding: const EdgeInsets.all(AbbaSpacing.md), // 16px
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // ── Header row ──
+                      Row(
+                        children: [
+                          // Avatar circle 40px
+                          CircleAvatar(
+                            radius: 20,
+                            backgroundColor: AbbaColors.sage.withValues(alpha: 0.2),
+                            child: Text(
+                              (post.displayName != null && post.displayName!.isNotEmpty)
+                                  ? post.displayName![0].toUpperCase()
+                                  : '\ud83c\udf3f',
+                              style: AbbaTypography.bodySmall,
                             ),
-                            const SizedBox(width: AbbaSpacing.xs),
-                            Expanded(
-                              child: RichText(
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                                text: TextSpan(
+                          ),
+                          const SizedBox(width: AbbaSpacing.sm),
+                          // Name + category + time column
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                // Name row with category pill
+                                Row(
                                   children: [
-                                    TextSpan(
-                                      text:
-                                          '${c.displayName ?? l10n.anonymous} ',
-                                      style: AbbaTypography.caption.copyWith(
-                                        fontWeight: FontWeight.w600,
-                                        color: AbbaColors.warmBrown,
+                                    Flexible(
+                                      child: Text(
+                                        post.displayName ?? l10n.anonymous,
+                                        style: AbbaTypography.body.copyWith(
+                                          fontWeight: FontWeight.w600,
+                                        ),
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis,
                                       ),
                                     ),
-                                    TextSpan(
-                                      text: c.content,
-                                      style: AbbaTypography.caption.copyWith(
-                                        color: AbbaColors.warmBrown,
+                                    const SizedBox(width: AbbaSpacing.sm),
+                                    // Category badge pill
+                                    Container(
+                                      padding: const EdgeInsets.symmetric(
+                                        horizontal: 8,
+                                        vertical: 2,
+                                      ),
+                                      decoration: BoxDecoration(
+                                        color: post.category == 'testimony'
+                                            ? AbbaColors.sage.withValues(alpha: 0.15)
+                                            : AbbaColors.softGold.withValues(alpha: 0.15),
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                      child: Text(
+                                        post.category == 'testimony'
+                                            ? l10n.filterTestimony
+                                            : l10n.filterPrayerRequest,
+                                        style: AbbaTypography.caption.copyWith(
+                                          fontSize: 11,
+                                          fontWeight: FontWeight.w600,
+                                          color: post.category == 'testimony'
+                                              ? AbbaColors.sage
+                                              : AbbaColors.softGold,
+                                        ),
                                       ),
                                     ),
                                   ],
                                 ),
-                              ),
+                                const SizedBox(height: 2),
+                                // Time
+                                Text(
+                                  _formatTime(post.createdAt),
+                                  style: AbbaTypography.caption.copyWith(
+                                    color: AbbaColors.muted,
+                                  ),
+                                ),
+                              ],
                             ),
-                          ],
+                          ),
+                          // Overflow menu (keep existing)
+                          PopupMenuButton<String>(
+                            icon: Icon(Icons.more_horiz, color: AbbaColors.muted, size: 20),
+                            padding: EdgeInsets.zero,
+                            onSelected: (value) => _handleMenuAction(value, post, l10n),
+                            itemBuilder: (context) {
+                              final currentUser = ref.read(currentUserProvider);
+                              final isOwner = currentUser?.id == post.userId;
+                              return [
+                                if (isOwner)
+                                  PopupMenuItem(
+                                    value: 'delete',
+                                    child: Row(
+                                      children: [
+                                        Icon(Icons.delete_outline,
+                                            size: 18, color: AbbaColors.error),
+                                        const SizedBox(width: AbbaSpacing.sm),
+                                        Text(l10n.deletePost),
+                                      ],
+                                    ),
+                                  ),
+                                PopupMenuItem(
+                                  value: 'report',
+                                  child: Row(
+                                    children: [
+                                      Icon(Icons.flag_outlined,
+                                          size: 18, color: AbbaColors.muted),
+                                      const SizedBox(width: AbbaSpacing.sm),
+                                      Text(l10n.reportPost),
+                                    ],
+                                  ),
+                                ),
+                              ];
+                            },
+                          ),
+                        ],
+                      ),
+
+                      // ── Content ──
+                      Padding(
+                        padding: const EdgeInsets.only(top: 12),
+                        child: _ExpandableText(
+                          text: post.content,
+                          maxLines: 4,
+                          seeMoreLabel: l10n.seeMore,
                         ),
                       ),
-                    ),
-                // "View all N comments" button
-                if (post.commentCount > 2)
-                  GestureDetector(
-                    onTap: () => _showCommentsSheet(context, post, l10n),
-                    child: Padding(
-                      padding: const EdgeInsets.only(top: AbbaSpacing.xs),
-                      child: Text(
-                        l10n.viewAllComments(post.commentCount),
-                        style: AbbaTypography.caption.copyWith(
-                          color: AbbaColors.muted,
-                          fontWeight: FontWeight.w500,
+
+                      // ── Like summary line (only if likeCount > 0) ──
+                      if (_likeCount > 0)
+                        Padding(
+                          padding: const EdgeInsets.only(top: 12),
+                          child: Text(
+                            l10n.likedByCount(_likeCount),
+                            style: AbbaTypography.bodySmall.copyWith(
+                              color: AbbaColors.muted,
+                            ),
+                          ),
+                        ),
+
+                      // ── Thin divider ──
+                      Padding(
+                        padding: const EdgeInsets.only(top: 12),
+                        child: Divider(
+                          height: 0.5,
+                          thickness: 0.5,
+                          color: AbbaColors.warmBrown.withValues(alpha: 0.1),
+                        ),
+                      ),
+
+                      // ── Action buttons row (3 equal buttons) ──
+                      Row(
+                        children: [
+                          // Like button
+                          Expanded(
+                            child: _CardActionButton(
+                              icon: _isLiked ? Icons.favorite : Icons.favorite_border,
+                              label: l10n.actionLike,
+                              color: _isLiked ? AbbaColors.error : AbbaColors.muted,
+                              onTap: _handleLike,
+                            ),
+                          ),
+                          // Comment button
+                          Expanded(
+                            child: _CardActionButton(
+                              icon: Icons.chat_bubble_outline,
+                              label: l10n.actionComment,
+                              color: AbbaColors.muted,
+                              onTap: () => _showCommentsSheet(context, post, l10n),
+                            ),
+                          ),
+                          // Save button
+                          Expanded(
+                            child: _CardActionButton(
+                              icon: _isSaved ? Icons.bookmark : Icons.bookmark_border,
+                              label: l10n.actionSave,
+                              color: _isSaved ? AbbaColors.softGold : AbbaColors.muted,
+                              onTap: _handleSave,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+
+                // Heart animation overlay (double-tap)
+                if (_showHeartAnimation)
+                  Positioned.fill(
+                    child: Center(
+                      child: TweenAnimationBuilder<double>(
+                        tween: Tween(begin: 0, end: 1),
+                        duration: const Duration(milliseconds: 300),
+                        builder: (context, value, child) => Opacity(
+                          opacity: value > 0.5 ? 2 - value * 2 : value * 2,
+                          child: Transform.scale(
+                            scale: 0.5 + value * 0.5,
+                            child: Icon(Icons.favorite,
+                                size: 80, color: AbbaColors.error),
+                          ),
                         ),
                       ),
                     ),
@@ -558,33 +520,9 @@ class _PostItemState extends ConsumerState<_PostItem> {
               ],
             ),
           ),
-
-        // Fallback: "view all comments" when comments not loaded inline
-        if (post.comments.isEmpty && post.commentCount > 0)
-          Padding(
-            padding: const EdgeInsets.only(
-              left: AbbaSpacing.md,
-              right: AbbaSpacing.md,
-              top: AbbaSpacing.xs,
-            ),
-            child: GestureDetector(
-              onTap: () => _showCommentsSheet(context, post, l10n),
-              child: Text(
-                l10n.viewAllComments(post.commentCount),
-                style: AbbaTypography.bodySmall.copyWith(
-                  color: AbbaColors.muted,
-                  fontSize: 14,
-                ),
-              ),
-            ),
-          ),
-
-        const SizedBox(height: AbbaSpacing.sm),
-        // Thin divider
-        Divider(
-          height: 1,
-          color: AbbaColors.muted.withValues(alpha: 0.2),
         ),
+
+        // Comments only via bottom sheet (tap 💬 댓글 button)
       ],
     );
   }
@@ -597,6 +535,7 @@ class _PostItemState extends ConsumerState<_PostItem> {
       _isLiked = liked;
       _likeCount += liked ? 1 : -1;
     });
+    communityLog.info('Post ${widget.post.id} ${liked ? "liked" : "unliked"}');
   }
 
   Future<void> _handleSave() async {
@@ -604,6 +543,7 @@ class _PostItemState extends ConsumerState<_PostItem> {
     final saved = await repo.toggleSave(widget.post.id);
     if (!mounted) return;
     setState(() => _isSaved = saved);
+    communityLog.info('Post ${widget.post.id} ${saved ? "saved" : "unsaved"}');
   }
 
   void _handleMenuAction(
@@ -644,6 +584,7 @@ class _PostItemState extends ConsumerState<_PostItem> {
     if (confirmed == true) {
       final repo = ref.read(communityRepositoryProvider);
       await repo.deletePost(postId);
+      communityLog.info('Post $postId deleted');
       widget.onRefresh();
     }
   }
@@ -717,6 +658,7 @@ class _PostItemState extends ConsumerState<_PostItem> {
         },
       );
       await launchUrl(uri);
+      communityLog.info('Post $postId reported');
 
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -731,6 +673,7 @@ class _PostItemState extends ConsumerState<_PostItem> {
     CommunityPost post,
     AppLocalizations l10n,
   ) {
+    communityLog.debug('Comments sheet opened for post ${post.id}');
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
@@ -850,21 +793,80 @@ class _CommentsSheetState extends ConsumerState<_CommentsSheet> {
   String? _replyToCommentId;
   String? _replyToName;
 
+  // Pagination state
+  final List<Comment> _comments = [];
+  bool _isLoading = true;
+  bool _isLoadingMore = false;
+  bool _hasMore = true;
+  String? _cursor;
+  static const _pageSize = 20;
+
+  @override
+  void initState() {
+    super.initState();
+    widget.scrollController.addListener(_onScroll);
+    _loadComments();
+  }
+
   @override
   void dispose() {
+    widget.scrollController.removeListener(_onScroll);
     _commentController.dispose();
     super.dispose();
   }
 
-  /// Get top-level comments only (replies are nested inside each comment).
-  List<Comment> get _topLevelComments =>
-      widget.post.comments.where((c) => c.parentCommentId == null).toList();
+  void _onScroll() {
+    if (widget.scrollController.position.pixels >=
+        widget.scrollController.position.maxScrollExtent - 200) {
+      _loadMore();
+    }
+  }
+
+  Future<void> _loadComments() async {
+    final repo = ref.read(communityRepositoryProvider);
+    final comments = await repo.getComments(
+      widget.post.id,
+      limit: _pageSize,
+    );
+    if (!mounted) return;
+    setState(() {
+      _comments.clear();
+      _comments.addAll(comments);
+      _cursor = comments.isNotEmpty
+          ? comments.last.createdAt.toIso8601String()
+          : null;
+      _hasMore = comments.length >= _pageSize;
+      _isLoading = false;
+    });
+    communityLog.debug('Loaded ${comments.length} comments for post ${widget.post.id}');
+  }
+
+  Future<void> _loadMore() async {
+    if (_isLoadingMore || !_hasMore) return;
+    setState(() => _isLoadingMore = true);
+
+    final repo = ref.read(communityRepositoryProvider);
+    final newComments = await repo.getComments(
+      widget.post.id,
+      cursor: _cursor,
+      limit: _pageSize,
+    );
+    if (!mounted) return;
+    setState(() {
+      _comments.addAll(newComments);
+      _cursor = newComments.isNotEmpty
+          ? newComments.last.createdAt.toIso8601String()
+          : null;
+      _hasMore = newComments.length >= _pageSize;
+      _isLoadingMore = false;
+    });
+    communityLog.debug('Loaded ${newComments.length} more comments');
+  }
 
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     final post = widget.post;
-    final topLevel = _topLevelComments;
 
     return Column(
       children: [
@@ -886,40 +888,59 @@ class _CommentsSheetState extends ConsumerState<_CommentsSheet> {
         const Divider(height: 1),
         // Threaded comment list
         Expanded(
-          child: topLevel.isEmpty
-              ? Center(
-                  child: Text(
-                    l10n.commentButton,
-                    style: AbbaTypography.body.copyWith(
-                      color: AbbaColors.muted,
+          child: _isLoading
+              ? const Center(child: CircularProgressIndicator())
+              : _comments.isEmpty
+                  ? Center(
+                      child: Text(
+                        l10n.commentButton,
+                        style: AbbaTypography.body.copyWith(
+                          color: AbbaColors.muted,
+                        ),
+                      ),
+                    )
+                  : ListView.builder(
+                      controller: widget.scrollController,
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: AbbaSpacing.md,
+                        vertical: AbbaSpacing.sm,
+                      ),
+                      itemCount:
+                          _comments.length + (_isLoadingMore ? 1 : 0),
+                      itemBuilder: (context, index) {
+                        if (index == _comments.length) {
+                          return const Padding(
+                            padding: EdgeInsets.all(AbbaSpacing.md),
+                            child: Center(
+                              child: SizedBox(
+                                width: 24,
+                                height: 24,
+                                child: CircularProgressIndicator(
+                                  strokeWidth: 2,
+                                ),
+                              ),
+                            ),
+                          );
+                        }
+                        final comment = _comments[index];
+                        return _ThreadedCommentTile(
+                          comment: comment,
+                          isReply: false,
+                          anonymousLabel: l10n.anonymous,
+                          onReply: () => setState(() {
+                            _replyToCommentId = comment.id;
+                            _replyToName =
+                                comment.displayName ?? l10n.anonymous;
+                          }),
+                          onDelete: () =>
+                              _handleDeleteComment(comment.id),
+                          isOwner: ref.read(currentUserProvider)?.id ==
+                              comment.userId,
+                          onCommentLike: (id) =>
+                              _handleCommentLike(id),
+                        );
+                      },
                     ),
-                  ),
-                )
-              : ListView.builder(
-                  controller: widget.scrollController,
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: AbbaSpacing.md,
-                    vertical: AbbaSpacing.sm,
-                  ),
-                  itemCount: topLevel.length,
-                  itemBuilder: (context, index) {
-                    final comment = topLevel[index];
-                    return _ThreadedCommentTile(
-                      comment: comment,
-                      isReply: false,
-                      anonymousLabel: l10n.anonymous,
-                      onReply: () => setState(() {
-                        _replyToCommentId = comment.id;
-                        _replyToName =
-                            comment.displayName ?? l10n.anonymous;
-                      }),
-                      onDelete: () => _handleDeleteComment(comment.id),
-                      isOwner: ref.read(currentUserProvider)?.id ==
-                          comment.userId,
-                      onCommentLike: (id) => _handleCommentLike(id),
-                    );
-                  },
-                ),
         ),
         // Reply indicator
         if (_replyToCommentId != null)
@@ -1031,7 +1052,7 @@ class _CommentsSheetState extends ConsumerState<_CommentsSheet> {
     final repo = ref.read(communityRepositoryProvider);
     final profile = ref.read(userProfileProvider).value;
 
-    await repo.createComment(
+    final newComment = await repo.createComment(
       postId: postId,
       content: text,
       displayName: profile?.name,
@@ -1039,25 +1060,75 @@ class _CommentsSheetState extends ConsumerState<_CommentsSheet> {
     );
 
     _commentController.clear();
+
+    if (_replyToCommentId != null) {
+      // Optimistic: append reply under the parent comment
+      final parentIndex =
+          _comments.indexWhere((c) => c.id == _replyToCommentId);
+      if (parentIndex != -1) {
+        final parent = _comments[parentIndex];
+        _comments[parentIndex] = parent.copyWith(
+          replies: [...parent.replies, newComment],
+        );
+      }
+    } else {
+      // Optimistic: prepend top-level comment
+      _comments.insert(0, newComment);
+    }
+
+    communityLog.info('Comment added to post $postId${_replyToCommentId != null ? " (reply to $_replyToCommentId)" : ""}');
+
     setState(() {
       _replyToCommentId = null;
       _replyToName = null;
     });
     widget.onRefresh();
-    if (mounted) Navigator.pop(context);
   }
 
   Future<void> _handleDeleteComment(String commentId) async {
     final repo = ref.read(communityRepositoryProvider);
     await repo.deleteComment(commentId);
+    communityLog.info('Comment $commentId deleted');
+    setState(() {
+      _comments.removeWhere((c) => c.id == commentId);
+    });
     widget.onRefresh();
-    if (mounted) Navigator.pop(context);
   }
 
   Future<void> _handleCommentLike(String commentId) async {
     final repo = ref.read(communityRepositoryProvider);
     await repo.toggleCommentLike(commentId);
-    widget.onRefresh();
+    communityLog.debug('Comment $commentId like toggled');
+
+    // Optimistic toggle in local state
+    setState(() {
+      for (int i = 0; i < _comments.length; i++) {
+        if (_comments[i].id == commentId) {
+          final c = _comments[i];
+          final nowLiked = !c.isLiked;
+          _comments[i] = c.copyWith(
+            isLiked: nowLiked,
+            likeCount: c.likeCount + (nowLiked ? 1 : -1),
+          );
+          return;
+        }
+        // Check replies
+        final replies = _comments[i].replies;
+        for (int j = 0; j < replies.length; j++) {
+          if (replies[j].id == commentId) {
+            final r = replies[j];
+            final nowLiked = !r.isLiked;
+            final updatedReplies = List<Comment>.from(replies);
+            updatedReplies[j] = r.copyWith(
+              isLiked: nowLiked,
+              likeCount: r.likeCount + (nowLiked ? 1 : -1),
+            );
+            _comments[i] = _comments[i].copyWith(replies: updatedReplies);
+            return;
+          }
+        }
+      }
+    });
   }
 }
 
@@ -1300,15 +1371,15 @@ class _ThreadedCommentTileState extends State<_ThreadedCommentTile> {
 }
 
 // ---------------------------------------------------------------------------
-// Action button (like, comment, save)
+// Card action button (Facebook-style: icon + text label, centered, min 44px)
 // ---------------------------------------------------------------------------
-class _ActionButton extends StatelessWidget {
+class _CardActionButton extends StatelessWidget {
   final IconData icon;
   final String label;
   final Color color;
   final VoidCallback onTap;
 
-  const _ActionButton({
+  const _CardActionButton({
     required this.icon,
     required this.label,
     required this.color,
@@ -1319,15 +1390,24 @@ class _ActionButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onTap,
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Icon(icon, size: 22, color: color),
-          if (label.isNotEmpty) ...[
+      behavior: HitTestBehavior.opaque,
+      child: Container(
+        constraints: const BoxConstraints(minHeight: 44),
+        alignment: Alignment.center,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(icon, size: 20, color: color),
             const SizedBox(width: AbbaSpacing.xs),
-            Text(label, style: AbbaTypography.bodySmall.copyWith(color: color)),
+            Text(
+              label,
+              style: AbbaTypography.bodySmall.copyWith(
+                color: color,
+              ),
+            ),
           ],
-        ],
+        ),
       ),
     );
   }

@@ -1,0 +1,19 @@
+name: app_lib_logging
+description: Structured logging with category filtering, redaction, and Sentry integration.
+version: 1.0.0
+publish_to: none
+
+environment:
+  sdk: ^3.7.0
+
+resolution: workspace
+
+dependencies:
+  flutter:
+    sdk: flutter
+  app_lib_error_logging:
+  http: ^1.2.0
+
+dev_dependencies:
+  lints: ^5.0.0
+  test: ^1.25.0

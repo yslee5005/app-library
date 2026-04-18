@@ -215,6 +215,7 @@
   "prayerStartPrompt": "Kezdd el az imádat",
   "startPrayerButton": "Ima indítása",
   "switchToTextMode": "Inkább gépelés",
+  "switchToVoiceMode": "Beszéljen",
   "prayerDashboardTitle": "Imakert",
   "qtDashboardTitle": "Csendes idő kert",
   "prayerSummaryTitle": "Ima összefoglaló",
@@ -300,5 +301,14 @@
   "leaveRecordingTitle": "Kilép a felvételből?",
   "leaveRecordingMessage": "A felvétel elvész. Biztosan kilép?",
   "leaveButton": "Kilépés",
-  "stayButton": "Maradok"
+  "stayButton": "Maradok",
+  "likedByCount": "{count} ember együttérzett",
+  "@likedByCount": {
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "actionLike": "Tetszik",
+  "actionComment": "Hozzászólás",
+  "actionSave": "Mentés"
 }

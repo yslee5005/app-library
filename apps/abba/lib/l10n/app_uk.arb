@@ -215,6 +215,7 @@
   "prayerStartPrompt": "Почніть молитву",
   "startPrayerButton": "Почати молитву",
   "switchToTextMode": "Краще написати",
+  "switchToVoiceMode": "Говоріть",
   "prayerDashboardTitle": "Сад молитви",
   "qtDashboardTitle": "Сад тихого часу",
   "prayerSummaryTitle": "Підсумок молитви",
@@ -300,5 +301,14 @@
   "leaveRecordingTitle": "Залишити запис?",
   "leaveRecordingMessage": "Ваш запис буде втрачено. Ви впевнені?",
   "leaveButton": "Залишити",
-  "stayButton": "Залишитися"
+  "stayButton": "Залишитися",
+  "likedByCount": "{count} осіб співпереживають",
+  "@likedByCount": {
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "actionLike": "Подобається",
+  "actionComment": "Коментар",
+  "actionSave": "Зберегти"
 }

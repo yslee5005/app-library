@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:app_lib_error_logging/error_logging.dart' as pkg;
 import 'package:sentry_flutter/sentry_flutter.dart';
 
 import '../config/app_config.dart';
@@ -54,5 +55,38 @@ class ErrorLoggingService {
     Sentry.addBreadcrumb(
       Breadcrumb(message: message, category: category ?? 'app'),
     );
+  }
+}
+
+/// Bridge: adapts abba's static ErrorLoggingService to the package interface.
+class AbbaErrorLoggingBridge implements pkg.ErrorLoggingService {
+  @override
+  Future<void> log(
+    String message, {
+    pkg.ErrorLevel level = pkg.ErrorLevel.info,
+  }) async {
+    // Sentry breadcrumb covers this
+  }
+
+  @override
+  Future<void> captureException(
+    Object exception, {
+    StackTrace? stackTrace,
+    pkg.ErrorLevel level = pkg.ErrorLevel.error,
+    Map<String, String>? tags,
+  }) async {
+    ErrorLoggingService.captureException(
+      exception,
+      stackTrace ?? StackTrace.current,
+    );
+  }
+
+  @override
+  void addBreadcrumb({
+    required String message,
+    String? category,
+    Map<String, String>? data,
+  }) {
+    ErrorLoggingService.addBreadcrumb(message, category: category);
   }
 }

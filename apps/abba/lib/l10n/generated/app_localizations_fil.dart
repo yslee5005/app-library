@@ -555,6 +555,9 @@ class AppLocalizationsFil extends AppLocalizations {
   String get switchToTextMode => 'I-type na lang';
 
   @override
+  String get switchToVoiceMode => 'Magsalita';
+
+  @override
   String get prayerDashboardTitle => 'Hardin ng Panalangin';
 
   @override
@@ -749,4 +752,18 @@ class AppLocalizationsFil extends AppLocalizations {
 
   @override
   String get stayButton => 'Manatili';
+
+  @override
+  String likedByCount(Object count) {
+    return '$count tao ang nakiramay';
+  }
+
+  @override
+  String get actionLike => 'Like';
+
+  @override
+  String get actionComment => 'Komento';
+
+  @override
+  String get actionSave => 'I-save';
 }

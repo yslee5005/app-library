@@ -23,6 +23,10 @@ dependencies:
     path: ../../packages/auth
   app_lib_core:
     path: ../../packages/core
+  app_lib_error_logging:
+    path: ../../packages/error_logging
+  app_lib_logging:
+    path: ../../packages/logging
   app_lib_supabase_client:
     path: ../../packages/supabase_client
   google_sign_in: ^6.2.0

@@ -215,6 +215,7 @@
   "prayerStartPrompt": "Mulakan doa anda",
   "startPrayerButton": "Mulakan Doa",
   "switchToTextMode": "Taip sebagai gantinya",
+  "switchToVoiceMode": "Bercakap",
   "prayerDashboardTitle": "Taman Doa",
   "qtDashboardTitle": "Taman Waktu Teduh",
   "prayerSummaryTitle": "Ringkasan Doa",
@@ -300,5 +301,14 @@
   "leaveRecordingTitle": "Tinggalkan rakaman?",
   "leaveRecordingMessage": "Rakaman anda akan hilang. Adakah anda pasti?",
   "leaveButton": "Tinggalkan",
-  "stayButton": "Kekal"
+  "stayButton": "Kekal",
+  "likedByCount": "{count} orang berempati",
+  "@likedByCount": {
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "actionLike": "Suka",
+  "actionComment": "Komen",
+  "actionSave": "Simpan"
 }

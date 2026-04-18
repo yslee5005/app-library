@@ -545,6 +545,9 @@ class AppLocalizationsAr extends AppLocalizations {
   String get switchToTextMode => 'الكتابة بدلاً من ذلك';
 
   @override
+  String get switchToVoiceMode => 'تحويل للصوت';
+
+  @override
   String get prayerDashboardTitle => 'حديقة الصلاة';
 
   @override
@@ -734,4 +737,18 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get stayButton => 'البقاء';
+
+  @override
+  String likedByCount(Object count) {
+    return '$count أشخاص تعاطفوا';
+  }
+
+  @override
+  String get actionLike => 'إعجاب';
+
+  @override
+  String get actionComment => 'تعليق';
+
+  @override
+  String get actionSave => 'حفظ';
 }

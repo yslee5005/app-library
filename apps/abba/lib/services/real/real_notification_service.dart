@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart'
     hide NotificationSettings;
-import 'package:flutter/foundation.dart';
+import 'package:app_lib_logging/logging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -148,7 +148,7 @@ class RealNotificationService implements NotificationService {
       // is not configured — that's expected and handled gracefully.
       final firebaseCore = await _tryInitializeFirebase();
       if (!firebaseCore) {
-        debugPrint('FCM: Firebase not configured — skipping FCM setup');
+        fcmLog.debug('Firebase not configured — skipping FCM setup');
         return;
       }
 
@@ -166,25 +166,22 @@ class RealNotificationService implements NotificationService {
         provisional: false,
       );
 
-      debugPrint(
-        'FCM: Permission status: ${settings.authorizationStatus}',
-      );
+      fcmLog.info('Permission status: ${settings.authorizationStatus}');
 
       // Get FCM token and save it
       final token = await messaging.getToken();
       if (token != null) {
-        debugPrint('FCM: Token obtained (${token.substring(0, 10)}...)');
+        fcmLog.info('Token obtained (${token.substring(0, 10)}...)');
         await saveToken(token);
       }
 
       // Listen for token refresh
       messaging.onTokenRefresh.listen((newToken) {
-        debugPrint('FCM: Token refreshed');
+        fcmLog.info('Token refreshed');
         saveToken(newToken);
       });
     } catch (e, st) {
-      debugPrint('FCM: Initialization failed (app continues without FCM): $e');
-      debugPrint('FCM: Stack trace: $st');
+      fcmLog.error('Initialization failed (app continues without FCM)', error: e, stackTrace: st);
       _firebaseInitialized = false;
     }
   }
@@ -196,7 +193,7 @@ class RealNotificationService implements NotificationService {
       final firebase = await _importFirebaseCore();
       return firebase;
     } catch (e) {
-      debugPrint('FCM: Firebase Core init failed: $e');
+      fcmLog.debug('Firebase Core init failed: $e');
       return false;
     }
   }
@@ -208,7 +205,7 @@ class RealNotificationService implements NotificationService {
       await Firebase.initializeApp();
       return true;
     } catch (e) {
-      debugPrint('FCM: Firebase.initializeApp() failed: $e');
+      fcmLog.debug('Firebase.initializeApp() failed: $e');
       return false;
     }
   }
@@ -218,13 +215,13 @@ class RealNotificationService implements NotificationService {
     try {
       return FirebaseMessaging.instance;
     } catch (e) {
-      debugPrint('FCM: Could not get FirebaseMessaging instance: $e');
+      fcmLog.debug('Could not get FirebaseMessaging instance: $e');
       return null;
     }
   }
 
   void _onNotificationTapped(NotificationResponse response) {
-    debugPrint('Notification tapped: ${response.payload}');
+    fcmLog.debug('Notification tapped: ${response.payload}');
   }
 
   @override
@@ -235,7 +232,7 @@ class RealNotificationService implements NotificationService {
       final messaging = _getFirebaseMessaging();
       return await messaging?.getToken();
     } catch (e) {
-      debugPrint('FCM: getToken() failed: $e');
+      fcmLog.debug('getToken() failed: $e');
       return null;
     }
   }
@@ -247,7 +244,7 @@ class RealNotificationService implements NotificationService {
       final user = supabase.auth.currentUser;
 
       if (user == null) {
-        debugPrint('FCM: No authenticated user — skipping token save');
+        fcmLog.debug('No authenticated user — skipping token save');
         return;
       }
 
@@ -266,10 +263,10 @@ class RealNotificationService implements NotificationService {
         onConflict: 'app_id,user_id,fcm_token',
       );
 
-      debugPrint('FCM: Token saved to user_devices for user ${user.id}');
+      fcmLog.info('Token saved to user_devices for user ${user.id}');
     } catch (e) {
       // Don't crash if table doesn't exist yet or Supabase is unavailable
-      debugPrint('FCM: saveToken() failed (non-fatal): $e');
+      fcmLog.debug('saveToken() failed (non-fatal): $e');
     }
   }
 
@@ -331,9 +328,7 @@ class RealNotificationService implements NotificationService {
       payload: 'morning_prayer',
     );
 
-    debugPrint(
-      'Morning reminder scheduled at $hour:${minute.toString().padLeft(2, '0')} — "$title"',
-    );
+    fcmLog.info('Morning reminder scheduled at $hour:${minute.toString().padLeft(2, '0')} — "$title"');
   }
 
   @override
@@ -368,7 +363,7 @@ class RealNotificationService implements NotificationService {
       payload: 'evening_gratitude',
     );
 
-    debugPrint('Evening reminder scheduled at 21:00 — "$title"');
+    fcmLog.info('Evening reminder scheduled at 21:00 — "$title"');
   }
 
   @override
@@ -399,7 +394,7 @@ class RealNotificationService implements NotificationService {
       payload: 'afternoon_nudge',
     );
 
-    debugPrint('Afternoon nudge scheduled at 14:00');
+    fcmLog.info('Afternoon nudge scheduled at 14:00');
   }
 
   @override
@@ -432,13 +427,13 @@ class RealNotificationService implements NotificationService {
       payload: 'streak_celebration_$streakCount',
     );
 
-    debugPrint('Streak celebration shown for $streakCount days');
+    fcmLog.info('Streak celebration shown for $streakCount days');
   }
 
   @override
   Future<void> cancelAllReminders() async {
     await _plugin.cancelAll();
-    debugPrint('All reminders cancelled');
+    fcmLog.info('All reminders cancelled');
   }
 
   @override

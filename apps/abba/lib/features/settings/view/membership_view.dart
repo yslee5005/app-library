@@ -1,3 +1,4 @@
+import 'package:app_lib_logging/logging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -126,6 +127,7 @@ class _MembershipViewState extends ConsumerState<MembershipView> {
           const SizedBox(height: AbbaSpacing.lg),
           TextButton(
             onPressed: () async {
+              appLogger.info('Restore purchase initiated', category: LogCategory.subscription);
               final service = ref.read(subscriptionServiceProvider);
               await service.restorePurchases();
             },
@@ -152,7 +154,10 @@ class _MembershipViewState extends ConsumerState<MembershipView> {
         children: [
           Expanded(
             child: GestureDetector(
-              onTap: () => setState(() => _selectedPlan = 0),
+              onTap: () {
+                setState(() => _selectedPlan = 0);
+                appLogger.info('Membership plan selected: monthly', category: LogCategory.subscription);
+              },
               child: AnimatedContainer(
                 duration: const Duration(milliseconds: 200),
                 padding: const EdgeInsets.symmetric(vertical: AbbaSpacing.md),
@@ -176,7 +181,10 @@ class _MembershipViewState extends ConsumerState<MembershipView> {
           ),
           Expanded(
             child: GestureDetector(
-              onTap: () => setState(() => _selectedPlan = 1),
+              onTap: () {
+                setState(() => _selectedPlan = 1);
+                appLogger.info('Membership plan selected: yearly', category: LogCategory.subscription);
+              },
               child: AnimatedContainer(
                 duration: const Duration(milliseconds: 200),
                 padding: const EdgeInsets.symmetric(vertical: AbbaSpacing.md),
@@ -323,6 +331,7 @@ class _MembershipViewState extends ConsumerState<MembershipView> {
           // Restore purchase
           GestureDetector(
             onTap: () async {
+              appLogger.info('Restore purchase initiated', category: LogCategory.subscription);
               final service = ref.read(subscriptionServiceProvider);
               await service.restorePurchases();
             },
@@ -386,14 +395,20 @@ class _MembershipViewState extends ConsumerState<MembershipView> {
   // ── Purchase ────────────────────────────────────────────────────────────
   Future<void> _purchase() async {
     final l10n = AppLocalizations.of(context)!;
+    final productId = _selectedPlan == 1 ? 'yearly' : 'monthly';
+    appLogger.info('Purchase initiated: $productId', category: LogCategory.subscription);
     setState(() => _purchasing = true);
     try {
       final service = ref.read(subscriptionServiceProvider);
       final success = _selectedPlan == 1
           ? await service.purchaseYearly()
           : await service.purchaseMonthly();
-      if (success) ref.invalidate(isPremiumProvider);
-    } catch (_) {
+      if (success) {
+        appLogger.info('Purchase successful', category: LogCategory.subscription);
+        ref.invalidate(isPremiumProvider);
+      }
+    } catch (e) {
+      appLogger.error('Purchase failed', category: LogCategory.subscription, error: e);
       if (mounted) {
         showAbbaSnackBar(context, message: l10n.errorPayment);
       }

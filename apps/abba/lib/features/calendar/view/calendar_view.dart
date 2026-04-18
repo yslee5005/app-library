@@ -1,3 +1,4 @@
+import 'package:app_lib_logging/logging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -64,6 +65,7 @@ class _CalendarViewState extends ConsumerState<CalendarView> {
                         _currentMonth.year,
                         _currentMonth.month - 1,
                       );
+                      prayerLog.debug('Calendar month changed: ${_currentMonth.year}-${_currentMonth.month}');
                     }),
                     child: Icon(
                       Icons.chevron_left,
@@ -89,6 +91,7 @@ class _CalendarViewState extends ConsumerState<CalendarView> {
                           _currentMonth.year,
                           _currentMonth.month + 1,
                         );
+                        prayerLog.debug('Calendar month changed: ${_currentMonth.year}-${_currentMonth.month}');
                       });
                     },
                     child: Builder(
@@ -287,6 +290,7 @@ class _CalendarViewState extends ConsumerState<CalendarView> {
         GestureDetector(
           onTap: () => setState(() {
             _selectedDate = _selectedDate == date ? null : date;
+            prayerLog.debug('Calendar date tapped: $date');
           }),
           child: Container(
             margin: const EdgeInsets.all(2),
@@ -517,6 +521,7 @@ class _CalendarViewState extends ConsumerState<CalendarView> {
   void _openPrayerDetail(Prayer prayer) {
     if (prayer.result == null) return;
 
+    prayerLog.debug('Prayer detail opened: ${prayer.id}');
     ref.read(prayerResultProvider.notifier).state =
         AsyncValue.data(prayer.result!);
     context.push('/home/prayer-dashboard');

@@ -550,6 +550,9 @@ class AppLocalizationsHu extends AppLocalizations {
   String get switchToTextMode => 'Inkább gépelés';
 
   @override
+  String get switchToVoiceMode => 'Beszéljen';
+
+  @override
   String get prayerDashboardTitle => 'Imakert';
 
   @override
@@ -742,4 +745,18 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String get stayButton => 'Maradok';
+
+  @override
+  String likedByCount(Object count) {
+    return '$count ember együttérzett';
+  }
+
+  @override
+  String get actionLike => 'Tetszik';
+
+  @override
+  String get actionComment => 'Hozzászólás';
+
+  @override
+  String get actionSave => 'Mentés';
 }

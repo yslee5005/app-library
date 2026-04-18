@@ -215,6 +215,7 @@
   "prayerStartPrompt": "Duanıza başlayın",
   "startPrayerButton": "Duaya Başla",
   "switchToTextMode": "Yazarak devam et",
+  "switchToVoiceMode": "Konus",
   "prayerDashboardTitle": "Dua Bahçesi",
   "qtDashboardTitle": "Sessiz Zaman Bahçesi",
   "prayerSummaryTitle": "Dua Özeti",
@@ -300,5 +301,14 @@
   "leaveRecordingTitle": "Kayıttan çıkılsın mı?",
   "leaveRecordingMessage": "Kaydınız kaybolacak. Emin misiniz?",
   "leaveButton": "Çık",
-  "stayButton": "Kal"
+  "stayButton": "Kal",
+  "likedByCount": "{count} kişi empati kurdu",
+  "@likedByCount": {
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "actionLike": "Beğen",
+  "actionComment": "Yorum",
+  "actionSave": "Kaydet"
 }

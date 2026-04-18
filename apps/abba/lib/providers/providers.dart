@@ -102,8 +102,9 @@ final premiumContentProvider =
     StateProvider<AsyncValue<PremiumContent>?>((ref) => null);
 
 final qtPassagesProvider = FutureProvider<List<QTPassage>>((ref) {
+  final locale = ref.watch(localeProvider);
   final repo = ref.watch(qtRepositoryProvider);
-  return repo.getTodayPassages();
+  return repo.getTodayPassages(locale: locale);
 });
 
 final communityPostsProvider = FutureProvider<List<CommunityPost>>((ref) {
@@ -181,9 +182,10 @@ class HeatmapDay {
   );
 }
 
-/// Prayer heatmap data: daily prayer counts + duration for last 84 days.
+/// Prayer heatmap data: daily counts + duration for last 84 days, filtered by mode.
+/// Pass 'prayer' or 'qt' to get mode-specific data.
 final prayerHeatmapProvider =
-    FutureProvider.autoDispose<Map<DateTime, HeatmapDay>>((ref) async {
+    FutureProvider.family<Map<DateTime, HeatmapDay>, String>((ref, mode) async {
   final repo = ref.watch(prayerRepositoryProvider);
   final now = DateTime.now();
   final result = <DateTime, HeatmapDay>{};
@@ -197,6 +199,7 @@ final prayerHeatmapProvider =
   for (final m in months) {
     final prayers = await repo.getPrayersByMonth(m.year, m.month);
     for (final p in prayers) {
+      if (p.mode != mode) continue; // filter by mode
       final dateKey = DateTime(p.createdAt.year, p.createdAt.month, p.createdAt.day);
       final daysAgo = now.difference(dateKey).inDays;
       if (daysAgo <= 84) {
@@ -205,6 +208,68 @@ final prayerHeatmapProvider =
     }
   }
   return result;
+});
+
+/// Streak calculated from heatmap data, per mode.
+/// Returns (current, best) streak for the given mode ('prayer' or 'qt').
+final streakByModeProvider =
+    FutureProvider.family<({int current, int best}), String>((ref, mode) async {
+  final heatmapData = await ref.watch(prayerHeatmapProvider(mode).future);
+  if (heatmapData.isEmpty) {
+    return (current: 0, best: 0);
+  }
+
+  final now = DateTime.now();
+  final today = DateTime(now.year, now.month, now.day);
+
+  // Collect dates that have activity
+  final activeDates = heatmapData.entries
+      .where((e) => e.value.count > 0)
+      .map((e) => e.key)
+      .toList()
+    ..sort((a, b) => b.compareTo(a)); // descending
+
+  if (activeDates.isEmpty) return (current: 0, best: 0);
+
+  // Current streak
+  int currentStreak = 0;
+  var expected = today;
+
+  if (activeDates.first == today) {
+    expected = today;
+  } else if (activeDates.first == today.subtract(const Duration(days: 1))) {
+    expected = today.subtract(const Duration(days: 1));
+  } else {
+    currentStreak = 0;
+    expected = today; // won't match
+  }
+
+  for (final date in activeDates) {
+    if (date == expected) {
+      currentStreak++;
+      expected = expected.subtract(const Duration(days: 1));
+    } else if (date.isBefore(expected)) {
+      break;
+    }
+  }
+
+  // Best streak
+  final ascending = activeDates.reversed.toList();
+  int bestStreak = 0;
+  int runLength = 1;
+  for (int i = 1; i < ascending.length; i++) {
+    final diff = ascending[i].difference(ascending[i - 1]).inDays;
+    if (diff == 1) {
+      runLength++;
+    } else {
+      if (runLength > bestStreak) bestStreak = runLength;
+      runLength = 1;
+    }
+  }
+  if (runLength > bestStreak) bestStreak = runLength;
+  if (currentStreak > bestStreak) bestStreak = currentStreak;
+
+  return (current: currentStreak, best: bestStreak);
 });
 
 // ---------------------------------------------------------------------------

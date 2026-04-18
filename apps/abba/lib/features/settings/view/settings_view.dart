@@ -1,3 +1,4 @@
+import 'package:app_lib_logging/logging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -119,7 +120,10 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
                       ),
                     ],
                   ),
-                  onTap: () => context.go('/settings/membership'),
+                  onTap: () {
+                    appLogger.debug('Membership page opened', category: LogCategory.subscription);
+                    context.go('/settings/membership');
+                  },
                 ),
               ],
             ),
@@ -168,7 +172,10 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
                     Icons.chevron_right,
                     color: AbbaColors.muted,
                   ),
-                  onTap: () => context.go('/settings/notifications'),
+                  onTap: () {
+                    fcmLog.debug('Notification settings opened');
+                    context.go('/settings/notifications');
+                  },
                 ),
               ],
             ),
@@ -226,11 +233,20 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
           ),
           const SizedBox(height: AbbaSpacing.lg),
 
-          // ── Version ───────────────────────────────────────────────
+          // ── Version (long press → Log Viewer) ────────────────────
           Center(
-            child: Text(
-              l10n.appVersion('1.0.0'),
-              style: AbbaTypography.caption,
+            child: GestureDetector(
+              onLongPress: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (_) => LogViewerScreen(history: logHistory),
+                  ),
+                );
+              },
+              child: Text(
+                l10n.appVersion('1.0.0'),
+                style: AbbaTypography.caption,
+              ),
             ),
           ),
           const SizedBox(height: AbbaSpacing.xl),
@@ -329,6 +345,7 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
           ref.read(voicePreferenceProvider.notifier).state = v;
           final prefs = await SharedPreferences.getInstance();
           await prefs.setString('voice_preference', v);
+          appLogger.info('Voice preference changed to $v', category: LogCategory.tts);
         }
       },
     );
@@ -391,6 +408,7 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
           ref.read(localeProvider.notifier).state = v;
           final prefs = await SharedPreferences.getInstance();
           await prefs.setString('locale', v);
+          appLogger.info('Language changed to $v', category: LogCategory.general);
         }
       },
     );
@@ -502,11 +520,13 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
         await notifier.linkWithGoogle();
       }
       ref.invalidate(userProfileProvider);
+      authLog.info('Account linked with $provider');
       if (mounted) {
         setState(() {});
         showAbbaSnackBar(context, message: l10n.linkAccountSuccess);
       }
     } catch (e) {
+      authLog.error('Account linking failed: $provider', error: e);
       if (mounted) {
         showAbbaSnackBar(context, message: l10n.errorGeneric);
       }
@@ -535,6 +555,7 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
             onPressed: () async {
               Navigator.pop(dialogContext);
               await ref.read(authNotifierProvider.notifier).signOut();
+              authLog.info('User logged out');
               if (context.mounted) context.go('/welcome');
             },
             child: Text(

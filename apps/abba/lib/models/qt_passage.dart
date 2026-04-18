@@ -3,10 +3,11 @@ import 'dart:ui' show Color;
 class QTPassage {
   final String id;
   final String reference;
-  final String textEn;
-  final String textKo;
-  final String topicEn;
-  final String topicKo;
+  final String locale;
+  final String text;
+  final String topic;
+  final String theme;
+  final String batchSlot;
   final String icon;
   final String colorHex;
   final DateTime date;
@@ -15,10 +16,11 @@ class QTPassage {
   const QTPassage({
     required this.id,
     required this.reference,
-    required this.textEn,
-    required this.textKo,
-    this.topicEn = '',
-    this.topicKo = '',
+    this.locale = 'en',
+    required this.text,
+    this.topic = '',
+    this.theme = '',
+    this.batchSlot = 'morning',
     required this.icon,
     required this.colorHex,
     required this.date,
@@ -29,19 +31,17 @@ class QTPassage {
     return QTPassage(
       id: json['id'] as String,
       reference: json['reference'] as String,
-      textEn: json['text_en'] as String,
-      textKo: json['text_ko'] as String,
-      topicEn: json['topic_en'] as String? ?? '',
-      topicKo: json['topic_ko'] as String? ?? '',
+      locale: json['locale'] as String? ?? 'en',
+      text: json['text'] as String,
+      topic: json['topic'] as String? ?? '',
+      theme: json['theme'] as String? ?? '',
+      batchSlot: json['batch_slot'] as String? ?? 'morning',
       icon: json['icon'] as String,
       colorHex: json['color_hex'] as String,
       date: DateTime.parse(json['date'] as String),
       isCompleted: json['is_completed'] as bool? ?? false,
     );
   }
-
-  String text(String locale) => locale == 'ko' ? textKo : textEn;
-  String topic(String locale) => locale == 'ko' ? topicKo : topicEn;
 
   Color get color => Color(int.parse(colorHex.replaceFirst('#', '0xFF')));
 }

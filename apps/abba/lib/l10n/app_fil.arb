@@ -215,6 +215,7 @@
   "prayerStartPrompt": "Simulan ang iyong panalangin",
   "startPrayerButton": "Magsimulang Manalangin",
   "switchToTextMode": "I-type na lang",
+  "switchToVoiceMode": "Magsalita",
   "prayerDashboardTitle": "Hardin ng Panalangin",
   "qtDashboardTitle": "Hardin ng QT",
   "prayerSummaryTitle": "Buod ng Panalangin",
@@ -300,5 +301,14 @@
   "leaveRecordingTitle": "Umalis sa recording?",
   "leaveRecordingMessage": "Mawawala ang iyong recording. Sigurado ka ba?",
   "leaveButton": "Umalis",
-  "stayButton": "Manatili"
+  "stayButton": "Manatili",
+  "likedByCount": "{count} tao ang nakiramay",
+  "@likedByCount": {
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "actionLike": "Like",
+  "actionComment": "Komento",
+  "actionSave": "I-save"
 }

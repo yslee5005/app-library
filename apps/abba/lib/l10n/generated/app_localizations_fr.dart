@@ -553,6 +553,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get switchToTextMode => 'Saisir au clavier';
 
   @override
+  String get switchToVoiceMode => 'Parler';
+
+  @override
   String get prayerDashboardTitle => 'Jardin de Prière';
 
   @override
@@ -747,4 +750,18 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get stayButton => 'Rester';
+
+  @override
+  String likedByCount(Object count) {
+    return '$count personnes ont compati';
+  }
+
+  @override
+  String get actionLike => 'J\'aime';
+
+  @override
+  String get actionComment => 'Commenter';
+
+  @override
+  String get actionSave => 'Sauvegarder';
 }

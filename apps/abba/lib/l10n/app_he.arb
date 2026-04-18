@@ -215,6 +215,7 @@
   "prayerStartPrompt": "התחל את תפילתך",
   "startPrayerButton": "התחל תפילה",
   "switchToTextMode": "הקלד במקום",
+  "switchToVoiceMode": "דבר במקום",
   "prayerDashboardTitle": "גן התפילה",
   "qtDashboardTitle": "גן שעת השקט",
   "prayerSummaryTitle": "סיכום תפילה",
@@ -300,5 +301,14 @@
   "leaveRecordingTitle": "לעזוב את ההקלטה?",
   "leaveRecordingMessage": "ההקלטה שלך תאבד. בטוח?",
   "leaveButton": "עזוב",
-  "stayButton": "הישאר"
+  "stayButton": "הישאר",
+  "likedByCount": "{count} אנשים הזדהו",
+  "@likedByCount": {
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "actionLike": "אהבתי",
+  "actionComment": "תגובה",
+  "actionSave": "שמירה"
 }

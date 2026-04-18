@@ -20,7 +20,11 @@ abstract class CommunityRepository {
   Future<void> deletePost(String postId);
 
   // --- Comments ---
-  Future<List<Comment>> getComments(String postId);
+  Future<List<Comment>> getComments(
+    String postId, {
+    String? cursor,
+    int limit = 20,
+  });
 
   Future<Comment> createComment({
     required String postId,

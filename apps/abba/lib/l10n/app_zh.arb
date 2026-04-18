@@ -215,6 +215,7 @@
   "prayerStartPrompt": "开始祷告",
   "startPrayerButton": "开始祷告",
   "switchToTextMode": "切换到文字输入",
+  "switchToVoiceMode": "语音输入",
   "prayerDashboardTitle": "祷告花园",
   "qtDashboardTitle": "灵修花园",
   "prayerSummaryTitle": "祷告摘要",
@@ -300,5 +301,14 @@
   "leaveRecordingTitle": "离开录音？",
   "leaveRecordingMessage": "录音内容将会丢失。确定要离开吗？",
   "leaveButton": "离开",
-  "stayButton": "留下"
+  "stayButton": "留下",
+  "likedByCount": "{count}人表示共鸣",
+  "@likedByCount": {
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "actionLike": "共鸣",
+  "actionComment": "评论",
+  "actionSave": "收藏"
 }

@@ -215,6 +215,7 @@
   "prayerStartPrompt": "Aloita rukouksesi",
   "startPrayerButton": "Aloita rukous",
   "switchToTextMode": "Kirjoita sen sijaan",
+  "switchToVoiceMode": "Puhu",
   "prayerDashboardTitle": "Rukouspuutarha",
   "qtDashboardTitle": "Hiljaisuuden puutarha",
   "prayerSummaryTitle": "Rukousyhteenveto",
@@ -300,5 +301,14 @@
   "leaveRecordingTitle": "Poistu nauhoituksesta?",
   "leaveRecordingMessage": "Nauhoituksesi menetetään. Oletko varma?",
   "leaveButton": "Poistu",
-  "stayButton": "Jää"
+  "stayButton": "Jää",
+  "likedByCount": "{count} ihmistä myötäeli",
+  "@likedByCount": {
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "actionLike": "Tykkää",
+  "actionComment": "Kommentti",
+  "actionSave": "Tallenna"
 }

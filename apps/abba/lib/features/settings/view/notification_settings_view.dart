@@ -1,3 +1,4 @@
+import 'package:app_lib_logging/logging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -39,6 +40,7 @@ class NotificationSettingsView extends ConsumerWidget {
                           .read(notificationServiceProvider)
                           .updateSettings(morningReminder: v);
                       ref.invalidate(notificationSettingsProvider);
+                      fcmLog.info('Morning reminder ${v ? "enabled" : "disabled"}');
                     },
                     activeTrackColor: AbbaColors.sage,
                   ),
@@ -67,6 +69,7 @@ class NotificationSettingsView extends ConsumerWidget {
                             .read(notificationServiceProvider)
                             .updateSettings(morningTime: formatted);
                         ref.invalidate(notificationSettingsProvider);
+                        fcmLog.info('Morning time changed to $formatted');
                       }
                     },
                   ),
@@ -83,6 +86,7 @@ class NotificationSettingsView extends ConsumerWidget {
                           .read(notificationServiceProvider)
                           .updateSettings(eveningReminder: v);
                       ref.invalidate(notificationSettingsProvider);
+                      fcmLog.info('Evening reminder ${v ? "enabled" : "disabled"}');
                     },
                     activeTrackColor: AbbaColors.sage,
                   ),
@@ -99,6 +103,7 @@ class NotificationSettingsView extends ConsumerWidget {
                           .read(notificationServiceProvider)
                           .updateSettings(afternoonNudge: v);
                       ref.invalidate(notificationSettingsProvider);
+                      fcmLog.info('Afternoon nudge ${v ? "enabled" : "disabled"}');
                     },
                     activeTrackColor: AbbaColors.sage,
                   ),
@@ -115,6 +120,7 @@ class NotificationSettingsView extends ConsumerWidget {
                           .read(notificationServiceProvider)
                           .updateSettings(streakReminder: v);
                       ref.invalidate(notificationSettingsProvider);
+                      fcmLog.info('Streak reminder ${v ? "enabled" : "disabled"}');
                     },
                     activeTrackColor: AbbaColors.sage,
                   ),
@@ -131,6 +137,7 @@ class NotificationSettingsView extends ConsumerWidget {
                           .read(notificationServiceProvider)
                           .updateSettings(weeklySummary: v);
                       ref.invalidate(notificationSettingsProvider);
+                      fcmLog.info('Weekly summary ${v ? "enabled" : "disabled"}');
                     },
                     activeTrackColor: AbbaColors.sage,
                   ),

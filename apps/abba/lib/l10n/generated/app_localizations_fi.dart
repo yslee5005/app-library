@@ -549,6 +549,9 @@ class AppLocalizationsFi extends AppLocalizations {
   String get switchToTextMode => 'Kirjoita sen sijaan';
 
   @override
+  String get switchToVoiceMode => 'Puhu';
+
+  @override
   String get prayerDashboardTitle => 'Rukouspuutarha';
 
   @override
@@ -739,4 +742,18 @@ class AppLocalizationsFi extends AppLocalizations {
 
   @override
   String get stayButton => 'Jää';
+
+  @override
+  String likedByCount(Object count) {
+    return '$count ihmistä myötäeli';
+  }
+
+  @override
+  String get actionLike => 'Tykkää';
+
+  @override
+  String get actionComment => 'Kommentti';
+
+  @override
+  String get actionSave => 'Tallenna';
 }

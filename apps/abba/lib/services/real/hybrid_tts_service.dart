@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import '../error_logging_service.dart';
+import 'package:app_lib_logging/logging.dart';
 import '../tts_service.dart';
 
 /// Orchestrates primary (cloud) and fallback (on-device) TTS services.
@@ -24,10 +24,7 @@ class HybridTtsService implements TtsService {
       _active = primary;
       await primary.speak(text: text, voice: voice);
     } catch (e) {
-      ErrorLoggingService.addBreadcrumb(
-        'Primary TTS failed, falling back to on-device: $e',
-        category: 'tts',
-      );
+      ttsLog.info('Primary TTS failed, falling back to on-device: $e');
       _active = fallback;
       await fallback.speak(text: text, voice: voice);
     }

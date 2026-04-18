@@ -550,6 +550,9 @@ class AppLocalizationsPl extends AppLocalizations {
   String get switchToTextMode => 'Pisz zamiast tego';
 
   @override
+  String get switchToVoiceMode => 'Mow';
+
+  @override
   String get prayerDashboardTitle => 'Ogród modlitwy';
 
   @override
@@ -742,4 +745,18 @@ class AppLocalizationsPl extends AppLocalizations {
 
   @override
   String get stayButton => 'Zostań';
+
+  @override
+  String likedByCount(Object count) {
+    return '$count osób okazało empatię';
+  }
+
+  @override
+  String get actionLike => 'Lubię';
+
+  @override
+  String get actionComment => 'Komentarz';
+
+  @override
+  String get actionSave => 'Zapisz';
 }

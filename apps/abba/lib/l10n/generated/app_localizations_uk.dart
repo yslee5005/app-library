@@ -548,6 +548,9 @@ class AppLocalizationsUk extends AppLocalizations {
   String get switchToTextMode => 'Краще написати';
 
   @override
+  String get switchToVoiceMode => 'Говоріть';
+
+  @override
   String get prayerDashboardTitle => 'Сад молитви';
 
   @override
@@ -740,4 +743,18 @@ class AppLocalizationsUk extends AppLocalizations {
 
   @override
   String get stayButton => 'Залишитися';
+
+  @override
+  String likedByCount(Object count) {
+    return '$count осіб співпереживають';
+  }
+
+  @override
+  String get actionLike => 'Подобається';
+
+  @override
+  String get actionComment => 'Коментар';
+
+  @override
+  String get actionSave => 'Зберегти';
 }

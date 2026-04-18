@@ -550,6 +550,9 @@ class AppLocalizationsSw extends AppLocalizations {
   String get switchToTextMode => 'Andika badala yake';
 
   @override
+  String get switchToVoiceMode => 'Ongea';
+
+  @override
   String get prayerDashboardTitle => 'Bustani ya Maombi';
 
   @override
@@ -741,4 +744,18 @@ class AppLocalizationsSw extends AppLocalizations {
 
   @override
   String get stayButton => 'Kaa';
+
+  @override
+  String likedByCount(Object count) {
+    return 'Watu $count wamehurumia';
+  }
+
+  @override
+  String get actionLike => 'Penda';
+
+  @override
+  String get actionComment => 'Toa maoni';
+
+  @override
+  String get actionSave => 'Hifadhi';
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:app_lib_logging/logging.dart';
 
 import '../../../l10n/generated/app_localizations.dart';
 import '../../../models/prayer.dart';
@@ -29,13 +30,19 @@ class DashboardView extends ConsumerWidget {
       backgroundColor: AbbaColors.cream,
       appBar: AppBar(
         leading: IconButton(
-          onPressed: () => context.go('/home'),
+          onPressed: () {
+            prayerLog.debug('Back to home from dashboard');
+            context.go('/home');
+          },
           icon: const Icon(Icons.arrow_back),
         ),
         title: Text('${l10n.dashboardTitle} 🌸', style: AbbaTypography.h1),
         actions: [
           IconButton(
-            onPressed: () => context.push('/community/write'),
+            onPressed: () {
+              prayerLog.info('Prayer result shared');
+              context.push('/community/write');
+            },
             icon: const Icon(Icons.share),
           ),
         ],
@@ -58,6 +65,7 @@ class DashboardView extends ConsumerWidget {
     bool isPremium,
   ) {
     void showPremiumUpgrade() {
+      appLogger.info('Premium card tapped', category: LogCategory.subscription);
       context.push('/settings/membership');
     }
 
@@ -134,7 +142,10 @@ class DashboardView extends ConsumerWidget {
             ),
             child: AbbaButton(
               label: '🏠 ${l10n.backToHome}',
-              onPressed: () => context.go('/home'),
+              onPressed: () {
+                prayerLog.debug('Back to home from dashboard');
+                context.go('/home');
+              },
               isHero: true,
             ),
           ),

@@ -7,7 +7,7 @@ import 'package:just_audio/just_audio.dart';
 import 'package:path_provider/path_provider.dart' show getTemporaryDirectory;
 
 import '../../config/app_config.dart';
-import '../error_logging_service.dart';
+import 'package:app_lib_logging/logging.dart';
 import '../tts_service.dart';
 
 /// Maps voice preference to OpenAI TTS voice
@@ -59,7 +59,7 @@ class RealTtsService implements TtsService {
       }
     }
 
-    ErrorLoggingService.addBreadcrumb('TTS API call started', category: 'tts');
+    ttsLog.info('TTS API call started');
 
     try {
       // Call OpenAI TTS API
@@ -78,10 +78,7 @@ class RealTtsService implements TtsService {
       );
 
       if (response.statusCode != 200) {
-        ErrorLoggingService.addBreadcrumb(
-          'TTS API failed: ${response.statusCode}',
-          category: 'tts',
-        );
+        ttsLog.info('TTS API failed: ${response.statusCode}');
         throw Exception('TTS API failed: ${response.statusCode}');
       }
 
@@ -98,7 +95,7 @@ class RealTtsService implements TtsService {
       await _player.setFilePath(filePath);
       await _player.play();
     } catch (e, stackTrace) {
-      ErrorLoggingService.captureException(e, stackTrace);
+      ttsLog.error('OpenAI TTS failed', error: e, stackTrace: stackTrace);
       rethrow;
     }
   }

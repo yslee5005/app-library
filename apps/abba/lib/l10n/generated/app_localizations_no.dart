@@ -547,6 +547,9 @@ class AppLocalizationsNo extends AppLocalizations {
   String get switchToTextMode => 'Skriv i stedet';
 
   @override
+  String get switchToVoiceMode => 'Snakk';
+
+  @override
   String get prayerDashboardTitle => 'Bønnens Hage';
 
   @override
@@ -740,4 +743,18 @@ class AppLocalizationsNo extends AppLocalizations {
 
   @override
   String get stayButton => 'Bli';
+
+  @override
+  String likedByCount(Object count) {
+    return '$count personer har vist medfølelse';
+  }
+
+  @override
+  String get actionLike => 'Liker';
+
+  @override
+  String get actionComment => 'Kommentar';
+
+  @override
+  String get actionSave => 'Lagre';
 }

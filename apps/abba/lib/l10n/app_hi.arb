@@ -215,6 +215,7 @@
   "prayerStartPrompt": "अपनी प्रार्थना शुरू करें",
   "startPrayerButton": "प्रार्थना शुरू करें",
   "switchToTextMode": "टाइप करें",
+  "switchToVoiceMode": "बोलें",
   "prayerDashboardTitle": "प्रार्थना बगीचा",
   "qtDashboardTitle": "मनन बगीचा",
   "prayerSummaryTitle": "प्रार्थना सारांश",
@@ -300,5 +301,14 @@
   "leaveRecordingTitle": "रिकॉर्डिंग छोड़ें?",
   "leaveRecordingMessage": "आपकी रिकॉर्डिंग खो जाएगी। क्या आप निश्चित हैं?",
   "leaveButton": "छोड़ें",
-  "stayButton": "रुकें"
+  "stayButton": "रुकें",
+  "likedByCount": "{count} लोगों ने सहानुभूति व्यक्त की",
+  "@likedByCount": {
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "actionLike": "पसंद",
+  "actionComment": "टिप्पणी",
+  "actionSave": "सहेजें"
 }

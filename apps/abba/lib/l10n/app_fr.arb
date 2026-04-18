@@ -215,6 +215,7 @@
   "prayerStartPrompt": "Commencez votre prière",
   "startPrayerButton": "Commencer la Prière",
   "switchToTextMode": "Saisir au clavier",
+  "switchToVoiceMode": "Parler",
   "prayerDashboardTitle": "Jardin de Prière",
   "qtDashboardTitle": "Jardin Temps Calme",
   "prayerSummaryTitle": "Résumé de Prière",
@@ -300,5 +301,14 @@
   "leaveRecordingTitle": "Quitter l'enregistrement ?",
   "leaveRecordingMessage": "Votre enregistrement sera perdu. Êtes-vous sûr ?",
   "leaveButton": "Quitter",
-  "stayButton": "Rester"
+  "stayButton": "Rester",
+  "likedByCount": "{count} personnes ont compati",
+  "@likedByCount": {
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "actionLike": "J'aime",
+  "actionComment": "Commenter",
+  "actionSave": "Sauvegarder"
 }

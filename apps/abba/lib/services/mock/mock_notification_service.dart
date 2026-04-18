@@ -1,4 +1,4 @@
-import 'package:flutter/foundation.dart';
+import 'package:app_lib_logging/logging.dart';
 
 import '../notification_service.dart';
 
@@ -7,7 +7,7 @@ class MockNotificationService implements NotificationService {
 
   @override
   Future<void> initialize() async {
-    debugPrint('[MockNotification] initialized');
+    fcmLog.debug('[MockNotification] initialized');
   }
 
   @override
@@ -15,12 +15,12 @@ class MockNotificationService implements NotificationService {
 
   @override
   Future<void> saveToken(String token) async {
-    debugPrint('[MockNotification] saveToken: $token');
+    fcmLog.debug('[MockNotification] saveToken: $token');
   }
 
   @override
   Future<void> requestPermission() async {
-    debugPrint('[MockNotification] requestPermission');
+    fcmLog.debug('[MockNotification] requestPermission');
   }
 
   @override
@@ -28,27 +28,27 @@ class MockNotificationService implements NotificationService {
     required String time,
     required String userName,
   }) async {
-    debugPrint('[MockNotification] scheduleMorningReminder: $time for $userName');
+    fcmLog.debug('[MockNotification] scheduleMorningReminder: $time for $userName');
   }
 
   @override
   Future<void> scheduleEveningReminder() async {
-    debugPrint('[MockNotification] scheduleEveningReminder at 21:00');
+    fcmLog.debug('[MockNotification] scheduleEveningReminder at 21:00');
   }
 
   @override
   Future<void> scheduleAfternoonNudge() async {
-    debugPrint('[MockNotification] scheduleAfternoonNudge at 14:00');
+    fcmLog.debug('[MockNotification] scheduleAfternoonNudge at 14:00');
   }
 
   @override
   Future<void> showStreakCelebration(int streakCount) async {
-    debugPrint('[MockNotification] showStreakCelebration: $streakCount days');
+    fcmLog.debug('[MockNotification] showStreakCelebration: $streakCount days');
   }
 
   @override
   Future<void> cancelAllReminders() async {
-    debugPrint('[MockNotification] cancelAllReminders');
+    fcmLog.debug('[MockNotification] cancelAllReminders');
   }
 
   @override
@@ -68,7 +68,7 @@ class MockNotificationService implements NotificationService {
       streakReminder: streakReminder,
       weeklySummary: weeklySummary,
     );
-    debugPrint('[MockNotification] updateSettings: $_settings');
+    fcmLog.debug('[MockNotification] updateSettings: $_settings');
   }
 
   @override

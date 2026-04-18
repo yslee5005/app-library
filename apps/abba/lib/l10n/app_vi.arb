@@ -215,6 +215,7 @@
   "prayerStartPrompt": "Bắt đầu cầu nguyện",
   "startPrayerButton": "Bắt đầu cầu nguyện",
   "switchToTextMode": "Nhập văn bản",
+  "switchToVoiceMode": "Noi",
   "prayerDashboardTitle": "Vườn Cầu Nguyện",
   "qtDashboardTitle": "Vườn Tĩnh Nguyện",
   "prayerSummaryTitle": "Tóm tắt cầu nguyện",
@@ -300,5 +301,14 @@
   "leaveRecordingTitle": "Rời khỏi bản ghi?",
   "leaveRecordingMessage": "Bản ghi của bạn sẽ bị mất. Bạn có chắc không?",
   "leaveButton": "Rời đi",
-  "stayButton": "Ở lại"
+  "stayButton": "Ở lại",
+  "likedByCount": "{count} người đã đồng cảm",
+  "@likedByCount": {
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "actionLike": "Thích",
+  "actionComment": "Bình luận",
+  "actionSave": "Lưu"
 }

@@ -215,6 +215,7 @@
   "prayerStartPrompt": "기도를 시작하세요",
   "startPrayerButton": "기도 시작하기",
   "switchToTextMode": "텍스트로 전환",
+  "switchToVoiceMode": "음성으로 전환",
   "prayerDashboardTitle": "기도 정원",
   "qtDashboardTitle": "QT 정원",
   "prayerSummaryTitle": "기도 요약",
@@ -300,5 +301,14 @@
   "leaveRecordingTitle": "녹음을 중단하시겠습니까?",
   "leaveRecordingMessage": "녹음 내용이 사라집니다. 정말 나가시겠습니까?",
   "leaveButton": "나가기",
-  "stayButton": "머무르기"
+  "stayButton": "머무르기",
+  "likedByCount": "{count}명이 공감했습니다",
+  "@likedByCount": {
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "actionLike": "공감",
+  "actionComment": "댓글",
+  "actionSave": "저장"
 }

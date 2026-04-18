@@ -115,13 +115,25 @@ class SupabaseCommunityRepository implements CommunityRepository {
   // --- Comments ---
 
   @override
-  Future<List<Comment>> getComments(String postId) async {
-    final data = await _abba
+  Future<List<Comment>> getComments(
+    String postId, {
+    String? cursor,
+    int limit = 20,
+  }) async {
+    var query = _abba
         .from('post_comments')
         .select()
         .eq('post_id', postId)
         .eq('app_id', 'abba')
-        .order('created_at', ascending: true);
+        .isFilter('parent_comment_id', null); // top-level only
+
+    if (cursor != null) {
+      query = query.lt('created_at', cursor);
+    }
+
+    final data = await query
+        .order('created_at', ascending: false) // newest first
+        .limit(limit);
 
     return (data as List)
         .map((e) => Comment.fromJson(e as Map<String, dynamic>))

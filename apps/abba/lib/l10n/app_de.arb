@@ -215,6 +215,7 @@
   "prayerStartPrompt": "Beginne dein Gebet",
   "startPrayerButton": "Gebet beginnen",
   "switchToTextMode": "Lieber tippen",
+  "switchToVoiceMode": "Sprechen",
   "prayerDashboardTitle": "Gebetsgarten",
   "qtDashboardTitle": "Stille-Zeit-Garten",
   "prayerSummaryTitle": "Gebetszusammenfassung",
@@ -300,5 +301,14 @@
   "leaveRecordingTitle": "Aufnahme verlassen?",
   "leaveRecordingMessage": "Ihre Aufnahme geht verloren. Sind Sie sicher?",
   "leaveButton": "Verlassen",
-  "stayButton": "Bleiben"
+  "stayButton": "Bleiben",
+  "likedByCount": "{count} Personen haben mitgefühlt",
+  "@likedByCount": {
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "actionLike": "Gefällt mir",
+  "actionComment": "Kommentar",
+  "actionSave": "Speichern"
 }

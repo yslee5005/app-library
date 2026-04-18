@@ -1,3 +1,4 @@
+import 'package:app_lib_logging/logging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -273,6 +274,7 @@ class _WritePostViewState extends ConsumerState<WritePostView> {
         content: text,
         displayName: _isAnonymous ? null : profile?.name,
       );
+      communityLog.info('New post created: category=$_category');
 
       // Refresh community posts
       ref.invalidate(filteredCommunityPostsProvider);

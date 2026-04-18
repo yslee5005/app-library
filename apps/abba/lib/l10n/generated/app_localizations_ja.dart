@@ -537,6 +537,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get switchToTextMode => 'テキストに切替';
 
   @override
+  String get switchToVoiceMode => '音声に切替';
+
+  @override
   String get prayerDashboardTitle => '祈りの庭';
 
   @override
@@ -725,4 +728,18 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get stayButton => '留まる';
+
+  @override
+  String likedByCount(Object count) {
+    return '$count人が共感しました';
+  }
+
+  @override
+  String get actionLike => '共感';
+
+  @override
+  String get actionComment => 'コメント';
+
+  @override
+  String get actionSave => '保存';
 }

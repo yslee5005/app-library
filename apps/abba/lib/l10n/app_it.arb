@@ -215,6 +215,7 @@
   "prayerStartPrompt": "Inizia la tua preghiera",
   "startPrayerButton": "Inizia a pregare",
   "switchToTextMode": "Scrivi invece",
+  "switchToVoiceMode": "Parla",
   "prayerDashboardTitle": "Giardino di preghiera",
   "qtDashboardTitle": "Giardino del Tempo con Dio",
   "prayerSummaryTitle": "Riepilogo preghiera",
@@ -300,5 +301,14 @@
   "leaveRecordingTitle": "Uscire dalla registrazione?",
   "leaveRecordingMessage": "La registrazione andrà persa. Sei sicuro?",
   "leaveButton": "Esci",
-  "stayButton": "Resta"
+  "stayButton": "Resta",
+  "likedByCount": "{count} persone hanno empatizzato",
+  "@likedByCount": {
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "actionLike": "Mi piace",
+  "actionComment": "Commenta",
+  "actionSave": "Salva"
 }

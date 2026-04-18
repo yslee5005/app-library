@@ -4,7 +4,8 @@ import 'package:go_router/go_router.dart';
 
 import '../../../l10n/generated/app_localizations.dart';
 import '../../../providers/providers.dart';
-import '../../../services/error_logging_service.dart';
+import 'package:app_lib_logging/logging.dart';
+
 import '../../../theme/abba_theme.dart';
 
 class LoginView extends ConsumerWidget {
@@ -20,13 +21,10 @@ class LoginView extends ConsumerWidget {
     ) async {
       try {
         await signIn();
-        ErrorLoggingService.addBreadcrumb(
-          'Login success: $provider',
-          category: 'auth',
-        );
+        authLog.info('Login success: $provider');
         if (context.mounted) context.go('/home');
       } catch (e, stackTrace) {
-        ErrorLoggingService.captureException(e, stackTrace);
+        authLog.error('Login failed: $provider', error: e, stackTrace: stackTrace);
         if (context.mounted) {
           ScaffoldMessenger.of(
             context,

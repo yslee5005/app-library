@@ -551,6 +551,9 @@ class AppLocalizationsTr extends AppLocalizations {
   String get switchToTextMode => 'Yazarak devam et';
 
   @override
+  String get switchToVoiceMode => 'Konus';
+
+  @override
   String get prayerDashboardTitle => 'Dua Bahçesi';
 
   @override
@@ -742,4 +745,18 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get stayButton => 'Kal';
+
+  @override
+  String likedByCount(Object count) {
+    return '$count kişi empati kurdu';
+  }
+
+  @override
+  String get actionLike => 'Beğen';
+
+  @override
+  String get actionComment => 'Yorum';
+
+  @override
+  String get actionSave => 'Kaydet';
 }

@@ -9,7 +9,8 @@ import '../../../l10n/generated/app_localizations.dart';
 import '../../../models/prayer.dart';
 import '../../../models/qt_meditation_result.dart';
 import '../../../providers/providers.dart';
-import '../../../services/error_logging_service.dart';
+import 'package:app_lib_logging/logging.dart';
+
 import '../../../services/network_checker.dart';
 import '../../../theme/abba_theme.dart';
 
@@ -60,7 +61,7 @@ class _AiLoadingViewState extends ConsumerState<AiLoadingView>
       _navigateIfReady();
     });
 
-    ErrorLoggingService.addBreadcrumb('AI loading started', category: 'prayer');
+    prayerLog.info('AI loading started');
 
     // Call AI service based on mode
     final mode = ref.read(currentPrayerModeProvider);
@@ -109,28 +110,26 @@ class _AiLoadingViewState extends ConsumerState<AiLoadingView>
       );
       await repo.updateStreak();
 
-      // Invalidate providers so calendar/history refresh
+      // Invalidate providers so calendar/history/heatmap refresh
       ref.invalidate(streakProvider);
       ref.invalidate(userProfileProvider);
+      ref.invalidate(prayerHeatmapProvider('prayer'));
+      ref.invalidate(prayerHeatmapProvider('qt'));
+      ref.invalidate(streakByModeProvider('prayer'));
+      ref.invalidate(streakByModeProvider('qt'));
 
       // Show streak celebration notification for milestones
       await _checkStreakCelebration();
 
-      ErrorLoggingService.addBreadcrumb(
-        'Prayer saved successfully',
-        category: 'prayer',
-      );
+      prayerLog.info('Prayer saved successfully');
     } catch (e, stackTrace) {
-      ErrorLoggingService.captureException(e, stackTrace);
+      prayerLog.error('Prayer AI analysis failed', error: e, stackTrace: stackTrace);
       _setFallbackResult(transcript);
     }
 
     _aiDone = true;
 
-    ErrorLoggingService.addBreadcrumb(
-      'AI loading finished',
-      category: 'prayer',
-    );
+    prayerLog.info('AI loading finished');
 
     _navigateIfReady();
   }
@@ -176,19 +175,20 @@ class _AiLoadingViewState extends ConsumerState<AiLoadingView>
       );
       await repo.updateStreak();
 
-      // Invalidate providers so calendar/history refresh
+      // Invalidate providers so calendar/history/heatmap refresh
       ref.invalidate(streakProvider);
       ref.invalidate(userProfileProvider);
+      ref.invalidate(prayerHeatmapProvider('prayer'));
+      ref.invalidate(prayerHeatmapProvider('qt'));
+      ref.invalidate(streakByModeProvider('prayer'));
+      ref.invalidate(streakByModeProvider('qt'));
 
       // Show streak celebration notification for milestones
       await _checkStreakCelebration();
 
-      ErrorLoggingService.addBreadcrumb(
-        'QT meditation saved successfully',
-        category: 'qt',
-      );
+      qtLog.info('QT meditation saved successfully');
     } catch (e, stackTrace) {
-      ErrorLoggingService.captureException(e, stackTrace);
+      qtLog.error('QT meditation analysis failed', error: e, stackTrace: stackTrace);
       _setFallbackMeditationResult();
     }
 
@@ -219,7 +219,7 @@ class _AiLoadingViewState extends ConsumerState<AiLoadingView>
       }
     } catch (e) {
       // Non-fatal — don't block prayer flow for notification errors
-      debugPrint('Streak celebration check failed: $e');
+      prayerLog.warning('Streak celebration check failed', error: e);
     }
   }
 

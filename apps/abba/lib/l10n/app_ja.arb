@@ -215,6 +215,7 @@
   "prayerStartPrompt": "お祈りを始めましょう",
   "startPrayerButton": "お祈り開始",
   "switchToTextMode": "テキストに切替",
+  "switchToVoiceMode": "音声に切替",
   "prayerDashboardTitle": "祈りの庭",
   "qtDashboardTitle": "QTの庭",
   "prayerSummaryTitle": "祈りの要約",
@@ -300,5 +301,14 @@
   "leaveRecordingTitle": "録音を中断しますか？",
   "leaveRecordingMessage": "録音内容が失われます。本当に退出しますか？",
   "leaveButton": "退出する",
-  "stayButton": "留まる"
+  "stayButton": "留まる",
+  "likedByCount": "{count}人が共感しました",
+  "@likedByCount": {
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "actionLike": "共感",
+  "actionComment": "コメント",
+  "actionSave": "保存"
 }

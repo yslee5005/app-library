@@ -215,6 +215,7 @@
   "prayerStartPrompt": "Начните молитву",
   "startPrayerButton": "Начать молитву",
   "switchToTextMode": "Написать вместо этого",
+  "switchToVoiceMode": "Говорить",
   "prayerDashboardTitle": "Сад молитвы",
   "qtDashboardTitle": "Сад тихого времени",
   "prayerSummaryTitle": "Итог молитвы",
@@ -300,5 +301,14 @@
   "leaveRecordingTitle": "Покинуть запись?",
   "leaveRecordingMessage": "Ваша запись будет потеряна. Вы уверены?",
   "leaveButton": "Выйти",
-  "stayButton": "Остаться"
+  "stayButton": "Остаться",
+  "likedByCount": "{count} человек сочувствуют",
+  "@likedByCount": {
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "actionLike": "Нравится",
+  "actionComment": "Комментарий",
+  "actionSave": "Сохранить"
 }

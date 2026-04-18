@@ -215,6 +215,7 @@
   "prayerStartPrompt": "ابدأ صلاتك",
   "startPrayerButton": "ابدأ الصلاة",
   "switchToTextMode": "الكتابة بدلاً من ذلك",
+  "switchToVoiceMode": "تحويل للصوت",
   "prayerDashboardTitle": "حديقة الصلاة",
   "qtDashboardTitle": "حديقة الخلوة",
   "prayerSummaryTitle": "ملخص الصلاة",
@@ -300,5 +301,14 @@
   "leaveRecordingTitle": "مغادرة التسجيل؟",
   "leaveRecordingMessage": "سيتم فقدان تسجيلك. هل أنت متأكد؟",
   "leaveButton": "مغادرة",
-  "stayButton": "البقاء"
+  "stayButton": "البقاء",
+  "likedByCount": "{count} أشخاص تعاطفوا",
+  "@likedByCount": {
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "actionLike": "إعجاب",
+  "actionComment": "تعليق",
+  "actionSave": "حفظ"
 }

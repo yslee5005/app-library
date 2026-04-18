@@ -548,6 +548,9 @@ class AppLocalizationsId extends AppLocalizations {
   String get switchToTextMode => 'Ketik saja';
 
   @override
+  String get switchToVoiceMode => 'Bicara';
+
+  @override
   String get prayerDashboardTitle => 'Taman Doa';
 
   @override
@@ -741,4 +744,18 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get stayButton => 'Tetap di sini';
+
+  @override
+  String likedByCount(Object count) {
+    return '$count orang berempati';
+  }
+
+  @override
+  String get actionLike => 'Suka';
+
+  @override
+  String get actionComment => 'Komentar';
+
+  @override
+  String get actionSave => 'Simpan';
 }

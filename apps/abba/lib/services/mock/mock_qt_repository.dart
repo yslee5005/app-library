@@ -8,7 +8,7 @@ class MockQtRepository implements QtRepository {
   MockQtRepository(this._mockData);
 
   @override
-  Future<List<QTPassage>> getTodayPassages() async {
+  Future<List<QTPassage>> getTodayPassages({required String locale}) async {
     return _mockData.getQTPassages();
   }
 }

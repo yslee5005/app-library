@@ -550,6 +550,9 @@ class AppLocalizationsHr extends AppLocalizations {
   String get switchToTextMode => 'Upiši umjesto toga';
 
   @override
+  String get switchToVoiceMode => 'Govorite';
+
+  @override
   String get prayerDashboardTitle => 'Molitveni Vrt';
 
   @override
@@ -743,4 +746,18 @@ class AppLocalizationsHr extends AppLocalizations {
 
   @override
   String get stayButton => 'Ostani';
+
+  @override
+  String likedByCount(Object count) {
+    return '$count osoba je suosjećalo';
+  }
+
+  @override
+  String get actionLike => 'Sviđa mi se';
+
+  @override
+  String get actionComment => 'Komentar';
+
+  @override
+  String get actionSave => 'Spremi';
 }

@@ -215,6 +215,7 @@
   "prayerStartPrompt": "Börja din bön",
   "startPrayerButton": "Börja be",
   "switchToTextMode": "Skriv istället",
+  "switchToVoiceMode": "Tala",
   "prayerDashboardTitle": "Bönens Trädgård",
   "qtDashboardTitle": "Stilla stundens Trädgård",
   "prayerSummaryTitle": "Bönesammanfattning",
@@ -300,5 +301,14 @@
   "leaveRecordingTitle": "Lämna inspelningen?",
   "leaveRecordingMessage": "Din inspelning kommer att gå förlorad. Är du säker?",
   "leaveButton": "Lämna",
-  "stayButton": "Stanna"
+  "stayButton": "Stanna",
+  "likedByCount": "{count} personer har känt med",
+  "@likedByCount": {
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "actionLike": "Gilla",
+  "actionComment": "Kommentera",
+  "actionSave": "Spara"
 }

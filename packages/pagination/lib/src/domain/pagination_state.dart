@@ -39,6 +39,7 @@ final class PaginationLoaded<T> extends PaginationState<T> {
     required this.items,
     required this.hasMore,
     this.cursor,
+    this.cursorId,
     this.totalCount,
   });
 
@@ -51,6 +52,9 @@ final class PaginationLoaded<T> extends PaginationState<T> {
   /// Cursor for fetching the next page.
   final String? cursor;
 
+  /// Secondary cursor for composite cursor pagination.
+  final String? cursorId;
+
   /// Total count of items (if provided by server).
   final int? totalCount;
 
@@ -60,7 +64,76 @@ final class PaginationLoaded<T> extends PaginationState<T> {
       items: [...items, ...page.items],
       hasMore: page.hasMore,
       cursor: page.cursor,
+      cursorId: page.cursorId ?? cursorId,
       totalCount: page.totalCount ?? totalCount,
+    );
+  }
+
+  /// Append a single item to the end (for optimistic adds in ascending lists).
+  ///
+  /// The new item appears at the last index. [totalCount] is incremented if set.
+  PaginationLoaded<T> appendItem(T item) {
+    return PaginationLoaded<T>(
+      items: [...items, item],
+      hasMore: hasMore,
+      cursor: cursor,
+      cursorId: cursorId,
+      totalCount: totalCount != null ? totalCount! + 1 : null,
+    );
+  }
+
+  /// Prepend a single item (for optimistic adds).
+  ///
+  /// The new item appears at index 0. [totalCount] is incremented if set.
+  PaginationLoaded<T> prependItem(T item) {
+    return PaginationLoaded<T>(
+      items: [item, ...items],
+      hasMore: hasMore,
+      cursor: cursor,
+      cursorId: cursorId,
+      totalCount: totalCount != null ? totalCount! + 1 : null,
+    );
+  }
+
+  /// Update an item in-place by predicate.
+  ///
+  /// Finds the first item matching [test] and replaces it with the result
+  /// of [update]. Returns an unchanged state if no match is found.
+  PaginationLoaded<T> updateItem(
+    bool Function(T) test,
+    T Function(T) update,
+  ) {
+    final index = items.indexWhere(test);
+    if (index == -1) return this;
+
+    final updated = List<T>.of(items);
+    updated[index] = update(items[index]);
+
+    return PaginationLoaded<T>(
+      items: updated,
+      hasMore: hasMore,
+      cursor: cursor,
+      cursorId: cursorId,
+      totalCount: totalCount,
+    );
+  }
+
+  /// Remove an item by predicate.
+  ///
+  /// Removes the first item matching [test]. [totalCount] is decremented
+  /// if set. Returns an unchanged state if no match is found.
+  PaginationLoaded<T> removeItem(bool Function(T) test) {
+    final index = items.indexWhere(test);
+    if (index == -1) return this;
+
+    final updated = List<T>.of(items)..removeAt(index);
+
+    return PaginationLoaded<T>(
+      items: updated,
+      hasMore: hasMore,
+      cursor: cursor,
+      cursorId: cursorId,
+      totalCount: totalCount != null ? totalCount! - 1 : null,
     );
   }
 }

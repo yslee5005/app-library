@@ -1,5 +1,6 @@
 import 'package:app_lib_auth/auth.dart' hide UserProfile;
 import 'package:app_lib_core/core.dart';
+import 'package:app_lib_logging/logging.dart';
 import 'package:app_lib_supabase_client/supabase_client.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -48,6 +49,19 @@ Future<void> main() async {
   // Initialize Sentry error logging
   await ErrorLoggingService.initialize();
 
+  // Initialize structured logger with in-memory history
+  logHistory = HistoryOutput(maxEntries: 500);
+  appLogger = Logger(
+    config: AppConfig.isProduction ? LogConfig.production : LogConfig.development,
+    outputs: [
+      const ConsoleOutput(),
+      logHistory,
+      if (AppConfig.sentryDsn.isNotEmpty)
+        SentryBreadcrumbOutput(errorService: AbbaErrorLoggingBridge()),
+    ],
+    redactor: const LogRedactor(),
+  );
+
   final overrides = [
     // Seed list with a dummy override so Dart infers the correct type.
     // Immediately replaced below based on mock/real mode.
@@ -63,7 +77,7 @@ Future<void> main() async {
     await notificationService.initialize();
     await notificationService.requestPermission();
   } catch (e) {
-    debugPrint('Notification init failed: $e — falling back to mock');
+    appLogger.warning('Notification init failed, falling back to mock', category: LogCategory.fcm, error: e);
     notificationService = MockNotificationService();
   }
 
@@ -97,7 +111,7 @@ Future<void> main() async {
         anonKey: AppConfig.supabaseAnonKey,
       );
     } catch (e) {
-      debugPrint('Supabase init failed: $e — falling back to mock mode');
+      appLogger.warning('Supabase init failed, falling back to mock mode', category: LogCategory.db, error: e);
       final mockData = MockDataService();
       authRepo = MockAuthRepository(mockData);
       overrides.addAll([

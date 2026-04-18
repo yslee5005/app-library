@@ -537,6 +537,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get switchToTextMode => '切换到文字输入';
 
   @override
+  String get switchToVoiceMode => '语音输入';
+
+  @override
   String get prayerDashboardTitle => '祷告花园';
 
   @override
@@ -725,4 +728,18 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get stayButton => '留下';
+
+  @override
+  String likedByCount(Object count) {
+    return '$count人表示共鸣';
+  }
+
+  @override
+  String get actionLike => '共鸣';
+
+  @override
+  String get actionComment => '评论';
+
+  @override
+  String get actionSave => '收藏';
 }

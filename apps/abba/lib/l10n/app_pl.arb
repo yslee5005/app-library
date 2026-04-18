@@ -215,6 +215,7 @@
   "prayerStartPrompt": "Rozpocznij modlitwę",
   "startPrayerButton": "Zacznij się modlić",
   "switchToTextMode": "Pisz zamiast tego",
+  "switchToVoiceMode": "Mow",
   "prayerDashboardTitle": "Ogród modlitwy",
   "qtDashboardTitle": "Ogród ciszy z Bogiem",
   "prayerSummaryTitle": "Podsumowanie modlitwy",
@@ -300,5 +301,14 @@
   "leaveRecordingTitle": "Opuścić nagrywanie?",
   "leaveRecordingMessage": "Twoje nagranie zostanie utracone. Czy na pewno?",
   "leaveButton": "Opuść",
-  "stayButton": "Zostań"
+  "stayButton": "Zostań",
+  "likedByCount": "{count} osób okazało empatię",
+  "@likedByCount": {
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "actionLike": "Lubię",
+  "actionComment": "Komentarz",
+  "actionSave": "Zapisz"
 }

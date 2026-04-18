@@ -215,6 +215,7 @@
   "prayerStartPrompt": "ဆုတောင်းခြင်း စတင်ပါ",
   "startPrayerButton": "ဆုတောင်း စတင်ရန်",
   "switchToTextMode": "စာရိုက်ရန်",
+  "switchToVoiceMode": "စကားပြော",
   "prayerDashboardTitle": "ဆုတောင်းခြင်းဥယျာဉ်",
   "qtDashboardTitle": "တိတ်ဆိတ်ချိန်ဥယျာဉ်",
   "prayerSummaryTitle": "ဆုတောင်းချက် အကျဉ်းချုပ်",
@@ -300,5 +301,14 @@
   "leaveRecordingTitle": "အသံဖမ်းခြင်းမှ ထွက်မလား?",
   "leaveRecordingMessage": "သင့်အသံဖမ်းချက် ပျောက်သွားပါမည်။ သေချာပါသလား?",
   "leaveButton": "ထွက်မည်",
-  "stayButton": "ဆက်နေမည်"
+  "stayButton": "ဆက်နေမည်",
+  "likedByCount": "{count} ဦး စာနာခဲ့သည်",
+  "@likedByCount": {
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "actionLike": "နှစ်သက်",
+  "actionComment": "မှတ်ချက်",
+  "actionSave": "သိမ်းဆည်း"
 }

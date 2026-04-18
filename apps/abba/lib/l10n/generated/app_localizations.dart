@@ -1184,6 +1184,12 @@ abstract class AppLocalizations {
   /// **'Type instead'**
   String get switchToTextMode;
 
+  /// No description provided for @switchToVoiceMode.
+  ///
+  /// In en, this message translates to:
+  /// **'Speak instead'**
+  String get switchToVoiceMode;
+
   /// No description provided for @prayerDashboardTitle.
   ///
   /// In en, this message translates to:
@@ -1543,6 +1549,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Stay'**
   String get stayButton;
+
+  /// No description provided for @likedByCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} people empathized'**
+  String likedByCount(Object count);
+
+  /// No description provided for @actionLike.
+  ///
+  /// In en, this message translates to:
+  /// **'Like'**
+  String get actionLike;
+
+  /// No description provided for @actionComment.
+  ///
+  /// In en, this message translates to:
+  /// **'Comment'**
+  String get actionComment;
+
+  /// No description provided for @actionSave.
+  ///
+  /// In en, this message translates to:
+  /// **'Save'**
+  String get actionSave;
 }
 
 class _AppLocalizationsDelegate

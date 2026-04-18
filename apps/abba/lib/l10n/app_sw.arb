@@ -215,6 +215,7 @@
   "prayerStartPrompt": "Anza maombi yako",
   "startPrayerButton": "Anza Kuomba",
   "switchToTextMode": "Andika badala yake",
+  "switchToVoiceMode": "Ongea",
   "prayerDashboardTitle": "Bustani ya Maombi",
   "qtDashboardTitle": "Bustani ya Tafakari",
   "prayerSummaryTitle": "Muhtasari wa Maombi",
@@ -300,5 +301,14 @@
   "leaveRecordingTitle": "Ondoka kwenye rekodi?",
   "leaveRecordingMessage": "Rekodi yako itapotea. Una uhakika?",
   "leaveButton": "Ondoka",
-  "stayButton": "Kaa"
+  "stayButton": "Kaa",
+  "likedByCount": "Watu {count} wamehurumia",
+  "@likedByCount": {
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "actionLike": "Penda",
+  "actionComment": "Toa maoni",
+  "actionSave": "Hifadhi"
 }

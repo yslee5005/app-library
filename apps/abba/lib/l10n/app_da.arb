@@ -215,6 +215,7 @@
   "prayerStartPrompt": "Begynd din bøn",
   "startPrayerButton": "Begynd at bede",
   "switchToTextMode": "Skriv i stedet",
+  "switchToVoiceMode": "Tal i stedet",
   "prayerDashboardTitle": "Bønnens Have",
   "qtDashboardTitle": "Stille stundens Have",
   "prayerSummaryTitle": "Bønneoversigt",
@@ -300,5 +301,14 @@
   "leaveRecordingTitle": "Forlad optagelsen?",
   "leaveRecordingMessage": "Din optagelse vil gå tabt. Er du sikker?",
   "leaveButton": "Forlad",
-  "stayButton": "Bliv"
+  "stayButton": "Bliv",
+  "likedByCount": "{count} personer har vist medfølelse",
+  "@likedByCount": {
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "actionLike": "Synes godt om",
+  "actionComment": "Kommentar",
+  "actionSave": "Gem"
 }

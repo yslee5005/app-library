@@ -549,6 +549,9 @@ class AppLocalizationsHi extends AppLocalizations {
   String get switchToTextMode => 'टाइप करें';
 
   @override
+  String get switchToVoiceMode => 'बोलें';
+
+  @override
   String get prayerDashboardTitle => 'प्रार्थना बगीचा';
 
   @override
@@ -741,4 +744,18 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get stayButton => 'रुकें';
+
+  @override
+  String likedByCount(Object count) {
+    return '$count लोगों ने सहानुभूति व्यक्त की';
+  }
+
+  @override
+  String get actionLike => 'पसंद';
+
+  @override
+  String get actionComment => 'टिप्पणी';
+
+  @override
+  String get actionSave => 'सहेजें';
 }

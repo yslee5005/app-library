@@ -215,6 +215,7 @@
   "prayerStartPrompt": "Ξεκίνα την προσευχή σου",
   "startPrayerButton": "Έναρξη Προσευχής",
   "switchToTextMode": "Γράψε αντί αυτού",
+  "switchToVoiceMode": "Μιλήστε",
   "prayerDashboardTitle": "Κήπος Προσευχής",
   "qtDashboardTitle": "Κήπος Μελέτης",
   "prayerSummaryTitle": "Σύνοψη Προσευχής",
@@ -300,5 +301,14 @@
   "leaveRecordingTitle": "Έξοδος από την εγγραφή;",
   "leaveRecordingMessage": "Η εγγραφή σας θα χαθεί. Είστε σίγουροι;",
   "leaveButton": "Έξοδος",
-  "stayButton": "Παραμονή"
+  "stayButton": "Παραμονή",
+  "likedByCount": "{count} άτομα συμπόνεσαν",
+  "@likedByCount": {
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "actionLike": "Μου αρέσει",
+  "actionComment": "Σχόλιο",
+  "actionSave": "Αποθήκευση"
 }

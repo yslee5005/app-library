@@ -550,6 +550,9 @@ class AppLocalizationsSk extends AppLocalizations {
   String get switchToTextMode => 'Napísať namiesto toho';
 
   @override
+  String get switchToVoiceMode => 'Hovorit';
+
+  @override
   String get prayerDashboardTitle => 'Modlitebná Záhrada';
 
   @override
@@ -743,4 +746,18 @@ class AppLocalizationsSk extends AppLocalizations {
 
   @override
   String get stayButton => 'Zostať';
+
+  @override
+  String likedByCount(Object count) {
+    return '$count ľudí prejavilo súcit';
+  }
+
+  @override
+  String get actionLike => 'Páči sa mi';
+
+  @override
+  String get actionComment => 'Komentár';
+
+  @override
+  String get actionSave => 'Uložiť';
 }

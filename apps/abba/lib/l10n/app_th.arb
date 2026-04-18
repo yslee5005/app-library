@@ -215,6 +215,7 @@
   "prayerStartPrompt": "เริ่มอธิษฐาน",
   "startPrayerButton": "เริ่มอธิษฐาน",
   "switchToTextMode": "พิมพ์แทน",
+  "switchToVoiceMode": "พูดแทน",
   "prayerDashboardTitle": "สวนอธิษฐาน",
   "qtDashboardTitle": "สวนเฝ้าเดี่ยว",
   "prayerSummaryTitle": "สรุปการอธิษฐาน",
@@ -300,5 +301,14 @@
   "leaveRecordingTitle": "ออกจากการบันทึก?",
   "leaveRecordingMessage": "การบันทึกของคุณจะหายไป คุณแน่ใจหรือไม่?",
   "leaveButton": "ออก",
-  "stayButton": "อยู่ต่อ"
+  "stayButton": "อยู่ต่อ",
+  "likedByCount": "{count} คนเห็นด้วย",
+  "@likedByCount": {
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "actionLike": "ชอบ",
+  "actionComment": "แสดงความคิดเห็น",
+  "actionSave": "บันทึก"
 }

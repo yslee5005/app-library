@@ -1,7 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:app_lib_logging/logging.dart';
 
 import '../providers/providers.dart';
 import '../theme/abba_theme.dart';
+
+/// Color scheme for heatmap cells.
+enum HeatmapColorScheme {
+  /// Sage green gradient (prayer)
+  sage,
+  /// Soft gold gradient (QT)
+  gold,
+}
 
 /// GitHub-style contribution heatmap showing prayer activity.
 /// Tap a cell to see date + count + total minutes.
@@ -13,6 +22,7 @@ class PrayerHeatmap extends StatefulWidget {
     this.weeks = 8,
     this.cellSize = 18.0,
     this.cellSpacing = 3.0,
+    this.colorScheme = HeatmapColorScheme.sage,
   });
 
   final Map<DateTime, HeatmapDay> data;
@@ -20,6 +30,7 @@ class PrayerHeatmap extends StatefulWidget {
   final int weeks;
   final double cellSize;
   final double cellSpacing;
+  final HeatmapColorScheme colorScheme;
 
   @override
   State<PrayerHeatmap> createState() => _PrayerHeatmapState();
@@ -29,12 +40,25 @@ class _PrayerHeatmapState extends State<PrayerHeatmap> {
   DateTime? _selectedDate;
   HeatmapDay? _selectedDay;
 
-  // Sage color gradient
-  static const _emptyColor = Color(0xFFEDE8DF);
-  static const _level1 = Color(0xFFC8DCC8);
-  static const _level2 = Color(0xFFA4CCA4);
-  static const _level3 = Color(0xFF8FBC8F);
-  static const _level4 = Color(0xFF5B8C5A);
+  // Sage color gradient (prayer)
+  static const _sageEmpty = Color(0xFFEDE8DF);
+  static const _sageLevel1 = Color(0xFFC8DCC8);
+  static const _sageLevel2 = Color(0xFFA4CCA4);
+  static const _sageLevel3 = Color(0xFF8FBC8F);
+  static const _sageLevel4 = Color(0xFF5B8C5A);
+
+  // Gold color gradient (QT)
+  static const _goldEmpty = Color(0xFFEDE8DF);
+  static const _goldLevel1 = Color(0xFFF0E4D4);
+  static const _goldLevel2 = Color(0xFFE8D4B8);
+  static const _goldLevel3 = Color(0xFFD4A574);
+  static const _goldLevel4 = Color(0xFFB8864A);
+
+  Color get _emptyColor => widget.colorScheme == HeatmapColorScheme.gold ? _goldEmpty : _sageEmpty;
+  Color get _level1 => widget.colorScheme == HeatmapColorScheme.gold ? _goldLevel1 : _sageLevel1;
+  Color get _level2 => widget.colorScheme == HeatmapColorScheme.gold ? _goldLevel2 : _sageLevel2;
+  Color get _level3 => widget.colorScheme == HeatmapColorScheme.gold ? _goldLevel3 : _sageLevel3;
+  Color get _level4 => widget.colorScheme == HeatmapColorScheme.gold ? _goldLevel4 : _sageLevel4;
 
   Color _colorForCount(int count) {
     if (count <= 0) return _emptyColor;
@@ -95,6 +119,8 @@ class _PrayerHeatmapState extends State<PrayerHeatmap> {
       } else {
         _selectedDate = dateKey;
         _selectedDay = widget.data[dateKey] ?? const HeatmapDay();
+        final count = _selectedDay?.count ?? 0;
+        prayerLog.debug('Heatmap cell tapped: $dateKey, count=$count');
       }
     });
   }
@@ -205,6 +231,7 @@ class _PrayerHeatmapState extends State<PrayerHeatmap> {
                               colorForCount: _colorForCount,
                               borderRadius: 3.0,
                               selectedDate: _selectedDate,
+                              selectionBorderColor: _level4,
                             ),
                           ),
                         ),
@@ -317,6 +344,7 @@ class _HeatmapPainter extends CustomPainter {
     required this.colorForCount,
     required this.borderRadius,
     this.selectedDate,
+    this.selectionBorderColor = const Color(0xFF5B8C5A),
   });
 
   final Map<DateTime, HeatmapDay> data;
@@ -328,6 +356,7 @@ class _HeatmapPainter extends CustomPainter {
   final Color Function(int) colorForCount;
   final double borderRadius;
   final DateTime? selectedDate;
+  final Color selectionBorderColor;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -335,7 +364,7 @@ class _HeatmapPainter extends CustomPainter {
     final borderPaint = Paint()
       ..style = PaintingStyle.stroke
       ..strokeWidth = 2.0
-      ..color = const Color(0xFF5B8C5A);
+      ..color = selectionBorderColor;
     final step = cellSize + cellSpacing;
 
     for (int col = 0; col < cols; col++) {

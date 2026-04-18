@@ -551,6 +551,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get switchToTextMode => 'Написать вместо этого';
 
   @override
+  String get switchToVoiceMode => 'Говорить';
+
+  @override
   String get prayerDashboardTitle => 'Сад молитвы';
 
   @override
@@ -743,4 +746,18 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get stayButton => 'Остаться';
+
+  @override
+  String likedByCount(Object count) {
+    return '$count человек сочувствуют';
+  }
+
+  @override
+  String get actionLike => 'Нравится';
+
+  @override
+  String get actionComment => 'Комментарий';
+
+  @override
+  String get actionSave => 'Сохранить';
 }

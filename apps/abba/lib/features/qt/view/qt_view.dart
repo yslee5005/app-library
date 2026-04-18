@@ -1,6 +1,9 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
+import 'package:app_lib_logging/logging.dart';
 
 import '../../../l10n/generated/app_localizations.dart';
 import '../../../models/qt_passage.dart';
@@ -53,6 +56,7 @@ class _QtRevealContent extends StatefulWidget {
 
 class _QtRevealContentState extends State<_QtRevealContent>
     with TickerProviderStateMixin {
+  late final PageController _pageController;
   late List<AnimationController> _controllers;
   late List<Animation<double>> _fadeAnimations;
   late List<Animation<Offset>> _slideAnimations;
@@ -60,13 +64,26 @@ class _QtRevealContentState extends State<_QtRevealContent>
   int _revealedCount = 0;
   int? _selectedIndex;
   bool _allRevealed = false;
+  int _currentPage = 0;
+
+  // Split passages into pages of 5
+  List<QTPassage> get _page1 =>
+      widget.passages.sublist(0, min(5, widget.passages.length));
+  List<QTPassage> get _page2 => widget.passages.length > 5
+      ? widget.passages.sublist(5)
+      : <QTPassage>[];
+  bool get _hasPage2 => _page2.isNotEmpty;
+  int get _pageCount => _hasPage2 ? 2 : 1;
 
   @override
   void initState() {
     super.initState();
+    qtLog.info('QT passages loaded: ${widget.passages.length}');
+    _pageController = PageController();
 
+    // Only create reveal animations for page 1
     _controllers = List.generate(
-      widget.passages.length,
+      _page1.length,
       (i) => AnimationController(
         vsync: this,
         duration: const Duration(milliseconds: 500),
@@ -88,7 +105,7 @@ class _QtRevealContentState extends State<_QtRevealContent>
   }
 
   Future<void> _startReveal() async {
-    for (int i = 0; i < widget.passages.length; i++) {
+    for (int i = 0; i < _page1.length; i++) {
       await Future.delayed(const Duration(milliseconds: 600));
       if (!mounted) return;
       _controllers[i].forward();
@@ -101,16 +118,21 @@ class _QtRevealContentState extends State<_QtRevealContent>
 
   @override
   void dispose() {
+    _pageController.dispose();
     for (final c in _controllers) {
       c.dispose();
     }
     super.dispose();
   }
 
-  void _selectCard(int index) {
+  void _selectCard(int globalIndex) {
     setState(() {
-      _selectedIndex = _selectedIndex == index ? null : index;
+      _selectedIndex = _selectedIndex == globalIndex ? null : globalIndex;
     });
+    if (_selectedIndex == globalIndex) {
+      final passage = widget.passages[globalIndex];
+      qtLog.info('QT passage selected: ${passage.reference}');
+    }
   }
 
   @override
@@ -128,7 +150,7 @@ class _QtRevealContentState extends State<_QtRevealContent>
           ),
         ),
         const SizedBox(height: AbbaSpacing.sm),
-        // Reveal message
+        // Reveal message before cards appear
         if (_revealedCount == 0)
           Expanded(
             child: Center(
@@ -148,45 +170,113 @@ class _QtRevealContentState extends State<_QtRevealContent>
           )
         else
           Expanded(
-            child: ListView(
-              padding: const EdgeInsets.symmetric(horizontal: AbbaSpacing.md),
+            child: Column(
               children: [
-                for (int i = 0; i < widget.passages.length; i++)
-                  if (i < _revealedCount)
-                    SlideTransition(
-                      position: _slideAnimations[i],
-                      child: FadeTransition(
-                        opacity: _fadeAnimations[i],
-                        child: _QtCard(
-                          passage: widget.passages[i],
-                          locale: widget.locale,
-                          l10n: widget.l10n,
-                          isSelected: _selectedIndex == i,
-                          isDimmed: _selectedIndex != null && _selectedIndex != i,
-                          onTap: () => _selectCard(i),
-                        ),
-                      ),
-                    ),
-                // Select prompt
-                if (_allRevealed && _selectedIndex == null)
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                      vertical: AbbaSpacing.lg,
-                      horizontal: AbbaSpacing.md,
-                    ),
-                    child: Text(
-                      widget.l10n.qtSelectPrompt,
-                      style: AbbaTypography.body.copyWith(
-                        color: AbbaColors.sage,
-                        fontWeight: FontWeight.w600,
-                      ),
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-                const SizedBox(height: AbbaSpacing.xl),
+                Expanded(
+                  child: _hasPage2
+                      ? PageView(
+                          controller: _pageController,
+                          onPageChanged: (page) {
+                            setState(() => _currentPage = page);
+                          },
+                          children: [
+                            _buildPage1(),
+                            _buildPage2(),
+                          ],
+                        )
+                      : _buildPage1(),
+                ),
+                // Page indicator + navigation hint
+                if (_hasPage2 && _allRevealed) ...[
+                  const SizedBox(height: AbbaSpacing.sm),
+                  _buildPageIndicator(),
+                  const SizedBox(height: AbbaSpacing.sm),
+                ],
               ],
             ),
           ),
+      ],
+    );
+  }
+
+  Widget _buildPage1() {
+    return ListView(
+      padding: const EdgeInsets.symmetric(horizontal: AbbaSpacing.md),
+      children: [
+        for (int i = 0; i < _page1.length; i++)
+          if (i < _revealedCount)
+            SlideTransition(
+              position: _slideAnimations[i],
+              child: FadeTransition(
+                opacity: _fadeAnimations[i],
+                child: _QtCard(
+                  passage: _page1[i],
+                  locale: widget.locale,
+                  l10n: widget.l10n,
+                  isSelected: _selectedIndex == i,
+                  isDimmed: _selectedIndex != null && _selectedIndex != i,
+                  onTap: () => _selectCard(i),
+                ),
+              ),
+            ),
+        // Select prompt
+        if (_allRevealed && _selectedIndex == null)
+          Padding(
+            padding: const EdgeInsets.symmetric(
+              vertical: AbbaSpacing.lg,
+              horizontal: AbbaSpacing.md,
+            ),
+            child: Text(
+              widget.l10n.qtSelectPrompt,
+              style: AbbaTypography.body.copyWith(
+                color: AbbaColors.sage,
+                fontWeight: FontWeight.w600,
+              ),
+              textAlign: TextAlign.center,
+            ),
+          ),
+        const SizedBox(height: AbbaSpacing.xl),
+      ],
+    );
+  }
+
+  Widget _buildPage2() {
+    return ListView(
+      padding: const EdgeInsets.symmetric(horizontal: AbbaSpacing.md),
+      children: [
+        for (int i = 0; i < _page2.length; i++)
+          _QtCard(
+            passage: _page2[i],
+            locale: widget.locale,
+            l10n: widget.l10n,
+            isSelected: _selectedIndex == (i + 5),
+            isDimmed: _selectedIndex != null && _selectedIndex != (i + 5),
+            onTap: () => _selectCard(i + 5),
+          ),
+        const SizedBox(height: AbbaSpacing.xl),
+      ],
+    );
+  }
+
+  Widget _buildPageIndicator() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        // Page dots
+        for (int i = 0; i < _pageCount; i++) ...[
+          AnimatedContainer(
+            duration: const Duration(milliseconds: 300),
+            width: _currentPage == i ? 24 : 8,
+            height: 8,
+            decoration: BoxDecoration(
+              color: _currentPage == i
+                  ? AbbaColors.sage
+                  : AbbaColors.muted.withValues(alpha: 0.3),
+              borderRadius: BorderRadius.circular(4),
+            ),
+          ),
+          if (i < _pageCount - 1) const SizedBox(width: 8),
+        ],
       ],
     );
   }
@@ -251,9 +341,9 @@ class _QtCard extends StatelessWidget {
                               passage.reference,
                               style: AbbaTypography.h2.copyWith(fontSize: 20),
                             ),
-                            if (passage.topic(locale).isNotEmpty)
+                            if (passage.topic.isNotEmpty)
                               Text(
-                                passage.topic(locale),
+                                passage.topic,
                                 style: AbbaTypography.bodySmall.copyWith(
                                   color: AbbaColors.sage,
                                   fontWeight: FontWeight.w600,
@@ -280,7 +370,7 @@ class _QtCard extends StatelessWidget {
                   const SizedBox(height: AbbaSpacing.sm),
                   // Text preview or full
                   Text(
-                    passage.text(locale),
+                    passage.text,
                     style: AbbaTypography.bodySmall,
                     maxLines: isSelected ? null : 2,
                     overflow: isSelected ? null : TextOverflow.ellipsis,
@@ -303,13 +393,13 @@ class _QtCard extends StatelessWidget {
   }
 
   void _showRecording(BuildContext context) {
-    // Set QT mode and passage info before recording
+    qtLog.info('QT meditation started for ${passage.reference}');
     final container = ProviderScope.containerOf(context);
     container.read(currentPrayerModeProvider.notifier).state = 'qt';
     container.read(currentPassageRefProvider.notifier).state =
         passage.reference;
     container.read(currentPassageTextProvider.notifier).state =
-        passage.text(locale);
+        passage.text;
 
     showModalBottomSheet(
       context: context,

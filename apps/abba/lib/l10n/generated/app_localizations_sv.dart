@@ -547,6 +547,9 @@ class AppLocalizationsSv extends AppLocalizations {
   String get switchToTextMode => 'Skriv istället';
 
   @override
+  String get switchToVoiceMode => 'Tala';
+
+  @override
   String get prayerDashboardTitle => 'Bönens Trädgård';
 
   @override
@@ -739,4 +742,18 @@ class AppLocalizationsSv extends AppLocalizations {
 
   @override
   String get stayButton => 'Stanna';
+
+  @override
+  String likedByCount(Object count) {
+    return '$count personer har känt med';
+  }
+
+  @override
+  String get actionLike => 'Gilla';
+
+  @override
+  String get actionComment => 'Kommentera';
+
+  @override
+  String get actionSave => 'Spara';
 }

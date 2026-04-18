@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:app_lib_logging/logging.dart';
 
 import '../../../l10n/generated/app_localizations.dart';
 import '../../../models/qt_meditation_result.dart';
@@ -13,11 +14,22 @@ import '../widgets/growth_story_card.dart';
 import '../widgets/meditation_analysis_card.dart';
 import '../widgets/related_knowledge_card.dart';
 
-class QtDashboardView extends ConsumerWidget {
+class QtDashboardView extends ConsumerStatefulWidget {
   const QtDashboardView({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<QtDashboardView> createState() => _QtDashboardViewState();
+}
+
+class _QtDashboardViewState extends ConsumerState<QtDashboardView> {
+  @override
+  void initState() {
+    super.initState();
+    qtLog.info('QT dashboard opened');
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     final locale = ref.watch(localeProvider);
     final resultAsync = ref.watch(qtMeditationResultProvider);
@@ -27,20 +39,26 @@ class QtDashboardView extends ConsumerWidget {
       backgroundColor: AbbaColors.cream,
       appBar: AppBar(
         leading: IconButton(
-          onPressed: () => context.go('/home'),
+          onPressed: () {
+            qtLog.debug('Back to home from QT dashboard');
+            context.go('/home');
+          },
           icon: const Icon(Icons.arrow_back),
         ),
         title: Text(l10n.qtDashboardTitle, style: AbbaTypography.h1),
         actions: [
           IconButton(
-            onPressed: () => context.push('/community/write'),
+            onPressed: () {
+              qtLog.info('QT result shared');
+              context.push('/community/write');
+            },
             icon: const Icon(Icons.share),
           ),
         ],
       ),
       body: resultAsync.when(
         data: (result) =>
-            _buildContent(context, ref, result, l10n, locale, isPremium),
+            _buildContent(context, result, l10n, locale, isPremium),
         loading: () => const Center(child: CircularProgressIndicator()),
         error: (e, s) => Center(child: Text(l10n.errorGeneric)),
       ),
@@ -49,13 +67,13 @@ class QtDashboardView extends ConsumerWidget {
 
   Widget _buildContent(
     BuildContext context,
-    WidgetRef ref,
     QtMeditationResult result,
     AppLocalizations l10n,
     String locale,
     bool isPremium,
   ) {
     void showPremiumUpgrade() {
+      appLogger.info('Premium card tapped', category: LogCategory.subscription);
       context.push('/settings/membership');
     }
 
@@ -117,7 +135,10 @@ class QtDashboardView extends ConsumerWidget {
             ),
             child: AbbaButton(
               label: l10n.backToHome,
-              onPressed: () => context.go('/home'),
+              onPressed: () {
+                qtLog.debug('Back to home from QT dashboard');
+                context.go('/home');
+              },
               isHero: true,
             ),
           ),

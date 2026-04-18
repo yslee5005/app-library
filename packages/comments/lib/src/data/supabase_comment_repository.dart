@@ -41,19 +41,38 @@ class SupabaseCommentRepository implements CommentRepository {
         query = query.eq('user_id', filter.userId!);
       }
 
-      // Apply cursor if present.
+      // Apply composite cursor (created_at|id) if present.
       if (params.cursor != null) {
-        query = filter.sortBy.ascending
-            ? query.gt(filter.sortBy.column, params.cursor!)
-            : query.lt(filter.sortBy.column, params.cursor!);
+        final cursorTime = params.cursor!;
+        final cursorId = params.cursorId;
+
+        if (cursorId != null) {
+          // Composite cursor: tie-break on id when created_at matches.
+          if (filter.sortBy.ascending) {
+            query = query.or(
+              'created_at.gt.$cursorTime,and(created_at.eq.$cursorTime,id.gt.$cursorId)',
+            );
+          } else {
+            query = query.or(
+              'created_at.lt.$cursorTime,and(created_at.eq.$cursorTime,id.lt.$cursorId)',
+            );
+          }
+        } else {
+          // Fallback: single cursor (backward compatible).
+          query = filter.sortBy.ascending
+              ? query.gt(filter.sortBy.column, cursorTime)
+              : query.lt(filter.sortBy.column, cursorTime);
+        }
       }
 
       // Fetch one extra to determine hasMore.
+      // Secondary sort by id for deterministic ordering.
       final data = await query
           .order(
             filter.sortBy.column,
             ascending: filter.sortBy.ascending,
           )
+          .order('id', ascending: filter.sortBy.ascending)
           .limit(params.limit + 1);
 
       final hasMore = data.length > params.limit;
@@ -66,12 +85,15 @@ class SupabaseCommentRepository implements CommentRepository {
       final cursor = comments.isNotEmpty
           ? comments.last.createdAt?.toIso8601String()
           : null;
+      final cursorId =
+          comments.isNotEmpty ? comments.last.id : null;
 
       return Result.success(
         PaginatedResult(
           items: comments,
           hasMore: hasMore,
           cursor: cursor,
+          cursorId: cursorId,
         ),
       );
     } catch (e, st) {

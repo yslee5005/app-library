@@ -1,10 +1,13 @@
 import 'dart:async';
 
+import 'package:app_lib_logging/logging.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
 
 import '../../config/app_config.dart';
 import '../../models/user_profile.dart';
 import '../subscription_service.dart';
+
+final _log = appLogger.forCategory(LogCategory.subscription);
 
 class RevenueCatSubscriptionService implements SubscriptionService {
   final _statusController = StreamController<SubscriptionStatus>.broadcast();
@@ -12,18 +15,23 @@ class RevenueCatSubscriptionService implements SubscriptionService {
 
   @override
   Future<void> initialize(String userId) async {
-    final config = PurchasesConfiguration(AppConfig.revenueCatApiKey)
-      ..appUserID = userId;
-    await Purchases.configure(config);
+    try {
+      final config = PurchasesConfiguration(AppConfig.revenueCatApiKey)
+        ..appUserID = userId;
+      await Purchases.configure(config);
 
-    // Listen for customer info updates
-    Purchases.addCustomerInfoUpdateListener((info) {
+      // Listen for customer info updates
+      Purchases.addCustomerInfoUpdateListener((info) {
+        _updateStatus(info);
+      });
+
+      // Initial status check
+      final info = await Purchases.getCustomerInfo();
       _updateStatus(info);
-    });
-
-    // Initial status check
-    final info = await Purchases.getCustomerInfo();
-    _updateStatus(info);
+      _log.info('RevenueCat initialized, status=$_currentStatus');
+    } catch (e, st) {
+      _log.error('RevenueCat init failed', error: e, stackTrace: st);
+    }
   }
 
   void _updateStatus(CustomerInfo info) {
@@ -53,8 +61,10 @@ class RevenueCatSubscriptionService implements SubscriptionService {
       await Purchases.purchasePackage(monthly);
       final info = await Purchases.getCustomerInfo();
       _updateStatus(info);
+      _log.info('Monthly purchase completed, status=$_currentStatus');
       return _currentStatus == SubscriptionStatus.premium;
-    } catch (e) {
+    } catch (e, st) {
+      _log.error('Monthly purchase failed', error: e, stackTrace: st);
       return false;
     }
   }
@@ -69,16 +79,23 @@ class RevenueCatSubscriptionService implements SubscriptionService {
       await Purchases.purchasePackage(annual);
       final info = await Purchases.getCustomerInfo();
       _updateStatus(info);
+      _log.info('Yearly purchase completed, status=$_currentStatus');
       return _currentStatus == SubscriptionStatus.premium;
-    } catch (e) {
+    } catch (e, st) {
+      _log.error('Yearly purchase failed', error: e, stackTrace: st);
       return false;
     }
   }
 
   @override
   Future<void> restorePurchases() async {
-    final info = await Purchases.restorePurchases();
-    _updateStatus(info);
+    try {
+      final info = await Purchases.restorePurchases();
+      _updateStatus(info);
+      _log.info('Purchases restored, status=$_currentStatus');
+    } catch (e, st) {
+      _log.error('Restore purchases failed', error: e, stackTrace: st);
+    }
   }
 
   @override

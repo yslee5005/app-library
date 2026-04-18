@@ -552,6 +552,9 @@ class AppLocalizationsRo extends AppLocalizations {
   String get switchToTextMode => 'Scrie în schimb';
 
   @override
+  String get switchToVoiceMode => 'Vorbeste';
+
+  @override
   String get prayerDashboardTitle => 'Grădina rugăciunii';
 
   @override
@@ -745,4 +748,18 @@ class AppLocalizationsRo extends AppLocalizations {
 
   @override
   String get stayButton => 'Rămâi';
+
+  @override
+  String likedByCount(Object count) {
+    return '$count persoane au empatizat';
+  }
+
+  @override
+  String get actionLike => 'Apreciez';
+
+  @override
+  String get actionComment => 'Comentariu';
+
+  @override
+  String get actionSave => 'Salvează';
 }
