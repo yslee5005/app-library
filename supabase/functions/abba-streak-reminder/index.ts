@@ -1,5 +1,5 @@
 /**
- * streak-reminder — Supabase Edge Function
+ * abba-streak-reminder — Supabase Edge Function
  *
  * Cron: daily at 19:00 KST (10:00 UTC)
  *
@@ -43,7 +43,7 @@ Deno.serve(async (req) => {
     );
 
     const today = todayKST();
-    console.log(`[streak-reminder] Running for date: ${today}`);
+    console.log(`[abba-streak-reminder] Running for date: ${today}`);
 
     // 1. Get users who opted in for streak reminders
     const { data: settings, error: settingsError } = await supabase
@@ -58,14 +58,14 @@ Deno.serve(async (req) => {
     }
 
     if (!settings || settings.length === 0) {
-      console.log("[streak-reminder] No users with streak_reminder enabled.");
+      console.log("[abba-streak-reminder] No users with streak_reminder enabled.");
       return new Response(JSON.stringify({ sent: 0, skipped: 0 }), {
         headers: { "Content-Type": "application/json" },
       });
     }
 
     const userIds = settings.map((s: { user_id: string }) => s.user_id);
-    console.log(`[streak-reminder] ${userIds.length} users opted in.`);
+    console.log(`[abba-streak-reminder] ${userIds.length} users opted in.`);
 
     // 2. Find which users already prayed today
     //    prayers.created_at is TIMESTAMPTZ. We filter by KST date range.
@@ -93,7 +93,7 @@ Deno.serve(async (req) => {
     );
 
     console.log(
-      `[streak-reminder] ${prayedUserIds.size} already prayed, ${notPrayedUserIds.length} have not.`
+      `[abba-streak-reminder] ${prayedUserIds.size} already prayed, ${notPrayedUserIds.length} have not.`
     );
 
     if (notPrayedUserIds.length === 0) {
@@ -115,7 +115,7 @@ Deno.serve(async (req) => {
     }
 
     if (!devices || devices.length === 0) {
-      console.log("[streak-reminder] No active devices for un-prayed users.");
+      console.log("[abba-streak-reminder] No active devices for un-prayed users.");
       return new Response(
         JSON.stringify({ sent: 0, skipped: notPrayedUserIds.length }),
         { headers: { "Content-Type": "application/json" } }
@@ -173,13 +173,13 @@ Deno.serve(async (req) => {
     }
 
     const summary = { sent, failed, skipped: prayedUserIds.size, total: userIds.length };
-    console.log("[streak-reminder] Done:", JSON.stringify(summary));
+    console.log("[abba-streak-reminder] Done:", JSON.stringify(summary));
 
     return new Response(JSON.stringify(summary), {
       headers: { "Content-Type": "application/json" },
     });
   } catch (err) {
-    console.error("[streak-reminder] Error:", err);
+    console.error("[abba-streak-reminder] Error:", err);
     return new Response(JSON.stringify({ error: String(err) }), {
       status: 500,
       headers: { "Content-Type": "application/json" },

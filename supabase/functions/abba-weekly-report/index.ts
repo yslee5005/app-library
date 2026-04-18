@@ -1,5 +1,5 @@
 /**
- * weekly-report — Supabase Edge Function
+ * abba-weekly-report — Supabase Edge Function
  *
  * Cron: every Sunday at 20:00 KST (11:00 UTC)
  *
@@ -82,7 +82,7 @@ Deno.serve(async (req) => {
     );
 
     const { weekStart, weekEnd } = currentWeekRangeKST();
-    console.log(`[weekly-report] Week range: ${weekStart} ~ ${weekEnd}`);
+    console.log(`[abba-weekly-report] Week range: ${weekStart} ~ ${weekEnd}`);
 
     // 1. Get users who opted in for weekly summary
     const { data: settings, error: settingsError } = await supabase
@@ -99,14 +99,14 @@ Deno.serve(async (req) => {
     }
 
     if (!settings || settings.length === 0) {
-      console.log("[weekly-report] No users with weekly_summary enabled.");
+      console.log("[abba-weekly-report] No users with weekly_summary enabled.");
       return new Response(JSON.stringify({ sent: 0 }), {
         headers: { "Content-Type": "application/json" },
       });
     }
 
     const userIds = settings.map((s: { user_id: string }) => s.user_id);
-    console.log(`[weekly-report] ${userIds.length} users opted in.`);
+    console.log(`[abba-weekly-report] ${userIds.length} users opted in.`);
 
     // 2. Count prayers per user this week
     //    Supabase JS doesn't support GROUP BY directly, so we fetch rows
@@ -143,7 +143,7 @@ Deno.serve(async (req) => {
     }
 
     if (!devices || devices.length === 0) {
-      console.log("[weekly-report] No active devices.");
+      console.log("[abba-weekly-report] No active devices.");
       return new Response(JSON.stringify({ sent: 0 }), {
         headers: { "Content-Type": "application/json" },
       });
@@ -180,13 +180,13 @@ Deno.serve(async (req) => {
     }
 
     const summary = { sent, failed, total: userIds.length };
-    console.log("[weekly-report] Done:", JSON.stringify(summary));
+    console.log("[abba-weekly-report] Done:", JSON.stringify(summary));
 
     return new Response(JSON.stringify(summary), {
       headers: { "Content-Type": "application/json" },
     });
   } catch (err) {
-    console.error("[weekly-report] Error:", err);
+    console.error("[abba-weekly-report] Error:", err);
     return new Response(JSON.stringify({ error: String(err) }), {
       status: 500,
       headers: { "Content-Type": "application/json" },
