@@ -14,7 +14,6 @@ void main() {
         'best_streak': 21,
         'subscription': 'free',
         'locale': 'en',
-        'voice_preference': 'warm',
         'reminder_time': '06:00',
         'dark_mode': false,
       };
@@ -30,7 +29,6 @@ void main() {
       expect(profile.bestStreak, 21);
       expect(profile.subscription, SubscriptionStatus.free);
       expect(profile.locale, 'en');
-      expect(profile.voicePreference, 'warm');
       expect(profile.reminderTime, '06:00');
       expect(profile.darkMode, false);
     });
@@ -85,7 +83,6 @@ void main() {
       expect(profile.bestStreak, 0);
       expect(profile.subscription, SubscriptionStatus.free);
       expect(profile.locale, 'en');
-      expect(profile.voicePreference, 'warm');
       expect(profile.reminderTime, isNull);
       expect(profile.darkMode, false);
     });

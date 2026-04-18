@@ -20,7 +20,6 @@ import '../services/prayer_repository.dart';
 import '../services/qt_repository.dart';
 import '../services/stt_service.dart';
 import '../services/subscription_service.dart';
-import '../services/tts_service.dart';
 
 // ---------------------------------------------------------------------------
 // Core data (kept for backward compat, loads JSON mock)
@@ -40,10 +39,6 @@ final aiServiceProvider = Provider<AiService>((ref) {
 
 final sttServiceProvider = Provider<SttService>((ref) {
   throw UnimplementedError('sttServiceProvider must be overridden');
-});
-
-final ttsServiceProvider = Provider<TtsService>((ref) {
-  throw UnimplementedError('ttsServiceProvider must be overridden');
 });
 
 final prayerRepositoryProvider = Provider<PrayerRepository>((ref) {
@@ -279,9 +274,6 @@ final localeProvider = StateProvider<String>((ref) => 'ko');
 
 /// Theme mode provider for dark mode support
 final themeModeProvider = StateProvider<ThemeMode>((ref) => ThemeMode.light);
-
-/// Voice preference provider
-final voicePreferenceProvider = StateProvider<String>((ref) => 'warm');
 
 /// Tracks current prayer transcript from recording
 final currentTranscriptProvider = StateProvider<String>((ref) => '');

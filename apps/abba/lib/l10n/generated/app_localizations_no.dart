@@ -260,18 +260,6 @@ class AppLocalizationsNo extends AppLocalizations {
   String get notificationSetting => 'Varsler';
 
   @override
-  String get aiVoiceSetting => 'AI-stemme';
-
-  @override
-  String get voiceWarm => 'Varm';
-
-  @override
-  String get voiceCalm => 'Rolig';
-
-  @override
-  String get voiceStrong => 'Sterk';
-
-  @override
   String get languageSetting => 'Språk';
 
   @override
@@ -429,9 +417,6 @@ class AppLocalizationsNo extends AppLocalizations {
 
   @override
   String get premiumBenefit3 => 'Troshistorier fra fortiden';
-
-  @override
-  String get premiumBenefit4 => 'Bønn opplest (TTS)';
 
   @override
   String get premiumBenefit5 => 'Bibelstudium på originalspråk';

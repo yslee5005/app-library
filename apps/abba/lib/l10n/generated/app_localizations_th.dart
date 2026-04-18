@@ -261,18 +261,6 @@ class AppLocalizationsTh extends AppLocalizations {
   String get notificationSetting => 'การแจ้งเตือน';
 
   @override
-  String get aiVoiceSetting => 'เสียง AI';
-
-  @override
-  String get voiceWarm => 'อบอุ่น';
-
-  @override
-  String get voiceCalm => 'สงบ';
-
-  @override
-  String get voiceStrong => 'หนักแน่น';
-
-  @override
   String get languageSetting => 'ภาษา';
 
   @override
@@ -425,9 +413,6 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get premiumBenefit3 => 'เรื่องราวแห่งศรัทธาจากประวัติศาสตร์';
-
-  @override
-  String get premiumBenefit4 => 'อ่านคำอธิษฐาน (TTS)';
 
   @override
   String get premiumBenefit5 => 'ศึกษาพระคัมภีร์ภาษาต้นฉบับ';

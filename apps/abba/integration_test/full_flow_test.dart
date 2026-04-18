@@ -12,7 +12,6 @@ import 'package:abba/services/mock/mock_prayer_repository.dart';
 import 'package:abba/services/mock/mock_qt_repository.dart';
 import 'package:abba/services/mock/mock_stt_service.dart';
 import 'package:abba/services/mock/mock_subscription_service.dart';
-import 'package:abba/services/mock/mock_tts_service.dart';
 import 'package:abba/services/mock_data.dart';
 
 void main() {
@@ -30,7 +29,6 @@ void main() {
             aiServiceProvider
                 .overrideWithValue(MockAiService(mockData)),
             sttServiceProvider.overrideWithValue(MockSttService()),
-            ttsServiceProvider.overrideWithValue(MockTtsService()),
             prayerRepositoryProvider
                 .overrideWithValue(MockPrayerRepository()),
             communityRepositoryProvider
@@ -76,7 +74,6 @@ void main() {
             aiServiceProvider
                 .overrideWithValue(MockAiService(mockData)),
             sttServiceProvider.overrideWithValue(MockSttService()),
-            ttsServiceProvider.overrideWithValue(MockTtsService()),
             prayerRepositoryProvider
                 .overrideWithValue(MockPrayerRepository()),
             communityRepositoryProvider

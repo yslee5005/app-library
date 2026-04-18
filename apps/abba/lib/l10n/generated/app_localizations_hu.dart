@@ -262,18 +262,6 @@ class AppLocalizationsHu extends AppLocalizations {
   String get notificationSetting => 'Értesítések';
 
   @override
-  String get aiVoiceSetting => 'AI hang';
-
-  @override
-  String get voiceWarm => 'Meleg';
-
-  @override
-  String get voiceCalm => 'Nyugodt';
-
-  @override
-  String get voiceStrong => 'Erős';
-
-  @override
   String get languageSetting => 'Nyelv';
 
   @override
@@ -432,9 +420,6 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String get premiumBenefit3 => 'Hittörténetek a múltból';
-
-  @override
-  String get premiumBenefit4 => 'Ima felolvasás (TTS)';
 
   @override
   String get premiumBenefit5 => 'Bibliatanulmány eredeti nyelven';

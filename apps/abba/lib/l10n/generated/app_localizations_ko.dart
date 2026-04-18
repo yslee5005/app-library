@@ -259,18 +259,6 @@ class AppLocalizationsKo extends AppLocalizations {
   String get notificationSetting => '알림';
 
   @override
-  String get aiVoiceSetting => 'AI 목소리';
-
-  @override
-  String get voiceWarm => '따뜻한';
-
-  @override
-  String get voiceCalm => '차분한';
-
-  @override
-  String get voiceStrong => '힘있는';
-
-  @override
   String get languageSetting => '언어';
 
   @override
@@ -419,9 +407,6 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get premiumBenefit3 => '역사 속 믿음의 이야기';
-
-  @override
-  String get premiumBenefit4 => '기도문 읽어주기 (TTS)';
 
   @override
   String get premiumBenefit5 => '원어 성경 해석';

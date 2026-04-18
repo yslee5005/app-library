@@ -261,18 +261,6 @@ class AppLocalizationsSw extends AppLocalizations {
   String get notificationSetting => 'Arifa';
 
   @override
-  String get aiVoiceSetting => 'Sauti ya AI';
-
-  @override
-  String get voiceWarm => 'Nyororo';
-
-  @override
-  String get voiceCalm => 'Tulivu';
-
-  @override
-  String get voiceStrong => 'Imara';
-
-  @override
   String get languageSetting => 'Lugha';
 
   @override
@@ -432,9 +420,6 @@ class AppLocalizationsSw extends AppLocalizations {
 
   @override
   String get premiumBenefit3 => 'Hadithi za imani kutoka historia';
-
-  @override
-  String get premiumBenefit4 => 'Kusomwa kwa maombi kwa sauti (TTS)';
 
   @override
   String get premiumBenefit5 => 'Kujifunza Biblia kwa lugha asili';

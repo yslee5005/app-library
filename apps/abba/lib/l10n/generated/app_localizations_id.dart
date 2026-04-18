@@ -261,18 +261,6 @@ class AppLocalizationsId extends AppLocalizations {
   String get notificationSetting => 'Notifikasi';
 
   @override
-  String get aiVoiceSetting => 'Suara AI';
-
-  @override
-  String get voiceWarm => 'Hangat';
-
-  @override
-  String get voiceCalm => 'Tenang';
-
-  @override
-  String get voiceStrong => 'Kuat';
-
-  @override
   String get languageSetting => 'Bahasa';
 
   @override
@@ -430,9 +418,6 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get premiumBenefit3 => 'Kisah iman dari sejarah';
-
-  @override
-  String get premiumBenefit4 => 'Pembacaan doa (TTS)';
 
   @override
   String get premiumBenefit5 => 'Studi Alkitab bahasa asli';

@@ -263,18 +263,6 @@ class AppLocalizationsEl extends AppLocalizations {
   String get notificationSetting => 'Ειδοποιήσεις';
 
   @override
-  String get aiVoiceSetting => 'Φωνή AI';
-
-  @override
-  String get voiceWarm => 'Ζεστή';
-
-  @override
-  String get voiceCalm => 'Ήρεμη';
-
-  @override
-  String get voiceStrong => 'Δυνατή';
-
-  @override
   String get languageSetting => 'Γλώσσα';
 
   @override
@@ -434,9 +422,6 @@ class AppLocalizationsEl extends AppLocalizations {
 
   @override
   String get premiumBenefit3 => 'Ιστορίες πίστης από την ιστορία';
-
-  @override
-  String get premiumBenefit4 => 'Ανάγνωση προσευχής (TTS)';
 
   @override
   String get premiumBenefit5 => 'Μελέτη Βίβλου στην αρχική γλώσσα';

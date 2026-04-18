@@ -260,18 +260,6 @@ class AppLocalizationsHe extends AppLocalizations {
   String get notificationSetting => 'התראות';
 
   @override
-  String get aiVoiceSetting => 'קול AI';
-
-  @override
-  String get voiceWarm => 'חם';
-
-  @override
-  String get voiceCalm => 'רגוע';
-
-  @override
-  String get voiceStrong => 'חזק';
-
-  @override
   String get languageSetting => 'שפה';
 
   @override
@@ -424,9 +412,6 @@ class AppLocalizationsHe extends AppLocalizations {
 
   @override
   String get premiumBenefit3 => 'סיפורי אמונה מההיסטוריה';
-
-  @override
-  String get premiumBenefit4 => 'הקראת תפילה (TTS)';
 
   @override
   String get premiumBenefit5 => 'לימוד תנ\"ך בשפת המקור';

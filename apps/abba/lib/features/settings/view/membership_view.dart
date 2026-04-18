@@ -359,7 +359,6 @@ class _MembershipViewState extends ConsumerState<MembershipView> {
       l10n.premiumBenefit1,
       l10n.premiumBenefit2,
       l10n.premiumBenefit3,
-      l10n.premiumBenefit4,
       l10n.premiumBenefit5,
     ];
 

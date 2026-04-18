@@ -261,18 +261,6 @@ class AppLocalizationsCs extends AppLocalizations {
   String get notificationSetting => 'Oznámení';
 
   @override
-  String get aiVoiceSetting => 'AI hlas';
-
-  @override
-  String get voiceWarm => 'Teplý';
-
-  @override
-  String get voiceCalm => 'Klidný';
-
-  @override
-  String get voiceStrong => 'Silný';
-
-  @override
   String get languageSetting => 'Jazyk';
 
   @override
@@ -430,9 +418,6 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String get premiumBenefit3 => 'Příběhy víry z historie';
-
-  @override
-  String get premiumBenefit4 => 'Předčítání modlitby (TTS)';
 
   @override
   String get premiumBenefit5 => 'Studium Bible v původních jazycích';

@@ -262,18 +262,6 @@ class AppLocalizationsRu extends AppLocalizations {
   String get notificationSetting => 'Уведомления';
 
   @override
-  String get aiVoiceSetting => 'Голос ИИ';
-
-  @override
-  String get voiceWarm => 'Тёплый';
-
-  @override
-  String get voiceCalm => 'Спокойный';
-
-  @override
-  String get voiceStrong => 'Сильный';
-
-  @override
   String get languageSetting => 'Язык';
 
   @override
@@ -432,9 +420,6 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get premiumBenefit3 => 'Истории веры из прошлого';
-
-  @override
-  String get premiumBenefit4 => 'Озвучивание молитвы (TTS)';
 
   @override
   String get premiumBenefit5 => 'Изучение Библии на оригинальных языках';

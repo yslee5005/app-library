@@ -261,18 +261,6 @@ class AppLocalizationsMy extends AppLocalizations {
   String get notificationSetting => 'အကြောင်းကြားချက်များ';
 
   @override
-  String get aiVoiceSetting => 'AI အသံ';
-
-  @override
-  String get voiceWarm => 'နွေးထွေး';
-
-  @override
-  String get voiceCalm => 'တည်ငြိမ်';
-
-  @override
-  String get voiceStrong => 'ခိုင်မာ';
-
-  @override
   String get languageSetting => 'ဘာသာစကား';
 
   @override
@@ -429,9 +417,6 @@ class AppLocalizationsMy extends AppLocalizations {
 
   @override
   String get premiumBenefit3 => 'သမိုင်းမှ ယုံကြည်ခြင်းဇာတ်လမ်းများ';
-
-  @override
-  String get premiumBenefit4 => 'ဆုတောင်းချက် ဖတ်ပြခြင်း (TTS)';
 
   @override
   String get premiumBenefit5 => 'မူရင်းဘာသာဖြင့် ကျမ်းစာလေ့လာခြင်း';

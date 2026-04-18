@@ -260,18 +260,6 @@ class AppLocalizationsTr extends AppLocalizations {
   String get notificationSetting => 'Bildirimler';
 
   @override
-  String get aiVoiceSetting => 'AI Sesi';
-
-  @override
-  String get voiceWarm => 'Sıcak';
-
-  @override
-  String get voiceCalm => 'Sakin';
-
-  @override
-  String get voiceStrong => 'Güçlü';
-
-  @override
   String get languageSetting => 'Dil';
 
   @override
@@ -432,9 +420,6 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get premiumBenefit3 => 'Tarihten iman hikayeleri';
-
-  @override
-  String get premiumBenefit4 => 'Dua sesli okuma (TTS)';
 
   @override
   String get premiumBenefit5 => 'Orijinal dilde Kutsal Kitap çalışması';

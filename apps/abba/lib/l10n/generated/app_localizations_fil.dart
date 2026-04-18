@@ -265,18 +265,6 @@ class AppLocalizationsFil extends AppLocalizations {
   String get notificationSetting => 'Mga Notification';
 
   @override
-  String get aiVoiceSetting => 'AI Boses';
-
-  @override
-  String get voiceWarm => 'Mainit';
-
-  @override
-  String get voiceCalm => 'Mahinahon';
-
-  @override
-  String get voiceStrong => 'Malakas';
-
-  @override
   String get languageSetting => 'Wika';
 
   @override
@@ -437,9 +425,6 @@ class AppLocalizationsFil extends AppLocalizations {
   @override
   String get premiumBenefit3 =>
       'Mga kwento ng pananampalataya mula sa kasaysayan';
-
-  @override
-  String get premiumBenefit4 => 'Pagbasa ng panalangin nang malakas (TTS)';
 
   @override
   String get premiumBenefit5 => 'Pag-aaral ng Bibliya sa orihinal na wika';

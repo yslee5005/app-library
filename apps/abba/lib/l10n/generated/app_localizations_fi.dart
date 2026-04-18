@@ -261,18 +261,6 @@ class AppLocalizationsFi extends AppLocalizations {
   String get notificationSetting => 'Ilmoitukset';
 
   @override
-  String get aiVoiceSetting => 'AI-ääni';
-
-  @override
-  String get voiceWarm => 'Lämmin';
-
-  @override
-  String get voiceCalm => 'Rauhallinen';
-
-  @override
-  String get voiceStrong => 'Vahva';
-
-  @override
   String get languageSetting => 'Kieli';
 
   @override
@@ -430,9 +418,6 @@ class AppLocalizationsFi extends AppLocalizations {
 
   @override
   String get premiumBenefit3 => 'Uskon tarinoita historiasta';
-
-  @override
-  String get premiumBenefit4 => 'Rukouksen ääneen lukeminen (TTS)';
 
   @override
   String get premiumBenefit5 => 'Raamatun opiskelu alkukielellä';

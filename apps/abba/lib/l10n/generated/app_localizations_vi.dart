@@ -261,18 +261,6 @@ class AppLocalizationsVi extends AppLocalizations {
   String get notificationSetting => 'Thông báo';
 
   @override
-  String get aiVoiceSetting => 'Giọng AI';
-
-  @override
-  String get voiceWarm => 'Ấm áp';
-
-  @override
-  String get voiceCalm => 'Bình an';
-
-  @override
-  String get voiceStrong => 'Mạnh mẽ';
-
-  @override
   String get languageSetting => 'Ngôn ngữ';
 
   @override
@@ -429,9 +417,6 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String get premiumBenefit3 => 'Câu chuyện đức tin từ lịch sử';
-
-  @override
-  String get premiumBenefit4 => 'Đọc lời cầu nguyện (TTS)';
 
   @override
   String get premiumBenefit5 => 'Học Kinh Thánh nguyên ngữ';

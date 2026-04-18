@@ -17,7 +17,6 @@ class UserProfile {
   final int bestStreak;
   final SubscriptionStatus subscription;
   final String locale;
-  final String voicePreference;
   final String? reminderTime;
   final bool darkMode;
 
@@ -31,7 +30,6 @@ class UserProfile {
     this.bestStreak = 0,
     this.subscription = SubscriptionStatus.free,
     this.locale = 'en',
-    this.voicePreference = 'warm',
     this.reminderTime,
     this.darkMode = false,
   });
@@ -53,7 +51,6 @@ class UserProfile {
         orElse: () => SubscriptionStatus.free,
       ),
       locale: json['locale'] as String? ?? 'en',
-      voicePreference: json['voice_preference'] as String? ?? 'warm',
       reminderTime: json['reminder_time'] as String?,
       darkMode: json['dark_mode'] as bool? ?? false,
     );
@@ -77,7 +74,6 @@ class UserProfile {
         orElse: () => SubscriptionStatus.free,
       ),
       locale: settings?['locale'] as String? ?? 'en',
-      voicePreference: settings?['voice_preference'] as String? ?? 'warm',
       reminderTime: settings?['reminder_time'] as String?,
       darkMode: settings?['dark_mode'] as bool? ?? false,
     );
@@ -86,7 +82,6 @@ class UserProfile {
   UserProfile copyWith({
     String? displayName,
     String? locale,
-    String? voicePreference,
     bool? darkMode,
     String? reminderTime,
   }) {
@@ -100,7 +95,6 @@ class UserProfile {
       bestStreak: bestStreak,
       subscription: subscription,
       locale: locale ?? this.locale,
-      voicePreference: voicePreference ?? this.voicePreference,
       reminderTime: reminderTime ?? this.reminderTime,
       darkMode: darkMode ?? this.darkMode,
     );

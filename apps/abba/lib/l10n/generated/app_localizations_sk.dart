@@ -261,18 +261,6 @@ class AppLocalizationsSk extends AppLocalizations {
   String get notificationSetting => 'Upozornenia';
 
   @override
-  String get aiVoiceSetting => 'AI hlas';
-
-  @override
-  String get voiceWarm => 'Teplý';
-
-  @override
-  String get voiceCalm => 'Pokojný';
-
-  @override
-  String get voiceStrong => 'Silný';
-
-  @override
   String get languageSetting => 'Jazyk';
 
   @override
@@ -432,9 +420,6 @@ class AppLocalizationsSk extends AppLocalizations {
 
   @override
   String get premiumBenefit3 => 'Príbehy viery z dejín';
-
-  @override
-  String get premiumBenefit4 => 'Čítanie modlitby nahlas (TTS)';
 
   @override
   String get premiumBenefit5 => 'Štúdium Biblie v pôvodnom jazyku';

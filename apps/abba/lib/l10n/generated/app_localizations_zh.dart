@@ -259,18 +259,6 @@ class AppLocalizationsZh extends AppLocalizations {
   String get notificationSetting => '通知';
 
   @override
-  String get aiVoiceSetting => 'AI语音';
-
-  @override
-  String get voiceWarm => '温暖';
-
-  @override
-  String get voiceCalm => '平静';
-
-  @override
-  String get voiceStrong => '有力';
-
-  @override
   String get languageSetting => '语言';
 
   @override
@@ -419,9 +407,6 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get premiumBenefit3 => '历史信仰故事';
-
-  @override
-  String get premiumBenefit4 => '祷告朗读 (TTS)';
 
   @override
   String get premiumBenefit5 => '原文圣经解读';

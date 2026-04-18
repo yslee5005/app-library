@@ -15,6 +15,8 @@ import '../features/dashboard/view/qt_dashboard_view.dart';
 import '../features/home/view/home_view.dart';
 import '../features/qt/view/qt_view.dart';
 import '../features/my_page/view/my_page_view.dart';
+import '../features/my_page/view/testimony_detail_view.dart';
+import '../models/post.dart';
 import '../features/settings/view/membership_view.dart';
 import '../features/settings/view/notification_settings_view.dart';
 import '../features/settings/view/settings_view.dart';
@@ -74,6 +76,15 @@ GoRouter createAppRouter({required String initialLocation}) {
                 GoRoute(
                   path: 'my-records',
                   builder: (context, state) => const MyPageView(),
+                  routes: [
+                    GoRoute(
+                      path: 'testimony',
+                      builder: (context, state) {
+                        final post = state.extra! as CommunityPost;
+                        return TestimonyDetailView(post: post);
+                      },
+                    ),
+                  ],
                 ),
               ],
             ),

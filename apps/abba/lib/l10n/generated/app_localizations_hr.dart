@@ -262,18 +262,6 @@ class AppLocalizationsHr extends AppLocalizations {
   String get notificationSetting => 'Obavijesti';
 
   @override
-  String get aiVoiceSetting => 'AI glas';
-
-  @override
-  String get voiceWarm => 'Topao';
-
-  @override
-  String get voiceCalm => 'Smiren';
-
-  @override
-  String get voiceStrong => 'Snažan';
-
-  @override
   String get languageSetting => 'Jezik';
 
   @override
@@ -432,9 +420,6 @@ class AppLocalizationsHr extends AppLocalizations {
 
   @override
   String get premiumBenefit3 => 'Priče vjere iz povijesti';
-
-  @override
-  String get premiumBenefit4 => 'Čitanje molitve naglas (TTS)';
 
   @override
   String get premiumBenefit5 => 'Proučavanje Biblije na izvornom jeziku';

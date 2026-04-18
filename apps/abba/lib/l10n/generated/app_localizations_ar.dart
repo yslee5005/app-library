@@ -259,18 +259,6 @@ class AppLocalizationsAr extends AppLocalizations {
   String get notificationSetting => 'الإشعارات';
 
   @override
-  String get aiVoiceSetting => 'صوت الذكاء الاصطناعي';
-
-  @override
-  String get voiceWarm => 'دافئ';
-
-  @override
-  String get voiceCalm => 'هادئ';
-
-  @override
-  String get voiceStrong => 'قوي';
-
-  @override
   String get languageSetting => 'اللغة';
 
   @override
@@ -427,9 +415,6 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get premiumBenefit3 => 'قصص إيمان من التاريخ';
-
-  @override
-  String get premiumBenefit4 => 'قراءة الصلاة بصوت عالٍ (TTS)';
 
   @override
   String get premiumBenefit5 => 'دراسة الكتاب المقدس باللغة الأصلية';

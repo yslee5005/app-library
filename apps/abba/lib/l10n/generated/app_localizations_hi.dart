@@ -263,18 +263,6 @@ class AppLocalizationsHi extends AppLocalizations {
   String get notificationSetting => 'सूचनाएँ';
 
   @override
-  String get aiVoiceSetting => 'AI आवाज़';
-
-  @override
-  String get voiceWarm => 'स्नेहपूर्ण';
-
-  @override
-  String get voiceCalm => 'शांत';
-
-  @override
-  String get voiceStrong => 'दृढ़';
-
-  @override
   String get languageSetting => 'भाषा';
 
   @override
@@ -431,9 +419,6 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get premiumBenefit3 => 'इतिहास से विश्वास की कहानियाँ';
-
-  @override
-  String get premiumBenefit4 => 'प्रार्थना वाचन (TTS)';
 
   @override
   String get premiumBenefit5 => 'मूल भाषा में बाइबल अध्ययन';

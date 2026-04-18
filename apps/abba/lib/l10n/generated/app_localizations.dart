@@ -644,30 +644,6 @@ abstract class AppLocalizations {
   /// **'Notifications'**
   String get notificationSetting;
 
-  /// No description provided for @aiVoiceSetting.
-  ///
-  /// In en, this message translates to:
-  /// **'AI Voice'**
-  String get aiVoiceSetting;
-
-  /// No description provided for @voiceWarm.
-  ///
-  /// In en, this message translates to:
-  /// **'Warm'**
-  String get voiceWarm;
-
-  /// No description provided for @voiceCalm.
-  ///
-  /// In en, this message translates to:
-  /// **'Calm'**
-  String get voiceCalm;
-
-  /// No description provided for @voiceStrong.
-  ///
-  /// In en, this message translates to:
-  /// **'Strong'**
-  String get voiceStrong;
-
   /// No description provided for @languageSetting.
   ///
   /// In en, this message translates to:
@@ -955,12 +931,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Stories of faith from history'**
   String get premiumBenefit3;
-
-  /// No description provided for @premiumBenefit4.
-  ///
-  /// In en, this message translates to:
-  /// **'Prayer read-aloud (TTS)'**
-  String get premiumBenefit4;
 
   /// No description provided for @premiumBenefit5.
   ///

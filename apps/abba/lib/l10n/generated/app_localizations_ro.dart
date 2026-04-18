@@ -263,18 +263,6 @@ class AppLocalizationsRo extends AppLocalizations {
   String get notificationSetting => 'Notificări';
 
   @override
-  String get aiVoiceSetting => 'Voce IA';
-
-  @override
-  String get voiceWarm => 'Caldă';
-
-  @override
-  String get voiceCalm => 'Liniștită';
-
-  @override
-  String get voiceStrong => 'Puternică';
-
-  @override
   String get languageSetting => 'Limbă';
 
   @override
@@ -434,9 +422,6 @@ class AppLocalizationsRo extends AppLocalizations {
 
   @override
   String get premiumBenefit3 => 'Povești de credință din istorie';
-
-  @override
-  String get premiumBenefit4 => 'Citire rugăciune (TTS)';
 
   @override
   String get premiumBenefit5 => 'Studiu biblic în limba originală';

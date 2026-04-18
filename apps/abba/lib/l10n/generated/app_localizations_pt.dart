@@ -262,18 +262,6 @@ class AppLocalizationsPt extends AppLocalizations {
   String get notificationSetting => 'Notificações';
 
   @override
-  String get aiVoiceSetting => 'Voz da IA';
-
-  @override
-  String get voiceWarm => 'Calorosa';
-
-  @override
-  String get voiceCalm => 'Calma';
-
-  @override
-  String get voiceStrong => 'Forte';
-
-  @override
   String get languageSetting => 'Idioma';
 
   @override
@@ -431,9 +419,6 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get premiumBenefit3 => 'Histórias de fé ao longo da história';
-
-  @override
-  String get premiumBenefit4 => 'Leitura da oração em voz alta (TTS)';
 
   @override
   String get premiumBenefit5 => 'Estudo bíblico na língua original';

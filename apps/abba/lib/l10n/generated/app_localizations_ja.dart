@@ -259,18 +259,6 @@ class AppLocalizationsJa extends AppLocalizations {
   String get notificationSetting => '通知';
 
   @override
-  String get aiVoiceSetting => 'AIの声';
-
-  @override
-  String get voiceWarm => '温かい';
-
-  @override
-  String get voiceCalm => '穏やか';
-
-  @override
-  String get voiceStrong => '力強い';
-
-  @override
   String get languageSetting => '言語';
 
   @override
@@ -419,9 +407,6 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get premiumBenefit3 => '歴史の中の信仰物語';
-
-  @override
-  String get premiumBenefit4 => '祈り読み上げ (TTS)';
 
   @override
   String get premiumBenefit5 => '原語聖書解釈';

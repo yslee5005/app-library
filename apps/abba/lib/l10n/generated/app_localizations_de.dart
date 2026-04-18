@@ -261,18 +261,6 @@ class AppLocalizationsDe extends AppLocalizations {
   String get notificationSetting => 'Benachrichtigungen';
 
   @override
-  String get aiVoiceSetting => 'KI-Stimme';
-
-  @override
-  String get voiceWarm => 'Warm';
-
-  @override
-  String get voiceCalm => 'Ruhig';
-
-  @override
-  String get voiceStrong => 'Kraftvoll';
-
-  @override
   String get languageSetting => 'Sprache';
 
   @override
@@ -432,9 +420,6 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get premiumBenefit3 => 'Glaubensgeschichten aus der Historie';
-
-  @override
-  String get premiumBenefit4 => 'Gebet vorlesen (TTS)';
 
   @override
   String get premiumBenefit5 => 'Bibelstudium in Originalsprachen';

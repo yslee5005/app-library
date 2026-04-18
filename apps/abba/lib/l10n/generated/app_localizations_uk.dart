@@ -262,18 +262,6 @@ class AppLocalizationsUk extends AppLocalizations {
   String get notificationSetting => 'Сповіщення';
 
   @override
-  String get aiVoiceSetting => 'Голос ШІ';
-
-  @override
-  String get voiceWarm => 'Теплий';
-
-  @override
-  String get voiceCalm => 'Спокійний';
-
-  @override
-  String get voiceStrong => 'Сильний';
-
-  @override
   String get languageSetting => 'Мова';
 
   @override
@@ -430,9 +418,6 @@ class AppLocalizationsUk extends AppLocalizations {
 
   @override
   String get premiumBenefit3 => 'Історії віри з минулого';
-
-  @override
-  String get premiumBenefit4 => 'Озвучення молитви (TTS)';
 
   @override
   String get premiumBenefit5 => 'Вивчення Біблії мовою оригіналу';

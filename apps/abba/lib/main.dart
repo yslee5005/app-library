@@ -22,7 +22,6 @@ import 'services/mock/mock_prayer_repository.dart';
 import 'services/mock/mock_qt_repository.dart';
 import 'services/mock/mock_stt_service.dart';
 import 'services/mock/mock_subscription_service.dart';
-import 'services/mock/mock_tts_service.dart';
 import 'services/mock_data.dart';
 import 'services/notification_service.dart';
 import 'services/cached_ai_service.dart';
@@ -30,9 +29,6 @@ import 'services/real/openai_service.dart';
 import 'services/real/real_notification_service.dart';
 import 'services/real/real_stt_service.dart';
 import 'services/real/supabase_qt_repository.dart';
-import 'services/real/google_cloud_tts_service.dart';
-import 'services/real/on_device_tts_service.dart';
-import 'services/real/hybrid_tts_service.dart';
 import 'services/real/revenuecat_subscription_service.dart';
 import 'services/real/supabase_community_repository.dart';
 import 'services/real/supabase_prayer_repository.dart';
@@ -89,12 +85,6 @@ Future<void> main() async {
       authRepositoryProvider.overrideWithValue(authRepo),
       aiServiceProvider.overrideWithValue(MockAiService(mockData)),
       sttServiceProvider.overrideWithValue(MockSttService()),
-      ttsServiceProvider.overrideWithValue(
-        HybridTtsService(
-          primary: GoogleCloudTtsService(),
-          fallback: OnDeviceTtsService(),
-        ),
-      ),
       prayerRepositoryProvider.overrideWithValue(MockPrayerRepository()),
       communityRepositoryProvider.overrideWithValue(
         MockCommunityRepository(mockData),
@@ -118,7 +108,6 @@ Future<void> main() async {
         authRepositoryProvider.overrideWithValue(authRepo),
         aiServiceProvider.overrideWithValue(MockAiService(mockData)),
         sttServiceProvider.overrideWithValue(MockSttService()),
-        ttsServiceProvider.overrideWithValue(MockTtsService()),
         prayerRepositoryProvider.overrideWithValue(MockPrayerRepository()),
         communityRepositoryProvider.overrideWithValue(
           MockCommunityRepository(mockData),
@@ -173,12 +162,6 @@ Future<void> main() async {
       authRepositoryProvider.overrideWithValue(authRepo),
       aiServiceProvider.overrideWithValue(CachedAiService(OpenAiService())),
       sttServiceProvider.overrideWithValue(RealSttService()),
-      ttsServiceProvider.overrideWithValue(
-        HybridTtsService(
-          primary: GoogleCloudTtsService(),
-          fallback: OnDeviceTtsService(),
-        ),
-      ),
       prayerRepositoryProvider.overrideWithValue(
         SupabasePrayerRepository(supabase),
       ),
@@ -204,16 +187,12 @@ Future<void> main() async {
   final hasSeenWelcome = prefs.getBool('has_seen_welcome') ?? false;
   final savedLocale = prefs.getString('locale');
   final savedDarkMode = prefs.getBool('dark_mode') ?? false;
-  final savedVoice = prefs.getString('voice_preference');
 
   if (savedLocale != null) {
     overrides.add(localeProvider.overrideWith((ref) => savedLocale));
   }
   if (savedDarkMode) {
     overrides.add(themeModeProvider.overrideWith((ref) => ThemeMode.dark));
-  }
-  if (savedVoice != null) {
-    overrides.add(voicePreferenceProvider.overrideWith((ref) => savedVoice));
   }
 
   // Create router with correct initial location (skip welcome if already seen)

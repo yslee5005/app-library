@@ -138,13 +138,6 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
             padding: EdgeInsets.zero,
             child: Column(
               children: [
-                // AI Voice
-                _SettingsRow(
-                  icon: Icons.record_voice_over_outlined,
-                  title: l10n.aiVoiceSetting,
-                  trailing: _buildVoiceDropdown(l10n),
-                ),
-                const Divider(height: 1, indent: 56),
                 // Language
                 _SettingsRow(
                   icon: Icons.language,
@@ -315,39 +308,6 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
       ),
       loading: () => const SizedBox(height: 72),
       error: (_, _) => const SizedBox(height: 72),
-    );
-  }
-
-  // ── Voice dropdown ──────────────────────────────────────────────────
-  Widget _buildVoiceDropdown(AppLocalizations l10n) {
-    final voiceLabels = <String, String>{
-      'warm': l10n.voiceWarm,
-      'calm': l10n.voiceCalm,
-      'strong': l10n.voiceStrong,
-    };
-
-    final voicePref = ref.watch(voicePreferenceProvider);
-
-    return DropdownButton<String>(
-      value: voicePref,
-      underline: const SizedBox.shrink(),
-      icon: const SizedBox.shrink(),
-      items: voiceLabels.entries
-          .map(
-            (e) => DropdownMenuItem(
-              value: e.key,
-              child: Text(e.value, style: AbbaTypography.bodySmall),
-            ),
-          )
-          .toList(),
-      onChanged: (v) async {
-        if (v != null) {
-          ref.read(voicePreferenceProvider.notifier).state = v;
-          final prefs = await SharedPreferences.getInstance();
-          await prefs.setString('voice_preference', v);
-          appLogger.info('Voice preference changed to $v', category: LogCategory.tts);
-        }
-      },
     );
   }
 

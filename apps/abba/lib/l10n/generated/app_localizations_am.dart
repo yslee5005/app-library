@@ -259,18 +259,6 @@ class AppLocalizationsAm extends AppLocalizations {
   String get notificationSetting => 'ማሳወቂያዎች';
 
   @override
-  String get aiVoiceSetting => 'የ AI ድምጽ';
-
-  @override
-  String get voiceWarm => 'ሞቅ ያለ';
-
-  @override
-  String get voiceCalm => 'ረጋ ያለ';
-
-  @override
-  String get voiceStrong => 'ጠንካራ';
-
-  @override
   String get languageSetting => 'ቋንቋ';
 
   @override
@@ -419,9 +407,6 @@ class AppLocalizationsAm extends AppLocalizations {
 
   @override
   String get premiumBenefit3 => 'ከታሪክ የተወሰዱ የእምነት ታሪኮች';
-
-  @override
-  String get premiumBenefit4 => 'ጸሎት ድምጽ ንባብ (TTS)';
 
   @override
   String get premiumBenefit5 => 'በመጀመሪያው ቋንቋ የመጽሐፍ ቅዱስ ጥናት';

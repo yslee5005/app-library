@@ -33,8 +33,6 @@ class _MyPageViewState extends ConsumerState<MyPageView>
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    final profileAsync = ref.watch(userProfileProvider);
-    final streakAsync = ref.watch(streakProvider);
 
     return Scaffold(
       backgroundColor: AbbaColors.cream,
@@ -43,67 +41,6 @@ class _MyPageViewState extends ConsumerState<MyPageView>
       ),
       body: Column(
         children: [
-          // Profile section
-          profileAsync.when(
-            data: (profile) {
-              final streak = streakAsync.value;
-              return Padding(
-                padding: const EdgeInsets.all(AbbaSpacing.md),
-                child: Column(
-                  children: [
-                    // Avatar
-                    CircleAvatar(
-                      radius: 40,
-                      backgroundColor:
-                          AbbaColors.sage.withValues(alpha: 0.2),
-                      child: Text(
-                        profile.name.isNotEmpty
-                            ? profile.name[0].toUpperCase()
-                            : '?',
-                        style: AbbaTypography.hero.copyWith(
-                          color: AbbaColors.sage,
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: AbbaSpacing.sm),
-                    // Name
-                    Text(profile.name, style: AbbaTypography.h1),
-                    Text(
-                      profile.email,
-                      style: AbbaTypography.bodySmall.copyWith(
-                        color: AbbaColors.muted,
-                      ),
-                    ),
-                    const SizedBox(height: AbbaSpacing.md),
-                    // 3-column stats
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        _StatColumn(
-                          value: '${profile.totalPrayers}',
-                          label: l10n.totalPrayersCount,
-                        ),
-                        _StatColumn(
-                          value: '${streak?.current ?? profile.currentStreak}',
-                          label: l10n.streakCount,
-                        ),
-                        _StatColumn(
-                          value: '0', // Testimony count placeholder
-                          label: l10n.testimoniesCount,
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              );
-            },
-            loading: () => const SizedBox(
-              height: 200,
-              child: Center(child: CircularProgressIndicator()),
-            ),
-            error: (_, st) => const SizedBox.shrink(),
-          ),
-
           // Tab bar
           Container(
             decoration: BoxDecoration(
@@ -142,33 +79,6 @@ class _MyPageViewState extends ConsumerState<MyPageView>
           ),
         ],
       ),
-    );
-  }
-}
-
-// ---------------------------------------------------------------------------
-// Stat column for profile
-// ---------------------------------------------------------------------------
-class _StatColumn extends StatelessWidget {
-  final String value;
-  final String label;
-
-  const _StatColumn({required this.value, required this.label});
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Text(
-          value,
-          style: AbbaTypography.h1.copyWith(fontSize: 22),
-        ),
-        const SizedBox(height: AbbaSpacing.xs),
-        Text(
-          label,
-          style: AbbaTypography.caption,
-        ),
-      ],
     );
   }
 }
@@ -315,8 +225,13 @@ class _MyTestimoniesTab extends ConsumerWidget {
         return ListView.builder(
           padding: const EdgeInsets.all(AbbaSpacing.md),
           itemCount: posts.length,
-          itemBuilder: (context, index) =>
-              _PostTile(post: posts[index]),
+          itemBuilder: (context, index) => _PostTile(
+            post: posts[index],
+            onTap: () => context.push(
+              '/home/my-records/testimony',
+              extra: posts[index],
+            ),
+          ),
         );
       },
       loading: () => const Center(child: CircularProgressIndicator()),
@@ -350,8 +265,13 @@ class _SavedPostsTab extends ConsumerWidget {
         return ListView.builder(
           padding: const EdgeInsets.all(AbbaSpacing.md),
           itemCount: posts.length,
-          itemBuilder: (context, index) =>
-              _PostTile(post: posts[index]),
+          itemBuilder: (context, index) => _PostTile(
+            post: posts[index],
+            onTap: () => context.push(
+              '/home/my-records/testimony',
+              extra: posts[index],
+            ),
+          ),
         );
       },
       loading: () => const Center(child: CircularProgressIndicator()),
@@ -368,72 +288,83 @@ class _SavedPostsTab extends ConsumerWidget {
 // ---------------------------------------------------------------------------
 class _PostTile extends StatelessWidget {
   final CommunityPost post;
+  final VoidCallback? onTap;
 
-  const _PostTile({required this.post});
+  const _PostTile({required this.post, this.onTap});
 
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
 
-    return Padding(
-      padding: const EdgeInsets.only(bottom: AbbaSpacing.sm),
-      child: Container(
-        padding: const EdgeInsets.all(AbbaSpacing.md),
-        decoration: BoxDecoration(
-          color: AbbaColors.white,
-          borderRadius: BorderRadius.circular(AbbaRadius.md),
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: AbbaSpacing.sm,
-                    vertical: 2,
+    return GestureDetector(
+      onTap: onTap,
+      child: Padding(
+        padding: const EdgeInsets.only(bottom: AbbaSpacing.sm),
+        child: Container(
+          padding: const EdgeInsets.all(AbbaSpacing.md),
+          decoration: BoxDecoration(
+            color: AbbaColors.white,
+            borderRadius: BorderRadius.circular(AbbaRadius.md),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: AbbaSpacing.sm,
+                      vertical: 2,
+                    ),
+                    decoration: BoxDecoration(
+                      color: post.category == 'testimony'
+                          ? AbbaColors.softPink.withValues(alpha: 0.3)
+                          : AbbaColors.softSky.withValues(alpha: 0.3),
+                      borderRadius: BorderRadius.circular(AbbaRadius.sm),
+                    ),
+                    child: Text(
+                      post.category == 'testimony'
+                          ? l10n.filterTestimony
+                          : l10n.filterPrayerRequest,
+                      style: AbbaTypography.caption,
+                    ),
                   ),
-                  decoration: BoxDecoration(
-                    color: post.category == 'testimony'
-                        ? AbbaColors.softPink.withValues(alpha: 0.3)
-                        : AbbaColors.softSky.withValues(alpha: 0.3),
-                    borderRadius: BorderRadius.circular(AbbaRadius.sm),
-                  ),
-                  child: Text(
-                    post.category == 'testimony'
-                        ? l10n.filterTestimony
-                        : l10n.filterPrayerRequest,
+                  const Spacer(),
+                  Text(
+                    _formatDate(post.createdAt),
                     style: AbbaTypography.caption,
                   ),
-                ),
-                const Spacer(),
-                Text(
-                  _formatDate(post.createdAt),
-                  style: AbbaTypography.caption,
-                ),
-              ],
-            ),
-            const SizedBox(height: AbbaSpacing.sm),
-            Text(
-              post.content,
-              style: AbbaTypography.bodySmall,
-              maxLines: 3,
-              overflow: TextOverflow.ellipsis,
-            ),
-            const SizedBox(height: AbbaSpacing.sm),
-            Row(
-              children: [
-                Icon(Icons.favorite, size: 14, color: AbbaColors.error),
-                const SizedBox(width: AbbaSpacing.xs),
-                Text('${post.likeCount}', style: AbbaTypography.caption),
-                const SizedBox(width: AbbaSpacing.md),
-                Icon(Icons.chat_bubble_outline,
-                    size: 14, color: AbbaColors.muted),
-                const SizedBox(width: AbbaSpacing.xs),
-                Text('${post.commentCount}', style: AbbaTypography.caption),
-              ],
-            ),
-          ],
+                ],
+              ),
+              const SizedBox(height: AbbaSpacing.sm),
+              Text(
+                post.content,
+                style: AbbaTypography.bodySmall,
+                maxLines: 3,
+                overflow: TextOverflow.ellipsis,
+              ),
+              const SizedBox(height: AbbaSpacing.sm),
+              Row(
+                children: [
+                  Icon(Icons.favorite, size: 14, color: AbbaColors.error),
+                  const SizedBox(width: AbbaSpacing.xs),
+                  Text('${post.likeCount}', style: AbbaTypography.caption),
+                  const SizedBox(width: AbbaSpacing.md),
+                  Icon(Icons.chat_bubble_outline,
+                      size: 14, color: AbbaColors.muted),
+                  const SizedBox(width: AbbaSpacing.xs),
+                  Text('${post.commentCount}', style: AbbaTypography.caption),
+                  const Spacer(),
+                  if (onTap != null)
+                    Icon(
+                      Icons.chevron_right,
+                      size: 18,
+                      color: AbbaColors.muted.withValues(alpha: 0.4),
+                    ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
