@@ -2,15 +2,18 @@ import 'package:flutter/material.dart';
 
 import '../../../theme/abba_theme.dart';
 import '../../../widgets/expandable_card.dart';
+import '../../../widgets/prayer_player.dart';
 
 class TestimonyCard extends StatelessWidget {
   final String testimony;
   final String title;
+  final String? audioUrl;
 
   const TestimonyCard({
     super.key,
     required this.testimony,
     required this.title,
+    this.audioUrl,
   });
 
   String get _summary {
@@ -24,7 +27,16 @@ class TestimonyCard extends StatelessWidget {
       icon: '✍️',
       title: title,
       summary: _summary,
-      expandedContent: Text(testimony, style: AbbaTypography.body),
+      expandedContent: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          if (audioUrl != null) ...[
+            PrayerPlayer(audioUrl: audioUrl!),
+            const SizedBox(height: AbbaSpacing.md),
+          ],
+          Text(testimony, style: AbbaTypography.body),
+        ],
+      ),
     );
   }
 }

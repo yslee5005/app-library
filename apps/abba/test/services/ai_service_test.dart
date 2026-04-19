@@ -94,6 +94,16 @@ class _CountingAiService implements AiService {
   }) => analyzePrayer(transcript: transcript, locale: locale);
 
   @override
+  Future<({PrayerResult result, String transcription})> analyzePrayerFromAudio({
+    required String audioFilePath,
+    required String locale,
+  }) async {
+    callCount++;
+    final result = await analyzePrayer(transcript: '', locale: locale);
+    return (result: result, transcription: 'Mock transcription from audio');
+  }
+
+  @override
   Future<PremiumContent> analyzePrayerPremium({
     required String transcript,
     required String locale,

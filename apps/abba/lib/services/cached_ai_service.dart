@@ -70,6 +70,18 @@ class CachedAiService implements AiService {
   }
 
   @override
+  Future<({PrayerResult result, String transcription})> analyzePrayerFromAudio({
+    required String audioFilePath,
+    required String locale,
+  }) async {
+    // Audio analysis is not cached (each recording is unique)
+    return _inner.analyzePrayerFromAudio(
+      audioFilePath: audioFilePath,
+      locale: locale,
+    );
+  }
+
+  @override
   Future<PremiumContent> analyzePrayerPremium({
     required String transcript,
     required String locale,

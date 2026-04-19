@@ -1,58 +1,41 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:abba/services/mock/mock_stt_service.dart';
+import 'package:abba/services/mock/mock_audio_recorder_service.dart';
 
 void main() {
-  late MockSttService service;
+  late MockAudioRecorderService service;
 
   setUp(() {
-    service = MockSttService();
+    service = MockAudioRecorderService();
   });
 
-  group('MockSttService', () {
-    test('initialize returns true', () async {
-      final result = await service.initialize();
-      expect(result, true);
+  group('MockAudioRecorderService', () {
+    test('startRecording sets isRecording to true', () async {
+      await service.startRecording(path: '/tmp/test.m4a');
+      expect(service.isRecording, true);
     });
 
-    test('isAvailable is true after init', () async {
-      await service.initialize();
-      expect(service.isAvailable, true);
+    test('stopRecording returns file path', () async {
+      await service.startRecording(path: '/tmp/test.m4a');
+      final path = await service.stopRecording();
+      expect(path, '/tmp/test.m4a');
+      expect(service.isRecording, false);
     });
 
-    test('startListening sets isListening to true', () async {
-      await service.initialize();
-      await service.startListening(
-        onResult: (text, isFinal) {},
-        onError: (error) {},
-      );
-
-      expect(service.isListening, true);
+    test('pauseRecording sets isPaused to true', () async {
+      await service.startRecording(path: '/tmp/test.m4a');
+      await service.pauseRecording();
+      expect(service.isPaused, true);
     });
 
-    test('stopListening sets isListening to false', () async {
-      await service.initialize();
-      await service.startListening(
-        onResult: (text, isFinal) {},
-        onError: (error) {},
-      );
-      await service.stopListening();
-
-      expect(service.isListening, false);
+    test('resumeRecording sets isPaused to false', () async {
+      await service.startRecording(path: '/tmp/test.m4a');
+      await service.pauseRecording();
+      await service.resumeRecording();
+      expect(service.isPaused, false);
     });
 
-    test('cancelListening stops listening', () async {
-      await service.initialize();
-      await service.startListening(
-        onResult: (text, isFinal) {},
-        onError: (error) {},
-      );
-      await service.cancelListening();
-
-      expect(service.isListening, false);
-    });
-
-    test('setLocale does not throw', () {
-      expect(() => service.setLocale('ko_KR'), returnsNormally);
+    test('dispose does not throw', () {
+      expect(() => service.dispose(), returnsNormally);
     });
   });
 }

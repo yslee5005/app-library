@@ -10,7 +10,8 @@ import 'package:abba/services/mock/mock_community_repository.dart';
 import 'package:abba/services/mock/mock_notification_service.dart';
 import 'package:abba/services/mock/mock_prayer_repository.dart';
 import 'package:abba/services/mock/mock_qt_repository.dart';
-import 'package:abba/services/mock/mock_stt_service.dart';
+import 'package:abba/services/mock/mock_audio_recorder_service.dart';
+import 'package:abba/services/mock/mock_audio_storage_service.dart';
 import 'package:abba/services/mock/mock_subscription_service.dart';
 import 'package:abba/services/mock_data.dart';
 import 'package:abba/services/mock/mock_ai_service.dart';
@@ -27,7 +28,8 @@ Widget buildTestApp(
   final defaultOverrides = [
     authRepositoryProvider.overrideWithValue(MockAuthRepository(mockData)),
     aiServiceProvider.overrideWithValue(MockAiService(mockData)),
-    sttServiceProvider.overrideWithValue(MockSttService()),
+    audioRecorderServiceProvider.overrideWithValue(MockAudioRecorderService()),
+    audioStorageServiceProvider.overrideWithValue(MockAudioStorageService()),
     prayerRepositoryProvider.overrideWithValue(MockPrayerRepository()),
     communityRepositoryProvider.overrideWithValue(
       MockCommunityRepository(mockData),

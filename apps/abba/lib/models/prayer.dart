@@ -4,6 +4,8 @@ class Prayer {
   final String transcript;
   final String mode; // 'prayer' | 'qt'
   final String? qtPassageRef;
+  final String? audioPath; // local file path for voice recordings
+  final String? audioStoragePath; // Supabase Storage path (e.g., 'abba/{userId}/{id}.m4a')
   final int durationSeconds;
   final DateTime createdAt;
   final PrayerResult? result;
@@ -14,6 +16,8 @@ class Prayer {
     required this.transcript,
     required this.mode,
     this.qtPassageRef,
+    this.audioPath,
+    this.audioStoragePath,
     this.durationSeconds = 0,
     required this.createdAt,
     this.result,
@@ -26,6 +30,8 @@ class Prayer {
       transcript: json['transcript'] as String,
       mode: json['mode'] as String,
       qtPassageRef: json['qt_passage_ref'] as String?,
+      audioPath: json['audio_path'] as String?,
+      audioStoragePath: json['audio_storage_path'] as String?,
       durationSeconds: json['duration_seconds'] as int? ?? 0,
       createdAt: DateTime.parse(json['created_at'] as String),
       result: json['result'] != null

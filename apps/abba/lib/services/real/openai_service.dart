@@ -180,6 +180,15 @@ class OpenAiService implements AiService {
   }
 
   @override
+  Future<({PrayerResult result, String transcription})> analyzePrayerFromAudio({
+    required String audioFilePath,
+    required String locale,
+  }) async {
+    // OpenAI service doesn't support audio analysis — use GeminiService instead
+    throw UnimplementedError('Use GeminiService for audio analysis');
+  }
+
+  @override
   Future<PrayerResult> analyzePrayerCore({
     required String transcript,
     required String locale,

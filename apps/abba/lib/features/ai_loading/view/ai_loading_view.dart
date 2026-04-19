@@ -74,8 +74,10 @@ class _AiLoadingViewState extends ConsumerState<AiLoadingView>
 
   Future<void> _analyzeWithAi() async {
     final transcript = ref.read(currentTranscriptProvider);
+    final audioPath = ref.read(currentAudioPathProvider);
     final locale = ref.read(localeProvider);
     final aiService = ref.read(aiServiceProvider);
+    final isVoiceMode = audioPath != null && audioPath.isNotEmpty;
 
     // Get actual user id from auth state
     final userId = ref.read(currentUserProvider)?.id ?? 'anonymous';
@@ -90,20 +92,58 @@ class _AiLoadingViewState extends ConsumerState<AiLoadingView>
     }
 
     try {
-      final result = await aiService.analyzePrayerCore(
-        transcript: transcript,
-        locale: locale,
-      );
+      PrayerResult result;
+      String savedTranscript;
+      String? audioStoragePath;
+      final prayerId = _generateId();
+
+      if (isVoiceMode) {
+        // Voice mode: upload + analyze in parallel
+        final storageService = ref.read(audioStorageServiceProvider);
+
+        final futures = await Future.wait([
+          // [0] Gemini analysis (transcription + analysis)
+          aiService.analyzePrayerFromAudio(
+            audioFilePath: audioPath,
+            locale: locale,
+          ),
+          // [1] Storage upload
+          storageService.uploadPrayerAudio(
+            localPath: audioPath,
+            userId: userId,
+            prayerId: prayerId,
+          ).catchError((_) => ''), // non-fatal: continue even if upload fails
+        ]);
+
+        final audioResult =
+            futures[0] as ({PrayerResult result, String transcription});
+        audioStoragePath = futures[1] as String;
+        if (audioStoragePath.isEmpty) audioStoragePath = null;
+
+        result = audioResult.result;
+        savedTranscript = audioResult.transcription;
+        prayerLog.info('Voice prayer analyzed + uploaded, transcript=${savedTranscript.length}');
+      } else {
+        // Text mode: send transcript to Gemini
+        result = await aiService.analyzePrayerCore(
+          transcript: transcript,
+          locale: locale,
+        );
+        savedTranscript = transcript;
+      }
+
       ref.read(prayerResultProvider.notifier).state = AsyncValue.data(result);
 
       // Save prayer with result
       final repo = ref.read(prayerRepositoryProvider);
       await repo.savePrayer(
         Prayer(
-          id: _generateId(),
+          id: prayerId,
           userId: userId,
-          transcript: transcript,
+          transcript: savedTranscript,
           mode: 'prayer',
+          audioPath: isVoiceMode ? audioPath : null,
+          audioStoragePath: audioStoragePath,
           createdAt: DateTime.now(),
           result: result,
         ),

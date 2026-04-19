@@ -14,6 +14,8 @@ class AppConfig {
 
   static String get openAiApiKey => dotenv.env['OPENAI_API_KEY'] ?? '';
 
+  static String get geminiApiKey => dotenv.env['GEMINI_API_KEY'] ?? '';
+
   static String get sentryDsn => dotenv.env['SENTRY_DSN'] ?? '';
 
   static String get revenueCatApiKey => dotenv.env['REVENUECAT_API_KEY'] ?? '';
@@ -37,7 +39,7 @@ class AppConfig {
     final missing = <String>[];
     if (supabaseUrl.isEmpty) missing.add('SUPABASE_URL');
     if (supabaseAnonKey.isEmpty) missing.add('SUPABASE_ANON_KEY');
-    if (openAiApiKey.isEmpty) missing.add('OPENAI_API_KEY');
+    if (geminiApiKey.isEmpty) missing.add('GEMINI_API_KEY');
     if (missing.isNotEmpty) {
       throw StateError(
         'Missing required environment variables: ${missing.join(', ')}',

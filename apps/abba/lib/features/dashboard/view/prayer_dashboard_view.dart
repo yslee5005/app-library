@@ -16,6 +16,15 @@ import '../widgets/prayer_summary_card.dart';
 import '../widgets/scripture_card.dart';
 import '../widgets/testimony_card.dart';
 
+/// Resolves audio storage path → signed URL for playback.
+final _currentAudioUrlProvider = FutureProvider<String?>((ref) async {
+  final audioPath = ref.watch(currentAudioPathProvider);
+  if (audioPath == null || audioPath.isEmpty) return null;
+
+  // Use local file path for playback (uploaded copy exists in Storage)
+  return audioPath;
+});
+
 class PrayerDashboardView extends ConsumerStatefulWidget {
   const PrayerDashboardView({super.key});
 
@@ -154,12 +163,13 @@ class _PrayerDashboardViewState extends ConsumerState<PrayerDashboardView> {
             initiallyExpanded: false,
           ),
         ),
-        // 3. Testimony Card
+        // 3. Testimony Card (with audio playback if available)
         StaggeredFadeIn(
           index: i++,
           child: TestimonyCard(
             testimony: testimonyText,
             title: l10n.testimonyTitle,
+            audioUrl: ref.watch(_currentAudioUrlProvider).value,
           ),
         ),
         // 4. Historical Story Card (Premium — on-demand)

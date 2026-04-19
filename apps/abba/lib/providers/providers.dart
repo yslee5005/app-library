@@ -18,7 +18,8 @@ import '../services/mock_data.dart';
 import '../services/notification_service.dart';
 import '../services/prayer_repository.dart';
 import '../services/qt_repository.dart';
-import '../services/stt_service.dart';
+import '../services/audio_recorder_service.dart';
+import '../services/audio_storage_service.dart';
 import '../services/subscription_service.dart';
 
 // ---------------------------------------------------------------------------
@@ -37,8 +38,12 @@ final aiServiceProvider = Provider<AiService>((ref) {
   throw UnimplementedError('aiServiceProvider must be overridden');
 });
 
-final sttServiceProvider = Provider<SttService>((ref) {
-  throw UnimplementedError('sttServiceProvider must be overridden');
+final audioRecorderServiceProvider = Provider<AudioRecorderService>((ref) {
+  throw UnimplementedError('audioRecorderServiceProvider must be overridden');
+});
+
+final audioStorageServiceProvider = Provider<AudioStorageService>((ref) {
+  throw UnimplementedError('audioStorageServiceProvider must be overridden');
 });
 
 final prayerRepositoryProvider = Provider<PrayerRepository>((ref) {
@@ -275,8 +280,11 @@ final localeProvider = StateProvider<String>((ref) => 'ko');
 /// Theme mode provider for dark mode support
 final themeModeProvider = StateProvider<ThemeMode>((ref) => ThemeMode.light);
 
-/// Tracks current prayer transcript from recording
+/// Tracks current prayer transcript from recording (text mode)
 final currentTranscriptProvider = StateProvider<String>((ref) => '');
+
+/// Tracks current audio file path from voice recording
+final currentAudioPathProvider = StateProvider<String?>((ref) => null);
 
 /// Current prayer mode: 'prayer' or 'qt'
 final currentPrayerModeProvider = StateProvider<String>((ref) => 'prayer');

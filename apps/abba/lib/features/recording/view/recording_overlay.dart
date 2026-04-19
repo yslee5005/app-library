@@ -1,17 +1,18 @@
 import 'dart:async';
 
+import 'package:audio_waveforms/audio_waveforms.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:path_provider/path_provider.dart';
 
 import '../../../l10n/generated/app_localizations.dart';
 import '../../../providers/providers.dart';
 import 'package:app_lib_logging/logging.dart';
 
-import '../../../services/stt_service.dart';
+import '../../../services/real/real_audio_recorder_service.dart';
 import '../../../theme/abba_theme.dart';
 import '../../../widgets/abba_button.dart';
-import '../../../widgets/abba_snackbar.dart';
 
 class RecordingOverlay extends ConsumerStatefulWidget {
   const RecordingOverlay({super.key});
@@ -26,24 +27,21 @@ class _RecordingOverlayState extends ConsumerState<RecordingOverlay>
   int _seconds = 0;
   bool _isPaused = false;
   bool _isTextMode = false;
-  String _transcript = '';
   final _textController = TextEditingController();
   late AnimationController _pulseController;
-  late final SttService _sttService;
+  String? _audioFilePath;
 
   @override
   void initState() {
     super.initState();
-    _sttService = ref.read(sttServiceProvider);
     Future(() {
       ref.read(isRecordingProvider.notifier).state = true;
     });
-    sttLog.info('Recording started');
+    prayerLog.info('Recording overlay started');
     _pulseController = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 1500),
     );
-    // Respect reduced motion accessibility setting
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final reduceMotion = MediaQuery.of(context).disableAnimations;
       if (!reduceMotion) {
@@ -51,38 +49,15 @@ class _RecordingOverlayState extends ConsumerState<RecordingOverlay>
       }
     });
     _startTimer();
-    _startStt();
+    _startRecording();
   }
 
-  void _startStt() {
-    final locale = ref.read(localeProvider);
-    _sttService.initialize().then((_) {
-      final sttLocale = switch (locale) {
-        'ko' => 'ko_KR',
-        'ja' => 'ja_JP',
-        'es' => 'es_ES',
-        'zh' => 'zh_CN',
-        _ => 'en_US',
-      };
-      _sttService.setLocale(sttLocale);
-      _sttService.startListening(
-        onResult: (text, isFinal) {
-          setState(() => _transcript = text);
-          sttLog.debug('STT partial result: ${text.length} chars');
-        },
-        onError: (error) {
-          // Fallback: switch to text mode on STT error
-          setState(() => _isTextMode = true);
-          if (mounted) {
-            final l10n = AppLocalizations.of(context);
-            showAbbaSnackBar(
-              context,
-              message: l10n?.errorSttFailed ?? 'Voice recognition unavailable.',
-            );
-          }
-        },
-      );
-    });
+  Future<void> _startRecording() async {
+    final dir = await getTemporaryDirectory();
+    _audioFilePath =
+        '${dir.path}/prayer_${DateTime.now().millisecondsSinceEpoch}.m4a';
+    final recorder = ref.read(audioRecorderServiceProvider);
+    await recorder.startRecording(path: _audioFilePath!);
   }
 
   void _startTimer() {
@@ -98,7 +73,6 @@ class _RecordingOverlayState extends ConsumerState<RecordingOverlay>
     _timer?.cancel();
     _pulseController.dispose();
     _textController.dispose();
-    _sttService.stopListening();
     ref.read(isRecordingProvider.notifier).state = false;
     super.dispose();
   }
@@ -177,28 +151,106 @@ class _RecordingOverlayState extends ConsumerState<RecordingOverlay>
   }
 
   void _togglePause() {
+    final recorder = ref.read(audioRecorderServiceProvider);
     setState(() => _isPaused = !_isPaused);
     if (_isPaused) {
       _pulseController.stop();
-      _sttService.stopListening();
-      sttLog.info('Recording paused');
+      recorder.pauseRecording();
+      prayerLog.info('Recording paused');
     } else {
       _pulseController.repeat(reverse: true);
-      _startStt();
-      sttLog.info('Recording resumed');
+      recorder.resumeRecording();
+      prayerLog.info('Recording resumed');
     }
   }
 
-  void _finishRecording() {
-    final transcript = _isTextMode ? _textController.text : _transcript;
-    sttLog.info('Prayer finished, transcript length=${transcript.length}');
-    _sttService.stopListening();
+  Future<void> _finishRecording() async {
+    final recorder = ref.read(audioRecorderServiceProvider);
+    final audioPath = await recorder.stopRecording();
 
-    // Store transcript for AI processing
-    ref.read(currentTranscriptProvider.notifier).state = transcript;
+    if (_isTextMode) {
+      ref.read(currentTranscriptProvider.notifier).state =
+          _textController.text;
+      ref.read(currentAudioPathProvider.notifier).state = null;
+    } else {
+      ref.read(currentAudioPathProvider.notifier).state = audioPath;
+      ref.read(currentTranscriptProvider.notifier).state = '';
+    }
 
-    Navigator.of(context).pop();
-    context.go('/home/ai-loading');
+    prayerLog.info(
+      'Recording finished, mode=${_isTextMode ? "text" : "voice"}, '
+      'audioPath=$audioPath',
+    );
+
+    if (context.mounted) {
+      Navigator.of(context).pop();
+      context.go('/home/ai-loading');
+    }
+  }
+
+  Widget _buildWaveformOrPulse() {
+    final recorder = ref.read(audioRecorderServiceProvider);
+
+    if (recorder is RealAudioRecorderService) {
+      return Column(
+        children: [
+          Icon(
+            _isPaused ? Icons.pause_circle_outline : Icons.mic,
+            size: 48,
+            color: AbbaColors.sage,
+          ),
+          const SizedBox(height: AbbaSpacing.md),
+          AudioWaveforms(
+            size: const Size(double.infinity, 80),
+            recorderController: recorder.controller,
+            enableGesture: false,
+            waveStyle: WaveStyle(
+              waveColor: AbbaColors.sage,
+              extendWaveform: true,
+              showMiddleLine: false,
+              spacing: 6.0,
+              waveThickness: 3.0,
+              showDurationLabel: false,
+            ),
+          ),
+        ],
+      );
+    }
+
+    return AnimatedBuilder(
+      animation: _pulseController,
+      builder: (context, child) {
+        final scale = 1.0 + (_pulseController.value * 0.15);
+        return Transform.scale(
+          scale: _isPaused ? 1.0 : scale,
+          child: Container(
+            width: 180,
+            height: 180,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: AbbaColors.sage.withValues(
+                alpha: 0.2 + (_pulseController.value * 0.15),
+              ),
+            ),
+            child: Center(
+              child: Container(
+                width: 120,
+                height: 120,
+                decoration: const BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: AbbaColors.sage,
+                ),
+                child: Icon(
+                  _isPaused ? Icons.pause : Icons.mic,
+                  size: 48,
+                  color: AbbaColors.white,
+                ),
+              ),
+            ),
+          ),
+        );
+      },
+    );
   }
 
   @override
@@ -210,7 +262,8 @@ class _RecordingOverlayState extends ConsumerState<RecordingOverlay>
       onPopInvokedWithResult: (didPop, _) async {
         if (didPop) return;
         if (await _confirmLeave()) {
-          _sttService.cancelListening();
+          final recorder = ref.read(audioRecorderServiceProvider);
+          await recorder.stopRecording();
           if (context.mounted) Navigator.of(context).pop();
         }
       },
@@ -224,7 +277,7 @@ class _RecordingOverlayState extends ConsumerState<RecordingOverlay>
       child: SafeArea(
         child: Column(
           children: [
-            // Top bar — fixed at top
+            // Top bar
             Padding(
               padding: const EdgeInsets.symmetric(
                 horizontal: AbbaSpacing.md,
@@ -239,7 +292,8 @@ class _RecordingOverlayState extends ConsumerState<RecordingOverlay>
                     child: IconButton(
                       onPressed: () async {
                         if (await _confirmLeave()) {
-                          _sttService.cancelListening();
+                          final recorder = ref.read(audioRecorderServiceProvider);
+                          await recorder.stopRecording();
                           if (context.mounted) Navigator.of(context).pop();
                         }
                       },
@@ -249,15 +303,15 @@ class _RecordingOverlayState extends ConsumerState<RecordingOverlay>
                   ),
                   Text(l10n.recordingTitle, style: AbbaTypography.h2),
                   TextButton.icon(
-                    onPressed: () {
+                    onPressed: () async {
+                      final recorder = ref.read(audioRecorderServiceProvider);
                       setState(() => _isTextMode = !_isTextMode);
                       if (_isTextMode) {
-                        _sttService.stopListening();
-                        _textController.text = _transcript;
-                        sttLog.info('Switched to text mode');
+                        await recorder.pauseRecording();
+                        prayerLog.info('Switched to text mode');
                       } else {
-                        _startStt();
-                        sttLog.info('Switched to voice mode');
+                        await recorder.resumeRecording();
+                        prayerLog.info('Switched to voice mode');
                       }
                     },
                     icon: Icon(
@@ -274,7 +328,7 @@ class _RecordingOverlayState extends ConsumerState<RecordingOverlay>
                 ],
               ),
             ),
-            // Pulse animation or text input — scrollable middle area
+            // Waveform or text input
             Expanded(child: SingleChildScrollView(child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -309,60 +363,9 @@ class _RecordingOverlayState extends ConsumerState<RecordingOverlay>
                 ),
               )
             else
-              Column(
-                children: [
-                  AnimatedBuilder(
-                    animation: _pulseController,
-                    builder: (context, child) {
-                      final scale = 1.0 + (_pulseController.value * 0.15);
-                      return Transform.scale(
-                        scale: _isPaused ? 1.0 : scale,
-                        child: Container(
-                          width: 180,
-                          height: 180,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: AbbaColors.sage.withValues(
-                              alpha: 0.2 + (_pulseController.value * 0.15),
-                            ),
-                          ),
-                          child: Center(
-                            child: Container(
-                              width: 120,
-                              height: 120,
-                              decoration: const BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: AbbaColors.sage,
-                              ),
-                              child: Icon(
-                                _isPaused ? Icons.pause : Icons.mic,
-                                size: 48,
-                                color: AbbaColors.white,
-                              ),
-                            ),
-                          ),
-                        ),
-                      );
-                    },
-                  ),
-                  if (_transcript.isNotEmpty) ...[
-                    const SizedBox(height: AbbaSpacing.lg),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: AbbaSpacing.xl,
-                      ),
-                      child: Text(
-                        _transcript,
-                        style: AbbaTypography.bodySmall.copyWith(
-                          color: AbbaColors.muted,
-                        ),
-                        textAlign: TextAlign.center,
-                        maxLines: 3,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                    ),
-                  ],
-                ],
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: AbbaSpacing.xl),
+                child: _buildWaveformOrPulse(),
               ),
             const SizedBox(height: AbbaSpacing.xl),
             // Timer
@@ -373,7 +376,7 @@ class _RecordingOverlayState extends ConsumerState<RecordingOverlay>
             const SizedBox(height: AbbaSpacing.xl),
               ],
             ))),
-            // Buttons — fixed at bottom
+            // Buttons
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: AbbaSpacing.xl),
               child: Row(

@@ -34,6 +34,26 @@ class MockAiService implements AiService {
   }
 
   @override
+  Future<({PrayerResult result, String transcription})> analyzePrayerFromAudio({
+    required String audioFilePath,
+    required String locale,
+  }) async {
+    await Future<void>.delayed(const Duration(seconds: 2));
+    final full = await _mockData.getPrayerResult();
+    final result = PrayerResult(
+      scripture: full.scripture,
+      bibleStory: full.bibleStory,
+      testimonyEn: full.testimonyEn,
+      testimonyKo: full.testimonyKo,
+      prayerSummary: full.prayerSummary,
+    );
+    return (
+      result: result,
+      transcription: 'Dear Lord, I thank you for this beautiful morning. Please guide my steps today.',
+    );
+  }
+
+  @override
   Future<PremiumContent> analyzePrayerPremium({
     required String transcript,
     required String locale,

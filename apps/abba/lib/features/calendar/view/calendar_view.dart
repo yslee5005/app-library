@@ -465,6 +465,15 @@ class _CalendarViewState extends ConsumerState<CalendarView> {
                   ],
                 ),
               ),
+              if (prayer.audioStoragePath != null)
+                Padding(
+                  padding: const EdgeInsets.only(right: AbbaSpacing.xs),
+                  child: Icon(
+                    Icons.volume_up_rounded,
+                    color: AbbaColors.sage.withValues(alpha: 0.6),
+                    size: 18,
+                  ),
+                ),
               Icon(
                 Icons.chevron_right,
                 color: AbbaColors.muted.withValues(alpha: 0.4),
