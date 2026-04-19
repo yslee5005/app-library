@@ -1,0 +1,41 @@
+name: License Audit (ScanCode)
+
+on:
+  schedule:
+    - cron: "0 0 1 * *"  # 1st of every month, 00:00 UTC
+  workflow_dispatch:
+
+jobs:
+  scancode:
+    name: ScanCode source scan
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run ScanCode Toolkit
+        run: |
+          docker run --rm \
+            -v "$PWD":/scan \
+            aboutcode/scancode-toolkit:latest \
+            scancode \
+              --license \
+              --copyright \
+              --info \
+              --json-pp /scan/scancode-report.json \
+              --ignore "node_modules/*" \
+              --ignore ".dart_tool/*" \
+              --ignore "build/*" \
+              --ignore ".next/*" \
+              --ignore "*.lock" \
+              /scan/apps /scan/packages
+
+      - name: Fail on GPL/LGPL/AGPL findings
+        run: python3 scripts/check_scancode_report.py scancode-report.json
+
+      - name: Upload ScanCode report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: scancode-report
+          path: scancode-report.json
+          retention-days: 90

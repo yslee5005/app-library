@@ -1,0 +1,33 @@
+name: License Check
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  npm:
+    name: npm (Next.js)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: apps/blacklabelled/web
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+          cache-dependency-path: apps/blacklabelled/web/package-lock.json
+      - run: npm ci --no-audit --no-fund
+      - run: python3 ../../../scripts/check_npm_licenses.py
+
+  flutter:
+    name: pub (Flutter workspace)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+      - run: flutter pub get
+      - run: python3 scripts/check_pub_licenses.py
