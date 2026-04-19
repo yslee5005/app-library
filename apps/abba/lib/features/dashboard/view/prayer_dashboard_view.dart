@@ -93,8 +93,12 @@ class _PrayerDashboardViewState extends ConsumerState<PrayerDashboardView> {
       appBar: AppBar(
         leading: IconButton(
           onPressed: () {
-            prayerLog.debug('Back to home from dashboard');
-            context.go('/home');
+            prayerLog.debug('Back from prayer dashboard');
+            if (context.canPop()) {
+              context.pop();
+            } else {
+              context.go('/home');
+            }
           },
           icon: const Icon(Icons.arrow_back),
         ),

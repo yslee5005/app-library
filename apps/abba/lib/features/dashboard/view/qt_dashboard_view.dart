@@ -40,8 +40,12 @@ class _QtDashboardViewState extends ConsumerState<QtDashboardView> {
       appBar: AppBar(
         leading: IconButton(
           onPressed: () {
-            qtLog.debug('Back to home from QT dashboard');
-            context.go('/home');
+            qtLog.debug('Back from QT dashboard');
+            if (context.canPop()) {
+              context.pop();
+            } else {
+              context.go('/home');
+            }
           },
           icon: const Icon(Icons.arrow_back),
         ),

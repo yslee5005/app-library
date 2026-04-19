@@ -31,8 +31,12 @@ class DashboardView extends ConsumerWidget {
       appBar: AppBar(
         leading: IconButton(
           onPressed: () {
-            prayerLog.debug('Back to home from dashboard');
-            context.go('/home');
+            prayerLog.debug('Back from dashboard');
+            if (context.canPop()) {
+              context.pop();
+            } else {
+              context.go('/home');
+            }
           },
           icon: const Icon(Icons.arrow_back),
         ),
