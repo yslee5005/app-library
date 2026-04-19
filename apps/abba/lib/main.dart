@@ -1,6 +1,9 @@
+import 'package:app_lib_audio_recorder/audio_recorder.dart';
+import 'package:app_lib_audio_storage/audio_storage.dart';
 import 'package:app_lib_auth/auth.dart' hide UserProfile;
 import 'package:app_lib_core/core.dart';
 import 'package:app_lib_logging/logging.dart';
+import 'package:app_lib_subscriptions/subscriptions.dart';
 import 'package:app_lib_supabase_client/supabase_client.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -20,18 +23,12 @@ import 'services/mock/mock_community_repository.dart';
 import 'services/mock/mock_notification_service.dart';
 import 'services/mock/mock_prayer_repository.dart';
 import 'services/mock/mock_qt_repository.dart';
-import 'services/mock/mock_audio_recorder_service.dart';
-import 'services/mock/mock_audio_storage_service.dart';
-import 'services/mock/mock_subscription_service.dart';
 import 'services/mock_data.dart';
 import 'services/notification_service.dart';
 import 'services/cached_ai_service.dart';
 import 'services/real/gemini_service.dart';
 import 'services/real/real_notification_service.dart';
-import 'services/real/real_audio_recorder_service.dart';
-import 'services/real/supabase_audio_storage_service.dart';
 import 'services/real/supabase_qt_repository.dart';
-import 'services/real/revenuecat_subscription_service.dart';
 import 'services/real/supabase_community_repository.dart';
 import 'services/real/supabase_prayer_repository.dart';
 
@@ -177,7 +174,7 @@ Future<void> main() async {
         SupabaseCommunityRepository(supabase),
       ),
       subscriptionServiceProvider.overrideWithValue(
-        RevenueCatSubscriptionService(),
+        RevenueCatSubscriptionService(apiKey: AppConfig.revenueCatApiKey),
       ),
       notificationServiceProvider.overrideWithValue(notificationService),
       qtRepositoryProvider.overrideWithValue(SupabaseQtRepository(supabase)),

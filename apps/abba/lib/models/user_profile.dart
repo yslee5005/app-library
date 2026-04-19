@@ -1,4 +1,6 @@
-enum SubscriptionStatus { free, premium, trial }
+import 'package:app_lib_subscriptions/subscriptions.dart';
+
+export 'package:app_lib_subscriptions/subscriptions.dart' show SubscriptionStatus;
 
 /// Abba domain user profile — combines auth profile + app-specific settings.
 ///

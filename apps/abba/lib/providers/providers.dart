@@ -7,6 +7,13 @@ import 'package:flutter_riverpod/legacy.dart';
 export 'package:app_lib_auth/auth.dart'
     show authRepositoryProvider, authNotifierProvider, currentUserProvider, isAnonymousProvider;
 
+// Re-export audio service providers from the shared packages so views
+// can keep importing a single providers.dart.
+export 'package:app_lib_audio_recorder/audio_recorder.dart'
+    show audioRecorderServiceProvider;
+export 'package:app_lib_audio_storage/audio_storage.dart'
+    show audioStorageServiceProvider;
+
 import '../models/post.dart';
 import '../models/prayer.dart';
 import '../models/qt_meditation_result.dart';
@@ -18,9 +25,7 @@ import '../services/mock_data.dart';
 import '../services/notification_service.dart';
 import '../services/prayer_repository.dart';
 import '../services/qt_repository.dart';
-import '../services/audio_recorder_service.dart';
-import '../services/audio_storage_service.dart';
-import '../services/subscription_service.dart';
+import 'package:app_lib_subscriptions/subscriptions.dart';
 
 // ---------------------------------------------------------------------------
 // Core data (kept for backward compat, loads JSON mock)
@@ -36,14 +41,6 @@ final mockDataServiceProvider = Provider<MockDataService>((ref) {
 
 final aiServiceProvider = Provider<AiService>((ref) {
   throw UnimplementedError('aiServiceProvider must be overridden');
-});
-
-final audioRecorderServiceProvider = Provider<AudioRecorderService>((ref) {
-  throw UnimplementedError('audioRecorderServiceProvider must be overridden');
-});
-
-final audioStorageServiceProvider = Provider<AudioStorageService>((ref) {
-  throw UnimplementedError('audioStorageServiceProvider must be overridden');
 });
 
 final prayerRepositoryProvider = Provider<PrayerRepository>((ref) {

@@ -29,17 +29,20 @@ dependencies:
     path: ../../packages/logging
   app_lib_supabase_client:
     path: ../../packages/supabase_client
+  app_lib_audio_recorder:
+    path: ../../packages/audio_recorder
+  app_lib_audio_storage:
+    path: ../../packages/audio_storage
+  app_lib_subscriptions:
+    path: ../../packages/subscriptions
   google_sign_in: ^6.2.0
   # Phase 2
   supabase_flutter: ^2.8.0
   http: ^1.2.0
   shared_preferences: ^2.3.5
-  audio_waveforms: ^1.2.0
   google_generative_ai: ^0.4.0
   sentry_flutter: ^9.16.0
   path_provider: ^2.1.0
-  # Phase 3
-  purchases_flutter: ^8.9.0
   # Phase 4
   share_plus: ^10.1.4
   url_launcher: ^6.3.0

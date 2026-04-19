@@ -108,10 +108,10 @@ class _AiLoadingViewState extends ConsumerState<AiLoadingView>
             locale: locale,
           ),
           // [1] Storage upload
-          storageService.uploadPrayerAudio(
+          storageService.uploadAudio(
             localPath: audioPath,
             userId: userId,
-            prayerId: prayerId,
+            recordId: prayerId,
           ).catchError((_) => ''), // non-fatal: continue even if upload fails
         ]);
 

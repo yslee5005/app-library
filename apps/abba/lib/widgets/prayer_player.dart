@@ -1,6 +1,6 @@
-import 'package:audio_waveforms/audio_waveforms.dart';
-import 'package:flutter/material.dart';
+import 'package:app_lib_audio_recorder/audio_recorder.dart';
 import 'package:app_lib_logging/logging.dart';
+import 'package:flutter/material.dart';
 
 import '../theme/abba_theme.dart';
 

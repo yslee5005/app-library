@@ -1,6 +1,7 @@
 import 'dart:async';
 
-import 'package:audio_waveforms/audio_waveforms.dart';
+import 'package:app_lib_audio_recorder/audio_recorder.dart';
+import 'package:app_lib_logging/logging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -8,9 +9,6 @@ import 'package:path_provider/path_provider.dart';
 
 import '../../../l10n/generated/app_localizations.dart';
 import '../../../providers/providers.dart';
-import 'package:app_lib_logging/logging.dart';
-
-import '../../../services/real/real_audio_recorder_service.dart';
 import '../../../theme/abba_theme.dart';
 import '../../../widgets/abba_button.dart';
 import '../../../widgets/premium_modal.dart';

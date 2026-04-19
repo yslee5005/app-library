@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:abba/services/mock/mock_audio_recorder_service.dart';
+import 'package:app_lib_audio_recorder/audio_recorder.dart';
 
 void main() {
   late MockAudioRecorderService service;

@@ -1,3 +1,6 @@
+import 'package:app_lib_audio_recorder/audio_recorder.dart';
+import 'package:app_lib_audio_storage/audio_storage.dart';
+import 'package:app_lib_subscriptions/subscriptions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -10,9 +13,6 @@ import 'package:abba/services/mock/mock_community_repository.dart';
 import 'package:abba/services/mock/mock_notification_service.dart';
 import 'package:abba/services/mock/mock_prayer_repository.dart';
 import 'package:abba/services/mock/mock_qt_repository.dart';
-import 'package:abba/services/mock/mock_audio_recorder_service.dart';
-import 'package:abba/services/mock/mock_audio_storage_service.dart';
-import 'package:abba/services/mock/mock_subscription_service.dart';
 import 'package:abba/services/mock_data.dart';
 import 'package:abba/services/mock/mock_ai_service.dart';
 import 'package:abba/theme/abba_theme.dart';
