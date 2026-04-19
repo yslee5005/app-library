@@ -9,13 +9,27 @@ class MockSubscriptionService implements SubscriptionService {
   SubscriptionStatus _status = SubscriptionStatus.free;
 
   @override
-  Future<void> initialize() async {}
+  Future<void> initialize(String userId) async {}
 
   @override
   Future<SubscriptionStatus> getSubscriptionStatus() async => _status;
 
   @override
-  Future<bool> purchasePlan(String planId) async {
+  Future<bool> purchaseMonthly() => _grantPremium();
+
+  @override
+  Future<bool> purchaseYearly() => _grantPremium();
+
+  @override
+  Future<bool> purchaseLifetime() => _grantPremium();
+
+  @override
+  Future<bool> presentPaywall() => _grantPremium();
+
+  @override
+  Future<void> presentCustomerCenter() async {}
+
+  Future<bool> _grantPremium() async {
     _status = SubscriptionStatus.premium;
     _controller.add(_status);
     return true;

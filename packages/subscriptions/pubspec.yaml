@@ -5,12 +5,19 @@ publish_to: none
 
 environment:
   sdk: ^3.7.0
+  flutter: ">=3.22.0"
 
 resolution: workspace
 
 dependencies:
+  flutter:
+    sdk: flutter
   app_lib_core:
+  app_lib_logging:
+  purchases_flutter: ^10.0.1
+  purchases_ui_flutter: ^10.0.1
 
 dev_dependencies:
+  flutter_test:
+    sdk: flutter
   lints: ^5.0.0
-  test: ^1.25.0

@@ -29,4 +29,6 @@ workspace:
   - packages/subscriptions
   - packages/gamification
   - packages/feed
+  - packages/audio_recorder
+  - packages/audio_storage
   - apps/claude-code-learn
