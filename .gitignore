@@ -2,7 +2,6 @@
 .env
 .env.*
 !.env.example
-!.env.shared.example
 
 # Flutter/Dart
 **/build/
