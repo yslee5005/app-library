@@ -66,9 +66,8 @@ Widget buildTestApp(
 /// Convenience constant for a test PrayerResult
 const testPrayerResult = PrayerResult(
   scripture: Scripture(
-    verseEn: 'The LORD is my shepherd.',
-    verseKo: '여호와는 나의 목자시니.',
     reference: 'Psalm 23:1',
+    verse: 'The LORD is my shepherd.',
   ),
   bibleStory: BibleStory(
     titleEn: 'David',

@@ -394,5 +394,15 @@
   "citationTypeQuote": "Trích dẫn",
   "citationTypeScience": "Nghiên cứu",
   "citationTypeExample": "Ví dụ",
-  "aiPrayerReadingTime": "Đọc trong 2 phút"
+  "aiPrayerReadingTime": "Đọc trong 2 phút",
+  "scriptureKeyWordHintTitle": "Từ khóa hôm nay",
+  "bibleLookupReferenceHint": "Tìm đoạn Kinh Thánh này trong Kinh Thánh của bạn và suy ngẫm.",
+  "bibleTranslationAttribution": "({name}, Public Domain)",
+  "@bibleTranslationAttribution": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  }
 }

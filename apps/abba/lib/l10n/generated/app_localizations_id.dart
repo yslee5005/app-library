@@ -929,4 +929,16 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get aiPrayerReadingTime => 'Baca 2 menit';
+
+  @override
+  String get scriptureKeyWordHintTitle => 'Kata kunci hari ini';
+
+  @override
+  String get bibleLookupReferenceHint =>
+      'Cari perikop ini di Alkitab Anda dan renungkanlah.';
+
+  @override
+  String bibleTranslationAttribution(String name) {
+    return '($name, Public Domain)';
+  }
 }

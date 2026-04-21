@@ -315,9 +315,8 @@ class OpenAiService implements AiService {
   PrayerResult _fallbackPrayerResult() {
     return PrayerResult(
       scripture: const Scripture(
-        verseEn: 'The LORD is my shepherd; I shall not want.',
-        verseKo: '여호와는 나의 목자시니 내게 부족함이 없으리로다',
         reference: 'Psalm 23:1',
+        // verse is populated at runtime by BibleTextService
       ),
       bibleStory: const BibleStory(
         titleEn: 'God is faithful',
@@ -436,11 +435,10 @@ Return a JSON object:
     "intercession": ["intercession items summarized in $langName"]
   },
   "scripture": {
-    "verse_en": "Bible verse in English",
-    "verse_ko": "same verse in Korean",
-    "reference": "Book Chapter:Verse",
-    "reason_en": "Why this verse was chosen (2-3 sentences in English)",
-    "reason_ko": "이 말씀을 선택한 이유 (2-3문장, 한국어)"
+    "reference": "Book Chapter:Verse (e.g., Psalm 23:1-3) — DO NOT include verse text; the app looks it up from a PD bundle",
+    "reason": "Why this verse for this prayer (2-3 sentences in $langName)",
+    "posture": "How to read it — action/mindset (2-3 sentences in $langName)",
+    "key_word_hint": "One key word with its original-language meaning (1 short line in $langName). Empty if not confident."
   },
   "bible_story": {
     "title_en": "story title in English",
@@ -512,11 +510,10 @@ Return a JSON object with ONLY these core sections:
     "intercession": ["intercession items summarized in $langName"]
   },
   "scripture": {
-    "verse_en": "Bible verse in English",
-    "verse_ko": "same verse in Korean",
-    "reference": "Book Chapter:Verse",
-    "reason_en": "Why this verse was chosen (2-3 sentences in English)",
-    "reason_ko": "이 말씀을 선택한 이유 (2-3문장, 한국어)"
+    "reference": "Book Chapter:Verse (e.g., Psalm 23:1-3) — DO NOT include verse text; the app looks it up from a PD bundle",
+    "reason": "Why this verse for this prayer (2-3 sentences in $langName)",
+    "posture": "How to read it — action/mindset (2-3 sentences in $langName)",
+    "key_word_hint": "One key word with its original-language meaning (1 short line in $langName). Empty if not confident."
   },
   "bible_story": {
     "title_en": "story title in English",

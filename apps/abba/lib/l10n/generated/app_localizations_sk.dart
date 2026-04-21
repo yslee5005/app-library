@@ -927,4 +927,16 @@ class AppLocalizationsSk extends AppLocalizations {
 
   @override
   String get aiPrayerReadingTime => 'Čítanie 2 minúty';
+
+  @override
+  String get scriptureKeyWordHintTitle => 'Dnešné kľúčové slovo';
+
+  @override
+  String get bibleLookupReferenceHint =>
+      'Nájdite túto pasáž vo svojej Biblii a rozjímajte nad ňou.';
+
+  @override
+  String bibleTranslationAttribution(String name) {
+    return '($name, Public Domain)';
+  }
 }

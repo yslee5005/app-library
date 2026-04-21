@@ -394,5 +394,15 @@
   "citationTypeQuote": "Cytat",
   "citationTypeScience": "Badanie",
   "citationTypeExample": "Przykład",
-  "aiPrayerReadingTime": "Czytanie 2 min"
+  "aiPrayerReadingTime": "Czytanie 2 min",
+  "scriptureKeyWordHintTitle": "Kluczowe słowo dzisiaj",
+  "bibleLookupReferenceHint": "Odszukaj ten fragment w swojej Biblii i rozważaj go.",
+  "bibleTranslationAttribution": "({name}, Public Domain)",
+  "@bibleTranslationAttribution": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  }
 }

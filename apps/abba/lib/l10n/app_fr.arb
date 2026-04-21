@@ -394,5 +394,15 @@
   "citationTypeQuote": "Citation",
   "citationTypeScience": "Étude",
   "citationTypeExample": "Exemple",
-  "aiPrayerReadingTime": "Lecture de 2 min"
+  "aiPrayerReadingTime": "Lecture de 2 min",
+  "scriptureKeyWordHintTitle": "Mot-clé du jour",
+  "bibleLookupReferenceHint": "Trouvez ce passage dans votre Bible et méditez-le.",
+  "bibleTranslationAttribution": "({name}, Public Domain)",
+  "@bibleTranslationAttribution": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  }
 }

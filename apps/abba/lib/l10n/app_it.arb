@@ -394,5 +394,15 @@
   "citationTypeQuote": "Citazione",
   "citationTypeScience": "Studio",
   "citationTypeExample": "Esempio",
-  "aiPrayerReadingTime": "Lettura di 2 minuti"
+  "aiPrayerReadingTime": "Lettura di 2 minuti",
+  "scriptureKeyWordHintTitle": "Parola chiave di oggi",
+  "bibleLookupReferenceHint": "Trova questo passo nella tua Bibbia e meditalo.",
+  "bibleTranslationAttribution": "({name}, Public Domain)",
+  "@bibleTranslationAttribution": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  }
 }

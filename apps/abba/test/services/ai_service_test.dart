@@ -23,7 +23,8 @@ void main() {
       );
 
       expect(result.scripture.reference, isNotEmpty);
-      expect(result.scripture.verseEn, isNotEmpty);
+      // Phase 6: verse text is populated at runtime via BibleTextService,
+      // not by AiService. Mock service leaves it empty.
       expect(result.bibleStory.titleEn, isNotEmpty);
       expect(result.testimony, isNotEmpty);
     });
@@ -72,9 +73,8 @@ class _CountingAiService implements AiService {
     callCount++;
     return const PrayerResult(
       scripture: Scripture(
-        verseEn: 'Test verse',
-        verseKo: '테스트 구절',
         reference: 'Test 1:1',
+        verse: 'Test verse',
       ),
       bibleStory: BibleStory(
         titleEn: 'Test',

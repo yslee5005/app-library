@@ -394,5 +394,15 @@
   "citationTypeQuote": "اقتباس",
   "citationTypeScience": "بحث",
   "citationTypeExample": "مثال",
-  "aiPrayerReadingTime": "قراءة لمدة دقيقتين"
+  "aiPrayerReadingTime": "قراءة لمدة دقيقتين",
+  "scriptureKeyWordHintTitle": "الكلمة المفتاحية لليوم",
+  "bibleLookupReferenceHint": "ابحث عن هذا المقطع في كتابك المقدس وتأمل فيه.",
+  "bibleTranslationAttribution": "({name}, Public Domain)",
+  "@bibleTranslationAttribution": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  }
 }

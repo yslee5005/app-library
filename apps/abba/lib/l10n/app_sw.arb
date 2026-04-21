@@ -394,5 +394,15 @@
   "citationTypeQuote": "Nukuu",
   "citationTypeScience": "Utafiti",
   "citationTypeExample": "Mfano",
-  "aiPrayerReadingTime": "Kusoma dakika 2"
+  "aiPrayerReadingTime": "Kusoma dakika 2",
+  "scriptureKeyWordHintTitle": "Neno kuu la leo",
+  "bibleLookupReferenceHint": "Tafuta mstari huu katika Biblia yako na utafakari juu yake.",
+  "bibleTranslationAttribution": "({name}, Public Domain)",
+  "@bibleTranslationAttribution": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  }
 }

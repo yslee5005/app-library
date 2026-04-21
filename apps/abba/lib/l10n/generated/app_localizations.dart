@@ -1867,6 +1867,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'2-minute read'**
   String get aiPrayerReadingTime;
+
+  /// No description provided for @scriptureKeyWordHintTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Today\'s Key Word'**
+  String get scriptureKeyWordHintTitle;
+
+  /// No description provided for @bibleLookupReferenceHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Find this passage in your Bible and meditate on it.'**
+  String get bibleLookupReferenceHint;
+
+  /// No description provided for @bibleTranslationAttribution.
+  ///
+  /// In en, this message translates to:
+  /// **'({name}, Public Domain)'**
+  String bibleTranslationAttribution(String name);
 }
 
 class _AppLocalizationsDelegate

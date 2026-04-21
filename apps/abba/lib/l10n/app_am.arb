@@ -394,5 +394,15 @@
   "citationTypeQuote": "ጥቅስ",
   "citationTypeScience": "ምርምር",
   "citationTypeExample": "ምሳሌ",
-  "aiPrayerReadingTime": "የ2 ደቂቃ ንባብ"
+  "aiPrayerReadingTime": "የ2 ደቂቃ ንባብ",
+  "scriptureKeyWordHintTitle": "የዛሬው ቁልፍ ቃል",
+  "bibleLookupReferenceHint": "ይህን ክፍል በራስዎ መጽሐፍ ቅዱስ ያግኙ እና ያሰላስሉበት።",
+  "bibleTranslationAttribution": "({name}, Public Domain)",
+  "@bibleTranslationAttribution": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  }
 }

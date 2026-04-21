@@ -394,5 +394,15 @@
   "citationTypeQuote": "ציטוט",
   "citationTypeScience": "מחקר",
   "citationTypeExample": "דוגמה",
-  "aiPrayerReadingTime": "קריאה בת 2 דקות"
+  "aiPrayerReadingTime": "קריאה בת 2 דקות",
+  "scriptureKeyWordHintTitle": "מילת המפתח של היום",
+  "bibleLookupReferenceHint": "חפשו את הקטע הזה בתנ״ך שלכם והגו בו.",
+  "bibleTranslationAttribution": "({name}, Public Domain)",
+  "@bibleTranslationAttribution": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  }
 }

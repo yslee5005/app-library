@@ -901,4 +901,15 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get aiPrayerReadingTime => '2分钟阅读';
+
+  @override
+  String get scriptureKeyWordHintTitle => '今日关键词';
+
+  @override
+  String get bibleLookupReferenceHint => '请在您的圣经中找到这段经文并默想。';
+
+  @override
+  String bibleTranslationAttribution(String name) {
+    return '($name, Public Domain)';
+  }
 }

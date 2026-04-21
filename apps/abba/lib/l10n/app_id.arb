@@ -394,5 +394,15 @@
   "citationTypeQuote": "Kutipan",
   "citationTypeScience": "Penelitian",
   "citationTypeExample": "Contoh",
-  "aiPrayerReadingTime": "Baca 2 menit"
+  "aiPrayerReadingTime": "Baca 2 menit",
+  "scriptureKeyWordHintTitle": "Kata kunci hari ini",
+  "bibleLookupReferenceHint": "Cari perikop ini di Alkitab Anda dan renungkanlah.",
+  "bibleTranslationAttribution": "({name}, Public Domain)",
+  "@bibleTranslationAttribution": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  }
 }

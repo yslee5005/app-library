@@ -83,7 +83,6 @@ class DashboardView extends ConsumerWidget {
           child: ScriptureCard(
             scripture: result.scripture,
             title: l10n.scriptureTitle,
-            locale: locale,
             initiallyExpanded: false,
           ),
         ),

@@ -394,5 +394,15 @@
   "citationTypeQuote": "Alıntı",
   "citationTypeScience": "Araştırma",
   "citationTypeExample": "Örnek",
-  "aiPrayerReadingTime": "2 dakikalık okuma"
+  "aiPrayerReadingTime": "2 dakikalık okuma",
+  "scriptureKeyWordHintTitle": "Bugünün anahtar kelimesi",
+  "bibleLookupReferenceHint": "Bu ayeti kendi Kutsal Kitabınızda bulun ve üzerinde meditasyon yapın.",
+  "bibleTranslationAttribution": "({name}, Public Domain)",
+  "@bibleTranslationAttribution": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  }
 }

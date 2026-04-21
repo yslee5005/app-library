@@ -166,7 +166,6 @@ class _PrayerDashboardViewState extends ConsumerState<PrayerDashboardView> {
           child: ScriptureCard(
             scripture: result.scripture,
             title: l10n.scriptureTitle,
-            locale: locale,
             initiallyExpanded: false,
           ),
         ),

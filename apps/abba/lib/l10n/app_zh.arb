@@ -394,5 +394,15 @@
   "citationTypeQuote": "名言",
   "citationTypeScience": "研究",
   "citationTypeExample": "例子",
-  "aiPrayerReadingTime": "2分钟阅读"
+  "aiPrayerReadingTime": "2分钟阅读",
+  "scriptureKeyWordHintTitle": "今日关键词",
+  "bibleLookupReferenceHint": "请在您的圣经中找到这段经文并默想。",
+  "bibleTranslationAttribution": "({name}, Public Domain)",
+  "@bibleTranslationAttribution": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  }
 }

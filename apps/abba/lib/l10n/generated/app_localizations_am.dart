@@ -901,4 +901,16 @@ class AppLocalizationsAm extends AppLocalizations {
 
   @override
   String get aiPrayerReadingTime => 'የ2 ደቂቃ ንባብ';
+
+  @override
+  String get scriptureKeyWordHintTitle => 'የዛሬው ቁልፍ ቃል';
+
+  @override
+  String get bibleLookupReferenceHint =>
+      'ይህን ክፍል በራስዎ መጽሐፍ ቅዱስ ያግኙ እና ያሰላስሉበት።';
+
+  @override
+  String bibleTranslationAttribution(String name) {
+    return '($name, Public Domain)';
+  }
 }

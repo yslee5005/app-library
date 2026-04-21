@@ -92,7 +92,8 @@ void main() {
 
       final result = PrayerResult.fromJson(json);
 
-      expect(result.scripture.verseEn, 'Be still.');
+      // Phase 6: verse is no longer persisted (comes from PD bundle at read time).
+      expect(result.scripture.reference, 'Psalm 46:10');
       expect(result.testimony, 'My prayer...');
       expect(result.guidance, isNull);
       expect(result.aiPrayer, isNull);
@@ -136,16 +137,33 @@ void main() {
   });
 
   group('Scripture', () {
-    test('verse returns locale-based text', () {
+    test('single-field access + legacy fromJson fallback', () {
+      // New single-field schema: no locale getter.
       const scripture = Scripture(
-        verseEn: 'English verse',
-        verseKo: '한국어 구절',
         reference: 'Psalm 1:1',
+        verse: 'Blessed is the one...',
+        reason: 'because God is faithful',
+        posture: 'meditate slowly',
+        keyWordHint: "'blessed' = Hebrew 'ashre'",
       );
 
-      expect(scripture.verse('en'), 'English verse');
-      expect(scripture.verse('ko'), '한국어 구절');
-      expect(scripture.verse('ja'), 'English verse'); // fallback to en
+      expect(scripture.verse, 'Blessed is the one...');
+      expect(scripture.reason, 'because God is faithful');
+      expect(scripture.posture, 'meditate slowly');
+      expect(scripture.keyWordHint.isNotEmpty, true);
+
+      // Legacy fromJson: reason_en / reason_ko fallback.
+      final legacy = Scripture.fromJson({
+        'reference': 'Psalm 1:1',
+        'reason_en': 'legacy reason en',
+        'reason_ko': 'legacy reason ko',
+      });
+      expect(legacy.reason, 'legacy reason en');
+
+      // withVerse returns immutable copy.
+      final enriched = scripture.withVerse('NEW TEXT');
+      expect(enriched.verse, 'NEW TEXT');
+      expect(enriched.reason, scripture.reason);
     });
   });
 

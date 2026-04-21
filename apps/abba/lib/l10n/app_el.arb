@@ -394,5 +394,15 @@
   "citationTypeQuote": "Παράθεση",
   "citationTypeScience": "Έρευνα",
   "citationTypeExample": "Παράδειγμα",
-  "aiPrayerReadingTime": "Ανάγνωση 2 λεπτών"
+  "aiPrayerReadingTime": "Ανάγνωση 2 λεπτών",
+  "scriptureKeyWordHintTitle": "Η λέξη-κλειδί σήμερα",
+  "bibleLookupReferenceHint": "Βρείτε αυτό το εδάφιο στη δική σας Βίβλο και στοχαστείτε πάνω σε αυτό.",
+  "bibleTranslationAttribution": "({name}, Public Domain)",
+  "@bibleTranslationAttribution": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  }
 }

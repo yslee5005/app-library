@@ -189,45 +189,52 @@ class PrayerResult {
 }
 
 class Scripture {
-  final String verseEn;
-  final String verseKo;
   final String reference;
-  final String reasonEn;
-  final String reasonKo;
-  final String postureEn;
-  final String postureKo;
+  final String verse;        // PD translation text (from BibleTextService lookup)
+  final String reason;       // AI 창작 (사용자 locale)
+  final String posture;      // AI 창작
+  final String keyWordHint;  // ✨ 핵심 단어 원-라이너 (AI 창작)
   final List<ScriptureOriginalWord> originalWords;
 
   const Scripture({
-    required this.verseEn,
-    required this.verseKo,
     required this.reference,
-    this.reasonEn = '',
-    this.reasonKo = '',
-    this.postureEn = '',
-    this.postureKo = '',
+    this.verse = '',
+    this.reason = '',
+    this.posture = '',
+    this.keyWordHint = '',
     this.originalWords = const [],
   });
 
   factory Scripture.fromJson(Map<String, dynamic> json) {
     return Scripture(
-      verseEn: json['verse_en'] as String? ?? json['verse'] as String? ?? '',
-      verseKo: json['verse_ko'] as String? ?? json['verse'] as String? ?? '',
-      reference: json['reference'] as String,
-      reasonEn: json['reason_en'] as String? ?? json['reason'] as String? ?? '',
-      reasonKo: json['reason_ko'] as String? ?? json['reason'] as String? ?? '',
-      postureEn: json['posture_en'] as String? ?? json['posture'] as String? ?? '',
-      postureKo: json['posture_ko'] as String? ?? json['posture'] as String? ?? '',
+      reference: json['reference'] as String? ?? '',
+      // BibleTextService가 runtime에 채움. legacy verse_en/verse_ko 는 무시.
+      verse: json['verse'] as String? ?? '',
+      reason: json['reason'] as String?
+          ?? json['reason_en'] as String?
+          ?? json['reason_ko'] as String?
+          ?? '',
+      posture: json['posture'] as String?
+          ?? json['posture_en'] as String?
+          ?? json['posture_ko'] as String?
+          ?? '',
+      keyWordHint: json['key_word_hint'] as String? ?? '',
       originalWords: (json['original_words'] as List<dynamic>?)
               ?.map((e) => ScriptureOriginalWord.fromJson(e as Map<String, dynamic>))
               .toList() ??
-          [],
+          const [],
     );
   }
 
-  String verse(String locale) => locale == 'ko' ? verseKo : verseEn;
-  String reason(String locale) => locale == 'ko' ? reasonKo : reasonEn;
-  String posture(String locale) => locale == 'ko' ? postureKo : postureEn;
+  /// Immutable copy with verse text filled (e.g., after BibleTextService lookup).
+  Scripture withVerse(String verseText) => Scripture(
+        reference: reference,
+        verse: verseText,
+        reason: reason,
+        posture: posture,
+        keyWordHint: keyWordHint,
+        originalWords: originalWords,
+      );
 }
 
 class ScriptureOriginalWord {

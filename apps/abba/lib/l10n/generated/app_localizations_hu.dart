@@ -926,4 +926,16 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String get aiPrayerReadingTime => '2 perces olvasás';
+
+  @override
+  String get scriptureKeyWordHintTitle => 'A mai kulcsszó';
+
+  @override
+  String get bibleLookupReferenceHint =>
+      'Keresd meg ezt a szakaszt a saját Bibliádban, és elmélkedj rajta.';
+
+  @override
+  String bibleTranslationAttribution(String name) {
+    return '($name, Public Domain)';
+  }
 }

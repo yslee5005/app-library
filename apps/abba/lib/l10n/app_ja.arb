@@ -394,5 +394,15 @@
   "citationTypeQuote": "名言",
   "citationTypeScience": "研究",
   "citationTypeExample": "例",
-  "aiPrayerReadingTime": "2分で読める"
+  "aiPrayerReadingTime": "2分で読める",
+  "scriptureKeyWordHintTitle": "今日のキーワード",
+  "bibleLookupReferenceHint": "ご自分の聖書でこの箇所を見つけて黙想してください。",
+  "bibleTranslationAttribution": "({name}, Public Domain)",
+  "@bibleTranslationAttribution": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  }
 }

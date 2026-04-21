@@ -8,14 +8,12 @@ import '../../../widgets/expandable_card.dart';
 class ScriptureCard extends StatefulWidget {
   final Scripture scripture;
   final String title;
-  final String locale;
   final bool initiallyExpanded;
 
   const ScriptureCard({
     super.key,
     required this.scripture,
     required this.title,
-    required this.locale,
     this.initiallyExpanded = false,
   });
 
@@ -30,7 +28,6 @@ class _ScriptureCardState extends State<ScriptureCard> {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     final scripture = widget.scripture;
-    final locale = widget.locale;
 
     return ExpandableCard(
       icon: '📜',
@@ -40,35 +37,110 @@ class _ScriptureCardState extends State<ScriptureCard> {
       expandedContent: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(scripture.verse(locale), style: AbbaTypography.body),
-          const SizedBox(height: AbbaSpacing.sm),
-          Text(
-            '— ${scripture.reference}',
-            style: AbbaTypography.bodySmall.copyWith(
-              color: AbbaColors.muted,
-              fontStyle: FontStyle.italic,
+          if (scripture.verse.isNotEmpty) ...[
+            Text(
+              scripture.verse,
+              style: AbbaTypography.body.copyWith(
+                color: AbbaColors.warmBrown,
+                height: 1.7,
+              ),
             ),
-          ),
-          if (scripture.reason(locale).isNotEmpty) ...[
+            const SizedBox(height: AbbaSpacing.sm),
+            Text(
+              '— ${scripture.reference}',
+              style: AbbaTypography.bodySmall.copyWith(
+                color: AbbaColors.muted,
+                fontStyle: FontStyle.italic,
+              ),
+            ),
+          ] else ...[
+            // PD bundle not available for this locale → reference-only fallback.
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.all(AbbaSpacing.md),
+              decoration: BoxDecoration(
+                color: AbbaColors.muted.withValues(alpha: 0.08),
+                borderRadius: BorderRadius.circular(AbbaRadius.md),
+              ),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text('📖', style: TextStyle(fontSize: 18)),
+                  const SizedBox(width: AbbaSpacing.sm),
+                  Expanded(
+                    child: Text(
+                      l10n.bibleLookupReferenceHint,
+                      style: AbbaTypography.bodySmall.copyWith(
+                        color: AbbaColors.muted,
+                        height: 1.5,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+          if (scripture.keyWordHint.isNotEmpty) ...[
+            const SizedBox(height: AbbaSpacing.md),
+            _buildKeyWordHintBox(l10n, scripture.keyWordHint),
+          ],
+          if (scripture.reason.isNotEmpty) ...[
             const SizedBox(height: AbbaSpacing.md),
             _buildSageBox(
               icon: '❓',
               label: l10n.scriptureReasonLabel,
-              body: scripture.reason(locale),
+              body: scripture.reason,
             ),
           ],
-          if (scripture.posture(locale).isNotEmpty) ...[
+          if (scripture.posture.isNotEmpty) ...[
             const SizedBox(height: AbbaSpacing.sm),
             _buildSageBox(
               icon: '🌿',
               label: l10n.scripturePostureLabel,
-              body: scripture.posture(locale),
+              body: scripture.posture,
             ),
           ],
           if (scripture.originalWords.isNotEmpty) ...[
             const SizedBox(height: AbbaSpacing.md),
-            _buildOriginalWordsSection(l10n, locale),
+            _buildOriginalWordsSection(l10n),
           ],
+        ],
+      ),
+    );
+  }
+
+  Widget _buildKeyWordHintBox(AppLocalizations l10n, String hint) {
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(AbbaSpacing.md),
+      decoration: BoxDecoration(
+        color: AbbaColors.softGold.withValues(alpha: 0.1),
+        borderRadius: BorderRadius.circular(AbbaRadius.md),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              const Text('✨', style: TextStyle(fontSize: 16)),
+              const SizedBox(width: 6),
+              Text(
+                l10n.scriptureKeyWordHintTitle,
+                style: AbbaTypography.label.copyWith(
+                  color: AbbaColors.softGold,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: AbbaSpacing.xs),
+          Text(
+            hint,
+            style: AbbaTypography.bodySmall.copyWith(
+              color: AbbaColors.warmBrown,
+              height: 1.5,
+            ),
+          ),
         ],
       ),
     );
@@ -115,7 +187,7 @@ class _ScriptureCardState extends State<ScriptureCard> {
     );
   }
 
-  Widget _buildOriginalWordsSection(AppLocalizations l10n, String locale) {
+  Widget _buildOriginalWordsSection(AppLocalizations l10n) {
     final count = widget.scripture.originalWords.length;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -172,7 +244,7 @@ class _ScriptureCardState extends State<ScriptureCard> {
                       height: 1,
                     ),
                   ),
-                _buildOriginalWord(l10n, locale, word),
+                _buildOriginalWord(l10n, word),
               ],
             );
           }),
@@ -180,7 +252,10 @@ class _ScriptureCardState extends State<ScriptureCard> {
     );
   }
 
-  Widget _buildOriginalWord(AppLocalizations l10n, String locale, ScriptureOriginalWord word) {
+  Widget _buildOriginalWord(AppLocalizations l10n, ScriptureOriginalWord word) {
+    // originalWords still carry _en/_ko under the hood — Phase 6 leaves this
+    // as-is (Scripture scope only). Use the current app locale to pick.
+    final locale = Localizations.localeOf(context).languageCode;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [

@@ -394,5 +394,15 @@
   "citationTypeQuote": "Цитата",
   "citationTypeScience": "Дослідження",
   "citationTypeExample": "Приклад",
-  "aiPrayerReadingTime": "Читання 2 хвилини"
+  "aiPrayerReadingTime": "Читання 2 хвилини",
+  "scriptureKeyWordHintTitle": "Ключове слово сьогодні",
+  "bibleLookupReferenceHint": "Знайдіть цей уривок у вашій Біблії та роздумуйте над ним.",
+  "bibleTranslationAttribution": "({name}, Public Domain)",
+  "@bibleTranslationAttribution": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  }
 }

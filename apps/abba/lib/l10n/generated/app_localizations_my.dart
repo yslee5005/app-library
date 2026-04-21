@@ -930,4 +930,16 @@ class AppLocalizationsMy extends AppLocalizations {
 
   @override
   String get aiPrayerReadingTime => '၂ မိနစ် ဖတ်ရန်';
+
+  @override
+  String get scriptureKeyWordHintTitle => 'ယနေ့ အဓိက စကားလုံး';
+
+  @override
+  String get bibleLookupReferenceHint =>
+      'ဤကျမ်းပိုဒ်ကို သင်၏ကျမ်းစာတွင် ရှာပြီး ဆင်ခြင်ပါ။';
+
+  @override
+  String bibleTranslationAttribution(String name) {
+    return '($name, Public Domain)';
+  }
 }

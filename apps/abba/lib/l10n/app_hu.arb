@@ -394,5 +394,15 @@
   "citationTypeQuote": "Idézet",
   "citationTypeScience": "Kutatás",
   "citationTypeExample": "Példa",
-  "aiPrayerReadingTime": "2 perces olvasás"
+  "aiPrayerReadingTime": "2 perces olvasás",
+  "scriptureKeyWordHintTitle": "A mai kulcsszó",
+  "bibleLookupReferenceHint": "Keresd meg ezt a szakaszt a saját Bibliádban, és elmélkedj rajta.",
+  "bibleTranslationAttribution": "({name}, Public Domain)",
+  "@bibleTranslationAttribution": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  }
 }

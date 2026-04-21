@@ -394,5 +394,15 @@
   "citationTypeQuote": "Citat",
   "citationTypeScience": "Istraživanje",
   "citationTypeExample": "Primjer",
-  "aiPrayerReadingTime": "Čitanje 2 minute"
+  "aiPrayerReadingTime": "Čitanje 2 minute",
+  "scriptureKeyWordHintTitle": "Današnja ključna riječ",
+  "bibleLookupReferenceHint": "Pronađite ovaj odlomak u svojoj Bibliji i razmišljajte o njemu.",
+  "bibleTranslationAttribution": "({name}, Public Domain)",
+  "@bibleTranslationAttribution": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  }
 }

@@ -405,18 +405,19 @@ Rules (per Prayer Guide §4-6):
         petition: ['오늘 하루 주님의 뜻을 따라 살아가게 하소서.'],
         intercession: ['염려하는 친구를 위로해 주시고 가족의 건강을 지켜 주소서.'],
       ),
-      scripture: const Scripture(
-        verseEn: 'The LORD is my shepherd; I shall not want.',
-        verseKo: '여호와는 나의 목자시니 내게 부족함이 없으리로다',
+      scripture: Scripture(
         reference: 'Psalm 23:1',
-        reasonEn:
-            'This verse reminds you that the God you prayed to is a shepherd who personally leads and provides for you.',
-        reasonKo: '당신이 기도한 하나님은 당신을 인격적으로 인도하시고 채워 주시는 목자이심을 다시 새겨 주는 말씀입니다.',
-        postureEn:
-            'Read this verse slowly, picturing yourself as a sheep led by a caring shepherd. Linger on the word "my" — this is a personal relationship.',
-        postureKo:
-            '당신을 부드럽게 인도하시는 목자의 양으로 그려 보며 천천히 읽어 보세요. "나의"라는 단어에 머물러 보세요 — 이것은 개인적인 관계입니다.',
-        originalWords: [
+        // verse: empty — filled at runtime by BibleTextService.lookup
+        reason: locale == 'ko'
+            ? '당신이 기도한 하나님은 당신을 인격적으로 인도하시고 채워 주시는 목자이심을 다시 새겨 주는 말씀입니다.'
+            : 'This verse reminds you that the God you prayed to is a shepherd who personally leads and provides for you.',
+        posture: locale == 'ko'
+            ? '당신을 부드럽게 인도하시는 목자의 양으로 그려 보며 천천히 읽어 보세요. "나의"라는 단어에 머물러 보세요 — 이것은 개인적인 관계입니다.'
+            : 'Read this verse slowly, picturing yourself as a sheep led by a caring shepherd. Linger on the word "my" — this is a personal relationship.',
+        keyWordHint: locale == 'ko'
+            ? "'나의 목자' = 히브리어 '로이' — 직업이 아닌 '나를 돌보시는 분'"
+            : "'my shepherd' = Hebrew 'ro'i' — not a job title, but 'the one who tends me personally'",
+        originalWords: const [
           ScriptureOriginalWord(
             word: 'רֹעִי',
             transliteration: "ro'i",
@@ -697,6 +698,9 @@ The user has just finished praying. Analyze their prayer with deep empathy and b
 CRITICAL RULES:
 1. Respond ENTIRELY in $langName. Do NOT mix languages.
 2. Every field must be in $langName only.
+3. SCRIPTURE: Do NOT generate verse text. Output only the "reference" — the
+   app looks up the exact Public Domain verse text from a bundle. Output
+   keys "verse_en"/"verse_ko"/"verse" are FORBIDDEN.
 3. The user's prayer transcript is their raw spoken words — summarize and organize it in $langName.
 
 Return a JSON object:
@@ -708,11 +712,10 @@ Return a JSON object:
     "intercession": ["intercession items summarized in $langName"]
   },
   "scripture": {
-    "verse_en": "Bible verse in English",
-    "verse_ko": "same verse in Korean",
-    "reference": "Book Chapter:Verse",
-    "reason_en": "Why this verse was chosen (2-3 sentences in English)",
-    "reason_ko": "이 말씀을 선택한 이유 (2-3문장, 한국어)"
+    "reference": "Book Chapter:Verse (e.g., Psalm 23:1-3) — DO NOT include verse text; the app looks it up from a PD bundle",
+    "reason": "Why this verse for this prayer (2-3 sentences in $langName)",
+    "posture": "How to read it — action/mindset (2-3 sentences in $langName)",
+    "key_word_hint": "One key word from the verse with its original-language meaning (1 short line in $langName). Example: 'my shepherd' = Hebrew 'roi' — not a job title, but 'the one who tends me personally'. Leave empty if not confident."
   },
   "bible_story": {
     "title_en": "story title in English",
@@ -808,6 +811,9 @@ The user has just finished praying. Analyze their prayer with deep empathy and b
 CRITICAL RULES:
 1. Respond ENTIRELY in $langName. Do NOT mix languages.
 2. Every field must be in $langName only.
+3. SCRIPTURE: Do NOT generate verse text. Output only the "reference" — the
+   app looks up the exact Public Domain verse text from a bundle. Output
+   keys "verse_en"/"verse_ko"/"verse" are FORBIDDEN.
 3. The user's prayer transcript is their raw spoken words — summarize and organize it in $langName.
 
 Return a JSON object with ONLY these core sections:
@@ -819,11 +825,10 @@ Return a JSON object with ONLY these core sections:
     "intercession": ["intercession items summarized in $langName"]
   },
   "scripture": {
-    "verse_en": "Bible verse in English",
-    "verse_ko": "same verse in Korean",
-    "reference": "Book Chapter:Verse",
-    "reason_en": "Why this verse was chosen (2-3 sentences in English)",
-    "reason_ko": "이 말씀을 선택한 이유 (2-3문장, 한국어)"
+    "reference": "Book Chapter:Verse (e.g., Psalm 23:1-3) — DO NOT include verse text; the app looks it up from a PD bundle",
+    "reason": "Why this verse for this prayer (2-3 sentences in $langName)",
+    "posture": "How to read it — action/mindset (2-3 sentences in $langName)",
+    "key_word_hint": "One key word from the verse with its original-language meaning (1 short line in $langName). Example: 'my shepherd' = Hebrew 'roi' — not a job title, but 'the one who tends me personally'. Leave empty if not confident."
   },
   "bible_story": {
     "title_en": "story title in English",
@@ -863,11 +868,10 @@ Return a JSON object:
     "intercession": ["intercession items summarized in $langName"]
   },
   "scripture": {
-    "verse_en": "Bible verse in English",
-    "verse_ko": "same verse in Korean",
-    "reference": "Book Chapter:Verse",
-    "reason_en": "Why this verse was chosen (2-3 sentences in English)",
-    "reason_ko": "이 말씀을 선택한 이유 (2-3문장, 한국어)"
+    "reference": "Book Chapter:Verse (e.g., Psalm 23:1-3) — DO NOT include verse text; the app looks it up from a PD bundle",
+    "reason": "Why this verse for this prayer (2-3 sentences in $langName)",
+    "posture": "How to read it — action/mindset (2-3 sentences in $langName)",
+    "key_word_hint": "One key word from the verse with its original-language meaning (1 short line in $langName). Example: 'my shepherd' = Hebrew 'roi' — not a job title, but 'the one who tends me personally'. Leave empty if not confident."
   },
   "bible_story": {
     "title_en": "story title in English",
@@ -893,6 +897,9 @@ The user has just finished praying. Generate premium content based on their pray
 CRITICAL RULES:
 1. Respond ENTIRELY in $langName. Do NOT mix languages.
 2. Every field must be in $langName only.
+3. SCRIPTURE: Do NOT generate verse text. Output only the "reference" — the
+   app looks up the exact Public Domain verse text from a bundle. Output
+   keys "verse_en"/"verse_ko"/"verse" are FORBIDDEN.
 
 Return a JSON object with ONLY these premium sections:
 
@@ -964,6 +971,9 @@ The user has meditated on a Bible passage and shared their reflection.
 CRITICAL RULES:
 1. Respond ENTIRELY in $langName. Do NOT mix languages.
 2. Every field must be in $langName only.
+3. SCRIPTURE: Do NOT generate verse text. Output only the "reference" — the
+   app looks up the exact Public Domain verse text from a bundle. Output
+   keys "verse_en"/"verse_ko"/"verse" are FORBIDDEN.
 
 Return a JSON object:
 

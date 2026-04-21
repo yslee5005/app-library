@@ -510,7 +510,7 @@ class _CalendarViewState extends ConsumerState<CalendarView> {
           ),
           const SizedBox(height: AbbaSpacing.sm),
           Text(
-            '"${scripture.verse(locale)}"',
+            '"${scripture.verse}"',
             style: AbbaTypography.bodySmall.copyWith(
               color: AbbaColors.warmBrown,
               fontStyle: FontStyle.italic,

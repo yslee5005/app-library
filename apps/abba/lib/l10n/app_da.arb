@@ -394,5 +394,15 @@
   "citationTypeQuote": "Citat",
   "citationTypeScience": "Forskning",
   "citationTypeExample": "Eksempel",
-  "aiPrayerReadingTime": "2 minutters læsning"
+  "aiPrayerReadingTime": "2 minutters læsning",
+  "scriptureKeyWordHintTitle": "Dagens nøgleord",
+  "bibleLookupReferenceHint": "Find dette afsnit i din bibel og mediter over det.",
+  "bibleTranslationAttribution": "({name}, Public Domain)",
+  "@bibleTranslationAttribution": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  }
 }

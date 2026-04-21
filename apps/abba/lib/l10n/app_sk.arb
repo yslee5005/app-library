@@ -394,5 +394,15 @@
   "citationTypeQuote": "Citát",
   "citationTypeScience": "Výskum",
   "citationTypeExample": "Príklad",
-  "aiPrayerReadingTime": "Čítanie 2 minúty"
+  "aiPrayerReadingTime": "Čítanie 2 minúty",
+  "scriptureKeyWordHintTitle": "Dnešné kľúčové slovo",
+  "bibleLookupReferenceHint": "Nájdite túto pasáž vo svojej Biblii a rozjímajte nad ňou.",
+  "bibleTranslationAttribution": "({name}, Public Domain)",
+  "@bibleTranslationAttribution": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  }
 }

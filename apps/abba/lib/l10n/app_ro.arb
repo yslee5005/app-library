@@ -394,5 +394,15 @@
   "citationTypeQuote": "Citat",
   "citationTypeScience": "Cercetare",
   "citationTypeExample": "Exemplu",
-  "aiPrayerReadingTime": "Lectură de 2 minute"
+  "aiPrayerReadingTime": "Lectură de 2 minute",
+  "scriptureKeyWordHintTitle": "Cuvântul cheie de astăzi",
+  "bibleLookupReferenceHint": "Găsește acest pasaj în Biblia ta și meditează asupra lui.",
+  "bibleTranslationAttribution": "({name}, Public Domain)",
+  "@bibleTranslationAttribution": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  }
 }

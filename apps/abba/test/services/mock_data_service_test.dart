@@ -15,8 +15,7 @@ void main() {
       final result = await service.getPrayerResult();
 
       expect(result.scripture.reference, isNotEmpty);
-      expect(result.scripture.verseEn, isNotEmpty);
-      expect(result.scripture.verseKo, isNotEmpty);
+      // Phase 6: verse is populated from PD bundle at runtime, not JSON mock.
       expect(result.bibleStory.titleEn, isNotEmpty);
       expect(result.testimony, isNotEmpty);
       expect(result.aiPrayer, isNotNull);

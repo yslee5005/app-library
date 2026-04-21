@@ -394,5 +394,15 @@
   "citationTypeQuote": "명언",
   "citationTypeScience": "연구",
   "citationTypeExample": "예시",
-  "aiPrayerReadingTime": "2분 읽기"
+  "aiPrayerReadingTime": "2분 읽기",
+  "scriptureKeyWordHintTitle": "오늘의 핵심 단어",
+  "bibleLookupReferenceHint": "나의 성경으로 이 말씀을 찾아 묵상해 보세요.",
+  "bibleTranslationAttribution": "({name}, Public Domain)",
+  "@bibleTranslationAttribution": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  }
 }

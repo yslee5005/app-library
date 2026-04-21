@@ -394,5 +394,15 @@
   "citationTypeQuote": "Sipi",
   "citationTypeScience": "Pananaliksik",
   "citationTypeExample": "Halimbawa",
-  "aiPrayerReadingTime": "2-minutong pagbasa"
+  "aiPrayerReadingTime": "2-minutong pagbasa",
+  "scriptureKeyWordHintTitle": "Susing salita ngayong araw",
+  "bibleLookupReferenceHint": "Hanapin ang talatang ito sa inyong Bibliya at pag-isipan ito.",
+  "bibleTranslationAttribution": "({name}, Public Domain)",
+  "@bibleTranslationAttribution": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  }
 }

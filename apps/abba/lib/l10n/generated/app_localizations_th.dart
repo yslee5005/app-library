@@ -912,4 +912,16 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get aiPrayerReadingTime => 'อ่าน 2 นาที';
+
+  @override
+  String get scriptureKeyWordHintTitle => 'คำสำคัญวันนี้';
+
+  @override
+  String get bibleLookupReferenceHint =>
+      'หาข้อนี้ในพระคัมภีร์ของคุณแล้วใคร่ครวญ';
+
+  @override
+  String bibleTranslationAttribution(String name) {
+    return '($name, Public Domain)';
+  }
 }

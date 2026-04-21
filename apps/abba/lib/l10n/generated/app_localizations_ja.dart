@@ -901,4 +901,15 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get aiPrayerReadingTime => '2分で読める';
+
+  @override
+  String get scriptureKeyWordHintTitle => '今日のキーワード';
+
+  @override
+  String get bibleLookupReferenceHint => 'ご自分の聖書でこの箇所を見つけて黙想してください。';
+
+  @override
+  String bibleTranslationAttribution(String name) {
+    return '($name, Public Domain)';
+  }
 }

@@ -26,6 +26,8 @@ import 'services/mock/mock_qt_repository.dart';
 import 'services/mock_data.dart';
 import 'services/notification_service.dart';
 import 'services/cached_ai_service.dart';
+import 'services/bible_text_service.dart';
+import 'services/mock/mock_bible_text_service.dart';
 import 'services/real/gemini_service.dart';
 import 'services/real/real_notification_service.dart';
 import 'services/real/supabase_qt_repository.dart';
@@ -88,6 +90,7 @@ Future<void> main() async {
     overrides.addAll([
       authRepositoryProvider.overrideWithValue(authRepo),
       aiServiceProvider.overrideWithValue(MockAiService(mockData)),
+      bibleTextServiceProvider.overrideWithValue(MockBibleTextService()),
       audioRecorderServiceProvider.overrideWithValue(MockAudioRecorderService()),
       audioStorageServiceProvider.overrideWithValue(MockAudioStorageService()),
       prayerRepositoryProvider.overrideWithValue(MockPrayerRepository()),
@@ -112,6 +115,7 @@ Future<void> main() async {
       overrides.addAll([
         authRepositoryProvider.overrideWithValue(authRepo),
         aiServiceProvider.overrideWithValue(MockAiService(mockData)),
+        bibleTextServiceProvider.overrideWithValue(MockBibleTextService()),
         audioRecorderServiceProvider.overrideWithValue(MockAudioRecorderService()),
         audioStorageServiceProvider.overrideWithValue(MockAudioStorageService()),
         prayerRepositoryProvider.overrideWithValue(MockPrayerRepository()),
@@ -170,6 +174,9 @@ Future<void> main() async {
     overrides.addAll([
       authRepositoryProvider.overrideWithValue(authRepo),
       aiServiceProvider.overrideWithValue(CachedAiService(GeminiService())),
+      bibleTextServiceProvider.overrideWithValue(
+        SupabaseStorageBibleTextService(client: supabase),
+      ),
       audioRecorderServiceProvider.overrideWithValue(RealAudioRecorderService()),
       audioStorageServiceProvider.overrideWithValue(
         SupabaseAudioStorageService(supabase),

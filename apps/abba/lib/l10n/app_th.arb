@@ -394,5 +394,15 @@
   "citationTypeQuote": "ข้ออ้าง",
   "citationTypeScience": "งานวิจัย",
   "citationTypeExample": "ตัวอย่าง",
-  "aiPrayerReadingTime": "อ่าน 2 นาที"
+  "aiPrayerReadingTime": "อ่าน 2 นาที",
+  "scriptureKeyWordHintTitle": "คำสำคัญวันนี้",
+  "bibleLookupReferenceHint": "หาข้อนี้ในพระคัมภีร์ของคุณแล้วใคร่ครวญ",
+  "bibleTranslationAttribution": "({name}, Public Domain)",
+  "@bibleTranslationAttribution": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  }
 }

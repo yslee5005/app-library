@@ -920,4 +920,16 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get aiPrayerReadingTime => '2 मिनट का पठन';
+
+  @override
+  String get scriptureKeyWordHintTitle => 'आज का मुख्य शब्द';
+
+  @override
+  String get bibleLookupReferenceHint =>
+      'अपनी बाइबल में यह अंश ढूंढ़ें और इस पर मनन करें।';
+
+  @override
+  String bibleTranslationAttribution(String name) {
+    return '($name, Public Domain)';
+  }
 }

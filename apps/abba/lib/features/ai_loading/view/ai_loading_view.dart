@@ -132,6 +132,10 @@ class _AiLoadingViewState extends ConsumerState<AiLoadingView>
         savedTranscript = transcript;
       }
 
+      // Phase 6: fill Scripture.verse from PD bundle (BibleTextService).
+      // AI only picks reference — verse text comes from the bundle.
+      result = await _enrichScriptureVerse(result, locale);
+
       ref.read(prayerResultProvider.notifier).state = AsyncValue.data(result);
 
       // Save prayer with result
@@ -263,13 +267,46 @@ class _AiLoadingViewState extends ConsumerState<AiLoadingView>
     }
   }
 
+  /// Phase 6 — Fill Scripture.verse from PD bundle. AI only picks
+  /// reference; the text comes from Supabase Storage (or null → UI fallback).
+  Future<PrayerResult> _enrichScriptureVerse(
+    PrayerResult result,
+    String locale,
+  ) async {
+    final reference = result.scripture.reference;
+    if (reference.isEmpty) return result;
+    // Skip lookup if the hardcoded path already set a verse (e.g. mock mode).
+    if (result.scripture.verse.isNotEmpty) return result;
+
+    try {
+      final bibleService = ref.read(bibleTextServiceProvider);
+      final verseText = await bibleService.lookup(reference, locale);
+      if (verseText == null || verseText.isEmpty) return result;
+      return PrayerResult(
+        scripture: result.scripture.withVerse(verseText),
+        bibleStory: result.bibleStory,
+        testimonyEn: result.testimonyEn,
+        testimonyKo: result.testimonyKo,
+        guidance: result.guidance,
+        aiPrayer: result.aiPrayer,
+        prayerSummary: result.prayerSummary,
+        historicalStory: result.historicalStory,
+      );
+    } catch (e) {
+      prayerLog.warning(
+        'BibleTextService lookup failed for $reference ($locale)',
+        error: e,
+      );
+      return result;
+    }
+  }
+
   void _setFallbackResult(String transcript) {
     ref.read(prayerResultProvider.notifier).state = AsyncValue.data(
       PrayerResult(
         scripture: const Scripture(
-          verseEn: 'The LORD is my shepherd; I shall not want.',
-          verseKo: '여호와는 나의 목자시니 내게 부족함이 없으리로다',
           reference: 'Psalm 23:1',
+          // verse populated at runtime by BibleTextService
         ),
         bibleStory: const BibleStory(
           titleEn: 'God is faithful',

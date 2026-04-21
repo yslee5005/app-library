@@ -394,5 +394,15 @@
   "citationTypeQuote": "Lainaus",
   "citationTypeScience": "Tutkimus",
   "citationTypeExample": "Esimerkki",
-  "aiPrayerReadingTime": "2 minuutin lukuaika"
+  "aiPrayerReadingTime": "2 minuutin lukuaika",
+  "scriptureKeyWordHintTitle": "Päivän avainsana",
+  "bibleLookupReferenceHint": "Etsi tämä kohta omasta Raamatustasi ja mietiskele sitä.",
+  "bibleTranslationAttribution": "({name}, Public Domain)",
+  "@bibleTranslationAttribution": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  }
 }

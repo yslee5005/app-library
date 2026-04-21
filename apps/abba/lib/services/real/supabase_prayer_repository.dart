@@ -226,13 +226,11 @@ class SupabasePrayerRepository implements PrayerRepository {
   Map<String, dynamic> _resultToJson(PrayerResult result) {
     return {
       'scripture': {
-        'verse_en': result.scripture.verseEn,
-        'verse_ko': result.scripture.verseKo,
         'reference': result.scripture.reference,
-        'reason_en': result.scripture.reasonEn,
-        'reason_ko': result.scripture.reasonKo,
-        'posture_en': result.scripture.postureEn,
-        'posture_ko': result.scripture.postureKo,
+        // verse is NOT persisted — it comes from the PD bundle at read time.
+        'reason': result.scripture.reason,
+        'posture': result.scripture.posture,
+        'key_word_hint': result.scripture.keyWordHint,
         'original_words': result.scripture.originalWords
             .map((w) => {
                   'word': w.word,

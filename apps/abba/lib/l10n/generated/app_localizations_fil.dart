@@ -937,4 +937,16 @@ class AppLocalizationsFil extends AppLocalizations {
 
   @override
   String get aiPrayerReadingTime => '2-minutong pagbasa';
+
+  @override
+  String get scriptureKeyWordHintTitle => 'Susing salita ngayong araw';
+
+  @override
+  String get bibleLookupReferenceHint =>
+      'Hanapin ang talatang ito sa inyong Bibliya at pag-isipan ito.';
+
+  @override
+  String bibleTranslationAttribution(String name) {
+    return '($name, Public Domain)';
+  }
 }

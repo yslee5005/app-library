@@ -401,5 +401,15 @@
   "citationTypeQuote": "Quote",
   "citationTypeScience": "Research",
   "citationTypeExample": "Example",
-  "aiPrayerReadingTime": "2-minute read"
+  "aiPrayerReadingTime": "2-minute read",
+  "scriptureKeyWordHintTitle": "Today's Key Word",
+  "bibleLookupReferenceHint": "Find this passage in your Bible and meditate on it.",
+  "bibleTranslationAttribution": "({name}, Public Domain)",
+  "@bibleTranslationAttribution": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  }
 }

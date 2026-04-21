@@ -901,4 +901,15 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get aiPrayerReadingTime => '2분 읽기';
+
+  @override
+  String get scriptureKeyWordHintTitle => '오늘의 핵심 단어';
+
+  @override
+  String get bibleLookupReferenceHint => '나의 성경으로 이 말씀을 찾아 묵상해 보세요.';
+
+  @override
+  String bibleTranslationAttribution(String name) {
+    return '($name, Public Domain)';
+  }
 }

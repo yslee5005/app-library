@@ -394,5 +394,15 @@
   "citationTypeQuote": "Petikan",
   "citationTypeScience": "Kajian",
   "citationTypeExample": "Contoh",
-  "aiPrayerReadingTime": "Bacaan 2 minit"
+  "aiPrayerReadingTime": "Bacaan 2 minit",
+  "scriptureKeyWordHintTitle": "Kata kunci hari ini",
+  "bibleLookupReferenceHint": "Cari petikan ini dalam Alkitab anda dan renungkannya.",
+  "bibleTranslationAttribution": "({name}, Public Domain)",
+  "@bibleTranslationAttribution": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  }
 }

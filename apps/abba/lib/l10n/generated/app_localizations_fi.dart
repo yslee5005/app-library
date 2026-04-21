@@ -922,4 +922,16 @@ class AppLocalizationsFi extends AppLocalizations {
 
   @override
   String get aiPrayerReadingTime => '2 minuutin lukuaika';
+
+  @override
+  String get scriptureKeyWordHintTitle => 'Päivän avainsana';
+
+  @override
+  String get bibleLookupReferenceHint =>
+      'Etsi tämä kohta omasta Raamatustasi ja mietiskele sitä.';
+
+  @override
+  String bibleTranslationAttribution(String name) {
+    return '($name, Public Domain)';
+  }
 }

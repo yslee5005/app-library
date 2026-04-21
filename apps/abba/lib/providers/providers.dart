@@ -22,6 +22,7 @@ import '../models/qt_meditation_result.dart';
 import '../models/qt_passage.dart';
 import '../models/user_profile.dart';
 import '../services/ai_service.dart';
+import '../services/bible_text_service.dart';
 import '../services/community_repository.dart';
 import '../services/mock_data.dart';
 import '../services/notification_service.dart';
@@ -43,6 +44,11 @@ final mockDataServiceProvider = Provider<MockDataService>((ref) {
 
 final aiServiceProvider = Provider<AiService>((ref) {
   throw UnimplementedError('aiServiceProvider must be overridden');
+});
+
+/// Looks up Bible verse text (Public Domain bundles) by reference + locale.
+final bibleTextServiceProvider = Provider<BibleTextService>((ref) {
+  throw UnimplementedError('bibleTextServiceProvider must be overridden');
 });
 
 final prayerRepositoryProvider = Provider<PrayerRepository>((ref) {
