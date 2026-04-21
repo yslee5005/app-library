@@ -88,14 +88,4 @@ const testPrayerResult = PrayerResult(
     textKo: '당신을 위한 기도.',
     isPremium: true,
   ),
-  originalLanguage: OriginalLanguage(
-    word: 'רֹעִי',
-    transliteration: "ro'i",
-    language: 'Hebrew',
-    meaningEn: 'my shepherd',
-    meaningKo: '나의 목자',
-    contextEn: 'Context.',
-    contextKo: '문맥.',
-    isPremium: true,
-  ),
 );

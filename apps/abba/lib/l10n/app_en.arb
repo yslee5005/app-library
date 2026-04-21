@@ -382,5 +382,19 @@
   "qtLoadingHint8": "📖 Wisdom — Hold onto one lesson from today",
   "qtLoadingHint9": "⏳ Patience — Think of what you're quietly waiting for",
   "qtLoadingHint10": "✨ Joy — Remember a moment you smiled today",
-  "qtLoadingTitle": "Preparing today's Word..."
+  "qtLoadingTitle": "Preparing today's Word...",
+  "coachingTitle": "Prayer Coaching",
+  "coachingLoadingText": "Reflecting on your prayer...",
+  "coachingErrorText": "Temporary error — please retry",
+  "coachingRetryButton": "Retry",
+  "coachingScoreSpecificity": "Specificity",
+  "coachingScoreGodCentered": "God-centered",
+  "coachingScoreActs": "ACTS balance",
+  "coachingScoreAuthenticity": "Authenticity",
+  "coachingStrengthsTitle": "What you did well ✨",
+  "coachingImprovementsTitle": "To go deeper 💡",
+  "coachingProCta": "Unlock Prayer Coaching with Pro",
+  "coachingLevelBeginner": "🌱 Beginner",
+  "coachingLevelGrowing": "🌿 Growing",
+  "coachingLevelExpert": "🌳 Expert"
 }

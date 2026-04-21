@@ -375,5 +375,19 @@
   "qtLoadingHint8": "📖 Hikmet — Bugünün bir dersini kalbinizde tutun",
   "qtLoadingHint9": "⏳ Sabır — Sessizce beklediğiniz şeyi düşünün",
   "qtLoadingHint10": "✨ Sevinç — Bugün gülümsediğiniz anı hatırlayın",
-  "qtLoadingTitle": "Bugünün Sözü hazırlanıyor..."
+  "qtLoadingTitle": "Bugünün Sözü hazırlanıyor...",
+  "coachingTitle": "Dua Koçluğu",
+  "coachingLoadingText": "Duanız üzerinde düşünüyoruz...",
+  "coachingErrorText": "Geçici hata — lütfen yeniden deneyin",
+  "coachingRetryButton": "Yeniden dene",
+  "coachingScoreSpecificity": "Somutluk",
+  "coachingScoreGodCentered": "Tanrı merkezli",
+  "coachingScoreActs": "ACTS dengesi",
+  "coachingScoreAuthenticity": "Samimiyet",
+  "coachingStrengthsTitle": "İyi yaptığınız şeyler ✨",
+  "coachingImprovementsTitle": "Daha derine inmek için 💡",
+  "coachingProCta": "Dua Koçluğunu Pro ile açın",
+  "coachingLevelBeginner": "🌱 Başlangıç",
+  "coachingLevelGrowing": "🌿 Gelişiyor",
+  "coachingLevelExpert": "🌳 Uzman"
 }

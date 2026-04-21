@@ -375,5 +375,19 @@
   "qtLoadingHint8": "📖 ጥበብ — ከዛሬ አንዲት ትምህርት በልብዎ ይያዙ",
   "qtLoadingHint9": "⏳ ትዕግስት — በጸጥታ የሚጠብቁትን ያስቡ",
   "qtLoadingHint10": "✨ ደስታ — ዛሬ የፈገገጉበትን ጊዜ ያስታውሱ",
-  "qtLoadingTitle": "የዛሬው ቃል እየተዘጋጀ ነው..."
+  "qtLoadingTitle": "የዛሬው ቃል እየተዘጋጀ ነው...",
+  "coachingTitle": "የጸሎት ማሰልጠኛ",
+  "coachingLoadingText": "ጸሎትዎን እንመለከታለን...",
+  "coachingErrorText": "ጊዜያዊ ስህተት — እንደገና ይሞክሩ",
+  "coachingRetryButton": "እንደገና ሞክር",
+  "coachingScoreSpecificity": "ግልጽነት",
+  "coachingScoreGodCentered": "በእግዚአብሔር ላይ ያተኮረ",
+  "coachingScoreActs": "የACTS ሚዛን",
+  "coachingScoreAuthenticity": "እውነተኛነት",
+  "coachingStrengthsTitle": "በደንብ የሰሩት ✨",
+  "coachingImprovementsTitle": "ይበልጥ ለመሄድ 💡",
+  "coachingProCta": "የጸሎት ማሰልጠኛ በPro ክፈቱ",
+  "coachingLevelBeginner": "🌱 ጀማሪ",
+  "coachingLevelGrowing": "🌿 በማደግ ላይ",
+  "coachingLevelExpert": "🌳 ባለሙያ"
 }

@@ -844,4 +844,46 @@ class AppLocalizationsAm extends AppLocalizations {
 
   @override
   String get qtLoadingTitle => 'የዛሬው ቃል እየተዘጋጀ ነው...';
+
+  @override
+  String get coachingTitle => 'የጸሎት ማሰልጠኛ';
+
+  @override
+  String get coachingLoadingText => 'ጸሎትዎን እንመለከታለን...';
+
+  @override
+  String get coachingErrorText => 'ጊዜያዊ ስህተት — እንደገና ይሞክሩ';
+
+  @override
+  String get coachingRetryButton => 'እንደገና ሞክር';
+
+  @override
+  String get coachingScoreSpecificity => 'ግልጽነት';
+
+  @override
+  String get coachingScoreGodCentered => 'በእግዚአብሔር ላይ ያተኮረ';
+
+  @override
+  String get coachingScoreActs => 'የACTS ሚዛን';
+
+  @override
+  String get coachingScoreAuthenticity => 'እውነተኛነት';
+
+  @override
+  String get coachingStrengthsTitle => 'በደንብ የሰሩት ✨';
+
+  @override
+  String get coachingImprovementsTitle => 'ይበልጥ ለመሄድ 💡';
+
+  @override
+  String get coachingProCta => 'የጸሎት ማሰልጠኛ በPro ክፈቱ';
+
+  @override
+  String get coachingLevelBeginner => '🌱 ጀማሪ';
+
+  @override
+  String get coachingLevelGrowing => '🌿 በማደግ ላይ';
+
+  @override
+  String get coachingLevelExpert => '🌳 ባለሙያ';
 }

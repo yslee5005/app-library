@@ -867,4 +867,46 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get qtLoadingTitle => 'Bugünün Sözü hazırlanıyor...';
+
+  @override
+  String get coachingTitle => 'Dua Koçluğu';
+
+  @override
+  String get coachingLoadingText => 'Duanız üzerinde düşünüyoruz...';
+
+  @override
+  String get coachingErrorText => 'Geçici hata — lütfen yeniden deneyin';
+
+  @override
+  String get coachingRetryButton => 'Yeniden dene';
+
+  @override
+  String get coachingScoreSpecificity => 'Somutluk';
+
+  @override
+  String get coachingScoreGodCentered => 'Tanrı merkezli';
+
+  @override
+  String get coachingScoreActs => 'ACTS dengesi';
+
+  @override
+  String get coachingScoreAuthenticity => 'Samimiyet';
+
+  @override
+  String get coachingStrengthsTitle => 'İyi yaptığınız şeyler ✨';
+
+  @override
+  String get coachingImprovementsTitle => 'Daha derine inmek için 💡';
+
+  @override
+  String get coachingProCta => 'Dua Koçluğunu Pro ile açın';
+
+  @override
+  String get coachingLevelBeginner => '🌱 Başlangıç';
+
+  @override
+  String get coachingLevelGrowing => '🌿 Gelişiyor';
+
+  @override
+  String get coachingLevelExpert => '🌳 Uzman';
 }

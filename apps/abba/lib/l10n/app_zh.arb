@@ -375,5 +375,19 @@
   "qtLoadingHint8": "📖 智慧 — 记住今天学到的一个教训",
   "qtLoadingHint9": "⏳ 忍耐 — 想想你静静等待的事情",
   "qtLoadingHint10": "✨ 喜乐 — 回想今天微笑的一刻",
-  "qtLoadingTitle": "正在准备今日的话语..."
+  "qtLoadingTitle": "正在准备今日的话语...",
+  "coachingTitle": "祷告辅导",
+  "coachingLoadingText": "正在回顾您的祷告...",
+  "coachingErrorText": "临时错误 — 请稍后重试",
+  "coachingRetryButton": "重试",
+  "coachingScoreSpecificity": "具体性",
+  "coachingScoreGodCentered": "以神为中心",
+  "coachingScoreActs": "ACTS 平衡",
+  "coachingScoreAuthenticity": "真实性",
+  "coachingStrengthsTitle": "你做得好的地方 ✨",
+  "coachingImprovementsTitle": "更进一步 💡",
+  "coachingProCta": "使用 Pro 解锁祷告辅导",
+  "coachingLevelBeginner": "🌱 初学者",
+  "coachingLevelGrowing": "🌿 成长中",
+  "coachingLevelExpert": "🌳 专家"
 }

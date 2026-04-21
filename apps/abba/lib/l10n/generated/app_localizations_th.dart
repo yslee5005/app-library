@@ -855,4 +855,46 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get qtLoadingTitle => 'กำลังเตรียมพระวจนะของวันนี้...';
+
+  @override
+  String get coachingTitle => 'การโค้ชการอธิษฐาน';
+
+  @override
+  String get coachingLoadingText => 'กำลังไตร่ตรองคำอธิษฐานของคุณ...';
+
+  @override
+  String get coachingErrorText => 'ข้อผิดพลาดชั่วคราว — โปรดลองอีกครั้ง';
+
+  @override
+  String get coachingRetryButton => 'ลองอีกครั้ง';
+
+  @override
+  String get coachingScoreSpecificity => 'ความเฉพาะเจาะจง';
+
+  @override
+  String get coachingScoreGodCentered => 'ศูนย์กลางที่พระเจ้า';
+
+  @override
+  String get coachingScoreActs => 'สมดุล ACTS';
+
+  @override
+  String get coachingScoreAuthenticity => 'ความจริงใจ';
+
+  @override
+  String get coachingStrengthsTitle => 'สิ่งที่คุณทำได้ดี ✨';
+
+  @override
+  String get coachingImprovementsTitle => 'เพื่อก้าวลึกขึ้น 💡';
+
+  @override
+  String get coachingProCta => 'ปลดล็อกการโค้ชการอธิษฐานด้วย Pro';
+
+  @override
+  String get coachingLevelBeginner => '🌱 ผู้เริ่มต้น';
+
+  @override
+  String get coachingLevelGrowing => '🌿 กำลังเติบโต';
+
+  @override
+  String get coachingLevelExpert => '🌳 ผู้เชี่ยวชาญ';
 }

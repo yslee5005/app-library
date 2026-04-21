@@ -375,5 +375,19 @@
   "qtLoadingHint8": "📖 知恵 — 今日学んだ一つの教えを心に留めてください",
   "qtLoadingHint9": "⏳ 忍耐 — 静かに待っているものを思い浮かべてください",
   "qtLoadingHint10": "✨ 喜び — 今日微笑んだ瞬間を思い出してください",
-  "qtLoadingTitle": "今日のみ言葉を準備しています..."
+  "qtLoadingTitle": "今日のみ言葉を準備しています...",
+  "coachingTitle": "祈りコーチング",
+  "coachingLoadingText": "あなたの祈りを振り返っています...",
+  "coachingErrorText": "一時的なエラーです — しばらくしてから再試行してください",
+  "coachingRetryButton": "再試行",
+  "coachingScoreSpecificity": "具体性",
+  "coachingScoreGodCentered": "神中心",
+  "coachingScoreActs": "ACTS バランス",
+  "coachingScoreAuthenticity": "真実性",
+  "coachingStrengthsTitle": "よくできた点 ✨",
+  "coachingImprovementsTitle": "さらに深めるために 💡",
+  "coachingProCta": "Pro で祈りコーチングを解放",
+  "coachingLevelBeginner": "🌱 初心者",
+  "coachingLevelGrowing": "🌿 成長中",
+  "coachingLevelExpert": "🌳 熟達者"
 }

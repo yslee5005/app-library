@@ -872,4 +872,46 @@ class AppLocalizationsRo extends AppLocalizations {
 
   @override
   String get qtLoadingTitle => 'Se pregătește Cuvântul de azi...';
+
+  @override
+  String get coachingTitle => 'Coaching de rugăciune';
+
+  @override
+  String get coachingLoadingText => 'Reflectăm la rugăciunea ta...';
+
+  @override
+  String get coachingErrorText => 'Eroare temporară — vă rugăm reîncercați';
+
+  @override
+  String get coachingRetryButton => 'Reîncearcă';
+
+  @override
+  String get coachingScoreSpecificity => 'Specificitate';
+
+  @override
+  String get coachingScoreGodCentered => 'Centrat pe Dumnezeu';
+
+  @override
+  String get coachingScoreActs => 'Echilibru ACTS';
+
+  @override
+  String get coachingScoreAuthenticity => 'Autenticitate';
+
+  @override
+  String get coachingStrengthsTitle => 'Ce ai făcut bine ✨';
+
+  @override
+  String get coachingImprovementsTitle => 'Pentru a merge mai adânc 💡';
+
+  @override
+  String get coachingProCta => 'Deblochează Coaching cu Pro';
+
+  @override
+  String get coachingLevelBeginner => '🌱 Începător';
+
+  @override
+  String get coachingLevelGrowing => '🌿 În creștere';
+
+  @override
+  String get coachingLevelExpert => '🌳 Expert';
 }

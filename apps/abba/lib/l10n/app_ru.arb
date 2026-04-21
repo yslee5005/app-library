@@ -375,5 +375,19 @@
   "qtLoadingHint8": "📖 Мудрость — Сохраните в сердце один урок дня",
   "qtLoadingHint9": "⏳ Терпение — Подумайте, чего вы тихо ждёте",
   "qtLoadingHint10": "✨ Радость — Вспомните улыбку сегодняшнего дня",
-  "qtLoadingTitle": "Готовим сегодняшнее Слово..."
+  "qtLoadingTitle": "Готовим сегодняшнее Слово...",
+  "coachingTitle": "Наставничество в молитве",
+  "coachingLoadingText": "Размышляем над вашей молитвой...",
+  "coachingErrorText": "Временная ошибка — попробуйте ещё раз",
+  "coachingRetryButton": "Повторить",
+  "coachingScoreSpecificity": "Конкретность",
+  "coachingScoreGodCentered": "Богоцентричность",
+  "coachingScoreActs": "Баланс ACTS",
+  "coachingScoreAuthenticity": "Подлинность",
+  "coachingStrengthsTitle": "Что у вас получилось ✨",
+  "coachingImprovementsTitle": "Чтобы углубить 💡",
+  "coachingProCta": "Откройте Наставничество с Pro",
+  "coachingLevelBeginner": "🌱 Новичок",
+  "coachingLevelGrowing": "🌿 Развивается",
+  "coachingLevelExpert": "🌳 Эксперт"
 }

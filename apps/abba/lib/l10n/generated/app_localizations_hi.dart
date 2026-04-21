@@ -863,4 +863,46 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get qtLoadingTitle => 'आज का वचन तैयार हो रहा है...';
+
+  @override
+  String get coachingTitle => 'प्रार्थना कोचिंग';
+
+  @override
+  String get coachingLoadingText => 'आपकी प्रार्थना पर विचार कर रहे हैं...';
+
+  @override
+  String get coachingErrorText => 'अस्थायी त्रुटि — कृपया पुनः प्रयास करें';
+
+  @override
+  String get coachingRetryButton => 'पुनः प्रयास';
+
+  @override
+  String get coachingScoreSpecificity => 'विशिष्टता';
+
+  @override
+  String get coachingScoreGodCentered => 'ईश्वर-केंद्रित';
+
+  @override
+  String get coachingScoreActs => 'ACTS संतुलन';
+
+  @override
+  String get coachingScoreAuthenticity => 'प्रामाणिकता';
+
+  @override
+  String get coachingStrengthsTitle => 'आपने क्या अच्छा किया ✨';
+
+  @override
+  String get coachingImprovementsTitle => 'और गहराई में जाने के लिए 💡';
+
+  @override
+  String get coachingProCta => 'Pro के साथ प्रार्थना कोचिंग अनलॉक करें';
+
+  @override
+  String get coachingLevelBeginner => '🌱 शुरुआती';
+
+  @override
+  String get coachingLevelGrowing => '🌿 बढ़ रहा';
+
+  @override
+  String get coachingLevelExpert => '🌳 विशेषज्ञ';
 }

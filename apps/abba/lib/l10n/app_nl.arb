@@ -375,5 +375,19 @@
   "qtLoadingHint8": "📖 Wijsheid — Bewaar één les van vandaag in je hart",
   "qtLoadingHint9": "⏳ Geduld — Denk aan iets waarop je stil wacht",
   "qtLoadingHint10": "✨ Vreugde — Denk aan een glimlach van vandaag",
-  "qtLoadingTitle": "Het Woord van vandaag wordt voorbereid..."
+  "qtLoadingTitle": "Het Woord van vandaag wordt voorbereid...",
+  "coachingTitle": "Gebedscoaching",
+  "coachingLoadingText": "We reflecteren op je gebed...",
+  "coachingErrorText": "Tijdelijke fout — probeer het opnieuw",
+  "coachingRetryButton": "Opnieuw proberen",
+  "coachingScoreSpecificity": "Specificiteit",
+  "coachingScoreGodCentered": "God-gericht",
+  "coachingScoreActs": "ACTS-balans",
+  "coachingScoreAuthenticity": "Authenticiteit",
+  "coachingStrengthsTitle": "Wat je goed deed ✨",
+  "coachingImprovementsTitle": "Om dieper te gaan 💡",
+  "coachingProCta": "Ontgrendel Gebedscoaching met Pro",
+  "coachingLevelBeginner": "🌱 Beginner",
+  "coachingLevelGrowing": "🌿 Groeiend",
+  "coachingLevelExpert": "🌳 Expert"
 }

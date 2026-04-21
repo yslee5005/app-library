@@ -868,4 +868,46 @@ class AppLocalizationsHr extends AppLocalizations {
 
   @override
   String get qtLoadingTitle => 'Priprema se današnja Riječ...';
+
+  @override
+  String get coachingTitle => 'Coaching molitve';
+
+  @override
+  String get coachingLoadingText => 'Razmišljamo o vašoj molitvi...';
+
+  @override
+  String get coachingErrorText => 'Privremena pogreška — pokušajte ponovno';
+
+  @override
+  String get coachingRetryButton => 'Pokušaj ponovno';
+
+  @override
+  String get coachingScoreSpecificity => 'Konkretnost';
+
+  @override
+  String get coachingScoreGodCentered => 'Usredotočenost na Boga';
+
+  @override
+  String get coachingScoreActs => 'ACTS ravnoteža';
+
+  @override
+  String get coachingScoreAuthenticity => 'Autentičnost';
+
+  @override
+  String get coachingStrengthsTitle => 'Što ste dobro napravili ✨';
+
+  @override
+  String get coachingImprovementsTitle => 'Da idete dublje 💡';
+
+  @override
+  String get coachingProCta => 'Otključaj Coaching molitve s Pro';
+
+  @override
+  String get coachingLevelBeginner => '🌱 Početnik';
+
+  @override
+  String get coachingLevelGrowing => '🌿 U rastu';
+
+  @override
+  String get coachingLevelExpert => '🌳 Stručnjak';
 }

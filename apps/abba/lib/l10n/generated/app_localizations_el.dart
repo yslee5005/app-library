@@ -869,4 +869,46 @@ class AppLocalizationsEl extends AppLocalizations {
 
   @override
   String get qtLoadingTitle => 'Προετοιμάζεται ο σημερινός Λόγος...';
+
+  @override
+  String get coachingTitle => 'Καθοδήγηση προσευχής';
+
+  @override
+  String get coachingLoadingText => 'Αναλογιζόμαστε την προσευχή σας...';
+
+  @override
+  String get coachingErrorText => 'Προσωρινό σφάλμα — δοκιμάστε ξανά';
+
+  @override
+  String get coachingRetryButton => 'Επανάληψη';
+
+  @override
+  String get coachingScoreSpecificity => 'Συγκεκριμένο';
+
+  @override
+  String get coachingScoreGodCentered => 'Θεοκεντρικότητα';
+
+  @override
+  String get coachingScoreActs => 'Ισορροπία ACTS';
+
+  @override
+  String get coachingScoreAuthenticity => 'Αυθεντικότητα';
+
+  @override
+  String get coachingStrengthsTitle => 'Τι κάνατε καλά ✨';
+
+  @override
+  String get coachingImprovementsTitle => 'Για να πάτε πιο βαθιά 💡';
+
+  @override
+  String get coachingProCta => 'Ξεκλειδώστε την Καθοδήγηση με Pro';
+
+  @override
+  String get coachingLevelBeginner => '🌱 Αρχάριος';
+
+  @override
+  String get coachingLevelGrowing => '🌿 Σε εξέλιξη';
+
+  @override
+  String get coachingLevelExpert => '🌳 Ειδικός';
 }

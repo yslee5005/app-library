@@ -211,6 +211,16 @@ class OpenAiService implements AiService {
   }
 
   @override
+  Future<PrayerCoaching> analyzePrayerCoaching({
+    required String transcript,
+    required String locale,
+  }) async {
+    // OpenAI path is legacy; coaching relies on Gemini service. Return placeholder.
+    apiLog.info('OpenAI analyzePrayerCoaching not implemented — placeholder');
+    return PrayerCoaching.placeholder();
+  }
+
+  @override
   Future<PremiumContent> analyzePrayerPremium({
     required String transcript,
     required String locale,

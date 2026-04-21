@@ -37,6 +37,13 @@ abstract class AiService {
     required String meditationText,
     required String locale,
   });
+
+  /// Evaluate a prayer transcript against the Prayer Guide (ACTS + principles).
+  /// Pro-only. Returns [PrayerCoaching.placeholder] on parse/API failure.
+  Future<PrayerCoaching> analyzePrayerCoaching({
+    required String transcript,
+    required String locale,
+  });
 }
 
 /// Premium-only content generated on-demand

@@ -12,6 +12,7 @@ import '../../../widgets/abba_button.dart';
 import '../../../widgets/staggered_fade_in.dart';
 import '../widgets/ai_prayer_card.dart';
 import '../widgets/historical_story_card.dart';
+import '../widgets/prayer_coaching_card.dart';
 import '../widgets/prayer_summary_card.dart';
 import '../widgets/scripture_card.dart';
 import '../widgets/testimony_card.dart';
@@ -178,7 +179,16 @@ class _PrayerDashboardViewState extends ConsumerState<PrayerDashboardView> {
             helperText: l10n.testimonyHelperText,
           ),
         ),
-        // 4. Historical Story Card (Premium — on-demand)
+        // 4. Prayer Coaching Card (Pro — first Pro card, on-demand analysis)
+        StaggeredFadeIn(
+          index: i++,
+          child: PrayerCoachingCard(
+            locale: locale,
+            isUserPremium: isPremium,
+            onUnlock: showPremiumUpgrade,
+          ),
+        ),
+        // 5. Historical Story Card (Premium — on-demand)
         if (hasHistoricalStory)
           StaggeredFadeIn(
             index: i++,

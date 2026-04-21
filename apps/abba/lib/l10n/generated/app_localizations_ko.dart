@@ -844,4 +844,46 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get qtLoadingTitle => '오늘의 말씀을 준비하고 있어요...';
+
+  @override
+  String get coachingTitle => '기도 코칭';
+
+  @override
+  String get coachingLoadingText => '당신의 기도를 돌아보고 있어요...';
+
+  @override
+  String get coachingErrorText => '일시적인 오류 — 잠시 후 다시 시도해 주세요';
+
+  @override
+  String get coachingRetryButton => '다시 시도';
+
+  @override
+  String get coachingScoreSpecificity => '구체성';
+
+  @override
+  String get coachingScoreGodCentered => '하나님 중심성';
+
+  @override
+  String get coachingScoreActs => 'ACTS 균형';
+
+  @override
+  String get coachingScoreAuthenticity => '진정성';
+
+  @override
+  String get coachingStrengthsTitle => '잘하신 점 ✨';
+
+  @override
+  String get coachingImprovementsTitle => '더 깊어지려면 💡';
+
+  @override
+  String get coachingProCta => 'Pro로 기도 코칭 받기';
+
+  @override
+  String get coachingLevelBeginner => '🌱 시작하는 중';
+
+  @override
+  String get coachingLevelGrowing => '🌿 자라는 중';
+
+  @override
+  String get coachingLevelExpert => '🌳 전문가';
 }

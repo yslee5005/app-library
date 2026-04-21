@@ -869,4 +869,46 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String get qtLoadingTitle => 'A mai Ige előkészítése folyamatban...';
+
+  @override
+  String get coachingTitle => 'Imakoucholás';
+
+  @override
+  String get coachingLoadingText => 'Elmélkedünk az imádságodon...';
+
+  @override
+  String get coachingErrorText => 'Átmeneti hiba — kérjük, próbálja újra';
+
+  @override
+  String get coachingRetryButton => 'Újra';
+
+  @override
+  String get coachingScoreSpecificity => 'Konkrétság';
+
+  @override
+  String get coachingScoreGodCentered => 'Istenközpontúság';
+
+  @override
+  String get coachingScoreActs => 'ACTS egyensúly';
+
+  @override
+  String get coachingScoreAuthenticity => 'Hitelesség';
+
+  @override
+  String get coachingStrengthsTitle => 'Amit jól csináltál ✨';
+
+  @override
+  String get coachingImprovementsTitle => 'Hogy elmélyülj 💡';
+
+  @override
+  String get coachingProCta => 'Oldja fel az Imakoucholást Pro-val';
+
+  @override
+  String get coachingLevelBeginner => '🌱 Kezdő';
+
+  @override
+  String get coachingLevelGrowing => '🌿 Fejlődő';
+
+  @override
+  String get coachingLevelExpert => '🌳 Szakértő';
 }

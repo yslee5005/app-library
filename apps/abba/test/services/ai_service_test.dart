@@ -137,4 +137,13 @@ class _CountingAiService implements AiService {
       ),
     );
   }
+
+  @override
+  Future<PrayerCoaching> analyzePrayerCoaching({
+    required String transcript,
+    required String locale,
+  }) async {
+    callCount++;
+    return PrayerCoaching.placeholder();
+  }
 }

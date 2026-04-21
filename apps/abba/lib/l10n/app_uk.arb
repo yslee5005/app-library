@@ -375,5 +375,19 @@
   "qtLoadingHint8": "📖 Мудрість — Збережіть один урок сьогоднішнього дня",
   "qtLoadingHint9": "⏳ Терпіння — Подумайте, на що ви тихо чекаєте",
   "qtLoadingHint10": "✨ Радість — Згадайте усмішку сьогоднішнього дня",
-  "qtLoadingTitle": "Готується сьогоднішнє Слово..."
+  "qtLoadingTitle": "Готується сьогоднішнє Слово...",
+  "coachingTitle": "Наставництво в молитві",
+  "coachingLoadingText": "Розмірковуємо над вашою молитвою...",
+  "coachingErrorText": "Тимчасова помилка — спробуйте ще раз",
+  "coachingRetryButton": "Повторити",
+  "coachingScoreSpecificity": "Конкретність",
+  "coachingScoreGodCentered": "Богоцентричність",
+  "coachingScoreActs": "Баланс ACTS",
+  "coachingScoreAuthenticity": "Автентичність",
+  "coachingStrengthsTitle": "Що ви зробили добре ✨",
+  "coachingImprovementsTitle": "Щоб заглибитися 💡",
+  "coachingProCta": "Відкрити Наставництво з Pro",
+  "coachingLevelBeginner": "🌱 Початківець",
+  "coachingLevelGrowing": "🌿 Зростає",
+  "coachingLevelExpert": "🌳 Експерт"
 }

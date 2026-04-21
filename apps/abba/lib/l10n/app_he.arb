@@ -375,5 +375,19 @@
   "qtLoadingHint8": "📖 חכמה — שמור בלבך לקח אחד מהיום",
   "qtLoadingHint9": "⏳ סבלנות — חשוב על מה שאתה מחכה לו בשקט",
   "qtLoadingHint10": "✨ שמחה — זכור רגע של חיוך היום",
-  "qtLoadingTitle": "מכין את דבר היום..."
+  "qtLoadingTitle": "מכין את דבר היום...",
+  "coachingTitle": "אימון תפילה",
+  "coachingLoadingText": "מהרהרים בתפילתך...",
+  "coachingErrorText": "שגיאה זמנית — נא נסה שוב",
+  "coachingRetryButton": "נסה שוב",
+  "coachingScoreSpecificity": "ספציפיות",
+  "coachingScoreGodCentered": "מרכזיות אלוהים",
+  "coachingScoreActs": "איזון ACTS",
+  "coachingScoreAuthenticity": "אותנטיות",
+  "coachingStrengthsTitle": "מה עשית טוב ✨",
+  "coachingImprovementsTitle": "כדי להעמיק 💡",
+  "coachingProCta": "פתחו אימון תפילה עם Pro",
+  "coachingLevelBeginner": "🌱 מתחיל",
+  "coachingLevelGrowing": "🌿 צומח",
+  "coachingLevelExpert": "🌳 מומחה"
 }

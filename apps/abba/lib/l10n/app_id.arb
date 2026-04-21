@@ -375,5 +375,19 @@
   "qtLoadingHint8": "📖 Hikmat — Simpan satu pelajaran hari ini di hatimu",
   "qtLoadingHint9": "⏳ Kesabaran — Pikirkan apa yang kamu tunggu dengan tenang",
   "qtLoadingHint10": "✨ Sukacita — Ingat saat kamu tersenyum hari ini",
-  "qtLoadingTitle": "Menyiapkan Firman hari ini..."
+  "qtLoadingTitle": "Menyiapkan Firman hari ini...",
+  "coachingTitle": "Coaching Doa",
+  "coachingLoadingText": "Merenungkan doa Anda...",
+  "coachingErrorText": "Kesalahan sementara — silakan coba lagi",
+  "coachingRetryButton": "Coba lagi",
+  "coachingScoreSpecificity": "Kekhususan",
+  "coachingScoreGodCentered": "Terpusat pada Tuhan",
+  "coachingScoreActs": "Keseimbangan ACTS",
+  "coachingScoreAuthenticity": "Keaslian",
+  "coachingStrengthsTitle": "Yang Anda lakukan dengan baik ✨",
+  "coachingImprovementsTitle": "Untuk lebih dalam 💡",
+  "coachingProCta": "Buka Coaching Doa dengan Pro",
+  "coachingLevelBeginner": "🌱 Pemula",
+  "coachingLevelGrowing": "🌿 Bertumbuh",
+  "coachingLevelExpert": "🌳 Ahli"
 }

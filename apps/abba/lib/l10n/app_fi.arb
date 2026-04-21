@@ -375,5 +375,19 @@
   "qtLoadingHint8": "📖 Viisaus — Säilytä yksi tämän päivän opetus",
   "qtLoadingHint9": "⏳ Kärsivällisyys — Ajattele sitä, mitä hiljaa odotat",
   "qtLoadingHint10": "✨ Ilo — Muista hetki, jolloin hymyilit tänään",
-  "qtLoadingTitle": "Valmistellaan tämän päivän Sanaa..."
+  "qtLoadingTitle": "Valmistellaan tämän päivän Sanaa...",
+  "coachingTitle": "Rukousvalmennus",
+  "coachingLoadingText": "Pohdimme rukoustasi...",
+  "coachingErrorText": "Väliaikainen virhe — yritä uudelleen",
+  "coachingRetryButton": "Yritä uudelleen",
+  "coachingScoreSpecificity": "Täsmällisyys",
+  "coachingScoreGodCentered": "Jumala-keskeisyys",
+  "coachingScoreActs": "ACTS-tasapaino",
+  "coachingScoreAuthenticity": "Aitous",
+  "coachingStrengthsTitle": "Mitä teit hyvin ✨",
+  "coachingImprovementsTitle": "Syventääksesi 💡",
+  "coachingProCta": "Avaa Rukousvalmennus Pro:lla",
+  "coachingLevelBeginner": "🌱 Aloittelija",
+  "coachingLevelGrowing": "🌿 Kasvussa",
+  "coachingLevelExpert": "🌳 Asiantuntija"
 }

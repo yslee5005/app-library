@@ -872,4 +872,46 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get qtLoadingTitle => 'Menyiapkan Firman hari ini...';
+
+  @override
+  String get coachingTitle => 'Coaching Doa';
+
+  @override
+  String get coachingLoadingText => 'Merenungkan doa Anda...';
+
+  @override
+  String get coachingErrorText => 'Kesalahan sementara — silakan coba lagi';
+
+  @override
+  String get coachingRetryButton => 'Coba lagi';
+
+  @override
+  String get coachingScoreSpecificity => 'Kekhususan';
+
+  @override
+  String get coachingScoreGodCentered => 'Terpusat pada Tuhan';
+
+  @override
+  String get coachingScoreActs => 'Keseimbangan ACTS';
+
+  @override
+  String get coachingScoreAuthenticity => 'Keaslian';
+
+  @override
+  String get coachingStrengthsTitle => 'Yang Anda lakukan dengan baik ✨';
+
+  @override
+  String get coachingImprovementsTitle => 'Untuk lebih dalam 💡';
+
+  @override
+  String get coachingProCta => 'Buka Coaching Doa dengan Pro';
+
+  @override
+  String get coachingLevelBeginner => '🌱 Pemula';
+
+  @override
+  String get coachingLevelGrowing => '🌿 Bertumbuh';
+
+  @override
+  String get coachingLevelExpert => '🌳 Ahli';
 }

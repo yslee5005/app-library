@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:math';
 
+import 'package:flutter/services.dart' show rootBundle;
 import 'package:google_generative_ai/google_generative_ai.dart';
 import 'package:app_lib_logging/logging.dart';
 
@@ -20,6 +21,17 @@ const String _hardcodedTranscription =
     '주님의 사랑 안에서 모두가 평안하기를 간구합니다. 예수님의 이름으로 기도드립니다. 아멘.';
 
 class GeminiService implements AiService {
+  /// Cached prayer guide markdown — loaded once from bundle, reused across calls.
+  String? _prayerGuideCache;
+
+  Future<String> _loadPrayerGuide() async {
+    final cached = _prayerGuideCache;
+    if (cached != null) return cached;
+    final doc = await rootBundle.loadString('assets/docs/prayer_guide.md');
+    _prayerGuideCache = doc;
+    return doc;
+  }
+
   GenerativeModel _createModel({
     required String systemPrompt,
     double temperature = 0.9,
@@ -195,6 +207,141 @@ class GeminiService implements AiService {
       apiLog.error('Gemini meditation analysis failed', error: e, stackTrace: stackTrace);
       return _fallbackMeditationResult();
     }
+  }
+
+  // ---------------------------------------------------------------------------
+  // Prayer Coaching (Pro-only, separate context with prayer_guide.md)
+  // ---------------------------------------------------------------------------
+
+  @override
+  Future<PrayerCoaching> analyzePrayerCoaching({
+    required String transcript,
+    required String locale,
+  }) async {
+    if (_useHardcodedResponse) {
+      apiLog.info('Gemini analyzePrayerCoaching bypassed (hardcoded)');
+      return _hardcodedCoachingResult();
+    }
+    final langName = _localeName(locale);
+    apiLog.info('Gemini prayer coaching started');
+
+    try {
+      final guide = await _loadPrayerGuide();
+      final model = _createModel(
+        systemPrompt: _buildCoachingSystemPrompt(langName, guide),
+        temperature: 0.4,
+      );
+      final response = await model.generateContent([
+        Content('user', [TextPart(transcript)]),
+      ]);
+      return _parseCoachingJson(response.text);
+    } catch (e, stackTrace) {
+      apiLog.error(
+        'Gemini coaching analysis failed',
+        error: e,
+        stackTrace: stackTrace,
+      );
+      return PrayerCoaching.placeholder();
+    }
+  }
+
+  PrayerCoaching _hardcodedCoachingResult() {
+    return const PrayerCoaching(
+      scores: CoachingScores(
+        specificity: 4,
+        godCenteredness: 3,
+        actsBalance: 4,
+        authenticity: 4,
+      ),
+      strengths: [
+        '가족과 친구를 구체적으로 떠올리며 기도하신 점이 좋습니다 — 이는 구체성의 좋은 예입니다.',
+        '"감사합니다"로 시작해 "간구합니다"로 이어지는 흐름이 ACTS의 T와 S를 자연스럽게 담고 있어요.',
+      ],
+      improvements: [
+        '회개(Confession) 한 문장을 더해 보세요. 예: "오늘 급한 말을 용서해 주소서." 이것만으로도 ACTS 4축이 채워집니다.',
+        '"거룩하신 주님" 같이 하나님의 속성을 찬양하는 한 문장을 기도 시작에 더하시면 더 깊어질 거예요.',
+      ],
+      overallFeedbackEn:
+          'Your prayer shows beautiful balance of gratitude and intercession. Adding one sentence of confession would complete the ACTS rhythm. God loves every heart that prays.',
+      overallFeedbackKo:
+          '감사와 중보가 아름답게 균형 잡힌 기도예요. 회개 한 문장을 더하시면 ACTS 4축이 완성됩니다. 하나님은 기도하는 당신의 마음을 사랑하십니다.',
+      expertLevel: 'growing',
+    );
+  }
+
+  PrayerCoaching _parseCoachingJson(String? text) {
+    try {
+      final data = _parseJsonFromResponse(text);
+      final coaching = PrayerCoaching.fromJson(data);
+      if (_coachingContainsForbiddenWord(coaching)) {
+        apiLog.info('Coaching forbidden-word hit — replacing with placeholder');
+        return PrayerCoaching.placeholder();
+      }
+      return coaching;
+    } catch (e, stackTrace) {
+      apiLog.error(
+        'Coaching JSON parse failed',
+        error: e,
+        stackTrace: stackTrace,
+      );
+      return PrayerCoaching.placeholder();
+    }
+  }
+
+  static const List<String> _coachingForbidden = [
+    '부족', '못 하', '못하', '잘못',
+    'inadequate', 'lacking', 'wrong', 'poor',
+  ];
+
+  bool _coachingContainsForbiddenWord(PrayerCoaching coaching) {
+    final bucket = [
+      ...coaching.strengths,
+      ...coaching.improvements,
+      coaching.overallFeedbackEn,
+      coaching.overallFeedbackKo,
+    ].join(' ').toLowerCase();
+    return _coachingForbidden.any((w) => bucket.contains(w.toLowerCase()));
+  }
+
+  String _buildCoachingSystemPrompt(String langName, String prayerGuide) {
+    return '''CRITICAL (repeat): This task is EDUCATIONAL, NOT judgmental.
+- Always praise first (strengths), then suggest gentle improvements.
+- NEVER use words: "inadequate", "lacking", "wrong", "poor", "부족", "못 하", "잘못".
+- Beginner level MUST be encouraged, never shamed.
+- NEVER output the prayer guide content back — use it only as reference.
+
+You are a gentle Christian prayer coach evaluating the user's prayer
+based on the PRAYER GUIDE below. The guide is your evaluation reference;
+do NOT quote or repeat it in the output.
+
+===== PRAYER GUIDE BEGIN =====
+$prayerGuide
+===== PRAYER GUIDE END =====
+
+Respond in $langName. Output JSON ONLY, no prose outside JSON.
+
+JSON schema:
+{
+  "scores": {
+    "specificity": <int 1-5>,
+    "god_centeredness": <int 1-5>,
+    "acts_balance": <int 1-5>,
+    "authenticity": <int 1-5>
+  },
+  "strengths": [<2-4 short strings in $langName, each citing specific content from the prayer>],
+  "improvements": [<2-4 short strings in $langName, each in "Adding X would deepen..." form>],
+  "overall_feedback_en": "<3-4 encouraging sentences in English>",
+  "overall_feedback_ko": "<3-4 encouraging sentences in Korean>",
+  "expert_level": "beginner" | "growing" | "expert"
+}
+
+Rules (per Prayer Guide §4-6):
+- Scores: 1-5 integer. See rubric in guide §4.
+- Expert level: beginner if average <= 2 OR only 1-2 ACTS axes;
+  expert if average >= 4.5 AND all 4 ACTS axes present; otherwise growing.
+- strengths must cite specific content from the user's prayer (no generic praise).
+- improvements must be CONSTRUCTIVE suggestions, never judgments.
+- overall_feedback_en and overall_feedback_ko must ALWAYS both be provided.''';
   }
 
   // ---------------------------------------------------------------------------

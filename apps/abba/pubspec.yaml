@@ -88,3 +88,4 @@ flutter:
     - .env.runtime
     - assets/mock/
     - assets/icon/
+    - assets/docs/

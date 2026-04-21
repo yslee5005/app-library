@@ -375,5 +375,19 @@
   "qtLoadingHint8": "📖 Visdom — Bevar én lærdom fra i dag",
   "qtLoadingHint9": "⏳ Tålmodighet — Tenk på det du stille venter på",
   "qtLoadingHint10": "✨ Glede — Husk et smil fra i dag",
-  "qtLoadingTitle": "Forbereder dagens Ord..."
+  "qtLoadingTitle": "Forbereder dagens Ord...",
+  "coachingTitle": "Bønnecoaching",
+  "coachingLoadingText": "Reflekterer over bønnen din...",
+  "coachingErrorText": "Midlertidig feil — prøv igjen",
+  "coachingRetryButton": "Prøv igjen",
+  "coachingScoreSpecificity": "Konkrethet",
+  "coachingScoreGodCentered": "Gudssentrert",
+  "coachingScoreActs": "ACTS-balanse",
+  "coachingScoreAuthenticity": "Ekthet",
+  "coachingStrengthsTitle": "Det du gjorde bra ✨",
+  "coachingImprovementsTitle": "For å gå dypere 💡",
+  "coachingProCta": "Lås opp Bønnecoaching med Pro",
+  "coachingLevelBeginner": "🌱 Nybegynner",
+  "coachingLevelGrowing": "🌿 Voksende",
+  "coachingLevelExpert": "🌳 Ekspert"
 }

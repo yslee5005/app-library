@@ -868,4 +868,46 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get qtLoadingTitle => 'Готовим сегодняшнее Слово...';
+
+  @override
+  String get coachingTitle => 'Наставничество в молитве';
+
+  @override
+  String get coachingLoadingText => 'Размышляем над вашей молитвой...';
+
+  @override
+  String get coachingErrorText => 'Временная ошибка — попробуйте ещё раз';
+
+  @override
+  String get coachingRetryButton => 'Повторить';
+
+  @override
+  String get coachingScoreSpecificity => 'Конкретность';
+
+  @override
+  String get coachingScoreGodCentered => 'Богоцентричность';
+
+  @override
+  String get coachingScoreActs => 'Баланс ACTS';
+
+  @override
+  String get coachingScoreAuthenticity => 'Подлинность';
+
+  @override
+  String get coachingStrengthsTitle => 'Что у вас получилось ✨';
+
+  @override
+  String get coachingImprovementsTitle => 'Чтобы углубить 💡';
+
+  @override
+  String get coachingProCta => 'Откройте Наставничество с Pro';
+
+  @override
+  String get coachingLevelBeginner => '🌱 Новичок';
+
+  @override
+  String get coachingLevelGrowing => '🌿 Развивается';
+
+  @override
+  String get coachingLevelExpert => '🌳 Эксперт';
 }

@@ -375,5 +375,19 @@
   "qtLoadingHint8": "📖 Sự khôn ngoan — Ghi nhớ một bài học của hôm nay",
   "qtLoadingHint9": "⏳ Kiên nhẫn — Nghĩ về điều bạn đang lặng lẽ chờ đợi",
   "qtLoadingHint10": "✨ Niềm vui — Nhớ khoảnh khắc bạn mỉm cười hôm nay",
-  "qtLoadingTitle": "Đang chuẩn bị Lời hôm nay..."
+  "qtLoadingTitle": "Đang chuẩn bị Lời hôm nay...",
+  "coachingTitle": "Huấn luyện cầu nguyện",
+  "coachingLoadingText": "Đang suy ngẫm về lời cầu nguyện của bạn...",
+  "coachingErrorText": "Lỗi tạm thời — vui lòng thử lại",
+  "coachingRetryButton": "Thử lại",
+  "coachingScoreSpecificity": "Tính cụ thể",
+  "coachingScoreGodCentered": "Lấy Chúa làm trung tâm",
+  "coachingScoreActs": "Cân bằng ACTS",
+  "coachingScoreAuthenticity": "Tính chân thực",
+  "coachingStrengthsTitle": "Điều bạn đã làm tốt ✨",
+  "coachingImprovementsTitle": "Để đi sâu hơn 💡",
+  "coachingProCta": "Mở Huấn luyện cầu nguyện với Pro",
+  "coachingLevelBeginner": "🌱 Người mới",
+  "coachingLevelGrowing": "🌿 Đang phát triển",
+  "coachingLevelExpert": "🌳 Chuyên gia"
 }

@@ -1753,6 +1753,90 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Preparing today\'s Word...'**
   String get qtLoadingTitle;
+
+  /// No description provided for @coachingTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Prayer Coaching'**
+  String get coachingTitle;
+
+  /// No description provided for @coachingLoadingText.
+  ///
+  /// In en, this message translates to:
+  /// **'Reflecting on your prayer...'**
+  String get coachingLoadingText;
+
+  /// No description provided for @coachingErrorText.
+  ///
+  /// In en, this message translates to:
+  /// **'Temporary error — please retry'**
+  String get coachingErrorText;
+
+  /// No description provided for @coachingRetryButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Retry'**
+  String get coachingRetryButton;
+
+  /// No description provided for @coachingScoreSpecificity.
+  ///
+  /// In en, this message translates to:
+  /// **'Specificity'**
+  String get coachingScoreSpecificity;
+
+  /// No description provided for @coachingScoreGodCentered.
+  ///
+  /// In en, this message translates to:
+  /// **'God-centered'**
+  String get coachingScoreGodCentered;
+
+  /// No description provided for @coachingScoreActs.
+  ///
+  /// In en, this message translates to:
+  /// **'ACTS balance'**
+  String get coachingScoreActs;
+
+  /// No description provided for @coachingScoreAuthenticity.
+  ///
+  /// In en, this message translates to:
+  /// **'Authenticity'**
+  String get coachingScoreAuthenticity;
+
+  /// No description provided for @coachingStrengthsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'What you did well ✨'**
+  String get coachingStrengthsTitle;
+
+  /// No description provided for @coachingImprovementsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'To go deeper 💡'**
+  String get coachingImprovementsTitle;
+
+  /// No description provided for @coachingProCta.
+  ///
+  /// In en, this message translates to:
+  /// **'Unlock Prayer Coaching with Pro'**
+  String get coachingProCta;
+
+  /// No description provided for @coachingLevelBeginner.
+  ///
+  /// In en, this message translates to:
+  /// **'🌱 Beginner'**
+  String get coachingLevelBeginner;
+
+  /// No description provided for @coachingLevelGrowing.
+  ///
+  /// In en, this message translates to:
+  /// **'🌿 Growing'**
+  String get coachingLevelGrowing;
+
+  /// No description provided for @coachingLevelExpert.
+  ///
+  /// In en, this message translates to:
+  /// **'🌳 Expert'**
+  String get coachingLevelExpert;
 }
 
 class _AppLocalizationsDelegate

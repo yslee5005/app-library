@@ -375,5 +375,19 @@
   "qtLoadingHint8": "📖 Karunungan — Itago sa puso ang isang aral ngayong araw",
   "qtLoadingHint9": "⏳ Pagtitiis — Isipin ang tahimik mong hinihintay",
   "qtLoadingHint10": "✨ Kagalakan — Alalahanin ang isang sandali ng ngiti ngayon",
-  "qtLoadingTitle": "Inihahanda ang Salita ngayon..."
+  "qtLoadingTitle": "Inihahanda ang Salita ngayon...",
+  "coachingTitle": "Coaching sa Panalangin",
+  "coachingLoadingText": "Nag-iisip tungkol sa iyong panalangin...",
+  "coachingErrorText": "Pansamantalang error — subukan muli",
+  "coachingRetryButton": "Subukan muli",
+  "coachingScoreSpecificity": "Kasipagan",
+  "coachingScoreGodCentered": "Nakasentro sa Diyos",
+  "coachingScoreActs": "Balanse ng ACTS",
+  "coachingScoreAuthenticity": "Pagiging tunay",
+  "coachingStrengthsTitle": "Magaling mong ginawa ✨",
+  "coachingImprovementsTitle": "Upang palalimin 💡",
+  "coachingProCta": "I-unlock ang Coaching sa Panalangin gamit ang Pro",
+  "coachingLevelBeginner": "🌱 Baguhan",
+  "coachingLevelGrowing": "🌿 Lumalago",
+  "coachingLevelExpert": "🌳 Eksperto"
 }

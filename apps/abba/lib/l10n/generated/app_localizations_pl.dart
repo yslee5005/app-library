@@ -871,4 +871,46 @@ class AppLocalizationsPl extends AppLocalizations {
 
   @override
   String get qtLoadingTitle => 'Przygotowuję dzisiejsze Słowo...';
+
+  @override
+  String get coachingTitle => 'Coaching modlitwy';
+
+  @override
+  String get coachingLoadingText => 'Rozważamy twoją modlitwę...';
+
+  @override
+  String get coachingErrorText => 'Błąd tymczasowy — spróbuj ponownie';
+
+  @override
+  String get coachingRetryButton => 'Ponów';
+
+  @override
+  String get coachingScoreSpecificity => 'Konkretność';
+
+  @override
+  String get coachingScoreGodCentered => 'Skupienie na Bogu';
+
+  @override
+  String get coachingScoreActs => 'Równowaga ACTS';
+
+  @override
+  String get coachingScoreAuthenticity => 'Autentyczność';
+
+  @override
+  String get coachingStrengthsTitle => 'Co zrobiłeś dobrze ✨';
+
+  @override
+  String get coachingImprovementsTitle => 'Aby pójść głębiej 💡';
+
+  @override
+  String get coachingProCta => 'Odblokuj Coaching modlitwy z Pro';
+
+  @override
+  String get coachingLevelBeginner => '🌱 Początkujący';
+
+  @override
+  String get coachingLevelGrowing => '🌿 Rozwijający się';
+
+  @override
+  String get coachingLevelExpert => '🌳 Ekspert';
 }

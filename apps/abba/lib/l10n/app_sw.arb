@@ -375,5 +375,19 @@
   "qtLoadingHint8": "📖 Hekima — Hifadhi fundisho moja la leo moyoni",
   "qtLoadingHint9": "⏳ Uvumilivu — Fikiria unachokisubiri kwa utulivu",
   "qtLoadingHint10": "✨ Furaha — Kumbuka wakati ulipotabasamu leo",
-  "qtLoadingTitle": "Inaandaa Neno la leo..."
+  "qtLoadingTitle": "Inaandaa Neno la leo...",
+  "coachingTitle": "Uongozi wa Maombi",
+  "coachingLoadingText": "Tunatafakari sala yako...",
+  "coachingErrorText": "Hitilafu ya muda — tafadhali jaribu tena",
+  "coachingRetryButton": "Jaribu tena",
+  "coachingScoreSpecificity": "Uwazi",
+  "coachingScoreGodCentered": "Umeelekezwa kwa Mungu",
+  "coachingScoreActs": "Usawa wa ACTS",
+  "coachingScoreAuthenticity": "Uhalisia",
+  "coachingStrengthsTitle": "Ulichokifanya vizuri ✨",
+  "coachingImprovementsTitle": "Kwa kwenda ndani zaidi 💡",
+  "coachingProCta": "Fungua Uongozi wa Maombi kwa Pro",
+  "coachingLevelBeginner": "🌱 Mwanzo",
+  "coachingLevelGrowing": "🌿 Anakua",
+  "coachingLevelExpert": "🌳 Mtaalamu"
 }

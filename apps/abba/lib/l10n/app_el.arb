@@ -375,5 +375,19 @@
   "qtLoadingHint8": "📖 Σοφία — Κράτα ένα μάθημα από σήμερα στην καρδιά",
   "qtLoadingHint9": "⏳ Υπομονή — Σκέψου τι περιμένεις σιωπηλά",
   "qtLoadingHint10": "✨ Χαρά — Θυμήσου ένα χαμόγελο από σήμερα",
-  "qtLoadingTitle": "Προετοιμάζεται ο σημερινός Λόγος..."
+  "qtLoadingTitle": "Προετοιμάζεται ο σημερινός Λόγος...",
+  "coachingTitle": "Καθοδήγηση προσευχής",
+  "coachingLoadingText": "Αναλογιζόμαστε την προσευχή σας...",
+  "coachingErrorText": "Προσωρινό σφάλμα — δοκιμάστε ξανά",
+  "coachingRetryButton": "Επανάληψη",
+  "coachingScoreSpecificity": "Συγκεκριμένο",
+  "coachingScoreGodCentered": "Θεοκεντρικότητα",
+  "coachingScoreActs": "Ισορροπία ACTS",
+  "coachingScoreAuthenticity": "Αυθεντικότητα",
+  "coachingStrengthsTitle": "Τι κάνατε καλά ✨",
+  "coachingImprovementsTitle": "Για να πάτε πιο βαθιά 💡",
+  "coachingProCta": "Ξεκλειδώστε την Καθοδήγηση με Pro",
+  "coachingLevelBeginner": "🌱 Αρχάριος",
+  "coachingLevelGrowing": "🌿 Σε εξέλιξη",
+  "coachingLevelExpert": "🌳 Ειδικός"
 }

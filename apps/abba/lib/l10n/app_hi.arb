@@ -375,5 +375,19 @@
   "qtLoadingHint8": "📖 ज्ञान — आज का एक सबक हृदय में रखें",
   "qtLoadingHint9": "⏳ धैर्य — चुपचाप जिसकी प्रतीक्षा कर रहे हैं सोचें",
   "qtLoadingHint10": "✨ आनंद — आज मुस्कुराए एक पल को याद करें",
-  "qtLoadingTitle": "आज का वचन तैयार हो रहा है..."
+  "qtLoadingTitle": "आज का वचन तैयार हो रहा है...",
+  "coachingTitle": "प्रार्थना कोचिंग",
+  "coachingLoadingText": "आपकी प्रार्थना पर विचार कर रहे हैं...",
+  "coachingErrorText": "अस्थायी त्रुटि — कृपया पुनः प्रयास करें",
+  "coachingRetryButton": "पुनः प्रयास",
+  "coachingScoreSpecificity": "विशिष्टता",
+  "coachingScoreGodCentered": "ईश्वर-केंद्रित",
+  "coachingScoreActs": "ACTS संतुलन",
+  "coachingScoreAuthenticity": "प्रामाणिकता",
+  "coachingStrengthsTitle": "आपने क्या अच्छा किया ✨",
+  "coachingImprovementsTitle": "और गहराई में जाने के लिए 💡",
+  "coachingProCta": "Pro के साथ प्रार्थना कोचिंग अनलॉक करें",
+  "coachingLevelBeginner": "🌱 शुरुआती",
+  "coachingLevelGrowing": "🌿 बढ़ रहा",
+  "coachingLevelExpert": "🌳 विशेषज्ञ"
 }

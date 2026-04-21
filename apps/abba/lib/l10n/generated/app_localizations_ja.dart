@@ -844,4 +844,46 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get qtLoadingTitle => '今日のみ言葉を準備しています...';
+
+  @override
+  String get coachingTitle => '祈りコーチング';
+
+  @override
+  String get coachingLoadingText => 'あなたの祈りを振り返っています...';
+
+  @override
+  String get coachingErrorText => '一時的なエラーです — しばらくしてから再試行してください';
+
+  @override
+  String get coachingRetryButton => '再試行';
+
+  @override
+  String get coachingScoreSpecificity => '具体性';
+
+  @override
+  String get coachingScoreGodCentered => '神中心';
+
+  @override
+  String get coachingScoreActs => 'ACTS バランス';
+
+  @override
+  String get coachingScoreAuthenticity => '真実性';
+
+  @override
+  String get coachingStrengthsTitle => 'よくできた点 ✨';
+
+  @override
+  String get coachingImprovementsTitle => 'さらに深めるために 💡';
+
+  @override
+  String get coachingProCta => 'Pro で祈りコーチングを解放';
+
+  @override
+  String get coachingLevelBeginner => '🌱 初心者';
+
+  @override
+  String get coachingLevelGrowing => '🌿 成長中';
+
+  @override
+  String get coachingLevelExpert => '🌳 熟達者';
 }

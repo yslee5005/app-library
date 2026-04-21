@@ -865,4 +865,46 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get qtLoadingTitle => 'Preparing today\'s Word...';
+
+  @override
+  String get coachingTitle => 'Prayer Coaching';
+
+  @override
+  String get coachingLoadingText => 'Reflecting on your prayer...';
+
+  @override
+  String get coachingErrorText => 'Temporary error — please retry';
+
+  @override
+  String get coachingRetryButton => 'Retry';
+
+  @override
+  String get coachingScoreSpecificity => 'Specificity';
+
+  @override
+  String get coachingScoreGodCentered => 'God-centered';
+
+  @override
+  String get coachingScoreActs => 'ACTS balance';
+
+  @override
+  String get coachingScoreAuthenticity => 'Authenticity';
+
+  @override
+  String get coachingStrengthsTitle => 'What you did well ✨';
+
+  @override
+  String get coachingImprovementsTitle => 'To go deeper 💡';
+
+  @override
+  String get coachingProCta => 'Unlock Prayer Coaching with Pro';
+
+  @override
+  String get coachingLevelBeginner => '🌱 Beginner';
+
+  @override
+  String get coachingLevelGrowing => '🌿 Growing';
+
+  @override
+  String get coachingLevelExpert => '🌳 Expert';
 }

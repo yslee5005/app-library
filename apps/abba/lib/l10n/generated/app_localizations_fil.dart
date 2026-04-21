@@ -879,4 +879,47 @@ class AppLocalizationsFil extends AppLocalizations {
 
   @override
   String get qtLoadingTitle => 'Inihahanda ang Salita ngayon...';
+
+  @override
+  String get coachingTitle => 'Coaching sa Panalangin';
+
+  @override
+  String get coachingLoadingText => 'Nag-iisip tungkol sa iyong panalangin...';
+
+  @override
+  String get coachingErrorText => 'Pansamantalang error — subukan muli';
+
+  @override
+  String get coachingRetryButton => 'Subukan muli';
+
+  @override
+  String get coachingScoreSpecificity => 'Kasipagan';
+
+  @override
+  String get coachingScoreGodCentered => 'Nakasentro sa Diyos';
+
+  @override
+  String get coachingScoreActs => 'Balanse ng ACTS';
+
+  @override
+  String get coachingScoreAuthenticity => 'Pagiging tunay';
+
+  @override
+  String get coachingStrengthsTitle => 'Magaling mong ginawa ✨';
+
+  @override
+  String get coachingImprovementsTitle => 'Upang palalimin 💡';
+
+  @override
+  String get coachingProCta =>
+      'I-unlock ang Coaching sa Panalangin gamit ang Pro';
+
+  @override
+  String get coachingLevelBeginner => '🌱 Baguhan';
+
+  @override
+  String get coachingLevelGrowing => '🌿 Lumalago';
+
+  @override
+  String get coachingLevelExpert => '🌳 Eksperto';
 }

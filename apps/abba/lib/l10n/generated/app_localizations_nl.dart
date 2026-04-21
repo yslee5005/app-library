@@ -869,4 +869,46 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get qtLoadingTitle => 'Het Woord van vandaag wordt voorbereid...';
+
+  @override
+  String get coachingTitle => 'Gebedscoaching';
+
+  @override
+  String get coachingLoadingText => 'We reflecteren op je gebed...';
+
+  @override
+  String get coachingErrorText => 'Tijdelijke fout — probeer het opnieuw';
+
+  @override
+  String get coachingRetryButton => 'Opnieuw proberen';
+
+  @override
+  String get coachingScoreSpecificity => 'Specificiteit';
+
+  @override
+  String get coachingScoreGodCentered => 'God-gericht';
+
+  @override
+  String get coachingScoreActs => 'ACTS-balans';
+
+  @override
+  String get coachingScoreAuthenticity => 'Authenticiteit';
+
+  @override
+  String get coachingStrengthsTitle => 'Wat je goed deed ✨';
+
+  @override
+  String get coachingImprovementsTitle => 'Om dieper te gaan 💡';
+
+  @override
+  String get coachingProCta => 'Ontgrendel Gebedscoaching met Pro';
+
+  @override
+  String get coachingLevelBeginner => '🌱 Beginner';
+
+  @override
+  String get coachingLevelGrowing => '🌿 Groeiend';
+
+  @override
+  String get coachingLevelExpert => '🌳 Expert';
 }

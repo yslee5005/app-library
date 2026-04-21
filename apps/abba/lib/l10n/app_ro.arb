@@ -375,5 +375,19 @@
   "qtLoadingHint8": "📖 Înțelepciune — Păstrează o lecție de azi în inimă",
   "qtLoadingHint9": "⏳ Răbdare — Gândește-te la ceea ce aștepți în liniște",
   "qtLoadingHint10": "✨ Bucurie — Amintește-ți un zâmbet de azi",
-  "qtLoadingTitle": "Se pregătește Cuvântul de azi..."
+  "qtLoadingTitle": "Se pregătește Cuvântul de azi...",
+  "coachingTitle": "Coaching de rugăciune",
+  "coachingLoadingText": "Reflectăm la rugăciunea ta...",
+  "coachingErrorText": "Eroare temporară — vă rugăm reîncercați",
+  "coachingRetryButton": "Reîncearcă",
+  "coachingScoreSpecificity": "Specificitate",
+  "coachingScoreGodCentered": "Centrat pe Dumnezeu",
+  "coachingScoreActs": "Echilibru ACTS",
+  "coachingScoreAuthenticity": "Autenticitate",
+  "coachingStrengthsTitle": "Ce ai făcut bine ✨",
+  "coachingImprovementsTitle": "Pentru a merge mai adânc 💡",
+  "coachingProCta": "Deblochează Coaching cu Pro",
+  "coachingLevelBeginner": "🌱 Începător",
+  "coachingLevelGrowing": "🌿 În creștere",
+  "coachingLevelExpert": "🌳 Expert"
 }

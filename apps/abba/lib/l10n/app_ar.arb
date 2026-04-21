@@ -375,5 +375,19 @@
   "qtLoadingHint8": "📖 حكمة — احفظ درسًا من هذا اليوم",
   "qtLoadingHint9": "⏳ صبر — فكّر فيما تنتظره بهدوء",
   "qtLoadingHint10": "✨ فرح — تذكّر لحظة ابتسمت فيها اليوم",
-  "qtLoadingTitle": "جاري إعداد كلمة اليوم..."
+  "qtLoadingTitle": "جاري إعداد كلمة اليوم...",
+  "coachingTitle": "إرشاد الصلاة",
+  "coachingLoadingText": "نتأمل في صلاتك...",
+  "coachingErrorText": "خطأ مؤقت — يرجى المحاولة مرة أخرى",
+  "coachingRetryButton": "إعادة المحاولة",
+  "coachingScoreSpecificity": "التحديد",
+  "coachingScoreGodCentered": "التركيز على الله",
+  "coachingScoreActs": "توازن ACTS",
+  "coachingScoreAuthenticity": "الأصالة",
+  "coachingStrengthsTitle": "ما قمت به بشكل جيد ✨",
+  "coachingImprovementsTitle": "للتعمق أكثر 💡",
+  "coachingProCta": "افتح إرشاد الصلاة مع Pro",
+  "coachingLevelBeginner": "🌱 مبتدئ",
+  "coachingLevelGrowing": "🌿 ينمو",
+  "coachingLevelExpert": "🌳 خبير"
 }

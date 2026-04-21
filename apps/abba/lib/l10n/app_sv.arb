@@ -375,5 +375,19 @@
   "qtLoadingHint8": "📖 Visdom — Bevara en lärdom från idag",
   "qtLoadingHint9": "⏳ Tålamod — Tänk på vad du tyst väntar på",
   "qtLoadingHint10": "✨ Glädje — Kom ihåg ett leende från idag",
-  "qtLoadingTitle": "Förbereder dagens Ord..."
+  "qtLoadingTitle": "Förbereder dagens Ord...",
+  "coachingTitle": "Böncoaching",
+  "coachingLoadingText": "Reflekterar över din bön...",
+  "coachingErrorText": "Tillfälligt fel — försök igen",
+  "coachingRetryButton": "Försök igen",
+  "coachingScoreSpecificity": "Specificitet",
+  "coachingScoreGodCentered": "Gudscentrerat",
+  "coachingScoreActs": "ACTS-balans",
+  "coachingScoreAuthenticity": "Äkthet",
+  "coachingStrengthsTitle": "Det du gjorde bra ✨",
+  "coachingImprovementsTitle": "För att gå djupare 💡",
+  "coachingProCta": "Lås upp Böncoaching med Pro",
+  "coachingLevelBeginner": "🌱 Nybörjare",
+  "coachingLevelGrowing": "🌿 Växande",
+  "coachingLevelExpert": "🌳 Expert"
 }

@@ -865,4 +865,46 @@ class AppLocalizationsFi extends AppLocalizations {
 
   @override
   String get qtLoadingTitle => 'Valmistellaan tämän päivän Sanaa...';
+
+  @override
+  String get coachingTitle => 'Rukousvalmennus';
+
+  @override
+  String get coachingLoadingText => 'Pohdimme rukoustasi...';
+
+  @override
+  String get coachingErrorText => 'Väliaikainen virhe — yritä uudelleen';
+
+  @override
+  String get coachingRetryButton => 'Yritä uudelleen';
+
+  @override
+  String get coachingScoreSpecificity => 'Täsmällisyys';
+
+  @override
+  String get coachingScoreGodCentered => 'Jumala-keskeisyys';
+
+  @override
+  String get coachingScoreActs => 'ACTS-tasapaino';
+
+  @override
+  String get coachingScoreAuthenticity => 'Aitous';
+
+  @override
+  String get coachingStrengthsTitle => 'Mitä teit hyvin ✨';
+
+  @override
+  String get coachingImprovementsTitle => 'Syventääksesi 💡';
+
+  @override
+  String get coachingProCta => 'Avaa Rukousvalmennus Pro:lla';
+
+  @override
+  String get coachingLevelBeginner => '🌱 Aloittelija';
+
+  @override
+  String get coachingLevelGrowing => '🌿 Kasvussa';
+
+  @override
+  String get coachingLevelExpert => '🌳 Asiantuntija';
 }

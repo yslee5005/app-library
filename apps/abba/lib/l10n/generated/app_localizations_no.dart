@@ -864,4 +864,46 @@ class AppLocalizationsNo extends AppLocalizations {
 
   @override
   String get qtLoadingTitle => 'Forbereder dagens Ord...';
+
+  @override
+  String get coachingTitle => 'Bønnecoaching';
+
+  @override
+  String get coachingLoadingText => 'Reflekterer over bønnen din...';
+
+  @override
+  String get coachingErrorText => 'Midlertidig feil — prøv igjen';
+
+  @override
+  String get coachingRetryButton => 'Prøv igjen';
+
+  @override
+  String get coachingScoreSpecificity => 'Konkrethet';
+
+  @override
+  String get coachingScoreGodCentered => 'Gudssentrert';
+
+  @override
+  String get coachingScoreActs => 'ACTS-balanse';
+
+  @override
+  String get coachingScoreAuthenticity => 'Ekthet';
+
+  @override
+  String get coachingStrengthsTitle => 'Det du gjorde bra ✨';
+
+  @override
+  String get coachingImprovementsTitle => 'For å gå dypere 💡';
+
+  @override
+  String get coachingProCta => 'Lås opp Bønnecoaching med Pro';
+
+  @override
+  String get coachingLevelBeginner => '🌱 Nybegynner';
+
+  @override
+  String get coachingLevelGrowing => '🌿 Voksende';
+
+  @override
+  String get coachingLevelExpert => '🌳 Ekspert';
 }

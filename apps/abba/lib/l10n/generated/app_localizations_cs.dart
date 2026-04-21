@@ -869,4 +869,46 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String get qtLoadingTitle => 'Připravuji dnešní Slovo...';
+
+  @override
+  String get coachingTitle => 'Koučink modlitby';
+
+  @override
+  String get coachingLoadingText => 'Přemýšlíme o vaší modlitbě...';
+
+  @override
+  String get coachingErrorText => 'Dočasná chyba — zkuste to znovu';
+
+  @override
+  String get coachingRetryButton => 'Zkusit znovu';
+
+  @override
+  String get coachingScoreSpecificity => 'Konkrétnost';
+
+  @override
+  String get coachingScoreGodCentered => 'Bohocentričnost';
+
+  @override
+  String get coachingScoreActs => 'Rovnováha ACTS';
+
+  @override
+  String get coachingScoreAuthenticity => 'Autentičnost';
+
+  @override
+  String get coachingStrengthsTitle => 'Co jste udělali dobře ✨';
+
+  @override
+  String get coachingImprovementsTitle => 'Jak jít hlouběji 💡';
+
+  @override
+  String get coachingProCta => 'Odemkněte Koučink modlitby s Pro';
+
+  @override
+  String get coachingLevelBeginner => '🌱 Začátečník';
+
+  @override
+  String get coachingLevelGrowing => '🌿 Rostoucí';
+
+  @override
+  String get coachingLevelExpert => '🌳 Odborník';
 }

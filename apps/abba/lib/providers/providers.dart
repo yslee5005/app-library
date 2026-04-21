@@ -116,6 +116,26 @@ final prayerResultProvider = StateProvider<AsyncValue<PrayerResult>>((ref) {
 final premiumContentProvider =
     StateProvider<AsyncValue<PremiumContent>?>((ref) => null);
 
+/// Prayer Coaching (Pro-only). On-demand single call, evaluated against
+/// `assets/docs/prayer_guide.md`. Free users: placeholder shown via ProBlur.
+final prayerCoachingProvider =
+    FutureProvider.autoDispose<PrayerCoaching>((ref) async {
+  final isPremium = await ref.watch(isPremiumProvider.future);
+  if (!isPremium) {
+    return PrayerCoaching.placeholder();
+  }
+  final transcript = ref.watch(currentTranscriptProvider);
+  if (transcript.trim().isEmpty) {
+    return PrayerCoaching.placeholder();
+  }
+  final locale = ref.watch(localeProvider);
+  final aiService = ref.watch(aiServiceProvider);
+  return aiService.analyzePrayerCoaching(
+    transcript: transcript,
+    locale: locale,
+  );
+});
+
 final qtPassagesProvider = FutureProvider<List<QTPassage>>((ref) {
   final locale = ref.watch(localeProvider);
   final repo = ref.watch(qtRepositoryProvider);

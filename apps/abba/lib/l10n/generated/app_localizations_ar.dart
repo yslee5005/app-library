@@ -853,4 +853,46 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get qtLoadingTitle => 'جاري إعداد كلمة اليوم...';
+
+  @override
+  String get coachingTitle => 'إرشاد الصلاة';
+
+  @override
+  String get coachingLoadingText => 'نتأمل في صلاتك...';
+
+  @override
+  String get coachingErrorText => 'خطأ مؤقت — يرجى المحاولة مرة أخرى';
+
+  @override
+  String get coachingRetryButton => 'إعادة المحاولة';
+
+  @override
+  String get coachingScoreSpecificity => 'التحديد';
+
+  @override
+  String get coachingScoreGodCentered => 'التركيز على الله';
+
+  @override
+  String get coachingScoreActs => 'توازن ACTS';
+
+  @override
+  String get coachingScoreAuthenticity => 'الأصالة';
+
+  @override
+  String get coachingStrengthsTitle => 'ما قمت به بشكل جيد ✨';
+
+  @override
+  String get coachingImprovementsTitle => 'للتعمق أكثر 💡';
+
+  @override
+  String get coachingProCta => 'افتح إرشاد الصلاة مع Pro';
+
+  @override
+  String get coachingLevelBeginner => '🌱 مبتدئ';
+
+  @override
+  String get coachingLevelGrowing => '🌿 ينمو';
+
+  @override
+  String get coachingLevelExpert => '🌳 خبير';
 }

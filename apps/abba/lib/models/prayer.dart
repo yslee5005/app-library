@@ -350,3 +350,87 @@ class AiPrayer {
         isPremium: true,
       );
 }
+
+class CoachingScores {
+  final int specificity;
+  final int godCenteredness;
+  final int actsBalance;
+  final int authenticity;
+
+  const CoachingScores({
+    required this.specificity,
+    required this.godCenteredness,
+    required this.actsBalance,
+    required this.authenticity,
+  });
+
+  factory CoachingScores.fromJson(Map<String, dynamic> json) {
+    return CoachingScores(
+      specificity: (json['specificity'] as num?)?.toInt() ?? 0,
+      godCenteredness: (json['god_centeredness'] as num?)?.toInt() ?? 0,
+      actsBalance: (json['acts_balance'] as num?)?.toInt() ?? 0,
+      authenticity: (json['authenticity'] as num?)?.toInt() ?? 0,
+    );
+  }
+
+  double get average =>
+      (specificity + godCenteredness + actsBalance + authenticity) / 4.0;
+}
+
+class PrayerCoaching {
+  final CoachingScores scores;
+  final List<String> strengths;
+  final List<String> improvements;
+  final String overallFeedbackEn;
+  final String overallFeedbackKo;
+  final String expertLevel; // "beginner" | "growing" | "expert"
+  final bool isPremium;
+
+  const PrayerCoaching({
+    required this.scores,
+    required this.strengths,
+    required this.improvements,
+    required this.overallFeedbackEn,
+    required this.overallFeedbackKo,
+    required this.expertLevel,
+    this.isPremium = true,
+  });
+
+  String overallFeedback(String locale) =>
+      locale == 'ko' ? overallFeedbackKo : overallFeedbackEn;
+
+  factory PrayerCoaching.fromJson(Map<String, dynamic> json) {
+    return PrayerCoaching(
+      scores: CoachingScores.fromJson(
+        json['scores'] as Map<String, dynamic>? ?? const {},
+      ),
+      strengths: (json['strengths'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          const [],
+      improvements: (json['improvements'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          const [],
+      overallFeedbackEn: json['overall_feedback_en'] as String? ?? '',
+      overallFeedbackKo: json['overall_feedback_ko'] as String? ?? '',
+      expertLevel: json['expert_level'] as String? ?? 'growing',
+      isPremium: json['is_premium'] as bool? ?? true,
+    );
+  }
+
+  /// Placeholder for locked premium card display (Free users).
+  factory PrayerCoaching.placeholder() => const PrayerCoaching(
+        scores: CoachingScores(
+          specificity: 0,
+          godCenteredness: 0,
+          actsBalance: 0,
+          authenticity: 0,
+        ),
+        strengths: [],
+        improvements: [],
+        overallFeedbackEn: 'Unlock your personal prayer coaching feedback...',
+        overallFeedbackKo: 'Pro로 당신의 기도에 대한 맞춤 코칭을 받아보세요...',
+        expertLevel: 'growing',
+      );
+}

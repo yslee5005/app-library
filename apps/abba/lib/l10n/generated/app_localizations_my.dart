@@ -872,4 +872,47 @@ class AppLocalizationsMy extends AppLocalizations {
 
   @override
   String get qtLoadingTitle => 'ယနေ့၏ နှုတ်ကပါဌ်တော်ကို ပြင်ဆင်နေပါသည်...';
+
+  @override
+  String get coachingTitle => 'ဆုတောင်းခြင်း သင်တန်း';
+
+  @override
+  String get coachingLoadingText =>
+      'သင်၏ဆုတောင်းချက်ကို ပြန်လည်သုံးသပ်နေပါသည်...';
+
+  @override
+  String get coachingErrorText => 'ယာယီ အမှား — ပြန်စမ်းကြည့်ပါ';
+
+  @override
+  String get coachingRetryButton => 'ပြန်ကြိုးစားပါ';
+
+  @override
+  String get coachingScoreSpecificity => 'တိကျမှု';
+
+  @override
+  String get coachingScoreGodCentered => 'ဘုရားဗဟိုပြု';
+
+  @override
+  String get coachingScoreActs => 'ACTS ချိန်ခွင်လျှာ';
+
+  @override
+  String get coachingScoreAuthenticity => 'စစ်မှန်မှု';
+
+  @override
+  String get coachingStrengthsTitle => 'ကောင်းမွန်စွာလုပ်ခဲ့သည်များ ✨';
+
+  @override
+  String get coachingImprovementsTitle => 'ပိုမိုနက်ရှိုင်းရန် 💡';
+
+  @override
+  String get coachingProCta => 'Pro ဖြင့် ဆုတောင်းခြင်း သင်တန်းကို ဖွင့်ပါ';
+
+  @override
+  String get coachingLevelBeginner => '🌱 စတင်နေသူ';
+
+  @override
+  String get coachingLevelGrowing => '🌿 ကြီးထွားနေသူ';
+
+  @override
+  String get coachingLevelExpert => '🌳 ကျွမ်းကျင်သူ';
 }

@@ -375,5 +375,19 @@
   "qtLoadingHint8": "📖 Mudrost — Sačuvaj jednu lekciju današnjeg dana",
   "qtLoadingHint9": "⏳ Strpljenje — Misli na ono što tiho čekaš",
   "qtLoadingHint10": "✨ Radost — Sjeti se osmijeha današnjeg dana",
-  "qtLoadingTitle": "Priprema se današnja Riječ..."
+  "qtLoadingTitle": "Priprema se današnja Riječ...",
+  "coachingTitle": "Coaching molitve",
+  "coachingLoadingText": "Razmišljamo o vašoj molitvi...",
+  "coachingErrorText": "Privremena pogreška — pokušajte ponovno",
+  "coachingRetryButton": "Pokušaj ponovno",
+  "coachingScoreSpecificity": "Konkretnost",
+  "coachingScoreGodCentered": "Usredotočenost na Boga",
+  "coachingScoreActs": "ACTS ravnoteža",
+  "coachingScoreAuthenticity": "Autentičnost",
+  "coachingStrengthsTitle": "Što ste dobro napravili ✨",
+  "coachingImprovementsTitle": "Da idete dublje 💡",
+  "coachingProCta": "Otključaj Coaching molitve s Pro",
+  "coachingLevelBeginner": "🌱 Početnik",
+  "coachingLevelGrowing": "🌿 U rastu",
+  "coachingLevelExpert": "🌳 Stručnjak"
 }

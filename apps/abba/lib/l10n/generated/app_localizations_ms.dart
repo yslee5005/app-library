@@ -873,4 +873,46 @@ class AppLocalizationsMs extends AppLocalizations {
 
   @override
   String get qtLoadingTitle => 'Menyediakan Firman hari ini...';
+
+  @override
+  String get coachingTitle => 'Bimbingan Doa';
+
+  @override
+  String get coachingLoadingText => 'Merenung doa anda...';
+
+  @override
+  String get coachingErrorText => 'Ralat sementara — sila cuba lagi';
+
+  @override
+  String get coachingRetryButton => 'Cuba lagi';
+
+  @override
+  String get coachingScoreSpecificity => 'Kekhususan';
+
+  @override
+  String get coachingScoreGodCentered => 'Berpusatkan Tuhan';
+
+  @override
+  String get coachingScoreActs => 'Keseimbangan ACTS';
+
+  @override
+  String get coachingScoreAuthenticity => 'Keaslian';
+
+  @override
+  String get coachingStrengthsTitle => 'Apa yang anda lakukan dengan baik ✨';
+
+  @override
+  String get coachingImprovementsTitle => 'Untuk lebih mendalam 💡';
+
+  @override
+  String get coachingProCta => 'Buka Bimbingan Doa dengan Pro';
+
+  @override
+  String get coachingLevelBeginner => '🌱 Permulaan';
+
+  @override
+  String get coachingLevelGrowing => '🌿 Berkembang';
+
+  @override
+  String get coachingLevelExpert => '🌳 Pakar';
 }

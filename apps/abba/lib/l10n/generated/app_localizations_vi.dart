@@ -867,4 +867,47 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String get qtLoadingTitle => 'Đang chuẩn bị Lời hôm nay...';
+
+  @override
+  String get coachingTitle => 'Huấn luyện cầu nguyện';
+
+  @override
+  String get coachingLoadingText =>
+      'Đang suy ngẫm về lời cầu nguyện của bạn...';
+
+  @override
+  String get coachingErrorText => 'Lỗi tạm thời — vui lòng thử lại';
+
+  @override
+  String get coachingRetryButton => 'Thử lại';
+
+  @override
+  String get coachingScoreSpecificity => 'Tính cụ thể';
+
+  @override
+  String get coachingScoreGodCentered => 'Lấy Chúa làm trung tâm';
+
+  @override
+  String get coachingScoreActs => 'Cân bằng ACTS';
+
+  @override
+  String get coachingScoreAuthenticity => 'Tính chân thực';
+
+  @override
+  String get coachingStrengthsTitle => 'Điều bạn đã làm tốt ✨';
+
+  @override
+  String get coachingImprovementsTitle => 'Để đi sâu hơn 💡';
+
+  @override
+  String get coachingProCta => 'Mở Huấn luyện cầu nguyện với Pro';
+
+  @override
+  String get coachingLevelBeginner => '🌱 Người mới';
+
+  @override
+  String get coachingLevelGrowing => '🌿 Đang phát triển';
+
+  @override
+  String get coachingLevelExpert => '🌳 Chuyên gia';
 }

@@ -375,5 +375,19 @@
   "qtLoadingHint8": "📖 Saggezza — Custodisci una lezione di oggi",
   "qtLoadingHint9": "⏳ Pazienza — Pensa a ciò che stai aspettando in silenzio",
   "qtLoadingHint10": "✨ Gioia — Ricorda un sorriso di oggi",
-  "qtLoadingTitle": "Preparando la Parola di oggi..."
+  "qtLoadingTitle": "Preparando la Parola di oggi...",
+  "coachingTitle": "Coaching di preghiera",
+  "coachingLoadingText": "Stiamo riflettendo sulla tua preghiera...",
+  "coachingErrorText": "Errore temporaneo — riprova",
+  "coachingRetryButton": "Riprova",
+  "coachingScoreSpecificity": "Specificità",
+  "coachingScoreGodCentered": "Centrato su Dio",
+  "coachingScoreActs": "Equilibrio ACTS",
+  "coachingScoreAuthenticity": "Autenticità",
+  "coachingStrengthsTitle": "Cosa hai fatto bene ✨",
+  "coachingImprovementsTitle": "Per approfondire 💡",
+  "coachingProCta": "Sblocca il Coaching con Pro",
+  "coachingLevelBeginner": "🌱 Principiante",
+  "coachingLevelGrowing": "🌿 In crescita",
+  "coachingLevelExpert": "🌳 Esperto"
 }

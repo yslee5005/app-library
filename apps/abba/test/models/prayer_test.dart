@@ -96,7 +96,6 @@ void main() {
       expect(result.testimony, 'My prayer...');
       expect(result.guidance, isNull);
       expect(result.aiPrayer, isNull);
-      expect(result.originalLanguage, isNull);
     });
 
     test('fromJson parses all premium fields', () {
@@ -120,16 +119,6 @@ void main() {
           'audio_url': 'https://example.com/audio.mp3',
           'is_premium': true,
         },
-        'original_language': {
-          'word': 'רֹעִי',
-          'transliteration': "ro'i",
-          'language': 'Hebrew',
-          'meaning_en': 'my shepherd',
-          'meaning_ko': '나의 목자',
-          'context_en': 'context en',
-          'context_ko': 'context ko',
-          'is_premium': true,
-        },
       };
 
       final result = PrayerResult.fromJson(json);
@@ -142,12 +131,6 @@ void main() {
       expect(result.aiPrayer, isNotNull);
       expect(result.aiPrayer!.audioUrl, 'https://example.com/audio.mp3');
       expect(result.aiPrayer!.text('en'), 'prayer en');
-
-      expect(result.originalLanguage, isNotNull);
-      expect(result.originalLanguage!.word, 'רֹעִי');
-      expect(result.originalLanguage!.transliteration, "ro'i");
-      expect(result.originalLanguage!.language, 'Hebrew');
-      expect(result.originalLanguage!.meaning('ko'), '나의 목자');
     });
   });
 
@@ -205,21 +188,23 @@ void main() {
     });
   });
 
-  group('OriginalLanguage', () {
-    test('context returns locale-based text', () {
-      const lang = OriginalLanguage(
+  group('ScriptureOriginalWord', () {
+    test('meaning and nuance return locale-based text', () {
+      const word = ScriptureOriginalWord(
         word: 'word',
         transliteration: 'trans',
         language: 'Hebrew',
         meaningEn: 'meaning en',
         meaningKo: 'meaning ko',
-        contextEn: 'context en',
-        contextKo: 'context ko',
-        isPremium: true,
+        nuanceEn: 'nuance en',
+        nuanceKo: 'nuance ko',
       );
 
-      expect(lang.context('en'), 'context en');
-      expect(lang.context('ko'), 'context ko');
+      expect(word.meaning('en'), 'meaning en');
+      expect(word.meaning('ko'), 'meaning ko');
+      expect(word.nuance('en'), 'nuance en');
+      expect(word.nuance('ko'), 'nuance ko');
+      expect(word.isRtl, true);
     });
   });
 }

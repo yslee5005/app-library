@@ -864,4 +864,46 @@ class AppLocalizationsSw extends AppLocalizations {
 
   @override
   String get qtLoadingTitle => 'Inaandaa Neno la leo...';
+
+  @override
+  String get coachingTitle => 'Uongozi wa Maombi';
+
+  @override
+  String get coachingLoadingText => 'Tunatafakari sala yako...';
+
+  @override
+  String get coachingErrorText => 'Hitilafu ya muda — tafadhali jaribu tena';
+
+  @override
+  String get coachingRetryButton => 'Jaribu tena';
+
+  @override
+  String get coachingScoreSpecificity => 'Uwazi';
+
+  @override
+  String get coachingScoreGodCentered => 'Umeelekezwa kwa Mungu';
+
+  @override
+  String get coachingScoreActs => 'Usawa wa ACTS';
+
+  @override
+  String get coachingScoreAuthenticity => 'Uhalisia';
+
+  @override
+  String get coachingStrengthsTitle => 'Ulichokifanya vizuri ✨';
+
+  @override
+  String get coachingImprovementsTitle => 'Kwa kwenda ndani zaidi 💡';
+
+  @override
+  String get coachingProCta => 'Fungua Uongozi wa Maombi kwa Pro';
+
+  @override
+  String get coachingLevelBeginner => '🌱 Mwanzo';
+
+  @override
+  String get coachingLevelGrowing => '🌿 Anakua';
+
+  @override
+  String get coachingLevelExpert => '🌳 Mtaalamu';
 }

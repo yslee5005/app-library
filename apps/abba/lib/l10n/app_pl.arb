@@ -375,5 +375,19 @@
   "qtLoadingHint8": "📖 Mądrość — Zachowaj jedną lekcję z dnia dzisiejszego",
   "qtLoadingHint9": "⏳ Cierpliwość — Pomyśl o tym, na co cicho czekasz",
   "qtLoadingHint10": "✨ Radość — Przypomnij sobie chwilę uśmiechu dzisiaj",
-  "qtLoadingTitle": "Przygotowuję dzisiejsze Słowo..."
+  "qtLoadingTitle": "Przygotowuję dzisiejsze Słowo...",
+  "coachingTitle": "Coaching modlitwy",
+  "coachingLoadingText": "Rozważamy twoją modlitwę...",
+  "coachingErrorText": "Błąd tymczasowy — spróbuj ponownie",
+  "coachingRetryButton": "Ponów",
+  "coachingScoreSpecificity": "Konkretność",
+  "coachingScoreGodCentered": "Skupienie na Bogu",
+  "coachingScoreActs": "Równowaga ACTS",
+  "coachingScoreAuthenticity": "Autentyczność",
+  "coachingStrengthsTitle": "Co zrobiłeś dobrze ✨",
+  "coachingImprovementsTitle": "Aby pójść głębiej 💡",
+  "coachingProCta": "Odblokuj Coaching modlitwy z Pro",
+  "coachingLevelBeginner": "🌱 Początkujący",
+  "coachingLevelGrowing": "🌿 Rozwijający się",
+  "coachingLevelExpert": "🌳 Ekspert"
 }

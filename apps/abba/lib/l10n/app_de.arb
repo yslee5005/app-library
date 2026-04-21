@@ -375,5 +375,19 @@
   "qtLoadingHint8": "📖 Weisheit — Bewahre eine Lektion von heute",
   "qtLoadingHint9": "⏳ Geduld — Denke an etwas, worauf du still wartest",
   "qtLoadingHint10": "✨ Freude — Erinnere dich an ein Lächeln von heute",
-  "qtLoadingTitle": "Das Wort für heute wird vorbereitet..."
+  "qtLoadingTitle": "Das Wort für heute wird vorbereitet...",
+  "coachingTitle": "Gebetscoaching",
+  "coachingLoadingText": "Ihr Gebet wird reflektiert...",
+  "coachingErrorText": "Vorübergehender Fehler — bitte erneut versuchen",
+  "coachingRetryButton": "Erneut versuchen",
+  "coachingScoreSpecificity": "Spezifität",
+  "coachingScoreGodCentered": "Gott-zentriert",
+  "coachingScoreActs": "ACTS-Balance",
+  "coachingScoreAuthenticity": "Authentizität",
+  "coachingStrengthsTitle": "Was Sie gut gemacht haben ✨",
+  "coachingImprovementsTitle": "Um tiefer zu gehen 💡",
+  "coachingProCta": "Gebetscoaching mit Pro freischalten",
+  "coachingLevelBeginner": "🌱 Anfänger",
+  "coachingLevelGrowing": "🌿 Wachsend",
+  "coachingLevelExpert": "🌳 Experte"
 }

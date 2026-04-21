@@ -375,5 +375,19 @@
   "qtLoadingHint8": "📖 Bölcsesség — Őrizd meg a mai nap egy tanulságát",
   "qtLoadingHint9": "⏳ Türelem — Gondolj arra, amire csendben vársz",
   "qtLoadingHint10": "✨ Öröm — Emlékezz egy mosolyra a mai napból",
-  "qtLoadingTitle": "A mai Ige előkészítése folyamatban..."
+  "qtLoadingTitle": "A mai Ige előkészítése folyamatban...",
+  "coachingTitle": "Imakoucholás",
+  "coachingLoadingText": "Elmélkedünk az imádságodon...",
+  "coachingErrorText": "Átmeneti hiba — kérjük, próbálja újra",
+  "coachingRetryButton": "Újra",
+  "coachingScoreSpecificity": "Konkrétság",
+  "coachingScoreGodCentered": "Istenközpontúság",
+  "coachingScoreActs": "ACTS egyensúly",
+  "coachingScoreAuthenticity": "Hitelesség",
+  "coachingStrengthsTitle": "Amit jól csináltál ✨",
+  "coachingImprovementsTitle": "Hogy elmélyülj 💡",
+  "coachingProCta": "Oldja fel az Imakoucholást Pro-val",
+  "coachingLevelBeginner": "🌱 Kezdő",
+  "coachingLevelGrowing": "🌿 Fejlődő",
+  "coachingLevelExpert": "🌳 Szakértő"
 }

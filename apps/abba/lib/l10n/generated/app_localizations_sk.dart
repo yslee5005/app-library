@@ -870,4 +870,46 @@ class AppLocalizationsSk extends AppLocalizations {
 
   @override
   String get qtLoadingTitle => 'Pripravuje sa dnešné Slovo...';
+
+  @override
+  String get coachingTitle => 'Koučing modlitby';
+
+  @override
+  String get coachingLoadingText => 'Rozjímame nad vašou modlitbou...';
+
+  @override
+  String get coachingErrorText => 'Dočasná chyba — skúste to znova';
+
+  @override
+  String get coachingRetryButton => 'Skúsiť znova';
+
+  @override
+  String get coachingScoreSpecificity => 'Konkrétnosť';
+
+  @override
+  String get coachingScoreGodCentered => 'Bohocentrickosť';
+
+  @override
+  String get coachingScoreActs => 'Rovnováha ACTS';
+
+  @override
+  String get coachingScoreAuthenticity => 'Autentickosť';
+
+  @override
+  String get coachingStrengthsTitle => 'Čo ste urobili dobre ✨';
+
+  @override
+  String get coachingImprovementsTitle => 'Ako ísť hlbšie 💡';
+
+  @override
+  String get coachingProCta => 'Odomknite Koučing modlitby s Pro';
+
+  @override
+  String get coachingLevelBeginner => '🌱 Začiatočník';
+
+  @override
+  String get coachingLevelGrowing => '🌿 Rastúci';
+
+  @override
+  String get coachingLevelExpert => '🌳 Odborník';
 }

@@ -375,5 +375,19 @@
   "qtLoadingHint8": "📖 ปัญญา — เก็บบทเรียนหนึ่งของวันนี้ไว้ในใจ",
   "qtLoadingHint9": "⏳ ความอดทน — นึกถึงสิ่งที่คุณกำลังรอคอยอย่างสงบ",
   "qtLoadingHint10": "✨ ความยินดี — จำช่วงเวลาที่ยิ้มในวันนี้",
-  "qtLoadingTitle": "กำลังเตรียมพระวจนะของวันนี้..."
+  "qtLoadingTitle": "กำลังเตรียมพระวจนะของวันนี้...",
+  "coachingTitle": "การโค้ชการอธิษฐาน",
+  "coachingLoadingText": "กำลังไตร่ตรองคำอธิษฐานของคุณ...",
+  "coachingErrorText": "ข้อผิดพลาดชั่วคราว — โปรดลองอีกครั้ง",
+  "coachingRetryButton": "ลองอีกครั้ง",
+  "coachingScoreSpecificity": "ความเฉพาะเจาะจง",
+  "coachingScoreGodCentered": "ศูนย์กลางที่พระเจ้า",
+  "coachingScoreActs": "สมดุล ACTS",
+  "coachingScoreAuthenticity": "ความจริงใจ",
+  "coachingStrengthsTitle": "สิ่งที่คุณทำได้ดี ✨",
+  "coachingImprovementsTitle": "เพื่อก้าวลึกขึ้น 💡",
+  "coachingProCta": "ปลดล็อกการโค้ชการอธิษฐานด้วย Pro",
+  "coachingLevelBeginner": "🌱 ผู้เริ่มต้น",
+  "coachingLevelGrowing": "🌿 กำลังเติบโต",
+  "coachingLevelExpert": "🌳 ผู้เชี่ยวชาญ"
 }

@@ -375,5 +375,19 @@
   "qtLoadingHint8": "📖 Moudrost — Uchovejte si jedno ponaučení z dneška",
   "qtLoadingHint9": "⏳ Trpělivost — Myslete na to, na co tiše čekáte",
   "qtLoadingHint10": "✨ Radost — Vzpomeňte si na úsměv z dneška",
-  "qtLoadingTitle": "Připravuji dnešní Slovo..."
+  "qtLoadingTitle": "Připravuji dnešní Slovo...",
+  "coachingTitle": "Koučink modlitby",
+  "coachingLoadingText": "Přemýšlíme o vaší modlitbě...",
+  "coachingErrorText": "Dočasná chyba — zkuste to znovu",
+  "coachingRetryButton": "Zkusit znovu",
+  "coachingScoreSpecificity": "Konkrétnost",
+  "coachingScoreGodCentered": "Bohocentričnost",
+  "coachingScoreActs": "Rovnováha ACTS",
+  "coachingScoreAuthenticity": "Autentičnost",
+  "coachingStrengthsTitle": "Co jste udělali dobře ✨",
+  "coachingImprovementsTitle": "Jak jít hlouběji 💡",
+  "coachingProCta": "Odemkněte Koučink modlitby s Pro",
+  "coachingLevelBeginner": "🌱 Začátečník",
+  "coachingLevelGrowing": "🌿 Rostoucí",
+  "coachingLevelExpert": "🌳 Odborník"
 }

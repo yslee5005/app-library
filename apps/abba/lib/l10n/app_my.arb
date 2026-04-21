@@ -375,5 +375,19 @@
   "qtLoadingHint8": "📖 ဉာဏ်ပညာ — ယနေ့၏ သင်ခန်းစာတစ်ခုကို စိတ်ထဲ မှတ်ထားပါ",
   "qtLoadingHint9": "⏳ သည်းခံခြင်း — တိတ်ဆိတ်စွာ စောင့်ဆိုင်းနေသောအရာကို စဉ်းစားပါ",
   "qtLoadingHint10": "✨ ဝမ်းမြောက်ခြင်း — ယနေ့ ပြုံးခဲ့သည့် အချိန်တစ်ခုကို ပြန်လည်သတိရပါ",
-  "qtLoadingTitle": "ယနေ့၏ နှုတ်ကပါဌ်တော်ကို ပြင်ဆင်နေပါသည်..."
+  "qtLoadingTitle": "ယနေ့၏ နှုတ်ကပါဌ်တော်ကို ပြင်ဆင်နေပါသည်...",
+  "coachingTitle": "ဆုတောင်းခြင်း သင်တန်း",
+  "coachingLoadingText": "သင်၏ဆုတောင်းချက်ကို ပြန်လည်သုံးသပ်နေပါသည်...",
+  "coachingErrorText": "ယာယီ အမှား — ပြန်စမ်းကြည့်ပါ",
+  "coachingRetryButton": "ပြန်ကြိုးစားပါ",
+  "coachingScoreSpecificity": "တိကျမှု",
+  "coachingScoreGodCentered": "ဘုရားဗဟိုပြု",
+  "coachingScoreActs": "ACTS ချိန်ခွင်လျှာ",
+  "coachingScoreAuthenticity": "စစ်မှန်မှု",
+  "coachingStrengthsTitle": "ကောင်းမွန်စွာလုပ်ခဲ့သည်များ ✨",
+  "coachingImprovementsTitle": "ပိုမိုနက်ရှိုင်းရန် 💡",
+  "coachingProCta": "Pro ဖြင့် ဆုတောင်းခြင်း သင်တန်းကို ဖွင့်ပါ",
+  "coachingLevelBeginner": "🌱 စတင်နေသူ",
+  "coachingLevelGrowing": "🌿 ကြီးထွားနေသူ",
+  "coachingLevelExpert": "🌳 ကျွမ်းကျင်သူ"
 }

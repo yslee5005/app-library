@@ -11,6 +11,7 @@ class CachedAiService implements AiService {
   final _prayerCache = <String, PrayerResult>{};
   final _premiumCache = <String, PremiumContent>{};
   final _meditationCache = <String, QtMeditationResult>{};
+  final _coachingCache = <String, PrayerCoaching>{};
 
   CachedAiService(this._inner);
 
@@ -116,6 +117,23 @@ class CachedAiService implements AiService {
       locale: locale,
     );
     _putInCache(_meditationCache, key, result);
+    return result;
+  }
+
+  @override
+  Future<PrayerCoaching> analyzePrayerCoaching({
+    required String transcript,
+    required String locale,
+  }) async {
+    final key = '${_key(transcript, locale)}_coaching';
+    final cached = _getFromCache(_coachingCache, key);
+    if (cached != null) return cached;
+
+    final result = await _inner.analyzePrayerCoaching(
+      transcript: transcript,
+      locale: locale,
+    );
+    _putInCache(_coachingCache, key, result);
     return result;
   }
 }
