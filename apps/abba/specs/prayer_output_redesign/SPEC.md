@@ -41,10 +41,10 @@
 - **변경 범위**: HistoricalStory 모델 (3 field pair → 3 single field, locale getter 제거, legacy fromJson fallback), HistoricalStoryCard 확장, Gemini prompt schema single-field 전환, hardcoded `_hardcodedPrayerResult(locale)` 시그니처 변경, ARB 신규 키 0개
 - **Prompt Phase**: Historical Deep Analysis (기존 `analyzePrayerPremium` 안에서 schema + 품질 지시만 변경, 신규 메서드 X)
 
-### Phase 5 · AI Prayer Deep (TTS 제거)
-- **목표**: 2분 분량(~300단어) + 명언/과학 사실/구체 예시 포함. **TTS 제거, 텍스트만**
-- **변경 범위**: AiPrayerCard 재작성 (audio player 제거), AiPrayerDeep 모델, citations UI, ARB ~5 키
-- **Prompt Phase**: AI Prayer Deep (명언/과학 풀 내장, citations 메타데이터 강제)
+### Phase 5 · AI Prayer Deep (TTS 제거 + citations + A-1 single-field)
+- **목표**: 2분 분량(~300단어) + 명언/과학/예시 citations. **TTS 완전 제거 (audioUrl 필드 삭제)**. Phase 4의 A-1 single-field 패턴을 AiPrayer에도 적용
+- **변경 범위**: `AiPrayer` 모델(textEn/Ko → text single, audioUrl 삭제, citations: List<Citation> 추가), `Citation` 신규 클래스, `AiPrayerCard` 확장 (locale prop 제거, citations expandable 섹션), Gemini prompt schema single-field + citations + 품질 지시 강화, hardcoded AiPrayer 샘플 locale-aware 리라이트 (~300 words + 3 citations), ARB 5 키 × 35 locale
+- **Prompt Phase**: AI Prayer Deep (기존 `analyzePrayerPremium` 안에서 schema + 품질 지시만 변경)
 
 ## 전체 변경 범위 (추산)
 
@@ -117,6 +117,9 @@
 - [x] Phase 3 구현 + commit `6cff608` (2026-04-21)
 - [x] Phase 4 `_details/*` 상세 작성 (2026-04-21)
 - [x] Phase 4 i18n 전략 결정: **A-1** (HistoricalStory single-field + locale별 prompt 직접 생성) — 사용자 승인 (2026-04-21)
-- [ ] **Phase 4 구현 착수 대기 ("실행" 커맨드)** ← 현재 여기
+- [x] Phase 4 구현 + commit `1daf58b` (2026-04-21)
+- [x] Phase 5 `_details/*` 상세 작성 (2026-04-21) ← 현재 여기
+- [ ] **Phase 5 사용자 승인 (AiPrayer single-field + citations hallucinate 방지 검토)**
+- [ ] Phase 5 구현
 - [ ] Phase 4 구현
 - [ ] Phase 5 (대기)

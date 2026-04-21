@@ -237,11 +237,88 @@
 
 ---
 
-## Phase 5 카드 변경 (추가 예정)
+## Phase 5 · AiPrayerCard 확장 (single-field + citations)
 
-| Phase | 카드 | 변경 유형 |
-|-------|------|---------|
-| 5 | AiPrayerCard | 재작성 (audio 제거 + citations 추가) |
+### Card: `AiPrayerCard` (기존 widget 재설계)
+
+Audio player 원래 포함 안 됨(이미 dead field). 실질 변경:
+1. `locale` prop 제거, `.text(locale)` → `.text` 직접 참조
+2. citations 존재 시 본문 아래 **expandable citations 섹션**
+3. text 분량 증가(~300 words) 대응 typography
+
+| State | Visual | Notes |
+|---|---|---|
+| **Empty** | `isPremium && !isUserPremium` → ProBlur (기존 유지) | |
+| **Loading** | 상위 Loading에서 처리 | |
+| **Error** | 상위 Dashboard 에러 | |
+| **Data (Pro)** | 기도문 body(18pt, h 1.8) + citations섹션(펼치면 노출) | citations 0개면 섹션 자체 숨김 |
+
+### 레이아웃 (Pro Data 상태, citations 3개 예시)
+
+```
+┌──────────────────────────────────────────────┐
+│ 🙏 당신을 위한 기도                            │
+├──────────────────────────────────────────────┤
+│ 하늘에 계신 아버지, 오늘 아침 당신 앞에         │
+│ 조용히 무릎 꿇습니다.                          │
+│                                              │
+│ 주님, 저는 오늘도 가족의 이름을 불러봅니다...   │
+│ [~2분 분량 본문, 여러 문단]                   │
+│                                              │
+│ 주님의 이름으로 기도드립니다. 아멘.            │
+├──────────────────────────────────────────────┤
+│ 📚 참고 · 인용 (3)         [펼치기 ▼]          │
+│                                              │
+│ ┌────────────────────────────────────────┐  │
+│ │ 💭 명언 · C.S. Lewis, Mere Christianity │  │
+│ │ "우리는 영원을 향해 창조된 존재입니다."  │  │
+│ ├────────────────────────────────────────┤  │
+│ │ 🔬 연구 · Harvard 85년 추적 연구        │  │
+│ │ "행복은 관계의 깊이에서 온다."           │  │
+│ ├────────────────────────────────────────┤  │
+│ │ ✨ 예시                                  │  │
+│ │ "염려로 잠 못 이루던 밤의 전화 한 통..."│  │
+│ └────────────────────────────────────────┘  │
+└──────────────────────────────────────────────┘
+```
+
+### Citation Section 스펙
+
+- 본문 아래 구분선 + 섹션 제목 `l10n.aiPrayerCitationsTitle` + 개수 표시
+- 기본 **접힘 상태** (기존 ExpandableCard 안의 sub-expandable 패턴 또는 간단 toggle)
+- 각 항목:
+  - 타입 아이콘: quote `💭` · science `🔬` · example `✨`
+  - 타입 라벨: `l10n.citationTypeQuote` / `citationTypeScience` / `citationTypeExample`
+  - source italic muted (source가 빈 문자열이면 라벨만)
+  - content body, 인용부호 추가
+- 항목 사이 divider 1px
+
+### Typography 변경
+
+| 요소 | Before | After | 이유 |
+|------|--------|-------|------|
+| 기도 본문 | `AbbaTypography.body` (h 1.6) | `AbbaTypography.body.copyWith(height: 1.8)` | 2분 읽기 분량 호흡 |
+| citation source | N/A | `AbbaTypography.caption` italic muted | 출처 명시 |
+| citation content | N/A | `AbbaTypography.bodySmall` | 본문과 구분 |
+| citation type label | N/A | `AbbaTypography.label` + 타입별 accent | 시각적 분류 |
+
+### Responsive
+
+- compact (< 600): citations 각 row 세로 stack (아이콘 + 라벨 상단, content 하단)
+- medium 이상: 아이콘/라벨 가로, content wrap
+
+### Reading Time 라벨 (선택)
+
+카드 제목 우측에 `l10n.aiPrayerReadingTime` (e.g., "2분 읽기 / 2 min read") 뱃지 노출 고려. MVP에서는 optional — 카드 제목이 길어지면 생략 가능.
+
+---
+
+### Dead Code Sweep
+
+- `AiPrayerCard.locale` prop → 제거
+- `AiPrayer.textEn`, `.textKo`, `.text(locale)` → 제거
+- `AiPrayer.audioUrl` 필드 → 제거
+- 주석으로 남기지 말 것
 
 ## 참조
 - `.claude/rules/responsive.md` — ScreenSize 4단계

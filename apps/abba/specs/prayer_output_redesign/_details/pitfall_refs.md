@@ -215,6 +215,54 @@ factory PrayerResult.fromJson(Map<String, dynamic> json) => _$PrayerResultFromJs
 
 ---
 
-## Phase 5 함정 (추가 예정)
+## Phase 5 · AI Prayer Deep 관련 함정
 
-- Phase 5: TTS 제거 시 기존 audio player dead code (§13), citations UI expandable (§11), 과학 사실 hallucinate (§2 느낌으로 검증)
+- [x] **§2 Subscription / Payment Crash** — Premium 1 call 유지, 영향 없음. 단 citations 배열이 커질 때 응답 토큰 과잉 방지 (최대 4개 제한 prompt에 명시)
+- [x] **§4 i18n** — 5 신규 키 × 35 locale. Phase 3 스크립트 패턴 재사용
+- [x] **§11 성능** — 긴 기도문(~300 words) + citations 4개 렌더. `Text` widget 단일 layout 충분. citations는 default **접힘** 상태로 초기 렌더 비용 최소화
+- [x] **§12 Color / Design Token** — citations 타입별 accent 색: quote=`softGold`, science=`softSky`, example=`sage`. 하드코딩 금지
+- [x] **§13 Dead Code Sweep** ★ 핵심:
+  - `AiPrayer.textEn`, `.textKo` 필드 제거
+  - `AiPrayer.text(locale)` getter 제거
+  - `AiPrayer.audioUrl` 필드 제거 (이미 UI 미사용 dead field)
+  - `AiPrayerCard.locale` prop 제거
+  - grep 검증: `grep -rn "aiPrayer\.\(text(\|audioUrl\|textEn\|textKo\)" apps/abba/`
+  - 삭제 전 주석/TODO 남기지 말 것 (CLAUDE.md)
+- [x] **§16 Code Generation** — l10n 신규 키 5개 → `flutter gen-l10n` 실행. freezed 안 쓰므로 build_runner 불필요
+- [ ] **§1 Riverpod 라이프사이클** — 해당 없음 (기존 Premium 로딩 로직 재사용)
+- [x] **§3 Multi-tenant** — Supabase 스키마 변경 없음. legacy `text_en`/`text_ko` 키는 fromJson 3단 fallback으로 처리. `audio_url` 키는 무시
+
+### Phase 5 특유 주의
+
+#### 1. AI Hallucinate 방지 (★ 최우선, Phase 4보다 강함)
+
+Phase 4 Historical Story는 "인물·사건"의 사실성, Phase 5 AI Prayer의 citations는 **"인용문·연구 결과"의 사실성**. 잘못된 quote 귀속 / 존재하지 않는 연구 인용은 앱 신뢰도에 치명적.
+
+- prompt: "If not 100% confident about source, OMIT citation entirely"
+- prompt: 악명 높은 misattribution 예시 금지 — "Einstein said...", "Gandhi said..." 패턴
+- 출시 전 30 sample fact check: quote의 author × work 실존 확인, science의 study 실존 확인
+- 금지어 필터 (선택): citation.source에 "recent study" 같은 모호 표현 감지 → 해당 citation drop
+
+#### 2. citations 빈 배열 vs null
+
+- DB legacy: `citations` 키 없음 → `fromJson`에서 빈 리스트로 처리 (`?? const []`)
+- UI: `citations.isEmpty`면 citations 섹션 자체 숨김 (AiPrayerCard)
+- AI 응답이 citations 생성 못 하면 빈 배열 반환 OK (필수 아님)
+
+#### 3. 기존 DB 레코드 호환
+
+- Phase 5 이전 레코드: `ai_prayer.text_en` / `text_ko` / `audio_url` 있음
+- new fromJson은 `text` 없으면 `text_en` fallback → 한국어 유저도 영어 표시될 수 있음 (Phase 4와 동일 허용)
+- `audio_url` 값은 무시 — PrayerPlayer는 사용자 본인 녹음용으로 이미 분리됨
+
+#### 4. Phase 5 scope 경계 유지
+
+- A-1 적용은 **AiPrayer만**. Scripture / BibleStory / Guidance의 `_en`/`_ko`는 건드리지 않음
+- 유혹: "남은 Phase 하나니까 다 정리" — **금지**. Phase 5 완료 후 별도 "codebase i18n unification" 작업으로 분리
+- 이유: 리스크 격리 + PR 리뷰 용이성
+
+#### 5. AiPrayer.audioUrl 완전 삭제 주의
+
+- Supabase storage에 실제 TTS mp3 파일이 남아있지 않은지 확인 (Phase 1/2에서 TTS 생성 안 했다면 OK)
+- audioUrl 참조가 dashboard 이외 어디에도 없는지 grep
+- `PrayerPlayer`, `audioUrl`, `audio_url` 완전히 분리된 context인지 재확인 (사용자 녹음 vs AI TTS)

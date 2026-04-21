@@ -155,6 +155,34 @@
 
 ---
 
-## Phase 5 INT-XXX (추가 예정)
+## Phase 5 · AI Prayer Deep (INT-038 ~ INT-048)
 
-Phase 4 done 후 Phase 5 spec 작성 시 INT-034부터 이어서 할당.
+| ID | Screen | Widget | Trigger | Action | Side Effect | Pitfall Tags | Status |
+|----|--------|--------|---------|--------|-------------|--------------|--------|
+| INT-038 | N/A | `[AiPrayer.model]` | build-time | `textEn/Ko` 제거, 단일 `text` 필드로 통합. `audioUrl` 필드 **완전 삭제**. `citations: List<Citation>` 필드 추가 (기본값 `const []`) | model API 변경 | `code-gen, dead-code-sweep` | pending |
+| INT-039 | N/A | `[Citation.model]` | build-time | 신규 클래스 (type / source / content + fromJson) | | `code-gen` | pending |
+| INT-040 | N/A | `[AiPrayer.fromJson]` | deserialization | `text`: 3단 fallback (`text` → `text_en` → `text_ko` → `''`). `citations` 파싱 (없으면 `[]`). `audio_url` 키 무시 | legacy DB compat | `code-gen` | pending |
+| INT-041 | N/A | `[AiPrayer.placeholder]` | runtime | `placeholder()` → `placeholder(String locale)` 시그니처 변경. locale-aware 샘플 | API 변경 | `code-gen` | pending |
+| INT-042 | N/A | `[gemini_service._buildSystemPrompt]` | runtime | ai_prayer JSON schema: `text_en/_ko` → 단일 `text` (`$langName`). `citations` 배열(0-4개, type/source/content) 추가. 품질 바: "~300 단어 / 2분 읽기 / 명언·과학·예시 중 최소 2종류 포함" + hallucinate 방지 | prompt 확장 | `subscription-crash` | pending |
+| INT-043 | N/A | `[gemini_service._buildPremiumSystemPrompt]` | runtime | 동일 ai_prayer schema + 품질 지시 적용 | | `subscription-crash` | pending |
+| INT-044 | N/A | `[gemini_service._hardcodedPrayerResult]` | runtime | AiPrayer 샘플을 locale-aware로 리라이트 — ~300 단어 분량 + citations 3개(quote C.S. Lewis, science Harvard Study, example). `audioUrl` 지정 제거 | hardcoded API 변경 | `code-gen` | pending |
+| INT-045 | `prayer_dashboard` | `[ai_prayer_card]` | build | `.text(locale)` → `.text` 직접 참조. summary 분량 대응으로 `AbbaTypography.body.copyWith(height: 1.8)` 적용. citations 비어있지 않으면 본문 아래 **expandable citations 섹션** 렌더 (각 항목: 타입 아이콘 + source italic + content) | locale prop 제거 | `color-token, dead-code-sweep` | pending |
+| INT-046 | `prayer_dashboard` | `[prayer_dashboard_view]` | build | `AiPrayerCard(locale: locale)` 호출에서 locale prop 제거, `AiPrayer.placeholder()` → `AiPrayer.placeholder(locale)` | | `dead-code-sweep` | pending |
+| INT-047 | N/A | `[l10n]` | build-time | 5 키 × 35 locale 추가: `aiPrayerCitationsTitle`, `citationTypeQuote`, `citationTypeScience`, `citationTypeExample`, `aiPrayerReadingTime` | | `i18n, code-gen` | pending |
+| INT-048 | N/A | `[PrayerResult.fromJson]` / `[_parsePremiumJson]` | deserialization | 변경 없음 (AiPrayer.fromJson이 자체 처리). grep으로 `aiPrayer.audioUrl` / `aiPrayer.text(locale)` 참조 0개 검증 | | `dead-code-sweep` | pending |
+
+### Phase 5 추가 작업
+
+- `PrayerResult.copyWithPremium`: 변경 없음 (여전히 `AiPrayer?` 받음)
+- `gemini_service` 전체 grep: `textEn`, `textKo`, `\.text\(`, `audioUrl` 키워드로 AiPrayer 관련 잔존 참조 확인
+- `openai_service.dart` — historical_story 이원 필드 건들지 않음. 그러나 Phase 5 범위 **ai_prayer** 섹션은 schema 변경 필요: openai 는 legacy 경로라 기존 en/ko 유지도 OK이지만, 일관성 위해 prompt schema를 gemini와 동일하게 맞춤 (optional)
+
+### 테스트 매핑 (Phase 5)
+
+| INT | Test file | Test case |
+|-----|-----------|-----------|
+| INT-038, INT-040 | `test/models/prayer_test.dart` | AiPrayer.fromJson 신규/legacy 두 포맷 + citations 없는 경우 `[]` 반환 |
+| INT-039 | 위 파일 | Citation.fromJson 기본 동작 |
+| INT-041 | 위 파일 | `AiPrayer.placeholder('ko')` vs `('en')` 언어 선택 |
+| INT-044 | `test/services/gemini_service_hardcoded_test.dart` (있으면) | hardcoded AiPrayer.text locale별 / citations 3개 |
+| INT-045 | `test/features/dashboard/widgets/ai_prayer_card_test.dart` (신규 또는 기존) | citations 없음: expandable 안 나타남 / citations 3개: expandable 렌더 / overflow compact/medium |

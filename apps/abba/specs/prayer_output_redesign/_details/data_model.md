@@ -384,10 +384,121 @@ Supabase `prayers.result: JSONB` 안에 Phase 3 이전 저장된 레코드는 `t
 
 ---
 
-## Phase 5 (추가 예정)
+## Phase 5 · AI Prayer Deep (audio 제거 + citations + A-1 single-field)
 
-Phase 4 승인 후 진입 시 작성:
-- Phase 5: `AiPrayer` 재설계 (audioUrl 제거, `citations[]` 추가)
+### 결정 (2026-04-21)
+
+1. **TTS 완전 제거** — 기존 SPEC에서 확정. `AiPrayer.audioUrl` 필드 삭제 (현재 어떤 widget도 참조 안 함 — dead field).
+2. **citations 추가** — 기도문이 감동을 주기 위한 "명언 / 과학적 사실 / 구체적 예시" 출처 메타데이터.
+3. **A-1 single-field 확장** — Phase 4 pilot 성공 → AiPrayer에도 동일 패턴 적용 (textEn/Ko → text). 35 locale 대응 + 일관성.
+
+### 현재 상태 (before)
+
+```dart
+class AiPrayer {
+  final String textEn;
+  final String textKo;
+  final String? audioUrl;  // dead field (UI 미사용)
+  final bool isPremium;
+
+  String text(String locale) => locale == 'ko' ? textKo : textEn;
+  factory AiPrayer.placeholder() => const AiPrayer(
+    textEn: 'Unlock to receive a personalized prayer...',
+    textKo: '당신만을 위한 기도문을 받아보세요...',
+    isPremium: true,
+  );
+}
+```
+
+### 변경 후 (Phase 5 after)
+
+```dart
+class AiPrayer {
+  final String text;                  // 사용자 locale로 생성
+  final List<Citation> citations;     // 신규 — 0-4개 (quote / science / example)
+  final bool isPremium;
+  // audioUrl 완전 삭제
+
+  const AiPrayer({
+    required this.text,
+    this.citations = const [],
+    required this.isPremium,
+  });
+
+  factory AiPrayer.fromJson(Map<String, dynamic> json) {
+    return AiPrayer(
+      text: json['text'] as String?
+          ?? json['text_en'] as String?
+          ?? json['text_ko'] as String?
+          ?? '',
+      citations: (json['citations'] as List<dynamic>?)
+              ?.map((e) => Citation.fromJson(e as Map<String, dynamic>))
+              .toList() ?? const [],
+      isPremium: json['is_premium'] as bool? ?? true,
+    );
+  }
+
+  factory AiPrayer.placeholder(String locale) => AiPrayer(
+    text: locale == 'ko'
+        ? '당신만을 위한 기도문을 받아보세요...'
+        : 'Unlock to receive a personalized prayer...',
+    isPremium: true,
+  );
+}
+
+class Citation {
+  final String type;    // "quote" | "science" | "example"
+  final String source;  // 출처 (e.g., "C.S. Lewis, Mere Christianity" / "Harvard Gazette, 2023")
+  final String content; // 인용 내용 (사용자 locale)
+
+  const Citation({
+    required this.type,
+    required this.source,
+    required this.content,
+  });
+
+  factory Citation.fromJson(Map<String, dynamic> json) {
+    return Citation(
+      type: json['type'] as String? ?? 'quote',
+      source: json['source'] as String? ?? '',
+      content: json['content'] as String? ?? '',
+    );
+  }
+}
+```
+
+### 제거되는 항목
+
+- `AiPrayer.textEn` / `.textKo` / `.text(locale)` getter 전부 삭제
+- `AiPrayer.audioUrl` 필드 삭제 (dead field)
+- Hardcoded fallback의 `aiPrayer.audioUrl` 설정 코드 없음 (현재도 null)
+- 주의: `PrayerPlayer` widget은 Phase 1에서 이미 `PrayerSummaryCard`(사용자 본인 녹음)로 이동됨 — 건드리지 않음
+
+### Legacy DB compat
+
+- `fromJson` 3단 fallback: `text` → `text_en` → `text_ko` → `''`
+- `audio_url` 키가 레코드에 있어도 단순 무시 (필드 없음 → crash 없음)
+- `citations` 없으면 빈 리스트 (기존 레코드 호환)
+
+### Supabase 스키마 영향
+
+**변경 없음** (`prayers.result: JSONB` 그대로). 새 필드 `text`, `citations`는 JSONB 안에 자동 저장.
+
+### Citation 설계 원칙
+
+| type | 예 (source) | 예 (content, ko) |
+|------|-------------|-----------------|
+| quote | "C.S. Lewis, *Mere Christianity*" | "우리는 영원을 향해 창조된 존재입니다." |
+| science | "Harvard Study of Adult Development, 85년 추적" | "행복은 재산이나 성공이 아니라 관계의 깊이에서 온다." |
+| example | (출처 없을 수 있음, 생략 가능) | "어느 수도자는 매일 아침 첫 빛을 맞으며 시편 한 편을 외웠습니다." |
+
+- **hallucinate 방지**: quote/science는 출처가 **확실하지 않으면 citation 자체를 생략**. example은 source 없이도 OK (일반적 일화 형태).
+- 총 0-4개. 필수 아님 (짧고 좋은 기도문이면 citation 없어도 통과).
+
+### 검증 기준
+
+- text 길이: 공백 제외 ko/ja/zh 250자 이상 / en/유럽어 1200자 이상 (~300단어 = 2분 읽기)
+- citations hallucinate: 출시 전 30 sample fact check (quote/science 출처 실존 여부)
 
 ## 참조
 
