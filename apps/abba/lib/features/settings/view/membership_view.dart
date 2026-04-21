@@ -28,52 +28,26 @@ class _MembershipViewState extends ConsumerState<MembershipView> {
     return Scaffold(
       backgroundColor: AbbaColors.cream,
       appBar: AppBar(
-        title: Text(l10n.membershipTitle, style: AbbaTypography.h2),
+        title: Text('Abba Pro', style: AbbaTypography.h2),
       ),
       body: SafeArea(
         child: ListView(
           padding: const EdgeInsets.symmetric(
             horizontal: AbbaSpacing.md,
-            vertical: AbbaSpacing.md,
+            vertical: AbbaSpacing.sm,
           ),
           children: [
-            // Header
-            _buildHeader(l10n),
-            const SizedBox(height: AbbaSpacing.lg),
-            // Content
             if (isPremium)
               _buildActiveCard(l10n)
             else ...[
               _buildPlanToggle(l10n),
-              const SizedBox(height: AbbaSpacing.lg),
+              const SizedBox(height: AbbaSpacing.md),
               _buildPlanCard(l10n),
             ],
-            const SizedBox(height: AbbaSpacing.xl),
+            const SizedBox(height: AbbaSpacing.md),
           ],
         ),
       ),
-    );
-  }
-
-  // ── Header ──────────────────────────────────────────────────────────────
-  Widget _buildHeader(AppLocalizations l10n) {
-    return Column(
-      children: [
-        const SizedBox(height: AbbaSpacing.md),
-        const Text('\u{1F33F}', style: TextStyle(fontSize: 48)),
-        const SizedBox(height: AbbaSpacing.md),
-        Text(
-          'Abba Premium',
-          style: AbbaTypography.h1.copyWith(fontWeight: FontWeight.w700),
-          textAlign: TextAlign.center,
-        ),
-        const SizedBox(height: AbbaSpacing.sm),
-        Text(
-          l10n.membershipSubtitle,
-          style: AbbaTypography.bodySmall.copyWith(color: AbbaColors.muted),
-          textAlign: TextAlign.center,
-        ),
-      ],
     );
   }
 
@@ -285,16 +259,14 @@ class _MembershipViewState extends ConsumerState<MembershipView> {
               ),
             ),
           ],
-          const SizedBox(height: AbbaSpacing.lg),
-          // Divider
+          const SizedBox(height: AbbaSpacing.md),
           Divider(
             color: AbbaColors.warmBrown.withValues(alpha: 0.08),
             height: 1,
           ),
-          const SizedBox(height: AbbaSpacing.lg),
-          // Benefits list
+          const SizedBox(height: AbbaSpacing.md),
           _buildBenefitsList(l10n),
-          const SizedBox(height: AbbaSpacing.lg),
+          const SizedBox(height: AbbaSpacing.sm),
           // CTA button
           SizedBox(
             width: double.infinity,
@@ -327,7 +299,7 @@ class _MembershipViewState extends ConsumerState<MembershipView> {
                     ),
             ),
           ),
-          const SizedBox(height: AbbaSpacing.lg),
+          const SizedBox(height: AbbaSpacing.md),
           // Restore purchase
           GestureDetector(
             onTap: () async {
@@ -366,15 +338,15 @@ class _MembershipViewState extends ConsumerState<MembershipView> {
       children: benefits
           .map(
             (benefit) => Padding(
-              padding: const EdgeInsets.only(bottom: AbbaSpacing.md),
+              padding: const EdgeInsets.only(bottom: AbbaSpacing.sm),
               child: Row(
                 children: [
                   Icon(
                     Icons.check_rounded,
-                    size: 22,
+                    size: 20,
                     color: AbbaColors.sage,
                   ),
-                  const SizedBox(width: AbbaSpacing.md),
+                  const SizedBox(width: AbbaSpacing.sm),
                   Expanded(
                     child: Text(
                       benefit,
