@@ -389,5 +389,10 @@
   "coachingProCta": "Відкрити Наставництво з Pro",
   "coachingLevelBeginner": "🌱 Початківець",
   "coachingLevelGrowing": "🌿 Зростає",
-  "coachingLevelExpert": "🌳 Експерт"
+  "coachingLevelExpert": "🌳 Експерт",
+  "aiPrayerCitationsTitle": "Посилання · Цитати",
+  "citationTypeQuote": "Цитата",
+  "citationTypeScience": "Дослідження",
+  "citationTypeExample": "Приклад",
+  "aiPrayerReadingTime": "Читання 2 хвилини"
 }

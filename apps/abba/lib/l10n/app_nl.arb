@@ -389,5 +389,10 @@
   "coachingProCta": "Ontgrendel Gebedscoaching met Pro",
   "coachingLevelBeginner": "🌱 Beginner",
   "coachingLevelGrowing": "🌿 Groeiend",
-  "coachingLevelExpert": "🌳 Expert"
+  "coachingLevelExpert": "🌳 Expert",
+  "aiPrayerCitationsTitle": "Referenties · Citaten",
+  "citationTypeQuote": "Citaat",
+  "citationTypeScience": "Onderzoek",
+  "citationTypeExample": "Voorbeeld",
+  "aiPrayerReadingTime": "2 minuten lezen"
 }

@@ -389,5 +389,10 @@
   "coachingProCta": "Buka Bimbingan Doa dengan Pro",
   "coachingLevelBeginner": "🌱 Permulaan",
   "coachingLevelGrowing": "🌿 Berkembang",
-  "coachingLevelExpert": "🌳 Pakar"
+  "coachingLevelExpert": "🌳 Pakar",
+  "aiPrayerCitationsTitle": "Rujukan · Petikan",
+  "citationTypeQuote": "Petikan",
+  "citationTypeScience": "Kajian",
+  "citationTypeExample": "Contoh",
+  "aiPrayerReadingTime": "Bacaan 2 minit"
 }

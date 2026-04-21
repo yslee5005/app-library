@@ -922,4 +922,19 @@ class AppLocalizationsFil extends AppLocalizations {
 
   @override
   String get coachingLevelExpert => '🌳 Eksperto';
+
+  @override
+  String get aiPrayerCitationsTitle => 'Mga Sanggunian · Sipi';
+
+  @override
+  String get citationTypeQuote => 'Sipi';
+
+  @override
+  String get citationTypeScience => 'Pananaliksik';
+
+  @override
+  String get citationTypeExample => 'Halimbawa';
+
+  @override
+  String get aiPrayerReadingTime => '2-minutong pagbasa';
 }

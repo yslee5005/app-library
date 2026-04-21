@@ -886,4 +886,19 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get coachingLevelExpert => '🌳 熟達者';
+
+  @override
+  String get aiPrayerCitationsTitle => '参照 · 引用';
+
+  @override
+  String get citationTypeQuote => '名言';
+
+  @override
+  String get citationTypeScience => '研究';
+
+  @override
+  String get citationTypeExample => '例';
+
+  @override
+  String get aiPrayerReadingTime => '2分で読める';
 }

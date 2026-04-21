@@ -911,4 +911,19 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String get coachingLevelExpert => '🌳 Szakértő';
+
+  @override
+  String get aiPrayerCitationsTitle => 'Hivatkozások · Idézetek';
+
+  @override
+  String get citationTypeQuote => 'Idézet';
+
+  @override
+  String get citationTypeScience => 'Kutatás';
+
+  @override
+  String get citationTypeExample => 'Példa';
+
+  @override
+  String get aiPrayerReadingTime => '2 perces olvasás';
 }

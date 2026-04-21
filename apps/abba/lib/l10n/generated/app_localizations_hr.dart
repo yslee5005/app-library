@@ -910,4 +910,19 @@ class AppLocalizationsHr extends AppLocalizations {
 
   @override
   String get coachingLevelExpert => '🌳 Stručnjak';
+
+  @override
+  String get aiPrayerCitationsTitle => 'Reference · Citati';
+
+  @override
+  String get citationTypeQuote => 'Citat';
+
+  @override
+  String get citationTypeScience => 'Istraživanje';
+
+  @override
+  String get citationTypeExample => 'Primjer';
+
+  @override
+  String get aiPrayerReadingTime => 'Čitanje 2 minute';
 }

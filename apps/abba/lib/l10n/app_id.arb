@@ -389,5 +389,10 @@
   "coachingProCta": "Buka Coaching Doa dengan Pro",
   "coachingLevelBeginner": "🌱 Pemula",
   "coachingLevelGrowing": "🌿 Bertumbuh",
-  "coachingLevelExpert": "🌳 Ahli"
+  "coachingLevelExpert": "🌳 Ahli",
+  "aiPrayerCitationsTitle": "Referensi · Kutipan",
+  "citationTypeQuote": "Kutipan",
+  "citationTypeScience": "Penelitian",
+  "citationTypeExample": "Contoh",
+  "aiPrayerReadingTime": "Baca 2 menit"
 }

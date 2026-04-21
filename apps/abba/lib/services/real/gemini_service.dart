@@ -460,14 +460,67 @@ Rules (per Prayer Guide §4-6):
             '자신보다 먼저 다른 이들을 기억하는 마음이 기도에 담겨 있습니다. 이는 중보자의 마음입니다. 오늘 만나는 이들과의 대화에서도 그 부드러움을 잃지 마세요.',
         isPremium: true,
       ),
-      aiPrayer: const AiPrayer(
-        textEn:
-            'Heavenly Father, we come before You with hearts full of gratitude. You know the burdens we carry and the ones we carry for others. Lead us beside quiet waters today. Restore what feels worn. Speak peace where there is worry. In Jesus\' name, Amen.',
-        textKo:
-            '하늘에 계신 아버지, 감사하는 마음으로 주 앞에 나아갑니다. 우리가 짊어진 짐과 다른 이를 위해 지는 짐을 주님은 아십니다. 오늘도 쉴 만한 물가로 인도하여 주옵소서. 지친 마음을 회복시켜 주시고, 염려하는 자리에 평안을 말씀하여 주소서. 예수님의 이름으로 기도드립니다. 아멘.',
-        isPremium: true,
-      ),
+      aiPrayer: _hardcodedAiPrayer(locale),
       historicalStory: _hardcodedHistoricalStory(locale),
+    );
+  }
+
+  AiPrayer _hardcodedAiPrayer(String locale) {
+    if (locale == 'ko') {
+      return const AiPrayer(
+        text:
+            '하늘에 계신 아버지, 오늘 아침 당신 앞에 조용히 무릎 꿇습니다.\n\n'
+            '주님, 저는 오늘도 가족의 이름을 불러봅니다. 어머니의 무릎, 아이의 숨결, 배우자의 뒷모습 — 그 익숙한 풍경이 얼마나 큰 은혜인지 이제야 눈이 열립니다. C.S. 루이스는 "우리는 영원을 향해 창조된 존재"라고 말했습니다. 하나님, 그 영원이 오늘 아침 제 방 안에, 가족의 평범한 얼굴 속에 이미 들어와 있음을 믿습니다.\n\n'
+            '하버드 대학은 85년 동안 724명의 삶을 추적하며 "행복을 결정짓는 단 하나의 요인은 관계의 깊이"라는 결론에 도달했습니다. 주님, 과학도 돌아가 증언하는 이 진리 — 사랑의 관계가 곧 생명 — 을 오늘 제 식탁과 잠자리에서 살아내게 하소서.\n\n'
+            '염려로 잠 못 이루던 밤, 친구의 전화 한 통이 얼마나 큰 위로였는지 기억합니다. 주님, 오늘 저를 그런 전화가 되게 하소서. 짧은 문자 하나, 조용한 기도 하나로 누군가의 밤을 밝히는 사람이 되게 하소서.\n\n'
+            '주님의 이름으로 기도드립니다. 아멘.',
+        citations: [
+          Citation(
+            type: 'quote',
+            source: 'C.S. Lewis, Mere Christianity',
+            content: '우리는 영원을 향해 창조된 존재입니다.',
+          ),
+          Citation(
+            type: 'science',
+            source: 'Harvard Study of Adult Development (Waldinger, 85년 추적)',
+            content: '행복을 결정짓는 단 하나의 요인은 관계의 깊이다.',
+          ),
+          Citation(
+            type: 'example',
+            source: '',
+            content: '염려로 잠 못 이루던 밤, 친구의 전화 한 통이 위로가 된 순간.',
+          ),
+        ],
+        isPremium: true,
+      );
+    }
+    return const AiPrayer(
+      text:
+          'Heavenly Father, this morning I kneel quietly before You.\n\n'
+          "Lord, today I find myself speaking the names of my family — my mother's knees, my child's breath, the familiar silhouette of my spouse. Only now do my eyes open to how great a grace this ordinary view is. C.S. Lewis wrote, \"We are creatures made for eternity.\" Father, I believe that eternity has already entered this morning, hidden in the plain faces around my breakfast table.\n\n"
+          'Harvard tracked 724 lives across 85 years and arrived at one quiet conclusion: the single strongest predictor of human flourishing is the depth of our relationships. Lord, let even this finding of science bow and testify to what Your Word has always said — that love is life itself. Help me live this truth today at my table and at my bedside.\n\n'
+          "I remember a sleepless night when a single phone call from a friend became light enough to carry me until dawn. Lord, today let me be that call for someone else. A short message, a quiet prayer — let me become the hand that steadies another person's darkness.\n\n"
+          "In Jesus' name, Amen.",
+      citations: [
+        Citation(
+          type: 'quote',
+          source: 'C.S. Lewis, Mere Christianity',
+          content: 'We are creatures made for eternity.',
+        ),
+        Citation(
+          type: 'science',
+          source: 'Harvard Study of Adult Development (Waldinger, 85-year study)',
+          content:
+              'The single strongest predictor of human flourishing is the depth of our close relationships.',
+        ),
+        Citation(
+          type: 'example',
+          source: '',
+          content:
+              'A sleepless night of worry, lifted by a single phone call from a friend.',
+        ),
+      ],
+      isPremium: true,
     );
   }
 
@@ -679,8 +732,12 @@ Return a JSON object:
     "is_premium": true
   },
   "ai_prayer": {
-    "text_en": "A deeply moving prayer (5-8 sentences in English)",
-    "text_ko": "감동적인 기도문 (5-8문장, 한국어)",
+    "text": "A deeply moving prayer in $langName (~300 words = 2-minute read)",
+    "citations": [
+      {"type": "quote", "source": "author + work", "content": "quoted text in $langName"},
+      {"type": "science", "source": "study + year + institution", "content": "factual statement in $langName"},
+      {"type": "example", "source": "", "content": "concrete anecdote in $langName"}
+    ],
     "is_premium": true
   }
 }
@@ -697,6 +754,32 @@ HISTORICAL STORY QUALITY BAR (Phase 4):
   church history (Augustine, Luther, Moravians, Hudson Taylor, Amy Carmichael,
   George Müller, Corrie ten Boom, etc.). If you are not confident about
   historicity, choose a different story. NEVER fabricate quotes or dates.
+
+AI PRAYER QUALITY BAR (Phase 5):
+- text length: ~300 words (2-minute read). For Korean/Japanese/Chinese:
+  aim for 10-12 sentences of natural breath. For English/European languages:
+  aim for ~300 words across 4-5 short paragraphs.
+- NEVER include audio/TTS references — text-only.
+- Structure: gentle opening → one concrete image or memory → one insight
+  from Scripture or a real quote/science → specific prayer for the user's
+  situation → quiet close ("In Jesus' name, Amen." or locale equivalent).
+- Separate paragraphs with a blank line ("\n\n") for breath.
+
+CITATIONS (include at least 2 of the 3 types; max 4 total):
+- type "quote": Real author + real work. C.S. Lewis, Augustine, Bonhoeffer,
+  Julian of Norwich, Tim Keller, etc. Never fabricate.
+- type "science": Real study, journal, or well-known finding. ONLY include
+  if you are confident about the source. If unsure → omit.
+- type "example": Concrete anecdote — may be anonymous (source: ""). Must
+  feel specific (a time, a place, a named action). No generic platitudes.
+
+TRUTHFULNESS (★ critical):
+- If you are not 100% confident about a quote's author or a study's source,
+  OMIT that citation entirely. Better zero citations than fabricated ones.
+- NEVER invent a research paper, professor, or institution name.
+- NEVER attribute modern phrases to ancient authors.
+- FORBIDDEN phrases: "According to recent studies...", "Einstein said...",
+  "Gandhi said..." (common misattribution patterns).
 
 WRITING STYLE (critical for quality):
 - Write like a master short story author, NOT a report writer.
@@ -822,8 +905,12 @@ Return a JSON object with ONLY these premium sections:
     "is_premium": true
   },
   "ai_prayer": {
-    "text_en": "A deeply moving prayer (5-8 sentences in English)",
-    "text_ko": "감동적인 기도문 (5-8문장, 한국어)",
+    "text": "A deeply moving prayer in $langName (~300 words = 2-minute read)",
+    "citations": [
+      {"type": "quote", "source": "author + work", "content": "quoted text in $langName"},
+      {"type": "science", "source": "study + year + institution", "content": "factual statement in $langName"},
+      {"type": "example", "source": "", "content": "concrete anecdote in $langName"}
+    ],
     "is_premium": true
   }
 }
@@ -840,6 +927,28 @@ HISTORICAL STORY QUALITY BAR (Phase 4):
   church history (Augustine, Luther, Moravians, Hudson Taylor, Amy Carmichael,
   George Müller, Corrie ten Boom, etc.). If you are not confident about
   historicity, choose a different story. NEVER fabricate quotes or dates.
+
+AI PRAYER QUALITY BAR (Phase 5):
+- text length: ~300 words (2-minute read). For Korean/Japanese/Chinese:
+  aim for 10-12 sentences of natural breath. For English/European languages:
+  aim for ~300 words across 4-5 short paragraphs.
+- NEVER include audio/TTS references — text-only.
+- Structure: gentle opening → one concrete image or memory → one insight
+  from Scripture or a real quote/science → specific prayer for the user's
+  situation → quiet close.
+- Separate paragraphs with a blank line ("\n\n") for breath.
+
+CITATIONS (include at least 2 of the 3 types; max 4 total):
+- type "quote": Real author + real work. Never fabricate.
+- type "science": Real study, journal, or well-known finding. If unsure → omit.
+- type "example": Concrete anecdote — may have empty source. Must feel specific.
+
+TRUTHFULNESS (★ critical):
+- If not 100% confident about source, OMIT that citation entirely.
+- NEVER invent research papers, professors, or institution names.
+- NEVER attribute modern phrases to ancient authors.
+- FORBIDDEN: "According to recent studies...", "Einstein said...",
+  "Gandhi said..." (common misattribution patterns).
 
 WRITING STYLE:
 - Write like a master short story author, NOT a report writer.

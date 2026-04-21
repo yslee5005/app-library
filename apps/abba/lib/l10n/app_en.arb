@@ -396,5 +396,10 @@
   "coachingProCta": "Unlock Prayer Coaching with Pro",
   "coachingLevelBeginner": "🌱 Beginner",
   "coachingLevelGrowing": "🌿 Growing",
-  "coachingLevelExpert": "🌳 Expert"
+  "coachingLevelExpert": "🌳 Expert",
+  "aiPrayerCitationsTitle": "References · Citations",
+  "citationTypeQuote": "Quote",
+  "citationTypeScience": "Research",
+  "citationTypeExample": "Example",
+  "aiPrayerReadingTime": "2-minute read"
 }

@@ -389,5 +389,10 @@
   "coachingProCta": "Mở Huấn luyện cầu nguyện với Pro",
   "coachingLevelBeginner": "🌱 Người mới",
   "coachingLevelGrowing": "🌿 Đang phát triển",
-  "coachingLevelExpert": "🌳 Chuyên gia"
+  "coachingLevelExpert": "🌳 Chuyên gia",
+  "aiPrayerCitationsTitle": "Tham khảo · Trích dẫn",
+  "citationTypeQuote": "Trích dẫn",
+  "citationTypeScience": "Nghiên cứu",
+  "citationTypeExample": "Ví dụ",
+  "aiPrayerReadingTime": "Đọc trong 2 phút"
 }

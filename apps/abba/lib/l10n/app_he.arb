@@ -389,5 +389,10 @@
   "coachingProCta": "פתחו אימון תפילה עם Pro",
   "coachingLevelBeginner": "🌱 מתחיל",
   "coachingLevelGrowing": "🌿 צומח",
-  "coachingLevelExpert": "🌳 מומחה"
+  "coachingLevelExpert": "🌳 מומחה",
+  "aiPrayerCitationsTitle": "הפניות · ציטוטים",
+  "citationTypeQuote": "ציטוט",
+  "citationTypeScience": "מחקר",
+  "citationTypeExample": "דוגמה",
+  "aiPrayerReadingTime": "קריאה בת 2 דקות"
 }

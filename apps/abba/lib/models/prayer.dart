@@ -315,35 +315,61 @@ class Guidance {
 }
 
 class AiPrayer {
-  final String textEn;
-  final String textKo;
-  final String? audioUrl;
+  final String text;
+  final List<Citation> citations;
   final bool isPremium;
 
   const AiPrayer({
-    required this.textEn,
-    required this.textKo,
-    this.audioUrl,
+    required this.text,
+    this.citations = const [],
     required this.isPremium,
   });
 
   factory AiPrayer.fromJson(Map<String, dynamic> json) {
     return AiPrayer(
-      textEn: json['text_en'] as String,
-      textKo: json['text_ko'] as String,
-      audioUrl: json['audio_url'] as String?,
+      text: json['text'] as String?
+          ?? json['text_en'] as String?
+          ?? json['text_ko'] as String?
+          ?? '',
+      citations: (json['citations'] as List<dynamic>?)
+              ?.map((e) => Citation.fromJson(e as Map<String, dynamic>))
+              .where((c) => c.content.isNotEmpty)
+              .toList() ??
+          const [],
       isPremium: json['is_premium'] as bool? ?? true,
     );
   }
 
-  String text(String locale) => locale == 'ko' ? textKo : textEn;
-
-  /// Placeholder for locked premium card display
-  factory AiPrayer.placeholder() => const AiPrayer(
-        textEn: 'Unlock to receive a personalized prayer...',
-        textKo: '당신만을 위한 기도문을 받아보세요...',
+  /// Placeholder for locked premium card display (locale-aware).
+  factory AiPrayer.placeholder(String locale) => AiPrayer(
+        text: locale == 'ko'
+            ? '당신만을 위한 기도문을 받아보세요...'
+            : 'Unlock to receive a personalized prayer...',
         isPremium: true,
       );
+}
+
+/// Citation attached to an AI-generated prayer — source for a quote,
+/// scientific fact, or concrete example. Used to deepen meaning with
+/// verifiable references.
+class Citation {
+  final String type;    // "quote" | "science" | "example"
+  final String source;  // author, work, or study (may be empty for "example")
+  final String content; // the quoted text or factual statement in user locale
+
+  const Citation({
+    required this.type,
+    required this.source,
+    required this.content,
+  });
+
+  factory Citation.fromJson(Map<String, dynamic> json) {
+    return Citation(
+      type: json['type'] as String? ?? 'quote',
+      source: json['source'] as String? ?? '',
+      content: json['content'] as String? ?? '',
+    );
+  }
 }
 
 class CoachingScores {

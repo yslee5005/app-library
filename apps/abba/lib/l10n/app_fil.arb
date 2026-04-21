@@ -389,5 +389,10 @@
   "coachingProCta": "I-unlock ang Coaching sa Panalangin gamit ang Pro",
   "coachingLevelBeginner": "🌱 Baguhan",
   "coachingLevelGrowing": "🌿 Lumalago",
-  "coachingLevelExpert": "🌳 Eksperto"
+  "coachingLevelExpert": "🌳 Eksperto",
+  "aiPrayerCitationsTitle": "Mga Sanggunian · Sipi",
+  "citationTypeQuote": "Sipi",
+  "citationTypeScience": "Pananaliksik",
+  "citationTypeExample": "Halimbawa",
+  "aiPrayerReadingTime": "2-minutong pagbasa"
 }

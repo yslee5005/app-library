@@ -389,5 +389,10 @@
   "coachingProCta": "Deblochează Coaching cu Pro",
   "coachingLevelBeginner": "🌱 Începător",
   "coachingLevelGrowing": "🌿 În creștere",
-  "coachingLevelExpert": "🌳 Expert"
+  "coachingLevelExpert": "🌳 Expert",
+  "aiPrayerCitationsTitle": "Referințe · Citate",
+  "citationTypeQuote": "Citat",
+  "citationTypeScience": "Cercetare",
+  "citationTypeExample": "Exemplu",
+  "aiPrayerReadingTime": "Lectură de 2 minute"
 }

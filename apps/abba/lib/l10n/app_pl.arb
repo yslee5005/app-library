@@ -389,5 +389,10 @@
   "coachingProCta": "Odblokuj Coaching modlitwy z Pro",
   "coachingLevelBeginner": "🌱 Początkujący",
   "coachingLevelGrowing": "🌿 Rozwijający się",
-  "coachingLevelExpert": "🌳 Ekspert"
+  "coachingLevelExpert": "🌳 Ekspert",
+  "aiPrayerCitationsTitle": "Odwołania · Cytaty",
+  "citationTypeQuote": "Cytat",
+  "citationTypeScience": "Badanie",
+  "citationTypeExample": "Przykład",
+  "aiPrayerReadingTime": "Czytanie 2 min"
 }

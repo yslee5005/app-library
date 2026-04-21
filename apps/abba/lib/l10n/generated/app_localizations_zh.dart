@@ -886,4 +886,19 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get coachingLevelExpert => '🌳 专家';
+
+  @override
+  String get aiPrayerCitationsTitle => '参考 · 引用';
+
+  @override
+  String get citationTypeQuote => '名言';
+
+  @override
+  String get citationTypeScience => '研究';
+
+  @override
+  String get citationTypeExample => '例子';
+
+  @override
+  String get aiPrayerReadingTime => '2分钟阅读';
 }

@@ -207,7 +207,6 @@ class _PrayerDashboardViewState extends ConsumerState<PrayerDashboardView> {
             child: AiPrayerCard(
               aiPrayer: result.aiPrayer!,
               title: l10n.aiPrayerTitle,
-              locale: locale,
               onUnlock: showPremiumUpgrade,
               isUserPremium: isPremium,
             ),
@@ -265,9 +264,8 @@ class _PrayerDashboardViewState extends ConsumerState<PrayerDashboardView> {
           StaggeredFadeIn(
             index: i++,
             child: AiPrayerCard(
-              aiPrayer: AiPrayer.placeholder(),
+              aiPrayer: AiPrayer.placeholder(locale),
               title: l10n.aiPrayerTitle,
-              locale: locale,
               onUnlock: showPremiumUpgrade,
               isUserPremium: false,
             ),

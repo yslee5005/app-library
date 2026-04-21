@@ -911,4 +911,19 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get coachingLevelExpert => '🌳 Expert';
+
+  @override
+  String get aiPrayerCitationsTitle => 'Referenties · Citaten';
+
+  @override
+  String get citationTypeQuote => 'Citaat';
+
+  @override
+  String get citationTypeScience => 'Onderzoek';
+
+  @override
+  String get citationTypeExample => 'Voorbeeld';
+
+  @override
+  String get aiPrayerReadingTime => '2 minuten lezen';
 }

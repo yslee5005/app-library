@@ -389,5 +389,10 @@
   "coachingProCta": "Pro で祈りコーチングを解放",
   "coachingLevelBeginner": "🌱 初心者",
   "coachingLevelGrowing": "🌿 成長中",
-  "coachingLevelExpert": "🌳 熟達者"
+  "coachingLevelExpert": "🌳 熟達者",
+  "aiPrayerCitationsTitle": "参照 · 引用",
+  "citationTypeQuote": "名言",
+  "citationTypeScience": "研究",
+  "citationTypeExample": "例",
+  "aiPrayerReadingTime": "2分で読める"
 }

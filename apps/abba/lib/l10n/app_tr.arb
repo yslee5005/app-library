@@ -389,5 +389,10 @@
   "coachingProCta": "Dua Koçluğunu Pro ile açın",
   "coachingLevelBeginner": "🌱 Başlangıç",
   "coachingLevelGrowing": "🌿 Gelişiyor",
-  "coachingLevelExpert": "🌳 Uzman"
+  "coachingLevelExpert": "🌳 Uzman",
+  "aiPrayerCitationsTitle": "Referanslar · Alıntılar",
+  "citationTypeQuote": "Alıntı",
+  "citationTypeScience": "Araştırma",
+  "citationTypeExample": "Örnek",
+  "aiPrayerReadingTime": "2 dakikalık okuma"
 }

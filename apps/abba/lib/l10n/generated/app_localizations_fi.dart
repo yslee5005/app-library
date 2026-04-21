@@ -907,4 +907,19 @@ class AppLocalizationsFi extends AppLocalizations {
 
   @override
   String get coachingLevelExpert => '🌳 Asiantuntija';
+
+  @override
+  String get aiPrayerCitationsTitle => 'Viitteet · Lainaukset';
+
+  @override
+  String get citationTypeQuote => 'Lainaus';
+
+  @override
+  String get citationTypeScience => 'Tutkimus';
+
+  @override
+  String get citationTypeExample => 'Esimerkki';
+
+  @override
+  String get aiPrayerReadingTime => '2 minuutin lukuaika';
 }

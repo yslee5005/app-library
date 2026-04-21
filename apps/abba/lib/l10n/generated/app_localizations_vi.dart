@@ -910,4 +910,19 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String get coachingLevelExpert => '🌳 Chuyên gia';
+
+  @override
+  String get aiPrayerCitationsTitle => 'Tham khảo · Trích dẫn';
+
+  @override
+  String get citationTypeQuote => 'Trích dẫn';
+
+  @override
+  String get citationTypeScience => 'Nghiên cứu';
+
+  @override
+  String get citationTypeExample => 'Ví dụ';
+
+  @override
+  String get aiPrayerReadingTime => 'Đọc trong 2 phút';
 }

@@ -909,4 +909,19 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get coachingLevelExpert => '🌳 Uzman';
+
+  @override
+  String get aiPrayerCitationsTitle => 'Referanslar · Alıntılar';
+
+  @override
+  String get citationTypeQuote => 'Alıntı';
+
+  @override
+  String get citationTypeScience => 'Araştırma';
+
+  @override
+  String get citationTypeExample => 'Örnek';
+
+  @override
+  String get aiPrayerReadingTime => '2 dakikalık okuma';
 }

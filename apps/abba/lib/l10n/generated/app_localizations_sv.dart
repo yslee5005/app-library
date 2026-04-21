@@ -906,4 +906,19 @@ class AppLocalizationsSv extends AppLocalizations {
 
   @override
   String get coachingLevelExpert => '🌳 Expert';
+
+  @override
+  String get aiPrayerCitationsTitle => 'Referenser · Citat';
+
+  @override
+  String get citationTypeQuote => 'Citat';
+
+  @override
+  String get citationTypeScience => 'Forskning';
+
+  @override
+  String get citationTypeExample => 'Exempel';
+
+  @override
+  String get aiPrayerReadingTime => '2 minuters läsning';
 }

@@ -906,4 +906,19 @@ class AppLocalizationsSw extends AppLocalizations {
 
   @override
   String get coachingLevelExpert => '🌳 Mtaalamu';
+
+  @override
+  String get aiPrayerCitationsTitle => 'Marejeleo · Nukuu';
+
+  @override
+  String get citationTypeQuote => 'Nukuu';
+
+  @override
+  String get citationTypeScience => 'Utafiti';
+
+  @override
+  String get citationTypeExample => 'Mfano';
+
+  @override
+  String get aiPrayerReadingTime => 'Kusoma dakika 2';
 }

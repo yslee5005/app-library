@@ -129,8 +129,9 @@ void main() {
       expect(result.guidance!.content('ko'), 'guidance ko');
 
       expect(result.aiPrayer, isNotNull);
-      expect(result.aiPrayer!.audioUrl, 'https://example.com/audio.mp3');
-      expect(result.aiPrayer!.text('en'), 'prayer en');
+      // Legacy `audio_url` key is ignored after Phase 5 removal.
+      // text falls back to text_en (new single-field schema preferred).
+      expect(result.aiPrayer!.text, 'prayer en');
     });
   });
 
@@ -176,15 +177,45 @@ void main() {
   });
 
   group('AiPrayer', () {
-    test('audioUrl is nullable', () {
+    test('fromJson new single-field schema', () {
       final prayer = AiPrayer.fromJson({
-        'text_en': 'en',
-        'text_ko': 'ko',
+        'text': 'hello',
+        'citations': [
+          {'type': 'quote', 'source': 'Lewis', 'content': 'hi'},
+        ],
         'is_premium': false,
       });
 
-      expect(prayer.audioUrl, isNull);
+      expect(prayer.text, 'hello');
+      expect(prayer.citations, hasLength(1));
+      expect(prayer.citations.first.type, 'quote');
       expect(prayer.isPremium, false);
+    });
+
+    test('fromJson legacy text_en/text_ko fallback + audio_url ignored', () {
+      final prayer = AiPrayer.fromJson({
+        'text_en': 'en',
+        'text_ko': 'ko',
+        'audio_url': 'https://ignored.example/audio.mp3',
+        'is_premium': true,
+      });
+
+      expect(prayer.text, 'en');
+      expect(prayer.citations, isEmpty);
+    });
+
+    test('placeholder returns locale-appropriate text', () {
+      expect(AiPrayer.placeholder('ko').text, contains('기도문'));
+      expect(AiPrayer.placeholder('en').text, contains('prayer'));
+    });
+  });
+
+  group('Citation', () {
+    test('fromJson defaults type to quote when missing', () {
+      final c = Citation.fromJson({'content': 'hello'});
+      expect(c.type, 'quote');
+      expect(c.source, '');
+      expect(c.content, 'hello');
     });
   });
 

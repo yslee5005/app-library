@@ -886,4 +886,19 @@ class AppLocalizationsAm extends AppLocalizations {
 
   @override
   String get coachingLevelExpert => '🌳 ባለሙያ';
+
+  @override
+  String get aiPrayerCitationsTitle => 'ማጣቀሻዎች · ጥቅሶች';
+
+  @override
+  String get citationTypeQuote => 'ጥቅስ';
+
+  @override
+  String get citationTypeScience => 'ምርምር';
+
+  @override
+  String get citationTypeExample => 'ምሳሌ';
+
+  @override
+  String get aiPrayerReadingTime => 'የ2 ደቂቃ ንባብ';
 }

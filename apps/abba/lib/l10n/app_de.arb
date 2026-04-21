@@ -389,5 +389,10 @@
   "coachingProCta": "Gebetscoaching mit Pro freischalten",
   "coachingLevelBeginner": "🌱 Anfänger",
   "coachingLevelGrowing": "🌿 Wachsend",
-  "coachingLevelExpert": "🌳 Experte"
+  "coachingLevelExpert": "🌳 Experte",
+  "aiPrayerCitationsTitle": "Quellen · Zitate",
+  "citationTypeQuote": "Zitat",
+  "citationTypeScience": "Studie",
+  "citationTypeExample": "Beispiel",
+  "aiPrayerReadingTime": "2-Minuten-Lektüre"
 }

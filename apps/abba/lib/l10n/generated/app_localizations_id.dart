@@ -914,4 +914,19 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get coachingLevelExpert => '🌳 Ahli';
+
+  @override
+  String get aiPrayerCitationsTitle => 'Referensi · Kutipan';
+
+  @override
+  String get citationTypeQuote => 'Kutipan';
+
+  @override
+  String get citationTypeScience => 'Penelitian';
+
+  @override
+  String get citationTypeExample => 'Contoh';
+
+  @override
+  String get aiPrayerReadingTime => 'Baca 2 menit';
 }

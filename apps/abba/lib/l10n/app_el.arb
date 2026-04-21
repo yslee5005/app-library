@@ -389,5 +389,10 @@
   "coachingProCta": "Ξεκλειδώστε την Καθοδήγηση με Pro",
   "coachingLevelBeginner": "🌱 Αρχάριος",
   "coachingLevelGrowing": "🌿 Σε εξέλιξη",
-  "coachingLevelExpert": "🌳 Ειδικός"
+  "coachingLevelExpert": "🌳 Ειδικός",
+  "aiPrayerCitationsTitle": "Αναφορές · Παραθέσεις",
+  "citationTypeQuote": "Παράθεση",
+  "citationTypeScience": "Έρευνα",
+  "citationTypeExample": "Παράδειγμα",
+  "aiPrayerReadingTime": "Ανάγνωση 2 λεπτών"
 }

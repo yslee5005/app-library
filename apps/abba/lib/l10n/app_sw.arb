@@ -389,5 +389,10 @@
   "coachingProCta": "Fungua Uongozi wa Maombi kwa Pro",
   "coachingLevelBeginner": "🌱 Mwanzo",
   "coachingLevelGrowing": "🌿 Anakua",
-  "coachingLevelExpert": "🌳 Mtaalamu"
+  "coachingLevelExpert": "🌳 Mtaalamu",
+  "aiPrayerCitationsTitle": "Marejeleo · Nukuu",
+  "citationTypeQuote": "Nukuu",
+  "citationTypeScience": "Utafiti",
+  "citationTypeExample": "Mfano",
+  "aiPrayerReadingTime": "Kusoma dakika 2"
 }

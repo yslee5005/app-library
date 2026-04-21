@@ -908,4 +908,19 @@ class AppLocalizationsDa extends AppLocalizations {
 
   @override
   String get coachingLevelExpert => '🌳 Ekspert';
+
+  @override
+  String get aiPrayerCitationsTitle => 'Referencer · Citater';
+
+  @override
+  String get citationTypeQuote => 'Citat';
+
+  @override
+  String get citationTypeScience => 'Forskning';
+
+  @override
+  String get citationTypeExample => 'Eksempel';
+
+  @override
+  String get aiPrayerReadingTime => '2 minutters læsning';
 }

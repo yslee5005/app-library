@@ -263,8 +263,14 @@ class SupabasePrayerRepository implements PrayerRepository {
         },
       if (result.aiPrayer != null)
         'ai_prayer': {
-          'text_en': result.aiPrayer!.textEn,
-          'text_ko': result.aiPrayer!.textKo,
+          'text': result.aiPrayer!.text,
+          'citations': result.aiPrayer!.citations
+              .map((c) => {
+                    'type': c.type,
+                    'source': c.source,
+                    'content': c.content,
+                  })
+              .toList(),
           'is_premium': result.aiPrayer!.isPremium,
         },
     };

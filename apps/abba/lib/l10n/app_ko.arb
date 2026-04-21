@@ -389,5 +389,10 @@
   "coachingProCta": "Pro로 기도 코칭 받기",
   "coachingLevelBeginner": "🌱 시작하는 중",
   "coachingLevelGrowing": "🌿 자라는 중",
-  "coachingLevelExpert": "🌳 전문가"
+  "coachingLevelExpert": "🌳 전문가",
+  "aiPrayerCitationsTitle": "참고 · 인용",
+  "citationTypeQuote": "명언",
+  "citationTypeScience": "연구",
+  "citationTypeExample": "예시",
+  "aiPrayerReadingTime": "2분 읽기"
 }

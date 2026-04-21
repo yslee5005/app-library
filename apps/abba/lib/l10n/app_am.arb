@@ -389,5 +389,10 @@
   "coachingProCta": "የጸሎት ማሰልጠኛ በPro ክፈቱ",
   "coachingLevelBeginner": "🌱 ጀማሪ",
   "coachingLevelGrowing": "🌿 በማደግ ላይ",
-  "coachingLevelExpert": "🌳 ባለሙያ"
+  "coachingLevelExpert": "🌳 ባለሙያ",
+  "aiPrayerCitationsTitle": "ማጣቀሻዎች · ጥቅሶች",
+  "citationTypeQuote": "ጥቅስ",
+  "citationTypeScience": "ምርምር",
+  "citationTypeExample": "ምሳሌ",
+  "aiPrayerReadingTime": "የ2 ደቂቃ ንባብ"
 }

@@ -389,5 +389,10 @@
   "coachingProCta": "Odomknite Koučing modlitby s Pro",
   "coachingLevelBeginner": "🌱 Začiatočník",
   "coachingLevelGrowing": "🌿 Rastúci",
-  "coachingLevelExpert": "🌳 Odborník"
+  "coachingLevelExpert": "🌳 Odborník",
+  "aiPrayerCitationsTitle": "Odkazy · Citácie",
+  "citationTypeQuote": "Citát",
+  "citationTypeScience": "Výskum",
+  "citationTypeExample": "Príklad",
+  "aiPrayerReadingTime": "Čítanie 2 minúty"
 }

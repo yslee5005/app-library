@@ -911,4 +911,19 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String get coachingLevelExpert => '🌳 Odborník';
+
+  @override
+  String get aiPrayerCitationsTitle => 'Odkazy · Citace';
+
+  @override
+  String get citationTypeQuote => 'Citát';
+
+  @override
+  String get citationTypeScience => 'Výzkum';
+
+  @override
+  String get citationTypeExample => 'Příklad';
+
+  @override
+  String get aiPrayerReadingTime => 'Čtení 2 minuty';
 }

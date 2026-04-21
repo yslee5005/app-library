@@ -908,4 +908,19 @@ class AppLocalizationsUk extends AppLocalizations {
 
   @override
   String get coachingLevelExpert => '🌳 Експерт';
+
+  @override
+  String get aiPrayerCitationsTitle => 'Посилання · Цитати';
+
+  @override
+  String get citationTypeQuote => 'Цитата';
+
+  @override
+  String get citationTypeScience => 'Дослідження';
+
+  @override
+  String get citationTypeExample => 'Приклад';
+
+  @override
+  String get aiPrayerReadingTime => 'Читання 2 хвилини';
 }

@@ -1837,6 +1837,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'🌳 Expert'**
   String get coachingLevelExpert;
+
+  /// No description provided for @aiPrayerCitationsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'References · Citations'**
+  String get aiPrayerCitationsTitle;
+
+  /// No description provided for @citationTypeQuote.
+  ///
+  /// In en, this message translates to:
+  /// **'Quote'**
+  String get citationTypeQuote;
+
+  /// No description provided for @citationTypeScience.
+  ///
+  /// In en, this message translates to:
+  /// **'Research'**
+  String get citationTypeScience;
+
+  /// No description provided for @citationTypeExample.
+  ///
+  /// In en, this message translates to:
+  /// **'Example'**
+  String get citationTypeExample;
+
+  /// No description provided for @aiPrayerReadingTime.
+  ///
+  /// In en, this message translates to:
+  /// **'2-minute read'**
+  String get aiPrayerReadingTime;
 }
 
 class _AppLocalizationsDelegate

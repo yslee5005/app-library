@@ -389,5 +389,10 @@
   "coachingProCta": "Откройте Наставничество с Pro",
   "coachingLevelBeginner": "🌱 Новичок",
   "coachingLevelGrowing": "🌿 Развивается",
-  "coachingLevelExpert": "🌳 Эксперт"
+  "coachingLevelExpert": "🌳 Эксперт",
+  "aiPrayerCitationsTitle": "Ссылки · Цитаты",
+  "citationTypeQuote": "Цитата",
+  "citationTypeScience": "Исследование",
+  "citationTypeExample": "Пример",
+  "aiPrayerReadingTime": "Чтение на 2 минуты"
 }

@@ -389,5 +389,10 @@
   "coachingProCta": "Pro के साथ प्रार्थना कोचिंग अनलॉक करें",
   "coachingLevelBeginner": "🌱 शुरुआती",
   "coachingLevelGrowing": "🌿 बढ़ रहा",
-  "coachingLevelExpert": "🌳 विशेषज्ञ"
+  "coachingLevelExpert": "🌳 विशेषज्ञ",
+  "aiPrayerCitationsTitle": "संदर्भ · उद्धरण",
+  "citationTypeQuote": "उद्धरण",
+  "citationTypeScience": "अनुसंधान",
+  "citationTypeExample": "उदाहरण",
+  "aiPrayerReadingTime": "2 मिनट का पठन"
 }

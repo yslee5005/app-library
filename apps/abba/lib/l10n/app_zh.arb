@@ -389,5 +389,10 @@
   "coachingProCta": "使用 Pro 解锁祷告辅导",
   "coachingLevelBeginner": "🌱 初学者",
   "coachingLevelGrowing": "🌿 成长中",
-  "coachingLevelExpert": "🌳 专家"
+  "coachingLevelExpert": "🌳 专家",
+  "aiPrayerCitationsTitle": "参考 · 引用",
+  "citationTypeQuote": "名言",
+  "citationTypeScience": "研究",
+  "citationTypeExample": "例子",
+  "aiPrayerReadingTime": "2分钟阅读"
 }

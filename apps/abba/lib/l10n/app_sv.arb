@@ -389,5 +389,10 @@
   "coachingProCta": "Lås upp Böncoaching med Pro",
   "coachingLevelBeginner": "🌱 Nybörjare",
   "coachingLevelGrowing": "🌿 Växande",
-  "coachingLevelExpert": "🌳 Expert"
+  "coachingLevelExpert": "🌳 Expert",
+  "aiPrayerCitationsTitle": "Referenser · Citat",
+  "citationTypeQuote": "Citat",
+  "citationTypeScience": "Forskning",
+  "citationTypeExample": "Exempel",
+  "aiPrayerReadingTime": "2 minuters läsning"
 }

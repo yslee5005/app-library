@@ -389,5 +389,10 @@
   "coachingProCta": "Lås opp Bønnecoaching med Pro",
   "coachingLevelBeginner": "🌱 Nybegynner",
   "coachingLevelGrowing": "🌿 Voksende",
-  "coachingLevelExpert": "🌳 Ekspert"
+  "coachingLevelExpert": "🌳 Ekspert",
+  "aiPrayerCitationsTitle": "Referanser · Sitater",
+  "citationTypeQuote": "Sitat",
+  "citationTypeScience": "Forskning",
+  "citationTypeExample": "Eksempel",
+  "aiPrayerReadingTime": "2-minutters lesing"
 }

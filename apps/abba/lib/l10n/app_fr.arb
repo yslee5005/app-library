@@ -389,5 +389,10 @@
   "coachingProCta": "Débloquez le Coaching avec Pro",
   "coachingLevelBeginner": "🌱 Débutant",
   "coachingLevelGrowing": "🌿 En croissance",
-  "coachingLevelExpert": "🌳 Expert"
+  "coachingLevelExpert": "🌳 Expert",
+  "aiPrayerCitationsTitle": "Références · Citations",
+  "citationTypeQuote": "Citation",
+  "citationTypeScience": "Étude",
+  "citationTypeExample": "Exemple",
+  "aiPrayerReadingTime": "Lecture de 2 min"
 }

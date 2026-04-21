@@ -119,7 +119,6 @@ class DashboardView extends ConsumerWidget {
             child: AiPrayerCard(
               aiPrayer: result.aiPrayer!,
               title: l10n.aiPrayerTitle,
-              locale: locale,
               onUnlock: showPremiumUpgrade,
               isUserPremium: isPremium,
             ),

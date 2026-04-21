@@ -897,4 +897,19 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get coachingLevelExpert => '🌳 ผู้เชี่ยวชาญ';
+
+  @override
+  String get aiPrayerCitationsTitle => 'อ้างอิง · ข้ออ้าง';
+
+  @override
+  String get citationTypeQuote => 'ข้ออ้าง';
+
+  @override
+  String get citationTypeScience => 'งานวิจัย';
+
+  @override
+  String get citationTypeExample => 'ตัวอย่าง';
+
+  @override
+  String get aiPrayerReadingTime => 'อ่าน 2 นาที';
 }

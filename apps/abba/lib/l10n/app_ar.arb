@@ -389,5 +389,10 @@
   "coachingProCta": "افتح إرشاد الصلاة مع Pro",
   "coachingLevelBeginner": "🌱 مبتدئ",
   "coachingLevelGrowing": "🌿 ينمو",
-  "coachingLevelExpert": "🌳 خبير"
+  "coachingLevelExpert": "🌳 خبير",
+  "aiPrayerCitationsTitle": "المراجع · الاقتباسات",
+  "citationTypeQuote": "اقتباس",
+  "citationTypeScience": "بحث",
+  "citationTypeExample": "مثال",
+  "aiPrayerReadingTime": "قراءة لمدة دقيقتين"
 }

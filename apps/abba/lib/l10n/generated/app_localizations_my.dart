@@ -915,4 +915,19 @@ class AppLocalizationsMy extends AppLocalizations {
 
   @override
   String get coachingLevelExpert => '🌳 ကျွမ်းကျင်သူ';
+
+  @override
+  String get aiPrayerCitationsTitle => 'ရည်ညွှန်းချက်များ · ကိုးကားချက်များ';
+
+  @override
+  String get citationTypeQuote => 'ကိုးကားချက်';
+
+  @override
+  String get citationTypeScience => 'သုတေသန';
+
+  @override
+  String get citationTypeExample => 'ဥပမာ';
+
+  @override
+  String get aiPrayerReadingTime => '၂ မိနစ် ဖတ်ရန်';
 }

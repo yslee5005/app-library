@@ -84,8 +84,7 @@ const testPrayerResult = PrayerResult(
     isPremium: true,
   ),
   aiPrayer: AiPrayer(
-    textEn: 'A prayer for you.',
-    textKo: '당신을 위한 기도.',
+    text: 'A prayer for you.',
     isPremium: true,
   ),
 );

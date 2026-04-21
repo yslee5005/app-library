@@ -912,4 +912,19 @@ class AppLocalizationsSk extends AppLocalizations {
 
   @override
   String get coachingLevelExpert => '🌳 Odborník';
+
+  @override
+  String get aiPrayerCitationsTitle => 'Odkazy · Citácie';
+
+  @override
+  String get citationTypeQuote => 'Citát';
+
+  @override
+  String get citationTypeScience => 'Výskum';
+
+  @override
+  String get citationTypeExample => 'Príklad';
+
+  @override
+  String get aiPrayerReadingTime => 'Čítanie 2 minúty';
 }

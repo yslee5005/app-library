@@ -389,5 +389,10 @@
   "coachingProCta": "Pro ဖြင့် ဆုတောင်းခြင်း သင်တန်းကို ဖွင့်ပါ",
   "coachingLevelBeginner": "🌱 စတင်နေသူ",
   "coachingLevelGrowing": "🌿 ကြီးထွားနေသူ",
-  "coachingLevelExpert": "🌳 ကျွမ်းကျင်သူ"
+  "coachingLevelExpert": "🌳 ကျွမ်းကျင်သူ",
+  "aiPrayerCitationsTitle": "ရည်ညွှန်းချက်များ · ကိုးကားချက်များ",
+  "citationTypeQuote": "ကိုးကားချက်",
+  "citationTypeScience": "သုတေသန",
+  "citationTypeExample": "ဥပမာ",
+  "aiPrayerReadingTime": "၂ မိနစ် ဖတ်ရန်"
 }

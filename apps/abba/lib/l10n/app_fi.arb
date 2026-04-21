@@ -389,5 +389,10 @@
   "coachingProCta": "Avaa Rukousvalmennus Pro:lla",
   "coachingLevelBeginner": "🌱 Aloittelija",
   "coachingLevelGrowing": "🌿 Kasvussa",
-  "coachingLevelExpert": "🌳 Asiantuntija"
+  "coachingLevelExpert": "🌳 Asiantuntija",
+  "aiPrayerCitationsTitle": "Viitteet · Lainaukset",
+  "citationTypeQuote": "Lainaus",
+  "citationTypeScience": "Tutkimus",
+  "citationTypeExample": "Esimerkki",
+  "aiPrayerReadingTime": "2 minuutin lukuaika"
 }

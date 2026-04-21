@@ -886,4 +886,19 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get coachingLevelExpert => '🌳 전문가';
+
+  @override
+  String get aiPrayerCitationsTitle => '참고 · 인용';
+
+  @override
+  String get citationTypeQuote => '명언';
+
+  @override
+  String get citationTypeScience => '연구';
+
+  @override
+  String get citationTypeExample => '예시';
+
+  @override
+  String get aiPrayerReadingTime => '2분 읽기';
 }

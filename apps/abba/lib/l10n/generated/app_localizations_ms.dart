@@ -915,4 +915,19 @@ class AppLocalizationsMs extends AppLocalizations {
 
   @override
   String get coachingLevelExpert => '🌳 Pakar';
+
+  @override
+  String get aiPrayerCitationsTitle => 'Rujukan · Petikan';
+
+  @override
+  String get citationTypeQuote => 'Petikan';
+
+  @override
+  String get citationTypeScience => 'Kajian';
+
+  @override
+  String get citationTypeExample => 'Contoh';
+
+  @override
+  String get aiPrayerReadingTime => 'Bacaan 2 minit';
 }

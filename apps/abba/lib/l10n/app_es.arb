@@ -389,5 +389,10 @@
   "coachingProCta": "Desbloquea Coaching de oración con Pro",
   "coachingLevelBeginner": "🌱 Principiante",
   "coachingLevelGrowing": "🌿 Creciendo",
-  "coachingLevelExpert": "🌳 Experto"
+  "coachingLevelExpert": "🌳 Experto",
+  "aiPrayerCitationsTitle": "Referencias · Citas",
+  "citationTypeQuote": "Cita",
+  "citationTypeScience": "Estudio",
+  "citationTypeExample": "Ejemplo",
+  "aiPrayerReadingTime": "Lectura de 2 minutos"
 }

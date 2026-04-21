@@ -389,5 +389,10 @@
   "coachingProCta": "Otključaj Coaching molitve s Pro",
   "coachingLevelBeginner": "🌱 Početnik",
   "coachingLevelGrowing": "🌿 U rastu",
-  "coachingLevelExpert": "🌳 Stručnjak"
+  "coachingLevelExpert": "🌳 Stručnjak",
+  "aiPrayerCitationsTitle": "Reference · Citati",
+  "citationTypeQuote": "Citat",
+  "citationTypeScience": "Istraživanje",
+  "citationTypeExample": "Primjer",
+  "aiPrayerReadingTime": "Čitanje 2 minute"
 }

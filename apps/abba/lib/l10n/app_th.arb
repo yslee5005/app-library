@@ -389,5 +389,10 @@
   "coachingProCta": "ปลดล็อกการโค้ชการอธิษฐานด้วย Pro",
   "coachingLevelBeginner": "🌱 ผู้เริ่มต้น",
   "coachingLevelGrowing": "🌿 กำลังเติบโต",
-  "coachingLevelExpert": "🌳 ผู้เชี่ยวชาญ"
+  "coachingLevelExpert": "🌳 ผู้เชี่ยวชาญ",
+  "aiPrayerCitationsTitle": "อ้างอิง · ข้ออ้าง",
+  "citationTypeQuote": "ข้ออ้าง",
+  "citationTypeScience": "งานวิจัย",
+  "citationTypeExample": "ตัวอย่าง",
+  "aiPrayerReadingTime": "อ่าน 2 นาที"
 }

@@ -389,5 +389,10 @@
   "coachingProCta": "Oldja fel az Imakoucholást Pro-val",
   "coachingLevelBeginner": "🌱 Kezdő",
   "coachingLevelGrowing": "🌿 Fejlődő",
-  "coachingLevelExpert": "🌳 Szakértő"
+  "coachingLevelExpert": "🌳 Szakértő",
+  "aiPrayerCitationsTitle": "Hivatkozások · Idézetek",
+  "citationTypeQuote": "Idézet",
+  "citationTypeScience": "Kutatás",
+  "citationTypeExample": "Példa",
+  "aiPrayerReadingTime": "2 perces olvasás"
 }
