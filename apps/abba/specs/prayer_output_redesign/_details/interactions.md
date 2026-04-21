@@ -123,28 +123,35 @@
 
 ---
 
-## Phase 4 · Historical Deep (INT-029 ~ INT-033)
+## Phase 4 · Historical Deep (INT-029 ~ INT-037) — A-1 single-field
 
 | ID | Screen | Widget | Trigger | Action | Side Effect | Pitfall Tags | Status |
 |----|--------|--------|---------|--------|-------------|--------------|--------|
-| INT-029 | N/A | `[gemini_service._buildPremiumSystemPrompt]` | runtime | historical_story JSON schema 지시를 "8-10 문장, 한 문장=한 장면, 감각+인물 내면+구체적 시간/장소" + "실존 인물/사건만, 불확실하면 생략" 으로 강화 | 프롬프트 품질 향상 | `subscription-crash` | pending |
-| INT-030 | N/A | `[gemini_service._buildSystemPrompt]` | runtime | 전체 분석 프롬프트(`analyzePrayer`)의 historical_story 섹션도 동일 지시 반영 (legacy 경로 호환) | | `subscription-crash` | pending |
-| INT-031 | N/A | `[gemini_service._hardcodedPrayerResult]` | runtime | George Müller 샘플 summary를 8-10 문장 품질 기준으로 세부 표현 보강 (감각 디테일 + 인물 내면). lesson은 기존 유지 | | `code-gen` | pending |
-| INT-032 | `prayer_dashboard` | `[historical_story_card]` | build | summary Text의 typography를 `AbbaTypography.bodySmall` → `AbbaTypography.body.copyWith(height: 1.7)`로 승격. prompt가 생성한 `\n\n` 문단 구분은 Text widget이 자동 렌더 | 긴 텍스트 가독성 | `color-token, flutter-layout` | pending |
-| INT-033 | `prayer_dashboard` | `[historical_story_card]` | build | lesson sage box를 `EdgeInsets.all(AbbaSpacing.md)` 로 여백 증가 + lessonLabel typography를 `caption` → `label`로 승격해 "오늘의 교훈" 섹션 강조 | 시각적 계층 강화 | `color-token` | pending |
+| INT-029 | N/A | `[HistoricalStory.model]` | build-time | `titleEn/Ko`, `summaryEn/Ko`, `lessonEn/Ko` 3쌍 → 단일 `title`/`summary`/`lesson` 로 통합. `reference`, `isPremium` 유지. locale getter 3개 제거 | model API 변경 | `code-gen, dead-code-sweep` | pending |
+| INT-030 | N/A | `[HistoricalStory.fromJson]` | deserialization | 3단 fallback: `json['title']` → `json['title_en']` → `json['title_ko']` → `''`. summary/lesson도 동일 패턴 | legacy DB compat | `code-gen` | pending |
+| INT-031 | N/A | `[HistoricalStory.placeholder]` | runtime | `placeholder()` → `placeholder(String locale)` 로 변경. locale=='ko'면 한국어 샘플, 그 외 영어 샘플 | API 변경 | `code-gen` | pending |
+| INT-032 | N/A | `[gemini_service._buildPremiumSystemPrompt]` | runtime | historical_story JSON schema를 single-field (`title`/`summary`/`lesson`, 사용자 locale)로 변경. 품질 바 지시 강화: "8-10 문장, 한 문장=한 장면, 감각+내면+구체적 시간/장소", "실존 인물/사건만, 불확실하면 다른 이야기 선택" | 프롬프트 품질 향상 | `subscription-crash` | pending |
+| INT-033 | N/A | `[gemini_service._buildSystemPrompt]` | runtime | 전체 분석 프롬프트(`analyzePrayer`)의 historical_story 섹션도 동일 single-field schema + 품질 지시 반영 | | `subscription-crash` | pending |
+| INT-034 | N/A | `[gemini_service._hardcodedPrayerResult]` | runtime | 시그니처 `_hardcodedPrayerResult(String locale)` 로 변경. HistoricalStory 샘플을 locale-aware로 (ko / en 2가지, 영어 샘플은 George Müller 문체 리라이트로 8-10 문장 품질 기준 제시) | hardcoded API 변경 | `code-gen` | pending |
+| INT-035 | N/A | `[gemini_service callers]` | runtime | `_hardcodedPrayerResult()` / `_fallbackPrayerResult()` 호출부 전부 `locale` 전달. `analyzePrayer`, `analyzePrayerCore`, `analyzePrayerFromAudio`, `analyzePrayerPremium` 각 경로에서 각자 받은 locale 인자 사용 | 호출 체인 업데이트 | `code-gen` | pending |
+| INT-036 | `prayer_dashboard` | `[historical_story_card]` | build | `.title(locale)` / `.summary(locale)` / `.lesson(locale)` 호출 전부 `.title` / `.summary` / `.lesson` 로 변경. `placeholder()` → `placeholder(locale)` 호출로 변경. summary Text typography `bodySmall` → `body.copyWith(height: 1.7)` 승격, lesson 박스 padding `sm` → `md` 증가, lessonLabel `caption` → `label` 승격 | 긴 텍스트 가독성 + API 변경 반영 | `color-token, flutter-layout, dead-code-sweep` | pending |
+| INT-037 | `prayer_dashboard` | `[prayer_dashboard_view]` | build | `HistoricalStory.placeholder()` 호출부를 `HistoricalStory.placeholder(locale)` 로 변경 | locale prop 전달 | `code-gen` | pending |
 
 ### Phase 4 추가 작업
 
-- `gemini_service.dart` `_parsePrayerJson` / `_parsePremiumJson`: 변경 없음 (기존 HistoricalStory.fromJson 재사용)
-- 신규 메서드 추가 없음 (prompt-only 강화)
-- l10n 신규 키 **0개** — 모든 라벨 기존 키(`historicalStoryTitle`, `todayLesson`) 재사용
+- `MockAiService.analyzePrayer` 하드코딩 샘플: single-field로 업데이트 (MockDataService가 JSON mock 쓰는 경우 그쪽도 업데이트 필요 — `assets/mock/prayer_result.json`)
+- `_parsePrayerJson` / `_parsePremiumJson`: 변경 없음 (HistoricalStory.fromJson이 legacy compat 처리)
+- Grep 검증: `grep -r "titleEn\|titleKo\|summaryEn\|summaryKo\|lessonEn\|lessonKo" apps/abba/lib/` → HistoricalStory 관련 참조가 모두 제거됐는지 (Scripture/BibleStory/Guidance 등 다른 모델의 동명 필드는 그대로 유지)
+- l10n 신규 키 **0개**
 
 ### 테스트 매핑 (Phase 4)
 
 | INT | Test file | Test case |
 |-----|-----------|-----------|
-| INT-031 | `test/services/gemini_service_hardcoded_test.dart` (있으면) | hardcoded HistoricalStory summary가 최소 300자(en) / 200자(ko) 이상인지 |
-| INT-032, INT-033 | `test/features/dashboard/widgets/historical_story_card_test.dart` (신규 또는 기존) | 긴 summary (500자) 렌더 시 overflow 없음 (compact 320dp, medium 768dp) |
+| INT-029, INT-030 | `test/models/prayer_test.dart` | HistoricalStory.fromJson new format, legacy `_en`, legacy `_ko` 3가지 입력에서 크래시 없이 값 추출 |
+| INT-031 | 위 파일 | `placeholder('ko')` vs `placeholder('en')` 언어 선택 검증 |
+| INT-034 | `test/services/gemini_service_hardcoded_test.dart` (있으면) | `_hardcodedPrayerResult('ko')` / `_hardcodedPrayerResult('en')` 호출 시 HistoricalStory summary가 locale-appropriate인지 |
+| INT-036, INT-037 | `test/features/dashboard/widgets/historical_story_card_test.dart` (신규 또는 기존) | 긴 summary (500자) overflow 없음 (compact 320dp, medium 768dp), placeholder 렌더 |
 
 ---
 

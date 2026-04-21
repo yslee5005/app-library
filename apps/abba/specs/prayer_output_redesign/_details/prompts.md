@@ -277,18 +277,20 @@ NEVER output the prayer_guide content back. Use it only as reference for evaluat
 
 → **옵션 A 채택** (Phase 4 MVP). Premium 1 call 유지, 비용 증가 0. Phase 5에서 AiPrayer를 별도 분리할 때 함께 재검토.
 
-#### Historical Story JSON schema 강화 (기존 유지 + 지시 보강)
+#### Historical Story JSON schema 변경 (A-1: single-field)
 
-기존 schema는 그대로:
+기존 `_en`/`_ko` 이원 필드 → **사용자 locale 단일 필드**:
 ```json
 "historical_story": {
-  "title_en": "...", "title_ko": "...",
-  "reference": "...",
-  "summary_en": "...", "summary_ko": "...",
-  "lesson_en": "...", "lesson_ko": "...",
+  "title": "<in $langName>",
+  "reference": "<locale-neutral, e.g. 'Bristol, 1838'>",
+  "summary": "<in $langName, 8-10 sentences>",
+  "lesson": "<in $langName, 2-4 sentences>",
   "is_premium": true
 }
 ```
+
+**다른 섹션(scripture, bible_story, guidance, ai_prayer)의 `_en`/`_ko` 이원 스키마는 Phase 4 scope 밖 — 그대로 유지.** 추후 phase에서 동일 패턴으로 리팩터링 예정.
 
 #### 신규 작성 규칙 (system prompt `_buildPremiumSystemPrompt` + `_buildSystemPrompt`에 추가)
 

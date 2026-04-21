@@ -36,10 +36,10 @@
 - **변경 범위**: PrayerCoachingCard 신규, PrayerCoaching 모델, asset 추가, ARB ~8 키
 - **Prompt Phase**: Prayer Coaching (system prompt에 prayer_guide.md 삽입)
 
-### Phase 4 · Historical Deep
-- **목표**: Historical Story 길게 (8-10문장) + "오늘의 교훈" 섹션
-- **변경 범위**: HistoricalStoryCard 확장, HistoricalStoryDeep 모델, ARB ~3 키
-- **Prompt Phase**: Historical Deep Analysis
+### Phase 4 · Historical Deep (+ A-1 i18n 리팩터링)
+- **목표**: Historical Story 길게 (8-10문장) + "오늘의 교훈" 강화 + **HistoricalStory 모델 single-field 정리 (35 locale 대응)**
+- **변경 범위**: HistoricalStory 모델 (3 field pair → 3 single field, locale getter 제거, legacy fromJson fallback), HistoricalStoryCard 확장, Gemini prompt schema single-field 전환, hardcoded `_hardcodedPrayerResult(locale)` 시그니처 변경, ARB 신규 키 0개
+- **Prompt Phase**: Historical Deep Analysis (기존 `analyzePrayerPremium` 안에서 schema + 품질 지시만 변경, 신규 메서드 X)
 
 ### Phase 5 · AI Prayer Deep (TTS 제거)
 - **목표**: 2분 분량(~300단어) + 명언/과학 사실/구체 예시 포함. **TTS 제거, 텍스트만**
@@ -115,7 +115,8 @@
 - [x] Phase 3 `_details/*` 상세 작성 + prayer_guide.md 초안 v0.1 (2026-04-21)
 - [x] Phase 3 사용자 승인 (2026-04-21)
 - [x] Phase 3 구현 + commit `6cff608` (2026-04-21)
-- [x] Phase 4 `_details/*` 상세 작성 (2026-04-21) ← 현재 여기
-- [ ] **Phase 4 사용자 승인 (prompt 강화 + widget typography 변경 검토)**
+- [x] Phase 4 `_details/*` 상세 작성 (2026-04-21)
+- [x] Phase 4 i18n 전략 결정: **A-1** (HistoricalStory single-field + locale별 prompt 직접 생성) — 사용자 승인 (2026-04-21)
+- [ ] **Phase 4 구현 착수 대기 ("실행" 커맨드)** ← 현재 여기
 - [ ] Phase 4 구현
 - [ ] Phase 5 (대기)

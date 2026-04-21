@@ -264,49 +264,123 @@ Phase 3 MVP는 **저장 안 함** 결정.
 
 ---
 
-## Phase 4 · Historical Deep
+## Phase 4 · Historical Deep (A-1: single-field i18n)
 
-### 현재 상태 (Phase 3 commit 이후)
+### 결정 (2026-04-21)
 
-`HistoricalStory` 모델은 이미 Phase 4에 필요한 핵심 필드를 전부 보유:
+사용자가 35 locale 대응 방식으로 **Option A (locale별 prompt에서 직접 생성)** 채택. 동시에 `HistoricalStory` 모델을 **single-field**로 정리 (en/ko 이원 필드 → 사용자 locale에 맞춰 하나의 `title`/`summary`/`lesson`). Phase 4가 이 패턴의 pilot — 결과 좋으면 후속 phase에서 Scripture/BibleStory 등에도 확장.
+
+### 현재 상태 (before)
 
 ```dart
 class HistoricalStory {
   final String titleEn, titleKo;
-  final String reference;          // 시대/출처 (e.g., "Bristol, 1838")
-  final String summaryEn, summaryKo;  // 본문 — Phase 4에서 8-10문장으로 확장
-  final String lessonEn, lessonKo;    // "오늘의 교훈" — 이미 존재
+  final String reference;          // locale 무관 (e.g., "Bristol, 1838")
+  final String summaryEn, summaryKo;
+  final String lessonEn, lessonKo;
   final bool isPremium;
-  // placeholder(), fromJson() 이미 있음
+
+  String title(String locale) => locale == 'ko' ? titleKo : titleEn;
+  String summary(String locale) => locale == 'ko' ? summaryKo : summaryEn;
+  String lesson(String locale) => locale == 'ko' ? lessonKo : lessonEn;
+  // ...
 }
 ```
 
-### Phase 4 변경 (최소)
+### 변경 후 (Phase 4 after)
 
-**모델 변경 없음.** 기존 필드 그대로 사용.
+```dart
+class HistoricalStory {
+  final String title;       // 사용자 locale로 생성된 단일 값
+  final String reference;    // locale 무관 (기존과 동일)
+  final String summary;      // 사용자 locale
+  final String lesson;       // 사용자 locale
+  final bool isPremium;
 
-변경되는 것:
-1. **prompt**: `summary` 생성 지시를 "7-10+ 문장, narrative arc"에서 **"8-10 문장, 한 문장 = 한 장면, 감각 묘사 + 인물 내면 + 구체적 시간/장소"** 로 구체화. Hallucinate 방지 강화 (인물/사건 확실하지 않으면 생략).
-2. **prompt 분리**: `analyzePrayerPremium` 안에 있는 historical_story 섹션의 작성 지침만 강화 (분리된 메서드 신규 생성 X — MVP).
-3. **hardcoded fallback**: 기존 조지 뮬러 샘플(8문장)은 유지. 영어 버전만 세부 표현 강화해서 품질 기준 제시.
-4. **widget**: summary 텍스트 typography 승격 (`bodySmall` → `body`, line-height 1.6) + 문단 구분 자동 (prompt가 `\n\n` 포함 생성).
+  const HistoricalStory({
+    required this.title,
+    required this.reference,
+    required this.summary,
+    required this.lesson,
+    required this.isPremium,
+  });
 
-### 대안 고려 (선택)
+  factory HistoricalStory.fromJson(Map<String, dynamic> json) {
+    return HistoricalStory(
+      // 신규 포맷 우선, 기존 _en/_ko 포맷 legacy fallback
+      title: json['title'] as String?
+          ?? json['title_en'] as String?
+          ?? json['title_ko'] as String?
+          ?? '',
+      reference: json['reference'] as String? ?? '',
+      summary: json['summary'] as String?
+          ?? json['summary_en'] as String?
+          ?? json['summary_ko'] as String?
+          ?? '',
+      lesson: json['lesson'] as String?
+          ?? json['lesson_en'] as String?
+          ?? json['lesson_ko'] as String?
+          ?? '',
+      isPremium: json['is_premium'] as bool? ?? true,
+    );
+  }
 
-옵션 A: **모델 변경 없음** ★ 권장 (MVP 원칙)
-옵션 B: `keyQuoteEn/Ko` (인물/성경 핵심 인용) 필드 추가 — 감동 증폭이지만 hallucinate 위험
-옵션 C: `HistoricalStoryDeep` 새 클래스 — 과도
+  factory HistoricalStory.placeholder(String locale) => HistoricalStory(
+    title: locale == 'ko' ? '믿음의 이야기' : 'A Story of Faith',
+    reference: '',
+    summary: locale == 'ko'
+        ? '성경 역사 속 감동적인 이야기를 만나보세요...'
+        : 'Unlock to discover a powerful story from Bible history...',
+    lesson: '',
+    isPremium: true,
+  );
+}
+```
 
-→ **옵션 A 채택**. Phase 4는 prompt 품질 강화가 본질. 필드 부족해서 못 하는 게 아니라, prompt가 평범해서 생기는 문제.
+### 제거되는 getter
 
-### Supabase 스키마 영향
+- `HistoricalStory.title(locale)` / `.summary(locale)` / `.lesson(locale)` → **전부 제거**
+- 호출부는 직접 `story.title` / `.summary` / `.lesson` 참조
+- 영향 파일: `HistoricalStoryCard` (locale prop은 유지하되 model getter 호출은 제거)
 
-**변경 없음** (기존 `prayers.result: JSONB` 그대로).
+### Legacy DB compat
+
+Supabase `prayers.result: JSONB` 안에 Phase 3 이전 저장된 레코드는 `title_en`/`title_ko` 형태로 저장됨. `fromJson`의 3단 fallback 체인(new → en → ko)으로 **lossy 호환**:
+- 기존 사용자가 한국어(`ko`) 유저였다 해도, `json['title_en']`이 fallback 체인 2번째라 영어가 먼저 잡힐 수 있음 → 기존 레코드는 잘못된 언어로 표시될 수 있으나 앱이 크래시되지 않음
+- MVP 판단: 다음 기도 시 재생성되면서 새 포맷으로 저장됨. 과거 레코드 정확성은 포기
+
+### Hardcoded fallback locale 인자
+
+`GeminiService._hardcodedPrayerResult()`에 `String locale` 인자 추가. HistoricalStory 생성 시 locale 에 따라 ko/en 샘플 선택. 다른 필드(Scripture, BibleStory 등)는 여전히 ko/en 이원 구조이므로 영향 없음 (Phase 4 scope 밖).
+
+### 프롬프트 schema 변경
+
+기존:
+```json
+"historical_story": {
+  "title_en": "...", "title_ko": "...",
+  "summary_en": "...", "summary_ko": "...",
+  "lesson_en": "...", "lesson_ko": "...",
+  "reference": "...", "is_premium": true
+}
+```
+
+변경 후 (사용자 locale로 생성):
+```json
+"historical_story": {
+  "title": "<사용자 locale로 생성>",
+  "reference": "<locale 무관 — 출처/시대>",
+  "summary": "<사용자 locale, 8-10 문장>",
+  "lesson": "<사용자 locale, 2-4 문장>",
+  "is_premium": true
+}
+```
 
 ### 검증 기준
 
-- summary 길이: locale별 공백 제외 400자 이상 (한국어) / 800자 이상 (영어)
-- 인물/사건이 실존 성경 or 검증된 교회사 소스인지 (prompt에 "Do NOT make up" 재강조 + Sentry 샘플 검토)
+- summary 길이: 공백 제외 locale별 최소 300자 (한/일/중 CJK) / 800자 (영·유럽어)
+- Legacy 호환: 과거 레코드 로드 시 crash 없음 (fromJson 3단 fallback)
+- hallucinate: 인물/사건 실존 여부는 prompt + Sentry 샘플로 모니터링
 
 ---
 

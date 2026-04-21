@@ -151,16 +151,25 @@ factory PrayerResult.fromJson(Map<String, dynamic> json) => _$PrayerResultFromJs
 
 ---
 
-## Phase 4 · Historical Deep 관련 함정
+## Phase 4 · Historical Deep 관련 함정 (A-1 single-field 포함)
 
 - [x] **§2 Subscription / Payment Crash** — Phase 4 직접 영향 없음. Premium 1 call 유지 (비용 변화 무).
-- [x] **§11 성능** — 긴 summary(500-800자) 렌더 시 `Text` widget 단일 layout pass 충분. 굳이 문단별 split + `Column` 렌더 불필요 (over-engineering). `height: 1.7` + `\n\n` 자동 처리.
+- [x] **§11 성능** — 긴 summary(500-800자) 렌더 시 `Text` widget 단일 layout pass 충분. `height: 1.7` + `\n\n` 자동 처리.
 - [x] **§12 Color / Design Token** — lesson 박스 `AbbaColors.sage.withValues(alpha: 0.1)` 기존 그대로. typography도 토큰 사용 (하드코딩 금지).
-- [x] **§15 Web** — 해당 없음 (Flutter only)
-- [x] **§16 Code Generation** — model 변경 없음 → freezed 재생성 불필요 / l10n 신규 키 없음 → `flutter gen-l10n` 불필요.
+- [x] **§13 Dead Code Sweep** ★ 핵심 (A-1 리팩터링):
+  - `HistoricalStory.title(locale)` / `.summary(locale)` / `.lesson(locale)` getter 3개 **완전 삭제** (주석 남기지 말 것)
+  - `titleEn`, `titleKo`, `summaryEn`, `summaryKo`, `lessonEn`, `lessonKo` 필드 6개 제거
+  - grep 검증: `grep -rn "HistoricalStory" apps/abba/lib/` → 전 호출부 업데이트 확인
+  - 삭제 전 `grep -rn "historicalStory\.\(title\|summary\|lesson\)(" apps/abba/` 로 locale 전달 호출부 전수 점검
+- [x] **§16 Code Generation** ★ 핵심:
+  - HistoricalStory 모델 변경 후 `flutter analyze apps/abba` 0 error 확인
+  - (freezed 사용 안 하는 plain class라) build_runner 불필요
+  - l10n 신규 키 0개 → `flutter gen-l10n` 불필요
+  - MockDataService JSON mock 파일(`assets/mock/prayer_result.json`) 포맷도 함께 업데이트 필요
+- [x] **§3 Multi-tenant (Supabase)** — Supabase `prayers.result: JSONB` 스키마 변경 없음. 저장된 legacy 레코드는 fromJson의 3단 fallback이 처리 (lossy compat)
 - [ ] **§1 Riverpod 라이프사이클** — 해당 없음 (기존 Premium 로딩 로직 재사용)
-- [ ] **§4 i18n** — 신규 키 없음
-- [ ] **§13 Dead Code Sweep** — 해당 없음 (코드 삭제 없음)
+- [ ] **§4 i18n** — l10n 신규 키 없음 (prompt 품질만 강화)
+- [x] **§15 Web** — 해당 없음 (Flutter only)
 
 ### Phase 4 특유 주의
 
@@ -190,6 +199,19 @@ factory PrayerResult.fromJson(Map<String, dynamic> json) => _$PrayerResultFromJs
 - Phase 4 이후 `analyzePrayerPremium` system prompt 길이 증가 (+400 token 정도)
 - Gemini 2.5 flash context 1M → 무시 가능
 - 단 prompt A/B 테스트 비교 (Phase 4 이전 hardcoded → Phase 4 이후 실 API) 시 품질 대조 필요
+
+#### 5. Legacy DB 레코드 i18n 불일치 (A-1 특유)
+
+- Phase 3 이전 저장 레코드는 `title_en`, `title_ko` 둘 다 있음
+- new fromJson은 `title` 없으면 `title_en` fallback → 한국어 사용자가 영어 레코드 보게 됨 (과거 기도 재조회 시)
+- 판단: MVP는 **과거 레코드 정확성 포기**. 다음 기도 시 새 포맷으로 재생성됨. 중대한 버그 아님
+- 모니터링 필요 시 Sentry custom event: `historical_story_legacy_record_loaded` 카운터
+
+#### 6. Phase 4 scope 경계 유지
+
+- A-1은 **HistoricalStory에만** 적용. Scripture / BibleStory / Guidance / AiPrayer의 `_en`/`_ko` 이원 필드는 **건드리지 않음**
+- 유혹: "이왕 하는 김에 다 정리" — **금지**. Phase 4 scope 지키기 (MVP 원칙, 리스크 격리)
+- 다른 모델의 single-field 리팩터링은 Phase 5 이후 별도 decision gate
 
 ---
 
