@@ -3,68 +3,69 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import '../../models/qt_passage.dart';
 import '../qt_repository.dart';
 
+/// On-demand QT repository.
+/// - Cache hit: read today's rows for requested locale from abba.qt_passages.
+/// - Cache miss: invoke the `abba-get-qt-passages` Edge Function which
+///   generates + inserts for this single locale. Race-safe via unique index.
+/// - Edge Function failure: fall back to English cache, then to hardcoded
+///   starter passages.
 class SupabaseQtRepository implements QtRepository {
+  SupabaseQtRepository(this._client);
+
   final SupabaseClient _client;
 
-  SupabaseQtRepository(this._client);
+  static const String _batchSlot = 'daily';
 
   @override
   Future<List<QTPassage>> getTodayPassages({required String locale}) async {
     final String today = _getEstDate();
-    final String batchSlot = _getCurrentBatchSlot();
 
+    // 1. Try cache first (fast path — <100ms).
+    final List<QTPassage> cached = await _fetchFromDb(today, locale);
+    if (cached.length >= 10) return cached;
+
+    // 2. Cache miss — call Edge Function to generate for this locale.
+    try {
+      await _client.functions.invoke(
+        'abba-get-qt-passages',
+        body: {'locale': locale},
+      );
+      final List<QTPassage> fresh = await _fetchFromDb(today, locale);
+      if (fresh.isNotEmpty) return fresh;
+    } catch (_) {
+      // Fall through to English / hardcoded fallback.
+    }
+
+    // 3. Edge Function failed or returned nothing — English fallback.
+    if (locale != 'en') {
+      final List<QTPassage> en = await _fetchFromDb(today, 'en');
+      if (en.isNotEmpty) return en;
+    }
+
+    // 4. Last-resort hardcoded starter set.
+    return _fallbackPassages(locale);
+  }
+
+  Future<List<QTPassage>> _fetchFromDb(String date, String locale) async {
     final List<dynamic> data = await _client
         .schema('abba')
         .from('qt_passages')
         .select()
         .eq('app_id', 'abba')
-        .eq('date', today)
-        .eq('batch_slot', batchSlot)
+        .eq('date', date)
+        .eq('batch_slot', _batchSlot)
         .eq('locale', locale)
         .order('created_at', ascending: true);
-
-    final List<QTPassage> passages = data
+    return data
         .map((e) => QTPassage.fromJson(e as Map<String, dynamic>))
         .toList();
-
-    if (passages.isEmpty) {
-      // locale 데이터 없으면 영어로 fallback
-      if (locale != 'en') {
-        final List<dynamic> enData = await _client
-            .schema('abba')
-            .from('qt_passages')
-            .select()
-            .eq('app_id', 'abba')
-            .eq('date', today)
-            .eq('batch_slot', batchSlot)
-            .eq('locale', 'en')
-            .order('created_at', ascending: true);
-
-        final List<QTPassage> enPassages = enData
-            .map((e) => QTPassage.fromJson(e as Map<String, dynamic>))
-            .toList();
-
-        if (enPassages.isNotEmpty) return enPassages;
-      }
-
-      return _fallbackPassages(locale);
-    }
-
-    return passages;
   }
 
-  /// Get current date in EST (UTC-5)
+  /// Get current date in EST (UTC-5) — server uses same anchor.
   String _getEstDate() {
     final DateTime utc = DateTime.now().toUtc();
     final DateTime est = utc.subtract(const Duration(hours: 5));
     return est.toIso8601String().substring(0, 10);
-  }
-
-  /// Determine current batch slot based on EST time
-  String _getCurrentBatchSlot() {
-    final DateTime utc = DateTime.now().toUtc();
-    final DateTime est = utc.subtract(const Duration(hours: 5));
-    return est.hour < 12 ? 'morning' : 'evening';
   }
 
   List<QTPassage> _fallbackPassages(String locale) {
