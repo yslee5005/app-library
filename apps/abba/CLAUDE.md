@@ -45,3 +45,4 @@ lib/features/
 
 @specs/REQUIREMENTS.md
 @specs/DESIGN.md
+@specs/SUBSCRIPTION.md  <!-- Pricing, billing grace period, payment flow, code refs -->

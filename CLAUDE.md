@@ -89,3 +89,13 @@ supabase db push --linked
 - `deploy.md` — Deployment checklist + recommended packages
 - `copy-paste.md` — Master→app copy-paste guide
 - `moai.md` — MoAI prompt template
+- `learned-pitfalls.md` — 245 fix commits에서 추출한 16 카테고리 함정 (코드 작성 전 필독)
+
+@./.claude/rules/learned-pitfalls.md
+
+## New Feature Workflow
+큰 feature(3+ 인터랙션) 추가 시 spec-driven 워크플로우 권장:
+```bash
+cp -r templates/feature_spec apps/<app>/specs/<feature_name>
+```
+그 후 `SPEC.md` + `_details/` 채우고 Ralph에게 implement 요청. 자세한 사용법: `templates/feature_spec/README.md`.
