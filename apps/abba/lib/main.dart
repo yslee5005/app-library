@@ -67,6 +67,10 @@ Future<void> main() async {
 
   AuthRepository authRepo;
 
+  // Real-mode RevenueCat service — created before overrides so we can call
+  // initialize(userId) after sign-in. Null in mock/fallback modes.
+  RevenueCatSubscriptionService? subscriptionService;
+
   // Initialize notification service (local-only, works in both mock/real)
   NotificationService notificationService = RealNotificationService();
   try {
@@ -160,6 +164,9 @@ Future<void> main() async {
       emailAuth: emailAuth,
     );
 
+    subscriptionService =
+        RevenueCatSubscriptionService(apiKey: AppConfig.revenueCatApiKey);
+
     overrides.addAll([
       authRepositoryProvider.overrideWithValue(authRepo),
       aiServiceProvider.overrideWithValue(CachedAiService(GeminiService())),
@@ -173,9 +180,7 @@ Future<void> main() async {
       communityRepositoryProvider.overrideWithValue(
         SupabaseCommunityRepository(supabase),
       ),
-      subscriptionServiceProvider.overrideWithValue(
-        RevenueCatSubscriptionService(apiKey: AppConfig.revenueCatApiKey),
-      ),
+      subscriptionServiceProvider.overrideWithValue(subscriptionService),
       notificationServiceProvider.overrideWithValue(notificationService),
       qtRepositoryProvider.overrideWithValue(SupabaseQtRepository(supabase)),
     ]);
@@ -191,6 +196,20 @@ Future<void> main() async {
         appLogger.info('signInAnonymously success', category: LogCategory.auth);
       case Failure(:final exception):
         appLogger.error('signInAnonymously failed: $exception', category: LogCategory.auth);
+    }
+  }
+
+  // Initialize RevenueCat with the (anonymous or linked) user id.
+  // Must happen AFTER sign-in so appUserID is stable across app restarts.
+  if (subscriptionService != null) {
+    final userId = Supabase.instance.client.auth.currentUser?.id;
+    if (userId != null) {
+      await subscriptionService.initialize(userId);
+    } else {
+      appLogger.warning(
+        'Skipping RevenueCat initialize: no user id available',
+        category: LogCategory.subscription,
+      );
     }
   }
 
