@@ -10,6 +10,15 @@ import '../../models/prayer.dart';
 import '../../models/qt_meditation_result.dart';
 import '../ai_service.dart';
 
+// Toggle: when true, skip Gemini API calls and return the hardcoded values
+// defined in `_hardcoded*` builders below. Flip to false to use real API.
+const bool _useHardcodedResponse = true;
+
+const String _hardcodedTranscription =
+    '주님, 오늘도 새로운 아침을 허락해 주셔서 감사합니다. 가족의 건강과 평안을 지켜 주시고, '
+    '오늘 하루 주님의 뜻을 따라 살아가게 하소서. 염려하는 친구를 위로하여 주시고, '
+    '주님의 사랑 안에서 모두가 평안하기를 간구합니다. 예수님의 이름으로 기도드립니다. 아멘.';
+
 class GeminiService implements AiService {
   GenerativeModel _createModel({
     required String systemPrompt,
@@ -35,6 +44,10 @@ class GeminiService implements AiService {
     required String transcript,
     required String locale,
   }) async {
+    if (_useHardcodedResponse) {
+      apiLog.info('Gemini analyzePrayer bypassed (hardcoded)');
+      return _hardcodedPrayerResult();
+    }
     final langName = _localeName(locale);
     apiLog.info('Gemini full prayer analysis started');
 
@@ -57,6 +70,10 @@ class GeminiService implements AiService {
     required String transcript,
     required String locale,
   }) async {
+    if (_useHardcodedResponse) {
+      apiLog.info('Gemini analyzePrayerCore bypassed (hardcoded)');
+      return _hardcodedPrayerResult();
+    }
     final langName = _localeName(locale);
     apiLog.info('Gemini core prayer analysis started');
 
@@ -83,6 +100,13 @@ class GeminiService implements AiService {
     required String audioFilePath,
     required String locale,
   }) async {
+    if (_useHardcodedResponse) {
+      apiLog.info('Gemini analyzePrayerFromAudio bypassed (hardcoded)');
+      return (
+        result: _hardcodedPrayerResult(),
+        transcription: _hardcodedTranscription,
+      );
+    }
     final langName = _localeName(locale);
     apiLog.info('Gemini audio prayer analysis started');
 
@@ -118,6 +142,10 @@ class GeminiService implements AiService {
     required String transcript,
     required String locale,
   }) async {
+    if (_useHardcodedResponse) {
+      apiLog.info('Gemini analyzePrayerPremium bypassed (hardcoded)');
+      return _hardcodedPremiumContent();
+    }
     final langName = _localeName(locale);
     apiLog.info('Gemini premium analysis started');
 
@@ -146,6 +174,10 @@ class GeminiService implements AiService {
     required String meditationText,
     required String locale,
   }) async {
+    if (_useHardcodedResponse) {
+      apiLog.info('Gemini analyzeMeditation bypassed (hardcoded)');
+      return _hardcodedMeditationResult();
+    }
     final langName = _localeName(locale);
     apiLog.info('Gemini meditation analysis started');
 
@@ -215,48 +247,148 @@ class GeminiService implements AiService {
   }
 
   // ---------------------------------------------------------------------------
-  // Fallbacks
+  // Hardcoded responses (visible sample data used when _useHardcodedResponse)
+  // Also used as graceful fallbacks when API calls fail.
   // ---------------------------------------------------------------------------
 
-  PrayerResult _fallbackPrayerResult() {
+  PrayerResult _hardcodedPrayerResult() {
     return PrayerResult(
+      prayerSummary: const PrayerSummary(
+        gratitude: ['새로운 아침을 허락해 주신 하나님께 감사합니다.'],
+        petition: ['오늘 하루 주님의 뜻을 따라 살아가게 하소서.'],
+        intercession: ['염려하는 친구를 위로해 주시고 가족의 건강을 지켜 주소서.'],
+      ),
       scripture: const Scripture(
         verseEn: 'The LORD is my shepherd; I shall not want.',
         verseKo: '여호와는 나의 목자시니 내게 부족함이 없으리로다',
         reference: 'Psalm 23:1',
+        reasonEn:
+            'This verse reminds you that the God you prayed to is a shepherd who personally leads and provides for you.',
+        reasonKo: '당신이 기도한 하나님은 당신을 인격적으로 인도하시고 채워 주시는 목자이심을 다시 새겨 주는 말씀입니다.',
       ),
       bibleStory: const BibleStory(
-        titleEn: 'God is faithful',
-        titleKo: '하나님은 신실하십니다',
-        summaryEn: 'Even when we cannot see the way, God is faithfully guiding our steps.',
-        summaryKo: '우리가 길을 볼 수 없을 때에도, 하나님은 신실하게 우리의 발걸음을 인도하십니다.',
+        titleEn: 'David the Shepherd',
+        titleKo: '목자 다윗',
+        summaryEn:
+            'Before David became king, he tended sheep in the fields of Bethlehem — defending them from lions and bears. In those quiet hills he learned that the LORD was the true shepherd over his own life.',
+        summaryKo:
+            '다윗은 왕이 되기 전, 베들레헴 들판에서 사자와 곰으로부터 양을 지키던 소년이었습니다. 고요한 언덕 위에서 그는 자신의 삶을 인도하시는 진짜 목자가 여호와이심을 배웠습니다.',
       ),
-      testimonyEn: '',
-      testimonyKo: '',
+      testimonyEn:
+          'Lord, thank You for this new morning. Guide my family in peace and comfort my friend who is anxious. In Jesus\' name, Amen.',
+      testimonyKo:
+          '주님, 오늘도 새로운 아침을 허락해 주셔서 감사합니다. 가족을 평안으로 인도하시고, 염려하는 친구를 위로해 주세요. 예수님의 이름으로 기도합니다. 아멘.',
+      guidance: const Guidance(
+        contentEn:
+            'Your prayer shows a heart that remembers others before yourself — a mark of intercession. Carry that same gentleness with you into today\'s conversations.',
+        contentKo:
+            '자신보다 먼저 다른 이들을 기억하는 마음이 기도에 담겨 있습니다. 이는 중보자의 마음입니다. 오늘 만나는 이들과의 대화에서도 그 부드러움을 잃지 마세요.',
+        isPremium: true,
+      ),
+      aiPrayer: const AiPrayer(
+        textEn:
+            'Heavenly Father, we come before You with hearts full of gratitude. You know the burdens we carry and the ones we carry for others. Lead us beside quiet waters today. Restore what feels worn. Speak peace where there is worry. In Jesus\' name, Amen.',
+        textKo:
+            '하늘에 계신 아버지, 감사하는 마음으로 주 앞에 나아갑니다. 우리가 짊어진 짐과 다른 이를 위해 지는 짐을 주님은 아십니다. 오늘도 쉴 만한 물가로 인도하여 주옵소서. 지친 마음을 회복시켜 주시고, 염려하는 자리에 평안을 말씀하여 주소서. 예수님의 이름으로 기도드립니다. 아멘.',
+        isPremium: true,
+      ),
+      originalLanguage: const OriginalLanguage(
+        word: 'רֹעִי',
+        transliteration: 'ro\'i',
+        language: 'Hebrew',
+        meaningEn: '"my shepherd" — implies intimate, personal care, not a distant ruler.',
+        meaningKo: '"나의 목자" — 멀리 있는 통치자가 아니라 친밀하고 인격적인 돌봄을 뜻합니다.',
+        contextEn:
+            'In ancient Israel, a shepherd knew each sheep by name and risked his own life for them. David chose this word to describe God\'s relationship with him.',
+        contextKo:
+            '고대 이스라엘에서 목자는 양 한 마리의 이름까지 알고 자신의 목숨을 걸어 보호했습니다. 다윗은 하나님과의 관계를 이 단어로 고백했습니다.',
+        isPremium: true,
+      ),
+      historicalStory: const HistoricalStory(
+        titleEn: 'George Müller\'s Morning Bread',
+        titleKo: '조지 뮬러의 아침 식탁',
+        reference: 'Bristol, 1838',
+        summaryEn:
+            'One morning in Bristol, the orphanage had no food. George Müller gathered three hundred children, set empty plates, and gave thanks aloud for breakfast. Before the prayer ended, a baker knocked — unable to sleep, he had baked bread for them. Minutes later, a milkman\'s cart broke down at the gate; rather than waste the milk, he brought it in.',
+            summaryKo:
+            '1838년 어느 아침, 브리스틀의 고아원에는 먹을 것이 하나도 없었습니다. 조지 뮬러는 300명의 아이들을 빈 식탁에 앉히고 아침 식사에 대한 감사 기도를 올렸습니다. 기도가 끝나기 전, 빵집 주인이 문을 두드렸습니다 — 잠이 오지 않아 아이들을 위해 빵을 구웠다고 했습니다. 잠시 후 우유 마차가 문 앞에서 고장이 났고, 마부는 우유를 버리는 대신 안으로 들고 들어왔습니다.',
+        lessonEn:
+            'Your prayer for your family\'s provision echoes Müller\'s: God often answers before we finish the sentence. Trust what you cannot yet see.',
+        lessonKo:
+            '가족을 위한 당신의 기도는 뮬러의 기도와 같습니다. 하나님은 때로 우리가 말을 마치기 전에 응답하십니다. 아직 보이지 않는 것을 신뢰하세요.',
+        isPremium: true,
+      ),
     );
   }
 
-  QtMeditationResult _fallbackMeditationResult() {
+  PremiumContent _hardcodedPremiumContent() {
+    final base = _hardcodedPrayerResult();
+    return PremiumContent(
+      historicalStory: base.historicalStory,
+      aiPrayer: base.aiPrayer,
+      guidance: base.guidance,
+    );
+  }
+
+  QtMeditationResult _hardcodedMeditationResult() {
     return const QtMeditationResult(
       analysis: MeditationAnalysis(
-        keyThemeEn: 'God\'s Faithfulness',
-        keyThemeKo: '하나님의 신실하심',
-        insightEn: 'Your meditation reveals a heart seeking God\'s guidance and peace.',
-        insightKo: '당신의 묵상에서 하나님의 인도와 평안을 구하는 마음이 느껴집니다.',
+        keyThemeEn: 'God\'s Faithful Shepherding',
+        keyThemeKo: '신실한 인도하심',
+        insightEn:
+            'Your meditation centers on trust — you are learning to release what you cannot control into the hands of the One who already holds it.',
+        insightKo:
+            '당신의 묵상은 "신뢰"에 맞닿아 있습니다. 당신은 지금, 통제할 수 없는 것을 이미 그것을 붙잡고 계신 분의 손에 맡기는 법을 배우는 중입니다.',
       ),
       application: ApplicationSuggestion(
-        action: '오늘 잠시 조용히 묵상하는 시간을 가져보세요',
+        action: '오늘 저녁 식사 전, 가족과 함께 시편 23편을 한 절씩 소리 내어 읽어 보세요.',
       ),
       knowledge: RelatedKnowledge(
-        historicalContextEn: 'The biblical concept of meditation involves deep reflection on God\'s Word.',
-        historicalContextKo: '성경에서의 묵상은 하나님의 말씀에 대한 깊은 성찰을 의미합니다.',
+        originalWord: OriginalWord(
+          word: 'רֹעִי',
+          transliteration: 'ro\'i',
+          language: 'Hebrew',
+          meaningEn: '"my shepherd" — intimate, covenantal care.',
+          meaningKo: '"나의 목자" — 친밀하고 언약적인 돌봄.',
+        ),
+        historicalContextEn:
+            'David wrote Psalm 23 from personal experience as a shepherd. Ancient Near Eastern kings often called themselves "shepherds" of their people — David flips this image to name God as his king.',
+        historicalContextKo:
+            '다윗은 목자로서의 경험을 바탕으로 시편 23편을 썼습니다. 고대 근동의 왕들은 스스로를 백성의 "목자"라 불렀지만, 다윗은 이 이미지를 뒤집어 하나님을 자신의 왕으로 고백합니다.',
         crossReferences: [
-          CrossReference(reference: 'Psalm 1:2', text: ''),
-          CrossReference(reference: 'Joshua 1:8', text: ''),
+          CrossReference(
+            reference: 'Isaiah 40:11',
+            text: '그는 목자 같이 양 무리를 먹이시며 어린 양을 그 품에 안으시며',
+          ),
+          CrossReference(
+            reference: 'John 10:11',
+            text: '나는 선한 목자라 선한 목자는 양들을 위하여 목숨을 버리거니와',
+          ),
         ],
+      ),
+      growthStory: GrowthStory(
+        titleEn: 'The Weaver\'s Pattern',
+        titleKo: '직조공의 무늬',
+        summaryEn:
+            'A young girl watched her grandmother weave a tapestry. From below, she saw only knots and loose threads, and she cried. Her grandmother lifted her to the top of the loom — where the same threads formed a garden of roses. "This is how God sees your life," she whispered. "From below it looks tangled. From above, it is already beautiful."',
+        summaryKo:
+            '한 소녀가 할머니가 태피스트리를 짜는 모습을 바라보고 있었습니다. 아래에서 보니 엉킨 매듭과 늘어진 실뿐이어서 소녀는 울었습니다. 할머니는 소녀를 베틀 위로 들어 올렸습니다 — 같은 실이 위에서는 장미 정원이 되어 있었습니다. "하나님이 네 인생을 보시는 방식이 이것이란다"라고 할머니는 속삭였습니다. "아래에서는 엉킨 것처럼 보여도, 위에서는 이미 아름답단다."',
+        lessonEn:
+            'Today\'s passage invites you to trust the weaver — to see today\'s tangled threads as part of a pattern only God fully sees.',
+        lessonKo:
+            '오늘의 말씀은 직조공을 신뢰하라고 초대합니다 — 오늘의 엉킨 실들이 하나님만이 온전히 보시는 무늬의 일부임을 믿으세요.',
+        isPremium: true,
       ),
     );
   }
+
+  // ---------------------------------------------------------------------------
+  // Fallbacks (for API error paths — reuse the rich hardcoded content)
+  // ---------------------------------------------------------------------------
+
+  PrayerResult _fallbackPrayerResult() => _hardcodedPrayerResult();
+
+  QtMeditationResult _fallbackMeditationResult() => _hardcodedMeditationResult();
 
   // ---------------------------------------------------------------------------
   // Diversity hint
