@@ -23,16 +23,43 @@ supabase db push --linked
 
 각 번역본을 ebible.org에서 다운로드:
 
-**한국어 (개역한글)**
+**한국어 (개역한글 1961)**
+
+ebible.org에는 1910 판만 있어서 scrollmapper/bible_databases (GitHub) 의
+KorRV.json을 사용. 이미 JSON 포맷이라 USFM 파싱 불필요.
+
 ```bash
-# 방법 1: ebible.org 직접
-curl -O https://ebible.org/Scriptures/kokrv_usfm.zip
+mkdir -p apps/abba/bible_sources
+curl -L -o apps/abba/bible_sources/ko_krv_1961.json \
+  https://raw.githubusercontent.com/scrollmapper/bible_databases/master/formats/json/KorRV.json
 
-# 또는 브라우저에서 https://ebible.org/find/details.php?id=kokrv
-# → "Download USFM files" 링크
-
-mkdir -p apps/abba/bible_sources/ko_krv
-unzip kokrv_usfm.zip -d apps/abba/bible_sources/ko_krv/
+# Convert to Abba bundle format (book 순회 → flat verse map)
+python3 <<'PY'
+import hashlib, json, os
+src = "apps/abba/bible_sources/ko_krv_1961.json"
+dst = "apps/abba/bible_sources/build/ko_krv.json"
+os.makedirs(os.path.dirname(dst), exist_ok=True)
+raw = json.load(open(src, encoding="utf-8"))
+verses = {}
+for book in raw["books"]:
+    name = book["name"]
+    if name == "Psalms":
+        name = "Psalm"
+    for ch in book["chapters"]:
+        for v in ch["verses"]:
+            verses[f"{name} {ch['chapter']}:{v['verse']}"] = v["text"].strip()
+blob = json.dumps(verses, sort_keys=True, ensure_ascii=False).encode("utf-8")
+sha = hashlib.sha256(blob).hexdigest()[:16]
+bundle = {
+    "locale": "ko", "version": "1.0.0", "sha256": sha,
+    "translation": {"name": "개역한글 (KRV)", "year": 1961,
+        "license": "Public Domain (copyright expired 2012)",
+        "source": "https://github.com/scrollmapper/bible_databases"},
+    "verses": verses,
+}
+open(dst, "w", encoding="utf-8").write(json.dumps(bundle, ensure_ascii=False, indent=2))
+print(f"DONE: {len(verses)} verses, sha={sha}")
+PY
 ```
 
 **영어 (WEB — World English Bible)**
@@ -47,19 +74,7 @@ unzip eng-web_usfm.zip -d apps/abba/bible_sources/en_web/
 ### 3. USFM → JSON 변환
 
 ```bash
-# 한국어 개역한글
-python3 scripts/build_bible_bundles.py \
-  --src apps/abba/bible_sources/ko_krv \
-  --locale ko \
-  --code krv \
-  --name "개역한글" \
-  --year 1961 \
-  --license "Public Domain (2012 expired)" \
-  --source "https://ebible.org/find/details.php?id=kokrv"
-
-# 결과: apps/abba/bible_sources/build/ko_krv.json
-
-# 영어 WEB
+# 영어 WEB (USFM → JSON)
 python3 scripts/build_bible_bundles.py \
   --src apps/abba/bible_sources/en_web \
   --locale en \
@@ -67,9 +82,12 @@ python3 scripts/build_bible_bundles.py \
   --name "World English Bible" \
   --year 2000 \
   --license "Public Domain" \
-  --source "https://worldenglish.bible/"
+  --source "https://eBible.org/engwebp/"
 
 # 결과: apps/abba/bible_sources/build/en_web.json
+
+# 한국어는 이미 JSON이라 위 scrollmapper 변환 블록 참조
+# 결과: apps/abba/bible_sources/build/ko_krv.json
 ```
 
 **파일 검증**:

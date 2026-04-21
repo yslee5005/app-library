@@ -57,7 +57,7 @@ class SupabaseStorageBibleTextService implements BibleTextService {
   /// Which translation file we use per locale (Phase 1 = ko + en only).
   /// Extended in Phase 3 for remaining locales.
   static const Map<String, _BundleDescriptor> _bundles = {
-    'ko': _BundleDescriptor(locale: 'ko', code: 'kor', name: '한국어 성경 1910'),
+    'ko': _BundleDescriptor(locale: 'ko', code: 'krv', name: '개역한글 (KRV)'),
     'en': _BundleDescriptor(
       locale: 'en',
       code: 'web',
