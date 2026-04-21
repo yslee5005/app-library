@@ -136,7 +136,7 @@ class AppLocalizationsFi extends AppLocalizations {
   String get originalLangTitle => 'Alkukieli';
 
   @override
-  String get premiumUnlock => 'Avaa Premiumilla';
+  String get proUnlock => 'Avaa Pro';
 
   @override
   String get qtPageTitle => 'Aamun puutarha';
@@ -231,19 +231,19 @@ class AppLocalizationsFi extends AppLocalizations {
   String get consecutiveDays => 'Peräkkäiset päivät';
 
   @override
-  String get premiumSection => 'Jäsenyys';
+  String get proSection => 'Jäsenyys';
 
   @override
   String get freePlan => 'Ilmainen';
 
   @override
-  String get premiumPlan => 'Premium';
+  String get proPlan => 'Pro';
 
   @override
-  String get monthlyPrice => '7,99€ / kk';
+  String get monthlyPrice => '6,99€ / kk';
 
   @override
-  String get yearlyPrice => '59,99€ / vuosi';
+  String get yearlyPrice => '49,99€ / vuosi';
 
   @override
   String get yearlySave => 'Säästä 40%';
@@ -252,7 +252,7 @@ class AppLocalizationsFi extends AppLocalizations {
   String get launchPromo => '3 kuukautta hintaan 3,99€/kk!';
 
   @override
-  String get startPremium => 'Aloita Premium';
+  String get startPro => 'Aloita Pro';
 
   @override
   String get comingSoon => 'Tulossa pian';
@@ -385,20 +385,19 @@ class AppLocalizationsFi extends AppLocalizations {
   }
 
   @override
-  String get premiumLimitTitle => 'Päivän rukous on valmis';
+  String get proLimitTitle => 'Päivän rukous on valmis';
 
   @override
-  String get premiumLimitBody =>
-      'Nähdään huomenna!\nRukoile rajattomasti Premiumilla';
+  String get proLimitBody => 'Nähdään huomenna!\nRukoile rajattomasti Pro';
 
   @override
   String get laterButton => 'Ehkä myöhemmin';
 
   @override
-  String get premiumPromptTitle => 'Pro-ominaisuus';
+  String get proPromptTitle => 'Pro-ominaisuus';
 
   @override
-  String get premiumPromptBody =>
+  String get proPromptBody =>
       'Tämä ominaisuus on saatavilla Prolla.\nHaluatko nähdä suunnitelmat?';
 
   @override
@@ -408,19 +407,19 @@ class AppLocalizationsFi extends AppLocalizations {
   String get maybeLater => 'Ehkä myöhemmin';
 
   @override
-  String get premiumHeadline => 'Lähempänä Jumalaa joka päivä';
+  String get proHeadline => 'Lähempänä Jumalaa joka päivä';
 
   @override
-  String get premiumBenefit1 => 'Rajaton rukous & hiljaisuuden hetki';
+  String get proBenefit1 => 'Rajaton rukous & hiljaisuuden hetki';
 
   @override
-  String get premiumBenefit2 => 'AI-avusteinen rukous & ohjaus';
+  String get proBenefit2 => 'AI-avusteinen rukous & ohjaus';
 
   @override
-  String get premiumBenefit3 => 'Uskon tarinoita historiasta';
+  String get proBenefit3 => 'Uskon tarinoita historiasta';
 
   @override
-  String get premiumBenefit5 => 'Raamatun opiskelu alkukielellä';
+  String get proBenefit5 => 'Raamatun opiskelu alkukielellä';
 
   @override
   String get bestValue => 'PARAS ARVO';
@@ -435,7 +434,7 @@ class AppLocalizationsFi extends AppLocalizations {
   String get restorePurchase => 'Palauta ostos';
 
   @override
-  String get yearlyPriceMonthly => '2,08€/kk';
+  String get yearlyPriceMonthly => '4,17€/kk';
 
   @override
   String get morningPrayerReminder => 'Aamurukous';
@@ -503,7 +502,7 @@ class AppLocalizationsFi extends AppLocalizations {
   String get shareSubtitle => 'Päivittäinen rukous Jumalan kanssa';
 
   @override
-  String get premiumActive => 'Jäsenyys Aktiivinen';
+  String get proActive => 'Jäsenyys Aktiivinen';
 
   @override
   String get planOncePerDay => '1x/päivä';
@@ -708,7 +707,7 @@ class AppLocalizationsFi extends AppLocalizations {
   String get yearlyPlan => 'Vuosittain';
 
   @override
-  String get yearlySavings => '5,00€/kk (37% alennus)';
+  String get yearlySavings => '4,17€/kk (40% alennus)';
 
   @override
   String get startMembership => 'Aloita';

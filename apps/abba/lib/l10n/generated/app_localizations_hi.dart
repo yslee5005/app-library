@@ -138,7 +138,7 @@ class AppLocalizationsHi extends AppLocalizations {
   String get originalLangTitle => 'मूल भाषा';
 
   @override
-  String get premiumUnlock => 'Premium से अनलॉक करें';
+  String get proUnlock => 'Pro से अनलॉक करें';
 
   @override
   String get qtPageTitle => 'प्रातः बगीचा';
@@ -233,19 +233,19 @@ class AppLocalizationsHi extends AppLocalizations {
   String get consecutiveDays => 'लगातार दिन';
 
   @override
-  String get premiumSection => 'सदस्यता';
+  String get proSection => 'सदस्यता';
 
   @override
   String get freePlan => 'मुफ़्त';
 
   @override
-  String get premiumPlan => 'Premium';
+  String get proPlan => 'Pro';
 
   @override
-  String get monthlyPrice => '₹649 / माह';
+  String get monthlyPrice => '₹549 / माह';
 
   @override
-  String get yearlyPrice => '₹4,899 / वर्ष';
+  String get yearlyPrice => '₹4,099 / वर्ष';
 
   @override
   String get yearlySave => '40% बचाएँ';
@@ -254,7 +254,7 @@ class AppLocalizationsHi extends AppLocalizations {
   String get launchPromo => '3 महीने ₹167/माह पर!';
 
   @override
-  String get startPremium => 'Premium शुरू करें';
+  String get startPro => 'Pro शुरू करें';
 
   @override
   String get comingSoon => 'जल्द आ रहा है';
@@ -386,20 +386,19 @@ class AppLocalizationsHi extends AppLocalizations {
   }
 
   @override
-  String get premiumLimitTitle => 'आज की प्रार्थना पूरी हुई';
+  String get proLimitTitle => 'आज की प्रार्थना पूरी हुई';
 
   @override
-  String get premiumLimitBody =>
-      'कल मिलते हैं!\nPremium के साथ असीमित प्रार्थना करें';
+  String get proLimitBody => 'कल मिलते हैं!\nPro के साथ असीमित प्रार्थना करें';
 
   @override
   String get laterButton => 'बाद में';
 
   @override
-  String get premiumPromptTitle => 'Pro सुविधा';
+  String get proPromptTitle => 'Pro सुविधा';
 
   @override
-  String get premiumPromptBody =>
+  String get proPromptBody =>
       'यह सुविधा Pro के साथ उपलब्ध है।\nक्या आप हमारे प्लान देखना चाहेंगे?';
 
   @override
@@ -409,19 +408,19 @@ class AppLocalizationsHi extends AppLocalizations {
   String get maybeLater => 'बाद में';
 
   @override
-  String get premiumHeadline => 'हर दिन परमेश्वर के और करीब';
+  String get proHeadline => 'हर दिन परमेश्वर के और करीब';
 
   @override
-  String get premiumBenefit1 => 'असीमित प्रार्थना और मनन समय';
+  String get proBenefit1 => 'असीमित प्रार्थना और मनन समय';
 
   @override
-  String get premiumBenefit2 => 'AI-संचालित प्रार्थना और मार्गदर्शन';
+  String get proBenefit2 => 'AI-संचालित प्रार्थना और मार्गदर्शन';
 
   @override
-  String get premiumBenefit3 => 'इतिहास से विश्वास की कहानियाँ';
+  String get proBenefit3 => 'इतिहास से विश्वास की कहानियाँ';
 
   @override
-  String get premiumBenefit5 => 'मूल भाषा में बाइबल अध्ययन';
+  String get proBenefit5 => 'मूल भाषा में बाइबल अध्ययन';
 
   @override
   String get bestValue => 'सर्वोत्तम मूल्य';
@@ -436,7 +435,7 @@ class AppLocalizationsHi extends AppLocalizations {
   String get restorePurchase => 'खरीदारी पुनर्स्थापित करें';
 
   @override
-  String get yearlyPriceMonthly => '₹167/माह';
+  String get yearlyPriceMonthly => '₹342/माह';
 
   @override
   String get morningPrayerReminder => 'प्रातः प्रार्थना';
@@ -504,7 +503,7 @@ class AppLocalizationsHi extends AppLocalizations {
   String get shareSubtitle => 'परमेश्वर के साथ दैनिक प्रार्थना';
 
   @override
-  String get premiumActive => 'सदस्यता सक्रिय';
+  String get proActive => 'सदस्यता सक्रिय';
 
   @override
   String get planOncePerDay => '1x/दिन';
@@ -709,7 +708,7 @@ class AppLocalizationsHi extends AppLocalizations {
   String get yearlyPlan => 'वार्षिक';
 
   @override
-  String get yearlySavings => '₹408/माह (37% छूट)';
+  String get yearlySavings => '₹207/माह (40% छूट)';
 
   @override
   String get startMembership => 'शुरू करें';

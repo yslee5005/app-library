@@ -137,7 +137,7 @@ class AppLocalizationsEl extends AppLocalizations {
   String get originalLangTitle => 'Αρχική Γλώσσα';
 
   @override
-  String get premiumUnlock => 'Ξεκλείδωμα με Premium';
+  String get proUnlock => 'Ξεκλείδωμα με Pro';
 
   @override
   String get qtPageTitle => 'Πρωινός Κήπος';
@@ -233,19 +233,19 @@ class AppLocalizationsEl extends AppLocalizations {
   String get consecutiveDays => 'Συνεχόμενες Ημέρες';
 
   @override
-  String get premiumSection => 'Συνδρομή';
+  String get proSection => 'Συνδρομή';
 
   @override
   String get freePlan => 'Δωρεάν';
 
   @override
-  String get premiumPlan => 'Premium';
+  String get proPlan => 'Pro';
 
   @override
-  String get monthlyPrice => '7,99€ / μήνα';
+  String get monthlyPrice => '6,99€ / μήνα';
 
   @override
-  String get yearlyPrice => '59,99€ / έτος';
+  String get yearlyPrice => '49,99€ / έτος';
 
   @override
   String get yearlySave => 'Εξοικονόμηση 40%';
@@ -254,7 +254,7 @@ class AppLocalizationsEl extends AppLocalizations {
   String get launchPromo => '3 μήνες στα 3,99€/μήνα!';
 
   @override
-  String get startPremium => 'Ξεκίνα Premium';
+  String get startPro => 'Ξεκίνα Pro';
 
   @override
   String get comingSoon => 'Έρχεται σύντομα';
@@ -389,20 +389,19 @@ class AppLocalizationsEl extends AppLocalizations {
   }
 
   @override
-  String get premiumLimitTitle => 'Η σημερινή προσευχή ολοκληρώθηκε';
+  String get proLimitTitle => 'Η σημερινή προσευχή ολοκληρώθηκε';
 
   @override
-  String get premiumLimitBody =>
-      'Τα λέμε αύριο!\nΑπεριόριστη προσευχή με Premium';
+  String get proLimitBody => 'Τα λέμε αύριο!\nΑπεριόριστη προσευχή με Pro';
 
   @override
   String get laterButton => 'Ίσως αργότερα';
 
   @override
-  String get premiumPromptTitle => 'Λειτουργία Pro';
+  String get proPromptTitle => 'Λειτουργία Pro';
 
   @override
-  String get premiumPromptBody =>
+  String get proPromptBody =>
       'Αυτή η λειτουργία είναι διαθέσιμη με Pro.\nΘέλετε να δείτε τα πλάνα;';
 
   @override
@@ -412,19 +411,19 @@ class AppLocalizationsEl extends AppLocalizations {
   String get maybeLater => 'Ίσως αργότερα';
 
   @override
-  String get premiumHeadline => 'Πιο κοντά στον Θεό, κάθε μέρα';
+  String get proHeadline => 'Πιο κοντά στον Θεό, κάθε μέρα';
 
   @override
-  String get premiumBenefit1 => 'Απεριόριστη Προσευχή & Μελέτη';
+  String get proBenefit1 => 'Απεριόριστη Προσευχή & Μελέτη';
 
   @override
-  String get premiumBenefit2 => 'Προσευχή & καθοδήγηση με AI';
+  String get proBenefit2 => 'Προσευχή & καθοδήγηση με AI';
 
   @override
-  String get premiumBenefit3 => 'Ιστορίες πίστης από την ιστορία';
+  String get proBenefit3 => 'Ιστορίες πίστης από την ιστορία';
 
   @override
-  String get premiumBenefit5 => 'Μελέτη Βίβλου στην αρχική γλώσσα';
+  String get proBenefit5 => 'Μελέτη Βίβλου στην αρχική γλώσσα';
 
   @override
   String get bestValue => 'ΚΑΛΥΤΕΡΗ ΑΞΙΑ';
@@ -439,7 +438,7 @@ class AppLocalizationsEl extends AppLocalizations {
   String get restorePurchase => 'Επαναφορά αγοράς';
 
   @override
-  String get yearlyPriceMonthly => '2,08€/μήνα';
+  String get yearlyPriceMonthly => '4,17€/μήνα';
 
   @override
   String get morningPrayerReminder => 'Πρωινή Προσευχή';
@@ -507,7 +506,7 @@ class AppLocalizationsEl extends AppLocalizations {
   String get shareSubtitle => 'Καθημερινή προσευχή με τον Θεό';
 
   @override
-  String get premiumActive => 'Συνδρομή Ενεργή';
+  String get proActive => 'Συνδρομή Ενεργή';
 
   @override
   String get planOncePerDay => '1 φορά/ημέρα';
@@ -713,7 +712,7 @@ class AppLocalizationsEl extends AppLocalizations {
   String get yearlyPlan => 'Ετήσια';
 
   @override
-  String get yearlySavings => '5,00€/μήνα (37% έκπτωση)';
+  String get yearlySavings => '4,17€/μήνα (40% έκπτωση)';
 
   @override
   String get startMembership => 'Ξεκινήστε';

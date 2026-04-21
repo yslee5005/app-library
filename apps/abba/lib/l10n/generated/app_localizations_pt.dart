@@ -136,7 +136,7 @@ class AppLocalizationsPt extends AppLocalizations {
   String get originalLangTitle => 'Língua Original';
 
   @override
-  String get premiumUnlock => 'Desbloquear com Premium';
+  String get proUnlock => 'Desbloquear com Pro';
 
   @override
   String get qtPageTitle => 'Jardim Matinal';
@@ -232,19 +232,19 @@ class AppLocalizationsPt extends AppLocalizations {
   String get consecutiveDays => 'Dias Consecutivos';
 
   @override
-  String get premiumSection => 'Assinatura';
+  String get proSection => 'Assinatura';
 
   @override
   String get freePlan => 'Gratuito';
 
   @override
-  String get premiumPlan => 'Premium';
+  String get proPlan => 'Pro';
 
   @override
-  String get monthlyPrice => 'R\$39,90 / mês';
+  String get monthlyPrice => 'R\$34,90 / mês';
 
   @override
-  String get yearlyPrice => 'R\$299,90 / ano';
+  String get yearlyPrice => 'R\$249,90 / ano';
 
   @override
   String get yearlySave => 'Economize 40%';
@@ -253,7 +253,7 @@ class AppLocalizationsPt extends AppLocalizations {
   String get launchPromo => '3 meses por R\$9,99/mês!';
 
   @override
-  String get startPremium => 'Iniciar Premium';
+  String get startPro => 'Iniciar Pro';
 
   @override
   String get comingSoon => 'Em breve';
@@ -387,19 +387,19 @@ class AppLocalizationsPt extends AppLocalizations {
   }
 
   @override
-  String get premiumLimitTitle => 'Oração de hoje concluída';
+  String get proLimitTitle => 'Oração de hoje concluída';
 
   @override
-  String get premiumLimitBody => 'Até amanhã!\nOre sem limites com o Premium';
+  String get proLimitBody => 'Até amanhã!\nOre sem limites com o Pro';
 
   @override
   String get laterButton => 'Talvez depois';
 
   @override
-  String get premiumPromptTitle => 'Recurso Pro';
+  String get proPromptTitle => 'Recurso Pro';
 
   @override
-  String get premiumPromptBody =>
+  String get proPromptBody =>
       'Este recurso está disponível com o Pro.\nGostaria de ver nossos planos?';
 
   @override
@@ -409,19 +409,19 @@ class AppLocalizationsPt extends AppLocalizations {
   String get maybeLater => 'Talvez depois';
 
   @override
-  String get premiumHeadline => 'Mais perto de Deus, todos os dias';
+  String get proHeadline => 'Mais perto de Deus, todos os dias';
 
   @override
-  String get premiumBenefit1 => 'Oração e Devocional ilimitados';
+  String get proBenefit1 => 'Oração e Devocional ilimitados';
 
   @override
-  String get premiumBenefit2 => 'Oração e orientação com IA';
+  String get proBenefit2 => 'Oração e orientação com IA';
 
   @override
-  String get premiumBenefit3 => 'Histórias de fé ao longo da história';
+  String get proBenefit3 => 'Histórias de fé ao longo da história';
 
   @override
-  String get premiumBenefit5 => 'Estudo bíblico na língua original';
+  String get proBenefit5 => 'Estudo bíblico na língua original';
 
   @override
   String get bestValue => 'MELHOR VALOR';
@@ -436,7 +436,7 @@ class AppLocalizationsPt extends AppLocalizations {
   String get restorePurchase => 'Restaurar compra';
 
   @override
-  String get yearlyPriceMonthly => 'R\$9,99/mês';
+  String get yearlyPriceMonthly => 'R\$20,83/mês';
 
   @override
   String get morningPrayerReminder => 'Oração Matinal';
@@ -504,7 +504,7 @@ class AppLocalizationsPt extends AppLocalizations {
   String get shareSubtitle => 'Oração diária com Deus';
 
   @override
-  String get premiumActive => 'Assinatura Ativa';
+  String get proActive => 'Assinatura Ativa';
 
   @override
   String get planOncePerDay => '1x/dia';
@@ -710,7 +710,7 @@ class AppLocalizationsPt extends AppLocalizations {
   String get yearlyPlan => 'Anual';
 
   @override
-  String get yearlySavings => 'R\$25/mês (37% de desconto)';
+  String get yearlySavings => 'R\$14,07/mês (40% de desconto)';
 
   @override
   String get startMembership => 'Começar';

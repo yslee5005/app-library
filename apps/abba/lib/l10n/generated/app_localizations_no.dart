@@ -135,7 +135,7 @@ class AppLocalizationsNo extends AppLocalizations {
   String get originalLangTitle => 'Originalspråk';
 
   @override
-  String get premiumUnlock => 'Lås opp med Premium';
+  String get proUnlock => 'Lås opp med Pro';
 
   @override
   String get qtPageTitle => 'Morgenens Hage';
@@ -230,19 +230,19 @@ class AppLocalizationsNo extends AppLocalizations {
   String get consecutiveDays => 'Dager på rad';
 
   @override
-  String get premiumSection => 'Medlemskap';
+  String get proSection => 'Medlemskap';
 
   @override
   String get freePlan => 'Gratis';
 
   @override
-  String get premiumPlan => 'Premium';
+  String get proPlan => 'Pro';
 
   @override
-  String get monthlyPrice => '89 kr / mnd';
+  String get monthlyPrice => '79 kr / mnd';
 
   @override
-  String get yearlyPrice => '669 kr / år';
+  String get yearlyPrice => '559 kr / år';
 
   @override
   String get yearlySave => 'Spar 40%';
@@ -251,7 +251,7 @@ class AppLocalizationsNo extends AppLocalizations {
   String get launchPromo => '3 måneder for 45kr/mnd!';
 
   @override
-  String get startPremium => 'Start Premium';
+  String get startPro => 'Start Pro';
 
   @override
   String get comingSoon => 'Kommer snart';
@@ -385,19 +385,19 @@ class AppLocalizationsNo extends AppLocalizations {
   }
 
   @override
-  String get premiumLimitTitle => 'Dagens bønn er fullført';
+  String get proLimitTitle => 'Dagens bønn er fullført';
 
   @override
-  String get premiumLimitBody => 'Vi ses i morgen!\nBe ubegrenset med Premium';
+  String get proLimitBody => 'Vi ses i morgen!\nBe ubegrenset med Pro';
 
   @override
   String get laterButton => 'Kanskje senere';
 
   @override
-  String get premiumPromptTitle => 'Pro-funksjon';
+  String get proPromptTitle => 'Pro-funksjon';
 
   @override
-  String get premiumPromptBody =>
+  String get proPromptBody =>
       'Denne funksjonen er tilgjengelig med Pro.\nVil du se planene våre?';
 
   @override
@@ -407,19 +407,19 @@ class AppLocalizationsNo extends AppLocalizations {
   String get maybeLater => 'Kanskje senere';
 
   @override
-  String get premiumHeadline => 'Nærmere Gud, hver dag';
+  String get proHeadline => 'Nærmere Gud, hver dag';
 
   @override
-  String get premiumBenefit1 => 'Ubegrenset bønn & stille stund';
+  String get proBenefit1 => 'Ubegrenset bønn & stille stund';
 
   @override
-  String get premiumBenefit2 => 'AI-drevet bønn & veiledning';
+  String get proBenefit2 => 'AI-drevet bønn & veiledning';
 
   @override
-  String get premiumBenefit3 => 'Troshistorier fra fortiden';
+  String get proBenefit3 => 'Troshistorier fra fortiden';
 
   @override
-  String get premiumBenefit5 => 'Bibelstudium på originalspråk';
+  String get proBenefit5 => 'Bibelstudium på originalspråk';
 
   @override
   String get bestValue => 'BEST VERDI';
@@ -434,7 +434,7 @@ class AppLocalizationsNo extends AppLocalizations {
   String get restorePurchase => 'Gjenopprett kjøp';
 
   @override
-  String get yearlyPriceMonthly => '22kr/mnd';
+  String get yearlyPriceMonthly => '47 kr/mnd';
 
   @override
   String get morningPrayerReminder => 'Morgenbønn';
@@ -502,7 +502,7 @@ class AppLocalizationsNo extends AppLocalizations {
   String get shareSubtitle => 'Daglig bønn med Gud';
 
   @override
-  String get premiumActive => 'Medlemskap Aktivt';
+  String get proActive => 'Medlemskap Aktivt';
 
   @override
   String get planOncePerDay => '1 gang/dag';
@@ -708,7 +708,7 @@ class AppLocalizationsNo extends AppLocalizations {
   String get yearlyPlan => 'Årlig';
 
   @override
-  String get yearlySavings => '56 kr/mnd (37% rabatt)';
+  String get yearlySavings => '32 kr/mnd (40% rabatt)';
 
   @override
   String get startMembership => 'Start nå';

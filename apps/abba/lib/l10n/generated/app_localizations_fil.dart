@@ -139,7 +139,7 @@ class AppLocalizationsFil extends AppLocalizations {
   String get originalLangTitle => 'Orihinal na Wika';
 
   @override
-  String get premiumUnlock => 'I-unlock sa Premium';
+  String get proUnlock => 'I-unlock sa Pro';
 
   @override
   String get qtPageTitle => 'Hardin sa Umaga';
@@ -235,19 +235,19 @@ class AppLocalizationsFil extends AppLocalizations {
   String get consecutiveDays => 'Sunod-sunod na Araw';
 
   @override
-  String get premiumSection => 'Membership';
+  String get proSection => 'Membership';
 
   @override
   String get freePlan => 'Libre';
 
   @override
-  String get premiumPlan => 'Premium';
+  String get proPlan => 'Pro';
 
   @override
-  String get monthlyPrice => '₱449 / buwan';
+  String get monthlyPrice => '₱399 / buwan';
 
   @override
-  String get yearlyPrice => '₱3,390 / taon';
+  String get yearlyPrice => '₱2,990 / taon';
 
   @override
   String get yearlySave => 'Makatipid ng 40%';
@@ -256,7 +256,7 @@ class AppLocalizationsFil extends AppLocalizations {
   String get launchPromo => '3 buwan sa ₱117/buwan!';
 
   @override
-  String get startPremium => 'Simulan ang Premium';
+  String get startPro => 'Simulan ang Pro';
 
   @override
   String get comingSoon => 'Malapit na';
@@ -391,20 +391,20 @@ class AppLocalizationsFil extends AppLocalizations {
   }
 
   @override
-  String get premiumLimitTitle => 'Tapos na ang panalangin ngayong araw';
+  String get proLimitTitle => 'Tapos na ang panalangin ngayong araw';
 
   @override
-  String get premiumLimitBody =>
-      'Magkita-kita bukas!\nManalangin nang walang limitasyon sa Premium';
+  String get proLimitBody =>
+      'Magkita-kita bukas!\nManalangin nang walang limitasyon sa Pro';
 
   @override
   String get laterButton => 'Mamaya na';
 
   @override
-  String get premiumPromptTitle => 'Pro Feature';
+  String get proPromptTitle => 'Pro Feature';
 
   @override
-  String get premiumPromptBody =>
+  String get proPromptBody =>
       'Ang feature na ito ay available sa Pro.\nGusto mo bang tingnan ang mga plano?';
 
   @override
@@ -414,20 +414,19 @@ class AppLocalizationsFil extends AppLocalizations {
   String get maybeLater => 'Mamaya na';
 
   @override
-  String get premiumHeadline => 'Mas malapit sa Diyos, araw-araw';
+  String get proHeadline => 'Mas malapit sa Diyos, araw-araw';
 
   @override
-  String get premiumBenefit1 => 'Walang limitasyong Panalangin at QT';
+  String get proBenefit1 => 'Walang limitasyong Panalangin at QT';
 
   @override
-  String get premiumBenefit2 => 'AI-powered na panalangin at gabay';
+  String get proBenefit2 => 'AI-powered na panalangin at gabay';
 
   @override
-  String get premiumBenefit3 =>
-      'Mga kwento ng pananampalataya mula sa kasaysayan';
+  String get proBenefit3 => 'Mga kwento ng pananampalataya mula sa kasaysayan';
 
   @override
-  String get premiumBenefit5 => 'Pag-aaral ng Bibliya sa orihinal na wika';
+  String get proBenefit5 => 'Pag-aaral ng Bibliya sa orihinal na wika';
 
   @override
   String get bestValue => 'PINAKAMAHUSAY NA HALAGA';
@@ -442,7 +441,7 @@ class AppLocalizationsFil extends AppLocalizations {
   String get restorePurchase => 'I-restore ang binili';
 
   @override
-  String get yearlyPriceMonthly => '₱117/buwan';
+  String get yearlyPriceMonthly => '₱249/buwan';
 
   @override
   String get morningPrayerReminder => 'Panalangin sa Umaga';
@@ -510,7 +509,7 @@ class AppLocalizationsFil extends AppLocalizations {
   String get shareSubtitle => 'Araw-araw na panalangin kasama ang Diyos';
 
   @override
-  String get premiumActive => 'Membership Aktibo';
+  String get proActive => 'Membership Aktibo';
 
   @override
   String get planOncePerDay => '1x/araw';
@@ -717,7 +716,7 @@ class AppLocalizationsFil extends AppLocalizations {
   String get yearlyPlan => 'Taunan';
 
   @override
-  String get yearlySavings => '₱283/buwan (37% diskwento)';
+  String get yearlySavings => '₱150/buwan (40% diskwento)';
 
   @override
   String get startMembership => 'Magsimula';

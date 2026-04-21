@@ -398,11 +398,11 @@ abstract class AppLocalizations {
   /// **'Original Language'**
   String get originalLangTitle;
 
-  /// No description provided for @premiumUnlock.
+  /// No description provided for @proUnlock.
   ///
   /// In en, this message translates to:
-  /// **'Unlock with Premium'**
-  String get premiumUnlock;
+  /// **'Unlock with Pro'**
+  String get proUnlock;
 
   /// No description provided for @qtPageTitle.
   ///
@@ -584,11 +584,11 @@ abstract class AppLocalizations {
   /// **'Consecutive Days'**
   String get consecutiveDays;
 
-  /// No description provided for @premiumSection.
+  /// No description provided for @proSection.
   ///
   /// In en, this message translates to:
   /// **'Membership'**
-  String get premiumSection;
+  String get proSection;
 
   /// No description provided for @freePlan.
   ///
@@ -596,22 +596,22 @@ abstract class AppLocalizations {
   /// **'Free'**
   String get freePlan;
 
-  /// No description provided for @premiumPlan.
+  /// No description provided for @proPlan.
   ///
   /// In en, this message translates to:
-  /// **'Premium'**
-  String get premiumPlan;
+  /// **'Pro'**
+  String get proPlan;
 
   /// No description provided for @monthlyPrice.
   ///
   /// In en, this message translates to:
-  /// **'\$7.99 / mo'**
+  /// **'\$6.99 / mo'**
   String get monthlyPrice;
 
   /// No description provided for @yearlyPrice.
   ///
   /// In en, this message translates to:
-  /// **'\$59.99 / yr'**
+  /// **'\$49.99 / yr'**
   String get yearlyPrice;
 
   /// No description provided for @yearlySave.
@@ -626,11 +626,11 @@ abstract class AppLocalizations {
   /// **'3 months at \$3.99/mo!'**
   String get launchPromo;
 
-  /// No description provided for @startPremium.
+  /// No description provided for @startPro.
   ///
   /// In en, this message translates to:
-  /// **'Start Premium'**
-  String get startPremium;
+  /// **'Start Pro'**
+  String get startPro;
 
   /// No description provided for @comingSoon.
   ///
@@ -866,17 +866,17 @@ abstract class AppLocalizations {
   /// **'Offer ends {date}'**
   String promoEndsOn(Object date);
 
-  /// No description provided for @premiumLimitTitle.
+  /// No description provided for @proLimitTitle.
   ///
   /// In en, this message translates to:
   /// **'Today\'s prayer is complete'**
-  String get premiumLimitTitle;
+  String get proLimitTitle;
 
-  /// No description provided for @premiumLimitBody.
+  /// No description provided for @proLimitBody.
   ///
   /// In en, this message translates to:
-  /// **'See you tomorrow!\nPray unlimited with Premium'**
-  String get premiumLimitBody;
+  /// **'See you tomorrow!\nPray unlimited with Pro'**
+  String get proLimitBody;
 
   /// No description provided for @laterButton.
   ///
@@ -884,17 +884,17 @@ abstract class AppLocalizations {
   /// **'Maybe later'**
   String get laterButton;
 
-  /// No description provided for @premiumPromptTitle.
+  /// No description provided for @proPromptTitle.
   ///
   /// In en, this message translates to:
   /// **'Pro Feature'**
-  String get premiumPromptTitle;
+  String get proPromptTitle;
 
-  /// No description provided for @premiumPromptBody.
+  /// No description provided for @proPromptBody.
   ///
   /// In en, this message translates to:
   /// **'This feature is available with Pro.\nWould you like to see our plans?'**
-  String get premiumPromptBody;
+  String get proPromptBody;
 
   /// No description provided for @viewProducts.
   ///
@@ -908,35 +908,35 @@ abstract class AppLocalizations {
   /// **'Maybe later'**
   String get maybeLater;
 
-  /// No description provided for @premiumHeadline.
+  /// No description provided for @proHeadline.
   ///
   /// In en, this message translates to:
   /// **'Closer to God, every day'**
-  String get premiumHeadline;
+  String get proHeadline;
 
-  /// No description provided for @premiumBenefit1.
+  /// No description provided for @proBenefit1.
   ///
   /// In en, this message translates to:
   /// **'Unlimited Prayer & QT'**
-  String get premiumBenefit1;
+  String get proBenefit1;
 
-  /// No description provided for @premiumBenefit2.
+  /// No description provided for @proBenefit2.
   ///
   /// In en, this message translates to:
   /// **'AI-powered prayer & guidance'**
-  String get premiumBenefit2;
+  String get proBenefit2;
 
-  /// No description provided for @premiumBenefit3.
+  /// No description provided for @proBenefit3.
   ///
   /// In en, this message translates to:
   /// **'Stories of faith from history'**
-  String get premiumBenefit3;
+  String get proBenefit3;
 
-  /// No description provided for @premiumBenefit5.
+  /// No description provided for @proBenefit5.
   ///
   /// In en, this message translates to:
   /// **'Original language Bible study'**
-  String get premiumBenefit5;
+  String get proBenefit5;
 
   /// No description provided for @bestValue.
   ///
@@ -965,7 +965,7 @@ abstract class AppLocalizations {
   /// No description provided for @yearlyPriceMonthly.
   ///
   /// In en, this message translates to:
-  /// **'\$2.08/mo'**
+  /// **'\$4.17/mo'**
   String get yearlyPriceMonthly;
 
   /// No description provided for @morningPrayerReminder.
@@ -1094,11 +1094,11 @@ abstract class AppLocalizations {
   /// **'Daily prayer with God'**
   String get shareSubtitle;
 
-  /// No description provided for @premiumActive.
+  /// No description provided for @proActive.
   ///
   /// In en, this message translates to:
   /// **'Membership Active'**
-  String get premiumActive;
+  String get proActive;
 
   /// No description provided for @planOncePerDay.
   ///
@@ -1481,7 +1481,7 @@ abstract class AppLocalizations {
   /// No description provided for @yearlySavings.
   ///
   /// In en, this message translates to:
-  /// **'\$5.00/mo (37% off)'**
+  /// **'\$4.17/mo (40% off)'**
   String get yearlySavings;
 
   /// No description provided for @startMembership.

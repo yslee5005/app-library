@@ -136,7 +136,7 @@ class AppLocalizationsUk extends AppLocalizations {
   String get originalLangTitle => 'Мова оригіналу';
 
   @override
-  String get premiumUnlock => 'Розблокувати з Premium';
+  String get proUnlock => 'Розблокувати з Pro';
 
   @override
   String get qtPageTitle => 'Ранковий сад';
@@ -232,19 +232,19 @@ class AppLocalizationsUk extends AppLocalizations {
   String get consecutiveDays => 'Днів поспіль';
 
   @override
-  String get premiumSection => 'Підписка';
+  String get proSection => 'Підписка';
 
   @override
   String get freePlan => 'Безкоштовно';
 
   @override
-  String get premiumPlan => 'Premium';
+  String get proPlan => 'Pro';
 
   @override
-  String get monthlyPrice => '\$7.99 / міс';
+  String get monthlyPrice => '\$6.99 / міс';
 
   @override
-  String get yearlyPrice => '\$59.99 / рік';
+  String get yearlyPrice => '\$49.99 / рік';
 
   @override
   String get yearlySave => 'Економія 40%';
@@ -253,7 +253,7 @@ class AppLocalizationsUk extends AppLocalizations {
   String get launchPromo => '3 місяці за 159₴/міс.!';
 
   @override
-  String get startPremium => 'Почати Premium';
+  String get startPro => 'Почати Pro';
 
   @override
   String get comingSoon => 'Незабаром';
@@ -386,19 +386,19 @@ class AppLocalizationsUk extends AppLocalizations {
   }
 
   @override
-  String get premiumLimitTitle => 'Сьогоднішня молитва завершена';
+  String get proLimitTitle => 'Сьогоднішня молитва завершена';
 
   @override
-  String get premiumLimitBody => 'До завтра!\nМолітеся без обмежень з Premium';
+  String get proLimitBody => 'До завтра!\nМолітеся без обмежень з Pro';
 
   @override
   String get laterButton => 'Можливо пізніше';
 
   @override
-  String get premiumPromptTitle => 'Функція Pro';
+  String get proPromptTitle => 'Функція Pro';
 
   @override
-  String get premiumPromptBody =>
+  String get proPromptBody =>
       'Ця функція доступна з Pro.\nБажаєте переглянути наші плани?';
 
   @override
@@ -408,19 +408,19 @@ class AppLocalizationsUk extends AppLocalizations {
   String get maybeLater => 'Можливо пізніше';
 
   @override
-  String get premiumHeadline => 'Ближче до Бога щодня';
+  String get proHeadline => 'Ближче до Бога щодня';
 
   @override
-  String get premiumBenefit1 => 'Необмежена молитва і тихий час';
+  String get proBenefit1 => 'Необмежена молитва і тихий час';
 
   @override
-  String get premiumBenefit2 => 'Молитва та настанова з ШІ';
+  String get proBenefit2 => 'Молитва та настанова з ШІ';
 
   @override
-  String get premiumBenefit3 => 'Історії віри з минулого';
+  String get proBenefit3 => 'Історії віри з минулого';
 
   @override
-  String get premiumBenefit5 => 'Вивчення Біблії мовою оригіналу';
+  String get proBenefit5 => 'Вивчення Біблії мовою оригіналу';
 
   @override
   String get bestValue => 'НАЙКРАЩА ПРОПОЗИЦІЯ';
@@ -435,7 +435,7 @@ class AppLocalizationsUk extends AppLocalizations {
   String get restorePurchase => 'Відновити покупку';
 
   @override
-  String get yearlyPriceMonthly => '83₴/міс.';
+  String get yearlyPriceMonthly => '\$4.17/міс';
 
   @override
   String get morningPrayerReminder => 'Ранкова молитва';
@@ -503,7 +503,7 @@ class AppLocalizationsUk extends AppLocalizations {
   String get shareSubtitle => 'Щоденна молитва з Богом';
 
   @override
-  String get premiumActive => 'Підписка Активна';
+  String get proActive => 'Підписка Активна';
 
   @override
   String get planOncePerDay => '1x/день';
@@ -709,7 +709,7 @@ class AppLocalizationsUk extends AppLocalizations {
   String get yearlyPlan => 'Щороку';
 
   @override
-  String get yearlySavings => '\$5.00/міс (знижка 37%)';
+  String get yearlySavings => '\$4.17/міс (знижка 40%)';
 
   @override
   String get startMembership => 'Розпочати';

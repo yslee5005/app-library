@@ -136,7 +136,7 @@ class AppLocalizationsHr extends AppLocalizations {
   String get originalLangTitle => 'Izvorni jezik';
 
   @override
-  String get premiumUnlock => 'Otključaj s Premium';
+  String get proUnlock => 'Otključaj s Pro';
 
   @override
   String get qtPageTitle => 'Jutarnji Vrt';
@@ -232,19 +232,19 @@ class AppLocalizationsHr extends AppLocalizations {
   String get consecutiveDays => 'Uzastopnih dana';
 
   @override
-  String get premiumSection => 'Članstvo';
+  String get proSection => 'Članstvo';
 
   @override
   String get freePlan => 'Besplatno';
 
   @override
-  String get premiumPlan => 'Premium';
+  String get proPlan => 'Pro';
 
   @override
-  String get monthlyPrice => '7,99€ / mjes';
+  String get monthlyPrice => '6,99€ / mjes';
 
   @override
-  String get yearlyPrice => '59,99€ / god';
+  String get yearlyPrice => '49,99€ / god';
 
   @override
   String get yearlySave => 'Uštedi 40%';
@@ -253,7 +253,7 @@ class AppLocalizationsHr extends AppLocalizations {
   String get launchPromo => '3 mjeseca po 3,99€/mj!';
 
   @override
-  String get startPremium => 'Započni Premium';
+  String get startPro => 'Započni Pro';
 
   @override
   String get comingSoon => 'Uskoro';
@@ -387,20 +387,19 @@ class AppLocalizationsHr extends AppLocalizations {
   }
 
   @override
-  String get premiumLimitTitle => 'Današnja molitva je završena';
+  String get proLimitTitle => 'Današnja molitva je završena';
 
   @override
-  String get premiumLimitBody =>
-      'Vidimo se sutra!\nMoli se neograničeno s Premium';
+  String get proLimitBody => 'Vidimo se sutra!\nMoli se neograničeno s Pro';
 
   @override
   String get laterButton => 'Možda kasnije';
 
   @override
-  String get premiumPromptTitle => 'Pro značajka';
+  String get proPromptTitle => 'Pro značajka';
 
   @override
-  String get premiumPromptBody =>
+  String get proPromptBody =>
       'Ova značajka je dostupna s Pro.\nŽelite li vidjeti planove?';
 
   @override
@@ -410,19 +409,19 @@ class AppLocalizationsHr extends AppLocalizations {
   String get maybeLater => 'Možda kasnije';
 
   @override
-  String get premiumHeadline => 'Bliže Bogu, svaki dan';
+  String get proHeadline => 'Bliže Bogu, svaki dan';
 
   @override
-  String get premiumBenefit1 => 'Neograničena molitva & tihi sat';
+  String get proBenefit1 => 'Neograničena molitva & tihi sat';
 
   @override
-  String get premiumBenefit2 => 'AI molitva & vodstvo';
+  String get proBenefit2 => 'AI molitva & vodstvo';
 
   @override
-  String get premiumBenefit3 => 'Priče vjere iz povijesti';
+  String get proBenefit3 => 'Priče vjere iz povijesti';
 
   @override
-  String get premiumBenefit5 => 'Proučavanje Biblije na izvornom jeziku';
+  String get proBenefit5 => 'Proučavanje Biblije na izvornom jeziku';
 
   @override
   String get bestValue => 'NAJBOLJA VRIJEDNOST';
@@ -437,7 +436,7 @@ class AppLocalizationsHr extends AppLocalizations {
   String get restorePurchase => 'Vrati kupnju';
 
   @override
-  String get yearlyPriceMonthly => '2,08€/mj';
+  String get yearlyPriceMonthly => '4,17€/mjes';
 
   @override
   String get morningPrayerReminder => 'Jutarnja molitva';
@@ -505,7 +504,7 @@ class AppLocalizationsHr extends AppLocalizations {
   String get shareSubtitle => 'Svakodnevna molitva s Bogom';
 
   @override
-  String get premiumActive => 'Članstvo Aktivno';
+  String get proActive => 'Članstvo Aktivno';
 
   @override
   String get planOncePerDay => '1x/dan';
@@ -711,7 +710,7 @@ class AppLocalizationsHr extends AppLocalizations {
   String get yearlyPlan => 'Godišnje';
 
   @override
-  String get yearlySavings => '5,00€/mjes (37% popust)';
+  String get yearlySavings => '4,17€/mjes (40% popust)';
 
   @override
   String get startMembership => 'Započni';

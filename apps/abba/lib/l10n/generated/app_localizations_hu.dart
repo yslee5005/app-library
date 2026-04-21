@@ -136,7 +136,7 @@ class AppLocalizationsHu extends AppLocalizations {
   String get originalLangTitle => 'Eredeti nyelv';
 
   @override
-  String get premiumUnlock => 'Feloldás Premiummal';
+  String get proUnlock => 'Feloldás Pro';
 
   @override
   String get qtPageTitle => 'Reggeli kert';
@@ -232,19 +232,19 @@ class AppLocalizationsHu extends AppLocalizations {
   String get consecutiveDays => 'Egymást követő napok';
 
   @override
-  String get premiumSection => 'Tagság';
+  String get proSection => 'Tagság';
 
   @override
   String get freePlan => 'Ingyenes';
 
   @override
-  String get premiumPlan => 'Prémium';
+  String get proPlan => 'Pro';
 
   @override
-  String get monthlyPrice => '2 990 Ft / hó';
+  String get monthlyPrice => '2 490 Ft / hó';
 
   @override
-  String get yearlyPrice => '22 990 Ft / év';
+  String get yearlyPrice => '18 990 Ft / év';
 
   @override
   String get yearlySave => '40% megtakarítás';
@@ -253,7 +253,7 @@ class AppLocalizationsHu extends AppLocalizations {
   String get launchPromo => '3 hónap 1590Ft/hó áron!';
 
   @override
-  String get startPremium => 'Prémium indítása';
+  String get startPro => 'Pro indítása';
 
   @override
   String get comingSoon => 'Hamarosan';
@@ -387,20 +387,19 @@ class AppLocalizationsHu extends AppLocalizations {
   }
 
   @override
-  String get premiumLimitTitle => 'A mai ima befejeződött';
+  String get proLimitTitle => 'A mai ima befejeződött';
 
   @override
-  String get premiumLimitBody =>
-      'Holnap találkozunk!\nImádkozz korlátlanul Prémiummal';
+  String get proLimitBody => 'Holnap találkozunk!\nImádkozz korlátlanul Promal';
 
   @override
   String get laterButton => 'Talán később';
 
   @override
-  String get premiumPromptTitle => 'Pro funkció';
+  String get proPromptTitle => 'Pro funkció';
 
   @override
-  String get premiumPromptBody =>
+  String get proPromptBody =>
       'Ez a funkció Pro-val érhető el.\nSzeretnéd megtekinteni a csomagjainkat?';
 
   @override
@@ -410,19 +409,19 @@ class AppLocalizationsHu extends AppLocalizations {
   String get maybeLater => 'Talán később';
 
   @override
-  String get premiumHeadline => 'Közelebb Istenhez, minden nap';
+  String get proHeadline => 'Közelebb Istenhez, minden nap';
 
   @override
-  String get premiumBenefit1 => 'Korlátlan ima és csendes idő';
+  String get proBenefit1 => 'Korlátlan ima és csendes idő';
 
   @override
-  String get premiumBenefit2 => 'AI-alapú ima és útmutatás';
+  String get proBenefit2 => 'AI-alapú ima és útmutatás';
 
   @override
-  String get premiumBenefit3 => 'Hittörténetek a múltból';
+  String get proBenefit3 => 'Hittörténetek a múltból';
 
   @override
-  String get premiumBenefit5 => 'Bibliatanulmány eredeti nyelven';
+  String get proBenefit5 => 'Bibliatanulmány eredeti nyelven';
 
   @override
   String get bestValue => 'LEGJOBB AJÁNLAT';
@@ -437,7 +436,7 @@ class AppLocalizationsHu extends AppLocalizations {
   String get restorePurchase => 'Vásárlás visszaállítása';
 
   @override
-  String get yearlyPriceMonthly => '833Ft/hó';
+  String get yearlyPriceMonthly => '1 583 Ft/hó';
 
   @override
   String get morningPrayerReminder => 'Reggeli ima';
@@ -505,7 +504,7 @@ class AppLocalizationsHu extends AppLocalizations {
   String get shareSubtitle => 'Mindennapi ima Istennel';
 
   @override
-  String get premiumActive => 'Tagság Aktív';
+  String get proActive => 'Tagság Aktív';
 
   @override
   String get planOncePerDay => '1x/nap';
@@ -711,7 +710,7 @@ class AppLocalizationsHu extends AppLocalizations {
   String get yearlyPlan => 'Éves';
 
   @override
-  String get yearlySavings => '1 916 Ft/hó (37% kedvezmény)';
+  String get yearlySavings => '907 Ft/hó (40% kedvezmény)';
 
   @override
   String get startMembership => 'Indítás';

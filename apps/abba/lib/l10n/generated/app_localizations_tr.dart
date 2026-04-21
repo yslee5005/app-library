@@ -135,7 +135,7 @@ class AppLocalizationsTr extends AppLocalizations {
   String get originalLangTitle => 'Orijinal Dil';
 
   @override
-  String get premiumUnlock => 'Premium ile Aç';
+  String get proUnlock => 'Pro ile Aç';
 
   @override
   String get qtPageTitle => 'Sabah Bahçesi';
@@ -230,19 +230,19 @@ class AppLocalizationsTr extends AppLocalizations {
   String get consecutiveDays => 'Ardışık Gün';
 
   @override
-  String get premiumSection => 'Üyelik';
+  String get proSection => 'Üyelik';
 
   @override
   String get freePlan => 'Ücretsiz';
 
   @override
-  String get premiumPlan => 'Premium';
+  String get proPlan => 'Pro';
 
   @override
-  String get monthlyPrice => '₺249 / ay';
+  String get monthlyPrice => '₺219 / ay';
 
   @override
-  String get yearlyPrice => '₺1.890 / yıl';
+  String get yearlyPrice => '₺1.590 / yıl';
 
   @override
   String get yearlySave => '%40 Tasarruf';
@@ -251,7 +251,7 @@ class AppLocalizationsTr extends AppLocalizations {
   String get launchPromo => '3 ay boyunca ₺129/ay!';
 
   @override
-  String get startPremium => 'Premium Başlat';
+  String get startPro => 'Pro Başlat';
 
   @override
   String get comingSoon => 'Yakında';
@@ -387,20 +387,19 @@ class AppLocalizationsTr extends AppLocalizations {
   }
 
   @override
-  String get premiumLimitTitle => 'Bugünkü dua tamamlandı';
+  String get proLimitTitle => 'Bugünkü dua tamamlandı';
 
   @override
-  String get premiumLimitBody =>
-      'Yarın görüşmek üzere!\nPremium ile sınırsız dua edin';
+  String get proLimitBody => 'Yarın görüşmek üzere!\nPro ile sınırsız dua edin';
 
   @override
   String get laterButton => 'Daha sonra';
 
   @override
-  String get premiumPromptTitle => 'Pro Özellik';
+  String get proPromptTitle => 'Pro Özellik';
 
   @override
-  String get premiumPromptBody =>
+  String get proPromptBody =>
       'Bu özellik Pro ile kullanılabilir.\nPlanları görmek ister misiniz?';
 
   @override
@@ -410,19 +409,19 @@ class AppLocalizationsTr extends AppLocalizations {
   String get maybeLater => 'Belki sonra';
 
   @override
-  String get premiumHeadline => 'Her gün Tanrı\'ya daha yakın';
+  String get proHeadline => 'Her gün Tanrı\'ya daha yakın';
 
   @override
-  String get premiumBenefit1 => 'Sınırsız Dua & Sessiz Zaman';
+  String get proBenefit1 => 'Sınırsız Dua & Sessiz Zaman';
 
   @override
-  String get premiumBenefit2 => 'AI destekli dua & rehberlik';
+  String get proBenefit2 => 'AI destekli dua & rehberlik';
 
   @override
-  String get premiumBenefit3 => 'Tarihten iman hikayeleri';
+  String get proBenefit3 => 'Tarihten iman hikayeleri';
 
   @override
-  String get premiumBenefit5 => 'Orijinal dilde Kutsal Kitap çalışması';
+  String get proBenefit5 => 'Orijinal dilde Kutsal Kitap çalışması';
 
   @override
   String get bestValue => 'EN İYİ DEĞer';
@@ -437,7 +436,7 @@ class AppLocalizationsTr extends AppLocalizations {
   String get restorePurchase => 'Satın almayı geri yükle';
 
   @override
-  String get yearlyPriceMonthly => '₺62/ay';
+  String get yearlyPriceMonthly => '₺133/ay';
 
   @override
   String get morningPrayerReminder => 'Sabah Duası';
@@ -505,7 +504,7 @@ class AppLocalizationsTr extends AppLocalizations {
   String get shareSubtitle => 'Tanrı ile günlük dua';
 
   @override
-  String get premiumActive => 'Üyelik Aktif';
+  String get proActive => 'Üyelik Aktif';
 
   @override
   String get planOncePerDay => 'Günde 1';
@@ -711,7 +710,7 @@ class AppLocalizationsTr extends AppLocalizations {
   String get yearlyPlan => 'Yıllık';
 
   @override
-  String get yearlySavings => '₺158/ay (%37 indirim)';
+  String get yearlySavings => '₺86/ay (%40 indirim)';
 
   @override
   String get startMembership => 'Başla';

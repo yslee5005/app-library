@@ -136,7 +136,7 @@ class AppLocalizationsCs extends AppLocalizations {
   String get originalLangTitle => 'Původní jazyk';
 
   @override
-  String get premiumUnlock => 'Odemknout s Premium';
+  String get proUnlock => 'Odemknout s Pro';
 
   @override
   String get qtPageTitle => 'Ranní zahrada';
@@ -231,19 +231,19 @@ class AppLocalizationsCs extends AppLocalizations {
   String get consecutiveDays => 'Dní v řadě';
 
   @override
-  String get premiumSection => 'Členství';
+  String get proSection => 'Členství';
 
   @override
   String get freePlan => 'Zdarma';
 
   @override
-  String get premiumPlan => 'Premium';
+  String get proPlan => 'Pro';
 
   @override
-  String get monthlyPrice => '199 Kč / měs';
+  String get monthlyPrice => '169 Kč / měs';
 
   @override
-  String get yearlyPrice => '1 490 Kč / rok';
+  String get yearlyPrice => '1 190 Kč / rok';
 
   @override
   String get yearlySave => 'Ušetři 40%';
@@ -252,7 +252,7 @@ class AppLocalizationsCs extends AppLocalizations {
   String get launchPromo => '3 měsíce za 99Kč/měs.!';
 
   @override
-  String get startPremium => 'Začít Premium';
+  String get startPro => 'Začít Pro';
 
   @override
   String get comingSoon => 'Již brzy';
@@ -385,20 +385,19 @@ class AppLocalizationsCs extends AppLocalizations {
   }
 
   @override
-  String get premiumLimitTitle => 'Dnešní modlitba je dokončena';
+  String get proLimitTitle => 'Dnešní modlitba je dokončena';
 
   @override
-  String get premiumLimitBody =>
-      'Na shledanou zítra!\nModli se bez omezení s Premium';
+  String get proLimitBody => 'Na shledanou zítra!\nModli se bez omezení s Pro';
 
   @override
   String get laterButton => 'Možná později';
 
   @override
-  String get premiumPromptTitle => 'Pro funkce';
+  String get proPromptTitle => 'Pro funkce';
 
   @override
-  String get premiumPromptBody =>
+  String get proPromptBody =>
       'Tato funkce je dostupná s Pro.\nChceš se podívat na naše plány?';
 
   @override
@@ -408,19 +407,19 @@ class AppLocalizationsCs extends AppLocalizations {
   String get maybeLater => 'Možná později';
 
   @override
-  String get premiumHeadline => 'Blíž k Bohu každý den';
+  String get proHeadline => 'Blíž k Bohu každý den';
 
   @override
-  String get premiumBenefit1 => 'Neomezená modlitba a tichý čas';
+  String get proBenefit1 => 'Neomezená modlitba a tichý čas';
 
   @override
-  String get premiumBenefit2 => 'Modlitba a průvodce s AI';
+  String get proBenefit2 => 'Modlitba a průvodce s AI';
 
   @override
-  String get premiumBenefit3 => 'Příběhy víry z historie';
+  String get proBenefit3 => 'Příběhy víry z historie';
 
   @override
-  String get premiumBenefit5 => 'Studium Bible v původních jazycích';
+  String get proBenefit5 => 'Studium Bible v původních jazycích';
 
   @override
   String get bestValue => 'NEJLEPŠÍ NABÍDKA';
@@ -435,7 +434,7 @@ class AppLocalizationsCs extends AppLocalizations {
   String get restorePurchase => 'Obnovit nákup';
 
   @override
-  String get yearlyPriceMonthly => '50Kč/měs.';
+  String get yearlyPriceMonthly => '99 Kč/měs';
 
   @override
   String get morningPrayerReminder => 'Ranní modlitba';
@@ -503,7 +502,7 @@ class AppLocalizationsCs extends AppLocalizations {
   String get shareSubtitle => 'Každodenní modlitba s Bohem';
 
   @override
-  String get premiumActive => 'Členství Aktivní';
+  String get proActive => 'Členství Aktivní';
 
   @override
   String get planOncePerDay => '1x/den';
@@ -709,7 +708,7 @@ class AppLocalizationsCs extends AppLocalizations {
   String get yearlyPlan => 'Ročně';
 
   @override
-  String get yearlySavings => '124 Kč/měs (sleva 37%)';
+  String get yearlySavings => '70 Kč/měs (sleva 40%)';
 
   @override
   String get startMembership => 'Začít';

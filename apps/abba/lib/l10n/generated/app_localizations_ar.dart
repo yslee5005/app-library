@@ -134,7 +134,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get originalLangTitle => 'اللغة الأصلية';
 
   @override
-  String get premiumUnlock => 'افتح مع Premium';
+  String get proUnlock => 'افتح مع Pro';
 
   @override
   String get qtPageTitle => 'حديقة الصباح';
@@ -229,19 +229,19 @@ class AppLocalizationsAr extends AppLocalizations {
   String get consecutiveDays => 'أيام متتالية';
 
   @override
-  String get premiumSection => 'العضوية';
+  String get proSection => 'العضوية';
 
   @override
   String get freePlan => 'مجاني';
 
   @override
-  String get premiumPlan => 'Premium';
+  String get proPlan => 'Pro';
 
   @override
-  String get monthlyPrice => '\$7.99 / شهر';
+  String get monthlyPrice => '\$6.99 / شهر';
 
   @override
-  String get yearlyPrice => '\$59.99 / سنة';
+  String get yearlyPrice => '\$49.99 / سنة';
 
   @override
   String get yearlySave => 'وفّر 40%';
@@ -250,7 +250,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get launchPromo => '3 أشهر بسعر \$4.99/شهر!';
 
   @override
-  String get startPremium => 'ابدأ Premium';
+  String get startPro => 'ابدأ Pro';
 
   @override
   String get comingSoon => 'قريبًا';
@@ -383,19 +383,19 @@ class AppLocalizationsAr extends AppLocalizations {
   }
 
   @override
-  String get premiumLimitTitle => 'اكتملت صلاة اليوم';
+  String get proLimitTitle => 'اكتملت صلاة اليوم';
 
   @override
-  String get premiumLimitBody => 'نراك غدًا!\nصلِّ بلا حدود مع Premium';
+  String get proLimitBody => 'نراك غدًا!\nصلِّ بلا حدود مع Pro';
 
   @override
   String get laterButton => 'لاحقًا';
 
   @override
-  String get premiumPromptTitle => 'ميزة Pro';
+  String get proPromptTitle => 'ميزة Pro';
 
   @override
-  String get premiumPromptBody =>
+  String get proPromptBody =>
       'هذه الميزة متاحة مع Pro.\nهل تريد الاطلاع على الخطط؟';
 
   @override
@@ -405,19 +405,19 @@ class AppLocalizationsAr extends AppLocalizations {
   String get maybeLater => 'ربما لاحقًا';
 
   @override
-  String get premiumHeadline => 'أقرب إلى الله، كل يوم';
+  String get proHeadline => 'أقرب إلى الله، كل يوم';
 
   @override
-  String get premiumBenefit1 => 'صلاة وخلوة بلا حدود';
+  String get proBenefit1 => 'صلاة وخلوة بلا حدود';
 
   @override
-  String get premiumBenefit2 => 'صلاة وإرشاد بالذكاء الاصطناعي';
+  String get proBenefit2 => 'صلاة وإرشاد بالذكاء الاصطناعي';
 
   @override
-  String get premiumBenefit3 => 'قصص إيمان من التاريخ';
+  String get proBenefit3 => 'قصص إيمان من التاريخ';
 
   @override
-  String get premiumBenefit5 => 'دراسة الكتاب المقدس باللغة الأصلية';
+  String get proBenefit5 => 'دراسة الكتاب المقدس باللغة الأصلية';
 
   @override
   String get bestValue => 'أفضل قيمة';
@@ -432,7 +432,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get restorePurchase => 'استعادة الشراء';
 
   @override
-  String get yearlyPriceMonthly => '\$2.08/شهر';
+  String get yearlyPriceMonthly => '\$4.17/شهر';
 
   @override
   String get morningPrayerReminder => 'صلاة الصباح';
@@ -500,7 +500,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get shareSubtitle => 'صلاة يومية مع الله';
 
   @override
-  String get premiumActive => 'العضوية نشطة';
+  String get proActive => 'العضوية نشطة';
 
   @override
   String get planOncePerDay => 'مرة/يوم';
@@ -703,7 +703,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get yearlyPlan => 'سنوي';
 
   @override
-  String get yearlySavings => '\$5.00/شهر (خصم 37%)';
+  String get yearlySavings => '\$4.17/شهر (خصم 40%)';
 
   @override
   String get startMembership => 'ابدأ الآن';

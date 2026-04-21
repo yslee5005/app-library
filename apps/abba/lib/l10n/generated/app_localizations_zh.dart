@@ -134,7 +134,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get originalLangTitle => '原文深意';
 
   @override
-  String get premiumUnlock => '用Premium解锁';
+  String get proUnlock => '用Pro解锁';
 
   @override
   String get qtPageTitle => '晨间花园';
@@ -229,19 +229,19 @@ class AppLocalizationsZh extends AppLocalizations {
   String get consecutiveDays => '连续天数';
 
   @override
-  String get premiumSection => '会员';
+  String get proSection => '会员';
 
   @override
   String get freePlan => '免费';
 
   @override
-  String get premiumPlan => '高级版';
+  String get proPlan => 'Pro';
 
   @override
-  String get monthlyPrice => '¥68 / 月';
+  String get monthlyPrice => '¥50 / 月';
 
   @override
-  String get yearlyPrice => '¥518 / 年';
+  String get yearlyPrice => '¥388 / 年';
 
   @override
   String get yearlySave => '省40%';
@@ -250,7 +250,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get launchPromo => '3个月¥25/月!';
 
   @override
-  String get startPremium => '开通Premium';
+  String get startPro => '开通Pro';
 
   @override
   String get comingSoon => '即将推出';
@@ -376,19 +376,19 @@ class AppLocalizationsZh extends AppLocalizations {
   }
 
   @override
-  String get premiumLimitTitle => '今天的祷告已完成';
+  String get proLimitTitle => '今天的祷告已完成';
 
   @override
-  String get premiumLimitBody => '明天见！\n升级Premium无限祷告';
+  String get proLimitBody => '明天见！\n升级Pro无限祷告';
 
   @override
   String get laterButton => '以后再说';
 
   @override
-  String get premiumPromptTitle => 'Pro功能';
+  String get proPromptTitle => 'Pro功能';
 
   @override
-  String get premiumPromptBody => '此功能需要Pro版本。\n要查看我们的方案吗？';
+  String get proPromptBody => '此功能需要Pro版本。\n要查看我们的方案吗？';
 
   @override
   String get viewProducts => '查看方案';
@@ -397,19 +397,19 @@ class AppLocalizationsZh extends AppLocalizations {
   String get maybeLater => '下次再说';
 
   @override
-  String get premiumHeadline => '每天与神更亲近';
+  String get proHeadline => '每天与神更亲近';
 
   @override
-  String get premiumBenefit1 => '无限祷告 & 灵修';
+  String get proBenefit1 => '无限祷告 & 灵修';
 
   @override
-  String get premiumBenefit2 => 'AI定制祷告与指导';
+  String get proBenefit2 => 'AI定制祷告与指导';
 
   @override
-  String get premiumBenefit3 => '历史信仰故事';
+  String get proBenefit3 => '历史信仰故事';
 
   @override
-  String get premiumBenefit5 => '原文圣经解读';
+  String get proBenefit5 => '原文圣经解读';
 
   @override
   String get bestValue => '最划算';
@@ -424,7 +424,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get restorePurchase => '恢复购买';
 
   @override
-  String get yearlyPriceMonthly => '¥15/月';
+  String get yearlyPriceMonthly => '¥32/月';
 
   @override
   String get morningPrayerReminder => '早祷';
@@ -492,7 +492,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get shareSubtitle => '与上帝同行的每日祷告';
 
   @override
-  String get premiumActive => '会员已激活';
+  String get proActive => '会员已激活';
 
   @override
   String get planOncePerDay => '每天1次';
@@ -694,7 +694,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get yearlyPlan => '年度';
 
   @override
-  String get yearlySavings => '月¥43 (37%折扣)';
+  String get yearlySavings => '月¥18 (40%折扣)';
 
   @override
   String get startMembership => '立即开通';

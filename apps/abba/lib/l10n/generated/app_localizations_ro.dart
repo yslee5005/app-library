@@ -137,7 +137,7 @@ class AppLocalizationsRo extends AppLocalizations {
   String get originalLangTitle => 'Limba originală';
 
   @override
-  String get premiumUnlock => 'Deblochează cu Premium';
+  String get proUnlock => 'Deblochează cu Pro';
 
   @override
   String get qtPageTitle => 'Grădina dimineții';
@@ -233,19 +233,19 @@ class AppLocalizationsRo extends AppLocalizations {
   String get consecutiveDays => 'Zile consecutive';
 
   @override
-  String get premiumSection => 'Abonament';
+  String get proSection => 'Abonament';
 
   @override
   String get freePlan => 'Gratuit';
 
   @override
-  String get premiumPlan => 'Premium';
+  String get proPlan => 'Pro';
 
   @override
-  String get monthlyPrice => '39,99 lei / lună';
+  String get monthlyPrice => '34,99 lei / lună';
 
   @override
-  String get yearlyPrice => '299,99 lei / an';
+  String get yearlyPrice => '249,99 lei / an';
 
   @override
   String get yearlySave => 'Economisești 40%';
@@ -254,7 +254,7 @@ class AppLocalizationsRo extends AppLocalizations {
   String get launchPromo => '3 luni la 17,99lei/lună!';
 
   @override
-  String get startPremium => 'Începe Premium';
+  String get startPro => 'Începe Pro';
 
   @override
   String get comingSoon => 'În curând';
@@ -389,20 +389,19 @@ class AppLocalizationsRo extends AppLocalizations {
   }
 
   @override
-  String get premiumLimitTitle => 'Rugăciunea de azi s-a încheiat';
+  String get proLimitTitle => 'Rugăciunea de azi s-a încheiat';
 
   @override
-  String get premiumLimitBody =>
-      'Ne vedem mâine!\nRoagă-te nelimitat cu Premium';
+  String get proLimitBody => 'Ne vedem mâine!\nRoagă-te nelimitat cu Pro';
 
   @override
   String get laterButton => 'Poate mai târziu';
 
   @override
-  String get premiumPromptTitle => 'Funcție Pro';
+  String get proPromptTitle => 'Funcție Pro';
 
   @override
-  String get premiumPromptBody =>
+  String get proPromptBody =>
       'Această funcție este disponibilă cu Pro.\nDorești să vezi planurile noastre?';
 
   @override
@@ -412,19 +411,19 @@ class AppLocalizationsRo extends AppLocalizations {
   String get maybeLater => 'Poate mai târziu';
 
   @override
-  String get premiumHeadline => 'Mai aproape de Dumnezeu, în fiecare zi';
+  String get proHeadline => 'Mai aproape de Dumnezeu, în fiecare zi';
 
   @override
-  String get premiumBenefit1 => 'Rugăciune și timp liniștit nelimitat';
+  String get proBenefit1 => 'Rugăciune și timp liniștit nelimitat';
 
   @override
-  String get premiumBenefit2 => 'Rugăciune și îndrumare cu IA';
+  String get proBenefit2 => 'Rugăciune și îndrumare cu IA';
 
   @override
-  String get premiumBenefit3 => 'Povești de credință din istorie';
+  String get proBenefit3 => 'Povești de credință din istorie';
 
   @override
-  String get premiumBenefit5 => 'Studiu biblic în limba originală';
+  String get proBenefit5 => 'Studiu biblic în limba originală';
 
   @override
   String get bestValue => 'CEA MAI BUNĂ OFERTĂ';
@@ -439,7 +438,7 @@ class AppLocalizationsRo extends AppLocalizations {
   String get restorePurchase => 'Restaurează achiziția';
 
   @override
-  String get yearlyPriceMonthly => '9,99lei/lună';
+  String get yearlyPriceMonthly => '20,83 lei/lună';
 
   @override
   String get morningPrayerReminder => 'Rugăciunea de dimineață';
@@ -507,7 +506,7 @@ class AppLocalizationsRo extends AppLocalizations {
   String get shareSubtitle => 'Rugăciune zilnică cu Dumnezeu';
 
   @override
-  String get premiumActive => 'Abonament Activ';
+  String get proActive => 'Abonament Activ';
 
   @override
   String get planOncePerDay => '1x/zi';
@@ -713,7 +712,7 @@ class AppLocalizationsRo extends AppLocalizations {
   String get yearlyPlan => 'Anual';
 
   @override
-  String get yearlySavings => '25 lei/lună (37% reducere)';
+  String get yearlySavings => '14,16 lei/lună (40% reducere)';
 
   @override
   String get startMembership => 'Începe';

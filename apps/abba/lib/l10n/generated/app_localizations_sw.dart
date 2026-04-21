@@ -136,7 +136,7 @@ class AppLocalizationsSw extends AppLocalizations {
   String get originalLangTitle => 'Lugha Asili';
 
   @override
-  String get premiumUnlock => 'Fungua kwa Premium';
+  String get proUnlock => 'Fungua kwa Pro';
 
   @override
   String get qtPageTitle => 'Bustani ya Asubuhi';
@@ -231,19 +231,19 @@ class AppLocalizationsSw extends AppLocalizations {
   String get consecutiveDays => 'Siku Mfululizo';
 
   @override
-  String get premiumSection => 'Uanachama';
+  String get proSection => 'Uanachama';
 
   @override
   String get freePlan => 'Bure';
 
   @override
-  String get premiumPlan => 'Premium';
+  String get proPlan => 'Pro';
 
   @override
-  String get monthlyPrice => '\$7.99 / mwezi';
+  String get monthlyPrice => '\$6.99 / mwezi';
 
   @override
-  String get yearlyPrice => '\$59.99 / mwaka';
+  String get yearlyPrice => '\$49.99 / mwaka';
 
   @override
   String get yearlySave => 'Okoa 40%';
@@ -252,7 +252,7 @@ class AppLocalizationsSw extends AppLocalizations {
   String get launchPromo => 'Miezi 3 kwa TSh4,992/mwezi!';
 
   @override
-  String get startPremium => 'Anza Premium';
+  String get startPro => 'Anza Pro';
 
   @override
   String get comingSoon => 'Inakuja hivi karibuni';
@@ -387,20 +387,19 @@ class AppLocalizationsSw extends AppLocalizations {
   }
 
   @override
-  String get premiumLimitTitle => 'Maombi ya leo yamekamilika';
+  String get proLimitTitle => 'Maombi ya leo yamekamilika';
 
   @override
-  String get premiumLimitBody =>
-      'Tutaonana kesho!\nOmba bila kikomo na Premium';
+  String get proLimitBody => 'Tutaonana kesho!\nOmba bila kikomo na Pro';
 
   @override
   String get laterButton => 'Labda baadaye';
 
   @override
-  String get premiumPromptTitle => 'Kipengele cha Pro';
+  String get proPromptTitle => 'Kipengele cha Pro';
 
   @override
-  String get premiumPromptBody =>
+  String get proPromptBody =>
       'Kipengele hiki kinapatikana na Pro.\nUngependa kuona mipango yetu?';
 
   @override
@@ -410,19 +409,19 @@ class AppLocalizationsSw extends AppLocalizations {
   String get maybeLater => 'Labda baadaye';
 
   @override
-  String get premiumHeadline => 'Karibu zaidi na Mungu, kila siku';
+  String get proHeadline => 'Karibu zaidi na Mungu, kila siku';
 
   @override
-  String get premiumBenefit1 => 'Maombi na Tafakari bila kikomo';
+  String get proBenefit1 => 'Maombi na Tafakari bila kikomo';
 
   @override
-  String get premiumBenefit2 => 'Maombi na mwongozo unaosaidwa na AI';
+  String get proBenefit2 => 'Maombi na mwongozo unaosaidwa na AI';
 
   @override
-  String get premiumBenefit3 => 'Hadithi za imani kutoka historia';
+  String get proBenefit3 => 'Hadithi za imani kutoka historia';
 
   @override
-  String get premiumBenefit5 => 'Kujifunza Biblia kwa lugha asili';
+  String get proBenefit5 => 'Kujifunza Biblia kwa lugha asili';
 
   @override
   String get bestValue => 'THAMANI BORA';
@@ -437,7 +436,7 @@ class AppLocalizationsSw extends AppLocalizations {
   String get restorePurchase => 'Rejesha ununuzi';
 
   @override
-  String get yearlyPriceMonthly => 'TSh4,992/mwezi';
+  String get yearlyPriceMonthly => '\$4.17/mwezi';
 
   @override
   String get morningPrayerReminder => 'Maombi ya Asubuhi';
@@ -505,7 +504,7 @@ class AppLocalizationsSw extends AppLocalizations {
   String get shareSubtitle => 'Maombi ya kila siku na Mungu';
 
   @override
-  String get premiumActive => 'Uanachama Hai';
+  String get proActive => 'Uanachama Hai';
 
   @override
   String get planOncePerDay => '1x/siku';
@@ -710,7 +709,7 @@ class AppLocalizationsSw extends AppLocalizations {
   String get yearlyPlan => 'Kwa mwaka';
 
   @override
-  String get yearlySavings => '\$5.00/mwezi (punguzo 37%)';
+  String get yearlySavings => '\$4.17/mwezi (punguzo 40%)';
 
   @override
   String get startMembership => 'Anza sasa';

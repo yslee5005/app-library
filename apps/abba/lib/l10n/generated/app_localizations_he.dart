@@ -135,7 +135,7 @@ class AppLocalizationsHe extends AppLocalizations {
   String get originalLangTitle => 'שפת המקור';
 
   @override
-  String get premiumUnlock => 'פתח עם Premium';
+  String get proUnlock => 'פתח עם Pro';
 
   @override
   String get qtPageTitle => 'גן הבוקר';
@@ -230,19 +230,19 @@ class AppLocalizationsHe extends AppLocalizations {
   String get consecutiveDays => 'ימים רצופים';
 
   @override
-  String get premiumSection => 'מנוי';
+  String get proSection => 'מנוי';
 
   @override
   String get freePlan => 'חינם';
 
   @override
-  String get premiumPlan => 'Premium';
+  String get proPlan => 'Pro';
 
   @override
-  String get monthlyPrice => '₪29.90 / חודש';
+  String get monthlyPrice => '₪24.90 / חודש';
 
   @override
-  String get yearlyPrice => '₪219.90 / שנה';
+  String get yearlyPrice => '₪179.90 / שנה';
 
   @override
   String get yearlySave => 'חסכון 40%';
@@ -251,7 +251,7 @@ class AppLocalizationsHe extends AppLocalizations {
   String get launchPromo => '3 חודשים ב-₪14.90/חודש!';
 
   @override
-  String get startPremium => 'התחל Premium';
+  String get startPro => 'התחל Pro';
 
   @override
   String get comingSoon => 'בקרוב';
@@ -380,19 +380,19 @@ class AppLocalizationsHe extends AppLocalizations {
   }
 
   @override
-  String get premiumLimitTitle => 'תפילת היום הושלמה';
+  String get proLimitTitle => 'תפילת היום הושלמה';
 
   @override
-  String get premiumLimitBody => 'נתראה מחר!\nתתפלל ללא הגבלה עם Premium';
+  String get proLimitBody => 'נתראה מחר!\nתתפלל ללא הגבלה עם Pro';
 
   @override
   String get laterButton => 'אולי מאוחר יותר';
 
   @override
-  String get premiumPromptTitle => 'תכונת Pro';
+  String get proPromptTitle => 'תכונת Pro';
 
   @override
-  String get premiumPromptBody =>
+  String get proPromptBody =>
       'תכונה זו זמינה עם Pro.\nהאם תרצה לראות את התוכניות?';
 
   @override
@@ -402,19 +402,19 @@ class AppLocalizationsHe extends AppLocalizations {
   String get maybeLater => 'אולי מאוחר יותר';
 
   @override
-  String get premiumHeadline => 'קרוב יותר לאלוהים, כל יום';
+  String get proHeadline => 'קרוב יותר לאלוהים, כל יום';
 
   @override
-  String get premiumBenefit1 => 'תפילה ושעת שקט ללא הגבלה';
+  String get proBenefit1 => 'תפילה ושעת שקט ללא הגבלה';
 
   @override
-  String get premiumBenefit2 => 'תפילה והדרכה מונעת AI';
+  String get proBenefit2 => 'תפילה והדרכה מונעת AI';
 
   @override
-  String get premiumBenefit3 => 'סיפורי אמונה מההיסטוריה';
+  String get proBenefit3 => 'סיפורי אמונה מההיסטוריה';
 
   @override
-  String get premiumBenefit5 => 'לימוד תנ\"ך בשפת המקור';
+  String get proBenefit5 => 'לימוד תנ\"ך בשפת המקור';
 
   @override
   String get bestValue => 'הערך הטוב ביותר';
@@ -429,7 +429,7 @@ class AppLocalizationsHe extends AppLocalizations {
   String get restorePurchase => 'שחזר רכישה';
 
   @override
-  String get yearlyPriceMonthly => '₪7.49/חודש';
+  String get yearlyPriceMonthly => '₪15/חודש';
 
   @override
   String get morningPrayerReminder => 'תפילת בוקר';
@@ -497,7 +497,7 @@ class AppLocalizationsHe extends AppLocalizations {
   String get shareSubtitle => 'תפילה יומית עם אלוהים';
 
   @override
-  String get premiumActive => 'מנוי פעיל';
+  String get proActive => 'מנוי פעיל';
 
   @override
   String get planOncePerDay => 'פעם/יום';
@@ -700,7 +700,7 @@ class AppLocalizationsHe extends AppLocalizations {
   String get yearlyPlan => 'שנתי';
 
   @override
-  String get yearlySavings => '₪18.33/חודש (הנחה 37%)';
+  String get yearlySavings => '₪9.90/חודש (הנחה 40%)';
 
   @override
   String get startMembership => 'התחל';

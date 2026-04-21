@@ -136,7 +136,7 @@ class AppLocalizationsVi extends AppLocalizations {
   String get originalLangTitle => 'Ngôn ngữ gốc';
 
   @override
-  String get premiumUnlock => 'Mở khóa với Premium';
+  String get proUnlock => 'Mở khóa với Pro';
 
   @override
   String get qtPageTitle => 'Vườn buổi sáng';
@@ -231,19 +231,19 @@ class AppLocalizationsVi extends AppLocalizations {
   String get consecutiveDays => 'Ngày liên tiếp';
 
   @override
-  String get premiumSection => 'Thành viên';
+  String get proSection => 'Thành viên';
 
   @override
   String get freePlan => 'Miễn phí';
 
   @override
-  String get premiumPlan => 'Premium';
+  String get proPlan => 'Pro';
 
   @override
-  String get monthlyPrice => '189.000đ / tháng';
+  String get monthlyPrice => '169.000đ / tháng';
 
   @override
-  String get yearlyPrice => '1.499.000đ / năm';
+  String get yearlyPrice => '1.249.000đ / năm';
 
   @override
   String get yearlySave => 'Tiết kiệm 40%';
@@ -252,7 +252,7 @@ class AppLocalizationsVi extends AppLocalizations {
   String get launchPromo => '3 tháng chỉ 99.000₫/tháng!';
 
   @override
-  String get startPremium => 'Bắt đầu Premium';
+  String get startPro => 'Bắt đầu Pro';
 
   @override
   String get comingSoon => 'Sắp ra mắt';
@@ -384,20 +384,20 @@ class AppLocalizationsVi extends AppLocalizations {
   }
 
   @override
-  String get premiumLimitTitle => 'Lời cầu nguyện hôm nay đã hoàn tất';
+  String get proLimitTitle => 'Lời cầu nguyện hôm nay đã hoàn tất';
 
   @override
-  String get premiumLimitBody =>
-      'Hẹn gặp bạn ngày mai!\nCầu nguyện không giới hạn với Premium';
+  String get proLimitBody =>
+      'Hẹn gặp bạn ngày mai!\nCầu nguyện không giới hạn với Pro';
 
   @override
   String get laterButton => 'Để sau';
 
   @override
-  String get premiumPromptTitle => 'Tính năng Pro';
+  String get proPromptTitle => 'Tính năng Pro';
 
   @override
-  String get premiumPromptBody =>
+  String get proPromptBody =>
       'Tính năng này dành cho Pro.\nBạn muốn xem các gói không?';
 
   @override
@@ -407,19 +407,19 @@ class AppLocalizationsVi extends AppLocalizations {
   String get maybeLater => 'Để sau';
 
   @override
-  String get premiumHeadline => 'Mỗi ngày gần Chúa hơn';
+  String get proHeadline => 'Mỗi ngày gần Chúa hơn';
 
   @override
-  String get premiumBenefit1 => 'Cầu nguyện & Tĩnh nguyện không giới hạn';
+  String get proBenefit1 => 'Cầu nguyện & Tĩnh nguyện không giới hạn';
 
   @override
-  String get premiumBenefit2 => 'Cầu nguyện & hướng dẫn bằng AI';
+  String get proBenefit2 => 'Cầu nguyện & hướng dẫn bằng AI';
 
   @override
-  String get premiumBenefit3 => 'Câu chuyện đức tin từ lịch sử';
+  String get proBenefit3 => 'Câu chuyện đức tin từ lịch sử';
 
   @override
-  String get premiumBenefit5 => 'Học Kinh Thánh nguyên ngữ';
+  String get proBenefit5 => 'Học Kinh Thánh nguyên ngữ';
 
   @override
   String get bestValue => 'GIÁ TRỊ NHẤT';
@@ -434,7 +434,7 @@ class AppLocalizationsVi extends AppLocalizations {
   String get restorePurchase => 'Khôi phục giao dịch';
 
   @override
-  String get yearlyPriceMonthly => '49.917₫/tháng';
+  String get yearlyPriceMonthly => '104.083đ/tháng';
 
   @override
   String get morningPrayerReminder => 'Cầu nguyện buổi sáng';
@@ -502,7 +502,7 @@ class AppLocalizationsVi extends AppLocalizations {
   String get shareSubtitle => 'Cầu nguyện mỗi ngày cùng Chúa';
 
   @override
-  String get premiumActive => 'Thành viên Hoạt động';
+  String get proActive => 'Thành viên Hoạt động';
 
   @override
   String get planOncePerDay => '1 lần/ngày';
@@ -708,7 +708,7 @@ class AppLocalizationsVi extends AppLocalizations {
   String get yearlyPlan => 'Hàng năm';
 
   @override
-  String get yearlySavings => '125.000đ/tháng (giảm 33%)';
+  String get yearlySavings => '64.917đ/tháng (giảm 40%)';
 
   @override
   String get startMembership => 'Bắt đầu';

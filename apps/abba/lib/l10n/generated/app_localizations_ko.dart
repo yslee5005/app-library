@@ -134,7 +134,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get originalLangTitle => '원어의 깊은 뜻';
 
   @override
-  String get premiumUnlock => '프리미엄으로 보기';
+  String get proUnlock => 'Pro로 보기';
 
   @override
   String get qtPageTitle => '아침 정원';
@@ -229,19 +229,19 @@ class AppLocalizationsKo extends AppLocalizations {
   String get consecutiveDays => '연속 기도일';
 
   @override
-  String get premiumSection => '멤버십';
+  String get proSection => '멤버십';
 
   @override
   String get freePlan => '무료';
 
   @override
-  String get premiumPlan => '프리미엄';
+  String get proPlan => 'Pro';
 
   @override
-  String get monthlyPrice => '₩9,900 / 월';
+  String get monthlyPrice => '₩8,900 / 월';
 
   @override
-  String get yearlyPrice => '₩79,900 / 년';
+  String get yearlyPrice => '₩65,000 / 년';
 
   @override
   String get yearlySave => '40% 절약';
@@ -250,7 +250,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get launchPromo => '3개월간 ₩5,900/월!';
 
   @override
-  String get startPremium => '프리미엄 시작하기';
+  String get startPro => 'Pro 시작하기';
 
   @override
   String get comingSoon => '곧 출시됩니다';
@@ -376,19 +376,19 @@ class AppLocalizationsKo extends AppLocalizations {
   }
 
   @override
-  String get premiumLimitTitle => '오늘의 기도를 마쳤습니다';
+  String get proLimitTitle => '오늘의 기도를 마쳤습니다';
 
   @override
-  String get premiumLimitBody => '내일 다시 만나요!\n프리미엄으로 무제한 기도하기';
+  String get proLimitBody => '내일 다시 만나요!\nPro로 무제한 기도하기';
 
   @override
   String get laterButton => '다음에 하기';
 
   @override
-  String get premiumPromptTitle => 'Pro 기능이에요';
+  String get proPromptTitle => 'Pro 기능이에요';
 
   @override
-  String get premiumPromptBody => '이 기능은 Pro에서 사용할 수 있어요.\n프리미엄 상품을 확인해보시겠어요?';
+  String get proPromptBody => '이 기능은 Pro에서 사용할 수 있어요.\nPro 상품을 확인해보시겠어요?';
 
   @override
   String get viewProducts => '상품 보기';
@@ -397,19 +397,19 @@ class AppLocalizationsKo extends AppLocalizations {
   String get maybeLater => '다음에 할게요';
 
   @override
-  String get premiumHeadline => '매일 하나님과 더 가까이';
+  String get proHeadline => '매일 하나님과 더 가까이';
 
   @override
-  String get premiumBenefit1 => '무제한 기도 & QT';
+  String get proBenefit1 => '무제한 기도 & QT';
 
   @override
-  String get premiumBenefit2 => 'AI 맞춤 기도문 & 조언';
+  String get proBenefit2 => 'AI 맞춤 기도문 & 조언';
 
   @override
-  String get premiumBenefit3 => '역사 속 믿음의 이야기';
+  String get proBenefit3 => '역사 속 믿음의 이야기';
 
   @override
-  String get premiumBenefit5 => '원어 성경 해석';
+  String get proBenefit5 => '원어 성경 해석';
 
   @override
   String get bestValue => 'BEST VALUE';
@@ -424,7 +424,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get restorePurchase => '구독 복원';
 
   @override
-  String get yearlyPriceMonthly => '₩2,800/월';
+  String get yearlyPriceMonthly => '₩5,417/월';
 
   @override
   String get morningPrayerReminder => '아침 기도';
@@ -492,7 +492,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get shareSubtitle => '하나님과 함께하는 매일의 기도';
 
   @override
-  String get premiumActive => '멤버십 활성';
+  String get proActive => '멤버십 활성';
 
   @override
   String get planOncePerDay => '1일 1회';
@@ -694,7 +694,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get yearlyPlan => '연간';
 
   @override
-  String get yearlySavings => '월 ₩6,658 (33% 할인)';
+  String get yearlySavings => '월 ₩3,483 (40% 할인)';
 
   @override
   String get startMembership => '시작하기';

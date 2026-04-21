@@ -135,7 +135,7 @@ class AppLocalizationsMy extends AppLocalizations {
   String get originalLangTitle => 'မူရင်းဘာသာ';
 
   @override
-  String get premiumUnlock => 'Premium ဖြင့် ဖွင့်ရန်';
+  String get proUnlock => 'Pro ဖြင့် ဖွင့်ရန်';
 
   @override
   String get qtPageTitle => 'နံနက်ဥယျာဉ်';
@@ -231,19 +231,19 @@ class AppLocalizationsMy extends AppLocalizations {
   String get consecutiveDays => 'ဆက်တိုက်ရက်';
 
   @override
-  String get premiumSection => 'အသင်းဝင်';
+  String get proSection => 'အသင်းဝင်';
 
   @override
   String get freePlan => 'အခမဲ့';
 
   @override
-  String get premiumPlan => 'Premium';
+  String get proPlan => 'Pro';
 
   @override
-  String get monthlyPrice => '\$7.99 / လ';
+  String get monthlyPrice => '\$6.99 / လ';
 
   @override
-  String get yearlyPrice => '\$59.99 / နှစ်';
+  String get yearlyPrice => '\$49.99 / နှစ်';
 
   @override
   String get yearlySave => '40% ချွေတာ';
@@ -252,7 +252,7 @@ class AppLocalizationsMy extends AppLocalizations {
   String get launchPromo => '3 လ \$4.99/လ ဖြင့်!';
 
   @override
-  String get startPremium => 'Premium စတင်ရန်';
+  String get startPro => 'Pro စတင်ရန်';
 
   @override
   String get comingSoon => 'မကြာမီ';
@@ -384,20 +384,20 @@ class AppLocalizationsMy extends AppLocalizations {
   }
 
   @override
-  String get premiumLimitTitle => 'ယနေ့ဆုတောင်းချက် ပြီးဆုံးပါပြီ';
+  String get proLimitTitle => 'ယနေ့ဆုတောင်းချက် ပြီးဆုံးပါပြီ';
 
   @override
-  String get premiumLimitBody =>
-      'မနက်ဖြန် ပြန်ဆုံကြမယ်!\nPremium ဖြင့် အကန့်အသတ်မရှိ ဆုတောင်းပါ';
+  String get proLimitBody =>
+      'မနက်ဖြန် ပြန်ဆုံကြမယ်!\nPro ဖြင့် အကန့်အသတ်မရှိ ဆုတောင်းပါ';
 
   @override
   String get laterButton => 'နောက်မှ';
 
   @override
-  String get premiumPromptTitle => 'Pro လုပ်ဆောင်ချက်';
+  String get proPromptTitle => 'Pro လုပ်ဆောင်ချက်';
 
   @override
-  String get premiumPromptBody =>
+  String get proPromptBody =>
       'ဤလုပ်ဆောင်ချက်သည် Pro ဖြင့် ရနိုင်ပါသည်။\nအစီအစဉ်များ ကြည့်လိုပါသလား?';
 
   @override
@@ -407,19 +407,19 @@ class AppLocalizationsMy extends AppLocalizations {
   String get maybeLater => 'နောက်မှ';
 
   @override
-  String get premiumHeadline => 'ဘုရားသခင်နှင့် နေ့တိုင်း ပိုနီးကပ်စွာ';
+  String get proHeadline => 'ဘုရားသခင်နှင့် နေ့တိုင်း ပိုနီးကပ်စွာ';
 
   @override
-  String get premiumBenefit1 => 'အကန့်အသတ်မဲ့ ဆုတောင်းခြင်း & တိတ်ဆိတ်ချိန်';
+  String get proBenefit1 => 'အကန့်အသတ်မဲ့ ဆုတောင်းခြင်း & တိတ်ဆိတ်ချိန်';
 
   @override
-  String get premiumBenefit2 => 'AI ဆုတောင်းချက် & လမ်းညွှန်ချက်';
+  String get proBenefit2 => 'AI ဆုတောင်းချက် & လမ်းညွှန်ချက်';
 
   @override
-  String get premiumBenefit3 => 'သမိုင်းမှ ယုံကြည်ခြင်းဇာတ်လမ်းများ';
+  String get proBenefit3 => 'သမိုင်းမှ ယုံကြည်ခြင်းဇာတ်လမ်းများ';
 
   @override
-  String get premiumBenefit5 => 'မူရင်းဘာသာဖြင့် ကျမ်းစာလေ့လာခြင်း';
+  String get proBenefit5 => 'မူရင်းဘာသာဖြင့် ကျမ်းစာလေ့လာခြင်း';
 
   @override
   String get bestValue => 'တန်ဖိုးအရှိဆုံး';
@@ -434,7 +434,7 @@ class AppLocalizationsMy extends AppLocalizations {
   String get restorePurchase => 'ဝယ်ယူမှု ပြန်ရယူရန်';
 
   @override
-  String get yearlyPriceMonthly => '\$2.08/လ';
+  String get yearlyPriceMonthly => '\$4.17/လ';
 
   @override
   String get morningPrayerReminder => 'နံနက်ဆုတောင်းချက်';
@@ -502,7 +502,7 @@ class AppLocalizationsMy extends AppLocalizations {
   String get shareSubtitle => 'ဘုရားသခင်နှင့် နေ့စဉ်ဆုတောင်းခြင်း';
 
   @override
-  String get premiumActive => 'အသင်းဝင် တက်ကြွ';
+  String get proActive => 'အသင်းဝင် တက်ကြွ';
 
   @override
   String get planOncePerDay => '1 ကြိမ်/ရက်';
@@ -709,7 +709,7 @@ class AppLocalizationsMy extends AppLocalizations {
   String get yearlyPlan => 'နှစ်စဉ်';
 
   @override
-  String get yearlySavings => '\$5.00/လ (37% လျှော့)';
+  String get yearlySavings => '\$4.17/လ (40% လျှော့)';
 
   @override
   String get startMembership => 'စတင်ပါ';

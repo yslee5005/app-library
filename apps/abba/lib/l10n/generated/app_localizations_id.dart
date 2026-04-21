@@ -136,7 +136,7 @@ class AppLocalizationsId extends AppLocalizations {
   String get originalLangTitle => 'Bahasa Asli';
 
   @override
-  String get premiumUnlock => 'Buka dengan Premium';
+  String get proUnlock => 'Buka dengan Pro';
 
   @override
   String get qtPageTitle => 'Taman Pagi';
@@ -231,19 +231,19 @@ class AppLocalizationsId extends AppLocalizations {
   String get consecutiveDays => 'Hari Berturut-turut';
 
   @override
-  String get premiumSection => 'Keanggotaan';
+  String get proSection => 'Keanggotaan';
 
   @override
   String get freePlan => 'Gratis';
 
   @override
-  String get premiumPlan => 'Premium';
+  String get proPlan => 'Pro';
 
   @override
-  String get monthlyPrice => 'Rp129.000 / bulan';
+  String get monthlyPrice => 'Rp109.000 / bulan';
 
   @override
-  String get yearlyPrice => 'Rp990.000 / tahun';
+  String get yearlyPrice => 'Rp829.000 / tahun';
 
   @override
   String get yearlySave => 'Hemat 40%';
@@ -252,7 +252,7 @@ class AppLocalizationsId extends AppLocalizations {
   String get launchPromo => '3 bulan hanya Rp59.900/bln!';
 
   @override
-  String get startPremium => 'Mulai Premium';
+  String get startPro => 'Mulai Pro';
 
   @override
   String get comingSoon => 'Segera hadir';
@@ -385,20 +385,20 @@ class AppLocalizationsId extends AppLocalizations {
   }
 
   @override
-  String get premiumLimitTitle => 'Doa hari ini sudah selesai';
+  String get proLimitTitle => 'Doa hari ini sudah selesai';
 
   @override
-  String get premiumLimitBody =>
-      'Sampai jumpa besok!\nBerdoa tanpa batas dengan Premium';
+  String get proLimitBody =>
+      'Sampai jumpa besok!\nBerdoa tanpa batas dengan Pro';
 
   @override
   String get laterButton => 'Mungkin nanti';
 
   @override
-  String get premiumPromptTitle => 'Fitur Pro';
+  String get proPromptTitle => 'Fitur Pro';
 
   @override
-  String get premiumPromptBody =>
+  String get proPromptBody =>
       'Fitur ini tersedia dengan Pro.\nIngin melihat paket kami?';
 
   @override
@@ -408,19 +408,19 @@ class AppLocalizationsId extends AppLocalizations {
   String get maybeLater => 'Mungkin nanti';
 
   @override
-  String get premiumHeadline => 'Lebih dekat dengan Tuhan, setiap hari';
+  String get proHeadline => 'Lebih dekat dengan Tuhan, setiap hari';
 
   @override
-  String get premiumBenefit1 => 'Doa & Saat Teduh tanpa batas';
+  String get proBenefit1 => 'Doa & Saat Teduh tanpa batas';
 
   @override
-  String get premiumBenefit2 => 'Doa & bimbingan bertenaga AI';
+  String get proBenefit2 => 'Doa & bimbingan bertenaga AI';
 
   @override
-  String get premiumBenefit3 => 'Kisah iman dari sejarah';
+  String get proBenefit3 => 'Kisah iman dari sejarah';
 
   @override
-  String get premiumBenefit5 => 'Studi Alkitab bahasa asli';
+  String get proBenefit5 => 'Studi Alkitab bahasa asli';
 
   @override
   String get bestValue => 'PALING HEMAT';
@@ -435,7 +435,7 @@ class AppLocalizationsId extends AppLocalizations {
   String get restorePurchase => 'Pulihkan pembelian';
 
   @override
-  String get yearlyPriceMonthly => 'Rp32.417/bln';
+  String get yearlyPriceMonthly => 'Rp69.083/bulan';
 
   @override
   String get morningPrayerReminder => 'Doa Pagi';
@@ -503,7 +503,7 @@ class AppLocalizationsId extends AppLocalizations {
   String get shareSubtitle => 'Doa harian bersama Tuhan';
 
   @override
-  String get premiumActive => 'Keanggotaan Aktif';
+  String get proActive => 'Keanggotaan Aktif';
 
   @override
   String get planOncePerDay => '1x/hari';
@@ -709,7 +709,7 @@ class AppLocalizationsId extends AppLocalizations {
   String get yearlyPlan => 'Tahunan';
 
   @override
-  String get yearlySavings => 'Rp82.500/bulan (diskon 37%)';
+  String get yearlySavings => 'Rp39.917/bulan (diskon 40%)';
 
   @override
   String get startMembership => 'Mulai';

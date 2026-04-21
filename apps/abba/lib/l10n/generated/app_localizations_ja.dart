@@ -134,7 +134,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get originalLangTitle => '原語の深い意味';
 
   @override
-  String get premiumUnlock => 'Premiumで見る';
+  String get proUnlock => 'Proで見る';
 
   @override
   String get qtPageTitle => '朝の庭';
@@ -229,19 +229,19 @@ class AppLocalizationsJa extends AppLocalizations {
   String get consecutiveDays => '連続日数';
 
   @override
-  String get premiumSection => 'メンバーシップ';
+  String get proSection => 'メンバーシップ';
 
   @override
   String get freePlan => '無料';
 
   @override
-  String get premiumPlan => 'プレミアム';
+  String get proPlan => 'Pro';
 
   @override
-  String get monthlyPrice => '¥1,500 / 月';
+  String get monthlyPrice => '¥1,200 / 月';
 
   @override
-  String get yearlyPrice => '¥11,800 / 年';
+  String get yearlyPrice => '¥9,800 / 年';
 
   @override
   String get yearlySave => '40%お得';
@@ -250,7 +250,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get launchPromo => '3ヶ月間¥580/月!';
 
   @override
-  String get startPremium => 'Premium開始';
+  String get startPro => 'Pro開始';
 
   @override
   String get comingSoon => '近日公開';
@@ -376,19 +376,19 @@ class AppLocalizationsJa extends AppLocalizations {
   }
 
   @override
-  String get premiumLimitTitle => '今日の祈りが完了しました';
+  String get proLimitTitle => '今日の祈りが完了しました';
 
   @override
-  String get premiumLimitBody => 'また明日お会いしましょう！\nPremiumで無制限に祈りましょう';
+  String get proLimitBody => 'また明日お会いしましょう！\nProで無制限に祈りましょう';
 
   @override
   String get laterButton => '後で';
 
   @override
-  String get premiumPromptTitle => 'Pro機能です';
+  String get proPromptTitle => 'Pro機能です';
 
   @override
-  String get premiumPromptBody => 'この機能はProでご利用いただけます。\nプランを確認しますか？';
+  String get proPromptBody => 'この機能はProでご利用いただけます。\nプランを確認しますか？';
 
   @override
   String get viewProducts => 'プランを見る';
@@ -397,19 +397,19 @@ class AppLocalizationsJa extends AppLocalizations {
   String get maybeLater => 'また今度';
 
   @override
-  String get premiumHeadline => '毎日、神様とより近く';
+  String get proHeadline => '毎日、神様とより近く';
 
   @override
-  String get premiumBenefit1 => '無制限の祈り & QT';
+  String get proBenefit1 => '無制限の祈り & QT';
 
   @override
-  String get premiumBenefit2 => 'AI祈りと導き';
+  String get proBenefit2 => 'AI祈りと導き';
 
   @override
-  String get premiumBenefit3 => '歴史の中の信仰物語';
+  String get proBenefit3 => '歴史の中の信仰物語';
 
   @override
-  String get premiumBenefit5 => '原語聖書解釈';
+  String get proBenefit5 => '原語聖書解釈';
 
   @override
   String get bestValue => 'お得';
@@ -424,7 +424,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get restorePurchase => '購入を復元';
 
   @override
-  String get yearlyPriceMonthly => '¥300/月';
+  String get yearlyPriceMonthly => '¥817/月';
 
   @override
   String get morningPrayerReminder => '朝の祈り';
@@ -492,7 +492,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get shareSubtitle => '神と共にある毎日の祈り';
 
   @override
-  String get premiumActive => 'メンバーシップ有効';
+  String get proActive => 'メンバーシップ有効';
 
   @override
   String get planOncePerDay => '1日1回';
@@ -694,7 +694,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get yearlyPlan => '年額';
 
   @override
-  String get yearlySavings => '月¥983 (33%お得)';
+  String get yearlySavings => '月¥383 (40%お得)';
 
   @override
   String get startMembership => '始める';

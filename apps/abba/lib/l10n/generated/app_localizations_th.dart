@@ -136,7 +136,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get originalLangTitle => 'ภาษาต้นฉบับ';
 
   @override
-  String get premiumUnlock => 'ปลดล็อกด้วย Premium';
+  String get proUnlock => 'ปลดล็อกด้วย Pro';
 
   @override
   String get qtPageTitle => 'สวนยามเช้า';
@@ -231,19 +231,19 @@ class AppLocalizationsTh extends AppLocalizations {
   String get consecutiveDays => 'วันต่อเนื่อง';
 
   @override
-  String get premiumSection => 'สมาชิก';
+  String get proSection => 'สมาชิก';
 
   @override
   String get freePlan => 'ฟรี';
 
   @override
-  String get premiumPlan => 'Premium';
+  String get proPlan => 'Pro';
 
   @override
-  String get monthlyPrice => '฿279 / เดือน';
+  String get monthlyPrice => '฿239 / เดือน';
 
   @override
-  String get yearlyPrice => '฿2,190 / ปี';
+  String get yearlyPrice => '฿1,790 / ปี';
 
   @override
   String get yearlySave => 'ประหยัด 40%';
@@ -252,7 +252,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get launchPromo => '3 เดือนแรก ฿159/เดือน!';
 
   @override
-  String get startPremium => 'เริ่มต้น Premium';
+  String get startPro => 'เริ่มต้น Pro';
 
   @override
   String get comingSoon => 'เร็วๆ นี้';
@@ -381,19 +381,19 @@ class AppLocalizationsTh extends AppLocalizations {
   }
 
   @override
-  String get premiumLimitTitle => 'การอธิษฐานวันนี้เสร็จสิ้นแล้ว';
+  String get proLimitTitle => 'การอธิษฐานวันนี้เสร็จสิ้นแล้ว';
 
   @override
-  String get premiumLimitBody => 'พบกันพรุ่งนี้!\nอธิษฐานไม่จำกัดด้วย Premium';
+  String get proLimitBody => 'พบกันพรุ่งนี้!\nอธิษฐานไม่จำกัดด้วย Pro';
 
   @override
   String get laterButton => 'ไว้ทีหลัง';
 
   @override
-  String get premiumPromptTitle => 'ฟีเจอร์ Pro';
+  String get proPromptTitle => 'ฟีเจอร์ Pro';
 
   @override
-  String get premiumPromptBody =>
+  String get proPromptBody =>
       'ฟีเจอร์นี้ใช้ได้กับ Pro\nต้องการดูแพ็กเกจหรือไม่?';
 
   @override
@@ -403,19 +403,19 @@ class AppLocalizationsTh extends AppLocalizations {
   String get maybeLater => 'ไว้ทีหลัง';
 
   @override
-  String get premiumHeadline => 'ใกล้ชิดพระเจ้ามากขึ้นทุกวัน';
+  String get proHeadline => 'ใกล้ชิดพระเจ้ามากขึ้นทุกวัน';
 
   @override
-  String get premiumBenefit1 => 'อธิษฐานและเฝ้าเดี่ยวไม่จำกัด';
+  String get proBenefit1 => 'อธิษฐานและเฝ้าเดี่ยวไม่จำกัด';
 
   @override
-  String get premiumBenefit2 => 'คำอธิษฐานและคำแนะนำด้วย AI';
+  String get proBenefit2 => 'คำอธิษฐานและคำแนะนำด้วย AI';
 
   @override
-  String get premiumBenefit3 => 'เรื่องราวแห่งศรัทธาจากประวัติศาสตร์';
+  String get proBenefit3 => 'เรื่องราวแห่งศรัทธาจากประวัติศาสตร์';
 
   @override
-  String get premiumBenefit5 => 'ศึกษาพระคัมภีร์ภาษาต้นฉบับ';
+  String get proBenefit5 => 'ศึกษาพระคัมภีร์ภาษาต้นฉบับ';
 
   @override
   String get bestValue => 'คุ้มค่าที่สุด';
@@ -430,7 +430,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get restorePurchase => 'กู้คืนการซื้อ';
 
   @override
-  String get yearlyPriceMonthly => '฿75/เดือน';
+  String get yearlyPriceMonthly => '฿149/เดือน';
 
   @override
   String get morningPrayerReminder => 'อธิษฐานเช้า';
@@ -498,7 +498,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get shareSubtitle => 'อธิษฐานกับพระเจ้าทุกวัน';
 
   @override
-  String get premiumActive => 'สมาชิกใช้งานอยู่';
+  String get proActive => 'สมาชิกใช้งานอยู่';
 
   @override
   String get planOncePerDay => '1 ครั้ง/วัน';
@@ -701,7 +701,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get yearlyPlan => 'รายปี';
 
   @override
-  String get yearlySavings => '฿183/เดือน (ลด 33%)';
+  String get yearlySavings => '฿90/เดือน (ลด 40%)';
 
   @override
   String get startMembership => 'เริ่มต้น';
