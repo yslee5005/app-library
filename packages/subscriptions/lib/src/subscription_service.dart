@@ -1,3 +1,4 @@
+import 'active_subscription_info.dart';
 import 'subscription_status.dart';
 
 /// Abstract subscription service interface.
@@ -27,6 +28,18 @@ abstract class SubscriptionService {
   Future<void> presentCustomerCenter();
 
   Future<void> restorePurchases();
+
+  /// Fetch current active subscription metadata (product id, next billing
+  /// date, renewal flag). Returns null when the user has no active
+  /// entitlement (including Grace Period window — treat `null` as free).
+  Future<ActiveSubscriptionInfo?> getActiveSubscription();
+
+  /// The latest expiration date across any prior purchase for this user.
+  /// Used to show a "subscription expired" banner when the user had an
+  /// active subscription that has since lapsed. Returns null when the
+  /// user has no history of purchases.
+  Future<DateTime?> getLatestExpirationDate();
+
   Future<bool> get isPremium;
   Stream<SubscriptionStatus> get statusStream;
 }

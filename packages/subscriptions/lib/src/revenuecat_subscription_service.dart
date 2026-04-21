@@ -4,6 +4,7 @@ import 'package:app_lib_logging/logging.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
 import 'package:purchases_ui_flutter/purchases_ui_flutter.dart';
 
+import 'active_subscription_info.dart';
 import 'subscription_service.dart';
 import 'subscription_status.dart';
 
@@ -72,14 +73,13 @@ class RevenueCatSubscriptionService implements SubscriptionService {
     Package? Function(Offering?) pick,
     String label,
   ) async {
+    final offerings = await Purchases.getOfferings();
+    final package = pick(offerings.current);
+    if (package == null) {
+      _log.warning('$label package unavailable');
+      return false;
+    }
     try {
-      final offerings = await Purchases.getOfferings();
-      final package = pick(offerings.current);
-      if (package == null) {
-        _log.warning('$label package unavailable');
-        return false;
-      }
-
       final result = await Purchases.purchase(
         PurchaseParams.package(package),
       );
@@ -88,7 +88,7 @@ class RevenueCatSubscriptionService implements SubscriptionService {
       return _currentStatus == SubscriptionStatus.premium;
     } catch (e, st) {
       _log.error('$label purchase failed', error: e, stackTrace: st);
-      return false;
+      rethrow;
     }
   }
 
@@ -129,6 +129,43 @@ class RevenueCatSubscriptionService implements SubscriptionService {
       _log.info('Purchases restored, status=$_currentStatus');
     } catch (e, st) {
       _log.error('Restore purchases failed', error: e, stackTrace: st);
+    }
+  }
+
+  @override
+  Future<DateTime?> getLatestExpirationDate() async {
+    try {
+      final info = await Purchases.getCustomerInfo();
+      DateTime? latest;
+      for (final dateStr in info.allExpirationDates.values) {
+        if (dateStr == null) continue;
+        final parsed = DateTime.tryParse(dateStr)?.toLocal();
+        if (parsed == null) continue;
+        if (latest == null || parsed.isAfter(latest)) latest = parsed;
+      }
+      return latest;
+    } catch (e, st) {
+      _log.error('getLatestExpirationDate failed', error: e, stackTrace: st);
+      return null;
+    }
+  }
+
+  @override
+  Future<ActiveSubscriptionInfo?> getActiveSubscription() async {
+    try {
+      final info = await Purchases.getCustomerInfo();
+      final entitlement = info.entitlements.all[entitlementId];
+      if (entitlement == null || !entitlement.isActive) return null;
+      final expires = entitlement.expirationDate;
+      return ActiveSubscriptionInfo(
+        productId: entitlement.productIdentifier,
+        expiresDate: expires != null ? DateTime.tryParse(expires)?.toLocal() : null,
+        willRenew: entitlement.willRenew,
+        periodType: entitlement.periodType,
+      );
+    } catch (e, st) {
+      _log.error('getActiveSubscription failed', error: e, stackTrace: st);
+      return null;
     }
   }
 

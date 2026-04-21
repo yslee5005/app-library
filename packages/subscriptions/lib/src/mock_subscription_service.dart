@@ -1,5 +1,8 @@
 import 'dart:async';
 
+import 'package:purchases_flutter/purchases_flutter.dart' show PeriodType;
+
+import 'active_subscription_info.dart';
 import 'subscription_service.dart';
 import 'subscription_status.dart';
 
@@ -37,6 +40,20 @@ class MockSubscriptionService implements SubscriptionService {
 
   @override
   Future<void> restorePurchases() async {}
+
+  @override
+  Future<DateTime?> getLatestExpirationDate() async => null;
+
+  @override
+  Future<ActiveSubscriptionInfo?> getActiveSubscription() async {
+    if (_status != SubscriptionStatus.premium) return null;
+    return ActiveSubscriptionInfo(
+      productId: 'com.ystech.abba.monthly',
+      expiresDate: DateTime.now().add(const Duration(days: 30)),
+      willRenew: true,
+      periodType: PeriodType.normal,
+    );
+  }
 
   @override
   Future<bool> get isPremium async => _status == SubscriptionStatus.premium;
