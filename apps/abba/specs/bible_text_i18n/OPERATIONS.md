@@ -123,24 +123,54 @@ Sentry/로그에서 `bible_text_not_found` 이벤트 모니터링 (있으면 번
 
 ---
 
-## Phase 3 수동 작업 (나머지 25 locale)
+## Phase 3 수동 작업 (bundle 업로드 + 저작권 실사 후 정리)
 
-Phase 1 검증 후 Phase 3 진입 시:
+Phase 3에서 29개 번들 생성됨 (`apps/abba/bible_sources/build/`). 저작권 실사
+(2026-04-21, `COPYRIGHT.md`) 결과 3개 제거 → 최종 **31 locale** 업로드.
 
+### Step A · 29개 번들 Supabase 업로드
+
+Dashboard (권장):
+1. Storage > abba > bibles/
+2. Upload → `apps/abba/bible_sources/build/` 에서 **ko_krv.json, en_web.json 제외** 나머지 29개 전체 선택
+
+CLI (service_role key 필요):
 ```bash
-# 모든 locale 자동 처리
-for locale_code in "es rv1909" "fr lsg1910" "de luther1912" "pt almeida1819" ...; do
-  set -- $locale_code
-  locale=$1
-  code=$2
-  curl -O "https://ebible.org/Scriptures/${locale}_${code}_usfm.zip"
-  # ... (스크립트 반복)
-done
+cd apps/abba/bible_sources/build
+SERVICE_ROLE_KEY=<your-service-role-key>
+SUPABASE_URL=https://YOUR_PROJECT.supabase.co
 
-# 27 bundle 일괄 Supabase 업로드
+for f in *.json; do
+  [[ "$f" == "ko_krv.json" || "$f" == "en_web.json" ]] && continue
+  curl -X POST \
+    -H "Authorization: Bearer $SERVICE_ROLE_KEY" \
+    -H "Content-Type: application/json" \
+    --data-binary @"$f" \
+    "$SUPABASE_URL/storage/v1/object/abba/bibles/$f" \
+    && echo "✓ $f"
+done
 ```
 
-Phase 3 spec에 자세한 순서 + locale별 ebible.org ID 정리.
+### Step B · 저작권 실사 결과 Supabase 정리
+
+만약 이전에 am_amh.json / th_kjv.json / no_norsk.json 을 업로드했다면
+**Supabase Storage에서 삭제** 필수:
+
+Dashboard:
+1. Storage > abba > bibles/
+2. `am_amh.json`, `th_kjv.json`, `no_norsk.json` 세 파일 선택 → Delete
+
+CLI:
+```bash
+for f in am_amh.json th_kjv.json no_norsk.json; do
+  curl -X DELETE \
+    -H "Authorization: Bearer $SERVICE_ROLE_KEY" \
+    "$SUPABASE_URL/storage/v1/object/abba/bibles/$f" \
+    && echo "✓ removed $f"
+done
+```
+
+사유 상세: `apps/abba/specs/bible_text_i18n/COPYRIGHT.md`.
 
 ---
 

@@ -90,9 +90,24 @@ UPDATE/INSERT/DELETE는 **service_role만** 자동 허용 (RLS가 authenticated/
 
 ### 7. 일본어 口語訳 저작권 리스크
 
-- Phase 1 구현 전 **일본성서협회 공식 확인 필수**
-- 확인 안 되면 文語訳 1887 (PD 확실) 사용
-- 결정 결과를 `_details/data_model.md` 번역본 표에 반영
+- 2006년 PD 만료 확정 (50년 룰). 채택 확정.
+
+### 8. 저작권 실사 (2026-04-21)
+
+Phase 3 bundle 34개 법적 실사 결과 **3개 제거, 5개 CC 라이선스 주의**:
+
+- **제거**: am_amh (UBS NC), th_kjv (CC BY-NC-ND), no_norsk (NC only)
+- **CC BY-SA 4.0**: hi, id, sk, tr (attribution 필수, ShareAlike — text 수정 금지)
+- **CC BY-ND 4.0**: ms (attribution 필수, 포맷 변환 외 수정 금지)
+
+모든 CC 번들은 Settings attribution 페이지에 라이선스 명시 (BibleTranslationsView.dart). Attribution 위반 시 최악 소송이지만 현실적으로 takedown 요청 수준. 상세 `COPYRIGHT.md`.
+
+### 9. 향후 Bundle 추가 체크리스트
+
+1. ebible.org details 페이지 공식 라이선스 확인
+2. "Public Domain" / "CC BY" / "CC BY-SA" 만 허용
+3. "NonCommercial" 또는 "permission required" 있으면 **즉시 제외**
+4. Biblica 등 대형 저작권자: CC BY-SA여도 trademark 유의
 
 ### 6. PD 번역본 품질 편차
 

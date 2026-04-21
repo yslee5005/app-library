@@ -34,9 +34,15 @@ class MockBibleTextService implements BibleTextService {
   bool hasBundleForLocale(String locale) => _verses.containsKey(locale);
 
   @override
-  Map<String, String> attributions() => const {
-        'ko': '개역한글',
-        'en': 'World English Bible',
+  Map<String, BibleTranslationInfo> attributions() => const {
+        'ko': BibleTranslationInfo(
+          name: '개역한글 (KRV)',
+          license: 'Public Domain',
+        ),
+        'en': BibleTranslationInfo(
+          name: 'World English Bible',
+          license: 'Public Domain',
+        ),
       };
 
   @override

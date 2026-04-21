@@ -26,7 +26,8 @@ Abba의 Scripture / BibleStory / Guidance 카드를 **저작권 안전한 구조
 | 7 | KeyWordHint 위치 | verse 본문 **바로 아래** (사용자 원래 의도 살림) |
 | 8 | Attribution | Settings 페이지 한 번만 (카드 clean 유지, PD라 법적 의무 없음) |
 | 9 | Phase 분리 | Phase 1 = ko+en 2개 (파이프라인 검증) / Phase 3 = 나머지 25개 일괄 |
-| 10 | PD 커버리지 | 27 locale 지원 예상 / 8 locale은 reference-only fallback |
+| 10 | PD 커버리지 | **31 locale 지원** (26 PD + 5 CC BY-SA/ND) / **4 locale reference-only** (am, ar, no, th) |
+| 11 | 저작권 실사 (2026-04-21) | am_amh, th_kjv, no_norsk 제거 — 상업 앱 라이선스 부적합. 상세 `COPYRIGHT.md` |
 
 ## 범위 (5개 구역)
 
@@ -134,9 +135,12 @@ Abba의 Scripture / BibleStory / Guidance 카드를 **저작권 안전한 구조
 - [x] Phase 1 `_details/*` 상세 작성 (2026-04-21)
 - [x] Phase 1 구현 + commit `d2dd88d` (2026-04-21)
 - [x] Phase 1 수동 단계 완료 (migration + USFM 다운로드 + JSON 변환 + Storage 업로드) (2026-04-21)
-- [x] Phase 2 `_details/*` 상세 작성 (2026-04-21) ← 현재 여기
-- [ ] Phase 2 구현 (사용자 "일단 진행, 나중에 한번에 테스트" 지시 → 바로 진행)
-- [ ] Phase 3 대기
+- [x] Phase 2 `_details/*` 상세 작성 + 구현 commit `d89e5e9` (2026-04-21)
+- [x] Phase 3 구현 — 30 locale bundle + Settings attribution 페이지 commit `db0a073` (2026-04-21)
+- [x] Phase 3 보강 — 4 locale 추가 commit `54806c7` → 34 locale 달성 (2026-04-21)
+- [x] **저작권 실사 완료** (2026-04-21) — am/th/no 제거, CC 라이선스 attribution 강화, `COPYRIGHT.md` 작성 → **최종 31 locale** ← 현재 여기
+- [ ] 사용자 수동: Supabase Storage 업로드 (28개 새 번들) + am/th/no 삭제
+- [ ] 실기기 smoke test → feature 완료 선언
 
 ## prayer_output_redesign과의 관계
 

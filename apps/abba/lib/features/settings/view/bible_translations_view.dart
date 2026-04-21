@@ -52,7 +52,7 @@ class BibleTranslationsView extends ConsumerWidget {
             Padding(
               padding: const EdgeInsets.symmetric(
                 horizontal: AbbaSpacing.md,
-                vertical: AbbaSpacing.xs,
+                vertical: AbbaSpacing.sm,
               ),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -69,11 +69,24 @@ class BibleTranslationsView extends ConsumerWidget {
                   ),
                   const SizedBox(width: AbbaSpacing.sm),
                   Expanded(
-                    child: Text(
-                      '${entry.value} · Public Domain',
-                      style: AbbaTypography.body.copyWith(
-                        color: AbbaColors.warmBrown,
-                      ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          entry.value.name,
+                          style: AbbaTypography.body.copyWith(
+                            color: AbbaColors.warmBrown,
+                          ),
+                        ),
+                        const SizedBox(height: 2),
+                        Text(
+                          entry.value.license,
+                          style: AbbaTypography.caption.copyWith(
+                            color: AbbaColors.muted,
+                            fontStyle: FontStyle.italic,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ],

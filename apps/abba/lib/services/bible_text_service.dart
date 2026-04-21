@@ -25,8 +25,16 @@ abstract class BibleTextService {
   /// Safe to call multiple times; no-op once cached.
   Future<void> preload(String locale);
 
-  /// Locale → translation name, for Settings attribution page.
-  Map<String, String> attributions();
+  /// Locale → translation metadata (name + license), for Settings
+  /// attribution page.
+  Map<String, BibleTranslationInfo> attributions();
+}
+
+/// Display metadata for a bundled translation.
+class BibleTranslationInfo {
+  final String name;
+  final String license;
+  const BibleTranslationInfo({required this.name, required this.license});
 }
 
 /// Bundle file naming: `{locale}_{code}.json` (e.g., `ko_krv.json`).
@@ -34,10 +42,15 @@ class _BundleDescriptor {
   final String locale;
   final String code;
   final String name;
+  /// Short license tag for the Settings attribution page.
+  /// Defaults to "Public Domain" — override for CC-licensed bundles.
+  final String license;
+
   const _BundleDescriptor({
     required this.locale,
     required this.code,
     required this.name,
+    this.license = 'Public Domain',
   });
 
   String get fileName => '${locale}_$code.json';
@@ -56,10 +69,10 @@ class SupabaseStorageBibleTextService implements BibleTextService {
 
   /// Which translation file we use per locale (Phase 1 = ko + en only).
   /// Extended in Phase 3 for remaining locales.
-  /// 34 Public Domain (or PD-equivalent freely redistributable) Bible
-  /// translations. Only `ar` (Arabic) falls back to reference-only UI —
-  /// Arabic Van Dyck 1865 SVD distribution requires SWORD format and is
-  /// not cleared for commercial app redistribution.
+  /// 31 locales with bundled Bible translations. The remaining 4 locales
+  /// (am, ar, no, th) fall back to reference-only UI because their only
+  /// available translations have commercial-use restrictions. Full audit:
+  /// `apps/abba/specs/bible_text_i18n/COPYRIGHT.md`.
   static const Map<String, _BundleDescriptor> _bundles = {
     'ko': _BundleDescriptor(locale: 'ko', code: 'krv', name: '개역한글 (KRV)'),
     'en': _BundleDescriptor(locale: 'en', code: 'web', name: 'World English Bible'),
@@ -83,18 +96,44 @@ class SupabaseStorageBibleTextService implements BibleTextService {
     'fil': _BundleDescriptor(locale: 'fil', code: 'adb', name: 'Ang Dating Biblia'),
     'ro': _BundleDescriptor(locale: 'ro', code: 'ronc', name: 'Cornilescu 1924'),
     'it': _BundleDescriptor(locale: 'it', code: 'diodati', name: 'Diodati 1927'),
-    'id': _BundleDescriptor(locale: 'id', code: 'tl', name: 'Terjemahan Lama'),
+    'id': _BundleDescriptor(
+      locale: 'id',
+      code: 'tl',
+      name: 'Alkitab BahasaKita (Albata)',
+      license: 'CC BY-SA 4.0 · © Yayasan Alkitab BahasaKita',
+    ),
     'sw': _BundleDescriptor(locale: 'sw', code: 'swh1850', name: 'Swahili 1850 (NT)'),
-    'tr': _BundleDescriptor(locale: 'tr', code: 'turobt', name: 'Kitabı Mukaddes (NT)'),
-    'hi': _BundleDescriptor(locale: 'hi', code: 'cv', name: 'Hindi Common Version'),
+    'tr': _BundleDescriptor(
+      locale: 'tr',
+      code: 'turobt',
+      name: 'Open Basic Turkish NT',
+      license: 'CC BY-SA 4.0 · © Biblica',
+    ),
+    'hi': _BundleDescriptor(
+      locale: 'hi',
+      code: 'cv',
+      name: 'Hindi Common Version',
+      license: 'CC BY-SA 4.0 · © Biblica',
+    ),
     'da': _BundleDescriptor(locale: 'da', code: '1871', name: 'Dansk 1871/1907'),
-    'no': _BundleDescriptor(locale: 'no', code: 'norsk', name: 'Norsk 1930'),
     'uk': _BundleDescriptor(locale: 'uk', code: 'ogienko', name: 'Огієнко'),
     'my': _BundleDescriptor(locale: 'my', code: 'judson', name: 'Judson 1835'),
-    'am': _BundleDescriptor(locale: 'am', code: 'amh', name: 'Amharic NT'),
-    'hr': _BundleDescriptor(locale: 'hr', code: 'sh', name: 'Croatian Bible'),
-    'ms': _BundleDescriptor(locale: 'ms', code: 'ksi', name: 'Kitab Suci (Malay NT)'),
-    'sk': _BundleDescriptor(locale: 'sk', code: 'hyr', name: 'Nádej pre každého (Slovak NT)'),
+    'hr': _BundleDescriptor(locale: 'hr', code: 'sh', name: 'Croatian Bible (Šarić)'),
+    // CC BY-SA / BY-ND 4.0 — commercial OK with attribution (see Settings).
+    'ms': _BundleDescriptor(
+      locale: 'ms',
+      code: 'ksi',
+      name: 'Kitab Suci (Malay NT)',
+      license: 'CC BY-ND 4.0 · © Pengamat Kitab Mulia',
+    ),
+    'sk': _BundleDescriptor(
+      locale: 'sk',
+      code: 'hyr',
+      name: 'Nádej pre každého (Slovak NT)',
+      license: 'CC BY-SA 4.0 · © Biblica',
+    ),
+    // NOTE: `am` (Amharic), `th` (Thai), `no` (Norwegian) intentionally
+    // excluded — see specs/bible_text_i18n/COPYRIGHT.md for the audit.
   };
 
   /// verses-by-locale memory cache (cleared only on app restart).
@@ -107,10 +146,13 @@ class SupabaseStorageBibleTextService implements BibleTextService {
   bool hasBundleForLocale(String locale) => _bundles.containsKey(locale);
 
   @override
-  Map<String, String> attributions() {
+  Map<String, BibleTranslationInfo> attributions() {
     return {
       for (final entry in _bundles.entries)
-        entry.key: entry.value.name,
+        entry.key: BibleTranslationInfo(
+          name: entry.value.name,
+          license: entry.value.license,
+        ),
     };
   }
 

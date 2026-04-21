@@ -267,13 +267,17 @@ Phase 3에서 각 locale에 대해 다음 번역본을 사용:
 | hi | Hindi | 1938 | PD | ebible.org |
 | fil | Ang Dating Biblia | 1905 | PD | sacred-texts.com |
 
-### 지원 안 되는 8개 locale (reference-only fallback)
+### 지원 안 되는 4개 locale (reference-only fallback, 저작권 실사 2026-04-21 후)
 
-`am, my, ms, da, no, uk, hr, sk` — Phase 3 진입 시 ebible.org 재조사. PD 발견되면 추가.
+`am, ar, no, th` — 상세 `COPYRIGHT.md` 참조:
+- **am (Amharic)**: UBS 소유, "commercial use needs permission" — 제거
+- **ar (Arabic)**: Van Dyck 1865 SVD, SWORD-only 배포 — 미확보
+- **no (Norwegian)**: Det Norsk Bibelselskap 1930 — "non-commercial" — 제거
+- **th (Thai)**: Philip Pope, CC BY-NC-ND — 제거
 
-### 특별 주의 — 일본어
+### 특별 주의 — 일본어 口語訳
 
-**口語訳 1955** 저작권 논쟁 있음 (일부 출처 PD, 일부 유지 주장). Phase 1 구현 시 직접 확인 (일본성서협회 공식 FAQ 문의). 확인 안 되면 **文語訳 1887**로 대체 — 시니어에게 약간 어려우나 안전.
+조사 결과 **2006년 PD 만료** 확정 (일본 50년 저작권 룰). bible.com "100% 무료" 표기 + ebible 공식 PD. 채택.
 
 ### Supabase 영향
 
