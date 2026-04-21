@@ -56,8 +56,10 @@ class SupabaseStorageBibleTextService implements BibleTextService {
 
   /// Which translation file we use per locale (Phase 1 = ko + en only).
   /// Extended in Phase 3 for remaining locales.
-  /// 30 Public Domain Bible translations. Other 5 locales (am, ar, hr, ms,
-  /// sk) fall back to reference-only UI.
+  /// 34 Public Domain (or PD-equivalent freely redistributable) Bible
+  /// translations. Only `ar` (Arabic) falls back to reference-only UI —
+  /// Arabic Van Dyck 1865 SVD distribution requires SWORD format and is
+  /// not cleared for commercial app redistribution.
   static const Map<String, _BundleDescriptor> _bundles = {
     'ko': _BundleDescriptor(locale: 'ko', code: 'krv', name: '개역한글 (KRV)'),
     'en': _BundleDescriptor(locale: 'en', code: 'web', name: 'World English Bible'),
@@ -89,6 +91,10 @@ class SupabaseStorageBibleTextService implements BibleTextService {
     'no': _BundleDescriptor(locale: 'no', code: 'norsk', name: 'Norsk 1930'),
     'uk': _BundleDescriptor(locale: 'uk', code: 'ogienko', name: 'Огієнко'),
     'my': _BundleDescriptor(locale: 'my', code: 'judson', name: 'Judson 1835'),
+    'am': _BundleDescriptor(locale: 'am', code: 'amh', name: 'Amharic NT'),
+    'hr': _BundleDescriptor(locale: 'hr', code: 'sh', name: 'Croatian Bible'),
+    'ms': _BundleDescriptor(locale: 'ms', code: 'ksi', name: 'Kitab Suci (Malay NT)'),
+    'sk': _BundleDescriptor(locale: 'sk', code: 'hyr', name: 'Nádej pre každého (Slovak NT)'),
   };
 
   /// verses-by-locale memory cache (cleared only on app restart).
