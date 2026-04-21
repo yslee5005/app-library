@@ -131,10 +131,12 @@ Abba의 Scripture / BibleStory / Guidance 카드를 **저작권 안전한 구조
 
 - [x] 사용자 전략 결정: A안 (PD bundle + AI 창작 하이브리드) (2026-04-21)
 - [x] SPEC.md 전체 개요 작성 (2026-04-21)
-- [x] Phase 1 `_details/*` 상세 작성 (2026-04-21) ← 현재 여기
-- [ ] **Phase 1 사용자 승인 + "실행"**
-- [ ] Phase 1 구현
-- [ ] Phase 2~3 (대기)
+- [x] Phase 1 `_details/*` 상세 작성 (2026-04-21)
+- [x] Phase 1 구현 + commit `d2dd88d` (2026-04-21)
+- [x] Phase 1 수동 단계 완료 (migration + USFM 다운로드 + JSON 변환 + Storage 업로드) (2026-04-21)
+- [x] Phase 2 `_details/*` 상세 작성 (2026-04-21) ← 현재 여기
+- [ ] Phase 2 구현 (사용자 "일단 진행, 나중에 한번에 테스트" 지시 → 바로 진행)
+- [ ] Phase 3 대기
 
 ## prayer_output_redesign과의 관계
 

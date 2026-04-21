@@ -84,6 +84,35 @@
 
 ---
 
-## Phase 2 INT-XXX (추가 예정)
+## Phase 2 · BibleStory + Guidance single-field (INT-071 ~ INT-078)
 
-Phase 1 done 후 BibleStory + Guidance 리팩터링으로 INT-071부터 이어서 할당.
+| ID | Screen | Widget | Trigger | Action | Side Effect | Pitfall Tags | Status |
+|----|--------|--------|---------|--------|-------------|--------------|--------|
+| INT-071 | N/A | `[BibleStory.model]` | build-time | titleEn/Ko, summaryEn/Ko → 단일 title / summary. locale getter 2개 제거. fromJson 3단 fallback | | `code-gen, dead-code-sweep` | pending |
+| INT-072 | N/A | `[Guidance.model]` | build-time | contentEn/Ko → 단일 content. locale getter 제거. fromJson 3단 fallback | | `code-gen, dead-code-sweep` | pending |
+| INT-073 | N/A | `[gemini_service prompts]` | runtime | _buildSystemPrompt / _buildCoreSystemPrompt / _buildAudioCoreSystemPrompt / _buildPremiumSystemPrompt 의 bible_story (title_en/ko → title, summary_en/ko → summary) + guidance (content_en/ko → content) schema 단일 필드. $langName 사용 | prompt schema 변경 | `subscription-crash` | pending |
+| INT-074 | N/A | `[gemini_service._hardcodedPrayerResult]` | runtime | BibleStory + Guidance locale-aware 샘플 (ko / en 분기). Scripture 패턴과 동일 | hardcoded locale 분기 | `code-gen` | pending |
+| INT-075 | N/A | `[openai_service prompts + fallback]` | runtime | 동일 schema 변경 + _fallbackPrayerResult BibleStory 단일 필드 | legacy 경로 정렬 | `code-gen, subscription-crash` | pending |
+| INT-076 | N/A | `[ai_loading_view._setFallbackResult]` | runtime | BibleStory 하드코딩 const 부분 single-field로 수정 | | `code-gen` | pending |
+| INT-077 | N/A | `[supabase_prayer_repository._resultToJson]` | runtime | bible_story / guidance 저장 포맷 single-field (title, summary, content). 기존 _en/_ko 저장 제거 | DB write format | `code-gen` | pending |
+| INT-078 | `prayer_dashboard` + `dashboard_view` (QT) | `[BibleStoryCard]` + `[GuidanceCard]` | build | 각 카드에서 locale prop 제거, `.title(locale)` → `.title` 등 직접 참조. 호출부에서 `locale:` 파라미터 제거 | widget API 변경 | `dead-code-sweep` | pending |
+
+### Phase 2 추가 작업
+
+- `MockAiService` / `MockDataService` / mock JSON files (`assets/mock/prayer_result.json`) 에도 single-field 반영 필요 (테스트용이라 후순위)
+- grep 검증: `grep -rn "bibleStory\.\(title\|summary\)(\|guidance\.content(" apps/abba/` → 0 hits
+- l10n 신규 키 **0개**
+
+### 테스트 매핑 (Phase 2)
+
+| INT | Test file | Test case |
+|-----|-----------|-----------|
+| INT-071 | `test/models/prayer_test.dart` | BibleStory.fromJson new + legacy 3단 fallback |
+| INT-072 | 동일 | Guidance.fromJson 동일 |
+| INT-078 | 관련 widget test (있으면) | locale prop 제거, 직접 필드 참조 렌더 |
+
+---
+
+## Phase 3 INT-XXX (추가 예정)
+
+Phase 2 done 후 Phase 3 spec 작성 시 INT-079부터 이어서 할당 (25 locale bundle 확장).

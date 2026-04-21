@@ -305,22 +305,92 @@ Phase 3에서 각 locale에 대해 다음 번역본을 사용:
 
 ---
 
-## Phase 2 · BibleStory / Guidance (예정)
+## Phase 2 · BibleStory / Guidance single-field
 
-Phase 1 승인 후 상세 작성. 간단 미리보기:
+A-1 패턴 (Phase 4-5 prayer_output_redesign + bible_text_i18n Phase 1) 동일 적용.
+
+### BibleStory — before
 
 ```dart
 class BibleStory {
-  final String title;    // was titleEn/Ko
-  final String summary;  // was summaryEn/Ko
-  // fromJson 3단 fallback
-}
+  final String titleEn, titleKo;
+  final String summaryEn, summaryKo;
 
-class Guidance {
-  final String content;  // was contentEn/Ko
-  final bool isPremium;
+  String title(String locale) => locale == 'ko' ? titleKo : titleEn;
+  String summary(String locale) => locale == 'ko' ? summaryKo : summaryEn;
 }
 ```
+
+### BibleStory — after
+
+```dart
+class BibleStory {
+  final String title;
+  final String summary;
+
+  const BibleStory({required this.title, required this.summary});
+
+  factory BibleStory.fromJson(Map<String, dynamic> json) {
+    return BibleStory(
+      title: json['title'] as String?
+          ?? json['title_en'] as String?
+          ?? json['title_ko'] as String?
+          ?? '',
+      summary: json['summary'] as String?
+          ?? json['summary_en'] as String?
+          ?? json['summary_ko'] as String?
+          ?? '',
+    );
+  }
+}
+```
+
+### Guidance — before
+
+```dart
+class Guidance {
+  final String contentEn, contentKo;
+  final bool isPremium;
+
+  String content(String locale) => locale == 'ko' ? contentKo : contentEn;
+}
+```
+
+### Guidance — after
+
+```dart
+class Guidance {
+  final String content;
+  final bool isPremium;
+
+  const Guidance({required this.content, required this.isPremium});
+
+  factory Guidance.fromJson(Map<String, dynamic> json) {
+    return Guidance(
+      content: json['content'] as String?
+          ?? json['content_en'] as String?
+          ?? json['content_ko'] as String?
+          ?? '',
+      isPremium: json['is_premium'] as bool? ?? true,
+    );
+  }
+}
+```
+
+### 제거되는 getter
+
+- `BibleStory.title(locale)` / `.summary(locale)`
+- `Guidance.content(locale)`
+
+### Hardcoded fallback
+
+`_hardcodedPrayerResult(locale)` 이미 locale 인자 받으므로 Bible Story / Guidance 블록만 locale-aware로 변경 (ko / en 분기).
+
+### Legacy DB compat
+
+Phase 6 이전 레코드의 `title_en/ko`, `content_en/ko` 있음 → fromJson 3단 fallback 처리.
+
+---
 
 ## Phase 3 · Bundle 확장 (예정)
 
