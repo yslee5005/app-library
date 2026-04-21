@@ -196,7 +196,6 @@ class _PrayerDashboardViewState extends ConsumerState<PrayerDashboardView> {
               historicalStory: result.historicalStory!,
               title: l10n.historicalStoryTitle,
               lessonLabel: l10n.todayLesson,
-              locale: locale,
               onUnlock: showPremiumUpgrade,
               isUserPremium: isPremium,
             ),
@@ -255,10 +254,9 @@ class _PrayerDashboardViewState extends ConsumerState<PrayerDashboardView> {
           StaggeredFadeIn(
             index: i++,
             child: HistoricalStoryCard(
-              historicalStory: HistoricalStory.placeholder(),
+              historicalStory: HistoricalStory.placeholder(locale),
               title: l10n.historicalStoryTitle,
               lessonLabel: l10n.todayLesson,
-              locale: locale,
               onUnlock: showPremiumUpgrade,
               isUserPremium: false,
             ),

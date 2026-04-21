@@ -58,7 +58,7 @@ class GeminiService implements AiService {
   }) async {
     if (_useHardcodedResponse) {
       apiLog.info('Gemini analyzePrayer bypassed (hardcoded)');
-      return _hardcodedPrayerResult();
+      return _hardcodedPrayerResult(locale);
     }
     final langName = _localeName(locale);
     apiLog.info('Gemini full prayer analysis started');
@@ -70,10 +70,10 @@ class GeminiService implements AiService {
       final response = await model.generateContent([
         Content('user', [TextPart(transcript)]),
       ]);
-      return _parsePrayerJson(response.text);
+      return _parsePrayerJson(response.text, locale);
     } catch (e, stackTrace) {
       apiLog.error('Gemini prayer analysis failed', error: e, stackTrace: stackTrace);
-      return _fallbackPrayerResult();
+      return _fallbackPrayerResult(locale);
     }
   }
 
@@ -84,7 +84,7 @@ class GeminiService implements AiService {
   }) async {
     if (_useHardcodedResponse) {
       apiLog.info('Gemini analyzePrayerCore bypassed (hardcoded)');
-      return _hardcodedPrayerResult();
+      return _hardcodedPrayerResult(locale);
     }
     final langName = _localeName(locale);
     apiLog.info('Gemini core prayer analysis started');
@@ -96,10 +96,10 @@ class GeminiService implements AiService {
       final response = await model.generateContent([
         Content('user', [TextPart(transcript)]),
       ]);
-      return _parsePrayerJson(response.text);
+      return _parsePrayerJson(response.text, locale);
     } catch (e, stackTrace) {
       apiLog.error('Gemini core analysis failed', error: e, stackTrace: stackTrace);
-      return _fallbackPrayerResult();
+      return _fallbackPrayerResult(locale);
     }
   }
 
@@ -115,7 +115,7 @@ class GeminiService implements AiService {
     if (_useHardcodedResponse) {
       apiLog.info('Gemini analyzePrayerFromAudio bypassed (hardcoded)');
       return (
-        result: _hardcodedPrayerResult(),
+        result: _hardcodedPrayerResult(locale),
         transcription: _hardcodedTranscription,
       );
     }
@@ -141,7 +141,7 @@ class GeminiService implements AiService {
       return (result: result, transcription: transcription);
     } catch (e, stackTrace) {
       apiLog.error('Gemini audio analysis failed', error: e, stackTrace: stackTrace);
-      return (result: _fallbackPrayerResult(), transcription: '');
+      return (result: _fallbackPrayerResult(locale), transcription: '');
     }
   }
 
@@ -156,7 +156,7 @@ class GeminiService implements AiService {
   }) async {
     if (_useHardcodedResponse) {
       apiLog.info('Gemini analyzePrayerPremium bypassed (hardcoded)');
-      return _hardcodedPremiumContent();
+      return _hardcodedPremiumContent(locale);
     }
     final langName = _localeName(locale);
     apiLog.info('Gemini premium analysis started');
@@ -353,13 +353,13 @@ Rules (per Prayer Guide §4-6):
     return jsonDecode(text) as Map<String, dynamic>;
   }
 
-  PrayerResult _parsePrayerJson(String? text) {
+  PrayerResult _parsePrayerJson(String? text, String locale) {
     try {
       final data = _parseJsonFromResponse(text);
       return PrayerResult.fromJson(data);
     } catch (e, stackTrace) {
       apiLog.error('Prayer JSON parse failed', error: e, stackTrace: stackTrace);
-      return _fallbackPrayerResult();
+      return _fallbackPrayerResult(locale);
     }
   }
 
@@ -398,7 +398,7 @@ Rules (per Prayer Guide §4-6):
   // Also used as graceful fallbacks when API calls fail.
   // ---------------------------------------------------------------------------
 
-  PrayerResult _hardcodedPrayerResult() {
+  PrayerResult _hardcodedPrayerResult(String locale) {
     return PrayerResult(
       prayerSummary: const PrayerSummary(
         gratitude: ['새로운 아침을 허락해 주신 하나님께 감사합니다.'],
@@ -467,25 +467,35 @@ Rules (per Prayer Guide §4-6):
             '하늘에 계신 아버지, 감사하는 마음으로 주 앞에 나아갑니다. 우리가 짊어진 짐과 다른 이를 위해 지는 짐을 주님은 아십니다. 오늘도 쉴 만한 물가로 인도하여 주옵소서. 지친 마음을 회복시켜 주시고, 염려하는 자리에 평안을 말씀하여 주소서. 예수님의 이름으로 기도드립니다. 아멘.',
         isPremium: true,
       ),
-      historicalStory: const HistoricalStory(
-        titleEn: 'George Müller\'s Morning Bread',
-        titleKo: '조지 뮬러의 아침 식탁',
-        reference: 'Bristol, 1838',
-        summaryEn:
-            'One morning in Bristol, the orphanage had no food. George Müller gathered three hundred children, set empty plates, and gave thanks aloud for breakfast. Before the prayer ended, a baker knocked — unable to sleep, he had baked bread for them. Minutes later, a milkman\'s cart broke down at the gate; rather than waste the milk, he brought it in.',
-            summaryKo:
-            '1838년 어느 아침, 브리스틀의 고아원에는 먹을 것이 하나도 없었습니다. 조지 뮬러는 300명의 아이들을 빈 식탁에 앉히고 아침 식사에 대한 감사 기도를 올렸습니다. 기도가 끝나기 전, 빵집 주인이 문을 두드렸습니다 — 잠이 오지 않아 아이들을 위해 빵을 구웠다고 했습니다. 잠시 후 우유 마차가 문 앞에서 고장이 났고, 마부는 우유를 버리는 대신 안으로 들고 들어왔습니다.',
-        lessonEn:
-            'Your prayer for your family\'s provision echoes Müller\'s: God often answers before we finish the sentence. Trust what you cannot yet see.',
-        lessonKo:
-            '가족을 위한 당신의 기도는 뮬러의 기도와 같습니다. 하나님은 때로 우리가 말을 마치기 전에 응답하십니다. 아직 보이지 않는 것을 신뢰하세요.',
-        isPremium: true,
-      ),
+      historicalStory: _hardcodedHistoricalStory(locale),
     );
   }
 
-  PremiumContent _hardcodedPremiumContent() {
-    final base = _hardcodedPrayerResult();
+  HistoricalStory _hardcodedHistoricalStory(String locale) {
+    if (locale == 'ko') {
+      return const HistoricalStory(
+        title: '조지 뮬러의 아침 식탁',
+        reference: '영국 브리스틀, 1838년',
+        summary:
+            '1838년 11월의 어느 추운 아침, 영국 브리스틀의 윌슨 스트리트 고아원 마당에는 짙은 안개가 무릎까지 내려앉아 있었습니다. 실내에서는 300명의 아이들이 긴 나무 식탁 앞에 앉아 빈 백랍 접시를 바라보고 있었습니다. 조지 뮬러는 방 앞에 서서 두 손을 모았습니다. 문 위 벽시계의 초침 소리가 그의 심장박동보다 더 작게 들렸습니다.\n\n그는 "빵이 없습니다"라고 말하지 않았습니다. 대신 이렇게 기도했습니다. "아버지, 곧 주실 양식에 감사드립니다." 기도가 끝나기도 전에, 주방 뒷문에서 노크 소리가 들렸습니다. 클리프턴 스트리트의 빵집 주인이 앞치마에 밀가루를 묻힌 채 서 있었습니다. 그는 간밤에 잠이 오지 않아 아이들 한 명 한 명 몫의 빵을 구웠다고 말했습니다.\n\n몇 분 뒤, 고아원 문 앞에서 우유 마차의 차축이 부러졌습니다. 마부는 배달을 나설 수 없게 되자, 우유를 상하게 두기보다 그대로 안으로 들여왔습니다. 그날 저녁 뮬러는 일기에 이렇게 적었습니다. "아이들은 자기들이 배고팠다는 것을 끝내 몰랐다."',
+        lesson:
+            '가족을 위한 당신의 기도는 뮬러의 기도와 닮았습니다. 하나님은 때로 우리가 문장을 마치기도 전에 응답하십니다. 아직 눈에 보이지 않는 것을 신뢰하세요.',
+        isPremium: true,
+      );
+    }
+    return const HistoricalStory(
+      title: "George Müller's Morning Bread",
+      reference: 'Bristol, England, 1838',
+      summary:
+          "One cold November morning in 1838, a heavy mist still hung over the orphanage yard on Wilson Street. Inside, three hundred children sat at long wooden tables with empty pewter plates. George Müller stood at the head of the room, his hands folded, the clock above the door ticking louder than his own heart.\n\nHe did not say, 'We have no breakfast.' Instead he said, 'Thank You, Father, for the food You are about to provide.' Before he had finished the prayer, there came a knock at the kitchen door. A baker from Clifton Street stood there, flour still on his apron — he had been unable to sleep, he said, and had baked enough loaves for every child.\n\nMinutes later, a milkman's cart broke its axle at the gate. Unable to deliver his rounds, he carried his cans in rather than let the milk sour. Müller would write in his journal that evening: 'The children did not know they had been hungry.'",
+      lesson:
+          "Your prayer for your family's provision echoes Müller's: God often answers before we finish the sentence. Trust what you cannot yet see.",
+      isPremium: true,
+    );
+  }
+
+  PremiumContent _hardcodedPremiumContent(String locale) {
+    final base = _hardcodedPrayerResult(locale);
     return PremiumContent(
       historicalStory: base.historicalStory,
       aiPrayer: base.aiPrayer,
@@ -549,7 +559,7 @@ Rules (per Prayer Guide §4-6):
   // Fallbacks (for API error paths — reuse the rich hardcoded content)
   // ---------------------------------------------------------------------------
 
-  PrayerResult _fallbackPrayerResult() => _hardcodedPrayerResult();
+  PrayerResult _fallbackPrayerResult(String locale) => _hardcodedPrayerResult(locale);
 
   QtMeditationResult _fallbackMeditationResult() => _hardcodedMeditationResult();
 
@@ -662,13 +672,10 @@ Return a JSON object:
     "transcript_ko": "기도 내용을 한국어 간증문으로 재구성"
   },
   "historical_story": {
-    "title_en": "story title in English",
-    "title_ko": "story title in Korean",
-    "reference": "source (Bible chapter:verse or historical source)",
-    "summary_en": "A story with narrative arc (7-10+ sentences in English)",
-    "summary_ko": "기승전결 구조의 이야기 (7-10문장 이상, 한국어)",
-    "lesson_en": "Specific lesson for this person (2-3 sentences in English)",
-    "lesson_ko": "이 이야기에서 오늘 기도하신 분에게 전하는 구체적 교훈 (2-3문장)",
+    "title": "story title in $langName",
+    "reference": "locale-neutral source (e.g., 'Bristol, 1838' or 'Luke 15:11-32')",
+    "summary": "A real-person narrative (8-10 sentences in $langName)",
+    "lesson": "Specific lesson for this person (2-4 sentences in $langName)",
     "is_premium": true
   },
   "ai_prayer": {
@@ -677,6 +684,19 @@ Return a JSON object:
     "is_premium": true
   }
 }
+
+HISTORICAL STORY QUALITY BAR (Phase 4):
+- 8-10 sentences. Each sentence should render ONE concrete scene — include at
+  least: (1) specific time/place, (2) a named character's inner thought or
+  feeling, (3) one physical detail (what they saw, heard, felt).
+- Separate major scene transitions with a blank line ("\n\n") so paragraphs
+  render naturally.
+- Avoid generic phrases like "and they trusted God" — show the trust through
+  a specific action, words, or silence.
+- TRUTHFULNESS: the story MUST be a real person from the Bible or verified
+  church history (Augustine, Luther, Moravians, Hudson Taylor, Amy Carmichael,
+  George Müller, Corrie ten Boom, etc.). If you are not confident about
+  historicity, choose a different story. NEVER fabricate quotes or dates.
 
 WRITING STYLE (critical for quality):
 - Write like a master short story author, NOT a report writer.
@@ -795,13 +815,10 @@ Return a JSON object with ONLY these premium sections:
 
 {
   "historical_story": {
-    "title_en": "story title in English",
-    "title_ko": "story title in Korean",
-    "reference": "source (Bible chapter:verse or historical source)",
-    "summary_en": "A story with narrative arc (7-10+ sentences in English)",
-    "summary_ko": "기승전결 구조의 이야기 (7-10문장 이상, 한국어)",
-    "lesson_en": "Specific lesson for this person (2-3 sentences in English)",
-    "lesson_ko": "이 이야기에서 오늘 기도하신 분에게 전하는 구체적 교훈 (2-3문장)",
+    "title": "story title in $langName",
+    "reference": "locale-neutral source (e.g., 'Bristol, 1838' or 'Luke 15:11-32')",
+    "summary": "A real-person narrative (8-10 sentences in $langName)",
+    "lesson": "Specific lesson for this person (2-4 sentences in $langName)",
     "is_premium": true
   },
   "ai_prayer": {
@@ -811,15 +828,24 @@ Return a JSON object with ONLY these premium sections:
   }
 }
 
+HISTORICAL STORY QUALITY BAR (Phase 4):
+- 8-10 sentences. Each sentence should render ONE concrete scene — include at
+  least: (1) specific time/place, (2) a named character's inner thought or
+  feeling, (3) one physical detail (what they saw, heard, felt).
+- Separate major scene transitions with a blank line ("\n\n") so paragraphs
+  render naturally.
+- Avoid generic phrases like "and they trusted God" — show the trust through
+  a specific action, words, or silence.
+- TRUTHFULNESS: the story MUST be a real person from the Bible or verified
+  church history (Augustine, Luther, Moravians, Hudson Taylor, Amy Carmichael,
+  George Müller, Corrie ten Boom, etc.). If you are not confident about
+  historicity, choose a different story. NEVER fabricate quotes or dates.
+
 WRITING STYLE:
 - Write like a master short story author, NOT a report writer.
 - Use SENSORY details, INNER MONOLOGUE, METAPHORS and SIMILES.
 - VARY sentence structure. Show, don't tell.
-- The ai_prayer should read like poetry.
-
-IMPORTANT:
-- The historical_story must be a REAL story from the Bible or verified church history.
-- Do NOT make up stories.''';
+- The ai_prayer should read like poetry.''';
   }
 
   String _buildMeditationPrompt(String langName) {

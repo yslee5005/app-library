@@ -9,7 +9,6 @@ class HistoricalStoryCard extends StatelessWidget {
   final HistoricalStory historicalStory;
   final String title;
   final String lessonLabel;
-  final String locale;
   final VoidCallback onUnlock;
   final bool isUserPremium;
 
@@ -18,7 +17,6 @@ class HistoricalStoryCard extends StatelessWidget {
     required this.historicalStory,
     required this.title,
     required this.lessonLabel,
-    required this.locale,
     required this.onUnlock,
     required this.isUserPremium,
   });
@@ -42,59 +40,67 @@ class HistoricalStoryCard extends StatelessWidget {
     return ExpandableCard(
       icon: '📖',
       title: title,
-      summary: historicalStory.title(locale),
+      summary: historicalStory.title,
       initiallyExpanded: false,
       expandedContent: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          if (historicalStory.reference.isNotEmpty) ...[
+            Text(
+              historicalStory.reference,
+              style: AbbaTypography.caption.copyWith(
+                color: AbbaColors.muted,
+                fontStyle: FontStyle.italic,
+              ),
+            ),
+            const SizedBox(height: AbbaSpacing.sm),
+          ],
           Text(
-            historicalStory.reference,
-            style: AbbaTypography.caption.copyWith(
-              color: AbbaColors.muted,
-              fontStyle: FontStyle.italic,
+            historicalStory.summary,
+            style: AbbaTypography.body.copyWith(
+              color: AbbaColors.warmBrown,
+              height: 1.7,
             ),
           ),
-          const SizedBox(height: AbbaSpacing.sm),
-          Text(
-            historicalStory.summary(locale),
-            style: AbbaTypography.bodySmall,
-          ),
-          const SizedBox(height: AbbaSpacing.md),
-          Container(
-            padding: const EdgeInsets.all(AbbaSpacing.sm),
-            decoration: BoxDecoration(
-              color: AbbaColors.sage.withValues(alpha: 0.1),
-              borderRadius: BorderRadius.circular(AbbaRadius.md),
-            ),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text('💡', style: TextStyle(fontSize: 18)),
-                const SizedBox(width: AbbaSpacing.sm),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        lessonLabel,
-                        style: AbbaTypography.caption.copyWith(
-                          color: AbbaColors.sage,
-                          fontWeight: FontWeight.w700,
+          if (historicalStory.lesson.isNotEmpty) ...[
+            const SizedBox(height: AbbaSpacing.md),
+            Container(
+              padding: const EdgeInsets.all(AbbaSpacing.md),
+              decoration: BoxDecoration(
+                color: AbbaColors.sage.withValues(alpha: 0.1),
+                borderRadius: BorderRadius.circular(AbbaRadius.md),
+              ),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text('💡', style: TextStyle(fontSize: 20)),
+                  const SizedBox(width: AbbaSpacing.sm),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          lessonLabel,
+                          style: AbbaTypography.label.copyWith(
+                            color: AbbaColors.sage,
+                            fontWeight: FontWeight.w700,
+                          ),
                         ),
-                      ),
-                      const SizedBox(height: 2),
-                      Text(
-                        historicalStory.lesson(locale),
-                        style: AbbaTypography.bodySmall.copyWith(
-                          fontWeight: FontWeight.w600,
+                        const SizedBox(height: AbbaSpacing.xs),
+                        Text(
+                          historicalStory.lesson,
+                          style: AbbaTypography.bodySmall.copyWith(
+                            fontWeight: FontWeight.w600,
+                            height: 1.6,
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
+          ],
         ],
       ),
     );

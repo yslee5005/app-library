@@ -74,52 +74,47 @@ class PrayerSummary {
 }
 
 class HistoricalStory {
-  final String titleEn;
-  final String titleKo;
+  final String title;
   final String reference;
-  final String summaryEn;
-  final String summaryKo;
-  final String lessonEn;
-  final String lessonKo;
+  final String summary;
+  final String lesson;
   final bool isPremium;
 
   const HistoricalStory({
-    required this.titleEn,
-    required this.titleKo,
+    required this.title,
     required this.reference,
-    required this.summaryEn,
-    required this.summaryKo,
-    required this.lessonEn,
-    required this.lessonKo,
+    required this.summary,
+    required this.lesson,
     required this.isPremium,
   });
 
   factory HistoricalStory.fromJson(Map<String, dynamic> json) {
     return HistoricalStory(
-      titleEn: json['title_en'] as String,
-      titleKo: json['title_ko'] as String,
-      reference: json['reference'] as String,
-      summaryEn: json['summary_en'] as String,
-      summaryKo: json['summary_ko'] as String,
-      lessonEn: json['lesson_en'] as String,
-      lessonKo: json['lesson_ko'] as String,
+      title: json['title'] as String?
+          ?? json['title_en'] as String?
+          ?? json['title_ko'] as String?
+          ?? '',
+      reference: json['reference'] as String? ?? '',
+      summary: json['summary'] as String?
+          ?? json['summary_en'] as String?
+          ?? json['summary_ko'] as String?
+          ?? '',
+      lesson: json['lesson'] as String?
+          ?? json['lesson_en'] as String?
+          ?? json['lesson_ko'] as String?
+          ?? '',
       isPremium: json['is_premium'] as bool? ?? true,
     );
   }
 
-  String title(String locale) => locale == 'ko' ? titleKo : titleEn;
-  String summary(String locale) => locale == 'ko' ? summaryKo : summaryEn;
-  String lesson(String locale) => locale == 'ko' ? lessonKo : lessonEn;
-
-  /// Placeholder for locked premium card display
-  factory HistoricalStory.placeholder() => const HistoricalStory(
-        titleEn: 'A Story of Faith',
-        titleKo: '믿음의 이야기',
+  /// Placeholder for locked premium card display (locale-aware).
+  factory HistoricalStory.placeholder(String locale) => HistoricalStory(
+        title: locale == 'ko' ? '믿음의 이야기' : 'A Story of Faith',
         reference: '',
-        summaryEn: 'Unlock to discover a powerful story from Bible history...',
-        summaryKo: '성경 역사 속 감동적인 이야기를 만나보세요...',
-        lessonEn: '',
-        lessonKo: '',
+        summary: locale == 'ko'
+            ? '성경 역사 속 감동적인 이야기를 만나보세요...'
+            : 'Unlock to discover a powerful story from Bible history...',
+        lesson: '',
         isPremium: true,
       );
 }
