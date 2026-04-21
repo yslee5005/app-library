@@ -123,10 +123,23 @@ Phase 1에선 placeholder 사용 키 없음.
 
 ---
 
-## Phase 4-5 키 (추가 예정)
+---
 
-Phase 3 승인 후 해당 phase 진입 시 추가:
-- Phase 4: (HistoricalStory에 이미 lessonEn/Ko 있음 — 신규 키 거의 없음) — 필요 시 `historicalFullStoryLabel` 1-2 키
+## Phase 4 · 신규 키 (0개)
+
+**신규 키 없음.** 모든 라벨은 기존 키 재사용:
+- `historicalStoryTitle` — 카드 제목 (기존)
+- `todayLesson` — lesson 섹션 라벨 (기존)
+
+Phase 4는 prompt 품질 강화 + widget typography 조정이 본질. UI에 노출되는 신규 문자열 없음.
+
+→ **Phase 4 l10n 작업 없음.** `flutter gen-l10n` 불필요.
+
+---
+
+## Phase 5 키 (추가 예정)
+
+Phase 4 승인 후 해당 phase 진입 시 추가:
 - Phase 5: `aiPrayerCitationsTitle`, `citationTypeQuote/Science/Example`, `aiPrayerReadingTime` ~5 키
 
 ## 참조

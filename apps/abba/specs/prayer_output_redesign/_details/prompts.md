@@ -268,10 +268,91 @@ NEVER output the prayer_guide content back. Use it only as reference for evaluat
 - Gemini 2.5 flash 기준: system prompt (~2500 토큰) + transcript (~300 토큰) + output (~500 토큰) = ~$0.001/call
 - Pro 유저 1 prayer = Coaching 1 call → **비용 무시 가능**
 
-### Phase 4 · Historical Deep (예정 상세)
-- 메서드: `analyzeHistoricalDeep(transcript, scriptureReference, locale)` 신규
-- 출력: title, summary (8-10문장), todayLesson (3-4문장)
-- 인물 풀: 성경 인물 우선, 초대 교회 ~ 현대 성인
+### Phase 4 · Historical Deep (상세)
+
+#### 대상 메서드
+
+**옵션 A**: 기존 `analyzePrayerPremium` 출력의 `historical_story` 섹션 지시만 강화. 신규 메서드 없음.
+**옵션 B**: `analyzeHistoricalDeep(transcript, scriptureRef, locale)` 신규 분리.
+
+→ **옵션 A 채택** (Phase 4 MVP). Premium 1 call 유지, 비용 증가 0. Phase 5에서 AiPrayer를 별도 분리할 때 함께 재검토.
+
+#### Historical Story JSON schema 강화 (기존 유지 + 지시 보강)
+
+기존 schema는 그대로:
+```json
+"historical_story": {
+  "title_en": "...", "title_ko": "...",
+  "reference": "...",
+  "summary_en": "...", "summary_ko": "...",
+  "lesson_en": "...", "lesson_ko": "...",
+  "is_premium": true
+}
+```
+
+#### 신규 작성 규칙 (system prompt `_buildPremiumSystemPrompt` + `_buildSystemPrompt`에 추가)
+
+```
+HISTORICAL STORY — quality bar (Phase 4):
+- summary_en: 8-10 sentences, minimum 800 characters (excluding whitespace).
+- summary_ko: 8-10 sentences, minimum 400 characters (excluding whitespace).
+- Each sentence should render ONE scene with sensory detail or inner monologue.
+  Avoid summarizing multiple events in one sentence.
+- Include at least: (1) concrete time/place, (2) named character's inner
+  thought or feeling, (3) one physical detail (what they saw, heard, felt).
+- Separate major scene transitions with a blank line ("\n\n") so the UI
+  can render paragraphs.
+- Avoid generic phrases like "and they trusted God". Show the trust through
+  action or dialogue.
+- lesson_en / lesson_ko: 2-4 sentences tying THIS person's prayer to
+  the story's specific moment. Not generic application — name the parallel.
+
+TRUTHFULNESS (★ critical):
+- Historical story MUST be a real person/event from the Bible or
+  verified church history (post-biblical: Augustine, Luther, Moravians,
+  Hudson Taylor, Amy Carmichael, George Müller, Corrie ten Boom, etc.).
+- If you are not confident about historicity, pick a different story.
+- Never fabricate quotes, dates, or events.
+- reference field: Bible chapter:verse OR city + year (e.g., "Bristol, 1838").
+```
+
+#### 하드코딩 샘플 강화 방향 (Phase 4)
+
+기존 George Müller 샘플(이미 8문장)의 summary_en 을 "감각 + 내면 + 구체적 시간" 기준으로 리라이트 예시:
+
+```
+"One cold November morning in 1838, a heavy mist still hung over the
+orphanage yard on Wilson Street. Inside, three hundred children sat
+at long wooden tables with empty pewter plates. George Müller stood
+at the head of the room, his hands folded, his heart beating louder
+than the ticking clock above the door. He did not say 'we have no
+breakfast.' Instead, he said, 'Thank you, Father, for the food You
+are about to provide.'
+
+Before he had finished the prayer, there came a knock at the kitchen
+door. A baker from Clifton Street stood there, flour still on his
+apron — he had been unable to sleep, he said, and had baked enough
+loaves for every child. Minutes later, a milkman's cart broke its
+axle at the gate. Unable to deliver his rounds, he carried his cans
+in rather than let the milk sour. Müller would later write in his
+journal that evening: 'The children did not know they had been
+hungry.'"
+```
+
+(korean 번역도 동일 문장 수준으로 리라이트)
+
+lesson 필드는 그대로 유지 (이미 충분히 응답자의 기도와 연결됨).
+
+#### 검증
+
+- JSON parsing 실패: `_fallbackPrayerResult()` 반환 (기존 로직)
+- summary 길이 미달(en 800/ko 400자 미만): 경고 로그만, 데이터는 반환 (사용자 경험 유지)
+- Sentry 샘플 검토: 출시 전 50개 샘플 수동 확인 — 인물/사건 fact check
+
+#### 비용
+
+- Premium 1 call 유지 (신규 메서드 없음)
+- 출력 토큰 증가: 기존 대비 +200-400 token × $0.30/1M = **+$0.0001/call** 무시 가능
 
 ### Phase 5 · AI Prayer Deep (예정 상세)
 - 메서드: `generateAiPrayerDeep(transcript, improvements, locale)` 신규

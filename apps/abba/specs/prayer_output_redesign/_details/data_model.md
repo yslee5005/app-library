@@ -264,10 +264,55 @@ Phase 3 MVP는 **저장 안 함** 결정.
 
 ---
 
-## Phase 4-5 (추가 예정)
+## Phase 4 · Historical Deep
 
-Phase 3 승인 후 해당 phase 진입 시 작성:
-- Phase 4: `HistoricalStory` 확장 (`todayLesson` 이미 있음 — 길이만 증대)
+### 현재 상태 (Phase 3 commit 이후)
+
+`HistoricalStory` 모델은 이미 Phase 4에 필요한 핵심 필드를 전부 보유:
+
+```dart
+class HistoricalStory {
+  final String titleEn, titleKo;
+  final String reference;          // 시대/출처 (e.g., "Bristol, 1838")
+  final String summaryEn, summaryKo;  // 본문 — Phase 4에서 8-10문장으로 확장
+  final String lessonEn, lessonKo;    // "오늘의 교훈" — 이미 존재
+  final bool isPremium;
+  // placeholder(), fromJson() 이미 있음
+}
+```
+
+### Phase 4 변경 (최소)
+
+**모델 변경 없음.** 기존 필드 그대로 사용.
+
+변경되는 것:
+1. **prompt**: `summary` 생성 지시를 "7-10+ 문장, narrative arc"에서 **"8-10 문장, 한 문장 = 한 장면, 감각 묘사 + 인물 내면 + 구체적 시간/장소"** 로 구체화. Hallucinate 방지 강화 (인물/사건 확실하지 않으면 생략).
+2. **prompt 분리**: `analyzePrayerPremium` 안에 있는 historical_story 섹션의 작성 지침만 강화 (분리된 메서드 신규 생성 X — MVP).
+3. **hardcoded fallback**: 기존 조지 뮬러 샘플(8문장)은 유지. 영어 버전만 세부 표현 강화해서 품질 기준 제시.
+4. **widget**: summary 텍스트 typography 승격 (`bodySmall` → `body`, line-height 1.6) + 문단 구분 자동 (prompt가 `\n\n` 포함 생성).
+
+### 대안 고려 (선택)
+
+옵션 A: **모델 변경 없음** ★ 권장 (MVP 원칙)
+옵션 B: `keyQuoteEn/Ko` (인물/성경 핵심 인용) 필드 추가 — 감동 증폭이지만 hallucinate 위험
+옵션 C: `HistoricalStoryDeep` 새 클래스 — 과도
+
+→ **옵션 A 채택**. Phase 4는 prompt 품질 강화가 본질. 필드 부족해서 못 하는 게 아니라, prompt가 평범해서 생기는 문제.
+
+### Supabase 스키마 영향
+
+**변경 없음** (기존 `prayers.result: JSONB` 그대로).
+
+### 검증 기준
+
+- summary 길이: locale별 공백 제외 400자 이상 (한국어) / 800자 이상 (영어)
+- 인물/사건이 실존 성경 or 검증된 교회사 소스인지 (prompt에 "Do NOT make up" 재강조 + Sentry 샘플 검토)
+
+---
+
+## Phase 5 (추가 예정)
+
+Phase 4 승인 후 진입 시 작성:
 - Phase 5: `AiPrayer` 재설계 (audioUrl 제거, `citations[]` 추가)
 
 ## 참조

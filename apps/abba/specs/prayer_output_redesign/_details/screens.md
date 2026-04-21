@@ -194,11 +194,53 @@
 
 ---
 
-## Phase 4-5 카드 변경 (추가 예정)
+---
+
+## Phase 4 · HistoricalStoryCard 확장
+
+### Card: `HistoricalStoryCard` (기존 widget)
+
+모델·ProBlur locked 상태는 변경 없음. **unlocked expanded 상태만 품질 향상.**
+
+| State | Visual | Notes |
+|---|---|---|
+| **Empty** | `isPremium && !isUserPremium` → ProBlur (변경 없음) | |
+| **Loading** | 상위 Loading에서 처리 | 변경 없음 |
+| **Error** | 상위 Dashboard 에러 | 변경 없음 |
+| **Data (Pro)** | reference(italic muted) · **summary (body 18pt, line-height 1.7, paragraph spacing)** · lesson sage box(강조) | 현재 bodySmall에서 승격 |
+
+### Typography 변경
+
+| 요소 | Before | After | 이유 |
+|------|--------|-------|------|
+| summary 본문 | `AbbaTypography.bodySmall` (16pt line-height 1.5) | `AbbaTypography.body` (18pt) `.copyWith(height: 1.7)` | 시니어 가독성 + 장문 호흡감 |
+| lesson 라벨 | `AbbaTypography.caption` (12pt) | `AbbaTypography.label` (14pt) `.copyWith(color: sage, fontWeight: w700)` | "오늘의 교훈" 섹션 명확화 |
+| lesson 본문 | `AbbaTypography.bodySmall` (16pt w600) | 유지 | 이미 적절 |
+| lesson 박스 padding | `AbbaSpacing.sm` (8) | `AbbaSpacing.md` (16) | 시각적 여유 |
+
+### 문단 렌더링
+
+- Prompt가 summary를 `\n\n`으로 장면 구분 (예: 도입 / 전개 / 절정 / 결말 4단락)
+- Flutter `Text` widget은 `\n\n`을 자동으로 두 줄 공백으로 렌더 — 별도 파싱/분리 불필요
+- `height: 1.7` 로 문단 내 행간 확보
+
+### Responsive
+
+- compact (< 600): body 18pt 유지, 긴 summary 스크롤은 상위 `ListView`가 담당
+- medium 이상: 카드 max-width 720dp (기존 policy) 유지
+- **overflow 체크**: compact 320dp + summary 500자 테스트 필수 (`testOverflow` helper)
+
+### RTL
+
+- 히브리어(`he`)의 경우 body Text 자동 RTL (Flutter 기본)
+- 이미 Phase 2에서 ScriptureCard의 히브리어 원어만 명시 RTL, 본문은 자동 — 변경 없음
+
+---
+
+## Phase 5 카드 변경 (추가 예정)
 
 | Phase | 카드 | 변경 유형 |
 |-------|------|---------|
-| 4 | HistoricalStoryCard | 확장 (summary 길이 증대, 기존 todayLesson 활용) |
 | 5 | AiPrayerCard | 재작성 (audio 제거 + citations 추가) |
 
 ## 참조

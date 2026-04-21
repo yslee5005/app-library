@@ -149,7 +149,50 @@ factory PrayerResult.fromJson(Map<String, dynamic> json) => _$PrayerResultFromJs
 - Coaching 결과에서 "Confession이 없네요" 제안 → 사용자가 Prayer Summary에서 찾으려 해도 없음 → 혼란 가능
 - **UI 추가 문구 필요**: "앱의 기도 요약은 감사/간구/중보 3축이지만, 코칭은 전통 ACTS 4축 기준입니다" (또는 간단 info icon)
 
-## Phase 4-5 함정 (추가 예정)
+---
 
-- Phase 4: 긴 텍스트 스크롤 (§11, flutter-layout.md), 기존 lesson 필드 활용 (거의 간단)
+## Phase 4 · Historical Deep 관련 함정
+
+- [x] **§2 Subscription / Payment Crash** — Phase 4 직접 영향 없음. Premium 1 call 유지 (비용 변화 무).
+- [x] **§11 성능** — 긴 summary(500-800자) 렌더 시 `Text` widget 단일 layout pass 충분. 굳이 문단별 split + `Column` 렌더 불필요 (over-engineering). `height: 1.7` + `\n\n` 자동 처리.
+- [x] **§12 Color / Design Token** — lesson 박스 `AbbaColors.sage.withValues(alpha: 0.1)` 기존 그대로. typography도 토큰 사용 (하드코딩 금지).
+- [x] **§15 Web** — 해당 없음 (Flutter only)
+- [x] **§16 Code Generation** — model 변경 없음 → freezed 재생성 불필요 / l10n 신규 키 없음 → `flutter gen-l10n` 불필요.
+- [ ] **§1 Riverpod 라이프사이클** — 해당 없음 (기존 Premium 로딩 로직 재사용)
+- [ ] **§4 i18n** — 신규 키 없음
+- [ ] **§13 Dead Code Sweep** — 해당 없음 (코드 삭제 없음)
+
+### Phase 4 특유 주의
+
+#### 1. AI Hallucinate 방지 (★ 최우선)
+
+이전 Phase 1-3는 사용자 기도 분석 기반이라 생성물이 짧고 제약적. **Phase 4는 "실존 인물의 실존 사건"을 8-10 문장으로 생성** — hallucinate 위험이 가장 큰 Phase.
+
+- prompt에 "Do NOT fabricate quotes, dates, or events" + "If not confident, pick different story" 명시
+- 출시 전 50 sample 수동 fact check (Sentry로 production sample 1% 샘플링)
+- 검증 대상: 인물 실존 여부, 날짜 정확성, 인용문 출처
+
+#### 2. 긴 텍스트 Flutter 렌더
+
+- `Text`에 `\n\n` 포함된 긴 문자열 — `softWrap: true` (default) 로 자동 줄바꿈 OK
+- `maxLines` 설정 **금지** (장문 truncate 시 사용자 불만)
+- `overflow: TextOverflow.visible` (default) 유지
+- 상위 ExpandableCard가 이미 스크롤 가능한 parent 안에서 렌더 → unbounded height 이슈 없음
+
+#### 3. Typography 승격 (`bodySmall` → `body`) 영향
+
+- body 18pt는 AbbaTypography 표준 (시니어 가독성)
+- 기존 bodySmall 16pt 대비 세로 공간 약 +15% 증가 (카드 길어짐)
+- compact 320dp + summary 500자 가정 시 약 18 라인 → 스크롤 필수 (이미 `ListView` 내부라 OK)
+
+#### 4. prompt 품질 회귀 방지
+
+- Phase 4 이후 `analyzePrayerPremium` system prompt 길이 증가 (+400 token 정도)
+- Gemini 2.5 flash context 1M → 무시 가능
+- 단 prompt A/B 테스트 비교 (Phase 4 이전 hardcoded → Phase 4 이후 실 API) 시 품질 대조 필요
+
+---
+
+## Phase 5 함정 (추가 예정)
+
 - Phase 5: TTS 제거 시 기존 audio player dead code (§13), citations UI expandable (§11), 과학 사실 hallucinate (§2 느낌으로 검증)

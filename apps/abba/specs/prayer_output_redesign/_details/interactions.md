@@ -123,6 +123,31 @@
 
 ---
 
-## Phase 4-5 INT-XXX (추가 예정)
+## Phase 4 · Historical Deep (INT-029 ~ INT-033)
 
-Phase 3 done 후 Phase 4 spec 작성 시 INT-029부터 이어서 할당.
+| ID | Screen | Widget | Trigger | Action | Side Effect | Pitfall Tags | Status |
+|----|--------|--------|---------|--------|-------------|--------------|--------|
+| INT-029 | N/A | `[gemini_service._buildPremiumSystemPrompt]` | runtime | historical_story JSON schema 지시를 "8-10 문장, 한 문장=한 장면, 감각+인물 내면+구체적 시간/장소" + "실존 인물/사건만, 불확실하면 생략" 으로 강화 | 프롬프트 품질 향상 | `subscription-crash` | pending |
+| INT-030 | N/A | `[gemini_service._buildSystemPrompt]` | runtime | 전체 분석 프롬프트(`analyzePrayer`)의 historical_story 섹션도 동일 지시 반영 (legacy 경로 호환) | | `subscription-crash` | pending |
+| INT-031 | N/A | `[gemini_service._hardcodedPrayerResult]` | runtime | George Müller 샘플 summary를 8-10 문장 품질 기준으로 세부 표현 보강 (감각 디테일 + 인물 내면). lesson은 기존 유지 | | `code-gen` | pending |
+| INT-032 | `prayer_dashboard` | `[historical_story_card]` | build | summary Text의 typography를 `AbbaTypography.bodySmall` → `AbbaTypography.body.copyWith(height: 1.7)`로 승격. prompt가 생성한 `\n\n` 문단 구분은 Text widget이 자동 렌더 | 긴 텍스트 가독성 | `color-token, flutter-layout` | pending |
+| INT-033 | `prayer_dashboard` | `[historical_story_card]` | build | lesson sage box를 `EdgeInsets.all(AbbaSpacing.md)` 로 여백 증가 + lessonLabel typography를 `caption` → `label`로 승격해 "오늘의 교훈" 섹션 강조 | 시각적 계층 강화 | `color-token` | pending |
+
+### Phase 4 추가 작업
+
+- `gemini_service.dart` `_parsePrayerJson` / `_parsePremiumJson`: 변경 없음 (기존 HistoricalStory.fromJson 재사용)
+- 신규 메서드 추가 없음 (prompt-only 강화)
+- l10n 신규 키 **0개** — 모든 라벨 기존 키(`historicalStoryTitle`, `todayLesson`) 재사용
+
+### 테스트 매핑 (Phase 4)
+
+| INT | Test file | Test case |
+|-----|-----------|-----------|
+| INT-031 | `test/services/gemini_service_hardcoded_test.dart` (있으면) | hardcoded HistoricalStory summary가 최소 300자(en) / 200자(ko) 이상인지 |
+| INT-032, INT-033 | `test/features/dashboard/widgets/historical_story_card_test.dart` (신규 또는 기존) | 긴 summary (500자) 렌더 시 overflow 없음 (compact 320dp, medium 768dp) |
+
+---
+
+## Phase 5 INT-XXX (추가 예정)
+
+Phase 4 done 후 Phase 5 spec 작성 시 INT-034부터 이어서 할당.
