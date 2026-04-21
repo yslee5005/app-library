@@ -13,6 +13,8 @@ export 'package:app_lib_audio_recorder/audio_recorder.dart'
     show audioRecorderServiceProvider;
 export 'package:app_lib_audio_storage/audio_storage.dart'
     show audioStorageServiceProvider;
+export 'package:app_lib_subscriptions/subscriptions.dart'
+    show ActiveSubscriptionInfo;
 
 import '../models/post.dart';
 import '../models/prayer.dart';
@@ -81,6 +83,22 @@ final subscriptionStatusProvider = StreamProvider<SubscriptionStatus>((ref) {
 final isPremiumProvider = FutureProvider<bool>((ref) {
   final service = ref.watch(subscriptionServiceProvider);
   return service.isPremium;
+});
+
+/// Current active subscription details (product id, next billing date,
+/// renewal flag). Null when user is free.
+final activeSubscriptionProvider =
+    FutureProvider.autoDispose<ActiveSubscriptionInfo?>((ref) async {
+  final service = ref.watch(subscriptionServiceProvider);
+  return service.getActiveSubscription();
+});
+
+/// Latest expiration date across the user's purchase history. Null when
+/// the user has never purchased. Drives the "subscription expired" banner.
+final lastExpirationDateProvider =
+    FutureProvider.autoDispose<DateTime?>((ref) async {
+  final service = ref.watch(subscriptionServiceProvider);
+  return service.getLatestExpirationDate();
 });
 
 // ---------------------------------------------------------------------------
