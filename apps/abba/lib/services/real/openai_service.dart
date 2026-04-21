@@ -319,11 +319,9 @@ class OpenAiService implements AiService {
         // verse is populated at runtime by BibleTextService
       ),
       bibleStory: const BibleStory(
-        titleEn: 'God is faithful',
-        titleKo: '하나님은 신실하십니다',
-        summaryEn:
+        title: 'God is faithful',
+        summary:
             'Even when we cannot see the way, God is faithfully guiding our steps.',
-        summaryKo: '우리가 길을 볼 수 없을 때에도, 하나님은 신실하게 우리의 발걸음을 인도하십니다.',
       ),
       testimonyEn: '',
       testimonyKo: '',
@@ -441,10 +439,8 @@ Return a JSON object:
     "key_word_hint": "One key word with its original-language meaning (1 short line in $langName). Empty if not confident."
   },
   "bible_story": {
-    "title_en": "story title in English",
-    "title_ko": "story title in Korean",
-    "summary_en": "3-4 sentence summary in English",
-    "summary_ko": "3-4 sentence summary in Korean"
+    "title": "story title in $langName",
+    "summary": "3-4 sentence summary in $langName"
   },
   "testimony": {
     "transcript_en": "the prayer reorganized in English as a testimony",
@@ -516,10 +512,8 @@ Return a JSON object with ONLY these core sections:
     "key_word_hint": "One key word with its original-language meaning (1 short line in $langName). Empty if not confident."
   },
   "bible_story": {
-    "title_en": "story title in English",
-    "title_ko": "story title in Korean",
-    "summary_en": "3-4 sentence summary in English",
-    "summary_ko": "3-4 sentence summary in Korean"
+    "title": "story title in $langName",
+    "summary": "3-4 sentence summary in $langName"
   },
   "testimony": {
     "transcript_en": "the prayer reorganized in English as a testimony",

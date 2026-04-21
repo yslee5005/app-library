@@ -70,16 +70,13 @@ const testPrayerResult = PrayerResult(
     verse: 'The LORD is my shepherd.',
   ),
   bibleStory: BibleStory(
-    titleEn: 'David',
-    titleKo: '다윗',
-    summaryEn: 'David was a shepherd.',
-    summaryKo: '다윗은 양치기였습니다.',
+    title: 'David',
+    summary: 'David was a shepherd.',
   ),
   testimonyEn: 'Test prayer transcript.',
   testimonyKo: '테스트 기도 내용.',
   guidance: Guidance(
-    contentEn: 'Guidance content.',
-    contentKo: '조언 내용.',
+    content: 'Guidance content.',
     isPremium: true,
   ),
   aiPrayer: AiPrayer(

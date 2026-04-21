@@ -274,51 +274,40 @@ class ScriptureOriginalWord {
 }
 
 class BibleStory {
-  final String titleEn;
-  final String titleKo;
-  final String summaryEn;
-  final String summaryKo;
+  final String title;
+  final String summary;
 
-  const BibleStory({
-    required this.titleEn,
-    required this.titleKo,
-    required this.summaryEn,
-    required this.summaryKo,
-  });
+  const BibleStory({required this.title, required this.summary});
 
   factory BibleStory.fromJson(Map<String, dynamic> json) {
     return BibleStory(
-      titleEn: json['title_en'] as String,
-      titleKo: json['title_ko'] as String,
-      summaryEn: json['summary_en'] as String,
-      summaryKo: json['summary_ko'] as String,
+      title: json['title'] as String?
+          ?? json['title_en'] as String?
+          ?? json['title_ko'] as String?
+          ?? '',
+      summary: json['summary'] as String?
+          ?? json['summary_en'] as String?
+          ?? json['summary_ko'] as String?
+          ?? '',
     );
   }
-
-  String title(String locale) => locale == 'ko' ? titleKo : titleEn;
-  String summary(String locale) => locale == 'ko' ? summaryKo : summaryEn;
 }
 
 class Guidance {
-  final String contentEn;
-  final String contentKo;
+  final String content;
   final bool isPremium;
 
-  const Guidance({
-    required this.contentEn,
-    required this.contentKo,
-    required this.isPremium,
-  });
+  const Guidance({required this.content, required this.isPremium});
 
   factory Guidance.fromJson(Map<String, dynamic> json) {
     return Guidance(
-      contentEn: json['content_en'] as String,
-      contentKo: json['content_ko'] as String,
+      content: json['content'] as String?
+          ?? json['content_en'] as String?
+          ?? json['content_ko'] as String?
+          ?? '',
       isPremium: json['is_premium'] as bool? ?? true,
     );
   }
-
-  String content(String locale) => locale == 'ko' ? contentKo : contentEn;
 }
 
 class AiPrayer {

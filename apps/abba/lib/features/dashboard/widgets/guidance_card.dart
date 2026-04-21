@@ -8,7 +8,6 @@ import '../../../widgets/pro_blur.dart';
 class GuidanceCard extends StatelessWidget {
   final Guidance guidance;
   final String title;
-  final String locale;
   final VoidCallback onUnlock;
   final bool isUserPremium;
 
@@ -16,7 +15,6 @@ class GuidanceCard extends StatelessWidget {
     super.key,
     required this.guidance,
     required this.title,
-    required this.locale,
     required this.onUnlock,
     this.isUserPremium = false,
   });
@@ -35,7 +33,7 @@ class GuidanceCard extends StatelessWidget {
       );
     }
 
-    final content = guidance.content(locale);
+    final content = guidance.content;
 
     return ExpandableCard(
       icon: '💬',

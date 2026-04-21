@@ -25,7 +25,7 @@ void main() {
       expect(result.scripture.reference, isNotEmpty);
       // Phase 6: verse text is populated at runtime via BibleTextService,
       // not by AiService. Mock service leaves it empty.
-      expect(result.bibleStory.titleEn, isNotEmpty);
+      expect(result.bibleStory.title, isNotEmpty);
       expect(result.testimony, isNotEmpty);
     });
   });
@@ -77,10 +77,8 @@ class _CountingAiService implements AiService {
         verse: 'Test verse',
       ),
       bibleStory: BibleStory(
-        titleEn: 'Test',
-        titleKo: '테스트',
-        summaryEn: 'Test story',
-        summaryKo: '테스트 이야기',
+        title: 'Test',
+        summary: 'Test story',
       ),
       testimonyEn: 'Test transcript',
       testimonyKo: '테스트 간증',

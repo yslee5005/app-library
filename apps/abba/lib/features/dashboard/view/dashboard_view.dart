@@ -91,7 +91,6 @@ class DashboardView extends ConsumerWidget {
           child: BibleStoryCard(
             bibleStory: result.bibleStory,
             title: l10n.bibleStoryTitle,
-            locale: locale,
           ),
         ),
         StaggeredFadeIn(
@@ -107,7 +106,6 @@ class DashboardView extends ConsumerWidget {
             child: GuidanceCard(
               guidance: result.guidance!,
               title: l10n.guidanceTitle,
-              locale: locale,
               onUnlock: showPremiumUpgrade,
               isUserPremium: isPremium,
             ),

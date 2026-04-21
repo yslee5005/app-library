@@ -442,23 +442,25 @@ Rules (per Prayer Guide §4-6):
           ),
         ],
       ),
-      bibleStory: const BibleStory(
-        titleEn: 'David the Shepherd',
-        titleKo: '목자 다윗',
-        summaryEn:
-            'Before David became king, he tended sheep in the fields of Bethlehem — defending them from lions and bears. In those quiet hills he learned that the LORD was the true shepherd over his own life.',
-        summaryKo:
-            '다윗은 왕이 되기 전, 베들레헴 들판에서 사자와 곰으로부터 양을 지키던 소년이었습니다. 고요한 언덕 위에서 그는 자신의 삶을 인도하시는 진짜 목자가 여호와이심을 배웠습니다.',
-      ),
+      bibleStory: locale == 'ko'
+          ? const BibleStory(
+              title: '목자 다윗',
+              summary:
+                  '다윗은 왕이 되기 전, 베들레헴 들판에서 사자와 곰으로부터 양을 지키던 소년이었습니다. 고요한 언덕 위에서 그는 자신의 삶을 인도하시는 진짜 목자가 여호와이심을 배웠습니다.',
+            )
+          : const BibleStory(
+              title: 'David the Shepherd',
+              summary:
+                  'Before David became king, he tended sheep in the fields of Bethlehem — defending them from lions and bears. In those quiet hills he learned that the LORD was the true shepherd over his own life.',
+            ),
       testimonyEn:
           'Lord, thank You for this new morning. Guide my family in peace and comfort my friend who is anxious. In Jesus\' name, Amen.',
       testimonyKo:
           '주님, 오늘도 새로운 아침을 허락해 주셔서 감사합니다. 가족을 평안으로 인도하시고, 염려하는 친구를 위로해 주세요. 예수님의 이름으로 기도합니다. 아멘.',
-      guidance: const Guidance(
-        contentEn:
-            'Your prayer shows a heart that remembers others before yourself — a mark of intercession. Carry that same gentleness with you into today\'s conversations.',
-        contentKo:
-            '자신보다 먼저 다른 이들을 기억하는 마음이 기도에 담겨 있습니다. 이는 중보자의 마음입니다. 오늘 만나는 이들과의 대화에서도 그 부드러움을 잃지 마세요.',
+      guidance: Guidance(
+        content: locale == 'ko'
+            ? '자신보다 먼저 다른 이들을 기억하는 마음이 기도에 담겨 있습니다. 이는 중보자의 마음입니다. 오늘 만나는 이들과의 대화에서도 그 부드러움을 잃지 마세요.'
+            : 'Your prayer shows a heart that remembers others before yourself — a mark of intercession. Carry that same gentleness with you into today\'s conversations.',
         isPremium: true,
       ),
       aiPrayer: _hardcodedAiPrayer(locale),
@@ -718,10 +720,8 @@ Return a JSON object:
     "key_word_hint": "One key word from the verse with its original-language meaning (1 short line in $langName). Example: 'my shepherd' = Hebrew 'roi' — not a job title, but 'the one who tends me personally'. Leave empty if not confident."
   },
   "bible_story": {
-    "title_en": "story title in English",
-    "title_ko": "story title in Korean",
-    "summary_en": "3-4 sentence summary in English",
-    "summary_ko": "3-4 sentence summary in Korean"
+    "title": "story title in $langName",
+    "summary": "3-4 sentence summary in $langName"
   },
   "testimony": {
     "transcript_en": "the prayer reorganized in English as a testimony",
@@ -831,10 +831,8 @@ Return a JSON object with ONLY these core sections:
     "key_word_hint": "One key word from the verse with its original-language meaning (1 short line in $langName). Example: 'my shepherd' = Hebrew 'roi' — not a job title, but 'the one who tends me personally'. Leave empty if not confident."
   },
   "bible_story": {
-    "title_en": "story title in English",
-    "title_ko": "story title in Korean",
-    "summary_en": "3-4 sentence summary in English",
-    "summary_ko": "3-4 sentence summary in Korean"
+    "title": "story title in $langName",
+    "summary": "3-4 sentence summary in $langName"
   },
   "testimony": {
     "transcript_en": "the prayer reorganized in English as a testimony",
@@ -874,10 +872,8 @@ Return a JSON object:
     "key_word_hint": "One key word from the verse with its original-language meaning (1 short line in $langName). Example: 'my shepherd' = Hebrew 'roi' — not a job title, but 'the one who tends me personally'. Leave empty if not confident."
   },
   "bible_story": {
-    "title_en": "story title in English",
-    "title_ko": "story title in Korean",
-    "summary_en": "3-4 sentence summary in English",
-    "summary_ko": "3-4 sentence summary in Korean"
+    "title": "story title in $langName",
+    "summary": "3-4 sentence summary in $langName"
   },
   "testimony": {
     "transcript_en": "the prayer reorganized in English as a testimony",

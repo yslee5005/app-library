@@ -244,10 +244,8 @@ class SupabasePrayerRepository implements PrayerRepository {
             .toList(),
       },
       'bible_story': {
-        'title_en': result.bibleStory.titleEn,
-        'title_ko': result.bibleStory.titleKo,
-        'summary_en': result.bibleStory.summaryEn,
-        'summary_ko': result.bibleStory.summaryKo,
+        'title': result.bibleStory.title,
+        'summary': result.bibleStory.summary,
       },
       'testimony': {
         'transcript_en': result.testimonyEn,
@@ -255,8 +253,7 @@ class SupabasePrayerRepository implements PrayerRepository {
       },
       if (result.guidance != null)
         'guidance': {
-          'content_en': result.guidance!.contentEn,
-          'content_ko': result.guidance!.contentKo,
+          'content': result.guidance!.content,
           'is_premium': result.guidance!.isPremium,
         },
       if (result.aiPrayer != null)

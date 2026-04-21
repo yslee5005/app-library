@@ -69,7 +69,8 @@ void main() {
 
       expect(prayer.result, isNotNull);
       expect(prayer.result!.scripture.reference, 'Psalm 23:1');
-      expect(prayer.result!.bibleStory.titleEn, 'David the Shepherd');
+      // Legacy title_en/ko fallback picks title_en first.
+      expect(prayer.result!.bibleStory.title, 'David the Shepherd');
     });
   });
 
@@ -126,8 +127,8 @@ void main() {
 
       expect(result.guidance, isNotNull);
       expect(result.guidance!.isPremium, true);
-      expect(result.guidance!.content('en'), 'guidance en');
-      expect(result.guidance!.content('ko'), 'guidance ko');
+      // Legacy content_en/ko fallback picks content_en first.
+      expect(result.guidance!.content, 'guidance en');
 
       expect(result.aiPrayer, isNotNull);
       // Legacy `audio_url` key is ignored after Phase 5 removal.
@@ -168,28 +169,31 @@ void main() {
   });
 
   group('BibleStory', () {
-    test('title and summary return locale-based text', () {
-      const story = BibleStory(
-        titleEn: 'Title EN',
-        titleKo: 'Title KO',
-        summaryEn: 'Summary EN',
-        summaryKo: 'Summary KO',
-      );
+    test('single-field access + legacy fromJson fallback', () {
+      const story = BibleStory(title: 'Title', summary: 'Summary');
+      expect(story.title, 'Title');
+      expect(story.summary, 'Summary');
 
-      expect(story.title('en'), 'Title EN');
-      expect(story.title('ko'), 'Title KO');
-      expect(story.summary('en'), 'Summary EN');
-      expect(story.summary('ko'), 'Summary KO');
+      // Legacy title_en/ko → fallback to title_en.
+      final legacy = BibleStory.fromJson({
+        'title_en': 'Title EN',
+        'title_ko': 'Title KO',
+        'summary_en': 'Summary EN',
+        'summary_ko': 'Summary KO',
+      });
+      expect(legacy.title, 'Title EN');
+      expect(legacy.summary, 'Summary EN');
     });
   });
 
   group('Guidance', () {
-    test('isPremium defaults to true when missing', () {
+    test('isPremium defaults to true when missing (legacy fromJson)', () {
       final guidance = Guidance.fromJson({
         'content_en': 'en',
         'content_ko': 'ko',
       });
 
+      expect(guidance.content, 'en');
       expect(guidance.isPremium, true);
     });
   });
