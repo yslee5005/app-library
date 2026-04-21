@@ -56,13 +56,39 @@ class SupabaseStorageBibleTextService implements BibleTextService {
 
   /// Which translation file we use per locale (Phase 1 = ko + en only).
   /// Extended in Phase 3 for remaining locales.
+  /// 30 Public Domain Bible translations. Other 5 locales (am, ar, hr, ms,
+  /// sk) fall back to reference-only UI.
   static const Map<String, _BundleDescriptor> _bundles = {
     'ko': _BundleDescriptor(locale: 'ko', code: 'krv', name: '개역한글 (KRV)'),
-    'en': _BundleDescriptor(
-      locale: 'en',
-      code: 'web',
-      name: 'World English Bible',
-    ),
+    'en': _BundleDescriptor(locale: 'en', code: 'web', name: 'World English Bible'),
+    'es': _BundleDescriptor(locale: 'es', code: 'rv1909', name: 'Reina-Valera Antigua'),
+    'fr': _BundleDescriptor(locale: 'fr', code: 'synodale', name: 'Synodale 1921'),
+    'de': _BundleDescriptor(locale: 'de', code: 'elb1905', name: 'Elberfelder 1905'),
+    'pt': _BundleDescriptor(locale: 'pt', code: 'almeida', name: 'Almeida'),
+    'ru': _BundleDescriptor(locale: 'ru', code: 'synodal', name: 'Synodal 1876'),
+    'zh': _BundleDescriptor(locale: 'zh', code: 'union', name: '和合本 (Chinese Union Version)'),
+    'ja': _BundleDescriptor(locale: 'ja', code: 'kougo', name: '口語訳'),
+    'nl': _BundleDescriptor(locale: 'nl', code: 'svv', name: 'Statenvertaling'),
+    'el': _BundleDescriptor(locale: 'el', code: 'vamvas', name: 'Βάμβας'),
+    'pl': _BundleDescriptor(locale: 'pl', code: 'gdanska', name: 'Biblia Gdańska'),
+    'cs': _BundleDescriptor(locale: 'cs', code: 'bkr', name: 'Bible Kralická'),
+    'he': _BundleDescriptor(locale: 'he', code: 'modern', name: 'Modern Hebrew Bible'),
+    'sv': _BundleDescriptor(locale: 'sv', code: '1917', name: 'Bibeln 1917'),
+    'fi': _BundleDescriptor(locale: 'fi', code: 'pr1933', name: 'Raamattu 1933/38'),
+    'hu': _BundleDescriptor(locale: 'hu', code: 'karoli', name: 'Károli'),
+    'vi': _BundleDescriptor(locale: 'vi', code: 'bible', name: 'Kinh Thánh Việt'),
+    'th': _BundleDescriptor(locale: 'th', code: 'kjv', name: 'พระคัมภีร์ไทย'),
+    'fil': _BundleDescriptor(locale: 'fil', code: 'adb', name: 'Ang Dating Biblia'),
+    'ro': _BundleDescriptor(locale: 'ro', code: 'ronc', name: 'Cornilescu 1924'),
+    'it': _BundleDescriptor(locale: 'it', code: 'diodati', name: 'Diodati 1927'),
+    'id': _BundleDescriptor(locale: 'id', code: 'tl', name: 'Terjemahan Lama'),
+    'sw': _BundleDescriptor(locale: 'sw', code: 'swh1850', name: 'Swahili 1850 (NT)'),
+    'tr': _BundleDescriptor(locale: 'tr', code: 'turobt', name: 'Kitabı Mukaddes (NT)'),
+    'hi': _BundleDescriptor(locale: 'hi', code: 'cv', name: 'Hindi Common Version'),
+    'da': _BundleDescriptor(locale: 'da', code: '1871', name: 'Dansk 1871/1907'),
+    'no': _BundleDescriptor(locale: 'no', code: 'norsk', name: 'Norsk 1930'),
+    'uk': _BundleDescriptor(locale: 'uk', code: 'ogienko', name: 'Огієнко'),
+    'my': _BundleDescriptor(locale: 'my', code: 'judson', name: 'Judson 1835'),
   };
 
   /// verses-by-locale memory cache (cleared only on app restart).

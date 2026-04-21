@@ -404,5 +404,7 @@
         "type": "String"
       }
     }
-  }
+  },
+  "settingsBibleTranslationsLabel": "Preklady Biblie",
+  "settingsBibleTranslationsIntro": "Biblické verše v tejto aplikácii pochádzajú z prekladov vo verejnej doméne. Komentáre, modlitby a príbehy generované AI sú tvorivým dielom Abba."
 }

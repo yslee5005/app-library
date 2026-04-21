@@ -404,5 +404,7 @@
         "type": "String"
       }
     }
-  }
+  },
+  "settingsBibleTranslationsLabel": "Bibeloversættelser",
+  "settingsBibleTranslationsIntro": "Bibelversene i denne app kommer fra oversættelser i det offentlige domæne. Kommentarer, bønner og historier genereret af AI er Abbas kreative arbejde."
 }

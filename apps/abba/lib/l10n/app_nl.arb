@@ -404,5 +404,7 @@
         "type": "String"
       }
     }
-  }
+  },
+  "settingsBibleTranslationsLabel": "Bijbelvertalingen",
+  "settingsBibleTranslationsIntro": "De Bijbelverzen in deze app komen uit vertalingen in het publieke domein. Door AI gegenereerde commentaren, gebeden en verhalen zijn Abba's creatieve werk."
 }

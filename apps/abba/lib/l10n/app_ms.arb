@@ -404,5 +404,7 @@
         "type": "String"
       }
     }
-  }
+  },
+  "settingsBibleTranslationsLabel": "Terjemahan Alkitab",
+  "settingsBibleTranslationsIntro": "Ayat Alkitab dalam aplikasi ini datang dari terjemahan domain awam. Ulasan, doa, dan cerita yang dihasilkan AI adalah karya kreatif Abba."
 }

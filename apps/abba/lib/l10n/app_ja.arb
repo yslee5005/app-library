@@ -404,5 +404,7 @@
         "type": "String"
       }
     }
-  }
+  },
+  "settingsBibleTranslationsLabel": "聖書翻訳一覧",
+  "settingsBibleTranslationsIntro": "このアプリの聖書の言葉はすべて著作権が切れたパブリックドメインの翻訳を使用しています。AIが生成する注釈・祈り・物語はAbbaの創作物です。"
 }

@@ -912,4 +912,11 @@ class AppLocalizationsJa extends AppLocalizations {
   String bibleTranslationAttribution(String name) {
     return '($name, Public Domain)';
   }
+
+  @override
+  String get settingsBibleTranslationsLabel => '聖書翻訳一覧';
+
+  @override
+  String get settingsBibleTranslationsIntro =>
+      'このアプリの聖書の言葉はすべて著作権が切れたパブリックドメインの翻訳を使用しています。AIが生成する注釈・祈り・物語はAbbaの創作物です。';
 }

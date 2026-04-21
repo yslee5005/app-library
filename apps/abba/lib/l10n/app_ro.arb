@@ -404,5 +404,7 @@
         "type": "String"
       }
     }
-  }
+  },
+  "settingsBibleTranslationsLabel": "Traduceri ale Bibliei",
+  "settingsBibleTranslationsIntro": "Versetele biblice din această aplicație provin din traduceri aflate în domeniul public. Comentariile, rugăciunile și poveștile generate de AI sunt opera creativă a Abba."
 }

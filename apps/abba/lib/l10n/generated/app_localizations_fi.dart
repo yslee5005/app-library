@@ -934,4 +934,11 @@ class AppLocalizationsFi extends AppLocalizations {
   String bibleTranslationAttribution(String name) {
     return '($name, Public Domain)';
   }
+
+  @override
+  String get settingsBibleTranslationsLabel => 'Raamatunkäännökset';
+
+  @override
+  String get settingsBibleTranslationsIntro =>
+      'Tämän sovelluksen raamatunjakeet tulevat julkisen alueen käännöksistä. Tekoälyn luomat kommentit, rukoukset ja tarinat ovat Abban luovaa työtä.';
 }

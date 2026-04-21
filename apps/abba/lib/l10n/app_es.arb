@@ -404,5 +404,7 @@
         "type": "String"
       }
     }
-  }
+  },
+  "settingsBibleTranslationsLabel": "Traducciones de la Biblia",
+  "settingsBibleTranslationsIntro": "Los versículos bíblicos de esta aplicación provienen de traducciones de dominio público. Los comentarios, oraciones e historias generados por IA son obra creativa de Abba."
 }

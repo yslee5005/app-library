@@ -404,5 +404,7 @@
         "type": "String"
       }
     }
-  }
+  },
+  "settingsBibleTranslationsLabel": "תרגומי המקרא",
+  "settingsBibleTranslationsIntro": "פסוקי המקרא באפליקציה זו מגיעים מתרגומים בנחלת הכלל. פרשנויות, תפילות וסיפורים שנוצרו על ידי בינה מלאכותית הם יצירה של Abba."
 }

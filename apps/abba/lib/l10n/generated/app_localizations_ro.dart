@@ -941,4 +941,11 @@ class AppLocalizationsRo extends AppLocalizations {
   String bibleTranslationAttribution(String name) {
     return '($name, Public Domain)';
   }
+
+  @override
+  String get settingsBibleTranslationsLabel => 'Traduceri ale Bibliei';
+
+  @override
+  String get settingsBibleTranslationsIntro =>
+      'Versetele biblice din această aplicație provin din traduceri aflate în domeniul public. Comentariile, rugăciunile și poveștile generate de AI sunt opera creativă a Abba.';
 }

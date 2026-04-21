@@ -404,5 +404,7 @@
         "type": "String"
       }
     }
-  }
+  },
+  "settingsBibleTranslationsLabel": "Bibelübersetzungen",
+  "settingsBibleTranslationsIntro": "Die Bibelverse in dieser App stammen aus gemeinfreien Übersetzungen. KI-generierte Kommentare, Gebete und Geschichten sind Abbas kreatives Werk."
 }

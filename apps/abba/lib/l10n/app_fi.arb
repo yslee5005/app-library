@@ -404,5 +404,7 @@
         "type": "String"
       }
     }
-  }
+  },
+  "settingsBibleTranslationsLabel": "Raamatunkäännökset",
+  "settingsBibleTranslationsIntro": "Tämän sovelluksen raamatunjakeet tulevat julkisen alueen käännöksistä. Tekoälyn luomat kommentit, rukoukset ja tarinat ovat Abban luovaa työtä."
 }

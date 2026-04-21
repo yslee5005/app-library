@@ -1885,6 +1885,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'({name}, Public Domain)'**
   String bibleTranslationAttribution(String name);
+
+  /// No description provided for @settingsBibleTranslationsLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Bible Translations'**
+  String get settingsBibleTranslationsLabel;
+
+  /// No description provided for @settingsBibleTranslationsIntro.
+  ///
+  /// In en, this message translates to:
+  /// **'Bible verses in this app come from Public Domain translations. AI commentary, prayers, and stories are Abba\'s creative work.'**
+  String get settingsBibleTranslationsIntro;
 }
 
 class _AppLocalizationsDelegate

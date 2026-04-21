@@ -937,4 +937,11 @@ class AppLocalizationsHr extends AppLocalizations {
   String bibleTranslationAttribution(String name) {
     return '($name, Public Domain)';
   }
+
+  @override
+  String get settingsBibleTranslationsLabel => 'Prijevodi Biblije';
+
+  @override
+  String get settingsBibleTranslationsIntro =>
+      'Biblijski stihovi u ovoj aplikaciji dolaze iz prijevoda u javnom vlasništvu. AI-generirani komentari, molitve i priče su Abbino kreativno djelo.';
 }

@@ -404,5 +404,7 @@
         "type": "String"
       }
     }
-  }
+  },
+  "settingsBibleTranslationsLabel": "Các bản dịch Kinh Thánh",
+  "settingsBibleTranslationsIntro": "Các câu Kinh Thánh trong ứng dụng này đến từ các bản dịch thuộc phạm vi công cộng. Các bình luận, lời cầu nguyện và câu chuyện do AI tạo ra là tác phẩm sáng tạo của Abba."
 }

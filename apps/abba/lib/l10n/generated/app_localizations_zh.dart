@@ -912,4 +912,11 @@ class AppLocalizationsZh extends AppLocalizations {
   String bibleTranslationAttribution(String name) {
     return '($name, Public Domain)';
   }
+
+  @override
+  String get settingsBibleTranslationsLabel => '圣经译本';
+
+  @override
+  String get settingsBibleTranslationsIntro =>
+      '本应用中的圣经经文均来自公共领域译本。AI 生成的注释、祷告和故事是 Abba 的原创作品。';
 }

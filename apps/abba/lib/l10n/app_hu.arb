@@ -404,5 +404,7 @@
         "type": "String"
       }
     }
-  }
+  },
+  "settingsBibleTranslationsLabel": "Biblia fordítások",
+  "settingsBibleTranslationsIntro": "A Biblia-versek ebben az alkalmazásban közkincsű fordításokból származnak. A mesterséges intelligencia által generált kommentárok, imák és történetek az Abba kreatív munkája."
 }

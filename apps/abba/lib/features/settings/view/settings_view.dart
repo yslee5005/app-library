@@ -212,6 +212,16 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
                   ),
                   onTap: () => _launchUrlSafe(Uri.parse('https://abba.ystech.app/privacy')),
                 ),
+                const Divider(height: 1, indent: 56),
+                _SettingsRow(
+                  icon: Icons.menu_book_outlined,
+                  title: l10n.settingsBibleTranslationsLabel,
+                  trailing: const Icon(
+                    Icons.chevron_right,
+                    color: AbbaColors.muted,
+                  ),
+                  onTap: () => context.go('/settings/bible-translations'),
+                ),
                 if (!isAnon) ...[
                   const Divider(height: 1, indent: 56),
                   _SettingsRow(

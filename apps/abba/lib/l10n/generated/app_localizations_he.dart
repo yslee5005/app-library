@@ -919,4 +919,11 @@ class AppLocalizationsHe extends AppLocalizations {
   String bibleTranslationAttribution(String name) {
     return '($name, Public Domain)';
   }
+
+  @override
+  String get settingsBibleTranslationsLabel => 'תרגומי המקרא';
+
+  @override
+  String get settingsBibleTranslationsIntro =>
+      'פסוקי המקרא באפליקציה זו מגיעים מתרגומים בנחלת הכלל. פרשנויות, תפילות וסיפורים שנוצרו על ידי בינה מלאכותית הם יצירה של Abba.';
 }

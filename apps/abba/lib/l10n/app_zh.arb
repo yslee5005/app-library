@@ -404,5 +404,7 @@
         "type": "String"
       }
     }
-  }
+  },
+  "settingsBibleTranslationsLabel": "圣经译本",
+  "settingsBibleTranslationsIntro": "本应用中的圣经经文均来自公共领域译本。AI 生成的注释、祷告和故事是 Abba 的原创作品。"
 }

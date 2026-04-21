@@ -404,5 +404,7 @@
         "type": "String"
       }
     }
-  }
+  },
+  "settingsBibleTranslationsLabel": "Kutsal Kitap Çevirileri",
+  "settingsBibleTranslationsIntro": "Bu uygulamadaki Kutsal Kitap ayetleri kamu malı çevirilerden alınmıştır. AI tarafından oluşturulan yorumlar, dualar ve hikayeler Abba'nın yaratıcı çalışmasıdır."
 }

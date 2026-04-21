@@ -924,4 +924,11 @@ class AppLocalizationsTh extends AppLocalizations {
   String bibleTranslationAttribution(String name) {
     return '($name, Public Domain)';
   }
+
+  @override
+  String get settingsBibleTranslationsLabel => 'ฉบับแปลพระคัมภีร์';
+
+  @override
+  String get settingsBibleTranslationsIntro =>
+      'ข้อพระคัมภีร์ในแอปนี้มาจากฉบับแปลที่อยู่ในสาธารณสมบัติ คำอธิบาย คำอธิษฐาน และเรื่องราวที่สร้างโดย AI เป็นผลงานสร้างสรรค์ของ Abba';
 }

@@ -935,4 +935,11 @@ class AppLocalizationsUk extends AppLocalizations {
   String bibleTranslationAttribution(String name) {
     return '($name, Public Domain)';
   }
+
+  @override
+  String get settingsBibleTranslationsLabel => 'Переклади Біблії';
+
+  @override
+  String get settingsBibleTranslationsIntro =>
+      'Біблійні вірші в цьому додатку взяті з перекладів у суспільному надбанні. Коментарі, молитви та історії, створені ШІ, є творчою роботою Abba.';
 }

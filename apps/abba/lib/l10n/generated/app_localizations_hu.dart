@@ -938,4 +938,11 @@ class AppLocalizationsHu extends AppLocalizations {
   String bibleTranslationAttribution(String name) {
     return '($name, Public Domain)';
   }
+
+  @override
+  String get settingsBibleTranslationsLabel => 'Biblia fordítások';
+
+  @override
+  String get settingsBibleTranslationsIntro =>
+      'A Biblia-versek ebben az alkalmazásban közkincsű fordításokból származnak. A mesterséges intelligencia által generált kommentárok, imák és történetek az Abba kreatív munkája.';
 }

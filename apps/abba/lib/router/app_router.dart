@@ -17,6 +17,7 @@ import '../features/qt/view/qt_view.dart';
 import '../features/my_page/view/my_page_view.dart';
 import '../features/my_page/view/testimony_detail_view.dart';
 import '../models/post.dart';
+import '../features/settings/view/bible_translations_view.dart';
 import '../features/settings/view/membership_view.dart';
 import '../features/settings/view/notification_settings_view.dart';
 import '../features/settings/view/settings_view.dart';
@@ -133,6 +134,10 @@ GoRouter createAppRouter({required String initialLocation}) {
                 GoRoute(
                   path: 'membership',
                   builder: (context, state) => const MembershipView(),
+                ),
+                GoRoute(
+                  path: 'bible-translations',
+                  builder: (context, state) => const BibleTranslationsView(),
                 ),
               ],
             ),

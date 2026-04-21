@@ -936,4 +936,11 @@ class AppLocalizationsTr extends AppLocalizations {
   String bibleTranslationAttribution(String name) {
     return '($name, Public Domain)';
   }
+
+  @override
+  String get settingsBibleTranslationsLabel => 'Kutsal Kitap Çevirileri';
+
+  @override
+  String get settingsBibleTranslationsIntro =>
+      'Bu uygulamadaki Kutsal Kitap ayetleri kamu malı çevirilerden alınmıştır. AI tarafından oluşturulan yorumlar, dualar ve hikayeler Abba\'nın yaratıcı çalışmasıdır.';
 }

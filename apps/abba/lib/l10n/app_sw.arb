@@ -404,5 +404,7 @@
         "type": "String"
       }
     }
-  }
+  },
+  "settingsBibleTranslationsLabel": "Tafsiri za Biblia",
+  "settingsBibleTranslationsIntro": "Aya za Biblia katika programu hii zinatoka kwa tafsiri zilizo katika umma. Maoni, sala, na hadithi zilizotengenezwa na AI ni kazi ya ubunifu ya Abba."
 }

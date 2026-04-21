@@ -942,4 +942,11 @@ class AppLocalizationsMy extends AppLocalizations {
   String bibleTranslationAttribution(String name) {
     return '($name, Public Domain)';
   }
+
+  @override
+  String get settingsBibleTranslationsLabel => 'ကျမ်းစာ ဘာသာပြန်များ';
+
+  @override
+  String get settingsBibleTranslationsIntro =>
+      'ဤအက်ပ်မှ ကျမ်းပိုဒ်များသည် ပြည်သူပိုင် ဘာသာပြန်များမှ ရယူထားသည်။ AI ဖြင့် ထုတ်လုပ်သော မှတ်ချက်များ၊ ဆုတောင်းချက်များနှင့် ပုံပြင်များသည် Abba ၏ ဖန်တီးမှုလက်ရာများဖြစ်သည်။';
 }

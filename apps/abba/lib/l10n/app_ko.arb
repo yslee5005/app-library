@@ -404,5 +404,7 @@
         "type": "String"
       }
     }
-  }
+  },
+  "settingsBibleTranslationsLabel": "사용된 성경 번역본",
+  "settingsBibleTranslationsIntro": "이 앱의 성경 구절은 모두 저작권이 만료된 공공 도메인 번역본에서 가져옵니다. AI가 생성하는 주석·기도·이야기는 Abba의 창작물입니다."
 }

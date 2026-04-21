@@ -942,4 +942,11 @@ class AppLocalizationsMs extends AppLocalizations {
   String bibleTranslationAttribution(String name) {
     return '($name, Public Domain)';
   }
+
+  @override
+  String get settingsBibleTranslationsLabel => 'Terjemahan Alkitab';
+
+  @override
+  String get settingsBibleTranslationsIntro =>
+      'Ayat Alkitab dalam aplikasi ini datang dari terjemahan domain awam. Ulasan, doa, dan cerita yang dihasilkan AI adalah karya kreatif Abba.';
 }

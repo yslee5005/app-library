@@ -404,5 +404,7 @@
         "type": "String"
       }
     }
-  }
+  },
+  "settingsBibleTranslationsLabel": "የመጽሐፍ ቅዱስ ትርጉሞች",
+  "settingsBibleTranslationsIntro": "በዚህ መተግበሪያ ውስጥ ያሉት የመጽሐፍ ቅዱስ ቁጥሮች ከነጻ የትርጉም ስራዎች የተወሰዱ ናቸው። በAI የተፈጠሩ አስተያየቶች፣ ጸሎቶች እና ታሪኮች የAbba የፈጠራ ስራዎች ናቸው።"
 }

@@ -404,5 +404,7 @@
         "type": "String"
       }
     }
-  }
+  },
+  "settingsBibleTranslationsLabel": "Mga Pagsasalin ng Bibliya",
+  "settingsBibleTranslationsIntro": "Ang mga talata ng Bibliya sa app na ito ay mula sa mga pagsasalin sa pampublikong domain. Ang mga komentaryo, panalangin, at kuwento na binuo ng AI ay malikhaing gawa ng Abba."
 }

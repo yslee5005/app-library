@@ -937,4 +937,11 @@ class AppLocalizationsVi extends AppLocalizations {
   String bibleTranslationAttribution(String name) {
     return '($name, Public Domain)';
   }
+
+  @override
+  String get settingsBibleTranslationsLabel => 'Các bản dịch Kinh Thánh';
+
+  @override
+  String get settingsBibleTranslationsIntro =>
+      'Các câu Kinh Thánh trong ứng dụng này đến từ các bản dịch thuộc phạm vi công cộng. Các bình luận, lời cầu nguyện và câu chuyện do AI tạo ra là tác phẩm sáng tạo của Abba.';
 }

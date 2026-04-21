@@ -404,5 +404,7 @@
         "type": "String"
       }
     }
-  }
+  },
+  "settingsBibleTranslationsLabel": "Tłumaczenia Biblii",
+  "settingsBibleTranslationsIntro": "Wersety biblijne w tej aplikacji pochodzą z tłumaczeń w domenie publicznej. Komentarze, modlitwy i historie generowane przez AI są twórczym dziełem Abba."
 }

@@ -933,4 +933,11 @@ class AppLocalizationsSw extends AppLocalizations {
   String bibleTranslationAttribution(String name) {
     return '($name, Public Domain)';
   }
+
+  @override
+  String get settingsBibleTranslationsLabel => 'Tafsiri za Biblia';
+
+  @override
+  String get settingsBibleTranslationsIntro =>
+      'Aya za Biblia katika programu hii zinatoka kwa tafsiri zilizo katika umma. Maoni, sala, na hadithi zilizotengenezwa na AI ni kazi ya ubunifu ya Abba.';
 }

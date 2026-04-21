@@ -913,4 +913,11 @@ class AppLocalizationsAm extends AppLocalizations {
   String bibleTranslationAttribution(String name) {
     return '($name, Public Domain)';
   }
+
+  @override
+  String get settingsBibleTranslationsLabel => 'የመጽሐፍ ቅዱስ ትርጉሞች';
+
+  @override
+  String get settingsBibleTranslationsIntro =>
+      'በዚህ መተግበሪያ ውስጥ ያሉት የመጽሐፍ ቅዱስ ቁጥሮች ከነጻ የትርጉም ስራዎች የተወሰዱ ናቸው። በAI የተፈጠሩ አስተያየቶች፣ ጸሎቶች እና ታሪኮች የAbba የፈጠራ ስራዎች ናቸው።';
 }
