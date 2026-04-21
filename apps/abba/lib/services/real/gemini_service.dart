@@ -16,7 +16,7 @@ class GeminiService implements AiService {
     double temperature = 0.9,
   }) {
     return GenerativeModel(
-      model: 'gemini-2.0-flash',
+      model: 'gemini-2.5-flash',
       apiKey: AppConfig.geminiApiKey,
       systemInstruction: Content.system(systemPrompt),
       generationConfig: GenerationConfig(
