@@ -630,6 +630,24 @@ class AppLocalizationsMy extends AppLocalizations {
   String get scriptureReasonLabel => 'ဤကျမ်းပိုဒ်ကို ဘာကြောင့်';
 
   @override
+  String get scripturePostureLabel => 'ဘယ်လိုစိတ်ဓာတ်နဲ့ဖတ်ရမလဲ?';
+
+  @override
+  String get scriptureOriginalWordsTitle =>
+      'မူရင်းဘာသာစကားတွင် ပိုနက်ရှိုင်းသောအဓိပ္ပါယ်';
+
+  @override
+  String get originalWordMeaningLabel => 'အဓိပ္ပါယ်';
+
+  @override
+  String get originalWordNuanceLabel => 'ဘာသာပြန်နှင့်ခြားနားချက်';
+
+  @override
+  String originalWordsCountLabel(int count) {
+    return '$count စကားလုံး';
+  }
+
+  @override
   String get seeMore => 'ပိုမိုကြည့်ရန်';
 
   @override
@@ -814,40 +832,44 @@ class AppLocalizationsMy extends AppLocalizations {
 
   @override
   String get qtLoadingHint1 =>
-      '💛 Love — Think of someone you love for 10 seconds';
+      '💛 မေတ္တာ — ချစ်ခင်သူတစ်ယောက်အကြောင်းကို ၁၀ စက္ကန့် စဉ်းစားပါ';
 
   @override
   String get qtLoadingHint2 =>
-      '🌿 Grace — Recall one small grace you received today';
+      '🌿 ကျေးဇူးတော် — ယနေ့ ရရှိသော ကျေးဇူးတော်ငယ်တစ်ခုကို ပြန်လည်သတိရပါ';
 
   @override
   String get qtLoadingHint3 =>
-      '🌅 Hope — Picture tomorrow\'s small hope in your heart';
+      '🌅 မျှော်လင့်ချက် — မနက်ဖြန်အတွက် မျှော်လင့်ချက်ငယ်တစ်ခုကို စိတ်ထဲ ပုံဖော်ပါ';
 
   @override
-  String get qtLoadingHint4 => '🕊️ Peace — Take three slow, deep breaths';
+  String get qtLoadingHint4 =>
+      '🕊️ ငြိမ်သက်ခြင်း — အသက်ကို သုံးကြိမ် ဖြည်းဖြည်း လေးလေးနက်နက် ရှူပါ';
 
   @override
-  String get qtLoadingHint5 => '🌳 Faith — Remember one unchanging truth';
+  String get qtLoadingHint5 =>
+      '🌳 ယုံကြည်ခြင်း — မပြောင်းလဲသော အမှန်တရားတစ်ခုကို သတိရပါ';
 
   @override
   String get qtLoadingHint6 =>
-      '🌸 Gratitude — Name one thing you\'re thankful for now';
+      '🌸 ကျေးဇူးတင်ခြင်း — ယခု ကျေးဇူးတင်စရာ တစ်ခုကို ဖော်ပြပါ';
 
   @override
   String get qtLoadingHint7 =>
-      '🌊 Forgiveness — Bring to mind someone to forgive';
+      '🌊 ခွင့်လွှတ်ခြင်း — ခွင့်လွှတ်လိုသူတစ်ယောက်ကို စိတ်ထဲ ရေးဆွဲပါ';
 
   @override
-  String get qtLoadingHint8 => '📖 Wisdom — Hold onto one lesson from today';
+  String get qtLoadingHint8 =>
+      '📖 ဉာဏ်ပညာ — ယနေ့၏ သင်ခန်းစာတစ်ခုကို စိတ်ထဲ မှတ်ထားပါ';
 
   @override
   String get qtLoadingHint9 =>
-      '⏳ Patience — Think of what you\'re quietly waiting for';
+      '⏳ သည်းခံခြင်း — တိတ်ဆိတ်စွာ စောင့်ဆိုင်းနေသောအရာကို စဉ်းစားပါ';
 
   @override
-  String get qtLoadingHint10 => '✨ Joy — Remember a moment you smiled today';
+  String get qtLoadingHint10 =>
+      '✨ ဝမ်းမြောက်ခြင်း — ယနေ့ ပြုံးခဲ့သည့် အချိန်တစ်ခုကို ပြန်လည်သတိရပါ';
 
   @override
-  String get qtLoadingTitle => 'Preparing today\'s Word...';
+  String get qtLoadingTitle => 'ယနေ့၏ နှုတ်ကပါဌ်တော်ကို ပြင်ဆင်နေပါသည်...';
 }

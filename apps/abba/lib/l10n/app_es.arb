@@ -241,6 +241,11 @@
   "qtGuide2": "Comparte lo que descubriste en voz alta o por escrito",
   "qtGuide3": "Abba te ayudará a aplicar la Palabra a tu vida diaria",
   "scriptureReasonLabel": "Por qué esta Escritura",
+  "scripturePostureLabel": "¿Con qué actitud debo leerlo?",
+  "scriptureOriginalWordsTitle": "Significado profundo en el idioma original",
+  "originalWordMeaningLabel": "Significado",
+  "originalWordNuanceLabel": "Matiz vs traducción",
+  "originalWordsCountLabel": "{count} palabras",
   "seeMore": "Ver más",
   "seeAllComments": "Ver los {count} comentarios",
   "@seeAllComments": {
@@ -360,15 +365,15 @@
       }
     }
   },
-  "qtLoadingHint1": "💛 Love — Think of someone you love for 10 seconds",
-  "qtLoadingHint2": "🌿 Grace — Recall one small grace you received today",
-  "qtLoadingHint3": "🌅 Hope — Picture tomorrow's small hope in your heart",
-  "qtLoadingHint4": "🕊️ Peace — Take three slow, deep breaths",
-  "qtLoadingHint5": "🌳 Faith — Remember one unchanging truth",
-  "qtLoadingHint6": "🌸 Gratitude — Name one thing you're thankful for now",
-  "qtLoadingHint7": "🌊 Forgiveness — Bring to mind someone to forgive",
-  "qtLoadingHint8": "📖 Wisdom — Hold onto one lesson from today",
-  "qtLoadingHint9": "⏳ Patience — Think of what you're quietly waiting for",
-  "qtLoadingHint10": "✨ Joy — Remember a moment you smiled today",
-  "qtLoadingTitle": "Preparing today's Word..."
+  "qtLoadingHint1": "💛 Amor — Piensa en alguien a quien amas durante 10 segundos",
+  "qtLoadingHint2": "🌿 Gracia — Recuerda una pequeña gracia que recibiste hoy",
+  "qtLoadingHint3": "🌅 Esperanza — Imagina una pequeña esperanza para mañana",
+  "qtLoadingHint4": "🕊️ Paz — Respira profundo tres veces, lentamente",
+  "qtLoadingHint5": "🌳 Fe — Recuerda una verdad inmutable",
+  "qtLoadingHint6": "🌸 Gratitud — Nombra algo por lo que agradeces ahora",
+  "qtLoadingHint7": "🌊 Perdón — Trae a la mente a alguien a quien perdonar",
+  "qtLoadingHint8": "📖 Sabiduría — Guarda una lección de hoy en tu corazón",
+  "qtLoadingHint9": "⏳ Paciencia — Piensa en lo que esperas con calma",
+  "qtLoadingHint10": "✨ Gozo — Recuerda un momento en que sonreíste hoy",
+  "qtLoadingTitle": "Preparando la Palabra de hoy..."
 }

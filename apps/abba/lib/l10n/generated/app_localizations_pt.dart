@@ -631,6 +631,24 @@ class AppLocalizationsPt extends AppLocalizations {
   String get scriptureReasonLabel => 'Por que esta Escritura';
 
   @override
+  String get scripturePostureLabel => 'Com que atitude devo ler isto?';
+
+  @override
+  String get scriptureOriginalWordsTitle =>
+      'Significado mais profundo no idioma original';
+
+  @override
+  String get originalWordMeaningLabel => 'Significado';
+
+  @override
+  String get originalWordNuanceLabel => 'Nuance vs tradução';
+
+  @override
+  String originalWordsCountLabel(int count) {
+    return '$count palavras';
+  }
+
+  @override
   String get seeMore => 'Ver mais';
 
   @override
@@ -814,40 +832,38 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get qtLoadingHint1 =>
-      '💛 Love — Think of someone you love for 10 seconds';
+      '💛 Amor — Pense em alguém que você ama por 10 segundos';
 
   @override
   String get qtLoadingHint2 =>
-      '🌿 Grace — Recall one small grace you received today';
+      '🌿 Graça — Lembre-se de uma pequena graça recebida hoje';
 
   @override
   String get qtLoadingHint3 =>
-      '🌅 Hope — Picture tomorrow\'s small hope in your heart';
+      '🌅 Esperança — Imagine uma pequena esperança para amanhã';
 
   @override
-  String get qtLoadingHint4 => '🕊️ Peace — Take three slow, deep breaths';
+  String get qtLoadingHint4 => '🕊️ Paz — Respire fundo três vezes, devagar';
 
   @override
-  String get qtLoadingHint5 => '🌳 Faith — Remember one unchanging truth';
+  String get qtLoadingHint5 => '🌳 Fé — Lembre-se de uma verdade imutável';
 
   @override
   String get qtLoadingHint6 =>
-      '🌸 Gratitude — Name one thing you\'re thankful for now';
+      '🌸 Gratidão — Diga uma coisa pela qual é grato agora';
 
   @override
-  String get qtLoadingHint7 =>
-      '🌊 Forgiveness — Bring to mind someone to forgive';
+  String get qtLoadingHint7 => '🌊 Perdão — Traga à mente alguém para perdoar';
 
   @override
-  String get qtLoadingHint8 => '📖 Wisdom — Hold onto one lesson from today';
+  String get qtLoadingHint8 => '📖 Sabedoria — Guarde uma lição de hoje';
 
   @override
-  String get qtLoadingHint9 =>
-      '⏳ Patience — Think of what you\'re quietly waiting for';
+  String get qtLoadingHint9 => '⏳ Paciência — Pense no que espera em silêncio';
 
   @override
-  String get qtLoadingHint10 => '✨ Joy — Remember a moment you smiled today';
+  String get qtLoadingHint10 => '✨ Alegria — Lembre-se de um sorriso de hoje';
 
   @override
-  String get qtLoadingTitle => 'Preparing today\'s Word...';
+  String get qtLoadingTitle => 'Preparando a Palavra de hoje...';
 }

@@ -241,6 +241,18 @@
   "qtGuide2": "Share what you discovered — speak or type your reflection",
   "qtGuide3": "Abba will help you apply the Word to your daily life",
   "scriptureReasonLabel": "Why this Scripture",
+  "scripturePostureLabel": "How should I read it?",
+  "scriptureOriginalWordsTitle": "Deeper meaning in the original language",
+  "originalWordMeaningLabel": "Meaning",
+  "originalWordNuanceLabel": "Nuance vs translation",
+  "originalWordsCountLabel": "{count} words",
+  "@originalWordsCountLabel": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "seeMore": "See more",
   "seeAllComments": "View all {count} comments",
   "@seeAllComments": {

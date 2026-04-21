@@ -241,6 +241,11 @@
   "qtGuide2": "Dela vad du upptäckte — tala eller skriv din reflektion",
   "qtGuide3": "Abba hjälper dig att tillämpa Ordet i din vardag",
   "scriptureReasonLabel": "Varför detta bibelord",
+  "scripturePostureLabel": "Med vilken inställning ska jag läsa det?",
+  "scriptureOriginalWordsTitle": "Djupare betydelse på originalspråket",
+  "originalWordMeaningLabel": "Betydelse",
+  "originalWordNuanceLabel": "Nyans vs översättning",
+  "originalWordsCountLabel": "{count} ord",
   "seeMore": "Se mer",
   "seeAllComments": "Visa alla {count} kommentarer",
   "@seeAllComments": {
@@ -360,15 +365,15 @@
       }
     }
   },
-  "qtLoadingHint1": "💛 Love — Think of someone you love for 10 seconds",
-  "qtLoadingHint2": "🌿 Grace — Recall one small grace you received today",
-  "qtLoadingHint3": "🌅 Hope — Picture tomorrow's small hope in your heart",
-  "qtLoadingHint4": "🕊️ Peace — Take three slow, deep breaths",
-  "qtLoadingHint5": "🌳 Faith — Remember one unchanging truth",
-  "qtLoadingHint6": "🌸 Gratitude — Name one thing you're thankful for now",
-  "qtLoadingHint7": "🌊 Forgiveness — Bring to mind someone to forgive",
-  "qtLoadingHint8": "📖 Wisdom — Hold onto one lesson from today",
-  "qtLoadingHint9": "⏳ Patience — Think of what you're quietly waiting for",
-  "qtLoadingHint10": "✨ Joy — Remember a moment you smiled today",
-  "qtLoadingTitle": "Preparing today's Word..."
+  "qtLoadingHint1": "💛 Kärlek — Tänk på någon du älskar i 10 sekunder",
+  "qtLoadingHint2": "🌿 Nåd — Kom ihåg en liten nåd du fick idag",
+  "qtLoadingHint3": "🌅 Hopp — Föreställ dig ett litet hopp för imorgon",
+  "qtLoadingHint4": "🕊️ Frid — Ta tre djupa, långsamma andetag",
+  "qtLoadingHint5": "🌳 Tro — Kom ihåg en oföränderlig sanning",
+  "qtLoadingHint6": "🌸 Tacksamhet — Nämn något du är tacksam för just nu",
+  "qtLoadingHint7": "🌊 Förlåtelse — Tänk på någon att förlåta",
+  "qtLoadingHint8": "📖 Visdom — Bevara en lärdom från idag",
+  "qtLoadingHint9": "⏳ Tålamod — Tänk på vad du tyst väntar på",
+  "qtLoadingHint10": "✨ Glädje — Kom ihåg ett leende från idag",
+  "qtLoadingTitle": "Förbereder dagens Ord..."
 }

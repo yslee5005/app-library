@@ -241,6 +241,11 @@
   "qtGuide2": "Deel wat je hebt ontdekt — spreek of typ je reflectie",
   "qtGuide3": "Abba helpt je het Woord toe te passen in je dagelijks leven",
   "scriptureReasonLabel": "Waarom deze Schrift",
+  "scripturePostureLabel": "Met welke houding moet ik het lezen?",
+  "scriptureOriginalWordsTitle": "Diepere betekenis in de oorspronkelijke taal",
+  "originalWordMeaningLabel": "Betekenis",
+  "originalWordNuanceLabel": "Nuance vs vertaling",
+  "originalWordsCountLabel": "{count} woorden",
   "seeMore": "Meer bekijken",
   "seeAllComments": "Bekijk alle {count} reacties",
   "@seeAllComments": {
@@ -360,15 +365,15 @@
       }
     }
   },
-  "qtLoadingHint1": "💛 Love — Think of someone you love for 10 seconds",
-  "qtLoadingHint2": "🌿 Grace — Recall one small grace you received today",
-  "qtLoadingHint3": "🌅 Hope — Picture tomorrow's small hope in your heart",
-  "qtLoadingHint4": "🕊️ Peace — Take three slow, deep breaths",
-  "qtLoadingHint5": "🌳 Faith — Remember one unchanging truth",
-  "qtLoadingHint6": "🌸 Gratitude — Name one thing you're thankful for now",
-  "qtLoadingHint7": "🌊 Forgiveness — Bring to mind someone to forgive",
-  "qtLoadingHint8": "📖 Wisdom — Hold onto one lesson from today",
-  "qtLoadingHint9": "⏳ Patience — Think of what you're quietly waiting for",
-  "qtLoadingHint10": "✨ Joy — Remember a moment you smiled today",
-  "qtLoadingTitle": "Preparing today's Word..."
+  "qtLoadingHint1": "💛 Liefde — Denk 10 seconden aan iemand van wie je houdt",
+  "qtLoadingHint2": "🌿 Genade — Denk aan één kleine genade die je vandaag ontving",
+  "qtLoadingHint3": "🌅 Hoop — Stel je een kleine hoop voor morgen voor",
+  "qtLoadingHint4": "🕊️ Vrede — Haal drie keer langzaam diep adem",
+  "qtLoadingHint5": "🌳 Geloof — Denk aan één onveranderlijke waarheid",
+  "qtLoadingHint6": "🌸 Dankbaarheid — Noem één ding waarvoor je nu dankbaar bent",
+  "qtLoadingHint7": "🌊 Vergeving — Denk aan iemand die je wilt vergeven",
+  "qtLoadingHint8": "📖 Wijsheid — Bewaar één les van vandaag in je hart",
+  "qtLoadingHint9": "⏳ Geduld — Denk aan iets waarop je stil wacht",
+  "qtLoadingHint10": "✨ Vreugde — Denk aan een glimlach van vandaag",
+  "qtLoadingTitle": "Het Woord van vandaag wordt voorbereid..."
 }

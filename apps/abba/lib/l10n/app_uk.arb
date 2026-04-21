@@ -241,6 +241,11 @@
   "qtGuide2": "Поділіться тим, що ви відкрили — скажіть або напишіть свої думки",
   "qtGuide3": "Abba допоможе вам застосувати Слово у щоденному житті",
   "scriptureReasonLabel": "Чому саме це Писання",
+  "scripturePostureLabel": "З яким настроєм це читати?",
+  "scriptureOriginalWordsTitle": "Глибший зміст мовою оригіналу",
+  "originalWordMeaningLabel": "Значення",
+  "originalWordNuanceLabel": "Нюанс vs переклад",
+  "originalWordsCountLabel": "{count} слів",
   "seeMore": "Показати більше",
   "seeAllComments": "Переглянути всі {count} коментарів",
   "@seeAllComments": {
@@ -360,15 +365,15 @@
       }
     }
   },
-  "qtLoadingHint1": "💛 Love — Think of someone you love for 10 seconds",
-  "qtLoadingHint2": "🌿 Grace — Recall one small grace you received today",
-  "qtLoadingHint3": "🌅 Hope — Picture tomorrow's small hope in your heart",
-  "qtLoadingHint4": "🕊️ Peace — Take three slow, deep breaths",
-  "qtLoadingHint5": "🌳 Faith — Remember one unchanging truth",
-  "qtLoadingHint6": "🌸 Gratitude — Name one thing you're thankful for now",
-  "qtLoadingHint7": "🌊 Forgiveness — Bring to mind someone to forgive",
-  "qtLoadingHint8": "📖 Wisdom — Hold onto one lesson from today",
-  "qtLoadingHint9": "⏳ Patience — Think of what you're quietly waiting for",
-  "qtLoadingHint10": "✨ Joy — Remember a moment you smiled today",
-  "qtLoadingTitle": "Preparing today's Word..."
+  "qtLoadingHint1": "💛 Любов — Подумайте про близьку людину 10 секунд",
+  "qtLoadingHint2": "🌿 Благодать — Згадайте одну маленьку благодать сьогодні",
+  "qtLoadingHint3": "🌅 Надія — Уявіть невелику надію на завтра",
+  "qtLoadingHint4": "🕊️ Мир — Зробіть три повільні глибокі вдихи",
+  "qtLoadingHint5": "🌳 Віра — Згадайте одну незмінну істину",
+  "qtLoadingHint6": "🌸 Вдячність — Назвіть одну річ, за яку ви вдячні зараз",
+  "qtLoadingHint7": "🌊 Прощення — Пригадайте того, кого хочете простити",
+  "qtLoadingHint8": "📖 Мудрість — Збережіть один урок сьогоднішнього дня",
+  "qtLoadingHint9": "⏳ Терпіння — Подумайте, на що ви тихо чекаєте",
+  "qtLoadingHint10": "✨ Радість — Згадайте усмішку сьогоднішнього дня",
+  "qtLoadingTitle": "Готується сьогоднішнє Слово..."
 }

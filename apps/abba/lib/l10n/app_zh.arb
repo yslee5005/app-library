@@ -241,6 +241,11 @@
   "qtGuide2": "请分享您的领悟——说出来或写下来",
   "qtGuide3": "Abba会帮助您将话语应用到日常生活中",
   "scriptureReasonLabel": "选择这段经文的原因",
+  "scripturePostureLabel": "以什么样的心读它?",
+  "scriptureOriginalWordsTitle": "通过原文遇见更深的含义",
+  "originalWordMeaningLabel": "含义",
+  "originalWordNuanceLabel": "与译文的细微差别",
+  "originalWordsCountLabel": "{count}个词",
   "seeMore": "查看更多",
   "seeAllComments": "查看全部{count}条评论",
   "@seeAllComments": {
@@ -360,15 +365,15 @@
       }
     }
   },
-  "qtLoadingHint1": "💛 Love — Think of someone you love for 10 seconds",
-  "qtLoadingHint2": "🌿 Grace — Recall one small grace you received today",
-  "qtLoadingHint3": "🌅 Hope — Picture tomorrow's small hope in your heart",
-  "qtLoadingHint4": "🕊️ Peace — Take three slow, deep breaths",
-  "qtLoadingHint5": "🌳 Faith — Remember one unchanging truth",
-  "qtLoadingHint6": "🌸 Gratitude — Name one thing you're thankful for now",
-  "qtLoadingHint7": "🌊 Forgiveness — Bring to mind someone to forgive",
-  "qtLoadingHint8": "📖 Wisdom — Hold onto one lesson from today",
-  "qtLoadingHint9": "⏳ Patience — Think of what you're quietly waiting for",
-  "qtLoadingHint10": "✨ Joy — Remember a moment you smiled today",
-  "qtLoadingTitle": "Preparing today's Word..."
+  "qtLoadingHint1": "💛 爱 — 闭上眼睛,用10秒想一个你爱的人",
+  "qtLoadingHint2": "🌿 恩典 — 回想今天领受的一点小恩典",
+  "qtLoadingHint3": "🌅 盼望 — 在心中描绘明天的一点盼望",
+  "qtLoadingHint4": "🕊️ 平安 — 慢慢深呼吸三次",
+  "qtLoadingHint5": "🌳 信心 — 想起一个不变的真理",
+  "qtLoadingHint6": "🌸 感恩 — 说出一件你现在感谢的事",
+  "qtLoadingHint7": "🌊 饶恕 — 在心中想起一个要饶恕的人",
+  "qtLoadingHint8": "📖 智慧 — 记住今天学到的一个教训",
+  "qtLoadingHint9": "⏳ 忍耐 — 想想你静静等待的事情",
+  "qtLoadingHint10": "✨ 喜乐 — 回想今天微笑的一刻",
+  "qtLoadingTitle": "正在准备今日的话语..."
 }

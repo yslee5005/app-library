@@ -631,6 +631,23 @@ class AppLocalizationsTr extends AppLocalizations {
   String get scriptureReasonLabel => 'Neden bu ayet';
 
   @override
+  String get scripturePostureLabel => 'Hangi ruh haliyle okumalıyım?';
+
+  @override
+  String get scriptureOriginalWordsTitle => 'Orijinal dilde daha derin anlam';
+
+  @override
+  String get originalWordMeaningLabel => 'Anlam';
+
+  @override
+  String get originalWordNuanceLabel => 'Çeviri farkı';
+
+  @override
+  String originalWordsCountLabel(int count) {
+    return '$count kelime';
+  }
+
+  @override
   String get seeMore => 'Daha fazla';
 
   @override
@@ -814,40 +831,40 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get qtLoadingHint1 =>
-      '💛 Love — Think of someone you love for 10 seconds';
+      '💛 Sevgi — 10 saniye boyunca sevdiğiniz birini düşünün';
 
   @override
   String get qtLoadingHint2 =>
-      '🌿 Grace — Recall one small grace you received today';
+      '🌿 Lütuf — Bugün aldığınız küçük bir lütfu hatırlayın';
 
   @override
-  String get qtLoadingHint3 =>
-      '🌅 Hope — Picture tomorrow\'s small hope in your heart';
+  String get qtLoadingHint3 => '🌅 Umut — Yarın için küçük bir umut hayal edin';
 
   @override
-  String get qtLoadingHint4 => '🕊️ Peace — Take three slow, deep breaths';
+  String get qtLoadingHint4 => '🕊️ Huzur — Yavaşça üç kez derin nefes alın';
 
   @override
-  String get qtLoadingHint5 => '🌳 Faith — Remember one unchanging truth';
+  String get qtLoadingHint5 => '🌳 İman — Değişmeyen bir gerçeği hatırlayın';
 
   @override
   String get qtLoadingHint6 =>
-      '🌸 Gratitude — Name one thing you\'re thankful for now';
+      '🌸 Şükran — Şu an şükrettiğiniz bir şeyi söyleyin';
 
   @override
   String get qtLoadingHint7 =>
-      '🌊 Forgiveness — Bring to mind someone to forgive';
+      '🌊 Bağışlama — Bağışlamak istediğiniz birini düşünün';
 
   @override
-  String get qtLoadingHint8 => '📖 Wisdom — Hold onto one lesson from today';
+  String get qtLoadingHint8 =>
+      '📖 Hikmet — Bugünün bir dersini kalbinizde tutun';
 
   @override
-  String get qtLoadingHint9 =>
-      '⏳ Patience — Think of what you\'re quietly waiting for';
+  String get qtLoadingHint9 => '⏳ Sabır — Sessizce beklediğiniz şeyi düşünün';
 
   @override
-  String get qtLoadingHint10 => '✨ Joy — Remember a moment you smiled today';
+  String get qtLoadingHint10 =>
+      '✨ Sevinç — Bugün gülümsediğiniz anı hatırlayın';
 
   @override
-  String get qtLoadingTitle => 'Preparing today\'s Word...';
+  String get qtLoadingTitle => 'Bugünün Sözü hazırlanıyor...';
 }

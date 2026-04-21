@@ -241,6 +241,11 @@
   "qtGuide2": "သင်ရှာတွေ့သည်ကို မျှဝေပါ — ပြောပါ သို့ သင့်ဆင်ခြင်မှုကို ရေးပါ",
   "qtGuide3": "Abba သည် နှုတ်ကပတ်တော်ကို နေ့စဉ်ဘဝတွင် အသုံးချရန် ကူညီပေးမည်",
   "scriptureReasonLabel": "ဤကျမ်းပိုဒ်ကို ဘာကြောင့်",
+  "scripturePostureLabel": "ဘယ်လိုစိတ်ဓာတ်နဲ့ဖတ်ရမလဲ?",
+  "scriptureOriginalWordsTitle": "မူရင်းဘာသာစကားတွင် ပိုနက်ရှိုင်းသောအဓိပ္ပါယ်",
+  "originalWordMeaningLabel": "အဓိပ္ပါယ်",
+  "originalWordNuanceLabel": "ဘာသာပြန်နှင့်ခြားနားချက်",
+  "originalWordsCountLabel": "{count} စကားလုံး",
   "seeMore": "ပိုမိုကြည့်ရန်",
   "seeAllComments": "မှတ်ချက် {count} ခုလုံးကို ကြည့်ရန်",
   "@seeAllComments": {
@@ -360,15 +365,15 @@
       }
     }
   },
-  "qtLoadingHint1": "💛 Love — Think of someone you love for 10 seconds",
-  "qtLoadingHint2": "🌿 Grace — Recall one small grace you received today",
-  "qtLoadingHint3": "🌅 Hope — Picture tomorrow's small hope in your heart",
-  "qtLoadingHint4": "🕊️ Peace — Take three slow, deep breaths",
-  "qtLoadingHint5": "🌳 Faith — Remember one unchanging truth",
-  "qtLoadingHint6": "🌸 Gratitude — Name one thing you're thankful for now",
-  "qtLoadingHint7": "🌊 Forgiveness — Bring to mind someone to forgive",
-  "qtLoadingHint8": "📖 Wisdom — Hold onto one lesson from today",
-  "qtLoadingHint9": "⏳ Patience — Think of what you're quietly waiting for",
-  "qtLoadingHint10": "✨ Joy — Remember a moment you smiled today",
-  "qtLoadingTitle": "Preparing today's Word..."
+  "qtLoadingHint1": "💛 မေတ္တာ — ချစ်ခင်သူတစ်ယောက်အကြောင်းကို ၁၀ စက္ကန့် စဉ်းစားပါ",
+  "qtLoadingHint2": "🌿 ကျေးဇူးတော် — ယနေ့ ရရှိသော ကျေးဇူးတော်ငယ်တစ်ခုကို ပြန်လည်သတိရပါ",
+  "qtLoadingHint3": "🌅 မျှော်လင့်ချက် — မနက်ဖြန်အတွက် မျှော်လင့်ချက်ငယ်တစ်ခုကို စိတ်ထဲ ပုံဖော်ပါ",
+  "qtLoadingHint4": "🕊️ ငြိမ်သက်ခြင်း — အသက်ကို သုံးကြိမ် ဖြည်းဖြည်း လေးလေးနက်နက် ရှူပါ",
+  "qtLoadingHint5": "🌳 ယုံကြည်ခြင်း — မပြောင်းလဲသော အမှန်တရားတစ်ခုကို သတိရပါ",
+  "qtLoadingHint6": "🌸 ကျေးဇူးတင်ခြင်း — ယခု ကျေးဇူးတင်စရာ တစ်ခုကို ဖော်ပြပါ",
+  "qtLoadingHint7": "🌊 ခွင့်လွှတ်ခြင်း — ခွင့်လွှတ်လိုသူတစ်ယောက်ကို စိတ်ထဲ ရေးဆွဲပါ",
+  "qtLoadingHint8": "📖 ဉာဏ်ပညာ — ယနေ့၏ သင်ခန်းစာတစ်ခုကို စိတ်ထဲ မှတ်ထားပါ",
+  "qtLoadingHint9": "⏳ သည်းခံခြင်း — တိတ်ဆိတ်စွာ စောင့်ဆိုင်းနေသောအရာကို စဉ်းစားပါ",
+  "qtLoadingHint10": "✨ ဝမ်းမြောက်ခြင်း — ယနေ့ ပြုံးခဲ့သည့် အချိန်တစ်ခုကို ပြန်လည်သတိရပါ",
+  "qtLoadingTitle": "ယနေ့၏ နှုတ်ကပါဌ်တော်ကို ပြင်ဆင်နေပါသည်..."
 }

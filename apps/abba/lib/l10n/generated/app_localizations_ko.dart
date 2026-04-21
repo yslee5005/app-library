@@ -615,6 +615,23 @@ class AppLocalizationsKo extends AppLocalizations {
   String get scriptureReasonLabel => '이 말씀을 드리는 이유';
 
   @override
+  String get scripturePostureLabel => '어떤 마음으로 읽을까요?';
+
+  @override
+  String get scriptureOriginalWordsTitle => '원어로 만나는 깊은 뜻';
+
+  @override
+  String get originalWordMeaningLabel => '의미';
+
+  @override
+  String get originalWordNuanceLabel => '번역과의 뉘앙스 차이';
+
+  @override
+  String originalWordsCountLabel(int count) {
+    return '$count개 단어';
+  }
+
+  @override
   String get seeMore => '더 보기';
 
   @override

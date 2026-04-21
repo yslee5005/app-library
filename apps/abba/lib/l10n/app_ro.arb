@@ -241,6 +241,11 @@
   "qtGuide2": "Împărtășește ce ai descoperit — spune sau scrie reflecția ta",
   "qtGuide3": "Abba te va ajuta să aplici Cuvântul în viața de zi cu zi",
   "scriptureReasonLabel": "De ce această Scriptură",
+  "scripturePostureLabel": "Cu ce atitudine să o citesc?",
+  "scriptureOriginalWordsTitle": "Sens mai profund în limba originală",
+  "originalWordMeaningLabel": "Sens",
+  "originalWordNuanceLabel": "Nuanță vs traducere",
+  "originalWordsCountLabel": "{count} cuvinte",
   "seeMore": "Vezi mai mult",
   "seeAllComments": "Vezi toate cele {count} comentarii",
   "@seeAllComments": {
@@ -360,15 +365,15 @@
       }
     }
   },
-  "qtLoadingHint1": "💛 Love — Think of someone you love for 10 seconds",
-  "qtLoadingHint2": "🌿 Grace — Recall one small grace you received today",
-  "qtLoadingHint3": "🌅 Hope — Picture tomorrow's small hope in your heart",
-  "qtLoadingHint4": "🕊️ Peace — Take three slow, deep breaths",
-  "qtLoadingHint5": "🌳 Faith — Remember one unchanging truth",
-  "qtLoadingHint6": "🌸 Gratitude — Name one thing you're thankful for now",
-  "qtLoadingHint7": "🌊 Forgiveness — Bring to mind someone to forgive",
-  "qtLoadingHint8": "📖 Wisdom — Hold onto one lesson from today",
-  "qtLoadingHint9": "⏳ Patience — Think of what you're quietly waiting for",
-  "qtLoadingHint10": "✨ Joy — Remember a moment you smiled today",
-  "qtLoadingTitle": "Preparing today's Word..."
+  "qtLoadingHint1": "💛 Iubire — Gândește-te 10 secunde la cineva drag",
+  "qtLoadingHint2": "🌿 Har — Amintește-ți un mic har primit azi",
+  "qtLoadingHint3": "🌅 Speranță — Imaginează-ți o mică speranță pentru mâine",
+  "qtLoadingHint4": "🕊️ Pace — Respiră adânc de trei ori, încet",
+  "qtLoadingHint5": "🌳 Credință — Amintește-ți un adevăr neschimbat",
+  "qtLoadingHint6": "🌸 Recunoștință — Numește un lucru pentru care ești recunoscător acum",
+  "qtLoadingHint7": "🌊 Iertare — Adu-ți aminte de cineva pe care vrei să-l ierți",
+  "qtLoadingHint8": "📖 Înțelepciune — Păstrează o lecție de azi în inimă",
+  "qtLoadingHint9": "⏳ Răbdare — Gândește-te la ceea ce aștepți în liniște",
+  "qtLoadingHint10": "✨ Bucurie — Amintește-ți un zâmbet de azi",
+  "qtLoadingTitle": "Se pregătește Cuvântul de azi..."
 }

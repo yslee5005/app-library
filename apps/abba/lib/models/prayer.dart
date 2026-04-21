@@ -133,7 +133,6 @@ class PrayerResult {
   String testimony(String locale) => locale == 'ko' ? testimonyKo : testimonyEn;
   final Guidance? guidance;
   final AiPrayer? aiPrayer;
-  final OriginalLanguage? originalLanguage;
   final PrayerSummary? prayerSummary;
   final HistoricalStory? historicalStory;
 
@@ -144,7 +143,6 @@ class PrayerResult {
     required this.testimonyKo,
     this.guidance,
     this.aiPrayer,
-    this.originalLanguage,
     this.prayerSummary,
     this.historicalStory,
   });
@@ -161,7 +159,6 @@ class PrayerResult {
       testimonyEn: testimonyEn,
       testimonyKo: testimonyKo,
       prayerSummary: prayerSummary,
-      originalLanguage: originalLanguage,
       historicalStory: historicalStory ?? this.historicalStory,
       aiPrayer: aiPrayer ?? this.aiPrayer,
       guidance: guidance ?? this.guidance,
@@ -181,11 +178,6 @@ class PrayerResult {
           : null,
       aiPrayer: json['ai_prayer'] != null
           ? AiPrayer.fromJson(json['ai_prayer'] as Map<String, dynamic>)
-          : null,
-      originalLanguage: json['original_language'] != null
-          ? OriginalLanguage.fromJson(
-              json['original_language'] as Map<String, dynamic>,
-            )
           : null,
       prayerSummary: json['prayer_summary'] != null
           ? PrayerSummary.fromJson(
@@ -207,6 +199,9 @@ class Scripture {
   final String reference;
   final String reasonEn;
   final String reasonKo;
+  final String postureEn;
+  final String postureKo;
+  final List<ScriptureOriginalWord> originalWords;
 
   const Scripture({
     required this.verseEn,
@@ -214,6 +209,9 @@ class Scripture {
     required this.reference,
     this.reasonEn = '',
     this.reasonKo = '',
+    this.postureEn = '',
+    this.postureKo = '',
+    this.originalWords = const [],
   });
 
   factory Scripture.fromJson(Map<String, dynamic> json) {
@@ -223,11 +221,54 @@ class Scripture {
       reference: json['reference'] as String,
       reasonEn: json['reason_en'] as String? ?? json['reason'] as String? ?? '',
       reasonKo: json['reason_ko'] as String? ?? json['reason'] as String? ?? '',
+      postureEn: json['posture_en'] as String? ?? json['posture'] as String? ?? '',
+      postureKo: json['posture_ko'] as String? ?? json['posture'] as String? ?? '',
+      originalWords: (json['original_words'] as List<dynamic>?)
+              ?.map((e) => ScriptureOriginalWord.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
     );
   }
 
   String verse(String locale) => locale == 'ko' ? verseKo : verseEn;
   String reason(String locale) => locale == 'ko' ? reasonKo : reasonEn;
+  String posture(String locale) => locale == 'ko' ? postureKo : postureEn;
+}
+
+class ScriptureOriginalWord {
+  final String word;
+  final String transliteration;
+  final String language; // "Hebrew" | "Greek"
+  final String meaningEn;
+  final String meaningKo;
+  final String nuanceEn;
+  final String nuanceKo;
+
+  const ScriptureOriginalWord({
+    required this.word,
+    required this.transliteration,
+    required this.language,
+    required this.meaningEn,
+    required this.meaningKo,
+    this.nuanceEn = '',
+    this.nuanceKo = '',
+  });
+
+  factory ScriptureOriginalWord.fromJson(Map<String, dynamic> json) {
+    return ScriptureOriginalWord(
+      word: json['word'] as String,
+      transliteration: json['transliteration'] as String,
+      language: json['language'] as String,
+      meaningEn: json['meaning_en'] as String? ?? '',
+      meaningKo: json['meaning_ko'] as String? ?? '',
+      nuanceEn: json['nuance_en'] as String? ?? '',
+      nuanceKo: json['nuance_ko'] as String? ?? '',
+    );
+  }
+
+  String meaning(String locale) => locale == 'ko' ? meaningKo : meaningEn;
+  String nuance(String locale) => locale == 'ko' ? nuanceKo : nuanceEn;
+  bool get isRtl => language == 'Hebrew';
 }
 
 class BibleStory {
@@ -308,42 +349,4 @@ class AiPrayer {
         textKo: '당신만을 위한 기도문을 받아보세요...',
         isPremium: true,
       );
-}
-
-class OriginalLanguage {
-  final String word;
-  final String transliteration;
-  final String language;
-  final String meaningEn;
-  final String meaningKo;
-  final String contextEn;
-  final String contextKo;
-  final bool isPremium;
-
-  const OriginalLanguage({
-    required this.word,
-    required this.transliteration,
-    required this.language,
-    required this.meaningEn,
-    required this.meaningKo,
-    required this.contextEn,
-    required this.contextKo,
-    required this.isPremium,
-  });
-
-  factory OriginalLanguage.fromJson(Map<String, dynamic> json) {
-    return OriginalLanguage(
-      word: json['word'] as String,
-      transliteration: json['transliteration'] as String,
-      language: json['language'] as String,
-      meaningEn: json['meaning_en'] as String,
-      meaningKo: json['meaning_ko'] as String,
-      contextEn: json['context_en'] as String,
-      contextKo: json['context_ko'] as String,
-      isPremium: json['is_premium'] as bool? ?? true,
-    );
-  }
-
-  String meaning(String locale) => locale == 'ko' ? meaningKo : meaningEn;
-  String context(String locale) => locale == 'ko' ? contextKo : contextEn;
 }

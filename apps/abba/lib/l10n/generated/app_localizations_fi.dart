@@ -628,6 +628,23 @@ class AppLocalizationsFi extends AppLocalizations {
   String get scriptureReasonLabel => 'Miksi tämä jae';
 
   @override
+  String get scripturePostureLabel => 'Millä mielellä luen sen?';
+
+  @override
+  String get scriptureOriginalWordsTitle => 'Syvempi merkitys alkukielellä';
+
+  @override
+  String get originalWordMeaningLabel => 'Merkitys';
+
+  @override
+  String get originalWordNuanceLabel => 'Vivahde vs käännös';
+
+  @override
+  String originalWordsCountLabel(int count) {
+    return '$count sanaa';
+  }
+
+  @override
   String get seeMore => 'Näytä lisää';
 
   @override
@@ -811,40 +828,41 @@ class AppLocalizationsFi extends AppLocalizations {
 
   @override
   String get qtLoadingHint1 =>
-      '💛 Love — Think of someone you love for 10 seconds';
+      '💛 Rakkaus — Ajattele 10 sekuntia jotakuta rakastamaasi';
 
   @override
   String get qtLoadingHint2 =>
-      '🌿 Grace — Recall one small grace you received today';
+      '🌿 Armo — Muista yksi pieni armo, jonka sait tänään';
 
   @override
   String get qtLoadingHint3 =>
-      '🌅 Hope — Picture tomorrow\'s small hope in your heart';
+      '🌅 Toivo — Kuvittele pieni toivo huomista varten';
 
   @override
-  String get qtLoadingHint4 => '🕊️ Peace — Take three slow, deep breaths';
+  String get qtLoadingHint4 =>
+      '🕊️ Rauha — Hengitä hitaasti kolme syvää henkeä';
 
   @override
-  String get qtLoadingHint5 => '🌳 Faith — Remember one unchanging truth';
+  String get qtLoadingHint5 => '🌳 Usko — Muista yksi muuttumaton totuus';
 
   @override
   String get qtLoadingHint6 =>
-      '🌸 Gratitude — Name one thing you\'re thankful for now';
+      '🌸 Kiitollisuus — Kerro yksi asia, josta olet nyt kiitollinen';
 
   @override
   String get qtLoadingHint7 =>
-      '🌊 Forgiveness — Bring to mind someone to forgive';
+      '🌊 Anteeksianto — Mieti ketä haluat antaa anteeksi';
 
   @override
-  String get qtLoadingHint8 => '📖 Wisdom — Hold onto one lesson from today';
+  String get qtLoadingHint8 => '📖 Viisaus — Säilytä yksi tämän päivän opetus';
 
   @override
   String get qtLoadingHint9 =>
-      '⏳ Patience — Think of what you\'re quietly waiting for';
+      '⏳ Kärsivällisyys — Ajattele sitä, mitä hiljaa odotat';
 
   @override
-  String get qtLoadingHint10 => '✨ Joy — Remember a moment you smiled today';
+  String get qtLoadingHint10 => '✨ Ilo — Muista hetki, jolloin hymyilit tänään';
 
   @override
-  String get qtLoadingTitle => 'Preparing today\'s Word...';
+  String get qtLoadingTitle => 'Valmistellaan tämän päivän Sanaa...';
 }

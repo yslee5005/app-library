@@ -241,6 +241,11 @@
   "qtGuide2": "Del hva du oppdaget — si det eller skriv refleksjonen din",
   "qtGuide3": "Abba hjelper deg å anvende Ordet i hverdagen",
   "scriptureReasonLabel": "Hvorfor dette verset",
+  "scripturePostureLabel": "Med hvilken innstilling skal jeg lese det?",
+  "scriptureOriginalWordsTitle": "Dypere mening på originalspråket",
+  "originalWordMeaningLabel": "Mening",
+  "originalWordNuanceLabel": "Nyanse vs oversettelse",
+  "originalWordsCountLabel": "{count} ord",
   "seeMore": "Se mer",
   "seeAllComments": "Se alle {count} kommentarer",
   "@seeAllComments": {
@@ -360,15 +365,15 @@
       }
     }
   },
-  "qtLoadingHint1": "💛 Love — Think of someone you love for 10 seconds",
-  "qtLoadingHint2": "🌿 Grace — Recall one small grace you received today",
-  "qtLoadingHint3": "🌅 Hope — Picture tomorrow's small hope in your heart",
-  "qtLoadingHint4": "🕊️ Peace — Take three slow, deep breaths",
-  "qtLoadingHint5": "🌳 Faith — Remember one unchanging truth",
-  "qtLoadingHint6": "🌸 Gratitude — Name one thing you're thankful for now",
-  "qtLoadingHint7": "🌊 Forgiveness — Bring to mind someone to forgive",
-  "qtLoadingHint8": "📖 Wisdom — Hold onto one lesson from today",
-  "qtLoadingHint9": "⏳ Patience — Think of what you're quietly waiting for",
-  "qtLoadingHint10": "✨ Joy — Remember a moment you smiled today",
-  "qtLoadingTitle": "Preparing today's Word..."
+  "qtLoadingHint1": "💛 Kjærlighet — Tenk på noen du er glad i i 10 sekunder",
+  "qtLoadingHint2": "🌿 Nåde — Husk én liten nåde du fikk i dag",
+  "qtLoadingHint3": "🌅 Håp — Se for deg et lite håp for i morgen",
+  "qtLoadingHint4": "🕊️ Fred — Ta tre dype, rolige pust",
+  "qtLoadingHint5": "🌳 Tro — Husk én uforanderlig sannhet",
+  "qtLoadingHint6": "🌸 Takknemlighet — Nevn én ting du er takknemlig for nå",
+  "qtLoadingHint7": "🌊 Tilgivelse — Tenk på noen du ønsker å tilgi",
+  "qtLoadingHint8": "📖 Visdom — Bevar én lærdom fra i dag",
+  "qtLoadingHint9": "⏳ Tålmodighet — Tenk på det du stille venter på",
+  "qtLoadingHint10": "✨ Glede — Husk et smil fra i dag",
+  "qtLoadingTitle": "Forbereder dagens Ord..."
 }

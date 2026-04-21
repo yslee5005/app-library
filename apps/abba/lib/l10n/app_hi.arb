@@ -241,6 +241,11 @@
   "qtGuide2": "जो आपने पाया वह साझा करें — बोलकर या लिखकर",
   "qtGuide3": "Abba आपको वचन को दैनिक जीवन में लागू करने में मदद करेगा",
   "scriptureReasonLabel": "यह वचन क्यों",
+  "scripturePostureLabel": "किस भाव से पढ़ूँ?",
+  "scriptureOriginalWordsTitle": "मूल भाषा में गहरा अर्थ",
+  "originalWordMeaningLabel": "अर्थ",
+  "originalWordNuanceLabel": "अनुवाद की तुलना में सूक्ष्मता",
+  "originalWordsCountLabel": "{count} शब्द",
   "seeMore": "और देखें",
   "seeAllComments": "सभी {count} टिप्पणियाँ देखें",
   "@seeAllComments": {
@@ -360,15 +365,15 @@
       }
     }
   },
-  "qtLoadingHint1": "💛 Love — Think of someone you love for 10 seconds",
-  "qtLoadingHint2": "🌿 Grace — Recall one small grace you received today",
-  "qtLoadingHint3": "🌅 Hope — Picture tomorrow's small hope in your heart",
-  "qtLoadingHint4": "🕊️ Peace — Take three slow, deep breaths",
-  "qtLoadingHint5": "🌳 Faith — Remember one unchanging truth",
-  "qtLoadingHint6": "🌸 Gratitude — Name one thing you're thankful for now",
-  "qtLoadingHint7": "🌊 Forgiveness — Bring to mind someone to forgive",
-  "qtLoadingHint8": "📖 Wisdom — Hold onto one lesson from today",
-  "qtLoadingHint9": "⏳ Patience — Think of what you're quietly waiting for",
-  "qtLoadingHint10": "✨ Joy — Remember a moment you smiled today",
-  "qtLoadingTitle": "Preparing today's Word..."
+  "qtLoadingHint1": "💛 प्रेम — 10 सेकंड किसी प्रियजन के बारे में सोचें",
+  "qtLoadingHint2": "🌿 अनुग्रह — आज पाई एक छोटी कृपा याद करें",
+  "qtLoadingHint3": "🌅 आशा — कल की एक छोटी आशा मन में बनाएँ",
+  "qtLoadingHint4": "🕊️ शांति — तीन बार धीरे-धीरे गहरी साँस लें",
+  "qtLoadingHint5": "🌳 विश्वास — एक अटल सत्य याद करें",
+  "qtLoadingHint6": "🌸 कृतज्ञता — अभी जिसके लिए आभारी हैं उसे कहें",
+  "qtLoadingHint7": "🌊 क्षमा — किसी क्षमा करने योग्य व्यक्ति को याद करें",
+  "qtLoadingHint8": "📖 ज्ञान — आज का एक सबक हृदय में रखें",
+  "qtLoadingHint9": "⏳ धैर्य — चुपचाप जिसकी प्रतीक्षा कर रहे हैं सोचें",
+  "qtLoadingHint10": "✨ आनंद — आज मुस्कुराए एक पल को याद करें",
+  "qtLoadingTitle": "आज का वचन तैयार हो रहा है..."
 }

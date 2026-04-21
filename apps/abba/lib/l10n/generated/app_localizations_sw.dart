@@ -630,6 +630,23 @@ class AppLocalizationsSw extends AppLocalizations {
   String get scriptureReasonLabel => 'Kwa nini Andiko hili';
 
   @override
+  String get scripturePostureLabel => 'Nisome kwa moyo gani?';
+
+  @override
+  String get scriptureOriginalWordsTitle => 'Maana ya kina katika lugha asili';
+
+  @override
+  String get originalWordMeaningLabel => 'Maana';
+
+  @override
+  String get originalWordNuanceLabel => 'Tofauti na tafsiri';
+
+  @override
+  String originalWordsCountLabel(int count) {
+    return 'Maneno $count';
+  }
+
+  @override
   String get seeMore => 'Tazama zaidi';
 
   @override
@@ -813,40 +830,38 @@ class AppLocalizationsSw extends AppLocalizations {
 
   @override
   String get qtLoadingHint1 =>
-      '💛 Love — Think of someone you love for 10 seconds';
+      '💛 Upendo — Mfikirie mtu unayempenda kwa sekunde 10';
 
   @override
-  String get qtLoadingHint2 =>
-      '🌿 Grace — Recall one small grace you received today';
+  String get qtLoadingHint2 => '🌿 Neema — Kumbuka neema ndogo uliyopokea leo';
 
   @override
-  String get qtLoadingHint3 =>
-      '🌅 Hope — Picture tomorrow\'s small hope in your heart';
+  String get qtLoadingHint3 => '🌅 Tumaini — Fikiria tumaini dogo la kesho';
 
   @override
-  String get qtLoadingHint4 => '🕊️ Peace — Take three slow, deep breaths';
+  String get qtLoadingHint4 => '🕊️ Amani — Vuta pumzi tatu ndefu, polepole';
 
   @override
-  String get qtLoadingHint5 => '🌳 Faith — Remember one unchanging truth';
+  String get qtLoadingHint5 => '🌳 Imani — Kumbuka ukweli mmoja usiobadilika';
 
   @override
   String get qtLoadingHint6 =>
-      '🌸 Gratitude — Name one thing you\'re thankful for now';
+      '🌸 Shukrani — Taja jambo moja unaloshukuru sasa';
 
   @override
-  String get qtLoadingHint7 =>
-      '🌊 Forgiveness — Bring to mind someone to forgive';
+  String get qtLoadingHint7 => '🌊 Msamaha — Mfikirie mtu unayetaka kumsamehe';
 
   @override
-  String get qtLoadingHint8 => '📖 Wisdom — Hold onto one lesson from today';
+  String get qtLoadingHint8 =>
+      '📖 Hekima — Hifadhi fundisho moja la leo moyoni';
 
   @override
   String get qtLoadingHint9 =>
-      '⏳ Patience — Think of what you\'re quietly waiting for';
+      '⏳ Uvumilivu — Fikiria unachokisubiri kwa utulivu';
 
   @override
-  String get qtLoadingHint10 => '✨ Joy — Remember a moment you smiled today';
+  String get qtLoadingHint10 => '✨ Furaha — Kumbuka wakati ulipotabasamu leo';
 
   @override
-  String get qtLoadingTitle => 'Preparing today\'s Word...';
+  String get qtLoadingTitle => 'Inaandaa Neno la leo...';
 }

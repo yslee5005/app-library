@@ -241,6 +241,11 @@
   "qtGuide2": "ያገኙትን ያጋሩ — ይናገሩ ወይም ያሰቡትን ይፃፉ",
   "qtGuide3": "Abba ቃሉን በዕለታዊ ሕይወትዎ ውስጥ ተግባራዊ ለማድረግ ይረዳዎታል",
   "scriptureReasonLabel": "ለምን ይህ ጥቅስ",
+  "scripturePostureLabel": "በምን ዓይነት ልብ እነበበው?",
+  "scriptureOriginalWordsTitle": "በመሠረታዊ ቋንቋ ላይ ጥልቅ ትርጉም",
+  "originalWordMeaningLabel": "ትርጉም",
+  "originalWordNuanceLabel": "ከትርጉም ልዩነት",
+  "originalWordsCountLabel": "{count} ቃላት",
   "seeMore": "ተጨማሪ ይመልከቱ",
   "seeAllComments": "ሁሉንም {count} አስተያየቶች ይመልከቱ",
   "@seeAllComments": {
@@ -360,15 +365,15 @@
       }
     }
   },
-  "qtLoadingHint1": "💛 Love — Think of someone you love for 10 seconds",
-  "qtLoadingHint2": "🌿 Grace — Recall one small grace you received today",
-  "qtLoadingHint3": "🌅 Hope — Picture tomorrow's small hope in your heart",
-  "qtLoadingHint4": "🕊️ Peace — Take three slow, deep breaths",
-  "qtLoadingHint5": "🌳 Faith — Remember one unchanging truth",
-  "qtLoadingHint6": "🌸 Gratitude — Name one thing you're thankful for now",
-  "qtLoadingHint7": "🌊 Forgiveness — Bring to mind someone to forgive",
-  "qtLoadingHint8": "📖 Wisdom — Hold onto one lesson from today",
-  "qtLoadingHint9": "⏳ Patience — Think of what you're quietly waiting for",
-  "qtLoadingHint10": "✨ Joy — Remember a moment you smiled today",
-  "qtLoadingTitle": "Preparing today's Word..."
+  "qtLoadingHint1": "💛 ፍቅር — ስለወደዱት ሰው ለ10 ሰከንድ ያስቡ",
+  "qtLoadingHint2": "🌿 ጸጋ — ዛሬ ያገኟትን አንዲት ትንሽ ጸጋ ያስታውሱ",
+  "qtLoadingHint3": "🌅 ተስፋ — ለነገ አንዲት ትንሽ ተስፋ በልብዎ ይሣሉ",
+  "qtLoadingHint4": "🕊️ ሰላም — ሦስት ጊዜ በዝግታ ጥልቀት ይተንፍሱ",
+  "qtLoadingHint5": "🌳 እምነት — የማይለወጥ አንድ እውነት ያስታውሱ",
+  "qtLoadingHint6": "🌸 ምስጋና — አሁን ስለሚያመሰግኑበት አንድ ነገር ይናገሩ",
+  "qtLoadingHint7": "🌊 ይቅርታ — ይቅር ማለት የሚፈልጉትን ሰው ያስታውሱ",
+  "qtLoadingHint8": "📖 ጥበብ — ከዛሬ አንዲት ትምህርት በልብዎ ይያዙ",
+  "qtLoadingHint9": "⏳ ትዕግስት — በጸጥታ የሚጠብቁትን ያስቡ",
+  "qtLoadingHint10": "✨ ደስታ — ዛሬ የፈገገጉበትን ጊዜ ያስታውሱ",
+  "qtLoadingTitle": "የዛሬው ቃል እየተዘጋጀ ነው..."
 }

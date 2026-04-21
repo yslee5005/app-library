@@ -64,10 +64,82 @@ class PrayerSummary {
 
 ---
 
-## Phase 2-5 (추가 예정)
+---
 
-Phase 1 승인 후 해당 phase 진입 시 작성:
-- Phase 2: `ScriptureDeep` + `OriginalWord[]` 편입
+## Phase 2 · Scripture Deep (원어 편입)
+
+### 실제 현재 상태 (Phase 1 commit 이후)
+
+`Scripture` 클래스 이미 보유:
+- `verseEn/Ko` (구절)
+- `reference` (참조)
+- `reasonEn/Ko` (**이미 있음** — "왜 이 말씀인가")
+
+→ 사용자 요구 "왜 이 말씀" **이미 구현됨**. Phase 2는 **`posture` 추가 + 원어 편입**만.
+
+### 변경 (Phase 2 after)
+
+```dart
+class Scripture {
+  final String verseEn;
+  final String verseKo;
+  final String reference;
+  final String reasonEn;
+  final String reasonKo;
+  final String postureEn;              // 신규 — "이 말씀을 읽고 가질 자세"
+  final String postureKo;              // 신규
+  final List<OriginalWord> originalWords; // 신규 — 원어 해석 편입 (0-2개)
+  // ... (생성자 업데이트)
+}
+
+class OriginalWord {
+  final String word;                   // 히브리어/헬라어
+  final String transliteration;        // 로마자 발음
+  final String language;               // "Hebrew" | "Greek"
+  final String meaningEn;
+  final String meaningKo;
+  final String nuanceEn;               // 신규 — 번역과의 뉘앙스 차이
+  final String nuanceKo;               // 신규
+
+  String meaning(String locale) => locale == 'ko' ? meaningKo : meaningEn;
+  String nuance(String locale) => locale == 'ko' ? nuanceKo : nuanceEn;
+}
+```
+
+### PrayerResult 변경
+
+```dart
+class PrayerResult {
+  // Scripture에 originalWords 편입
+  final Scripture scripture;
+  // ...
+  // REMOVE: final OriginalLanguage? originalLanguage;  ← Phase 2에서 제거
+}
+```
+
+### 기존 `OriginalLanguage` 클래스 처리
+
+- **DELETE**: `OriginalLanguage` 클래스 전체 삭제 (`prayer.dart`)
+- 새 `OriginalWord` 클래스가 대체 (간소화 + nuance 필드 추가)
+- 기존 `OriginalLanguage.fromJson` 참조 전부 제거
+
+### Supabase 스키마 영향
+
+변경 없음 (여전히 `result: JSONB` 통째 저장).  
+단 `fromJson` 커스텀 adapter: 기존 DB 레코드의 `original_language` 키를 Scripture.originalWords[0]로 마이그레이션 (lossy 호환).
+
+### Hardcoded Fallback 영향
+
+`_hardcodedPrayerResult()`의 Scripture 부분:
+- `postureEn/Ko` 필드 신규 하드코딩
+- `originalWords` 배열 1-2개 하드코딩 (예: "ברך" barak + "חסד" chesed)
+- `originalLanguage` 필드 제거
+
+---
+
+## Phase 3-5 (추가 예정)
+
+Phase 2 승인 후 해당 phase 진입 시 작성:
 - Phase 3: `PrayerCoaching` + `Scores`
 - Phase 4: `HistoricalStoryDeep` (`todayLesson` 추가)
 - Phase 5: `AiPrayerDeep` (audioUrl 제거, `citations[]` 추가)

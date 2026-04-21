@@ -241,6 +241,11 @@
   "qtGuide2": "Partagez ce que vous avez découvert — parlez ou écrivez votre réflexion",
   "qtGuide3": "Abba vous aidera à appliquer la Parole dans votre vie quotidienne",
   "scriptureReasonLabel": "Pourquoi cette Écriture",
+  "scripturePostureLabel": "Dans quel état d'esprit le lire ?",
+  "scriptureOriginalWordsTitle": "Sens profond en langue originale",
+  "originalWordMeaningLabel": "Signification",
+  "originalWordNuanceLabel": "Nuance vs traduction",
+  "originalWordsCountLabel": "{count} mots",
   "seeMore": "Voir plus",
   "seeAllComments": "Voir les {count} commentaires",
   "@seeAllComments": {
@@ -360,15 +365,15 @@
       }
     }
   },
-  "qtLoadingHint1": "💛 Love — Think of someone you love for 10 seconds",
-  "qtLoadingHint2": "🌿 Grace — Recall one small grace you received today",
-  "qtLoadingHint3": "🌅 Hope — Picture tomorrow's small hope in your heart",
-  "qtLoadingHint4": "🕊️ Peace — Take three slow, deep breaths",
-  "qtLoadingHint5": "🌳 Faith — Remember one unchanging truth",
-  "qtLoadingHint6": "🌸 Gratitude — Name one thing you're thankful for now",
-  "qtLoadingHint7": "🌊 Forgiveness — Bring to mind someone to forgive",
-  "qtLoadingHint8": "📖 Wisdom — Hold onto one lesson from today",
-  "qtLoadingHint9": "⏳ Patience — Think of what you're quietly waiting for",
-  "qtLoadingHint10": "✨ Joy — Remember a moment you smiled today",
-  "qtLoadingTitle": "Preparing today's Word..."
+  "qtLoadingHint1": "💛 Amour — Pensez à quelqu'un que vous aimez pendant 10 secondes",
+  "qtLoadingHint2": "🌿 Grâce — Rappelez-vous une petite grâce reçue aujourd'hui",
+  "qtLoadingHint3": "🌅 Espérance — Imaginez un petit espoir pour demain",
+  "qtLoadingHint4": "🕊️ Paix — Respirez profondément trois fois, lentement",
+  "qtLoadingHint5": "🌳 Foi — Souvenez-vous d'une vérité immuable",
+  "qtLoadingHint6": "🌸 Gratitude — Nommez une chose pour laquelle vous êtes reconnaissant",
+  "qtLoadingHint7": "🌊 Pardon — Pensez à quelqu'un à pardonner",
+  "qtLoadingHint8": "📖 Sagesse — Gardez une leçon d'aujourd'hui dans votre cœur",
+  "qtLoadingHint9": "⏳ Patience — Pensez à ce que vous attendez tranquillement",
+  "qtLoadingHint10": "✨ Joie — Souvenez-vous d'un sourire d'aujourd'hui",
+  "qtLoadingTitle": "Préparation de la Parole d'aujourd'hui..."
 }

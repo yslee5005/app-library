@@ -241,6 +241,11 @@
   "qtGuide2": "깨달은 것을 소리 내어 나누거나 글로 적어주세요",
   "qtGuide3": "아바가 말씀을 삶에 적용할 수 있도록 도와드려요",
   "scriptureReasonLabel": "이 말씀을 드리는 이유",
+  "scripturePostureLabel": "어떤 마음으로 읽을까요?",
+  "scriptureOriginalWordsTitle": "원어로 만나는 깊은 뜻",
+  "originalWordMeaningLabel": "의미",
+  "originalWordNuanceLabel": "번역과의 뉘앙스 차이",
+  "originalWordsCountLabel": "{count}개 단어",
   "seeMore": "더 보기",
   "seeAllComments": "댓글 {count}개 모두 보기",
   "@seeAllComments": {

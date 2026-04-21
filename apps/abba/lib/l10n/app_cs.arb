@@ -241,6 +241,11 @@
   "qtGuide2": "Podíl se o to, co jsi objevil — řekni nebo napiš svou úvahu",
   "qtGuide3": "Abba ti pomůže uplatnit Slovo ve tvém každodenním životě",
   "scriptureReasonLabel": "Proč toto Písmo",
+  "scripturePostureLabel": "S jakým postojem to mám číst?",
+  "scriptureOriginalWordsTitle": "Hlubší význam v původním jazyce",
+  "originalWordMeaningLabel": "Význam",
+  "originalWordNuanceLabel": "Nuance vs překlad",
+  "originalWordsCountLabel": "{count} slov",
   "seeMore": "Zobrazit více",
   "seeAllComments": "Zobrazit všech {count} komentářů",
   "@seeAllComments": {
@@ -360,15 +365,15 @@
       }
     }
   },
-  "qtLoadingHint1": "💛 Love — Think of someone you love for 10 seconds",
-  "qtLoadingHint2": "🌿 Grace — Recall one small grace you received today",
-  "qtLoadingHint3": "🌅 Hope — Picture tomorrow's small hope in your heart",
-  "qtLoadingHint4": "🕊️ Peace — Take three slow, deep breaths",
-  "qtLoadingHint5": "🌳 Faith — Remember one unchanging truth",
-  "qtLoadingHint6": "🌸 Gratitude — Name one thing you're thankful for now",
-  "qtLoadingHint7": "🌊 Forgiveness — Bring to mind someone to forgive",
-  "qtLoadingHint8": "📖 Wisdom — Hold onto one lesson from today",
-  "qtLoadingHint9": "⏳ Patience — Think of what you're quietly waiting for",
-  "qtLoadingHint10": "✨ Joy — Remember a moment you smiled today",
-  "qtLoadingTitle": "Preparing today's Word..."
+  "qtLoadingHint1": "💛 Láska — Myslete 10 sekund na někoho, koho milujete",
+  "qtLoadingHint2": "🌿 Milost — Vzpomeňte si na jednu malou milost z dneška",
+  "qtLoadingHint3": "🌅 Naděje — Představte si malou naději pro zítřek",
+  "qtLoadingHint4": "🕊️ Pokoj — Třikrát pomalu a zhluboka se nadechněte",
+  "qtLoadingHint5": "🌳 Víra — Vzpomeňte si na jednu neměnnou pravdu",
+  "qtLoadingHint6": "🌸 Vděčnost — Pojmenujte jednu věc, za kterou jste teď vděční",
+  "qtLoadingHint7": "🌊 Odpuštění — Vzpomeňte si na někoho, komu chcete odpustit",
+  "qtLoadingHint8": "📖 Moudrost — Uchovejte si jedno ponaučení z dneška",
+  "qtLoadingHint9": "⏳ Trpělivost — Myslete na to, na co tiše čekáte",
+  "qtLoadingHint10": "✨ Radost — Vzpomeňte si na úsměv z dneška",
+  "qtLoadingTitle": "Připravuji dnešní Slovo..."
 }

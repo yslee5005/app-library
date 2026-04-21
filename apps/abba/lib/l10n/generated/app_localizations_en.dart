@@ -627,6 +627,24 @@ class AppLocalizationsEn extends AppLocalizations {
   String get scriptureReasonLabel => 'Why this Scripture';
 
   @override
+  String get scripturePostureLabel => 'How should I read it?';
+
+  @override
+  String get scriptureOriginalWordsTitle =>
+      'Deeper meaning in the original language';
+
+  @override
+  String get originalWordMeaningLabel => 'Meaning';
+
+  @override
+  String get originalWordNuanceLabel => 'Nuance vs translation';
+
+  @override
+  String originalWordsCountLabel(int count) {
+    return '$count words';
+  }
+
+  @override
   String get seeMore => 'See more';
 
   @override

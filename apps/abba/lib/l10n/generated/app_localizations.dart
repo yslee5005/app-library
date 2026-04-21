@@ -1340,6 +1340,36 @@ abstract class AppLocalizations {
   /// **'Why this Scripture'**
   String get scriptureReasonLabel;
 
+  /// No description provided for @scripturePostureLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'How should I read it?'**
+  String get scripturePostureLabel;
+
+  /// No description provided for @scriptureOriginalWordsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Deeper meaning in the original language'**
+  String get scriptureOriginalWordsTitle;
+
+  /// No description provided for @originalWordMeaningLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Meaning'**
+  String get originalWordMeaningLabel;
+
+  /// No description provided for @originalWordNuanceLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Nuance vs translation'**
+  String get originalWordNuanceLabel;
+
+  /// No description provided for @originalWordsCountLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} words'**
+  String originalWordsCountLabel(int count);
+
   /// No description provided for @seeMore.
   ///
   /// In en, this message translates to:

@@ -12,7 +12,6 @@ import '../../../widgets/staggered_fade_in.dart';
 import '../widgets/ai_prayer_card.dart';
 import '../widgets/bible_story_card.dart';
 import '../widgets/guidance_card.dart';
-import '../widgets/original_lang_card.dart';
 import '../widgets/scripture_card.dart';
 import '../widgets/testimony_card.dart';
 
@@ -120,17 +119,6 @@ class DashboardView extends ConsumerWidget {
             child: AiPrayerCard(
               aiPrayer: result.aiPrayer!,
               title: l10n.aiPrayerTitle,
-              locale: locale,
-              onUnlock: showPremiumUpgrade,
-              isUserPremium: isPremium,
-            ),
-          ),
-        if (result.originalLanguage != null)
-          StaggeredFadeIn(
-            index: i++,
-            child: OriginalLangCard(
-              originalLanguage: result.originalLanguage!,
-              title: l10n.originalLangTitle,
               locale: locale,
               onUnlock: showPremiumUpgrade,
               isUserPremium: isPremium,

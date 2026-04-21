@@ -241,6 +241,11 @@
   "qtGuide2": "Del hvad du opdagede — sig det eller skriv din refleksion",
   "qtGuide3": "Abba hjælper dig med at anvende Ordet i din hverdag",
   "scriptureReasonLabel": "Hvorfor dette skriftsted",
+  "scripturePostureLabel": "Med hvilken indstilling skal jeg læse det?",
+  "scriptureOriginalWordsTitle": "Dybere betydning på originalsproget",
+  "originalWordMeaningLabel": "Betydning",
+  "originalWordNuanceLabel": "Nuance vs oversættelse",
+  "originalWordsCountLabel": "{count} ord",
   "seeMore": "Se mere",
   "seeAllComments": "Se alle {count} kommentarer",
   "@seeAllComments": {
@@ -360,15 +365,15 @@
       }
     }
   },
-  "qtLoadingHint1": "💛 Love — Think of someone you love for 10 seconds",
-  "qtLoadingHint2": "🌿 Grace — Recall one small grace you received today",
-  "qtLoadingHint3": "🌅 Hope — Picture tomorrow's small hope in your heart",
-  "qtLoadingHint4": "🕊️ Peace — Take three slow, deep breaths",
-  "qtLoadingHint5": "🌳 Faith — Remember one unchanging truth",
-  "qtLoadingHint6": "🌸 Gratitude — Name one thing you're thankful for now",
-  "qtLoadingHint7": "🌊 Forgiveness — Bring to mind someone to forgive",
-  "qtLoadingHint8": "📖 Wisdom — Hold onto one lesson from today",
-  "qtLoadingHint9": "⏳ Patience — Think of what you're quietly waiting for",
-  "qtLoadingHint10": "✨ Joy — Remember a moment you smiled today",
-  "qtLoadingTitle": "Preparing today's Word..."
+  "qtLoadingHint1": "💛 Kærlighed — Tænk på en, du elsker, i 10 sekunder",
+  "qtLoadingHint2": "🌿 Nåde — Husk en lille nåde, du fik i dag",
+  "qtLoadingHint3": "🌅 Håb — Forestil dig et lille håb for i morgen",
+  "qtLoadingHint4": "🕊️ Fred — Tag tre langsomme, dybe indåndinger",
+  "qtLoadingHint5": "🌳 Tro — Husk én uforanderlig sandhed",
+  "qtLoadingHint6": "🌸 Taknemmelighed — Nævn én ting, du er taknemmelig for nu",
+  "qtLoadingHint7": "🌊 Tilgivelse — Tænk på nogen, du vil tilgive",
+  "qtLoadingHint8": "📖 Visdom — Bevar en læring fra i dag",
+  "qtLoadingHint9": "⏳ Tålmodighed — Tænk på det, du stille venter på",
+  "qtLoadingHint10": "✨ Glæde — Husk et smil fra i dag",
+  "qtLoadingTitle": "Forbereder dagens Ord..."
 }

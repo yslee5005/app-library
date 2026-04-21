@@ -241,6 +241,11 @@
   "qtGuide2": "Oszd meg, amit felfedeztél — mondd el vagy gépeld be a gondolataidat",
   "qtGuide3": "Az Abba segít alkalmazni az Igét a mindennapi életedben",
   "scriptureReasonLabel": "Miért ez a Szentírás",
+  "scripturePostureLabel": "Milyen lelkülettel olvassam?",
+  "scriptureOriginalWordsTitle": "Mélyebb jelentés az eredeti nyelven",
+  "originalWordMeaningLabel": "Jelentés",
+  "originalWordNuanceLabel": "Árnyalat vs fordítás",
+  "originalWordsCountLabel": "{count} szó",
   "seeMore": "Több megtekintése",
   "seeAllComments": "Mind a {count} hozzászólás megtekintése",
   "@seeAllComments": {
@@ -360,15 +365,15 @@
       }
     }
   },
-  "qtLoadingHint1": "💛 Love — Think of someone you love for 10 seconds",
-  "qtLoadingHint2": "🌿 Grace — Recall one small grace you received today",
-  "qtLoadingHint3": "🌅 Hope — Picture tomorrow's small hope in your heart",
-  "qtLoadingHint4": "🕊️ Peace — Take three slow, deep breaths",
-  "qtLoadingHint5": "🌳 Faith — Remember one unchanging truth",
-  "qtLoadingHint6": "🌸 Gratitude — Name one thing you're thankful for now",
-  "qtLoadingHint7": "🌊 Forgiveness — Bring to mind someone to forgive",
-  "qtLoadingHint8": "📖 Wisdom — Hold onto one lesson from today",
-  "qtLoadingHint9": "⏳ Patience — Think of what you're quietly waiting for",
-  "qtLoadingHint10": "✨ Joy — Remember a moment you smiled today",
-  "qtLoadingTitle": "Preparing today's Word..."
+  "qtLoadingHint1": "💛 Szeretet — Gondolj 10 másodpercig valakire, akit szeretsz",
+  "qtLoadingHint2": "🌿 Kegyelem — Emlékezz egy kis kegyelemre, amit ma kaptál",
+  "qtLoadingHint3": "🌅 Remény — Képzelj el egy kis reményt a holnapra",
+  "qtLoadingHint4": "🕊️ Békesség — Lélegezz háromszor lassan, mélyen",
+  "qtLoadingHint5": "🌳 Hit — Emlékezz egy változhatatlan igazságra",
+  "qtLoadingHint6": "🌸 Hála — Nevezz meg egy dolgot, amiért most hálás vagy",
+  "qtLoadingHint7": "🌊 Megbocsátás — Idézd fel valakit, akinek meg akarsz bocsátani",
+  "qtLoadingHint8": "📖 Bölcsesség — Őrizd meg a mai nap egy tanulságát",
+  "qtLoadingHint9": "⏳ Türelem — Gondolj arra, amire csendben vársz",
+  "qtLoadingHint10": "✨ Öröm — Emlékezz egy mosolyra a mai napból",
+  "qtLoadingTitle": "A mai Ige előkészítése folyamatban..."
 }

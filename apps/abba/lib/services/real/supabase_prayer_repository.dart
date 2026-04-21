@@ -229,6 +229,21 @@ class SupabasePrayerRepository implements PrayerRepository {
         'verse_en': result.scripture.verseEn,
         'verse_ko': result.scripture.verseKo,
         'reference': result.scripture.reference,
+        'reason_en': result.scripture.reasonEn,
+        'reason_ko': result.scripture.reasonKo,
+        'posture_en': result.scripture.postureEn,
+        'posture_ko': result.scripture.postureKo,
+        'original_words': result.scripture.originalWords
+            .map((w) => {
+                  'word': w.word,
+                  'transliteration': w.transliteration,
+                  'language': w.language,
+                  'meaning_en': w.meaningEn,
+                  'meaning_ko': w.meaningKo,
+                  'nuance_en': w.nuanceEn,
+                  'nuance_ko': w.nuanceKo,
+                })
+            .toList(),
       },
       'bible_story': {
         'title_en': result.bibleStory.titleEn,
@@ -251,17 +266,6 @@ class SupabasePrayerRepository implements PrayerRepository {
           'text_en': result.aiPrayer!.textEn,
           'text_ko': result.aiPrayer!.textKo,
           'is_premium': result.aiPrayer!.isPremium,
-        },
-      if (result.originalLanguage != null)
-        'original_language': {
-          'word': result.originalLanguage!.word,
-          'transliteration': result.originalLanguage!.transliteration,
-          'language': result.originalLanguage!.language,
-          'meaning_en': result.originalLanguage!.meaningEn,
-          'meaning_ko': result.originalLanguage!.meaningKo,
-          'context_en': result.originalLanguage!.contextEn,
-          'context_ko': result.originalLanguage!.contextKo,
-          'is_premium': result.originalLanguage!.isPremium,
         },
     };
   }

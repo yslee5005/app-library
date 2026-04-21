@@ -630,6 +630,24 @@ class AppLocalizationsNl extends AppLocalizations {
   String get scriptureReasonLabel => 'Waarom deze Schrift';
 
   @override
+  String get scripturePostureLabel => 'Met welke houding moet ik het lezen?';
+
+  @override
+  String get scriptureOriginalWordsTitle =>
+      'Diepere betekenis in de oorspronkelijke taal';
+
+  @override
+  String get originalWordMeaningLabel => 'Betekenis';
+
+  @override
+  String get originalWordNuanceLabel => 'Nuance vs vertaling';
+
+  @override
+  String originalWordsCountLabel(int count) {
+    return '$count woorden';
+  }
+
+  @override
   String get seeMore => 'Meer bekijken';
 
   @override
@@ -814,40 +832,41 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get qtLoadingHint1 =>
-      '💛 Love — Think of someone you love for 10 seconds';
+      '💛 Liefde — Denk 10 seconden aan iemand van wie je houdt';
 
   @override
   String get qtLoadingHint2 =>
-      '🌿 Grace — Recall one small grace you received today';
+      '🌿 Genade — Denk aan één kleine genade die je vandaag ontving';
 
   @override
   String get qtLoadingHint3 =>
-      '🌅 Hope — Picture tomorrow\'s small hope in your heart';
+      '🌅 Hoop — Stel je een kleine hoop voor morgen voor';
 
   @override
-  String get qtLoadingHint4 => '🕊️ Peace — Take three slow, deep breaths';
+  String get qtLoadingHint4 => '🕊️ Vrede — Haal drie keer langzaam diep adem';
 
   @override
-  String get qtLoadingHint5 => '🌳 Faith — Remember one unchanging truth';
+  String get qtLoadingHint5 =>
+      '🌳 Geloof — Denk aan één onveranderlijke waarheid';
 
   @override
   String get qtLoadingHint6 =>
-      '🌸 Gratitude — Name one thing you\'re thankful for now';
+      '🌸 Dankbaarheid — Noem één ding waarvoor je nu dankbaar bent';
 
   @override
   String get qtLoadingHint7 =>
-      '🌊 Forgiveness — Bring to mind someone to forgive';
+      '🌊 Vergeving — Denk aan iemand die je wilt vergeven';
 
   @override
-  String get qtLoadingHint8 => '📖 Wisdom — Hold onto one lesson from today';
+  String get qtLoadingHint8 =>
+      '📖 Wijsheid — Bewaar één les van vandaag in je hart';
 
   @override
-  String get qtLoadingHint9 =>
-      '⏳ Patience — Think of what you\'re quietly waiting for';
+  String get qtLoadingHint9 => '⏳ Geduld — Denk aan iets waarop je stil wacht';
 
   @override
-  String get qtLoadingHint10 => '✨ Joy — Remember a moment you smiled today';
+  String get qtLoadingHint10 => '✨ Vreugde — Denk aan een glimlach van vandaag';
 
   @override
-  String get qtLoadingTitle => 'Preparing today\'s Word...';
+  String get qtLoadingTitle => 'Het Woord van vandaag wordt voorbereid...';
 }

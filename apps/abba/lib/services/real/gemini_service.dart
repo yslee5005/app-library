@@ -265,6 +265,34 @@ class GeminiService implements AiService {
         reasonEn:
             'This verse reminds you that the God you prayed to is a shepherd who personally leads and provides for you.',
         reasonKo: '당신이 기도한 하나님은 당신을 인격적으로 인도하시고 채워 주시는 목자이심을 다시 새겨 주는 말씀입니다.',
+        postureEn:
+            'Read this verse slowly, picturing yourself as a sheep led by a caring shepherd. Linger on the word "my" — this is a personal relationship.',
+        postureKo:
+            '당신을 부드럽게 인도하시는 목자의 양으로 그려 보며 천천히 읽어 보세요. "나의"라는 단어에 머물러 보세요 — 이것은 개인적인 관계입니다.',
+        originalWords: [
+          ScriptureOriginalWord(
+            word: 'רֹעִי',
+            transliteration: "ro'i",
+            language: 'Hebrew',
+            meaningEn: 'my shepherd',
+            meaningKo: '나의 목자',
+            nuanceEn:
+                "Unlike 'shepherd' as a job, 'ro'i' implies an intimate, personal covenant relationship — 'the one who shepherds me personally'.",
+            nuanceKo:
+                "단순한 직업으로서의 '목자'와 달리, '로이'는 친밀하고 개인적인 언약 관계를 의미합니다 — '나를 개인적으로 돌보시는 분'.",
+          ),
+          ScriptureOriginalWord(
+            word: 'חָסֵר',
+            transliteration: 'chaser',
+            language: 'Hebrew',
+            meaningEn: 'to lack, be in want',
+            meaningKo: '부족하다, 결핍되다',
+            nuanceEn:
+                'Not merely material lack but covenant completeness — with God as shepherd, nothing essential is missing from life.',
+            nuanceKo:
+                '단순한 물질적 결핍이 아니라 언약적 완전성을 의미합니다 — 하나님이 목자이시면 삶에 본질적인 것이 빠지지 않습니다.',
+          ),
+        ],
       ),
       bibleStory: const BibleStory(
         titleEn: 'David the Shepherd',
@@ -290,18 +318,6 @@ class GeminiService implements AiService {
             'Heavenly Father, we come before You with hearts full of gratitude. You know the burdens we carry and the ones we carry for others. Lead us beside quiet waters today. Restore what feels worn. Speak peace where there is worry. In Jesus\' name, Amen.',
         textKo:
             '하늘에 계신 아버지, 감사하는 마음으로 주 앞에 나아갑니다. 우리가 짊어진 짐과 다른 이를 위해 지는 짐을 주님은 아십니다. 오늘도 쉴 만한 물가로 인도하여 주옵소서. 지친 마음을 회복시켜 주시고, 염려하는 자리에 평안을 말씀하여 주소서. 예수님의 이름으로 기도드립니다. 아멘.',
-        isPremium: true,
-      ),
-      originalLanguage: const OriginalLanguage(
-        word: 'רֹעִי',
-        transliteration: 'ro\'i',
-        language: 'Hebrew',
-        meaningEn: '"my shepherd" — implies intimate, personal care, not a distant ruler.',
-        meaningKo: '"나의 목자" — 멀리 있는 통치자가 아니라 친밀하고 인격적인 돌봄을 뜻합니다.',
-        contextEn:
-            'In ancient Israel, a shepherd knew each sheep by name and risked his own life for them. David chose this word to describe God\'s relationship with him.',
-        contextKo:
-            '고대 이스라엘에서 목자는 양 한 마리의 이름까지 알고 자신의 목숨을 걸어 보호했습니다. 다윗은 하나님과의 관계를 이 단어로 고백했습니다.',
         isPremium: true,
       ),
       historicalStory: const HistoricalStory(

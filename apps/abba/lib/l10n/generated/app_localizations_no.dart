@@ -629,6 +629,24 @@ class AppLocalizationsNo extends AppLocalizations {
   String get scriptureReasonLabel => 'Hvorfor dette verset';
 
   @override
+  String get scripturePostureLabel =>
+      'Med hvilken innstilling skal jeg lese det?';
+
+  @override
+  String get scriptureOriginalWordsTitle => 'Dypere mening på originalspråket';
+
+  @override
+  String get originalWordMeaningLabel => 'Mening';
+
+  @override
+  String get originalWordNuanceLabel => 'Nyanse vs oversettelse';
+
+  @override
+  String originalWordsCountLabel(int count) {
+    return '$count ord';
+  }
+
+  @override
   String get seeMore => 'Se mer';
 
   @override
@@ -813,40 +831,37 @@ class AppLocalizationsNo extends AppLocalizations {
 
   @override
   String get qtLoadingHint1 =>
-      '💛 Love — Think of someone you love for 10 seconds';
+      '💛 Kjærlighet — Tenk på noen du er glad i i 10 sekunder';
 
   @override
-  String get qtLoadingHint2 =>
-      '🌿 Grace — Recall one small grace you received today';
+  String get qtLoadingHint2 => '🌿 Nåde — Husk én liten nåde du fikk i dag';
 
   @override
-  String get qtLoadingHint3 =>
-      '🌅 Hope — Picture tomorrow\'s small hope in your heart';
+  String get qtLoadingHint3 => '🌅 Håp — Se for deg et lite håp for i morgen';
 
   @override
-  String get qtLoadingHint4 => '🕊️ Peace — Take three slow, deep breaths';
+  String get qtLoadingHint4 => '🕊️ Fred — Ta tre dype, rolige pust';
 
   @override
-  String get qtLoadingHint5 => '🌳 Faith — Remember one unchanging truth';
+  String get qtLoadingHint5 => '🌳 Tro — Husk én uforanderlig sannhet';
 
   @override
   String get qtLoadingHint6 =>
-      '🌸 Gratitude — Name one thing you\'re thankful for now';
+      '🌸 Takknemlighet — Nevn én ting du er takknemlig for nå';
 
   @override
-  String get qtLoadingHint7 =>
-      '🌊 Forgiveness — Bring to mind someone to forgive';
+  String get qtLoadingHint7 => '🌊 Tilgivelse — Tenk på noen du ønsker å tilgi';
 
   @override
-  String get qtLoadingHint8 => '📖 Wisdom — Hold onto one lesson from today';
+  String get qtLoadingHint8 => '📖 Visdom — Bevar én lærdom fra i dag';
 
   @override
   String get qtLoadingHint9 =>
-      '⏳ Patience — Think of what you\'re quietly waiting for';
+      '⏳ Tålmodighet — Tenk på det du stille venter på';
 
   @override
-  String get qtLoadingHint10 => '✨ Joy — Remember a moment you smiled today';
+  String get qtLoadingHint10 => '✨ Glede — Husk et smil fra i dag';
 
   @override
-  String get qtLoadingTitle => 'Preparing today\'s Word...';
+  String get qtLoadingTitle => 'Forbereder dagens Ord...';
 }

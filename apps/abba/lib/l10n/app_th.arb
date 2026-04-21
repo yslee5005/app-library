@@ -241,6 +241,11 @@
   "qtGuide2": "แบ่งปันสิ่งที่คุณค้นพบ — พูดหรือพิมพ์ข้อคิด",
   "qtGuide3": "Abba จะช่วยคุณนำพระวจนะไปใช้ในชีวิตประจำวัน",
   "scriptureReasonLabel": "ทำไมพระวจนะนี้",
+  "scripturePostureLabel": "ควรอ่านด้วยใจแบบไหน?",
+  "scriptureOriginalWordsTitle": "ความหมายที่ลึกกว่าในภาษาต้นฉบับ",
+  "originalWordMeaningLabel": "ความหมาย",
+  "originalWordNuanceLabel": "ความแตกต่างจากการแปล",
+  "originalWordsCountLabel": "{count} คำ",
   "seeMore": "ดูเพิ่มเติม",
   "seeAllComments": "ดูความคิดเห็นทั้ง {count} รายการ",
   "@seeAllComments": {
@@ -360,15 +365,15 @@
       }
     }
   },
-  "qtLoadingHint1": "💛 Love — Think of someone you love for 10 seconds",
-  "qtLoadingHint2": "🌿 Grace — Recall one small grace you received today",
-  "qtLoadingHint3": "🌅 Hope — Picture tomorrow's small hope in your heart",
-  "qtLoadingHint4": "🕊️ Peace — Take three slow, deep breaths",
-  "qtLoadingHint5": "🌳 Faith — Remember one unchanging truth",
-  "qtLoadingHint6": "🌸 Gratitude — Name one thing you're thankful for now",
-  "qtLoadingHint7": "🌊 Forgiveness — Bring to mind someone to forgive",
-  "qtLoadingHint8": "📖 Wisdom — Hold onto one lesson from today",
-  "qtLoadingHint9": "⏳ Patience — Think of what you're quietly waiting for",
-  "qtLoadingHint10": "✨ Joy — Remember a moment you smiled today",
-  "qtLoadingTitle": "Preparing today's Word..."
+  "qtLoadingHint1": "💛 ความรัก — นึกถึงคนที่คุณรักสัก 10 วินาที",
+  "qtLoadingHint2": "🌿 พระคุณ — ระลึกถึงพระคุณเล็กๆ ที่ได้รับวันนี้",
+  "qtLoadingHint3": "🌅 ความหวัง — วาดภาพความหวังเล็กๆ สำหรับพรุ่งนี้",
+  "qtLoadingHint4": "🕊️ สันติ — หายใจลึกๆ ช้าๆ สามครั้ง",
+  "qtLoadingHint5": "🌳 ความเชื่อ — ระลึกถึงความจริงที่ไม่เปลี่ยนแปลง",
+  "qtLoadingHint6": "🌸 ความขอบคุณ — บอกสิ่งที่คุณขอบคุณในตอนนี้",
+  "qtLoadingHint7": "🌊 การให้อภัย — นึกถึงคนที่อยากให้อภัย",
+  "qtLoadingHint8": "📖 ปัญญา — เก็บบทเรียนหนึ่งของวันนี้ไว้ในใจ",
+  "qtLoadingHint9": "⏳ ความอดทน — นึกถึงสิ่งที่คุณกำลังรอคอยอย่างสงบ",
+  "qtLoadingHint10": "✨ ความยินดี — จำช่วงเวลาที่ยิ้มในวันนี้",
+  "qtLoadingTitle": "กำลังเตรียมพระวจนะของวันนี้..."
 }

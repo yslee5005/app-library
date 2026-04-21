@@ -615,6 +615,23 @@ class AppLocalizationsJa extends AppLocalizations {
   String get scriptureReasonLabel => 'このみ言葉を選んだ理由';
 
   @override
+  String get scripturePostureLabel => 'どんな心で読みましょうか?';
+
+  @override
+  String get scriptureOriginalWordsTitle => '原語で出会う深い意味';
+
+  @override
+  String get originalWordMeaningLabel => '意味';
+
+  @override
+  String get originalWordNuanceLabel => '翻訳とのニュアンスの違い';
+
+  @override
+  String originalWordsCountLabel(int count) {
+    return '$count語';
+  }
+
+  @override
   String get seeMore => 'もっと見る';
 
   @override
@@ -796,41 +813,35 @@ class AppLocalizationsJa extends AppLocalizations {
   }
 
   @override
-  String get qtLoadingHint1 =>
-      '💛 Love — Think of someone you love for 10 seconds';
+  String get qtLoadingHint1 => '💛 愛 — 10秒間、愛する人を思い浮かべてください';
 
   @override
-  String get qtLoadingHint2 =>
-      '🌿 Grace — Recall one small grace you received today';
+  String get qtLoadingHint2 => '🌿 恵み — 今日受けた小さな恵みを一つ思い出してください';
 
   @override
-  String get qtLoadingHint3 =>
-      '🌅 Hope — Picture tomorrow\'s small hope in your heart';
+  String get qtLoadingHint3 => '🌅 希望 — 明日への小さな希望を心に描いてください';
 
   @override
-  String get qtLoadingHint4 => '🕊️ Peace — Take three slow, deep breaths';
+  String get qtLoadingHint4 => '🕊️ 平安 — ゆっくり三回、深く息をしてください';
 
   @override
-  String get qtLoadingHint5 => '🌳 Faith — Remember one unchanging truth';
+  String get qtLoadingHint5 => '🌳 信仰 — 変わらない真理を一つ思い出してください';
 
   @override
-  String get qtLoadingHint6 =>
-      '🌸 Gratitude — Name one thing you\'re thankful for now';
+  String get qtLoadingHint6 => '🌸 感謝 — 今、感謝できることを一つ見つけてください';
 
   @override
-  String get qtLoadingHint7 =>
-      '🌊 Forgiveness — Bring to mind someone to forgive';
+  String get qtLoadingHint7 => '🌊 赦し — 赦したい人を心に思い浮かべてください';
 
   @override
-  String get qtLoadingHint8 => '📖 Wisdom — Hold onto one lesson from today';
+  String get qtLoadingHint8 => '📖 知恵 — 今日学んだ一つの教えを心に留めてください';
 
   @override
-  String get qtLoadingHint9 =>
-      '⏳ Patience — Think of what you\'re quietly waiting for';
+  String get qtLoadingHint9 => '⏳ 忍耐 — 静かに待っているものを思い浮かべてください';
 
   @override
-  String get qtLoadingHint10 => '✨ Joy — Remember a moment you smiled today';
+  String get qtLoadingHint10 => '✨ 喜び — 今日微笑んだ瞬間を思い出してください';
 
   @override
-  String get qtLoadingTitle => 'Preparing today\'s Word...';
+  String get qtLoadingTitle => '今日のみ言葉を準備しています...';
 }

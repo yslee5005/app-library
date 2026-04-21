@@ -64,10 +64,50 @@ factory PrayerResult.fromJson(Map<String, dynamic> json) => _$PrayerResultFromJs
 
 ---
 
-## Phase 2-5 함정 (추가 예정)
+---
 
-Phase 2 진입 시 해당 phase 특유 함정 추가:
-- Phase 2: OriginalLangCard 삭제 (§13 dead code), 원어 폰트 렌더링 (히브리어 RTL)
+## Phase 2 · Scripture Deep 관련 함정
+
+- [x] **§4 i18n** — 5 신규 키 (scripturePostureLabel, scriptureOriginalWordsTitle, originalWordMeaningLabel, originalWordNuanceLabel, originalWordsCountLabel) 35 locale 일괄. namedArg placeholder 메타(`count`) 누락 주의.
+- [x] **§12 Color/Design Token** — reason 녹색 박스(sage α 0.08)와 posture 녹색 박스 시각 구분. **하드코딩 금지**, 토큰 사용.
+- [x] **§13 Dead Code Sweep** — 핵심:
+  - `OriginalLanguage` 클래스 완전 삭제 (model)
+  - `OriginalLangCard` 파일 삭제
+  - `prayer_dashboard_view.dart` + `qt_dashboard_view.dart`의 `OriginalLangCard` 참조 전부 제거
+  - 주석으로 남기지 말 것 (`// removed` 같은 comment 금지 — CLAUDE.md 룰)
+  - 삭제 전 `grep -r "OriginalLanguage\|OriginalLangCard\|originalLanguage" apps/abba/lib/`로 전체 참조 확인
+- [x] **§16 Code Generation** — Scripture / OriginalWord 모델 변경 후:
+  - (freezed 사용 안 하는 plain class라) fromJson 수동 업데이트 필요
+  - `flutter gen-l10n` (신규 ARB 키)
+- [x] **§1 Riverpod 라이프사이클** — ScriptureCard는 StatelessWidget 유지, expandable 내부 상태는 StatefulWidget으로 분리 시 dispose 주의
+
+### Phase 2 특유 주의
+
+#### 1. 히브리어/헬라어 폰트 렌더링
+- 시스템 기본 폰트가 히브리어/헬라어 부재하면 `Text` 위젯에 fallback 적용
+- 현재 앱 폰트(Noto Sans KR + Nunito)가 커버하는지 확인 필요
+- 히브리어는 **RTL 필수** (`textDirection: TextDirection.rtl`)
+- 헬라어는 LTR
+
+#### 2. 두 녹색 박스 시각 구분
+- 같은 `AbbaColors.sage` alpha 0.08 사용 시 시각 구분 어려움
+- 해결안 A: 라벨 + 아이콘으로만 구분 (이모지 "❓" / "🌿")
+- 해결안 B: reason α 0.08, posture α 0.12 (약간 진하게)
+- 해결안 C: 하나로 병합 containter + divider
+- **결정 필요**: Phase 2 구현 시작 전 UI 디자인 결정. 기본: A (아이콘 구분).
+
+#### 3. Expandable 기본 접힘 상태
+- `originalWords` 비어 있으면 섹션 자체 숨김
+- 1개 이상이면 접힘 상태로 카드 표시 (시니어 UX: 카드 길이 제한)
+- `ExpandableCard` 위젯 재사용 고려
+
+#### 4. 기존 DB 레코드 호환
+- 이미 저장된 `prayers.result` JSON에 `original_language` 필드 있음
+- `PrayerResult.fromJson`에서 legacy `original_language` → `scripture.originalWords[0]`로 마이그레이션 (lossy)
+- 또는 무시 (기존 데이터는 Phase 2 배포 후 다시 생성되면서 새 구조로)
+
+## Phase 3-5 함정 (추가 예정)
+
 - Phase 3: §2 subscription (Pro gating), asset 로딩 (§11 lazy), prompt 검증 (hallucinate 방지)
 - Phase 4: 긴 텍스트 스크롤 (§11, flutter-layout.md)
 - Phase 5: TTS 제거 시 기존 audio player dead code (§13), citations UI expandable (§11)

@@ -241,6 +241,11 @@
   "qtGuide2": "Compartilhe o que descobriu — fale ou digite sua reflexão",
   "qtGuide3": "Abba ajudará você a aplicar a Palavra no seu dia a dia",
   "scriptureReasonLabel": "Por que esta Escritura",
+  "scripturePostureLabel": "Com que atitude devo ler isto?",
+  "scriptureOriginalWordsTitle": "Significado mais profundo no idioma original",
+  "originalWordMeaningLabel": "Significado",
+  "originalWordNuanceLabel": "Nuance vs tradução",
+  "originalWordsCountLabel": "{count} palavras",
   "seeMore": "Ver mais",
   "seeAllComments": "Ver todos os {count} comentários",
   "@seeAllComments": {
@@ -360,15 +365,15 @@
       }
     }
   },
-  "qtLoadingHint1": "💛 Love — Think of someone you love for 10 seconds",
-  "qtLoadingHint2": "🌿 Grace — Recall one small grace you received today",
-  "qtLoadingHint3": "🌅 Hope — Picture tomorrow's small hope in your heart",
-  "qtLoadingHint4": "🕊️ Peace — Take three slow, deep breaths",
-  "qtLoadingHint5": "🌳 Faith — Remember one unchanging truth",
-  "qtLoadingHint6": "🌸 Gratitude — Name one thing you're thankful for now",
-  "qtLoadingHint7": "🌊 Forgiveness — Bring to mind someone to forgive",
-  "qtLoadingHint8": "📖 Wisdom — Hold onto one lesson from today",
-  "qtLoadingHint9": "⏳ Patience — Think of what you're quietly waiting for",
-  "qtLoadingHint10": "✨ Joy — Remember a moment you smiled today",
-  "qtLoadingTitle": "Preparing today's Word..."
+  "qtLoadingHint1": "💛 Amor — Pense em alguém que você ama por 10 segundos",
+  "qtLoadingHint2": "🌿 Graça — Lembre-se de uma pequena graça recebida hoje",
+  "qtLoadingHint3": "🌅 Esperança — Imagine uma pequena esperança para amanhã",
+  "qtLoadingHint4": "🕊️ Paz — Respire fundo três vezes, devagar",
+  "qtLoadingHint5": "🌳 Fé — Lembre-se de uma verdade imutável",
+  "qtLoadingHint6": "🌸 Gratidão — Diga uma coisa pela qual é grato agora",
+  "qtLoadingHint7": "🌊 Perdão — Traga à mente alguém para perdoar",
+  "qtLoadingHint8": "📖 Sabedoria — Guarde uma lição de hoje",
+  "qtLoadingHint9": "⏳ Paciência — Pense no que espera em silêncio",
+  "qtLoadingHint10": "✨ Alegria — Lembre-se de um sorriso de hoje",
+  "qtLoadingTitle": "Preparando a Palavra de hoje..."
 }

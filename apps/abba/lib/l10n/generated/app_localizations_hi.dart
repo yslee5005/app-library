@@ -629,6 +629,23 @@ class AppLocalizationsHi extends AppLocalizations {
   String get scriptureReasonLabel => 'यह वचन क्यों';
 
   @override
+  String get scripturePostureLabel => 'किस भाव से पढ़ूँ?';
+
+  @override
+  String get scriptureOriginalWordsTitle => 'मूल भाषा में गहरा अर्थ';
+
+  @override
+  String get originalWordMeaningLabel => 'अर्थ';
+
+  @override
+  String get originalWordNuanceLabel => 'अनुवाद की तुलना में सूक्ष्मता';
+
+  @override
+  String originalWordsCountLabel(int count) {
+    return '$count शब्द';
+  }
+
+  @override
   String get seeMore => 'और देखें';
 
   @override
@@ -813,40 +830,37 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get qtLoadingHint1 =>
-      '💛 Love — Think of someone you love for 10 seconds';
+      '💛 प्रेम — 10 सेकंड किसी प्रियजन के बारे में सोचें';
 
   @override
-  String get qtLoadingHint2 =>
-      '🌿 Grace — Recall one small grace you received today';
+  String get qtLoadingHint2 => '🌿 अनुग्रह — आज पाई एक छोटी कृपा याद करें';
 
   @override
-  String get qtLoadingHint3 =>
-      '🌅 Hope — Picture tomorrow\'s small hope in your heart';
+  String get qtLoadingHint3 => '🌅 आशा — कल की एक छोटी आशा मन में बनाएँ';
 
   @override
-  String get qtLoadingHint4 => '🕊️ Peace — Take three slow, deep breaths';
+  String get qtLoadingHint4 => '🕊️ शांति — तीन बार धीरे-धीरे गहरी साँस लें';
 
   @override
-  String get qtLoadingHint5 => '🌳 Faith — Remember one unchanging truth';
+  String get qtLoadingHint5 => '🌳 विश्वास — एक अटल सत्य याद करें';
 
   @override
-  String get qtLoadingHint6 =>
-      '🌸 Gratitude — Name one thing you\'re thankful for now';
+  String get qtLoadingHint6 => '🌸 कृतज्ञता — अभी जिसके लिए आभारी हैं उसे कहें';
 
   @override
   String get qtLoadingHint7 =>
-      '🌊 Forgiveness — Bring to mind someone to forgive';
+      '🌊 क्षमा — किसी क्षमा करने योग्य व्यक्ति को याद करें';
 
   @override
-  String get qtLoadingHint8 => '📖 Wisdom — Hold onto one lesson from today';
+  String get qtLoadingHint8 => '📖 ज्ञान — आज का एक सबक हृदय में रखें';
 
   @override
   String get qtLoadingHint9 =>
-      '⏳ Patience — Think of what you\'re quietly waiting for';
+      '⏳ धैर्य — चुपचाप जिसकी प्रतीक्षा कर रहे हैं सोचें';
 
   @override
-  String get qtLoadingHint10 => '✨ Joy — Remember a moment you smiled today';
+  String get qtLoadingHint10 => '✨ आनंद — आज मुस्कुराए एक पल को याद करें';
 
   @override
-  String get qtLoadingTitle => 'Preparing today\'s Word...';
+  String get qtLoadingTitle => 'आज का वचन तैयार हो रहा है...';
 }

@@ -633,6 +633,24 @@ class AppLocalizationsRo extends AppLocalizations {
   String get scriptureReasonLabel => 'De ce această Scriptură';
 
   @override
+  String get scripturePostureLabel => 'Cu ce atitudine să o citesc?';
+
+  @override
+  String get scriptureOriginalWordsTitle =>
+      'Sens mai profund în limba originală';
+
+  @override
+  String get originalWordMeaningLabel => 'Sens';
+
+  @override
+  String get originalWordNuanceLabel => 'Nuanță vs traducere';
+
+  @override
+  String originalWordsCountLabel(int count) {
+    return '$count cuvinte';
+  }
+
+  @override
   String get seeMore => 'Vezi mai mult';
 
   @override
@@ -817,40 +835,41 @@ class AppLocalizationsRo extends AppLocalizations {
 
   @override
   String get qtLoadingHint1 =>
-      '💛 Love — Think of someone you love for 10 seconds';
+      '💛 Iubire — Gândește-te 10 secunde la cineva drag';
 
   @override
-  String get qtLoadingHint2 =>
-      '🌿 Grace — Recall one small grace you received today';
+  String get qtLoadingHint2 => '🌿 Har — Amintește-ți un mic har primit azi';
 
   @override
   String get qtLoadingHint3 =>
-      '🌅 Hope — Picture tomorrow\'s small hope in your heart';
+      '🌅 Speranță — Imaginează-ți o mică speranță pentru mâine';
 
   @override
-  String get qtLoadingHint4 => '🕊️ Peace — Take three slow, deep breaths';
+  String get qtLoadingHint4 => '🕊️ Pace — Respiră adânc de trei ori, încet';
 
   @override
-  String get qtLoadingHint5 => '🌳 Faith — Remember one unchanging truth';
+  String get qtLoadingHint5 =>
+      '🌳 Credință — Amintește-ți un adevăr neschimbat';
 
   @override
   String get qtLoadingHint6 =>
-      '🌸 Gratitude — Name one thing you\'re thankful for now';
+      '🌸 Recunoștință — Numește un lucru pentru care ești recunoscător acum';
 
   @override
   String get qtLoadingHint7 =>
-      '🌊 Forgiveness — Bring to mind someone to forgive';
+      '🌊 Iertare — Adu-ți aminte de cineva pe care vrei să-l ierți';
 
   @override
-  String get qtLoadingHint8 => '📖 Wisdom — Hold onto one lesson from today';
+  String get qtLoadingHint8 =>
+      '📖 Înțelepciune — Păstrează o lecție de azi în inimă';
 
   @override
   String get qtLoadingHint9 =>
-      '⏳ Patience — Think of what you\'re quietly waiting for';
+      '⏳ Răbdare — Gândește-te la ceea ce aștepți în liniște';
 
   @override
-  String get qtLoadingHint10 => '✨ Joy — Remember a moment you smiled today';
+  String get qtLoadingHint10 => '✨ Bucurie — Amintește-ți un zâmbet de azi';
 
   @override
-  String get qtLoadingTitle => 'Preparing today\'s Word...';
+  String get qtLoadingTitle => 'Se pregătește Cuvântul de azi...';
 }

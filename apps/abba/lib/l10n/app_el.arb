@@ -241,6 +241,11 @@
   "qtGuide2": "Μοιράσου τι ανακάλυψες — μίλα ή γράψε τον στοχασμό σου",
   "qtGuide3": "Ο Abba θα σε βοηθήσει να εφαρμόσεις τον Λόγο στην καθημερινή ζωή",
   "scriptureReasonLabel": "Γιατί αυτό το εδάφιο",
+  "scripturePostureLabel": "Με ποια στάση να το διαβάσω;",
+  "scriptureOriginalWordsTitle": "Βαθύτερο νόημα στην αρχική γλώσσα",
+  "originalWordMeaningLabel": "Νόημα",
+  "originalWordNuanceLabel": "Απόχρωση vs μετάφραση",
+  "originalWordsCountLabel": "{count} λέξεις",
   "seeMore": "Δείτε περισσότερα",
   "seeAllComments": "Δείτε όλα τα {count} σχόλια",
   "@seeAllComments": {
@@ -360,15 +365,15 @@
       }
     }
   },
-  "qtLoadingHint1": "💛 Love — Think of someone you love for 10 seconds",
-  "qtLoadingHint2": "🌿 Grace — Recall one small grace you received today",
-  "qtLoadingHint3": "🌅 Hope — Picture tomorrow's small hope in your heart",
-  "qtLoadingHint4": "🕊️ Peace — Take three slow, deep breaths",
-  "qtLoadingHint5": "🌳 Faith — Remember one unchanging truth",
-  "qtLoadingHint6": "🌸 Gratitude — Name one thing you're thankful for now",
-  "qtLoadingHint7": "🌊 Forgiveness — Bring to mind someone to forgive",
-  "qtLoadingHint8": "📖 Wisdom — Hold onto one lesson from today",
-  "qtLoadingHint9": "⏳ Patience — Think of what you're quietly waiting for",
-  "qtLoadingHint10": "✨ Joy — Remember a moment you smiled today",
-  "qtLoadingTitle": "Preparing today's Word..."
+  "qtLoadingHint1": "💛 Αγάπη — Σκέψου κάποιον που αγαπάς για 10 δευτερόλεπτα",
+  "qtLoadingHint2": "🌿 Χάρη — Θυμήσου μια μικρή χάρη που έλαβες σήμερα",
+  "qtLoadingHint3": "🌅 Ελπίδα — Φαντάσου μια μικρή ελπίδα για αύριο",
+  "qtLoadingHint4": "🕊️ Ειρήνη — Πάρε τρεις αργές, βαθιές αναπνοές",
+  "qtLoadingHint5": "🌳 Πίστη — Θυμήσου μια αμετάβλητη αλήθεια",
+  "qtLoadingHint6": "🌸 Ευγνωμοσύνη — Πες ένα πράγμα για το οποίο είσαι τώρα ευγνώμων",
+  "qtLoadingHint7": "🌊 Συγχώρεση — Φέρε στο μυαλό κάποιον να συγχωρήσεις",
+  "qtLoadingHint8": "📖 Σοφία — Κράτα ένα μάθημα από σήμερα στην καρδιά",
+  "qtLoadingHint9": "⏳ Υπομονή — Σκέψου τι περιμένεις σιωπηλά",
+  "qtLoadingHint10": "✨ Χαρά — Θυμήσου ένα χαμόγελο από σήμερα",
+  "qtLoadingTitle": "Προετοιμάζεται ο σημερινός Λόγος..."
 }

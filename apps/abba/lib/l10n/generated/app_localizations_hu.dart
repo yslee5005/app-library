@@ -631,6 +631,24 @@ class AppLocalizationsHu extends AppLocalizations {
   String get scriptureReasonLabel => 'Miért ez a Szentírás';
 
   @override
+  String get scripturePostureLabel => 'Milyen lelkülettel olvassam?';
+
+  @override
+  String get scriptureOriginalWordsTitle =>
+      'Mélyebb jelentés az eredeti nyelven';
+
+  @override
+  String get originalWordMeaningLabel => 'Jelentés';
+
+  @override
+  String get originalWordNuanceLabel => 'Árnyalat vs fordítás';
+
+  @override
+  String originalWordsCountLabel(int count) {
+    return '$count szó';
+  }
+
+  @override
   String get seeMore => 'Több megtekintése';
 
   @override
@@ -814,40 +832,41 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String get qtLoadingHint1 =>
-      '💛 Love — Think of someone you love for 10 seconds';
+      '💛 Szeretet — Gondolj 10 másodpercig valakire, akit szeretsz';
 
   @override
   String get qtLoadingHint2 =>
-      '🌿 Grace — Recall one small grace you received today';
+      '🌿 Kegyelem — Emlékezz egy kis kegyelemre, amit ma kaptál';
 
   @override
   String get qtLoadingHint3 =>
-      '🌅 Hope — Picture tomorrow\'s small hope in your heart';
+      '🌅 Remény — Képzelj el egy kis reményt a holnapra';
 
   @override
-  String get qtLoadingHint4 => '🕊️ Peace — Take three slow, deep breaths';
+  String get qtLoadingHint4 =>
+      '🕊️ Békesség — Lélegezz háromszor lassan, mélyen';
 
   @override
-  String get qtLoadingHint5 => '🌳 Faith — Remember one unchanging truth';
+  String get qtLoadingHint5 => '🌳 Hit — Emlékezz egy változhatatlan igazságra';
 
   @override
   String get qtLoadingHint6 =>
-      '🌸 Gratitude — Name one thing you\'re thankful for now';
+      '🌸 Hála — Nevezz meg egy dolgot, amiért most hálás vagy';
 
   @override
   String get qtLoadingHint7 =>
-      '🌊 Forgiveness — Bring to mind someone to forgive';
+      '🌊 Megbocsátás — Idézd fel valakit, akinek meg akarsz bocsátani';
 
   @override
-  String get qtLoadingHint8 => '📖 Wisdom — Hold onto one lesson from today';
+  String get qtLoadingHint8 =>
+      '📖 Bölcsesség — Őrizd meg a mai nap egy tanulságát';
 
   @override
-  String get qtLoadingHint9 =>
-      '⏳ Patience — Think of what you\'re quietly waiting for';
+  String get qtLoadingHint9 => '⏳ Türelem — Gondolj arra, amire csendben vársz';
 
   @override
-  String get qtLoadingHint10 => '✨ Joy — Remember a moment you smiled today';
+  String get qtLoadingHint10 => '✨ Öröm — Emlékezz egy mosolyra a mai napból';
 
   @override
-  String get qtLoadingTitle => 'Preparing today\'s Word...';
+  String get qtLoadingTitle => 'A mai Ige előkészítése folyamatban...';
 }

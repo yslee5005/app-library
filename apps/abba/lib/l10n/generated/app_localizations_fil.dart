@@ -637,6 +637,24 @@ class AppLocalizationsFil extends AppLocalizations {
   String get scriptureReasonLabel => 'Bakit ang Kasulatang ito';
 
   @override
+  String get scripturePostureLabel => 'Sa anong pag-iisip ko ito babasahin?';
+
+  @override
+  String get scriptureOriginalWordsTitle =>
+      'Mas malalim na kahulugan sa orihinal na wika';
+
+  @override
+  String get originalWordMeaningLabel => 'Kahulugan';
+
+  @override
+  String get originalWordNuanceLabel => 'Nuance vs pagsasalin';
+
+  @override
+  String originalWordsCountLabel(int count) {
+    return '$count salita';
+  }
+
+  @override
   String get seeMore => 'Tingnan pa';
 
   @override
@@ -821,40 +839,44 @@ class AppLocalizationsFil extends AppLocalizations {
 
   @override
   String get qtLoadingHint1 =>
-      '💛 Love — Think of someone you love for 10 seconds';
+      '💛 Pag-ibig — Isipin ang isang mahal mo sa loob ng 10 segundo';
 
   @override
   String get qtLoadingHint2 =>
-      '🌿 Grace — Recall one small grace you received today';
+      '🌿 Biyaya — Alalahanin ang isang maliit na biyayang natanggap ngayon';
 
   @override
   String get qtLoadingHint3 =>
-      '🌅 Hope — Picture tomorrow\'s small hope in your heart';
+      '🌅 Pag-asa — Isipin ang isang maliit na pag-asa para bukas';
 
   @override
-  String get qtLoadingHint4 => '🕊️ Peace — Take three slow, deep breaths';
+  String get qtLoadingHint4 =>
+      '🕊️ Kapayapaan — Huminga nang malalim ng tatlong beses, dahan-dahan';
 
   @override
-  String get qtLoadingHint5 => '🌳 Faith — Remember one unchanging truth';
+  String get qtLoadingHint5 =>
+      '🌳 Pananampalataya — Alalahanin ang isang katotohanang hindi nagbabago';
 
   @override
   String get qtLoadingHint6 =>
-      '🌸 Gratitude — Name one thing you\'re thankful for now';
+      '🌸 Pasasalamat — Pangalanan ang isang bagay na ipinagpapasalamat mo ngayon';
 
   @override
   String get qtLoadingHint7 =>
-      '🌊 Forgiveness — Bring to mind someone to forgive';
+      '🌊 Kapatawaran — Isipin ang isang taong nais mong patawarin';
 
   @override
-  String get qtLoadingHint8 => '📖 Wisdom — Hold onto one lesson from today';
+  String get qtLoadingHint8 =>
+      '📖 Karunungan — Itago sa puso ang isang aral ngayong araw';
 
   @override
   String get qtLoadingHint9 =>
-      '⏳ Patience — Think of what you\'re quietly waiting for';
+      '⏳ Pagtitiis — Isipin ang tahimik mong hinihintay';
 
   @override
-  String get qtLoadingHint10 => '✨ Joy — Remember a moment you smiled today';
+  String get qtLoadingHint10 =>
+      '✨ Kagalakan — Alalahanin ang isang sandali ng ngiti ngayon';
 
   @override
-  String get qtLoadingTitle => 'Preparing today\'s Word...';
+  String get qtLoadingTitle => 'Inihahanda ang Salita ngayon...';
 }

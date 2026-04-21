@@ -633,6 +633,23 @@ class AppLocalizationsEl extends AppLocalizations {
   String get scriptureReasonLabel => 'Γιατί αυτό το εδάφιο';
 
   @override
+  String get scripturePostureLabel => 'Με ποια στάση να το διαβάσω;';
+
+  @override
+  String get scriptureOriginalWordsTitle => 'Βαθύτερο νόημα στην αρχική γλώσσα';
+
+  @override
+  String get originalWordMeaningLabel => 'Νόημα';
+
+  @override
+  String get originalWordNuanceLabel => 'Απόχρωση vs μετάφραση';
+
+  @override
+  String originalWordsCountLabel(int count) {
+    return '$count λέξεις';
+  }
+
+  @override
   String get seeMore => 'Δείτε περισσότερα';
 
   @override
@@ -816,40 +833,40 @@ class AppLocalizationsEl extends AppLocalizations {
 
   @override
   String get qtLoadingHint1 =>
-      '💛 Love — Think of someone you love for 10 seconds';
+      '💛 Αγάπη — Σκέψου κάποιον που αγαπάς για 10 δευτερόλεπτα';
 
   @override
   String get qtLoadingHint2 =>
-      '🌿 Grace — Recall one small grace you received today';
+      '🌿 Χάρη — Θυμήσου μια μικρή χάρη που έλαβες σήμερα';
 
   @override
   String get qtLoadingHint3 =>
-      '🌅 Hope — Picture tomorrow\'s small hope in your heart';
+      '🌅 Ελπίδα — Φαντάσου μια μικρή ελπίδα για αύριο';
 
   @override
-  String get qtLoadingHint4 => '🕊️ Peace — Take three slow, deep breaths';
+  String get qtLoadingHint4 => '🕊️ Ειρήνη — Πάρε τρεις αργές, βαθιές αναπνοές';
 
   @override
-  String get qtLoadingHint5 => '🌳 Faith — Remember one unchanging truth';
+  String get qtLoadingHint5 => '🌳 Πίστη — Θυμήσου μια αμετάβλητη αλήθεια';
 
   @override
   String get qtLoadingHint6 =>
-      '🌸 Gratitude — Name one thing you\'re thankful for now';
+      '🌸 Ευγνωμοσύνη — Πες ένα πράγμα για το οποίο είσαι τώρα ευγνώμων';
 
   @override
   String get qtLoadingHint7 =>
-      '🌊 Forgiveness — Bring to mind someone to forgive';
+      '🌊 Συγχώρεση — Φέρε στο μυαλό κάποιον να συγχωρήσεις';
 
   @override
-  String get qtLoadingHint8 => '📖 Wisdom — Hold onto one lesson from today';
+  String get qtLoadingHint8 =>
+      '📖 Σοφία — Κράτα ένα μάθημα από σήμερα στην καρδιά';
 
   @override
-  String get qtLoadingHint9 =>
-      '⏳ Patience — Think of what you\'re quietly waiting for';
+  String get qtLoadingHint9 => '⏳ Υπομονή — Σκέψου τι περιμένεις σιωπηλά';
 
   @override
-  String get qtLoadingHint10 => '✨ Joy — Remember a moment you smiled today';
+  String get qtLoadingHint10 => '✨ Χαρά — Θυμήσου ένα χαμόγελο από σήμερα';
 
   @override
-  String get qtLoadingTitle => 'Preparing today\'s Word...';
+  String get qtLoadingTitle => 'Προετοιμάζεται ο σημερινός Λόγος...';
 }

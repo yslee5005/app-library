@@ -241,6 +241,11 @@
   "qtGuide2": "Teile, was du entdeckt hast — sprich oder tippe deine Gedanken",
   "qtGuide3": "Abba hilft dir, das Wort in deinem Alltag anzuwenden",
   "scriptureReasonLabel": "Warum diese Schriftstelle",
+  "scripturePostureLabel": "Mit welcher Haltung soll ich es lesen?",
+  "scriptureOriginalWordsTitle": "Tiefere Bedeutung in der Ursprache",
+  "originalWordMeaningLabel": "Bedeutung",
+  "originalWordNuanceLabel": "Nuance vs Übersetzung",
+  "originalWordsCountLabel": "{count} Wörter",
   "seeMore": "Mehr anzeigen",
   "seeAllComments": "Alle {count} Kommentare anzeigen",
   "@seeAllComments": {
@@ -360,15 +365,15 @@
       }
     }
   },
-  "qtLoadingHint1": "💛 Love — Think of someone you love for 10 seconds",
-  "qtLoadingHint2": "🌿 Grace — Recall one small grace you received today",
-  "qtLoadingHint3": "🌅 Hope — Picture tomorrow's small hope in your heart",
-  "qtLoadingHint4": "🕊️ Peace — Take three slow, deep breaths",
-  "qtLoadingHint5": "🌳 Faith — Remember one unchanging truth",
-  "qtLoadingHint6": "🌸 Gratitude — Name one thing you're thankful for now",
-  "qtLoadingHint7": "🌊 Forgiveness — Bring to mind someone to forgive",
-  "qtLoadingHint8": "📖 Wisdom — Hold onto one lesson from today",
-  "qtLoadingHint9": "⏳ Patience — Think of what you're quietly waiting for",
-  "qtLoadingHint10": "✨ Joy — Remember a moment you smiled today",
-  "qtLoadingTitle": "Preparing today's Word..."
+  "qtLoadingHint1": "💛 Liebe — Denke 10 Sekunden an jemanden, den du liebst",
+  "qtLoadingHint2": "🌿 Gnade — Erinnere dich an eine kleine Gnade von heute",
+  "qtLoadingHint3": "🌅 Hoffnung — Male dir eine kleine Hoffnung für morgen aus",
+  "qtLoadingHint4": "🕊️ Frieden — Atme dreimal langsam und tief",
+  "qtLoadingHint5": "🌳 Glaube — Denke an eine unveränderliche Wahrheit",
+  "qtLoadingHint6": "🌸 Dankbarkeit — Nenne eine Sache, für die du jetzt dankbar bist",
+  "qtLoadingHint7": "🌊 Vergebung — Denke an jemanden, dem du vergeben willst",
+  "qtLoadingHint8": "📖 Weisheit — Bewahre eine Lektion von heute",
+  "qtLoadingHint9": "⏳ Geduld — Denke an etwas, worauf du still wartest",
+  "qtLoadingHint10": "✨ Freude — Erinnere dich an ein Lächeln von heute",
+  "qtLoadingTitle": "Das Wort für heute wird vorbereitet..."
 }

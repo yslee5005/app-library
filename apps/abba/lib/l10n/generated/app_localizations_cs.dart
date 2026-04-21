@@ -629,6 +629,23 @@ class AppLocalizationsCs extends AppLocalizations {
   String get scriptureReasonLabel => 'Proč toto Písmo';
 
   @override
+  String get scripturePostureLabel => 'S jakým postojem to mám číst?';
+
+  @override
+  String get scriptureOriginalWordsTitle => 'Hlubší význam v původním jazyce';
+
+  @override
+  String get originalWordMeaningLabel => 'Význam';
+
+  @override
+  String get originalWordNuanceLabel => 'Nuance vs překlad';
+
+  @override
+  String originalWordsCountLabel(int count) {
+    return '$count slov';
+  }
+
+  @override
   String get seeMore => 'Zobrazit více';
 
   @override
@@ -813,40 +830,43 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String get qtLoadingHint1 =>
-      '💛 Love — Think of someone you love for 10 seconds';
+      '💛 Láska — Myslete 10 sekund na někoho, koho milujete';
 
   @override
   String get qtLoadingHint2 =>
-      '🌿 Grace — Recall one small grace you received today';
+      '🌿 Milost — Vzpomeňte si na jednu malou milost z dneška';
 
   @override
   String get qtLoadingHint3 =>
-      '🌅 Hope — Picture tomorrow\'s small hope in your heart';
+      '🌅 Naděje — Představte si malou naději pro zítřek';
 
   @override
-  String get qtLoadingHint4 => '🕊️ Peace — Take three slow, deep breaths';
+  String get qtLoadingHint4 =>
+      '🕊️ Pokoj — Třikrát pomalu a zhluboka se nadechněte';
 
   @override
-  String get qtLoadingHint5 => '🌳 Faith — Remember one unchanging truth';
+  String get qtLoadingHint5 =>
+      '🌳 Víra — Vzpomeňte si na jednu neměnnou pravdu';
 
   @override
   String get qtLoadingHint6 =>
-      '🌸 Gratitude — Name one thing you\'re thankful for now';
+      '🌸 Vděčnost — Pojmenujte jednu věc, za kterou jste teď vděční';
 
   @override
   String get qtLoadingHint7 =>
-      '🌊 Forgiveness — Bring to mind someone to forgive';
+      '🌊 Odpuštění — Vzpomeňte si na někoho, komu chcete odpustit';
 
   @override
-  String get qtLoadingHint8 => '📖 Wisdom — Hold onto one lesson from today';
+  String get qtLoadingHint8 =>
+      '📖 Moudrost — Uchovejte si jedno ponaučení z dneška';
 
   @override
   String get qtLoadingHint9 =>
-      '⏳ Patience — Think of what you\'re quietly waiting for';
+      '⏳ Trpělivost — Myslete na to, na co tiše čekáte';
 
   @override
-  String get qtLoadingHint10 => '✨ Joy — Remember a moment you smiled today';
+  String get qtLoadingHint10 => '✨ Radost — Vzpomeňte si na úsměv z dneška';
 
   @override
-  String get qtLoadingTitle => 'Preparing today\'s Word...';
+  String get qtLoadingTitle => 'Připravuji dnešní Slovo...';
 }

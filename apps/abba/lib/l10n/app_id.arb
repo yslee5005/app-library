@@ -241,6 +241,11 @@
   "qtGuide2": "Bagikan apa yang kamu temukan — ucapkan atau ketik renunganmu",
   "qtGuide3": "Abba akan membantumu menerapkan Firman dalam kehidupan sehari-hari",
   "scriptureReasonLabel": "Mengapa Firman ini",
+  "scripturePostureLabel": "Dengan sikap apa saya harus membacanya?",
+  "scriptureOriginalWordsTitle": "Makna lebih dalam dalam bahasa asli",
+  "originalWordMeaningLabel": "Makna",
+  "originalWordNuanceLabel": "Nuansa vs terjemahan",
+  "originalWordsCountLabel": "{count} kata",
   "seeMore": "Lihat selengkapnya",
   "seeAllComments": "Lihat semua {count} komentar",
   "@seeAllComments": {
@@ -360,15 +365,15 @@
       }
     }
   },
-  "qtLoadingHint1": "💛 Love — Think of someone you love for 10 seconds",
-  "qtLoadingHint2": "🌿 Grace — Recall one small grace you received today",
-  "qtLoadingHint3": "🌅 Hope — Picture tomorrow's small hope in your heart",
-  "qtLoadingHint4": "🕊️ Peace — Take three slow, deep breaths",
-  "qtLoadingHint5": "🌳 Faith — Remember one unchanging truth",
-  "qtLoadingHint6": "🌸 Gratitude — Name one thing you're thankful for now",
-  "qtLoadingHint7": "🌊 Forgiveness — Bring to mind someone to forgive",
-  "qtLoadingHint8": "📖 Wisdom — Hold onto one lesson from today",
-  "qtLoadingHint9": "⏳ Patience — Think of what you're quietly waiting for",
-  "qtLoadingHint10": "✨ Joy — Remember a moment you smiled today",
-  "qtLoadingTitle": "Preparing today's Word..."
+  "qtLoadingHint1": "💛 Kasih — Pikirkan seseorang yang kamu kasihi selama 10 detik",
+  "qtLoadingHint2": "🌿 Anugerah — Ingat satu anugerah kecil yang kamu terima hari ini",
+  "qtLoadingHint3": "🌅 Harapan — Bayangkan harapan kecil untuk esok hari",
+  "qtLoadingHint4": "🕊️ Damai — Tarik napas dalam tiga kali, perlahan",
+  "qtLoadingHint5": "🌳 Iman — Ingat satu kebenaran yang tak berubah",
+  "qtLoadingHint6": "🌸 Syukur — Sebutkan satu hal yang kamu syukuri sekarang",
+  "qtLoadingHint7": "🌊 Pengampunan — Bayangkan seseorang yang ingin kamu ampuni",
+  "qtLoadingHint8": "📖 Hikmat — Simpan satu pelajaran hari ini di hatimu",
+  "qtLoadingHint9": "⏳ Kesabaran — Pikirkan apa yang kamu tunggu dengan tenang",
+  "qtLoadingHint10": "✨ Sukacita — Ingat saat kamu tersenyum hari ini",
+  "qtLoadingTitle": "Menyiapkan Firman hari ini..."
 }

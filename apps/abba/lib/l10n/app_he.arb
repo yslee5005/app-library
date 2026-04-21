@@ -241,6 +241,11 @@
   "qtGuide2": "שתף את מה שגילית — דבר או הקלד את ההתבוננות שלך",
   "qtGuide3": "Abba יעזור לך ליישם את הדבר בחיי היומיום",
   "scriptureReasonLabel": "למה פסוק זה",
+  "scripturePostureLabel": "באיזו גישה לקרוא את זה?",
+  "scriptureOriginalWordsTitle": "משמעות עמוקה יותר בשפת המקור",
+  "originalWordMeaningLabel": "משמעות",
+  "originalWordNuanceLabel": "ניואנס לעומת תרגום",
+  "originalWordsCountLabel": "{count} מילים",
   "seeMore": "ראה עוד",
   "seeAllComments": "צפה בכל {count} התגובות",
   "@seeAllComments": {
@@ -360,15 +365,15 @@
       }
     }
   },
-  "qtLoadingHint1": "💛 Love — Think of someone you love for 10 seconds",
-  "qtLoadingHint2": "🌿 Grace — Recall one small grace you received today",
-  "qtLoadingHint3": "🌅 Hope — Picture tomorrow's small hope in your heart",
-  "qtLoadingHint4": "🕊️ Peace — Take three slow, deep breaths",
-  "qtLoadingHint5": "🌳 Faith — Remember one unchanging truth",
-  "qtLoadingHint6": "🌸 Gratitude — Name one thing you're thankful for now",
-  "qtLoadingHint7": "🌊 Forgiveness — Bring to mind someone to forgive",
-  "qtLoadingHint8": "📖 Wisdom — Hold onto one lesson from today",
-  "qtLoadingHint9": "⏳ Patience — Think of what you're quietly waiting for",
-  "qtLoadingHint10": "✨ Joy — Remember a moment you smiled today",
-  "qtLoadingTitle": "Preparing today's Word..."
+  "qtLoadingHint1": "💛 אהבה — חשוב על מישהו שאתה אוהב למשך 10 שניות",
+  "qtLoadingHint2": "🌿 חסד — היזכר בחסד קטן שקיבלת היום",
+  "qtLoadingHint3": "🌅 תקווה — דמיין תקווה קטנה למחר",
+  "qtLoadingHint4": "🕊️ שלום — נשום עמוק שלוש פעמים, לאט",
+  "qtLoadingHint5": "🌳 אמונה — זכור אמת אחת שאינה משתנה",
+  "qtLoadingHint6": "🌸 הודיה — ציין דבר אחד שאתה מודה עליו עכשיו",
+  "qtLoadingHint7": "🌊 סליחה — העלה בזיכרונך מישהו לסלוח לו",
+  "qtLoadingHint8": "📖 חכמה — שמור בלבך לקח אחד מהיום",
+  "qtLoadingHint9": "⏳ סבלנות — חשוב על מה שאתה מחכה לו בשקט",
+  "qtLoadingHint10": "✨ שמחה — זכור רגע של חיוך היום",
+  "qtLoadingTitle": "מכין את דבר היום..."
 }

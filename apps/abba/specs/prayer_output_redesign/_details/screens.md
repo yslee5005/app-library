@@ -69,12 +69,61 @@
 
 ---
 
-## Phase 2-5 카드 변경 (추가 예정)
+---
+
+## Phase 2 · ScriptureCard 확장 + OriginalLangCard 삭제
+
+### Card: `ScriptureCard` (확장)
+
+기존 3개 섹션 (verse / reference / reason green-box) 유지 + **2개 섹션 추가**.
+
+| State | Visual | Notes |
+|---|---|---|
+| **Empty** | `verse` 없으면 카드 자체 숨김 | 시니어 UX |
+| **Loading** | 상위 Loading 처리 | |
+| **Error** | 상위 Dashboard 에러 | |
+| **Data** | verse / reference / **reason(녹색)** / **posture(녹색, 신규)** / **originalWords expandable(신규)** | |
+
+### 신규 섹션 1: Posture (읽는 자세)
+
+- 위치: `reason` 섹션 **바로 아래**
+- 스타일: `reason`과 같은 녹색(sage alpha 0.08) 배경 박스
+- 구분법: 라벨과 아이콘으로 차별화
+  - reason 라벨: `l10n.scriptureReasonLabel` = "왜 이 말씀을?" (이미 존재)
+  - posture 라벨: `l10n.scripturePostureLabel` = "어떤 마음으로 읽을까요?" + 🌿 아이콘
+- `posture(locale)` 비어 있으면 섹션 자체 숨김
+
+### 신규 섹션 2: Original Words (원어로 만나는 깊은 뜻)
+
+- 위치: posture 아래
+- 기본 **접힘 상태** (expandable) — 시니어 UX: 긴 카드 방지
+- 접힘 시: `"원어로 만나는 깊은 뜻 (2)"` 같이 개수 표시
+- 펼침 시: 각 `OriginalWord` 세로 나열
+  - 큰 글씨 원어 (히브리어/헬라어 hero 32pt)
+  - 아래 작은 글씨 transliteration + language
+  - 의미 `meaning(locale)` — body 18pt
+  - 뉘앙스 `nuance(locale)` — bodySmall muted
+  - 각 word 사이 divider 8pt
+
+### RTL 처리
+
+히브리어(he)는 RTL. `OriginalWord.language == 'Hebrew'`일 때 원어 `Text` 위젯 `textDirection: TextDirection.rtl`.
+
+### Card: `OriginalLangCard` (삭제)
+
+- 파일 삭제: `apps/abba/lib/features/dashboard/widgets/original_lang_card.dart`
+- 참조 제거:
+  - `prayer_dashboard_view.dart` (사용 중일 수 있음 — grep 후 제거)
+  - `qt_dashboard_view.dart` (사용 안 하지만 import 확인)
+
+### Responsive (Phase 2)
+- compact (< 600): 원어 hero 32pt → 28pt로 축소 권장 (overflow 방지)
+- medium 이상: 32pt 유지
+
+## Phase 3-5 카드 변경 (추가 예정)
 
 | Phase | 카드 | 변경 유형 |
 |-------|------|---------|
-| 2 | ScriptureCard | 확장 (whyThisVerse + postureToRead + originalWords) |
-| 2 | OriginalLangCard | 삭제 |
 | 3 | PrayerCoachingCard | 신규 생성 |
 | 4 | HistoricalStoryCard | 확장 (todayLesson) |
 | 5 | AiPrayerCard | 재작성 (audio 제거 + citations) |

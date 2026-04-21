@@ -241,6 +241,11 @@
   "qtGuide2": "Keşfettiklerinizi paylaşın — konuşun ya da yazın",
   "qtGuide3": "Abba, Söz'ü günlük hayatınıza uygulamanıza yardımcı olacak",
   "scriptureReasonLabel": "Neden bu ayet",
+  "scripturePostureLabel": "Hangi ruh haliyle okumalıyım?",
+  "scriptureOriginalWordsTitle": "Orijinal dilde daha derin anlam",
+  "originalWordMeaningLabel": "Anlam",
+  "originalWordNuanceLabel": "Çeviri farkı",
+  "originalWordsCountLabel": "{count} kelime",
   "seeMore": "Daha fazla",
   "seeAllComments": "Tüm {count} yorumu gör",
   "@seeAllComments": {
@@ -360,15 +365,15 @@
       }
     }
   },
-  "qtLoadingHint1": "💛 Love — Think of someone you love for 10 seconds",
-  "qtLoadingHint2": "🌿 Grace — Recall one small grace you received today",
-  "qtLoadingHint3": "🌅 Hope — Picture tomorrow's small hope in your heart",
-  "qtLoadingHint4": "🕊️ Peace — Take three slow, deep breaths",
-  "qtLoadingHint5": "🌳 Faith — Remember one unchanging truth",
-  "qtLoadingHint6": "🌸 Gratitude — Name one thing you're thankful for now",
-  "qtLoadingHint7": "🌊 Forgiveness — Bring to mind someone to forgive",
-  "qtLoadingHint8": "📖 Wisdom — Hold onto one lesson from today",
-  "qtLoadingHint9": "⏳ Patience — Think of what you're quietly waiting for",
-  "qtLoadingHint10": "✨ Joy — Remember a moment you smiled today",
-  "qtLoadingTitle": "Preparing today's Word..."
+  "qtLoadingHint1": "💛 Sevgi — 10 saniye boyunca sevdiğiniz birini düşünün",
+  "qtLoadingHint2": "🌿 Lütuf — Bugün aldığınız küçük bir lütfu hatırlayın",
+  "qtLoadingHint3": "🌅 Umut — Yarın için küçük bir umut hayal edin",
+  "qtLoadingHint4": "🕊️ Huzur — Yavaşça üç kez derin nefes alın",
+  "qtLoadingHint5": "🌳 İman — Değişmeyen bir gerçeği hatırlayın",
+  "qtLoadingHint6": "🌸 Şükran — Şu an şükrettiğiniz bir şeyi söyleyin",
+  "qtLoadingHint7": "🌊 Bağışlama — Bağışlamak istediğiniz birini düşünün",
+  "qtLoadingHint8": "📖 Hikmet — Bugünün bir dersini kalbinizde tutun",
+  "qtLoadingHint9": "⏳ Sabır — Sessizce beklediğiniz şeyi düşünün",
+  "qtLoadingHint10": "✨ Sevinç — Bugün gülümsediğiniz anı hatırlayın",
+  "qtLoadingTitle": "Bugünün Sözü hazırlanıyor..."
 }

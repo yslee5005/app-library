@@ -241,6 +241,11 @@
   "qtGuide2": "Ibahagi ang iyong natuklasan — magsalita o mag-type ng iyong repleksyon",
   "qtGuide3": "Tutulungan ka ng Abba na ilapat ang Salita sa iyong pang-araw-araw na buhay",
   "scriptureReasonLabel": "Bakit ang Kasulatang ito",
+  "scripturePostureLabel": "Sa anong pag-iisip ko ito babasahin?",
+  "scriptureOriginalWordsTitle": "Mas malalim na kahulugan sa orihinal na wika",
+  "originalWordMeaningLabel": "Kahulugan",
+  "originalWordNuanceLabel": "Nuance vs pagsasalin",
+  "originalWordsCountLabel": "{count} salita",
   "seeMore": "Tingnan pa",
   "seeAllComments": "Tingnan lahat ng {count} komento",
   "@seeAllComments": {
@@ -360,15 +365,15 @@
       }
     }
   },
-  "qtLoadingHint1": "💛 Love — Think of someone you love for 10 seconds",
-  "qtLoadingHint2": "🌿 Grace — Recall one small grace you received today",
-  "qtLoadingHint3": "🌅 Hope — Picture tomorrow's small hope in your heart",
-  "qtLoadingHint4": "🕊️ Peace — Take three slow, deep breaths",
-  "qtLoadingHint5": "🌳 Faith — Remember one unchanging truth",
-  "qtLoadingHint6": "🌸 Gratitude — Name one thing you're thankful for now",
-  "qtLoadingHint7": "🌊 Forgiveness — Bring to mind someone to forgive",
-  "qtLoadingHint8": "📖 Wisdom — Hold onto one lesson from today",
-  "qtLoadingHint9": "⏳ Patience — Think of what you're quietly waiting for",
-  "qtLoadingHint10": "✨ Joy — Remember a moment you smiled today",
-  "qtLoadingTitle": "Preparing today's Word..."
+  "qtLoadingHint1": "💛 Pag-ibig — Isipin ang isang mahal mo sa loob ng 10 segundo",
+  "qtLoadingHint2": "🌿 Biyaya — Alalahanin ang isang maliit na biyayang natanggap ngayon",
+  "qtLoadingHint3": "🌅 Pag-asa — Isipin ang isang maliit na pag-asa para bukas",
+  "qtLoadingHint4": "🕊️ Kapayapaan — Huminga nang malalim ng tatlong beses, dahan-dahan",
+  "qtLoadingHint5": "🌳 Pananampalataya — Alalahanin ang isang katotohanang hindi nagbabago",
+  "qtLoadingHint6": "🌸 Pasasalamat — Pangalanan ang isang bagay na ipinagpapasalamat mo ngayon",
+  "qtLoadingHint7": "🌊 Kapatawaran — Isipin ang isang taong nais mong patawarin",
+  "qtLoadingHint8": "📖 Karunungan — Itago sa puso ang isang aral ngayong araw",
+  "qtLoadingHint9": "⏳ Pagtitiis — Isipin ang tahimik mong hinihintay",
+  "qtLoadingHint10": "✨ Kagalakan — Alalahanin ang isang sandali ng ngiti ngayon",
+  "qtLoadingTitle": "Inihahanda ang Salita ngayon..."
 }
