@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../models/prayer.dart';
 import '../../../theme/abba_theme.dart';
 import '../../../widgets/expandable_card.dart';
-import '../../../widgets/premium_blur.dart';
+import '../../../widgets/pro_blur.dart';
 
 class GuidanceCard extends StatelessWidget {
   final Guidance guidance;
@@ -26,7 +26,7 @@ class GuidanceCard extends StatelessWidget {
     final isLocked = guidance.isPremium && !isUserPremium;
 
     if (isLocked) {
-      return PremiumBlur(
+      return ProBlur(
         title: title,
         icon: '💬',
         isLocked: true,

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../models/prayer.dart';
 import '../../../theme/abba_theme.dart';
 import '../../../widgets/expandable_card.dart';
-import '../../../widgets/premium_blur.dart';
+import '../../../widgets/pro_blur.dart';
 
 class HistoricalStoryCard extends StatelessWidget {
   final HistoricalStory historicalStory;
@@ -27,9 +27,9 @@ class HistoricalStoryCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final isLocked = historicalStory.isPremium && !isUserPremium;
 
-    // Locked: show PremiumBlur with 3-line preview
+    // Locked: show ProBlur with 3-line preview
     if (isLocked) {
-      return PremiumBlur(
+      return ProBlur(
         title: title,
         icon: '📖',
         isLocked: true,

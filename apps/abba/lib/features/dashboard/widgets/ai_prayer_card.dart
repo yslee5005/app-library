@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../models/prayer.dart';
 import '../../../theme/abba_theme.dart';
 import '../../../widgets/expandable_card.dart';
-import '../../../widgets/premium_blur.dart';
+import '../../../widgets/pro_blur.dart';
 
 class AiPrayerCard extends ConsumerWidget {
   final AiPrayer aiPrayer;
@@ -27,7 +27,7 @@ class AiPrayerCard extends ConsumerWidget {
     final isLocked = aiPrayer.isPremium && !isUserPremium;
 
     if (isLocked) {
-      return PremiumBlur(
+      return ProBlur(
         title: title,
         icon: '🙏',
         isLocked: true,

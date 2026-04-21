@@ -8,7 +8,7 @@ import '../theme/abba_theme.dart';
 
 /// Soft prompt: "이 기능은 Pro에서 사용할 수 있어요. 확인하시겠어요?"
 /// Returns true if user ultimately purchased Premium.
-Future<bool> showPremiumPrompt(BuildContext context) async {
+Future<bool> showProPrompt(BuildContext context) async {
   final l10n = AppLocalizations.of(context)!;
 
   final wantsToSee = await showDialog<bool>(
@@ -24,13 +24,13 @@ Future<bool> showPremiumPrompt(BuildContext context) async {
           const Text('✨', style: TextStyle(fontSize: 40)),
           const SizedBox(height: AbbaSpacing.md),
           Text(
-            l10n.premiumPromptTitle,
+            l10n.proPromptTitle,
             style: AbbaTypography.h2,
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: AbbaSpacing.sm),
           Text(
-            l10n.premiumPromptBody,
+            l10n.proPromptBody,
             style: AbbaTypography.bodySmall.copyWith(color: AbbaColors.muted),
             textAlign: TextAlign.center,
           ),
@@ -91,25 +91,25 @@ Future<bool> showPremiumPrompt(BuildContext context) async {
 
 /// Shows a soft modal when free user hits daily prayer limit.
 /// Returns true if user successfully purchased Premium, false otherwise.
-Future<bool> showPremiumModal(BuildContext context) async {
+Future<bool> showProModal(BuildContext context) async {
   final result = await showModalBottomSheet<bool>(
     context: context,
     backgroundColor: Colors.transparent,
-    builder: (ctx) => const _PremiumModalContent(),
+    builder: (ctx) => const _ProModalContent(),
   );
 
   return result ?? false;
 }
 
-class _PremiumModalContent extends ConsumerStatefulWidget {
-  const _PremiumModalContent();
+class _ProModalContent extends ConsumerStatefulWidget {
+  const _ProModalContent();
 
   @override
-  ConsumerState<_PremiumModalContent> createState() =>
-      _PremiumModalContentState();
+  ConsumerState<_ProModalContent> createState() =>
+      _ProModalContentState();
 }
 
-class _PremiumModalContentState extends ConsumerState<_PremiumModalContent> {
+class _ProModalContentState extends ConsumerState<_ProModalContent> {
   bool _purchasing = false;
 
   @override
@@ -135,13 +135,13 @@ class _PremiumModalContentState extends ConsumerState<_PremiumModalContent> {
             const Text('🌸', style: TextStyle(fontSize: 48)),
             const SizedBox(height: AbbaSpacing.md),
             Text(
-              l10n.premiumLimitTitle,
+              l10n.proLimitTitle,
               style: AbbaTypography.h1,
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: AbbaSpacing.sm),
             Text(
-              l10n.premiumLimitBody,
+              l10n.proLimitBody,
               style: AbbaTypography.body.copyWith(color: AbbaColors.muted),
               textAlign: TextAlign.center,
             ),
@@ -169,7 +169,7 @@ class _PremiumModalContentState extends ConsumerState<_PremiumModalContent> {
                         ),
                       )
                     : Text(
-                        '💎 ${l10n.startPremium} — ${l10n.monthlyPrice}',
+                        '💎 ${l10n.startPro} — ${l10n.monthlyPrice}',
                         style: AbbaTypography.body.copyWith(
                           color: AbbaColors.white,
                           fontWeight: FontWeight.w600,

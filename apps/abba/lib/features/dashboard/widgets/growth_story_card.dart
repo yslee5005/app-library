@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../models/qt_meditation_result.dart';
 import '../../../theme/abba_theme.dart';
-import '../../../widgets/premium_blur.dart';
+import '../../../widgets/pro_blur.dart';
 
 class GrowthStoryCard extends StatelessWidget {
   final GrowthStory growthStory;
@@ -26,7 +26,7 @@ class GrowthStoryCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final isLocked = growthStory.isPremium && !isUserPremium;
 
-    return PremiumBlur(
+    return ProBlur(
       title: title,
       icon: '🌱',
       isLocked: isLocked,

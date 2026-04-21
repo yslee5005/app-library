@@ -6,7 +6,7 @@ import '../l10n/generated/app_localizations.dart';
 import '../theme/abba_theme.dart';
 import 'abba_card.dart';
 
-class PremiumBlur extends StatelessWidget {
+class ProBlur extends StatelessWidget {
   final String title;
   final String icon;
   final Widget content;
@@ -14,7 +14,7 @@ class PremiumBlur extends StatelessWidget {
   final VoidCallback onUnlock;
   final String? previewText;
 
-  const PremiumBlur({
+  const ProBlur({
     super.key,
     required this.title,
     required this.icon,
@@ -68,7 +68,7 @@ class PremiumBlur extends StatelessWidget {
 
     // Locked — same card style as ExpandableCard, tap to unlock
     return Semantics(
-      label: '$title - ${l10n.premiumUnlock}',
+      label: '$title - ${l10n.proUnlock}',
       child: AbbaCard(
         padding: EdgeInsets.zero,
         child: InkWell(

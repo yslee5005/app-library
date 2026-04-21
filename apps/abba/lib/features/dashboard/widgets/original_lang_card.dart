@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../models/prayer.dart';
 import '../../../theme/abba_theme.dart';
-import '../../../widgets/premium_blur.dart';
+import '../../../widgets/pro_blur.dart';
 
 class OriginalLangCard extends StatelessWidget {
   final OriginalLanguage originalLanguage;
@@ -22,7 +22,7 @@ class OriginalLangCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return PremiumBlur(
+    return ProBlur(
       title: title,
       icon: '🔤',
       isLocked: originalLanguage.isPremium && !isUserPremium,

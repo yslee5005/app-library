@@ -11,7 +11,7 @@ import '../../../l10n/generated/app_localizations.dart';
 import '../../../providers/providers.dart';
 import '../../../theme/abba_theme.dart';
 import '../../../widgets/abba_button.dart';
-import '../../../widgets/premium_modal.dart';
+import '../../../widgets/pro_modal.dart';
 import '../../../widgets/prayer_heatmap.dart';
 
 class HomeView extends ConsumerStatefulWidget {
@@ -67,7 +67,7 @@ class _HomeViewState extends ConsumerState<HomeView>
 
       if (!isPremium && todayCount >= 1) {
         if (context.mounted) {
-          final purchased = await showPremiumPrompt(context);
+          final purchased = await showProPrompt(context);
           if (!purchased) return;
         }
       }
