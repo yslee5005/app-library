@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -32,8 +33,98 @@ class QtView extends ConsumerWidget {
           locale: locale,
           l10n: l10n,
         ),
-        loading: () => const Center(child: CircularProgressIndicator()),
+        loading: () => const _QtLoadingView(),
         error: (e, s) => Center(child: Text(l10n.errorGeneric)),
+      ),
+    );
+  }
+}
+
+/// First user of the day in a given locale may wait 5-15 seconds while the
+/// Edge Function generates passages. Rotate 10 scripture-keyword hints +
+/// meditation prompts to keep the wait feeling intentional rather than broken.
+class _QtLoadingView extends StatefulWidget {
+  const _QtLoadingView();
+
+  @override
+  State<_QtLoadingView> createState() => _QtLoadingViewState();
+}
+
+class _QtLoadingViewState extends State<_QtLoadingView> {
+  Timer? _timer;
+  int _index = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    _timer = Timer.periodic(const Duration(seconds: 2), (_) {
+      if (!mounted) return;
+      setState(() => _index = (_index + 1) % 10);
+    });
+  }
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    super.dispose();
+  }
+
+  String _hintFor(AppLocalizations l10n, int i) {
+    switch (i) {
+      case 0:
+        return l10n.qtLoadingHint1;
+      case 1:
+        return l10n.qtLoadingHint2;
+      case 2:
+        return l10n.qtLoadingHint3;
+      case 3:
+        return l10n.qtLoadingHint4;
+      case 4:
+        return l10n.qtLoadingHint5;
+      case 5:
+        return l10n.qtLoadingHint6;
+      case 6:
+        return l10n.qtLoadingHint7;
+      case 7:
+        return l10n.qtLoadingHint8;
+      case 8:
+        return l10n.qtLoadingHint9;
+      default:
+        return l10n.qtLoadingHint10;
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: AbbaSpacing.xl),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const CircularProgressIndicator(color: AbbaColors.sage),
+            const SizedBox(height: AbbaSpacing.lg),
+            Text(
+              l10n.qtLoadingTitle,
+              style: AbbaTypography.body.copyWith(color: AbbaColors.muted),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: AbbaSpacing.xl),
+            AnimatedSwitcher(
+              duration: const Duration(milliseconds: 400),
+              child: Text(
+                _hintFor(l10n, _index),
+                key: ValueKey<int>(_index),
+                style: AbbaTypography.body.copyWith(
+                  color: AbbaColors.warmBrown,
+                  height: 1.6,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
