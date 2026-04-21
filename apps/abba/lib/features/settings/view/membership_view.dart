@@ -356,10 +356,10 @@ class _MembershipViewState extends ConsumerState<MembershipView> {
   // ── Benefits list ───────────────────────────────────────────────────────
   Widget _buildBenefitsList(AppLocalizations l10n) {
     final benefits = [
-      l10n.premiumBenefit1,
-      l10n.premiumBenefit2,
-      l10n.premiumBenefit3,
-      l10n.premiumBenefit5,
+      l10n.proBenefit1,
+      l10n.proBenefit2,
+      l10n.proBenefit3,
+      l10n.proBenefit5,
     ];
 
     return Column(

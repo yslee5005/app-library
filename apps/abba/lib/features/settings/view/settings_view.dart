@@ -105,7 +105,7 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
                           borderRadius: BorderRadius.circular(AbbaRadius.sm),
                         ),
                         child: Text(
-                          isPremium ? l10n.premiumPlan : l10n.freePlan,
+                          isPremium ? l10n.proPlan : l10n.freePlan,
                           style: AbbaTypography.caption.copyWith(
                             color:
                                 isPremium ? AbbaColors.sage : AbbaColors.muted,
