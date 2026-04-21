@@ -20,6 +20,14 @@ class AppConfig {
 
   static String get revenueCatApiKey => dotenv.env['REVENUECAT_API_KEY'] ?? '';
 
+  /// Terms of Service URL (Apple Guideline 3.1.2 requires link under purchase button).
+  static String get termsUrl =>
+      dotenv.env['TERMS_URL'] ?? 'https://abba.ystech.com/terms';
+
+  /// Privacy Policy URL (Apple Guideline 3.1.2 requires link under purchase button).
+  static String get privacyUrl =>
+      dotenv.env['PRIVACY_URL'] ?? 'https://abba.ystech.com/privacy';
+
   static String get googleWebClientId =>
       dotenv.env['GOOGLE_WEB_CLIENT_ID'] ?? '';
 

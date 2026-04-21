@@ -744,4 +744,65 @@ class AppLocalizationsSk extends AppLocalizations {
 
   @override
   String get actionSave => 'Uložiť';
+
+  @override
+  String get manageSubscription => 'Manage Subscription';
+
+  @override
+  String currentPlan(String plan) {
+    return 'Current Plan: $plan';
+  }
+
+  @override
+  String nextBillingDate(String date) {
+    return 'Next billing: $date';
+  }
+
+  @override
+  String get upgradeToYearly => 'Upgrade to Yearly — Save 40%';
+
+  @override
+  String get upgradeSuccess => 'Upgraded to Yearly 🌸';
+
+  @override
+  String get purchaseSuccess => 'Your subscription is now active 🌸';
+
+  @override
+  String get purchaseFailedNetwork => 'Please check your network connection';
+
+  @override
+  String get purchaseFailedGeneric => 'Something went wrong. Please try again.';
+
+  @override
+  String get restoreInProgress => 'Restoring your subscription...';
+
+  @override
+  String get restoreSuccess => 'Subscription restored ✅';
+
+  @override
+  String get restoreNothing => 'No purchases to restore';
+
+  @override
+  String get restoreTimeout => 'Timed out. Please try again.';
+
+  @override
+  String get restoreFailed => 'Restore failed. Please try again later.';
+
+  @override
+  String get subscriptionExpiredTitle => 'Subscription Expired';
+
+  @override
+  String subscriptionExpiredBody(String date) {
+    return 'Your subscription expired on $date. Resubscribe to continue enjoying Abba Pro.';
+  }
+
+  @override
+  String accessUntil(String date) {
+    return 'Access until: $date';
+  }
+
+  @override
+  String subscriptionCancelledNotice(String date) {
+    return 'Your subscription has been cancelled. You\'ll have access until $date.';
+  }
 }

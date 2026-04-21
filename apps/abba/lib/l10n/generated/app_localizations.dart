@@ -1543,6 +1543,108 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Save'**
   String get actionSave;
+
+  /// No description provided for @manageSubscription.
+  ///
+  /// In en, this message translates to:
+  /// **'Manage Subscription'**
+  String get manageSubscription;
+
+  /// No description provided for @currentPlan.
+  ///
+  /// In en, this message translates to:
+  /// **'Current Plan: {plan}'**
+  String currentPlan(String plan);
+
+  /// No description provided for @nextBillingDate.
+  ///
+  /// In en, this message translates to:
+  /// **'Next billing: {date}'**
+  String nextBillingDate(String date);
+
+  /// No description provided for @upgradeToYearly.
+  ///
+  /// In en, this message translates to:
+  /// **'Upgrade to Yearly — Save 40%'**
+  String get upgradeToYearly;
+
+  /// No description provided for @upgradeSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Upgraded to Yearly 🌸'**
+  String get upgradeSuccess;
+
+  /// No description provided for @purchaseSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Your subscription is now active 🌸'**
+  String get purchaseSuccess;
+
+  /// No description provided for @purchaseFailedNetwork.
+  ///
+  /// In en, this message translates to:
+  /// **'Please check your network connection'**
+  String get purchaseFailedNetwork;
+
+  /// No description provided for @purchaseFailedGeneric.
+  ///
+  /// In en, this message translates to:
+  /// **'Something went wrong. Please try again.'**
+  String get purchaseFailedGeneric;
+
+  /// No description provided for @restoreInProgress.
+  ///
+  /// In en, this message translates to:
+  /// **'Restoring your subscription...'**
+  String get restoreInProgress;
+
+  /// No description provided for @restoreSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Subscription restored ✅'**
+  String get restoreSuccess;
+
+  /// No description provided for @restoreNothing.
+  ///
+  /// In en, this message translates to:
+  /// **'No purchases to restore'**
+  String get restoreNothing;
+
+  /// No description provided for @restoreTimeout.
+  ///
+  /// In en, this message translates to:
+  /// **'Timed out. Please try again.'**
+  String get restoreTimeout;
+
+  /// No description provided for @restoreFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Restore failed. Please try again later.'**
+  String get restoreFailed;
+
+  /// No description provided for @subscriptionExpiredTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Subscription Expired'**
+  String get subscriptionExpiredTitle;
+
+  /// No description provided for @subscriptionExpiredBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Your subscription expired on {date}. Resubscribe to continue enjoying Abba Pro.'**
+  String subscriptionExpiredBody(String date);
+
+  /// No description provided for @accessUntil.
+  ///
+  /// In en, this message translates to:
+  /// **'Access until: {date}'**
+  String accessUntil(String date);
+
+  /// No description provided for @subscriptionCancelledNotice.
+  ///
+  /// In en, this message translates to:
+  /// **'Your subscription has been cancelled. You\'ll have access until {date}.'**
+  String subscriptionCancelledNotice(String date);
 }
 
 class _AppLocalizationsDelegate

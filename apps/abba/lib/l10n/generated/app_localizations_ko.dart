@@ -727,4 +727,65 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get actionSave => '저장';
+
+  @override
+  String get manageSubscription => '구독 관리';
+
+  @override
+  String currentPlan(String plan) {
+    return '현재 플랜: $plan';
+  }
+
+  @override
+  String nextBillingDate(String date) {
+    return '다음 결제일: $date';
+  }
+
+  @override
+  String get upgradeToYearly => '연간으로 업그레이드 — 40% 절약';
+
+  @override
+  String get upgradeSuccess => '연간 구독으로 전환되었습니다 🌸';
+
+  @override
+  String get purchaseSuccess => '구독이 시작되었습니다 🌸';
+
+  @override
+  String get purchaseFailedNetwork => '네트워크 연결을 확인해 주세요';
+
+  @override
+  String get purchaseFailedGeneric => '문제가 발생했습니다. 다시 시도해 주세요.';
+
+  @override
+  String get restoreInProgress => '구독을 복구하고 있습니다...';
+
+  @override
+  String get restoreSuccess => '구독이 복구되었습니다 ✅';
+
+  @override
+  String get restoreNothing => '복구할 구독이 없습니다';
+
+  @override
+  String get restoreTimeout => '시간이 초과되었습니다. 다시 시도해 주세요.';
+
+  @override
+  String get restoreFailed => '복구에 실패했습니다. 잠시 후 다시 시도해 주세요.';
+
+  @override
+  String get subscriptionExpiredTitle => '구독이 만료되었습니다';
+
+  @override
+  String subscriptionExpiredBody(String date) {
+    return '$date에 구독이 만료되었습니다. 재구독하고 Abba Pro를 이어가세요.';
+  }
+
+  @override
+  String accessUntil(String date) {
+    return '이용 가능: $date까지';
+  }
+
+  @override
+  String subscriptionCancelledNotice(String date) {
+    return '구독이 취소되었습니다. $date까지 이용 가능합니다.';
+  }
 }

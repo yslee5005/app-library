@@ -305,5 +305,57 @@
   },
   "actionLike": "אהבתי",
   "actionComment": "תגובה",
-  "actionSave": "שמירה"
+  "actionSave": "שמירה",
+  "manageSubscription": "Manage Subscription",
+  "currentPlan": "Current Plan: {plan}",
+  "@currentPlan": {
+    "placeholders": {
+      "plan": {
+        "type": "String"
+      }
+    }
+  },
+  "nextBillingDate": "Next billing: {date}",
+  "@nextBillingDate": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "upgradeToYearly": "Upgrade to Yearly — Save 40%",
+  "upgradeSuccess": "Upgraded to Yearly 🌸",
+  "purchaseSuccess": "Your subscription is now active 🌸",
+  "purchaseFailedNetwork": "Please check your network connection",
+  "purchaseFailedGeneric": "Something went wrong. Please try again.",
+  "restoreInProgress": "Restoring your subscription...",
+  "restoreSuccess": "Subscription restored ✅",
+  "restoreNothing": "No purchases to restore",
+  "restoreTimeout": "Timed out. Please try again.",
+  "restoreFailed": "Restore failed. Please try again later.",
+  "subscriptionExpiredTitle": "Subscription Expired",
+  "subscriptionExpiredBody": "Your subscription expired on {date}. Resubscribe to continue enjoying Abba Pro.",
+  "@subscriptionExpiredBody": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "accessUntil": "Access until: {date}",
+  "@accessUntil": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "subscriptionCancelledNotice": "Your subscription has been cancelled. You'll have access until {date}.",
+  "@subscriptionCancelledNotice": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  }
 }
