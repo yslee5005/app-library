@@ -17,12 +17,16 @@ Abba의 Scripture / BibleStory / Guidance 카드를 **저작권 안전한 구조
 
 | # | 결정 | 내용 |
 |---|------|------|
-| 1 | 저작권 전략 | **PD Bible bundle + AI 해설 창작 하이브리드** (사용자 승인 A안) |
-| 2 | Verse 생성 주체 | AI가 **reference만 선택**, verse text는 앱 bundle lookup |
-| 3 | i18n 패턴 | Scripture/BibleStory/Guidance **A-1 single-field 확장** (Phase 4-5 pilot 계승) |
-| 4 | 핵심단어 Hint | Scripture 본문 아래 ✨ **Scripture.keyWordHint** 신규 필드 (짧은 한 줄) |
-| 5 | Phase 2 originalWords | 유지 + **Strong's/lexicon 근거 prompt 강화** |
-| 6 | PD 지원 범위 | 8-10 주요 언어 bundle + 나머지 ~25 locale는 **reference-only fallback** |
+| 1 | 저작권 전략 | **PD Bible + AI 해설 창작 하이브리드** (사용자 승인 A안) |
+| 2 | Verse 생성 주체 | AI는 **reference만 선택**, verse text는 PD 번들 lookup |
+| 3 | i18n 패턴 | Scripture/BibleStory/Guidance **A-1 single-field 확장** |
+| 4 | 핵심단어 Hint | Scripture 본문 아래 ✨ **Scripture.keyWordHint** 신규 필드 |
+| 5 | PD 배포 방식 | **Supabase Storage on-demand + 로컬 캐시** (앱 bundle 아님) |
+| 6 | Supabase Bucket | 기존 **`abba` private bucket 재활용**, 신규 `bibles/` 폴더 + RLS SELECT 정책 추가 |
+| 7 | KeyWordHint 위치 | verse 본문 **바로 아래** (사용자 원래 의도 살림) |
+| 8 | Attribution | Settings 페이지 한 번만 (카드 clean 유지, PD라 법적 의무 없음) |
+| 9 | Phase 분리 | Phase 1 = ko+en 2개 (파이프라인 검증) / Phase 3 = 나머지 25개 일괄 |
+| 10 | PD 커버리지 | 27 locale 지원 예상 / 8 locale은 reference-only fallback |
 
 ## 범위 (5개 구역)
 

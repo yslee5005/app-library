@@ -12,12 +12,13 @@
 | INT-049 | N/A | `[Scripture.model]` | build-time | `verseEn/Ko`, `reasonEn/Ko`, `postureEn/Ko` 3쌍 → 단일 `verse`/`reason`/`posture`. `keyWordHint: String` 신규 필드 추가. locale getter 3개 제거 | model API 변경 | `code-gen, dead-code-sweep` | pending |
 | INT-050 | N/A | `[Scripture.fromJson]` | deserialization | 3단 fallback: `reason` → `reason_en` → `reason_ko` → `''`. `posture` 동일. `verse`는 legacy `verse_en/_ko` 무시 (BibleTextService로 재조회). `key_word_hint` 파싱 추가 | legacy DB compat | `code-gen` | pending |
 | INT-051 | N/A | `[Scripture.withVerse]` | runtime | 신규 helper method — immutable copy with `verse` set. BibleTextService lookup 결과를 주입할 때 사용 | 모델 immutable 유지 | `code-gen` | pending |
-| INT-052 | N/A | `[assets/bibles/ko_krv.json]` | file-level | 개역한글 JSON bundle 생성. 시편 23편 등 최소 AI가 자주 reference하는 ~300 절 수록 (full Bible은 Phase 3에서) | asset 번들 | `code-gen` | pending |
-| INT-053 | N/A | `[assets/bibles/en_web.json]` | file-level | WEB(World English Bible) JSON bundle 동일 ~300 절 | asset 번들 | `code-gen` | pending |
-| INT-054 | N/A | `[pubspec.yaml]` | build-time | `assets/bibles/` 경로 등록 | asset 번들 포함 | `code-gen` | pending |
-| INT-055 | N/A | `[BibleTextService.interface]` | build-time | 추상 인터페이스: `lookup(ref, locale) -> Future<String?>`, `hasBundleForLocale(locale) -> bool`, `attributions() -> Map<String, String>` | | `code-gen` | pending |
-| INT-056 | N/A | `[AssetBibleTextService]` | runtime | 구현체: rootBundle.loadString으로 locale JSON lazy load + 메모리 캐시. reference parse ("Psalm 23:1-3" 범위) + verses map lookup + 결과 join | lazy asset IO | `riverpod-lifecycle, code-gen` | pending |
-| INT-057 | N/A | `[bibleTextServiceProvider]` | runtime | Provider 등록 — main.dart에서 `AssetBibleTextService()` override | provider wiring | `riverpod-lifecycle` | pending |
+| INT-052 | N/A | `[scripts/build_bible_bundles.py]` | build-time | USFM → JSON 변환 스크립트 작성. 입력: ebible.org USFM 파일. 출력: `{locale}_{trans}.json` 포맷 (locale, version, translation meta, verses dict). reference 정규화 ("PSA 23.1" → "Psalm 23:1") | 자동화 도구 | `code-gen` | pending |
+| INT-053 | N/A | `[ko_krv.json 생성 + 업로드]` | one-time | 개역한글 USFM 다운로드 → build script 실행 → `abba/bibles/ko_krv.json` Supabase Storage 업로드 (service_role) | PD 번들 | `code-gen` | pending |
+| INT-054 | N/A | `[en_web.json 생성 + 업로드]` | one-time | WEB USFM 다운로드 → build script 실행 → `abba/bibles/en_web.json` Supabase Storage 업로드 | PD 번들 | `code-gen` | pending |
+| INT-054b | N/A | `[Supabase RLS 정책]` | one-time | SQL: `bibles/*` 경로에 `authenticated` user SELECT 허용 정책 생성. 사용자 승인 후 Supabase 대시보드 또는 migration으로 수동 실행 | Supabase 설정 | `supabase-rls` | pending |
+| INT-056 | N/A | `[BibleTextService.interface]` | build-time | 추상 인터페이스: `lookup(ref, locale) -> Future<String?>`, `hasBundleForLocale(locale) -> bool`, `attributions() -> Map<String, String>`, `preload(locale) -> Future<void>` | | `code-gen` | pending |
+| INT-057 | N/A | `[SupabaseStorageBibleTextService]` | runtime | 구현: memory cache → local file cache (`path_provider.getApplicationSupportDirectory()/bibles/`) → Supabase Storage download (fallback). reference parse + range join. 다운로드 실패 시 null | 3-tier cache + IO | `riverpod-lifecycle, code-gen` | pending |
+| INT-057b | N/A | `[bibleTextServiceProvider]` | runtime | Provider 등록 — `main.dart`에서 `SupabaseStorageBibleTextService(Supabase.instance)` override | provider wiring | `riverpod-lifecycle` | pending |
 | INT-058 | N/A | `[gemini_service._buildSystemPrompt]` + `[_buildPremiumSystemPrompt]` | runtime | Scripture JSON schema에서 `verse_en/_ko` 제거, `reference`만 요구. `reason`, `posture` 단일 필드 (`$langName`). `key_word_hint` 신규 (1 line). **"Do NOT generate verse text — only select reference"** 지시 추가 | prompt schema 변경 | `subscription-crash` | pending |
 | INT-059 | N/A | `[gemini_service._hardcodedPrayerResult]` | runtime | Scripture sample 구조 변경: verse 필드 설정 안 함 (BibleTextService가 runtime에 채움), reason/posture/keyWordHint는 locale-aware. 기존 `"여호와는 나의 목자시니..."` verbatim 제거 | hardcoded API 변경 | `code-gen, dead-code-sweep` | pending |
 | INT-060 | N/A | `[PrayerResult.fromJson]` or analyze layer | runtime | Gemini 응답 받은 후 `Scripture` 조립 시 `BibleTextService.lookup(reference, locale)` 호출해서 `verse` 필드 채움. 실패(lookup null)하면 `verse = ''` (UI가 reference-only fallback 렌더) | 비동기 조립 | `riverpod-lifecycle, code-gen` | pending |
@@ -32,6 +33,8 @@
 | INT-064 | `prayer_dashboard` | `[scripture_card]` | build | 구절 본문에 PD 번역본 attribution 작게 표시: `"({translation.name}, Public Domain)"` — reference 옆 caption muted | 법적 attribution | `i18n, color-token` | pending |
 | INT-065 | `prayer_dashboard` | `[scripture_card]` | build | originalWords 섹션(기존 Phase 2) 유지 — 변경 없음. 단 keyWordHint와 중복성 UX 점검 (기본 접힘 유지) | 기존 패턴 | `i18n` | pending |
 | INT-066 | `prayer_dashboard` | `[prayer_dashboard_view]` + `[qt_dashboard_view]` | build | ScriptureCard 호출에서 `locale:` prop 제거 | 호출부 업데이트 | `dead-code-sweep` | pending |
+
+> **참고**: `pubspec.yaml` assets 등록 필요 없음 (Supabase Storage runtime download 방식)
 
 ## Phase 1 · Hardcoded Audit (INT-067 ~ INT-068)
 
