@@ -78,7 +78,19 @@ EXPECTED_TOTAL = EXPECTED_TOTAL_OT + EXPECTED_TOTAL_NT  # 31171
 RE_BOOK_ID = re.compile(r"\\id\s+([A-Z1-3]{3})")
 RE_CHAPTER = re.compile(r"\\c\s+(\d+)")
 RE_VERSE = re.compile(r"\\v\s+(\d+(?:-\d+)?)\s*(.*?)(?=\\v\s+\d|\\c\s+\d|\Z)", re.DOTALL)
-RE_MARKER_STRIP = re.compile(r"\\[a-z0-9*]+\*?\s?")
+# Word-level markers with attributes: \w text|lemma="..."|strong="..."\w*
+# or \+w text|strong="..."\+w* (nested). Keep the text, drop everything after |.
+RE_WORD_ATTR = re.compile(r"\\\+?w\s+([^|\\]+?)(?:\|[^\\]*)?\\\+?w\*")
+# Footnotes and cross-references are dropped entirely (not just stripped).
+# \f + footnote text... \f*   and   \x - cross-ref text... \x*
+RE_FOOTNOTE = re.compile(r"\\f\s+.*?\\f\*", re.DOTALL)
+RE_XREF = re.compile(r"\\x\s+.*?\\x\*", re.DOTALL)
+# Other marker pairs with content (e.g., \add ... \add*, \nd ... \nd*)
+RE_PAIRED_MARKER = re.compile(r"\\\+?[a-z]+\s+(.*?)\\\+?[a-z]+\*")
+# Standalone markers (footnotes, cross-refs already handled by stripping)
+RE_MARKER_STRIP = re.compile(r"\\[a-z0-9+*]+\*?\s?")
+# Leftover attribute blocks like |strong="H1234" that slipped through
+RE_LEFTOVER_ATTR = re.compile(r'\|[a-z]+="[^"]*"')
 RE_MULTI_WHITESPACE = re.compile(r"\s+")
 
 
@@ -102,8 +114,21 @@ def parse_usfm_file(path: Path) -> tuple[str, dict[str, str]]:
         for m in RE_VERSE.finditer(ch_text):
             verse_num = m.group(1)
             verse_text = m.group(2)
-            # Strip remaining markers
-            clean = RE_MARKER_STRIP.sub(" ", verse_text)
+            # 1. Drop footnotes and cross-references entirely
+            clean = RE_FOOTNOTE.sub(" ", verse_text)
+            clean = RE_XREF.sub(" ", clean)
+            # 2. Resolve word-level markers with Strong's attributes
+            clean = RE_WORD_ATTR.sub(r"\1", clean)
+            # 3. Resolve other paired markers (\add ... \add*, etc.) — keep
+            #    inner text. Loop because markers can nest.
+            prev = None
+            while prev != clean:
+                prev = clean
+                clean = RE_PAIRED_MARKER.sub(r"\1", clean)
+            # 3. Strip remaining standalone markers
+            clean = RE_MARKER_STRIP.sub(" ", clean)
+            # 4. Remove leftover attribute blocks
+            clean = RE_LEFTOVER_ATTR.sub("", clean)
             clean = RE_MULTI_WHITESPACE.sub(" ", clean).strip()
             if clean:
                 key = f"{ch_num}:{verse_num}"

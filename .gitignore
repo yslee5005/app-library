@@ -122,3 +122,7 @@ supabase/migrations_pending/
 **/.next/
 **/out/
 **/node_modules/
+
+
+# Bible text bundles (USFM raw + generated JSON — uploaded to Supabase Storage manually)
+apps/*/bible_sources/
