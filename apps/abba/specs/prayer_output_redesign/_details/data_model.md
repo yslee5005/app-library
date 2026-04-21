@@ -137,12 +137,138 @@ class PrayerResult {
 
 ---
 
-## Phase 3-5 (추가 예정)
+---
 
-Phase 2 승인 후 해당 phase 진입 시 작성:
-- Phase 3: `PrayerCoaching` + `Scores`
-- Phase 4: `HistoricalStoryDeep` (`todayLesson` 추가)
-- Phase 5: `AiPrayerDeep` (audioUrl 제거, `citations[]` 추가)
+## Phase 3 · Prayer Coaching (신규 카드)
+
+### 신규 모델
+
+```dart
+class PrayerCoaching {
+  final CoachingScores scores;
+  final List<String> strengths;      // 2-4 items
+  final List<String> improvements;   // 2-4 items
+  final String overallFeedbackEn;
+  final String overallFeedbackKo;
+  final String expertLevel;          // "beginner" | "growing" | "expert"
+  final bool isPremium;              // always true for Phase 3
+
+  const PrayerCoaching({
+    required this.scores,
+    required this.strengths,
+    required this.improvements,
+    required this.overallFeedbackEn,
+    required this.overallFeedbackKo,
+    required this.expertLevel,
+    this.isPremium = true,
+  });
+
+  String overallFeedback(String locale) =>
+      locale == 'ko' ? overallFeedbackKo : overallFeedbackEn;
+
+  factory PrayerCoaching.fromJson(Map<String, dynamic> json) {
+    return PrayerCoaching(
+      scores: CoachingScores.fromJson(json['scores'] as Map<String, dynamic>),
+      strengths: (json['strengths'] as List<dynamic>?)
+              ?.map((e) => e as String).toList() ?? [],
+      improvements: (json['improvements'] as List<dynamic>?)
+              ?.map((e) => e as String).toList() ?? [],
+      overallFeedbackEn: json['overall_feedback_en'] as String? ?? '',
+      overallFeedbackKo: json['overall_feedback_ko'] as String? ?? '',
+      expertLevel: json['expert_level'] as String? ?? 'growing',
+      isPremium: json['is_premium'] as bool? ?? true,
+    );
+  }
+
+  factory PrayerCoaching.placeholder() => const PrayerCoaching(
+        scores: CoachingScores(
+          specificity: 0,
+          godCenteredness: 0,
+          actsBalance: 0,
+          authenticity: 0,
+        ),
+        strengths: [],
+        improvements: [],
+        overallFeedbackEn: 'Unlock your personal prayer coaching feedback...',
+        overallFeedbackKo: 'Pro로 당신의 기도에 대한 맞춤 코칭을 받아보세요...',
+        expertLevel: 'growing',
+      );
+}
+
+class CoachingScores {
+  final int specificity;       // 1-5, 0 = placeholder
+  final int godCenteredness;   // 1-5
+  final int actsBalance;       // 1-5
+  final int authenticity;      // 1-5
+
+  const CoachingScores({
+    required this.specificity,
+    required this.godCenteredness,
+    required this.actsBalance,
+    required this.authenticity,
+  });
+
+  factory CoachingScores.fromJson(Map<String, dynamic> json) {
+    return CoachingScores(
+      specificity: (json['specificity'] as num?)?.toInt() ?? 0,
+      godCenteredness: (json['god_centeredness'] as num?)?.toInt() ?? 0,
+      actsBalance: (json['acts_balance'] as num?)?.toInt() ?? 0,
+      authenticity: (json['authenticity'] as num?)?.toInt() ?? 0,
+    );
+  }
+
+  double get average =>
+      (specificity + godCenteredness + actsBalance + authenticity) / 4.0;
+}
+```
+
+### PrayerResult 확장
+
+```dart
+class PrayerResult {
+  // ... 기존 필드
+  final PrayerCoaching? coaching;  // 신규, nullable (Pro만, on-demand)
+}
+```
+
+`copyWithPremium` 함수에 `coaching` 추가, `fromJson`에 `json['coaching']` 파싱 추가.
+
+### PremiumContent 확장 (on-demand 로드용)
+
+```dart
+class PremiumContent {
+  // ... 기존 (historicalStory, aiPrayer, guidance)
+  final PrayerCoaching? coaching;
+}
+```
+
+단, Coaching은 **별도 call** (`analyzePrayerCoaching`)이므로 `PremiumContent`에 포함하지 않고 **독립 provider** 사용 가능.
+
+### 설계 결정: 어디에 저장?
+
+- 옵션 A: `PrayerResult.coaching` (기존 모델 확장) — Premium과 다른 라이프사이클이라 섞이면 복잡
+- 옵션 B: **독립 provider `prayerCoachingProvider`** — Pro 유저 coaching 카드 first-view 시 호출, cache
+- → **옵션 B 권장**. Coaching은 on-demand 단일 호출. `_premiumContent` 와 별도 state.
+
+### Supabase 스키마 영향
+
+기존 `prayers.result: JSONB` 재사용. Coaching 결과 저장 시 `result.coaching` 키로 추가. **저장은 옵션** (재계산 가능하므로):
+- MVP: Supabase에 저장 안 함 (매번 신규 호출) — 간단
+- v2: 저장 → 이전 기도 review 시 coaching 재사용
+
+Phase 3 MVP는 **저장 안 함** 결정.
+
+### Hardcoded Fallback
+
+`gemini_service.dart` 신규 `_hardcodedCoachingResult()` 함수 추가. 시편 23:1 기반 샘플 기도 코칭.
+
+---
+
+## Phase 4-5 (추가 예정)
+
+Phase 3 승인 후 해당 phase 진입 시 작성:
+- Phase 4: `HistoricalStory` 확장 (`todayLesson` 이미 있음 — 길이만 증대)
+- Phase 5: `AiPrayer` 재설계 (audioUrl 제거, `citations[]` 추가)
 
 ## 참조
 

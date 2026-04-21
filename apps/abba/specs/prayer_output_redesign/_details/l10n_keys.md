@@ -91,12 +91,43 @@ Phase 1에선 placeholder 사용 키 없음.
 
 ---
 
-## Phase 3-5 키 (추가 예정)
+---
 
-Phase 2 승인 후 해당 phase 진입 시 추가:
-- Phase 3: `coachingTitle`, `coachingStrengthsTitle`, `coachingImprovementsTitle`, `coachingExpertLevel*`, 점수 라벨 ~8 키
-- Phase 4: `historicalLessonTitle`, `historicalFullStoryLabel` ~3 키
-- Phase 5: `aiPrayerCitationsTitle`, `citationTypeQuote/Science/Example` ~5 키
+## Phase 3 · 신규 키 목록 (PrayerCoachingCard)
+
+### 필수 신규 (11 키)
+
+| Key | EN | KO | 용도 / INT |
+|---|---|---|---|
+| `coachingTitle` | `Prayer Coaching` | `기도 코칭` | Card 제목 (INT-024) |
+| `coachingLoadingText` | `Reflecting on your prayer...` | `당신의 기도를 돌아보고 있어요...` | Loading 상태 |
+| `coachingErrorText` | `Temporary error — please retry` | `일시적인 오류 — 잠시 후 다시 시도해 주세요` | Error 상태 |
+| `coachingRetryButton` | `Retry` | `다시 시도` | INT-027 |
+| `coachingScoreSpecificity` | `Specificity` | `구체성` | 점수 bar 라벨 |
+| `coachingScoreGodCentered` | `God-centered` | `하나님 중심성` | 점수 bar 라벨 |
+| `coachingScoreActs` | `ACTS balance` | `ACTS 균형` | 점수 bar 라벨 |
+| `coachingScoreAuthenticity` | `Authenticity` | `진정성` | 점수 bar 라벨 |
+| `coachingStrengthsTitle` | `What you did well ✨` | `잘하신 점 ✨` | strengths 섹션 제목 |
+| `coachingImprovementsTitle` | `To go deeper 💡` | `더 깊어지려면 💡` | improvements 섹션 제목 |
+| `coachingProCta` | `Unlock Prayer Coaching with Pro` | `Pro로 기도 코칭 받기` | Locked CTA (INT-024) |
+
+### Expert Level 배지 (3 키)
+
+| Key | EN | KO | 용도 |
+|---|---|---|---|
+| `coachingLevelBeginner` | `🌱 Beginner` | `🌱 시작하는 중` | beginner 배지 |
+| `coachingLevelGrowing` | `🌿 Growing` | `🌿 자라는 중` | growing 배지 |
+| `coachingLevelExpert` | `🌳 Expert` | `🌳 전문가` | expert 배지 |
+
+→ **Phase 3 총 14 키** × 35 locale.
+
+---
+
+## Phase 4-5 키 (추가 예정)
+
+Phase 3 승인 후 해당 phase 진입 시 추가:
+- Phase 4: (HistoricalStory에 이미 lessonEn/Ko 있음 — 신규 키 거의 없음) — 필요 시 `historicalFullStoryLabel` 1-2 키
+- Phase 5: `aiPrayerCitationsTitle`, `citationTypeQuote/Science/Example`, `aiPrayerReadingTime` ~5 키
 
 ## 참조
 

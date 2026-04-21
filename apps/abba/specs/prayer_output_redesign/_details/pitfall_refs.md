@@ -106,8 +106,50 @@ factory PrayerResult.fromJson(Map<String, dynamic> json) => _$PrayerResultFromJs
 - `PrayerResult.fromJson`에서 legacy `original_language` → `scripture.originalWords[0]`로 마이그레이션 (lossy)
 - 또는 무시 (기존 데이터는 Phase 2 배포 후 다시 생성되면서 새 구조로)
 
-## Phase 3-5 함정 (추가 예정)
+---
 
-- Phase 3: §2 subscription (Pro gating), asset 로딩 (§11 lazy), prompt 검증 (hallucinate 방지)
-- Phase 4: 긴 텍스트 스크롤 (§11, flutter-layout.md)
-- Phase 5: TTS 제거 시 기존 audio player dead code (§13), citations UI expandable (§11)
+## Phase 3 · Prayer Coaching 관련 함정
+
+- [x] **§1 Riverpod 라이프사이클** — `prayerCoachingProvider`
+  - `FutureProvider.autoDispose` (화면 떠나면 정리)
+  - async gap 후 `ref.mounted` 체크 (특히 retry 로직)
+- [x] **§2 Subscription / Payment Crash** ★ 핵심
+  - `isUserPremium` 체크 후 호출 (Free 유저에겐 API 호출 X)
+  - ProBlur 위젯 재사용 (기존 패턴)
+  - Pro 전환 후 `invalidate(prayerCoachingProvider)` → 재호출
+  - 포그라운드 복귀 시 subscription 재확인
+- [x] **§4 i18n** — 14 신규 키 × 35 locale. ACTS 용어는 **언어별 번역 주의** (가톨릭/개신교 맥락)
+- [x] **§11 성능** — `rootBundle.loadString('assets/docs/prayer_guide.md')`는 **한 번만 로드 후 메모리 캐시** (매 call마다 파일 IO 금지)
+- [x] **§12 Color/Design Token** — score bar 색: `AbbaColors.sage` / `AbbaColors.muted α 0.2`. 하드코딩 금지
+- [x] **§16 Code Generation** — pubspec asset 경로 등록 후 `flutter pub get` + l10n 신규 키 후 `flutter gen-l10n`
+
+### Phase 3 특유 주의
+
+#### 1. AI Hallucinate 방지 (★ 최우선)
+- prayer_guide.md는 LLM에 "reference"로 주지만, 출력을 guide 자체로 하지 않도록 명시
+- 금지어 필터: 출력 JSON 파싱 후 `["부족", "못 하", "잘못", "inadequate", "lacking", "wrong"]` 포함 여부 검사 → 걸리면 placeholder로 대체 + Sentry 경고
+- 100개 샘플 수동 검증 (출시 전) — 특히 Beginner 레벨 응답 톤
+
+#### 2. Asset 로딩 타이밍
+- `rootBundle` 로드는 async. Coaching call 생성 전 한 번만 로드해서 메모리 캐시
+- `PrayerGuideLoader` 싱글톤 또는 Riverpod provider로 관리 (`prayerGuideProvider`)
+
+#### 3. Pro 전환 UX
+- 사용자가 Pro 구매 직후 Coaching 카드 즉시 업데이트
+- `isPremiumProvider` change listener에서 `invalidate(prayerCoachingProvider)` 자동 발동
+- 포그라운드 복귀 시 subscription + coaching 재확인 (§1, §2 함정)
+
+#### 4. prayer_guide.md 버전 관리
+- Asset 파일이라 앱 빌드 시 번들
+- 문구 수정하려면 배포 필요 (동적 업데이트 X)
+- v0.2로 업그레이드 시 Supabase storage로 이동 고려 (MVP 아님)
+
+#### 5. ACTS vs Prayer Summary 3축 일관성
+- Coaching은 ACTS 4축 기반, Prayer Summary는 3축 (감사/간구/중보)
+- Coaching 결과에서 "Confession이 없네요" 제안 → 사용자가 Prayer Summary에서 찾으려 해도 없음 → 혼란 가능
+- **UI 추가 문구 필요**: "앱의 기도 요약은 감사/간구/중보 3축이지만, 코칭은 전통 ACTS 4축 기준입니다" (또는 간단 info icon)
+
+## Phase 4-5 함정 (추가 예정)
+
+- Phase 4: 긴 텍스트 스크롤 (§11, flutter-layout.md), 기존 lesson 필드 활용 (거의 간단)
+- Phase 5: TTS 제거 시 기존 audio player dead code (§13), citations UI expandable (§11), 과학 사실 hallucinate (§2 느낌으로 검증)

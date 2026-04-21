@@ -173,12 +173,100 @@ PrayerResult(
 }
 ```
 
-### Phase 3 · Prayer Coaching (예정 상세)
-- 메서드: `analyzePrayerCoaching(transcript, locale)` 신규
-- **system prompt에 `prayer_guide.md` 전체 내용 삽입**
-- 출력: scores{specificity, godCenteredness, actsBalance, authenticity}, strengths[], improvements[], overallFeedback, expertLevel
-- 룰: 판단 금지 / 칭찬 먼저 / beginner 격려
-- 호출: Pro 유저만, on-demand
+### Phase 3 · Prayer Coaching (상세)
+
+#### 대상 메서드 (신규)
+
+`AiService.analyzePrayerCoaching(transcript, locale)` — 모든 구현체(Gemini, OpenAI, Mock, Cached)에 신규 추가.
+
+#### 입력
+- `transcript`: 사용자 기도 원문 (String)
+- `locale`: `ko` | `en` | 기타
+
+#### System Prompt 구조
+
+```
+[PRAYER_GUIDE_DOC 전체 삽입]  ← rootBundle.loadString('assets/docs/prayer_guide.md')
+
+[영어 직접 지시]:
+You are a gentle Christian prayer coach evaluating a user's prayer
+based on the Prayer Guide above.
+
+CRITICAL: Your job is EDUCATIONAL, not judgmental.
+- Always praise first (strengths)
+- Improvements must be CONSTRUCTIVE ("Adding X would deepen...")
+- NEVER use words: "inadequate", "lacking", "wrong", "poor"
+- Beginner level MUST be encouraged, never shamed
+
+Respond in {locale} language ({langName}).
+Output JSON ONLY, no prose outside JSON.
+
+JSON schema:
+{
+  "scores": {
+    "specificity": <int 1-5>,
+    "god_centeredness": <int 1-5>,
+    "acts_balance": <int 1-5>,
+    "authenticity": <int 1-5>
+  },
+  "strengths": [<2-4 strings in {locale}>],
+  "improvements": [<2-4 strings in {locale}>],
+  "overall_feedback_en": "<3-4 sentences English>",
+  "overall_feedback_ko": "<3-4 sentences Korean>",
+  "expert_level": "beginner" | "growing" | "expert"
+}
+
+Rules (per Prayer Guide §4-6):
+- Scores: 1-5 integer (see rubric in guide §4)
+- Strengths must cite specific content from the prayer (not generic)
+- Improvements: "Adding X would deepen..." format
+- Forbidden words in any output: "lacking", "inadequate", "wrong", "poor"
+- Expert level: beginner (avg ≤ 2 OR only 1-2 ACTS) / growing / expert (avg ≥ 4.5)
+- overall_feedback: both en and ko always (for device locale switch support)
+
+NEVER output the prayer_guide content back. Use it only as reference for evaluation.
+```
+
+#### 하드코딩 샘플 (`_hardcodedCoachingResult()`)
+
+```json
+{
+  "scores": {
+    "specificity": 4,
+    "god_centeredness": 3,
+    "acts_balance": 4,
+    "authenticity": 4
+  },
+  "strengths": [
+    "가족과 친구를 구체적으로 이름처럼 떠올리며 기도하신 점이 좋습니다 — 이는 구체성의 좋은 예입니다.",
+    "'감사합니다'로 시작해 '간구합니다'로 이어지는 흐름이 ACTS의 T와 S를 자연스럽게 담고 있어요."
+  ],
+  "improvements": [
+    "회개 (Confession) 한 문장을 더해 보세요. 예: '오늘 급한 말을 용서해 주소서.' 이것만으로도 ACTS 4축이 채워집니다.",
+    "하나님의 속성 한 가지 — '거룩하신 주님' 같은 찬양 한 문장 — 을 시작에 더하시면 기도가 더 깊어질 거예요."
+  ],
+  "overall_feedback_en": "Your prayer shows beautiful balance of gratitude and intercession. Adding one sentence of confession would complete the ACTS rhythm. God loves every heart that prays.",
+  "overall_feedback_ko": "감사와 중보가 아름답게 균형 잡힌 기도예요. 회개 한 문장을 더하시면 ACTS 4축이 완성됩니다. 하나님은 기도하는 당신의 마음을 사랑하십니다.",
+  "expert_level": "growing"
+}
+```
+
+#### 에러 처리
+
+- JSON parsing 실패: `PrayerCoaching.placeholder()` 반환 + Sentry 보고
+- API 호출 실패: 동일 placeholder
+- 금지어 감지 (hallucinate): 출력 후 간단 필터 — "부족", "못 하", "잘못" 포함 시 placeholder로 대체 (안전장치)
+
+#### 호출 시점 / Provider
+
+- 신규 `prayerCoachingProvider` (autoDispose FutureProvider)
+- Pro 유저만 자동 fetch (`isUserPremium && transcript.isNotEmpty` 조건)
+- Free 유저: placeholder 즉시 반환, ProBlur로 렌더
+
+#### 비용
+
+- Gemini 2.5 flash 기준: system prompt (~2500 토큰) + transcript (~300 토큰) + output (~500 토큰) = ~$0.001/call
+- Pro 유저 1 prayer = Coaching 1 call → **비용 무시 가능**
 
 ### Phase 4 · Historical Deep (예정 상세)
 - 메서드: `analyzeHistoricalDeep(transcript, scriptureReference, locale)` 신규

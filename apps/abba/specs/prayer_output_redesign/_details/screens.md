@@ -120,13 +120,86 @@
 - compact (< 600): 원어 hero 32pt → 28pt로 축소 권장 (overflow 방지)
 - medium 이상: 32pt 유지
 
-## Phase 3-5 카드 변경 (추가 예정)
+---
+
+## Phase 3 · PrayerCoachingCard (신규, Pro 전용)
+
+### Card: `PrayerCoachingCard` (신규)
+
+위치: Prayer Dashboard의 **HistoricalStory 카드 바로 위** (Free 카드 3개 다음, Pro 카드 첫 번째).
+
+| State | Visual | Notes |
+|---|---|---|
+| **Loading** | `CircularProgressIndicator` + "당신의 기도를 돌아보고 있어요..." | Coaching call 진행 중 |
+| **Empty / Locked (Free)** | ProBlur 위젯으로 4 score bar + 제목 + Pro CTA | 기존 ProBlur 패턴 재사용 |
+| **Error** | "일시적인 오류 — 잠시 후 다시 시도" + retry 버튼 | Coaching call 실패 시 |
+| **Data (Pro)** | 4 score bar + expertLevel 배지 + strengths/improvements 리스트 + overallFeedback | 펼치면 전체 표시 |
+
+### 레이아웃 (Pro Data 상태)
+
+```
+┌───────────────────────────────────────────┐
+│ 🎯 기도 코칭                    [🌱 Growing] │
+├───────────────────────────────────────────┤
+│ 구체성            ●●●●○  4/5               │
+│ 하나님 중심성     ●●●○○  3/5               │
+│ ACTS 균형        ●●●●●  5/5               │
+│ 진정성           ●●●●○  4/5               │
+├───────────────────────────────────────────┤
+│ ✨ 잘하신 점                                │
+│ • 어머니의 이름을 구체적으로 언급하신 점이...    │
+│ • 감사와 간구를 균형 있게...                  │
+│                                           │
+│ 💡 더 깊어지려면                             │
+│ • 회개 (Confession) 한 문장을 더해 보세요...  │
+│ • 하나님의 속성을 한 가지만 더 찬양해...      │
+│                                           │
+│ ─────────────────────────────────        │
+│ 균형 잡힌 기도가 아름답습니다.                 │
+│ 오늘 기도에 회개 한 문장을 더하시면 ACTS 4축이  │
+│ 완성됩니다. 하나님은 기도하는 당신을 사랑하십니다. │
+└───────────────────────────────────────────┘
+```
+
+### Score Bar 스펙
+- 라벨(캡션 12pt) + 5 dot (또는 짧은 progress bar)
+- 색: `AbbaColors.sage` (채워진) / `AbbaColors.muted` α 0.2 (빈)
+- 1-5 = 정수. 0 = placeholder (숨김 처리)
+
+### Expert Level 배지
+- 위치: 카드 제목 우측
+- beginner: `🌱 Beginner` / `🌱 시작하는 중` (soft pink)
+- growing: `🌿 Growing` / `🌿 자라는 중` (sage)
+- expert: `🌳 Expert` / `🌳 전문가` (warm gold)
+
+### Pro Locked 상태 (Free 유저)
+- ProBlur 위젯 사용 (기존 패턴)
+- 타이틀 "🎯 기도 코칭" 보임
+- 점수/피드백 내용 블러 처리
+- 하단 "Pro로 기도 코칭 받기" CTA 버튼
+- Icon preview 작은 이미지로 기능 소개 (점수 bar 4개 대략 보이게)
+
+### Responsive
+- compact: score bar full width, 제목 + 배지 세로 stack 가능
+- medium+: 제목 + 배지 한 줄, score bar 가로 배치 유지
+
+### 데이터 로딩 전략 (Pro)
+- 카드가 viewport에 들어올 때 first-time 호출 (`VisibilityDetector` 활용 가능)
+- 또는 **Dashboard 진입 시 Premium call + Coaching call 병렬 spawn** (2 call 동시, UX 빠름)
+- MVP: Dashboard 진입 시 병렬 (간단), 비용 증가 미미
+
+### 에러 복구
+- 3회 retry는 사용자 수동 (retry 버튼)
+- Coaching 실패해도 다른 카드는 정상 표시 (Pro 1 call과 분리됐으므로)
+
+---
+
+## Phase 4-5 카드 변경 (추가 예정)
 
 | Phase | 카드 | 변경 유형 |
 |-------|------|---------|
-| 3 | PrayerCoachingCard | 신규 생성 |
-| 4 | HistoricalStoryCard | 확장 (todayLesson) |
-| 5 | AiPrayerCard | 재작성 (audio 제거 + citations) |
+| 4 | HistoricalStoryCard | 확장 (summary 길이 증대, 기존 todayLesson 활용) |
+| 5 | AiPrayerCard | 재작성 (audio 제거 + citations 추가) |
 
 ## 참조
 - `.claude/rules/responsive.md` — ScreenSize 4단계

@@ -88,6 +88,41 @@
 
 ---
 
-## Phase 3-5 INT-XXX (추가 예정)
+---
 
-Phase 2 done 후 Phase 3 spec 작성 시 INT-017부터 이어서 할당.
+## Phase 3 · Prayer Coaching 신규 (INT-017 ~ INT-028)
+
+| ID | Screen | Widget | Trigger | Action | Side Effect | Pitfall Tags | Status |
+|----|--------|--------|---------|--------|-------------|--------------|--------|
+| INT-017 | N/A | `[PrayerCoaching.model]` | build-time | 신규 클래스 (scores, strengths, improvements, overallFeedbackEn/Ko, expertLevel, isPremium + fromJson + placeholder factory) | | `code-gen` | pending |
+| INT-018 | N/A | `[CoachingScores.model]` | build-time | 신규 클래스 (specificity, godCenteredness, actsBalance, authenticity 모두 int 1-5, average getter) | | `code-gen` | pending |
+| INT-019 | N/A | `[AiService.interface]` | build-time | `analyzePrayerCoaching(transcript, locale)` 메서드 인터페이스 추가 | | `code-gen` | pending |
+| INT-020 | N/A | `[GeminiService]` | runtime | `analyzePrayerCoaching` 구현: system prompt = prayer_guide.md asset 로드 + JSON schema 지시, hardcoded fallback 추가 | asset rootBundle 로드 | `subscription-crash, code-gen` | pending |
+| INT-021 | N/A | `[MockAiService, CachedAiService, OpenAIService]` | runtime | 동일 인터페이스 구현 (mock: hardcoded 반환, cached: 래핑) | | `code-gen` | pending |
+| INT-022 | N/A | `[pubspec.yaml]` | build-time | `apps/abba/assets/docs/prayer_guide.md` asset 경로 등록 | asset 번들 포함 | `code-gen` | pending |
+| INT-023 | N/A | `[prayer_guide.md asset file]` | file-level | `apps/abba/specs/prayer_output_redesign/_details/prayer_guide.md` → `apps/abba/assets/docs/prayer_guide.md` 복사 (사용자 승인된 버전) | 배포 자산 | `code-gen` | pending |
+| INT-024 | `prayer_dashboard` | `[prayer_coaching_card]` | build | 신규 widget: 4 score bar + expertLevel 배지 + strengths/improvements 리스트 + overallFeedback. ProBlur 래핑 (isPremium && !isUserPremium) | | `subscription-crash, color-token, i18n` | pending |
+| INT-025 | `prayer_dashboard` | `[prayer_dashboard_view]` | build | Coaching 카드 렌더 (Pro 카드 섹션 최상위에 배치 — Historical/AiPrayer 위) | provider watch | `riverpod-lifecycle` | pending |
+| INT-026 | `prayer_dashboard` | `[prayer_coaching_provider]` | runtime | `FutureProvider<PrayerCoaching?>` — Pro 유저만 자동 fetch, autoDispose(keepAlive=false) | on-demand 호출 | `riverpod-lifecycle, subscription-crash` | pending |
+| INT-027 | `prayer_dashboard` | `[prayer_coaching_card]` | `onTap` retry 버튼 | 에러 상태에서 provider invalidate → 재호출 | | `riverpod-lifecycle` | pending |
+| INT-028 | N/A | `[l10n]` | build-time | 8 키 × 35 locale 추가 (coachingTitle / coachingScoreSpecificityLabel / coachingScoreGodCenterednessLabel / coachingScoreActsBalanceLabel / coachingScoreAuthenticityLabel / coachingStrengthsTitle / coachingImprovementsTitle / coachingExpertLevel{Beginner,Growing,Expert}) | | `i18n, code-gen` | pending |
+
+### Phase 3 추가 작업
+
+- `_hardcodedCoachingResult()` gemini_service에 추가
+- `PrayerResult.fromJson` - `coaching` 키 파싱 추가 (옵션: 저장 안 하면 불필요, MVP는 생략)
+
+### 테스트 매핑 (Phase 3)
+
+| INT | Test file | Test case |
+|-----|-----------|-----------|
+| INT-017, INT-018 | `test/models/prayer_coaching_test.dart` | fromJson / scores average / placeholder factory |
+| INT-020 | `test/services/gemini_service_coaching_test.dart` | hardcoded result 구조 / asset 로드 테스트 |
+| INT-024 | `test/features/dashboard/widgets/prayer_coaching_card_test.dart` | Pro locked ProBlur 렌더 / Pro data 상태 전체 렌더 / loading 상태 / error 상태 retry |
+| INT-026 | `test/features/dashboard/providers/prayer_coaching_provider_test.dart` | Pro 유저 autoDispose 동작 / Free 유저 skip |
+
+---
+
+## Phase 4-5 INT-XXX (추가 예정)
+
+Phase 3 done 후 Phase 4 spec 작성 시 INT-029부터 이어서 할당.

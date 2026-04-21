@@ -109,7 +109,10 @@
 - [x] Phase 1 `_details/*` 상세 작성 (2026-04-21)
 - [x] Phase 1 사용자 승인 (2026-04-21)
 - [x] Phase 1 구현 + commit `fea3f28` (2026-04-21)
-- [x] Phase 2 `_details/*` 상세 작성 (2026-04-21) ← 현재 여기
-- [ ] Phase 2 사용자 승인
-- [ ] Phase 2 Ralph 구현
-- [ ] Phase 3~5 (대기)
+- [x] Phase 2 `_details/*` 상세 작성 (2026-04-21)
+- [x] Phase 2 사용자 승인 (2026-04-21)
+- [x] Phase 2 구현 + commit `0ca34c3` (2026-04-21)
+- [x] Phase 3 `_details/*` 상세 작성 + prayer_guide.md 초안 v0.1 (2026-04-21) ← 현재 여기
+- [ ] **Phase 3 사용자 승인 (prayer_guide.md 중점 검토 필요)**
+- [ ] Phase 3 Ralph 구현
+- [ ] Phase 4~5 (대기)
