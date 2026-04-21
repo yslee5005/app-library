@@ -25,6 +25,8 @@ class SupabasePrayerRepository implements PrayerRepository {
       'transcript': prayer.transcript,
       'mode': prayer.mode,
       'qt_passage_ref': prayer.qtPassageRef,
+      'audio_storage_path': prayer.audioStoragePath,
+      'duration_seconds': prayer.durationSeconds,
       'result': prayer.result != null ? _resultToJson(prayer.result!) : null,
     });
     await updateStreak();
