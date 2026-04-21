@@ -120,7 +120,13 @@ class AppLocalizationsHe extends AppLocalizations {
   String get bibleStoryTitle => 'סיפור מהתנ\"ך';
 
   @override
-  String get testimonyTitle => 'העדות שלי';
+  String get testimonyTitle => 'עדות · תפילתי';
+
+  @override
+  String get testimonyHelperText => 'הרהור על תפילתך · ניתן לשתף עם הקהילה';
+
+  @override
+  String get myPrayerAudioLabel => 'הקלטת התפילה שלי';
 
   @override
   String get testimonyEdit => 'ערוך';
@@ -794,4 +800,43 @@ class AppLocalizationsHe extends AppLocalizations {
   String subscriptionCancelledNotice(String date) {
     return 'Your subscription has been cancelled. You\'ll have access until $date.';
   }
+
+  @override
+  String get qtLoadingHint1 =>
+      '💛 Love — Think of someone you love for 10 seconds';
+
+  @override
+  String get qtLoadingHint2 =>
+      '🌿 Grace — Recall one small grace you received today';
+
+  @override
+  String get qtLoadingHint3 =>
+      '🌅 Hope — Picture tomorrow\'s small hope in your heart';
+
+  @override
+  String get qtLoadingHint4 => '🕊️ Peace — Take three slow, deep breaths';
+
+  @override
+  String get qtLoadingHint5 => '🌳 Faith — Remember one unchanging truth';
+
+  @override
+  String get qtLoadingHint6 =>
+      '🌸 Gratitude — Name one thing you\'re thankful for now';
+
+  @override
+  String get qtLoadingHint7 =>
+      '🌊 Forgiveness — Bring to mind someone to forgive';
+
+  @override
+  String get qtLoadingHint8 => '📖 Wisdom — Hold onto one lesson from today';
+
+  @override
+  String get qtLoadingHint9 =>
+      '⏳ Patience — Think of what you\'re quietly waiting for';
+
+  @override
+  String get qtLoadingHint10 => '✨ Joy — Remember a moment you smiled today';
+
+  @override
+  String get qtLoadingTitle => 'Preparing today\'s Word...';
 }

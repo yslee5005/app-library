@@ -371,8 +371,20 @@ abstract class AppLocalizations {
   /// No description provided for @testimonyTitle.
   ///
   /// In en, this message translates to:
-  /// **'My Testimony'**
+  /// **'Testimony · My prayer'**
   String get testimonyTitle;
+
+  /// No description provided for @testimonyHelperText.
+  ///
+  /// In en, this message translates to:
+  /// **'Reflect on what you prayed · can be shared to community'**
+  String get testimonyHelperText;
+
+  /// No description provided for @myPrayerAudioLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'My prayer recording'**
+  String get myPrayerAudioLabel;
 
   /// No description provided for @testimonyEdit.
   ///
@@ -1645,6 +1657,72 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Your subscription has been cancelled. You\'ll have access until {date}.'**
   String subscriptionCancelledNotice(String date);
+
+  /// No description provided for @qtLoadingHint1.
+  ///
+  /// In en, this message translates to:
+  /// **'💛 Love — Think of someone you love for 10 seconds'**
+  String get qtLoadingHint1;
+
+  /// No description provided for @qtLoadingHint2.
+  ///
+  /// In en, this message translates to:
+  /// **'🌿 Grace — Recall one small grace you received today'**
+  String get qtLoadingHint2;
+
+  /// No description provided for @qtLoadingHint3.
+  ///
+  /// In en, this message translates to:
+  /// **'🌅 Hope — Picture tomorrow\'s small hope in your heart'**
+  String get qtLoadingHint3;
+
+  /// No description provided for @qtLoadingHint4.
+  ///
+  /// In en, this message translates to:
+  /// **'🕊️ Peace — Take three slow, deep breaths'**
+  String get qtLoadingHint4;
+
+  /// No description provided for @qtLoadingHint5.
+  ///
+  /// In en, this message translates to:
+  /// **'🌳 Faith — Remember one unchanging truth'**
+  String get qtLoadingHint5;
+
+  /// No description provided for @qtLoadingHint6.
+  ///
+  /// In en, this message translates to:
+  /// **'🌸 Gratitude — Name one thing you\'re thankful for now'**
+  String get qtLoadingHint6;
+
+  /// No description provided for @qtLoadingHint7.
+  ///
+  /// In en, this message translates to:
+  /// **'🌊 Forgiveness — Bring to mind someone to forgive'**
+  String get qtLoadingHint7;
+
+  /// No description provided for @qtLoadingHint8.
+  ///
+  /// In en, this message translates to:
+  /// **'📖 Wisdom — Hold onto one lesson from today'**
+  String get qtLoadingHint8;
+
+  /// No description provided for @qtLoadingHint9.
+  ///
+  /// In en, this message translates to:
+  /// **'⏳ Patience — Think of what you\'re quietly waiting for'**
+  String get qtLoadingHint9;
+
+  /// No description provided for @qtLoadingHint10.
+  ///
+  /// In en, this message translates to:
+  /// **'✨ Joy — Remember a moment you smiled today'**
+  String get qtLoadingHint10;
+
+  /// No description provided for @qtLoadingTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Preparing today\'s Word...'**
+  String get qtLoadingTitle;
 }
 
 class _AppLocalizationsDelegate

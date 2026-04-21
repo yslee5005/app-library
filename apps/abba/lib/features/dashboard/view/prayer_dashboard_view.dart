@@ -145,7 +145,7 @@ class _PrayerDashboardViewState extends ConsumerState<PrayerDashboardView> {
     return ListView(
       padding: const EdgeInsets.only(bottom: AbbaSpacing.xl),
       children: [
-        // 1. Prayer Summary Card
+        // 1. Prayer Summary Card (with user prayer audio playback)
         if (result.prayerSummary != null)
           StaggeredFadeIn(
             index: i++,
@@ -155,6 +155,8 @@ class _PrayerDashboardViewState extends ConsumerState<PrayerDashboardView> {
               gratitudeLabel: l10n.gratitudeLabel,
               petitionLabel: l10n.petitionLabel,
               intercessionLabel: l10n.intercessionLabel,
+              audioUrl: ref.watch(_currentAudioUrlProvider).value,
+              audioLabel: l10n.myPrayerAudioLabel,
             ),
           ),
         // 2. Scripture Card
@@ -167,13 +169,13 @@ class _PrayerDashboardViewState extends ConsumerState<PrayerDashboardView> {
             initiallyExpanded: false,
           ),
         ),
-        // 3. Testimony Card (with audio playback if available)
+        // 3. Testimony Card (prayer transcript reflection; audio moved to Prayer Summary)
         StaggeredFadeIn(
           index: i++,
           child: TestimonyCard(
             testimony: testimonyText,
             title: l10n.testimonyTitle,
-            audioUrl: ref.watch(_currentAudioUrlProvider).value,
+            helperText: l10n.testimonyHelperText,
           ),
         ),
         // 4. Historical Story Card (Premium — on-demand)

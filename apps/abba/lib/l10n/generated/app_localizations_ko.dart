@@ -119,7 +119,13 @@ class AppLocalizationsKo extends AppLocalizations {
   String get bibleStoryTitle => '성경 이야기';
 
   @override
-  String get testimonyTitle => '나의 간증';
+  String get testimonyTitle => '나의 간증 · 기도 원문';
+
+  @override
+  String get testimonyHelperText => '내가 뭐라고 기도했는지 돌아보기 · 커뮤니티 공유에도 사용';
+
+  @override
+  String get myPrayerAudioLabel => '내 기도 녹음';
 
   @override
   String get testimonyEdit => '수정';
@@ -788,4 +794,37 @@ class AppLocalizationsKo extends AppLocalizations {
   String subscriptionCancelledNotice(String date) {
     return '구독이 취소되었습니다. $date까지 이용 가능합니다.';
   }
+
+  @override
+  String get qtLoadingHint1 => '💛 사랑 — 눈을 감고 10초간 사랑하는 사람을 떠올리세요';
+
+  @override
+  String get qtLoadingHint2 => '🌿 은혜 — 오늘 받은 작은 은혜를 하나 떠올려 보세요';
+
+  @override
+  String get qtLoadingHint3 => '🌅 소망 — 내일 바라는 작은 소망을 마음에 그려보세요';
+
+  @override
+  String get qtLoadingHint4 => '🕊️ 평안 — 깊게 숨을 세 번 들이쉬고 내쉬세요';
+
+  @override
+  String get qtLoadingHint5 => '🌳 믿음 — 변하지 않는 진리 하나를 떠올려 보세요';
+
+  @override
+  String get qtLoadingHint6 => '🌸 감사 — 지금 감사할 것 하나를 찾아보세요';
+
+  @override
+  String get qtLoadingHint7 => '🌊 용서 — 용서하고 싶은 사람을 떠올려 보세요';
+
+  @override
+  String get qtLoadingHint8 => '📖 지혜 — 오늘 배운 것 하나를 마음에 새겨 보세요';
+
+  @override
+  String get qtLoadingHint9 => '⏳ 인내 — 조용히 기다리고 있는 것을 떠올려 보세요';
+
+  @override
+  String get qtLoadingHint10 => '✨ 기쁨 — 오늘 미소 지었던 순간을 기억해 보세요';
+
+  @override
+  String get qtLoadingTitle => '오늘의 말씀을 준비하고 있어요...';
 }

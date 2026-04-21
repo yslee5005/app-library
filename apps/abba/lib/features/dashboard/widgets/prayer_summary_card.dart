@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../models/prayer.dart';
 import '../../../theme/abba_theme.dart';
 import '../../../widgets/expandable_card.dart';
+import '../../../widgets/prayer_player.dart';
 
 class PrayerSummaryCard extends StatelessWidget {
   final PrayerSummary prayerSummary;
@@ -10,6 +11,8 @@ class PrayerSummaryCard extends StatelessWidget {
   final String gratitudeLabel;
   final String petitionLabel;
   final String intercessionLabel;
+  final String? audioUrl;
+  final String? audioLabel;
 
   const PrayerSummaryCard({
     super.key,
@@ -18,6 +21,8 @@ class PrayerSummaryCard extends StatelessWidget {
     required this.gratitudeLabel,
     required this.petitionLabel,
     required this.intercessionLabel,
+    this.audioUrl,
+    this.audioLabel,
   });
 
   String get _summary {
@@ -53,6 +58,30 @@ class PrayerSummaryCard extends StatelessWidget {
               prayerSummary.intercession,
               AbbaColors.softPink,
             ),
+          if (audioUrl != null) _buildAudioSection(),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildAudioSection() {
+    return Padding(
+      padding: const EdgeInsets.only(top: AbbaSpacing.sm),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          if (audioLabel != null)
+            Padding(
+              padding: const EdgeInsets.only(bottom: 4),
+              child: Text(
+                audioLabel!,
+                style: AbbaTypography.caption.copyWith(
+                  color: AbbaColors.muted,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ),
+          PrayerPlayer(audioUrl: audioUrl!),
         ],
       ),
     );
