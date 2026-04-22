@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:app_lib_logging/logging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -379,6 +381,12 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
           final prefs = await SharedPreferences.getInstance();
           await prefs.setString('locale', v);
           appLogger.info('Language changed to $v', category: LogCategory.general);
+          // Preload the PD Bible bundle so the first prayer doesn't pay the
+          // download cost. Safe to fire-and-forget — Bible text service
+          // dedupes in-flight requests.
+          unawaited(
+            ref.read(bibleTextServiceProvider).preload(v),
+          );
         }
       },
     );
