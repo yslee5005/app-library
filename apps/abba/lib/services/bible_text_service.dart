@@ -223,7 +223,13 @@ class SupabaseStorageBibleTextService implements BibleTextService {
 
   Future<Map<String, String>?> _loadBundleUncached(String locale) async {
     final desc = _bundles[locale];
-    if (desc == null) return null;
+    if (desc == null) {
+      apiLog.info(
+        '[Bible] preload skip: locale=$locale not in bundle registry '
+        '→ reference-only fallback at prayer time',
+      );
+      return null;
+    }
 
     // 2nd tier: local file cache.
     try {
