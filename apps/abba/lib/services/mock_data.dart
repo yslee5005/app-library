@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart' show visibleForTesting;
 import 'package:flutter/services.dart';
 
 import '../models/post.dart';
@@ -14,6 +15,33 @@ class MockDataService {
   List<QTPassage>? _qtPassages;
   List<CommunityPost>? _communityPosts;
   UserProfile? _userProfile;
+
+  /// Production constructor — loads data lazily from `assets/mock/*.json`
+  /// via `rootBundle`. Keep this path untouched so `main.dart` continues to
+  /// work unchanged.
+  MockDataService();
+
+  /// Test-only constructor: inject in-memory fixtures and skip the
+  /// `rootBundle.loadString` path entirely. Required in `flutter_test`
+  /// because the asset bundle shim is not wired for raw `assets/mock/*.json`
+  /// lookups — otherwise every getter throws
+  /// `Unable to load asset: "assets/mock/*.json"`.
+  ///
+  /// Pre-seeded fields short-circuit their getters; any fields left `null`
+  /// fall back to the normal asset-loading path (useful for narrow tests
+  /// that only stub one resource).
+  @visibleForTesting
+  MockDataService.fromData({
+    PrayerResult? prayerResult,
+    QtMeditationResult? qtMeditationResult,
+    List<QTPassage>? qtPassages,
+    List<CommunityPost>? communityPosts,
+    UserProfile? userProfile,
+  })  : _prayerResult = prayerResult,
+        _qtMeditationResult = qtMeditationResult,
+        _qtPassages = qtPassages,
+        _communityPosts = communityPosts,
+        _userProfile = userProfile;
 
   Future<PrayerResult> getPrayerResult() async {
     if (_prayerResult != null) return _prayerResult!;

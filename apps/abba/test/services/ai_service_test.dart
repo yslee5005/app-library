@@ -6,6 +6,8 @@ import 'package:abba/services/mock_data.dart';
 import 'package:abba/services/mock/mock_ai_service.dart';
 import 'package:abba/services/cached_ai_service.dart';
 
+import '../helpers/test_fixtures.dart';
+
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
@@ -13,7 +15,12 @@ void main() {
     late MockAiService service;
 
     setUp(() {
-      service = MockAiService(MockDataService());
+      // `fromData` fixtures bypass `rootBundle.loadString('assets/mock/*.json')`
+      // which fails in `flutter_test` due to missing asset shim.
+      final mockData = MockDataService.fromData(
+        prayerResult: TestFixtures.prayerResult(),
+      );
+      service = MockAiService(mockData);
     });
 
     test('analyzePrayer returns PrayerResult', () async {

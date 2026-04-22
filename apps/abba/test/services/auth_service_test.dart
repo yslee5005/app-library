@@ -4,13 +4,20 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:abba/services/mock_data.dart';
 import 'package:abba/services/mock/mock_auth_repository.dart';
 
+import '../helpers/test_fixtures.dart';
+
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
   late MockAuthRepository repo;
 
   setUp(() {
-    repo = MockAuthRepository(MockDataService());
+    // `MockDataService.fromData(...)` bypasses the `rootBundle` asset load so
+    // `getUserProfile()` can succeed in `flutter_test` without the asset shim.
+    final mockData = MockDataService.fromData(
+      userProfile: TestFixtures.userProfile(),
+    );
+    repo = MockAuthRepository(mockData);
   });
 
   group('MockAuthRepository', () {

@@ -1,13 +1,23 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:abba/services/mock_data.dart';
 
+import '../helpers/test_fixtures.dart';
+
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
   late MockDataService service;
 
   setUp(() {
-    service = MockDataService();
+    // Use in-memory fixtures via `fromData` — bypasses `rootBundle`
+    // (asset shim is not wired in `flutter_test` for raw `assets/mock/*.json`).
+    service = MockDataService.fromData(
+      prayerResult: TestFixtures.prayerResult(),
+      qtMeditationResult: TestFixtures.qtMeditationResult(),
+      qtPassages: TestFixtures.qtPassages(),
+      communityPosts: TestFixtures.communityPosts(),
+      userProfile: TestFixtures.userProfile(),
+    );
   });
 
   group('MockDataService', () {
