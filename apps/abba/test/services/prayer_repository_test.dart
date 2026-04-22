@@ -3,11 +3,20 @@ import 'package:abba/models/prayer.dart';
 import 'package:abba/services/mock/mock_prayer_repository.dart';
 
 void main() {
-  late MockPrayerRepository repo;
-
-  setUp(() {
-    repo = MockPrayerRepository();
-  });
+  // Build a fixture of N consecutive prayer days ending today (inclusive).
+  List<Prayer> consecutiveDayFixture(int days, {DateTime? endOn}) {
+    final end = endOn ?? DateTime.now();
+    return List.generate(days, (i) {
+      final d = end.subtract(Duration(days: i));
+      return Prayer(
+        id: 'fixture-$i',
+        userId: 'mock-user',
+        transcript: 'Fixture prayer $i',
+        mode: 'prayer',
+        createdAt: d,
+      );
+    });
+  }
 
   group('MockPrayerRepository', () {
     Prayer makePrayer({DateTime? createdAt}) {
@@ -21,6 +30,8 @@ void main() {
     }
 
     test('savePrayer adds to list', () async {
+      // Start empty (no asset load), then save.
+      final repo = MockPrayerRepository.fromData(const []);
       final prayer = makePrayer();
       await repo.savePrayer(prayer);
 
@@ -30,6 +41,7 @@ void main() {
     });
 
     test('getPrayersByDate returns matching prayers', () async {
+      final repo = MockPrayerRepository.fromData(const []);
       final today = DateTime.now();
       final yesterday = today.subtract(const Duration(days: 1));
 
@@ -41,6 +53,7 @@ void main() {
     });
 
     test('getPrayersByMonth returns matching prayers', () async {
+      final repo = MockPrayerRepository.fromData(const []);
       final now = DateTime.now();
       await repo.savePrayer(makePrayer(createdAt: now));
 
@@ -49,6 +62,7 @@ void main() {
     });
 
     test('getTodayPrayerCount counts correctly', () async {
+      final repo = MockPrayerRepository.fromData(const []);
       await repo.savePrayer(makePrayer());
       await repo.savePrayer(makePrayer());
 
@@ -56,34 +70,38 @@ void main() {
       expect(count, 2);
     });
 
-    test('updateStreak increments current streak', () async {
+    test('updateStreak does not regress current streak', () async {
+      // Seed 7 consecutive days ending today → current=7, best=7.
+      // Current `updateStreak()` is a no-op (streak is derived from prayer
+      // data, not a counter), so the streak stays stable across the call.
+      final repo = MockPrayerRepository.fromData(consecutiveDayFixture(7));
       final before = await repo.getStreak();
-      expect(before.current, 7); // initial mock value
+      expect(before.current, 7);
 
       await repo.updateStreak();
 
       final after = await repo.getStreak();
-      expect(after.current, 8);
+      expect(after.current, before.current);
     });
 
-    test('updateStreak updates best streak when exceeded', () async {
-      // Initial best is 21, current is 7
-      // Need to increment 15 times to exceed
-      for (var i = 0; i < 15; i++) {
-        await repo.updateStreak();
-      }
+    test('updateStreak preserves best streak', () async {
+      // Seed 21 consecutive days ending today → current=21, best=21.
+      final repo = MockPrayerRepository.fromData(consecutiveDayFixture(21));
+      await repo.updateStreak();
 
       final streak = await repo.getStreak();
-      expect(streak.current, 22);
-      expect(streak.best, 22);
+      expect(streak.current, 21);
+      expect(streak.best, 21);
     });
 
     test('getLatestPrayer returns null when empty', () async {
+      final repo = MockPrayerRepository.fromData(const []);
       final latest = await repo.getLatestPrayer();
       expect(latest, isNull);
     });
 
     test('getTotalPrayerCount returns correct count', () async {
+      final repo = MockPrayerRepository.fromData(const []);
       expect(await repo.getTotalPrayerCount(), 0);
 
       await repo.savePrayer(makePrayer());
@@ -94,13 +112,15 @@ void main() {
     });
 
     test('checkMilestones detects first prayer', () async {
+      final repo = MockPrayerRepository.fromData(const []);
       await repo.savePrayer(makePrayer());
       final milestones = await repo.checkMilestones();
       expect(milestones, contains('first_prayer'));
     });
 
     test('checkMilestones detects 7 day streak', () async {
-      // Mock initial streak is 7, so milestone should trigger
+      // Seed exactly 7 consecutive days ending today → streak.current == 7.
+      final repo = MockPrayerRepository.fromData(consecutiveDayFixture(7));
       final milestones = await repo.checkMilestones();
       expect(milestones, contains('7_day_streak'));
     });

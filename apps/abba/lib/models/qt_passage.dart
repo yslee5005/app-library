@@ -28,17 +28,18 @@ class QTPassage {
   });
 
   factory QTPassage.fromJson(Map<String, dynamic> json) {
+    final dateRaw = json['date'] as String?;
     return QTPassage(
-      id: json['id'] as String,
-      reference: json['reference'] as String,
+      id: json['id'] as String? ?? '',
+      reference: json['reference'] as String? ?? '',
       locale: json['locale'] as String? ?? 'en',
-      text: json['text'] as String,
+      text: json['text'] as String? ?? '',
       topic: json['topic'] as String? ?? '',
       theme: json['theme'] as String? ?? '',
       batchSlot: json['batch_slot'] as String? ?? 'morning',
-      icon: json['icon'] as String,
-      colorHex: json['color_hex'] as String,
-      date: DateTime.parse(json['date'] as String),
+      icon: json['icon'] as String? ?? '📖',
+      colorHex: json['color_hex'] as String? ?? '#CCCCCC',
+      date: dateRaw != null ? DateTime.parse(dateRaw) : DateTime.now(),
       isCompleted: json['is_completed'] as bool? ?? false,
     );
   }

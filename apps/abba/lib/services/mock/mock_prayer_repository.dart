@@ -1,14 +1,30 @@
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart' show visibleForTesting;
 import 'package:flutter/services.dart';
 
 import '../../models/prayer.dart';
 import '../prayer_repository.dart';
 
 class MockPrayerRepository implements PrayerRepository {
-  final List<Prayer> _prayers = [];
+  final List<Prayer> _prayers;
   final Set<String> _achievedMilestones = {};
-  bool _initialized = false;
+  bool _initialized;
+
+  MockPrayerRepository()
+      : _prayers = [],
+        _initialized = false;
+
+  /// Test-only constructor: skip asset load and inject data directly.
+  /// Use this in tests where the rootBundle asset shim is not wired, so
+  /// `_ensureInitialized` would otherwise fail loading `assets/mock/prayers.json`.
+  @visibleForTesting
+  MockPrayerRepository.fromData(List<Prayer> prayers)
+      : _prayers = List.of(prayers),
+        _initialized = true {
+    // Sort newest first so getLatestPrayer returns correct result.
+    _prayers.sort((a, b) => b.createdAt.compareTo(a.createdAt));
+  }
 
   /// Lazy-load seed data from JSON on first read access.
   Future<void> _ensureInitialized() async {

@@ -26,9 +26,13 @@ void main() {
       expect(streakGardenIcon(59), '🌸');
     });
 
-    test('returns tree for 60+ days', () {
+    test('returns tree for 60-99 days', () {
       expect(streakGardenIcon(60), '🌳');
-      expect(streakGardenIcon(100), '🌳');
+      expect(streakGardenIcon(99), '🌳');
+    });
+
+    test('returns forest for 100+ days', () {
+      expect(streakGardenIcon(100), '🌲🌳🌲');
     });
   });
 
