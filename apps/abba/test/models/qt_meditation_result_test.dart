@@ -98,18 +98,18 @@ void main() {
         'application': {'action': 'y'},
         'knowledge': {'historical_context': 'z'},
         'growth_story': {
-          'title': '직조공의 무늬',
-          'summary': '한 소녀가 할머니가 태피스트리를 짜는 모습을 바라보았습니다.',
-          'lesson': '하나님은 엉킨 실에서도 아름다움을 만드십니다.',
+          'title': '조지 뮐러 — 아침 빵',
+          'summary': '1838년 브리스톨, 조지 뮐러는 비어 있는 식탁 앞에 섰습니다.',
+          'lesson': '하나님은 구하기 전에 응답의 길을 여십니다.',
           'is_premium': true,
         },
       };
 
       final result = QtMeditationResult.fromJson(json);
       expect(result.growthStory, isNotNull);
-      expect(result.growthStory!.titleEn, '직조공의 무늬');
-      expect(result.growthStory!.titleKo, '직조공의 무늬');
-      expect(result.growthStory!.summaryEn, isNotEmpty);
+      expect(result.growthStory!.title, '조지 뮐러 — 아침 빵');
+      expect(result.growthStory!.summary, isNotEmpty);
+      expect(result.growthStory!.lesson, isNotEmpty);
       expect(result.growthStory!.isPremium, isTrue);
     });
   });
@@ -145,7 +145,7 @@ void main() {
       expect(result.analysis.insightKo, '통찰');
     });
 
-    test('legacy growth_story with _en/_ko fields still parses', () {
+    test('legacy growth_story with _en/_ko fields still parses (English first)', () {
       final json = {
         'analysis': {'insight': ''},
         'application': {'action': ''},
@@ -162,9 +162,11 @@ void main() {
       };
 
       final result = QtMeditationResult.fromJson(json);
-      expect(result.growthStory!.titleEn, 'Old Title');
-      expect(result.growthStory!.titleKo, '옛 제목');
-      expect(result.growthStory!.summaryKo, '옛 한국어 요약');
+      // Phase 4: no locale context at parse time → _en preferred, _ko fallback.
+      expect(result.growthStory!.title, 'Old Title');
+      expect(result.growthStory!.summary, 'Old English summary');
+      expect(result.growthStory!.lesson, 'Old lesson');
+      expect(result.growthStory!.isPremium, isTrue);
     });
 
     test('tolerates completely empty sub-objects (defensive defaults)', () {
@@ -255,6 +257,74 @@ void main() {
       expect(result.knowledge.citations.first.type, 'example');
       expect(result.knowledge.citations.first.source, isEmpty);
       expect(result.knowledge.citations.first.content, '일상의 한 장면');
+    });
+  });
+
+  group('GrowthStory — Phase 4 single-field', () {
+    test('parses new single-field schema (title / summary / lesson)', () {
+      final story = GrowthStory.fromJson({
+        'title': 'George Müller — The Morning of Bread',
+        'summary':
+            'On a cold November morning in 1838, the orphanage on Wilson '
+                'Street sat in mist. Three hundred children stared at empty '
+                'pewter plates. George Müller folded his hands and said, '
+                'Father, we thank You for the food You are about to provide. '
+                'Before the amen left his lips, the baker knocked at the door.',
+        'lesson':
+            'For whatever feels empty in your life today, remember: the '
+                'Shepherd was already opening the door of provision before '
+                'you finished your prayer.',
+        'is_premium': true,
+      });
+
+      expect(story.title, 'George Müller — The Morning of Bread');
+      expect(story.summary, contains('November morning in 1838'));
+      expect(story.lesson, contains('Shepherd'));
+      expect(story.isPremium, isTrue);
+    });
+
+    test('legacy dual-field JSON prefers _en over _ko (Phase 4 compat)', () {
+      final story = GrowthStory.fromJson({
+        'title_en': 'Augustine Milan',
+        'title_ko': '아우구스티누스 밀라노',
+        'summary_en': 'Under the fig tree...',
+        'summary_ko': '무화과나무 아래에서...',
+        'lesson_en': 'Take up and read.',
+        'lesson_ko': '집어 들고 읽으라.',
+        // no is_premium → defaults to true (premium card)
+      });
+
+      expect(story.title, 'Augustine Milan');
+      expect(story.summary, 'Under the fig tree...');
+      expect(story.lesson, 'Take up and read.');
+      expect(story.isPremium, isTrue);
+    });
+
+    test('all fields missing → empty strings, isPremium defaults to true', () {
+      final story = GrowthStory.fromJson(const {});
+      expect(story.title, isEmpty);
+      expect(story.summary, isEmpty);
+      expect(story.lesson, isEmpty);
+      expect(story.isPremium, isTrue);
+    });
+
+    test('QtMeditationResult.fromJson propagates single-field growth_story', () {
+      final result = QtMeditationResult.fromJson({
+        'analysis': {'insight': 'i'},
+        'application': {'action': 'a'},
+        'knowledge': {'historical_context': 'h'},
+        'growth_story': {
+          'title': 'Corrie ten Boom — Ravensbrück',
+          'summary': 'In the flea-infested barrack, Betsie read the Shepherd Psalm aloud.',
+          'lesson': 'The Shepherd can lead you through any valley today.',
+          'is_premium': true,
+        },
+      });
+
+      expect(result.growthStory, isNotNull);
+      expect(result.growthStory!.title, 'Corrie ten Boom — Ravensbrück');
+      expect(result.growthStory!.summary, contains('Betsie'));
+      expect(result.growthStory!.lesson, contains('Shepherd'));
     });
   });
 

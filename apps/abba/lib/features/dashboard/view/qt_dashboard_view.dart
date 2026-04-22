@@ -155,7 +155,6 @@ class _QtDashboardViewState extends ConsumerState<QtDashboardView> {
               growthStory: result.growthStory!,
               title: l10n.growthStoryTitle,
               lessonLabel: l10n.todayLesson,
-              locale: locale,
               onUnlock: showPremiumUpgrade,
               isUserPremium: isPremium,
             ),

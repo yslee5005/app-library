@@ -243,46 +243,43 @@ class OriginalWord {
   String meaning(String locale) => locale == 'ko' ? meaningKo : meaningEn;
 }
 
+/// Spiritual growth story tied to today's meditation. Phase 4 of
+/// qt_output_redesign collapsed this to single-field (generated in the user's
+/// locale by Gemini). Legacy DB records that still carry `_en`/`_ko` pairs
+/// fall through a 3-stage resolver: `title` → `title_en` → `title_ko`.
 class GrowthStory {
-  final String titleEn;
-  final String titleKo;
-  final String summaryEn;
-  final String summaryKo;
-  final String lessonEn;
-  final String lessonKo;
+  final String title;   // In the user's locale (Gemini-generated)
+  final String summary; // 8-12 sentence narrative of a REAL Bible/church-history figure
+  final String lesson;  // 2-3 sentence application tied to today's meditation
   final bool isPremium;
 
   const GrowthStory({
-    required this.titleEn,
-    required this.titleKo,
-    required this.summaryEn,
-    required this.summaryKo,
-    required this.lessonEn,
-    required this.lessonKo,
+    required this.title,
+    required this.summary,
+    required this.lesson,
     required this.isPremium,
   });
 
   factory GrowthStory.fromJson(Map<String, dynamic> json) {
-    // Phase 1 prompt asks for single `title`/`summary`/`lesson` in the user's
-    // locale. Legacy records still carry _en/_ko variants. Phase 4 will
-    // fully migrate to single-field. For now, accept both.
-    final singleTitle = json['title'] as String?;
-    final singleSummary = json['summary'] as String?;
-    final singleLesson = json['lesson'] as String?;
+    // Phase 4 — single-field is the primary schema. `_en`/`_ko` are legacy
+    // fallbacks so historical DB records keep rendering. No locale info is
+    // available here, so prefer English, then Korean, then empty string.
     return GrowthStory(
-      titleEn: singleTitle ?? json['title_en'] as String? ?? '',
-      titleKo: singleTitle ?? json['title_ko'] as String? ?? '',
-      summaryEn: singleSummary ?? json['summary_en'] as String? ?? '',
-      summaryKo: singleSummary ?? json['summary_ko'] as String? ?? '',
-      lessonEn: singleLesson ?? json['lesson_en'] as String? ?? '',
-      lessonKo: singleLesson ?? json['lesson_ko'] as String? ?? '',
+      title: json['title'] as String?
+          ?? json['title_en'] as String?
+          ?? json['title_ko'] as String?
+          ?? '',
+      summary: json['summary'] as String?
+          ?? json['summary_en'] as String?
+          ?? json['summary_ko'] as String?
+          ?? '',
+      lesson: json['lesson'] as String?
+          ?? json['lesson_en'] as String?
+          ?? json['lesson_ko'] as String?
+          ?? '',
       isPremium: json['is_premium'] as bool? ?? true,
     );
   }
-
-  String title(String locale) => locale == 'ko' ? titleKo : titleEn;
-  String summary(String locale) => locale == 'ko' ? summaryKo : summaryEn;
-  String lesson(String locale) => locale == 'ko' ? lessonKo : lessonEn;
 }
 
 /// QT Coaching scores — Pro-only, mirrors `CoachingScores` but with the

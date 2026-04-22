@@ -617,12 +617,9 @@ Return a JSON object:
     ]
   },
   "growth_story": {
-    "title_en": "Growth story title in English",
-    "title_ko": "영적 성장 스토리 제목 (한국어)",
-    "summary_en": "A story with narrative arc (8-12 sentences in English): [Beginning] Ordinary life or background. Who is this person and what was their situation? [Rising] Crisis begins. A dramatic event testing faith — desperation, suffering. Vivid scene description. [Turning] Encounter with God's Word, answered prayer, or faith decision. How God worked — dramatic reversal. [Resolution] Transformation and fruit. How they changed. Connection to today's passage.",
-    "summary_ko": "기승전결 구조의 감동적인 실화 (8-12문장): [기] 평범한 일상/배경. 이 사람은 누구이고 어떤 상황이었는지. [승] 위기 시작. 신앙을 시험하는 극적 사건, 고난, 절망. 구체적 장면 묘사. [전] 전환점. 말씀과의 만남, 기도의 응답, 믿음의 결단. 하나님의 역사 — 극적 반전. [결] 변화와 열매. 그 경험 이후 어떻게 달라졌는지. 오늘 묵상 말씀과의 연결.",
-    "lesson_en": "How this story connects to today's meditation and specific lesson for the reader (2-3 sentences)",
-    "lesson_ko": "이 이야기가 오늘 묵상과 어떻게 연결되는지, 독자에게 주는 구체적 교훈 (2-3문장)",
+    "title": "Growth story title in $langName",
+    "summary": "A real-person narrative (8-12 sentences in $langName) with a four-beat arc: [Beginning] concrete time + place + background of a NAMED Bible or church-history figure. [Rising] the crisis or inner conflict with sensory detail and inner monologue. [Turning] a specific moment — encounter with Scripture, answered prayer, or costly faith decision. [Resolution] how this changed them, tied directly to today's passage theme.",
+    "lesson": "How this story connects to today's meditation and specific lesson for the reader (2-3 sentences in $langName — address the reader as 'you').",
     "is_premium": true
   }
 }
@@ -639,7 +636,30 @@ WRITING STYLE (critical for quality):
 IMPORTANT:
 - cross_references: Include 2-3 verses. Each must have both "reference" and full "text" in $langName.
 - application.action: Must be SPECIFIC and ACTIONABLE. Include who/what/how.
-- growth_story: Must be a REAL story from Bible or verified church history. Minimum 8 sentences.
-- Do NOT use generic phrases. Every response must be personalized to THIS meditation.''';
+- Do NOT use generic phrases. Every response must be personalized to THIS meditation.
+
+GROWTH STORY QUALITY BAR (Phase 4):
+- Must be a REAL, VERIFIABLE story from:
+  * Bible (a specific NAMED person — not "a man said...", not an unnamed disciple)
+  * Documented church history — era/year and location identifiable
+    (e.g. Augustine 386 AD Milan, Martin Luther 1521 Worms, Hudson Taylor
+    1865 Brighton Beach, George Müller 1838 Bristol, Corrie ten Boom 1944
+    Ravensbrück, Amy Carmichael 1901 Dohnavur).
+- NEVER fabricate names, fictional characters, or parables dressed as history.
+- If you cannot think of a verifiable story that fits this passage, USE A
+  BIBLE FIGURE. Never substitute with fiction.
+
+Length and structure:
+- summary: 8-12 sentences in $langName. Four beats:
+  1. Open with concrete TIME and PLACE (year/era, city, room, season).
+  2. Introduce the person's INNER conflict or question.
+  3. Turning point — specific moment of revelation, encounter, or choice.
+  4. Resolution tied directly to today's passage theme.
+- SENSORY details (sight / sound / smell / touch) in every scene.
+- INNER MONOLOGUE — at least one line of what they thought or felt.
+- VARY sentence length. Show, don't tell.
+
+lesson: 2-3 sentences in $langName. Speak directly to the reader ("you"),
+referencing a specific detail from the story above.''';
   }
 }

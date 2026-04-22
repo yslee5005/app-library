@@ -8,7 +8,6 @@ class GrowthStoryCard extends StatelessWidget {
   final GrowthStory growthStory;
   final String title;
   final String lessonLabel;
-  final String locale;
   final VoidCallback onUnlock;
   final bool isUserPremium;
 
@@ -17,7 +16,6 @@ class GrowthStoryCard extends StatelessWidget {
     required this.growthStory,
     required this.title,
     required this.lessonLabel,
-    required this.locale,
     required this.onUnlock,
     required this.isUserPremium,
   });
@@ -35,12 +33,12 @@ class GrowthStoryCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            growthStory.title(locale),
+            growthStory.title,
             style: AbbaTypography.body.copyWith(fontWeight: FontWeight.w700),
           ),
           const SizedBox(height: AbbaSpacing.sm),
           Text(
-            growthStory.summary(locale),
+            growthStory.summary,
             style: AbbaTypography.bodySmall,
           ),
           const SizedBox(height: AbbaSpacing.md),
@@ -68,7 +66,7 @@ class GrowthStoryCard extends StatelessWidget {
                       ),
                       const SizedBox(height: 2),
                       Text(
-                        growthStory.lesson(locale),
+                        growthStory.lesson,
                         style: AbbaTypography.bodySmall.copyWith(
                           fontWeight: FontWeight.w600,
                         ),

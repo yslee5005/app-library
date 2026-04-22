@@ -797,16 +797,20 @@ Rules (per QT Guide §4-6):
         ],
       ),
       growthStory: GrowthStory(
-        titleEn: 'The Weaver\'s Pattern',
-        titleKo: '직조공의 무늬',
-        summaryEn:
-            'A young girl watched her grandmother weave a tapestry. From below, she saw only knots and loose threads, and she cried. Her grandmother lifted her to the top of the loom — where the same threads formed a garden of roses. "This is how God sees your life," she whispered. "From below it looks tangled. From above, it is already beautiful."',
-        summaryKo:
-            '한 소녀가 할머니가 태피스트리를 짜는 모습을 바라보고 있었습니다. 아래에서 보니 엉킨 매듭과 늘어진 실뿐이어서 소녀는 울었습니다. 할머니는 소녀를 베틀 위로 들어 올렸습니다 — 같은 실이 위에서는 장미 정원이 되어 있었습니다. "하나님이 네 인생을 보시는 방식이 이것이란다"라고 할머니는 속삭였습니다. "아래에서는 엉킨 것처럼 보여도, 위에서는 이미 아름답단다."',
-        lessonEn:
-            'Today\'s passage invites you to trust the weaver — to see today\'s tangled threads as part of a pattern only God fully sees.',
-        lessonKo:
-            '오늘의 말씀은 직조공을 신뢰하라고 초대합니다 — 오늘의 엉킨 실들이 하나님만이 온전히 보시는 무늬의 일부임을 믿으세요.',
+        // Phase 4: replaced fictional "Weaver's Pattern" parable with a
+        // verifiable George Müller episode from Bristol, 1838. Ties directly
+        // to Psalm 23:1 — "The Lord is my shepherd; I shall not want."
+        title: isKo
+            ? '조지 뮐러 — "내게 부족함이 없으리로다"의 아침'
+            : 'George Müller — The Morning of "I Shall Not Want"',
+        summary: isKo
+            ? '1838년 11월, 브리스톨 윌슨 거리의 고아원 마당에는 차가운 안개가 낮게 깔려 있었습니다. 식당 안에는 삼백 명의 아이들이 긴 나무 식탁에 앉아, 빈 주석 접시를 바라보고 있었습니다. 문 위의 낡은 시계가 조지 뮐러의 심장보다 더 크게 째깍거렸습니다. 그는 주머니에 단 한 푼도 없었고, 우유 통도, 빵 부대도 비어 있다는 것을 알고 있었습니다. "오늘 아침은 그냥 지나가는 수밖에 없겠다"는 생각이 잠시 스쳤습니다. 하지만 그는 식당 앞에 서서 조용히 손을 모으고 이렇게 말했습니다. "아버지, 우리에게 주실 음식에 대해 감사합니다." 아멘이라는 말이 떨어지기도 전에, 부엌 쪽에서 문 두드리는 소리가 났습니다. 클리프턴 거리의 빵집 주인이 앞치마에 밀가루를 묻힌 채 서 있었습니다. "밤새 잠을 이룰 수 없어서, 아이들 먹을 빵을 구웠습니다"라고 그는 말했습니다. 몇 분 뒤에는 배달 마차의 축이 고아원 정문 앞에서 부러졌고, 우유 장수는 상하기 전에 그것을 전부 들여놓았습니다. 그날 저녁 일기에 뮐러는 이렇게 적었습니다: "아이들은 자신들이 굶주렸다는 사실조차 알지 못했다." 그는 평생 기부를 구하러 다니지 않았고, 오직 목자이신 한 분에게만 구했습니다.'
+            : 'On a cold November morning in 1838, a low mist still clung to the orphanage yard on Wilson Street in Bristol. Inside, three hundred children sat at long wooden tables, staring down at empty pewter plates. The old clock above the door ticked louder than George Müller\'s own heart. He knew there was not a single penny in his pocket, and the milk cans and bread baskets in the kitchen were bare. For one heartbeat, the thought flickered — "perhaps we must simply let this morning pass." Instead he stood at the head of the hall, folded his hands, and said quietly, "Father, we thank You for the food You are about to provide." Before the "amen" had left his lips, a knock came at the kitchen door. The baker from Clifton Street stood there, flour still on his apron. "I could not sleep last night," he said, "so I baked enough for the children." Minutes later a milkman\'s cart broke its axle at the gate, and rather than let his cans sour he carried every one of them inside. That evening Müller wrote in his journal: "The children did not know they had been hungry." For sixty years he refused to ask a single human being for money — he asked only the Shepherd.'
+        ,
+        lesson: isKo
+            ? '시편 23편 1절의 "내게 부족함이 없으리로다"는 텅 빈 창고를 본 후에야 참된 의미가 드러나는 고백입니다. 오늘 당신이 비어 있다고 느끼는 그 자리에 대해 — 구하기 전에 목자께서 이미 응답의 길을 여셨음을 기억하세요.'
+            : 'The confession "I shall not want" in Psalm 23:1 only reveals its true weight after you have looked inside an empty storehouse. For whatever feels empty in your life today, remember this: the Shepherd was already opening the door of provision before you finished the sentence of your prayer.'
+        ,
         isPremium: true,
       ),
     );
@@ -1254,6 +1258,40 @@ CITATIONS (knowledge.citations):
 IMPORTANT:
 - cross_references: Include 2-3 verses with both "reference" and full "text" in $langName.
 - application.action: Must be SPECIFIC and ACTIONABLE with who/what/how.
-- growth_story: Must be a REAL story from Bible or verified church history. Minimum 8 sentences.''';
+
+GROWTH STORY QUALITY BAR (Phase 4):
+- Must be a REAL, VERIFIABLE story from:
+  * Bible (a specific NAMED person — not "a man said...", not an unnamed disciple)
+  * Documented church history — era/year and location identifiable
+    (e.g. Augustine 386 AD Milan, Martin Luther 1521 Worms, Hudson Taylor
+    1865 Brighton Beach, George Müller 1838 Bristol, Corrie ten Boom 1944
+    Ravensbrück, Amy Carmichael 1901 Dohnavur).
+- NEVER fabricate names, fictional characters, or parables dressed as history.
+- If you cannot think of a verifiable story that fits this passage, USE A
+  BIBLE FIGURE. Never substitute with fiction or a modern anonymous anecdote.
+
+Length and structure:
+- summary: 8-12 sentences in $langName. Structure in four beats:
+  1. Open with a concrete TIME and PLACE (year/era, city, room, season, weather).
+  2. Introduce the person's INNER conflict, question, or fear — what they
+     were thinking or feeling right before the turning point.
+  3. Turning point — a specific moment of revelation, encounter, answered
+     prayer, or costly choice. One line of their actual (or near-quote)
+     speech is welcome if historically documented.
+  4. Resolution — how this changed them, tied directly to THIS passage's
+     theme (not a generic "they trusted God" sentence).
+
+Writing style:
+- SENSORY details (sight / sound / smell / touch) in every scene — e.g.
+  "the paper smelled of lamp oil", "the mist still hung over the yard".
+- INNER MONOLOGUE — at least one sentence of what they thought or felt.
+- Metaphors and similes allowed; avoid clichés.
+- VARY sentence length. Mix short punchy lines with flowing longer ones.
+- Show, don't tell. No generic phrases like "and they trusted God" without
+  a concrete action, word, or silence showing that trust.
+
+lesson: 2-3 sentences in $langName. Speak directly to the reader ("you"),
+connecting THIS specific story to something the reader can apply TODAY.
+Not a platitude — reference a detail from the story above.''';
   }
 }
