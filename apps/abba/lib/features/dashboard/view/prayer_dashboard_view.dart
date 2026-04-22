@@ -77,7 +77,12 @@ class _PrayerDashboardViewState extends ConsumerState<PrayerDashboardView> {
           );
         }
       }
-    } catch (_) {
+    } catch (e, stackTrace) {
+      prayerLog.error(
+        'Premium content generation failed',
+        error: e,
+        stackTrace: stackTrace,
+      );
       if (mounted) setState(() => _premiumLoading = false);
     }
   }

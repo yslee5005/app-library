@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:app_lib_error_logging/error_logging.dart' as pkg;
+import 'package:flutter/foundation.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 
 import '../config/app_config.dart';
@@ -23,26 +24,83 @@ class ErrorLoggingService {
     SentryEvent event,
     Hint hint,
   ) {
-    // Mask prayer transcript and email from breadcrumbs/exceptions
+    // 1. Mask message
     final message = event.message?.formatted;
     if (message != null) {
-      final masked = _maskSensitive(message);
-      event.message = SentryMessage(masked);
+      event.message = SentryMessage(maskSensitive(message));
     }
+
+    // 2. Mask breadcrumbs (messages carry user input / prayer transcript)
+    final breadcrumbs = event.breadcrumbs;
+    if (breadcrumbs != null) {
+      for (final b in breadcrumbs) {
+        if (b.message != null) {
+          b.message = maskSensitive(b.message!);
+        }
+      }
+    }
+
+    // 3. Mask exception values (error messages often contain PII)
+    final exceptions = event.exceptions;
+    if (exceptions != null) {
+      for (final exc in exceptions) {
+        if (exc.value != null) {
+          exc.value = maskSensitive(exc.value!);
+        }
+      }
+    }
+
     return event;
   }
 
-  static String _maskSensitive(String text) {
-    // Mask emails
-    final emailMasked = text.replaceAll(
+  /// Masks sensitive data from free-form strings before they reach Sentry.
+  ///
+  /// Rules (applied in order):
+  /// 1. Email addresses → `[EMAIL]`
+  /// 2. Phone numbers (E.164 + KR formats) → `[PHONE]`
+  /// 3. JWT-like tokens (Supabase/auth) → `[JWT]`
+  /// 4. Long Korean runs (50+ chars) = prayer transcript → `[TRANSCRIPT]`
+  /// 5. URL query params → `?[PARAMS_REDACTED]`
+  /// 6. Truncate to 500 chars
+  @visibleForTesting
+  static String maskSensitive(String text) {
+    var result = text;
+
+    // 1. Email
+    result = result.replaceAll(
       RegExp(r'[\w.+-]+@[\w-]+\.[\w.]+'),
       '[EMAIL]',
     );
-    // Truncate long prayer text
-    if (emailMasked.length > 200) {
-      return '${emailMasked.substring(0, 200)}... [TRUNCATED]';
+
+    // 2. Phone (E.164 `+<digits>` or hyphen-separated KR/US)
+    result = result.replaceAll(
+      RegExp(r'(\+\d{8,15}|\d{2,3}-\d{3,4}-\d{4})'),
+      '[PHONE]',
+    );
+
+    // 3. JWT-like tokens (3 base64url segments separated by dots, starts with eyJ)
+    result = result.replaceAll(
+      RegExp(r'eyJ[\w-]+\.[\w-]+\.[\w-]+'),
+      '[JWT]',
+    );
+
+    // 4. Long Korean runs (transcript / prayer content)
+    result = result.replaceAllMapped(
+      RegExp(r'[가-힣][가-힣\s.,!?~]{49,}'),
+      (_) => '[TRANSCRIPT]',
+    );
+
+    // 5. URL query params (keep scheme + host + path; mask query)
+    result = result.replaceAllMapped(
+      RegExp(r'(https?://[^\s?]+)\?[^\s]+'),
+      (m) => '${m.group(1)}?[PARAMS_REDACTED]',
+    );
+
+    // 6. Truncate (500 is generous to preserve stacktrace context after mask)
+    if (result.length > 500) {
+      return '${result.substring(0, 500)}... [TRUNCATED]';
     }
-    return emailMasked;
+    return result;
   }
 
   static void captureException(Object error, StackTrace stackTrace) {

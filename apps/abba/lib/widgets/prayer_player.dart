@@ -41,8 +41,12 @@ class _PrayerPlayerState extends State<PrayerPlayer> {
         if (mounted) setState(() => _isPlaying = false);
       });
       if (mounted) setState(() => _prepared = true);
-    } catch (e) {
-      prayerLog.warning('Audio player prepare failed', error: e);
+    } catch (e, stackTrace) {
+      prayerLog.error(
+        'Audio player prepare failed',
+        error: e,
+        stackTrace: stackTrace,
+      );
     }
   }
 

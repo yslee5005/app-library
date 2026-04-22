@@ -1,3 +1,4 @@
+import 'package:app_lib_logging/logging.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../models/qt_passage.dart';
@@ -32,8 +33,15 @@ class SupabaseQtRepository implements QtRepository {
       );
       final List<QTPassage> fresh = await _fetchFromDb(today, locale);
       if (fresh.isNotEmpty) return fresh;
-    } catch (_) {
-      // Fall through to English / hardcoded fallback.
+    } catch (e, stackTrace) {
+      // Edge Function failure is recoverable (fallback below), but we still
+      // want Sentry to see it — signals backend degradation.
+      appLogger.error(
+        'QT Edge Function invoke failed; falling back to en/hardcoded',
+        category: LogCategory.qt,
+        error: e,
+        stackTrace: stackTrace,
+      );
     }
 
     // 3. Edge Function failed or returned nothing — English fallback.
