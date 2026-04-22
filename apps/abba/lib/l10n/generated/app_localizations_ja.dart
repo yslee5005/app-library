@@ -990,4 +990,144 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get qtCoachingLevelExpert => '🌳 熟達者';
+
+  @override
+  String get notifyMorning1Title => '🙏 祈りの時間です';
+
+  @override
+  String notifyMorning1Body(String name) {
+    return '$nameさん、今日も神様と対話してみましょう';
+  }
+
+  @override
+  String get notifyMorning2Title => '🌅 新しい朝が来ました';
+
+  @override
+  String notifyMorning2Body(String name) {
+    return '$nameさん、感謝で一日を始めましょう';
+  }
+
+  @override
+  String get notifyMorning3Title => '✨ 今日の恵み';
+
+  @override
+  String notifyMorning3Body(String name) {
+    return '$nameさん、神様が用意された恵みに出会いましょう';
+  }
+
+  @override
+  String get notifyMorning4Title => '🕊️ 平安な朝';
+
+  @override
+  String notifyMorning4Body(String name) {
+    return '$nameさん、祈りで心に平安を満たしましょう';
+  }
+
+  @override
+  String get notifyMorning5Title => '📖 み言葉とともに';
+
+  @override
+  String notifyMorning5Body(String name) {
+    return '$nameさん、今日神様の声を聞いてみましょう';
+  }
+
+  @override
+  String get notifyMorning6Title => '🌿 休みの時間';
+
+  @override
+  String notifyMorning6Body(String name) {
+    return '$nameさん、少し立ち止まって祈ってみましょう';
+  }
+
+  @override
+  String get notifyMorning7Title => '💫 今日という日も';
+
+  @override
+  String notifyMorning7Body(String name) {
+    return '$nameさん、祈りで始まる一日は違います';
+  }
+
+  @override
+  String get notifyEvening1Title => '✨ 今日一日に感謝';
+
+  @override
+  String get notifyEvening1Body => '今日一日を振り返り感謝の祈りをささげましょう';
+
+  @override
+  String get notifyEvening2Title => '🌙 一日を締めくくりながら';
+
+  @override
+  String get notifyEvening2Body => '今日の感謝を祈りで表してみましょう';
+
+  @override
+  String get notifyEvening3Title => '🙏 夕べの祈り';
+
+  @override
+  String get notifyEvening3Body => '一日の終わりに神様に感謝をささげましょう';
+
+  @override
+  String get notifyEvening4Title => '🌟 今日の恵みを数えながら';
+
+  @override
+  String get notifyEvening4Body => '感謝したいことがあれば祈りで分かち合いましょう';
+
+  @override
+  String get notifyStreak3Title => '🌱 3日連続!';
+
+  @override
+  String get notifyStreak3Body => '祈りの習慣が始まりました';
+
+  @override
+  String get notifyStreak7Title => '🌿 一週間連続!';
+
+  @override
+  String get notifyStreak7Body => '祈りが習慣になっています';
+
+  @override
+  String get notifyStreak14Title => '🌳 2週間連続!';
+
+  @override
+  String get notifyStreak14Body => '素晴らしい成長です';
+
+  @override
+  String get notifyStreak21Title => '🌻 3週間連続!';
+
+  @override
+  String get notifyStreak21Body => '祈りの花が咲いています';
+
+  @override
+  String get notifyStreak30Title => '🏆 1か月連続!';
+
+  @override
+  String get notifyStreak30Body => 'あなたの祈りが輝いています';
+
+  @override
+  String get notifyStreak50Title => '👑 50日連続!';
+
+  @override
+  String get notifyStreak50Body => '神様との歩みが深まっています';
+
+  @override
+  String get notifyStreak100Title => '🎉 100日連続!';
+
+  @override
+  String get notifyStreak100Body => '祈りの戦士となりました!';
+
+  @override
+  String get notifyStreak365Title => '✝️ 1年連続!';
+
+  @override
+  String get notifyStreak365Body => '驚くべき信仰の旅路です!';
+
+  @override
+  String get notifyAfternoonNudgeTitle => '☀️ 今日はもう祈りましたか?';
+
+  @override
+  String get notifyAfternoonNudgeBody => 'ほんの少しの祈りが一日を変えます';
+
+  @override
+  String get notifyChannelName => '祈りのリマインダー';
+
+  @override
+  String get notifyChannelDescription => '朝の祈り、夕べの感謝などの祈りのリマインダー';
 }

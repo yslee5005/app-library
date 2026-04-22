@@ -443,5 +443,96 @@
   "qtCoachingProCta": "Unlock QT Coaching with Pro",
   "qtCoachingLevelBeginner": "🌱 Beginner",
   "qtCoachingLevelGrowing": "🌿 Growing",
-  "qtCoachingLevelExpert": "🌳 Expert"
+  "qtCoachingLevelExpert": "🌳 Expert",
+  "notifyMorning1Title": "🙏 Time to pray",
+  "notifyMorning1Body": "{name}, talk with God today as well",
+  "@notifyMorning1Body": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "notifyMorning2Title": "🌅 A new morning has come",
+  "notifyMorning2Body": "{name}, start the day with gratitude",
+  "@notifyMorning2Body": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "notifyMorning3Title": "✨ Today's grace",
+  "notifyMorning3Body": "{name}, meet the grace God has prepared",
+  "@notifyMorning3Body": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "notifyMorning4Title": "🕊️ Peaceful morning",
+  "notifyMorning4Body": "{name}, fill your heart with peace through prayer",
+  "@notifyMorning4Body": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "notifyMorning5Title": "📖 With the Word",
+  "notifyMorning5Body": "{name}, listen to God's voice today",
+  "@notifyMorning5Body": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "notifyMorning6Title": "🌿 Time to rest",
+  "notifyMorning6Body": "{name}, pause for a moment and pray",
+  "@notifyMorning6Body": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "notifyMorning7Title": "💫 Today as well",
+  "notifyMorning7Body": "{name}, a day that begins with prayer is different",
+  "@notifyMorning7Body": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "notifyEvening1Title": "✨ Thankful for today",
+  "notifyEvening1Body": "Look back on today and offer a prayer of thanks",
+  "notifyEvening2Title": "🌙 Wrapping up the day",
+  "notifyEvening2Body": "Express today's gratitude through prayer",
+  "notifyEvening3Title": "🙏 Evening prayer",
+  "notifyEvening3Body": "At the end of the day, give thanks to God",
+  "notifyEvening4Title": "🌟 Counting today's blessings",
+  "notifyEvening4Body": "If you have something to be thankful for, share it in prayer",
+  "notifyStreak3Title": "🌱 3 days in a row!",
+  "notifyStreak3Body": "Your prayer habit has begun",
+  "notifyStreak7Title": "🌿 A full week!",
+  "notifyStreak7Body": "Prayer is becoming a habit",
+  "notifyStreak14Title": "🌳 2 weeks in a row!",
+  "notifyStreak14Body": "Amazing growth!",
+  "notifyStreak21Title": "🌻 3 weeks in a row!",
+  "notifyStreak21Body": "The flower of prayer is blooming",
+  "notifyStreak30Title": "🏆 A full month!",
+  "notifyStreak30Body": "Your prayer is shining",
+  "notifyStreak50Title": "👑 50 days in a row!",
+  "notifyStreak50Body": "Your walk with God is deepening",
+  "notifyStreak100Title": "🎉 100 days in a row!",
+  "notifyStreak100Body": "You've become a prayer warrior!",
+  "notifyStreak365Title": "✝️ A full year!",
+  "notifyStreak365Body": "What an amazing journey of faith!",
+  "notifyAfternoonNudgeTitle": "☀️ Have you prayed today?",
+  "notifyAfternoonNudgeBody": "A brief prayer can change the day",
+  "notifyChannelName": "Prayer Reminders",
+  "notifyChannelDescription": "Morning prayer, evening gratitude, and other prayer reminders"
 }

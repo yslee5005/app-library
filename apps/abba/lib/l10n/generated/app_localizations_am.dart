@@ -991,4 +991,145 @@ class AppLocalizationsAm extends AppLocalizations {
 
   @override
   String get qtCoachingLevelExpert => '🌳 ባለሙያ';
+
+  @override
+  String get notifyMorning1Title => '🙏 የጸሎት ሰዓት ነው';
+
+  @override
+  String notifyMorning1Body(String name) {
+    return '$name፣ ዛሬም ከእግዚአብሔር ጋር ይነጋገሩ';
+  }
+
+  @override
+  String get notifyMorning2Title => '🌅 አዲስ ጥዋት ተከፍቷል';
+
+  @override
+  String notifyMorning2Body(String name) {
+    return '$name፣ ቀንዎን በምስጋና ይጀምሩ';
+  }
+
+  @override
+  String get notifyMorning3Title => '✨ የዛሬ ጸጋ';
+
+  @override
+  String notifyMorning3Body(String name) {
+    return '$name፣ እግዚአብሔር ያዘጋጀውን ጸጋ ይገናኙ';
+  }
+
+  @override
+  String get notifyMorning4Title => '🕊️ ሰላማዊ ጥዋት';
+
+  @override
+  String notifyMorning4Body(String name) {
+    return '$name፣ ልብዎን በጸሎት በሰላም ይሙሉት';
+  }
+
+  @override
+  String get notifyMorning5Title => '📖 ከቃሉ ጋር';
+
+  @override
+  String notifyMorning5Body(String name) {
+    return '$name፣ ዛሬ የእግዚአብሔርን ድምፅ ያዳምጡ';
+  }
+
+  @override
+  String get notifyMorning6Title => '🌿 የእረፍት ጊዜ';
+
+  @override
+  String notifyMorning6Body(String name) {
+    return '$name፣ ለጥቂት ቆይተው ይጸልዩ';
+  }
+
+  @override
+  String get notifyMorning7Title => '💫 ዛሬም';
+
+  @override
+  String notifyMorning7Body(String name) {
+    return '$name፣ በጸሎት የሚጀምር ቀን የተለየ ነው';
+  }
+
+  @override
+  String get notifyEvening1Title => '✨ ስለዛሬው ምስጋና';
+
+  @override
+  String get notifyEvening1Body => 'የዛሬውን ቀን አስታውሰው የምስጋና ጸሎት ያቅርቡ';
+
+  @override
+  String get notifyEvening2Title => '🌙 ቀኑን እየዘጋን';
+
+  @override
+  String get notifyEvening2Body => 'የዛሬን ምስጋና በጸሎት ይግለጡ';
+
+  @override
+  String get notifyEvening3Title => '🙏 የማታ ጸሎት';
+
+  @override
+  String get notifyEvening3Body => 'በቀኑ መጨረሻ ለእግዚአብሔር ምስጋና ያቅርቡ';
+
+  @override
+  String get notifyEvening4Title => '🌟 የዛሬን በረከት እየቆጠርን';
+
+  @override
+  String get notifyEvening4Body => 'ለማመስገን ነገር ካለ በጸሎት ያካፍሉ';
+
+  @override
+  String get notifyStreak3Title => '🌱 3 ቀን ተከታታይ!';
+
+  @override
+  String get notifyStreak3Body => 'የጸሎት ልምድዎ ተጀምሯል';
+
+  @override
+  String get notifyStreak7Title => '🌿 ሙሉ ሳምንት!';
+
+  @override
+  String get notifyStreak7Body => 'ጸሎት ልምድ እየሆነ ነው';
+
+  @override
+  String get notifyStreak14Title => '🌳 2 ሳምንት ተከታታይ!';
+
+  @override
+  String get notifyStreak14Body => 'አስደናቂ እድገት!';
+
+  @override
+  String get notifyStreak21Title => '🌻 3 ሳምንት ተከታታይ!';
+
+  @override
+  String get notifyStreak21Body => 'የጸሎት አበባ እያበበ ነው';
+
+  @override
+  String get notifyStreak30Title => '🏆 ሙሉ ወር!';
+
+  @override
+  String get notifyStreak30Body => 'ጸሎትዎ እያበራ ነው';
+
+  @override
+  String get notifyStreak50Title => '👑 50 ቀን ተከታታይ!';
+
+  @override
+  String get notifyStreak50Body => 'ከእግዚአብሔር ጋር የሚደረገው ጉዞዎ እየጠለቀ ነው';
+
+  @override
+  String get notifyStreak100Title => '🎉 100 ቀን ተከታታይ!';
+
+  @override
+  String get notifyStreak100Body => 'የጸሎት ተዋጊ ሆነዋል!';
+
+  @override
+  String get notifyStreak365Title => '✝️ ሙሉ ዓመት!';
+
+  @override
+  String get notifyStreak365Body => 'አስደናቂ የእምነት ጉዞ ነው!';
+
+  @override
+  String get notifyAfternoonNudgeTitle => '☀️ ዛሬ ጸልየዋል?';
+
+  @override
+  String get notifyAfternoonNudgeBody => 'አጭር ጸሎት ቀንን ሊቀይር ይችላል';
+
+  @override
+  String get notifyChannelName => 'የጸሎት ማስታወሻዎች';
+
+  @override
+  String get notifyChannelDescription =>
+      'የጠዋት ጸሎት፣ የማታ ምስጋና እና ሌሎች የጸሎት ማስታወሻዎች';
 }

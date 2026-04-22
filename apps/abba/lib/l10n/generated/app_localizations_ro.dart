@@ -1019,4 +1019,149 @@ class AppLocalizationsRo extends AppLocalizations {
 
   @override
   String get qtCoachingLevelExpert => '🌳 Expert';
+
+  @override
+  String get notifyMorning1Title => '🙏 E timpul să te rogi';
+
+  @override
+  String notifyMorning1Body(String name) {
+    return '$name, vorbește cu Dumnezeu și astăzi';
+  }
+
+  @override
+  String get notifyMorning2Title => '🌅 A venit o nouă dimineață';
+
+  @override
+  String notifyMorning2Body(String name) {
+    return '$name, începe ziua cu recunoștință';
+  }
+
+  @override
+  String get notifyMorning3Title => '✨ Harul de azi';
+
+  @override
+  String notifyMorning3Body(String name) {
+    return '$name, întâlnește harul pe care Dumnezeu l-a pregătit';
+  }
+
+  @override
+  String get notifyMorning4Title => '🕊️ Dimineață liniștită';
+
+  @override
+  String notifyMorning4Body(String name) {
+    return '$name, umple-ți inima cu pace prin rugăciune';
+  }
+
+  @override
+  String get notifyMorning5Title => '📖 Cu Cuvântul';
+
+  @override
+  String notifyMorning5Body(String name) {
+    return '$name, ascultă glasul lui Dumnezeu astăzi';
+  }
+
+  @override
+  String get notifyMorning6Title => '🌿 Timp de odihnă';
+
+  @override
+  String notifyMorning6Body(String name) {
+    return '$name, oprește-te o clipă și roagă-te';
+  }
+
+  @override
+  String get notifyMorning7Title => '💫 Și azi';
+
+  @override
+  String notifyMorning7Body(String name) {
+    return '$name, o zi care începe cu rugăciune este diferită';
+  }
+
+  @override
+  String get notifyEvening1Title => '✨ Recunoștință pentru azi';
+
+  @override
+  String get notifyEvening1Body =>
+      'Privește ziua și înalță o rugăciune de mulțumire';
+
+  @override
+  String get notifyEvening2Title => '🌙 Încheind ziua';
+
+  @override
+  String get notifyEvening2Body => 'Exprimă recunoștința zilei prin rugăciune';
+
+  @override
+  String get notifyEvening3Title => '🙏 Rugăciune de seară';
+
+  @override
+  String get notifyEvening3Body =>
+      'La sfârșitul zilei, mulțumește-I lui Dumnezeu';
+
+  @override
+  String get notifyEvening4Title => '🌟 Numărând binecuvântările de azi';
+
+  @override
+  String get notifyEvening4Body =>
+      'Dacă ai pentru ce să mulțumești, împărtășește în rugăciune';
+
+  @override
+  String get notifyStreak3Title => '🌱 3 zile la rând!';
+
+  @override
+  String get notifyStreak3Body => 'Obiceiul tău de rugăciune a început';
+
+  @override
+  String get notifyStreak7Title => '🌿 O săptămână întreagă!';
+
+  @override
+  String get notifyStreak7Body => 'Rugăciunea devine un obicei';
+
+  @override
+  String get notifyStreak14Title => '🌳 2 săptămâni la rând!';
+
+  @override
+  String get notifyStreak14Body => 'Creștere uimitoare!';
+
+  @override
+  String get notifyStreak21Title => '🌻 3 săptămâni la rând!';
+
+  @override
+  String get notifyStreak21Body => 'Floarea rugăciunii înflorește';
+
+  @override
+  String get notifyStreak30Title => '🏆 O lună întreagă!';
+
+  @override
+  String get notifyStreak30Body => 'Rugăciunea ta strălucește';
+
+  @override
+  String get notifyStreak50Title => '👑 50 de zile la rând!';
+
+  @override
+  String get notifyStreak50Body => 'Umblarea ta cu Dumnezeu se adâncește';
+
+  @override
+  String get notifyStreak100Title => '🎉 100 de zile la rând!';
+
+  @override
+  String get notifyStreak100Body => 'Ai devenit un luptător al rugăciunii!';
+
+  @override
+  String get notifyStreak365Title => '✝️ Un an întreg!';
+
+  @override
+  String get notifyStreak365Body => 'Ce călătorie uimitoare a credinței!';
+
+  @override
+  String get notifyAfternoonNudgeTitle => '☀️ Te-ai rugat astăzi?';
+
+  @override
+  String get notifyAfternoonNudgeBody =>
+      'O rugăciune scurtă poate schimba ziua';
+
+  @override
+  String get notifyChannelName => 'Memento-uri de rugăciune';
+
+  @override
+  String get notifyChannelDescription =>
+      'Rugăciune de dimineață, mulțumire de seară și alte memento-uri';
 }

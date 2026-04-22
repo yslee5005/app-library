@@ -1016,4 +1016,149 @@ class AppLocalizationsEl extends AppLocalizations {
 
   @override
   String get qtCoachingLevelExpert => '🌳 Ειδικός';
+
+  @override
+  String get notifyMorning1Title => '🙏 Ώρα για προσευχή';
+
+  @override
+  String notifyMorning1Body(String name) {
+    return '$name, μίλα με τον Θεό και σήμερα';
+  }
+
+  @override
+  String get notifyMorning2Title => '🌅 Ένα νέο πρωί ήρθε';
+
+  @override
+  String notifyMorning2Body(String name) {
+    return '$name, ξεκίνα την ημέρα με ευγνωμοσύνη';
+  }
+
+  @override
+  String get notifyMorning3Title => '✨ Η χάρη της ημέρας';
+
+  @override
+  String notifyMorning3Body(String name) {
+    return '$name, συνάντησε τη χάρη που ετοίμασε ο Θεός';
+  }
+
+  @override
+  String get notifyMorning4Title => '🕊️ Ήρεμο πρωινό';
+
+  @override
+  String notifyMorning4Body(String name) {
+    return '$name, γέμισε την καρδιά με ειρήνη μέσω της προσευχής';
+  }
+
+  @override
+  String get notifyMorning5Title => '📖 Με τον Λόγο';
+
+  @override
+  String notifyMorning5Body(String name) {
+    return '$name, άκουσε τη φωνή του Θεού σήμερα';
+  }
+
+  @override
+  String get notifyMorning6Title => '🌿 Ώρα για ξεκούραση';
+
+  @override
+  String notifyMorning6Body(String name) {
+    return '$name, σταμάτησε για λίγο και προσευχήσου';
+  }
+
+  @override
+  String get notifyMorning7Title => '💫 Και σήμερα';
+
+  @override
+  String notifyMorning7Body(String name) {
+    return '$name, μια ημέρα που αρχίζει με προσευχή είναι διαφορετική';
+  }
+
+  @override
+  String get notifyEvening1Title => '✨ Ευγνωμοσύνη για σήμερα';
+
+  @override
+  String get notifyEvening1Body =>
+      'Κοίταξε πίσω στην ημέρα και προσφέρει ευχαριστιακή προσευχή';
+
+  @override
+  String get notifyEvening2Title => '🌙 Κλείνοντας την ημέρα';
+
+  @override
+  String get notifyEvening2Body =>
+      'Εκφράσε την ευγνωμοσύνη της ημέρας μέσω προσευχής';
+
+  @override
+  String get notifyEvening3Title => '🙏 Βραδινή προσευχή';
+
+  @override
+  String get notifyEvening3Body => 'Στο τέλος της ημέρας, ευχαρίστησε τον Θεό';
+
+  @override
+  String get notifyEvening4Title => '🌟 Μετρώντας τις ευλογίες της ημέρας';
+
+  @override
+  String get notifyEvening4Body =>
+      'Αν έχεις λόγο ευγνωμοσύνης, μοιράσου τον στην προσευχή';
+
+  @override
+  String get notifyStreak3Title => '🌱 3 μέρες συνεχόμενες!';
+
+  @override
+  String get notifyStreak3Body => 'Η συνήθεια της προσευχής ξεκίνησε';
+
+  @override
+  String get notifyStreak7Title => '🌿 Μια ολόκληρη εβδομάδα!';
+
+  @override
+  String get notifyStreak7Body => 'Η προσευχή γίνεται συνήθεια';
+
+  @override
+  String get notifyStreak14Title => '🌳 2 εβδομάδες συνεχόμενες!';
+
+  @override
+  String get notifyStreak14Body => 'Εκπληκτική ανάπτυξη!';
+
+  @override
+  String get notifyStreak21Title => '🌻 3 εβδομάδες συνεχόμενες!';
+
+  @override
+  String get notifyStreak21Body => 'Το λουλούδι της προσευχής ανθίζει';
+
+  @override
+  String get notifyStreak30Title => '🏆 Έναν ολόκληρο μήνα!';
+
+  @override
+  String get notifyStreak30Body => 'Η προσευχή σου λάμπει';
+
+  @override
+  String get notifyStreak50Title => '👑 50 μέρες συνεχόμενες!';
+
+  @override
+  String get notifyStreak50Body => 'Ο περίπατός σου με τον Θεό βαθαίνει';
+
+  @override
+  String get notifyStreak100Title => '🎉 100 μέρες συνεχόμενες!';
+
+  @override
+  String get notifyStreak100Body => 'Έγινες πολεμιστής της προσευχής!';
+
+  @override
+  String get notifyStreak365Title => '✝️ Έναν ολόκληρο χρόνο!';
+
+  @override
+  String get notifyStreak365Body => 'Τι εκπληκτικό ταξίδι πίστης!';
+
+  @override
+  String get notifyAfternoonNudgeTitle => '☀️ Προσευχήθηκες σήμερα;';
+
+  @override
+  String get notifyAfternoonNudgeBody =>
+      'Μια σύντομη προσευχή μπορεί να αλλάξει την ημέρα';
+
+  @override
+  String get notifyChannelName => 'Υπενθυμίσεις προσευχής';
+
+  @override
+  String get notifyChannelDescription =>
+      'Πρωινή προσευχή, βραδινή ευγνωμοσύνη και άλλες υπενθυμίσεις';
 }

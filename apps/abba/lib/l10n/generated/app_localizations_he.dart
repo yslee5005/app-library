@@ -997,4 +997,145 @@ class AppLocalizationsHe extends AppLocalizations {
 
   @override
   String get qtCoachingLevelExpert => '🌳 מומחה';
+
+  @override
+  String get notifyMorning1Title => '🙏 זמן להתפלל';
+
+  @override
+  String notifyMorning1Body(String name) {
+    return '$name, שוחח עם אלוהים גם היום';
+  }
+
+  @override
+  String get notifyMorning2Title => '🌅 בוקר חדש הגיע';
+
+  @override
+  String notifyMorning2Body(String name) {
+    return '$name, התחל את היום בתודה';
+  }
+
+  @override
+  String get notifyMorning3Title => '✨ החסד של היום';
+
+  @override
+  String notifyMorning3Body(String name) {
+    return '$name, פגוש את החסד שאלוהים הכין';
+  }
+
+  @override
+  String get notifyMorning4Title => '🕊️ בוקר שליו';
+
+  @override
+  String notifyMorning4Body(String name) {
+    return '$name, מלא את הלב בשלום דרך התפילה';
+  }
+
+  @override
+  String get notifyMorning5Title => '📖 עם הדבר';
+
+  @override
+  String notifyMorning5Body(String name) {
+    return '$name, הקשב לקולו של אלוהים היום';
+  }
+
+  @override
+  String get notifyMorning6Title => '🌿 זמן למנוחה';
+
+  @override
+  String notifyMorning6Body(String name) {
+    return '$name, עצור לרגע והתפלל';
+  }
+
+  @override
+  String get notifyMorning7Title => '💫 גם היום';
+
+  @override
+  String notifyMorning7Body(String name) {
+    return '$name, יום שמתחיל בתפילה הוא שונה';
+  }
+
+  @override
+  String get notifyEvening1Title => '✨ תודה על היום';
+
+  @override
+  String get notifyEvening1Body => 'הבט אחורה על היום והתפלל תפילת תודה';
+
+  @override
+  String get notifyEvening2Title => '🌙 מסיימים את היום';
+
+  @override
+  String get notifyEvening2Body => 'הבע את תודת היום בתפילה';
+
+  @override
+  String get notifyEvening3Title => '🙏 תפילת ערב';
+
+  @override
+  String get notifyEvening3Body => 'בסוף היום, הודה לאלוהים';
+
+  @override
+  String get notifyEvening4Title => '🌟 סופרים את ברכות היום';
+
+  @override
+  String get notifyEvening4Body => 'אם יש לך על מה להודות, שתף בתפילה';
+
+  @override
+  String get notifyStreak3Title => '🌱 3 ימים ברציפות!';
+
+  @override
+  String get notifyStreak3Body => 'הרגל התפילה שלך החל';
+
+  @override
+  String get notifyStreak7Title => '🌿 שבוע שלם!';
+
+  @override
+  String get notifyStreak7Body => 'התפילה הופכת להרגל';
+
+  @override
+  String get notifyStreak14Title => '🌳 שבועיים ברציפות!';
+
+  @override
+  String get notifyStreak14Body => 'צמיחה מדהימה!';
+
+  @override
+  String get notifyStreak21Title => '🌻 3 שבועות ברציפות!';
+
+  @override
+  String get notifyStreak21Body => 'פרח התפילה פורח';
+
+  @override
+  String get notifyStreak30Title => '🏆 חודש שלם!';
+
+  @override
+  String get notifyStreak30Body => 'התפילה שלך זורחת';
+
+  @override
+  String get notifyStreak50Title => '👑 50 ימים ברציפות!';
+
+  @override
+  String get notifyStreak50Body => 'ההליכה שלך עם אלוהים מעמיקה';
+
+  @override
+  String get notifyStreak100Title => '🎉 100 ימים ברציפות!';
+
+  @override
+  String get notifyStreak100Body => 'הפכת ללוחם תפילה!';
+
+  @override
+  String get notifyStreak365Title => '✝️ שנה שלמה!';
+
+  @override
+  String get notifyStreak365Body => 'איזו מסע אמונה מדהים!';
+
+  @override
+  String get notifyAfternoonNudgeTitle => '☀️ התפללת היום?';
+
+  @override
+  String get notifyAfternoonNudgeBody => 'תפילה קצרה יכולה לשנות את היום';
+
+  @override
+  String get notifyChannelName => 'תזכורות תפילה';
+
+  @override
+  String get notifyChannelDescription =>
+      'תפילת בוקר, הודיית ערב ותזכורות תפילה נוספות';
 }

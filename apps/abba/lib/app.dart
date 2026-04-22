@@ -69,6 +69,46 @@ class AbbaApp extends ConsumerWidget {
         Locale('my'),
       ],
       routerConfig: appRouter,
+      // Inject AppLocalizations into NotificationService whenever the locale
+      // changes. Uses the `child` subtree so every rebuild sees a valid
+      // AppLocalizations instance (localizationsDelegates are already loaded
+      // at this level).
+      builder: (context, child) {
+        return _NotificationLocalizationBridge(child: child ?? const SizedBox());
+      },
     );
   }
+}
+
+/// Listens to locale-aware [AppLocalizations] and pushes the current instance
+/// down to [NotificationService] so background-scheduled reminders render in
+/// the user's selected language.
+class _NotificationLocalizationBridge extends ConsumerStatefulWidget {
+  final Widget child;
+
+  const _NotificationLocalizationBridge({required this.child});
+
+  @override
+  ConsumerState<_NotificationLocalizationBridge> createState() =>
+      _NotificationLocalizationBridgeState();
+}
+
+class _NotificationLocalizationBridgeState
+    extends ConsumerState<_NotificationLocalizationBridge> {
+  String? _lastAppliedLocale;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final l10n = AppLocalizations.of(context);
+    if (l10n == null) return;
+    if (_lastAppliedLocale == l10n.localeName) return;
+
+    _lastAppliedLocale = l10n.localeName;
+    // Fire-and-forget — don't block the widget tree on I/O.
+    ref.read(notificationServiceProvider).setLocalization(l10n);
+  }
+
+  @override
+  Widget build(BuildContext context) => widget.child;
 }

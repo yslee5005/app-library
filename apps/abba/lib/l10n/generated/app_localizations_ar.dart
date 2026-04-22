@@ -1000,4 +1000,145 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get qtCoachingLevelExpert => '🌳 خبير';
+
+  @override
+  String get notifyMorning1Title => '🙏 حان وقت الصلاة';
+
+  @override
+  String notifyMorning1Body(String name) {
+    return '$name، تحدث مع الله اليوم أيضًا';
+  }
+
+  @override
+  String get notifyMorning2Title => '🌅 أشرق صباح جديد';
+
+  @override
+  String notifyMorning2Body(String name) {
+    return '$name، ابدأ يومك بالامتنان';
+  }
+
+  @override
+  String get notifyMorning3Title => '✨ نعمة اليوم';
+
+  @override
+  String notifyMorning3Body(String name) {
+    return '$name، التقِ بالنعمة التي أعدها الله';
+  }
+
+  @override
+  String get notifyMorning4Title => '🕊️ صباح مسالم';
+
+  @override
+  String notifyMorning4Body(String name) {
+    return '$name، املأ قلبك سلامًا بالصلاة';
+  }
+
+  @override
+  String get notifyMorning5Title => '📖 مع الكلمة';
+
+  @override
+  String notifyMorning5Body(String name) {
+    return '$name، استمع إلى صوت الله اليوم';
+  }
+
+  @override
+  String get notifyMorning6Title => '🌿 وقت الراحة';
+
+  @override
+  String notifyMorning6Body(String name) {
+    return '$name، توقف لحظة وصلِّ';
+  }
+
+  @override
+  String get notifyMorning7Title => '💫 اليوم أيضًا';
+
+  @override
+  String notifyMorning7Body(String name) {
+    return '$name، اليوم الذي يبدأ بالصلاة مختلف';
+  }
+
+  @override
+  String get notifyEvening1Title => '✨ شكرًا على هذا اليوم';
+
+  @override
+  String get notifyEvening1Body => 'تأمل في يومك وارفع صلاة شكر';
+
+  @override
+  String get notifyEvening2Title => '🌙 في ختام اليوم';
+
+  @override
+  String get notifyEvening2Body => 'عبّر عن امتنان اليوم بالصلاة';
+
+  @override
+  String get notifyEvening3Title => '🙏 صلاة المساء';
+
+  @override
+  String get notifyEvening3Body => 'في ختام اليوم، اشكر الله';
+
+  @override
+  String get notifyEvening4Title => '🌟 نعدّ بركات اليوم';
+
+  @override
+  String get notifyEvening4Body => 'إن كان لديك ما تشكر عليه، فشاركه في الصلاة';
+
+  @override
+  String get notifyStreak3Title => '🌱 3 أيام متتالية!';
+
+  @override
+  String get notifyStreak3Body => 'لقد بدأت عادة الصلاة';
+
+  @override
+  String get notifyStreak7Title => '🌿 أسبوع كامل!';
+
+  @override
+  String get notifyStreak7Body => 'أصبحت الصلاة عادة';
+
+  @override
+  String get notifyStreak14Title => '🌳 أسبوعان متتاليان!';
+
+  @override
+  String get notifyStreak14Body => 'نمو مذهل!';
+
+  @override
+  String get notifyStreak21Title => '🌻 3 أسابيع متتالية!';
+
+  @override
+  String get notifyStreak21Body => 'زهرة الصلاة تتفتح';
+
+  @override
+  String get notifyStreak30Title => '🏆 شهر كامل!';
+
+  @override
+  String get notifyStreak30Body => 'صلاتك تتألق';
+
+  @override
+  String get notifyStreak50Title => '👑 50 يومًا متتالية!';
+
+  @override
+  String get notifyStreak50Body => 'سيرك مع الله يتعمق';
+
+  @override
+  String get notifyStreak100Title => '🎉 100 يوم متتالية!';
+
+  @override
+  String get notifyStreak100Body => 'لقد أصبحت محاربًا في الصلاة!';
+
+  @override
+  String get notifyStreak365Title => '✝️ سنة كاملة!';
+
+  @override
+  String get notifyStreak365Body => 'رحلة إيمان مذهلة!';
+
+  @override
+  String get notifyAfternoonNudgeTitle => '☀️ هل صليت اليوم؟';
+
+  @override
+  String get notifyAfternoonNudgeBody => 'صلاة قصيرة قد تغير يومك';
+
+  @override
+  String get notifyChannelName => 'تذكيرات الصلاة';
+
+  @override
+  String get notifyChannelDescription =>
+      'صلاة الصباح وشكر المساء وتذكيرات أخرى للصلاة';
 }

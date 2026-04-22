@@ -1002,4 +1002,147 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get qtCoachingLevelExpert => '🌳 ผู้เชี่ยวชาญ';
+
+  @override
+  String get notifyMorning1Title => '🙏 ถึงเวลาอธิษฐานแล้ว';
+
+  @override
+  String notifyMorning1Body(String name) {
+    return '$name มาพูดคุยกับพระเจ้าในวันนี้';
+  }
+
+  @override
+  String get notifyMorning2Title => '🌅 เช้าวันใหม่มาถึงแล้ว';
+
+  @override
+  String notifyMorning2Body(String name) {
+    return '$name เริ่มต้นวันด้วยความขอบพระคุณ';
+  }
+
+  @override
+  String get notifyMorning3Title => '✨ พระคุณของวันนี้';
+
+  @override
+  String notifyMorning3Body(String name) {
+    return '$name พบกับพระคุณที่พระเจ้าเตรียมไว้';
+  }
+
+  @override
+  String get notifyMorning4Title => '🕊️ เช้าที่สงบ';
+
+  @override
+  String notifyMorning4Body(String name) {
+    return '$name เติมใจด้วยสันติสุขผ่านการอธิษฐาน';
+  }
+
+  @override
+  String get notifyMorning5Title => '📖 กับพระวจนะ';
+
+  @override
+  String notifyMorning5Body(String name) {
+    return '$name ฟังพระสุรเสียงของพระเจ้าในวันนี้';
+  }
+
+  @override
+  String get notifyMorning6Title => '🌿 เวลาพักผ่อน';
+
+  @override
+  String notifyMorning6Body(String name) {
+    return '$name หยุดสักครู่แล้วอธิษฐาน';
+  }
+
+  @override
+  String get notifyMorning7Title => '💫 วันนี้ก็เช่นกัน';
+
+  @override
+  String notifyMorning7Body(String name) {
+    return '$name วันที่เริ่มต้นด้วยการอธิษฐานจะแตกต่าง';
+  }
+
+  @override
+  String get notifyEvening1Title => '✨ ขอบพระคุณสำหรับวันนี้';
+
+  @override
+  String get notifyEvening1Body => 'ย้อนดูวันนี้แล้วอธิษฐานขอบพระคุณ';
+
+  @override
+  String get notifyEvening2Title => '🌙 ปิดท้ายวัน';
+
+  @override
+  String get notifyEvening2Body => 'แสดงความขอบพระคุณของวันนี้ผ่านการอธิษฐาน';
+
+  @override
+  String get notifyEvening3Title => '🙏 การอธิษฐานยามเย็น';
+
+  @override
+  String get notifyEvening3Body => 'ในตอนท้ายของวัน ขอบพระคุณพระเจ้า';
+
+  @override
+  String get notifyEvening4Title => '🌟 นับพระพรของวันนี้';
+
+  @override
+  String get notifyEvening4Body =>
+      'หากมีสิ่งที่ต้องขอบพระคุณ ให้แบ่งปันในการอธิษฐาน';
+
+  @override
+  String get notifyStreak3Title => '🌱 3 วันติด!';
+
+  @override
+  String get notifyStreak3Body => 'นิสัยการอธิษฐานของคุณเริ่มต้นแล้ว';
+
+  @override
+  String get notifyStreak7Title => '🌿 หนึ่งสัปดาห์เต็ม!';
+
+  @override
+  String get notifyStreak7Body => 'การอธิษฐานกำลังกลายเป็นนิสัย';
+
+  @override
+  String get notifyStreak14Title => '🌳 2 สัปดาห์ติด!';
+
+  @override
+  String get notifyStreak14Body => 'การเติบโตที่น่าทึ่ง!';
+
+  @override
+  String get notifyStreak21Title => '🌻 3 สัปดาห์ติด!';
+
+  @override
+  String get notifyStreak21Body => 'ดอกไม้แห่งการอธิษฐานกำลังผลิบาน';
+
+  @override
+  String get notifyStreak30Title => '🏆 หนึ่งเดือนเต็ม!';
+
+  @override
+  String get notifyStreak30Body => 'การอธิษฐานของคุณกำลังส่องสว่าง';
+
+  @override
+  String get notifyStreak50Title => '👑 50 วันติด!';
+
+  @override
+  String get notifyStreak50Body => 'การเดินกับพระเจ้าของคุณกำลังลึกซึ้งขึ้น';
+
+  @override
+  String get notifyStreak100Title => '🎉 100 วันติด!';
+
+  @override
+  String get notifyStreak100Body => 'คุณได้กลายเป็นนักรบแห่งการอธิษฐาน!';
+
+  @override
+  String get notifyStreak365Title => '✝️ หนึ่งปีเต็ม!';
+
+  @override
+  String get notifyStreak365Body => 'เป็นการเดินทางแห่งความเชื่อที่น่าทึ่ง!';
+
+  @override
+  String get notifyAfternoonNudgeTitle => '☀️ วันนี้คุณอธิษฐานหรือยัง?';
+
+  @override
+  String get notifyAfternoonNudgeBody =>
+      'การอธิษฐานเพียงชั่วครู่ก็เปลี่ยนวันได้';
+
+  @override
+  String get notifyChannelName => 'การแจ้งเตือนอธิษฐาน';
+
+  @override
+  String get notifyChannelDescription =>
+      'อธิษฐานตอนเช้า ขอบพระคุณตอนเย็น และการแจ้งเตือนอื่นๆ';
 }

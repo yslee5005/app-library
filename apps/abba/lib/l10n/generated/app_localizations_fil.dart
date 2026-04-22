@@ -1028,4 +1028,153 @@ class AppLocalizationsFil extends AppLocalizations {
 
   @override
   String get qtCoachingLevelExpert => '🌳 Eksperto';
+
+  @override
+  String get notifyMorning1Title => '🙏 Oras na para manalangin';
+
+  @override
+  String notifyMorning1Body(String name) {
+    return '$name, makipag-usap sa Diyos ngayon din';
+  }
+
+  @override
+  String get notifyMorning2Title => '🌅 Dumating na ang bagong umaga';
+
+  @override
+  String notifyMorning2Body(String name) {
+    return '$name, simulan ang araw nang may pasasalamat';
+  }
+
+  @override
+  String get notifyMorning3Title => '✨ Biyaya ngayon';
+
+  @override
+  String notifyMorning3Body(String name) {
+    return '$name, salubungin ang biyayang inihanda ng Diyos';
+  }
+
+  @override
+  String get notifyMorning4Title => '🕊️ Mapayapang umaga';
+
+  @override
+  String notifyMorning4Body(String name) {
+    return '$name, punuin ang puso ng kapayapaan sa pananalangin';
+  }
+
+  @override
+  String get notifyMorning5Title => '📖 Kasama ang Salita';
+
+  @override
+  String notifyMorning5Body(String name) {
+    return '$name, pakinggan ang tinig ng Diyos ngayon';
+  }
+
+  @override
+  String get notifyMorning6Title => '🌿 Oras para magpahinga';
+
+  @override
+  String notifyMorning6Body(String name) {
+    return '$name, huminto sandali at manalangin';
+  }
+
+  @override
+  String get notifyMorning7Title => '💫 Ngayon din';
+
+  @override
+  String notifyMorning7Body(String name) {
+    return '$name, ang araw na nagsisimula sa panalangin ay iba';
+  }
+
+  @override
+  String get notifyEvening1Title => '✨ Pasasalamat sa araw na ito';
+
+  @override
+  String get notifyEvening1Body =>
+      'Balikan ang araw at mag-alay ng panalangin ng pasasalamat';
+
+  @override
+  String get notifyEvening2Title => '🌙 Pagtatapos ng araw';
+
+  @override
+  String get notifyEvening2Body =>
+      'Ipahayag ang pasasalamat ngayon sa panalangin';
+
+  @override
+  String get notifyEvening3Title => '🙏 Panalangin sa gabi';
+
+  @override
+  String get notifyEvening3Body =>
+      'Sa pagtatapos ng araw, magpasalamat sa Diyos';
+
+  @override
+  String get notifyEvening4Title => '🌟 Binibilang ang mga biyaya ngayon';
+
+  @override
+  String get notifyEvening4Body =>
+      'Kung may pasasalamatan ka, ibahagi sa panalangin';
+
+  @override
+  String get notifyStreak3Title => '🌱 3 araw sunod-sunod!';
+
+  @override
+  String get notifyStreak3Body =>
+      'Nagsimula na ang iyong ugali ng pananalangin';
+
+  @override
+  String get notifyStreak7Title => '🌿 Isang buong linggo!';
+
+  @override
+  String get notifyStreak7Body => 'Nagiging ugali na ang pananalangin';
+
+  @override
+  String get notifyStreak14Title => '🌳 2 linggo sunod-sunod!';
+
+  @override
+  String get notifyStreak14Body => 'Kahanga-hangang paglago!';
+
+  @override
+  String get notifyStreak21Title => '🌻 3 linggo sunod-sunod!';
+
+  @override
+  String get notifyStreak21Body => 'Namumulaklak ang bulaklak ng panalangin';
+
+  @override
+  String get notifyStreak30Title => '🏆 Isang buong buwan!';
+
+  @override
+  String get notifyStreak30Body => 'Ang iyong panalangin ay nagniningning';
+
+  @override
+  String get notifyStreak50Title => '👑 50 araw sunod-sunod!';
+
+  @override
+  String get notifyStreak50Body =>
+      'Lumalalim ang iyong paglakad kasama ang Diyos';
+
+  @override
+  String get notifyStreak100Title => '🎉 100 araw sunod-sunod!';
+
+  @override
+  String get notifyStreak100Body => 'Ikaw ay naging mandirigma ng panalangin!';
+
+  @override
+  String get notifyStreak365Title => '✝️ Isang buong taon!';
+
+  @override
+  String get notifyStreak365Body =>
+      'Isang kahanga-hangang paglalakbay ng pananampalataya!';
+
+  @override
+  String get notifyAfternoonNudgeTitle => '☀️ Nanalangin ka na ba ngayon?';
+
+  @override
+  String get notifyAfternoonNudgeBody =>
+      'Ang maikling panalangin ay maaaring magbago ng araw';
+
+  @override
+  String get notifyChannelName => 'Mga paalala sa panalangin';
+
+  @override
+  String get notifyChannelDescription =>
+      'Panalangin sa umaga, pasasalamat sa gabi, at iba pang paalala';
 }

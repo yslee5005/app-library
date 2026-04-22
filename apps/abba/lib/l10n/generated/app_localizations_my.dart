@@ -1021,4 +1021,151 @@ class AppLocalizationsMy extends AppLocalizations {
 
   @override
   String get qtCoachingLevelExpert => '🌳 ကျွမ်းကျင်သူ';
+
+  @override
+  String get notifyMorning1Title => '🙏 ဆုတောင်းချိန်ရောက်ပြီ';
+
+  @override
+  String notifyMorning1Body(String name) {
+    return '$name၊ ဒီနေ့လည်း ဘုရားသခင်နှင့် စကားပြောကြည့်ပါ';
+  }
+
+  @override
+  String get notifyMorning2Title => '🌅 နံနက်အသစ်တစ်ခုရောက်လာပြီ';
+
+  @override
+  String notifyMorning2Body(String name) {
+    return '$name၊ ကျေးဇူးတင်ခြင်းဖြင့် တစ်နေ့တာကို စတင်ပါ';
+  }
+
+  @override
+  String get notifyMorning3Title => '✨ ယနေ့ကျေးဇူးတော်';
+
+  @override
+  String notifyMorning3Body(String name) {
+    return '$name၊ ဘုရားသခင်ပြင်ဆင်ထားသော ကျေးဇူးတော်ကို တွေ့ကြုံပါ';
+  }
+
+  @override
+  String get notifyMorning4Title => '🕊️ ငြိမ်းချမ်းသောနံနက်';
+
+  @override
+  String notifyMorning4Body(String name) {
+    return '$name၊ ဆုတောင်းခြင်းဖြင့် စိတ်နှလုံးကို ငြိမ်းချမ်းမှုဖြင့် ဖြည့်ပါ';
+  }
+
+  @override
+  String get notifyMorning5Title => '📖 နှုတ်ကပါတ်တော်နှင့်အတူ';
+
+  @override
+  String notifyMorning5Body(String name) {
+    return '$name၊ ယနေ့ ဘုရားသခင်၏အသံကို နားထောင်ပါ';
+  }
+
+  @override
+  String get notifyMorning6Title => '🌿 အနားယူချိန်';
+
+  @override
+  String notifyMorning6Body(String name) {
+    return '$name၊ ခဏနားပြီး ဆုတောင်းပါ';
+  }
+
+  @override
+  String get notifyMorning7Title => '💫 ယနေ့လည်း';
+
+  @override
+  String notifyMorning7Body(String name) {
+    return '$name၊ ဆုတောင်းခြင်းဖြင့်စတင်သောနေ့သည် ထူးခြားသည်';
+  }
+
+  @override
+  String get notifyEvening1Title => '✨ ယနေ့အတွက်ကျေးဇူးတင်ပါသည်';
+
+  @override
+  String get notifyEvening1Body =>
+      'ယနေ့ကို ပြန်လည်သုံးသပ်ပြီး ကျေးဇူးတင်ဆုတောင်းခြင်းပြုပါ';
+
+  @override
+  String get notifyEvening2Title => '🌙 တစ်နေ့တာကိုနိဂုံးချုပ်ရင်း';
+
+  @override
+  String get notifyEvening2Body =>
+      'ယနေ့၏ကျေးဇူးတင်ခြင်းကို ဆုတောင်းခြင်းဖြင့် ဖော်ပြပါ';
+
+  @override
+  String get notifyEvening3Title => '🙏 ညနေခင်းဆုတောင်းခြင်း';
+
+  @override
+  String get notifyEvening3Body =>
+      'တစ်နေ့တာအဆုံးတွင် ဘုရားသခင်ကို ကျေးဇူးတင်ပါ';
+
+  @override
+  String get notifyEvening4Title => '🌟 ယနေ့၏ကောင်းချီးများကို ရေတွက်ရင်း';
+
+  @override
+  String get notifyEvening4Body =>
+      'ကျေးဇူးတင်စရာရှိပါက ဆုတောင်းခြင်းဖြင့် မျှဝေပါ';
+
+  @override
+  String get notifyStreak3Title => '🌱 3 ရက်ဆက်တိုက်!';
+
+  @override
+  String get notifyStreak3Body => 'သင်၏ ဆုတောင်းအလေ့အထ စတင်နေပြီ';
+
+  @override
+  String get notifyStreak7Title => '🌿 တစ်ပတ်လုံး!';
+
+  @override
+  String get notifyStreak7Body => 'ဆုတောင်းခြင်းသည် အလေ့အထဖြစ်လာနေပြီ';
+
+  @override
+  String get notifyStreak14Title => '🌳 2 ပတ်ဆက်တိုက်!';
+
+  @override
+  String get notifyStreak14Body => 'အံ့သြဖွယ်တိုးတက်မှု!';
+
+  @override
+  String get notifyStreak21Title => '🌻 3 ပတ်ဆက်တိုက်!';
+
+  @override
+  String get notifyStreak21Body => 'ဆုတောင်းခြင်း၏ပန်း ပွင့်လာနေပြီ';
+
+  @override
+  String get notifyStreak30Title => '🏆 တစ်လလုံး!';
+
+  @override
+  String get notifyStreak30Body => 'သင်၏ဆုတောင်းချက် တောက်ပနေသည်';
+
+  @override
+  String get notifyStreak50Title => '👑 50 ရက်ဆက်တိုက်!';
+
+  @override
+  String get notifyStreak50Body =>
+      'ဘုရားသခင်နှင့်အတူ လျှောက်လှမ်းခြင်းသည် နက်ရှိုင်းလာနေသည်';
+
+  @override
+  String get notifyStreak100Title => '🎉 100 ရက်ဆက်တိုက်!';
+
+  @override
+  String get notifyStreak100Body => 'သင်သည် ဆုတောင်းခြင်းစစ်သူရဲ ဖြစ်လာပြီ!';
+
+  @override
+  String get notifyStreak365Title => '✝️ တစ်နှစ်လုံး!';
+
+  @override
+  String get notifyStreak365Body => 'အံ့သြဖွယ်ယုံကြည်ခြင်း၏ခရီးစဉ်!';
+
+  @override
+  String get notifyAfternoonNudgeTitle => '☀️ ယနေ့ ဆုတောင်းပြီးပြီလား?';
+
+  @override
+  String get notifyAfternoonNudgeBody =>
+      'ခဏတာဆုတောင်းခြင်းက တစ်နေ့တာကို ပြောင်းလဲနိုင်သည်';
+
+  @override
+  String get notifyChannelName => 'ဆုတောင်းခြင်းသတိပေးချက်များ';
+
+  @override
+  String get notifyChannelDescription =>
+      'နံနက်ဆုတောင်းခြင်း၊ ညနေကျေးဇူးတင်ခြင်းနှင့် အခြားဆုတောင်းခြင်းသတိပေးချက်များ';
 }

@@ -1020,4 +1020,149 @@ class AppLocalizationsMs extends AppLocalizations {
 
   @override
   String get qtCoachingLevelExpert => '🌳 Pakar';
+
+  @override
+  String get notifyMorning1Title => '🙏 Masa untuk berdoa';
+
+  @override
+  String notifyMorning1Body(String name) {
+    return '$name, bercakaplah dengan Tuhan hari ini';
+  }
+
+  @override
+  String get notifyMorning2Title => '🌅 Pagi baru telah tiba';
+
+  @override
+  String notifyMorning2Body(String name) {
+    return '$name, mulakan hari dengan kesyukuran';
+  }
+
+  @override
+  String get notifyMorning3Title => '✨ Rahmat hari ini';
+
+  @override
+  String notifyMorning3Body(String name) {
+    return '$name, temui rahmat yang Tuhan sediakan';
+  }
+
+  @override
+  String get notifyMorning4Title => '🕊️ Pagi yang tenang';
+
+  @override
+  String notifyMorning4Body(String name) {
+    return '$name, penuhi hati dengan damai melalui doa';
+  }
+
+  @override
+  String get notifyMorning5Title => '📖 Bersama Firman';
+
+  @override
+  String notifyMorning5Body(String name) {
+    return '$name, dengarlah suara Tuhan hari ini';
+  }
+
+  @override
+  String get notifyMorning6Title => '🌿 Masa untuk berehat';
+
+  @override
+  String notifyMorning6Body(String name) {
+    return '$name, berhenti sejenak dan berdoalah';
+  }
+
+  @override
+  String get notifyMorning7Title => '💫 Hari ini juga';
+
+  @override
+  String notifyMorning7Body(String name) {
+    return '$name, hari yang dimulai dengan doa itu berbeza';
+  }
+
+  @override
+  String get notifyEvening1Title => '✨ Kesyukuran untuk hari ini';
+
+  @override
+  String get notifyEvening1Body =>
+      'Renungkan hari ini dan panjatkan doa syukur';
+
+  @override
+  String get notifyEvening2Title => '🌙 Mengakhiri hari';
+
+  @override
+  String get notifyEvening2Body => 'Ungkapkan rasa syukur hari ini melalui doa';
+
+  @override
+  String get notifyEvening3Title => '🙏 Doa malam';
+
+  @override
+  String get notifyEvening3Body =>
+      'Di penghujung hari, bersyukurlah kepada Tuhan';
+
+  @override
+  String get notifyEvening4Title => '🌟 Mengira berkat hari ini';
+
+  @override
+  String get notifyEvening4Body =>
+      'Jika ada yang patut disyukuri, kongsikan dalam doa';
+
+  @override
+  String get notifyStreak3Title => '🌱 3 hari berturut-turut!';
+
+  @override
+  String get notifyStreak3Body => 'Tabiat doamu telah bermula';
+
+  @override
+  String get notifyStreak7Title => '🌿 Seminggu penuh!';
+
+  @override
+  String get notifyStreak7Body => 'Doa menjadi tabiat';
+
+  @override
+  String get notifyStreak14Title => '🌳 2 minggu berturut-turut!';
+
+  @override
+  String get notifyStreak14Body => 'Pertumbuhan yang menakjubkan!';
+
+  @override
+  String get notifyStreak21Title => '🌻 3 minggu berturut-turut!';
+
+  @override
+  String get notifyStreak21Body => 'Bunga doa sedang mekar';
+
+  @override
+  String get notifyStreak30Title => '🏆 Sebulan penuh!';
+
+  @override
+  String get notifyStreak30Body => 'Doamu bersinar';
+
+  @override
+  String get notifyStreak50Title => '👑 50 hari berturut-turut!';
+
+  @override
+  String get notifyStreak50Body =>
+      'Perjalananmu bersama Tuhan semakin mendalam';
+
+  @override
+  String get notifyStreak100Title => '🎉 100 hari berturut-turut!';
+
+  @override
+  String get notifyStreak100Body => 'Kamu telah menjadi pejuang doa!';
+
+  @override
+  String get notifyStreak365Title => '✝️ Setahun penuh!';
+
+  @override
+  String get notifyStreak365Body => 'Perjalanan iman yang menakjubkan!';
+
+  @override
+  String get notifyAfternoonNudgeTitle => '☀️ Sudahkah kamu berdoa hari ini?';
+
+  @override
+  String get notifyAfternoonNudgeBody => 'Doa ringkas boleh mengubah hari';
+
+  @override
+  String get notifyChannelName => 'Peringatan doa';
+
+  @override
+  String get notifyChannelDescription =>
+      'Doa pagi, kesyukuran malam, dan peringatan doa lain';
 }

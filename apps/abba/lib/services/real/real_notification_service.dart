@@ -11,6 +11,7 @@ import 'package:timezone/data/latest_all.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 
 import '../../config/app_config.dart';
+import '../../l10n/generated/app_localizations.dart';
 import '../notification_service.dart';
 
 /// Notification IDs for scheduled reminders
@@ -31,58 +32,227 @@ class _PrefKeys {
   static const weeklySummary = 'notif_weekly_summary';
 }
 
+/// English fallback copy used until [setLocalization] is called. This also
+/// protects against edge cases where the service runs before the widget tree
+/// injects an [AppLocalizations] instance.
+class _EnFallback {
+  static const morningTitles = [
+    '🙏 Time to pray',
+    '🌅 A new morning has come',
+    "✨ Today's grace",
+    '🕊️ Peaceful morning',
+    '📖 With the Word',
+    '🌿 Time to rest',
+    '💫 Today as well',
+  ];
+
+  static const morningBodies = [
+    '{name}, talk with God today as well',
+    '{name}, start the day with gratitude',
+    '{name}, meet the grace God has prepared',
+    '{name}, fill your heart with peace through prayer',
+    "{name}, listen to God's voice today",
+    '{name}, pause for a moment and pray',
+    '{name}, a day that begins with prayer is different',
+  ];
+
+  static const eveningTitles = [
+    '✨ Thankful for today',
+    '🌙 Wrapping up the day',
+    '🙏 Evening prayer',
+    "🌟 Counting today's blessings",
+  ];
+
+  static const eveningBodies = [
+    'Look back on today and offer a prayer of thanks',
+    "Express today's gratitude through prayer",
+    'At the end of the day, give thanks to God',
+    'If you have something to be thankful for, share it in prayer',
+  ];
+
+  static const afternoonTitle = '☀️ Have you prayed today?';
+  static const afternoonBody = 'A brief prayer can change the day';
+
+  static const channelName = 'Prayer Reminders';
+  static const channelDescription =
+      'Morning prayer, evening gratitude, and other prayer reminders';
+
+  static const streakMilestones = <int, (String, String)>{
+    3: ('🌱 3 days in a row!', 'Your prayer habit has begun'),
+    7: ('🌿 A full week!', 'Prayer is becoming a habit'),
+    14: ('🌳 2 weeks in a row!', 'Amazing growth!'),
+    21: ('🌻 3 weeks in a row!', 'The flower of prayer is blooming'),
+    30: ('🏆 A full month!', 'Your prayer is shining'),
+    50: ('👑 50 days in a row!', 'Your walk with God is deepening'),
+    100: ('🎉 100 days in a row!', "You've become a prayer warrior!"),
+    365: ('✝️ A full year!', 'What an amazing journey of faith!'),
+  };
+}
+
 class RealNotificationService implements NotificationService {
   final FlutterLocalNotificationsPlugin _plugin =
       FlutterLocalNotificationsPlugin();
 
   NotificationSettings _cachedSettings = const NotificationSettings();
 
+  /// Current locale strings. Null until [setLocalization] is called —
+  /// services fall back to English copy in that window.
+  AppLocalizations? _l10n;
+
   /// Whether Firebase was successfully initialized
   bool _firebaseInitialized = false;
 
   RealNotificationService();
 
-  // ---------------------------------------------------------------------------
-  // Morning messages — rotated daily by day-of-year
-  // ---------------------------------------------------------------------------
-  static const _morningMessages = [
-    ('🙏 기도할 시간이에요', '{name}님, 오늘도 하나님과 대화해보세요'),
-    ('🌅 새 아침이 밝았어요', '{name}님, 감사로 하루를 시작해보세요'),
-    ('✨ 오늘의 은혜', '{name}님, 하나님이 준비하신 은혜를 만나보세요'),
-    ('🕊️ 평안한 아침', '{name}님, 기도로 마음에 평안을 채워보세요'),
-    ('📖 말씀과 함께', '{name}님, 오늘 하나님의 음성을 들어보세요'),
-    ('🌿 쉼의 시간', '{name}님, 잠시 멈추고 기도해보세요'),
-    ('💫 오늘 하루도', '{name}님, 기도로 시작하는 하루가 달라요'),
-  ];
-
-  // ---------------------------------------------------------------------------
-  // Evening messages — rotated daily by day-of-year
-  // ---------------------------------------------------------------------------
-  static const _eveningMessages = [
-    ('✨ 오늘 하루 감사', '오늘 하루를 돌아보며 감사 기도를 드려보세요'),
-    ('🌙 하루를 마무리하며', '오늘의 감사를 기도로 표현해보세요'),
-    ('🙏 저녁 기도', '하루의 끝, 하나님께 감사를 올려드려요'),
-    ('🌟 오늘의 은혜를 세며', '감사할 것이 있다면 기도로 나눠보세요'),
-  ];
-
-  // ---------------------------------------------------------------------------
-  // Streak milestone messages
-  // ---------------------------------------------------------------------------
-  static const _streakMilestones = <int, (String, String)>{
-    3: ('🌱 3일 연속!', '기도 습관이 시작됐어요'),
-    7: ('🌿 일주일 연속!', '기도가 습관이 되고 있어요'),
-    14: ('🌳 2주 연속!', '놀라운 성장이에요'),
-    21: ('🌻 3주 연속!', '기도의 꽃이 피고 있어요'),
-    30: ('🏆 한 달 연속!', '당신의 기도가 빛나고 있어요'),
-    50: ('👑 50일 연속!', '하나님과의 동행이 깊어지고 있어요'),
-    100: ('🎉 100일 연속!', '기도의 전사가 되었어요!'),
-    365: ('✝️ 1년 연속!', '놀라운 믿음의 여정이에요!'),
-  };
-
   /// Get the day-of-year (1-366) for a given DateTime
   static int _dayOfYear(DateTime date) {
     final start = DateTime(date.year, 1, 1);
     return date.difference(start).inDays + 1;
+  }
+
+  // ---------------------------------------------------------------------------
+  // Localized message helpers
+  // ---------------------------------------------------------------------------
+
+  (String, String) _morningMessage(int index, String userName) {
+    final l10n = _l10n;
+    final normalizedIndex = index % 7;
+    if (l10n != null) {
+      final title = _morningTitleFor(l10n, normalizedIndex);
+      final body = _morningBodyFor(l10n, normalizedIndex, userName);
+      return (title, body);
+    }
+
+    // English fallback
+    final title = _EnFallback.morningTitles[normalizedIndex];
+    final template = _EnFallback.morningBodies[normalizedIndex];
+    final body = userName.isNotEmpty
+        ? template.replaceAll('{name}', userName)
+        : template.replaceAll('{name}, ', '');
+    return (title, body);
+  }
+
+  String _morningTitleFor(AppLocalizations l10n, int index) {
+    switch (index) {
+      case 0:
+        return l10n.notifyMorning1Title;
+      case 1:
+        return l10n.notifyMorning2Title;
+      case 2:
+        return l10n.notifyMorning3Title;
+      case 3:
+        return l10n.notifyMorning4Title;
+      case 4:
+        return l10n.notifyMorning5Title;
+      case 5:
+        return l10n.notifyMorning6Title;
+      case 6:
+      default:
+        return l10n.notifyMorning7Title;
+    }
+  }
+
+  String _morningBodyFor(AppLocalizations l10n, int index, String userName) {
+    // When userName is empty we still pass '' so ARB strings with a {name}
+    // placeholder render without a dangling substitution.
+    final name = userName;
+    switch (index) {
+      case 0:
+        return l10n.notifyMorning1Body(name);
+      case 1:
+        return l10n.notifyMorning2Body(name);
+      case 2:
+        return l10n.notifyMorning3Body(name);
+      case 3:
+        return l10n.notifyMorning4Body(name);
+      case 4:
+        return l10n.notifyMorning5Body(name);
+      case 5:
+        return l10n.notifyMorning6Body(name);
+      case 6:
+      default:
+        return l10n.notifyMorning7Body(name);
+    }
+  }
+
+  (String, String) _eveningMessage(int index) {
+    final l10n = _l10n;
+    final normalizedIndex = index % 4;
+    if (l10n != null) {
+      switch (normalizedIndex) {
+        case 0:
+          return (l10n.notifyEvening1Title, l10n.notifyEvening1Body);
+        case 1:
+          return (l10n.notifyEvening2Title, l10n.notifyEvening2Body);
+        case 2:
+          return (l10n.notifyEvening3Title, l10n.notifyEvening3Body);
+        case 3:
+        default:
+          return (l10n.notifyEvening4Title, l10n.notifyEvening4Body);
+      }
+    }
+    return (
+      _EnFallback.eveningTitles[normalizedIndex],
+      _EnFallback.eveningBodies[normalizedIndex],
+    );
+  }
+
+  (String, String)? _streakMessage(int streakCount) {
+    final l10n = _l10n;
+    if (l10n != null) {
+      switch (streakCount) {
+        case 3:
+          return (l10n.notifyStreak3Title, l10n.notifyStreak3Body);
+        case 7:
+          return (l10n.notifyStreak7Title, l10n.notifyStreak7Body);
+        case 14:
+          return (l10n.notifyStreak14Title, l10n.notifyStreak14Body);
+        case 21:
+          return (l10n.notifyStreak21Title, l10n.notifyStreak21Body);
+        case 30:
+          return (l10n.notifyStreak30Title, l10n.notifyStreak30Body);
+        case 50:
+          return (l10n.notifyStreak50Title, l10n.notifyStreak50Body);
+        case 100:
+          return (l10n.notifyStreak100Title, l10n.notifyStreak100Body);
+        case 365:
+          return (l10n.notifyStreak365Title, l10n.notifyStreak365Body);
+        default:
+          return null;
+      }
+    }
+    return _EnFallback.streakMilestones[streakCount];
+  }
+
+  String _afternoonTitle() =>
+      _l10n?.notifyAfternoonNudgeTitle ?? _EnFallback.afternoonTitle;
+
+  String _afternoonBody() =>
+      _l10n?.notifyAfternoonNudgeBody ?? _EnFallback.afternoonBody;
+
+  String _channelName() => _l10n?.notifyChannelName ?? _EnFallback.channelName;
+
+  String _channelDescription() =>
+      _l10n?.notifyChannelDescription ?? _EnFallback.channelDescription;
+
+  NotificationDetails _buildDetails({
+    Importance importance = Importance.high,
+    Priority priority = Priority.high,
+  }) {
+    return NotificationDetails(
+      android: AndroidNotificationDetails(
+        'prayer_reminders',
+        _channelName(),
+        channelDescription: _channelDescription(),
+        importance: importance,
+        priority: priority,
+      ),
+      iOS: const DarwinNotificationDetails(
+        presentAlert: true,
+        presentBadge: true,
+        presentSound: true,
+      ),
+    );
   }
 
   @override
@@ -114,18 +284,10 @@ class RealNotificationService implements NotificationService {
       onDidReceiveNotificationResponse: _onNotificationTapped,
     );
 
-    // Create Android notification channel
-    const androidChannel = AndroidNotificationChannel(
-      'prayer_reminders',
-      '기도 알림',
-      description: '아침 기도, 저녁 감사 등 기도 알림',
-      importance: Importance.high,
-    );
-
-    await _plugin
-        .resolvePlatformSpecificImplementation<
-            AndroidFlutterLocalNotificationsPlugin>()
-        ?.createNotificationChannel(androidChannel);
+    // Create Android notification channel with English fallback text.
+    // When setLocalization() is called later we re-create the channel with
+    // the user's current locale so the system settings show translated text.
+    await _createOrUpdateChannel();
 
     // Load saved settings
     await getSettings();
@@ -136,6 +298,32 @@ class RealNotificationService implements NotificationService {
     // Initialize FCM (Firebase Cloud Messaging)
     // Wrapped in try/catch — app works without Firebase configured
     await _initializeFcm();
+  }
+
+  @override
+  Future<void> setLocalization(AppLocalizations l10n) async {
+    _l10n = l10n;
+    // Android channels are immutable for name/description after creation
+    // on some OS versions, but re-registering with the same ID is the
+    // documented upgrade path. Safe to call repeatedly.
+    await _createOrUpdateChannel();
+    // Reschedule pending notifications so titles/bodies reflect the new
+    // locale the next time they fire.
+    await _rescheduleFromSettings();
+  }
+
+  Future<void> _createOrUpdateChannel() async {
+    final androidChannel = AndroidNotificationChannel(
+      'prayer_reminders',
+      _channelName(),
+      description: _channelDescription(),
+      importance: Importance.high,
+    );
+
+    await _plugin
+        .resolvePlatformSpecificImplementation<
+            AndroidFlutterLocalNotificationsPlugin>()
+        ?.createNotificationChannel(androidChannel);
   }
 
   /// Initialize Firebase and FCM.
@@ -297,32 +485,15 @@ class RealNotificationService implements NotificationService {
     final scheduledTime = _nextInstanceOfTime(hour, minute);
 
     // Pick message based on day of year (rotates daily)
-    final dayIndex = _dayOfYear(DateTime.now()) % _morningMessages.length;
-    final (title, bodyTemplate) = _morningMessages[dayIndex];
-
-    final body = userName.isNotEmpty
-        ? bodyTemplate.replaceAll('{name}', userName)
-        : bodyTemplate.replaceAll('{name}님, ', '');
+    final dayIndex = _dayOfYear(DateTime.now()) % 7;
+    final (title, body) = _morningMessage(dayIndex, userName);
 
     await _plugin.zonedSchedule(
       _NotificationIds.morningReminder,
       title,
       body,
       scheduledTime,
-      const NotificationDetails(
-        android: AndroidNotificationDetails(
-          'prayer_reminders',
-          '기도 알림',
-          channelDescription: '아침 기도, 저녁 감사 등 기도 알림',
-          importance: Importance.high,
-          priority: Priority.high,
-        ),
-        iOS: DarwinNotificationDetails(
-          presentAlert: true,
-          presentBadge: true,
-          presentSound: true,
-        ),
-      ),
+      _buildDetails(),
       androidScheduleMode: AndroidScheduleMode.inexactAllowWhileIdle,
       matchDateTimeComponents: DateTimeComponents.time,
       payload: 'morning_prayer',
@@ -336,28 +507,15 @@ class RealNotificationService implements NotificationService {
     final scheduledTime = _nextInstanceOfTime(21, 0);
 
     // Pick message based on day of year (rotates daily)
-    final dayIndex = _dayOfYear(DateTime.now()) % _eveningMessages.length;
-    final (title, body) = _eveningMessages[dayIndex];
+    final dayIndex = _dayOfYear(DateTime.now()) % 4;
+    final (title, body) = _eveningMessage(dayIndex);
 
     await _plugin.zonedSchedule(
       _NotificationIds.eveningReminder,
       title,
       body,
       scheduledTime,
-      const NotificationDetails(
-        android: AndroidNotificationDetails(
-          'prayer_reminders',
-          '기도 알림',
-          channelDescription: '아침 기도, 저녁 감사 등 기도 알림',
-          importance: Importance.high,
-          priority: Priority.high,
-        ),
-        iOS: DarwinNotificationDetails(
-          presentAlert: true,
-          presentBadge: true,
-          presentSound: true,
-        ),
-      ),
+      _buildDetails(),
       androidScheduleMode: AndroidScheduleMode.inexactAllowWhileIdle,
       matchDateTimeComponents: DateTimeComponents.time,
       payload: 'evening_gratitude',
@@ -372,22 +530,12 @@ class RealNotificationService implements NotificationService {
 
     await _plugin.zonedSchedule(
       _NotificationIds.afternoonNudge,
-      '☀️ 오늘 기도는 하셨나요?',
-      '잠깐의 기도가 하루를 바꿔요',
+      _afternoonTitle(),
+      _afternoonBody(),
       scheduledTime,
-      const NotificationDetails(
-        android: AndroidNotificationDetails(
-          'prayer_reminders',
-          '기도 알림',
-          channelDescription: '아침 기도, 저녁 감사 등 기도 알림',
-          importance: Importance.defaultImportance,
-          priority: Priority.defaultPriority,
-        ),
-        iOS: DarwinNotificationDetails(
-          presentAlert: true,
-          presentBadge: true,
-          presentSound: true,
-        ),
+      _buildDetails(
+        importance: Importance.defaultImportance,
+        priority: Priority.defaultPriority,
       ),
       androidScheduleMode: AndroidScheduleMode.inexactAllowWhileIdle,
       matchDateTimeComponents: DateTimeComponents.time,
@@ -399,7 +547,7 @@ class RealNotificationService implements NotificationService {
 
   @override
   Future<void> showStreakCelebration(int streakCount) async {
-    final milestone = _streakMilestones[streakCount];
+    final milestone = _streakMessage(streakCount);
     if (milestone == null) return;
 
     if (!_cachedSettings.streakReminder) return;
@@ -410,20 +558,7 @@ class RealNotificationService implements NotificationService {
       _NotificationIds.streakCelebration + streakCount,
       title,
       body,
-      const NotificationDetails(
-        android: AndroidNotificationDetails(
-          'prayer_reminders',
-          '기도 알림',
-          channelDescription: '아침 기도, 저녁 감사 등 기도 알림',
-          importance: Importance.high,
-          priority: Priority.high,
-        ),
-        iOS: DarwinNotificationDetails(
-          presentAlert: true,
-          presentBadge: true,
-          presentSound: true,
-        ),
-      ),
+      _buildDetails(),
       payload: 'streak_celebration_$streakCount',
     );
 

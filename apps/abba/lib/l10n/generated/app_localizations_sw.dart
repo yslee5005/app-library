@@ -1011,4 +1011,147 @@ class AppLocalizationsSw extends AppLocalizations {
 
   @override
   String get qtCoachingLevelExpert => '🌳 Mtaalamu';
+
+  @override
+  String get notifyMorning1Title => '🙏 Wakati wa kuomba';
+
+  @override
+  String notifyMorning1Body(String name) {
+    return '$name, zungumza na Mungu leo pia';
+  }
+
+  @override
+  String get notifyMorning2Title => '🌅 Asubuhi mpya imefika';
+
+  @override
+  String notifyMorning2Body(String name) {
+    return '$name, anza siku kwa shukrani';
+  }
+
+  @override
+  String get notifyMorning3Title => '✨ Neema ya leo';
+
+  @override
+  String notifyMorning3Body(String name) {
+    return '$name, kutana na neema Mungu aliyoandaa';
+  }
+
+  @override
+  String get notifyMorning4Title => '🕊️ Asubuhi yenye amani';
+
+  @override
+  String notifyMorning4Body(String name) {
+    return '$name, jaza moyo wako amani kwa sala';
+  }
+
+  @override
+  String get notifyMorning5Title => '📖 Pamoja na Neno';
+
+  @override
+  String notifyMorning5Body(String name) {
+    return '$name, sikiliza sauti ya Mungu leo';
+  }
+
+  @override
+  String get notifyMorning6Title => '🌿 Wakati wa kupumzika';
+
+  @override
+  String notifyMorning6Body(String name) {
+    return '$name, simama kidogo na uombe';
+  }
+
+  @override
+  String get notifyMorning7Title => '💫 Leo pia';
+
+  @override
+  String notifyMorning7Body(String name) {
+    return '$name, siku inayoanza kwa sala ni tofauti';
+  }
+
+  @override
+  String get notifyEvening1Title => '✨ Shukrani kwa leo';
+
+  @override
+  String get notifyEvening1Body =>
+      'Tafakari siku ya leo na utoe sala ya shukrani';
+
+  @override
+  String get notifyEvening2Title => '🌙 Kumalizia siku';
+
+  @override
+  String get notifyEvening2Body => 'Onyesha shukrani ya leo kupitia sala';
+
+  @override
+  String get notifyEvening3Title => '🙏 Sala ya jioni';
+
+  @override
+  String get notifyEvening3Body => 'Mwishoni mwa siku, mshukuru Mungu';
+
+  @override
+  String get notifyEvening4Title => '🌟 Tukihesabu baraka za leo';
+
+  @override
+  String get notifyEvening4Body =>
+      'Ikiwa una kitu cha kushukuru, kishiriki katika sala';
+
+  @override
+  String get notifyStreak3Title => '🌱 Siku 3 mfululizo!';
+
+  @override
+  String get notifyStreak3Body => 'Tabia yako ya sala imeanza';
+
+  @override
+  String get notifyStreak7Title => '🌿 Wiki nzima!';
+
+  @override
+  String get notifyStreak7Body => 'Sala inakuwa tabia';
+
+  @override
+  String get notifyStreak14Title => '🌳 Wiki 2 mfululizo!';
+
+  @override
+  String get notifyStreak14Body => 'Ukuaji wa ajabu!';
+
+  @override
+  String get notifyStreak21Title => '🌻 Wiki 3 mfululizo!';
+
+  @override
+  String get notifyStreak21Body => 'Ua la sala linachanua';
+
+  @override
+  String get notifyStreak30Title => '🏆 Mwezi mzima!';
+
+  @override
+  String get notifyStreak30Body => 'Sala yako inang\'aa';
+
+  @override
+  String get notifyStreak50Title => '👑 Siku 50 mfululizo!';
+
+  @override
+  String get notifyStreak50Body => 'Kutembea kwako na Mungu kunaongezeka kina';
+
+  @override
+  String get notifyStreak100Title => '🎉 Siku 100 mfululizo!';
+
+  @override
+  String get notifyStreak100Body => 'Umekuwa shujaa wa sala!';
+
+  @override
+  String get notifyStreak365Title => '✝️ Mwaka mzima!';
+
+  @override
+  String get notifyStreak365Body => 'Safari ya ajabu ya imani!';
+
+  @override
+  String get notifyAfternoonNudgeTitle => '☀️ Umesali leo?';
+
+  @override
+  String get notifyAfternoonNudgeBody => 'Sala fupi yaweza kubadilisha siku';
+
+  @override
+  String get notifyChannelName => 'Vikumbusho vya sala';
+
+  @override
+  String get notifyChannelDescription =>
+      'Sala ya asubuhi, shukrani za jioni, na vikumbusho vingine';
 }

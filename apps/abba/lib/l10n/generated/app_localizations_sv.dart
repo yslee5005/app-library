@@ -1011,4 +1011,146 @@ class AppLocalizationsSv extends AppLocalizations {
 
   @override
   String get qtCoachingLevelExpert => '🌳 Expert';
+
+  @override
+  String get notifyMorning1Title => '🙏 Dags att be';
+
+  @override
+  String notifyMorning1Body(String name) {
+    return '$name, prata med Gud idag också';
+  }
+
+  @override
+  String get notifyMorning2Title => '🌅 En ny morgon har kommit';
+
+  @override
+  String notifyMorning2Body(String name) {
+    return '$name, börja dagen med tacksamhet';
+  }
+
+  @override
+  String get notifyMorning3Title => '✨ Dagens nåd';
+
+  @override
+  String notifyMorning3Body(String name) {
+    return '$name, möt nåden Gud har berett';
+  }
+
+  @override
+  String get notifyMorning4Title => '🕊️ Fridfull morgon';
+
+  @override
+  String notifyMorning4Body(String name) {
+    return '$name, fyll hjärtat med frid genom bön';
+  }
+
+  @override
+  String get notifyMorning5Title => '📖 Med Ordet';
+
+  @override
+  String notifyMorning5Body(String name) {
+    return '$name, lyssna på Guds röst idag';
+  }
+
+  @override
+  String get notifyMorning6Title => '🌿 Dags att vila';
+
+  @override
+  String notifyMorning6Body(String name) {
+    return '$name, stanna upp ett ögonblick och be';
+  }
+
+  @override
+  String get notifyMorning7Title => '💫 Även idag';
+
+  @override
+  String notifyMorning7Body(String name) {
+    return '$name, en dag som börjar med bön är annorlunda';
+  }
+
+  @override
+  String get notifyEvening1Title => '✨ Tacksam för idag';
+
+  @override
+  String get notifyEvening1Body => 'Blicka tillbaka på dagen och be en tackbön';
+
+  @override
+  String get notifyEvening2Title => '🌙 Avslutar dagen';
+
+  @override
+  String get notifyEvening2Body => 'Uttryck dagens tacksamhet genom bön';
+
+  @override
+  String get notifyEvening3Title => '🙏 Kvällsbön';
+
+  @override
+  String get notifyEvening3Body => 'Tacka Gud vid dagens slut';
+
+  @override
+  String get notifyEvening4Title => '🌟 Räknar dagens välsignelser';
+
+  @override
+  String get notifyEvening4Body =>
+      'Om du har något att tacka för, dela det i bön';
+
+  @override
+  String get notifyStreak3Title => '🌱 3 dagar i rad!';
+
+  @override
+  String get notifyStreak3Body => 'Din bönevana har börjat';
+
+  @override
+  String get notifyStreak7Title => '🌿 En hel vecka!';
+
+  @override
+  String get notifyStreak7Body => 'Bön blir en vana';
+
+  @override
+  String get notifyStreak14Title => '🌳 2 veckor i rad!';
+
+  @override
+  String get notifyStreak14Body => 'Fantastisk tillväxt!';
+
+  @override
+  String get notifyStreak21Title => '🌻 3 veckor i rad!';
+
+  @override
+  String get notifyStreak21Body => 'Bönens blomma slår ut';
+
+  @override
+  String get notifyStreak30Title => '🏆 En hel månad!';
+
+  @override
+  String get notifyStreak30Body => 'Din bön lyser';
+
+  @override
+  String get notifyStreak50Title => '👑 50 dagar i rad!';
+
+  @override
+  String get notifyStreak50Body => 'Din vandring med Gud fördjupas';
+
+  @override
+  String get notifyStreak100Title => '🎉 100 dagar i rad!';
+
+  @override
+  String get notifyStreak100Body => 'Du har blivit en bönekrigare!';
+
+  @override
+  String get notifyStreak365Title => '✝️ Ett helt år!';
+
+  @override
+  String get notifyStreak365Body => 'Vilken fantastisk trosresa!';
+
+  @override
+  String get notifyAfternoonNudgeTitle => '☀️ Har du bett idag?';
+
+  @override
+  String get notifyAfternoonNudgeBody => 'En kort bön kan förändra dagen';
+
+  @override
+  String get notifyChannelName => 'Bönpåminnelser';
+
+  @override
+  String get notifyChannelDescription =>
+      'Morgonbön, kvällstacksamhet och andra bönpåminnelser';
 }

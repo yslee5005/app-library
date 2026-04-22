@@ -1017,4 +1017,147 @@ class AppLocalizationsSk extends AppLocalizations {
 
   @override
   String get qtCoachingLevelExpert => '🌳 Odborník';
+
+  @override
+  String get notifyMorning1Title => '🙏 Čas modliť sa';
+
+  @override
+  String notifyMorning1Body(String name) {
+    return '$name, porozprávaj sa s Bohom aj dnes';
+  }
+
+  @override
+  String get notifyMorning2Title => '🌅 Prišlo nové ráno';
+
+  @override
+  String notifyMorning2Body(String name) {
+    return '$name, začni deň s vďačnosťou';
+  }
+
+  @override
+  String get notifyMorning3Title => '✨ Dnešná milosť';
+
+  @override
+  String notifyMorning3Body(String name) {
+    return '$name, stretni sa s milosťou, ktorú Boh pripravil';
+  }
+
+  @override
+  String get notifyMorning4Title => '🕊️ Pokojné ráno';
+
+  @override
+  String notifyMorning4Body(String name) {
+    return '$name, naplň srdce pokojom cez modlitbu';
+  }
+
+  @override
+  String get notifyMorning5Title => '📖 So Slovom';
+
+  @override
+  String notifyMorning5Body(String name) {
+    return '$name, načúvaj dnes Božiemu hlasu';
+  }
+
+  @override
+  String get notifyMorning6Title => '🌿 Čas na odpočinok';
+
+  @override
+  String notifyMorning6Body(String name) {
+    return '$name, zastav sa na chvíľu a modli sa';
+  }
+
+  @override
+  String get notifyMorning7Title => '💫 Aj dnes';
+
+  @override
+  String notifyMorning7Body(String name) {
+    return '$name, deň začínajúci modlitbou je iný';
+  }
+
+  @override
+  String get notifyEvening1Title => '✨ Vďaka za dnešok';
+
+  @override
+  String get notifyEvening1Body =>
+      'Obzri sa za dňom a pomodli sa modlitbu vďaky';
+
+  @override
+  String get notifyEvening2Title => '🌙 Ukončenie dňa';
+
+  @override
+  String get notifyEvening2Body => 'Vyjadri dnešnú vďačnosť v modlitbe';
+
+  @override
+  String get notifyEvening3Title => '🙏 Večerná modlitba';
+
+  @override
+  String get notifyEvening3Body => 'Na konci dňa poďakuj Bohu';
+
+  @override
+  String get notifyEvening4Title => '🌟 Počítame dnešné požehnania';
+
+  @override
+  String get notifyEvening4Body =>
+      'Ak máš za čo ďakovať, zdieľaj to v modlitbe';
+
+  @override
+  String get notifyStreak3Title => '🌱 3 dni po sebe!';
+
+  @override
+  String get notifyStreak3Body => 'Tvoj návyk modliť sa začal';
+
+  @override
+  String get notifyStreak7Title => '🌿 Celý týždeň!';
+
+  @override
+  String get notifyStreak7Body => 'Modlitba sa stáva zvykom';
+
+  @override
+  String get notifyStreak14Title => '🌳 2 týždne za sebou!';
+
+  @override
+  String get notifyStreak14Body => 'Úžasný rast!';
+
+  @override
+  String get notifyStreak21Title => '🌻 3 týždne za sebou!';
+
+  @override
+  String get notifyStreak21Body => 'Kvet modlitby rozkvitá';
+
+  @override
+  String get notifyStreak30Title => '🏆 Celý mesiac!';
+
+  @override
+  String get notifyStreak30Body => 'Tvoja modlitba žiari';
+
+  @override
+  String get notifyStreak50Title => '👑 50 dní po sebe!';
+
+  @override
+  String get notifyStreak50Body => 'Tvoja chôdza s Bohom sa prehlbuje';
+
+  @override
+  String get notifyStreak100Title => '🎉 100 dní po sebe!';
+
+  @override
+  String get notifyStreak100Body => 'Stal si sa modlitebným bojovníkom!';
+
+  @override
+  String get notifyStreak365Title => '✝️ Celý rok!';
+
+  @override
+  String get notifyStreak365Body => 'Úžasná cesta viery!';
+
+  @override
+  String get notifyAfternoonNudgeTitle => '☀️ Modlil si sa dnes?';
+
+  @override
+  String get notifyAfternoonNudgeBody => 'Krátka modlitba môže zmeniť deň';
+
+  @override
+  String get notifyChannelName => 'Pripomienky modlitby';
+
+  @override
+  String get notifyChannelDescription =>
+      'Ranná modlitba, večerná vďačnosť a ďalšie pripomienky modlitby';
 }

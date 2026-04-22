@@ -1,3 +1,5 @@
+import '../l10n/generated/app_localizations.dart';
+
 /// Abstract notification service for push notifications and reminders
 abstract class NotificationService {
   Future<void> initialize();
@@ -7,6 +9,13 @@ abstract class NotificationService {
   Future<void> saveToken(String token);
 
   Future<void> requestPermission();
+
+  /// Inject the current [AppLocalizations] so future notification text uses
+  /// the user's selected locale.
+  ///
+  /// Call at app startup and again whenever the app locale changes. When the
+  /// localization is not yet set, services fall back to English defaults.
+  Future<void> setLocalization(AppLocalizations l10n);
 
   /// Schedule morning prayer reminder
   Future<void> scheduleMorningReminder({

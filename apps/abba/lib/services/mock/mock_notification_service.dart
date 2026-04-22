@@ -1,5 +1,6 @@
 import 'package:app_lib_logging/logging.dart';
 
+import '../../l10n/generated/app_localizations.dart';
 import '../notification_service.dart';
 
 class MockNotificationService implements NotificationService {
@@ -21,6 +22,11 @@ class MockNotificationService implements NotificationService {
   @override
   Future<void> requestPermission() async {
     fcmLog.debug('[MockNotification] requestPermission');
+  }
+
+  @override
+  Future<void> setLocalization(AppLocalizations l10n) async {
+    fcmLog.debug('[MockNotification] setLocalization: ${l10n.localeName}');
   }
 
   @override

@@ -990,4 +990,144 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get qtCoachingLevelExpert => '🌳 专家';
+
+  @override
+  String get notifyMorning1Title => '🙏 祷告时间到了';
+
+  @override
+  String notifyMorning1Body(String name) {
+    return '$name,今天也与神交谈吧';
+  }
+
+  @override
+  String get notifyMorning2Title => '🌅 新的一天开始了';
+
+  @override
+  String notifyMorning2Body(String name) {
+    return '$name,以感恩开始新的一天';
+  }
+
+  @override
+  String get notifyMorning3Title => '✨ 今日的恩典';
+
+  @override
+  String notifyMorning3Body(String name) {
+    return '$name,领受神为你预备的恩典';
+  }
+
+  @override
+  String get notifyMorning4Title => '🕊️ 平安的早晨';
+
+  @override
+  String notifyMorning4Body(String name) {
+    return '$name,用祷告将平安充满你的心';
+  }
+
+  @override
+  String get notifyMorning5Title => '📖 与神的话同在';
+
+  @override
+  String notifyMorning5Body(String name) {
+    return '$name,今天聆听神的声音';
+  }
+
+  @override
+  String get notifyMorning6Title => '🌿 安息的时刻';
+
+  @override
+  String notifyMorning6Body(String name) {
+    return '$name,稍作停顿来祷告吧';
+  }
+
+  @override
+  String get notifyMorning7Title => '💫 今天也一样';
+
+  @override
+  String notifyMorning7Body(String name) {
+    return '$name,以祷告开始的一天与众不同';
+  }
+
+  @override
+  String get notifyEvening1Title => '✨ 感恩今日';
+
+  @override
+  String get notifyEvening1Body => '回顾今日并献上感恩的祷告';
+
+  @override
+  String get notifyEvening2Title => '🌙 一天的尾声';
+
+  @override
+  String get notifyEvening2Body => '用祷告表达今日的感恩';
+
+  @override
+  String get notifyEvening3Title => '🙏 晚间祷告';
+
+  @override
+  String get notifyEvening3Body => '在一日的尾声,向神献上感恩';
+
+  @override
+  String get notifyEvening4Title => '🌟 数算今日的恩典';
+
+  @override
+  String get notifyEvening4Body => '若有感恩的事,就在祷告中分享';
+
+  @override
+  String get notifyStreak3Title => '🌱 连续3天!';
+
+  @override
+  String get notifyStreak3Body => '祷告的习惯已经开始';
+
+  @override
+  String get notifyStreak7Title => '🌿 连续一周!';
+
+  @override
+  String get notifyStreak7Body => '祷告正在成为习惯';
+
+  @override
+  String get notifyStreak14Title => '🌳 连续两周!';
+
+  @override
+  String get notifyStreak14Body => '惊人的成长!';
+
+  @override
+  String get notifyStreak21Title => '🌻 连续三周!';
+
+  @override
+  String get notifyStreak21Body => '祷告的花正在绽放';
+
+  @override
+  String get notifyStreak30Title => '🏆 连续一个月!';
+
+  @override
+  String get notifyStreak30Body => '你的祷告正在闪耀';
+
+  @override
+  String get notifyStreak50Title => '👑 连续50天!';
+
+  @override
+  String get notifyStreak50Body => '与神同行的日子越来越深';
+
+  @override
+  String get notifyStreak100Title => '🎉 连续100天!';
+
+  @override
+  String get notifyStreak100Body => '你成了祷告的勇士!';
+
+  @override
+  String get notifyStreak365Title => '✝️ 连续一整年!';
+
+  @override
+  String get notifyStreak365Body => '这是一段惊人的信仰旅程!';
+
+  @override
+  String get notifyAfternoonNudgeTitle => '☀️ 今天祷告了吗?';
+
+  @override
+  String get notifyAfternoonNudgeBody => '短短的祷告能改变一天';
+
+  @override
+  String get notifyChannelName => '祷告提醒';
+
+  @override
+  String get notifyChannelDescription => '晨祷、晚间感恩等祷告提醒';
 }

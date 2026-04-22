@@ -1010,4 +1010,147 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get qtCoachingLevelExpert => '🌳 विशेषज्ञ';
+
+  @override
+  String get notifyMorning1Title => '🙏 प्रार्थना का समय है';
+
+  @override
+  String notifyMorning1Body(String name) {
+    return '$name, आज भी परमेश्वर से बात करें';
+  }
+
+  @override
+  String get notifyMorning2Title => '🌅 नई सुबह हो गई है';
+
+  @override
+  String notifyMorning2Body(String name) {
+    return '$name, कृतज्ञता के साथ दिन शुरू करें';
+  }
+
+  @override
+  String get notifyMorning3Title => '✨ आज का अनुग्रह';
+
+  @override
+  String notifyMorning3Body(String name) {
+    return '$name, परमेश्वर की तैयार की हुई कृपा से मिलें';
+  }
+
+  @override
+  String get notifyMorning4Title => '🕊️ शांत सुबह';
+
+  @override
+  String notifyMorning4Body(String name) {
+    return '$name, प्रार्थना से मन में शांति भरें';
+  }
+
+  @override
+  String get notifyMorning5Title => '📖 वचन के साथ';
+
+  @override
+  String notifyMorning5Body(String name) {
+    return '$name, आज परमेश्वर की आवाज़ सुनें';
+  }
+
+  @override
+  String get notifyMorning6Title => '🌿 विश्राम का समय';
+
+  @override
+  String notifyMorning6Body(String name) {
+    return '$name, एक पल रुककर प्रार्थना करें';
+  }
+
+  @override
+  String get notifyMorning7Title => '💫 आज भी';
+
+  @override
+  String notifyMorning7Body(String name) {
+    return '$name, प्रार्थना से शुरू होने वाला दिन अलग होता है';
+  }
+
+  @override
+  String get notifyEvening1Title => '✨ आज के लिए धन्यवाद';
+
+  @override
+  String get notifyEvening1Body =>
+      'आज पर चिंतन करें और धन्यवाद की प्रार्थना करें';
+
+  @override
+  String get notifyEvening2Title => '🌙 दिन का समापन करते हुए';
+
+  @override
+  String get notifyEvening2Body => 'आज की कृतज्ञता को प्रार्थना से व्यक्त करें';
+
+  @override
+  String get notifyEvening3Title => '🙏 शाम की प्रार्थना';
+
+  @override
+  String get notifyEvening3Body => 'दिन के अंत में परमेश्वर को धन्यवाद दें';
+
+  @override
+  String get notifyEvening4Title => '🌟 आज की आशीषें गिनते हुए';
+
+  @override
+  String get notifyEvening4Body =>
+      'यदि आभारी होने के लिए कुछ है, तो प्रार्थना में साझा करें';
+
+  @override
+  String get notifyStreak3Title => '🌱 लगातार 3 दिन!';
+
+  @override
+  String get notifyStreak3Body => 'आपकी प्रार्थना की आदत शुरू हो गई';
+
+  @override
+  String get notifyStreak7Title => '🌿 पूरा हफ्ता!';
+
+  @override
+  String get notifyStreak7Body => 'प्रार्थना एक आदत बन रही है';
+
+  @override
+  String get notifyStreak14Title => '🌳 लगातार 2 हफ्ते!';
+
+  @override
+  String get notifyStreak14Body => 'अद्भुत वृद्धि!';
+
+  @override
+  String get notifyStreak21Title => '🌻 लगातार 3 हफ्ते!';
+
+  @override
+  String get notifyStreak21Body => 'प्रार्थना का फूल खिल रहा है';
+
+  @override
+  String get notifyStreak30Title => '🏆 पूरा महीना!';
+
+  @override
+  String get notifyStreak30Body => 'आपकी प्रार्थना चमक रही है';
+
+  @override
+  String get notifyStreak50Title => '👑 लगातार 50 दिन!';
+
+  @override
+  String get notifyStreak50Body => 'परमेश्वर के साथ आपका चलना गहरा हो रहा है';
+
+  @override
+  String get notifyStreak100Title => '🎉 लगातार 100 दिन!';
+
+  @override
+  String get notifyStreak100Body => 'आप प्रार्थना के योद्धा बन गए हैं!';
+
+  @override
+  String get notifyStreak365Title => '✝️ पूरा एक साल!';
+
+  @override
+  String get notifyStreak365Body => 'विश्वास की अद्भुत यात्रा!';
+
+  @override
+  String get notifyAfternoonNudgeTitle => '☀️ क्या आपने आज प्रार्थना की?';
+
+  @override
+  String get notifyAfternoonNudgeBody => 'एक छोटी प्रार्थना दिन को बदल सकती है';
+
+  @override
+  String get notifyChannelName => 'प्रार्थना अनुस्मारक';
+
+  @override
+  String get notifyChannelDescription =>
+      'सुबह की प्रार्थना, शाम की कृतज्ञता और अन्य प्रार्थना अनुस्मारक';
 }

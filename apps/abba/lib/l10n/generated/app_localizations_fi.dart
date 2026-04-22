@@ -1012,4 +1012,146 @@ class AppLocalizationsFi extends AppLocalizations {
 
   @override
   String get qtCoachingLevelExpert => '🌳 Asiantuntija';
+
+  @override
+  String get notifyMorning1Title => '🙏 Aika rukoilla';
+
+  @override
+  String notifyMorning1Body(String name) {
+    return '$name, keskustele Jumalan kanssa tänäänkin';
+  }
+
+  @override
+  String get notifyMorning2Title => '🌅 Uusi aamu on koittanut';
+
+  @override
+  String notifyMorning2Body(String name) {
+    return '$name, aloita päivä kiitollisuudella';
+  }
+
+  @override
+  String get notifyMorning3Title => '✨ Tämän päivän armo';
+
+  @override
+  String notifyMorning3Body(String name) {
+    return '$name, kohtaa armo, jonka Jumala on valmistanut';
+  }
+
+  @override
+  String get notifyMorning4Title => '🕊️ Rauhallinen aamu';
+
+  @override
+  String notifyMorning4Body(String name) {
+    return '$name, täytä sydämesi rauhalla rukouksen kautta';
+  }
+
+  @override
+  String get notifyMorning5Title => '📖 Sanan kanssa';
+
+  @override
+  String notifyMorning5Body(String name) {
+    return '$name, kuuntele Jumalan ääntä tänään';
+  }
+
+  @override
+  String get notifyMorning6Title => '🌿 Aika levätä';
+
+  @override
+  String notifyMorning6Body(String name) {
+    return '$name, pysähdy hetkeksi ja rukoile';
+  }
+
+  @override
+  String get notifyMorning7Title => '💫 Myös tänään';
+
+  @override
+  String notifyMorning7Body(String name) {
+    return '$name, päivä, joka alkaa rukouksella, on erilainen';
+  }
+
+  @override
+  String get notifyEvening1Title => '✨ Kiitollisuus tästä päivästä';
+
+  @override
+  String get notifyEvening1Body => 'Palaa päivääsi ja rukoile kiitosrukous';
+
+  @override
+  String get notifyEvening2Title => '🌙 Päivää päättämässä';
+
+  @override
+  String get notifyEvening2Body => 'Ilmaise päivän kiitollisuus rukouksessa';
+
+  @override
+  String get notifyEvening3Title => '🙏 Iltarukous';
+
+  @override
+  String get notifyEvening3Body => 'Päivän päätteeksi kiitä Jumalaa';
+
+  @override
+  String get notifyEvening4Title => '🌟 Laskien päivän siunauksia';
+
+  @override
+  String get notifyEvening4Body =>
+      'Jos sinulla on jotain, mistä kiittää, jaa se rukouksessa';
+
+  @override
+  String get notifyStreak3Title => '🌱 3 päivää putkeen!';
+
+  @override
+  String get notifyStreak3Body => 'Rukoustottumuksesi on alkanut';
+
+  @override
+  String get notifyStreak7Title => '🌿 Koko viikko!';
+
+  @override
+  String get notifyStreak7Body => 'Rukouksesta on tulossa tapa';
+
+  @override
+  String get notifyStreak14Title => '🌳 2 viikkoa putkeen!';
+
+  @override
+  String get notifyStreak14Body => 'Uskomatonta kasvua!';
+
+  @override
+  String get notifyStreak21Title => '🌻 3 viikkoa putkeen!';
+
+  @override
+  String get notifyStreak21Body => 'Rukouksen kukka puhkeaa';
+
+  @override
+  String get notifyStreak30Title => '🏆 Koko kuukausi!';
+
+  @override
+  String get notifyStreak30Body => 'Rukouksesi loistaa';
+
+  @override
+  String get notifyStreak50Title => '👑 50 päivää putkeen!';
+
+  @override
+  String get notifyStreak50Body => 'Vaelluksesi Jumalan kanssa syvenee';
+
+  @override
+  String get notifyStreak100Title => '🎉 100 päivää putkeen!';
+
+  @override
+  String get notifyStreak100Body => 'Sinusta on tullut rukoussoturi!';
+
+  @override
+  String get notifyStreak365Title => '✝️ Koko vuosi!';
+
+  @override
+  String get notifyStreak365Body => 'Uskomaton uskon matka!';
+
+  @override
+  String get notifyAfternoonNudgeTitle => '☀️ Oletko rukoillut tänään?';
+
+  @override
+  String get notifyAfternoonNudgeBody => 'Lyhyt rukous voi muuttaa päivän';
+
+  @override
+  String get notifyChannelName => 'Rukousmuistutukset';
+
+  @override
+  String get notifyChannelDescription =>
+      'Aamurukous, iltakiitollisuus ja muut rukousmuistutukset';
 }

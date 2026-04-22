@@ -1013,4 +1013,146 @@ class AppLocalizationsUk extends AppLocalizations {
 
   @override
   String get qtCoachingLevelExpert => '🌳 Експерт';
+
+  @override
+  String get notifyMorning1Title => '🙏 Час молитися';
+
+  @override
+  String notifyMorning1Body(String name) {
+    return '$name, поговори з Богом і сьогодні';
+  }
+
+  @override
+  String get notifyMorning2Title => '🌅 Настав новий ранок';
+
+  @override
+  String notifyMorning2Body(String name) {
+    return '$name, почни день з вдячності';
+  }
+
+  @override
+  String get notifyMorning3Title => '✨ Благодать сьогодні';
+
+  @override
+  String notifyMorning3Body(String name) {
+    return '$name, зустрінь благодать, яку Бог приготував';
+  }
+
+  @override
+  String get notifyMorning4Title => '🕊️ Мирний ранок';
+
+  @override
+  String notifyMorning4Body(String name) {
+    return '$name, наповни серце миром через молитву';
+  }
+
+  @override
+  String get notifyMorning5Title => '📖 Зі Словом';
+
+  @override
+  String notifyMorning5Body(String name) {
+    return '$name, послухай сьогодні голос Бога';
+  }
+
+  @override
+  String get notifyMorning6Title => '🌿 Час відпочинку';
+
+  @override
+  String notifyMorning6Body(String name) {
+    return '$name, зупинися на мить і помолися';
+  }
+
+  @override
+  String get notifyMorning7Title => '💫 І сьогодні';
+
+  @override
+  String notifyMorning7Body(String name) {
+    return '$name, день, що починається з молитви, інакший';
+  }
+
+  @override
+  String get notifyEvening1Title => '✨ Вдячність за сьогодні';
+
+  @override
+  String get notifyEvening1Body =>
+      'Оглянься на день і звершимо подячну молитву';
+
+  @override
+  String get notifyEvening2Title => '🌙 Завершуючи день';
+
+  @override
+  String get notifyEvening2Body => 'Вислови сьогоднішню вдячність у молитві';
+
+  @override
+  String get notifyEvening3Title => '🙏 Вечірня молитва';
+
+  @override
+  String get notifyEvening3Body => 'У кінці дня подякуй Богові';
+
+  @override
+  String get notifyEvening4Title => '🌟 Рахуючи благословення дня';
+
+  @override
+  String get notifyEvening4Body => 'Якщо є за що дякувати, поділись у молитві';
+
+  @override
+  String get notifyStreak3Title => '🌱 3 дні поспіль!';
+
+  @override
+  String get notifyStreak3Body => 'Ваша звичка молитися розпочалася';
+
+  @override
+  String get notifyStreak7Title => '🌿 Цілий тиждень!';
+
+  @override
+  String get notifyStreak7Body => 'Молитва стає звичкою';
+
+  @override
+  String get notifyStreak14Title => '🌳 2 тижні поспіль!';
+
+  @override
+  String get notifyStreak14Body => 'Вражаючий ріст!';
+
+  @override
+  String get notifyStreak21Title => '🌻 3 тижні поспіль!';
+
+  @override
+  String get notifyStreak21Body => 'Квітка молитви розквітає';
+
+  @override
+  String get notifyStreak30Title => '🏆 Цілий місяць!';
+
+  @override
+  String get notifyStreak30Body => 'Ваша молитва сяє';
+
+  @override
+  String get notifyStreak50Title => '👑 50 днів поспіль!';
+
+  @override
+  String get notifyStreak50Body => 'Ваша дорога з Богом поглиблюється';
+
+  @override
+  String get notifyStreak100Title => '🎉 100 днів поспіль!';
+
+  @override
+  String get notifyStreak100Body => 'Ви стали воїном молитви!';
+
+  @override
+  String get notifyStreak365Title => '✝️ Цілий рік!';
+
+  @override
+  String get notifyStreak365Body => 'Вражаюча подорож віри!';
+
+  @override
+  String get notifyAfternoonNudgeTitle => '☀️ Ви вже помолилися сьогодні?';
+
+  @override
+  String get notifyAfternoonNudgeBody => 'Коротка молитва може змінити день';
+
+  @override
+  String get notifyChannelName => 'Нагадування про молитву';
+
+  @override
+  String get notifyChannelDescription =>
+      'Ранкова молитва, вечірня вдячність та інші нагадування';
 }

@@ -2035,6 +2035,258 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'🌳 Expert'**
   String get qtCoachingLevelExpert;
+
+  /// No description provided for @notifyMorning1Title.
+  ///
+  /// In en, this message translates to:
+  /// **'🙏 Time to pray'**
+  String get notifyMorning1Title;
+
+  /// No description provided for @notifyMorning1Body.
+  ///
+  /// In en, this message translates to:
+  /// **'{name}, talk with God today as well'**
+  String notifyMorning1Body(String name);
+
+  /// No description provided for @notifyMorning2Title.
+  ///
+  /// In en, this message translates to:
+  /// **'🌅 A new morning has come'**
+  String get notifyMorning2Title;
+
+  /// No description provided for @notifyMorning2Body.
+  ///
+  /// In en, this message translates to:
+  /// **'{name}, start the day with gratitude'**
+  String notifyMorning2Body(String name);
+
+  /// No description provided for @notifyMorning3Title.
+  ///
+  /// In en, this message translates to:
+  /// **'✨ Today\'s grace'**
+  String get notifyMorning3Title;
+
+  /// No description provided for @notifyMorning3Body.
+  ///
+  /// In en, this message translates to:
+  /// **'{name}, meet the grace God has prepared'**
+  String notifyMorning3Body(String name);
+
+  /// No description provided for @notifyMorning4Title.
+  ///
+  /// In en, this message translates to:
+  /// **'🕊️ Peaceful morning'**
+  String get notifyMorning4Title;
+
+  /// No description provided for @notifyMorning4Body.
+  ///
+  /// In en, this message translates to:
+  /// **'{name}, fill your heart with peace through prayer'**
+  String notifyMorning4Body(String name);
+
+  /// No description provided for @notifyMorning5Title.
+  ///
+  /// In en, this message translates to:
+  /// **'📖 With the Word'**
+  String get notifyMorning5Title;
+
+  /// No description provided for @notifyMorning5Body.
+  ///
+  /// In en, this message translates to:
+  /// **'{name}, listen to God\'s voice today'**
+  String notifyMorning5Body(String name);
+
+  /// No description provided for @notifyMorning6Title.
+  ///
+  /// In en, this message translates to:
+  /// **'🌿 Time to rest'**
+  String get notifyMorning6Title;
+
+  /// No description provided for @notifyMorning6Body.
+  ///
+  /// In en, this message translates to:
+  /// **'{name}, pause for a moment and pray'**
+  String notifyMorning6Body(String name);
+
+  /// No description provided for @notifyMorning7Title.
+  ///
+  /// In en, this message translates to:
+  /// **'💫 Today as well'**
+  String get notifyMorning7Title;
+
+  /// No description provided for @notifyMorning7Body.
+  ///
+  /// In en, this message translates to:
+  /// **'{name}, a day that begins with prayer is different'**
+  String notifyMorning7Body(String name);
+
+  /// No description provided for @notifyEvening1Title.
+  ///
+  /// In en, this message translates to:
+  /// **'✨ Thankful for today'**
+  String get notifyEvening1Title;
+
+  /// No description provided for @notifyEvening1Body.
+  ///
+  /// In en, this message translates to:
+  /// **'Look back on today and offer a prayer of thanks'**
+  String get notifyEvening1Body;
+
+  /// No description provided for @notifyEvening2Title.
+  ///
+  /// In en, this message translates to:
+  /// **'🌙 Wrapping up the day'**
+  String get notifyEvening2Title;
+
+  /// No description provided for @notifyEvening2Body.
+  ///
+  /// In en, this message translates to:
+  /// **'Express today\'s gratitude through prayer'**
+  String get notifyEvening2Body;
+
+  /// No description provided for @notifyEvening3Title.
+  ///
+  /// In en, this message translates to:
+  /// **'🙏 Evening prayer'**
+  String get notifyEvening3Title;
+
+  /// No description provided for @notifyEvening3Body.
+  ///
+  /// In en, this message translates to:
+  /// **'At the end of the day, give thanks to God'**
+  String get notifyEvening3Body;
+
+  /// No description provided for @notifyEvening4Title.
+  ///
+  /// In en, this message translates to:
+  /// **'🌟 Counting today\'s blessings'**
+  String get notifyEvening4Title;
+
+  /// No description provided for @notifyEvening4Body.
+  ///
+  /// In en, this message translates to:
+  /// **'If you have something to be thankful for, share it in prayer'**
+  String get notifyEvening4Body;
+
+  /// No description provided for @notifyStreak3Title.
+  ///
+  /// In en, this message translates to:
+  /// **'🌱 3 days in a row!'**
+  String get notifyStreak3Title;
+
+  /// No description provided for @notifyStreak3Body.
+  ///
+  /// In en, this message translates to:
+  /// **'Your prayer habit has begun'**
+  String get notifyStreak3Body;
+
+  /// No description provided for @notifyStreak7Title.
+  ///
+  /// In en, this message translates to:
+  /// **'🌿 A full week!'**
+  String get notifyStreak7Title;
+
+  /// No description provided for @notifyStreak7Body.
+  ///
+  /// In en, this message translates to:
+  /// **'Prayer is becoming a habit'**
+  String get notifyStreak7Body;
+
+  /// No description provided for @notifyStreak14Title.
+  ///
+  /// In en, this message translates to:
+  /// **'🌳 2 weeks in a row!'**
+  String get notifyStreak14Title;
+
+  /// No description provided for @notifyStreak14Body.
+  ///
+  /// In en, this message translates to:
+  /// **'Amazing growth!'**
+  String get notifyStreak14Body;
+
+  /// No description provided for @notifyStreak21Title.
+  ///
+  /// In en, this message translates to:
+  /// **'🌻 3 weeks in a row!'**
+  String get notifyStreak21Title;
+
+  /// No description provided for @notifyStreak21Body.
+  ///
+  /// In en, this message translates to:
+  /// **'The flower of prayer is blooming'**
+  String get notifyStreak21Body;
+
+  /// No description provided for @notifyStreak30Title.
+  ///
+  /// In en, this message translates to:
+  /// **'🏆 A full month!'**
+  String get notifyStreak30Title;
+
+  /// No description provided for @notifyStreak30Body.
+  ///
+  /// In en, this message translates to:
+  /// **'Your prayer is shining'**
+  String get notifyStreak30Body;
+
+  /// No description provided for @notifyStreak50Title.
+  ///
+  /// In en, this message translates to:
+  /// **'👑 50 days in a row!'**
+  String get notifyStreak50Title;
+
+  /// No description provided for @notifyStreak50Body.
+  ///
+  /// In en, this message translates to:
+  /// **'Your walk with God is deepening'**
+  String get notifyStreak50Body;
+
+  /// No description provided for @notifyStreak100Title.
+  ///
+  /// In en, this message translates to:
+  /// **'🎉 100 days in a row!'**
+  String get notifyStreak100Title;
+
+  /// No description provided for @notifyStreak100Body.
+  ///
+  /// In en, this message translates to:
+  /// **'You\'ve become a prayer warrior!'**
+  String get notifyStreak100Body;
+
+  /// No description provided for @notifyStreak365Title.
+  ///
+  /// In en, this message translates to:
+  /// **'✝️ A full year!'**
+  String get notifyStreak365Title;
+
+  /// No description provided for @notifyStreak365Body.
+  ///
+  /// In en, this message translates to:
+  /// **'What an amazing journey of faith!'**
+  String get notifyStreak365Body;
+
+  /// No description provided for @notifyAfternoonNudgeTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'☀️ Have you prayed today?'**
+  String get notifyAfternoonNudgeTitle;
+
+  /// No description provided for @notifyAfternoonNudgeBody.
+  ///
+  /// In en, this message translates to:
+  /// **'A brief prayer can change the day'**
+  String get notifyAfternoonNudgeBody;
+
+  /// No description provided for @notifyChannelName.
+  ///
+  /// In en, this message translates to:
+  /// **'Prayer Reminders'**
+  String get notifyChannelName;
+
+  /// No description provided for @notifyChannelDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Morning prayer, evening gratitude, and other prayer reminders'**
+  String get notifyChannelDescription;
 }
 
 class _AppLocalizationsDelegate

@@ -1015,4 +1015,147 @@ class AppLocalizationsHr extends AppLocalizations {
 
   @override
   String get qtCoachingLevelExpert => '🌳 Stručnjak';
+
+  @override
+  String get notifyMorning1Title => '🙏 Vrijeme za molitvu';
+
+  @override
+  String notifyMorning1Body(String name) {
+    return '$name, razgovaraj s Bogom i danas';
+  }
+
+  @override
+  String get notifyMorning2Title => '🌅 Stiglo je novo jutro';
+
+  @override
+  String notifyMorning2Body(String name) {
+    return '$name, započni dan sa zahvalnošću';
+  }
+
+  @override
+  String get notifyMorning3Title => '✨ Današnja milost';
+
+  @override
+  String notifyMorning3Body(String name) {
+    return '$name, susretni milost koju je Bog pripremio';
+  }
+
+  @override
+  String get notifyMorning4Title => '🕊️ Mirno jutro';
+
+  @override
+  String notifyMorning4Body(String name) {
+    return '$name, ispuni srce mirom kroz molitvu';
+  }
+
+  @override
+  String get notifyMorning5Title => '📖 S Riječju';
+
+  @override
+  String notifyMorning5Body(String name) {
+    return '$name, poslušaj danas Božji glas';
+  }
+
+  @override
+  String get notifyMorning6Title => '🌿 Vrijeme za odmor';
+
+  @override
+  String notifyMorning6Body(String name) {
+    return '$name, zastani na trenutak i pomoli se';
+  }
+
+  @override
+  String get notifyMorning7Title => '💫 I danas';
+
+  @override
+  String notifyMorning7Body(String name) {
+    return '$name, dan koji počinje molitvom je drukčiji';
+  }
+
+  @override
+  String get notifyEvening1Title => '✨ Zahvalnost za danas';
+
+  @override
+  String get notifyEvening1Body =>
+      'Osvrni se na dan i uputi molitvu zahvalnosti';
+
+  @override
+  String get notifyEvening2Title => '🌙 Završavajući dan';
+
+  @override
+  String get notifyEvening2Body => 'Izrazi današnju zahvalnost molitvom';
+
+  @override
+  String get notifyEvening3Title => '🙏 Večernja molitva';
+
+  @override
+  String get notifyEvening3Body => 'Na kraju dana zahvali Bogu';
+
+  @override
+  String get notifyEvening4Title => '🌟 Brojeći današnje blagoslove';
+
+  @override
+  String get notifyEvening4Body =>
+      'Ako imaš za što zahvaliti, podijeli u molitvi';
+
+  @override
+  String get notifyStreak3Title => '🌱 3 dana zaredom!';
+
+  @override
+  String get notifyStreak3Body => 'Tvoja navika molitve je započela';
+
+  @override
+  String get notifyStreak7Title => '🌿 Cijeli tjedan!';
+
+  @override
+  String get notifyStreak7Body => 'Molitva postaje navika';
+
+  @override
+  String get notifyStreak14Title => '🌳 2 tjedna zaredom!';
+
+  @override
+  String get notifyStreak14Body => 'Nevjerojatan rast!';
+
+  @override
+  String get notifyStreak21Title => '🌻 3 tjedna zaredom!';
+
+  @override
+  String get notifyStreak21Body => 'Cvijet molitve cvate';
+
+  @override
+  String get notifyStreak30Title => '🏆 Cijeli mjesec!';
+
+  @override
+  String get notifyStreak30Body => 'Tvoja molitva sja';
+
+  @override
+  String get notifyStreak50Title => '👑 50 dana zaredom!';
+
+  @override
+  String get notifyStreak50Body => 'Tvoj hod s Bogom se produbljuje';
+
+  @override
+  String get notifyStreak100Title => '🎉 100 dana zaredom!';
+
+  @override
+  String get notifyStreak100Body => 'Postao si molitveni ratnik!';
+
+  @override
+  String get notifyStreak365Title => '✝️ Cijela godina!';
+
+  @override
+  String get notifyStreak365Body => 'Nevjerojatno putovanje vjere!';
+
+  @override
+  String get notifyAfternoonNudgeTitle => '☀️ Jesi li danas molio?';
+
+  @override
+  String get notifyAfternoonNudgeBody => 'Kratka molitva može promijeniti dan';
+
+  @override
+  String get notifyChannelName => 'Podsjetnici za molitvu';
+
+  @override
+  String get notifyChannelDescription =>
+      'Jutarnja molitva, večernja zahvalnost i drugi podsjetnici';
 }

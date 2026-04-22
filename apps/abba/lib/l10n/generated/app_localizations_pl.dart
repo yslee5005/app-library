@@ -1018,4 +1018,147 @@ class AppLocalizationsPl extends AppLocalizations {
 
   @override
   String get qtCoachingLevelExpert => '🌳 Ekspert';
+
+  @override
+  String get notifyMorning1Title => '🙏 Czas na modlitwę';
+
+  @override
+  String notifyMorning1Body(String name) {
+    return '$name, porozmawiaj z Bogiem także dzisiaj';
+  }
+
+  @override
+  String get notifyMorning2Title => '🌅 Nadszedł nowy poranek';
+
+  @override
+  String notifyMorning2Body(String name) {
+    return '$name, zacznij dzień z wdzięcznością';
+  }
+
+  @override
+  String get notifyMorning3Title => '✨ Dzisiejsza łaska';
+
+  @override
+  String notifyMorning3Body(String name) {
+    return '$name, spotkaj łaskę przygotowaną przez Boga';
+  }
+
+  @override
+  String get notifyMorning4Title => '🕊️ Spokojny poranek';
+
+  @override
+  String notifyMorning4Body(String name) {
+    return '$name, napełnij serce pokojem przez modlitwę';
+  }
+
+  @override
+  String get notifyMorning5Title => '📖 Ze Słowem';
+
+  @override
+  String notifyMorning5Body(String name) {
+    return '$name, wsłuchaj się dziś w głos Boga';
+  }
+
+  @override
+  String get notifyMorning6Title => '🌿 Czas na odpoczynek';
+
+  @override
+  String notifyMorning6Body(String name) {
+    return '$name, zatrzymaj się na chwilę i pomódl się';
+  }
+
+  @override
+  String get notifyMorning7Title => '💫 Dziś też';
+
+  @override
+  String notifyMorning7Body(String name) {
+    return '$name, dzień rozpoczęty modlitwą jest inny';
+  }
+
+  @override
+  String get notifyEvening1Title => '✨ Wdzięczność za dziś';
+
+  @override
+  String get notifyEvening1Body =>
+      'Spójrz wstecz na dzień i ofiaruj modlitwę dziękczynną';
+
+  @override
+  String get notifyEvening2Title => '🌙 Kończąc dzień';
+
+  @override
+  String get notifyEvening2Body => 'Wyraź dzisiejszą wdzięczność w modlitwie';
+
+  @override
+  String get notifyEvening3Title => '🙏 Modlitwa wieczorna';
+
+  @override
+  String get notifyEvening3Body => 'Na koniec dnia podziękuj Bogu';
+
+  @override
+  String get notifyEvening4Title => '🌟 Licząc dzisiejsze błogosławieństwa';
+
+  @override
+  String get notifyEvening4Body =>
+      'Jeśli masz za co dziękować, podziel się w modlitwie';
+
+  @override
+  String get notifyStreak3Title => '🌱 3 dni z rzędu!';
+
+  @override
+  String get notifyStreak3Body => 'Twój nawyk modlitwy się rozpoczął';
+
+  @override
+  String get notifyStreak7Title => '🌿 Cały tydzień!';
+
+  @override
+  String get notifyStreak7Body => 'Modlitwa staje się nawykiem';
+
+  @override
+  String get notifyStreak14Title => '🌳 2 tygodnie z rzędu!';
+
+  @override
+  String get notifyStreak14Body => 'Niesamowity wzrost!';
+
+  @override
+  String get notifyStreak21Title => '🌻 3 tygodnie z rzędu!';
+
+  @override
+  String get notifyStreak21Body => 'Kwiat modlitwy rozkwita';
+
+  @override
+  String get notifyStreak30Title => '🏆 Cały miesiąc!';
+
+  @override
+  String get notifyStreak30Body => 'Twoja modlitwa jaśnieje';
+
+  @override
+  String get notifyStreak50Title => '👑 50 dni z rzędu!';
+
+  @override
+  String get notifyStreak50Body => 'Twoja wędrówka z Bogiem się pogłębia';
+
+  @override
+  String get notifyStreak100Title => '🎉 100 dni z rzędu!';
+
+  @override
+  String get notifyStreak100Body => 'Stałeś się wojownikiem modlitwy!';
+
+  @override
+  String get notifyStreak365Title => '✝️ Cały rok!';
+
+  @override
+  String get notifyStreak365Body => 'Niesamowita podróż wiary!';
+
+  @override
+  String get notifyAfternoonNudgeTitle => '☀️ Czy modliłeś się dziś?';
+
+  @override
+  String get notifyAfternoonNudgeBody => 'Krótka modlitwa może zmienić dzień';
+
+  @override
+  String get notifyChannelName => 'Przypomnienia modlitwy';
+
+  @override
+  String get notifyChannelDescription =>
+      'Poranna modlitwa, wieczorna wdzięczność i inne przypomnienia';
 }

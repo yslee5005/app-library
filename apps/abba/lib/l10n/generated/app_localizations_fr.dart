@@ -1023,4 +1023,149 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get qtCoachingLevelExpert => '🌳 Expert';
+
+  @override
+  String get notifyMorning1Title => '🙏 C\'est l\'heure de prier';
+
+  @override
+  String notifyMorning1Body(String name) {
+    return '$name, parle avec Dieu aujourd\'hui aussi';
+  }
+
+  @override
+  String get notifyMorning2Title => '🌅 Un nouveau matin est arrivé';
+
+  @override
+  String notifyMorning2Body(String name) {
+    return '$name, commence la journée avec gratitude';
+  }
+
+  @override
+  String get notifyMorning3Title => '✨ La grâce du jour';
+
+  @override
+  String notifyMorning3Body(String name) {
+    return '$name, découvre la grâce que Dieu a préparée';
+  }
+
+  @override
+  String get notifyMorning4Title => '🕊️ Matin paisible';
+
+  @override
+  String notifyMorning4Body(String name) {
+    return '$name, remplis ton cœur de paix par la prière';
+  }
+
+  @override
+  String get notifyMorning5Title => '📖 Avec la Parole';
+
+  @override
+  String notifyMorning5Body(String name) {
+    return '$name, écoute la voix de Dieu aujourd\'hui';
+  }
+
+  @override
+  String get notifyMorning6Title => '🌿 Temps de repos';
+
+  @override
+  String notifyMorning6Body(String name) {
+    return '$name, arrête-toi un instant et prie';
+  }
+
+  @override
+  String get notifyMorning7Title => '💫 Aujourd\'hui aussi';
+
+  @override
+  String notifyMorning7Body(String name) {
+    return '$name, une journée qui commence par la prière est différente';
+  }
+
+  @override
+  String get notifyEvening1Title => '✨ Merci pour aujourd\'hui';
+
+  @override
+  String get notifyEvening1Body =>
+      'Revois ta journée et offre une prière de gratitude';
+
+  @override
+  String get notifyEvening2Title => '🌙 En terminant la journée';
+
+  @override
+  String get notifyEvening2Body =>
+      'Exprime la gratitude de la journée par la prière';
+
+  @override
+  String get notifyEvening3Title => '🙏 Prière du soir';
+
+  @override
+  String get notifyEvening3Body => 'À la fin de la journée, rends grâce à Dieu';
+
+  @override
+  String get notifyEvening4Title => '🌟 En comptant les grâces du jour';
+
+  @override
+  String get notifyEvening4Body =>
+      'Si tu as de quoi être reconnaissant, partage-le dans la prière';
+
+  @override
+  String get notifyStreak3Title => '🌱 3 jours de suite !';
+
+  @override
+  String get notifyStreak3Body => 'Ton habitude de prière a commencé';
+
+  @override
+  String get notifyStreak7Title => '🌿 Une semaine d\'affilée !';
+
+  @override
+  String get notifyStreak7Body => 'La prière devient une habitude';
+
+  @override
+  String get notifyStreak14Title => '🌳 2 semaines d\'affilée !';
+
+  @override
+  String get notifyStreak14Body => 'Une croissance incroyable !';
+
+  @override
+  String get notifyStreak21Title => '🌻 3 semaines d\'affilée !';
+
+  @override
+  String get notifyStreak21Body => 'La fleur de la prière s\'épanouit';
+
+  @override
+  String get notifyStreak30Title => '🏆 Un mois entier !';
+
+  @override
+  String get notifyStreak30Body => 'Ta prière rayonne';
+
+  @override
+  String get notifyStreak50Title => '👑 50 jours d\'affilée !';
+
+  @override
+  String get notifyStreak50Body => 'Ta marche avec Dieu s\'approfondit';
+
+  @override
+  String get notifyStreak100Title => '🎉 100 jours d\'affilée !';
+
+  @override
+  String get notifyStreak100Body => 'Tu es devenu un guerrier de la prière !';
+
+  @override
+  String get notifyStreak365Title => '✝️ Une année entière !';
+
+  @override
+  String get notifyStreak365Body => 'Quel incroyable voyage de foi !';
+
+  @override
+  String get notifyAfternoonNudgeTitle => '☀️ As-tu déjà prié aujourd\'hui ?';
+
+  @override
+  String get notifyAfternoonNudgeBody =>
+      'Une courte prière peut changer la journée';
+
+  @override
+  String get notifyChannelName => 'Rappels de prière';
+
+  @override
+  String get notifyChannelDescription =>
+      'Prière du matin, gratitude du soir et autres rappels';
 }

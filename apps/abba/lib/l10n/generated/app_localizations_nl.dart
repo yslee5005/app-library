@@ -1016,4 +1016,147 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get qtCoachingLevelExpert => '🌳 Expert';
+
+  @override
+  String get notifyMorning1Title => '🙏 Tijd om te bidden';
+
+  @override
+  String notifyMorning1Body(String name) {
+    return '$name, praat ook vandaag met God';
+  }
+
+  @override
+  String get notifyMorning2Title => '🌅 Een nieuwe ochtend is aangebroken';
+
+  @override
+  String notifyMorning2Body(String name) {
+    return '$name, begin de dag met dankbaarheid';
+  }
+
+  @override
+  String get notifyMorning3Title => '✨ De genade van vandaag';
+
+  @override
+  String notifyMorning3Body(String name) {
+    return '$name, ontmoet de genade die God heeft bereid';
+  }
+
+  @override
+  String get notifyMorning4Title => '🕊️ Vredige ochtend';
+
+  @override
+  String notifyMorning4Body(String name) {
+    return '$name, vul je hart met vrede door gebed';
+  }
+
+  @override
+  String get notifyMorning5Title => '📖 Met het Woord';
+
+  @override
+  String notifyMorning5Body(String name) {
+    return '$name, luister vandaag naar Gods stem';
+  }
+
+  @override
+  String get notifyMorning6Title => '🌿 Tijd om te rusten';
+
+  @override
+  String notifyMorning6Body(String name) {
+    return '$name, pauzeer even en bid';
+  }
+
+  @override
+  String get notifyMorning7Title => '💫 Ook vandaag';
+
+  @override
+  String notifyMorning7Body(String name) {
+    return '$name, een dag die begint met gebed is anders';
+  }
+
+  @override
+  String get notifyEvening1Title => '✨ Dankbaar voor vandaag';
+
+  @override
+  String get notifyEvening1Body => 'Kijk terug op de dag en bid een dankgebed';
+
+  @override
+  String get notifyEvening2Title => '🌙 De dag afsluiten';
+
+  @override
+  String get notifyEvening2Body =>
+      'Druk de dankbaarheid van vandaag uit in gebed';
+
+  @override
+  String get notifyEvening3Title => '🙏 Avondgebed';
+
+  @override
+  String get notifyEvening3Body => 'Dank God aan het einde van de dag';
+
+  @override
+  String get notifyEvening4Title => '🌟 De zegeningen van vandaag tellen';
+
+  @override
+  String get notifyEvening4Body =>
+      'Als je iets hebt om dankbaar voor te zijn, deel het in gebed';
+
+  @override
+  String get notifyStreak3Title => '🌱 3 dagen op rij!';
+
+  @override
+  String get notifyStreak3Body => 'Je gebedsgewoonte is begonnen';
+
+  @override
+  String get notifyStreak7Title => '🌿 Een hele week!';
+
+  @override
+  String get notifyStreak7Body => 'Bidden wordt een gewoonte';
+
+  @override
+  String get notifyStreak14Title => '🌳 2 weken op rij!';
+
+  @override
+  String get notifyStreak14Body => 'Geweldige groei!';
+
+  @override
+  String get notifyStreak21Title => '🌻 3 weken op rij!';
+
+  @override
+  String get notifyStreak21Body => 'De bloem van het gebed bloeit';
+
+  @override
+  String get notifyStreak30Title => '🏆 Een hele maand!';
+
+  @override
+  String get notifyStreak30Body => 'Je gebed straalt';
+
+  @override
+  String get notifyStreak50Title => '👑 50 dagen op rij!';
+
+  @override
+  String get notifyStreak50Body => 'Je wandel met God wordt dieper';
+
+  @override
+  String get notifyStreak100Title => '🎉 100 dagen op rij!';
+
+  @override
+  String get notifyStreak100Body => 'Je bent een gebedskrijger geworden!';
+
+  @override
+  String get notifyStreak365Title => '✝️ Een heel jaar!';
+
+  @override
+  String get notifyStreak365Body => 'Een geweldige geloofsreis!';
+
+  @override
+  String get notifyAfternoonNudgeTitle => '☀️ Heb je vandaag al gebeden?';
+
+  @override
+  String get notifyAfternoonNudgeBody => 'Een kort gebed kan de dag veranderen';
+
+  @override
+  String get notifyChannelName => 'Gebedsherinneringen';
+
+  @override
+  String get notifyChannelDescription =>
+      'Ochtendgebed, avonddankbaarheid en andere gebedsherinneringen';
 }

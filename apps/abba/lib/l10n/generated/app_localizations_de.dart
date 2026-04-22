@@ -1020,4 +1020,149 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get qtCoachingLevelExpert => '🌳 Experte';
+
+  @override
+  String get notifyMorning1Title => '🙏 Zeit zu beten';
+
+  @override
+  String notifyMorning1Body(String name) {
+    return '$name, sprich auch heute mit Gott';
+  }
+
+  @override
+  String get notifyMorning2Title => '🌅 Ein neuer Morgen ist da';
+
+  @override
+  String notifyMorning2Body(String name) {
+    return '$name, beginne den Tag mit Dankbarkeit';
+  }
+
+  @override
+  String get notifyMorning3Title => '✨ Die Gnade von heute';
+
+  @override
+  String notifyMorning3Body(String name) {
+    return '$name, begegne der Gnade, die Gott bereitet hat';
+  }
+
+  @override
+  String get notifyMorning4Title => '🕊️ Friedlicher Morgen';
+
+  @override
+  String notifyMorning4Body(String name) {
+    return '$name, fülle dein Herz durch Gebet mit Frieden';
+  }
+
+  @override
+  String get notifyMorning5Title => '📖 Mit dem Wort';
+
+  @override
+  String notifyMorning5Body(String name) {
+    return '$name, höre heute Gottes Stimme';
+  }
+
+  @override
+  String get notifyMorning6Title => '🌿 Zeit zur Ruhe';
+
+  @override
+  String notifyMorning6Body(String name) {
+    return '$name, halte kurz inne und bete';
+  }
+
+  @override
+  String get notifyMorning7Title => '💫 Auch heute';
+
+  @override
+  String notifyMorning7Body(String name) {
+    return '$name, ein Tag, der mit Gebet beginnt, ist anders';
+  }
+
+  @override
+  String get notifyEvening1Title => '✨ Dankbar für heute';
+
+  @override
+  String get notifyEvening1Body =>
+      'Blicke auf den Tag zurück und bete ein Dankgebet';
+
+  @override
+  String get notifyEvening2Title => '🌙 Den Tag beschließen';
+
+  @override
+  String get notifyEvening2Body =>
+      'Drücke die Dankbarkeit von heute im Gebet aus';
+
+  @override
+  String get notifyEvening3Title => '🙏 Abendgebet';
+
+  @override
+  String get notifyEvening3Body => 'Am Ende des Tages danke Gott';
+
+  @override
+  String get notifyEvening4Title => '🌟 Heutige Segnungen zählen';
+
+  @override
+  String get notifyEvening4Body =>
+      'Wenn du etwas zu danken hast, teile es im Gebet';
+
+  @override
+  String get notifyStreak3Title => '🌱 3 Tage in Folge!';
+
+  @override
+  String get notifyStreak3Body => 'Deine Gebetsgewohnheit hat begonnen';
+
+  @override
+  String get notifyStreak7Title => '🌿 Eine ganze Woche!';
+
+  @override
+  String get notifyStreak7Body => 'Gebet wird zur Gewohnheit';
+
+  @override
+  String get notifyStreak14Title => '🌳 2 Wochen in Folge!';
+
+  @override
+  String get notifyStreak14Body => 'Erstaunliches Wachstum!';
+
+  @override
+  String get notifyStreak21Title => '🌻 3 Wochen in Folge!';
+
+  @override
+  String get notifyStreak21Body => 'Die Blume des Gebets blüht';
+
+  @override
+  String get notifyStreak30Title => '🏆 Ein ganzer Monat!';
+
+  @override
+  String get notifyStreak30Body => 'Dein Gebet strahlt';
+
+  @override
+  String get notifyStreak50Title => '👑 50 Tage in Folge!';
+
+  @override
+  String get notifyStreak50Body => 'Dein Weg mit Gott wird tiefer';
+
+  @override
+  String get notifyStreak100Title => '🎉 100 Tage in Folge!';
+
+  @override
+  String get notifyStreak100Body => 'Du bist ein Gebetskrieger geworden!';
+
+  @override
+  String get notifyStreak365Title => '✝️ Ein ganzes Jahr!';
+
+  @override
+  String get notifyStreak365Body => 'Eine erstaunliche Glaubensreise!';
+
+  @override
+  String get notifyAfternoonNudgeTitle => '☀️ Hast du heute schon gebetet?';
+
+  @override
+  String get notifyAfternoonNudgeBody =>
+      'Ein kurzes Gebet kann den Tag verändern';
+
+  @override
+  String get notifyChannelName => 'Gebetserinnerungen';
+
+  @override
+  String get notifyChannelDescription =>
+      'Morgengebet, Abenddank und weitere Gebetserinnerungen';
 }

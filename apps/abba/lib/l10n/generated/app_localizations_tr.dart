@@ -1014,4 +1014,145 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get qtCoachingLevelExpert => '🌳 Uzman';
+
+  @override
+  String get notifyMorning1Title => '🙏 Dua zamanı';
+
+  @override
+  String notifyMorning1Body(String name) {
+    return '$name, bugün de Tanrı ile konuş';
+  }
+
+  @override
+  String get notifyMorning2Title => '🌅 Yeni bir sabah geldi';
+
+  @override
+  String notifyMorning2Body(String name) {
+    return '$name, güne şükranla başla';
+  }
+
+  @override
+  String get notifyMorning3Title => '✨ Bugünün lütfu';
+
+  @override
+  String notifyMorning3Body(String name) {
+    return '$name, Tanrı\'nın hazırladığı lütufla buluş';
+  }
+
+  @override
+  String get notifyMorning4Title => '🕊️ Huzurlu sabah';
+
+  @override
+  String notifyMorning4Body(String name) {
+    return '$name, kalbini dua ile huzurla doldur';
+  }
+
+  @override
+  String get notifyMorning5Title => '📖 Söz ile birlikte';
+
+  @override
+  String notifyMorning5Body(String name) {
+    return '$name, bugün Tanrı\'nın sesini dinle';
+  }
+
+  @override
+  String get notifyMorning6Title => '🌿 Dinlenme zamanı';
+
+  @override
+  String notifyMorning6Body(String name) {
+    return '$name, bir an dur ve dua et';
+  }
+
+  @override
+  String get notifyMorning7Title => '💫 Bugün de';
+
+  @override
+  String notifyMorning7Body(String name) {
+    return '$name, dua ile başlayan bir gün farklıdır';
+  }
+
+  @override
+  String get notifyEvening1Title => '✨ Bugün için şükran';
+
+  @override
+  String get notifyEvening1Body => 'Bugüne dön ve bir şükran duası sun';
+
+  @override
+  String get notifyEvening2Title => '🌙 Günü kapatırken';
+
+  @override
+  String get notifyEvening2Body => 'Bugünün şükranını dua ile ifade et';
+
+  @override
+  String get notifyEvening3Title => '🙏 Akşam duası';
+
+  @override
+  String get notifyEvening3Body => 'Günün sonunda Tanrı\'ya şükret';
+
+  @override
+  String get notifyEvening4Title => '🌟 Bugünün nimetlerini sayarken';
+
+  @override
+  String get notifyEvening4Body => 'Şükredecek bir şeyin varsa dua ile paylaş';
+
+  @override
+  String get notifyStreak3Title => '🌱 Üst üste 3 gün!';
+
+  @override
+  String get notifyStreak3Body => 'Dua alışkanlığın başladı';
+
+  @override
+  String get notifyStreak7Title => '🌿 Tam bir hafta!';
+
+  @override
+  String get notifyStreak7Body => 'Dua bir alışkanlık oluyor';
+
+  @override
+  String get notifyStreak14Title => '🌳 Üst üste 2 hafta!';
+
+  @override
+  String get notifyStreak14Body => 'Harika bir gelişim!';
+
+  @override
+  String get notifyStreak21Title => '🌻 Üst üste 3 hafta!';
+
+  @override
+  String get notifyStreak21Body => 'Dua çiçeği açıyor';
+
+  @override
+  String get notifyStreak30Title => '🏆 Koca bir ay!';
+
+  @override
+  String get notifyStreak30Body => 'Duan parlıyor';
+
+  @override
+  String get notifyStreak50Title => '👑 Üst üste 50 gün!';
+
+  @override
+  String get notifyStreak50Body => 'Tanrı ile yürüyüşün derinleşiyor';
+
+  @override
+  String get notifyStreak100Title => '🎉 Üst üste 100 gün!';
+
+  @override
+  String get notifyStreak100Body => 'Bir dua savaşçısı oldun!';
+
+  @override
+  String get notifyStreak365Title => '✝️ Koca bir yıl!';
+
+  @override
+  String get notifyStreak365Body => 'İnanç yolculuğun muhteşem!';
+
+  @override
+  String get notifyAfternoonNudgeTitle => '☀️ Bugün dua ettin mi?';
+
+  @override
+  String get notifyAfternoonNudgeBody => 'Kısa bir dua günü değiştirebilir';
+
+  @override
+  String get notifyChannelName => 'Dua hatırlatıcıları';
+
+  @override
+  String get notifyChannelDescription =>
+      'Sabah duası, akşam şükrü ve diğer dua hatırlatıcıları';
 }

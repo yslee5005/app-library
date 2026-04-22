@@ -1016,4 +1016,146 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String get qtCoachingLevelExpert => '🌳 Szakértő';
+
+  @override
+  String get notifyMorning1Title => '🙏 Ima ideje';
+
+  @override
+  String notifyMorning1Body(String name) {
+    return '$name, beszélgess Istennel ma is';
+  }
+
+  @override
+  String get notifyMorning2Title => '🌅 Új reggel virradt';
+
+  @override
+  String notifyMorning2Body(String name) {
+    return '$name, kezdd a napot hálával';
+  }
+
+  @override
+  String get notifyMorning3Title => '✨ A mai kegyelem';
+
+  @override
+  String notifyMorning3Body(String name) {
+    return '$name, találkozz a kegyelemmel, amit Isten készített';
+  }
+
+  @override
+  String get notifyMorning4Title => '🕊️ Békés reggel';
+
+  @override
+  String notifyMorning4Body(String name) {
+    return '$name, töltsd meg szíved békével ima által';
+  }
+
+  @override
+  String get notifyMorning5Title => '📖 Az Igével';
+
+  @override
+  String notifyMorning5Body(String name) {
+    return '$name, figyelj ma Isten hangjára';
+  }
+
+  @override
+  String get notifyMorning6Title => '🌿 Pihenés ideje';
+
+  @override
+  String notifyMorning6Body(String name) {
+    return '$name, állj meg egy pillanatra és imádkozz';
+  }
+
+  @override
+  String get notifyMorning7Title => '💫 Ma is';
+
+  @override
+  String notifyMorning7Body(String name) {
+    return '$name, az imával kezdődő nap más';
+  }
+
+  @override
+  String get notifyEvening1Title => '✨ Hála a mai napért';
+
+  @override
+  String get notifyEvening1Body => 'Tekints vissza a napra és mondj hálaimát';
+
+  @override
+  String get notifyEvening2Title => '🌙 A nap lezárása';
+
+  @override
+  String get notifyEvening2Body => 'Fejezd ki a mai hálát imában';
+
+  @override
+  String get notifyEvening3Title => '🙏 Esti ima';
+
+  @override
+  String get notifyEvening3Body => 'A nap végén adj hálát Istennek';
+
+  @override
+  String get notifyEvening4Title => '🌟 A mai áldásokat számolva';
+
+  @override
+  String get notifyEvening4Body => 'Ha van miért hálát adnod, oszd meg imában';
+
+  @override
+  String get notifyStreak3Title => '🌱 3 nap egymás után!';
+
+  @override
+  String get notifyStreak3Body => 'Az imaszokásod elkezdődött';
+
+  @override
+  String get notifyStreak7Title => '🌿 Egy egész hét!';
+
+  @override
+  String get notifyStreak7Body => 'Az ima szokássá válik';
+
+  @override
+  String get notifyStreak14Title => '🌳 2 hét egymás után!';
+
+  @override
+  String get notifyStreak14Body => 'Lenyűgöző fejlődés!';
+
+  @override
+  String get notifyStreak21Title => '🌻 3 hét egymás után!';
+
+  @override
+  String get notifyStreak21Body => 'Az ima virága kinyílik';
+
+  @override
+  String get notifyStreak30Title => '🏆 Egy egész hónap!';
+
+  @override
+  String get notifyStreak30Body => 'Az imád ragyog';
+
+  @override
+  String get notifyStreak50Title => '👑 50 nap egymás után!';
+
+  @override
+  String get notifyStreak50Body => 'Az Istennel való járásod mélyül';
+
+  @override
+  String get notifyStreak100Title => '🎉 100 nap egymás után!';
+
+  @override
+  String get notifyStreak100Body => 'Imaharcossá váltál!';
+
+  @override
+  String get notifyStreak365Title => '✝️ Egy egész év!';
+
+  @override
+  String get notifyStreak365Body => 'Csodálatos hitbeli utazás!';
+
+  @override
+  String get notifyAfternoonNudgeTitle => '☀️ Imádkoztál már ma?';
+
+  @override
+  String get notifyAfternoonNudgeBody =>
+      'Egy rövid ima megváltoztathatja a napot';
+
+  @override
+  String get notifyChannelName => 'Ima emlékeztetők';
+
+  @override
+  String get notifyChannelDescription =>
+      'Reggeli ima, esti hála és egyéb emlékeztetők';
 }

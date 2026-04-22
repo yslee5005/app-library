@@ -1015,4 +1015,148 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String get qtCoachingLevelExpert => '🌳 Chuyên gia';
+
+  @override
+  String get notifyMorning1Title => '🙏 Đã đến giờ cầu nguyện';
+
+  @override
+  String notifyMorning1Body(String name) {
+    return '$name, hãy trò chuyện với Chúa hôm nay';
+  }
+
+  @override
+  String get notifyMorning2Title => '🌅 Một buổi sáng mới đã đến';
+
+  @override
+  String notifyMorning2Body(String name) {
+    return '$name, hãy bắt đầu ngày mới với lòng biết ơn';
+  }
+
+  @override
+  String get notifyMorning3Title => '✨ Ân điển hôm nay';
+
+  @override
+  String notifyMorning3Body(String name) {
+    return '$name, hãy đón nhận ân điển Chúa đã chuẩn bị';
+  }
+
+  @override
+  String get notifyMorning4Title => '🕊️ Buổi sáng bình an';
+
+  @override
+  String notifyMorning4Body(String name) {
+    return '$name, hãy lấp đầy lòng bằng bình an qua cầu nguyện';
+  }
+
+  @override
+  String get notifyMorning5Title => '📖 Cùng với Lời Chúa';
+
+  @override
+  String notifyMorning5Body(String name) {
+    return '$name, hãy lắng nghe tiếng Chúa hôm nay';
+  }
+
+  @override
+  String get notifyMorning6Title => '🌿 Thời gian nghỉ ngơi';
+
+  @override
+  String notifyMorning6Body(String name) {
+    return '$name, hãy dừng lại một chút và cầu nguyện';
+  }
+
+  @override
+  String get notifyMorning7Title => '💫 Hôm nay cũng vậy';
+
+  @override
+  String notifyMorning7Body(String name) {
+    return '$name, một ngày bắt đầu bằng cầu nguyện thật khác biệt';
+  }
+
+  @override
+  String get notifyEvening1Title => '✨ Biết ơn ngày hôm nay';
+
+  @override
+  String get notifyEvening1Body => 'Nhìn lại ngày hôm nay và dâng lời cảm tạ';
+
+  @override
+  String get notifyEvening2Title => '🌙 Khép lại ngày hôm nay';
+
+  @override
+  String get notifyEvening2Body =>
+      'Hãy bày tỏ lòng biết ơn hôm nay qua lời cầu nguyện';
+
+  @override
+  String get notifyEvening3Title => '🙏 Cầu nguyện buổi tối';
+
+  @override
+  String get notifyEvening3Body => 'Cuối ngày, hãy dâng lời tạ ơn lên Chúa';
+
+  @override
+  String get notifyEvening4Title => '🌟 Đếm lại những ơn phước hôm nay';
+
+  @override
+  String get notifyEvening4Body =>
+      'Nếu có điều để biết ơn, hãy chia sẻ trong lời cầu nguyện';
+
+  @override
+  String get notifyStreak3Title => '🌱 3 ngày liên tiếp!';
+
+  @override
+  String get notifyStreak3Body => 'Thói quen cầu nguyện của bạn đã bắt đầu';
+
+  @override
+  String get notifyStreak7Title => '🌿 Cả một tuần!';
+
+  @override
+  String get notifyStreak7Body => 'Cầu nguyện đang trở thành thói quen';
+
+  @override
+  String get notifyStreak14Title => '🌳 2 tuần liên tiếp!';
+
+  @override
+  String get notifyStreak14Body => 'Sự trưởng thành tuyệt vời!';
+
+  @override
+  String get notifyStreak21Title => '🌻 3 tuần liên tiếp!';
+
+  @override
+  String get notifyStreak21Body => 'Đóa hoa cầu nguyện đang nở';
+
+  @override
+  String get notifyStreak30Title => '🏆 Trọn một tháng!';
+
+  @override
+  String get notifyStreak30Body => 'Lời cầu nguyện của bạn đang tỏa sáng';
+
+  @override
+  String get notifyStreak50Title => '👑 50 ngày liên tiếp!';
+
+  @override
+  String get notifyStreak50Body => 'Hành trình với Chúa của bạn ngày càng sâu';
+
+  @override
+  String get notifyStreak100Title => '🎉 100 ngày liên tiếp!';
+
+  @override
+  String get notifyStreak100Body => 'Bạn đã trở thành chiến sĩ cầu nguyện!';
+
+  @override
+  String get notifyStreak365Title => '✝️ Trọn một năm!';
+
+  @override
+  String get notifyStreak365Body => 'Một hành trình đức tin tuyệt vời!';
+
+  @override
+  String get notifyAfternoonNudgeTitle => '☀️ Hôm nay bạn đã cầu nguyện chưa?';
+
+  @override
+  String get notifyAfternoonNudgeBody =>
+      'Một lời cầu nguyện ngắn có thể thay đổi cả ngày';
+
+  @override
+  String get notifyChannelName => 'Nhắc nhở cầu nguyện';
+
+  @override
+  String get notifyChannelDescription =>
+      'Cầu nguyện buổi sáng, tạ ơn buổi tối và các nhắc nhở cầu nguyện khác';
 }

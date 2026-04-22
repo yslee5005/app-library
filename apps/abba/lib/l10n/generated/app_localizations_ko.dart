@@ -990,4 +990,144 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get qtCoachingLevelExpert => '🌳 전문가';
+
+  @override
+  String get notifyMorning1Title => '🙏 기도할 시간이에요';
+
+  @override
+  String notifyMorning1Body(String name) {
+    return '$name님, 오늘도 하나님과 대화해보세요';
+  }
+
+  @override
+  String get notifyMorning2Title => '🌅 새 아침이 밝았어요';
+
+  @override
+  String notifyMorning2Body(String name) {
+    return '$name님, 감사로 하루를 시작해보세요';
+  }
+
+  @override
+  String get notifyMorning3Title => '✨ 오늘의 은혜';
+
+  @override
+  String notifyMorning3Body(String name) {
+    return '$name님, 하나님이 준비하신 은혜를 만나보세요';
+  }
+
+  @override
+  String get notifyMorning4Title => '🕊️ 평안한 아침';
+
+  @override
+  String notifyMorning4Body(String name) {
+    return '$name님, 기도로 마음에 평안을 채워보세요';
+  }
+
+  @override
+  String get notifyMorning5Title => '📖 말씀과 함께';
+
+  @override
+  String notifyMorning5Body(String name) {
+    return '$name님, 오늘 하나님의 음성을 들어보세요';
+  }
+
+  @override
+  String get notifyMorning6Title => '🌿 쉼의 시간';
+
+  @override
+  String notifyMorning6Body(String name) {
+    return '$name님, 잠시 멈추고 기도해보세요';
+  }
+
+  @override
+  String get notifyMorning7Title => '💫 오늘 하루도';
+
+  @override
+  String notifyMorning7Body(String name) {
+    return '$name님, 기도로 시작하는 하루가 달라요';
+  }
+
+  @override
+  String get notifyEvening1Title => '✨ 오늘 하루 감사';
+
+  @override
+  String get notifyEvening1Body => '오늘 하루를 돌아보며 감사 기도를 드려보세요';
+
+  @override
+  String get notifyEvening2Title => '🌙 하루를 마무리하며';
+
+  @override
+  String get notifyEvening2Body => '오늘의 감사를 기도로 표현해보세요';
+
+  @override
+  String get notifyEvening3Title => '🙏 저녁 기도';
+
+  @override
+  String get notifyEvening3Body => '하루의 끝, 하나님께 감사를 올려드려요';
+
+  @override
+  String get notifyEvening4Title => '🌟 오늘의 은혜를 세며';
+
+  @override
+  String get notifyEvening4Body => '감사할 것이 있다면 기도로 나눠보세요';
+
+  @override
+  String get notifyStreak3Title => '🌱 3일 연속!';
+
+  @override
+  String get notifyStreak3Body => '기도 습관이 시작됐어요';
+
+  @override
+  String get notifyStreak7Title => '🌿 일주일 연속!';
+
+  @override
+  String get notifyStreak7Body => '기도가 습관이 되고 있어요';
+
+  @override
+  String get notifyStreak14Title => '🌳 2주 연속!';
+
+  @override
+  String get notifyStreak14Body => '놀라운 성장이에요';
+
+  @override
+  String get notifyStreak21Title => '🌻 3주 연속!';
+
+  @override
+  String get notifyStreak21Body => '기도의 꽃이 피고 있어요';
+
+  @override
+  String get notifyStreak30Title => '🏆 한 달 연속!';
+
+  @override
+  String get notifyStreak30Body => '당신의 기도가 빛나고 있어요';
+
+  @override
+  String get notifyStreak50Title => '👑 50일 연속!';
+
+  @override
+  String get notifyStreak50Body => '하나님과의 동행이 깊어지고 있어요';
+
+  @override
+  String get notifyStreak100Title => '🎉 100일 연속!';
+
+  @override
+  String get notifyStreak100Body => '기도의 전사가 되었어요!';
+
+  @override
+  String get notifyStreak365Title => '✝️ 1년 연속!';
+
+  @override
+  String get notifyStreak365Body => '놀라운 믿음의 여정이에요!';
+
+  @override
+  String get notifyAfternoonNudgeTitle => '☀️ 오늘 기도는 하셨나요?';
+
+  @override
+  String get notifyAfternoonNudgeBody => '잠깐의 기도가 하루를 바꿔요';
+
+  @override
+  String get notifyChannelName => '기도 알림';
+
+  @override
+  String get notifyChannelDescription => '아침 기도, 저녁 감사 등 기도 알림';
 }

@@ -1015,4 +1015,148 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get qtCoachingLevelExpert => '🌳 Especialista';
+
+  @override
+  String get notifyMorning1Title => '🙏 Hora de orar';
+
+  @override
+  String notifyMorning1Body(String name) {
+    return '$name, converse com Deus hoje também';
+  }
+
+  @override
+  String get notifyMorning2Title => '🌅 Uma nova manhã chegou';
+
+  @override
+  String notifyMorning2Body(String name) {
+    return '$name, comece o dia com gratidão';
+  }
+
+  @override
+  String get notifyMorning3Title => '✨ A graça de hoje';
+
+  @override
+  String notifyMorning3Body(String name) {
+    return '$name, encontre a graça que Deus preparou';
+  }
+
+  @override
+  String get notifyMorning4Title => '🕊️ Manhã de paz';
+
+  @override
+  String notifyMorning4Body(String name) {
+    return '$name, encha o coração de paz pela oração';
+  }
+
+  @override
+  String get notifyMorning5Title => '📖 Com a Palavra';
+
+  @override
+  String notifyMorning5Body(String name) {
+    return '$name, escute a voz de Deus hoje';
+  }
+
+  @override
+  String get notifyMorning6Title => '🌿 Hora de descansar';
+
+  @override
+  String notifyMorning6Body(String name) {
+    return '$name, pare um instante e ore';
+  }
+
+  @override
+  String get notifyMorning7Title => '💫 Hoje também';
+
+  @override
+  String notifyMorning7Body(String name) {
+    return '$name, um dia que começa com oração é diferente';
+  }
+
+  @override
+  String get notifyEvening1Title => '✨ Grato por hoje';
+
+  @override
+  String get notifyEvening1Body =>
+      'Recapitule o dia e ofereça uma oração de gratidão';
+
+  @override
+  String get notifyEvening2Title => '🌙 Encerrando o dia';
+
+  @override
+  String get notifyEvening2Body => 'Expresse a gratidão de hoje em oração';
+
+  @override
+  String get notifyEvening3Title => '🙏 Oração da noite';
+
+  @override
+  String get notifyEvening3Body => 'No fim do dia, agradeça a Deus';
+
+  @override
+  String get notifyEvening4Title => '🌟 Contando as bênçãos de hoje';
+
+  @override
+  String get notifyEvening4Body =>
+      'Se tem algo a agradecer, compartilhe em oração';
+
+  @override
+  String get notifyStreak3Title => '🌱 3 dias seguidos!';
+
+  @override
+  String get notifyStreak3Body => 'Seu hábito de oração começou';
+
+  @override
+  String get notifyStreak7Title => '🌿 Uma semana seguida!';
+
+  @override
+  String get notifyStreak7Body => 'A oração está virando um hábito';
+
+  @override
+  String get notifyStreak14Title => '🌳 2 semanas seguidas!';
+
+  @override
+  String get notifyStreak14Body => 'Que crescimento incrível!';
+
+  @override
+  String get notifyStreak21Title => '🌻 3 semanas seguidas!';
+
+  @override
+  String get notifyStreak21Body => 'A flor da oração está desabrochando';
+
+  @override
+  String get notifyStreak30Title => '🏆 Um mês inteiro!';
+
+  @override
+  String get notifyStreak30Body => 'Sua oração está brilhando';
+
+  @override
+  String get notifyStreak50Title => '👑 50 dias seguidos!';
+
+  @override
+  String get notifyStreak50Body =>
+      'Sua caminhada com Deus está se aprofundando';
+
+  @override
+  String get notifyStreak100Title => '🎉 100 dias seguidos!';
+
+  @override
+  String get notifyStreak100Body => 'Você se tornou um guerreiro de oração!';
+
+  @override
+  String get notifyStreak365Title => '✝️ Um ano inteiro!';
+
+  @override
+  String get notifyStreak365Body => 'Que jornada de fé incrível!';
+
+  @override
+  String get notifyAfternoonNudgeTitle => '☀️ Você já orou hoje?';
+
+  @override
+  String get notifyAfternoonNudgeBody => 'Uma breve oração pode mudar o dia';
+
+  @override
+  String get notifyChannelName => 'Lembretes de oração';
+
+  @override
+  String get notifyChannelDescription =>
+      'Oração da manhã, gratidão noturna e outros lembretes';
 }

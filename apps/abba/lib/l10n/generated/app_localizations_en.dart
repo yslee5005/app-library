@@ -1012,4 +1012,147 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get qtCoachingLevelExpert => '🌳 Expert';
+
+  @override
+  String get notifyMorning1Title => '🙏 Time to pray';
+
+  @override
+  String notifyMorning1Body(String name) {
+    return '$name, talk with God today as well';
+  }
+
+  @override
+  String get notifyMorning2Title => '🌅 A new morning has come';
+
+  @override
+  String notifyMorning2Body(String name) {
+    return '$name, start the day with gratitude';
+  }
+
+  @override
+  String get notifyMorning3Title => '✨ Today\'s grace';
+
+  @override
+  String notifyMorning3Body(String name) {
+    return '$name, meet the grace God has prepared';
+  }
+
+  @override
+  String get notifyMorning4Title => '🕊️ Peaceful morning';
+
+  @override
+  String notifyMorning4Body(String name) {
+    return '$name, fill your heart with peace through prayer';
+  }
+
+  @override
+  String get notifyMorning5Title => '📖 With the Word';
+
+  @override
+  String notifyMorning5Body(String name) {
+    return '$name, listen to God\'s voice today';
+  }
+
+  @override
+  String get notifyMorning6Title => '🌿 Time to rest';
+
+  @override
+  String notifyMorning6Body(String name) {
+    return '$name, pause for a moment and pray';
+  }
+
+  @override
+  String get notifyMorning7Title => '💫 Today as well';
+
+  @override
+  String notifyMorning7Body(String name) {
+    return '$name, a day that begins with prayer is different';
+  }
+
+  @override
+  String get notifyEvening1Title => '✨ Thankful for today';
+
+  @override
+  String get notifyEvening1Body =>
+      'Look back on today and offer a prayer of thanks';
+
+  @override
+  String get notifyEvening2Title => '🌙 Wrapping up the day';
+
+  @override
+  String get notifyEvening2Body => 'Express today\'s gratitude through prayer';
+
+  @override
+  String get notifyEvening3Title => '🙏 Evening prayer';
+
+  @override
+  String get notifyEvening3Body => 'At the end of the day, give thanks to God';
+
+  @override
+  String get notifyEvening4Title => '🌟 Counting today\'s blessings';
+
+  @override
+  String get notifyEvening4Body =>
+      'If you have something to be thankful for, share it in prayer';
+
+  @override
+  String get notifyStreak3Title => '🌱 3 days in a row!';
+
+  @override
+  String get notifyStreak3Body => 'Your prayer habit has begun';
+
+  @override
+  String get notifyStreak7Title => '🌿 A full week!';
+
+  @override
+  String get notifyStreak7Body => 'Prayer is becoming a habit';
+
+  @override
+  String get notifyStreak14Title => '🌳 2 weeks in a row!';
+
+  @override
+  String get notifyStreak14Body => 'Amazing growth!';
+
+  @override
+  String get notifyStreak21Title => '🌻 3 weeks in a row!';
+
+  @override
+  String get notifyStreak21Body => 'The flower of prayer is blooming';
+
+  @override
+  String get notifyStreak30Title => '🏆 A full month!';
+
+  @override
+  String get notifyStreak30Body => 'Your prayer is shining';
+
+  @override
+  String get notifyStreak50Title => '👑 50 days in a row!';
+
+  @override
+  String get notifyStreak50Body => 'Your walk with God is deepening';
+
+  @override
+  String get notifyStreak100Title => '🎉 100 days in a row!';
+
+  @override
+  String get notifyStreak100Body => 'You\'ve become a prayer warrior!';
+
+  @override
+  String get notifyStreak365Title => '✝️ A full year!';
+
+  @override
+  String get notifyStreak365Body => 'What an amazing journey of faith!';
+
+  @override
+  String get notifyAfternoonNudgeTitle => '☀️ Have you prayed today?';
+
+  @override
+  String get notifyAfternoonNudgeBody => 'A brief prayer can change the day';
+
+  @override
+  String get notifyChannelName => 'Prayer Reminders';
+
+  @override
+  String get notifyChannelDescription =>
+      'Morning prayer, evening gratitude, and other prayer reminders';
 }
