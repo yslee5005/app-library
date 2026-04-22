@@ -1154,4 +1154,65 @@ class AppLocalizationsSw extends AppLocalizations {
   @override
   String get notifyChannelDescription =>
       'Sala ya asubuhi, shukrani za jioni, na vikumbusho vingine';
+
+  @override
+  String get milestoneFirstPrayerTitle => 'Sala ya kwanza!';
+
+  @override
+  String get milestoneFirstPrayerDesc =>
+      'Safari yako ya sala imeanza. Mungu anasikiliza.';
+
+  @override
+  String get milestoneSevenDayStreakTitle => 'Siku 7 za sala!';
+
+  @override
+  String get milestoneSevenDayStreakDesc =>
+      'Wiki ya sala ya uaminifu. Bustani yako inakua!';
+
+  @override
+  String get milestoneThirtyDayStreakTitle => 'Siku 30!';
+
+  @override
+  String get milestoneThirtyDayStreakDesc =>
+      'Bustani yako imechanua kuwa shamba la maua!';
+
+  @override
+  String get milestoneHundredPrayersTitle => 'Sala ya 100!';
+
+  @override
+  String get milestoneHundredPrayersDesc =>
+      'Mazungumzo mia moja na Mungu. Umekita mizizi kwa kina.';
+
+  @override
+  String get homeFirstPrayerPrompt => 'Anza sala yako ya kwanza';
+
+  @override
+  String get homeFirstQtPrompt => 'Anza QT yako ya kwanza';
+
+  @override
+  String homeActivityPrompt(String activityName) {
+    return 'Leo pia fanya $activityName';
+  }
+
+  @override
+  String homeStreakInProgress(int count, String activityName) {
+    return 'Siku ya $count mfululizo wa $activityName';
+  }
+
+  @override
+  String homeDaysSinceLastActivity(int days, String activityName) {
+    return 'Ni siku $days tangu $activityName ya mwisho';
+  }
+
+  @override
+  String get homeActivityPrayer => 'sala';
+
+  @override
+  String get homeActivityQt => 'QT';
+
+  @override
+  String get prayerPlayerLoading => 'Inapakia...';
+
+  @override
+  String get heatmapNoPrayer => 'Hakuna sala';
 }

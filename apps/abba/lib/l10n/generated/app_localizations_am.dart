@@ -1132,4 +1132,63 @@ class AppLocalizationsAm extends AppLocalizations {
   @override
   String get notifyChannelDescription =>
       'የጠዋት ጸሎት፣ የማታ ምስጋና እና ሌሎች የጸሎት ማስታወሻዎች';
+
+  @override
+  String get milestoneFirstPrayerTitle => 'የመጀመሪያ ጸሎት!';
+
+  @override
+  String get milestoneFirstPrayerDesc => 'የጸሎት ጉዞዎ ተጀምሯል። እግዚአብሔር እያዳመጠ ነው።';
+
+  @override
+  String get milestoneSevenDayStreakTitle => '7 ቀናት ጸሎት!';
+
+  @override
+  String get milestoneSevenDayStreakDesc =>
+      'የታማኝ ጸሎት ሳምንት። የእርስዎ የአትክልት ቦታ እያደገ ነው!';
+
+  @override
+  String get milestoneThirtyDayStreakTitle => '30 ቀናት!';
+
+  @override
+  String get milestoneThirtyDayStreakDesc => 'የእርስዎ የአትክልት ቦታ ወደ የአበባ ሜዳ አብቧል!';
+
+  @override
+  String get milestoneHundredPrayersTitle => '100ኛ ጸሎት!';
+
+  @override
+  String get milestoneHundredPrayersDesc =>
+      'ከእግዚአብሔር ጋር መቶ ውይይቶች። በጥልቀት ስር ሰድዷል።';
+
+  @override
+  String get homeFirstPrayerPrompt => 'የመጀመሪያ ጸሎትዎን ይጀምሩ';
+
+  @override
+  String get homeFirstQtPrompt => 'የመጀመሪያ QT ይጀምሩ';
+
+  @override
+  String homeActivityPrompt(String activityName) {
+    return 'ዛሬም $activityName ያድርጉ';
+  }
+
+  @override
+  String homeStreakInProgress(int count, String activityName) {
+    return 'ቀን $count ቀጣይ $activityName';
+  }
+
+  @override
+  String homeDaysSinceLastActivity(int days, String activityName) {
+    return 'ከመጨረሻው $activityName ጀምሮ $days ቀናት አልፈዋል';
+  }
+
+  @override
+  String get homeActivityPrayer => 'ጸሎት';
+
+  @override
+  String get homeActivityQt => 'QT';
+
+  @override
+  String get prayerPlayerLoading => 'በመጫን ላይ...';
+
+  @override
+  String get heatmapNoPrayer => 'ጸሎት የለም';
 }

@@ -24,9 +24,9 @@ class RelatedKnowledgeCard extends StatelessWidget {
 
   String get _summary {
     final parts = <String>[];
-    if (knowledge.originalWord != null) parts.add('원어');
-    parts.add('역사');
-    if (knowledge.crossReferences.isNotEmpty) parts.add('교차참조');
+    if (knowledge.originalWord != null) parts.add(originalWordLabel);
+    parts.add(historicalContextLabel);
+    if (knowledge.crossReferences.isNotEmpty) parts.add(crossReferencesLabel);
     return parts.join(' · ');
   }
 

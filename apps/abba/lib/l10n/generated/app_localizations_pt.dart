@@ -1159,4 +1159,65 @@ class AppLocalizationsPt extends AppLocalizations {
   @override
   String get notifyChannelDescription =>
       'Oração da manhã, gratidão noturna e outros lembretes';
+
+  @override
+  String get milestoneFirstPrayerTitle => 'Primeira oração!';
+
+  @override
+  String get milestoneFirstPrayerDesc =>
+      'Sua jornada de oração começou. Deus está ouvindo.';
+
+  @override
+  String get milestoneSevenDayStreakTitle => '7 dias de oração!';
+
+  @override
+  String get milestoneSevenDayStreakDesc =>
+      'Uma semana de oração fiel. Seu jardim está crescendo!';
+
+  @override
+  String get milestoneThirtyDayStreakTitle => '30 dias!';
+
+  @override
+  String get milestoneThirtyDayStreakDesc =>
+      'Seu jardim floresceu em um campo de flores!';
+
+  @override
+  String get milestoneHundredPrayersTitle => '100ª oração!';
+
+  @override
+  String get milestoneHundredPrayersDesc =>
+      'Cem conversas com Deus. Você está profundamente enraizado.';
+
+  @override
+  String get homeFirstPrayerPrompt => 'Comece sua primeira oração';
+
+  @override
+  String get homeFirstQtPrompt => 'Comece seu primeiro QT';
+
+  @override
+  String homeActivityPrompt(String activityName) {
+    return 'Hoje também faça $activityName';
+  }
+
+  @override
+  String homeStreakInProgress(int count, String activityName) {
+    return 'Dia $count contínuo de $activityName';
+  }
+
+  @override
+  String homeDaysSinceLastActivity(int days, String activityName) {
+    return 'Já se passaram $days dias desde seu último $activityName';
+  }
+
+  @override
+  String get homeActivityPrayer => 'oração';
+
+  @override
+  String get homeActivityQt => 'QT';
+
+  @override
+  String get prayerPlayerLoading => 'Carregando...';
+
+  @override
+  String get heatmapNoPrayer => 'Sem oração';
 }

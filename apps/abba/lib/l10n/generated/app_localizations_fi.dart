@@ -1154,4 +1154,65 @@ class AppLocalizationsFi extends AppLocalizations {
   @override
   String get notifyChannelDescription =>
       'Aamurukous, iltakiitollisuus ja muut rukousmuistutukset';
+
+  @override
+  String get milestoneFirstPrayerTitle => 'Ensimmäinen rukous!';
+
+  @override
+  String get milestoneFirstPrayerDesc =>
+      'Rukousmatkasi on alkanut. Jumala kuuntelee.';
+
+  @override
+  String get milestoneSevenDayStreakTitle => '7 päivää rukousta!';
+
+  @override
+  String get milestoneSevenDayStreakDesc =>
+      'Viikko uskollista rukousta. Puutarhasi kasvaa!';
+
+  @override
+  String get milestoneThirtyDayStreakTitle => '30 päivää!';
+
+  @override
+  String get milestoneThirtyDayStreakDesc =>
+      'Puutarhasi on kukkinut kukkakentäksi!';
+
+  @override
+  String get milestoneHundredPrayersTitle => '100. rukous!';
+
+  @override
+  String get milestoneHundredPrayersDesc =>
+      'Sata keskustelua Jumalan kanssa. Olet juurtunut syvälle.';
+
+  @override
+  String get homeFirstPrayerPrompt => 'Aloita ensimmäinen rukouksesi';
+
+  @override
+  String get homeFirstQtPrompt => 'Aloita ensimmäinen QT-hetkesi';
+
+  @override
+  String homeActivityPrompt(String activityName) {
+    return 'Tee $activityName tänäänkin';
+  }
+
+  @override
+  String homeStreakInProgress(int count, String activityName) {
+    return 'Päivä $count jatkuvaa $activityName';
+  }
+
+  @override
+  String homeDaysSinceLastActivity(int days, String activityName) {
+    return 'Edellisestä $activityName on $days päivää';
+  }
+
+  @override
+  String get homeActivityPrayer => 'rukous';
+
+  @override
+  String get homeActivityQt => 'QT';
+
+  @override
+  String get prayerPlayerLoading => 'Ladataan...';
+
+  @override
+  String get heatmapNoPrayer => 'Ei rukousta';
 }

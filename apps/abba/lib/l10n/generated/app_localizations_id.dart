@@ -1163,4 +1163,65 @@ class AppLocalizationsId extends AppLocalizations {
   @override
   String get notifyChannelDescription =>
       'Doa pagi, syukur malam, dan pengingat doa lainnya';
+
+  @override
+  String get milestoneFirstPrayerTitle => 'Doa pertama!';
+
+  @override
+  String get milestoneFirstPrayerDesc =>
+      'Perjalanan doamu telah dimulai. Tuhan sedang mendengarkan.';
+
+  @override
+  String get milestoneSevenDayStreakTitle => '7 hari berdoa!';
+
+  @override
+  String get milestoneSevenDayStreakDesc =>
+      'Seminggu doa yang setia. Tamanmu bertumbuh!';
+
+  @override
+  String get milestoneThirtyDayStreakTitle => '30 hari!';
+
+  @override
+  String get milestoneThirtyDayStreakDesc =>
+      'Tamanmu telah mekar menjadi ladang bunga!';
+
+  @override
+  String get milestoneHundredPrayersTitle => 'Doa ke-100!';
+
+  @override
+  String get milestoneHundredPrayersDesc =>
+      'Seratus percakapan dengan Tuhan. Kamu berakar dalam.';
+
+  @override
+  String get homeFirstPrayerPrompt => 'Mulai doa pertamamu';
+
+  @override
+  String get homeFirstQtPrompt => 'Mulai QT pertamamu';
+
+  @override
+  String homeActivityPrompt(String activityName) {
+    return 'Hari ini juga $activityName';
+  }
+
+  @override
+  String homeStreakInProgress(int count, String activityName) {
+    return 'Hari ke-$count $activityName berturut-turut';
+  }
+
+  @override
+  String homeDaysSinceLastActivity(int days, String activityName) {
+    return 'Sudah $days hari sejak $activityName terakhir';
+  }
+
+  @override
+  String get homeActivityPrayer => 'doa';
+
+  @override
+  String get homeActivityQt => 'QT';
+
+  @override
+  String get prayerPlayerLoading => 'Memuat...';
+
+  @override
+  String get heatmapNoPrayer => 'Tidak ada doa';
 }

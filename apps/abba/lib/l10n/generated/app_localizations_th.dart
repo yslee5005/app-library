@@ -1145,4 +1145,65 @@ class AppLocalizationsTh extends AppLocalizations {
   @override
   String get notifyChannelDescription =>
       'อธิษฐานตอนเช้า ขอบพระคุณตอนเย็น และการแจ้งเตือนอื่นๆ';
+
+  @override
+  String get milestoneFirstPrayerTitle => 'การอธิษฐานครั้งแรก!';
+
+  @override
+  String get milestoneFirstPrayerDesc =>
+      'การเดินทางแห่งการอธิษฐานของคุณได้เริ่มต้นแล้ว พระเจ้ากำลังฟังอยู่';
+
+  @override
+  String get milestoneSevenDayStreakTitle => 'อธิษฐาน 7 วันติดต่อกัน!';
+
+  @override
+  String get milestoneSevenDayStreakDesc =>
+      'หนึ่งสัปดาห์ของการอธิษฐานที่สัตย์ซื่อ สวนของคุณกำลังเติบโต!';
+
+  @override
+  String get milestoneThirtyDayStreakTitle => '30 วัน!';
+
+  @override
+  String get milestoneThirtyDayStreakDesc =>
+      'สวนของคุณได้เบ่งบานเป็นทุ่งดอกไม้!';
+
+  @override
+  String get milestoneHundredPrayersTitle => 'การอธิษฐานครั้งที่ 100!';
+
+  @override
+  String get milestoneHundredPrayersDesc =>
+      'การสนทนากับพระเจ้าร้อยครั้ง คุณหยั่งรากลึกแล้ว';
+
+  @override
+  String get homeFirstPrayerPrompt => 'เริ่มการอธิษฐานครั้งแรกของคุณ';
+
+  @override
+  String get homeFirstQtPrompt => 'เริ่ม QT ครั้งแรกของคุณ';
+
+  @override
+  String homeActivityPrompt(String activityName) {
+    return 'วันนี้ก็ $activityName ด้วย';
+  }
+
+  @override
+  String homeStreakInProgress(int count, String activityName) {
+    return '$activityName ต่อเนื่องวันที่ $count';
+  }
+
+  @override
+  String homeDaysSinceLastActivity(int days, String activityName) {
+    return 'ผ่านไป $days วันนับจาก $activityName ครั้งล่าสุด';
+  }
+
+  @override
+  String get homeActivityPrayer => 'การอธิษฐาน';
+
+  @override
+  String get homeActivityQt => 'QT';
+
+  @override
+  String get prayerPlayerLoading => 'กำลังโหลด...';
+
+  @override
+  String get heatmapNoPrayer => 'ไม่มีการอธิษฐาน';
 }

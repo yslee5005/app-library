@@ -2,6 +2,7 @@ import 'package:app_lib_audio_recorder/audio_recorder.dart';
 import 'package:app_lib_logging/logging.dart';
 import 'package:flutter/material.dart';
 
+import '../l10n/generated/app_localizations.dart';
 import '../theme/abba_theme.dart';
 
 /// Reusable audio player with waveform visualization.
@@ -84,7 +85,7 @@ class _PrayerPlayerState extends State<PrayerPlayer> {
             ),
             const SizedBox(width: AbbaSpacing.sm),
             Text(
-              '로딩 중...',
+              AppLocalizations.of(context)!.prayerPlayerLoading,
               style: AbbaTypography.caption.copyWith(color: AbbaColors.muted),
             ),
           ],

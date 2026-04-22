@@ -2287,6 +2287,108 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Morning prayer, evening gratitude, and other prayer reminders'**
   String get notifyChannelDescription;
+
+  /// No description provided for @milestoneFirstPrayerTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'First Prayer!'**
+  String get milestoneFirstPrayerTitle;
+
+  /// No description provided for @milestoneFirstPrayerDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Your prayer journey has begun. God is listening.'**
+  String get milestoneFirstPrayerDesc;
+
+  /// No description provided for @milestoneSevenDayStreakTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'7 Days of Prayer!'**
+  String get milestoneSevenDayStreakTitle;
+
+  /// No description provided for @milestoneSevenDayStreakDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'A week of faithful prayer. Your garden is growing!'**
+  String get milestoneSevenDayStreakDesc;
+
+  /// No description provided for @milestoneThirtyDayStreakTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'30 Days!'**
+  String get milestoneThirtyDayStreakTitle;
+
+  /// No description provided for @milestoneThirtyDayStreakDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Your garden has blossomed into a flower field!'**
+  String get milestoneThirtyDayStreakDesc;
+
+  /// No description provided for @milestoneHundredPrayersTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'100th Prayer!'**
+  String get milestoneHundredPrayersTitle;
+
+  /// No description provided for @milestoneHundredPrayersDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'A hundred conversations with God. You are deeply rooted.'**
+  String get milestoneHundredPrayersDesc;
+
+  /// No description provided for @homeFirstPrayerPrompt.
+  ///
+  /// In en, this message translates to:
+  /// **'Start your first prayer'**
+  String get homeFirstPrayerPrompt;
+
+  /// No description provided for @homeFirstQtPrompt.
+  ///
+  /// In en, this message translates to:
+  /// **'Start your first QT'**
+  String get homeFirstQtPrompt;
+
+  /// No description provided for @homeActivityPrompt.
+  ///
+  /// In en, this message translates to:
+  /// **'Pray {activityName} today as well'**
+  String homeActivityPrompt(String activityName);
+
+  /// No description provided for @homeStreakInProgress.
+  ///
+  /// In en, this message translates to:
+  /// **'Day {count} of continuous {activityName}'**
+  String homeStreakInProgress(int count, String activityName);
+
+  /// No description provided for @homeDaysSinceLastActivity.
+  ///
+  /// In en, this message translates to:
+  /// **'It\'s been {days} days since your last {activityName}'**
+  String homeDaysSinceLastActivity(int days, String activityName);
+
+  /// No description provided for @homeActivityPrayer.
+  ///
+  /// In en, this message translates to:
+  /// **'prayer'**
+  String get homeActivityPrayer;
+
+  /// No description provided for @homeActivityQt.
+  ///
+  /// In en, this message translates to:
+  /// **'QT'**
+  String get homeActivityQt;
+
+  /// No description provided for @prayerPlayerLoading.
+  ///
+  /// In en, this message translates to:
+  /// **'Loading...'**
+  String get prayerPlayerLoading;
+
+  /// No description provided for @heatmapNoPrayer.
+  ///
+  /// In en, this message translates to:
+  /// **'No prayer'**
+  String get heatmapNoPrayer;
 }
 
 class _AppLocalizationsDelegate

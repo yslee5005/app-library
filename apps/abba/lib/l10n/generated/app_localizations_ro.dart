@@ -1164,4 +1164,65 @@ class AppLocalizationsRo extends AppLocalizations {
   @override
   String get notifyChannelDescription =>
       'Rugăciune de dimineață, mulțumire de seară și alte memento-uri';
+
+  @override
+  String get milestoneFirstPrayerTitle => 'Prima rugăciune!';
+
+  @override
+  String get milestoneFirstPrayerDesc =>
+      'Călătoria ta de rugăciune a început. Dumnezeu ascultă.';
+
+  @override
+  String get milestoneSevenDayStreakTitle => '7 zile de rugăciune!';
+
+  @override
+  String get milestoneSevenDayStreakDesc =>
+      'O săptămână de rugăciune fidelă. Grădina ta crește!';
+
+  @override
+  String get milestoneThirtyDayStreakTitle => '30 de zile!';
+
+  @override
+  String get milestoneThirtyDayStreakDesc =>
+      'Grădina ta a înflorit într-un câmp de flori!';
+
+  @override
+  String get milestoneHundredPrayersTitle => 'A 100-a rugăciune!';
+
+  @override
+  String get milestoneHundredPrayersDesc =>
+      'O sută de conversații cu Dumnezeu. Ești adânc înrădăcinat.';
+
+  @override
+  String get homeFirstPrayerPrompt => 'Începe prima ta rugăciune';
+
+  @override
+  String get homeFirstQtPrompt => 'Începe primul tău QT';
+
+  @override
+  String homeActivityPrompt(String activityName) {
+    return 'Fă $activityName și astăzi';
+  }
+
+  @override
+  String homeStreakInProgress(int count, String activityName) {
+    return 'Ziua $count continuă de $activityName';
+  }
+
+  @override
+  String homeDaysSinceLastActivity(int days, String activityName) {
+    return 'Au trecut $days zile de la ultimul $activityName';
+  }
+
+  @override
+  String get homeActivityPrayer => 'rugăciune';
+
+  @override
+  String get homeActivityQt => 'QT';
+
+  @override
+  String get prayerPlayerLoading => 'Se încarcă...';
+
+  @override
+  String get heatmapNoPrayer => 'Nicio rugăciune';
 }

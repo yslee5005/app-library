@@ -1168,4 +1168,64 @@ class AppLocalizationsMy extends AppLocalizations {
   @override
   String get notifyChannelDescription =>
       'နံနက်ဆုတောင်းခြင်း၊ ညနေကျေးဇူးတင်ခြင်းနှင့် အခြားဆုတောင်းခြင်းသတိပေးချက်များ';
+
+  @override
+  String get milestoneFirstPrayerTitle => 'ပထမဆုံးဆုတောင်း!';
+
+  @override
+  String get milestoneFirstPrayerDesc =>
+      'သင်၏ဆုတောင်းခရီးစတင်ပြီ။ ဘုရားသခင်နားထောင်နေသည်။';
+
+  @override
+  String get milestoneSevenDayStreakTitle => '၇ ရက်ဆုတောင်း!';
+
+  @override
+  String get milestoneSevenDayStreakDesc =>
+      'တစ်ပတ်ကြာသစ္စာရှိသောဆုတောင်း။ သင့်ဥယျာဉ်ကြီးထွားနေပါပြီ!';
+
+  @override
+  String get milestoneThirtyDayStreakTitle => '၃၀ ရက်!';
+
+  @override
+  String get milestoneThirtyDayStreakDesc => 'သင့်ဥယျာဉ်သည် ပန်းခင်းဖြစ်လာပြီ!';
+
+  @override
+  String get milestoneHundredPrayersTitle => 'အကြိမ် ၁၀၀ ဆုတောင်း!';
+
+  @override
+  String get milestoneHundredPrayersDesc =>
+      'ဘုရားသခင်နှင့် စကားပြောဆိုမှု ၁၀၀။ သင်သည် အမြစ်တွယ်ပြီ။';
+
+  @override
+  String get homeFirstPrayerPrompt => 'သင်၏ပထမဆုံးဆုတောင်းကိုစတင်ပါ';
+
+  @override
+  String get homeFirstQtPrompt => 'သင်၏ပထမဆုံး QT ကိုစတင်ပါ';
+
+  @override
+  String homeActivityPrompt(String activityName) {
+    return 'ဒီနေ့လည်း $activityName လုပ်ပါ';
+  }
+
+  @override
+  String homeStreakInProgress(int count, String activityName) {
+    return '$activityName ဆက်တိုက် $count ရက်မြောက်';
+  }
+
+  @override
+  String homeDaysSinceLastActivity(int days, String activityName) {
+    return 'နောက်ဆုံး $activityName ကတည်းက $days ရက်ကြာပြီ';
+  }
+
+  @override
+  String get homeActivityPrayer => 'ဆုတောင်း';
+
+  @override
+  String get homeActivityQt => 'QT';
+
+  @override
+  String get prayerPlayerLoading => 'ဖွင့်နေသည်...';
+
+  @override
+  String get heatmapNoPrayer => 'ဆုတောင်းမရှိ';
 }

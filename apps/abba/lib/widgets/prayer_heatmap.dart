@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:app_lib_logging/logging.dart';
 
+import '../l10n/generated/app_localizations.dart';
 import '../providers/providers.dart';
 import '../theme/abba_theme.dart';
 
@@ -289,7 +290,7 @@ class _PrayerHeatmapState extends State<PrayerHeatmap> {
             )
           else
             Text(
-              '기도 없음',
+              AppLocalizations.of(context)!.heatmapNoPrayer,
               style: AbbaTypography.bodySmall.copyWith(
                 color: AbbaColors.muted,
               ),

@@ -392,6 +392,7 @@ class _HomeViewState extends ConsumerState<HomeView>
   }
 
   Widget _buildStreakStatus(String mode) {
+    final l10n = AppLocalizations.of(context)!;
     final heatmapAsync = ref.watch(prayerHeatmapProvider(mode));
     final streakAsync = ref.watch(streakByModeProvider(mode));
 
@@ -414,31 +415,38 @@ class _HomeViewState extends ConsumerState<HomeView>
     }
 
     final isPrayer = mode == 'prayer';
-    final activityName = isPrayer ? '기도' : 'QT';
+    final activityName =
+        isPrayer ? l10n.homeActivityPrayer : l10n.homeActivityQt;
     String emoji;
     String message;
 
     if (streak > 0 && daysSinceLastActivity <= 1) {
       emoji = '🔥';
-      message = '$streak일째 연속 $activityName 중';
+      message = l10n.homeStreakInProgress(streak, activityName);
     } else if (daysSinceLastActivity == -1 || daysSinceLastActivity > 84) {
       emoji = '🌱';
-      message = isPrayer ? '첫 기도를 시작해보세요' : '첫 QT를 시작해보세요';
+      message = isPrayer ? l10n.homeFirstPrayerPrompt : l10n.homeFirstQtPrompt;
     } else if (daysSinceLastActivity >= 2) {
       emoji = '😴';
-      message = '$daysSinceLastActivity일째 $activityName을 쉬고 있어요';
+      message =
+          l10n.homeDaysSinceLastActivity(daysSinceLastActivity, activityName);
     } else {
       emoji = isPrayer ? '🙏' : '📖';
-      message = '오늘도 $activityName해보세요';
+      message = l10n.homeActivityPrompt(activityName);
     }
 
-    return Text(
-      '$emoji $message',
-      style: AbbaTypography.body.copyWith(
-        color: AbbaColors.warmBrown,
-        fontWeight: FontWeight.w600,
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: AbbaSpacing.md),
+      child: Text(
+        '$emoji $message',
+        style: AbbaTypography.body.copyWith(
+          color: AbbaColors.warmBrown,
+          fontWeight: FontWeight.w600,
+        ),
+        textAlign: TextAlign.center,
+        maxLines: 1,
+        overflow: TextOverflow.ellipsis,
       ),
-      textAlign: TextAlign.center,
     );
   }
 

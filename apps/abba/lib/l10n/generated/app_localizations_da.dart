@@ -1155,4 +1155,65 @@ class AppLocalizationsDa extends AppLocalizations {
   @override
   String get notifyChannelDescription =>
       'Morgenbøn, aftentaknemmelighed og andre bønnepåmindelser';
+
+  @override
+  String get milestoneFirstPrayerTitle => 'Første bøn!';
+
+  @override
+  String get milestoneFirstPrayerDesc =>
+      'Din bønnerejse er begyndt. Gud lytter.';
+
+  @override
+  String get milestoneSevenDayStreakTitle => '7 dages bøn!';
+
+  @override
+  String get milestoneSevenDayStreakDesc =>
+      'En uge med trofast bøn. Din have vokser!';
+
+  @override
+  String get milestoneThirtyDayStreakTitle => '30 dage!';
+
+  @override
+  String get milestoneThirtyDayStreakDesc =>
+      'Din have er blomstret til en blomstereng!';
+
+  @override
+  String get milestoneHundredPrayersTitle => '100. bøn!';
+
+  @override
+  String get milestoneHundredPrayersDesc =>
+      'Hundrede samtaler med Gud. Du har dybe rødder.';
+
+  @override
+  String get homeFirstPrayerPrompt => 'Start din første bøn';
+
+  @override
+  String get homeFirstQtPrompt => 'Start din første QT';
+
+  @override
+  String homeActivityPrompt(String activityName) {
+    return 'Lav $activityName også i dag';
+  }
+
+  @override
+  String homeStreakInProgress(int count, String activityName) {
+    return 'Dag $count fortløbende $activityName';
+  }
+
+  @override
+  String homeDaysSinceLastActivity(int days, String activityName) {
+    return 'Der er gået $days dage siden sidste $activityName';
+  }
+
+  @override
+  String get homeActivityPrayer => 'bøn';
+
+  @override
+  String get homeActivityQt => 'QT';
+
+  @override
+  String get prayerPlayerLoading => 'Indlæser...';
+
+  @override
+  String get heatmapNoPrayer => 'Ingen bøn';
 }

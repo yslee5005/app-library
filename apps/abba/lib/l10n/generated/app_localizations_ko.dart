@@ -1130,4 +1130,61 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get notifyChannelDescription => '아침 기도, 저녁 감사 등 기도 알림';
+
+  @override
+  String get milestoneFirstPrayerTitle => '첫 기도를 올렸습니다!';
+
+  @override
+  String get milestoneFirstPrayerDesc => '기도 여정이 시작되었습니다. 하나님이 듣고 계십니다.';
+
+  @override
+  String get milestoneSevenDayStreakTitle => '7일 연속 기도!';
+
+  @override
+  String get milestoneSevenDayStreakDesc => '한 주간 신실한 기도. 당신의 정원이 자라고 있습니다!';
+
+  @override
+  String get milestoneThirtyDayStreakTitle => '30일 연속!';
+
+  @override
+  String get milestoneThirtyDayStreakDesc => '당신의 정원이 꽃밭이 되었습니다!';
+
+  @override
+  String get milestoneHundredPrayersTitle => '100번째 기도!';
+
+  @override
+  String get milestoneHundredPrayersDesc => '하나님과의 백 번째 대화. 깊이 뿌리내렸습니다.';
+
+  @override
+  String get homeFirstPrayerPrompt => '첫 기도를 시작해보세요';
+
+  @override
+  String get homeFirstQtPrompt => '첫 QT를 시작해보세요';
+
+  @override
+  String homeActivityPrompt(String activityName) {
+    return '오늘도 $activityName해보세요';
+  }
+
+  @override
+  String homeStreakInProgress(int count, String activityName) {
+    return '$count일째 연속 $activityName 중';
+  }
+
+  @override
+  String homeDaysSinceLastActivity(int days, String activityName) {
+    return '$days일째 $activityName을 쉬고 있어요';
+  }
+
+  @override
+  String get homeActivityPrayer => '기도';
+
+  @override
+  String get homeActivityQt => 'QT';
+
+  @override
+  String get prayerPlayerLoading => '로딩 중...';
+
+  @override
+  String get heatmapNoPrayer => '기도 없음';
 }

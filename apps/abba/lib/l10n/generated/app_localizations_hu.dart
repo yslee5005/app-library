@@ -1158,4 +1158,64 @@ class AppLocalizationsHu extends AppLocalizations {
   @override
   String get notifyChannelDescription =>
       'Reggeli ima, esti hála és egyéb emlékeztetők';
+
+  @override
+  String get milestoneFirstPrayerTitle => 'Első ima!';
+
+  @override
+  String get milestoneFirstPrayerDesc =>
+      'Imautazásod elkezdődött. Isten hallgat.';
+
+  @override
+  String get milestoneSevenDayStreakTitle => '7 napos ima!';
+
+  @override
+  String get milestoneSevenDayStreakDesc =>
+      'Egy hét hűséges ima. A kerted növekszik!';
+
+  @override
+  String get milestoneThirtyDayStreakTitle => '30 nap!';
+
+  @override
+  String get milestoneThirtyDayStreakDesc => 'A kerted virágmezővé vált!';
+
+  @override
+  String get milestoneHundredPrayersTitle => '100. ima!';
+
+  @override
+  String get milestoneHundredPrayersDesc =>
+      'Száz beszélgetés Istennel. Mélyen gyökeret eresztettél.';
+
+  @override
+  String get homeFirstPrayerPrompt => 'Kezdd el az első imádat';
+
+  @override
+  String get homeFirstQtPrompt => 'Kezdd el az első QT-dat';
+
+  @override
+  String homeActivityPrompt(String activityName) {
+    return 'Ma is $activityName';
+  }
+
+  @override
+  String homeStreakInProgress(int count, String activityName) {
+    return '$count. folyamatos $activityName napja';
+  }
+
+  @override
+  String homeDaysSinceLastActivity(int days, String activityName) {
+    return '$days napja volt az utolsó $activityName';
+  }
+
+  @override
+  String get homeActivityPrayer => 'ima';
+
+  @override
+  String get homeActivityQt => 'QT';
+
+  @override
+  String get prayerPlayerLoading => 'Betöltés...';
+
+  @override
+  String get heatmapNoPrayer => 'Nincs ima';
 }

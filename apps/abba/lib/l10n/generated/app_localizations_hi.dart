@@ -1153,4 +1153,65 @@ class AppLocalizationsHi extends AppLocalizations {
   @override
   String get notifyChannelDescription =>
       'सुबह की प्रार्थना, शाम की कृतज्ञता और अन्य प्रार्थना अनुस्मारक';
+
+  @override
+  String get milestoneFirstPrayerTitle => 'पहली प्रार्थना!';
+
+  @override
+  String get milestoneFirstPrayerDesc =>
+      'आपकी प्रार्थना यात्रा शुरू हो गई है। परमेश्वर सुन रहा है।';
+
+  @override
+  String get milestoneSevenDayStreakTitle => '7 दिन की प्रार्थना!';
+
+  @override
+  String get milestoneSevenDayStreakDesc =>
+      'एक सप्ताह की निष्ठावान प्रार्थना। आपका बगीचा बढ़ रहा है!';
+
+  @override
+  String get milestoneThirtyDayStreakTitle => '30 दिन!';
+
+  @override
+  String get milestoneThirtyDayStreakDesc =>
+      'आपका बगीचा फूलों के खेत में खिल गया है!';
+
+  @override
+  String get milestoneHundredPrayersTitle => '100वीं प्रार्थना!';
+
+  @override
+  String get milestoneHundredPrayersDesc =>
+      'परमेश्वर के साथ सौ बातचीत। आप गहराई से जड़ें जमा चुके हैं।';
+
+  @override
+  String get homeFirstPrayerPrompt => 'अपनी पहली प्रार्थना शुरू करें';
+
+  @override
+  String get homeFirstQtPrompt => 'अपना पहला QT शुरू करें';
+
+  @override
+  String homeActivityPrompt(String activityName) {
+    return 'आज भी $activityName करें';
+  }
+
+  @override
+  String homeStreakInProgress(int count, String activityName) {
+    return '$activityName का लगातार $count दिन';
+  }
+
+  @override
+  String homeDaysSinceLastActivity(int days, String activityName) {
+    return 'आपके अंतिम $activityName को $days दिन हो गए';
+  }
+
+  @override
+  String get homeActivityPrayer => 'प्रार्थना';
+
+  @override
+  String get homeActivityQt => 'QT';
+
+  @override
+  String get prayerPlayerLoading => 'लोड हो रहा है...';
+
+  @override
+  String get heatmapNoPrayer => 'कोई प्रार्थना नहीं';
 }

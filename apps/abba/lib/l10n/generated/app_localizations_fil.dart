@@ -1177,4 +1177,65 @@ class AppLocalizationsFil extends AppLocalizations {
   @override
   String get notifyChannelDescription =>
       'Panalangin sa umaga, pasasalamat sa gabi, at iba pang paalala';
+
+  @override
+  String get milestoneFirstPrayerTitle => 'Unang panalangin!';
+
+  @override
+  String get milestoneFirstPrayerDesc =>
+      'Nagsimula na ang iyong paglalakbay sa panalangin. Nakikinig ang Diyos.';
+
+  @override
+  String get milestoneSevenDayStreakTitle => '7 araw ng panalangin!';
+
+  @override
+  String get milestoneSevenDayStreakDesc =>
+      'Isang linggo ng tapat na panalangin. Lumalago ang iyong hardin!';
+
+  @override
+  String get milestoneThirtyDayStreakTitle => '30 araw!';
+
+  @override
+  String get milestoneThirtyDayStreakDesc =>
+      'Ang iyong hardin ay naging bukid ng bulaklak!';
+
+  @override
+  String get milestoneHundredPrayersTitle => 'Ika-100 na panalangin!';
+
+  @override
+  String get milestoneHundredPrayersDesc =>
+      'Isang daang pag-uusap sa Diyos. Malalim na ang iyong ugat.';
+
+  @override
+  String get homeFirstPrayerPrompt => 'Simulan ang iyong unang panalangin';
+
+  @override
+  String get homeFirstQtPrompt => 'Simulan ang iyong unang QT';
+
+  @override
+  String homeActivityPrompt(String activityName) {
+    return 'Ngayon din ay $activityName';
+  }
+
+  @override
+  String homeStreakInProgress(int count, String activityName) {
+    return 'Ika-$count araw ng tuloy-tuloy na $activityName';
+  }
+
+  @override
+  String homeDaysSinceLastActivity(int days, String activityName) {
+    return '$days araw na mula sa huling $activityName';
+  }
+
+  @override
+  String get homeActivityPrayer => 'panalangin';
+
+  @override
+  String get homeActivityQt => 'QT';
+
+  @override
+  String get prayerPlayerLoading => 'Naglo-load...';
+
+  @override
+  String get heatmapNoPrayer => 'Walang panalangin';
 }

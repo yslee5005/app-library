@@ -1161,4 +1161,65 @@ class AppLocalizationsEl extends AppLocalizations {
   @override
   String get notifyChannelDescription =>
       'Πρωινή προσευχή, βραδινή ευγνωμοσύνη και άλλες υπενθυμίσεις';
+
+  @override
+  String get milestoneFirstPrayerTitle => 'Πρώτη προσευχή!';
+
+  @override
+  String get milestoneFirstPrayerDesc =>
+      'Το προσευχητικό ταξίδι σας ξεκίνησε. Ο Θεός ακούει.';
+
+  @override
+  String get milestoneSevenDayStreakTitle => '7 ημέρες προσευχής!';
+
+  @override
+  String get milestoneSevenDayStreakDesc =>
+      'Μια εβδομάδα πιστής προσευχής. Ο κήπος σας μεγαλώνει!';
+
+  @override
+  String get milestoneThirtyDayStreakTitle => '30 ημέρες!';
+
+  @override
+  String get milestoneThirtyDayStreakDesc =>
+      'Ο κήπος σας άνθισε σε ένα λιβάδι λουλουδιών!';
+
+  @override
+  String get milestoneHundredPrayersTitle => '100ή προσευχή!';
+
+  @override
+  String get milestoneHundredPrayersDesc =>
+      'Εκατό συζητήσεις με τον Θεό. Έχετε βαθιές ρίζες.';
+
+  @override
+  String get homeFirstPrayerPrompt => 'Ξεκινήστε την πρώτη σας προσευχή';
+
+  @override
+  String get homeFirstQtPrompt => 'Ξεκινήστε το πρώτο σας QT';
+
+  @override
+  String homeActivityPrompt(String activityName) {
+    return 'Κάντε $activityName και σήμερα';
+  }
+
+  @override
+  String homeStreakInProgress(int count, String activityName) {
+    return 'Ημέρα $count συνεχούς $activityName';
+  }
+
+  @override
+  String homeDaysSinceLastActivity(int days, String activityName) {
+    return 'Πέρασαν $days ημέρες από τη τελευταία $activityName';
+  }
+
+  @override
+  String get homeActivityPrayer => 'προσευχή';
+
+  @override
+  String get homeActivityQt => 'QT';
+
+  @override
+  String get prayerPlayerLoading => 'Φόρτωση...';
+
+  @override
+  String get heatmapNoPrayer => 'Καμία προσευχή';
 }

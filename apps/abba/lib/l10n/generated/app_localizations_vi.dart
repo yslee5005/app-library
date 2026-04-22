@@ -1159,4 +1159,65 @@ class AppLocalizationsVi extends AppLocalizations {
   @override
   String get notifyChannelDescription =>
       'Cầu nguyện buổi sáng, tạ ơn buổi tối và các nhắc nhở cầu nguyện khác';
+
+  @override
+  String get milestoneFirstPrayerTitle => 'Lời cầu nguyện đầu tiên!';
+
+  @override
+  String get milestoneFirstPrayerDesc =>
+      'Hành trình cầu nguyện của bạn đã bắt đầu. Chúa đang lắng nghe.';
+
+  @override
+  String get milestoneSevenDayStreakTitle => '7 ngày cầu nguyện!';
+
+  @override
+  String get milestoneSevenDayStreakDesc =>
+      'Một tuần cầu nguyện trung tín. Khu vườn của bạn đang lớn lên!';
+
+  @override
+  String get milestoneThirtyDayStreakTitle => '30 ngày!';
+
+  @override
+  String get milestoneThirtyDayStreakDesc =>
+      'Khu vườn của bạn đã nở thành cánh đồng hoa!';
+
+  @override
+  String get milestoneHundredPrayersTitle => 'Lời cầu nguyện thứ 100!';
+
+  @override
+  String get milestoneHundredPrayersDesc =>
+      'Một trăm cuộc trò chuyện với Chúa. Bạn đã bám rễ sâu.';
+
+  @override
+  String get homeFirstPrayerPrompt => 'Bắt đầu lời cầu nguyện đầu tiên';
+
+  @override
+  String get homeFirstQtPrompt => 'Bắt đầu QT đầu tiên';
+
+  @override
+  String homeActivityPrompt(String activityName) {
+    return 'Hôm nay cũng $activityName';
+  }
+
+  @override
+  String homeStreakInProgress(int count, String activityName) {
+    return 'Ngày thứ $count liên tục $activityName';
+  }
+
+  @override
+  String homeDaysSinceLastActivity(int days, String activityName) {
+    return 'Đã $days ngày kể từ $activityName cuối';
+  }
+
+  @override
+  String get homeActivityPrayer => 'cầu nguyện';
+
+  @override
+  String get homeActivityQt => 'QT';
+
+  @override
+  String get prayerPlayerLoading => 'Đang tải...';
+
+  @override
+  String get heatmapNoPrayer => 'Không có cầu nguyện';
 }

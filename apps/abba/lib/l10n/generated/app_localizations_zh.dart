@@ -1130,4 +1130,61 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get notifyChannelDescription => '晨祷、晚间感恩等祷告提醒';
+
+  @override
+  String get milestoneFirstPrayerTitle => '第一次祷告!';
+
+  @override
+  String get milestoneFirstPrayerDesc => '您的祷告之旅已经开始。神正在倾听。';
+
+  @override
+  String get milestoneSevenDayStreakTitle => '7天连续祷告!';
+
+  @override
+  String get milestoneSevenDayStreakDesc => '一周忠实的祷告。您的花园正在生长!';
+
+  @override
+  String get milestoneThirtyDayStreakTitle => '30天连续!';
+
+  @override
+  String get milestoneThirtyDayStreakDesc => '您的花园已经变成了花田!';
+
+  @override
+  String get milestoneHundredPrayersTitle => '第100次祷告!';
+
+  @override
+  String get milestoneHundredPrayersDesc => '与神进行了100次对话。您已深深扎根。';
+
+  @override
+  String get homeFirstPrayerPrompt => '开始您的第一次祷告';
+
+  @override
+  String get homeFirstQtPrompt => '开始您的第一次QT';
+
+  @override
+  String homeActivityPrompt(String activityName) {
+    return '今天也$activityName吧';
+  }
+
+  @override
+  String homeStreakInProgress(int count, String activityName) {
+    return '连续$activityName第$count天';
+  }
+
+  @override
+  String homeDaysSinceLastActivity(int days, String activityName) {
+    return '已经$days天没有$activityName了';
+  }
+
+  @override
+  String get homeActivityPrayer => '祷告';
+
+  @override
+  String get homeActivityQt => 'QT';
+
+  @override
+  String get prayerPlayerLoading => '加载中...';
+
+  @override
+  String get heatmapNoPrayer => '无祷告';
 }

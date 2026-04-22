@@ -1130,4 +1130,61 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get notifyChannelDescription => '朝の祈り、夕べの感謝などの祈りのリマインダー';
+
+  @override
+  String get milestoneFirstPrayerTitle => '初めての祈り!';
+
+  @override
+  String get milestoneFirstPrayerDesc => 'あなたの祈りの旅が始まりました。神様が聞いておられます。';
+
+  @override
+  String get milestoneSevenDayStreakTitle => '7日連続の祈り!';
+
+  @override
+  String get milestoneSevenDayStreakDesc => '一週間の忠実な祈り。あなたの庭は育っています!';
+
+  @override
+  String get milestoneThirtyDayStreakTitle => '30日連続!';
+
+  @override
+  String get milestoneThirtyDayStreakDesc => 'あなたの庭が花畑になりました!';
+
+  @override
+  String get milestoneHundredPrayersTitle => '100回目の祈り!';
+
+  @override
+  String get milestoneHundredPrayersDesc => '神様との100回の対話。深く根を下ろしました。';
+
+  @override
+  String get homeFirstPrayerPrompt => '最初の祈りを始めましょう';
+
+  @override
+  String get homeFirstQtPrompt => '最初のQTを始めましょう';
+
+  @override
+  String homeActivityPrompt(String activityName) {
+    return '今日も$activityNameしてみましょう';
+  }
+
+  @override
+  String homeStreakInProgress(int count, String activityName) {
+    return '$count日連続$activityName中';
+  }
+
+  @override
+  String homeDaysSinceLastActivity(int days, String activityName) {
+    return '$days日間$activityNameを休んでいます';
+  }
+
+  @override
+  String get homeActivityPrayer => '祈り';
+
+  @override
+  String get homeActivityQt => 'QT';
+
+  @override
+  String get prayerPlayerLoading => '読み込み中...';
+
+  @override
+  String get heatmapNoPrayer => '祈りなし';
 }
