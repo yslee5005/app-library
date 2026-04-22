@@ -4,6 +4,9 @@ import 'package:abba/models/qt_meditation_result.dart';
 import 'package:abba/models/qt_passage.dart';
 import 'package:abba/models/user_profile.dart';
 
+// Ralph #6 — shared card fixtures used by dashboard widget tests.
+// Kept additive so existing tests are untouched.
+
 /// In-memory fixtures for `MockDataService.fromData(...)` injection.
 ///
 /// These mirror the real `assets/mock/*.json` contents closely enough that
@@ -175,5 +178,75 @@ class TestFixtures {
         bestStreak: 21,
         locale: 'en',
         reminderTime: '06:00',
+      );
+
+  // ---------------------------------------------------------------------------
+  // Ralph #6 — Dashboard card fixtures.
+  // ---------------------------------------------------------------------------
+
+  /// AiPrayer with a representative citation per (quote/science/example) type.
+  /// `isPremium` drives the ProBlur gate inside `AiPrayerCard`.
+  static AiPrayer aiPrayer({bool isPremium = true}) => AiPrayer(
+        text: 'Father, guide our steps today.',
+        isPremium: isPremium,
+        citations: const [
+          Citation(
+            type: 'quote',
+            source: 'Augustine',
+            content: 'Our hearts are restless until they rest in You.',
+          ),
+          Citation(
+            type: 'science',
+            source: 'Harvard Study 2023',
+            content: 'Gratitude practice lowers cortisol by 23%.',
+          ),
+          Citation(
+            type: 'example',
+            source: '',
+            content: 'A widow keeps a morning gratitude journal.',
+          ),
+        ],
+      );
+
+  /// GrowthStory — spiritual narrative of a biblical figure. `isPremium=true`
+  /// combined with `isUserPremium=false` makes `GrowthStoryCard` show ProBlur.
+  static GrowthStory growthStory({bool isPremium = true}) => GrowthStory(
+        title: 'Hannah at Shiloh',
+        summary: 'Hannah wept bitterly before the Lord, pouring out her soul.',
+        lesson: 'Even silent prayers reach God when the heart is broken.',
+        isPremium: isPremium,
+      );
+
+  /// QtCoaching — realistic scores + bullets. `overallFeedback(locale)` picks
+  /// the right locale variant; both are filled so `en`/`ko` tests both work.
+  static QtCoaching qtCoaching() => const QtCoaching(
+        scores: QtScores(
+          comprehension: 4,
+          application: 3,
+          depth: 5,
+          authenticity: 4,
+        ),
+        strengths: [
+          'You tied the passage to your morning commute.',
+          'Your confession was specific, not generic.',
+        ],
+        improvements: [
+          'Consider memorizing one key word for the week.',
+        ],
+        overallFeedbackEn:
+            'Your meditation shows deep engagement with the text.',
+        overallFeedbackKo: '본문과 깊이 씨름하신 흔적이 느껴집니다.',
+        expertLevel: 'growing',
+      );
+
+  /// MeditationSummary with all three fields populated.
+  static MeditationSummary meditationSummary({
+    String summary = 'Today I meditated on God as my shepherd.',
+    String topic = "Shepherd's Care",
+    String insight = 'Trusting God in uncertainty is an act of worship.',
+  }) => MeditationSummary(
+        summary: summary,
+        topic: topic,
+        insight: insight,
       );
 }

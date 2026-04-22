@@ -17,6 +17,28 @@
 **Before**: 157 pass / 2 fail
 **After**: 170 pass / 2 fail (+13, 동일 2 pre-existing E2E fail 유지)
 
+### ✅ Ralph #6에서 완료 (2026-04-22)
+
+Dashboard widgets 핵심 4개 (Pro 블러 + 카드 렌더 UX 결제 연계 핵심):
+
+| 파일 | 테스트 수 | 커버 범위 |
+|------|----------|----------|
+| `test/features/dashboard/widgets/ai_prayer_card_test.dart` | 3 | Pro: text + citations 3 type (quote/science/example) 확장; Free: ProBlur lock; `AiPrayer.placeholder()` locked 경로 |
+| `test/features/dashboard/widgets/growth_story_card_test.dart` | 2 | Pro: title/summary/lesson + 🌱/💡; Free: ProBlur lock |
+| `test/features/dashboard/widgets/qt_coaching_card_test.dart` | 4 | Pro+data: 4축 score bar + strengths/improvements + 🌿 level badge + feedback; loading(spinner+메시지); error(retry 버튼+🔄 icon); Free: ProBlur (provider 읽지 않음) |
+| `test/features/dashboard/widgets/meditation_summary_card_test.dart` | 4 | 3필드 렌더; empty → SizedBox.shrink; insight 없으면 🔍 섹션 숨김; topic 없으면 topic row 숨김 |
+
+**TestFixtures 확장**: `aiPrayer({isPremium})`, `growthStory({isPremium})`, `qtCoaching()`, `meditationSummary({summary, topic, insight})` 추가. 기존 fixture 패턴 유지 (additive only).
+
+**Before**: 170 pass / 2 fail
+**After**: 183 pass / 2 fail (+13 widget tests, 동일 2 pre-existing E2E fail 유지)
+
+### 📋 Ralph #6에서 의도적으로 스킵
+
+| 대상 | 스킵 이유 |
+|------|---------|
+| `scripture_card_test.dart` | 복잡도 높음 — `ScriptureOriginalWord` RTL 처리, `prayerLog` (`app_lib_logging`) 의존성, `keyWordHint`/`reason`/`posture`/`originalWords` 4개 선택 영역 + PD bundle fallback(reference-only) 분기. 후속 작업으로 별도 세션 권장. |
+
 ### 📋 Ralph #5에서 의도적으로 스킵
 
 | 대상 | 스킵 이유 |
@@ -81,14 +103,23 @@
 
 ## 📋 Backlog — 🟡 중요 (권장)
 
-### Dashboard widgets (13개)
+### Dashboard widgets — 진행현황
 
-Ralph #6에서 3-5개 작성 예정. 나머지:
+Ralph #6에서 4개 완료 (✅), 나머지 🟡:
 
-- `meditation_summary_card`, `scripture_card`, `application_card`
-- `related_knowledge_card`, `historical_story_card`, `bible_story_card`
-- `prayer_coaching_card`, `guidance_card`, `ai_prayer_card`, `original_lang_card`
-- `testimony_card`, `prayer_summary_card`, `posture_card`
+- ✅ `ai_prayer_card` (Ralph #6)
+- ✅ `growth_story_card` (Ralph #6)
+- ✅ `qt_coaching_card` (Ralph #6)
+- ✅ `meditation_summary_card` (Ralph #6)
+- 🟡 `scripture_card` — 복잡도 높음, 별도 세션 권장 (Ralph #6 스킵 사유 참조)
+- 🟡 `prayer_coaching_card` — QT coaching과 구조 유사, 템플릿 재사용 가능
+- 🟡 `historical_story_card`
+- 🟡 `bible_story_card`
+- 🟡 `application_card`
+- 🟡 `related_knowledge_card`
+- 🟡 `guidance_card`
+- 🟡 `prayer_summary_card` — ACTS 3-세그먼트 + 오디오 플레이어
+- 🟡 `testimony_card` — dual-label (Prayer/QT)
 
 ### Pro UX
 
