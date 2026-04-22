@@ -160,21 +160,24 @@ QT(묵상) Dashboard를 Prayer Dashboard와 동급 품질로 재설계. 기존 4
 
 ## 컨펌 게이트 (5개)
 
-- [ ] Phase 1 spec 승인 → 구현 → "Phase 1 OK"
-- [ ] Phase 2 spec 작성 → 승인 → 구현 → "Phase 2 OK"
-- [ ] Phase 3 spec 작성 → 승인 → 구현 → "Phase 3 OK"
-- [ ] Phase 4 spec 작성 → 승인 → 구현 → "Phase 4 OK"
-- [ ] Phase 5 spec 작성 → 승인 → 구현 → "Phase 5 OK" → **feature 완료**
+- [x] Phase 1 Core (묵상 요약 + Scripture Deep) — `ee557ec` (2026-04-21)
+- [x] Phase 2 QT Coaching (Pro) + qt_guide.md asset — `83d44be` (2026-04-21)
+- [x] Phase 3 Citations (4 type: quote/science/history/example) — `ac2fdaf` (2026-04-21)
+- [x] Phase 4 GrowthStory single-field + 실존 인물 품질 바 — `a69ab99` (2026-04-21)
+- [x] Phase 5A i18n 통일 (MeditationAnalysis/RelatedKnowledge/OriginalWord/ScriptureOriginalWord single-field) — `cee981a` (2026-04-21)
+- [x] Phase 5B Application 3-block (morning/day/evening) — `7f63e87` (2026-04-22)
+- [x] Phase 5C Dashboard 재정리 (MeditationAnalysis 흡수 → MeditationSummary + l10n cleanup) — `d211aa1` (2026-04-22)
+- [x] Phase 5D QT 영속화 (prayers.result JSONB polymorphic + Calendar/MyPage 재진입) — `d7cb7c8` (2026-04-22)
+
+✅ **feature 완료** (2026-04-22)
 
 ## 현재 상태
 
 - [x] 사용자 비전 인터뷰 + 5 추천 채택 (2026-04-21)
 - [x] Web search — QT 평가 기준 4축 도출 (2026-04-21)
 - [x] SPEC.md 전체 개요 작성 (2026-04-21)
-- [x] Phase 1 `_details/*` 초안 + qt_guide.md v0.1 (2026-04-21) ← 현재 여기
-- [ ] **Phase 1 사용자 승인 (qt_guide.md 중점 검토)**
-- [ ] Phase 1 구현 (Ralph 위임)
-- [ ] Phase 2~5 (대기)
+- [x] Phase 1-5 전체 구현·커밋·푸시 완료 (2026-04-21 ~ 2026-04-22)
+- [ ] 사용자 smoke test (35 locale 대표 전환 + Pro/Free 게이팅 + Calendar 재진입)
 
 ## 구현 정책 (CLAUDE.md 준수)
 
