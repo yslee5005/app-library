@@ -316,8 +316,7 @@ class _AiLoadingViewState extends ConsumerState<AiLoadingView>
       return PrayerResult(
         scripture: result.scripture.withVerse(verseText),
         bibleStory: result.bibleStory,
-        testimonyEn: result.testimonyEn,
-        testimonyKo: result.testimonyKo,
+        testimony: result.testimony,
         guidance: result.guidance,
         aiPrayer: result.aiPrayer,
         prayerSummary: result.prayerSummary,
@@ -345,8 +344,7 @@ class _AiLoadingViewState extends ConsumerState<AiLoadingView>
           summary:
               'Even when we cannot see the way, God is faithfully guiding our steps.',
         ),
-        testimonyEn: transcript,
-        testimonyKo: transcript,
+        testimony: transcript,
       ),
     );
   }

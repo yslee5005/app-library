@@ -27,8 +27,7 @@ class MockAiService implements AiService {
     return PrayerResult(
       scripture: full.scripture,
       bibleStory: full.bibleStory,
-      testimonyEn: full.testimonyEn,
-      testimonyKo: full.testimonyKo,
+      testimony: full.testimony,
       prayerSummary: full.prayerSummary,
     );
   }
@@ -43,8 +42,7 @@ class MockAiService implements AiService {
     final result = PrayerResult(
       scripture: full.scripture,
       bibleStory: full.bibleStory,
-      testimonyEn: full.testimonyEn,
-      testimonyKo: full.testimonyKo,
+      testimony: full.testimony,
       prayerSummary: full.prayerSummary,
     );
     return (

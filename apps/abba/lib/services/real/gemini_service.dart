@@ -453,10 +453,9 @@ Rules (per Prayer Guide §4-6):
               summary:
                   'Before David became king, he tended sheep in the fields of Bethlehem — defending them from lions and bears. In those quiet hills he learned that the LORD was the true shepherd over his own life.',
             ),
-      testimonyEn:
-          'Lord, thank You for this new morning. Guide my family in peace and comfort my friend who is anxious. In Jesus\' name, Amen.',
-      testimonyKo:
-          '주님, 오늘도 새로운 아침을 허락해 주셔서 감사합니다. 가족을 평안으로 인도하시고, 염려하는 친구를 위로해 주세요. 예수님의 이름으로 기도합니다. 아멘.',
+      testimony: locale == 'ko'
+          ? '주님, 오늘도 새로운 아침을 허락해 주셔서 감사합니다. 가족을 평안으로 인도하시고, 염려하는 친구를 위로해 주세요. 예수님의 이름으로 기도합니다. 아멘.'
+          : 'Lord, thank You for this new morning. Guide my family in peace and comfort my friend who is anxious. In Jesus\' name, Amen.',
       guidance: Guidance(
         content: locale == 'ko'
             ? '자신보다 먼저 다른 이들을 기억하는 마음이 기도에 담겨 있습니다. 이는 중보자의 마음입니다. 오늘 만나는 이들과의 대화에서도 그 부드러움을 잃지 마세요.'
@@ -723,10 +722,7 @@ Return a JSON object:
     "title": "story title in $langName",
     "summary": "3-4 sentence summary in $langName"
   },
-  "testimony": {
-    "transcript_en": "the prayer reorganized in English as a testimony",
-    "transcript_ko": "기도 내용을 한국어 간증문으로 재구성"
-  },
+  "testimony": "the prayer reorganized as a testimonial narrative in $langName",
   "historical_story": {
     "title": "story title in $langName",
     "reference": "locale-neutral source (e.g., 'Bristol, 1838' or 'Luke 15:11-32')",

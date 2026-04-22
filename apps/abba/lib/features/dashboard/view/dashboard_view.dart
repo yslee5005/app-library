@@ -72,7 +72,7 @@ class DashboardView extends ConsumerWidget {
       context.push('/settings/membership');
     }
 
-    final testimonyText = result.testimony(locale);
+    final testimonyText = result.testimony;
 
     int i = 0;
     return ListView(

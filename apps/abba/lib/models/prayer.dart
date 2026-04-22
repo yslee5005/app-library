@@ -122,10 +122,7 @@ class HistoricalStory {
 class PrayerResult {
   final Scripture scripture;
   final BibleStory bibleStory;
-  final String testimonyEn;
-  final String testimonyKo;
-
-  String testimony(String locale) => locale == 'ko' ? testimonyKo : testimonyEn;
+  final String testimony;
   final Guidance? guidance;
   final AiPrayer? aiPrayer;
   final PrayerSummary? prayerSummary;
@@ -134,8 +131,7 @@ class PrayerResult {
   const PrayerResult({
     required this.scripture,
     required this.bibleStory,
-    required this.testimonyEn,
-    required this.testimonyKo,
+    required this.testimony,
     this.guidance,
     this.aiPrayer,
     this.prayerSummary,
@@ -151,8 +147,7 @@ class PrayerResult {
     return PrayerResult(
       scripture: scripture,
       bibleStory: bibleStory,
-      testimonyEn: testimonyEn,
-      testimonyKo: testimonyKo,
+      testimony: testimony,
       prayerSummary: prayerSummary,
       historicalStory: historicalStory ?? this.historicalStory,
       aiPrayer: aiPrayer ?? this.aiPrayer,
@@ -161,13 +156,23 @@ class PrayerResult {
   }
 
   factory PrayerResult.fromJson(Map<String, dynamic> json) {
+    // Accept both flat (new Phase 6+ format: testimony: "...") and nested
+    // legacy (Phase 1-5: testimony.transcript_en/_ko). 3-tier fallback.
+    final testimonyRaw = json['testimony'];
+    final String testimonyValue = switch (testimonyRaw) {
+      String s => s,
+      Map m => (m['transcript'] as String?)
+          ?? (m['transcript_en'] as String?)
+          ?? (m['transcript_ko'] as String?)
+          ?? '',
+      _ => '',
+    };
     return PrayerResult(
       scripture: Scripture.fromJson(json['scripture'] as Map<String, dynamic>),
       bibleStory: BibleStory.fromJson(
         json['bible_story'] as Map<String, dynamic>,
       ),
-      testimonyEn: json['testimony']?['transcript_en'] as String? ?? '',
-      testimonyKo: json['testimony']?['transcript_ko'] as String? ?? '',
+      testimony: testimonyValue,
       guidance: json['guidance'] != null
           ? Guidance.fromJson(json['guidance'] as Map<String, dynamic>)
           : null,

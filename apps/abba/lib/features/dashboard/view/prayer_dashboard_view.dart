@@ -135,7 +135,7 @@ class _PrayerDashboardViewState extends ConsumerState<PrayerDashboardView> {
       context.push('/settings/membership');
     }
 
-    final testimonyText = result.testimony(locale);
+    final testimonyText = result.testimony;
 
     // Check if premium content is available (from full analyzePrayer or on-demand)
     final hasHistoricalStory = result.historicalStory != null;

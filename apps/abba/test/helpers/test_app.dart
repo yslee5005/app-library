@@ -73,8 +73,7 @@ const testPrayerResult = PrayerResult(
     title: 'David',
     summary: 'David was a shepherd.',
   ),
-  testimonyEn: 'Test prayer transcript.',
-  testimonyKo: '테스트 기도 내용.',
+  testimony: 'Test prayer transcript.',
   guidance: Guidance(
     content: 'Guidance content.',
     isPremium: true,

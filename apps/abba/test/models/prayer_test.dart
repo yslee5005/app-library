@@ -95,7 +95,8 @@ void main() {
 
       // Phase 6: verse is no longer persisted (comes from PD bundle at read time).
       expect(result.scripture.reference, 'Psalm 46:10');
-      expect(result.testimony('en'), 'My prayer...');
+      // Phase 7: testimony single-field — legacy transcript_en fallback
+      expect(result.testimony, 'My prayer...');
       expect(result.guidance, isNull);
       expect(result.aiPrayer, isNull);
     });

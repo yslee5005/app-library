@@ -323,8 +323,7 @@ class OpenAiService implements AiService {
         summary:
             'Even when we cannot see the way, God is faithfully guiding our steps.',
       ),
-      testimonyEn: '',
-      testimonyKo: '',
+      testimony: '',
     );
   }
 
@@ -442,10 +441,7 @@ Return a JSON object:
     "title": "story title in $langName",
     "summary": "3-4 sentence summary in $langName"
   },
-  "testimony": {
-    "transcript_en": "the prayer reorganized in English as a testimony",
-    "transcript_ko": "기도 내용을 한국어 간증문으로 재구성"
-  },
+  "testimony": "the prayer reorganized as a testimonial narrative in $langName",
   "historical_story": {
     "title_en": "story title in English",
     "title_ko": "story title in Korean",
