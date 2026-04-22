@@ -138,9 +138,17 @@ Abba의 Scripture / BibleStory / Guidance 카드를 **저작권 안전한 구조
 - [x] Phase 2 `_details/*` 상세 작성 + 구현 commit `d89e5e9` (2026-04-21)
 - [x] Phase 3 구현 — 30 locale bundle + Settings attribution 페이지 commit `db0a073` (2026-04-21)
 - [x] Phase 3 보강 — 4 locale 추가 commit `54806c7` → 34 locale 달성 (2026-04-21)
-- [x] **저작권 실사 완료** (2026-04-21) — am/th/no 제거, CC 라이선스 attribution 강화, `COPYRIGHT.md` 작성 → **최종 31 locale** ← 현재 여기
-- [ ] 사용자 수동: Supabase Storage 업로드 (28개 새 번들) + am/th/no 삭제
-- [ ] 실기기 smoke test → feature 완료 선언
+- [x] **저작권 실사 완료** (2026-04-21) — am/th/no 제거, CC 라이선스 attribution 강화, `COPYRIGHT.md` 작성 → **최종 31 locale**
+- [x] th_kjv Dart 등록 잔재 제거 (commit `03ad700`, 2026-04-21)
+- [x] Supabase Storage 업로드 (31 bundle, 사용자 2026-04-21)
+- [x] 실기기 smoke test 완료 (2026-04-21):
+  - ko 기도 + memory/file cache + download (ok, 52ms file-cache, 1288ms first download)
+  - en 언어 전환 + 번들 preload + lookup (ok)
+  - 5 locale 연속 전환 병렬 preload (ja/es/pt/fr, dedup 정상)
+  - ar reference-only fallback UI (lookup unsupported → UI fallback)
+  - Pro 카드 3종 (Coaching / Historical / AiPrayer) 렌더 확인
+  - Settings "사용된 성경 번역본" 31개 + 라이선스 표기 확인
+- [x] **bible_text_i18n feature 완료** 🎉
 
 ## prayer_output_redesign과의 관계
 
