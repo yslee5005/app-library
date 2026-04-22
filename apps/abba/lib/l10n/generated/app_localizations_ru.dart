@@ -924,6 +924,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get citationTypeExample => 'Пример';
 
   @override
+  String get citationTypeHistory => 'История';
+
+  @override
   String get aiPrayerReadingTime => 'Чтение на 2 минуты';
 
   @override

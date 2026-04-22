@@ -907,6 +907,9 @@ class AppLocalizationsHe extends AppLocalizations {
   String get citationTypeExample => 'דוגמה';
 
   @override
+  String get citationTypeHistory => 'היסטוריה';
+
+  @override
   String get aiPrayerReadingTime => 'קריאה בת 2 דקות';
 
   @override

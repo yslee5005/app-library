@@ -1862,6 +1862,12 @@ abstract class AppLocalizations {
   /// **'Example'**
   String get citationTypeExample;
 
+  /// No description provided for @citationTypeHistory.
+  ///
+  /// In en, this message translates to:
+  /// **'History'**
+  String get citationTypeHistory;
+
   /// No description provided for @aiPrayerReadingTime.
   ///
   /// In en, this message translates to:

@@ -925,6 +925,9 @@ class AppLocalizationsCs extends AppLocalizations {
   String get citationTypeExample => 'Příklad';
 
   @override
+  String get citationTypeHistory => 'Historie';
+
+  @override
   String get aiPrayerReadingTime => 'Čtení 2 minuty';
 
   @override

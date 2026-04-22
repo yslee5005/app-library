@@ -925,6 +925,9 @@ class AppLocalizationsNl extends AppLocalizations {
   String get citationTypeExample => 'Voorbeeld';
 
   @override
+  String get citationTypeHistory => 'Geschiedenis';
+
+  @override
   String get aiPrayerReadingTime => '2 minuten lezen';
 
   @override

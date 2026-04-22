@@ -350,11 +350,11 @@ class AiPrayer {
       );
 }
 
-/// Citation attached to an AI-generated prayer — source for a quote,
-/// scientific fact, or concrete example. Used to deepen meaning with
-/// verifiable references.
+/// Citation attached to an AI-generated prayer or QT meditation — source
+/// for a quote, scientific fact, historical reference, or concrete example.
+/// Used to deepen meaning with verifiable references.
 class Citation {
-  final String type;    // "quote" | "science" | "example"
+  final String type;    // "quote" | "science" | "history" | "example"
   final String source;  // author, work, or study (may be empty for "example")
   final String content; // the quoted text or factual statement in user locale
 

@@ -929,6 +929,9 @@ class AppLocalizationsMs extends AppLocalizations {
   String get citationTypeExample => 'Contoh';
 
   @override
+  String get citationTypeHistory => 'Sejarah';
+
+  @override
   String get aiPrayerReadingTime => 'Bacaan 2 minit';
 
   @override

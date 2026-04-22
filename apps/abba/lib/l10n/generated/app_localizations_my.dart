@@ -929,6 +929,9 @@ class AppLocalizationsMy extends AppLocalizations {
   String get citationTypeExample => 'ဥပမာ';
 
   @override
+  String get citationTypeHistory => 'သမိုင်း';
+
+  @override
   String get aiPrayerReadingTime => '၂ မိနစ် ဖတ်ရန်';
 
   @override

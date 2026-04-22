@@ -900,6 +900,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get citationTypeExample => '例子';
 
   @override
+  String get citationTypeHistory => '历史';
+
+  @override
   String get aiPrayerReadingTime => '2分钟阅读';
 
   @override

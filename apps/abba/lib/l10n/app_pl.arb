@@ -394,6 +394,7 @@
   "citationTypeQuote": "Cytat",
   "citationTypeScience": "Badanie",
   "citationTypeExample": "Przykład",
+  "citationTypeHistory": "Historia",
   "aiPrayerReadingTime": "Czytanie 2 min",
   "scriptureKeyWordHintTitle": "Kluczowe słowo dzisiaj",
   "bibleLookupReferenceHint": "Odszukaj ten fragment w swojej Biblii i rozważaj go.",

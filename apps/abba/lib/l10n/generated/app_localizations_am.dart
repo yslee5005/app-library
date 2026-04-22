@@ -900,6 +900,9 @@ class AppLocalizationsAm extends AppLocalizations {
   String get citationTypeExample => 'ምሳሌ';
 
   @override
+  String get citationTypeHistory => 'ታሪክ';
+
+  @override
   String get aiPrayerReadingTime => 'የ2 ደቂቃ ንባብ';
 
   @override

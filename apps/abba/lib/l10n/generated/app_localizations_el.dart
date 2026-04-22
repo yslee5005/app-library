@@ -925,6 +925,9 @@ class AppLocalizationsEl extends AppLocalizations {
   String get citationTypeExample => 'Παράδειγμα';
 
   @override
+  String get citationTypeHistory => 'Ιστορία';
+
+  @override
   String get aiPrayerReadingTime => 'Ανάγνωση 2 λεπτών';
 
   @override

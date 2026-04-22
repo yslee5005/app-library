@@ -928,6 +928,9 @@ class AppLocalizationsId extends AppLocalizations {
   String get citationTypeExample => 'Contoh';
 
   @override
+  String get citationTypeHistory => 'Sejarah';
+
+  @override
   String get aiPrayerReadingTime => 'Baca 2 menit';
 
   @override

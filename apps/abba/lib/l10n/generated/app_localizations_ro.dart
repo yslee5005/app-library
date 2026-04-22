@@ -928,6 +928,9 @@ class AppLocalizationsRo extends AppLocalizations {
   String get citationTypeExample => 'Exemplu';
 
   @override
+  String get citationTypeHistory => 'Istorie';
+
+  @override
   String get aiPrayerReadingTime => 'Lectură de 2 minute';
 
   @override

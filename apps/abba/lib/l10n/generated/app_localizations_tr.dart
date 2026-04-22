@@ -923,6 +923,9 @@ class AppLocalizationsTr extends AppLocalizations {
   String get citationTypeExample => 'Örnek';
 
   @override
+  String get citationTypeHistory => 'Tarih';
+
+  @override
   String get aiPrayerReadingTime => '2 dakikalık okuma';
 
   @override

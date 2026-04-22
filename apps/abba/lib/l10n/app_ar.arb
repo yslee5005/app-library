@@ -394,6 +394,7 @@
   "citationTypeQuote": "اقتباس",
   "citationTypeScience": "بحث",
   "citationTypeExample": "مثال",
+  "citationTypeHistory": "تاريخ",
   "aiPrayerReadingTime": "قراءة لمدة دقيقتين",
   "scriptureKeyWordHintTitle": "الكلمة المفتاحية لليوم",
   "bibleLookupReferenceHint": "ابحث عن هذا المقطع في كتابك المقدس وتأمل فيه.",

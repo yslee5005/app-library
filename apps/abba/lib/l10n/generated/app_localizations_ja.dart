@@ -900,6 +900,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get citationTypeExample => '例';
 
   @override
+  String get citationTypeHistory => '歴史';
+
+  @override
   String get aiPrayerReadingTime => '2分で読める';
 
   @override

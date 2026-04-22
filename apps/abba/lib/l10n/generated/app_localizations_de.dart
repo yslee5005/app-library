@@ -928,6 +928,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get citationTypeExample => 'Beispiel';
 
   @override
+  String get citationTypeHistory => 'Geschichte';
+
+  @override
   String get aiPrayerReadingTime => '2-Minuten-Lektüre';
 
   @override

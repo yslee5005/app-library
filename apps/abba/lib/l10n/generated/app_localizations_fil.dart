@@ -936,6 +936,9 @@ class AppLocalizationsFil extends AppLocalizations {
   String get citationTypeExample => 'Halimbawa';
 
   @override
+  String get citationTypeHistory => 'Kasaysayan';
+
+  @override
   String get aiPrayerReadingTime => '2-minutong pagbasa';
 
   @override

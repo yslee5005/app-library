@@ -911,6 +911,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get citationTypeExample => 'ตัวอย่าง';
 
   @override
+  String get citationTypeHistory => 'ประวัติศาสตร์';
+
+  @override
   String get aiPrayerReadingTime => 'อ่าน 2 นาที';
 
   @override

@@ -925,6 +925,9 @@ class AppLocalizationsHu extends AppLocalizations {
   String get citationTypeExample => 'Példa';
 
   @override
+  String get citationTypeHistory => 'Történelem';
+
+  @override
   String get aiPrayerReadingTime => '2 perces olvasás';
 
   @override

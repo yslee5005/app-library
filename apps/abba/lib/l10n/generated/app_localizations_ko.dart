@@ -900,6 +900,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get citationTypeExample => '예시';
 
   @override
+  String get citationTypeHistory => '역사';
+
+  @override
   String get aiPrayerReadingTime => '2분 읽기';
 
   @override

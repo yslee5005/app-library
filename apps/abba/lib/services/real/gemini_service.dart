@@ -1206,6 +1206,9 @@ Return this JSON object:
     "cross_references": [
       {"reference": "Book Chapter:Verse", "text": "Full verse text in $langName"},
       {"reference": "Book Chapter:Verse", "text": "Full verse text in $langName"}
+    ],
+    "citations": [
+      {"type": "quote|science|history|example", "source": "<author, work, year, or study name>", "content": "<the quoted or factual statement in $langName>"}
     ]
   },
   "growth_story": {
@@ -1237,6 +1240,16 @@ WRITING STYLE:
 - Write like a master short story author, NOT a report writer.
 - Use SENSORY details, INNER MONOLOGUE, METAPHORS and SIMILES.
 - VARY sentence structure. Show, don't tell.
+
+CITATIONS (knowledge.citations):
+- You MAY include 0-3 citations. Empty array [] if no confident citation.
+- Each citation has: type, source, content.
+- type: one of "quote" (famous saying), "science" (research/empirical finding),
+  "history" (historical event/figure fact), "example" (real-world anecdote).
+- source: author / work / year / study name. May be empty only for "example".
+- content: the quoted text or factual statement, written in $langName.
+- ONLY include verifiable, well-known references. NEVER fabricate.
+- If uncertain about factual accuracy, omit the citation entirely.
 
 IMPORTANT:
 - cross_references: Include 2-3 verses with both "reference" and full "text" in $langName.

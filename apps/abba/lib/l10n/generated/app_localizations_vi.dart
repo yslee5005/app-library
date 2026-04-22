@@ -924,6 +924,9 @@ class AppLocalizationsVi extends AppLocalizations {
   String get citationTypeExample => 'Ví dụ';
 
   @override
+  String get citationTypeHistory => 'Lịch sử';
+
+  @override
   String get aiPrayerReadingTime => 'Đọc trong 2 phút';
 
   @override

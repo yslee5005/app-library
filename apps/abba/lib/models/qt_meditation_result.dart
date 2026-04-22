@@ -170,11 +170,18 @@ class RelatedKnowledge {
   final String historicalContextKo;
   final List<CrossReference> crossReferences;
 
+  /// QT citations (Phase 3, qt_output_redesign). Mirrors `AiPrayer.citations`.
+  /// Each citation: `{type: "quote"|"science"|"history"|"example",
+  /// source: "author/work/year", content: "the quoted/factual statement"}`.
+  /// Empty list when the model is not confident about any verifiable reference.
+  final List<Citation> citations;
+
   const RelatedKnowledge({
     this.originalWord,
     this.historicalContextEn = '',
     this.historicalContextKo = '',
     this.crossReferences = const [],
+    this.citations = const [],
   });
 
   factory RelatedKnowledge.fromJson(Map<String, dynamic> json) {
@@ -196,6 +203,11 @@ class RelatedKnowledge {
               })
               .toList() ??
           [],
+      citations: (json['citations'] as List<dynamic>?)
+              ?.map((e) => Citation.fromJson(e as Map<String, dynamic>))
+              .where((c) => c.content.isNotEmpty)
+              .toList() ??
+          const [],
     );
   }
 

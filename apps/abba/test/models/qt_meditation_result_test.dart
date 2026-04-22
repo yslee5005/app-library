@@ -183,6 +183,81 @@ void main() {
     });
   });
 
+  group('RelatedKnowledge.citations — Phase 3 (qt_output_redesign)', () {
+    test('parses citations array when present', () {
+      final knowledge = RelatedKnowledge.fromJson({
+        'historical_context': '배경 설명',
+        'citations': [
+          {
+            'type': 'history',
+            'source': 'Phillip Keller, 1970',
+            'content': '팔레스타인 양들은 급류를 두려워했습니다.',
+          },
+          {
+            'type': 'science',
+            'source': 'Journal of Behavioral Medicine, 2012',
+            'content': '정기적 묵상자는 코르티솔이 23% 낮다는 보고.',
+          },
+          {
+            'type': 'quote',
+            'source': 'Augustine, Confessions',
+            'content': '우리의 마음은 당신 안에서 쉴 때까지 쉬지 못합니다.',
+          },
+        ],
+      });
+
+      expect(knowledge.citations, hasLength(3));
+      expect(knowledge.citations[0].type, 'history');
+      expect(knowledge.citations[0].source, 'Phillip Keller, 1970');
+      expect(knowledge.citations[1].type, 'science');
+      expect(knowledge.citations[2].type, 'quote');
+    });
+
+    test('defaults to empty list when citations key is missing', () {
+      final knowledge = RelatedKnowledge.fromJson({
+        'historical_context': '배경 설명',
+        'cross_references': [],
+      });
+      expect(knowledge.citations, isEmpty);
+    });
+
+    test('filters out citations with empty content', () {
+      final knowledge = RelatedKnowledge.fromJson({
+        'citations': [
+          {'type': 'quote', 'source': 'A', 'content': 'valid content'},
+          {'type': 'quote', 'source': 'B', 'content': ''},
+          {'type': 'history', 'source': 'C', 'content': 'another valid'},
+        ],
+      });
+      expect(knowledge.citations, hasLength(2));
+      expect(knowledge.citations[0].content, 'valid content');
+      expect(knowledge.citations[1].content, 'another valid');
+    });
+
+    test('QtMeditationResult.fromJson propagates citations through knowledge',
+        () {
+      final json = {
+        'analysis': {'insight': 'i'},
+        'application': {'action': 'a'},
+        'knowledge': {
+          'historical_context': 'h',
+          'citations': [
+            {
+              'type': 'example',
+              'source': '',
+              'content': '일상의 한 장면',
+            },
+          ],
+        },
+      };
+      final result = QtMeditationResult.fromJson(json);
+      expect(result.knowledge.citations, hasLength(1));
+      expect(result.knowledge.citations.first.type, 'example');
+      expect(result.knowledge.citations.first.source, isEmpty);
+      expect(result.knowledge.citations.first.content, '일상의 한 장면');
+    });
+  });
+
   group('QtMeditationResult.copyWithScripture', () {
     test('replaces scripture, preserves other fields', () {
       final original = QtMeditationResult.fromJson({

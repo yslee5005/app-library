@@ -394,6 +394,7 @@
   "citationTypeQuote": "Cita",
   "citationTypeScience": "Estudio",
   "citationTypeExample": "Ejemplo",
+  "citationTypeHistory": "Historia",
   "aiPrayerReadingTime": "Lectura de 2 minutos",
   "scriptureKeyWordHintTitle": "Palabra clave de hoy",
   "bibleLookupReferenceHint": "Busca este pasaje en tu Biblia y medítalo.",

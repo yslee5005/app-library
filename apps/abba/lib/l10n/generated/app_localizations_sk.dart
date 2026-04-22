@@ -926,6 +926,9 @@ class AppLocalizationsSk extends AppLocalizations {
   String get citationTypeExample => 'Príklad';
 
   @override
+  String get citationTypeHistory => 'História';
+
+  @override
   String get aiPrayerReadingTime => 'Čítanie 2 minúty';
 
   @override

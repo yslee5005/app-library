@@ -394,6 +394,7 @@
   "citationTypeQuote": "Idézet",
   "citationTypeScience": "Kutatás",
   "citationTypeExample": "Példa",
+  "citationTypeHistory": "Történelem",
   "aiPrayerReadingTime": "2 perces olvasás",
   "scriptureKeyWordHintTitle": "A mai kulcsszó",
   "bibleLookupReferenceHint": "Keresd meg ezt a szakaszt a saját Bibliádban, és elmélkedj rajta.",

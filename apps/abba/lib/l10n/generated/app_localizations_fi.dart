@@ -921,6 +921,9 @@ class AppLocalizationsFi extends AppLocalizations {
   String get citationTypeExample => 'Esimerkki';
 
   @override
+  String get citationTypeHistory => 'Historia';
+
+  @override
   String get aiPrayerReadingTime => '2 minuutin lukuaika';
 
   @override

@@ -920,6 +920,9 @@ class AppLocalizationsSv extends AppLocalizations {
   String get citationTypeExample => 'Exempel';
 
   @override
+  String get citationTypeHistory => 'Historia';
+
+  @override
   String get aiPrayerReadingTime => '2 minuters läsning';
 
   @override

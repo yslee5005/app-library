@@ -394,6 +394,7 @@
   "citationTypeQuote": "Lainaus",
   "citationTypeScience": "Tutkimus",
   "citationTypeExample": "Esimerkki",
+  "citationTypeHistory": "Historia",
   "aiPrayerReadingTime": "2 minuutin lukuaika",
   "scriptureKeyWordHintTitle": "Päivän avainsana",
   "bibleLookupReferenceHint": "Etsi tämä kohta omasta Raamatustasi ja mietiskele sitä.",

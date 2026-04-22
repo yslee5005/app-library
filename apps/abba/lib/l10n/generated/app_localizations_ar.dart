@@ -909,6 +909,9 @@ class AppLocalizationsAr extends AppLocalizations {
   String get citationTypeExample => 'مثال';
 
   @override
+  String get citationTypeHistory => 'تاريخ';
+
+  @override
   String get aiPrayerReadingTime => 'قراءة لمدة دقيقتين';
 
   @override
