@@ -121,5 +121,3 @@
 - [x] Phase 5 `_details/*` 상세 작성 (2026-04-21)
 - [x] Phase 5 사용자 승인 (2026-04-21)
 - [x] Phase 5 구현 + commit `eea3bac` (2026-04-21) — **prayer_output_redesign feature 완료**
-- [ ] Phase 4 구현
-- [ ] Phase 5 (대기)

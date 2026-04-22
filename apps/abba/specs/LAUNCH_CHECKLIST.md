@@ -125,10 +125,10 @@
 
 ### 17. 결제 견고성
 
-- [ ] `completePurchase()` try-catch 강화
-- [ ] Webhook JWS 디코딩 에러 핸들러
-- [ ] 30초 복원 타임아웃
-- [ ] Grace Period 만료 후 자동 다운그레이드 UX
+- [x] `completePurchase()` try-catch 강화 — RevenueCatSubscriptionService 전 메서드 try-catch 커버 (2026-04-22 검증)
+- [ ] Webhook JWS 디코딩 에러 핸들러 — 서버사이드 Edge Function 작업 (앱 범위 외)
+- [x] 30초 복원 타임아웃 — `membership_view.dart:698` 구현 완료
+- [ ] Grace Period 만료 후 자동 다운그레이드 UX — SDK 자동 전환 OK, **사용자 알림 UX 미구현**
 
 ---
 
