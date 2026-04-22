@@ -398,8 +398,9 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
       await launchUrl(url, mode: LaunchMode.externalApplication);
     } else {
       if (mounted) {
+        final l10n = AppLocalizations.of(context)!;
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Coming soon')),
+          SnackBar(content: Text(l10n.comingSoon)),
         );
       }
     }
