@@ -92,7 +92,6 @@ class SupabaseStorageBibleTextService implements BibleTextService {
     'fi': _BundleDescriptor(locale: 'fi', code: 'pr1933', name: 'Raamattu 1933/38'),
     'hu': _BundleDescriptor(locale: 'hu', code: 'karoli', name: 'Károli'),
     'vi': _BundleDescriptor(locale: 'vi', code: 'bible', name: 'Kinh Thánh Việt'),
-    'th': _BundleDescriptor(locale: 'th', code: 'kjv', name: 'พระคัมภีร์ไทย'),
     'fil': _BundleDescriptor(locale: 'fil', code: 'adb', name: 'Ang Dating Biblia'),
     'ro': _BundleDescriptor(locale: 'ro', code: 'ronc', name: 'Cornilescu 1924'),
     'it': _BundleDescriptor(locale: 'it', code: 'diodati', name: 'Diodati 1927'),
