@@ -1,0 +1,22 @@
+# Android Release Signing Config Template
+# ==============================================
+# 1. Keystore 생성 (한 번만):
+#    keytool -genkey -v \
+#      -keystore ~/.android/abba-release.keystore \
+#      -alias abba \
+#      -keyalg RSA -keysize 2048 -validity 10000
+#
+# 2. 이 파일을 `key.properties`로 복사:
+#    cp key.properties.template key.properties
+#
+# 3. 아래 값 실제 값으로 채우기 (키스토어 생성 시 입력한 값):
+storePassword=CHANGE_ME_keystore_password
+keyPassword=CHANGE_ME_key_password
+keyAlias=abba
+storeFile=/Users/yonghunjeong/.android/abba-release.keystore
+
+# ⚠️ 중요:
+# - key.properties 파일은 .gitignore에 이미 포함됨 (커밋 금지)
+# - keystore 파일은 1Password / iCloud Keychain 등에 반드시 백업
+# - 분실 시 Play Store 앱 업데이트 영원히 불가 (Google Play App Signing 미사용 시)
+# - 권장: Google Play App Signing 활성화 (Play Console > Setup > App signing)

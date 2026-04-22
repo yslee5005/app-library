@@ -167,16 +167,29 @@
 
 ### 18. Android 출시
 
-- [ ] **Android keystore 생성**: `keytool -genkey -v -keystore ~/.android/abba-release.keystore -alias abba -keyalg RSA -keysize 2048 -validity 10000`
-- [ ] `android/key.properties` 작성 (gitignored) — storePassword / keyAlias / keyPassword / storeFile
-- [ ] `android/app/build.gradle.kts` release signingConfig 설정 (현재 debug 키로 서명 → Play Store 업로드 불가)
-- [ ] `.gitignore` 검증 (`key.properties` 포함)
-- [ ] `flutter build appbundle --release` 테스트
+- [x] **`android/app/build.gradle.kts` release signingConfig 설정** — key.properties 조건부 로드 + debug fallback 구현
+- [x] **`android/key.properties.template` 생성** — keytool 명령 + 작성 가이드 포함
+- [x] **`.gitignore` 검증** — `key.properties`, `*.keystore`, `*.jks` 이미 포함됨 (android/.gitignore)
+- [ ] **Android keystore 생성** (사용자):
+  ```bash
+  keytool -genkey -v \
+    -keystore ~/.android/abba-release.keystore \
+    -alias abba \
+    -keyalg RSA -keysize 2048 -validity 10000
+  ```
+- [ ] **`apps/abba/android/key.properties` 작성** (사용자):
+  ```bash
+  cp apps/abba/android/key.properties.template apps/abba/android/key.properties
+  # CHANGE_ME 값을 실제 keystore 암호로 변경
+  ```
+- [ ] `flutter build appbundle --release` 테스트 (서명 확인)
+- [ ] **Keystore 백업** — 1Password/iCloud Keychain 필수 (분실 시 Play Store 업데이트 영원히 불가)
 - [ ] Google Play Console 등록
 - [ ] Android RevenueCat 키 추가 (`.env.client` `REVENUECAT_ANDROID_KEY`)
   - ⚠️ `AppConfig`는 platform 분기로 이미 대응 (`a538f6b`)
 - [ ] Play Store 자산 (스크린샷, 아이콘 512×512, feature graphic 1024×500)
 - [ ] 콘텐츠 등급 신청
+- [ ] **(권장) Google Play App Signing 활성화** (Play Console > Setup > App signing) — upload key 분실해도 복구 가능
 
 ### 19. 결제 견고성 (전부 완료)
 
