@@ -126,7 +126,7 @@
 ### 17. 결제 견고성
 
 - [x] `completePurchase()` try-catch 강화 — RevenueCatSubscriptionService 전 메서드 try-catch 커버 (2026-04-22 검증)
-- [ ] Webhook JWS 디코딩 에러 핸들러 — 서버사이드 Edge Function 작업 (앱 범위 외)
+- [x] ~~Webhook JWS 디코딩 에러 핸들러~~ — **Abba에 불필요**. SDK `CustomerInfo.entitlement.isActive`로 직접 조회, 서버 DB 동기화(`public.subscriptions`) 미사용. 서버 트리거 알림 등 향후 필요 시에만 검토
 - [x] 30초 복원 타임아웃 — `membership_view.dart:698` 구현 완료
 - [x] Grace Period 만료 후 자동 다운그레이드 UX — Membership 페이지에 billing-issue 배너 + 결제수단 업데이트 CTA 구현 (`membership_view.dart` `_buildGraceBanner`, 35 locale l10n, 2026-04-21)
 
