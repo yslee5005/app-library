@@ -573,6 +573,15 @@ class AppLocalizationsKo extends AppLocalizations {
   String get applicationContext => '어디서';
 
   @override
+  String get applicationMorningLabel => '아침';
+
+  @override
+  String get applicationDayLabel => '낮';
+
+  @override
+  String get applicationEveningLabel => '저녁';
+
+  @override
   String get relatedKnowledgeTitle => '관련 지식';
 
   @override

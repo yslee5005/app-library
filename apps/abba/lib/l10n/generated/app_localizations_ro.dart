@@ -588,6 +588,15 @@ class AppLocalizationsRo extends AppLocalizations {
   String get applicationContext => 'Unde';
 
   @override
+  String get applicationMorningLabel => 'Dimineață';
+
+  @override
+  String get applicationDayLabel => 'Zi';
+
+  @override
+  String get applicationEveningLabel => 'Seară';
+
+  @override
   String get relatedKnowledgeTitle => 'Cunoștințe conexe';
 
   @override

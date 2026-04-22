@@ -585,6 +585,15 @@ class AppLocalizationsUk extends AppLocalizations {
   String get applicationContext => 'Де';
 
   @override
+  String get applicationMorningLabel => 'Ранок';
+
+  @override
+  String get applicationDayLabel => 'День';
+
+  @override
+  String get applicationEveningLabel => 'Вечір';
+
+  @override
   String get relatedKnowledgeTitle => 'Додаткові знання';
 
   @override

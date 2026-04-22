@@ -578,6 +578,15 @@ class AppLocalizationsHe extends AppLocalizations {
   String get applicationContext => 'איפה';
 
   @override
+  String get applicationMorningLabel => 'בוקר';
+
+  @override
+  String get applicationDayLabel => 'יום';
+
+  @override
+  String get applicationEveningLabel => 'ערב';
+
+  @override
   String get relatedKnowledgeTitle => 'ידע קשור';
 
   @override

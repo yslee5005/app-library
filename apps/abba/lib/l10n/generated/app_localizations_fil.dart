@@ -591,6 +591,15 @@ class AppLocalizationsFil extends AppLocalizations {
   String get applicationContext => 'Saan';
 
   @override
+  String get applicationMorningLabel => 'Umaga';
+
+  @override
+  String get applicationDayLabel => 'Araw';
+
+  @override
+  String get applicationEveningLabel => 'Gabi';
+
+  @override
   String get relatedKnowledgeTitle => 'Kaugnay na Kaalaman';
 
   @override

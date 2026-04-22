@@ -585,6 +585,15 @@ class AppLocalizationsHi extends AppLocalizations {
   String get applicationContext => 'कहाँ';
 
   @override
+  String get applicationMorningLabel => 'सुबह';
+
+  @override
+  String get applicationDayLabel => 'दिन';
+
+  @override
+  String get applicationEveningLabel => 'शाम';
+
+  @override
   String get relatedKnowledgeTitle => 'संबंधित ज्ञान';
 
   @override

@@ -586,6 +586,15 @@ class AppLocalizationsPt extends AppLocalizations {
   String get applicationContext => 'Onde';
 
   @override
+  String get applicationMorningLabel => 'Manhã';
+
+  @override
+  String get applicationDayLabel => 'Dia';
+
+  @override
+  String get applicationEveningLabel => 'Noite';
+
+  @override
   String get relatedKnowledgeTitle => 'Conhecimento Relacionado';
 
   @override

@@ -584,6 +584,15 @@ class AppLocalizationsSv extends AppLocalizations {
   String get applicationContext => 'Var';
 
   @override
+  String get applicationMorningLabel => 'Morgon';
+
+  @override
+  String get applicationDayLabel => 'Dag';
+
+  @override
+  String get applicationEveningLabel => 'Kväll';
+
+  @override
   String get relatedKnowledgeTitle => 'Relaterad kunskap';
 
   @override

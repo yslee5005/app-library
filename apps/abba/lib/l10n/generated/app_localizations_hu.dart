@@ -586,6 +586,15 @@ class AppLocalizationsHu extends AppLocalizations {
   String get applicationContext => 'Hol';
 
   @override
+  String get applicationMorningLabel => 'Reggel';
+
+  @override
+  String get applicationDayLabel => 'Nappal';
+
+  @override
+  String get applicationEveningLabel => 'Este';
+
+  @override
   String get relatedKnowledgeTitle => 'Kapcsolódó tudás';
 
   @override

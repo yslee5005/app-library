@@ -588,6 +588,15 @@ class AppLocalizationsEl extends AppLocalizations {
   String get applicationContext => 'Πού';
 
   @override
+  String get applicationMorningLabel => 'Πρωί';
+
+  @override
+  String get applicationDayLabel => 'Μέρα';
+
+  @override
+  String get applicationEveningLabel => 'Βράδυ';
+
+  @override
   String get relatedKnowledgeTitle => 'Σχετική Γνώση';
 
   @override

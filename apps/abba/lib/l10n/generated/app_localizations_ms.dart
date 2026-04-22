@@ -585,6 +585,15 @@ class AppLocalizationsMs extends AppLocalizations {
   String get applicationContext => 'Di mana';
 
   @override
+  String get applicationMorningLabel => 'Pagi';
+
+  @override
+  String get applicationDayLabel => 'Siang';
+
+  @override
+  String get applicationEveningLabel => 'Petang';
+
+  @override
   String get relatedKnowledgeTitle => 'Pengetahuan Berkaitan';
 
   @override

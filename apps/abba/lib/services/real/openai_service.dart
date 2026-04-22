@@ -350,7 +350,12 @@ class OpenAiService implements AiService {
             'Your meditation reveals a heart seeking God\'s guidance and peace.',
       ),
       application: ApplicationSuggestion(
-        action: '오늘 잠시 조용히 묵상하는 시간을 가져보세요',
+        morningAction:
+            'Before rising, whisper "The Lord is my shepherd" three times in bed.',
+        dayAction:
+            'When frustrated during work, silently say "my shepherd" once.',
+        eveningAction:
+            'Before dinner, read Psalm 23:1 aloud with your family.',
       ),
       knowledge: RelatedKnowledge(
         historicalContext:
@@ -592,7 +597,9 @@ Return a JSON object:
     "insight": "Deep analysis of the user's meditation (3-4 sentences in $langName). Acknowledge what they discovered, then add deeper meaning."
   },
   "application": {
-    "action": "A very specific actionable application in $langName. BAD: 'Be more grateful' (abstract). BAD: 'Trust God more' (vague). GOOD: 'At dinner tonight, tell your family 3 things you are thankful for this year'. GOOD: 'Tomorrow morning before work, read Psalm 23 aloud for 5 minutes'. GOOD: 'Today, buy coffee for a colleague you are in conflict with and greet them first'. Must include who/what/how."
+    "morning_action": "Before the day starts. 10 minutes or less. Quiet, reflective. In $langName. Example: 'In bed before getting up, whisper one line of Psalm 23 three times.'",
+    "day_action": "During work or daily errands. Practical, doable while busy. In $langName. Example: 'When frustrated at work today, silently say my shepherd once.'",
+    "evening_action": "With family or alone in the evening. Slightly longer, more personal. In $langName. Example: 'Before dinner, read Psalm 23:1 aloud with your family.'"
   },
   "knowledge": {
     "original_word": {
@@ -626,7 +633,7 @@ WRITING STYLE (critical for quality):
 
 IMPORTANT:
 - cross_references: Include 2-3 verses. Each must have both "reference" and full "text" in $langName.
-- application.action: Must be SPECIFIC and ACTIONABLE. Include who/what/how.
+- application.morning_action / day_action / evening_action: Each must be SPECIFIC and ACTIONABLE with who/what/how. All 3 must tie to today's passage theme.
 - Do NOT use generic phrases. Every response must be personalized to THIS meditation.
 
 GROWTH STORY QUALITY BAR (Phase 4):

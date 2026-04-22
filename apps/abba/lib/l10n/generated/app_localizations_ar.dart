@@ -581,6 +581,15 @@ class AppLocalizationsAr extends AppLocalizations {
   String get applicationContext => 'أين';
 
   @override
+  String get applicationMorningLabel => 'الصباح';
+
+  @override
+  String get applicationDayLabel => 'النهار';
+
+  @override
+  String get applicationEveningLabel => 'المساء';
+
+  @override
   String get relatedKnowledgeTitle => 'معرفة ذات صلة';
 
   @override

@@ -590,6 +590,15 @@ class AppLocalizationsFr extends AppLocalizations {
   String get applicationContext => 'Où';
 
   @override
+  String get applicationMorningLabel => 'Matin';
+
+  @override
+  String get applicationDayLabel => 'Jour';
+
+  @override
+  String get applicationEveningLabel => 'Soir';
+
+  @override
   String get relatedKnowledgeTitle => 'Connaissances Liées';
 
   @override

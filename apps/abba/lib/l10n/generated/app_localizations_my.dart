@@ -585,6 +585,15 @@ class AppLocalizationsMy extends AppLocalizations {
   String get applicationContext => 'ဘယ်နေရာ';
 
   @override
+  String get applicationMorningLabel => 'နံနက်';
+
+  @override
+  String get applicationDayLabel => 'နေ့လယ်';
+
+  @override
+  String get applicationEveningLabel => 'ညနေ';
+
+  @override
   String get relatedKnowledgeTitle => 'ဆက်စပ်ဗဟုသုတ';
 
   @override

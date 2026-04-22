@@ -584,6 +584,15 @@ class AppLocalizationsDa extends AppLocalizations {
   String get applicationContext => 'Hvor';
 
   @override
+  String get applicationMorningLabel => 'Morgen';
+
+  @override
+  String get applicationDayLabel => 'Dag';
+
+  @override
+  String get applicationEveningLabel => 'Aften';
+
+  @override
   String get relatedKnowledgeTitle => 'Relateret viden';
 
   @override

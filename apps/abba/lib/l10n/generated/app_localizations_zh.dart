@@ -573,6 +573,15 @@ class AppLocalizationsZh extends AppLocalizations {
   String get applicationContext => '何地';
 
   @override
+  String get applicationMorningLabel => '早晨';
+
+  @override
+  String get applicationDayLabel => '白天';
+
+  @override
+  String get applicationEveningLabel => '晚上';
+
+  @override
   String get relatedKnowledgeTitle => '相关知识';
 
   @override

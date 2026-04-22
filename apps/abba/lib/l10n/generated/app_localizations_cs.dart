@@ -584,6 +584,15 @@ class AppLocalizationsCs extends AppLocalizations {
   String get applicationContext => 'Kde';
 
   @override
+  String get applicationMorningLabel => 'Ráno';
+
+  @override
+  String get applicationDayLabel => 'Den';
+
+  @override
+  String get applicationEveningLabel => 'Večer';
+
+  @override
   String get relatedKnowledgeTitle => 'Související znalosti';
 
   @override

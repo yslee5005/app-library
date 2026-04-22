@@ -586,6 +586,15 @@ class AppLocalizationsHr extends AppLocalizations {
   String get applicationContext => 'Gdje';
 
   @override
+  String get applicationMorningLabel => 'Jutro';
+
+  @override
+  String get applicationDayLabel => 'Dan';
+
+  @override
+  String get applicationEveningLabel => 'Večer';
+
+  @override
   String get relatedKnowledgeTitle => 'Povezano znanje';
 
   @override

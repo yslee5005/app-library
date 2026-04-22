@@ -585,6 +585,15 @@ class AppLocalizationsId extends AppLocalizations {
   String get applicationContext => 'Di mana';
 
   @override
+  String get applicationMorningLabel => 'Pagi';
+
+  @override
+  String get applicationDayLabel => 'Siang';
+
+  @override
+  String get applicationEveningLabel => 'Malam';
+
+  @override
   String get relatedKnowledgeTitle => 'Pengetahuan Terkait';
 
   @override

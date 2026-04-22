@@ -587,6 +587,15 @@ class AppLocalizationsDe extends AppLocalizations {
   String get applicationContext => 'Wo';
 
   @override
+  String get applicationMorningLabel => 'Morgen';
+
+  @override
+  String get applicationDayLabel => 'Tag';
+
+  @override
+  String get applicationEveningLabel => 'Abend';
+
+  @override
   String get relatedKnowledgeTitle => 'Verwandtes Wissen';
 
   @override

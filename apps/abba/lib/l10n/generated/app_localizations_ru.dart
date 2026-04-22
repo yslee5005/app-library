@@ -587,6 +587,15 @@ class AppLocalizationsRu extends AppLocalizations {
   String get applicationContext => 'Где';
 
   @override
+  String get applicationMorningLabel => 'Утро';
+
+  @override
+  String get applicationDayLabel => 'День';
+
+  @override
+  String get applicationEveningLabel => 'Вечер';
+
+  @override
   String get relatedKnowledgeTitle => 'Дополнительные знания';
 
   @override

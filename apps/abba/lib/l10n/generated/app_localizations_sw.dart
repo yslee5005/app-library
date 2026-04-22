@@ -586,6 +586,15 @@ class AppLocalizationsSw extends AppLocalizations {
   String get applicationContext => 'Wapi';
 
   @override
+  String get applicationMorningLabel => 'Asubuhi';
+
+  @override
+  String get applicationDayLabel => 'Mchana';
+
+  @override
+  String get applicationEveningLabel => 'Jioni';
+
+  @override
   String get relatedKnowledgeTitle => 'Maarifa Yanayohusiana';
 
   @override

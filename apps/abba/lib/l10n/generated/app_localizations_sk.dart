@@ -586,6 +586,15 @@ class AppLocalizationsSk extends AppLocalizations {
   String get applicationContext => 'Kde';
 
   @override
+  String get applicationMorningLabel => 'Ráno';
+
+  @override
+  String get applicationDayLabel => 'Deň';
+
+  @override
+  String get applicationEveningLabel => 'Večer';
+
+  @override
   String get relatedKnowledgeTitle => 'Súvisiace poznatky';
 
   @override

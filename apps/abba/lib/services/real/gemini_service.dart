@@ -757,9 +757,15 @@ Rules (per QT Guide §4-6):
             : 'Your meditation centers on trust — you are learning to release what you cannot control into the hands of the One who already holds it.',
       ),
       application: ApplicationSuggestion(
-        action: isKo
-            ? '오늘 저녁 식사 전, 가족과 함께 시편 23편을 한 절씩 소리 내어 읽어 보세요.'
-            : 'Tonight before dinner, read Psalm 23 aloud one verse at a time with your family.',
+        morningAction: isKo
+            ? '아침에 눈을 뜨기 전 침대에서 "여호와는 나의 목자시니"를 3번 속삭여 보세요.'
+            : 'Before rising, whisper "The Lord is my shepherd" three times while still in bed.',
+        dayAction: isKo
+            ? '업무 중 답답할 때, 마음속으로 "나의 목자"라 한 번 말해 보세요.'
+            : 'When frustrated during work today, silently say "my shepherd" once.',
+        eveningAction: isKo
+            ? '저녁 식사 전, 가족과 함께 시편 23편 1절을 소리 내어 읽어 보세요.'
+            : 'Before dinner, read Psalm 23:1 aloud with your family.',
       ),
       knowledge: RelatedKnowledge(
         originalWord: OriginalWord(
@@ -1193,7 +1199,9 @@ Return this JSON object:
     "insight": "<3-4 sentence deep analysis of the user's meditation in $langName>"
   },
   "application": {
-    "action": "<one specific actionable application in $langName — Personal, Practical, Possible>"
+    "morning_action": "<Before the day starts, ≤10 min. Quiet, reflective action in $langName>",
+    "day_action": "<During work or daily errands. Practical, doable while busy. In $langName>",
+    "evening_action": "<With family or alone in the evening. Slightly longer, personal. In $langName>"
   },
   "knowledge": {
     "historical_context": "<Historical/cultural background (3-4 sentences in $langName)>",
@@ -1225,10 +1233,15 @@ SCRIPTURE HANDLING:
 - Must be a real Bible citation (Book Chapter:Verse).
 - original_words: 1-2 words max, must appear in this passage.
 
-APPLICATION — 3P principle:
-- Personal: "you should" → "today, you can..."
-- Practical: concrete action, not abstract
-- Possible: achievable today or this week
+APPLICATION — 3P principle (Personal, Practical, Possible) across 3 time blocks:
+- morning_action: Before the day starts. 10 minutes or less. Quiet, reflective.
+  Example: "In bed before getting up, whisper one line of Psalm 23 three times."
+- day_action: During work or daily errands. Practical, doable while busy.
+  Example: "When frustrated at work today, silently say 'my shepherd' once."
+- evening_action: With family or alone in the evening. Slightly longer, more personal.
+  Example: "Before dinner, read Psalm 23:1 aloud with your family."
+- Each must be SPECIFIC with who/what/how. Avoid generic "pray more" or "read Bible".
+- All 3 must connect to today's passage theme.
 
 WRITING STYLE:
 - Write like a master short story author, NOT a report writer.
@@ -1247,7 +1260,7 @@ CITATIONS (knowledge.citations):
 
 IMPORTANT:
 - cross_references: Include 2-3 verses with both "reference" and full "text" in $langName.
-- application.action: Must be SPECIFIC and ACTIONABLE with who/what/how.
+- application.morning_action / day_action / evening_action: Each must be SPECIFIC and ACTIONABLE with who/what/how.
 
 GROWTH STORY QUALITY BAR (Phase 4):
 - Must be a REAL, VERIFIABLE story from:

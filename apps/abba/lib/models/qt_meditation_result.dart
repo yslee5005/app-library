@@ -120,17 +120,51 @@ class MeditationAnalysis {
   }
 }
 
+/// Phase 5B (qt_output_redesign) — expanded into 3 time-block actions.
+/// Legacy `action` field preserved as fallback for:
+///   1. DB records written before Phase 5B (single-action format).
+///   2. Model responses that still emit only `action` during rollout.
+///
+/// UI prefers 3-block rendering when `hasTimeBlocks` is true; otherwise it
+/// falls back to the single `action` string.
 class ApplicationSuggestion {
-  final String action;
+  final String action;          // legacy / fallback — single action
+  final String morningAction;   // Phase 5B — before the day starts, ≤10 min
+  final String dayAction;       // Phase 5B — during work or daily errands
+  final String eveningAction;   // Phase 5B — family or alone, in the evening
 
-  const ApplicationSuggestion({this.action = ''});
+  const ApplicationSuggestion({
+    this.action = '',
+    this.morningAction = '',
+    this.dayAction = '',
+    this.eveningAction = '',
+  });
+
+  /// True when at least one time-block field is populated. UI uses this to
+  /// choose between the 3-block layout and the legacy single-line layout.
+  bool get hasTimeBlocks =>
+      morningAction.isNotEmpty ||
+      dayAction.isNotEmpty ||
+      eveningAction.isNotEmpty;
 
   factory ApplicationSuggestion.fromJson(Map<String, dynamic> json) {
-    // New format (single action)
+    // Phase 5B primary schema — 3 time blocks.
+    final morning = json['morning_action'] as String? ?? '';
+    final day = json['day_action'] as String? ?? '';
+    final evening = json['evening_action'] as String? ?? '';
+    if (morning.isNotEmpty || day.isNotEmpty || evening.isNotEmpty) {
+      return ApplicationSuggestion(
+        action: json['action'] as String? ?? '',
+        morningAction: morning,
+        dayAction: day,
+        eveningAction: evening,
+      );
+    }
+    // Legacy format: single `action` string.
     if (json.containsKey('action') && json['action'] is String) {
       return ApplicationSuggestion(action: json['action'] as String);
     }
-    // Legacy format fallback (action_ko or action_en)
+    // Oldest legacy: `action_ko` / `action_en` pair.
     return ApplicationSuggestion(
       action: json['action_ko'] as String? ?? json['action_en'] as String? ?? '',
     );

@@ -573,6 +573,15 @@ class AppLocalizationsJa extends AppLocalizations {
   String get applicationContext => 'どこで';
 
   @override
+  String get applicationMorningLabel => '朝';
+
+  @override
+  String get applicationDayLabel => '昼';
+
+  @override
+  String get applicationEveningLabel => '夜';
+
+  @override
   String get relatedKnowledgeTitle => '関連知識';
 
   @override

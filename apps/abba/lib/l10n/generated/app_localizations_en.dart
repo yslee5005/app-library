@@ -583,6 +583,15 @@ class AppLocalizationsEn extends AppLocalizations {
   String get applicationContext => 'Where';
 
   @override
+  String get applicationMorningLabel => 'Morning';
+
+  @override
+  String get applicationDayLabel => 'Day';
+
+  @override
+  String get applicationEveningLabel => 'Evening';
+
+  @override
   String get relatedKnowledgeTitle => 'Related Knowledge';
 
   @override

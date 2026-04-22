@@ -579,6 +579,15 @@ class AppLocalizationsTh extends AppLocalizations {
   String get applicationContext => 'ที่ไหน';
 
   @override
+  String get applicationMorningLabel => 'เช้า';
+
+  @override
+  String get applicationDayLabel => 'กลางวัน';
+
+  @override
+  String get applicationEveningLabel => 'เย็น';
+
+  @override
   String get relatedKnowledgeTitle => 'ความรู้ที่เกี่ยวข้อง';
 
   @override

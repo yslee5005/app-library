@@ -585,6 +585,15 @@ class AppLocalizationsFi extends AppLocalizations {
   String get applicationContext => 'Missä';
 
   @override
+  String get applicationMorningLabel => 'Aamu';
+
+  @override
+  String get applicationDayLabel => 'Päivä';
+
+  @override
+  String get applicationEveningLabel => 'Ilta';
+
+  @override
   String get relatedKnowledgeTitle => 'Liittyvä tieto';
 
   @override

@@ -327,6 +327,95 @@ void main() {
     });
   });
 
+  // ---------------------------------------------------------------------------
+  // Phase 5B (qt_output_redesign) — ApplicationSuggestion 3 time blocks
+  // ---------------------------------------------------------------------------
+  group('ApplicationSuggestion Phase 5B 3-block', () {
+    test('parses new 3-block JSON', () {
+      final app = ApplicationSuggestion.fromJson({
+        'morning_action': 'Before rising, whisper a line from Psalm 23.',
+        'day_action': 'At lunch, pause and say "my shepherd" once.',
+        'evening_action': 'Before dinner, read Psalm 23:1 with family.',
+      });
+      expect(app.morningAction, startsWith('Before rising'));
+      expect(app.dayAction, contains('my shepherd'));
+      expect(app.eveningAction, contains('Psalm 23:1'));
+      expect(app.action, isEmpty);
+      expect(app.hasTimeBlocks, isTrue);
+    });
+
+    test('legacy single `action` JSON falls back (hasTimeBlocks false)', () {
+      final app = ApplicationSuggestion.fromJson({
+        'action': '오늘 저녁 식사 전 시편 23편을 한 번 소리 내어 읽으세요.',
+      });
+      expect(app.action, contains('시편 23편'));
+      expect(app.morningAction, isEmpty);
+      expect(app.dayAction, isEmpty);
+      expect(app.eveningAction, isEmpty);
+      expect(app.hasTimeBlocks, isFalse);
+    });
+
+    test('oldest legacy `action_ko`/`action_en` fallback', () {
+      final legacyEn = ApplicationSuggestion.fromJson({
+        'action_en': 'Read Psalm 23 aloud tonight.',
+        'action_ko': '오늘 밤 시편 23편을 소리 내어 읽으세요.',
+      });
+      // fromJson prefers action_ko first (historical behavior preserved).
+      expect(legacyEn.action, '오늘 밤 시편 23편을 소리 내어 읽으세요.');
+      expect(legacyEn.hasTimeBlocks, isFalse);
+
+      final legacyEnOnly = ApplicationSuggestion.fromJson({
+        'action_en': 'Read Psalm 23 aloud tonight.',
+      });
+      expect(legacyEnOnly.action, 'Read Psalm 23 aloud tonight.');
+    });
+
+    test('hasTimeBlocks true when only morning is populated', () {
+      const app = ApplicationSuggestion(morningAction: 'whisper a verse');
+      expect(app.hasTimeBlocks, isTrue);
+      expect(app.dayAction, isEmpty);
+      expect(app.eveningAction, isEmpty);
+    });
+
+    test('hasTimeBlocks false when nothing set', () {
+      const app = ApplicationSuggestion();
+      expect(app.hasTimeBlocks, isFalse);
+      expect(app.action, isEmpty);
+    });
+
+    test('3-block schema coexists with legacy `action` (both preserved)', () {
+      // Simulates a Gemini response that still carries a legacy action field
+      // alongside the new 3-block. Both should parse; hasTimeBlocks wins.
+      final app = ApplicationSuggestion.fromJson({
+        'action': '오늘 조용히 묵상하는 시간을 가져보세요.',
+        'morning_action': '아침에 침대에서 한 구절 속삭이기',
+        'day_action': '점심에 한 번 호흡하며 기도',
+        'evening_action': '저녁 식사 전 가족과 함께 읽기',
+      });
+      expect(app.hasTimeBlocks, isTrue);
+      expect(app.action, '오늘 조용히 묵상하는 시간을 가져보세요.');
+      expect(app.morningAction, isNotEmpty);
+      expect(app.dayAction, isNotEmpty);
+      expect(app.eveningAction, isNotEmpty);
+    });
+
+    test('QtMeditationResult.fromJson propagates 3-block application', () {
+      final result = QtMeditationResult.fromJson({
+        'analysis': {'insight': 'i'},
+        'application': {
+          'morning_action': 'm',
+          'day_action': 'd',
+          'evening_action': 'e',
+        },
+        'knowledge': {},
+      });
+      expect(result.application.hasTimeBlocks, isTrue);
+      expect(result.application.morningAction, 'm');
+      expect(result.application.dayAction, 'd');
+      expect(result.application.eveningAction, 'e');
+    });
+  });
+
   group('QtMeditationResult.copyWithScripture', () {
     test('replaces scripture, preserves other fields', () {
       final original = QtMeditationResult.fromJson({

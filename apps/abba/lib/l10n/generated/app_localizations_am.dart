@@ -573,6 +573,15 @@ class AppLocalizationsAm extends AppLocalizations {
   String get applicationContext => 'የት';
 
   @override
+  String get applicationMorningLabel => 'ጥዋት';
+
+  @override
+  String get applicationDayLabel => 'ቀን';
+
+  @override
+  String get applicationEveningLabel => 'ማታ';
+
+  @override
   String get relatedKnowledgeTitle => 'ተዛማጅ እውቀት';
 
   @override

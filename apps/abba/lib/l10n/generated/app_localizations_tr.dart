@@ -587,6 +587,15 @@ class AppLocalizationsTr extends AppLocalizations {
   String get applicationContext => 'Nerede';
 
   @override
+  String get applicationMorningLabel => 'Sabah';
+
+  @override
+  String get applicationDayLabel => 'Gündüz';
+
+  @override
+  String get applicationEveningLabel => 'Akşam';
+
+  @override
   String get relatedKnowledgeTitle => 'İlgili Bilgi';
 
   @override

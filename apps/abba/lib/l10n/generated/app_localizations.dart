@@ -1256,6 +1256,24 @@ abstract class AppLocalizations {
   /// **'Where'**
   String get applicationContext;
 
+  /// No description provided for @applicationMorningLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Morning'**
+  String get applicationMorningLabel;
+
+  /// No description provided for @applicationDayLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Day'**
+  String get applicationDayLabel;
+
+  /// No description provided for @applicationEveningLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Evening'**
+  String get applicationEveningLabel;
+
   /// No description provided for @relatedKnowledgeTitle.
   ///
   /// In en, this message translates to:

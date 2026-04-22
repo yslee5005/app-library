@@ -380,7 +380,12 @@ class _AiLoadingViewState extends ConsumerState<AiLoadingView>
               'Your meditation reveals a heart seeking God\'s guidance and peace.',
         ),
         application: ApplicationSuggestion(
-          action: '오늘 잠시 조용히 묵상하는 시간을 가져보세요',
+          morningAction:
+              'Before rising, whisper "The Lord is my shepherd" three times in bed.',
+          dayAction:
+              'When frustrated during work, silently say "my shepherd" once.',
+          eveningAction:
+              'Before dinner, read Psalm 23:1 aloud with your family.',
         ),
         knowledge: RelatedKnowledge(
           historicalContext:

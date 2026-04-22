@@ -584,6 +584,15 @@ class AppLocalizationsVi extends AppLocalizations {
   String get applicationContext => 'Ở đâu';
 
   @override
+  String get applicationMorningLabel => 'Sáng';
+
+  @override
+  String get applicationDayLabel => 'Ngày';
+
+  @override
+  String get applicationEveningLabel => 'Tối';
+
+  @override
   String get relatedKnowledgeTitle => 'Kiến thức liên quan';
 
   @override

@@ -585,6 +585,15 @@ class AppLocalizationsNl extends AppLocalizations {
   String get applicationContext => 'Waar';
 
   @override
+  String get applicationMorningLabel => 'Ochtend';
+
+  @override
+  String get applicationDayLabel => 'Dag';
+
+  @override
+  String get applicationEveningLabel => 'Avond';
+
+  @override
   String get relatedKnowledgeTitle => 'Gerelateerde kennis';
 
   @override

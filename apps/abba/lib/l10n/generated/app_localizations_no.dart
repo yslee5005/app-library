@@ -584,6 +584,15 @@ class AppLocalizationsNo extends AppLocalizations {
   String get applicationContext => 'Hvor';
 
   @override
+  String get applicationMorningLabel => 'Morgen';
+
+  @override
+  String get applicationDayLabel => 'Dag';
+
+  @override
+  String get applicationEveningLabel => 'Kveld';
+
+  @override
   String get relatedKnowledgeTitle => 'Relatert kunnskap';
 
   @override
