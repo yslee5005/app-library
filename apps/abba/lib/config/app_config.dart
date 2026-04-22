@@ -1,3 +1,6 @@
+import 'dart:io' show Platform;
+
+import 'package:flutter/foundation.dart' show debugPrint, kIsWeb;
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 /// App configuration loaded from .env.client via flutter_dotenv (runtime).
@@ -16,7 +19,29 @@ class AppConfig {
 
   static String get sentryDsn => dotenv.env['SENTRY_DSN'] ?? '';
 
-  static String get revenueCatApiKey => dotenv.env['REVENUECAT_API_KEY'] ?? '';
+  /// RevenueCat SDK key — platform-specific.
+  ///
+  /// `.env.client` defines `REVENUECAT_IOS_KEY` (`appl_*`) and
+  /// `REVENUECAT_ANDROID_KEY` (`goog_*`) separately. This getter selects
+  /// the correct key based on the runtime platform. Web returns empty
+  /// (RevenueCat is not configured for web builds).
+  ///
+  /// Legacy `REVENUECAT_API_KEY` is still honored as a fallback for
+  /// local developer setups that predate the per-platform split.
+  static String get revenueCatApiKey {
+    if (kIsWeb) return dotenv.env['REVENUECAT_API_KEY'] ?? '';
+    if (Platform.isIOS) {
+      return dotenv.env['REVENUECAT_IOS_KEY'] ??
+          dotenv.env['REVENUECAT_API_KEY'] ??
+          '';
+    }
+    if (Platform.isAndroid) {
+      return dotenv.env['REVENUECAT_ANDROID_KEY'] ??
+          dotenv.env['REVENUECAT_API_KEY'] ??
+          '';
+    }
+    return dotenv.env['REVENUECAT_API_KEY'] ?? '';
+  }
 
   /// Terms of Service URL (Apple Guideline 3.1.2 requires link under purchase button).
   static String get termsUrl =>
@@ -39,16 +64,43 @@ class AppConfig {
   static bool get isProduction => env == 'prod';
 
   /// Validate required environment variables.
-  /// Skipped in mock mode — real mode requires Supabase + Gemini keys.
+  /// Skipped in mock mode — real mode requires Supabase + Gemini + RevenueCat + Google OAuth keys.
+  ///
+  /// Called from `main()` *before* the structured logger is initialized, so
+  /// warnings use `debugPrint` instead of `appLogger`.
   static void validate() {
     if (useMock) return;
+
     final missing = <String>[];
+
+    // Fatal — required for core app functionality
     if (supabaseUrl.isEmpty) missing.add('SUPABASE_URL');
     if (supabaseAnonKey.isEmpty) missing.add('SUPABASE_ANON_KEY');
     if (geminiApiKey.isEmpty) missing.add('GEMINI_API_KEY');
+
+    // RevenueCat — required for subscription purchases (iOS/Android only)
+    if (!kIsWeb && revenueCatApiKey.isEmpty) {
+      if (Platform.isIOS) {
+        missing.add('REVENUECAT_IOS_KEY');
+      } else if (Platform.isAndroid) {
+        missing.add('REVENUECAT_ANDROID_KEY');
+      }
+    }
+
+    // Google OAuth — required for account linking (social sign-in)
+    if (googleWebClientId.isEmpty) missing.add('GOOGLE_WEB_CLIENT_ID');
+    if (googleIosClientId.isEmpty) missing.add('GOOGLE_IOS_CLIENT_ID');
+
     if (missing.isNotEmpty) {
       throw StateError(
         'Missing required environment variables: ${missing.join(', ')}',
+      );
+    }
+
+    // Optional — warn but don't fail startup
+    if (sentryDsn.isEmpty) {
+      debugPrint(
+        '[AppConfig] SENTRY_DSN empty — Sentry error reporting disabled.',
       );
     }
   }
