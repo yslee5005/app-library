@@ -824,6 +824,17 @@ class AppLocalizationsMy extends AppLocalizations {
   }
 
   @override
+  String get billingIssueTitle => 'ငွေပေးချေမှု ပြဿနာ တွေ့ရှိခဲ့သည်';
+
+  @override
+  String billingIssueBody(int days) {
+    return 'ငွေပေးချေမှုကို မမွမ်းမံပါက Pro အကျိုးခံစားခွင့်များသည် $days ရက်အတွင်း ကုန်ဆုံးမည်။';
+  }
+
+  @override
+  String get billingIssueAction => 'ငွေပေးချေမှု မွမ်းမံရန်';
+
+  @override
   String accessUntil(String date) {
     return 'Access until: $date';
   }

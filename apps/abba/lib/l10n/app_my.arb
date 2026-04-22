@@ -350,6 +350,16 @@
       }
     }
   },
+  "billingIssueTitle": "ငွေပေးချေမှု ပြဿနာ တွေ့ရှိခဲ့သည်",
+  "billingIssueBody": "ငွေပေးချေမှုကို မမွမ်းမံပါက Pro အကျိုးခံစားခွင့်များသည် {days} ရက်အတွင်း ကုန်ဆုံးမည်။",
+  "@billingIssueBody": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "billingIssueAction": "ငွေပေးချေမှု မွမ်းမံရန်",
   "accessUntil": "Access until: {date}",
   "@accessUntil": {
     "placeholders": {

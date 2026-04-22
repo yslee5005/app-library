@@ -825,6 +825,17 @@ class AppLocalizationsHr extends AppLocalizations {
   }
 
   @override
+  String get billingIssueTitle => 'Otkriven problem s plaćanjem';
+
+  @override
+  String billingIssueBody(int days) {
+    return 'Vaše Pro pogodnosti završit će za $days dana ako se plaćanje ne ažurira.';
+  }
+
+  @override
+  String get billingIssueAction => 'Ažuriraj plaćanje';
+
+  @override
   String accessUntil(String date) {
     return 'Access until: $date';
   }

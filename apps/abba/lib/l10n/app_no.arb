@@ -350,6 +350,16 @@
       }
     }
   },
+  "billingIssueTitle": "Betalingsproblem oppdaget",
+  "billingIssueBody": "Dine Pro-fordeler avsluttes om {days} dager hvis betalingen ikke oppdateres.",
+  "@billingIssueBody": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "billingIssueAction": "Oppdater betaling",
   "accessUntil": "Access until: {date}",
   "@accessUntil": {
     "placeholders": {

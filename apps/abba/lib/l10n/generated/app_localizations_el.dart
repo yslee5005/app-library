@@ -825,6 +825,17 @@ class AppLocalizationsEl extends AppLocalizations {
   }
 
   @override
+  String get billingIssueTitle => 'Εντοπίστηκε πρόβλημα πληρωμής';
+
+  @override
+  String billingIssueBody(int days) {
+    return 'Τα προνόμια Pro θα λήξουν σε $days ημέρες αν δεν ενημερωθεί η πληρωμή.';
+  }
+
+  @override
+  String get billingIssueAction => 'Ενημέρωση πληρωμής';
+
+  @override
   String accessUntil(String date) {
     return 'Access until: $date';
   }

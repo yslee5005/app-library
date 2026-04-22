@@ -350,6 +350,16 @@
       }
     }
   },
+  "billingIssueTitle": "Problema de pagamento detectado",
+  "billingIssueBody": "Seus benefícios Pro terminarão em {days} dias se o pagamento não for atualizado.",
+  "@billingIssueBody": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "billingIssueAction": "Atualizar pagamento",
   "accessUntil": "Access until: {date}",
   "@accessUntil": {
     "placeholders": {

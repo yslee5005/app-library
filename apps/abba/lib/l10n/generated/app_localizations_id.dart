@@ -824,6 +824,17 @@ class AppLocalizationsId extends AppLocalizations {
   }
 
   @override
+  String get billingIssueTitle => 'Masalah pembayaran terdeteksi';
+
+  @override
+  String billingIssueBody(int days) {
+    return 'Manfaat Pro Anda akan berakhir dalam $days hari kecuali pembayaran diperbarui.';
+  }
+
+  @override
+  String get billingIssueAction => 'Perbarui pembayaran';
+
+  @override
   String accessUntil(String date) {
     return 'Access until: $date';
   }

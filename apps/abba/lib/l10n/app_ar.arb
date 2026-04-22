@@ -350,6 +350,16 @@
       }
     }
   },
+  "billingIssueTitle": "تم اكتشاف مشكلة في الدفع",
+  "billingIssueBody": "ستنتهي مزايا Pro خلال {days} أيام ما لم يتم تحديث الدفع.",
+  "@billingIssueBody": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "billingIssueAction": "تحديث الدفع",
   "accessUntil": "Access until: {date}",
   "@accessUntil": {
     "placeholders": {

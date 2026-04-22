@@ -350,6 +350,16 @@
       }
     }
   },
+  "billingIssueTitle": "Ödeme sorunu algılandı",
+  "billingIssueBody": "Ödeme güncellenmezse Pro avantajlarınız {days} gün içinde sona erecek.",
+  "@billingIssueBody": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "billingIssueAction": "Ödemeyi güncelle",
   "accessUntil": "Access until: {date}",
   "@accessUntil": {
     "placeholders": {

@@ -831,6 +831,17 @@ class AppLocalizationsFil extends AppLocalizations {
   }
 
   @override
+  String get billingIssueTitle => 'Natukoy na isyu sa pagbabayad';
+
+  @override
+  String billingIssueBody(int days) {
+    return 'Matatapos ang mga benepisyo ng Pro sa loob ng $days araw maliban na lang kung ma-update ang bayad.';
+  }
+
+  @override
+  String get billingIssueAction => 'I-update ang bayad';
+
+  @override
   String accessUntil(String date) {
     return 'Access until: $date';
   }

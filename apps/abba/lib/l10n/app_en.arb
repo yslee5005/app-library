@@ -357,6 +357,16 @@
       }
     }
   },
+  "billingIssueTitle": "Payment issue detected",
+  "billingIssueBody": "Your Pro benefits will end in {days} days unless payment is updated.",
+  "@billingIssueBody": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "billingIssueAction": "Update payment",
   "accessUntil": "Access until: {date}",
   "@accessUntil": {
     "placeholders": {

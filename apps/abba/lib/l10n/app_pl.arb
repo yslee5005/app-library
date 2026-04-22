@@ -350,6 +350,16 @@
       }
     }
   },
+  "billingIssueTitle": "Wykryto problem z płatnością",
+  "billingIssueBody": "Twoje korzyści Pro zakończą się za {days} dni, jeśli płatność nie zostanie zaktualizowana.",
+  "@billingIssueBody": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "billingIssueAction": "Zaktualizuj płatność",
   "accessUntil": "Access until: {date}",
   "@accessUntil": {
     "placeholders": {

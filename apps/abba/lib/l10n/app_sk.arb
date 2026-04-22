@@ -350,6 +350,16 @@
       }
     }
   },
+  "billingIssueTitle": "Zistil sa problém s platbou",
+  "billingIssueBody": "Vaše výhody Pro sa skončia o {days} dní, ak sa platba neaktualizuje.",
+  "@billingIssueBody": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "billingIssueAction": "Aktualizovať platbu",
   "accessUntil": "Access until: {date}",
   "@accessUntil": {
     "placeholders": {

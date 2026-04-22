@@ -822,6 +822,17 @@ class AppLocalizationsSw extends AppLocalizations {
   }
 
   @override
+  String get billingIssueTitle => 'Tatizo la malipo limegunduliwa';
+
+  @override
+  String billingIssueBody(int days) {
+    return 'Manufaa ya Pro yataisha baada ya siku $days ikiwa malipo hayatasasishwa.';
+  }
+
+  @override
+  String get billingIssueAction => 'Sasisha malipo';
+
+  @override
   String accessUntil(String date) {
     return 'Access until: $date';
   }

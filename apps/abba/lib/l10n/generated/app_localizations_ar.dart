@@ -815,6 +815,17 @@ class AppLocalizationsAr extends AppLocalizations {
   }
 
   @override
+  String get billingIssueTitle => 'تم اكتشاف مشكلة في الدفع';
+
+  @override
+  String billingIssueBody(int days) {
+    return 'ستنتهي مزايا Pro خلال $days أيام ما لم يتم تحديث الدفع.';
+  }
+
+  @override
+  String get billingIssueAction => 'تحديث الدفع';
+
+  @override
   String accessUntil(String date) {
     return 'Access until: $date';
   }

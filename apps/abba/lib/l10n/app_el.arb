@@ -350,6 +350,16 @@
       }
     }
   },
+  "billingIssueTitle": "Εντοπίστηκε πρόβλημα πληρωμής",
+  "billingIssueBody": "Τα προνόμια Pro θα λήξουν σε {days} ημέρες αν δεν ενημερωθεί η πληρωμή.",
+  "@billingIssueBody": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "billingIssueAction": "Ενημέρωση πληρωμής",
   "accessUntil": "Access until: {date}",
   "@accessUntil": {
     "placeholders": {

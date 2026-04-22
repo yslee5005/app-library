@@ -825,6 +825,17 @@ class AppLocalizationsDe extends AppLocalizations {
   }
 
   @override
+  String get billingIssueTitle => 'Zahlungsproblem erkannt';
+
+  @override
+  String billingIssueBody(int days) {
+    return 'Ihre Pro-Vorteile enden in $days Tagen, sofern die Zahlung nicht aktualisiert wird.';
+  }
+
+  @override
+  String get billingIssueAction => 'Zahlung aktualisieren';
+
+  @override
   String accessUntil(String date) {
     return 'Access until: $date';
   }

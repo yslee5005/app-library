@@ -822,6 +822,17 @@ class AppLocalizationsUk extends AppLocalizations {
   }
 
   @override
+  String get billingIssueTitle => 'Виявлено проблему з оплатою';
+
+  @override
+  String billingIssueBody(int days) {
+    return 'Переваги Pro завершаться через $days днів, якщо спосіб оплати не оновлено.';
+  }
+
+  @override
+  String get billingIssueAction => 'Оновити оплату';
+
+  @override
   String accessUntil(String date) {
     return 'Access until: $date';
   }

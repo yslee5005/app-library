@@ -823,6 +823,17 @@ class AppLocalizationsTr extends AppLocalizations {
   }
 
   @override
+  String get billingIssueTitle => 'Ödeme sorunu algılandı';
+
+  @override
+  String billingIssueBody(int days) {
+    return 'Ödeme güncellenmezse Pro avantajlarınız $days gün içinde sona erecek.';
+  }
+
+  @override
+  String get billingIssueAction => 'Ödemeyi güncelle';
+
+  @override
   String accessUntil(String date) {
     return 'Access until: $date';
   }

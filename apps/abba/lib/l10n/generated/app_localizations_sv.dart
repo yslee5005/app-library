@@ -823,6 +823,17 @@ class AppLocalizationsSv extends AppLocalizations {
   }
 
   @override
+  String get billingIssueTitle => 'Betalningsproblem upptäckt';
+
+  @override
+  String billingIssueBody(int days) {
+    return 'Dina Pro-förmåner upphör om $days dagar om betalningen inte uppdateras.';
+  }
+
+  @override
+  String get billingIssueAction => 'Uppdatera betalning';
+
+  @override
   String accessUntil(String date) {
     return 'Access until: $date';
   }

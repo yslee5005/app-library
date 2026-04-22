@@ -824,6 +824,17 @@ class AppLocalizationsNl extends AppLocalizations {
   }
 
   @override
+  String get billingIssueTitle => 'Betalingsprobleem gedetecteerd';
+
+  @override
+  String billingIssueBody(int days) {
+    return 'Uw Pro-voordelen eindigen over $days dagen tenzij de betaling wordt bijgewerkt.';
+  }
+
+  @override
+  String get billingIssueAction => 'Betaling bijwerken';
+
+  @override
   String accessUntil(String date) {
     return 'Access until: $date';
   }

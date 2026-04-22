@@ -350,6 +350,16 @@
       }
     }
   },
+  "billingIssueTitle": "Masalah pembayaran terdeteksi",
+  "billingIssueBody": "Manfaat Pro Anda akan berakhir dalam {days} hari kecuali pembayaran diperbarui.",
+  "@billingIssueBody": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "billingIssueAction": "Perbarui pembayaran",
   "accessUntil": "Access until: {date}",
   "@accessUntil": {
     "placeholders": {

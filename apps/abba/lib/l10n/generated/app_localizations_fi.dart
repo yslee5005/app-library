@@ -820,6 +820,17 @@ class AppLocalizationsFi extends AppLocalizations {
   }
 
   @override
+  String get billingIssueTitle => 'Maksuongelma havaittu';
+
+  @override
+  String billingIssueBody(int days) {
+    return 'Pro-etusi päättyvät $days päivän kuluttua, ellei maksua päivitetä.';
+  }
+
+  @override
+  String get billingIssueAction => 'Päivitä maksu';
+
+  @override
   String accessUntil(String date) {
     return 'Access until: $date';
   }

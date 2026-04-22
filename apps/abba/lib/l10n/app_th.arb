@@ -350,6 +350,16 @@
       }
     }
   },
+  "billingIssueTitle": "ตรวจพบปัญหาการชำระเงิน",
+  "billingIssueBody": "สิทธิประโยชน์ Pro จะสิ้นสุดใน {days} วันหากไม่อัปเดตการชำระเงิน",
+  "@billingIssueBody": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "billingIssueAction": "อัปเดตการชำระเงิน",
   "accessUntil": "Access until: {date}",
   "@accessUntil": {
     "placeholders": {

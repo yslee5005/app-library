@@ -350,6 +350,16 @@
       }
     }
   },
+  "billingIssueTitle": "Phát hiện sự cố thanh toán",
+  "billingIssueBody": "Quyền lợi Pro sẽ kết thúc sau {days} ngày nếu thanh toán không được cập nhật.",
+  "@billingIssueBody": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "billingIssueAction": "Cập nhật thanh toán",
   "accessUntil": "Access until: {date}",
   "@accessUntil": {
     "placeholders": {

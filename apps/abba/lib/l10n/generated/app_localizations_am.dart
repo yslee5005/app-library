@@ -806,6 +806,17 @@ class AppLocalizationsAm extends AppLocalizations {
   }
 
   @override
+  String get billingIssueTitle => 'የክፍያ ችግር ተገኝቷል';
+
+  @override
+  String billingIssueBody(int days) {
+    return 'ክፍያ ካልተዘመነ የPro ጥቅሞች በ$days ቀናት ውስጥ ያበቃሉ።';
+  }
+
+  @override
+  String get billingIssueAction => 'ክፍያ አዘምን';
+
+  @override
   String accessUntil(String date) {
     return 'Access until: $date';
   }

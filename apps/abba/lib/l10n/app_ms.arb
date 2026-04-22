@@ -350,6 +350,16 @@
       }
     }
   },
+  "billingIssueTitle": "Masalah pembayaran dikesan",
+  "billingIssueBody": "Manfaat Pro akan tamat dalam {days} hari melainkan pembayaran dikemas kini.",
+  "@billingIssueBody": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "billingIssueAction": "Kemas kini pembayaran",
   "accessUntil": "Access until: {date}",
   "@accessUntil": {
     "placeholders": {

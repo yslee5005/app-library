@@ -216,11 +216,15 @@ class RevenueCatSubscriptionService implements SubscriptionService {
       final entitlement = info.entitlements.all[entitlementId];
       if (entitlement == null || !entitlement.isActive) return null;
       final expires = entitlement.expirationDate;
+      final billingIssue = entitlement.billingIssueDetectedAt;
       return ActiveSubscriptionInfo(
         productId: entitlement.productIdentifier,
         expiresDate: expires != null ? DateTime.tryParse(expires)?.toLocal() : null,
         willRenew: entitlement.willRenew,
         periodType: entitlement.periodType,
+        billingIssueDetectedAt: billingIssue != null
+            ? DateTime.tryParse(billingIssue)?.toLocal()
+            : null,
       );
     } catch (e, st) {
       _log.error('getActiveSubscription failed', error: e, stackTrace: st);

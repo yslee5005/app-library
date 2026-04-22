@@ -806,6 +806,17 @@ class AppLocalizationsKo extends AppLocalizations {
   }
 
   @override
+  String get billingIssueTitle => '결제 문제가 감지되었습니다';
+
+  @override
+  String billingIssueBody(int days) {
+    return '$days일 안에 결제수단을 업데이트하지 않으면 Pro 혜택이 중단됩니다.';
+  }
+
+  @override
+  String get billingIssueAction => '결제수단 업데이트';
+
+  @override
   String accessUntil(String date) {
     return '이용 가능: $date까지';
   }

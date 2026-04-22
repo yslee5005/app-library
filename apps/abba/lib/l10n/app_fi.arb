@@ -350,6 +350,16 @@
       }
     }
   },
+  "billingIssueTitle": "Maksuongelma havaittu",
+  "billingIssueBody": "Pro-etusi päättyvät {days} päivän kuluttua, ellei maksua päivitetä.",
+  "@billingIssueBody": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "billingIssueAction": "Päivitä maksu",
   "accessUntil": "Access until: {date}",
   "@accessUntil": {
     "placeholders": {

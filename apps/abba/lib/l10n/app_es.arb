@@ -350,6 +350,16 @@
       }
     }
   },
+  "billingIssueTitle": "Problema de pago detectado",
+  "billingIssueBody": "Tus ventajas Pro terminarán en {days} días si no se actualiza el pago.",
+  "@billingIssueBody": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "billingIssueAction": "Actualizar pago",
   "accessUntil": "Access until: {date}",
   "@accessUntil": {
     "placeholders": {

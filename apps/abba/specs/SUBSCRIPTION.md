@@ -176,6 +176,18 @@ How to test:
 - Monthly → Yearly 업그레이드: 즉시 Yearly 전환, 남은 Monthly 일수는 환불 (Apple 처리)
 - Yearly → Monthly 다운그레이드: 현재 Yearly 만료 시점에 Monthly로 전환
 
+### 4.4 Grace Period UX (billing-issue 배너)
+
+결제 실패 → Grace Period 진입 시 유저가 **아무 경고 없이 16일 뒤 Free 전환**되던 문제 대응 (LAUNCH_CHECKLIST §17):
+
+- **감지**: `RevenueCatSubscriptionService.getActiveSubscription()`이 `entitlement.billingIssueDetectedAt`(ISO string) 를 파싱해 `ActiveSubscriptionInfo.billingIssueDetectedAt: DateTime?` 로 노출
+- **판정**: `ActiveSubscriptionInfo.isInGracePeriod == (billingIssueDetectedAt != null && willRenew)` — `willRenew == false`는 명시적 취소 → 기존 "Cancellation notice" 분기가 담당
+- **카운터**: `gracePeriodDaysRemaining = billingGracePeriodDays(=16) - elapsedDays` (0으로 클램프)
+- **UI**: `apps/abba/lib/features/settings/view/membership_view.dart` `_buildGraceBanner` — Active 카드 안, plan/billing 라인 바로 아래. 톤은 기존 Expired 배너와 동일 팔레트 (softPeach 배경 + softGold 테두리, ⚠️ 이모지). 본문은 `billingIssueBody(days)` (35 locale). CTA `billingIssueAction` 버튼은 `_manageSubscription()` 재사용 → RevenueCat Customer Center → Apple 구독 관리 시트로 이동해 결제수단 교체 가능
+- **자동 해제**: 결제 해결 시 RevenueCat가 다음 CustomerInfo 업데이트에서 `billingIssueDetectedAt`을 `null`로 보내므로 배너가 자연스럽게 사라짐
+- **백엔드**: SDK 자동 재시도 16일 + `_updateStatus()`의 `isActive` 평가는 그대로 → 서버사이드 변경 불필요
+- **회귀 테스트**: `packages/subscriptions/test/active_subscription_info_test.dart` (getter 경계값) + `apps/abba/test/features/membership_grace_banner_test.dart` (배너 렌더/숨김)
+
 ---
 
 ## 5. 코드 레퍼런스

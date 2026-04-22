@@ -350,6 +350,16 @@
       }
     }
   },
+  "billingIssueTitle": "Problema di pagamento rilevato",
+  "billingIssueBody": "I tuoi vantaggi Pro termineranno tra {days} giorni se non aggiorni il pagamento.",
+  "@billingIssueBody": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "billingIssueAction": "Aggiorna pagamento",
   "accessUntil": "Access until: {date}",
   "@accessUntil": {
     "placeholders": {

@@ -350,6 +350,16 @@
       }
     }
   },
+  "billingIssueTitle": "Problemă de plată detectată",
+  "billingIssueBody": "Beneficiile Pro se vor încheia în {days} zile dacă plata nu este actualizată.",
+  "@billingIssueBody": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "billingIssueAction": "Actualizează plata",
   "accessUntil": "Access until: {date}",
   "@accessUntil": {
     "placeholders": {

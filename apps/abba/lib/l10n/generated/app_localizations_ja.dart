@@ -806,6 +806,17 @@ class AppLocalizationsJa extends AppLocalizations {
   }
 
   @override
+  String get billingIssueTitle => 'お支払いの問題が検出されました';
+
+  @override
+  String billingIssueBody(int days) {
+    return '$days日以内にお支払い方法を更新しないとProの特典が終了します。';
+  }
+
+  @override
+  String get billingIssueAction => 'お支払い方法を更新';
+
+  @override
   String accessUntil(String date) {
     return 'Access until: $date';
   }

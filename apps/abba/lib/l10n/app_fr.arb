@@ -350,6 +350,16 @@
       }
     }
   },
+  "billingIssueTitle": "Problème de paiement détecté",
+  "billingIssueBody": "Vos avantages Pro prendront fin dans {days} jours sans mise à jour du paiement.",
+  "@billingIssueBody": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "billingIssueAction": "Mettre à jour le paiement",
   "accessUntil": "Access until: {date}",
   "@accessUntil": {
     "placeholders": {

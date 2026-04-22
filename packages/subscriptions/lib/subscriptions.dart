@@ -2,7 +2,7 @@
 library;
 
 export 'package:purchases_flutter/purchases_flutter.dart'
-    show PurchasesErrorCode, PurchasesErrorHelper;
+    show PeriodType, PurchasesErrorCode, PurchasesErrorHelper;
 
 export 'src/active_subscription_info.dart';
 export 'src/offering_prices.dart';

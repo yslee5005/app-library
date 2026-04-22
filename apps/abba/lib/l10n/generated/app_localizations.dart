@@ -1682,6 +1682,24 @@ abstract class AppLocalizations {
   /// **'Your subscription expired on {date}. Resubscribe to continue enjoying Abba Pro.'**
   String subscriptionExpiredBody(String date);
 
+  /// No description provided for @billingIssueTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Payment issue detected'**
+  String get billingIssueTitle;
+
+  /// No description provided for @billingIssueBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Your Pro benefits will end in {days} days unless payment is updated.'**
+  String billingIssueBody(int days);
+
+  /// No description provided for @billingIssueAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Update payment'**
+  String get billingIssueAction;
+
   /// No description provided for @accessUntil.
   ///
   /// In en, this message translates to:

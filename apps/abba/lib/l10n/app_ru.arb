@@ -350,6 +350,16 @@
       }
     }
   },
+  "billingIssueTitle": "Обнаружена проблема с оплатой",
+  "billingIssueBody": "Преимущества Pro закончатся через {days} дней, если способ оплаты не будет обновлён.",
+  "@billingIssueBody": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "billingIssueAction": "Обновить оплату",
   "accessUntil": "Access until: {date}",
   "@accessUntil": {
     "placeholders": {

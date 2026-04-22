@@ -350,6 +350,16 @@
       }
     }
   },
+  "billingIssueTitle": "Natukoy na isyu sa pagbabayad",
+  "billingIssueBody": "Matatapos ang mga benepisyo ng Pro sa loob ng {days} araw maliban na lang kung ma-update ang bayad.",
+  "@billingIssueBody": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "billingIssueAction": "I-update ang bayad",
   "accessUntil": "Access until: {date}",
   "@accessUntil": {
     "placeholders": {

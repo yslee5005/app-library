@@ -350,6 +350,16 @@
       }
     }
   },
+  "billingIssueTitle": "Tatizo la malipo limegunduliwa",
+  "billingIssueBody": "Manufaa ya Pro yataisha baada ya siku {days} ikiwa malipo hayatasasishwa.",
+  "@billingIssueBody": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "billingIssueAction": "Sasisha malipo",
   "accessUntil": "Access until: {date}",
   "@accessUntil": {
     "placeholders": {

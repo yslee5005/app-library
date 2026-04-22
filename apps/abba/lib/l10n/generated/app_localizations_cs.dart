@@ -822,6 +822,17 @@ class AppLocalizationsCs extends AppLocalizations {
   }
 
   @override
+  String get billingIssueTitle => 'Zjištěn problém s platbou';
+
+  @override
+  String billingIssueBody(int days) {
+    return 'Výhody Pro skončí za $days dní, pokud platba nebude aktualizována.';
+  }
+
+  @override
+  String get billingIssueAction => 'Aktualizovat platbu';
+
+  @override
   String accessUntil(String date) {
     return 'Access until: $date';
   }

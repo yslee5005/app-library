@@ -823,6 +823,17 @@ class AppLocalizationsVi extends AppLocalizations {
   }
 
   @override
+  String get billingIssueTitle => 'Phát hiện sự cố thanh toán';
+
+  @override
+  String billingIssueBody(int days) {
+    return 'Quyền lợi Pro sẽ kết thúc sau $days ngày nếu thanh toán không được cập nhật.';
+  }
+
+  @override
+  String get billingIssueAction => 'Cập nhật thanh toán';
+
+  @override
   String accessUntil(String date) {
     return 'Access until: $date';
   }

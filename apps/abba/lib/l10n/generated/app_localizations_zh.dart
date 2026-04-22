@@ -806,6 +806,17 @@ class AppLocalizationsZh extends AppLocalizations {
   }
 
   @override
+  String get billingIssueTitle => '检测到付款问题';
+
+  @override
+  String billingIssueBody(int days) {
+    return '请在$days天内更新付款方式，否则 Pro 权益将中止。';
+  }
+
+  @override
+  String get billingIssueAction => '更新付款方式';
+
+  @override
   String accessUntil(String date) {
     return 'Access until: $date';
   }

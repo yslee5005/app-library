@@ -350,6 +350,16 @@
       }
     }
   },
+  "billingIssueTitle": "भुगतान समस्या का पता चला",
+  "billingIssueBody": "यदि भुगतान अपडेट नहीं हुआ तो आपके Pro लाभ {days} दिनों में समाप्त हो जाएंगे।",
+  "@billingIssueBody": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "billingIssueAction": "भुगतान अपडेट करें",
   "accessUntil": "Access until: {date}",
   "@accessUntil": {
     "placeholders": {

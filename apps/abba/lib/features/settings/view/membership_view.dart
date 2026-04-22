@@ -244,6 +244,10 @@ class _MembershipViewState extends ConsumerState<MembershipView>
         ),
         const SizedBox(height: AbbaSpacing.xs),
         _buildDetailRow(label: billingLabel),
+        if (info.isInGracePeriod) ...[
+          const SizedBox(height: AbbaSpacing.sm),
+          _buildGraceBanner(l10n, info),
+        ],
         if (!info.willRenew) ...[
           const SizedBox(height: AbbaSpacing.sm),
           _buildCancellationNotice(l10n, dateLabel),
@@ -316,6 +320,74 @@ class _MembershipViewState extends ConsumerState<MembershipView>
       label,
       textAlign: TextAlign.center,
       style: AbbaTypography.body.copyWith(color: AbbaColors.warmBrown),
+    );
+  }
+
+  /// Grace Period banner — shown inline inside the Active card when
+  /// RevenueCat reports `billingIssueDetectedAt`. The entitlement is still
+  /// active, so we don't block the user; we surface the warning + a CTA
+  /// into the App Store subscription management sheet (`_manageSubscription`).
+  Widget _buildGraceBanner(AppLocalizations l10n, ActiveSubscriptionInfo info) {
+    final days = info.gracePeriodDaysRemaining ?? 0;
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(AbbaSpacing.md),
+      decoration: BoxDecoration(
+        color: AbbaColors.softPeach.withValues(alpha: 0.45),
+        borderRadius: BorderRadius.circular(AbbaRadius.md),
+        border: Border.all(
+          color: AbbaColors.softGold.withValues(alpha: 0.7),
+        ),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              const Text('⚠️', style: TextStyle(fontSize: 22)),
+              const SizedBox(width: AbbaSpacing.sm),
+              Expanded(
+                child: Text(
+                  l10n.billingIssueTitle,
+                  style: AbbaTypography.body.copyWith(
+                    fontWeight: FontWeight.w700,
+                    color: AbbaColors.warmBrown,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: AbbaSpacing.xs),
+          Text(
+            l10n.billingIssueBody(days),
+            style: AbbaTypography.bodySmall
+                .copyWith(color: AbbaColors.warmBrown),
+          ),
+          const SizedBox(height: AbbaSpacing.sm),
+          SizedBox(
+            width: double.infinity,
+            height: abbaButtonHeight,
+            child: ElevatedButton(
+              onPressed: _manageSubscription,
+              style: ElevatedButton.styleFrom(
+                backgroundColor: AbbaColors.sageDark,
+                foregroundColor: AbbaColors.white,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(AbbaRadius.md),
+                ),
+                elevation: 0,
+              ),
+              child: Text(
+                l10n.billingIssueAction,
+                style: AbbaTypography.body.copyWith(
+                  color: AbbaColors.white,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 

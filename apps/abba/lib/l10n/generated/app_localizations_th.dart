@@ -813,6 +813,17 @@ class AppLocalizationsTh extends AppLocalizations {
   }
 
   @override
+  String get billingIssueTitle => 'ตรวจพบปัญหาการชำระเงิน';
+
+  @override
+  String billingIssueBody(int days) {
+    return 'สิทธิประโยชน์ Pro จะสิ้นสุดใน $days วันหากไม่อัปเดตการชำระเงิน';
+  }
+
+  @override
+  String get billingIssueAction => 'อัปเดตการชำระเงิน';
+
+  @override
   String accessUntil(String date) {
     return 'Access until: $date';
   }

@@ -350,6 +350,16 @@
       }
     }
   },
+  "billingIssueTitle": "检测到付款问题",
+  "billingIssueBody": "请在{days}天内更新付款方式，否则 Pro 权益将中止。",
+  "@billingIssueBody": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "billingIssueAction": "更新付款方式",
   "accessUntil": "Access until: {date}",
   "@accessUntil": {
     "placeholders": {

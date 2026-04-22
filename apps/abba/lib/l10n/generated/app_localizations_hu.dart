@@ -824,6 +824,17 @@ class AppLocalizationsHu extends AppLocalizations {
   }
 
   @override
+  String get billingIssueTitle => 'Fizetési probléma észlelve';
+
+  @override
+  String billingIssueBody(int days) {
+    return 'Pro előnyei $days nap múlva megszűnnek, ha a fizetés nem frissül.';
+  }
+
+  @override
+  String get billingIssueAction => 'Fizetés frissítése';
+
+  @override
   String accessUntil(String date) {
     return 'Access until: $date';
   }

@@ -350,6 +350,16 @@
       }
     }
   },
+  "billingIssueTitle": "זוהתה בעיית תשלום",
+  "billingIssueBody": "הטבות Pro שלך יסתיימו בעוד {days} ימים אם אמצעי התשלום לא יעודכן.",
+  "@billingIssueBody": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "billingIssueAction": "עדכן תשלום",
   "accessUntil": "Access until: {date}",
   "@accessUntil": {
     "placeholders": {

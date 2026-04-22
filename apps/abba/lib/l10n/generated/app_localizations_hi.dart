@@ -822,6 +822,17 @@ class AppLocalizationsHi extends AppLocalizations {
   }
 
   @override
+  String get billingIssueTitle => 'भुगतान समस्या का पता चला';
+
+  @override
+  String billingIssueBody(int days) {
+    return 'यदि भुगतान अपडेट नहीं हुआ तो आपके Pro लाभ $days दिनों में समाप्त हो जाएंगे।';
+  }
+
+  @override
+  String get billingIssueAction => 'भुगतान अपडेट करें';
+
+  @override
   String accessUntil(String date) {
     return 'Access until: $date';
   }

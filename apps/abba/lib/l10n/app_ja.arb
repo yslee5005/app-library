@@ -350,6 +350,16 @@
       }
     }
   },
+  "billingIssueTitle": "お支払いの問題が検出されました",
+  "billingIssueBody": "{days}日以内にお支払い方法を更新しないとProの特典が終了します。",
+  "@billingIssueBody": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "billingIssueAction": "お支払い方法を更新",
   "accessUntil": "Access until: {date}",
   "@accessUntil": {
     "placeholders": {

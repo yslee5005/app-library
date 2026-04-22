@@ -350,6 +350,16 @@
       }
     }
   },
+  "billingIssueTitle": "Zahlungsproblem erkannt",
+  "billingIssueBody": "Ihre Pro-Vorteile enden in {days} Tagen, sofern die Zahlung nicht aktualisiert wird.",
+  "@billingIssueBody": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "billingIssueAction": "Zahlung aktualisieren",
   "accessUntil": "Access until: {date}",
   "@accessUntil": {
     "placeholders": {

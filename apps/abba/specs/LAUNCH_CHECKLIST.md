@@ -128,7 +128,7 @@
 - [x] `completePurchase()` try-catch 강화 — RevenueCatSubscriptionService 전 메서드 try-catch 커버 (2026-04-22 검증)
 - [ ] Webhook JWS 디코딩 에러 핸들러 — 서버사이드 Edge Function 작업 (앱 범위 외)
 - [x] 30초 복원 타임아웃 — `membership_view.dart:698` 구현 완료
-- [ ] Grace Period 만료 후 자동 다운그레이드 UX — SDK 자동 전환 OK, **사용자 알림 UX 미구현**
+- [x] Grace Period 만료 후 자동 다운그레이드 UX — Membership 페이지에 billing-issue 배너 + 결제수단 업데이트 CTA 구현 (`membership_view.dart` `_buildGraceBanner`, 35 locale l10n, 2026-04-21)
 
 ---
 

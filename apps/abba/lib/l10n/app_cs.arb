@@ -350,6 +350,16 @@
       }
     }
   },
+  "billingIssueTitle": "Zjištěn problém s platbou",
+  "billingIssueBody": "Výhody Pro skončí za {days} dní, pokud platba nebude aktualizována.",
+  "@billingIssueBody": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "billingIssueAction": "Aktualizovat platbu",
   "accessUntil": "Access until: {date}",
   "@accessUntil": {
     "placeholders": {

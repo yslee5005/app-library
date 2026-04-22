@@ -350,6 +350,16 @@
       }
     }
   },
+  "billingIssueTitle": "결제 문제가 감지되었습니다",
+  "billingIssueBody": "{days}일 안에 결제수단을 업데이트하지 않으면 Pro 혜택이 중단됩니다.",
+  "@billingIssueBody": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "billingIssueAction": "결제수단 업데이트",
   "accessUntil": "이용 가능: {date}까지",
   "@accessUntil": {
     "placeholders": {

@@ -827,6 +827,17 @@ class AppLocalizationsRo extends AppLocalizations {
   }
 
   @override
+  String get billingIssueTitle => 'Problemă de plată detectată';
+
+  @override
+  String billingIssueBody(int days) {
+    return 'Beneficiile Pro se vor încheia în $days zile dacă plata nu este actualizată.';
+  }
+
+  @override
+  String get billingIssueAction => 'Actualizează plata';
+
+  @override
   String accessUntil(String date) {
     return 'Access until: $date';
   }

@@ -350,6 +350,16 @@
       }
     }
   },
+  "billingIssueTitle": "Otkriven problem s plaćanjem",
+  "billingIssueBody": "Vaše Pro pogodnosti završit će za {days} dana ako se plaćanje ne ažurira.",
+  "@billingIssueBody": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "billingIssueAction": "Ažuriraj plaćanje",
   "accessUntil": "Access until: {date}",
   "@accessUntil": {
     "placeholders": {

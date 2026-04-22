@@ -823,6 +823,17 @@ class AppLocalizationsNo extends AppLocalizations {
   }
 
   @override
+  String get billingIssueTitle => 'Betalingsproblem oppdaget';
+
+  @override
+  String billingIssueBody(int days) {
+    return 'Dine Pro-fordeler avsluttes om $days dager hvis betalingen ikke oppdateres.';
+  }
+
+  @override
+  String get billingIssueAction => 'Oppdater betaling';
+
+  @override
   String accessUntil(String date) {
     return 'Access until: $date';
   }

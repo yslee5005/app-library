@@ -350,6 +350,16 @@
       }
     }
   },
+  "billingIssueTitle": "Betalningsproblem upptäckt",
+  "billingIssueBody": "Dina Pro-förmåner upphör om {days} dagar om betalningen inte uppdateras.",
+  "@billingIssueBody": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "billingIssueAction": "Uppdatera betalning",
   "accessUntil": "Access until: {date}",
   "@accessUntil": {
     "placeholders": {

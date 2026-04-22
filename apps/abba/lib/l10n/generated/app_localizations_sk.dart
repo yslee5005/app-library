@@ -824,6 +824,17 @@ class AppLocalizationsSk extends AppLocalizations {
   }
 
   @override
+  String get billingIssueTitle => 'Zistil sa problém s platbou';
+
+  @override
+  String billingIssueBody(int days) {
+    return 'Vaše výhody Pro sa skončia o $days dní, ak sa platba neaktualizuje.';
+  }
+
+  @override
+  String get billingIssueAction => 'Aktualizovať platbu';
+
+  @override
   String accessUntil(String date) {
     return 'Access until: $date';
   }

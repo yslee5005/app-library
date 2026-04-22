@@ -350,6 +350,16 @@
       }
     }
   },
+  "billingIssueTitle": "Betalingsprobleem gedetecteerd",
+  "billingIssueBody": "Uw Pro-voordelen eindigen over {days} dagen tenzij de betaling wordt bijgewerkt.",
+  "@billingIssueBody": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "billingIssueAction": "Betaling bijwerken",
   "accessUntil": "Access until: {date}",
   "@accessUntil": {
     "placeholders": {

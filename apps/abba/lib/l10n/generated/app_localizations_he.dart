@@ -812,6 +812,17 @@ class AppLocalizationsHe extends AppLocalizations {
   }
 
   @override
+  String get billingIssueTitle => 'זוהתה בעיית תשלום';
+
+  @override
+  String billingIssueBody(int days) {
+    return 'הטבות Pro שלך יסתיימו בעוד $days ימים אם אמצעי התשלום לא יעודכן.';
+  }
+
+  @override
+  String get billingIssueAction => 'עדכן תשלום';
+
+  @override
   String accessUntil(String date) {
     return 'Access until: $date';
   }

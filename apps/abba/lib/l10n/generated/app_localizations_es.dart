@@ -824,6 +824,17 @@ class AppLocalizationsEs extends AppLocalizations {
   }
 
   @override
+  String get billingIssueTitle => 'Problema de pago detectado';
+
+  @override
+  String billingIssueBody(int days) {
+    return 'Tus ventajas Pro terminarán en $days días si no se actualiza el pago.';
+  }
+
+  @override
+  String get billingIssueAction => 'Actualizar pago';
+
+  @override
   String accessUntil(String date) {
     return 'Access until: $date';
   }
