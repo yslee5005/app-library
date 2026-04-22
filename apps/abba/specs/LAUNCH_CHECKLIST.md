@@ -107,10 +107,10 @@
 - [ ] 아침 알림 (5-6시 "오늘의 기도 시간입니다")
 - [ ] 스트릭 celebration notifications
 
-### 14. QT Cronjob
+### 14. ~~QT Cronjob~~ (폐기)
 
-- [ ] Supabase Edge Function (매일 5개 QT 말씀 자동 생성)
-- [ ] 현재 JSON mock → DB 기반으로 전환
+- [x] ~~Supabase Edge Function (매일 5개 QT 말씀 자동 생성)~~ — **on-demand Gemini 생성으로 대체** (commit `ae8bac3`)
+- [x] ~~JSON mock → DB 기반 전환~~ — 불필요 (on-demand 생성 방식)
 
 ### 15. 동적 가격 (RevenueCat)
 
