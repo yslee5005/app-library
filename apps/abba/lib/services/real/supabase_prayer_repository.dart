@@ -236,10 +236,9 @@ class SupabasePrayerRepository implements PrayerRepository {
                   'word': w.word,
                   'transliteration': w.transliteration,
                   'language': w.language,
-                  'meaning_en': w.meaningEn,
-                  'meaning_ko': w.meaningKo,
-                  'nuance_en': w.nuanceEn,
-                  'nuance_ko': w.nuanceKo,
+                  // Phase 5A — single-field write (fromJson reads legacy _en/_ko).
+                  'meaning': w.meaning,
+                  'nuance': w.nuance,
                 })
             .toList(),
       },

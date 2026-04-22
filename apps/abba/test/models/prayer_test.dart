@@ -242,23 +242,68 @@ void main() {
     });
   });
 
-  group('ScriptureOriginalWord', () {
-    test('meaning and nuance return locale-based text', () {
+  group('ScriptureOriginalWord — Phase 5A single-field', () {
+    test('single-field meaning/nuance direct access (user locale)', () {
       const word = ScriptureOriginalWord(
         word: 'word',
         transliteration: 'trans',
         language: 'Hebrew',
-        meaningEn: 'meaning en',
-        meaningKo: 'meaning ko',
-        nuanceEn: 'nuance en',
-        nuanceKo: 'nuance ko',
+        meaning: 'my shepherd',
+        nuance: 'intimate covenant relationship',
       );
 
-      expect(word.meaning('en'), 'meaning en');
-      expect(word.meaning('ko'), 'meaning ko');
-      expect(word.nuance('en'), 'nuance en');
-      expect(word.nuance('ko'), 'nuance ko');
+      expect(word.meaning, 'my shepherd');
+      expect(word.nuance, 'intimate covenant relationship');
       expect(word.isRtl, true);
+    });
+
+    test('fromJson — new single `meaning`/`nuance` keys', () {
+      final word = ScriptureOriginalWord.fromJson({
+        'word': 'רֹעִי',
+        'transliteration': "ro'i",
+        'language': 'Hebrew',
+        'meaning': '나의 목자',
+        'nuance': '친밀한 언약 관계',
+      });
+      expect(word.meaning, '나의 목자');
+      expect(word.nuance, '친밀한 언약 관계');
+    });
+
+    test('fromJson — legacy `_en`/`_ko` fallback (English preferred)', () {
+      final word = ScriptureOriginalWord.fromJson({
+        'word': 'רֹעִי',
+        'transliteration': "ro'i",
+        'language': 'Hebrew',
+        'meaning_en': 'my shepherd',
+        'meaning_ko': '나의 목자',
+        'nuance_en': 'intimate covenant',
+        'nuance_ko': '친밀한 언약',
+      });
+      // Phase 5A: no locale context → _en preferred, _ko fallback.
+      expect(word.meaning, 'my shepherd');
+      expect(word.nuance, 'intimate covenant');
+    });
+
+    test('fromJson — legacy `_ko` only (no _en)', () {
+      final word = ScriptureOriginalWord.fromJson({
+        'word': 'רֹעִי',
+        'transliteration': "ro'i",
+        'language': 'Hebrew',
+        'meaning_ko': '나의 목자',
+        'nuance_ko': '친밀한 언약',
+      });
+      expect(word.meaning, '나의 목자');
+      expect(word.nuance, '친밀한 언약');
+    });
+
+    test('fromJson — missing meaning/nuance → empty strings', () {
+      final word = ScriptureOriginalWord.fromJson({
+        'word': 'רֹעִי',
+        'transliteration': "ro'i",
+        'language': 'Hebrew',
+      });
+      expect(word.meaning, isEmpty);
+      expect(word.nuance, isEmpty);
     });
   });
 }

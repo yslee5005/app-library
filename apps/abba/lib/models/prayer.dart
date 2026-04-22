@@ -242,23 +242,23 @@ class Scripture {
       );
 }
 
+/// Phase 5A (qt_output_redesign) — single-field in user's locale (Gemini
+/// generates in the active locale). Shared by Prayer + QT Scripture cards.
+/// Legacy records carrying `meaning_en`/`_ko` + `nuance_en`/`_ko` parse via
+/// the 3-tier fallback below.
 class ScriptureOriginalWord {
   final String word;
   final String transliteration;
   final String language; // "Hebrew" | "Greek"
-  final String meaningEn;
-  final String meaningKo;
-  final String nuanceEn;
-  final String nuanceKo;
+  final String meaning;
+  final String nuance;
 
   const ScriptureOriginalWord({
     required this.word,
     required this.transliteration,
     required this.language,
-    required this.meaningEn,
-    required this.meaningKo,
-    this.nuanceEn = '',
-    this.nuanceKo = '',
+    this.meaning = '',
+    this.nuance = '',
   });
 
   factory ScriptureOriginalWord.fromJson(Map<String, dynamic> json) {
@@ -266,15 +266,17 @@ class ScriptureOriginalWord {
       word: json['word'] as String,
       transliteration: json['transliteration'] as String,
       language: json['language'] as String,
-      meaningEn: json['meaning_en'] as String? ?? '',
-      meaningKo: json['meaning_ko'] as String? ?? '',
-      nuanceEn: json['nuance_en'] as String? ?? '',
-      nuanceKo: json['nuance_ko'] as String? ?? '',
+      meaning: json['meaning'] as String?
+          ?? json['meaning_en'] as String?
+          ?? json['meaning_ko'] as String?
+          ?? '',
+      nuance: json['nuance'] as String?
+          ?? json['nuance_en'] as String?
+          ?? json['nuance_ko'] as String?
+          ?? '',
     );
   }
 
-  String meaning(String locale) => locale == 'ko' ? meaningKo : meaningEn;
-  String nuance(String locale) => locale == 'ko' ? nuanceKo : nuanceEn;
   bool get isRtl => language == 'Hebrew';
 }
 

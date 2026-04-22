@@ -1,4 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:abba/models/prayer.dart' show ScriptureOriginalWord;
 import 'package:abba/models/qt_meditation_result.dart';
 
 void main() {
@@ -53,8 +54,7 @@ void main() {
               'word': 'רֹעִי',
               'transliteration': "ro'i",
               'language': 'Hebrew',
-              'meaning_en': 'my shepherd',
-              'meaning_ko': '나의 목자',
+              'meaning': '나의 목자',
             },
           ],
         },
@@ -83,12 +83,10 @@ void main() {
       expect(result.scripture.keyWordHint, isNotEmpty);
       expect(result.scripture.originalWords, hasLength(1));
       expect(result.scripture.originalWords.first.word, 'רֹעִי');
-      // Phase 1 single `insight` → propagates to both locale variants.
-      expect(result.analysis.insightEn, isNotEmpty);
-      expect(result.analysis.insightKo, isNotEmpty);
+      // Phase 5A — single-field access.
+      expect(result.analysis.insight, isNotEmpty);
       expect(result.application.action, isNotEmpty);
-      expect(result.knowledge.historicalContextEn, isNotEmpty);
-      expect(result.knowledge.historicalContextKo, isNotEmpty);
+      expect(result.knowledge.historicalContext, isNotEmpty);
       expect(result.knowledge.crossReferences, hasLength(1));
     });
 
@@ -115,11 +113,10 @@ void main() {
   });
 
   group('QtMeditationResult.fromJson — legacy compat', () {
-    test('legacy record without meditation_summary synthesizes topic from keyTheme', () {
+    test('legacy record without meditation_summary → empty summary (Phase 5A)', () {
       final json = {
         'analysis': {
-          'key_theme_en': "God's Faithfulness",
-          'key_theme_ko': '신실하심',
+          // keyTheme removed (Phase 5A); still tolerates _en/_ko for insight.
           'insight_en': 'insight',
           'insight_ko': '통찰',
         },
@@ -135,14 +132,16 @@ void main() {
 
       final result = QtMeditationResult.fromJson(json);
 
-      // No meditation_summary in legacy → summary empty, topic inferred.
+      // Phase 5A: no meditation_summary → both fields empty (no fallback
+      // from keyTheme since keyTheme is removed). Card will auto-hide.
       expect(result.meditationSummary.summary, isEmpty);
-      expect(result.meditationSummary.topic, "God's Faithfulness");
+      expect(result.meditationSummary.topic, isEmpty);
       // No scripture in legacy → default empty Scripture.
       expect(result.scripture.reference, isEmpty);
-      // Legacy fields still readable.
-      expect(result.analysis.keyThemeKo, '신실하심');
-      expect(result.analysis.insightKo, '통찰');
+      // Legacy insight_en preferred.
+      expect(result.analysis.insight, 'insight');
+      // Legacy historical_context_en preferred.
+      expect(result.knowledge.historicalContext, 'context');
     });
 
     test('legacy growth_story with _en/_ko fields still parses (English first)', () {
@@ -178,7 +177,7 @@ void main() {
       final result = QtMeditationResult.fromJson(json);
       expect(result.meditationSummary.isEmpty, isTrue);
       expect(result.scripture.reference, isEmpty);
-      expect(result.analysis.insightEn, isEmpty);
+      expect(result.analysis.insight, isEmpty);
       expect(result.application.action, isEmpty);
       expect(result.knowledge.crossReferences, isEmpty);
       expect(result.growthStory, isNull);
@@ -345,7 +344,98 @@ void main() {
       expect(next.scripture.reference, 'Psalm 23:1');
       expect(next.scripture.verse, '여호와는 나의 목자시니');
       expect(next.meditationSummary.topic, 't');
-      expect(next.analysis.insightEn, 'i');
+      expect(next.analysis.insight, 'i');
+    });
+  });
+
+  // ---------------------------------------------------------------------------
+  // Phase 5A (qt_output_redesign) — i18n single-field unification
+  // ---------------------------------------------------------------------------
+  group('Phase 5A i18n single-field', () {
+    test('MeditationAnalysis.fromJson — new single `insight` key', () {
+      final analysis = MeditationAnalysis.fromJson({
+        'insight': '당신의 묵상은 신뢰에 닿아 있습니다.',
+      });
+      expect(analysis.insight, '당신의 묵상은 신뢰에 닿아 있습니다.');
+    });
+
+    test('MeditationAnalysis.fromJson — legacy `_en`/`_ko` fallback (_en first)', () {
+      final analysis = MeditationAnalysis.fromJson({
+        'insight_en': 'Your meditation touches trust.',
+        'insight_ko': '당신의 묵상은 신뢰에 닿아 있습니다.',
+      });
+      // Phase 5A: _en preferred at parse time (no locale context).
+      expect(analysis.insight, 'Your meditation touches trust.');
+    });
+
+    test('MeditationAnalysis.fromJson — only `_ko` legacy present', () {
+      final analysis = MeditationAnalysis.fromJson({
+        'insight_ko': '당신의 묵상은 신뢰에 닿아 있습니다.',
+      });
+      expect(analysis.insight, '당신의 묵상은 신뢰에 닿아 있습니다.');
+    });
+
+    test('MeditationAnalysis.fromJson — all fields missing → empty', () {
+      final analysis = MeditationAnalysis.fromJson(const {});
+      expect(analysis.insight, isEmpty);
+    });
+
+    test('RelatedKnowledge.fromJson — single `historical_context` + legacy fallback', () {
+      final fresh = RelatedKnowledge.fromJson({
+        'historical_context': '다윗은 유대 광야의 목자였습니다.',
+      });
+      expect(fresh.historicalContext, '다윗은 유대 광야의 목자였습니다.');
+
+      final legacy = RelatedKnowledge.fromJson({
+        'historical_context_en': 'David was a shepherd of Judea.',
+        'historical_context_ko': '다윗은 유대 광야의 목자였습니다.',
+      });
+      expect(legacy.historicalContext, 'David was a shepherd of Judea.');
+    });
+
+    test('OriginalWord.fromJson — single `meaning` + legacy fallback', () {
+      final fresh = OriginalWord.fromJson({
+        'word': 'רֹעִי',
+        'transliteration': "ro'i",
+        'language': 'Hebrew',
+        'meaning': '나의 목자',
+      });
+      expect(fresh.meaning, '나의 목자');
+
+      final legacy = OriginalWord.fromJson({
+        'word': 'רֹעִי',
+        'transliteration': "ro'i",
+        'language': 'Hebrew',
+        'meaning_en': 'my shepherd',
+        'meaning_ko': '나의 목자',
+      });
+      // Phase 5A: _en preferred.
+      expect(legacy.meaning, 'my shepherd');
+    });
+
+    test('ScriptureOriginalWord.fromJson — single-field + legacy (Prayer shared)', () {
+      // Prayer + QT share this model. Shared migration must not regress Prayer.
+      final fresh = ScriptureOriginalWord.fromJson({
+        'word': 'רֹעִי',
+        'transliteration': "ro'i",
+        'language': 'Hebrew',
+        'meaning': '나의 목자',
+        'nuance': '친밀한 언약 관계',
+      });
+      expect(fresh.meaning, '나의 목자');
+      expect(fresh.nuance, '친밀한 언약 관계');
+
+      final legacy = ScriptureOriginalWord.fromJson({
+        'word': 'רֹעִי',
+        'transliteration': "ro'i",
+        'language': 'Hebrew',
+        'meaning_en': 'my shepherd',
+        'meaning_ko': '나의 목자',
+        'nuance_en': 'intimate covenant',
+        'nuance_ko': '친밀한 언약',
+      });
+      expect(legacy.meaning, 'my shepherd');
+      expect(legacy.nuance, 'intimate covenant');
     });
   });
 }

@@ -376,19 +376,15 @@ class _AiLoadingViewState extends ConsumerState<AiLoadingView>
         ),
         scripture: Scripture(reference: 'Psalm 1:2'),
         analysis: MeditationAnalysis(
-          keyThemeEn: 'God\'s Faithfulness',
-          keyThemeKo: '하나님의 신실하심',
-          insightEn:
+          insight:
               'Your meditation reveals a heart seeking God\'s guidance and peace.',
-          insightKo: '당신의 묵상에서 하나님의 인도와 평안을 구하는 마음이 느껴집니다.',
         ),
         application: ApplicationSuggestion(
           action: '오늘 잠시 조용히 묵상하는 시간을 가져보세요',
         ),
         knowledge: RelatedKnowledge(
-          historicalContextEn:
+          historicalContext:
               'The biblical concept of meditation involves deep reflection on God\'s Word.',
-          historicalContextKo: '성경에서의 묵상은 하나님의 말씀에 대한 깊은 성찰을 의미합니다.',
           crossReferences: [
             CrossReference(reference: 'Psalm 1:2', text: ''),
             CrossReference(reference: 'Joshua 1:8', text: ''),

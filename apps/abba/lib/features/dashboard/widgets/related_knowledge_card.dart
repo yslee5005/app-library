@@ -12,7 +12,6 @@ class RelatedKnowledgeCard extends StatelessWidget {
   final String originalWordLabel;
   final String historicalContextLabel;
   final String crossReferencesLabel;
-  final String locale;
 
   const RelatedKnowledgeCard({
     super.key,
@@ -21,7 +20,6 @@ class RelatedKnowledgeCard extends StatelessWidget {
     required this.originalWordLabel,
     required this.historicalContextLabel,
     required this.crossReferencesLabel,
-    required this.locale,
   });
 
   String get _summary {
@@ -74,7 +72,7 @@ class RelatedKnowledgeCard extends StatelessWidget {
                   ),
                   const SizedBox(height: 4),
                   Text(
-                    knowledge.originalWord!.meaning(locale),
+                    knowledge.originalWord!.meaning,
                     style: AbbaTypography.bodySmall,
                   ),
                 ],
@@ -92,7 +90,7 @@ class RelatedKnowledgeCard extends StatelessWidget {
           ),
           const SizedBox(height: 4),
           Text(
-            knowledge.historicalContext(locale),
+            knowledge.historicalContext,
             style: AbbaTypography.bodySmall,
           ),
           // Cross References

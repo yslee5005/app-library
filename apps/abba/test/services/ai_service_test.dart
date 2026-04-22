@@ -119,17 +119,13 @@ class _CountingAiService implements AiService {
     callCount++;
     return const QtMeditationResult(
       analysis: MeditationAnalysis(
-        keyThemeEn: 'Test',
-        keyThemeKo: '테스트',
-        insightEn: 'Test insight',
-        insightKo: '테스트 인사이트',
+        insight: 'Test insight',
       ),
       application: ApplicationSuggestion(
         action: '테스트 행동',
       ),
       knowledge: RelatedKnowledge(
-        historicalContextEn: 'Test context',
-        historicalContextKo: '테스트 배경',
+        historicalContext: 'Test context',
         crossReferences: [CrossReference(reference: 'Test 1:1', text: '')],
       ),
     );

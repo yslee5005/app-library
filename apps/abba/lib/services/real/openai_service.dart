@@ -346,19 +346,15 @@ class OpenAiService implements AiService {
       ),
       scripture: Scripture(reference: 'Psalm 1:2'),
       analysis: MeditationAnalysis(
-        keyThemeEn: 'God\'s Faithfulness',
-        keyThemeKo: '하나님의 신실하심',
-        insightEn:
+        insight:
             'Your meditation reveals a heart seeking God\'s guidance and peace.',
-        insightKo: '당신의 묵상에서 하나님의 인도와 평안을 구하는 마음이 느껴집니다.',
       ),
       application: ApplicationSuggestion(
         action: '오늘 잠시 조용히 묵상하는 시간을 가져보세요',
       ),
       knowledge: RelatedKnowledge(
-        historicalContextEn:
+        historicalContext:
             'The biblical concept of meditation involves deep reflection on God\'s Word.',
-        historicalContextKo: '성경에서의 묵상은 하나님의 말씀에 대한 깊은 성찰을 의미합니다.',
         crossReferences: [
           CrossReference(reference: 'Psalm 1:2', text: ''),
           CrossReference(reference: 'Joshua 1:8', text: ''),
@@ -593,10 +589,7 @@ Return a JSON object:
 
 {
   "analysis": {
-    "key_theme_en": "key theme in English (2-3 words)",
-    "key_theme_ko": "핵심 테마 (2-3단어, 한국어)",
-    "insight_en": "Deep analysis of the user's meditation (3-4 sentences in English). Acknowledge what they discovered, then add deeper meaning.",
-    "insight_ko": "사용자의 묵상을 깊이 분석한 인사이트 (3-4문장). 사용자가 발견한 것을 인정하고, 더 깊은 의미를 추가."
+    "insight": "Deep analysis of the user's meditation (3-4 sentences in $langName). Acknowledge what they discovered, then add deeper meaning."
   },
   "application": {
     "action": "A very specific actionable application in $langName. BAD: 'Be more grateful' (abstract). BAD: 'Trust God more' (vague). GOOD: 'At dinner tonight, tell your family 3 things you are thankful for this year'. GOOD: 'Tomorrow morning before work, read Psalm 23 aloud for 5 minutes'. GOOD: 'Today, buy coffee for a colleague you are in conflict with and greet them first'. Must include who/what/how."
@@ -606,11 +599,9 @@ Return a JSON object:
       "word": "Hebrew or Greek word from the passage",
       "transliteration": "romanized pronunciation",
       "language": "Hebrew or Greek",
-      "meaning_en": "Deep meaning (2-3 sentences in English). Not just dictionary meaning but cultural/theological background.",
-      "meaning_ko": "원어의 깊은 뜻 (2-3문장). 단순 사전적 의미가 아닌, 문화적/신학적 배경까지."
+      "meaning": "Deep meaning (2-3 sentences in $langName). Not just dictionary meaning but cultural/theological background."
     },
-    "historical_context_en": "Historical/cultural background (3-4 sentences in English). What this text meant to its original audience.",
-    "historical_context_ko": "역사적/문화적 배경 (3-4문장). 당시 독자들에게 이 말씀이 어떤 의미였는지.",
+    "historical_context": "Historical/cultural background (3-4 sentences in $langName). What this text meant to its original audience.",
     "cross_references": [
       {"reference": "Book Chapter:Verse", "text": "Full verse text in $langName"},
       {"reference": "Book Chapter:Verse", "text": "Full verse text in $langName"}

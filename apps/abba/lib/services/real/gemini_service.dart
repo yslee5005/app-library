@@ -581,28 +581,24 @@ Rules (per QT Guide §4-6):
         keyWordHint: locale == 'ko'
             ? "'나의 목자' = 히브리어 '로이' — 직업이 아닌 '나를 돌보시는 분'"
             : "'my shepherd' = Hebrew 'ro'i' — not a job title, but 'the one who tends me personally'",
-        originalWords: const [
+        originalWords: [
           ScriptureOriginalWord(
             word: 'רֹעִי',
             transliteration: "ro'i",
             language: 'Hebrew',
-            meaningEn: 'my shepherd',
-            meaningKo: '나의 목자',
-            nuanceEn:
-                "Unlike 'shepherd' as a job, 'ro'i' implies an intimate, personal covenant relationship — 'the one who shepherds me personally'.",
-            nuanceKo:
-                "단순한 직업으로서의 '목자'와 달리, '로이'는 친밀하고 개인적인 언약 관계를 의미합니다 — '나를 개인적으로 돌보시는 분'.",
+            meaning: locale == 'ko' ? '나의 목자' : 'my shepherd',
+            nuance: locale == 'ko'
+                ? "단순한 직업으로서의 '목자'와 달리, '로이'는 친밀하고 개인적인 언약 관계를 의미합니다 — '나를 개인적으로 돌보시는 분'."
+                : "Unlike 'shepherd' as a job, 'ro'i' implies an intimate, personal covenant relationship — 'the one who shepherds me personally'.",
           ),
           ScriptureOriginalWord(
             word: 'חָסֵר',
             transliteration: 'chaser',
             language: 'Hebrew',
-            meaningEn: 'to lack, be in want',
-            meaningKo: '부족하다, 결핍되다',
-            nuanceEn:
-                'Not merely material lack but covenant completeness — with God as shepherd, nothing essential is missing from life.',
-            nuanceKo:
-                '단순한 물질적 결핍이 아니라 언약적 완전성을 의미합니다 — 하나님이 목자이시면 삶에 본질적인 것이 빠지지 않습니다.',
+            meaning: locale == 'ko' ? '부족하다, 결핍되다' : 'to lack, be in want',
+            nuance: locale == 'ko'
+                ? '단순한 물질적 결핍이 아니라 언약적 완전성을 의미합니다 — 하나님이 목자이시면 삶에 본질적인 것이 빠지지 않습니다.'
+                : 'Not merely material lack but covenant completeness — with God as shepherd, nothing essential is missing from life.',
           ),
         ],
       ),
@@ -748,21 +744,17 @@ Rules (per QT Guide §4-6):
             word: 'רֹעִי',
             transliteration: "ro'i",
             language: 'Hebrew',
-            meaningEn: 'my shepherd',
-            meaningKo: '나의 목자',
-            nuanceEn:
-                'Not a job description but an intimate covenant relationship.',
-            nuanceKo: '단순한 직업이 아니라 친밀한 언약 관계를 뜻합니다.',
+            meaning: isKo ? '나의 목자' : 'my shepherd',
+            nuance: isKo
+                ? '단순한 직업이 아니라 친밀한 언약 관계를 뜻합니다.'
+                : 'Not a job description but an intimate covenant relationship.',
           ),
         ],
       ),
       analysis: MeditationAnalysis(
-        keyThemeEn: '',
-        keyThemeKo: '',
-        insightEn:
-            'Your meditation centers on trust — you are learning to release what you cannot control into the hands of the One who already holds it.',
-        insightKo:
-            '당신의 묵상은 "신뢰"에 맞닿아 있습니다. 당신은 지금, 통제할 수 없는 것을 이미 그것을 붙잡고 계신 분의 손에 맡기는 법을 배우는 중입니다.',
+        insight: isKo
+            ? '당신의 묵상은 "신뢰"에 맞닿아 있습니다. 당신은 지금, 통제할 수 없는 것을 이미 그것을 붙잡고 계신 분의 손에 맡기는 법을 배우는 중입니다.'
+            : 'Your meditation centers on trust — you are learning to release what you cannot control into the hands of the One who already holds it.',
       ),
       application: ApplicationSuggestion(
         action: isKo
@@ -770,17 +762,17 @@ Rules (per QT Guide §4-6):
             : 'Tonight before dinner, read Psalm 23 aloud one verse at a time with your family.',
       ),
       knowledge: RelatedKnowledge(
-        originalWord: const OriginalWord(
+        originalWord: OriginalWord(
           word: 'רֹעִי',
           transliteration: 'ro\'i',
           language: 'Hebrew',
-          meaningEn: '"my shepherd" — intimate, covenantal care.',
-          meaningKo: '"나의 목자" — 친밀하고 언약적인 돌봄.',
+          meaning: isKo
+              ? '"나의 목자" — 친밀하고 언약적인 돌봄.'
+              : '"my shepherd" — intimate, covenantal care.',
         ),
-        historicalContextEn:
-            'David wrote Psalm 23 from personal experience as a shepherd. Ancient Near Eastern kings often called themselves "shepherds" of their people — David flips this image to name God as his king.',
-        historicalContextKo:
-            '다윗은 목자로서의 경험을 바탕으로 시편 23편을 썼습니다. 고대 근동의 왕들은 스스로를 백성의 "목자"라 불렀지만, 다윗은 이 이미지를 뒤집어 하나님을 자신의 왕으로 고백합니다.',
+        historicalContext: isKo
+            ? '다윗은 목자로서의 경험을 바탕으로 시편 23편을 썼습니다. 고대 근동의 왕들은 스스로를 백성의 "목자"라 불렀지만, 다윗은 이 이미지를 뒤집어 하나님을 자신의 왕으로 고백합니다.'
+            : 'David wrote Psalm 23 from personal experience as a shepherd. Ancient Near Eastern kings often called themselves "shepherds" of their people — David flips this image to name God as his king.',
         crossReferences: [
           CrossReference(
             reference: 'Isaiah 40:11',
@@ -1192,10 +1184,8 @@ Return this JSON object:
         "word": "<Hebrew/Greek original>",
         "transliteration": "<romanization>",
         "language": "Hebrew",
-        "meaning_en": "<meaning in English>",
-        "meaning_ko": "<의미 (한국어)>",
-        "nuance_en": "<1-2 sentence nuance in English>",
-        "nuance_ko": "<1-2 문장 뉘앙스 (한국어)>"
+        "meaning": "<meaning in $langName>",
+        "nuance": "<1-2 sentence nuance in $langName>"
       }
     ]
   },

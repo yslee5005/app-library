@@ -122,8 +122,6 @@ class _QtDashboardViewState extends ConsumerState<QtDashboardView> {
           child: MeditationAnalysisCard(
             analysis: result.analysis,
             title: l10n.meditationAnalysisTitle,
-            keyThemeLabel: l10n.keyThemeLabel,
-            locale: locale,
             initiallyExpanded: false,
           ),
         ),
@@ -144,7 +142,6 @@ class _QtDashboardViewState extends ConsumerState<QtDashboardView> {
             originalWordLabel: l10n.originalWordLabel,
             historicalContextLabel: l10n.historicalContextLabel,
             crossReferencesLabel: l10n.crossReferencesLabel,
-            locale: locale,
           ),
         ),
         // 6. Growth Story Card (Premium)

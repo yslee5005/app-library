@@ -62,21 +62,15 @@ class QtMeditationResult {
   factory QtMeditationResult.fromJson(Map<String, dynamic> json) {
     final analysis = MeditationAnalysis.fromJson(_asMap(json['analysis']));
 
-    // Phase 1 — parse new `meditation_summary` if present. Otherwise fall
-    // back to legacy format: infer topic from analysis.keyTheme, leave
-    // summary empty (hidden card if both empty).
+    // Phase 1 — parse new `meditation_summary` if present. Legacy records
+    // without it render an empty summary (card hidden). Phase 5A removed
+    // the keyTheme fallback synthesis since keyTheme itself is gone.
     final MeditationSummary summary;
     final rawSummary = json['meditation_summary'];
     if (rawSummary is Map) {
       summary = MeditationSummary.fromJson(_asMap(rawSummary));
     } else {
-      // Legacy compat: previous records have no meditation_summary.
-      // Use English keyTheme as a best-effort topic (locale-agnostic here —
-      // the card will hide automatically if both summary + topic are empty).
-      final legacyTopic = analysis.keyThemeEn.isNotEmpty
-          ? analysis.keyThemeEn
-          : analysis.keyThemeKo;
-      summary = MeditationSummary(summary: '', topic: legacyTopic);
+      summary = const MeditationSummary(summary: '', topic: '');
     }
 
     // Phase 1 — parse new `scripture`. Legacy records have no scripture key;
@@ -104,33 +98,26 @@ class QtMeditationResult {
   }
 }
 
+/// Phase 5A (qt_output_redesign) — single-field in user's locale (Gemini
+/// generates in the active locale). `keyTheme` has been removed entirely —
+/// Phase 1 `MeditationSummary.topic` supersedes it. Legacy records carrying
+/// `insight_en`/`insight_ko` still parse via the 3-tier fallback below.
 class MeditationAnalysis {
-  final String keyThemeEn;
-  final String keyThemeKo;
-  final String insightEn;
-  final String insightKo;
+  final String insight;
 
   const MeditationAnalysis({
-    required this.keyThemeEn,
-    required this.keyThemeKo,
-    required this.insightEn,
-    required this.insightKo,
+    this.insight = '',
   });
 
   factory MeditationAnalysis.fromJson(Map<String, dynamic> json) {
-    // Phase 1 prompt uses single `insight` + no key_theme (topic moved to
-    // meditationSummary). Legacy records still carry _en/_ko variants.
-    final insight = json['insight'] as String?;
+    // 3-tier resolver: new single `insight` → legacy `_en` → legacy `_ko`.
     return MeditationAnalysis(
-      keyThemeEn: json['key_theme_en'] as String? ?? '',
-      keyThemeKo: json['key_theme_ko'] as String? ?? '',
-      insightEn: insight ?? json['insight_en'] as String? ?? '',
-      insightKo: insight ?? json['insight_ko'] as String? ?? '',
+      insight: json['insight'] as String?
+          ?? json['insight_en'] as String?
+          ?? json['insight_ko'] as String?
+          ?? '',
     );
   }
-
-  String keyTheme(String locale) => locale == 'ko' ? keyThemeKo : keyThemeEn;
-  String insight(String locale) => locale == 'ko' ? insightKo : insightEn;
 }
 
 class ApplicationSuggestion {
@@ -166,8 +153,7 @@ class CrossReference {
 
 class RelatedKnowledge {
   final OriginalWord? originalWord;
-  final String historicalContextEn;
-  final String historicalContextKo;
+  final String historicalContext;
   final List<CrossReference> crossReferences;
 
   /// QT citations (Phase 3, qt_output_redesign). Mirrors `AiPrayer.citations`.
@@ -178,24 +164,23 @@ class RelatedKnowledge {
 
   const RelatedKnowledge({
     this.originalWord,
-    this.historicalContextEn = '',
-    this.historicalContextKo = '',
+    this.historicalContext = '',
     this.crossReferences = const [],
     this.citations = const [],
   });
 
   factory RelatedKnowledge.fromJson(Map<String, dynamic> json) {
-    final single = json['historical_context'] as String?;
     return RelatedKnowledge(
       originalWord: json['original_word'] != null
           ? OriginalWord.fromJson(
               json['original_word'] as Map<String, dynamic>,
             )
           : null,
-      historicalContextEn:
-          single ?? json['historical_context_en'] as String? ?? '',
-      historicalContextKo:
-          single ?? json['historical_context_ko'] as String? ?? '',
+      // Phase 5A — single-field resolver with legacy fallbacks.
+      historicalContext: json['historical_context'] as String?
+          ?? json['historical_context_en'] as String?
+          ?? json['historical_context_ko'] as String?
+          ?? '',
       crossReferences: (json['cross_references'] as List<dynamic>?)
               ?.map((e) {
                 if (e is String) return CrossReference(reference: e, text: '');
@@ -210,24 +195,19 @@ class RelatedKnowledge {
           const [],
     );
   }
-
-  String historicalContext(String locale) =>
-      locale == 'ko' ? historicalContextKo : historicalContextEn;
 }
 
 class OriginalWord {
   final String word;
   final String transliteration;
   final String language;
-  final String meaningEn;
-  final String meaningKo;
+  final String meaning;
 
   const OriginalWord({
     required this.word,
     required this.transliteration,
     required this.language,
-    required this.meaningEn,
-    required this.meaningKo,
+    this.meaning = '',
   });
 
   factory OriginalWord.fromJson(Map<String, dynamic> json) {
@@ -235,12 +215,13 @@ class OriginalWord {
       word: json['word'] as String,
       transliteration: json['transliteration'] as String,
       language: json['language'] as String,
-      meaningEn: json['meaning_en'] as String,
-      meaningKo: json['meaning_ko'] as String,
+      // Phase 5A — single-field resolver with legacy fallbacks.
+      meaning: json['meaning'] as String?
+          ?? json['meaning_en'] as String?
+          ?? json['meaning_ko'] as String?
+          ?? '',
     );
   }
-
-  String meaning(String locale) => locale == 'ko' ? meaningKo : meaningEn;
 }
 
 /// Spiritual growth story tied to today's meditation. Phase 4 of
