@@ -406,5 +406,9 @@
     }
   },
   "settingsBibleTranslationsLabel": "बाइबल अनुवाद",
-  "settingsBibleTranslationsIntro": "इस ऐप में बाइबल के वचन सार्वजनिक डोमेन अनुवादों से लिए गए हैं। AI द्वारा उत्पन्न टिप्पणियां, प्रार्थनाएं और कहानियां Abba की रचनात्मक रचना हैं।"
+  "settingsBibleTranslationsIntro": "इस ऐप में बाइबल के वचन सार्वजनिक डोमेन अनुवादों से लिए गए हैं। AI द्वारा उत्पन्न टिप्पणियां, प्रार्थनाएं और कहानियां Abba की रचनात्मक रचना हैं।",
+  "meditationSummaryTitle": "Today's Meditation",
+  "meditationTopicLabel": "Topic",
+  "meditationSummaryLabel": "Summary",
+  "qtScriptureTitle": "Today's Passage"
 }

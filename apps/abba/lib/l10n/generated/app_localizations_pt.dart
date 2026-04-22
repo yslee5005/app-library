@@ -943,4 +943,16 @@ class AppLocalizationsPt extends AppLocalizations {
   @override
   String get settingsBibleTranslationsIntro =>
       'Os versículos bíblicos deste aplicativo vêm de traduções de domínio público. Comentários, orações e histórias gerados por IA são obra criativa da Abba.';
+
+  @override
+  String get meditationSummaryTitle => 'Meditação de hoje';
+
+  @override
+  String get meditationTopicLabel => 'Tema';
+
+  @override
+  String get meditationSummaryLabel => 'Em uma frase';
+
+  @override
+  String get qtScriptureTitle => 'Passagem de hoje';
 }

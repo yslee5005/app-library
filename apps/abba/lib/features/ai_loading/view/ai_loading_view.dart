@@ -205,12 +205,26 @@ class _AiLoadingViewState extends ConsumerState<AiLoadingView>
     }
 
     try {
-      final result = await aiService.analyzeMeditation(
+      QtMeditationResult result = await aiService.analyzeMeditation(
         passageReference: passageRef,
         passageText: passageText,
         meditationText: meditationText,
         locale: locale,
       );
+
+      qtLog.info(
+        '[QT-Analyze] done: locale=$locale '
+        'ref="${result.scripture.reference}" '
+        'topic="${result.meditationSummary.topic}" '
+        'summaryLen=${result.meditationSummary.summary.length} '
+        'hint="${result.scripture.keyWordHint}" '
+        'original=${result.scripture.originalWords.length}words',
+      );
+
+      // Phase 1 — fill Scripture.verse from PD bundle (BibleTextService),
+      // mirroring prayer's _enrichScriptureVerse pattern.
+      result = await _enrichQtScriptureVerse(result, locale);
+
       ref.read(qtMeditationResultProvider.notifier).state =
           AsyncValue.data(result);
 
@@ -224,6 +238,10 @@ class _AiLoadingViewState extends ConsumerState<AiLoadingView>
           mode: 'qt',
           qtPassageRef: passageRef,
           createdAt: DateTime.now(),
+          // QT result currently saved under prayer (not qt_sessions) — the
+          // JSONB `result` column isn't used by the prayer repo, so the
+          // meditation result stays in memory via the provider. Phase 5
+          // will introduce proper qt_sessions persistence.
         ),
       );
       await repo.updateStreak();
@@ -352,6 +370,11 @@ class _AiLoadingViewState extends ConsumerState<AiLoadingView>
   void _setFallbackMeditationResult() {
     ref.read(qtMeditationResultProvider.notifier).state = const AsyncValue.data(
       QtMeditationResult(
+        meditationSummary: MeditationSummary(
+          summary: '',
+          topic: 'Meditating on God\'s Word',
+        ),
+        scripture: Scripture(reference: 'Psalm 1:2'),
         analysis: MeditationAnalysis(
           keyThemeEn: 'God\'s Faithfulness',
           keyThemeKo: '하나님의 신실하심',
@@ -373,6 +396,57 @@ class _AiLoadingViewState extends ConsumerState<AiLoadingView>
         ),
       ),
     );
+  }
+
+  /// Phase 1 (qt_output_redesign) — Fill QT Scripture.verse from PD bundle.
+  /// Mirror of `_enrichScriptureVerse` for prayer.
+  Future<QtMeditationResult> _enrichQtScriptureVerse(
+    QtMeditationResult result,
+    String locale,
+  ) async {
+    final reference = result.scripture.reference;
+    if (reference.isEmpty) {
+      qtLog.warning(
+        '[QT-Bible-Enrich] skip: reference empty — AI did not select verse',
+      );
+      return result;
+    }
+    if (result.scripture.verse.isNotEmpty) {
+      qtLog.debug(
+        '[QT-Bible-Enrich] skip: verse already filled '
+        '(${result.scripture.verse.length} chars) — hardcoded path',
+      );
+      return result;
+    }
+
+    qtLog.info('[QT-Bible-Enrich] start: ref="$reference" locale=$locale');
+
+    try {
+      final bibleService = ref.read(bibleTextServiceProvider);
+      final verseText = await bibleService.lookup(reference, locale);
+      if (!mounted) return result;
+      if (verseText == null || verseText.isEmpty) {
+        qtLog.info(
+          '[QT-Bible-Enrich] null: ref="$reference" locale=$locale '
+          '→ UI reference-only fallback',
+        );
+        return result;
+      }
+      qtLog.info(
+        '[QT-Bible-Enrich] ok: ref="$reference" locale=$locale '
+        'verse=${verseText.length} chars',
+      );
+      return result.copyWithScripture(
+        result.scripture.withVerse(verseText),
+      );
+    } catch (e, stack) {
+      qtLog.error(
+        '[QT-Bible-Enrich] FAILED: ref="$reference" locale=$locale',
+        error: e,
+        stackTrace: stack,
+      );
+      return result;
+    }
   }
 
   /// Generate a unique ID: timestamp + random hex suffix

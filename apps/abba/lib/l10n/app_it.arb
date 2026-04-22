@@ -406,5 +406,9 @@
     }
   },
   "settingsBibleTranslationsLabel": "Traduzioni della Bibbia",
-  "settingsBibleTranslationsIntro": "I versetti biblici in questa app provengono da traduzioni di dominio pubblico. I commenti, le preghiere e le storie generati dall'IA sono opera creativa di Abba."
+  "settingsBibleTranslationsIntro": "I versetti biblici in questa app provengono da traduzioni di dominio pubblico. I commenti, le preghiere e le storie generati dall'IA sono opera creativa di Abba.",
+  "meditationSummaryTitle": "Today's Meditation",
+  "meditationTopicLabel": "Topic",
+  "meditationSummaryLabel": "Summary",
+  "qtScriptureTitle": "Today's Passage"
 }

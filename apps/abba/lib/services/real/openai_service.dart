@@ -329,6 +329,11 @@ class OpenAiService implements AiService {
 
   QtMeditationResult _fallbackMeditationResult() {
     return const QtMeditationResult(
+      meditationSummary: MeditationSummary(
+        summary: '',
+        topic: 'Meditating on God\'s Word',
+      ),
+      scripture: Scripture(reference: 'Psalm 1:2'),
       analysis: MeditationAnalysis(
         keyThemeEn: 'God\'s Faithfulness',
         keyThemeKo: '하나님의 신실하심',

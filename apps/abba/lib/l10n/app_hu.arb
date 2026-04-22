@@ -406,5 +406,9 @@
     }
   },
   "settingsBibleTranslationsLabel": "Biblia fordítások",
-  "settingsBibleTranslationsIntro": "A Biblia-versek ebben az alkalmazásban közkincsű fordításokból származnak. A mesterséges intelligencia által generált kommentárok, imák és történetek az Abba kreatív munkája."
+  "settingsBibleTranslationsIntro": "A Biblia-versek ebben az alkalmazásban közkincsű fordításokból származnak. A mesterséges intelligencia által generált kommentárok, imák és történetek az Abba kreatív munkája.",
+  "meditationSummaryTitle": "Today's Meditation",
+  "meditationTopicLabel": "Topic",
+  "meditationSummaryLabel": "Summary",
+  "qtScriptureTitle": "Today's Passage"
 }

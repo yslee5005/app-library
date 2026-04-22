@@ -943,4 +943,16 @@ class AppLocalizationsTr extends AppLocalizations {
   @override
   String get settingsBibleTranslationsIntro =>
       'Bu uygulamadaki Kutsal Kitap ayetleri kamu malı çevirilerden alınmıştır. AI tarafından oluşturulan yorumlar, dualar ve hikayeler Abba\'nın yaratıcı çalışmasıdır.';
+
+  @override
+  String get meditationSummaryTitle => 'Today\'s Meditation';
+
+  @override
+  String get meditationTopicLabel => 'Topic';
+
+  @override
+  String get meditationSummaryLabel => 'Summary';
+
+  @override
+  String get qtScriptureTitle => 'Today\'s Passage';
 }

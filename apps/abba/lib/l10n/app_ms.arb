@@ -406,5 +406,9 @@
     }
   },
   "settingsBibleTranslationsLabel": "Terjemahan Alkitab",
-  "settingsBibleTranslationsIntro": "Ayat Alkitab dalam aplikasi ini datang dari terjemahan domain awam. Ulasan, doa, dan cerita yang dihasilkan AI adalah karya kreatif Abba."
+  "settingsBibleTranslationsIntro": "Ayat Alkitab dalam aplikasi ini datang dari terjemahan domain awam. Ulasan, doa, dan cerita yang dihasilkan AI adalah karya kreatif Abba.",
+  "meditationSummaryTitle": "Today's Meditation",
+  "meditationTopicLabel": "Topic",
+  "meditationSummaryLabel": "Summary",
+  "qtScriptureTitle": "Today's Passage"
 }

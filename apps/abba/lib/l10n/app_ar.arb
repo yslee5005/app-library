@@ -406,5 +406,9 @@
     }
   },
   "settingsBibleTranslationsLabel": "ترجمات الكتاب المقدس",
-  "settingsBibleTranslationsIntro": "تأتي الآيات الكتابية في هذا التطبيق من ترجمات في الملكية العامة. التعليقات والصلوات والقصص التي يولدها الذكاء الاصطناعي هي من إبداع أبا."
+  "settingsBibleTranslationsIntro": "تأتي الآيات الكتابية في هذا التطبيق من ترجمات في الملكية العامة. التعليقات والصلوات والقصص التي يولدها الذكاء الاصطناعي هي من إبداع أبا.",
+  "meditationSummaryTitle": "Today's Meditation",
+  "meditationTopicLabel": "Topic",
+  "meditationSummaryLabel": "Summary",
+  "qtScriptureTitle": "Today's Passage"
 }

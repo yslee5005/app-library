@@ -406,5 +406,9 @@
     }
   },
   "settingsBibleTranslationsLabel": "תרגומי המקרא",
-  "settingsBibleTranslationsIntro": "פסוקי המקרא באפליקציה זו מגיעים מתרגומים בנחלת הכלל. פרשנויות, תפילות וסיפורים שנוצרו על ידי בינה מלאכותית הם יצירה של Abba."
+  "settingsBibleTranslationsIntro": "פסוקי המקרא באפליקציה זו מגיעים מתרגומים בנחלת הכלל. פרשנויות, תפילות וסיפורים שנוצרו על ידי בינה מלאכותית הם יצירה של Abba.",
+  "meditationSummaryTitle": "Today's Meditation",
+  "meditationTopicLabel": "Topic",
+  "meditationSummaryLabel": "Summary",
+  "qtScriptureTitle": "Today's Passage"
 }

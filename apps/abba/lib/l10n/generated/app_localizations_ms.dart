@@ -949,4 +949,16 @@ class AppLocalizationsMs extends AppLocalizations {
   @override
   String get settingsBibleTranslationsIntro =>
       'Ayat Alkitab dalam aplikasi ini datang dari terjemahan domain awam. Ulasan, doa, dan cerita yang dihasilkan AI adalah karya kreatif Abba.';
+
+  @override
+  String get meditationSummaryTitle => 'Today\'s Meditation';
+
+  @override
+  String get meditationTopicLabel => 'Topic';
+
+  @override
+  String get meditationSummaryLabel => 'Summary';
+
+  @override
+  String get qtScriptureTitle => 'Today\'s Passage';
 }

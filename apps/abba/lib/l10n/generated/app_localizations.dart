@@ -1897,6 +1897,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Bible verses in this app come from Public Domain translations. AI commentary, prayers, and stories are Abba\'s creative work.'**
   String get settingsBibleTranslationsIntro;
+
+  /// No description provided for @meditationSummaryTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Today\'s Meditation'**
+  String get meditationSummaryTitle;
+
+  /// No description provided for @meditationTopicLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Topic'**
+  String get meditationTopicLabel;
+
+  /// No description provided for @meditationSummaryLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Summary'**
+  String get meditationSummaryLabel;
+
+  /// No description provided for @qtScriptureTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Today\'s Passage'**
+  String get qtScriptureTitle;
 }
 
 class _AppLocalizationsDelegate

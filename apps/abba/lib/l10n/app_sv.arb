@@ -406,5 +406,9 @@
     }
   },
   "settingsBibleTranslationsLabel": "Bibelöversättningar",
-  "settingsBibleTranslationsIntro": "Bibelverserna i denna app kommer från översättningar i det offentliga området. Kommentarer, böner och berättelser som genereras av AI är Abbas kreativa verk."
+  "settingsBibleTranslationsIntro": "Bibelverserna i denna app kommer från översättningar i det offentliga området. Kommentarer, böner och berättelser som genereras av AI är Abbas kreativa verk.",
+  "meditationSummaryTitle": "Today's Meditation",
+  "meditationTopicLabel": "Topic",
+  "meditationSummaryLabel": "Summary",
+  "qtScriptureTitle": "Today's Passage"
 }

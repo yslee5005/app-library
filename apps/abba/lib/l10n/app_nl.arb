@@ -406,5 +406,9 @@
     }
   },
   "settingsBibleTranslationsLabel": "Bijbelvertalingen",
-  "settingsBibleTranslationsIntro": "De Bijbelverzen in deze app komen uit vertalingen in het publieke domein. Door AI gegenereerde commentaren, gebeden en verhalen zijn Abba's creatieve werk."
+  "settingsBibleTranslationsIntro": "De Bijbelverzen in deze app komen uit vertalingen in het publieke domein. Door AI gegenereerde commentaren, gebeden en verhalen zijn Abba's creatieve werk.",
+  "meditationSummaryTitle": "Today's Meditation",
+  "meditationTopicLabel": "Topic",
+  "meditationSummaryLabel": "Summary",
+  "qtScriptureTitle": "Today's Passage"
 }

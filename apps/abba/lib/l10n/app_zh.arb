@@ -406,5 +406,9 @@
     }
   },
   "settingsBibleTranslationsLabel": "圣经译本",
-  "settingsBibleTranslationsIntro": "本应用中的圣经经文均来自公共领域译本。AI 生成的注释、祷告和故事是 Abba 的原创作品。"
+  "settingsBibleTranslationsIntro": "本应用中的圣经经文均来自公共领域译本。AI 生成的注释、祷告和故事是 Abba 的原创作品。",
+  "meditationSummaryTitle": "今日默想",
+  "meditationTopicLabel": "主题",
+  "meditationSummaryLabel": "一句话",
+  "qtScriptureTitle": "今日经文"
 }

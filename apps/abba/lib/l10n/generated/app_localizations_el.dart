@@ -945,4 +945,16 @@ class AppLocalizationsEl extends AppLocalizations {
   @override
   String get settingsBibleTranslationsIntro =>
       'Τα βιβλικά εδάφια σε αυτήν την εφαρμογή προέρχονται από μεταφράσεις στο δημόσιο τομέα. Τα σχόλια, οι προσευχές και οι ιστορίες που δημιουργούνται από το AI είναι δημιουργικό έργο του Abba.';
+
+  @override
+  String get meditationSummaryTitle => 'Today\'s Meditation';
+
+  @override
+  String get meditationTopicLabel => 'Topic';
+
+  @override
+  String get meditationSummaryLabel => 'Summary';
+
+  @override
+  String get qtScriptureTitle => 'Today\'s Passage';
 }

@@ -406,5 +406,9 @@
     }
   },
   "settingsBibleTranslationsLabel": "Переводы Библии",
-  "settingsBibleTranslationsIntro": "Библейские стихи в этом приложении взяты из переводов, находящихся в общественном достоянии. Комментарии, молитвы и истории, созданные ИИ, являются творческой работой Abba."
+  "settingsBibleTranslationsIntro": "Библейские стихи в этом приложении взяты из переводов, находящихся в общественном достоянии. Комментарии, молитвы и истории, созданные ИИ, являются творческой работой Abba.",
+  "meditationSummaryTitle": "Today's Meditation",
+  "meditationTopicLabel": "Topic",
+  "meditationSummaryLabel": "Summary",
+  "qtScriptureTitle": "Today's Passage"
 }

@@ -939,4 +939,16 @@ class AppLocalizationsHi extends AppLocalizations {
   @override
   String get settingsBibleTranslationsIntro =>
       'इस ऐप में बाइबल के वचन सार्वजनिक डोमेन अनुवादों से लिए गए हैं। AI द्वारा उत्पन्न टिप्पणियां, प्रार्थनाएं और कहानियां Abba की रचनात्मक रचना हैं।';
+
+  @override
+  String get meditationSummaryTitle => 'Today\'s Meditation';
+
+  @override
+  String get meditationTopicLabel => 'Topic';
+
+  @override
+  String get meditationSummaryLabel => 'Summary';
+
+  @override
+  String get qtScriptureTitle => 'Today\'s Passage';
 }

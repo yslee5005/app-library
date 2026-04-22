@@ -944,4 +944,16 @@ class AppLocalizationsRu extends AppLocalizations {
   @override
   String get settingsBibleTranslationsIntro =>
       'Библейские стихи в этом приложении взяты из переводов, находящихся в общественном достоянии. Комментарии, молитвы и истории, созданные ИИ, являются творческой работой Abba.';
+
+  @override
+  String get meditationSummaryTitle => 'Today\'s Meditation';
+
+  @override
+  String get meditationTopicLabel => 'Topic';
+
+  @override
+  String get meditationSummaryLabel => 'Summary';
+
+  @override
+  String get qtScriptureTitle => 'Today\'s Passage';
 }

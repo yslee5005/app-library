@@ -947,4 +947,16 @@ class AppLocalizationsPl extends AppLocalizations {
   @override
   String get settingsBibleTranslationsIntro =>
       'Wersety biblijne w tej aplikacji pochodzą z tłumaczeń w domenie publicznej. Komentarze, modlitwy i historie generowane przez AI są twórczym dziełem Abba.';
+
+  @override
+  String get meditationSummaryTitle => 'Today\'s Meditation';
+
+  @override
+  String get meditationTopicLabel => 'Topic';
+
+  @override
+  String get meditationSummaryLabel => 'Summary';
+
+  @override
+  String get qtScriptureTitle => 'Today\'s Passage';
 }

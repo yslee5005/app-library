@@ -945,4 +945,16 @@ class AppLocalizationsNl extends AppLocalizations {
   @override
   String get settingsBibleTranslationsIntro =>
       'De Bijbelverzen in deze app komen uit vertalingen in het publieke domein. Door AI gegenereerde commentaren, gebeden en verhalen zijn Abba\'s creatieve werk.';
+
+  @override
+  String get meditationSummaryTitle => 'Today\'s Meditation';
+
+  @override
+  String get meditationTopicLabel => 'Topic';
+
+  @override
+  String get meditationSummaryLabel => 'Summary';
+
+  @override
+  String get qtScriptureTitle => 'Today\'s Passage';
 }

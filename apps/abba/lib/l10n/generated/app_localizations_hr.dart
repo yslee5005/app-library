@@ -944,4 +944,16 @@ class AppLocalizationsHr extends AppLocalizations {
   @override
   String get settingsBibleTranslationsIntro =>
       'Biblijski stihovi u ovoj aplikaciji dolaze iz prijevoda u javnom vlasništvu. AI-generirani komentari, molitve i priče su Abbino kreativno djelo.';
+
+  @override
+  String get meditationSummaryTitle => 'Today\'s Meditation';
+
+  @override
+  String get meditationTopicLabel => 'Topic';
+
+  @override
+  String get meditationSummaryLabel => 'Summary';
+
+  @override
+  String get qtScriptureTitle => 'Today\'s Passage';
 }

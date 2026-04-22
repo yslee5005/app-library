@@ -940,4 +940,16 @@ class AppLocalizationsSw extends AppLocalizations {
   @override
   String get settingsBibleTranslationsIntro =>
       'Aya za Biblia katika programu hii zinatoka kwa tafsiri zilizo katika umma. Maoni, sala, na hadithi zilizotengenezwa na AI ni kazi ya ubunifu ya Abba.';
+
+  @override
+  String get meditationSummaryTitle => 'Today\'s Meditation';
+
+  @override
+  String get meditationTopicLabel => 'Topic';
+
+  @override
+  String get meditationSummaryLabel => 'Summary';
+
+  @override
+  String get qtScriptureTitle => 'Today\'s Passage';
 }

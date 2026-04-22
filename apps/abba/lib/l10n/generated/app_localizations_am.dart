@@ -920,4 +920,16 @@ class AppLocalizationsAm extends AppLocalizations {
   @override
   String get settingsBibleTranslationsIntro =>
       'በዚህ መተግበሪያ ውስጥ ያሉት የመጽሐፍ ቅዱስ ቁጥሮች ከነጻ የትርጉም ስራዎች የተወሰዱ ናቸው። በAI የተፈጠሩ አስተያየቶች፣ ጸሎቶች እና ታሪኮች የAbba የፈጠራ ስራዎች ናቸው።';
+
+  @override
+  String get meditationSummaryTitle => 'Today\'s Meditation';
+
+  @override
+  String get meditationTopicLabel => 'Topic';
+
+  @override
+  String get meditationSummaryLabel => 'Summary';
+
+  @override
+  String get qtScriptureTitle => 'Today\'s Passage';
 }

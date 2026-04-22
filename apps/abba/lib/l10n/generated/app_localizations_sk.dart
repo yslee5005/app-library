@@ -946,4 +946,16 @@ class AppLocalizationsSk extends AppLocalizations {
   @override
   String get settingsBibleTranslationsIntro =>
       'Biblické verše v tejto aplikácii pochádzajú z prekladov vo verejnej doméne. Komentáre, modlitby a príbehy generované AI sú tvorivým dielom Abba.';
+
+  @override
+  String get meditationSummaryTitle => 'Today\'s Meditation';
+
+  @override
+  String get meditationTopicLabel => 'Topic';
+
+  @override
+  String get meditationSummaryLabel => 'Summary';
+
+  @override
+  String get qtScriptureTitle => 'Today\'s Passage';
 }

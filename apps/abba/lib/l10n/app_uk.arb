@@ -406,5 +406,9 @@
     }
   },
   "settingsBibleTranslationsLabel": "Переклади Біблії",
-  "settingsBibleTranslationsIntro": "Біблійні вірші в цьому додатку взяті з перекладів у суспільному надбанні. Коментарі, молитви та історії, створені ШІ, є творчою роботою Abba."
+  "settingsBibleTranslationsIntro": "Біблійні вірші в цьому додатку взяті з перекладів у суспільному надбанні. Коментарі, молитви та історії, створені ШІ, є творчою роботою Abba.",
+  "meditationSummaryTitle": "Today's Meditation",
+  "meditationTopicLabel": "Topic",
+  "meditationSummaryLabel": "Summary",
+  "qtScriptureTitle": "Today's Passage"
 }

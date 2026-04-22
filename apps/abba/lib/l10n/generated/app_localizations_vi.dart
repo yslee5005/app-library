@@ -944,4 +944,16 @@ class AppLocalizationsVi extends AppLocalizations {
   @override
   String get settingsBibleTranslationsIntro =>
       'Các câu Kinh Thánh trong ứng dụng này đến từ các bản dịch thuộc phạm vi công cộng. Các bình luận, lời cầu nguyện và câu chuyện do AI tạo ra là tác phẩm sáng tạo của Abba.';
+
+  @override
+  String get meditationSummaryTitle => 'Today\'s Meditation';
+
+  @override
+  String get meditationTopicLabel => 'Topic';
+
+  @override
+  String get meditationSummaryLabel => 'Summary';
+
+  @override
+  String get qtScriptureTitle => 'Today\'s Passage';
 }

@@ -940,4 +940,16 @@ class AppLocalizationsSv extends AppLocalizations {
   @override
   String get settingsBibleTranslationsIntro =>
       'Bibelverserna i denna app kommer från översättningar i det offentliga området. Kommentarer, böner och berättelser som genereras av AI är Abbas kreativa verk.';
+
+  @override
+  String get meditationSummaryTitle => 'Today\'s Meditation';
+
+  @override
+  String get meditationTopicLabel => 'Topic';
+
+  @override
+  String get meditationSummaryLabel => 'Summary';
+
+  @override
+  String get qtScriptureTitle => 'Today\'s Passage';
 }

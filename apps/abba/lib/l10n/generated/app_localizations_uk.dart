@@ -942,4 +942,16 @@ class AppLocalizationsUk extends AppLocalizations {
   @override
   String get settingsBibleTranslationsIntro =>
       'Біблійні вірші в цьому додатку взяті з перекладів у суспільному надбанні. Коментарі, молитви та історії, створені ШІ, є творчою роботою Abba.';
+
+  @override
+  String get meditationSummaryTitle => 'Today\'s Meditation';
+
+  @override
+  String get meditationTopicLabel => 'Topic';
+
+  @override
+  String get meditationSummaryLabel => 'Summary';
+
+  @override
+  String get qtScriptureTitle => 'Today\'s Passage';
 }

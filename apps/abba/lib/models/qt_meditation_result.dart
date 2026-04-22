@@ -1,31 +1,104 @@
+import 'prayer.dart';
+
+/// Single-field summary of the user's meditation plus the passage topic.
+/// Added in qt_output_redesign Phase 1. Rendered by `MeditationSummaryCard`.
+class MeditationSummary {
+  final String summary; // 1-2 sentence summary of the user's meditation text
+  final String topic;   // Short 1-line topic of today's passage
+
+  const MeditationSummary({
+    required this.summary,
+    required this.topic,
+  });
+
+  factory MeditationSummary.fromJson(Map<String, dynamic> json) {
+    return MeditationSummary(
+      summary: json['summary'] as String? ?? '',
+      topic: json['topic'] as String? ?? '',
+    );
+  }
+
+  bool get isEmpty => summary.isEmpty && topic.isEmpty;
+}
+
 class QtMeditationResult {
+  final MeditationSummary meditationSummary; // Phase 1 — new
+  final Scripture scripture;                 // Phase 1 — new (Scripture Deep)
   final MeditationAnalysis analysis;
   final ApplicationSuggestion application;
   final RelatedKnowledge knowledge;
   final GrowthStory? growthStory;
 
   const QtMeditationResult({
+    this.meditationSummary = const MeditationSummary(summary: '', topic: ''),
+    this.scripture = const Scripture(reference: ''),
     required this.analysis,
     required this.application,
     required this.knowledge,
     this.growthStory,
   });
 
-  factory QtMeditationResult.fromJson(Map<String, dynamic> json) {
+  /// Immutable copy with scripture replaced (e.g. after BibleTextService fills
+  /// verse text from the PD bundle lookup).
+  QtMeditationResult copyWithScripture(Scripture scripture) {
     return QtMeditationResult(
-      analysis: MeditationAnalysis.fromJson(
-        json['analysis'] as Map<String, dynamic>,
-      ),
-      application: ApplicationSuggestion.fromJson(
-        json['application'] as Map<String, dynamic>,
-      ),
-      knowledge: RelatedKnowledge.fromJson(
-        json['knowledge'] as Map<String, dynamic>,
-      ),
+      meditationSummary: meditationSummary,
+      scripture: scripture,
+      analysis: analysis,
+      application: application,
+      knowledge: knowledge,
+      growthStory: growthStory,
+    );
+  }
+
+  /// Defensive cast: tolerates `Map<dynamic, dynamic>` JSON literals (common
+  /// in tests and from some JSON libraries) without throwing.
+  static Map<String, dynamic> _asMap(Object? value) {
+    if (value is Map<String, dynamic>) return value;
+    if (value is Map) return value.cast<String, dynamic>();
+    return const {};
+  }
+
+  factory QtMeditationResult.fromJson(Map<String, dynamic> json) {
+    final analysis = MeditationAnalysis.fromJson(_asMap(json['analysis']));
+
+    // Phase 1 — parse new `meditation_summary` if present. Otherwise fall
+    // back to legacy format: infer topic from analysis.keyTheme, leave
+    // summary empty (hidden card if both empty).
+    final MeditationSummary summary;
+    final rawSummary = json['meditation_summary'];
+    if (rawSummary is Map) {
+      summary = MeditationSummary.fromJson(_asMap(rawSummary));
+    } else {
+      // Legacy compat: previous records have no meditation_summary.
+      // Use English keyTheme as a best-effort topic (locale-agnostic here —
+      // the card will hide automatically if both summary + topic are empty).
+      final legacyTopic = analysis.keyThemeEn.isNotEmpty
+          ? analysis.keyThemeEn
+          : analysis.keyThemeKo;
+      summary = MeditationSummary(summary: '', topic: legacyTopic);
+    }
+
+    // Phase 1 — parse new `scripture`. Legacy records have no scripture key;
+    // default to an empty Scripture (reference: ''). ScriptureCard will
+    // render nothing meaningful when reference is empty, which is fine for
+    // legacy records rendered in history view.
+    final Scripture scripture;
+    final rawScripture = json['scripture'];
+    if (rawScripture is Map) {
+      scripture = Scripture.fromJson(_asMap(rawScripture));
+    } else {
+      scripture = const Scripture(reference: '');
+    }
+
+    return QtMeditationResult(
+      meditationSummary: summary,
+      scripture: scripture,
+      analysis: analysis,
+      application: ApplicationSuggestion.fromJson(_asMap(json['application'])),
+      knowledge: RelatedKnowledge.fromJson(_asMap(json['knowledge'])),
       growthStory: json['growth_story'] != null
-          ? GrowthStory.fromJson(
-              json['growth_story'] as Map<String, dynamic>,
-            )
+          ? GrowthStory.fromJson(_asMap(json['growth_story']))
           : null,
     );
   }
@@ -45,11 +118,14 @@ class MeditationAnalysis {
   });
 
   factory MeditationAnalysis.fromJson(Map<String, dynamic> json) {
+    // Phase 1 prompt uses single `insight` + no key_theme (topic moved to
+    // meditationSummary). Legacy records still carry _en/_ko variants.
+    final insight = json['insight'] as String?;
     return MeditationAnalysis(
-      keyThemeEn: json['key_theme_en'] as String,
-      keyThemeKo: json['key_theme_ko'] as String,
-      insightEn: json['insight_en'] as String,
-      insightKo: json['insight_ko'] as String,
+      keyThemeEn: json['key_theme_en'] as String? ?? '',
+      keyThemeKo: json['key_theme_ko'] as String? ?? '',
+      insightEn: insight ?? json['insight_en'] as String? ?? '',
+      insightKo: insight ?? json['insight_ko'] as String? ?? '',
     );
   }
 
@@ -60,7 +136,7 @@ class MeditationAnalysis {
 class ApplicationSuggestion {
   final String action;
 
-  const ApplicationSuggestion({required this.action});
+  const ApplicationSuggestion({this.action = ''});
 
   factory ApplicationSuggestion.fromJson(Map<String, dynamic> json) {
     // New format (single action)
@@ -96,24 +172,23 @@ class RelatedKnowledge {
 
   const RelatedKnowledge({
     this.originalWord,
-    required this.historicalContextEn,
-    required this.historicalContextKo,
-    required this.crossReferences,
+    this.historicalContextEn = '',
+    this.historicalContextKo = '',
+    this.crossReferences = const [],
   });
 
   factory RelatedKnowledge.fromJson(Map<String, dynamic> json) {
+    final single = json['historical_context'] as String?;
     return RelatedKnowledge(
       originalWord: json['original_word'] != null
           ? OriginalWord.fromJson(
               json['original_word'] as Map<String, dynamic>,
             )
           : null,
-      historicalContextEn: json['historical_context_en'] as String? ??
-          json['historical_context'] as String? ??
-          '',
-      historicalContextKo: json['historical_context_ko'] as String? ??
-          json['historical_context'] as String? ??
-          '',
+      historicalContextEn:
+          single ?? json['historical_context_en'] as String? ?? '',
+      historicalContextKo:
+          single ?? json['historical_context_ko'] as String? ?? '',
       crossReferences: (json['cross_references'] as List<dynamic>?)
               ?.map((e) {
                 if (e is String) return CrossReference(reference: e, text: '');
@@ -176,13 +251,19 @@ class GrowthStory {
   });
 
   factory GrowthStory.fromJson(Map<String, dynamic> json) {
+    // Phase 1 prompt asks for single `title`/`summary`/`lesson` in the user's
+    // locale. Legacy records still carry _en/_ko variants. Phase 4 will
+    // fully migrate to single-field. For now, accept both.
+    final singleTitle = json['title'] as String?;
+    final singleSummary = json['summary'] as String?;
+    final singleLesson = json['lesson'] as String?;
     return GrowthStory(
-      titleEn: json['title_en'] as String,
-      titleKo: json['title_ko'] as String,
-      summaryEn: json['summary_en'] as String,
-      summaryKo: json['summary_ko'] as String,
-      lessonEn: json['lesson_en'] as String,
-      lessonKo: json['lesson_ko'] as String,
+      titleEn: singleTitle ?? json['title_en'] as String? ?? '',
+      titleKo: singleTitle ?? json['title_ko'] as String? ?? '',
+      summaryEn: singleSummary ?? json['summary_en'] as String? ?? '',
+      summaryKo: singleSummary ?? json['summary_ko'] as String? ?? '',
+      lessonEn: singleLesson ?? json['lesson_en'] as String? ?? '',
+      lessonKo: singleLesson ?? json['lesson_ko'] as String? ?? '',
       isPremium: json['is_premium'] as bool? ?? true,
     );
   }

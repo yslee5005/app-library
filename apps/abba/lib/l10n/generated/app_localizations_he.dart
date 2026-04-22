@@ -926,4 +926,16 @@ class AppLocalizationsHe extends AppLocalizations {
   @override
   String get settingsBibleTranslationsIntro =>
       'פסוקי המקרא באפליקציה זו מגיעים מתרגומים בנחלת הכלל. פרשנויות, תפילות וסיפורים שנוצרו על ידי בינה מלאכותית הם יצירה של Abba.';
+
+  @override
+  String get meditationSummaryTitle => 'Today\'s Meditation';
+
+  @override
+  String get meditationTopicLabel => 'Topic';
+
+  @override
+  String get meditationSummaryLabel => 'Summary';
+
+  @override
+  String get qtScriptureTitle => 'Today\'s Passage';
 }

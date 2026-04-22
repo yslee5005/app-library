@@ -406,5 +406,9 @@
     }
   },
   "settingsBibleTranslationsLabel": "Kutsal Kitap Çevirileri",
-  "settingsBibleTranslationsIntro": "Bu uygulamadaki Kutsal Kitap ayetleri kamu malı çevirilerden alınmıştır. AI tarafından oluşturulan yorumlar, dualar ve hikayeler Abba'nın yaratıcı çalışmasıdır."
+  "settingsBibleTranslationsIntro": "Bu uygulamadaki Kutsal Kitap ayetleri kamu malı çevirilerden alınmıştır. AI tarafından oluşturulan yorumlar, dualar ve hikayeler Abba'nın yaratıcı çalışmasıdır.",
+  "meditationSummaryTitle": "Today's Meditation",
+  "meditationTopicLabel": "Topic",
+  "meditationSummaryLabel": "Summary",
+  "qtScriptureTitle": "Today's Passage"
 }

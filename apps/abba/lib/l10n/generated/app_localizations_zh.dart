@@ -919,4 +919,16 @@ class AppLocalizationsZh extends AppLocalizations {
   @override
   String get settingsBibleTranslationsIntro =>
       '本应用中的圣经经文均来自公共领域译本。AI 生成的注释、祷告和故事是 Abba 的原创作品。';
+
+  @override
+  String get meditationSummaryTitle => '今日默想';
+
+  @override
+  String get meditationTopicLabel => '主题';
+
+  @override
+  String get meditationSummaryLabel => '一句话';
+
+  @override
+  String get qtScriptureTitle => '今日经文';
 }

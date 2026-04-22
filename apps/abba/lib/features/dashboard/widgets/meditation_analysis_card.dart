@@ -22,33 +22,42 @@ class MeditationAnalysisCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Phase 1 (qt_output_redesign): keyTheme is absorbed by MeditationSummary.topic
+    // in new records. Fall back to insight preview when missing.
+    final theme = analysis.keyTheme(locale);
+    final insight = analysis.insight(locale);
+    final summary = theme.isNotEmpty
+        ? theme
+        : (insight.length <= 40 ? insight : '${insight.substring(0, 40)}...');
     return ExpandableCard(
       icon: '🔍',
       title: title,
-      summary: analysis.keyTheme(locale),
+      summary: summary,
       initiallyExpanded: initiallyExpanded,
       expandedContent: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container(
-            padding: const EdgeInsets.symmetric(
-              horizontal: AbbaSpacing.sm,
-              vertical: 4,
-            ),
-            decoration: BoxDecoration(
-              color: AbbaColors.sage.withValues(alpha: 0.15),
-              borderRadius: BorderRadius.circular(AbbaRadius.sm),
-            ),
-            child: Text(
-              '$keyThemeLabel: ${analysis.keyTheme(locale)}',
-              style: AbbaTypography.body.copyWith(
-                color: AbbaColors.sage,
-                fontWeight: FontWeight.w700,
+          if (theme.isNotEmpty) ...[
+            Container(
+              padding: const EdgeInsets.symmetric(
+                horizontal: AbbaSpacing.sm,
+                vertical: 4,
+              ),
+              decoration: BoxDecoration(
+                color: AbbaColors.sage.withValues(alpha: 0.15),
+                borderRadius: BorderRadius.circular(AbbaRadius.sm),
+              ),
+              child: Text(
+                '$keyThemeLabel: $theme',
+                style: AbbaTypography.body.copyWith(
+                  color: AbbaColors.sage,
+                  fontWeight: FontWeight.w700,
+                ),
               ),
             ),
-          ),
-          const SizedBox(height: AbbaSpacing.md),
-          Text(analysis.insight(locale), style: AbbaTypography.body),
+            const SizedBox(height: AbbaSpacing.md),
+          ],
+          Text(insight, style: AbbaTypography.body),
         ],
       ),
     );

@@ -406,5 +406,9 @@
     }
   },
   "settingsBibleTranslationsLabel": "Traduções da Bíblia",
-  "settingsBibleTranslationsIntro": "Os versículos bíblicos deste aplicativo vêm de traduções de domínio público. Comentários, orações e histórias gerados por IA são obra criativa da Abba."
+  "settingsBibleTranslationsIntro": "Os versículos bíblicos deste aplicativo vêm de traduções de domínio público. Comentários, orações e histórias gerados por IA são obra criativa da Abba.",
+  "meditationSummaryTitle": "Meditação de hoje",
+  "meditationTopicLabel": "Tema",
+  "meditationSummaryLabel": "Em uma frase",
+  "qtScriptureTitle": "Passagem de hoje"
 }

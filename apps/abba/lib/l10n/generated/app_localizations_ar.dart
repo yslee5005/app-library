@@ -929,4 +929,16 @@ class AppLocalizationsAr extends AppLocalizations {
   @override
   String get settingsBibleTranslationsIntro =>
       'تأتي الآيات الكتابية في هذا التطبيق من ترجمات في الملكية العامة. التعليقات والصلوات والقصص التي يولدها الذكاء الاصطناعي هي من إبداع أبا.';
+
+  @override
+  String get meditationSummaryTitle => 'Today\'s Meditation';
+
+  @override
+  String get meditationTopicLabel => 'Topic';
+
+  @override
+  String get meditationSummaryLabel => 'Summary';
+
+  @override
+  String get qtScriptureTitle => 'Today\'s Passage';
 }

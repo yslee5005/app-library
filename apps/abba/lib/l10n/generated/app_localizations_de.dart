@@ -948,4 +948,16 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get settingsBibleTranslationsIntro =>
       'Die Bibelverse in dieser App stammen aus gemeinfreien Übersetzungen. KI-generierte Kommentare, Gebete und Geschichten sind Abbas kreatives Werk.';
+
+  @override
+  String get meditationSummaryTitle => 'Heutige Meditation';
+
+  @override
+  String get meditationTopicLabel => 'Thema';
+
+  @override
+  String get meditationSummaryLabel => 'In einem Satz';
+
+  @override
+  String get qtScriptureTitle => 'Heutige Schriftstelle';
 }

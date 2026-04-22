@@ -931,4 +931,16 @@ class AppLocalizationsTh extends AppLocalizations {
   @override
   String get settingsBibleTranslationsIntro =>
       'ข้อพระคัมภีร์ในแอปนี้มาจากฉบับแปลที่อยู่ในสาธารณสมบัติ คำอธิบาย คำอธิษฐาน และเรื่องราวที่สร้างโดย AI เป็นผลงานสร้างสรรค์ของ Abba';
+
+  @override
+  String get meditationSummaryTitle => 'Today\'s Meditation';
+
+  @override
+  String get meditationTopicLabel => 'Topic';
+
+  @override
+  String get meditationSummaryLabel => 'Summary';
+
+  @override
+  String get qtScriptureTitle => 'Today\'s Passage';
 }

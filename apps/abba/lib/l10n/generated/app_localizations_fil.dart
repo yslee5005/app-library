@@ -956,4 +956,16 @@ class AppLocalizationsFil extends AppLocalizations {
   @override
   String get settingsBibleTranslationsIntro =>
       'Ang mga talata ng Bibliya sa app na ito ay mula sa mga pagsasalin sa pampublikong domain. Ang mga komentaryo, panalangin, at kuwento na binuo ng AI ay malikhaing gawa ng Abba.';
+
+  @override
+  String get meditationSummaryTitle => 'Today\'s Meditation';
+
+  @override
+  String get meditationTopicLabel => 'Topic';
+
+  @override
+  String get meditationSummaryLabel => 'Summary';
+
+  @override
+  String get qtScriptureTitle => 'Today\'s Passage';
 }

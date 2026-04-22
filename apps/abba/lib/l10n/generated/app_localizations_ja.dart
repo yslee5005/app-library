@@ -919,4 +919,16 @@ class AppLocalizationsJa extends AppLocalizations {
   @override
   String get settingsBibleTranslationsIntro =>
       'このアプリの聖書の言葉はすべて著作権が切れたパブリックドメインの翻訳を使用しています。AIが生成する注釈・祈り・物語はAbbaの創作物です。';
+
+  @override
+  String get meditationSummaryTitle => '今日の黙想';
+
+  @override
+  String get meditationTopicLabel => '主題';
+
+  @override
+  String get meditationSummaryLabel => '一言で';
+
+  @override
+  String get qtScriptureTitle => '今日のみことば';
 }

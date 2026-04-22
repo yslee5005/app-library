@@ -406,5 +406,9 @@
     }
   },
   "settingsBibleTranslationsLabel": "Μεταφράσεις της Βίβλου",
-  "settingsBibleTranslationsIntro": "Τα βιβλικά εδάφια σε αυτήν την εφαρμογή προέρχονται από μεταφράσεις στο δημόσιο τομέα. Τα σχόλια, οι προσευχές και οι ιστορίες που δημιουργούνται από το AI είναι δημιουργικό έργο του Abba."
+  "settingsBibleTranslationsIntro": "Τα βιβλικά εδάφια σε αυτήν την εφαρμογή προέρχονται από μεταφράσεις στο δημόσιο τομέα. Τα σχόλια, οι προσευχές και οι ιστορίες που δημιουργούνται από το AI είναι δημιουργικό έργο του Abba.",
+  "meditationSummaryTitle": "Today's Meditation",
+  "meditationTopicLabel": "Topic",
+  "meditationSummaryLabel": "Summary",
+  "qtScriptureTitle": "Today's Passage"
 }

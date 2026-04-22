@@ -948,4 +948,16 @@ class AppLocalizationsRo extends AppLocalizations {
   @override
   String get settingsBibleTranslationsIntro =>
       'Versetele biblice din această aplicație provin din traduceri aflate în domeniul public. Comentariile, rugăciunile și poveștile generate de AI sunt opera creativă a Abba.';
+
+  @override
+  String get meditationSummaryTitle => 'Today\'s Meditation';
+
+  @override
+  String get meditationTopicLabel => 'Topic';
+
+  @override
+  String get meditationSummaryLabel => 'Summary';
+
+  @override
+  String get qtScriptureTitle => 'Today\'s Passage';
 }

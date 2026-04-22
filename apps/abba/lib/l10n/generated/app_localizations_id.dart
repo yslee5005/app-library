@@ -948,4 +948,16 @@ class AppLocalizationsId extends AppLocalizations {
   @override
   String get settingsBibleTranslationsIntro =>
       'Ayat-ayat Alkitab dalam aplikasi ini berasal dari terjemahan domain publik. Komentar, doa, dan cerita yang dihasilkan AI adalah karya kreatif Abba.';
+
+  @override
+  String get meditationSummaryTitle => 'Today\'s Meditation';
+
+  @override
+  String get meditationTopicLabel => 'Topic';
+
+  @override
+  String get meditationSummaryLabel => 'Summary';
+
+  @override
+  String get qtScriptureTitle => 'Today\'s Passage';
 }

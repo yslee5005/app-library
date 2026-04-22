@@ -12,7 +12,9 @@ import '../../../widgets/staggered_fade_in.dart';
 import '../widgets/application_card.dart';
 import '../widgets/growth_story_card.dart';
 import '../widgets/meditation_analysis_card.dart';
+import '../widgets/meditation_summary_card.dart';
 import '../widgets/related_knowledge_card.dart';
+import '../widgets/scripture_card.dart';
 
 class QtDashboardView extends ConsumerStatefulWidget {
   const QtDashboardView({super.key});
@@ -85,7 +87,26 @@ class _QtDashboardViewState extends ConsumerState<QtDashboardView> {
     return ListView(
       padding: const EdgeInsets.only(bottom: AbbaSpacing.xl),
       children: [
-        // 1. Meditation Analysis Card
+        // 1. Meditation Summary Card (Phase 1 — new first card)
+        StaggeredFadeIn(
+          index: i++,
+          child: MeditationSummaryCard(
+            meditationSummary: result.meditationSummary,
+            title: l10n.meditationSummaryTitle,
+            topicLabel: l10n.meditationTopicLabel,
+          ),
+        ),
+        // 2. Scripture Card (Phase 1 — Scripture Deep reused)
+        if (result.scripture.reference.isNotEmpty)
+          StaggeredFadeIn(
+            index: i++,
+            child: ScriptureCard(
+              scripture: result.scripture,
+              title: l10n.qtScriptureTitle,
+              initiallyExpanded: true,
+            ),
+          ),
+        // 3. Meditation Analysis Card
         StaggeredFadeIn(
           index: i++,
           child: MeditationAnalysisCard(
@@ -96,7 +117,7 @@ class _QtDashboardViewState extends ConsumerState<QtDashboardView> {
             initiallyExpanded: false,
           ),
         ),
-        // 2. Application Card
+        // 4. Application Card
         StaggeredFadeIn(
           index: i++,
           child: ApplicationCard(
@@ -104,7 +125,7 @@ class _QtDashboardViewState extends ConsumerState<QtDashboardView> {
             title: l10n.applicationTitle,
           ),
         ),
-        // 3. Related Knowledge Card
+        // 5. Related Knowledge Card
         StaggeredFadeIn(
           index: i++,
           child: RelatedKnowledgeCard(
@@ -116,7 +137,7 @@ class _QtDashboardViewState extends ConsumerState<QtDashboardView> {
             locale: locale,
           ),
         ),
-        // 4. Growth Story Card (Premium)
+        // 6. Growth Story Card (Premium)
         if (result.growthStory != null)
           StaggeredFadeIn(
             index: i++,

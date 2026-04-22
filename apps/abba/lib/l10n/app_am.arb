@@ -406,5 +406,9 @@
     }
   },
   "settingsBibleTranslationsLabel": "የመጽሐፍ ቅዱስ ትርጉሞች",
-  "settingsBibleTranslationsIntro": "በዚህ መተግበሪያ ውስጥ ያሉት የመጽሐፍ ቅዱስ ቁጥሮች ከነጻ የትርጉም ስራዎች የተወሰዱ ናቸው። በAI የተፈጠሩ አስተያየቶች፣ ጸሎቶች እና ታሪኮች የAbba የፈጠራ ስራዎች ናቸው።"
+  "settingsBibleTranslationsIntro": "በዚህ መተግበሪያ ውስጥ ያሉት የመጽሐፍ ቅዱስ ቁጥሮች ከነጻ የትርጉም ስራዎች የተወሰዱ ናቸው። በAI የተፈጠሩ አስተያየቶች፣ ጸሎቶች እና ታሪኮች የAbba የፈጠራ ስራዎች ናቸው።",
+  "meditationSummaryTitle": "Today's Meditation",
+  "meditationTopicLabel": "Topic",
+  "meditationSummaryLabel": "Summary",
+  "qtScriptureTitle": "Today's Passage"
 }

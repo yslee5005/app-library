@@ -945,4 +945,16 @@ class AppLocalizationsHu extends AppLocalizations {
   @override
   String get settingsBibleTranslationsIntro =>
       'A Biblia-versek ebben az alkalmazásban közkincsű fordításokból származnak. A mesterséges intelligencia által generált kommentárok, imák és történetek az Abba kreatív munkája.';
+
+  @override
+  String get meditationSummaryTitle => 'Today\'s Meditation';
+
+  @override
+  String get meditationTopicLabel => 'Topic';
+
+  @override
+  String get meditationSummaryLabel => 'Summary';
+
+  @override
+  String get qtScriptureTitle => 'Today\'s Passage';
 }

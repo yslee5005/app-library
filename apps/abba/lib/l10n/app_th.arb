@@ -406,5 +406,9 @@
     }
   },
   "settingsBibleTranslationsLabel": "ฉบับแปลพระคัมภีร์",
-  "settingsBibleTranslationsIntro": "ข้อพระคัมภีร์ในแอปนี้มาจากฉบับแปลที่อยู่ในสาธารณสมบัติ คำอธิบาย คำอธิษฐาน และเรื่องราวที่สร้างโดย AI เป็นผลงานสร้างสรรค์ของ Abba"
+  "settingsBibleTranslationsIntro": "ข้อพระคัมภีร์ในแอปนี้มาจากฉบับแปลที่อยู่ในสาธารณสมบัติ คำอธิบาย คำอธิษฐาน และเรื่องราวที่สร้างโดย AI เป็นผลงานสร้างสรรค์ของ Abba",
+  "meditationSummaryTitle": "Today's Meditation",
+  "meditationTopicLabel": "Topic",
+  "meditationSummaryLabel": "Summary",
+  "qtScriptureTitle": "Today's Passage"
 }

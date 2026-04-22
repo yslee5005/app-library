@@ -941,4 +941,16 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get settingsBibleTranslationsIntro =>
       'Bible verses in this app come from Public Domain translations. AI commentary, prayers, and stories are Abba\'s creative work.';
+
+  @override
+  String get meditationSummaryTitle => 'Today\'s Meditation';
+
+  @override
+  String get meditationTopicLabel => 'Topic';
+
+  @override
+  String get meditationSummaryLabel => 'Summary';
+
+  @override
+  String get qtScriptureTitle => 'Today\'s Passage';
 }

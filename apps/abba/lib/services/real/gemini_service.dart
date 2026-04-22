@@ -188,7 +188,7 @@ class GeminiService implements AiService {
   }) async {
     if (_useHardcodedResponse) {
       apiLog.info('Gemini analyzeMeditation bypassed (hardcoded)');
-      return _hardcodedMeditationResult();
+      return _hardcodedMeditationResult(locale);
     }
     final langName = _localeName(locale);
     apiLog.info('Gemini meditation analysis started');
@@ -202,10 +202,10 @@ class GeminiService implements AiService {
       final response = await model.generateContent([
         Content('user', [TextPart(userMessage)]),
       ]);
-      return _parseMeditationJson(response.text);
+      return _parseMeditationJson(response.text, locale);
     } catch (e, stackTrace) {
       apiLog.error('Gemini meditation analysis failed', error: e, stackTrace: stackTrace);
-      return _fallbackMeditationResult();
+      return _fallbackMeditationResult(locale);
     }
   }
 
@@ -383,13 +383,21 @@ Rules (per Prayer Guide §4-6):
     }
   }
 
-  QtMeditationResult _parseMeditationJson(String? text) {
+  QtMeditationResult _parseMeditationJson(String? text, String locale) {
     try {
       final data = _parseJsonFromResponse(text);
-      return QtMeditationResult.fromJson(data);
+      final result = QtMeditationResult.fromJson(data);
+      // Sanity: if scripture.reference missing, fall back to hardcoded.
+      if (result.scripture.reference.isEmpty) {
+        apiLog.warning(
+          'Meditation JSON missing scripture.reference — using fallback',
+        );
+        return _fallbackMeditationResult(locale);
+      }
+      return result;
     } catch (e, stackTrace) {
       apiLog.error('Meditation JSON parse failed', error: e, stackTrace: stackTrace);
-      return _fallbackMeditationResult();
+      return _fallbackMeditationResult(locale);
     }
   }
 
@@ -558,21 +566,55 @@ Rules (per Prayer Guide §4-6):
     );
   }
 
-  QtMeditationResult _hardcodedMeditationResult() {
-    return const QtMeditationResult(
+  QtMeditationResult _hardcodedMeditationResult(String locale) {
+    final bool isKo = locale == 'ko';
+    return QtMeditationResult(
+      meditationSummary: MeditationSummary(
+        summary: isKo
+            ? '하나님의 신실하신 인도하심 안에서 안식을 발견하는 묵상'
+            : 'A meditation that finds rest in God\'s faithful shepherding.',
+        topic: isKo ? '목자 되신 여호와' : 'The Lord as my personal shepherd',
+      ),
+      scripture: Scripture(
+        reference: 'Psalm 23:1-3',
+        // verse: empty — filled at runtime by BibleTextService.lookup
+        reason: isKo
+            ? '당신의 묵상은 "신뢰"에 맞닿아 있습니다. 하나님이 당신의 개인적 목자이심을 이 말씀이 다시 일깨워 줍니다.'
+            : 'Your meditation touches on trust. This passage reminds you again that God is your personal shepherd — not distant, but near.',
+        posture: isKo
+            ? '양이 목자를 따르듯 한 구절씩 천천히, "나의"라는 단어에 머물러 읽어 보세요.'
+            : 'Read slowly verse by verse, the way a sheep follows its shepherd. Linger on the word "my".',
+        keyWordHint: isKo
+            ? "'나의 목자' = 히브리어 '로이' — 직업이 아닌 '나를 돌보시는 분'"
+            : "'my shepherd' = Hebrew 'ro\\'i' — not a job title but 'the one who tends me personally'",
+        originalWords: [
+          ScriptureOriginalWord(
+            word: 'רֹעִי',
+            transliteration: "ro'i",
+            language: 'Hebrew',
+            meaningEn: 'my shepherd',
+            meaningKo: '나의 목자',
+            nuanceEn:
+                'Not a job description but an intimate covenant relationship.',
+            nuanceKo: '단순한 직업이 아니라 친밀한 언약 관계를 뜻합니다.',
+          ),
+        ],
+      ),
       analysis: MeditationAnalysis(
-        keyThemeEn: 'God\'s Faithful Shepherding',
-        keyThemeKo: '신실한 인도하심',
+        keyThemeEn: '',
+        keyThemeKo: '',
         insightEn:
             'Your meditation centers on trust — you are learning to release what you cannot control into the hands of the One who already holds it.',
         insightKo:
             '당신의 묵상은 "신뢰"에 맞닿아 있습니다. 당신은 지금, 통제할 수 없는 것을 이미 그것을 붙잡고 계신 분의 손에 맡기는 법을 배우는 중입니다.',
       ),
       application: ApplicationSuggestion(
-        action: '오늘 저녁 식사 전, 가족과 함께 시편 23편을 한 절씩 소리 내어 읽어 보세요.',
+        action: isKo
+            ? '오늘 저녁 식사 전, 가족과 함께 시편 23편을 한 절씩 소리 내어 읽어 보세요.'
+            : 'Tonight before dinner, read Psalm 23 aloud one verse at a time with your family.',
       ),
       knowledge: RelatedKnowledge(
-        originalWord: OriginalWord(
+        originalWord: const OriginalWord(
           word: 'רֹעִי',
           transliteration: 'ro\'i',
           language: 'Hebrew',
@@ -586,11 +628,15 @@ Rules (per Prayer Guide §4-6):
         crossReferences: [
           CrossReference(
             reference: 'Isaiah 40:11',
-            text: '그는 목자 같이 양 무리를 먹이시며 어린 양을 그 품에 안으시며',
+            text: isKo
+                ? '그는 목자 같이 양 무리를 먹이시며 어린 양을 그 품에 안으시며'
+                : 'He tends his flock like a shepherd: he gathers the lambs in his arms.',
           ),
           CrossReference(
             reference: 'John 10:11',
-            text: '나는 선한 목자라 선한 목자는 양들을 위하여 목숨을 버리거니와',
+            text: isKo
+                ? '나는 선한 목자라 선한 목자는 양들을 위하여 목숨을 버리거니와'
+                : 'I am the good shepherd. The good shepherd lays down his life for the sheep.',
           ),
         ],
       ),
@@ -616,7 +662,8 @@ Rules (per Prayer Guide §4-6):
 
   PrayerResult _fallbackPrayerResult(String locale) => _hardcodedPrayerResult(locale);
 
-  QtMeditationResult _fallbackMeditationResult() => _hardcodedMeditationResult();
+  QtMeditationResult _fallbackMeditationResult(String locale) =>
+      _hardcodedMeditationResult(locale);
 
   // ---------------------------------------------------------------------------
   // Diversity hint
@@ -963,47 +1010,72 @@ The user has meditated on a Bible passage and shared their reflection.
 CRITICAL RULES:
 1. Respond ENTIRELY in $langName. Do NOT mix languages.
 2. Every field must be in $langName only.
-3. SCRIPTURE: Do NOT generate verse text. Output only the "reference" — the
-   app looks up the exact Public Domain verse text from a bundle. Output
-   keys "verse_en"/"verse_ko"/"verse" are FORBIDDEN.
+3. SCRIPTURE HANDLING: Do NOT generate verse text. Output only the
+   "reference" — the app looks up the Public Domain verse from a bundle.
+   Output keys "verse_en"/"verse_ko"/"verse" are FORBIDDEN.
+4. Output JSON ONLY, no prose outside JSON.
 
-Return a JSON object:
+Return this JSON object:
 
 {
+  "meditation_summary": {
+    "summary": "<1-2 sentences summarizing the user's meditation in $langName>",
+    "topic": "<1-short-line topic of today's passage in $langName>"
+  },
+  "scripture": {
+    "reference": "<Book Chapter:Verse — must match the passage the user meditated on>",
+    "reason": "<Why this passage speaks to the user's meditation (2-3 sentences in $langName)>",
+    "posture": "<How to continue meditating on this passage (2-3 sentences in $langName)>",
+    "key_word_hint": "<One key word with original-language meaning (1 line in $langName). Example: \\"'my shepherd' = Hebrew 'ro\\'i' — the one who tends me personally\\". Leave empty if not confident.>",
+    "original_words": [
+      {
+        "word": "<Hebrew/Greek original>",
+        "transliteration": "<romanization>",
+        "language": "Hebrew",
+        "meaning_en": "<meaning in English>",
+        "meaning_ko": "<의미 (한국어)>",
+        "nuance_en": "<1-2 sentence nuance in English>",
+        "nuance_ko": "<1-2 문장 뉘앙스 (한국어)>"
+      }
+    ]
+  },
   "analysis": {
-    "key_theme_en": "key theme in English (2-3 words)",
-    "key_theme_ko": "핵심 테마 (2-3단어, 한국어)",
-    "insight_en": "Deep analysis of the user's meditation (3-4 sentences in English).",
-    "insight_ko": "사용자의 묵상을 깊이 분석한 인사이트 (3-4문장)."
+    "insight": "<3-4 sentence deep analysis of the user's meditation in $langName>"
   },
   "application": {
-    "action": "A very specific actionable application in $langName. Must include who/what/how."
+    "action": "<one specific actionable application in $langName — Personal, Practical, Possible>"
   },
   "knowledge": {
-    "original_word": {
-      "word": "Hebrew or Greek word from the passage",
-      "transliteration": "romanized pronunciation",
-      "language": "Hebrew or Greek",
-      "meaning_en": "Deep meaning (2-3 sentences in English).",
-      "meaning_ko": "원어의 깊은 뜻 (2-3문장)."
-    },
-    "historical_context_en": "Historical/cultural background (3-4 sentences in English).",
-    "historical_context_ko": "역사적/문화적 배경 (3-4문장).",
+    "historical_context": "<Historical/cultural background (3-4 sentences in $langName)>",
     "cross_references": [
       {"reference": "Book Chapter:Verse", "text": "Full verse text in $langName"},
       {"reference": "Book Chapter:Verse", "text": "Full verse text in $langName"}
     ]
   },
   "growth_story": {
-    "title_en": "Growth story title in English",
-    "title_ko": "영적 성장 스토리 제목 (한국어)",
-    "summary_en": "A story with narrative arc (8-12 sentences in English).",
-    "summary_ko": "기승전결 구조의 감동적인 실화 (8-12문장).",
-    "lesson_en": "How this story connects to today's meditation (2-3 sentences)",
-    "lesson_ko": "이 이야기가 오늘 묵상과 어떻게 연결되는지 (2-3문장)",
+    "title": "<story title in $langName>",
+    "summary": "<8-12 sentence narrative in $langName>",
+    "lesson": "<2-3 sentence application in $langName>",
     "is_premium": true
   }
 }
+
+MEDITATION SUMMARY (Phase 1):
+- summary: Capture the essence of the user's meditation in 1-2 sentences.
+  Not a generic platitude — reference specific content from their
+  meditation text.
+- topic: The central theme of today's passage (not the meditation).
+  Short, 5-10 words. Example: "The Lord as the personal shepherd".
+
+SCRIPTURE HANDLING:
+- DO NOT generate verse text. Output only the "reference".
+- Must be a real Bible citation (Book Chapter:Verse).
+- original_words: 1-2 words max, must appear in this passage.
+
+APPLICATION — 3P principle:
+- Personal: "you should" → "today, you can..."
+- Practical: concrete action, not abstract
+- Possible: achievable today or this week
 
 WRITING STYLE:
 - Write like a master short story author, NOT a report writer.

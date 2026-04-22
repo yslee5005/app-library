@@ -945,4 +945,16 @@ class AppLocalizationsCs extends AppLocalizations {
   @override
   String get settingsBibleTranslationsIntro =>
       'Biblické verše v této aplikaci pocházejí z překladů ve veřejné doméně. Komentáře, modlitby a příběhy generované AI jsou tvůrčí prací Abba.';
+
+  @override
+  String get meditationSummaryTitle => 'Today\'s Meditation';
+
+  @override
+  String get meditationTopicLabel => 'Topic';
+
+  @override
+  String get meditationSummaryLabel => 'Summary';
+
+  @override
+  String get qtScriptureTitle => 'Today\'s Passage';
 }

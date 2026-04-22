@@ -941,4 +941,16 @@ class AppLocalizationsFi extends AppLocalizations {
   @override
   String get settingsBibleTranslationsIntro =>
       'Tämän sovelluksen raamatunjakeet tulevat julkisen alueen käännöksistä. Tekoälyn luomat kommentit, rukoukset ja tarinat ovat Abban luovaa työtä.';
+
+  @override
+  String get meditationSummaryTitle => 'Today\'s Meditation';
+
+  @override
+  String get meditationTopicLabel => 'Topic';
+
+  @override
+  String get meditationSummaryLabel => 'Summary';
+
+  @override
+  String get qtScriptureTitle => 'Today\'s Passage';
 }
