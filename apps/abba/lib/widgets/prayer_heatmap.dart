@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:app_lib_logging/logging.dart';
+import 'package:intl/intl.dart';
 
 import '../l10n/generated/app_localizations.dart';
 import '../providers/providers.dart';
@@ -133,17 +134,22 @@ class _PrayerHeatmapState extends State<PrayerHeatmap> {
     final gridWidth = _cols * _step - widget.cellSpacing;
     final gridHeight = 7 * _step - widget.cellSpacing;
 
-    const weekdayLabels = ['월', '화', '수', '목', '금', '토', '일'];
+    final locale = Localizations.localeOf(context).toString();
+    // ISO weekday: Mon=1..Sun=7. Generate short names via intl (locale-aware).
+    final weekdayLabels = List.generate(7, (i) {
+      final d = DateTime(2024, 1, i + 1); // Jan 1 2024 = Mon
+      return DateFormat.E(locale).format(d);
+    });
     const labelWidth = 24.0;
 
-    // Month labels
+    // Month labels (locale-aware short month name)
     final monthLabels = <(int col, String label)>[];
     int lastMonth = -1;
     for (int col = 0; col < _cols; col++) {
       final firstDayOfCol = _gridStart.add(Duration(days: col * 7));
       if (firstDayOfCol.month != lastMonth) {
         lastMonth = firstDayOfCol.month;
-        monthLabels.add((col, '${firstDayOfCol.month}월'));
+        monthLabels.add((col, DateFormat.MMM(locale).format(firstDayOfCol)));
       }
     }
 
@@ -257,9 +263,10 @@ class _PrayerHeatmapState extends State<PrayerHeatmap> {
   Widget _buildSelectedInfo() {
     final d = _selectedDate!;
     final day = _selectedDay!;
-    const weekdays = ['월', '화', '수', '목', '금', '토', '일'];
-    final weekday = weekdays[(d.weekday - 1) % 7];
-    final dateStr = '${d.month}월 ${d.day}일 ($weekday)';
+    final locale = Localizations.localeOf(context).toString();
+    // Full localized date: "Apr 22 (Tue)" / "4월 22일 (화)" 등
+    final dateStr = '${DateFormat.MMMd(locale).format(d)} '
+        '(${DateFormat.E(locale).format(d)})';
 
     return Container(
       padding: const EdgeInsets.symmetric(
