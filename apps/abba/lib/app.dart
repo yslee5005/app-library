@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -9,28 +7,11 @@ import 'providers/providers.dart';
 import 'router/app_router.dart';
 import 'theme/abba_theme.dart';
 
-class AbbaApp extends ConsumerStatefulWidget {
+class AbbaApp extends ConsumerWidget {
   const AbbaApp({super.key});
 
   @override
-  ConsumerState<AbbaApp> createState() => _AbbaAppState();
-}
-
-class _AbbaAppState extends ConsumerState<AbbaApp> {
-  @override
-  void initState() {
-    super.initState();
-    // Preload the current locale's Bible bundle at startup. Fire-and-forget
-    // — dedup'd by BibleTextService so repeat calls are harmless.
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (!mounted) return;
-      final locale = ref.read(localeProvider);
-      unawaited(ref.read(bibleTextServiceProvider).preload(locale));
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final locale = ref.watch(localeProvider);
     // Dark mode disabled for MVP — AbbaColors.cream backgrounds clash with dark theme.
     // themeModeProvider kept for future use but not applied to MaterialApp.
