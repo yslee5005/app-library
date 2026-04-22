@@ -1,3 +1,4 @@
+import 'package:app_lib_logging/logging.dart';
 import 'package:flutter/material.dart';
 
 import '../../../l10n/generated/app_localizations.dart';
@@ -28,6 +29,14 @@ class _ScriptureCardState extends State<ScriptureCard> {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     final scripture = widget.scripture;
+
+    // Render-time diagnostic: clear signal on which UI path is taken.
+    if (scripture.verse.isEmpty && scripture.reference.isNotEmpty) {
+      prayerLog.info(
+        '[ScriptureCard] reference-only UI: ref="${scripture.reference}" '
+        '(no bundle text — check locale support and Supabase upload)',
+      );
+    }
 
     return ExpandableCard(
       icon: '📜',

@@ -158,18 +158,53 @@ class SupabaseStorageBibleTextService implements BibleTextService {
 
   @override
   Future<void> preload(String locale) async {
-    if (_memCache.containsKey(locale)) return;
+    if (_memCache.containsKey(locale)) {
+      apiLog.debug('[Bible] preload skip: $locale already in memory');
+      return;
+    }
+    apiLog.info('[Bible] preload start: $locale');
     await _loadBundle(locale);
   }
 
   @override
   Future<String?> lookup(String reference, String locale) async {
-    if (!_bundles.containsKey(locale)) return null;
+    if (!_bundles.containsKey(locale)) {
+      apiLog.info(
+        '[Bible] lookup unsupported: locale=$locale (no bundle) ref=$reference → fallback UI',
+      );
+      return null;
+    }
 
-    final verses = _memCache[locale] ?? await _loadBundle(locale);
-    if (verses == null) return null;
+    // 1st tier: memory cache.
+    var verses = _memCache[locale];
+    if (verses != null) {
+      final text = _resolveReference(reference, verses);
+      apiLog.debug(
+        '[Bible] lookup mem-hit: $locale $reference → ${text == null ? "NOT FOUND" : "${text.length} chars"}',
+      );
+      return text;
+    }
 
-    return _resolveReference(reference, verses);
+    // 2nd/3rd tier: local file or download.
+    verses = await _loadBundle(locale);
+    if (verses == null) {
+      apiLog.warning(
+        '[Bible] lookup load-failed: $locale — no local cache and download failed',
+      );
+      return null;
+    }
+
+    final text = _resolveReference(reference, verses);
+    if (text == null) {
+      apiLog.warning(
+        '[Bible] lookup ref-missing: $locale $reference not in bundle (${verses.length} verses)',
+      );
+    } else {
+      apiLog.info(
+        '[Bible] lookup ok: $locale $reference → ${text.length} chars',
+      );
+    }
+    return text;
   }
 
   // --------------------------------------------------------------------------
@@ -194,37 +229,53 @@ class SupabaseStorageBibleTextService implements BibleTextService {
     try {
       final file = await _localFile(desc.fileName);
       if (await file.exists()) {
+        final stopwatch = Stopwatch()..start();
         final raw = await file.readAsString();
         final verses = _parseVersesFromJson(raw);
+        stopwatch.stop();
         _memCache[locale] = verses;
-        apiLog.debug('BibleTextService: local cache hit for $locale');
+        apiLog.info(
+          '[Bible] file-cache hit: $locale ${verses.length} verses '
+          '(${raw.length ~/ 1024}KB, ${stopwatch.elapsedMilliseconds}ms)',
+        );
         return verses;
+      } else {
+        apiLog.debug('[Bible] file-cache miss: $locale — will download');
       }
     } catch (e) {
       apiLog.warning(
-        'BibleTextService: local cache read failed for $locale',
+        '[Bible] file-cache read failed: $locale',
         error: e,
       );
     }
 
     // 3rd tier: download from Supabase Storage.
+    final stopwatch = Stopwatch()..start();
     try {
+      apiLog.info(
+        '[Bible] download start: $locale ← $_bucket/${desc.storagePath}',
+      );
       final bytes = await _client.storage.from(_bucket).download(desc.storagePath);
       final raw = utf8.decode(bytes);
       final verses = _parseVersesFromJson(raw);
+      stopwatch.stop();
 
       // Persist to local file cache (best-effort).
       unawaited(_writeLocal(desc.fileName, bytes));
 
       _memCache[locale] = verses;
       apiLog.info(
-        'BibleTextService: downloaded $locale bundle (${bytes.length ~/ 1024}KB)',
+        '[Bible] download ok: $locale ${verses.length} verses '
+        '(${bytes.length ~/ 1024}KB, ${stopwatch.elapsedMilliseconds}ms)',
       );
       return verses;
-    } catch (e) {
-      apiLog.warning(
-        'BibleTextService: download failed for $locale',
+    } catch (e, stack) {
+      stopwatch.stop();
+      apiLog.error(
+        '[Bible] download FAILED: $locale ← $_bucket/${desc.storagePath} '
+        '(after ${stopwatch.elapsedMilliseconds}ms)',
         error: e,
+        stackTrace: stack,
       );
       return null;
     }

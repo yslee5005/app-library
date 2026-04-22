@@ -132,6 +132,15 @@ class _AiLoadingViewState extends ConsumerState<AiLoadingView>
         savedTranscript = transcript;
       }
 
+      prayerLog.info(
+        '[Prayer-Analyze] done: locale=$locale '
+        'ref="${result.scripture.reference}" '
+        'hint="${result.scripture.keyWordHint}" '
+        'reason=${result.scripture.reason.length}chars '
+        'posture=${result.scripture.posture.length}chars '
+        'original=${result.scripture.originalWords.length}words',
+      );
+
       // Phase 6: fill Scripture.verse from PD bundle (BibleTextService).
       // AI only picks reference — verse text comes from the bundle.
       result = await _enrichScriptureVerse(result, locale);
@@ -274,14 +283,36 @@ class _AiLoadingViewState extends ConsumerState<AiLoadingView>
     String locale,
   ) async {
     final reference = result.scripture.reference;
-    if (reference.isEmpty) return result;
+    if (reference.isEmpty) {
+      prayerLog.warning(
+        '[Bible-Enrich] skip: reference empty — AI did not select verse',
+      );
+      return result;
+    }
     // Skip lookup if the hardcoded path already set a verse (e.g. mock mode).
-    if (result.scripture.verse.isNotEmpty) return result;
+    if (result.scripture.verse.isNotEmpty) {
+      prayerLog.debug(
+        '[Bible-Enrich] skip: verse already filled (${result.scripture.verse.length} chars) — hardcoded path',
+      );
+      return result;
+    }
+
+    prayerLog.info(
+      '[Bible-Enrich] start: ref="$reference" locale=$locale',
+    );
 
     try {
       final bibleService = ref.read(bibleTextServiceProvider);
       final verseText = await bibleService.lookup(reference, locale);
-      if (verseText == null || verseText.isEmpty) return result;
+      if (verseText == null || verseText.isEmpty) {
+        prayerLog.info(
+          '[Bible-Enrich] null: ref="$reference" locale=$locale → UI reference-only fallback',
+        );
+        return result;
+      }
+      prayerLog.info(
+        '[Bible-Enrich] ok: ref="$reference" locale=$locale verse=${verseText.length} chars',
+      );
       return PrayerResult(
         scripture: result.scripture.withVerse(verseText),
         bibleStory: result.bibleStory,
@@ -292,10 +323,11 @@ class _AiLoadingViewState extends ConsumerState<AiLoadingView>
         prayerSummary: result.prayerSummary,
         historicalStory: result.historicalStory,
       );
-    } catch (e) {
-      prayerLog.warning(
-        'BibleTextService lookup failed for $reference ($locale)',
+    } catch (e, stack) {
+      prayerLog.error(
+        '[Bible-Enrich] FAILED: ref="$reference" locale=$locale',
         error: e,
+        stackTrace: stack,
       );
       return result;
     }
