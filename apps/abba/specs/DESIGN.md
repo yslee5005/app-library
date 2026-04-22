@@ -27,8 +27,8 @@ abba/                          ← 독립 repo
 │   │   ├── post.dart          # CommunityPost, Comment
 │   │   └── user_profile.dart  # UserProfile, SubscriptionStatus
 │   ├── services/
-│   │   ├── ai_service.dart    # AI API 인터페이스 (Phase 2)
-│   │   ├── stt_service.dart   # speech_to_text 래퍼
+│   │   ├── ai_service.dart    # AI API 인터페이스 (Gemini `analyzePrayerFromAudio` 포함)
+│   │   │                      # ~~(구 계획: stt_service.dart speech_to_text 래퍼)~~ Gemini 멀티모달로 전환 (2026-04-22)
 │   │   ├── tts_service.dart   # TTS 재생 (Phase 2)
 │   │   ├── auth_service.dart  # Supabase Auth (Phase 2)
 │   │   └── mock_data.dart     # JSON mock 로더 (Phase 1)
@@ -183,7 +183,7 @@ GoRouter(
 class Prayer {
   final String id;
   final String userId;
-  final String transcript;      // STT 변환 텍스트
+  final String transcript;      // Gemini 멀티모달 transcribe 결과 텍스트 (구: STT 변환)
   final String mode;             // 'prayer' | 'qt'
   final String? qtPassageRef;    // QT 모드일 때 말씀 참조
   final DateTime createdAt;
@@ -512,7 +512,7 @@ dependencies:
   intl: ^0.19.0
   flutter_riverpod: ^2.6.1
   go_router: ^14.8.1
-  speech_to_text: ^7.0.0
+  # ~~speech_to_text: ^7.0.0~~ Gemini 멀티모달(`analyzePrayerFromAudio`)로 전환 (2026-04-22)
   google_fonts: ^6.2.1
   cached_network_image: ^3.4.1
   shared_preferences: ^2.3.5

@@ -96,7 +96,7 @@ test/models/
 test/services/
 ├── mock_data_service_test.dart
 ├── ai_service_test.dart
-├── stt_service_test.dart
+# ~~stt_service_test.dart~~ Gemini 멀티모달(`analyzePrayerFromAudio`)로 전환 (2026-04-22) — ai_service_test에 포함
 ├── tts_service_test.dart
 └── auth_service_test.dart
 ```

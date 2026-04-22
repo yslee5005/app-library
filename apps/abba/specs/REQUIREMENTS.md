@@ -115,8 +115,7 @@ Home → [📖 QT하기] 탭
 | 표시 방식 | 풀스크린 오버레이 (Home 위에) |
 | 요소 | 파형 애니메이션 + 경과 시간 (36pt) + [일시정지] + [완료] 버튼 |
 | 전환 옵션 | 우측 상단 [⌨️ 텍스트로 전환] — 텍스트 입력 모드 |
-| STT | 온디바이스 (speech_to_text 패키지), 비용 $0 |
-| 1분 제한 대응 | 자동 세션 재시작 + 텍스트 이어붙이기 |
+| 오디오 분석 | Gemini 2.0 Flash 멀티모달 (`analyzePrayerFromAudio`) — 오디오 업로드 → transcribe + 분석 1-call, 35 locale 자동 지원, ~$0.004/세션 <br> ~~(구 계획: speech_to_text 온디바이스)~~ Gemini 멀티모달로 전환 (2026-04-22, 35 locale 자동 지원) |
 | 완료 시 | → AI Loading |
 
 ### 4.5 AI Loading
@@ -412,8 +411,8 @@ assets/mock/
 | 프레임워크 | Flutter (Dart) | iOS + Android 동시 |
 | 상태 관리 | Riverpod | |
 | 라우터 | go_router | |
-| STT | speech_to_text (온디바이스) | 비용 $0 |
-| AI | GPT-4o-mini API | $0.004/세션 |
+| AI Audio Analysis | Gemini 2.0 Flash (멀티모달) | 오디오 transcribe + 분석 1 call, 35 locale 자동 지원, ~$0.004/세션 <br> ~~(구 계획: speech_to_text 온디바이스 $0)~~ Gemini 멀티모달로 전환 (2026-04-22) |
+| AI (텍스트 분석) | GPT-4o-mini API | $0.004/세션 |
 | TTS | OpenAI TTS (tts-1) | $0.008/세션 |
 | 백엔드 | Supabase (app_id: 'abba') | 공유 인프라 |
 | 인증 | Supabase Auth (Google/Apple/Email) | |
@@ -436,7 +435,7 @@ assets/mock/
 - 기본 애니메이션
 
 ### Phase 2: Core 기능
-- speech_to_text STT 연동
+- Gemini 2.0 Flash 멀티모달 오디오 분석 연동 (`analyzePrayerFromAudio`) <br> ~~(구 계획: speech_to_text 온디바이스 STT 연동)~~ Gemini 멀티모달로 전환 (2026-04-22)
 - GPT-4o-mini API 연동
 - OpenAI TTS 연동
 - Supabase Auth + DB

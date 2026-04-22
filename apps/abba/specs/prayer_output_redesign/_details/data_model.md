@@ -14,7 +14,7 @@
 class PrayerResult {
   PrayerSummary? prayerSummary;  // 감사/간구/중보 3축 (optional)
   Scripture scripture;            // verse + reference
-  String testimony;               // STT transcript (String 직접)
+  String testimony;               // Gemini 멀티모달 transcribe 결과 (String 직접)
   HistoricalStory? historicalStory;
   AiPrayer? aiPrayer;             // text + audioUrl
   OriginalLanguage? originalLanguage;

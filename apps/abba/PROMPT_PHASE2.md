@@ -75,17 +75,16 @@ Phase 1에서 만든 UI Shell에 **실제 기능을 연결**한다.
 - [ ] prayer_streaks 테이블 자동 업데이트 (기도 완료 시)
 - [ ] 스트릭 로직: 오늘 기도 → current_streak++, 어제 안 했으면 reset to 1, best_streak 갱신
 
-### 2. 음성 녹음 (STT)
+### 2. 음성 녹음 (Gemini 멀티모달 오디오 분석)
 
-- [ ] `speech_to_text` 패키지 통합
+> ~~(구 계획: `speech_to_text` 온디바이스)~~ Gemini 멀티모달(`analyzePrayerFromAudio`)로 전환 (2026-04-22, 35 locale 자동 지원)
+
 - [ ] 마이크 권한 요청 (iOS Info.plist + Android manifest)
-- [ ] RecordingOverlay: 가짜 타이머 → 실제 음성 인식
-  - `onDevice: true` 설정 (iOS)
-  - 실시간 부분 인식 (partial results) → 텍스트 표시
-  - 1분 세션 제한 대응: 자동 재시작 + 텍스트 이어붙이기
-  - 무음 5초 → 자동 종료 방지 (pauseFor 파라미터 조정)
+- [ ] RecordingOverlay: 가짜 타이머 → 실제 오디오 캡처
+  - `record` 패키지로 오디오 파일 저장 (m4a/AAC)
+  - 무음 감지 자동 종료 (pauseFor 파라미터 조정)
 - [ ] 텍스트 입력 모드: TextField (이미 Phase 1에서 UI 있음) → 실제 입력값 사용
-- [ ] 녹음 완료 → transcript 텍스트를 AI 서비스에 전달
+- [ ] 녹음 완료 → 오디오 파일을 `analyzePrayerFromAudio`에 업로드 → transcribe + 분석 결과 1-call 수신
 
 ### 3. AI API 연동 (GPT-4o-mini)
 
