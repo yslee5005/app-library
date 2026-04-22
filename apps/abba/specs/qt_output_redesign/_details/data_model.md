@@ -81,8 +81,121 @@ QT용 추가 의미 부여:
 
 ## Phase 2-5 데이터 모델 (예정)
 
-### Phase 2 · QtCoaching / QtScores
-Prayer Coaching 미러. 상세 Phase 2 spec 시 작성.
+### Phase 2 · QtCoaching / QtScores (상세)
+
+Prayer Coaching 미러 (완벽 동일 구조).
+
+```dart
+class QtCoaching {
+  final QtScores scores;
+  final List<String> strengths;       // 2-4 items, 묵상 본문 인용
+  final List<String> improvements;    // 2-4 items, "XX하면 더 깊어질 거예요" 형식
+  final String overallFeedbackEn;
+  final String overallFeedbackKo;
+  final String expertLevel;           // beginner | growing | expert
+  final bool isPremium;
+
+  const QtCoaching({
+    required this.scores,
+    required this.strengths,
+    required this.improvements,
+    required this.overallFeedbackEn,
+    required this.overallFeedbackKo,
+    required this.expertLevel,
+    this.isPremium = true,
+  });
+
+  String overallFeedback(String locale) =>
+      locale == 'ko' ? overallFeedbackKo : overallFeedbackEn;
+
+  factory QtCoaching.fromJson(Map<String, dynamic> json) {
+    return QtCoaching(
+      scores: QtScores.fromJson(
+        json['scores'] as Map<String, dynamic>? ?? const {},
+      ),
+      strengths: (json['strengths'] as List<dynamic>?)
+              ?.map((e) => e as String).toList() ?? const [],
+      improvements: (json['improvements'] as List<dynamic>?)
+              ?.map((e) => e as String).toList() ?? const [],
+      overallFeedbackEn: json['overall_feedback_en'] as String? ?? '',
+      overallFeedbackKo: json['overall_feedback_ko'] as String? ?? '',
+      expertLevel: json['expert_level'] as String? ?? 'growing',
+      isPremium: json['is_premium'] as bool? ?? true,
+    );
+  }
+
+  factory QtCoaching.placeholder() => const QtCoaching(
+    scores: QtScores(
+      comprehension: 0,
+      application: 0,
+      depth: 0,
+      authenticity: 0,
+    ),
+    strengths: [],
+    improvements: [],
+    overallFeedbackEn: 'Unlock your personal meditation coaching...',
+    overallFeedbackKo: 'Pro로 당신의 묵상에 대한 맞춤 코칭을 받아보세요...',
+    expertLevel: 'growing',
+  );
+}
+
+class QtScores {
+  final int comprehension;   // 본문 이해 1-5
+  final int application;     // 개인 적용 1-5
+  final int depth;            // 영적 깊이 1-5
+  final int authenticity;    // 진정성 1-5
+
+  const QtScores({
+    required this.comprehension,
+    required this.application,
+    required this.depth,
+    required this.authenticity,
+  });
+
+  factory QtScores.fromJson(Map<String, dynamic> json) {
+    return QtScores(
+      comprehension: (json['comprehension'] as num?)?.toInt() ?? 0,
+      application: (json['application'] as num?)?.toInt() ?? 0,
+      depth: (json['depth'] as num?)?.toInt() ?? 0,
+      authenticity: (json['authenticity'] as num?)?.toInt() ?? 0,
+    );
+  }
+
+  double get average =>
+      (comprehension + application + depth + authenticity) / 4.0;
+}
+```
+
+### Phase 2 · Provider
+
+```dart
+final qtCoachingProvider =
+    FutureProvider.autoDispose<QtCoaching>((ref) async {
+  final isPremium = await ref.watch(isPremiumProvider.future);
+  if (!isPremium) return QtCoaching.placeholder();
+
+  final meditation = ref.watch(currentTranscriptProvider);
+  if (meditation.trim().isEmpty) return QtCoaching.placeholder();
+
+  final scriptureRef = ref.watch(currentPassageRefProvider);
+  final locale = ref.watch(localeProvider);
+  final aiService = ref.watch(aiServiceProvider);
+
+  return aiService.analyzeQtCoaching(
+    meditation: meditation,
+    scriptureReference: scriptureRef,
+    locale: locale,
+  );
+});
+```
+
+### Phase 2 · Hardcoded sample
+
+`_hardcodedQtCoaching(locale)` in gemini_service — Prayer Coaching 하드코딩과 동일 구조. ko/en 분기.
+
+### Phase 2 · Asset
+
+**`apps/abba/assets/docs/qt_guide.md`** 신규 — `_details/qt_guide.md` 내용 그대로 복사. prayer_guide.md 옆에 배치.
 
 ### Phase 3 · Citations 확장
 기존 Citation 재사용. `type` enum 확장: quote / science / history / example.

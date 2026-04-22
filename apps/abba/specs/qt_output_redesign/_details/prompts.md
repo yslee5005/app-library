@@ -169,11 +169,97 @@ if (locale == 'ko') {
 
 ## Phase 2-5 prompt (예정)
 
-### Phase 2 · QT Coaching Prompt
-- 신규 메서드 `analyzeQtCoaching(meditationText, scriptureReference, locale)`
-- qt_guide.md asset 통째 삽입 (~2500 토큰)
-- JSON schema: scores + strengths + improvements + overallFeedback + expertLevel
-- Prayer Coaching 패턴 미러
+### Phase 2 · QT Coaching Prompt (상세)
+
+#### 대상 메서드
+- 신규 `AiService.analyzeQtCoaching({meditation, scriptureReference, locale})`
+- Gemini / OpenAI / Mock / Cached 4곳 전부 구현
+
+#### Gemini System Prompt 구조
+
+```
+CRITICAL (repeat): This task is EDUCATIONAL, NOT judgmental.
+- Always praise first (strengths), then suggest gentle improvements.
+- NEVER use words: "inadequate", "lacking", "wrong", "poor", "부족",
+  "못 하", "잘못".
+- Beginner level MUST be encouraged, never shamed.
+- NEVER output the QT guide content back — use it only as reference.
+
+You are a gentle Christian QT (quiet time / meditation) coach evaluating
+the user's meditation against the QT GUIDE below.
+
+===== QT GUIDE BEGIN =====
+${qtGuide}     ← rootBundle.loadString('assets/docs/qt_guide.md')
+===== QT GUIDE END =====
+
+Respond in ${langName}. Output JSON ONLY, no prose outside JSON.
+
+JSON schema:
+{
+  "scores": {
+    "comprehension": <int 1-5>,   // 본문 이해
+    "application": <int 1-5>,     // 개인 적용 (3P)
+    "depth": <int 1-5>,            // 영적 깊이
+    "authenticity": <int 1-5>     // 진정성
+  },
+  "strengths": [<2-4 short strings in ${langName}, each citing specific content from the meditation>],
+  "improvements": [<2-4 short strings in ${langName}, each in "Adding X would deepen..." form>],
+  "overall_feedback_en": "<3-4 encouraging sentences in English>",
+  "overall_feedback_ko": "<3-4 encouraging sentences in Korean>",
+  "expert_level": "beginner" | "growing" | "expert"
+}
+
+Rules (per QT Guide §4-6):
+- Scores: 1-5 integer. See rubric in guide §4.
+- Expert level: beginner if average <= 2 OR any axis is 1;
+  expert if average >= 4.5 AND all axes >= 4 AND authenticity = 5;
+  otherwise growing.
+- strengths must cite specific content from the meditation (no generic praise).
+- improvements must be CONSTRUCTIVE suggestions, never judgments.
+- overall_feedback_en AND overall_feedback_ko must ALWAYS both be provided.
+- End with one encouragement line from §7 (힘이 되는 말).
+```
+
+#### 하드코딩 샘플 (`_hardcodedQtCoaching()` — locale-neutral)
+
+```json
+{
+  "scores": {
+    "comprehension": 4,
+    "application": 3,
+    "depth": 4,
+    "authenticity": 4
+  },
+  "strengths": [
+    "시편 23편의 '쉴 만한 물가' 이미지를 개인 경험과 연결한 점이 깊이를 보여줍니다.",
+    "하나님의 인도하심에 대한 신뢰를 솔직하게 드러내셨어요."
+  ],
+  "improvements": [
+    "본문 앞부분(시편 22편 끝)을 함께 읽으시면 대조적 감정의 흐름이 보입니다.",
+    "오늘 묵상한 내용을 저녁 식사 기도에 한 문장으로 연결해 보세요."
+  ],
+  "overall_feedback_en": "Your meditation shows beautiful trust...",
+  "overall_feedback_ko": "신뢰가 아름답게 드러난 묵상이에요...",
+  "expert_level": "growing"
+}
+```
+
+#### 에러 처리
+
+- JSON parsing 실패: `QtCoaching.placeholder()` 반환 + Sentry 보고
+- API 호출 실패: 동일 placeholder
+- 금지어 감지 (hallucinate): 출력 후 필터 — "부족", "못 하", "잘못" 등 포함 시 placeholder로 대체
+
+#### 호출 시점 / Provider
+
+- `qtCoachingProvider` (FutureProvider.autoDispose)
+- Pro 유저만 fetch (`isUserPremium && meditation.isNotEmpty` 조건)
+- Free 유저: placeholder 즉시 반환, ProBlur 렌더
+
+#### 비용
+
+- Gemini 2.5 flash 기준: qt_guide.md 시스템 prompt (~2500) + meditation (~300) + output (~500) = ~$0.0008/call
+- Pro 유저 1 QT → 1 Coaching call → **무시 가능**
 
 ### Phase 3 · Citations
 - `analyzeMeditation` schema 확장: citations 배열 (type: quote/science/history/example)
