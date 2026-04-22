@@ -527,6 +527,199 @@ void main() {
   // ---------------------------------------------------------------------------
   // Phase 5A (qt_output_redesign) — i18n single-field unification (non-analysis)
   // ---------------------------------------------------------------------------
+  // ---------------------------------------------------------------------------
+  // Phase 5D (qt_output_redesign) — Supabase JSONB persistence.
+  // QT results now round-trip through `abba.prayers.result`. Every sub-model
+  // gains a `toJson()` and the envelope encodes the full meditation record.
+  // Legacy `_en`/`_ko` dual-writes are NOT emitted (single-field era).
+  // ---------------------------------------------------------------------------
+  group('Phase 5D serialization', () {
+    test('QtMeditationResult toJson <-> fromJson round-trip preserves every field', () {
+      final original = QtMeditationResult.fromJson({
+        'meditation_summary': {
+          'summary': '오늘 묵상은 하나님의 평안에 닿아 있습니다.',
+          'topic': '평안의 근원',
+          'insight': '당신의 묵상은 신뢰에 닿아 있습니다.',
+        },
+        'scripture': {
+          'reference': 'Psalm 23:1-3',
+          'reason': '당신의 묵상은 신뢰에 닿아 있습니다.',
+          'posture': '한 구절씩 천천히 읽어 보세요.',
+          'key_word_hint': "'나의 목자' = 히브리어 '로이'",
+          'original_words': [
+            {
+              'word': 'רֹעִי',
+              'transliteration': "ro'i",
+              'language': 'Hebrew',
+              'meaning': '나의 목자',
+              'nuance': '친밀한 언약 관계',
+            },
+          ],
+        },
+        'application': {
+          'morning_action': '침대에서 한 구절 속삭이기',
+          'day_action': '점심 전 호흡 묵상',
+          'evening_action': '가족과 함께 소리 내어 읽기',
+        },
+        'knowledge': {
+          'original_word': {
+            'word': 'רֹעִי',
+            'transliteration': "ro'i",
+            'language': 'Hebrew',
+            'meaning': '나의 목자',
+          },
+          'historical_context': '다윗은 유대 광야의 목자였습니다.',
+          'cross_references': [
+            {'reference': 'Isaiah 40:11', 'text': '...'},
+            {'reference': 'John 10:11', 'text': '선한 목자...'},
+          ],
+          'citations': [
+            {
+              'type': 'history',
+              'source': 'Phillip Keller, 1970',
+              'content': '팔레스타인 양들은 급류를 두려워했습니다.',
+            },
+          ],
+        },
+        'growth_story': {
+          'title': '조지 뮐러 — 아침 빵',
+          'summary': '1838년 브리스톨, 조지 뮐러는 비어 있는 식탁 앞에 섰습니다.',
+          'lesson': '하나님은 구하기 전에 응답의 길을 여십니다.',
+          'is_premium': true,
+        },
+      });
+
+      final json = original.toJson();
+      final roundtrip = QtMeditationResult.fromJson(json);
+
+      // MeditationSummary (Phase 1 + 5C).
+      expect(roundtrip.meditationSummary.summary,
+          original.meditationSummary.summary);
+      expect(roundtrip.meditationSummary.topic,
+          original.meditationSummary.topic);
+      expect(roundtrip.meditationSummary.insight,
+          original.meditationSummary.insight);
+
+      // Scripture (Phase 2 — reference/reason/posture/hint/originalWords).
+      expect(roundtrip.scripture.reference, original.scripture.reference);
+      expect(roundtrip.scripture.reason, original.scripture.reason);
+      expect(roundtrip.scripture.posture, original.scripture.posture);
+      expect(roundtrip.scripture.keyWordHint, original.scripture.keyWordHint);
+      expect(roundtrip.scripture.originalWords.length,
+          original.scripture.originalWords.length);
+      expect(roundtrip.scripture.originalWords.first.word,
+          original.scripture.originalWords.first.word);
+      expect(roundtrip.scripture.originalWords.first.meaning,
+          original.scripture.originalWords.first.meaning);
+      expect(roundtrip.scripture.originalWords.first.nuance,
+          original.scripture.originalWords.first.nuance);
+
+      // Application (Phase 5B — 3-block preferred over legacy action).
+      expect(roundtrip.application.hasTimeBlocks, isTrue);
+      expect(roundtrip.application.morningAction,
+          original.application.morningAction);
+      expect(roundtrip.application.dayAction,
+          original.application.dayAction);
+      expect(roundtrip.application.eveningAction,
+          original.application.eveningAction);
+
+      // RelatedKnowledge (Phase 3 — citations + originalWord + crossRefs).
+      expect(roundtrip.knowledge.originalWord, isNotNull);
+      expect(roundtrip.knowledge.originalWord!.word,
+          original.knowledge.originalWord!.word);
+      expect(roundtrip.knowledge.historicalContext,
+          original.knowledge.historicalContext);
+      expect(roundtrip.knowledge.crossReferences.length, 2);
+      expect(roundtrip.knowledge.crossReferences.first.reference,
+          'Isaiah 40:11');
+      expect(roundtrip.knowledge.citations, hasLength(1));
+      expect(roundtrip.knowledge.citations.first.type, 'history');
+      expect(roundtrip.knowledge.citations.first.source,
+          'Phillip Keller, 1970');
+
+      // GrowthStory (Phase 4 — single-field).
+      expect(roundtrip.growthStory, isNotNull);
+      expect(roundtrip.growthStory!.title, original.growthStory!.title);
+      expect(roundtrip.growthStory!.summary, original.growthStory!.summary);
+      expect(roundtrip.growthStory!.lesson, original.growthStory!.lesson);
+      expect(roundtrip.growthStory!.isPremium, true);
+    });
+
+    test('MeditationSummary.toJson emits only snake_case single fields', () {
+      const summary = MeditationSummary(
+        summary: 's', topic: 't', insight: 'i',
+      );
+      expect(summary.toJson(), {
+        'summary': 's',
+        'topic': 't',
+        'insight': 'i',
+      });
+    });
+
+    test('ApplicationSuggestion.toJson writes 3-block when populated (no legacy action)', () {
+      const app = ApplicationSuggestion(
+        action: 'legacy text', // should NOT be written when time-blocks exist
+        morningAction: 'm',
+        dayAction: 'd',
+        eveningAction: 'e',
+      );
+      final json = app.toJson();
+      expect(json.containsKey('action'), isFalse);
+      expect(json['morning_action'], 'm');
+      expect(json['day_action'], 'd');
+      expect(json['evening_action'], 'e');
+    });
+
+    test('ApplicationSuggestion.toJson falls back to single action when no time-blocks', () {
+      const app = ApplicationSuggestion(action: 'Read Psalm 23 aloud.');
+      final json = app.toJson();
+      expect(json, {'action': 'Read Psalm 23 aloud.'});
+      expect(json.containsKey('morning_action'), isFalse);
+    });
+
+    test('RelatedKnowledge.toJson emits snake_case + filters empty citations after round-trip', () {
+      final knowledge = RelatedKnowledge.fromJson({
+        'historical_context': '배경',
+        'citations': [
+          {'type': 'quote', 'source': 'A', 'content': 'valid'},
+        ],
+        'cross_references': [
+          {'reference': 'Ps 1:1', 'text': 'Blessed...'},
+        ],
+      });
+      final json = knowledge.toJson();
+      expect(json['historical_context'], '배경');
+      expect(json['citations'], hasLength(1));
+      expect(json['cross_references'], hasLength(1));
+      expect(
+        (json['cross_references'] as List).first,
+        {'reference': 'Ps 1:1', 'text': 'Blessed...'},
+      );
+    });
+
+    test('GrowthStory.toJson writes single-field + is_premium', () {
+      const story = GrowthStory(
+        title: 'T', summary: 'S', lesson: 'L', isPremium: true,
+      );
+      expect(story.toJson(), {
+        'title': 'T',
+        'summary': 'S',
+        'lesson': 'L',
+        'is_premium': true,
+      });
+    });
+
+    test('QtMeditationResult.toJson omits growth_story when null', () {
+      final result = QtMeditationResult.fromJson({
+        'meditation_summary': {'summary': 's', 'topic': 't', 'insight': 'i'},
+        'application': {'action': 'a'},
+        'knowledge': {},
+      });
+      final json = result.toJson();
+      expect(json.containsKey('growth_story'), isFalse);
+    });
+  });
+
   group('Phase 5A i18n single-field (non-analysis)', () {
     test('RelatedKnowledge.fromJson — single `historical_context` + legacy fallback', () {
       final fresh = RelatedKnowledge.fromJson({

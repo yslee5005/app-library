@@ -1,3 +1,5 @@
+import 'qt_meditation_result.dart';
+
 class Prayer {
   final String id;
   final String userId;
@@ -8,7 +10,8 @@ class Prayer {
   final String? audioStoragePath; // Supabase Storage path (e.g., 'abba/{userId}/{id}.m4a')
   final int durationSeconds;
   final DateTime createdAt;
-  final PrayerResult? result;
+  final PrayerResult? result;     // mode='prayer' — AI prayer analysis
+  final QtMeditationResult? qtResult; // Phase 5D — mode='qt' persistence
 
   const Prayer({
     required this.id,
@@ -21,22 +24,40 @@ class Prayer {
     this.durationSeconds = 0,
     required this.createdAt,
     this.result,
+    this.qtResult,
   });
 
   factory Prayer.fromJson(Map<String, dynamic> json) {
+    // Phase 5D — `result` JSONB is mode-polymorphic. Dispatch on `mode`:
+    //   mode='qt'     → QtMeditationResult (new) into `qtResult`
+    //   mode='prayer' → PrayerResult into `result`
+    // Legacy QT records written before Phase 5D carry result=null, which is
+    // fine — both fields stay null and history list still renders the row.
+    final mode = json['mode'] as String;
+    final resultJson = json['result'];
+
+    PrayerResult? prayerResult;
+    QtMeditationResult? qtResult;
+    if (resultJson is Map<String, dynamic>) {
+      if (mode == 'qt') {
+        qtResult = QtMeditationResult.fromJson(resultJson);
+      } else {
+        prayerResult = PrayerResult.fromJson(resultJson);
+      }
+    }
+
     return Prayer(
       id: json['id'] as String,
       userId: json['user_id'] as String,
       transcript: json['transcript'] as String,
-      mode: json['mode'] as String,
+      mode: mode,
       qtPassageRef: json['qt_passage_ref'] as String?,
       audioPath: json['audio_path'] as String?,
       audioStoragePath: json['audio_storage_path'] as String?,
       durationSeconds: json['duration_seconds'] as int? ?? 0,
       createdAt: DateTime.parse(json['created_at'] as String),
-      result: json['result'] != null
-          ? PrayerResult.fromJson(json['result'] as Map<String, dynamic>)
-          : null,
+      result: prayerResult,
+      qtResult: qtResult,
     );
   }
 }
@@ -276,6 +297,15 @@ class ScriptureOriginalWord {
           ?? '',
     );
   }
+
+  /// Phase 5D — single-field snake_case (no legacy `_en`/`_ko` dual write).
+  Map<String, dynamic> toJson() => {
+        'word': word,
+        'transliteration': transliteration,
+        'language': language,
+        'meaning': meaning,
+        'nuance': nuance,
+      };
 
   bool get isRtl => language == 'Hebrew';
 }

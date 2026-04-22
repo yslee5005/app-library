@@ -228,7 +228,7 @@ class _AiLoadingViewState extends ConsumerState<AiLoadingView>
       ref.read(qtMeditationResultProvider.notifier).state =
           AsyncValue.data(result);
 
-      // Save as QT prayer
+      // Save as QT prayer — Phase 5D persists QT result via qt_result JSONB.
       final repo = ref.read(prayerRepositoryProvider);
       await repo.savePrayer(
         Prayer(
@@ -238,10 +238,7 @@ class _AiLoadingViewState extends ConsumerState<AiLoadingView>
           mode: 'qt',
           qtPassageRef: passageRef,
           createdAt: DateTime.now(),
-          // QT result currently saved under prayer (not qt_sessions) — the
-          // JSONB `result` column isn't used by the prayer repo, so the
-          // meditation result stays in memory via the provider. Phase 5
-          // will introduce proper qt_sessions persistence.
+          qtResult: result,
         ),
       );
       await repo.updateStreak();

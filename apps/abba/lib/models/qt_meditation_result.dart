@@ -25,6 +25,13 @@ class MeditationSummary {
     );
   }
 
+  /// Phase 5D — snake_case keys, single-field only (no legacy `_en`/`_ko`).
+  Map<String, dynamic> toJson() => {
+        'summary': summary,
+        'topic': topic,
+        'insight': insight,
+      };
+
   bool get isEmpty => summary.isEmpty && topic.isEmpty && insight.isEmpty;
 }
 
@@ -54,6 +61,26 @@ class QtMeditationResult {
       growthStory: growthStory,
     );
   }
+
+  /// Phase 5D (qt_output_redesign) — JSONB persistence for `abba.prayers.result`
+  /// when `mode='qt'`. Uses single-field snake_case schema to match
+  /// `fromJson` input. `verse` is intentionally NOT persisted (comes from the
+  /// PD bundle via BibleTextService at read time — same convention as Prayer).
+  Map<String, dynamic> toJson() => {
+        'meditation_summary': meditationSummary.toJson(),
+        'scripture': {
+          'reference': scripture.reference,
+          // verse not persisted — BibleTextService fills at read time.
+          'reason': scripture.reason,
+          'posture': scripture.posture,
+          'key_word_hint': scripture.keyWordHint,
+          'original_words':
+              scripture.originalWords.map((w) => w.toJson()).toList(),
+        },
+        'application': application.toJson(),
+        'knowledge': knowledge.toJson(),
+        if (growthStory != null) 'growth_story': growthStory!.toJson(),
+      };
 
   /// Defensive cast: tolerates `Map<dynamic, dynamic>` JSON literals (common
   /// in tests and from some JSON libraries) without throwing.
@@ -174,6 +201,20 @@ class ApplicationSuggestion {
       action: json['action_ko'] as String? ?? json['action_en'] as String? ?? '',
     );
   }
+
+  /// Phase 5D — persistence. Writes 3-block fields when present; falls back
+  /// to the legacy single `action` only when time-blocks are empty (mirrors
+  /// `fromJson` preference order — no dual-field write).
+  Map<String, dynamic> toJson() {
+    if (hasTimeBlocks) {
+      return {
+        'morning_action': morningAction,
+        'day_action': dayAction,
+        'evening_action': eveningAction,
+      };
+    }
+    return {'action': action};
+  }
 }
 
 class CrossReference {
@@ -188,6 +229,12 @@ class CrossReference {
       text: json['text'] as String? ?? '',
     );
   }
+
+  /// Phase 5D — snake_case persistence.
+  Map<String, dynamic> toJson() => {
+        'reference': reference,
+        'text': text,
+      };
 }
 
 class RelatedKnowledge {
@@ -234,6 +281,21 @@ class RelatedKnowledge {
           const [],
     );
   }
+
+  /// Phase 5D — single-field snake_case write. Mirrors `fromJson` shape.
+  Map<String, dynamic> toJson() => {
+        if (originalWord != null) 'original_word': originalWord!.toJson(),
+        'historical_context': historicalContext,
+        'cross_references':
+            crossReferences.map((c) => c.toJson()).toList(),
+        'citations': citations
+            .map((c) => {
+                  'type': c.type,
+                  'source': c.source,
+                  'content': c.content,
+                })
+            .toList(),
+      };
 }
 
 class OriginalWord {
@@ -261,6 +323,14 @@ class OriginalWord {
           ?? '',
     );
   }
+
+  /// Phase 5D — snake_case, single-field only.
+  Map<String, dynamic> toJson() => {
+        'word': word,
+        'transliteration': transliteration,
+        'language': language,
+        'meaning': meaning,
+      };
 }
 
 /// Spiritual growth story tied to today's meditation. Phase 4 of
@@ -300,6 +370,14 @@ class GrowthStory {
       isPremium: json['is_premium'] as bool? ?? true,
     );
   }
+
+  /// Phase 5D — single-field snake_case persistence.
+  Map<String, dynamic> toJson() => {
+        'title': title,
+        'summary': summary,
+        'lesson': lesson,
+        'is_premium': isPremium,
+      };
 }
 
 /// QT Coaching scores — Pro-only, mirrors `CoachingScores` but with the

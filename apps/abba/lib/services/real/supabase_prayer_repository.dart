@@ -19,6 +19,15 @@ class SupabasePrayerRepository implements PrayerRepository {
 
   @override
   Future<void> savePrayer(Prayer prayer) async {
+    // Phase 5D — QT meditation results are now persisted to `result` JSONB.
+    // Dispatch on mode: QT→QtMeditationResult.toJson, Prayer→_resultToJson.
+    Map<String, dynamic>? resultJsonb;
+    if (prayer.mode == 'qt' && prayer.qtResult != null) {
+      resultJsonb = prayer.qtResult!.toJson();
+    } else if (prayer.result != null) {
+      resultJsonb = _resultToJson(prayer.result!);
+    }
+
     await _abba.from('prayers').insert({
       'app_id': 'abba',
       'user_id': _userId,
@@ -27,7 +36,7 @@ class SupabasePrayerRepository implements PrayerRepository {
       'qt_passage_ref': prayer.qtPassageRef,
       'audio_storage_path': prayer.audioStoragePath,
       'duration_seconds': prayer.durationSeconds,
-      'result': prayer.result != null ? _resultToJson(prayer.result!) : null,
+      'result': resultJsonb,
     });
     await updateStreak();
   }

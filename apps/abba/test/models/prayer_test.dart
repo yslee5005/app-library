@@ -1,5 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:abba/models/prayer.dart';
+import 'package:abba/models/qt_meditation_result.dart';
 
 void main() {
   group('Prayer', () {
@@ -71,6 +72,121 @@ void main() {
       expect(prayer.result!.scripture.reference, 'Psalm 23:1');
       // Legacy title_en/ko fallback picks title_en first.
       expect(prayer.result!.bibleStory.title, 'David the Shepherd');
+    });
+  });
+
+  // ---------------------------------------------------------------------------
+  // Phase 5D (qt_output_redesign) — QT result persisted through prayers.result
+  // JSONB. Prayer.fromJson dispatches on `mode` to route into either
+  // `result` (PrayerResult) or `qtResult` (QtMeditationResult). No migration —
+  // column is polymorphic and existing records continue to parse.
+  // ---------------------------------------------------------------------------
+  group('Phase 5D QT persistence', () {
+    test("mode='qt' + result JSONB → qtResult populated, result null", () {
+      final json = {
+        'id': 'qt-1',
+        'user_id': 'user-1',
+        'transcript': 'I meditated on Psalm 23...',
+        'mode': 'qt',
+        'qt_passage_ref': 'Psalm 23:1',
+        'created_at': '2026-04-20T08:00:00Z',
+        'result': {
+          'meditation_summary': {
+            'summary': 's',
+            'topic': 't',
+            'insight': 'i',
+          },
+          'scripture': {'reference': 'Psalm 23:1'},
+          'application': {
+            'morning_action': 'm',
+            'day_action': 'd',
+            'evening_action': 'e',
+          },
+          'knowledge': {'historical_context': 'h'},
+          'growth_story': {
+            'title': 'George Muller',
+            'summary': '1838...',
+            'lesson': 'Trust...',
+            'is_premium': true,
+          },
+        },
+      };
+
+      final prayer = Prayer.fromJson(json);
+
+      expect(prayer.mode, 'qt');
+      expect(prayer.result, isNull);
+      expect(prayer.qtResult, isNotNull);
+      expect(prayer.qtResult!.meditationSummary.summary, 's');
+      expect(prayer.qtResult!.scripture.reference, 'Psalm 23:1');
+      expect(prayer.qtResult!.application.hasTimeBlocks, isTrue);
+      expect(prayer.qtResult!.growthStory!.title, 'George Muller');
+    });
+
+    test("mode='prayer' + result JSONB → result populated, qtResult null", () {
+      final json = {
+        'id': 'prayer-1',
+        'user_id': 'user-1',
+        'transcript': 'Dear Lord...',
+        'mode': 'prayer',
+        'created_at': '2026-04-20T08:00:00Z',
+        'result': {
+          'scripture': {'reference': 'Psalm 23:1'},
+          'bible_story': {'title': 'David', 'summary': 'David was...'},
+          'testimony': 'Dear Lord...',
+        },
+      };
+
+      final prayer = Prayer.fromJson(json);
+
+      expect(prayer.mode, 'prayer');
+      expect(prayer.qtResult, isNull);
+      expect(prayer.result, isNotNull);
+      expect(prayer.result!.scripture.reference, 'Psalm 23:1');
+    });
+
+    test('result=null → both result and qtResult stay null (legacy QT row)', () {
+      final json = {
+        'id': 'qt-legacy',
+        'user_id': 'user-1',
+        'transcript': 'Legacy QT before Phase 5D',
+        'mode': 'qt',
+        'qt_passage_ref': 'Psalm 1:1',
+        'created_at': '2026-04-01T08:00:00Z',
+        'result': null,
+      };
+
+      final prayer = Prayer.fromJson(json);
+
+      expect(prayer.mode, 'qt');
+      expect(prayer.result, isNull);
+      expect(prayer.qtResult, isNull);
+      expect(prayer.qtPassageRef, 'Psalm 1:1');
+    });
+
+    test('QT round-trip Prayer.qtResult → toJson → fromJson preserves payload', () {
+      final qt = QtMeditationResult.fromJson({
+        'meditation_summary': {'summary': 's', 'topic': 't', 'insight': 'i'},
+        'scripture': {'reference': 'John 10:11'},
+        'application': {'action': 'read aloud'},
+        'knowledge': {},
+      });
+      final jsonb = qt.toJson();
+
+      // Simulate DB row read: same JSONB encoded back into a Prayer row.
+      final row = {
+        'id': 'qt-rt',
+        'user_id': 'u',
+        'transcript': 'text',
+        'mode': 'qt',
+        'qt_passage_ref': 'John 10:11',
+        'created_at': '2026-04-20T10:00:00Z',
+        'result': jsonb,
+      };
+      final prayer = Prayer.fromJson(row);
+      expect(prayer.qtResult, isNotNull);
+      expect(prayer.qtResult!.scripture.reference, 'John 10:11');
+      expect(prayer.qtResult!.application.action, 'read aloud');
     });
   });
 

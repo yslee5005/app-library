@@ -173,7 +173,14 @@ class _PrayerItemCard extends ConsumerWidget {
 
     return GestureDetector(
       onTap: () {
-        if (prayer.result != null) {
+        // Phase 5D — QT records persist qtResult; open qt-dashboard for QT
+        // and prayer-dashboard for Prayer mode.
+        if (prayer.mode == 'qt' && prayer.qtResult != null) {
+          ref.read(qtMeditationResultProvider.notifier).state =
+              AsyncValue.data(prayer.qtResult!);
+          prayerLog.info('History QT tapped: ${prayer.id}, navigating to qt-dashboard');
+          context.push('/home/qt-dashboard');
+        } else if (prayer.result != null) {
           ref.read(prayerResultProvider.notifier).state =
               AsyncValue.data(prayer.result!);
           prayerLog.info('History item tapped: ${prayer.id}, navigating to dashboard');

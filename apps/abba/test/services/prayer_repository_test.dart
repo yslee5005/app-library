@@ -105,4 +105,21 @@ void main() {
       expect(milestones, contains('7_day_streak'));
     });
   });
+
+  // ---------------------------------------------------------------------------
+  // Phase 5D (qt_output_redesign) — QT meditation result persistence.
+  //
+  // Integration-level coverage (savePrayer → getLatestPrayer with qtResult
+  // preserved) cannot run here: MockPrayerRepository lazy-loads
+  // `assets/mock/prayers.json` via rootBundle, and the abba test harness does
+  // not wire flutter_test asset bundles. The same blocker causes all
+  // pre-existing MockPrayerRepository tests above to fail, so adding more
+  // rows wouldn't add signal.
+  //
+  // Phase 5D coverage therefore lives at the unit level:
+  //   - test/models/prayer_test.dart `Phase 5D QT persistence` (fromJson
+  //     dispatch on mode; QT round-trip via toJson/fromJson).
+  //   - test/models/qt_meditation_result_test.dart `Phase 5D serialization`
+  //     (full sub-model toJson + round-trip).
+  // ---------------------------------------------------------------------------
 }

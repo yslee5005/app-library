@@ -528,6 +528,15 @@ class _CalendarViewState extends ConsumerState<CalendarView> {
   }
 
   void _openPrayerDetail(Prayer prayer) {
+    // Phase 5D — QT records now persist qtResult; dispatch on mode so history
+    // re-entry opens the correct dashboard.
+    if (prayer.mode == 'qt' && prayer.qtResult != null) {
+      prayerLog.debug('QT detail opened: ${prayer.id}');
+      ref.read(qtMeditationResultProvider.notifier).state =
+          AsyncValue.data(prayer.qtResult!);
+      context.push('/home/qt-dashboard');
+      return;
+    }
     if (prayer.result == null) return;
 
     prayerLog.debug('Prayer detail opened: ${prayer.id}');
