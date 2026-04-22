@@ -1231,6 +1231,12 @@ class AppLocalizationsFr extends AppLocalizations {
   String get heatmapNoPrayer => 'Aucune prière';
 
   @override
+  String get heatmapLegendLess => 'Moins';
+
+  @override
+  String get heatmapLegendMore => 'Plus';
+
+  @override
   String get qtPassagesLoadError =>
       'Impossible de charger les passages du jour. Vérifiez votre connexion.';
 

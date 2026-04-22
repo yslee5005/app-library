@@ -499,6 +499,8 @@
   "homeActivityQt": "QT",
   "prayerPlayerLoading": "Učitavanje...",
   "heatmapNoPrayer": "Nema molitve",
+  "heatmapLegendLess": "Manje",
+  "heatmapLegendMore": "Više",
   "qtPassagesLoadError": "Nije moguće učitati današnje odlomke. Provjerite vezu.",
   "qtPassagesRetryButton": "Pokušaj ponovno"
 }

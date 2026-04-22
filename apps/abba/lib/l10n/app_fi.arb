@@ -499,6 +499,8 @@
   "homeActivityQt": "QT",
   "prayerPlayerLoading": "Ladataan...",
   "heatmapNoPrayer": "Ei rukousta",
+  "heatmapLegendLess": "Vähemmän",
+  "heatmapLegendMore": "Enemmän",
   "qtPassagesLoadError": "Päivän raamatunkohtia ei voitu ladata. Tarkista yhteytesi.",
   "qtPassagesRetryButton": "Yritä uudelleen"
 }

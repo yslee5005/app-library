@@ -1189,6 +1189,12 @@ class AppLocalizationsKo extends AppLocalizations {
   String get heatmapNoPrayer => '기도 없음';
 
   @override
+  String get heatmapLegendLess => '적음';
+
+  @override
+  String get heatmapLegendMore => '많음';
+
+  @override
   String get qtPassagesLoadError => '오늘의 말씀을 불러올 수 없어요. 연결을 확인해주세요.';
 
   @override

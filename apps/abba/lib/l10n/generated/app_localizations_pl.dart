@@ -1224,6 +1224,12 @@ class AppLocalizationsPl extends AppLocalizations {
   String get heatmapNoPrayer => 'Brak modlitwy';
 
   @override
+  String get heatmapLegendLess => 'Mniej';
+
+  @override
+  String get heatmapLegendMore => 'Więcej';
+
+  @override
   String get qtPassagesLoadError =>
       'Nie udało się załadować dzisiejszych fragmentów. Sprawdź połączenie.';
 

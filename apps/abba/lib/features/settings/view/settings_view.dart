@@ -152,7 +152,7 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
                   icon: Icons.dark_mode_outlined,
                   title: l10n.darkModeSetting,
                   trailing: Text(
-                    'Coming soon',
+                    l10n.comingSoon,
                     style: AbbaTypography.caption.copyWith(
                       color: AbbaColors.muted,
                     ),

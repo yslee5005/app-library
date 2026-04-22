@@ -499,6 +499,8 @@
   "homeActivityQt": "QT",
   "prayerPlayerLoading": "Wird geladen...",
   "heatmapNoPrayer": "Kein Gebet",
+  "heatmapLegendLess": "Weniger",
+  "heatmapLegendMore": "Mehr",
   "qtPassagesLoadError": "Die heutigen Bibelstellen konnten nicht geladen werden. Bitte Verbindung prüfen.",
   "qtPassagesRetryButton": "Erneut versuchen"
 }

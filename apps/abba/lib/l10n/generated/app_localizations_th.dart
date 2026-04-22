@@ -1208,6 +1208,12 @@ class AppLocalizationsTh extends AppLocalizations {
   String get heatmapNoPrayer => 'ไม่มีการอธิษฐาน';
 
   @override
+  String get heatmapLegendLess => 'น้อย';
+
+  @override
+  String get heatmapLegendMore => 'มาก';
+
+  @override
   String get qtPassagesLoadError =>
       'ไม่สามารถโหลดข้อพระคัมภีร์ของวันนี้ กรุณาตรวจสอบการเชื่อมต่อ';
 

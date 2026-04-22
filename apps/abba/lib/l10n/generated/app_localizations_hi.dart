@@ -1216,6 +1216,12 @@ class AppLocalizationsHi extends AppLocalizations {
   String get heatmapNoPrayer => 'कोई प्रार्थना नहीं';
 
   @override
+  String get heatmapLegendLess => 'कम';
+
+  @override
+  String get heatmapLegendMore => 'ज्यादा';
+
+  @override
   String get qtPassagesLoadError =>
       'आज के वचन लोड नहीं हो सके। कृपया अपना कनेक्शन जाँचें।';
 

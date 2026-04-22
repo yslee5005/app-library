@@ -1202,6 +1202,12 @@ class AppLocalizationsAr extends AppLocalizations {
   String get heatmapNoPrayer => 'لا صلاة';
 
   @override
+  String get heatmapLegendLess => 'أقل';
+
+  @override
+  String get heatmapLegendMore => 'أكثر';
+
+  @override
   String get qtPassagesLoadError =>
       'تعذّر تحميل آيات اليوم. يُرجى التحقق من الاتصال.';
 

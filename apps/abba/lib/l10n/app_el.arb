@@ -499,6 +499,8 @@
   "homeActivityQt": "QT",
   "prayerPlayerLoading": "Φόρτωση...",
   "heatmapNoPrayer": "Καμία προσευχή",
+  "heatmapLegendLess": "Λιγότερο",
+  "heatmapLegendMore": "Περισσότερο",
   "qtPassagesLoadError": "Δεν ήταν δυνατή η φόρτωση των σημερινών εδαφίων. Ελέγξτε τη σύνδεση.",
   "qtPassagesRetryButton": "Δοκιμάστε ξανά"
 }

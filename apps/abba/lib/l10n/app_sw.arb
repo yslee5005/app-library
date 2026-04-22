@@ -499,6 +499,8 @@
   "homeActivityQt": "QT",
   "prayerPlayerLoading": "Inapakia...",
   "heatmapNoPrayer": "Hakuna sala",
+  "heatmapLegendLess": "Kidogo",
+  "heatmapLegendMore": "Zaidi",
   "qtPassagesLoadError": "Imeshindikana kupakia vifungu vya leo. Tafadhali angalia muunganisho wako.",
   "qtPassagesRetryButton": "Jaribu tena"
 }

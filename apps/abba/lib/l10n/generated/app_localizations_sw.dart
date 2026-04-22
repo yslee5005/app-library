@@ -1217,6 +1217,12 @@ class AppLocalizationsSw extends AppLocalizations {
   String get heatmapNoPrayer => 'Hakuna sala';
 
   @override
+  String get heatmapLegendLess => 'Kidogo';
+
+  @override
+  String get heatmapLegendMore => 'Zaidi';
+
+  @override
   String get qtPassagesLoadError =>
       'Imeshindikana kupakia vifungu vya leo. Tafadhali angalia muunganisho wako.';
 

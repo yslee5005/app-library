@@ -1220,6 +1220,12 @@ class AppLocalizationsHu extends AppLocalizations {
   String get heatmapNoPrayer => 'Nincs ima';
 
   @override
+  String get heatmapLegendLess => 'Kevesebb';
+
+  @override
+  String get heatmapLegendMore => 'Több';
+
+  @override
   String get qtPassagesLoadError =>
       'A mai igék betöltése nem sikerült. Ellenőrizze a kapcsolatot.';
 

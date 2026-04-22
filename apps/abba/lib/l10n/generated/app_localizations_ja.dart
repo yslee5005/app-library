@@ -1189,6 +1189,12 @@ class AppLocalizationsJa extends AppLocalizations {
   String get heatmapNoPrayer => '祈りなし';
 
   @override
+  String get heatmapLegendLess => '少ない';
+
+  @override
+  String get heatmapLegendMore => '多い';
+
+  @override
   String get qtPassagesLoadError => '今日の御言葉を読み込めませんでした。接続をご確認ください。';
 
   @override

@@ -1222,6 +1222,12 @@ class AppLocalizationsVi extends AppLocalizations {
   String get heatmapNoPrayer => 'Không có cầu nguyện';
 
   @override
+  String get heatmapLegendLess => 'Ít';
+
+  @override
+  String get heatmapLegendMore => 'Nhiều';
+
+  @override
   String get qtPassagesLoadError =>
       'Không thể tải các phân đoạn hôm nay. Vui lòng kiểm tra kết nối.';
 

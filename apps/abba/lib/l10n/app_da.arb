@@ -499,6 +499,8 @@
   "homeActivityQt": "QT",
   "prayerPlayerLoading": "Indlæser...",
   "heatmapNoPrayer": "Ingen bøn",
+  "heatmapLegendLess": "Mindre",
+  "heatmapLegendMore": "Mere",
   "qtPassagesLoadError": "Dagens skriftsteder kunne ikke indlæses. Tjek din forbindelse.",
   "qtPassagesRetryButton": "Prøv igen"
 }

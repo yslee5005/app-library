@@ -1189,6 +1189,12 @@ class AppLocalizationsZh extends AppLocalizations {
   String get heatmapNoPrayer => '无祷告';
 
   @override
+  String get heatmapLegendLess => '少';
+
+  @override
+  String get heatmapLegendMore => '多';
+
+  @override
   String get qtPassagesLoadError => '无法加载今天的经文。请检查网络连接。';
 
   @override

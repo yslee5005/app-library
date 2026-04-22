@@ -2390,6 +2390,18 @@ abstract class AppLocalizations {
   /// **'No prayer'**
   String get heatmapNoPrayer;
 
+  /// No description provided for @heatmapLegendLess.
+  ///
+  /// In en, this message translates to:
+  /// **'Less'**
+  String get heatmapLegendLess;
+
+  /// No description provided for @heatmapLegendMore.
+  ///
+  /// In en, this message translates to:
+  /// **'More'**
+  String get heatmapLegendMore;
+
   /// No description provided for @qtPassagesLoadError.
   ///
   /// In en, this message translates to:

@@ -1228,6 +1228,12 @@ class AppLocalizationsMs extends AppLocalizations {
   String get heatmapNoPrayer => 'Tiada doa';
 
   @override
+  String get heatmapLegendLess => 'Kurang';
+
+  @override
+  String get heatmapLegendMore => 'Banyak';
+
+  @override
   String get qtPassagesLoadError =>
       'Tidak dapat memuatkan petikan hari ini. Sila semak sambungan anda.';
 

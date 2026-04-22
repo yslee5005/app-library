@@ -499,6 +499,8 @@
   "homeActivityQt": "QT",
   "prayerPlayerLoading": "Memuatkan...",
   "heatmapNoPrayer": "Tiada doa",
+  "heatmapLegendLess": "Kurang",
+  "heatmapLegendMore": "Banyak",
   "qtPassagesLoadError": "Tidak dapat memuatkan petikan hari ini. Sila semak sambungan anda.",
   "qtPassagesRetryButton": "Cuba lagi"
 }

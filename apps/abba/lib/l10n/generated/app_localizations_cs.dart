@@ -1220,6 +1220,12 @@ class AppLocalizationsCs extends AppLocalizations {
   String get heatmapNoPrayer => 'Žádná modlitba';
 
   @override
+  String get heatmapLegendLess => 'Méně';
+
+  @override
+  String get heatmapLegendMore => 'Více';
+
+  @override
   String get qtPassagesLoadError =>
       'Dnešní verše se nepodařilo načíst. Zkontrolujte připojení.';
 

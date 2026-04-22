@@ -499,6 +499,8 @@
   "homeActivityQt": "QT",
   "prayerPlayerLoading": "جارٍ التحميل...",
   "heatmapNoPrayer": "لا صلاة",
+  "heatmapLegendLess": "أقل",
+  "heatmapLegendMore": "أكثر",
   "qtPassagesLoadError": "تعذّر تحميل آيات اليوم. يُرجى التحقق من الاتصال.",
   "qtPassagesRetryButton": "إعادة المحاولة"
 }

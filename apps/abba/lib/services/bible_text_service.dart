@@ -68,7 +68,6 @@ class SupabaseStorageBibleTextService implements BibleTextService {
   final String _bucket;
 
   /// Which translation file we use per locale (Phase 1 = ko + en only).
-  /// Extended in Phase 3 for remaining locales.
   /// 31 locales with bundled Bible translations. The remaining 4 locales
   /// (am, ar, no, th) fall back to reference-only UI because their only
   /// available translations have commercial-use restrictions. Full audit:

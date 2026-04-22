@@ -499,6 +499,8 @@
   "homeActivityQt": "QT",
   "prayerPlayerLoading": "Se încarcă...",
   "heatmapNoPrayer": "Nicio rugăciune",
+  "heatmapLegendLess": "Mai puțin",
+  "heatmapLegendMore": "Mai mult",
   "qtPassagesLoadError": "Nu am putut încărca pasajele de astăzi. Verificați conexiunea.",
   "qtPassagesRetryButton": "Încearcă din nou"
 }

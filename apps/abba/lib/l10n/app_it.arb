@@ -499,6 +499,8 @@
   "homeActivityQt": "QT",
   "prayerPlayerLoading": "Caricamento...",
   "heatmapNoPrayer": "Nessuna preghiera",
+  "heatmapLegendLess": "Meno",
+  "heatmapLegendMore": "Più",
   "qtPassagesLoadError": "Non è stato possibile caricare i passi di oggi. Controlla la connessione.",
   "qtPassagesRetryButton": "Riprova"
 }

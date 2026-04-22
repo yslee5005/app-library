@@ -1224,6 +1224,12 @@ class AppLocalizationsEl extends AppLocalizations {
   String get heatmapNoPrayer => 'Καμία προσευχή';
 
   @override
+  String get heatmapLegendLess => 'Λιγότερο';
+
+  @override
+  String get heatmapLegendMore => 'Περισσότερο';
+
+  @override
   String get qtPassagesLoadError =>
       'Δεν ήταν δυνατή η φόρτωση των σημερινών εδαφίων. Ελέγξτε τη σύνδεση.';
 

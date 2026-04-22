@@ -499,6 +499,8 @@
   "homeActivityQt": "QT",
   "prayerPlayerLoading": "Naglo-load...",
   "heatmapNoPrayer": "Walang panalangin",
+  "heatmapLegendLess": "Kaunti",
+  "heatmapLegendMore": "Marami",
   "qtPassagesLoadError": "Hindi ma-load ang mga talata ngayong araw. Pakisuri ang iyong koneksyon.",
   "qtPassagesRetryButton": "Subukan muli"
 }

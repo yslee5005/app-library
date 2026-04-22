@@ -499,6 +499,8 @@
   "homeActivityQt": "QT",
   "prayerPlayerLoading": "Đang tải...",
   "heatmapNoPrayer": "Không có cầu nguyện",
+  "heatmapLegendLess": "Ít",
+  "heatmapLegendMore": "Nhiều",
   "qtPassagesLoadError": "Không thể tải các phân đoạn hôm nay. Vui lòng kiểm tra kết nối.",
   "qtPassagesRetryButton": "Thử lại"
 }

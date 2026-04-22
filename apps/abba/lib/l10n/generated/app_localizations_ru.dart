@@ -1220,6 +1220,12 @@ class AppLocalizationsRu extends AppLocalizations {
   String get heatmapNoPrayer => 'Нет молитвы';
 
   @override
+  String get heatmapLegendLess => 'Меньше';
+
+  @override
+  String get heatmapLegendMore => 'Больше';
+
+  @override
   String get qtPassagesLoadError =>
       'Не удалось загрузить сегодняшние отрывки. Проверьте подключение.';
 

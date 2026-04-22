@@ -1223,6 +1223,12 @@ class AppLocalizationsSk extends AppLocalizations {
   String get heatmapNoPrayer => 'Žiadna modlitba';
 
   @override
+  String get heatmapLegendLess => 'Menej';
+
+  @override
+  String get heatmapLegendMore => 'Viac';
+
+  @override
   String get qtPassagesLoadError =>
       'Dnešné verše sa nepodarilo načítať. Skontrolujte pripojenie.';
 

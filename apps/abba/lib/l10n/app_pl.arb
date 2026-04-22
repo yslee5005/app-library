@@ -499,6 +499,8 @@
   "homeActivityQt": "QT",
   "prayerPlayerLoading": "Ładowanie...",
   "heatmapNoPrayer": "Brak modlitwy",
+  "heatmapLegendLess": "Mniej",
+  "heatmapLegendMore": "Więcej",
   "qtPassagesLoadError": "Nie udało się załadować dzisiejszych fragmentów. Sprawdź połączenie.",
   "qtPassagesRetryButton": "Spróbuj ponownie"
 }

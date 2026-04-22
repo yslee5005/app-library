@@ -1218,6 +1218,12 @@ class AppLocalizationsTr extends AppLocalizations {
   String get heatmapNoPrayer => 'Dua yok';
 
   @override
+  String get heatmapLegendLess => 'Az';
+
+  @override
+  String get heatmapLegendMore => 'Çok';
+
+  @override
   String get qtPassagesLoadError =>
       'Bugünün ayetleri yüklenemedi. Lütfen bağlantınızı kontrol edin.';
 

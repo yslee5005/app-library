@@ -1218,6 +1218,12 @@ class AppLocalizationsDa extends AppLocalizations {
   String get heatmapNoPrayer => 'Ingen bøn';
 
   @override
+  String get heatmapLegendLess => 'Mindre';
+
+  @override
+  String get heatmapLegendMore => 'Mere';
+
+  @override
   String get qtPassagesLoadError =>
       'Dagens skriftsteder kunne ikke indlæses. Tjek din forbindelse.';
 

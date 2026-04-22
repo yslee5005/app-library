@@ -499,6 +499,8 @@
   "homeActivityQt": "QT",
   "prayerPlayerLoading": "ဖွင့်နေသည်...",
   "heatmapNoPrayer": "ဆုတောင်းမရှိ",
+  "heatmapLegendLess": "နည်း",
+  "heatmapLegendMore": "များ",
   "qtPassagesLoadError": "ယနေ့ကျမ်းပိုဒ်များကို တင်၍မရပါ။ ချိတ်ဆက်မှုကို စစ်ဆေးပါ။",
   "qtPassagesRetryButton": "ထပ်မံကြိုးစားပါ"
 }

@@ -499,6 +499,8 @@
   "homeActivityQt": "QT",
   "prayerPlayerLoading": "በመጫን ላይ...",
   "heatmapNoPrayer": "ጸሎት የለም",
+  "heatmapLegendLess": "ያነሰ",
+  "heatmapLegendMore": "ብዙ",
   "qtPassagesLoadError": "የዛሬውን ቃላት ማምጣት አልተቻለም። እባክዎ ግንኙነትዎን ያረጋግጡ።",
   "qtPassagesRetryButton": "እንደገና ሞክር"
 }

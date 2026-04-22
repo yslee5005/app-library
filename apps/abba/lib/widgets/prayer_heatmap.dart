@@ -255,7 +255,7 @@ class _PrayerHeatmapState extends State<PrayerHeatmap> {
         if (_selectedDate != null && _selectedDay != null)
           _buildSelectedInfo()
         else
-          _buildStreakAndLegend(),
+          _buildStreakAndLegend(context),
       ],
     );
   }
@@ -307,7 +307,8 @@ class _PrayerHeatmapState extends State<PrayerHeatmap> {
     );
   }
 
-  Widget _buildStreakAndLegend() {
+  Widget _buildStreakAndLegend(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Row(
       children: [
         if (widget.streakDays > 0)
@@ -319,7 +320,10 @@ class _PrayerHeatmapState extends State<PrayerHeatmap> {
             ),
           ),
         const Spacer(),
-        Text('Less', style: AbbaTypography.caption.copyWith(fontSize: 10)),
+        Text(
+          l10n.heatmapLegendLess,
+          style: AbbaTypography.caption.copyWith(fontSize: 10),
+        ),
         const SizedBox(width: 3),
         ...[_emptyColor, _level1, _level2, _level3, _level4].map(
           (color) => Padding(
@@ -335,7 +339,10 @@ class _PrayerHeatmapState extends State<PrayerHeatmap> {
           ),
         ),
         const SizedBox(width: 2),
-        Text('More', style: AbbaTypography.caption.copyWith(fontSize: 10)),
+        Text(
+          l10n.heatmapLegendMore,
+          style: AbbaTypography.caption.copyWith(fontSize: 10),
+        ),
       ],
     );
   }
