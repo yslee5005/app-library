@@ -1,10 +1,12 @@
 import 'dart:async';
 
 import 'package:app_lib_logging/logging.dart';
+import 'package:intl/intl.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
 import 'package:purchases_ui_flutter/purchases_ui_flutter.dart';
 
 import 'active_subscription_info.dart';
+import 'offering_prices.dart';
 import 'subscription_service.dart';
 import 'subscription_status.dart';
 
@@ -146,6 +148,63 @@ class RevenueCatSubscriptionService implements SubscriptionService {
       return latest;
     } catch (e, st) {
       _log.error('getLatestExpirationDate failed', error: e, stackTrace: st);
+      return null;
+    }
+  }
+
+  @override
+  Future<OfferingPrices?> getOfferingPrices() async {
+    try {
+      final offerings = await Purchases.getOfferings();
+      final current = offerings.current;
+      if (current == null) {
+        _log.warning('getOfferingPrices: no current offering');
+        return null;
+      }
+      final monthly = current.monthly;
+      final yearly = current.annual;
+      if (monthly == null || yearly == null) {
+        _log.warning(
+          'getOfferingPrices: missing package (monthly=${monthly != null}, '
+          'yearly=${yearly != null})',
+        );
+        return null;
+      }
+
+      final monthlyProduct = monthly.storeProduct;
+      final yearlyProduct = yearly.storeProduct;
+      final monthlyPrice = monthlyProduct.price;
+      final yearlyPrice = yearlyProduct.price;
+      final currencyCode = monthlyProduct.currencyCode;
+
+      // yearly / 12, formatted in the same locale-currency as yearlyPriceString.
+      // RevenueCat does not expose a per-month string for an annual package,
+      // so we synthesize one using intl's NumberFormat.
+      final yearlyPerMonth = yearlyPrice / 12;
+      String yearlyPerMonthString;
+      try {
+        final formatter = NumberFormat.simpleCurrency(name: currencyCode);
+        yearlyPerMonthString = formatter.format(yearlyPerMonth);
+      } catch (e) {
+        // Fallback: raw currency code + numeric value when intl cannot
+        // resolve the symbol for this ISO code.
+        yearlyPerMonthString =
+            '$currencyCode ${yearlyPerMonth.toStringAsFixed(2)}';
+      }
+
+      final int? savings = (monthlyPrice > 0 && yearlyPrice > 0)
+          ? (100 - (yearlyPrice / (monthlyPrice * 12) * 100)).round()
+          : null;
+
+      return OfferingPrices(
+        monthlyPriceString: monthlyProduct.priceString,
+        yearlyPriceString: yearlyProduct.priceString,
+        yearlyPriceMonthlyString: yearlyPerMonthString,
+        savingsPercent: savings,
+        currencyCode: currencyCode,
+      );
+    } catch (e, st) {
+      _log.error('getOfferingPrices failed', error: e, stackTrace: st);
       return null;
     }
   }

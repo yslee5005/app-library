@@ -14,6 +14,7 @@ dependencies:
     sdk: flutter
   app_lib_core:
   app_lib_logging:
+  intl: ^0.20.0
   purchases_flutter: ^10.0.1
   purchases_ui_flutter: ^10.0.1
 

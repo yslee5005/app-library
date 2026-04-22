@@ -14,7 +14,7 @@ export 'package:app_lib_audio_recorder/audio_recorder.dart'
 export 'package:app_lib_audio_storage/audio_storage.dart'
     show audioStorageServiceProvider;
 export 'package:app_lib_subscriptions/subscriptions.dart'
-    show ActiveSubscriptionInfo;
+    show ActiveSubscriptionInfo, OfferingPrices;
 
 import '../models/post.dart';
 import '../models/prayer.dart';
@@ -105,6 +105,15 @@ final lastExpirationDateProvider =
     FutureProvider.autoDispose<DateTime?>((ref) async {
   final service = ref.watch(subscriptionServiceProvider);
   return service.getLatestExpirationDate();
+});
+
+/// Localized store prices (monthly, yearly, yearly-per-month, savings %).
+/// Returns null when offerings are unavailable — UI must fall back to
+/// the hardcoded ARB default prices.
+final offeringPricesProvider =
+    FutureProvider.autoDispose<OfferingPrices?>((ref) async {
+  final service = ref.watch(subscriptionServiceProvider);
+  return service.getOfferingPrices();
 });
 
 // ---------------------------------------------------------------------------

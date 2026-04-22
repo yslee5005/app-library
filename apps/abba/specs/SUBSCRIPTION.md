@@ -219,10 +219,24 @@ if (success) {
 `apps/abba/lib/widgets/premium_blur.dart` — 블러 처리 + Pro 잠금 CTA
 `apps/abba/lib/widgets/premium_modal.dart` — Pro 소개 모달 + Start Pro 버튼
 
-### 5.5 가격 표시 (하드코딩)
+### 5.5 가격 표시 (동적, RevenueCat)
 
-`apps/abba/lib/l10n/*.arb` — 35개 언어별 `monthlyPrice`, `yearlyPrice`, `yearlySavings`, `yearlyPriceMonthly`, `yearlySave`, `launchPromo`
-- ⚠️ **TODO**: RevenueCat `package.localizedPriceString` 동적 가격으로 마이그레이션 (정확성 + 유지보수 ↑)
+**구현 완료 (2026-04-21):** 핵심 가격 4개 (`monthlyPrice`, `yearlyPrice`)는 RevenueCat `storeProduct.priceString` 기반 동적 값으로 표시.
+
+- `packages/subscriptions/lib/src/offering_prices.dart` — `OfferingPrices` 모델 (monthly/yearly/yearly-per-month/savings%/currencyCode)
+- `packages/subscriptions/lib/src/revenuecat_subscription_service.dart` — `getOfferingPrices()` 구현. `Purchases.getOfferings()` → `current.monthly/annual.storeProduct`에서 가격/통화 추출, yearly-per-month는 `NumberFormat.simpleCurrency` 포맷.
+- `apps/abba/lib/providers/providers.dart` — `offeringPricesProvider` (autoDispose FutureProvider)
+- `apps/abba/lib/features/settings/view/membership_view.dart` `_buildPlanCard` + `apps/abba/lib/widgets/pro_modal.dart` — `ref.watch(offeringPricesProvider).value` 우선, null 시 ARB fallback
+
+**Fallback 정책:**
+- Offering unavailable (네트워크/설정 실패) → `null` 반환 → UI는 ARB 하드코딩 가격(`l10n.monthlyPrice` / `l10n.yearlyPrice`) 표시
+- ARB 35-locale 가격 키는 **삭제하지 않고 유지** (fallback 전용)
+- `yearlySave`, `yearlySavings`, `launchPromo`, `yearlyPriceMonthly` ARB 키는 현 상태 유지 (Phase 2 대상)
+
+**범위 밖 (향후 Phase):**
+- `savingsPercent` 동적 표시 (현재는 `l10n.yearlySave` "Save 40%" 문자열 유지)
+- `yearlyPriceMonthlyString` UI 노출 (현재 `OfferingPrices`에 포함되지만 아직 위젯에서 소비 안 함)
+- Launch promo 가격 (App Store Connect Introductory Offer로 별도 관리)
 
 ---
 

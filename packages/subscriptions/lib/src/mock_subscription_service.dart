@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:purchases_flutter/purchases_flutter.dart' show PeriodType;
 
 import 'active_subscription_info.dart';
+import 'offering_prices.dart';
 import 'subscription_service.dart';
 import 'subscription_status.dart';
 
@@ -43,6 +44,17 @@ class MockSubscriptionService implements SubscriptionService {
 
   @override
   Future<DateTime?> getLatestExpirationDate() async => null;
+
+  @override
+  Future<OfferingPrices?> getOfferingPrices() async {
+    return const OfferingPrices(
+      monthlyPriceString: r'$6.99',
+      yearlyPriceString: r'$49.99',
+      yearlyPriceMonthlyString: r'$4.17',
+      savingsPercent: 40,
+      currencyCode: 'USD',
+    );
+  }
 
   @override
   Future<ActiveSubscriptionInfo?> getActiveSubscription() async {

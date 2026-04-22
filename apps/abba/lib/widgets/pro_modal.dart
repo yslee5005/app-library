@@ -115,6 +115,10 @@ class _ProModalContentState extends ConsumerState<_ProModalContent> {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
+    // Store-localized prices. Null → fall back to hardcoded ARB values.
+    final prices = ref.watch(offeringPricesProvider).value;
+    final monthlyLabel = prices?.monthlyPriceString ?? l10n.monthlyPrice;
+    final yearlyLabel = prices?.yearlyPriceString ?? l10n.yearlyPrice;
 
     return Container(
       padding: const EdgeInsets.symmetric(
@@ -169,7 +173,7 @@ class _ProModalContentState extends ConsumerState<_ProModalContent> {
                         ),
                       )
                     : Text(
-                        '💎 ${l10n.startPro} — ${l10n.monthlyPrice}',
+                        '💎 ${l10n.startPro} — $monthlyLabel',
                         style: AbbaTypography.body.copyWith(
                           color: AbbaColors.white,
                           fontWeight: FontWeight.w600,
@@ -191,7 +195,7 @@ class _ProModalContentState extends ConsumerState<_ProModalContent> {
                   ),
                 ),
                 child: Text(
-                  '${l10n.yearlyPrice} (${l10n.yearlySave})',
+                  '$yearlyLabel (${l10n.yearlySave})',
                   style: AbbaTypography.body.copyWith(
                     color: AbbaColors.premium,
                     fontWeight: FontWeight.w600,

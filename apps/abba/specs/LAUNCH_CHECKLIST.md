@@ -114,7 +114,7 @@
 
 ### 15. 동적 가격 (RevenueCat)
 
-- [ ] 35개 ARB 하드코딩 가격 → `package.localizedPriceString` 동적 가격 마이그레이션
+- [x] 35개 ARB 하드코딩 가격 → `package.storeProduct.priceString` 동적 가격 마이그레이션 (monthly/yearly 핵심 가격, ARB fallback 유지) — 2026-04-21
 
 ### 16. Android 출시
 

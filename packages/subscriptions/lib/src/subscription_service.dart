@@ -1,4 +1,5 @@
 import 'active_subscription_info.dart';
+import 'offering_prices.dart';
 import 'subscription_status.dart';
 
 /// Abstract subscription service interface.
@@ -39,6 +40,11 @@ abstract class SubscriptionService {
   /// active subscription that has since lapsed. Returns null when the
   /// user has no history of purchases.
   Future<DateTime?> getLatestExpirationDate();
+
+  /// Fetch localized prices for the current offering (monthly + yearly)
+  /// directly from the store (App Store / Play Store). Returns null when
+  /// offerings are unavailable — UI must then fall back to ARB defaults.
+  Future<OfferingPrices?> getOfferingPrices();
 
   Future<bool> get isPremium;
   Stream<SubscriptionStatus> get statusStream;

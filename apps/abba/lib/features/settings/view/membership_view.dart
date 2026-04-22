@@ -50,6 +50,7 @@ class _MembershipViewState extends ConsumerState<MembershipView>
       ref.invalidate(isPremiumProvider);
       ref.invalidate(activeSubscriptionProvider);
       ref.invalidate(lastExpirationDateProvider);
+      ref.invalidate(offeringPricesProvider);
     }
   }
 
@@ -435,6 +436,11 @@ class _MembershipViewState extends ConsumerState<MembershipView>
   // ── Plan card ───────────────────────────────────────────────────────────
   Widget _buildPlanCard(AppLocalizations l10n) {
     final isYearly = _selectedPlan == 1;
+    // Store-localized prices. Null → fall back to hardcoded ARB values.
+    final prices = ref.watch(offeringPricesProvider).value;
+    final priceLabel = isYearly
+        ? (prices?.yearlyPriceString ?? l10n.yearlyPrice)
+        : (prices?.monthlyPriceString ?? l10n.monthlyPrice);
 
     return Container(
       width: double.infinity,
@@ -476,7 +482,7 @@ class _MembershipViewState extends ConsumerState<MembershipView>
           ],
           // Price
           Text(
-            isYearly ? l10n.yearlyPrice : l10n.monthlyPrice,
+            priceLabel,
             style: AbbaTypography.hero.copyWith(
               fontWeight: FontWeight.w700,
             ),
