@@ -893,7 +893,7 @@ Rules (per QT Guide §4-6):
   }
 
   // ---------------------------------------------------------------------------
-  // System prompts (preserved from OpenAI service)
+  // System prompts
   // ---------------------------------------------------------------------------
 
   String _buildSystemPrompt(String langName) {

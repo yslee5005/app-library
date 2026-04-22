@@ -177,7 +177,7 @@ PrayerResult(
 
 #### 대상 메서드 (신규)
 
-`AiService.analyzePrayerCoaching(transcript, locale)` — 모든 구현체(Gemini, OpenAI, Mock, Cached)에 신규 추가.
+`AiService.analyzePrayerCoaching(transcript, locale)` — 모든 구현체(Gemini, Mock, Cached)에 신규 추가. OpenAI 구현체는 2026-04-21 폐기.
 
 #### 입력
 - `transcript`: 사용자 기도 원문 (String)

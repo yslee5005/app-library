@@ -12,8 +12,6 @@ class AppConfig {
 
   static String get supabaseAnonKey => dotenv.env['SUPABASE_ANON_KEY'] ?? '';
 
-  static String get openAiApiKey => dotenv.env['OPENAI_API_KEY'] ?? '';
-
   static String get geminiApiKey => dotenv.env['GEMINI_API_KEY'] ?? '';
 
   static String get sentryDsn => dotenv.env['SENTRY_DSN'] ?? '';
@@ -41,7 +39,7 @@ class AppConfig {
   static bool get isProduction => env == 'prod';
 
   /// Validate required environment variables.
-  /// Skipped in mock mode — real mode requires Supabase + OpenAI keys.
+  /// Skipped in mock mode — real mode requires Supabase + Gemini keys.
   static void validate() {
     if (useMock) return;
     final missing = <String>[];

@@ -291,7 +291,7 @@ Phase 3에서 각 locale에 대해 다음 번역본을 사용:
 
 1. `gemini_service.dart` `_hardcodedPrayerResult(locale)` — Scripture 부분
 2. `ai_loading_view.dart` `_setFallbackResult` — Scripture + BibleStory 부분 (아직 _en/_ko 쓰는 경우)
-3. `openai_service.dart` `_fallbackPrayerResult` — Scripture 부분
+3. ~~`openai_service.dart` `_fallbackPrayerResult`~~ — 2026-04-21 폐기
 4. `test/helpers/test_app.dart` testPrayerResult — testPrayer 샘플
 
 ### 점검 procedure

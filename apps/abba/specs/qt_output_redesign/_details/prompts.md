@@ -173,7 +173,7 @@ if (locale == 'ko') {
 
 #### 대상 메서드
 - 신규 `AiService.analyzeQtCoaching({meditation, scriptureReference, locale})`
-- Gemini / OpenAI / Mock / Cached 4곳 전부 구현
+- Gemini / Mock / Cached 3곳 전부 구현 (OpenAI 구현체는 2026-04-21 폐기)
 
 #### Gemini System Prompt 구조
 

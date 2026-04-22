@@ -79,19 +79,8 @@ supportedLocales: const [
 #### 2. `lib/features/settings/view/settings_view.dart` — 드롭다운 확장
 언어 선택 DropdownButton에 30개 항목 추가.
 
-#### 3. `lib/services/real/openai_service.dart` — _localeName 매핑 확장
-```dart
-static String _localeName(String locale) {
-  return switch (locale) {
-    'ko' => 'Korean',
-    'en' => 'English',
-    'pt' => 'Portuguese',
-    'fr' => 'French',
-    // ... 35개 전체 매핑
-    _ => 'English',
-  };
-}
-```
+#### 3. ~~`lib/services/real/openai_service.dart` — _localeName 매핑 확장~~
+**폐기됨 (2026-04-21)** — OpenAI 서비스 전체 삭제. Gemini 단독 운영으로 `gemini_service.dart`의 `_localeName` 매핑만 유지한다.
 
 ### C. 자동 생성 (flutter gen-l10n)
 ```
@@ -114,7 +103,7 @@ lib/l10n/generated/app_localizations.dart (업데이트)
 ### Task 4: 코드 수정
 - app.dart supportedLocales 확장
 - settings_view.dart 드롭다운 확장
-- openai_service.dart _localeName 매핑 확장
+- gemini_service.dart _localeName 매핑 확장 (openai_service.dart는 2026-04-21 폐기)
 
 ### Task 5: 빌드 검증
 - flutter pub get (l10n 재생성)

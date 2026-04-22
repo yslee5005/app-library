@@ -102,7 +102,7 @@ Future<void> main() async {
       qtRepositoryProvider.overrideWithValue(MockQtRepository(mockData)),
     ]);
   } else {
-    // Real mode — connect to Supabase, OpenAI, etc.
+    // Real mode — connect to Supabase, Gemini, etc.
     try {
       await Supabase.initialize(
         url: AppConfig.supabaseUrl,

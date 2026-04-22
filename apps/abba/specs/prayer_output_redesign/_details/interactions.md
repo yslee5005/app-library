@@ -98,7 +98,7 @@
 | INT-018 | N/A | `[CoachingScores.model]` | build-time | 신규 클래스 (specificity, godCenteredness, actsBalance, authenticity 모두 int 1-5, average getter) | | `code-gen` | pending |
 | INT-019 | N/A | `[AiService.interface]` | build-time | `analyzePrayerCoaching(transcript, locale)` 메서드 인터페이스 추가 | | `code-gen` | pending |
 | INT-020 | N/A | `[GeminiService]` | runtime | `analyzePrayerCoaching` 구현: system prompt = prayer_guide.md asset 로드 + JSON schema 지시, hardcoded fallback 추가 | asset rootBundle 로드 | `subscription-crash, code-gen` | pending |
-| INT-021 | N/A | `[MockAiService, CachedAiService, OpenAIService]` | runtime | 동일 인터페이스 구현 (mock: hardcoded 반환, cached: 래핑) | | `code-gen` | pending |
+| INT-021 | N/A | `[MockAiService, CachedAiService]` | runtime | 동일 인터페이스 구현 (mock: hardcoded 반환, cached: 래핑). OpenAIService는 2026-04-21 폐기 | | `code-gen` | pending |
 | INT-022 | N/A | `[pubspec.yaml]` | build-time | `apps/abba/assets/docs/prayer_guide.md` asset 경로 등록 | asset 번들 포함 | `code-gen` | pending |
 | INT-023 | N/A | `[prayer_guide.md asset file]` | file-level | `apps/abba/specs/prayer_output_redesign/_details/prayer_guide.md` → `apps/abba/assets/docs/prayer_guide.md` 복사 (사용자 승인된 버전) | 배포 자산 | `code-gen` | pending |
 | INT-024 | `prayer_dashboard` | `[prayer_coaching_card]` | build | 신규 widget: 4 score bar + expertLevel 배지 + strengths/improvements 리스트 + overallFeedback. ProBlur 래핑 (isPremium && !isUserPremium) | | `subscription-crash, color-token, i18n` | pending |
@@ -175,7 +175,7 @@
 
 - `PrayerResult.copyWithPremium`: 변경 없음 (여전히 `AiPrayer?` 받음)
 - `gemini_service` 전체 grep: `textEn`, `textKo`, `\.text\(`, `audioUrl` 키워드로 AiPrayer 관련 잔존 참조 확인
-- `openai_service.dart` — historical_story 이원 필드 건들지 않음. 그러나 Phase 5 범위 **ai_prayer** 섹션은 schema 변경 필요: openai 는 legacy 경로라 기존 en/ko 유지도 OK이지만, 일관성 위해 prompt schema를 gemini와 동일하게 맞춤 (optional)
+- ~~`openai_service.dart`~~ — 2026-04-21 폐기 (dead code, main.dart 미주입). Gemini 단독 운영.
 
 ### 테스트 매핑 (Phase 5)
 

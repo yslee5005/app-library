@@ -91,7 +91,7 @@ Phase 1에서 만든 UI Shell에 **실제 기능을 연결**한다.
 
 #### 3.1 서비스 구현
 - [ ] AiService 클래스 구현 (http 패키지)
-- [ ] API 키 .env에서 로드 (OPENAI_API_KEY)
+- [ ] API 키 .env에서 로드 (GEMINI_API_KEY — OpenAI 경로는 2026-04-21 폐기)
 - [ ] 기도 분석 API 호출:
   - Input: transcript (기도 텍스트) + locale (사용자 언어)
   - System prompt: DESIGN.md 섹션 8 참고

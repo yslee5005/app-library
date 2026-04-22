@@ -41,7 +41,7 @@
 | ID | Screen | Widget | Trigger | Action | Side Effect | Pitfall Tags | Status |
 |----|--------|--------|---------|--------|-------------|--------------|--------|
 | INT-067 | N/A | `[ai_loading_view._setFallbackResult]` | runtime | 남아있는 `BibleStory(titleEn/Ko, summaryEn/Ko)` 참조 Phase 2 스코프 — Phase 1에선 Scripture만 업데이트 (verseEn/Ko 제거). BibleStory 부분은 Phase 2에서 | partial update | `code-gen` | pending |
-| INT-068 | N/A | `[openai_service._fallbackPrayerResult]` | runtime | Scripture `verseEn/verseKo` 제거, reference만 남김. legacy 경로 유지 가능하도록 (Phase 2에서 BibleStory도) | partial update | `code-gen` | pending |
+| INT-068 | N/A | ~~`[openai_service._fallbackPrayerResult]`~~ | runtime | **폐기됨 (2026-04-21)** — OpenAI 서비스 전체 삭제. Gemini만 유지 | superseded | — | obsolete |
 
 ## Phase 1 · l10n (INT-069 ~ INT-070)
 
@@ -92,7 +92,7 @@
 | INT-072 | N/A | `[Guidance.model]` | build-time | contentEn/Ko → 단일 content. locale getter 제거. fromJson 3단 fallback | | `code-gen, dead-code-sweep` | pending |
 | INT-073 | N/A | `[gemini_service prompts]` | runtime | _buildSystemPrompt / _buildCoreSystemPrompt / _buildAudioCoreSystemPrompt / _buildPremiumSystemPrompt 의 bible_story (title_en/ko → title, summary_en/ko → summary) + guidance (content_en/ko → content) schema 단일 필드. $langName 사용 | prompt schema 변경 | `subscription-crash` | pending |
 | INT-074 | N/A | `[gemini_service._hardcodedPrayerResult]` | runtime | BibleStory + Guidance locale-aware 샘플 (ko / en 분기). Scripture 패턴과 동일 | hardcoded locale 분기 | `code-gen` | pending |
-| INT-075 | N/A | `[openai_service prompts + fallback]` | runtime | 동일 schema 변경 + _fallbackPrayerResult BibleStory 단일 필드 | legacy 경로 정렬 | `code-gen, subscription-crash` | pending |
+| INT-075 | N/A | ~~`[openai_service prompts + fallback]`~~ | runtime | **폐기됨 (2026-04-21)** — OpenAI 서비스 전체 삭제. Gemini만 유지 | superseded | — | obsolete |
 | INT-076 | N/A | `[ai_loading_view._setFallbackResult]` | runtime | BibleStory 하드코딩 const 부분 single-field로 수정 | | `code-gen` | pending |
 | INT-077 | N/A | `[supabase_prayer_repository._resultToJson]` | runtime | bible_story / guidance 저장 포맷 single-field (title, summary, content). 기존 _en/_ko 저장 제거 | DB write format | `code-gen` | pending |
 | INT-078 | `prayer_dashboard` + `dashboard_view` (QT) | `[BibleStoryCard]` + `[GuidanceCard]` | build | 각 카드에서 locale prop 제거, `.title(locale)` → `.title` 등 직접 참조. 호출부에서 `locale:` 파라미터 제거 | widget API 변경 | `dead-code-sweep` | pending |

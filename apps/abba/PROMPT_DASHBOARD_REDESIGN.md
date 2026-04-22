@@ -18,7 +18,7 @@
 
 - `apps/abba/specs/DESIGN.md` — 섹션 8 (AI 프롬프트)
 - `apps/abba/lib/models/prayer.dart` — 현재 PrayerResult 모델
-- `apps/abba/lib/services/real/openai_service.dart` — 현재 AI 프롬프트
+- `apps/abba/lib/services/real/gemini_service.dart` — 현재 AI 프롬프트 (구 openai_service.dart는 2026-04-21 폐기)
 - `apps/abba/lib/features/dashboard/view/dashboard_view.dart` — 현재 Dashboard
 - `apps/abba/lib/features/dashboard/widgets/` — 현재 카드 위젯들
 - `apps/abba/lib/router/app_router.dart` — 현재 라우팅
@@ -149,7 +149,7 @@ class GrowthStory {
 
 ## Phase B: AI 프롬프트 변경
 
-### B-1. 기도 분석 프롬프트 (openai_service.dart)
+### B-1. 기도 분석 프롬프트 (gemini_service.dart — 구 openai_service.dart는 2026-04-21 폐기)
 
 기존 `_buildSystemPrompt`를 수정하여 새 JSON 구조 요청:
 
@@ -189,7 +189,7 @@ The historical_story should be a real Bible story or church history story that r
 Be warm, encouraging, biblically accurate. Never judge.
 ```
 
-### B-2. QT 묵상 분석 프롬프트 (openai_service.dart에 새 메서드 추가)
+### B-2. QT 묵상 분석 프롬프트 (gemini_service.dart에 새 메서드 추가)
 
 AiService 인터페이스에 새 메서드 추가:
 ```dart

@@ -19,7 +19,7 @@
 - `apps/abba/lib/features/home/view/home_view.dart` — 기도 중 UI
 - `apps/abba/lib/models/prayer.dart` — PrayerResult, Scripture 모델
 - `apps/abba/lib/models/qt_meditation_result.dart` — ApplicationSuggestion, RelatedKnowledge
-- `apps/abba/lib/services/real/openai_service.dart` — AI 프롬프트
+- `apps/abba/lib/services/real/gemini_service.dart` — AI 프롬프트 (구 openai_service.dart는 2026-04-21 폐기)
 - `apps/abba/lib/services/mock/mock_ai_service.dart` — Mock 구현
 - `apps/abba/lib/features/dashboard/widgets/scripture_card.dart`
 - `apps/abba/lib/features/dashboard/widgets/application_card.dart`
@@ -189,7 +189,7 @@ Column(
 
 ---
 
-## 변경 3: AI 프롬프트 품질 대폭 강화 (openai_service.dart)
+## 변경 3: AI 프롬프트 품질 대폭 강화 (gemini_service.dart — 구 openai_service.dart는 2026-04-21 폐기)
 
 ### 3-1. 기도 분석 프롬프트 (`_buildSystemPrompt`)
 

@@ -46,7 +46,7 @@ INT 번호는 bible_text_i18n Phase 2 (INT-078) 이후로 **INT-101**부터 시�
 | INT-112 | N/A | `[QtScores.model]` | build-time | 신규 클래스 (comprehension, application, depth, authenticity 1-5 int, average getter) | | `code-gen` | pending |
 | INT-113 | N/A | `[AiService.interface]` | build-time | `analyzeQtCoaching({meditation, scriptureReference, locale})` 인터페이스 추가 | | `code-gen` | pending |
 | INT-114 | N/A | `[GeminiService.analyzeQtCoaching]` | runtime | 구현: qt_guide.md asset 로드(캐시) + system prompt 삽입 + JSON schema + 금지어 필터 + hardcoded fallback | asset rootBundle 로드 | `subscription-crash, code-gen` | pending |
-| INT-115 | N/A | `[MockAiService / CachedAiService / OpenAIService]` | runtime | 동일 인터페이스 구현 (mock: hardcoded 반환, cached: 래핑, openai: placeholder) | | `code-gen` | pending |
+| INT-115 | N/A | `[MockAiService / CachedAiService]` | runtime | 동일 인터페이스 구현 (mock: hardcoded 반환, cached: 래핑). OpenAIService는 2026-04-21 폐기 | | `code-gen` | pending |
 | INT-116 | N/A | `[pubspec.yaml]` | build-time | assets/docs/ 이미 등록됨 — 확인만 (Phase 3 Prayer Coaching에서 추가됨) | | — | pending |
 | INT-117 | N/A | `[assets/docs/qt_guide.md]` | file-level | `_details/qt_guide.md` v0.1 → `apps/abba/assets/docs/qt_guide.md` 복사 | 배포 자산 | `code-gen` | pending |
 | INT-118 | N/A | `[qtCoachingProvider]` | runtime | `FutureProvider<QtCoaching>.autoDispose` — Pro 유저 + meditation 있을 때만 fetch | on-demand 호출 | `riverpod-lifecycle, subscription-crash` | pending |
