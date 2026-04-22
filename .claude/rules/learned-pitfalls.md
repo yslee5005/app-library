@@ -19,6 +19,10 @@
 - Grace Period (만료 후 16일) 처리 + 그룹/멤버 read_only 전환
 - 복원(restore)은 타임아웃 30초+ 필요
 - Webhook JWS 디코딩 에러 핸들러 + originalTransactionId 매칭
+- **RevenueCat Grace Period 감지**: `EntitlementInfo.billingIssueDetectedAt` (ISO date string) 사용. `isInGracePeriod = billingIssueDetectedAt != null && willRenew`. 배너 UX로 남은 일 수 카운트다운 (16일 기준, `gracePeriodDaysRemaining` getter)
+- **동적 가격 표시**: ARB 하드코딩 가격 대신 `Purchases.getOfferings()` → `package.storeProduct.priceString` / `.currencyCode` 사용. Apple PPP tier 자동 반영. yearly/월 환산은 `NumberFormat.simpleCurrency(name: currencyCode)` 로 동일 통화 포맷 유지
+- ARB 가격은 fallback 전용으로만 유지 (offering 로드 실패 / 네트워크 없음 시)
+- **Webhook은 선택**: client-side SDK `CustomerInfo.entitlement.isActive` + `addCustomerInfoUpdateListener`로 충분. 서버 DB 동기화가 필요한 경우에만 Edge Function + JWS 디코딩 구현
 
 ## 3. Multi-tenant (Supabase)
 - 새 테이블 → RLS 즉시 활성화 + COALESCE NULL defense
@@ -28,6 +32,7 @@
 - `handle_new_user` trigger는 `raw_user_meta_data` 우선, `raw_app_meta_data` fallback
 - service_role key는 Edge Function 환경변수만, client에 절대 X
 - Edge Function에 JWT `auth.uid()` 검증 필수
+- **Polymorphic JSONB 재사용**: 새 엔티티 저장 전 기존 테이블의 JSONB 컬럼 + discriminator(예: `mode`) 재활용 가능 여부 점검. 예: `abba.prayers.result` + `mode='prayer'|'qt'`로 PrayerResult/QtMeditationResult 저장 → migration 없이 QT 영속화 달성. 새 테이블 만들기 전 항상 재사용 경로 먼저 검토
 
 ## 4. i18n
 - View/Widget에서 하드코딩 문자열 0개 — 전부 ARB 키 (`l10n.xxx`)
@@ -35,6 +40,11 @@
 - namedArgs placeholder는 ARB 메타에 명시 (`@key: { placeholders: ... }`)
 - 로케일 변경 시 즉시 반영 (앱 재시작 강제 X)
 - `scripts/check_hardcoded_strings.sh` / `check_l10n_sync.sh` 활용
+- ⚠️ `check_l10n_sync.sh` naive regex 버그 — ARB **값**(영어 단어)을 **키**로 오탐. Python JSON 기반 검증 권장: `set(k for k in json.load(...) if not k.startswith('@'))` 비교
+- **Single-field 3-tier legacy fallback** 패턴: `json[key]` → `json[key_en]` → `json[key_ko]` → `''`. Dual → single 전환 시 DB 기존 레코드 호환 (GrowthStory / MeditationSummary / testimony / ScriptureOriginalWord 등)
+- **Context 없는 서비스 레이어 l10n**: `flutter_local_notifications` 같은 서비스는 `AppLocalizations.of(context)` 불가. 해결 패턴 = `setLocalization(AppLocalizations l10n)` 메서드 추가 + `app.dart`에 Bridge Widget (`didChangeDependencies`에서 `ref.read(service).setLocalization(l10n)` fire-and-forget, `_lastAppliedLocale`로 중복 호출 방지). `_l10n == null` 윈도우는 영어 fallback 클래스 (`_EnFallback`)로 보호
+- **Android notification 채널 locale 대응**: 동일 채널 ID(`prayer_reminders`)로 `createNotificationChannel` 재호출하여 name/description만 업데이트. 채널 ID 변경 시 유저 권한 설정 리셋되므로 금지
+- **STT 대신 Gemini 멀티모달 활용**: `speech_to_text` 35 locale mapping 테이블 대신 `Gemini.analyzePrayerFromAudio(audioFilePath, locale)` 한 호출로 transcribe + 분석 동시 처리. 모든 locale 자동 지원
 
 ## 5. Auth Lifecycle
 - Refresh Token 만료 → `PlatformDispatcher.onError + runZonedGuarded`로 크래시 방지
@@ -116,6 +126,21 @@
 - Android Kotlin/Gradle 변경 후 `./gradlew clean`
 - workspace 모드: 앱별 `dart pub get`은 작동 안 함, 반드시 root에서
 
+## 17. Sentry 에러 로깅
+- catch 블록 3 패턴 분류: **A** (`appLogger.error(error: e, stackTrace: st)` + Sentry 자동 승격) / **B** (의도된 silent fallback, 주석 필수) / **C** (rethrow)
+- ⚠️ `appLogger.error`에 `error: e` 파라미터 **미전달**하면 Sentry `captureException` 자동 승격 안 됨 (`SentryBreadcrumbOutput` 조건: `entry.level >= LogLevel.error && entry.error != null`)
+- 마스킹 규칙 `beforeSend`: email만으론 부족 → phone / JWT (`eyJ...`) / 긴 한국어 transcript (`[가-힣]{50,}`) / URL query params 포함
+- `event.message` 마스킹만으론 부족 — `event.breadcrumbs[].message` + `event.exceptions[].value`도 마스킹 (SDK 버전별 API 호환성 확인)
+- private 마스킹 함수는 `@visibleForTesting`으로 public 노출 → 단위 테스트 가능
+- Sentry Dashboard에서 Data Scrubber 추가 활성화 (서버측 이중 방어)
+- `tracesSampleRate`: prod 0.2 / dev 1.0 (비용 + 신호 비율 균형)
+
+## 18. Git 멀티계정 운영
+- `git push` 403 실패 시 → `gh auth switch --user <account>` + `gh auth setup-git` 재실행
+- 로컬 `user.name` 정상이어도 credential helper가 다른 active account 사용 가능
+- 프로젝트별 `memory/git_commit_account.md`에 기록 → 재확인 생략
+- `--global` 플래그 절대 사용 금지 (다른 프로젝트 영향)
+
 ---
 
 ## 사용 가이드
@@ -127,3 +152,6 @@
 4. 작업 종료 시 `scripts/harness_check.sh` 실행
 
 새 함정 발견 시 이 파일에 추가 (PR 통해).
+
+## 업데이트 이력
+- 2026-04-22: §2/§3/§4 확장 + §17 Sentry 에러 로깅 + §18 Git 멀티계정 신규 (abba 출시 준비 세션에서 발견)
