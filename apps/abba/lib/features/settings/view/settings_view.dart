@@ -7,6 +7,7 @@ import 'package:go_router/go_router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../../config/app_config.dart';
 import '../../../l10n/generated/app_localizations.dart';
 import '../../../models/user_profile.dart';
 import '../../../providers/providers.dart';
@@ -192,7 +193,7 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
                     Icons.chevron_right,
                     color: AbbaColors.muted,
                   ),
-                  onTap: () => _launchUrlSafe(Uri.parse('https://abba.ystech.app/help')),
+                  onTap: () => _launchUrlSafe(Uri.parse(AppConfig.helpUrl)),
                 ),
                 const Divider(height: 1, indent: 56),
                 _SettingsRow(
@@ -202,7 +203,7 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
                     Icons.chevron_right,
                     color: AbbaColors.muted,
                   ),
-                  onTap: () => _launchUrlSafe(Uri.parse('https://abba.ystech.app/terms')),
+                  onTap: () => _launchUrlSafe(Uri.parse(AppConfig.termsUrl)),
                 ),
                 const Divider(height: 1, indent: 56),
                 _SettingsRow(
@@ -212,7 +213,7 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
                     Icons.chevron_right,
                     color: AbbaColors.muted,
                   ),
-                  onTap: () => _launchUrlSafe(Uri.parse('https://abba.ystech.app/privacy')),
+                  onTap: () => _launchUrlSafe(Uri.parse(AppConfig.privacyUrl)),
                 ),
                 const Divider(height: 1, indent: 56),
                 _SettingsRow(

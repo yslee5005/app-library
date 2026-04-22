@@ -43,13 +43,29 @@ class AppConfig {
     return dotenv.env['REVENUECAT_API_KEY'] ?? '';
   }
 
-  /// Terms of Service URL (Apple Guideline 3.1.2 requires link under purchase button).
-  static String get termsUrl =>
-      dotenv.env['TERMS_URL'] ?? 'https://abba.ystech.com/terms';
+  /// Help center URL. Fallback to GitHub Pages so the app keeps working
+  /// before a custom domain is provisioned.
+  static String get helpUrl {
+    final envValue = dotenv.env['HELP_URL'];
+    if (envValue != null && envValue.isNotEmpty) return envValue;
+    return 'https://yslee5005.github.io/abba-docs/help';
+  }
 
-  /// Privacy Policy URL (Apple Guideline 3.1.2 requires link under purchase button).
-  static String get privacyUrl =>
-      dotenv.env['PRIVACY_URL'] ?? 'https://abba.ystech.com/privacy';
+  /// Terms of Service URL (Apple Guideline 3.1.2 requires link under purchase
+  /// button). Fallback to GitHub Pages.
+  static String get termsUrl {
+    final envValue = dotenv.env['TERMS_URL'];
+    if (envValue != null && envValue.isNotEmpty) return envValue;
+    return 'https://yslee5005.github.io/abba-docs/terms';
+  }
+
+  /// Privacy Policy URL (Apple Guideline 3.1.2 requires link under purchase
+  /// button). Fallback to GitHub Pages.
+  static String get privacyUrl {
+    final envValue = dotenv.env['PRIVACY_URL'];
+    if (envValue != null && envValue.isNotEmpty) return envValue;
+    return 'https://yslee5005.github.io/abba-docs/privacy';
+  }
 
   static String get googleWebClientId =>
       dotenv.env['GOOGLE_WEB_CLIENT_ID'] ?? '';

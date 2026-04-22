@@ -113,8 +113,9 @@
 
 ### 9. Apple Guideline 3.1.2 준수
 
-- [ ] Terms of Service + Privacy Policy 링크 **구매 버튼 바로 아래** 위치 확인
+- [x] Terms of Service + Privacy Policy 링크 **구매 버튼 바로 아래** (`AppConfig.termsUrl` / `AppConfig.privacyUrl` 연결, `membership_view.dart:619, 630`) — 2026-04-22
 - [x] `Cancel anytime` 문구 (membership_view.dart:310, 652)
+- [x] Help/Terms/Privacy URL을 `AppConfig` getter로 추출 → `.env` 기반 교체 가능 (settings_view.dart + membership_view.dart), 기본값 GitHub Pages fallback — 2026-04-22
 
 ### 10. Welcome 화면 첫 실행 감지
 
