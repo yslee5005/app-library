@@ -410,5 +410,19 @@
   "meditationSummaryTitle": "Today's Meditation",
   "meditationTopicLabel": "Topic",
   "meditationSummaryLabel": "Summary",
-  "qtScriptureTitle": "Today's Passage"
+  "qtScriptureTitle": "Today's Passage",
+  "qtCoachingTitle": "אימון QT",
+  "qtCoachingLoadingText": "מהרהרים בהגותך...",
+  "qtCoachingErrorText": "שגיאה זמנית — נא נסה שוב",
+  "qtCoachingRetryButton": "נסה שוב",
+  "qtCoachingScoreComprehension": "הבנת הכתוב",
+  "qtCoachingScoreApplication": "יישום אישי",
+  "qtCoachingScoreDepth": "עומק רוחני",
+  "qtCoachingScoreAuthenticity": "אותנטיות",
+  "qtCoachingStrengthsTitle": "מה עשית טוב ✨",
+  "qtCoachingImprovementsTitle": "כדי להעמיק 💡",
+  "qtCoachingProCta": "פתחו אימון QT עם Pro",
+  "qtCoachingLevelBeginner": "🌱 מתחיל",
+  "qtCoachingLevelGrowing": "🌿 צומח",
+  "qtCoachingLevelExpert": "🌳 מומחה"
 }

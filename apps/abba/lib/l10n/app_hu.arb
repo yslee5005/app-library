@@ -410,5 +410,19 @@
   "meditationSummaryTitle": "Today's Meditation",
   "meditationTopicLabel": "Topic",
   "meditationSummaryLabel": "Summary",
-  "qtScriptureTitle": "Today's Passage"
+  "qtScriptureTitle": "Today's Passage",
+  "qtCoachingTitle": "QT coaching",
+  "qtCoachingLoadingText": "Elmélkedünk az elmélkedéseden...",
+  "qtCoachingErrorText": "Átmeneti hiba — kérjük, próbálja újra",
+  "qtCoachingRetryButton": "Újra",
+  "qtCoachingScoreComprehension": "Szövegértés",
+  "qtCoachingScoreApplication": "Személyes alkalmazás",
+  "qtCoachingScoreDepth": "Lelki mélység",
+  "qtCoachingScoreAuthenticity": "Hitelesség",
+  "qtCoachingStrengthsTitle": "Amit jól csináltál ✨",
+  "qtCoachingImprovementsTitle": "Hogy elmélyülj 💡",
+  "qtCoachingProCta": "Oldja fel a QT coachingot Pro-val",
+  "qtCoachingLevelBeginner": "🌱 Kezdő",
+  "qtCoachingLevelGrowing": "🌿 Fejlődő",
+  "qtCoachingLevelExpert": "🌳 Szakértő"
 }

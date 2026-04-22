@@ -410,5 +410,19 @@
   "meditationSummaryTitle": "Méditation d'aujourd'hui",
   "meditationTopicLabel": "Thème",
   "meditationSummaryLabel": "En une phrase",
-  "qtScriptureTitle": "Passage d'aujourd'hui"
+  "qtScriptureTitle": "Passage d'aujourd'hui",
+  "qtCoachingTitle": "Coaching QT",
+  "qtCoachingLoadingText": "Nous réfléchissons à votre méditation...",
+  "qtCoachingErrorText": "Erreur temporaire — veuillez réessayer",
+  "qtCoachingRetryButton": "Réessayer",
+  "qtCoachingScoreComprehension": "Compréhension du texte",
+  "qtCoachingScoreApplication": "Application personnelle",
+  "qtCoachingScoreDepth": "Profondeur spirituelle",
+  "qtCoachingScoreAuthenticity": "Authenticité",
+  "qtCoachingStrengthsTitle": "Ce que vous avez bien fait ✨",
+  "qtCoachingImprovementsTitle": "Pour aller plus loin 💡",
+  "qtCoachingProCta": "Débloquez le Coaching QT avec Pro",
+  "qtCoachingLevelBeginner": "🌱 Débutant",
+  "qtCoachingLevelGrowing": "🌿 En croissance",
+  "qtCoachingLevelExpert": "🌳 Expert"
 }

@@ -410,5 +410,19 @@
   "meditationSummaryTitle": "Today's Meditation",
   "meditationTopicLabel": "Topic",
   "meditationSummaryLabel": "Summary",
-  "qtScriptureTitle": "Today's Passage"
+  "qtScriptureTitle": "Today's Passage",
+  "qtCoachingTitle": "QT သင်တန်း",
+  "qtCoachingLoadingText": "သင်၏ တရားထိုင်ခြင်းကို ပြန်လည်သုံးသပ်နေပါသည်...",
+  "qtCoachingErrorText": "ယာယီ အမှား — ပြန်စမ်းကြည့်ပါ",
+  "qtCoachingRetryButton": "ပြန်ကြိုးစားပါ",
+  "qtCoachingScoreComprehension": "ကျမ်းစာ နားလည်မှု",
+  "qtCoachingScoreApplication": "ကိုယ်ပိုင် အသုံးချမှု",
+  "qtCoachingScoreDepth": "ဝိညာဉ်ရေး နက်ရှိုင်းမှု",
+  "qtCoachingScoreAuthenticity": "စစ်မှန်မှု",
+  "qtCoachingStrengthsTitle": "ကောင်းမွန်စွာလုပ်ခဲ့သည်များ ✨",
+  "qtCoachingImprovementsTitle": "ပိုမိုနက်ရှိုင်းရန် 💡",
+  "qtCoachingProCta": "Pro ဖြင့် QT သင်တန်းကို ဖွင့်ပါ",
+  "qtCoachingLevelBeginner": "🌱 စတင်နေသူ",
+  "qtCoachingLevelGrowing": "🌿 ကြီးထွားနေသူ",
+  "qtCoachingLevelExpert": "🌳 ကျွမ်းကျင်သူ"
 }

@@ -410,5 +410,19 @@
   "meditationSummaryTitle": "Today's Meditation",
   "meditationTopicLabel": "Topic",
   "meditationSummaryLabel": "Summary",
-  "qtScriptureTitle": "Today's Passage"
+  "qtScriptureTitle": "Today's Passage",
+  "qtCoachingTitle": "Huấn luyện QT",
+  "qtCoachingLoadingText": "Đang suy ngẫm về sự suy gẫm của bạn...",
+  "qtCoachingErrorText": "Lỗi tạm thời — vui lòng thử lại",
+  "qtCoachingRetryButton": "Thử lại",
+  "qtCoachingScoreComprehension": "Hiểu Kinh Thánh",
+  "qtCoachingScoreApplication": "Áp dụng cá nhân",
+  "qtCoachingScoreDepth": "Chiều sâu thuộc linh",
+  "qtCoachingScoreAuthenticity": "Tính chân thực",
+  "qtCoachingStrengthsTitle": "Điều bạn đã làm tốt ✨",
+  "qtCoachingImprovementsTitle": "Để đi sâu hơn 💡",
+  "qtCoachingProCta": "Mở Huấn luyện QT với Pro",
+  "qtCoachingLevelBeginner": "🌱 Người mới",
+  "qtCoachingLevelGrowing": "🌿 Đang phát triển",
+  "qtCoachingLevelExpert": "🌳 Chuyên gia"
 }

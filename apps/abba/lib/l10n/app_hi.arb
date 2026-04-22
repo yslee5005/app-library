@@ -410,5 +410,19 @@
   "meditationSummaryTitle": "Today's Meditation",
   "meditationTopicLabel": "Topic",
   "meditationSummaryLabel": "Summary",
-  "qtScriptureTitle": "Today's Passage"
+  "qtScriptureTitle": "Today's Passage",
+  "qtCoachingTitle": "QT कोचिंग",
+  "qtCoachingLoadingText": "आपके ध्यान पर विचार कर रहे हैं...",
+  "qtCoachingErrorText": "अस्थायी त्रुटि — कृपया पुनः प्रयास करें",
+  "qtCoachingRetryButton": "पुनः प्रयास",
+  "qtCoachingScoreComprehension": "शास्त्र की समझ",
+  "qtCoachingScoreApplication": "व्यक्तिगत प्रयोग",
+  "qtCoachingScoreDepth": "आध्यात्मिक गहराई",
+  "qtCoachingScoreAuthenticity": "प्रामाणिकता",
+  "qtCoachingStrengthsTitle": "आपने क्या अच्छा किया ✨",
+  "qtCoachingImprovementsTitle": "और गहराई में जाने के लिए 💡",
+  "qtCoachingProCta": "Pro के साथ QT कोचिंग अनलॉक करें",
+  "qtCoachingLevelBeginner": "🌱 शुरुआती",
+  "qtCoachingLevelGrowing": "🌿 बढ़ रहा",
+  "qtCoachingLevelExpert": "🌳 विशेषज्ञ"
 }

@@ -1921,6 +1921,90 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Today\'s Passage'**
   String get qtScriptureTitle;
+
+  /// No description provided for @qtCoachingTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'QT Coaching'**
+  String get qtCoachingTitle;
+
+  /// No description provided for @qtCoachingLoadingText.
+  ///
+  /// In en, this message translates to:
+  /// **'Reflecting on your meditation...'**
+  String get qtCoachingLoadingText;
+
+  /// No description provided for @qtCoachingErrorText.
+  ///
+  /// In en, this message translates to:
+  /// **'Temporary error — please retry'**
+  String get qtCoachingErrorText;
+
+  /// No description provided for @qtCoachingRetryButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Retry'**
+  String get qtCoachingRetryButton;
+
+  /// No description provided for @qtCoachingScoreComprehension.
+  ///
+  /// In en, this message translates to:
+  /// **'Scripture Comprehension'**
+  String get qtCoachingScoreComprehension;
+
+  /// No description provided for @qtCoachingScoreApplication.
+  ///
+  /// In en, this message translates to:
+  /// **'Personal Application'**
+  String get qtCoachingScoreApplication;
+
+  /// No description provided for @qtCoachingScoreDepth.
+  ///
+  /// In en, this message translates to:
+  /// **'Spiritual Depth'**
+  String get qtCoachingScoreDepth;
+
+  /// No description provided for @qtCoachingScoreAuthenticity.
+  ///
+  /// In en, this message translates to:
+  /// **'Authenticity'**
+  String get qtCoachingScoreAuthenticity;
+
+  /// No description provided for @qtCoachingStrengthsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'What you did well ✨'**
+  String get qtCoachingStrengthsTitle;
+
+  /// No description provided for @qtCoachingImprovementsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'To go deeper 💡'**
+  String get qtCoachingImprovementsTitle;
+
+  /// No description provided for @qtCoachingProCta.
+  ///
+  /// In en, this message translates to:
+  /// **'Unlock QT Coaching with Pro'**
+  String get qtCoachingProCta;
+
+  /// No description provided for @qtCoachingLevelBeginner.
+  ///
+  /// In en, this message translates to:
+  /// **'🌱 Beginner'**
+  String get qtCoachingLevelBeginner;
+
+  /// No description provided for @qtCoachingLevelGrowing.
+  ///
+  /// In en, this message translates to:
+  /// **'🌿 Growing'**
+  String get qtCoachingLevelGrowing;
+
+  /// No description provided for @qtCoachingLevelExpert.
+  ///
+  /// In en, this message translates to:
+  /// **'🌳 Expert'**
+  String get qtCoachingLevelExpert;
 }
 
 class _AppLocalizationsDelegate

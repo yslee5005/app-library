@@ -410,5 +410,19 @@
   "meditationSummaryTitle": "Today's Meditation",
   "meditationTopicLabel": "Topic",
   "meditationSummaryLabel": "Summary",
-  "qtScriptureTitle": "Today's Passage"
+  "qtScriptureTitle": "Today's Passage",
+  "qtCoachingTitle": "QT-coaching",
+  "qtCoachingLoadingText": "We reflecteren op je meditatie...",
+  "qtCoachingErrorText": "Tijdelijke fout — probeer het opnieuw",
+  "qtCoachingRetryButton": "Opnieuw proberen",
+  "qtCoachingScoreComprehension": "Tekstbegrip",
+  "qtCoachingScoreApplication": "Persoonlijke toepassing",
+  "qtCoachingScoreDepth": "Geestelijke diepte",
+  "qtCoachingScoreAuthenticity": "Authenticiteit",
+  "qtCoachingStrengthsTitle": "Wat je goed deed ✨",
+  "qtCoachingImprovementsTitle": "Om dieper te gaan 💡",
+  "qtCoachingProCta": "Ontgrendel QT-coaching met Pro",
+  "qtCoachingLevelBeginner": "🌱 Beginner",
+  "qtCoachingLevelGrowing": "🌿 Groeiend",
+  "qtCoachingLevelExpert": "🌳 Expert"
 }

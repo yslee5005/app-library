@@ -142,6 +142,29 @@ final prayerCoachingProvider =
   );
 });
 
+/// QT Coaching (Pro-only). On-demand single call, evaluated against
+/// `assets/docs/qt_guide.md`. Free users: placeholder shown via ProBlur.
+/// Phase 2 of qt_output_redesign (INT-118).
+final qtCoachingProvider =
+    FutureProvider.autoDispose<QtCoaching>((ref) async {
+  final isPremium = await ref.watch(isPremiumProvider.future);
+  if (!isPremium) {
+    return QtCoaching.placeholder();
+  }
+  final meditation = ref.watch(currentTranscriptProvider);
+  if (meditation.trim().isEmpty) {
+    return QtCoaching.placeholder();
+  }
+  final scriptureRef = ref.watch(currentPassageRefProvider);
+  final locale = ref.watch(localeProvider);
+  final aiService = ref.watch(aiServiceProvider);
+  return aiService.analyzeQtCoaching(
+    meditation: meditation,
+    scriptureReference: scriptureRef,
+    locale: locale,
+  );
+});
+
 final qtPassagesProvider = FutureProvider<List<QTPassage>>((ref) {
   final locale = ref.watch(localeProvider);
   final repo = ref.watch(qtRepositoryProvider);

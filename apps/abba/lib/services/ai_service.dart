@@ -44,6 +44,15 @@ abstract class AiService {
     required String transcript,
     required String locale,
   });
+
+  /// Evaluate a QT meditation against the QT Guide (comprehension / application /
+  /// depth / authenticity). Pro-only. Returns [QtCoaching.placeholder] on
+  /// parse/API failure.
+  Future<QtCoaching> analyzeQtCoaching({
+    required String meditation,
+    required String scriptureReference,
+    required String locale,
+  });
 }
 
 /// Premium-only content generated on-demand

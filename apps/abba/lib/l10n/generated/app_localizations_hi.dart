@@ -951,4 +951,46 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get qtScriptureTitle => 'Today\'s Passage';
+
+  @override
+  String get qtCoachingTitle => 'QT कोचिंग';
+
+  @override
+  String get qtCoachingLoadingText => 'आपके ध्यान पर विचार कर रहे हैं...';
+
+  @override
+  String get qtCoachingErrorText => 'अस्थायी त्रुटि — कृपया पुनः प्रयास करें';
+
+  @override
+  String get qtCoachingRetryButton => 'पुनः प्रयास';
+
+  @override
+  String get qtCoachingScoreComprehension => 'शास्त्र की समझ';
+
+  @override
+  String get qtCoachingScoreApplication => 'व्यक्तिगत प्रयोग';
+
+  @override
+  String get qtCoachingScoreDepth => 'आध्यात्मिक गहराई';
+
+  @override
+  String get qtCoachingScoreAuthenticity => 'प्रामाणिकता';
+
+  @override
+  String get qtCoachingStrengthsTitle => 'आपने क्या अच्छा किया ✨';
+
+  @override
+  String get qtCoachingImprovementsTitle => 'और गहराई में जाने के लिए 💡';
+
+  @override
+  String get qtCoachingProCta => 'Pro के साथ QT कोचिंग अनलॉक करें';
+
+  @override
+  String get qtCoachingLevelBeginner => '🌱 शुरुआती';
+
+  @override
+  String get qtCoachingLevelGrowing => '🌿 बढ़ रहा';
+
+  @override
+  String get qtCoachingLevelExpert => '🌳 विशेषज्ञ';
 }

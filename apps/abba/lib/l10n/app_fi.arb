@@ -410,5 +410,19 @@
   "meditationSummaryTitle": "Today's Meditation",
   "meditationTopicLabel": "Topic",
   "meditationSummaryLabel": "Summary",
-  "qtScriptureTitle": "Today's Passage"
+  "qtScriptureTitle": "Today's Passage",
+  "qtCoachingTitle": "QT-valmennus",
+  "qtCoachingLoadingText": "Pohdimme mietiskelyäsi...",
+  "qtCoachingErrorText": "Väliaikainen virhe — yritä uudelleen",
+  "qtCoachingRetryButton": "Yritä uudelleen",
+  "qtCoachingScoreComprehension": "Tekstin ymmärrys",
+  "qtCoachingScoreApplication": "Henkilökohtainen sovellus",
+  "qtCoachingScoreDepth": "Hengellinen syvyys",
+  "qtCoachingScoreAuthenticity": "Aitous",
+  "qtCoachingStrengthsTitle": "Mitä teit hyvin ✨",
+  "qtCoachingImprovementsTitle": "Syventääksesi 💡",
+  "qtCoachingProCta": "Avaa QT-valmennus Pro:lla",
+  "qtCoachingLevelBeginner": "🌱 Aloittelija",
+  "qtCoachingLevelGrowing": "🌿 Kasvussa",
+  "qtCoachingLevelExpert": "🌳 Asiantuntija"
 }

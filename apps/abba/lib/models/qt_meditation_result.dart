@@ -272,3 +272,94 @@ class GrowthStory {
   String summary(String locale) => locale == 'ko' ? summaryKo : summaryEn;
   String lesson(String locale) => locale == 'ko' ? lessonKo : lessonEn;
 }
+
+/// QT Coaching scores — Pro-only, mirrors `CoachingScores` but with the
+/// QT 4 axes: comprehension / application / depth / authenticity.
+/// Phase 2 of qt_output_redesign (INT-112).
+class QtScores {
+  final int comprehension; // 본문 이해 1-5
+  final int application;    // 개인 적용 (3P) 1-5
+  final int depth;          // 영적 깊이 1-5
+  final int authenticity;   // 진정성 1-5
+
+  const QtScores({
+    required this.comprehension,
+    required this.application,
+    required this.depth,
+    required this.authenticity,
+  });
+
+  factory QtScores.fromJson(Map<String, dynamic> json) {
+    return QtScores(
+      comprehension: (json['comprehension'] as num?)?.toInt() ?? 0,
+      application: (json['application'] as num?)?.toInt() ?? 0,
+      depth: (json['depth'] as num?)?.toInt() ?? 0,
+      authenticity: (json['authenticity'] as num?)?.toInt() ?? 0,
+    );
+  }
+
+  double get average =>
+      (comprehension + application + depth + authenticity) / 4.0;
+}
+
+/// QT Coaching result — Pro-only, mirrors `PrayerCoaching` but evaluated
+/// against the QT Guide (`assets/docs/qt_guide.md`). Phase 2 of
+/// qt_output_redesign (INT-111).
+class QtCoaching {
+  final QtScores scores;
+  final List<String> strengths;
+  final List<String> improvements;
+  final String overallFeedbackEn;
+  final String overallFeedbackKo;
+  final String expertLevel; // "beginner" | "growing" | "expert"
+  final bool isPremium;
+
+  const QtCoaching({
+    required this.scores,
+    required this.strengths,
+    required this.improvements,
+    required this.overallFeedbackEn,
+    required this.overallFeedbackKo,
+    required this.expertLevel,
+    this.isPremium = true,
+  });
+
+  String overallFeedback(String locale) =>
+      locale == 'ko' ? overallFeedbackKo : overallFeedbackEn;
+
+  factory QtCoaching.fromJson(Map<String, dynamic> json) {
+    return QtCoaching(
+      scores: QtScores.fromJson(
+        json['scores'] as Map<String, dynamic>? ?? const {},
+      ),
+      strengths: (json['strengths'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          const [],
+      improvements: (json['improvements'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          const [],
+      overallFeedbackEn: json['overall_feedback_en'] as String? ?? '',
+      overallFeedbackKo: json['overall_feedback_ko'] as String? ?? '',
+      expertLevel: json['expert_level'] as String? ?? 'growing',
+      isPremium: json['is_premium'] as bool? ?? true,
+    );
+  }
+
+  /// Placeholder for locked card display (Free users) and API failures.
+  factory QtCoaching.placeholder() => const QtCoaching(
+        scores: QtScores(
+          comprehension: 0,
+          application: 0,
+          depth: 0,
+          authenticity: 0,
+        ),
+        strengths: [],
+        improvements: [],
+        overallFeedbackEn:
+            'Unlock your personal meditation coaching feedback...',
+        overallFeedbackKo: 'Pro로 당신의 묵상에 대한 맞춤 코칭을 받아보세요...',
+        expertLevel: 'growing',
+      );
+}

@@ -410,5 +410,19 @@
   "meditationSummaryTitle": "Today's Meditation",
   "meditationTopicLabel": "Topic",
   "meditationSummaryLabel": "Summary",
-  "qtScriptureTitle": "Today's Passage"
+  "qtScriptureTitle": "Today's Passage",
+  "qtCoachingTitle": "Coaching QT",
+  "qtCoachingLoadingText": "Merenungkan meditasi Anda...",
+  "qtCoachingErrorText": "Kesalahan sementara — silakan coba lagi",
+  "qtCoachingRetryButton": "Coba lagi",
+  "qtCoachingScoreComprehension": "Pemahaman Kitab Suci",
+  "qtCoachingScoreApplication": "Penerapan pribadi",
+  "qtCoachingScoreDepth": "Kedalaman rohani",
+  "qtCoachingScoreAuthenticity": "Keaslian",
+  "qtCoachingStrengthsTitle": "Yang Anda lakukan dengan baik ✨",
+  "qtCoachingImprovementsTitle": "Untuk lebih dalam 💡",
+  "qtCoachingProCta": "Buka Coaching QT dengan Pro",
+  "qtCoachingLevelBeginner": "🌱 Pemula",
+  "qtCoachingLevelGrowing": "🌿 Bertumbuh",
+  "qtCoachingLevelExpert": "🌳 Ahli"
 }

@@ -410,5 +410,19 @@
   "meditationSummaryTitle": "오늘의 묵상",
   "meditationTopicLabel": "주제",
   "meditationSummaryLabel": "한 마디로",
-  "qtScriptureTitle": "오늘의 말씀"
+  "qtScriptureTitle": "오늘의 말씀",
+  "qtCoachingTitle": "QT 코칭",
+  "qtCoachingLoadingText": "당신의 묵상을 돌아보고 있어요...",
+  "qtCoachingErrorText": "일시적인 오류 — 잠시 후 다시 시도해 주세요",
+  "qtCoachingRetryButton": "다시 시도",
+  "qtCoachingScoreComprehension": "본문 이해",
+  "qtCoachingScoreApplication": "개인 적용",
+  "qtCoachingScoreDepth": "영적 깊이",
+  "qtCoachingScoreAuthenticity": "진정성",
+  "qtCoachingStrengthsTitle": "잘하신 점 ✨",
+  "qtCoachingImprovementsTitle": "더 깊어지려면 💡",
+  "qtCoachingProCta": "Pro로 QT 코칭 받기",
+  "qtCoachingLevelBeginner": "🌱 시작하는 중",
+  "qtCoachingLevelGrowing": "🌿 자라는 중",
+  "qtCoachingLevelExpert": "🌳 전문가"
 }

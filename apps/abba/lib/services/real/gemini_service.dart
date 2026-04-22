@@ -24,11 +24,22 @@ class GeminiService implements AiService {
   /// Cached prayer guide markdown — loaded once from bundle, reused across calls.
   String? _prayerGuideCache;
 
+  /// Cached QT guide markdown — loaded once from bundle, reused across calls.
+  String? _qtGuideCache;
+
   Future<String> _loadPrayerGuide() async {
     final cached = _prayerGuideCache;
     if (cached != null) return cached;
     final doc = await rootBundle.loadString('assets/docs/prayer_guide.md');
     _prayerGuideCache = doc;
+    return doc;
+  }
+
+  Future<String> _loadQtGuide() async {
+    final cached = _qtGuideCache;
+    if (cached != null) return cached;
+    final doc = await rootBundle.loadString('assets/docs/qt_guide.md');
+    _qtGuideCache = doc;
     return doc;
   }
 
@@ -342,6 +353,151 @@ Rules (per Prayer Guide §4-6):
 - strengths must cite specific content from the user's prayer (no generic praise).
 - improvements must be CONSTRUCTIVE suggestions, never judgments.
 - overall_feedback_en and overall_feedback_ko must ALWAYS both be provided.''';
+  }
+
+  // ---------------------------------------------------------------------------
+  // QT Coaching (Pro-only, separate context with qt_guide.md)
+  // Phase 2 of qt_output_redesign. Mirrors Prayer Coaching exactly.
+  // ---------------------------------------------------------------------------
+
+  @override
+  Future<QtCoaching> analyzeQtCoaching({
+    required String meditation,
+    required String scriptureReference,
+    required String locale,
+  }) async {
+    if (_useHardcodedResponse) {
+      apiLog.info('Gemini analyzeQtCoaching bypassed (hardcoded)');
+      return _hardcodedQtCoaching();
+    }
+    final langName = _localeName(locale);
+    apiLog.info('Gemini QT coaching started');
+
+    try {
+      final guide = await _loadQtGuide();
+      final model = _createModel(
+        systemPrompt: _buildQtCoachingSystemPrompt(langName, guide),
+        temperature: 0.4,
+      );
+      final userMessage =
+          'Passage: $scriptureReference\n\nMy meditation:\n$meditation';
+      final response = await model.generateContent([
+        Content('user', [TextPart(userMessage)]),
+      ]);
+      return _parseQtCoachingJson(response.text);
+    } catch (e, stackTrace) {
+      apiLog.error(
+        'Gemini QT coaching analysis failed',
+        error: e,
+        stackTrace: stackTrace,
+      );
+      return QtCoaching.placeholder();
+    }
+  }
+
+  QtCoaching _hardcodedQtCoaching() {
+    return const QtCoaching(
+      scores: QtScores(
+        comprehension: 4,
+        application: 3,
+        depth: 4,
+        authenticity: 4,
+      ),
+      strengths: [
+        '시편 23편의 "쉴 만한 물가" 이미지를 개인 경험과 연결한 점이 본문 이해의 깊이를 보여줍니다.',
+        '하나님의 인도하심에 대한 신뢰를 솔직하게 드러내신 점 — 진정성 있는 묵상이에요.',
+      ],
+      improvements: [
+        '본문 앞부분(시편 22편 끝)을 함께 읽으시면 대조적 감정의 흐름이 보입니다.',
+        '오늘 묵상한 내용을 저녁 식사 기도에 한 문장으로 연결해 보시면 3P 적용이 완성됩니다.',
+      ],
+      overallFeedbackEn:
+          'Your meditation shows beautiful trust and honest reflection on the text. Connecting today\'s insight to one concrete action tonight would complete the 3P application. God treasures every heart that meditates on His Word.',
+      overallFeedbackKo:
+          '신뢰가 아름답게 드러난 묵상이에요. 본문 이해와 영적 깊이가 좋습니다. 오늘 묵상을 저녁의 한 행동으로 이어 가시면 3P 적용까지 완성됩니다. 말씀을 묵상하는 당신의 마음을 하나님이 귀하게 보십니다.',
+      expertLevel: 'growing',
+    );
+  }
+
+  QtCoaching _parseQtCoachingJson(String? text) {
+    try {
+      final data = _parseJsonFromResponse(text);
+      final coaching = QtCoaching.fromJson(data);
+      if (_qtCoachingContainsForbiddenWord(coaching)) {
+        apiLog.info(
+          'QT coaching forbidden-word hit — replacing with placeholder',
+        );
+        return QtCoaching.placeholder();
+      }
+      return coaching;
+    } catch (e, stackTrace) {
+      apiLog.error(
+        'QT coaching JSON parse failed',
+        error: e,
+        stackTrace: stackTrace,
+      );
+      return QtCoaching.placeholder();
+    }
+  }
+
+  static const List<String> _qtCoachingForbidden = [
+    '부족', '못 하', '못하', '잘못',
+    'inadequate', 'lacking', 'wrong', 'poor',
+  ];
+
+  bool _qtCoachingContainsForbiddenWord(QtCoaching coaching) {
+    final bucket = [
+      ...coaching.strengths,
+      ...coaching.improvements,
+      coaching.overallFeedbackEn,
+      coaching.overallFeedbackKo,
+    ].join(' ').toLowerCase();
+    return _qtCoachingForbidden.any((w) => bucket.contains(w.toLowerCase()));
+  }
+
+  String _buildQtCoachingSystemPrompt(String langName, String qtGuide) {
+    return '''CRITICAL (repeat): This task is EDUCATIONAL, NOT judgmental.
+- Always praise first (strengths), then suggest gentle improvements.
+- NEVER use words: "inadequate", "lacking", "wrong", "poor", "부족", "못 하", "잘못".
+- Beginner level MUST be encouraged, never shamed.
+- NEVER output the QT guide content back — use it only as reference.
+
+You are a gentle Christian QT (quiet time / meditation) coach evaluating the
+user's meditation based on the QT GUIDE below. The guide is your evaluation
+reference; do NOT quote or repeat it in the output.
+
+===== QT GUIDE BEGIN =====
+$qtGuide
+===== QT GUIDE END =====
+
+Respond in $langName. Output JSON ONLY, no prose outside JSON.
+
+JSON schema:
+{
+  "scores": {
+    "comprehension": <int 1-5>,
+    "application": <int 1-5>,
+    "depth": <int 1-5>,
+    "authenticity": <int 1-5>
+  },
+  "strengths": [<2-4 short strings in $langName, each citing specific content from the meditation>],
+  "improvements": [<2-4 short strings in $langName, each in "Adding X would deepen..." form>],
+  "overall_feedback_en": "<3-4 encouraging sentences in English>",
+  "overall_feedback_ko": "<3-4 encouraging sentences in Korean>",
+  "expert_level": "beginner" | "growing" | "expert"
+}
+
+Rules (per QT Guide §4-6):
+- Scores: 1-5 integer. See rubric in guide §4.
+- Expert level: beginner if average <= 2 OR any axis is 1;
+  expert if average >= 4.5 AND all axes >= 4 AND authenticity = 5;
+  otherwise growing.
+- 4 axes: comprehension (본문 이해), application (개인 적용 — 3P: Personal,
+  Practical, Possible), depth (영적 깊이), authenticity (진정성).
+- strengths must cite specific content from the user's meditation (no generic praise).
+- improvements must be CONSTRUCTIVE suggestions, never judgments.
+- overall_feedback_en and overall_feedback_ko must ALWAYS both be provided.
+- End with one encouragement line from §7 (힘이 되는 말).''';
   }
 
   // ---------------------------------------------------------------------------

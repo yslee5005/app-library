@@ -410,5 +410,19 @@
   "meditationSummaryTitle": "Today's Meditation",
   "meditationTopicLabel": "Topic",
   "meditationSummaryLabel": "Summary",
-  "qtScriptureTitle": "Today's Passage"
+  "qtScriptureTitle": "Today's Passage",
+  "qtCoachingTitle": "إرشاد التأمل",
+  "qtCoachingLoadingText": "نتأمل في تأملك...",
+  "qtCoachingErrorText": "خطأ مؤقت — يرجى المحاولة مرة أخرى",
+  "qtCoachingRetryButton": "إعادة المحاولة",
+  "qtCoachingScoreComprehension": "فهم النص",
+  "qtCoachingScoreApplication": "التطبيق الشخصي",
+  "qtCoachingScoreDepth": "العمق الروحي",
+  "qtCoachingScoreAuthenticity": "الأصالة",
+  "qtCoachingStrengthsTitle": "ما قمت به بشكل جيد ✨",
+  "qtCoachingImprovementsTitle": "للتعمق أكثر 💡",
+  "qtCoachingProCta": "افتح إرشاد التأمل مع Pro",
+  "qtCoachingLevelBeginner": "🌱 مبتدئ",
+  "qtCoachingLevelGrowing": "🌿 ينمو",
+  "qtCoachingLevelExpert": "🌳 خبير"
 }

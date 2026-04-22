@@ -104,4 +104,34 @@ class MockAiService implements AiService {
       expertLevel: 'growing',
     );
   }
+
+  @override
+  Future<QtCoaching> analyzeQtCoaching({
+    required String meditation,
+    required String scriptureReference,
+    required String locale,
+  }) async {
+    await Future<void>.delayed(const Duration(seconds: 1));
+    return const QtCoaching(
+      scores: QtScores(
+        comprehension: 4,
+        application: 3,
+        depth: 4,
+        authenticity: 4,
+      ),
+      strengths: [
+        '시편 23편의 "쉴 만한 물가" 이미지를 개인 경험과 연결한 점이 본문 이해의 깊이를 보여줍니다.',
+        '하나님의 인도하심에 대한 신뢰를 솔직하게 드러내신 점 — 진정성 있는 묵상이에요.',
+      ],
+      improvements: [
+        '본문 앞부분(시편 22편 끝)을 함께 읽으시면 대조적 감정의 흐름이 보입니다.',
+        '오늘 묵상한 내용을 저녁 식사 기도에 한 문장으로 연결해 보시면 3P 적용이 완성됩니다.',
+      ],
+      overallFeedbackEn:
+          'Your meditation shows beautiful trust and honest reflection on the text. Connecting today\'s insight to one concrete action tonight would complete the 3P application. God treasures every heart that meditates on His Word.',
+      overallFeedbackKo:
+          '신뢰가 아름답게 드러난 묵상이에요. 본문 이해와 영적 깊이가 좋습니다. 오늘 묵상을 저녁의 한 행동으로 이어 가시면 3P 적용까지 완성됩니다. 말씀을 묵상하는 당신의 마음을 하나님이 귀하게 보십니다.',
+      expertLevel: 'growing',
+    );
+  }
 }

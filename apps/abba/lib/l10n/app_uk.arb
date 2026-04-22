@@ -410,5 +410,19 @@
   "meditationSummaryTitle": "Today's Meditation",
   "meditationTopicLabel": "Topic",
   "meditationSummaryLabel": "Summary",
-  "qtScriptureTitle": "Today's Passage"
+  "qtScriptureTitle": "Today's Passage",
+  "qtCoachingTitle": "Наставництво в QT",
+  "qtCoachingLoadingText": "Розмірковуємо над вашими роздумами...",
+  "qtCoachingErrorText": "Тимчасова помилка — спробуйте ще раз",
+  "qtCoachingRetryButton": "Повторити",
+  "qtCoachingScoreComprehension": "Розуміння тексту",
+  "qtCoachingScoreApplication": "Особисте застосування",
+  "qtCoachingScoreDepth": "Духовна глибина",
+  "qtCoachingScoreAuthenticity": "Автентичність",
+  "qtCoachingStrengthsTitle": "Що ви зробили добре ✨",
+  "qtCoachingImprovementsTitle": "Щоб заглибитися 💡",
+  "qtCoachingProCta": "Відкрити Наставництво в QT з Pro",
+  "qtCoachingLevelBeginner": "🌱 Початківець",
+  "qtCoachingLevelGrowing": "🌿 Зростає",
+  "qtCoachingLevelExpert": "🌳 Експерт"
 }

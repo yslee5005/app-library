@@ -143,4 +143,14 @@ class _CountingAiService implements AiService {
     callCount++;
     return PrayerCoaching.placeholder();
   }
+
+  @override
+  Future<QtCoaching> analyzeQtCoaching({
+    required String meditation,
+    required String scriptureReference,
+    required String locale,
+  }) async {
+    callCount++;
+    return QtCoaching.placeholder();
+  }
 }

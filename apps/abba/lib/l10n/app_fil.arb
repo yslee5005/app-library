@@ -410,5 +410,19 @@
   "meditationSummaryTitle": "Today's Meditation",
   "meditationTopicLabel": "Topic",
   "meditationSummaryLabel": "Summary",
-  "qtScriptureTitle": "Today's Passage"
+  "qtScriptureTitle": "Today's Passage",
+  "qtCoachingTitle": "QT Coaching",
+  "qtCoachingLoadingText": "Nag-iisip tungkol sa iyong pagninilay...",
+  "qtCoachingErrorText": "Pansamantalang error — subukan muli",
+  "qtCoachingRetryButton": "Subukan muli",
+  "qtCoachingScoreComprehension": "Pag-unawa sa Kasulatan",
+  "qtCoachingScoreApplication": "Personal na aplikasyon",
+  "qtCoachingScoreDepth": "Espirituwal na lalim",
+  "qtCoachingScoreAuthenticity": "Pagiging tunay",
+  "qtCoachingStrengthsTitle": "Magaling mong ginawa ✨",
+  "qtCoachingImprovementsTitle": "Upang palalimin 💡",
+  "qtCoachingProCta": "I-unlock ang QT Coaching gamit ang Pro",
+  "qtCoachingLevelBeginner": "🌱 Baguhan",
+  "qtCoachingLevelGrowing": "🌿 Lumalago",
+  "qtCoachingLevelExpert": "🌳 Eksperto"
 }

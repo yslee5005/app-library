@@ -943,4 +943,46 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get qtScriptureTitle => 'Today\'s Passage';
+
+  @override
+  String get qtCoachingTitle => 'การโค้ช QT';
+
+  @override
+  String get qtCoachingLoadingText => 'กำลังไตร่ตรองการใคร่ครวญของคุณ...';
+
+  @override
+  String get qtCoachingErrorText => 'ข้อผิดพลาดชั่วคราว — โปรดลองอีกครั้ง';
+
+  @override
+  String get qtCoachingRetryButton => 'ลองอีกครั้ง';
+
+  @override
+  String get qtCoachingScoreComprehension => 'ความเข้าใจพระคัมภีร์';
+
+  @override
+  String get qtCoachingScoreApplication => 'การประยุกต์ส่วนตัว';
+
+  @override
+  String get qtCoachingScoreDepth => 'ความลึกทางจิตวิญญาณ';
+
+  @override
+  String get qtCoachingScoreAuthenticity => 'ความจริงใจ';
+
+  @override
+  String get qtCoachingStrengthsTitle => 'สิ่งที่คุณทำได้ดี ✨';
+
+  @override
+  String get qtCoachingImprovementsTitle => 'เพื่อก้าวลึกขึ้น 💡';
+
+  @override
+  String get qtCoachingProCta => 'ปลดล็อกการโค้ช QT ด้วย Pro';
+
+  @override
+  String get qtCoachingLevelBeginner => '🌱 ผู้เริ่มต้น';
+
+  @override
+  String get qtCoachingLevelGrowing => '🌿 กำลังเติบโต';
+
+  @override
+  String get qtCoachingLevelExpert => '🌳 ผู้เชี่ยวชาญ';
 }

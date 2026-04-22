@@ -938,4 +938,46 @@ class AppLocalizationsHe extends AppLocalizations {
 
   @override
   String get qtScriptureTitle => 'Today\'s Passage';
+
+  @override
+  String get qtCoachingTitle => 'אימון QT';
+
+  @override
+  String get qtCoachingLoadingText => 'מהרהרים בהגותך...';
+
+  @override
+  String get qtCoachingErrorText => 'שגיאה זמנית — נא נסה שוב';
+
+  @override
+  String get qtCoachingRetryButton => 'נסה שוב';
+
+  @override
+  String get qtCoachingScoreComprehension => 'הבנת הכתוב';
+
+  @override
+  String get qtCoachingScoreApplication => 'יישום אישי';
+
+  @override
+  String get qtCoachingScoreDepth => 'עומק רוחני';
+
+  @override
+  String get qtCoachingScoreAuthenticity => 'אותנטיות';
+
+  @override
+  String get qtCoachingStrengthsTitle => 'מה עשית טוב ✨';
+
+  @override
+  String get qtCoachingImprovementsTitle => 'כדי להעמיק 💡';
+
+  @override
+  String get qtCoachingProCta => 'פתחו אימון QT עם Pro';
+
+  @override
+  String get qtCoachingLevelBeginner => '🌱 מתחיל';
+
+  @override
+  String get qtCoachingLevelGrowing => '🌿 צומח';
+
+  @override
+  String get qtCoachingLevelExpert => '🌳 מומחה';
 }

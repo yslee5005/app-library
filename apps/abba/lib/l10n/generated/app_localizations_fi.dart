@@ -953,4 +953,46 @@ class AppLocalizationsFi extends AppLocalizations {
 
   @override
   String get qtScriptureTitle => 'Today\'s Passage';
+
+  @override
+  String get qtCoachingTitle => 'QT-valmennus';
+
+  @override
+  String get qtCoachingLoadingText => 'Pohdimme mietiskelyäsi...';
+
+  @override
+  String get qtCoachingErrorText => 'Väliaikainen virhe — yritä uudelleen';
+
+  @override
+  String get qtCoachingRetryButton => 'Yritä uudelleen';
+
+  @override
+  String get qtCoachingScoreComprehension => 'Tekstin ymmärrys';
+
+  @override
+  String get qtCoachingScoreApplication => 'Henkilökohtainen sovellus';
+
+  @override
+  String get qtCoachingScoreDepth => 'Hengellinen syvyys';
+
+  @override
+  String get qtCoachingScoreAuthenticity => 'Aitous';
+
+  @override
+  String get qtCoachingStrengthsTitle => 'Mitä teit hyvin ✨';
+
+  @override
+  String get qtCoachingImprovementsTitle => 'Syventääksesi 💡';
+
+  @override
+  String get qtCoachingProCta => 'Avaa QT-valmennus Pro:lla';
+
+  @override
+  String get qtCoachingLevelBeginner => '🌱 Aloittelija';
+
+  @override
+  String get qtCoachingLevelGrowing => '🌿 Kasvussa';
+
+  @override
+  String get qtCoachingLevelExpert => '🌳 Asiantuntija';
 }

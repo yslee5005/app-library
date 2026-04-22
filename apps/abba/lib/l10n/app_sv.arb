@@ -410,5 +410,19 @@
   "meditationSummaryTitle": "Today's Meditation",
   "meditationTopicLabel": "Topic",
   "meditationSummaryLabel": "Summary",
-  "qtScriptureTitle": "Today's Passage"
+  "qtScriptureTitle": "Today's Passage",
+  "qtCoachingTitle": "QT-coaching",
+  "qtCoachingLoadingText": "Reflekterar över din meditation...",
+  "qtCoachingErrorText": "Tillfälligt fel — försök igen",
+  "qtCoachingRetryButton": "Försök igen",
+  "qtCoachingScoreComprehension": "Förståelse",
+  "qtCoachingScoreApplication": "Personlig tillämpning",
+  "qtCoachingScoreDepth": "Andligt djup",
+  "qtCoachingScoreAuthenticity": "Äkthet",
+  "qtCoachingStrengthsTitle": "Det du gjorde bra ✨",
+  "qtCoachingImprovementsTitle": "För att gå djupare 💡",
+  "qtCoachingProCta": "Lås upp QT-coaching med Pro",
+  "qtCoachingLevelBeginner": "🌱 Nybörjare",
+  "qtCoachingLevelGrowing": "🌿 Växande",
+  "qtCoachingLevelExpert": "🌳 Expert"
 }

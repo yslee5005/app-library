@@ -410,5 +410,19 @@
   "meditationSummaryTitle": "Today's Meditation",
   "meditationTopicLabel": "Topic",
   "meditationSummaryLabel": "Summary",
-  "qtScriptureTitle": "Today's Passage"
+  "qtScriptureTitle": "Today's Passage",
+  "qtCoachingTitle": "QT koučing",
+  "qtCoachingLoadingText": "Rozjímame nad vaším rozjímaním...",
+  "qtCoachingErrorText": "Dočasná chyba — skúste to znova",
+  "qtCoachingRetryButton": "Skúsiť znova",
+  "qtCoachingScoreComprehension": "Porozumenie textu",
+  "qtCoachingScoreApplication": "Osobná aplikácia",
+  "qtCoachingScoreDepth": "Duchovná hĺbka",
+  "qtCoachingScoreAuthenticity": "Autentickosť",
+  "qtCoachingStrengthsTitle": "Čo ste urobili dobre ✨",
+  "qtCoachingImprovementsTitle": "Ako ísť hlbšie 💡",
+  "qtCoachingProCta": "Odomknite QT koučing s Pro",
+  "qtCoachingLevelBeginner": "🌱 Začiatočník",
+  "qtCoachingLevelGrowing": "🌿 Rastúci",
+  "qtCoachingLevelExpert": "🌳 Odborník"
 }

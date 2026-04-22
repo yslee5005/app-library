@@ -955,4 +955,46 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get qtScriptureTitle => 'Today\'s Passage';
+
+  @override
+  String get qtCoachingTitle => 'QT Koçluğu';
+
+  @override
+  String get qtCoachingLoadingText => 'Tefekkürünüz üzerinde düşünüyoruz...';
+
+  @override
+  String get qtCoachingErrorText => 'Geçici hata — lütfen yeniden deneyin';
+
+  @override
+  String get qtCoachingRetryButton => 'Yeniden dene';
+
+  @override
+  String get qtCoachingScoreComprehension => 'Metin anlayışı';
+
+  @override
+  String get qtCoachingScoreApplication => 'Kişisel uygulama';
+
+  @override
+  String get qtCoachingScoreDepth => 'Ruhsal derinlik';
+
+  @override
+  String get qtCoachingScoreAuthenticity => 'Samimiyet';
+
+  @override
+  String get qtCoachingStrengthsTitle => 'İyi yaptığınız şeyler ✨';
+
+  @override
+  String get qtCoachingImprovementsTitle => 'Daha derine inmek için 💡';
+
+  @override
+  String get qtCoachingProCta => 'QT Koçluğunu Pro ile açın';
+
+  @override
+  String get qtCoachingLevelBeginner => '🌱 Başlangıç';
+
+  @override
+  String get qtCoachingLevelGrowing => '🌿 Gelişiyor';
+
+  @override
+  String get qtCoachingLevelExpert => '🌳 Uzman';
 }

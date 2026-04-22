@@ -410,5 +410,19 @@
   "meditationSummaryTitle": "今日の黙想",
   "meditationTopicLabel": "主題",
   "meditationSummaryLabel": "一言で",
-  "qtScriptureTitle": "今日のみことば"
+  "qtScriptureTitle": "今日のみことば",
+  "qtCoachingTitle": "QT コーチング",
+  "qtCoachingLoadingText": "あなたの黙想を振り返っています...",
+  "qtCoachingErrorText": "一時的なエラーです — しばらくしてから再試行してください",
+  "qtCoachingRetryButton": "再試行",
+  "qtCoachingScoreComprehension": "本文の理解",
+  "qtCoachingScoreApplication": "個人的な適用",
+  "qtCoachingScoreDepth": "霊的な深さ",
+  "qtCoachingScoreAuthenticity": "真実性",
+  "qtCoachingStrengthsTitle": "よくできた点 ✨",
+  "qtCoachingImprovementsTitle": "さらに深めるために 💡",
+  "qtCoachingProCta": "Pro で QT コーチングを解放",
+  "qtCoachingLevelBeginner": "🌱 初心者",
+  "qtCoachingLevelGrowing": "🌿 成長中",
+  "qtCoachingLevelExpert": "🌳 熟達者"
 }

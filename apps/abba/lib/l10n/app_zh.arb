@@ -410,5 +410,19 @@
   "meditationSummaryTitle": "今日默想",
   "meditationTopicLabel": "主题",
   "meditationSummaryLabel": "一句话",
-  "qtScriptureTitle": "今日经文"
+  "qtScriptureTitle": "今日经文",
+  "qtCoachingTitle": "QT 辅导",
+  "qtCoachingLoadingText": "正在回顾您的默想...",
+  "qtCoachingErrorText": "临时错误 — 请稍后重试",
+  "qtCoachingRetryButton": "重试",
+  "qtCoachingScoreComprehension": "经文理解",
+  "qtCoachingScoreApplication": "个人应用",
+  "qtCoachingScoreDepth": "属灵深度",
+  "qtCoachingScoreAuthenticity": "真实性",
+  "qtCoachingStrengthsTitle": "你做得好的地方 ✨",
+  "qtCoachingImprovementsTitle": "更进一步 💡",
+  "qtCoachingProCta": "使用 Pro 解锁 QT 辅导",
+  "qtCoachingLevelBeginner": "🌱 初学者",
+  "qtCoachingLevelGrowing": "🌿 成长中",
+  "qtCoachingLevelExpert": "🌳 专家"
 }

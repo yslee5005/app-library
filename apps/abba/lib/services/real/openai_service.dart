@@ -221,6 +221,17 @@ class OpenAiService implements AiService {
   }
 
   @override
+  Future<QtCoaching> analyzeQtCoaching({
+    required String meditation,
+    required String scriptureReference,
+    required String locale,
+  }) async {
+    // OpenAI path is legacy; QT coaching relies on Gemini service. Placeholder.
+    apiLog.info('OpenAI analyzeQtCoaching not implemented — placeholder');
+    return QtCoaching.placeholder();
+  }
+
+  @override
   Future<PremiumContent> analyzePrayerPremium({
     required String transcript,
     required String locale,

@@ -957,4 +957,46 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String get qtScriptureTitle => 'Today\'s Passage';
+
+  @override
+  String get qtCoachingTitle => 'QT coaching';
+
+  @override
+  String get qtCoachingLoadingText => 'Elmélkedünk az elmélkedéseden...';
+
+  @override
+  String get qtCoachingErrorText => 'Átmeneti hiba — kérjük, próbálja újra';
+
+  @override
+  String get qtCoachingRetryButton => 'Újra';
+
+  @override
+  String get qtCoachingScoreComprehension => 'Szövegértés';
+
+  @override
+  String get qtCoachingScoreApplication => 'Személyes alkalmazás';
+
+  @override
+  String get qtCoachingScoreDepth => 'Lelki mélység';
+
+  @override
+  String get qtCoachingScoreAuthenticity => 'Hitelesség';
+
+  @override
+  String get qtCoachingStrengthsTitle => 'Amit jól csináltál ✨';
+
+  @override
+  String get qtCoachingImprovementsTitle => 'Hogy elmélyülj 💡';
+
+  @override
+  String get qtCoachingProCta => 'Oldja fel a QT coachingot Pro-val';
+
+  @override
+  String get qtCoachingLevelBeginner => '🌱 Kezdő';
+
+  @override
+  String get qtCoachingLevelGrowing => '🌿 Fejlődő';
+
+  @override
+  String get qtCoachingLevelExpert => '🌳 Szakértő';
 }

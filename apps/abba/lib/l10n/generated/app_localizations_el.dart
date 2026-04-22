@@ -957,4 +957,46 @@ class AppLocalizationsEl extends AppLocalizations {
 
   @override
   String get qtScriptureTitle => 'Today\'s Passage';
+
+  @override
+  String get qtCoachingTitle => 'Καθοδήγηση QT';
+
+  @override
+  String get qtCoachingLoadingText => 'Αναλογιζόμαστε τον διαλογισμό σας...';
+
+  @override
+  String get qtCoachingErrorText => 'Προσωρινό σφάλμα — δοκιμάστε ξανά';
+
+  @override
+  String get qtCoachingRetryButton => 'Επανάληψη';
+
+  @override
+  String get qtCoachingScoreComprehension => 'Κατανόηση κειμένου';
+
+  @override
+  String get qtCoachingScoreApplication => 'Προσωπική εφαρμογή';
+
+  @override
+  String get qtCoachingScoreDepth => 'Πνευματικό βάθος';
+
+  @override
+  String get qtCoachingScoreAuthenticity => 'Αυθεντικότητα';
+
+  @override
+  String get qtCoachingStrengthsTitle => 'Τι κάνατε καλά ✨';
+
+  @override
+  String get qtCoachingImprovementsTitle => 'Για να πάτε πιο βαθιά 💡';
+
+  @override
+  String get qtCoachingProCta => 'Ξεκλειδώστε την Καθοδήγηση QT με Pro';
+
+  @override
+  String get qtCoachingLevelBeginner => '🌱 Αρχάριος';
+
+  @override
+  String get qtCoachingLevelGrowing => '🌿 Σε εξέλιξη';
+
+  @override
+  String get qtCoachingLevelExpert => '🌳 Ειδικός';
 }

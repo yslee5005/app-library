@@ -941,4 +941,46 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get qtScriptureTitle => 'Today\'s Passage';
+
+  @override
+  String get qtCoachingTitle => 'إرشاد التأمل';
+
+  @override
+  String get qtCoachingLoadingText => 'نتأمل في تأملك...';
+
+  @override
+  String get qtCoachingErrorText => 'خطأ مؤقت — يرجى المحاولة مرة أخرى';
+
+  @override
+  String get qtCoachingRetryButton => 'إعادة المحاولة';
+
+  @override
+  String get qtCoachingScoreComprehension => 'فهم النص';
+
+  @override
+  String get qtCoachingScoreApplication => 'التطبيق الشخصي';
+
+  @override
+  String get qtCoachingScoreDepth => 'العمق الروحي';
+
+  @override
+  String get qtCoachingScoreAuthenticity => 'الأصالة';
+
+  @override
+  String get qtCoachingStrengthsTitle => 'ما قمت به بشكل جيد ✨';
+
+  @override
+  String get qtCoachingImprovementsTitle => 'للتعمق أكثر 💡';
+
+  @override
+  String get qtCoachingProCta => 'افتح إرشاد التأمل مع Pro';
+
+  @override
+  String get qtCoachingLevelBeginner => '🌱 مبتدئ';
+
+  @override
+  String get qtCoachingLevelGrowing => '🌿 ينمو';
+
+  @override
+  String get qtCoachingLevelExpert => '🌳 خبير';
 }

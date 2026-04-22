@@ -410,5 +410,19 @@
   "meditationSummaryTitle": "Today's Meditation",
   "meditationTopicLabel": "Topic",
   "meditationSummaryLabel": "Summary",
-  "qtScriptureTitle": "Today's Passage"
+  "qtScriptureTitle": "Today's Passage",
+  "qtCoachingTitle": "การโค้ช QT",
+  "qtCoachingLoadingText": "กำลังไตร่ตรองการใคร่ครวญของคุณ...",
+  "qtCoachingErrorText": "ข้อผิดพลาดชั่วคราว — โปรดลองอีกครั้ง",
+  "qtCoachingRetryButton": "ลองอีกครั้ง",
+  "qtCoachingScoreComprehension": "ความเข้าใจพระคัมภีร์",
+  "qtCoachingScoreApplication": "การประยุกต์ส่วนตัว",
+  "qtCoachingScoreDepth": "ความลึกทางจิตวิญญาณ",
+  "qtCoachingScoreAuthenticity": "ความจริงใจ",
+  "qtCoachingStrengthsTitle": "สิ่งที่คุณทำได้ดี ✨",
+  "qtCoachingImprovementsTitle": "เพื่อก้าวลึกขึ้น 💡",
+  "qtCoachingProCta": "ปลดล็อกการโค้ช QT ด้วย Pro",
+  "qtCoachingLevelBeginner": "🌱 ผู้เริ่มต้น",
+  "qtCoachingLevelGrowing": "🌿 กำลังเติบโต",
+  "qtCoachingLevelExpert": "🌳 ผู้เชี่ยวชาญ"
 }

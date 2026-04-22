@@ -931,4 +931,46 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get qtScriptureTitle => '今日经文';
+
+  @override
+  String get qtCoachingTitle => 'QT 辅导';
+
+  @override
+  String get qtCoachingLoadingText => '正在回顾您的默想...';
+
+  @override
+  String get qtCoachingErrorText => '临时错误 — 请稍后重试';
+
+  @override
+  String get qtCoachingRetryButton => '重试';
+
+  @override
+  String get qtCoachingScoreComprehension => '经文理解';
+
+  @override
+  String get qtCoachingScoreApplication => '个人应用';
+
+  @override
+  String get qtCoachingScoreDepth => '属灵深度';
+
+  @override
+  String get qtCoachingScoreAuthenticity => '真实性';
+
+  @override
+  String get qtCoachingStrengthsTitle => '你做得好的地方 ✨';
+
+  @override
+  String get qtCoachingImprovementsTitle => '更进一步 💡';
+
+  @override
+  String get qtCoachingProCta => '使用 Pro 解锁 QT 辅导';
+
+  @override
+  String get qtCoachingLevelBeginner => '🌱 初学者';
+
+  @override
+  String get qtCoachingLevelGrowing => '🌿 成长中';
+
+  @override
+  String get qtCoachingLevelExpert => '🌳 专家';
 }

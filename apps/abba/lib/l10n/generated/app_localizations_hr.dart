@@ -956,4 +956,46 @@ class AppLocalizationsHr extends AppLocalizations {
 
   @override
   String get qtScriptureTitle => 'Today\'s Passage';
+
+  @override
+  String get qtCoachingTitle => 'QT coaching';
+
+  @override
+  String get qtCoachingLoadingText => 'Razmišljamo o vašem razmatranju...';
+
+  @override
+  String get qtCoachingErrorText => 'Privremena pogreška — pokušajte ponovno';
+
+  @override
+  String get qtCoachingRetryButton => 'Pokušaj ponovno';
+
+  @override
+  String get qtCoachingScoreComprehension => 'Razumijevanje teksta';
+
+  @override
+  String get qtCoachingScoreApplication => 'Osobna primjena';
+
+  @override
+  String get qtCoachingScoreDepth => 'Duhovna dubina';
+
+  @override
+  String get qtCoachingScoreAuthenticity => 'Autentičnost';
+
+  @override
+  String get qtCoachingStrengthsTitle => 'Što ste dobro napravili ✨';
+
+  @override
+  String get qtCoachingImprovementsTitle => 'Da idete dublje 💡';
+
+  @override
+  String get qtCoachingProCta => 'Otključaj QT coaching s Pro';
+
+  @override
+  String get qtCoachingLevelBeginner => '🌱 Početnik';
+
+  @override
+  String get qtCoachingLevelGrowing => '🌿 U rastu';
+
+  @override
+  String get qtCoachingLevelExpert => '🌳 Stručnjak';
 }

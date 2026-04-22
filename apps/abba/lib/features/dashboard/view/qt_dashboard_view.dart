@@ -13,6 +13,7 @@ import '../widgets/application_card.dart';
 import '../widgets/growth_story_card.dart';
 import '../widgets/meditation_analysis_card.dart';
 import '../widgets/meditation_summary_card.dart';
+import '../widgets/qt_coaching_card.dart';
 import '../widgets/related_knowledge_card.dart';
 import '../widgets/scripture_card.dart';
 
@@ -87,6 +88,15 @@ class _QtDashboardViewState extends ConsumerState<QtDashboardView> {
     return ListView(
       padding: const EdgeInsets.only(bottom: AbbaSpacing.xl),
       children: [
+        // 0. QT Coaching Card (Phase 2 — Pro, top of list)
+        StaggeredFadeIn(
+          index: i++,
+          child: QtCoachingCard(
+            locale: locale,
+            isUserPremium: isPremium,
+            onUnlock: showPremiumUpgrade,
+          ),
+        ),
         // 1. Meditation Summary Card (Phase 1 — new first card)
         StaggeredFadeIn(
           index: i++,

@@ -410,5 +410,19 @@
   "meditationSummaryTitle": "Today's Meditation",
   "meditationTopicLabel": "Topic",
   "meditationSummaryLabel": "Summary",
-  "qtScriptureTitle": "Today's Passage"
+  "qtScriptureTitle": "Today's Passage",
+  "qtCoachingTitle": "Καθοδήγηση QT",
+  "qtCoachingLoadingText": "Αναλογιζόμαστε τον διαλογισμό σας...",
+  "qtCoachingErrorText": "Προσωρινό σφάλμα — δοκιμάστε ξανά",
+  "qtCoachingRetryButton": "Επανάληψη",
+  "qtCoachingScoreComprehension": "Κατανόηση κειμένου",
+  "qtCoachingScoreApplication": "Προσωπική εφαρμογή",
+  "qtCoachingScoreDepth": "Πνευματικό βάθος",
+  "qtCoachingScoreAuthenticity": "Αυθεντικότητα",
+  "qtCoachingStrengthsTitle": "Τι κάνατε καλά ✨",
+  "qtCoachingImprovementsTitle": "Για να πάτε πιο βαθιά 💡",
+  "qtCoachingProCta": "Ξεκλειδώστε την Καθοδήγηση QT με Pro",
+  "qtCoachingLevelBeginner": "🌱 Αρχάριος",
+  "qtCoachingLevelGrowing": "🌿 Σε εξέλιξη",
+  "qtCoachingLevelExpert": "🌳 Ειδικός"
 }

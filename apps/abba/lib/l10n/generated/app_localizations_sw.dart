@@ -952,4 +952,46 @@ class AppLocalizationsSw extends AppLocalizations {
 
   @override
   String get qtScriptureTitle => 'Today\'s Passage';
+
+  @override
+  String get qtCoachingTitle => 'Uongozi wa QT';
+
+  @override
+  String get qtCoachingLoadingText => 'Tunatafakari tafakari yako...';
+
+  @override
+  String get qtCoachingErrorText => 'Hitilafu ya muda — tafadhali jaribu tena';
+
+  @override
+  String get qtCoachingRetryButton => 'Jaribu tena';
+
+  @override
+  String get qtCoachingScoreComprehension => 'Uelewa wa Maandiko';
+
+  @override
+  String get qtCoachingScoreApplication => 'Matumizi binafsi';
+
+  @override
+  String get qtCoachingScoreDepth => 'Kina cha kiroho';
+
+  @override
+  String get qtCoachingScoreAuthenticity => 'Uhalisia';
+
+  @override
+  String get qtCoachingStrengthsTitle => 'Ulichokifanya vizuri ✨';
+
+  @override
+  String get qtCoachingImprovementsTitle => 'Kwa kwenda ndani zaidi 💡';
+
+  @override
+  String get qtCoachingProCta => 'Fungua Uongozi wa QT kwa Pro';
+
+  @override
+  String get qtCoachingLevelBeginner => '🌱 Mwanzo';
+
+  @override
+  String get qtCoachingLevelGrowing => '🌿 Anakua';
+
+  @override
+  String get qtCoachingLevelExpert => '🌳 Mtaalamu';
 }

@@ -952,4 +952,46 @@ class AppLocalizationsNo extends AppLocalizations {
 
   @override
   String get qtScriptureTitle => 'Today\'s Passage';
+
+  @override
+  String get qtCoachingTitle => 'QT-coaching';
+
+  @override
+  String get qtCoachingLoadingText => 'Reflekterer over meditasjonen din...';
+
+  @override
+  String get qtCoachingErrorText => 'Midlertidig feil — prøv igjen';
+
+  @override
+  String get qtCoachingRetryButton => 'Prøv igjen';
+
+  @override
+  String get qtCoachingScoreComprehension => 'Tekstforståelse';
+
+  @override
+  String get qtCoachingScoreApplication => 'Personlig anvendelse';
+
+  @override
+  String get qtCoachingScoreDepth => 'Åndelig dybde';
+
+  @override
+  String get qtCoachingScoreAuthenticity => 'Ekthet';
+
+  @override
+  String get qtCoachingStrengthsTitle => 'Det du gjorde bra ✨';
+
+  @override
+  String get qtCoachingImprovementsTitle => 'For å gå dypere 💡';
+
+  @override
+  String get qtCoachingProCta => 'Lås opp QT-coaching med Pro';
+
+  @override
+  String get qtCoachingLevelBeginner => '🌱 Nybegynner';
+
+  @override
+  String get qtCoachingLevelGrowing => '🌿 Voksende';
+
+  @override
+  String get qtCoachingLevelExpert => '🌳 Ekspert';
 }

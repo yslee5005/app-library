@@ -954,4 +954,46 @@ class AppLocalizationsUk extends AppLocalizations {
 
   @override
   String get qtScriptureTitle => 'Today\'s Passage';
+
+  @override
+  String get qtCoachingTitle => 'Наставництво в QT';
+
+  @override
+  String get qtCoachingLoadingText => 'Розмірковуємо над вашими роздумами...';
+
+  @override
+  String get qtCoachingErrorText => 'Тимчасова помилка — спробуйте ще раз';
+
+  @override
+  String get qtCoachingRetryButton => 'Повторити';
+
+  @override
+  String get qtCoachingScoreComprehension => 'Розуміння тексту';
+
+  @override
+  String get qtCoachingScoreApplication => 'Особисте застосування';
+
+  @override
+  String get qtCoachingScoreDepth => 'Духовна глибина';
+
+  @override
+  String get qtCoachingScoreAuthenticity => 'Автентичність';
+
+  @override
+  String get qtCoachingStrengthsTitle => 'Що ви зробили добре ✨';
+
+  @override
+  String get qtCoachingImprovementsTitle => 'Щоб заглибитися 💡';
+
+  @override
+  String get qtCoachingProCta => 'Відкрити Наставництво в QT з Pro';
+
+  @override
+  String get qtCoachingLevelBeginner => '🌱 Початківець';
+
+  @override
+  String get qtCoachingLevelGrowing => '🌿 Зростає';
+
+  @override
+  String get qtCoachingLevelExpert => '🌳 Експерт';
 }

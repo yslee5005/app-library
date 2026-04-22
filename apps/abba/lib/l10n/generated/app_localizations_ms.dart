@@ -961,4 +961,46 @@ class AppLocalizationsMs extends AppLocalizations {
 
   @override
   String get qtScriptureTitle => 'Today\'s Passage';
+
+  @override
+  String get qtCoachingTitle => 'Bimbingan QT';
+
+  @override
+  String get qtCoachingLoadingText => 'Merenung meditasi anda...';
+
+  @override
+  String get qtCoachingErrorText => 'Ralat sementara — sila cuba lagi';
+
+  @override
+  String get qtCoachingRetryButton => 'Cuba lagi';
+
+  @override
+  String get qtCoachingScoreComprehension => 'Kefahaman Kitab';
+
+  @override
+  String get qtCoachingScoreApplication => 'Aplikasi peribadi';
+
+  @override
+  String get qtCoachingScoreDepth => 'Kedalaman rohani';
+
+  @override
+  String get qtCoachingScoreAuthenticity => 'Keaslian';
+
+  @override
+  String get qtCoachingStrengthsTitle => 'Apa yang anda lakukan dengan baik ✨';
+
+  @override
+  String get qtCoachingImprovementsTitle => 'Untuk lebih mendalam 💡';
+
+  @override
+  String get qtCoachingProCta => 'Buka Bimbingan QT dengan Pro';
+
+  @override
+  String get qtCoachingLevelBeginner => '🌱 Permulaan';
+
+  @override
+  String get qtCoachingLevelGrowing => '🌿 Berkembang';
+
+  @override
+  String get qtCoachingLevelExpert => '🌳 Pakar';
 }

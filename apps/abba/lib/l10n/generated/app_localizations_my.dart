@@ -961,4 +961,47 @@ class AppLocalizationsMy extends AppLocalizations {
 
   @override
   String get qtScriptureTitle => 'Today\'s Passage';
+
+  @override
+  String get qtCoachingTitle => 'QT သင်တန်း';
+
+  @override
+  String get qtCoachingLoadingText =>
+      'သင်၏ တရားထိုင်ခြင်းကို ပြန်လည်သုံးသပ်နေပါသည်...';
+
+  @override
+  String get qtCoachingErrorText => 'ယာယီ အမှား — ပြန်စမ်းကြည့်ပါ';
+
+  @override
+  String get qtCoachingRetryButton => 'ပြန်ကြိုးစားပါ';
+
+  @override
+  String get qtCoachingScoreComprehension => 'ကျမ်းစာ နားလည်မှု';
+
+  @override
+  String get qtCoachingScoreApplication => 'ကိုယ်ပိုင် အသုံးချမှု';
+
+  @override
+  String get qtCoachingScoreDepth => 'ဝိညာဉ်ရေး နက်ရှိုင်းမှု';
+
+  @override
+  String get qtCoachingScoreAuthenticity => 'စစ်မှန်မှု';
+
+  @override
+  String get qtCoachingStrengthsTitle => 'ကောင်းမွန်စွာလုပ်ခဲ့သည်များ ✨';
+
+  @override
+  String get qtCoachingImprovementsTitle => 'ပိုမိုနက်ရှိုင်းရန် 💡';
+
+  @override
+  String get qtCoachingProCta => 'Pro ဖြင့် QT သင်တန်းကို ဖွင့်ပါ';
+
+  @override
+  String get qtCoachingLevelBeginner => '🌱 စတင်နေသူ';
+
+  @override
+  String get qtCoachingLevelGrowing => '🌿 ကြီးထွားနေသူ';
+
+  @override
+  String get qtCoachingLevelExpert => '🌳 ကျွမ်းကျင်သူ';
 }

@@ -410,5 +410,19 @@
   "meditationSummaryTitle": "Today's Meditation",
   "meditationTopicLabel": "Topic",
   "meditationSummaryLabel": "Summary",
-  "qtScriptureTitle": "Today's Passage"
+  "qtScriptureTitle": "Today's Passage",
+  "qtCoachingTitle": "QT coaching",
+  "qtCoachingLoadingText": "Razmišljamo o vašem razmatranju...",
+  "qtCoachingErrorText": "Privremena pogreška — pokušajte ponovno",
+  "qtCoachingRetryButton": "Pokušaj ponovno",
+  "qtCoachingScoreComprehension": "Razumijevanje teksta",
+  "qtCoachingScoreApplication": "Osobna primjena",
+  "qtCoachingScoreDepth": "Duhovna dubina",
+  "qtCoachingScoreAuthenticity": "Autentičnost",
+  "qtCoachingStrengthsTitle": "Što ste dobro napravili ✨",
+  "qtCoachingImprovementsTitle": "Da idete dublje 💡",
+  "qtCoachingProCta": "Otključaj QT coaching s Pro",
+  "qtCoachingLevelBeginner": "🌱 Početnik",
+  "qtCoachingLevelGrowing": "🌿 U rastu",
+  "qtCoachingLevelExpert": "🌳 Stručnjak"
 }

@@ -956,4 +956,46 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String get qtScriptureTitle => 'Today\'s Passage';
+
+  @override
+  String get qtCoachingTitle => 'Huấn luyện QT';
+
+  @override
+  String get qtCoachingLoadingText => 'Đang suy ngẫm về sự suy gẫm của bạn...';
+
+  @override
+  String get qtCoachingErrorText => 'Lỗi tạm thời — vui lòng thử lại';
+
+  @override
+  String get qtCoachingRetryButton => 'Thử lại';
+
+  @override
+  String get qtCoachingScoreComprehension => 'Hiểu Kinh Thánh';
+
+  @override
+  String get qtCoachingScoreApplication => 'Áp dụng cá nhân';
+
+  @override
+  String get qtCoachingScoreDepth => 'Chiều sâu thuộc linh';
+
+  @override
+  String get qtCoachingScoreAuthenticity => 'Tính chân thực';
+
+  @override
+  String get qtCoachingStrengthsTitle => 'Điều bạn đã làm tốt ✨';
+
+  @override
+  String get qtCoachingImprovementsTitle => 'Để đi sâu hơn 💡';
+
+  @override
+  String get qtCoachingProCta => 'Mở Huấn luyện QT với Pro';
+
+  @override
+  String get qtCoachingLevelBeginner => '🌱 Người mới';
+
+  @override
+  String get qtCoachingLevelGrowing => '🌿 Đang phát triển';
+
+  @override
+  String get qtCoachingLevelExpert => '🌳 Chuyên gia';
 }

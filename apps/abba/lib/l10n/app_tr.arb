@@ -410,5 +410,19 @@
   "meditationSummaryTitle": "Today's Meditation",
   "meditationTopicLabel": "Topic",
   "meditationSummaryLabel": "Summary",
-  "qtScriptureTitle": "Today's Passage"
+  "qtScriptureTitle": "Today's Passage",
+  "qtCoachingTitle": "QT Koçluğu",
+  "qtCoachingLoadingText": "Tefekkürünüz üzerinde düşünüyoruz...",
+  "qtCoachingErrorText": "Geçici hata — lütfen yeniden deneyin",
+  "qtCoachingRetryButton": "Yeniden dene",
+  "qtCoachingScoreComprehension": "Metin anlayışı",
+  "qtCoachingScoreApplication": "Kişisel uygulama",
+  "qtCoachingScoreDepth": "Ruhsal derinlik",
+  "qtCoachingScoreAuthenticity": "Samimiyet",
+  "qtCoachingStrengthsTitle": "İyi yaptığınız şeyler ✨",
+  "qtCoachingImprovementsTitle": "Daha derine inmek için 💡",
+  "qtCoachingProCta": "QT Koçluğunu Pro ile açın",
+  "qtCoachingLevelBeginner": "🌱 Başlangıç",
+  "qtCoachingLevelGrowing": "🌿 Gelişiyor",
+  "qtCoachingLevelExpert": "🌳 Uzman"
 }
