@@ -526,7 +526,7 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
           TextButton(
             onPressed: () => Navigator.pop(dialogContext),
             child: Text(
-              l10n.cancelAnytime.split(' ').first, // "언제든" → just use first word as cancel
+              l10n.cancel,
               style: AbbaTypography.bodySmall.copyWith(color: AbbaColors.muted),
             ),
           ),
