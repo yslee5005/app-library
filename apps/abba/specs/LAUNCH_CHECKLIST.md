@@ -40,12 +40,12 @@
 
 ### 4. 코드 품질 (Phase 5)
 
-- [ ] `flutter analyze` 0 경고 (현재 2 info 경고 — `recording_overlay.dart`)
-- [ ] 하드코딩 문자열 0개 (`'Abba Pro'` 등 남은 것 제거)
-- [ ] `scripts/check_hardcoded_strings.sh` 통과
-- [ ] 35개 ARB 파일 동기화 (`scripts/check_l10n_sync.sh`)
-- [ ] Sentry 마스킹 동작 확인 (기도 텍스트 / 이메일)
-- [ ] RLS 전 테이블 활성화 + COALESCE NULL 방어
+- [ ] `flutter analyze` 0 경고 (현재 2 info 경고 — `recording_overlay.dart`, 사전 이슈)
+- [x] 하드코딩 문자열 0개 — `settings_view.dart:402` `'Coming soon'` → `l10n.comingSoon` (2026-04-22 `ff6a700`)
+- [x] `scripts/check_hardcoded_strings.sh` 통과
+- [x] 35개 ARB 파일 동기화 — 312 keys × 35 locale 완벽 일치 (Python JSON 검증 통과). `scripts/check_l10n_sync.sh`는 naive regex false positive 버그 있음 (ARB 값 영어를 키로 오탐)
+- [ ] Sentry 마스킹 동작 확인 (기도 텍스트 / 이메일) — 수동 검증
+- [ ] RLS 전 테이블 활성화 + COALESCE NULL 방어 — 수동 검증
 
 ### 5. 성능
 
@@ -63,17 +63,17 @@
 - [ ] Semantics 라벨 모든 인터랙티브 요소
 - [ ] 시스템 폰트 크기 변경 시 UI 안 깨짐
 
-### 7. STT Locale 매핑 보완
+### 7. ~~STT Locale 매핑 보완~~ (폐기)
 
-- [ ] 현재 5개 → 35개 locale 매핑 추가 (`home_view.dart`)
+- [x] ~~현재 5개 → 35개 locale 매핑 추가 (`home_view.dart`)~~ — **`speech_to_text` 미사용, Gemini 오디오 분석으로 대체** (`analyzePrayerFromAudio` — 다국어 자동)
 
-### 8. 결제 UX 보완 (지금 작업 대상)
+### 8. 결제 UX 보완
 
-- [ ] Restore Purchase 버튼 UX 개선
-- [ ] Cancel Subscription 진입점 (Apple Settings 연결)
-- [ ] Monthly ↔ Yearly 업그레이드/다운그레이드 UX
-- [ ] 결제 실패 에러 메시지 개선
-- [ ] Loading state 개선 (3-state 패턴)
+- [x] Restore Purchase 버튼 UX 개선 — `_restore()`: 3-state loading + 30s timeout + 4분기(success/nothing/timeout/failed) + in-progress snackbar
+- [x] Cancel Subscription 진입점 — `_manageSubscription` RevenueCat Customer Center → App Store fallback
+- [x] Monthly ↔ Yearly 업그레이드/다운그레이드 UX — `_upgradeToYearly` 메서드 + active card 내부 upgrade 버튼
+- [x] 결제 실패 에러 메시지 개선 — `_handlePurchaseError`: cancelled 무음 / networkError 전용 / generic fallback
+- [x] Loading state 개선 (3-state 패턴) — `_purchasing` / `_restoring` flags + mounted guards + finally setState
 
 ---
 
@@ -86,7 +86,7 @@
 
 ### 10. Welcome 화면 첫 실행 감지
 
-- [ ] 첫 실행 시 `/welcome` 자동 표시 (`initialLocation` 로직)
+- [x] 첫 실행 시 `/welcome` 자동 표시 (`initialLocation` 로직) — `main.dart:225-238` SharedPreferences `has_seen_welcome` 체크, `welcome_view.dart:14`에서 완료 시 `true` 저장
 
 ### 11. 프로모션
 
