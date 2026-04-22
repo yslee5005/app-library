@@ -1220,18 +1220,6 @@ abstract class AppLocalizations {
   /// **'Today\'s Lesson'**
   String get todayLesson;
 
-  /// No description provided for @meditationAnalysisTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Meditation Analysis'**
-  String get meditationAnalysisTitle;
-
-  /// No description provided for @keyThemeLabel.
-  ///
-  /// In en, this message translates to:
-  /// **'Key Theme'**
-  String get keyThemeLabel;
-
   /// No description provided for @applicationTitle.
   ///
   /// In en, this message translates to:

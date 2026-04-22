@@ -569,12 +569,6 @@ class AppLocalizationsTr extends AppLocalizations {
   String get todayLesson => 'Bugünün Dersi';
 
   @override
-  String get meditationAnalysisTitle => 'Tefekkür Analizi';
-
-  @override
-  String get keyThemeLabel => 'Ana Tema';
-
-  @override
   String get applicationTitle => 'Bugünün Uygulaması';
 
   @override

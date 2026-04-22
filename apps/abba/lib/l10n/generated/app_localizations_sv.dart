@@ -566,12 +566,6 @@ class AppLocalizationsSv extends AppLocalizations {
   String get todayLesson => 'Dagens lärdom';
 
   @override
-  String get meditationAnalysisTitle => 'Meditationsanalys';
-
-  @override
-  String get keyThemeLabel => 'Nyckeltema';
-
-  @override
   String get applicationTitle => 'Dagens tillämpning';
 
   @override

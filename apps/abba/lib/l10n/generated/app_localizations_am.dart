@@ -555,12 +555,6 @@ class AppLocalizationsAm extends AppLocalizations {
   String get todayLesson => 'የዛሬው ትምህርት';
 
   @override
-  String get meditationAnalysisTitle => 'የማሰላሰል ትንተና';
-
-  @override
-  String get keyThemeLabel => 'ዋና ጭብጥ';
-
-  @override
   String get applicationTitle => 'የዛሬው ተግባራዊ አተገባበር';
 
   @override

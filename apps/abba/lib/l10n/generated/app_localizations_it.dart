@@ -568,12 +568,6 @@ class AppLocalizationsIt extends AppLocalizations {
   String get todayLesson => 'Lezione di oggi';
 
   @override
-  String get meditationAnalysisTitle => 'Analisi della meditazione';
-
-  @override
-  String get keyThemeLabel => 'Tema chiave';
-
-  @override
   String get applicationTitle => 'Applicazione di oggi';
 
   @override

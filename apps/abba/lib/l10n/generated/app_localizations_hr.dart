@@ -568,12 +568,6 @@ class AppLocalizationsHr extends AppLocalizations {
   String get todayLesson => 'Današnja pouka';
 
   @override
-  String get meditationAnalysisTitle => 'Analiza meditacije';
-
-  @override
-  String get keyThemeLabel => 'Ključna tema';
-
-  @override
   String get applicationTitle => 'Današnja primjena';
 
   @override

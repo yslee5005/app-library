@@ -573,12 +573,6 @@ class AppLocalizationsFil extends AppLocalizations {
   String get todayLesson => 'Aral Ngayong Araw';
 
   @override
-  String get meditationAnalysisTitle => 'Pagsusuri ng Pagbubulay-bulay';
-
-  @override
-  String get keyThemeLabel => 'Pangunahing Tema';
-
-  @override
   String get applicationTitle => 'Aplikasyon Ngayong Araw';
 
   @override

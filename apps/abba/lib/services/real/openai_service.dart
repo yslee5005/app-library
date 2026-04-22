@@ -343,12 +343,11 @@ class OpenAiService implements AiService {
       meditationSummary: MeditationSummary(
         summary: '',
         topic: 'Meditating on God\'s Word',
-      ),
-      scripture: Scripture(reference: 'Psalm 1:2'),
-      analysis: MeditationAnalysis(
+        // Phase 5C — insight absorbed from the removed MeditationAnalysis.
         insight:
             'Your meditation reveals a heart seeking God\'s guidance and peace.',
       ),
+      scripture: Scripture(reference: 'Psalm 1:2'),
       application: ApplicationSuggestion(
         morningAction:
             'Before rising, whisper "The Lord is my shepherd" three times in bed.',
@@ -593,8 +592,10 @@ CRITICAL RULES:
 Return a JSON object:
 
 {
-  "analysis": {
-    "insight": "Deep analysis of the user's meditation (3-4 sentences in $langName). Acknowledge what they discovered, then add deeper meaning."
+  "meditation_summary": {
+    "summary": "1-2 sentence summary of the user's meditation in $langName. Reference specific content from their meditation text.",
+    "topic": "1-short-line topic of today's passage in $langName. 5-10 words.",
+    "insight": "1-2 sentence AI insight — how today's passage meets the user's specific meditation, in $langName. Not generic; reference a concrete phrase from their meditation or the passage."
   },
   "application": {
     "morning_action": "Before the day starts. 10 minutes or less. Quiet, reflective. In $langName. Example: 'In bed before getting up, whisper one line of Psalm 23 three times.'",

@@ -566,12 +566,6 @@ class AppLocalizationsCs extends AppLocalizations {
   String get todayLesson => 'Dnešní lekce';
 
   @override
-  String get meditationAnalysisTitle => 'Analýza meditace';
-
-  @override
-  String get keyThemeLabel => 'Klíčové téma';
-
-  @override
   String get applicationTitle => 'Dnešní uplatnění';
 
   @override

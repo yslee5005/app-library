@@ -565,12 +565,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get todayLesson => 'Today\'s Lesson';
 
   @override
-  String get meditationAnalysisTitle => 'Meditation Analysis';
-
-  @override
-  String get keyThemeLabel => 'Key Theme';
-
-  @override
   String get applicationTitle => 'Today\'s Application';
 
   @override

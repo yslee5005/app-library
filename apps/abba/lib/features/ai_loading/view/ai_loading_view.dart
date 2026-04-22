@@ -373,12 +373,11 @@ class _AiLoadingViewState extends ConsumerState<AiLoadingView>
         meditationSummary: MeditationSummary(
           summary: '',
           topic: 'Meditating on God\'s Word',
-        ),
-        scripture: Scripture(reference: 'Psalm 1:2'),
-        analysis: MeditationAnalysis(
+          // Phase 5C — insight absorbed from the removed MeditationAnalysis.
           insight:
               'Your meditation reveals a heart seeking God\'s guidance and peace.',
         ),
+        scripture: Scripture(reference: 'Psalm 1:2'),
         application: ApplicationSuggestion(
           morningAction:
               'Before rising, whisper "The Lord is my shepherd" three times in bed.',

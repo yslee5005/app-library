@@ -555,12 +555,6 @@ class AppLocalizationsJa extends AppLocalizations {
   String get todayLesson => '今日の教訓';
 
   @override
-  String get meditationAnalysisTitle => '黙想分析';
-
-  @override
-  String get keyThemeLabel => 'キーテーマ';
-
-  @override
   String get applicationTitle => '今日の適用';
 
   @override

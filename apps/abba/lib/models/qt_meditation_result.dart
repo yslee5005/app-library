@@ -1,30 +1,36 @@
 import 'prayer.dart';
 
-/// Single-field summary of the user's meditation plus the passage topic.
-/// Added in qt_output_redesign Phase 1. Rendered by `MeditationSummaryCard`.
+/// Summary of the user's meditation (summary) + passage topic + AI insight.
+///
+/// Phase 5C (qt_output_redesign) absorbed the former `MeditationAnalysis.insight`
+/// into this class as the `insight` field. The standalone analysis card and
+/// its model class were removed — the `MeditationSummaryCard` now renders all
+/// three fields in a single unified card.
 class MeditationSummary {
   final String summary; // 1-2 sentence summary of the user's meditation text
   final String topic;   // Short 1-line topic of today's passage
+  final String insight; // Phase 5C — AI insight (absorbed from MeditationAnalysis)
 
   const MeditationSummary({
     required this.summary,
     required this.topic,
+    this.insight = '',
   });
 
   factory MeditationSummary.fromJson(Map<String, dynamic> json) {
     return MeditationSummary(
       summary: json['summary'] as String? ?? '',
       topic: json['topic'] as String? ?? '',
+      insight: json['insight'] as String? ?? '',
     );
   }
 
-  bool get isEmpty => summary.isEmpty && topic.isEmpty;
+  bool get isEmpty => summary.isEmpty && topic.isEmpty && insight.isEmpty;
 }
 
 class QtMeditationResult {
-  final MeditationSummary meditationSummary; // Phase 1 — new
-  final Scripture scripture;                 // Phase 1 — new (Scripture Deep)
-  final MeditationAnalysis analysis;
+  final MeditationSummary meditationSummary; // Phase 1 + 5C — summary/topic/insight
+  final Scripture scripture;                 // Phase 1 — Scripture Deep
   final ApplicationSuggestion application;
   final RelatedKnowledge knowledge;
   final GrowthStory? growthStory;
@@ -32,7 +38,6 @@ class QtMeditationResult {
   const QtMeditationResult({
     this.meditationSummary = const MeditationSummary(summary: '', topic: ''),
     this.scripture = const Scripture(reference: ''),
-    required this.analysis,
     required this.application,
     required this.knowledge,
     this.growthStory,
@@ -44,7 +49,6 @@ class QtMeditationResult {
     return QtMeditationResult(
       meditationSummary: meditationSummary,
       scripture: scripture,
-      analysis: analysis,
       application: application,
       knowledge: knowledge,
       growthStory: growthStory,
@@ -60,17 +64,41 @@ class QtMeditationResult {
   }
 
   factory QtMeditationResult.fromJson(Map<String, dynamic> json) {
-    final analysis = MeditationAnalysis.fromJson(_asMap(json['analysis']));
-
-    // Phase 1 — parse new `meditation_summary` if present. Legacy records
-    // without it render an empty summary (card hidden). Phase 5A removed
-    // the keyTheme fallback synthesis since keyTheme itself is gone.
-    final MeditationSummary summary;
+    // Phase 5C — `MeditationAnalysis` removed. If legacy records carry
+    // `analysis.insight` (any locale variant), absorb it into
+    // `meditation_summary.insight` so historical DB rows keep rendering.
     final rawSummary = json['meditation_summary'];
+    final rawAnalysis = json['analysis'];
+
+    String legacyInsight = '';
+    if (rawAnalysis is Map) {
+      final analysisMap = _asMap(rawAnalysis);
+      legacyInsight = (analysisMap['insight'] as String?)
+          ?? (analysisMap['insight_en'] as String?)
+          ?? (analysisMap['insight_ko'] as String?)
+          ?? '';
+    }
+
+    MeditationSummary summary;
     if (rawSummary is Map) {
       summary = MeditationSummary.fromJson(_asMap(rawSummary));
+      // Legacy absorption — if meditation_summary has no insight but the
+      // legacy analysis field carries one, pull it up.
+      if (summary.insight.isEmpty && legacyInsight.isNotEmpty) {
+        summary = MeditationSummary(
+          summary: summary.summary,
+          topic: summary.topic,
+          insight: legacyInsight,
+        );
+      }
     } else {
-      summary = const MeditationSummary(summary: '', topic: '');
+      // Fully legacy: no meditation_summary block at all. Preserve insight
+      // only (summary/topic are not recoverable from pre-Phase-1 records).
+      summary = MeditationSummary(
+        summary: '',
+        topic: '',
+        insight: legacyInsight,
+      );
     }
 
     // Phase 1 — parse new `scripture`. Legacy records have no scripture key;
@@ -88,34 +116,11 @@ class QtMeditationResult {
     return QtMeditationResult(
       meditationSummary: summary,
       scripture: scripture,
-      analysis: analysis,
       application: ApplicationSuggestion.fromJson(_asMap(json['application'])),
       knowledge: RelatedKnowledge.fromJson(_asMap(json['knowledge'])),
       growthStory: json['growth_story'] != null
           ? GrowthStory.fromJson(_asMap(json['growth_story']))
           : null,
-    );
-  }
-}
-
-/// Phase 5A (qt_output_redesign) — single-field in user's locale (Gemini
-/// generates in the active locale). `keyTheme` has been removed entirely —
-/// Phase 1 `MeditationSummary.topic` supersedes it. Legacy records carrying
-/// `insight_en`/`insight_ko` still parse via the 3-tier fallback below.
-class MeditationAnalysis {
-  final String insight;
-
-  const MeditationAnalysis({
-    this.insight = '',
-  });
-
-  factory MeditationAnalysis.fromJson(Map<String, dynamic> json) {
-    // 3-tier resolver: new single `insight` → legacy `_en` → legacy `_ko`.
-    return MeditationAnalysis(
-      insight: json['insight'] as String?
-          ?? json['insight_en'] as String?
-          ?? json['insight_ko'] as String?
-          ?? '',
     );
   }
 }

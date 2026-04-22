@@ -569,12 +569,6 @@ class AppLocalizationsRu extends AppLocalizations {
   String get todayLesson => 'Урок на сегодня';
 
   @override
-  String get meditationAnalysisTitle => 'Анализ размышления';
-
-  @override
-  String get keyThemeLabel => 'Ключевая тема';
-
-  @override
   String get applicationTitle => 'Применение на сегодня';
 
   @override

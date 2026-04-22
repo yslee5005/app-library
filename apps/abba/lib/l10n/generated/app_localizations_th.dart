@@ -561,12 +561,6 @@ class AppLocalizationsTh extends AppLocalizations {
   String get todayLesson => 'บทเรียนวันนี้';
 
   @override
-  String get meditationAnalysisTitle => 'การวิเคราะห์การเฝ้าเดี่ยว';
-
-  @override
-  String get keyThemeLabel => 'หัวข้อหลัก';
-
-  @override
   String get applicationTitle => 'การประยุกต์ใช้วันนี้';
 
   @override

@@ -118,7 +118,9 @@ class _CountingAiService implements AiService {
   }) async {
     callCount++;
     return const QtMeditationResult(
-      analysis: MeditationAnalysis(
+      meditationSummary: MeditationSummary(
+        summary: '',
+        topic: '',
         insight: 'Test insight',
       ),
       application: ApplicationSuggestion(

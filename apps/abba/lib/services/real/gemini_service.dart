@@ -726,6 +726,10 @@ Rules (per QT Guide §4-6):
             ? '하나님의 신실하신 인도하심 안에서 안식을 발견하는 묵상'
             : 'A meditation that finds rest in God\'s faithful shepherding.',
         topic: isKo ? '목자 되신 여호와' : 'The Lord as my personal shepherd',
+        // Phase 5C — insight absorbed from the removed MeditationAnalysis class.
+        insight: isKo
+            ? '당신의 묵상은 "신뢰"에 맞닿아 있습니다. 당신은 지금, 통제할 수 없는 것을 이미 그것을 붙잡고 계신 분의 손에 맡기는 법을 배우는 중입니다.'
+            : 'Your meditation centers on trust — you are learning to release what you cannot control into the hands of the One who already holds it.',
       ),
       scripture: Scripture(
         reference: 'Psalm 23:1-3',
@@ -750,11 +754,6 @@ Rules (per QT Guide §4-6):
                 : 'Not a job description but an intimate covenant relationship.',
           ),
         ],
-      ),
-      analysis: MeditationAnalysis(
-        insight: isKo
-            ? '당신의 묵상은 "신뢰"에 맞닿아 있습니다. 당신은 지금, 통제할 수 없는 것을 이미 그것을 붙잡고 계신 분의 손에 맡기는 법을 배우는 중입니다.'
-            : 'Your meditation centers on trust — you are learning to release what you cannot control into the hands of the One who already holds it.',
       ),
       application: ApplicationSuggestion(
         morningAction: isKo
@@ -1178,7 +1177,8 @@ Return this JSON object:
 {
   "meditation_summary": {
     "summary": "<1-2 sentences summarizing the user's meditation in $langName>",
-    "topic": "<1-short-line topic of today's passage in $langName>"
+    "topic": "<1-short-line topic of today's passage in $langName>",
+    "insight": "<1-2 sentence AI insight — how today's passage meets the user's specific meditation, in $langName. Not generic; reference a concrete phrase from their meditation or the passage.>"
   },
   "scripture": {
     "reference": "<Book Chapter:Verse — must match the passage the user meditated on>",
@@ -1194,9 +1194,6 @@ Return this JSON object:
         "nuance": "<1-2 sentence nuance in $langName>"
       }
     ]
-  },
-  "analysis": {
-    "insight": "<3-4 sentence deep analysis of the user's meditation in $langName>"
   },
   "application": {
     "morning_action": "<Before the day starts, ≤10 min. Quiet, reflective action in $langName>",
@@ -1221,12 +1218,16 @@ Return this JSON object:
   }
 }
 
-MEDITATION SUMMARY (Phase 1):
+MEDITATION SUMMARY (Phase 1 + 5C):
 - summary: Capture the essence of the user's meditation in 1-2 sentences.
   Not a generic platitude — reference specific content from their
   meditation text.
 - topic: The central theme of today's passage (not the meditation).
   Short, 5-10 words. Example: "The Lord as the personal shepherd".
+- insight: 1-2 sentence AI interpretation — how today's passage meets the
+  user's specific meditation content. Not generic. Reference a concrete
+  phrase from their meditation or the passage. This replaces the former
+  standalone "analysis.insight" field (Phase 5C absorption).
 
 SCRIPTURE HANDLING:
 - DO NOT generate verse text. Output only the "reference".

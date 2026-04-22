@@ -570,12 +570,6 @@ class AppLocalizationsRo extends AppLocalizations {
   String get todayLesson => 'Lecția de azi';
 
   @override
-  String get meditationAnalysisTitle => 'Analiza meditației';
-
-  @override
-  String get keyThemeLabel => 'Tema principală';
-
-  @override
   String get applicationTitle => 'Aplicarea de azi';
 
   @override

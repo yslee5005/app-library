@@ -566,12 +566,6 @@ class AppLocalizationsVi extends AppLocalizations {
   String get todayLesson => 'Bài học hôm nay';
 
   @override
-  String get meditationAnalysisTitle => 'Phân tích suy ngẫm';
-
-  @override
-  String get keyThemeLabel => 'Chủ đề chính';
-
-  @override
   String get applicationTitle => 'Áp dụng hôm nay';
 
   @override

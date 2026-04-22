@@ -569,12 +569,6 @@ class AppLocalizationsPl extends AppLocalizations {
   String get todayLesson => 'Dzisiejsza lekcja';
 
   @override
-  String get meditationAnalysisTitle => 'Analiza medytacji';
-
-  @override
-  String get keyThemeLabel => 'Kluczowy temat';
-
-  @override
   String get applicationTitle => 'Dzisiejsze zastosowanie';
 
   @override

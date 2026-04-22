@@ -563,12 +563,6 @@ class AppLocalizationsAr extends AppLocalizations {
   String get todayLesson => 'درس اليوم';
 
   @override
-  String get meditationAnalysisTitle => 'تحليل التأمل';
-
-  @override
-  String get keyThemeLabel => 'الموضوع الرئيسي';
-
-  @override
   String get applicationTitle => 'تطبيق اليوم';
 
   @override

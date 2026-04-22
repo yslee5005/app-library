@@ -567,12 +567,6 @@ class AppLocalizationsFi extends AppLocalizations {
   String get todayLesson => 'Päivän opetus';
 
   @override
-  String get meditationAnalysisTitle => 'Mietiskelyanalyysi';
-
-  @override
-  String get keyThemeLabel => 'Avainteema';
-
-  @override
   String get applicationTitle => 'Päivän sovellus';
 
   @override

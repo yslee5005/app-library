@@ -560,12 +560,6 @@ class AppLocalizationsHe extends AppLocalizations {
   String get todayLesson => 'לקח היום';
 
   @override
-  String get meditationAnalysisTitle => 'ניתוח התבוננות';
-
-  @override
-  String get keyThemeLabel => 'נושא מרכזי';
-
-  @override
   String get applicationTitle => 'יישום להיום';
 
   @override

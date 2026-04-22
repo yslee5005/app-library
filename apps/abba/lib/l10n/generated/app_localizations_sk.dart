@@ -568,12 +568,6 @@ class AppLocalizationsSk extends AppLocalizations {
   String get todayLesson => 'Dnešná lekcia';
 
   @override
-  String get meditationAnalysisTitle => 'Analýza meditácie';
-
-  @override
-  String get keyThemeLabel => 'Kľúčová téma';
-
-  @override
   String get applicationTitle => 'Dnešná aplikácia';
 
   @override

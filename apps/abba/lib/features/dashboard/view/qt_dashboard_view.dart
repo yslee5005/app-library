@@ -11,7 +11,6 @@ import '../../../widgets/abba_button.dart';
 import '../../../widgets/staggered_fade_in.dart';
 import '../widgets/application_card.dart';
 import '../widgets/growth_story_card.dart';
-import '../widgets/meditation_analysis_card.dart';
 import '../widgets/meditation_summary_card.dart';
 import '../widgets/qt_coaching_card.dart';
 import '../widgets/related_knowledge_card.dart';
@@ -116,16 +115,8 @@ class _QtDashboardViewState extends ConsumerState<QtDashboardView> {
               initiallyExpanded: true,
             ),
           ),
-        // 3. Meditation Analysis Card
-        StaggeredFadeIn(
-          index: i++,
-          child: MeditationAnalysisCard(
-            analysis: result.analysis,
-            title: l10n.meditationAnalysisTitle,
-            initiallyExpanded: false,
-          ),
-        ),
-        // 4. Application Card
+        // 3. Application Card (Phase 5C — Meditation Analysis absorbed into
+        //    MeditationSummaryCard; standalone analysis card removed.)
         StaggeredFadeIn(
           index: i++,
           child: ApplicationCard(

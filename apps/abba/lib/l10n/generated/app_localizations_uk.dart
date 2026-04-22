@@ -567,12 +567,6 @@ class AppLocalizationsUk extends AppLocalizations {
   String get todayLesson => 'Урок на сьогодні';
 
   @override
-  String get meditationAnalysisTitle => 'Аналіз роздумів';
-
-  @override
-  String get keyThemeLabel => 'Ключова тема';
-
-  @override
   String get applicationTitle => 'Застосування на сьогодні';
 
   @override

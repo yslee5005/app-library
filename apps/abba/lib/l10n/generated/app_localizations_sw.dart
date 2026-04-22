@@ -568,12 +568,6 @@ class AppLocalizationsSw extends AppLocalizations {
   String get todayLesson => 'Somo la Leo';
 
   @override
-  String get meditationAnalysisTitle => 'Uchambuzi wa Tafakari';
-
-  @override
-  String get keyThemeLabel => 'Mada Kuu';
-
-  @override
   String get applicationTitle => 'Matumizi ya Leo';
 
   @override

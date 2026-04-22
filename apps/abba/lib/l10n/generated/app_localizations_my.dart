@@ -567,12 +567,6 @@ class AppLocalizationsMy extends AppLocalizations {
   String get todayLesson => 'ယနေ့သင်ခန်းစာ';
 
   @override
-  String get meditationAnalysisTitle => 'ဆင်ခြင်ခြင်း ခွဲခြမ်းစိတ်ဖြာမှု';
-
-  @override
-  String get keyThemeLabel => 'အဓိကခေါင်းစဉ်';
-
-  @override
   String get applicationTitle => 'ယနေ့အသုံးချခြင်း';
 
   @override

@@ -566,12 +566,6 @@ class AppLocalizationsDa extends AppLocalizations {
   String get todayLesson => 'Dagens lærdom';
 
   @override
-  String get meditationAnalysisTitle => 'Meditationsanalyse';
-
-  @override
-  String get keyThemeLabel => 'Nøgletema';
-
-  @override
   String get applicationTitle => 'Dagens anvendelse';
 
   @override

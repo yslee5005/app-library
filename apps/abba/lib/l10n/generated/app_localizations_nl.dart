@@ -567,12 +567,6 @@ class AppLocalizationsNl extends AppLocalizations {
   String get todayLesson => 'Les van vandaag';
 
   @override
-  String get meditationAnalysisTitle => 'Meditatie-analyse';
-
-  @override
-  String get keyThemeLabel => 'Kernthema';
-
-  @override
   String get applicationTitle => 'Toepassing van vandaag';
 
   @override

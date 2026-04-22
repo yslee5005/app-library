@@ -572,12 +572,6 @@ class AppLocalizationsFr extends AppLocalizations {
   String get todayLesson => 'Leçon du Jour';
 
   @override
-  String get meditationAnalysisTitle => 'Analyse de la Méditation';
-
-  @override
-  String get keyThemeLabel => 'Thème Principal';
-
-  @override
   String get applicationTitle => 'Application du Jour';
 
   @override

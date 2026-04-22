@@ -4,13 +4,15 @@ import '../../../models/qt_meditation_result.dart';
 import '../../../theme/abba_theme.dart';
 import '../../../widgets/abba_card.dart';
 
-/// First card of the QT Dashboard (qt_output_redesign Phase 1).
+/// First card of the QT Dashboard (qt_output_redesign Phase 1 + 5C).
 ///
-/// Shows a single-field summary of the user's meditation ([MeditationSummary.summary])
-/// plus the passage topic ([MeditationSummary.topic]). Mirrors the
-/// "Today's prayer" summary on the Prayer Dashboard.
+/// Shows three fields in a unified card:
+///   - [MeditationSummary.summary]: 1-2 sentence summary of the user's meditation
+///   - [MeditationSummary.topic]: passage topic (short line)
+///   - [MeditationSummary.insight]: AI insight on how the passage meets the
+///     meditation (absorbed from the removed MeditationAnalysisCard in Phase 5C)
 ///
-/// Hides itself when both fields are empty (legacy records).
+/// Hides itself when all three fields are empty (legacy records).
 class MeditationSummaryCard extends StatelessWidget {
   final MeditationSummary meditationSummary;
   final String title;
@@ -30,6 +32,7 @@ class MeditationSummaryCard extends StatelessWidget {
     }
     final summary = meditationSummary.summary;
     final topic = meditationSummary.topic;
+    final insight = meditationSummary.insight;
 
     return AbbaCard(
       child: Column(
@@ -83,6 +86,32 @@ class MeditationSummaryCard extends StatelessWidget {
                     ),
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
+                  ),
+                ),
+              ],
+            ),
+          ],
+          // Phase 5C — AI insight section (absorbed from MeditationAnalysisCard).
+          // Rendered below summary/topic with a subtle divider and magnifier icon.
+          if (insight.isNotEmpty) ...[
+            const SizedBox(height: AbbaSpacing.md),
+            Container(
+              height: 1,
+              color: AbbaColors.sage.withValues(alpha: 0.25),
+            ),
+            const SizedBox(height: AbbaSpacing.md),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text('🔍', style: TextStyle(fontSize: 18)),
+                const SizedBox(width: AbbaSpacing.sm),
+                Expanded(
+                  child: Text(
+                    insight,
+                    style: AbbaTypography.bodySmall.copyWith(
+                      color: AbbaColors.warmBrown,
+                      height: 1.6,
+                    ),
                   ),
                 ),
               ],

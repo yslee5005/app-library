@@ -570,12 +570,6 @@ class AppLocalizationsEl extends AppLocalizations {
   String get todayLesson => 'Μάθημα Ημέρας';
 
   @override
-  String get meditationAnalysisTitle => 'Ανάλυση Μελέτης';
-
-  @override
-  String get keyThemeLabel => 'Κεντρικό Θέμα';
-
-  @override
   String get applicationTitle => 'Εφαρμογή Ημέρας';
 
   @override

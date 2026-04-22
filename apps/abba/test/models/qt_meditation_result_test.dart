@@ -4,13 +4,15 @@ import 'package:abba/models/qt_meditation_result.dart';
 
 void main() {
   group('MeditationSummary', () {
-    test('fromJson parses summary + topic', () {
+    test('fromJson parses summary + topic + insight (Phase 5C)', () {
       final summary = MeditationSummary.fromJson({
         'summary': '하나님의 신실하심을 묵상하는 시간',
         'topic': '목자 되신 여호와',
+        'insight': '당신의 묵상은 신뢰에 닿아 있습니다.',
       });
       expect(summary.summary, '하나님의 신실하심을 묵상하는 시간');
       expect(summary.topic, '목자 되신 여호와');
+      expect(summary.insight, '당신의 묵상은 신뢰에 닿아 있습니다.');
       expect(summary.isEmpty, isFalse);
     });
 
@@ -18,10 +20,11 @@ void main() {
       final summary = MeditationSummary.fromJson(const {});
       expect(summary.summary, isEmpty);
       expect(summary.topic, isEmpty);
+      expect(summary.insight, isEmpty);
       expect(summary.isEmpty, isTrue);
     });
 
-    test('isEmpty true only when both fields blank', () {
+    test('isEmpty true only when ALL three fields blank (Phase 5C)', () {
       expect(
         const MeditationSummary(summary: 'x', topic: '').isEmpty,
         isFalse,
@@ -31,18 +34,23 @@ void main() {
         isFalse,
       );
       expect(
+        const MeditationSummary(summary: '', topic: '', insight: 'z').isEmpty,
+        isFalse,
+      );
+      expect(
         const MeditationSummary(summary: '', topic: '').isEmpty,
         isTrue,
       );
     });
   });
 
-  group('QtMeditationResult.fromJson — Phase 1 new format', () {
-    test('parses meditation_summary + scripture + analysis', () {
+  group('QtMeditationResult.fromJson — Phase 1 + 5C format', () {
+    test('parses meditation_summary (with insight) + scripture', () {
       final json = {
         'meditation_summary': {
           'summary': '오늘 묵상은 하나님의 평안에 닿아 있습니다.',
           'topic': '평안의 근원',
+          'insight': '당신의 묵상은 신뢰에 맞닿아 있습니다.',
         },
         'scripture': {
           'reference': 'Psalm 23:1-3',
@@ -57,9 +65,6 @@ void main() {
               'meaning': '나의 목자',
             },
           ],
-        },
-        'analysis': {
-          'insight': '당신의 묵상은 신뢰에 맞닿아 있습니다.',
         },
         'application': {
           'action': '오늘 저녁 식사 전 시편 23편을 한 번 소리 내어 읽으세요.',
@@ -77,14 +82,14 @@ void main() {
       expect(result.meditationSummary.summary,
           '오늘 묵상은 하나님의 평안에 닿아 있습니다.');
       expect(result.meditationSummary.topic, '평안의 근원');
+      // Phase 5C — insight absorbed into meditationSummary.
+      expect(result.meditationSummary.insight, '당신의 묵상은 신뢰에 맞닿아 있습니다.');
       expect(result.scripture.reference, 'Psalm 23:1-3');
       expect(result.scripture.reason, isNotEmpty);
       expect(result.scripture.posture, isNotEmpty);
       expect(result.scripture.keyWordHint, isNotEmpty);
       expect(result.scripture.originalWords, hasLength(1));
       expect(result.scripture.originalWords.first.word, 'רֹעִי');
-      // Phase 5A — single-field access.
-      expect(result.analysis.insight, isNotEmpty);
       expect(result.application.action, isNotEmpty);
       expect(result.knowledge.historicalContext, isNotEmpty);
       expect(result.knowledge.crossReferences, hasLength(1));
@@ -92,7 +97,7 @@ void main() {
 
     test('growthStory single-field Phase 1 prompt output', () {
       final json = {
-        'analysis': {'insight': 'x'},
+        'meditation_summary': {'summary': 's', 'topic': 't', 'insight': 'x'},
         'application': {'action': 'y'},
         'knowledge': {'historical_context': 'z'},
         'growth_story': {
@@ -113,10 +118,12 @@ void main() {
   });
 
   group('QtMeditationResult.fromJson — legacy compat', () {
-    test('legacy record without meditation_summary → empty summary (Phase 5A)', () {
+    test('legacy record with analysis.insight (absorbed into meditationSummary)', () {
+      // Phase 5C: the legacy `analysis` block is absorbed into
+      // `meditation_summary.insight` so historical DB records keep rendering
+      // the insight in the new unified MeditationSummaryCard.
       final json = {
         'analysis': {
-          // keyTheme removed (Phase 5A); still tolerates _en/_ko for insight.
           'insight_en': 'insight',
           'insight_ko': '통찰',
         },
@@ -132,21 +139,21 @@ void main() {
 
       final result = QtMeditationResult.fromJson(json);
 
-      // Phase 5A: no meditation_summary → both fields empty (no fallback
-      // from keyTheme since keyTheme is removed). Card will auto-hide.
+      // No meditation_summary block → summary/topic empty.
       expect(result.meditationSummary.summary, isEmpty);
       expect(result.meditationSummary.topic, isEmpty);
+      // Legacy analysis.insight_en absorbed (English first).
+      expect(result.meditationSummary.insight, 'insight');
+      // isEmpty is false because insight is populated.
+      expect(result.meditationSummary.isEmpty, isFalse);
       // No scripture in legacy → default empty Scripture.
       expect(result.scripture.reference, isEmpty);
-      // Legacy insight_en preferred.
-      expect(result.analysis.insight, 'insight');
       // Legacy historical_context_en preferred.
       expect(result.knowledge.historicalContext, 'context');
     });
 
     test('legacy growth_story with _en/_ko fields still parses (English first)', () {
       final json = {
-        'analysis': {'insight': ''},
         'application': {'action': ''},
         'knowledge': {},
         'growth_story': {
@@ -170,14 +177,13 @@ void main() {
 
     test('tolerates completely empty sub-objects (defensive defaults)', () {
       final json = {
-        'analysis': {},
         'application': {},
         'knowledge': {},
       };
       final result = QtMeditationResult.fromJson(json);
       expect(result.meditationSummary.isEmpty, isTrue);
       expect(result.scripture.reference, isEmpty);
-      expect(result.analysis.insight, isEmpty);
+      expect(result.meditationSummary.insight, isEmpty);
       expect(result.application.action, isEmpty);
       expect(result.knowledge.crossReferences, isEmpty);
       expect(result.growthStory, isNull);
@@ -238,7 +244,7 @@ void main() {
     test('QtMeditationResult.fromJson propagates citations through knowledge',
         () {
       final json = {
-        'analysis': {'insight': 'i'},
+        'meditation_summary': {'summary': 's', 'topic': 't', 'insight': 'i'},
         'application': {'action': 'a'},
         'knowledge': {
           'historical_context': 'h',
@@ -309,7 +315,7 @@ void main() {
 
     test('QtMeditationResult.fromJson propagates single-field growth_story', () {
       final result = QtMeditationResult.fromJson({
-        'analysis': {'insight': 'i'},
+        'meditation_summary': {'summary': 's', 'topic': 't', 'insight': 'i'},
         'application': {'action': 'a'},
         'knowledge': {'historical_context': 'h'},
         'growth_story': {
@@ -401,7 +407,7 @@ void main() {
 
     test('QtMeditationResult.fromJson propagates 3-block application', () {
       final result = QtMeditationResult.fromJson({
-        'analysis': {'insight': 'i'},
+        'meditation_summary': {'summary': 's', 'topic': 't', 'insight': 'i'},
         'application': {
           'morning_action': 'm',
           'day_action': 'd',
@@ -419,9 +425,8 @@ void main() {
   group('QtMeditationResult.copyWithScripture', () {
     test('replaces scripture, preserves other fields', () {
       final original = QtMeditationResult.fromJson({
-        'meditation_summary': {'summary': 's', 'topic': 't'},
+        'meditation_summary': {'summary': 's', 'topic': 't', 'insight': 'i'},
         'scripture': {'reference': 'Psalm 23:1'},
-        'analysis': {'insight': 'i'},
         'application': {'action': 'a'},
         'knowledge': {},
       });
@@ -433,42 +438,96 @@ void main() {
       expect(next.scripture.reference, 'Psalm 23:1');
       expect(next.scripture.verse, '여호와는 나의 목자시니');
       expect(next.meditationSummary.topic, 't');
-      expect(next.analysis.insight, 'i');
+      expect(next.meditationSummary.insight, 'i');
     });
   });
 
   // ---------------------------------------------------------------------------
-  // Phase 5A (qt_output_redesign) — i18n single-field unification
+  // Phase 5C (qt_output_redesign) — MeditationAnalysis absorbed into
+  // MeditationSummary.insight. Legacy DB records carrying `analysis.insight`
+  // (any locale variant) must still surface the insight in the new location.
   // ---------------------------------------------------------------------------
-  group('Phase 5A i18n single-field', () {
-    test('MeditationAnalysis.fromJson — new single `insight` key', () {
-      final analysis = MeditationAnalysis.fromJson({
-        'insight': '당신의 묵상은 신뢰에 닿아 있습니다.',
+  group('Phase 5C analysis absorption', () {
+    test('new JSON: meditation_summary.insight parses directly', () {
+      final result = QtMeditationResult.fromJson({
+        'meditation_summary': {
+          'summary': '요약',
+          'topic': '주제',
+          'insight': '당신의 묵상은 신뢰에 닿아 있습니다.',
+        },
+        'application': {},
+        'knowledge': {},
       });
-      expect(analysis.insight, '당신의 묵상은 신뢰에 닿아 있습니다.');
+      expect(result.meditationSummary.insight, '당신의 묵상은 신뢰에 닿아 있습니다.');
     });
 
-    test('MeditationAnalysis.fromJson — legacy `_en`/`_ko` fallback (_en first)', () {
-      final analysis = MeditationAnalysis.fromJson({
-        'insight_en': 'Your meditation touches trust.',
-        'insight_ko': '당신의 묵상은 신뢰에 닿아 있습니다.',
+    test('legacy JSON: analysis.insight → meditationSummary.insight', () {
+      // Pre-Phase-5C record carrying only the old `analysis.insight` block.
+      final result = QtMeditationResult.fromJson({
+        'analysis': {'insight': '레거시 통찰'},
+        'application': {},
+        'knowledge': {},
       });
-      // Phase 5A: _en preferred at parse time (no locale context).
-      expect(analysis.insight, 'Your meditation touches trust.');
+      expect(result.meditationSummary.insight, '레거시 통찰');
+      expect(result.meditationSummary.summary, isEmpty);
+      expect(result.meditationSummary.topic, isEmpty);
     });
 
-    test('MeditationAnalysis.fromJson — only `_ko` legacy present', () {
-      final analysis = MeditationAnalysis.fromJson({
-        'insight_ko': '당신의 묵상은 신뢰에 닿아 있습니다.',
+    test('legacy JSON: analysis.insight_en/insight_ko → absorbed (_en first)',
+        () {
+      // Even older pre-Phase-5A record with dual-locale insight pair.
+      final result = QtMeditationResult.fromJson({
+        'analysis': {
+          'insight_en': 'Your meditation touches trust.',
+          'insight_ko': '당신의 묵상은 신뢰에 닿아 있습니다.',
+        },
+        'application': {},
+        'knowledge': {},
       });
-      expect(analysis.insight, '당신의 묵상은 신뢰에 닿아 있습니다.');
+      // _en preferred at parse time (no locale context available).
+      expect(result.meditationSummary.insight, 'Your meditation touches trust.');
     });
 
-    test('MeditationAnalysis.fromJson — all fields missing → empty', () {
-      final analysis = MeditationAnalysis.fromJson(const {});
-      expect(analysis.insight, isEmpty);
+    test('no insight anywhere → empty string, isEmpty depends on other fields',
+        () {
+      final empty = QtMeditationResult.fromJson({
+        'application': {},
+        'knowledge': {},
+      });
+      expect(empty.meditationSummary.insight, isEmpty);
+      expect(empty.meditationSummary.isEmpty, isTrue);
+
+      // With only topic populated, card still renders (not empty) but
+      // insight section stays hidden.
+      final topicOnly = QtMeditationResult.fromJson({
+        'meditation_summary': {'topic': '오늘의 주제'},
+        'application': {},
+        'knowledge': {},
+      });
+      expect(topicOnly.meditationSummary.insight, isEmpty);
+      expect(topicOnly.meditationSummary.isEmpty, isFalse);
     });
 
+    test('meditation_summary.insight wins over legacy analysis.insight', () {
+      // When both coexist during rollout, the new location is authoritative.
+      final result = QtMeditationResult.fromJson({
+        'meditation_summary': {
+          'summary': 's',
+          'topic': 't',
+          'insight': '새 위치 통찰',
+        },
+        'analysis': {'insight': '레거시 통찰'},
+        'application': {},
+        'knowledge': {},
+      });
+      expect(result.meditationSummary.insight, '새 위치 통찰');
+    });
+  });
+
+  // ---------------------------------------------------------------------------
+  // Phase 5A (qt_output_redesign) — i18n single-field unification (non-analysis)
+  // ---------------------------------------------------------------------------
+  group('Phase 5A i18n single-field (non-analysis)', () {
     test('RelatedKnowledge.fromJson — single `historical_context` + legacy fallback', () {
       final fresh = RelatedKnowledge.fromJson({
         'historical_context': '다윗은 유대 광야의 목자였습니다.',

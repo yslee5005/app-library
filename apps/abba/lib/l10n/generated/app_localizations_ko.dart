@@ -555,12 +555,6 @@ class AppLocalizationsKo extends AppLocalizations {
   String get todayLesson => '오늘의 교훈';
 
   @override
-  String get meditationAnalysisTitle => '묵상 분석';
-
-  @override
-  String get keyThemeLabel => '핵심 테마';
-
-  @override
   String get applicationTitle => '오늘의 적용';
 
   @override

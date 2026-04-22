@@ -555,12 +555,6 @@ class AppLocalizationsZh extends AppLocalizations {
   String get todayLesson => '今日教训';
 
   @override
-  String get meditationAnalysisTitle => '默想分析';
-
-  @override
-  String get keyThemeLabel => '核心主题';
-
-  @override
   String get applicationTitle => '今日应用';
 
   @override

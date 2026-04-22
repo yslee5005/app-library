@@ -568,12 +568,6 @@ class AppLocalizationsHu extends AppLocalizations {
   String get todayLesson => 'Mai lecke';
 
   @override
-  String get meditationAnalysisTitle => 'Meditáció elemzés';
-
-  @override
-  String get keyThemeLabel => 'Kulcs téma';
-
-  @override
   String get applicationTitle => 'Mai alkalmazás';
 
   @override
