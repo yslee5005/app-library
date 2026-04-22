@@ -498,5 +498,7 @@
   "homeActivityPrayer": "ဆုတောင်း",
   "homeActivityQt": "QT",
   "prayerPlayerLoading": "ဖွင့်နေသည်...",
-  "heatmapNoPrayer": "ဆုတောင်းမရှိ"
+  "heatmapNoPrayer": "ဆုတောင်းမရှိ",
+  "qtPassagesLoadError": "ယနေ့ကျမ်းပိုဒ်များကို တင်၍မရပါ။ ချိတ်ဆက်မှုကို စစ်ဆေးပါ။",
+  "qtPassagesRetryButton": "ထပ်မံကြိုးစားပါ"
 }

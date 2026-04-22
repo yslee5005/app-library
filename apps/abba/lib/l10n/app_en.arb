@@ -554,5 +554,7 @@
   "homeActivityPrayer": "prayer",
   "homeActivityQt": "QT",
   "prayerPlayerLoading": "Loading...",
-  "heatmapNoPrayer": "No prayer"
+  "heatmapNoPrayer": "No prayer",
+  "qtPassagesLoadError": "Couldn't load today's passages. Please check your connection.",
+  "qtPassagesRetryButton": "Try again"
 }

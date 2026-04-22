@@ -4,12 +4,27 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import '../../models/qt_passage.dart';
 import '../qt_repository.dart';
 
+/// Thrown when today's QT passages cannot be served from any source
+/// (cache miss + Edge Function failure + English fallback empty).
+/// UI should render an error state with a Retry affordance.
+class QtPassagesUnavailableException implements Exception {
+  final String message;
+  const QtPassagesUnavailableException([
+    this.message = 'No QT passages available — network or service unavailable',
+  ]);
+
+  @override
+  String toString() => 'QtPassagesUnavailableException: $message';
+}
+
 /// On-demand QT repository.
 /// - Cache hit: read today's rows for requested locale from abba.qt_passages.
 /// - Cache miss: invoke the `abba-get-qt-passages` Edge Function which
 ///   generates + inserts for this single locale. Race-safe via unique index.
-/// - Edge Function failure: fall back to English cache, then to hardcoded
-///   starter passages.
+/// - Edge Function failure: fall back to English cache.
+/// - If everything fails: throw [QtPassagesUnavailableException] so the UI
+///   can render an error + Retry state instead of showing hardcoded English
+///   Scripture to users in 35 locales.
 class SupabaseQtRepository implements QtRepository {
   SupabaseQtRepository(this._client);
 
@@ -37,21 +52,22 @@ class SupabaseQtRepository implements QtRepository {
       // Edge Function failure is recoverable (fallback below), but we still
       // want Sentry to see it — signals backend degradation.
       appLogger.error(
-        'QT Edge Function invoke failed; falling back to en/hardcoded',
+        'QT Edge Function invoke failed; falling back to en/unavailable',
         category: LogCategory.qt,
         error: e,
         stackTrace: stackTrace,
       );
     }
 
-    // 3. Edge Function failed or returned nothing — English fallback.
+    // 3. Edge Function failed or returned nothing — English fallback
+    // (last resort before surfacing an error to the user).
     if (locale != 'en') {
       final List<QTPassage> en = await _fetchFromDb(today, 'en');
       if (en.isNotEmpty) return en;
     }
 
-    // 4. Last-resort hardcoded starter set.
-    return _fallbackPassages(locale);
+    // 4. Nothing available — surface to UI so Retry can be offered.
+    throw const QtPassagesUnavailableException();
   }
 
   Future<List<QTPassage>> _fetchFromDb(String date, String locale) async {
@@ -74,57 +90,5 @@ class SupabaseQtRepository implements QtRepository {
     final DateTime utc = DateTime.now().toUtc();
     final DateTime est = utc.subtract(const Duration(hours: 5));
     return est.toIso8601String().substring(0, 10);
-  }
-
-  List<QTPassage> _fallbackPassages(String locale) {
-    final bool isKo = locale == 'ko';
-    return [
-      QTPassage(
-        id: 'fallback-1',
-        reference: 'Psalm 23:1-3',
-        locale: locale,
-        text: isKo
-            ? '여호와는 나의 목자시니 내게 부족함이 없으리로다. '
-              '그가 나를 푸른 풀밭에 누이시며 '
-              '쉴 만한 물가로 인도하시는도다. 내 영혼을 소생시키시고.'
-            : 'The Lord is my shepherd; I shall not want. '
-              'He makes me lie down in green pastures. '
-              'He leads me beside still waters. He restores my soul.',
-        theme: 'hope',
-        icon: '🌿',
-        colorHex: '#B2DFDB',
-        date: DateTime.now(),
-      ),
-      QTPassage(
-        id: 'fallback-2',
-        reference: 'Philippians 4:6-7',
-        locale: locale,
-        text: isKo
-            ? '아무 것도 염려하지 말고 다만 모든 일에 기도와 간구로, '
-              '너희 구할 것을 감사함으로 하나님께 아뢰라. '
-              '그리하면 하나님의 평강이 너희 마음과 생각을 지키시리라.'
-            : 'Do not be anxious about anything, but in every situation, '
-              'by prayer and petition, with thanksgiving, present your requests to God. '
-              'And the peace of God will guard your hearts and minds.',
-        theme: 'anxiety',
-        icon: '🌧️',
-        colorHex: '#B0BEC5',
-        date: DateTime.now(),
-      ),
-      QTPassage(
-        id: 'fallback-3',
-        reference: 'Romans 8:28',
-        locale: locale,
-        text: isKo
-            ? '우리가 알거니와 하나님을 사랑하는 자 곧 그의 뜻대로 '
-              '부르심을 입은 자들에게는 모든 것이 합력하여 선을 이루느니라.'
-            : 'And we know that in all things God works for the good '
-              'of those who love him, who have been called according to his purpose.',
-        theme: 'gratitude',
-        icon: '🌸',
-        colorHex: '#FFB7C5',
-        date: DateTime.now(),
-      ),
-    ];
   }
 }

@@ -1224,4 +1224,11 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get heatmapNoPrayer => 'Tidak ada doa';
+
+  @override
+  String get qtPassagesLoadError =>
+      'Tidak dapat memuat bacaan hari ini. Silakan periksa koneksi Anda.';
+
+  @override
+  String get qtPassagesRetryButton => 'Coba lagi';
 }

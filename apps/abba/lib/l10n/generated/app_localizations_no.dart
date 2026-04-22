@@ -1213,4 +1213,11 @@ class AppLocalizationsNo extends AppLocalizations {
 
   @override
   String get heatmapNoPrayer => 'Ingen bønn';
+
+  @override
+  String get qtPassagesLoadError =>
+      'Kunne ikke laste dagens skriftsteder. Sjekk tilkoblingen din.';
+
+  @override
+  String get qtPassagesRetryButton => 'Prøv igjen';
 }

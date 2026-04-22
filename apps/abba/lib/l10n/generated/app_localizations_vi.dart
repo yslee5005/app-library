@@ -1220,4 +1220,11 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String get heatmapNoPrayer => 'Không có cầu nguyện';
+
+  @override
+  String get qtPassagesLoadError =>
+      'Không thể tải các phân đoạn hôm nay. Vui lòng kiểm tra kết nối.';
+
+  @override
+  String get qtPassagesRetryButton => 'Thử lại';
 }

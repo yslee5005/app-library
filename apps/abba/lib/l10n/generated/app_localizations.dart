@@ -2389,6 +2389,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'No prayer'**
   String get heatmapNoPrayer;
+
+  /// No description provided for @qtPassagesLoadError.
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t load today\'s passages. Please check your connection.'**
+  String get qtPassagesLoadError;
+
+  /// No description provided for @qtPassagesRetryButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Try again'**
+  String get qtPassagesRetryButton;
 }
 
 class _AppLocalizationsDelegate

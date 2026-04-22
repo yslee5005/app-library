@@ -498,5 +498,7 @@
   "homeActivityPrayer": "การอธิษฐาน",
   "homeActivityQt": "QT",
   "prayerPlayerLoading": "กำลังโหลด...",
-  "heatmapNoPrayer": "ไม่มีการอธิษฐาน"
+  "heatmapNoPrayer": "ไม่มีการอธิษฐาน",
+  "qtPassagesLoadError": "ไม่สามารถโหลดข้อพระคัมภีร์ของวันนี้ กรุณาตรวจสอบการเชื่อมต่อ",
+  "qtPassagesRetryButton": "ลองอีกครั้ง"
 }

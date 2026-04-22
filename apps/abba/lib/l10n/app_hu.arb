@@ -498,5 +498,7 @@
   "homeActivityPrayer": "ima",
   "homeActivityQt": "QT",
   "prayerPlayerLoading": "Betöltés...",
-  "heatmapNoPrayer": "Nincs ima"
+  "heatmapNoPrayer": "Nincs ima",
+  "qtPassagesLoadError": "A mai igék betöltése nem sikerült. Ellenőrizze a kapcsolatot.",
+  "qtPassagesRetryButton": "Újrapróbálkozás"
 }

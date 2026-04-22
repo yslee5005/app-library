@@ -498,5 +498,7 @@
   "homeActivityPrayer": "modlitwa",
   "homeActivityQt": "QT",
   "prayerPlayerLoading": "Ładowanie...",
-  "heatmapNoPrayer": "Brak modlitwy"
+  "heatmapNoPrayer": "Brak modlitwy",
+  "qtPassagesLoadError": "Nie udało się załadować dzisiejszych fragmentów. Sprawdź połączenie.",
+  "qtPassagesRetryButton": "Spróbuj ponownie"
 }

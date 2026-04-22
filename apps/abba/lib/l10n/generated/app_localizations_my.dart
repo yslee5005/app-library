@@ -1228,4 +1228,11 @@ class AppLocalizationsMy extends AppLocalizations {
 
   @override
   String get heatmapNoPrayer => 'ဆုတောင်းမရှိ';
+
+  @override
+  String get qtPassagesLoadError =>
+      'ယနေ့ကျမ်းပိုဒ်များကို တင်၍မရပါ။ ချိတ်ဆက်မှုကို စစ်ဆေးပါ။';
+
+  @override
+  String get qtPassagesRetryButton => 'ထပ်မံကြိုးစားပါ';
 }

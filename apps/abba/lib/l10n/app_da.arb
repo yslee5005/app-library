@@ -498,5 +498,7 @@
   "homeActivityPrayer": "bøn",
   "homeActivityQt": "QT",
   "prayerPlayerLoading": "Indlæser...",
-  "heatmapNoPrayer": "Ingen bøn"
+  "heatmapNoPrayer": "Ingen bøn",
+  "qtPassagesLoadError": "Dagens skriftsteder kunne ikke indlæses. Tjek din forbindelse.",
+  "qtPassagesRetryButton": "Prøv igen"
 }

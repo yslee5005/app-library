@@ -498,5 +498,7 @@
   "homeActivityPrayer": "oración",
   "homeActivityQt": "QT",
   "prayerPlayerLoading": "Cargando...",
-  "heatmapNoPrayer": "Sin oración"
+  "heatmapNoPrayer": "Sin oración",
+  "qtPassagesLoadError": "No pudimos cargar los pasajes de hoy. Verifica tu conexión.",
+  "qtPassagesRetryButton": "Reintentar"
 }

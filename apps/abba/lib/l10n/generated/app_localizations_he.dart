@@ -1196,4 +1196,11 @@ class AppLocalizationsHe extends AppLocalizations {
 
   @override
   String get heatmapNoPrayer => 'אין תפילה';
+
+  @override
+  String get qtPassagesLoadError =>
+      'לא הצלחנו לטעון את הפסוקים של היום. בדוק את החיבור שלך.';
+
+  @override
+  String get qtPassagesRetryButton => 'נסה שוב';
 }

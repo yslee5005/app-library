@@ -498,5 +498,7 @@
   "homeActivityPrayer": "祷告",
   "homeActivityQt": "QT",
   "prayerPlayerLoading": "加载中...",
-  "heatmapNoPrayer": "无祷告"
+  "heatmapNoPrayer": "无祷告",
+  "qtPassagesLoadError": "无法加载今天的经文。请检查网络连接。",
+  "qtPassagesRetryButton": "重试"
 }

@@ -498,5 +498,7 @@
   "homeActivityPrayer": "gebed",
   "homeActivityQt": "QT",
   "prayerPlayerLoading": "Laden...",
-  "heatmapNoPrayer": "Geen gebed"
+  "heatmapNoPrayer": "Geen gebed",
+  "qtPassagesLoadError": "De passages van vandaag konden niet worden geladen. Controleer je verbinding.",
+  "qtPassagesRetryButton": "Opnieuw proberen"
 }

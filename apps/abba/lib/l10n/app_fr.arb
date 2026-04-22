@@ -498,5 +498,7 @@
   "homeActivityPrayer": "prière",
   "homeActivityQt": "QT",
   "prayerPlayerLoading": "Chargement...",
-  "heatmapNoPrayer": "Aucune prière"
+  "heatmapNoPrayer": "Aucune prière",
+  "qtPassagesLoadError": "Impossible de charger les passages du jour. Vérifiez votre connexion.",
+  "qtPassagesRetryButton": "Réessayer"
 }

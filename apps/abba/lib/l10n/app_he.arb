@@ -498,5 +498,7 @@
   "homeActivityPrayer": "תפילה",
   "homeActivityQt": "QT",
   "prayerPlayerLoading": "טוען...",
-  "heatmapNoPrayer": "אין תפילה"
+  "heatmapNoPrayer": "אין תפילה",
+  "qtPassagesLoadError": "לא הצלחנו לטעון את הפסוקים של היום. בדוק את החיבור שלך.",
+  "qtPassagesRetryButton": "נסה שוב"
 }

@@ -1214,4 +1214,11 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get heatmapNoPrayer => 'कोई प्रार्थना नहीं';
+
+  @override
+  String get qtPassagesLoadError =>
+      'आज के वचन लोड नहीं हो सके। कृपया अपना कनेक्शन जाँचें।';
+
+  @override
+  String get qtPassagesRetryButton => 'फिर से प्रयास करें';
 }

@@ -1218,4 +1218,11 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String get heatmapNoPrayer => 'Nincs ima';
+
+  @override
+  String get qtPassagesLoadError =>
+      'A mai igék betöltése nem sikerült. Ellenőrizze a kapcsolatot.';
+
+  @override
+  String get qtPassagesRetryButton => 'Újrapróbálkozás';
 }

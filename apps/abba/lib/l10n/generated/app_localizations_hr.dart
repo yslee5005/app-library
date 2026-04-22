@@ -1219,4 +1219,11 @@ class AppLocalizationsHr extends AppLocalizations {
 
   @override
   String get heatmapNoPrayer => 'Nema molitve';
+
+  @override
+  String get qtPassagesLoadError =>
+      'Nije moguće učitati današnje odlomke. Provjerite vezu.';
+
+  @override
+  String get qtPassagesRetryButton => 'Pokušaj ponovno';
 }

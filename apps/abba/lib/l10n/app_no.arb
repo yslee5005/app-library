@@ -498,5 +498,7 @@
   "homeActivityPrayer": "bønn",
   "homeActivityQt": "QT",
   "prayerPlayerLoading": "Laster...",
-  "heatmapNoPrayer": "Ingen bønn"
+  "heatmapNoPrayer": "Ingen bønn",
+  "qtPassagesLoadError": "Kunne ikke laste dagens skriftsteder. Sjekk tilkoblingen din.",
+  "qtPassagesRetryButton": "Prøv igjen"
 }

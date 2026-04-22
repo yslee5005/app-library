@@ -1225,4 +1225,11 @@ class AppLocalizationsRo extends AppLocalizations {
 
   @override
   String get heatmapNoPrayer => 'Nicio rugăciune';
+
+  @override
+  String get qtPassagesLoadError =>
+      'Nu am putut încărca pasajele de astăzi. Verificați conexiunea.';
+
+  @override
+  String get qtPassagesRetryButton => 'Încearcă din nou';
 }

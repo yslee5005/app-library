@@ -1226,4 +1226,11 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get heatmapNoPrayer => 'Kein Gebet';
+
+  @override
+  String get qtPassagesLoadError =>
+      'Die heutigen Bibelstellen konnten nicht geladen werden. Bitte Verbindung prüfen.';
+
+  @override
+  String get qtPassagesRetryButton => 'Erneut versuchen';
 }

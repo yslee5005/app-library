@@ -1216,4 +1216,11 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get heatmapNoPrayer => 'No prayer';
+
+  @override
+  String get qtPassagesLoadError =>
+      'Couldn\'t load today\'s passages. Please check your connection.';
+
+  @override
+  String get qtPassagesRetryButton => 'Try again';
 }

@@ -498,5 +498,7 @@
   "homeActivityPrayer": "cầu nguyện",
   "homeActivityQt": "QT",
   "prayerPlayerLoading": "Đang tải...",
-  "heatmapNoPrayer": "Không có cầu nguyện"
+  "heatmapNoPrayer": "Không có cầu nguyện",
+  "qtPassagesLoadError": "Không thể tải các phân đoạn hôm nay. Vui lòng kiểm tra kết nối.",
+  "qtPassagesRetryButton": "Thử lại"
 }

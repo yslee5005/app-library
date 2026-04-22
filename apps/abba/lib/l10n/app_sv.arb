@@ -498,5 +498,7 @@
   "homeActivityPrayer": "bön",
   "homeActivityQt": "QT",
   "prayerPlayerLoading": "Laddar...",
-  "heatmapNoPrayer": "Ingen bön"
+  "heatmapNoPrayer": "Ingen bön",
+  "qtPassagesLoadError": "Dagens bibelställen kunde inte laddas. Kontrollera anslutningen.",
+  "qtPassagesRetryButton": "Försök igen"
 }

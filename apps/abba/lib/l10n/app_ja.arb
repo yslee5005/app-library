@@ -498,5 +498,7 @@
   "homeActivityPrayer": "祈り",
   "homeActivityQt": "QT",
   "prayerPlayerLoading": "読み込み中...",
-  "heatmapNoPrayer": "祈りなし"
+  "heatmapNoPrayer": "祈りなし",
+  "qtPassagesLoadError": "今日の御言葉を読み込めませんでした。接続をご確認ください。",
+  "qtPassagesRetryButton": "再試行"
 }

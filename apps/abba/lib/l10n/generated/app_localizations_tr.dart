@@ -1216,4 +1216,11 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get heatmapNoPrayer => 'Dua yok';
+
+  @override
+  String get qtPassagesLoadError =>
+      'Bugünün ayetleri yüklenemedi. Lütfen bağlantınızı kontrol edin.';
+
+  @override
+  String get qtPassagesRetryButton => 'Tekrar dene';
 }

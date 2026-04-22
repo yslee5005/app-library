@@ -1218,4 +1218,11 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get heatmapNoPrayer => 'Нет молитвы';
+
+  @override
+  String get qtPassagesLoadError =>
+      'Не удалось загрузить сегодняшние отрывки. Проверьте подключение.';
+
+  @override
+  String get qtPassagesRetryButton => 'Повторить';
 }

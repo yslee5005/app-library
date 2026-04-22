@@ -1191,4 +1191,11 @@ class AppLocalizationsAm extends AppLocalizations {
 
   @override
   String get heatmapNoPrayer => 'ጸሎት የለም';
+
+  @override
+  String get qtPassagesLoadError =>
+      'የዛሬውን ቃላት ማምጣት አልተቻለም። እባክዎ ግንኙነትዎን ያረጋግጡ።';
+
+  @override
+  String get qtPassagesRetryButton => 'እንደገና ሞክር';
 }

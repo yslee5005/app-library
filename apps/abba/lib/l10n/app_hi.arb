@@ -498,5 +498,7 @@
   "homeActivityPrayer": "प्रार्थना",
   "homeActivityQt": "QT",
   "prayerPlayerLoading": "लोड हो रहा है...",
-  "heatmapNoPrayer": "कोई प्रार्थना नहीं"
+  "heatmapNoPrayer": "कोई प्रार्थना नहीं",
+  "qtPassagesLoadError": "आज के वचन लोड नहीं हो सके। कृपया अपना कनेक्शन जाँचें।",
+  "qtPassagesRetryButton": "फिर से प्रयास करें"
 }

@@ -1222,4 +1222,11 @@ class AppLocalizationsPl extends AppLocalizations {
 
   @override
   String get heatmapNoPrayer => 'Brak modlitwy';
+
+  @override
+  String get qtPassagesLoadError =>
+      'Nie udało się załadować dzisiejszych fragmentów. Sprawdź połączenie.';
+
+  @override
+  String get qtPassagesRetryButton => 'Spróbuj ponownie';
 }

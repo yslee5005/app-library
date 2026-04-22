@@ -1220,4 +1220,11 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get heatmapNoPrayer => 'Sem oração';
+
+  @override
+  String get qtPassagesLoadError =>
+      'Não foi possível carregar as passagens de hoje. Verifique sua conexão.';
+
+  @override
+  String get qtPassagesRetryButton => 'Tentar novamente';
 }

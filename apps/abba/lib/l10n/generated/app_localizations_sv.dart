@@ -1214,4 +1214,11 @@ class AppLocalizationsSv extends AppLocalizations {
 
   @override
   String get heatmapNoPrayer => 'Ingen bön';
+
+  @override
+  String get qtPassagesLoadError =>
+      'Dagens bibelställen kunde inte laddas. Kontrollera anslutningen.';
+
+  @override
+  String get qtPassagesRetryButton => 'Försök igen';
 }

@@ -498,5 +498,7 @@
   "homeActivityPrayer": "modlitba",
   "homeActivityQt": "QT",
   "prayerPlayerLoading": "Načítava sa...",
-  "heatmapNoPrayer": "Žiadna modlitba"
+  "heatmapNoPrayer": "Žiadna modlitba",
+  "qtPassagesLoadError": "Dnešné verše sa nepodarilo načítať. Skontrolujte pripojenie.",
+  "qtPassagesRetryButton": "Skúsiť znova"
 }

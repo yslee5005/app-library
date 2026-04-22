@@ -498,5 +498,7 @@
   "homeActivityPrayer": "молитва",
   "homeActivityQt": "QT",
   "prayerPlayerLoading": "Загрузка...",
-  "heatmapNoPrayer": "Нет молитвы"
+  "heatmapNoPrayer": "Нет молитвы",
+  "qtPassagesLoadError": "Не удалось загрузить сегодняшние отрывки. Проверьте подключение.",
+  "qtPassagesRetryButton": "Повторить"
 }

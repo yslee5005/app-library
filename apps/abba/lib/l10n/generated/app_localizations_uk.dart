@@ -1215,4 +1215,11 @@ class AppLocalizationsUk extends AppLocalizations {
 
   @override
   String get heatmapNoPrayer => 'Немає молитви';
+
+  @override
+  String get qtPassagesLoadError =>
+      'Не вдалося завантажити сьогоднішні уривки. Перевірте з\'єднання.';
+
+  @override
+  String get qtPassagesRetryButton => 'Повторити';
 }

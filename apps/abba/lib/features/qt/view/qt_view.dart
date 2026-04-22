@@ -27,14 +27,73 @@ class QtView extends ConsumerWidget {
       appBar: AppBar(
         title: Text('${l10n.qtPageTitle} 🌱', style: AbbaTypography.h1),
       ),
+      // skipLoadingOnReload keeps the previous error state visible while
+      // the provider reruns after an invalidate — otherwise Riverpod 3 reports
+      // isLoading=true + hasError=true during reload, flashing the loading
+      // view on top of a real error.
       body: passagesAsync.when(
-        data: (passages) => _QtRevealContent(
-          passages: passages,
-          locale: locale,
-          l10n: l10n,
-        ),
+        skipLoadingOnReload: true,
+        data: (passages) => passages.isEmpty
+            ? _QtErrorView(
+                l10n: l10n,
+                onRetry: () => ref.invalidate(qtPassagesProvider),
+              )
+            : _QtRevealContent(
+                passages: passages,
+                locale: locale,
+                l10n: l10n,
+              ),
         loading: () => const _QtLoadingView(),
-        error: (e, s) => Center(child: Text(l10n.errorGeneric)),
+        error: (e, s) => _QtErrorView(
+          l10n: l10n,
+          onRetry: () => ref.invalidate(qtPassagesProvider),
+        ),
+      ),
+    );
+  }
+}
+
+/// Shown when QT passages can't be loaded (Edge Function failure + English
+/// fallback empty). Senior-friendly single-button Retry UX — no hardcoded
+/// Scripture fallback that would ship English to 34 non-English locales.
+class _QtErrorView extends StatelessWidget {
+  final AppLocalizations l10n;
+  final VoidCallback onRetry;
+
+  const _QtErrorView({required this.l10n, required this.onRetry});
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.all(AbbaSpacing.lg),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const Text('🌙', style: TextStyle(fontSize: 48)),
+            const SizedBox(height: AbbaSpacing.md),
+            Text(
+              l10n.qtPassagesLoadError,
+              textAlign: TextAlign.center,
+              style: AbbaTypography.body.copyWith(color: AbbaColors.warmBrown),
+            ),
+            const SizedBox(height: AbbaSpacing.lg),
+            ElevatedButton.icon(
+              onPressed: onRetry,
+              icon: const Icon(Icons.refresh),
+              label: Text(l10n.qtPassagesRetryButton),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: AbbaColors.sage,
+                foregroundColor: AbbaColors.white,
+                padding: const EdgeInsets.symmetric(
+                  horizontal: AbbaSpacing.lg,
+                  vertical: AbbaSpacing.md,
+                ),
+                textStyle: AbbaTypography.body,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

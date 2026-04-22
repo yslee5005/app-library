@@ -498,5 +498,7 @@
   "homeActivityPrayer": "dua",
   "homeActivityQt": "QT",
   "prayerPlayerLoading": "Yükleniyor...",
-  "heatmapNoPrayer": "Dua yok"
+  "heatmapNoPrayer": "Dua yok",
+  "qtPassagesLoadError": "Bugünün ayetleri yüklenemedi. Lütfen bağlantınızı kontrol edin.",
+  "qtPassagesRetryButton": "Tekrar dene"
 }

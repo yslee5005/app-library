@@ -1221,4 +1221,11 @@ class AppLocalizationsSk extends AppLocalizations {
 
   @override
   String get heatmapNoPrayer => 'Žiadna modlitba';
+
+  @override
+  String get qtPassagesLoadError =>
+      'Dnešné verše sa nepodarilo načítať. Skontrolujte pripojenie.';
+
+  @override
+  String get qtPassagesRetryButton => 'Skúsiť znova';
 }

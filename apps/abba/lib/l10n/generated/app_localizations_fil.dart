@@ -1238,4 +1238,11 @@ class AppLocalizationsFil extends AppLocalizations {
 
   @override
   String get heatmapNoPrayer => 'Walang panalangin';
+
+  @override
+  String get qtPassagesLoadError =>
+      'Hindi ma-load ang mga talata ngayong araw. Pakisuri ang iyong koneksyon.';
+
+  @override
+  String get qtPassagesRetryButton => 'Subukan muli';
 }

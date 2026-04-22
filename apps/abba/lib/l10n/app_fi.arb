@@ -498,5 +498,7 @@
   "homeActivityPrayer": "rukous",
   "homeActivityQt": "QT",
   "prayerPlayerLoading": "Ladataan...",
-  "heatmapNoPrayer": "Ei rukousta"
+  "heatmapNoPrayer": "Ei rukousta",
+  "qtPassagesLoadError": "Päivän raamatunkohtia ei voitu ladata. Tarkista yhteytesi.",
+  "qtPassagesRetryButton": "Yritä uudelleen"
 }

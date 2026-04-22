@@ -498,5 +498,7 @@
   "homeActivityPrayer": "sala",
   "homeActivityQt": "QT",
   "prayerPlayerLoading": "Inapakia...",
-  "heatmapNoPrayer": "Hakuna sala"
+  "heatmapNoPrayer": "Hakuna sala",
+  "qtPassagesLoadError": "Imeshindikana kupakia vifungu vya leo. Tafadhali angalia muunganisho wako.",
+  "qtPassagesRetryButton": "Jaribu tena"
 }

@@ -1215,4 +1215,11 @@ class AppLocalizationsFi extends AppLocalizations {
 
   @override
   String get heatmapNoPrayer => 'Ei rukousta';
+
+  @override
+  String get qtPassagesLoadError =>
+      'Päivän raamatunkohtia ei voitu ladata. Tarkista yhteytesi.';
+
+  @override
+  String get qtPassagesRetryButton => 'Yritä uudelleen';
 }
