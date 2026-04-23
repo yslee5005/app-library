@@ -289,6 +289,43 @@
 - [ ] `scripts/check_l10n_sync.sh` Python 기반으로 재작성 (naive regex false positive)
 - [ ] E2E integration test 환경 설정 (남은 2건 fail)
 
+### 24. Phase 4.1 — Section-Based AI + Cached Rubrics (진행)
+
+참조: `apps/abba/specs/phase_4_1_section_based_ai/SPEC.md`
+
+**완료 (2026-04-23 ~ 2026-04-24 세션)**
+- [x] Spec + 10 _details 문서 (`7704f9c`)
+- [x] INT-001~013 Rubric 12 + DB migration SQL (`b6fb8a4`)
+- [x] INT-015~019, 025 core infra: cache manager, TierResult, repo (`6cf9d4b`)
+- [x] INT-020~024 tier analyzers + GeminiService streamed API (`22cebde`)
+- [x] INT-026 PrayerSectionsNotifier (`2cf9ff7`)
+- [x] INT-027 ai_loading_view Stream refactor (`b63237b`)
+- [x] INT-028 Dashboard progressive rendering (`4a99425`)
+- [x] INT-032 VisibilityDetector T3 trigger (`0a991ca`)
+- [x] INT-033 Day-1 template fallback service + 6 bundled templates (`a3f832d`)
+- [x] INT-034/035 19 new ARB keys (en + ko) (`7503cd5`)
+- [x] INT-040/043 notifier + template service tests (`88f5cad`)
+
+**사용자 action 필요**
+- [ ] **INT-014**: `supabase db push --linked` 로 `20260423000004_section_based_ai.sql`
+      적용 (section_status 컬럼, system_config, update_prayer_tier RPC)
+- [ ] 12 rubric 문서 신학적 검토 (`apps/abba/assets/prompts/prayer/*.md`,
+      `apps/abba/assets/prompts/qt/*.md`)
+- [ ] 실기기 E2E — T1 즉시 등장 / T2 background / T3 scroll trigger
+- [ ] Supabase Studio 에서 `section_status` JSONB 수동 inspect
+
+**Deferred (Phase 2 / 후속)**
+- INT-029 QT Dashboard progressive (QT tier analyzers 미구현)
+- INT-030/031 True SSE token-level rendering (`generateContentStream` 체인 정비 후)
+- INT-036~039/041/042 tier / cache / RPC / 위젯 통합 테스트 (Gemini SDK 모킹 필요)
+- INT-047/048 항목은 이 체크리스트 업데이트로 대응 (`88f5cad` 이후)
+
+**Phase 2 후속 최적화 (출시 후 데이터 기반)**
+- [ ] Batch API for T3 — 월 $110 절감
+- [ ] Flash-Lite T2 routing — 월 $90 절감 (A/B test 후)
+- [ ] Output token tuning 2000 → 1400 — 월 $140 절감
+- [ ] 저자원 locale per-locale cache (아랍어/히브리어 필요 시)
+
 ---
 
 ## 📊 총계 (2026-04-22 업데이트)

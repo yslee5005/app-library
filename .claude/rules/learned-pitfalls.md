@@ -175,3 +175,12 @@
 ## 업데이트 이력
 - 2026-04-22: §2/§3/§4 확장 + §17 Sentry 에러 로깅 + §18 Git 멀티계정 신규 (abba 출시 준비 세션에서 발견)
 - 2026-04-23: §2-1 AI fallback DB 오염 + §19 MoAI Phase-first Pre-Execution Report 신규 (abba pending/retry 아키텍처 세션)
+- 2026-04-24: §1 추가 함정 (AutoDispose StateNotifier + 화면 전환 중 background Stream 구독 유실) + §16 추가 함정 (flutter_test `rootBundle` 한계 + AssetBundle 의존성 주입) 보강 (abba Phase 4.1 section-based AI 세션)
+
+## §1 보강 (2026-04-24 Phase 4.1)
+- **화면 이동 중 background Stream subscription 유실**: ai_loading_view가 Stream을 시작하고 Dashboard로 nav하는 경우, subscription이 view state에 묶여 있으면 나머지 tier(T2/T3) 이벤트가 유실됨. 해결 = Notifier 안에서 listen, view 전환 후에도 구독 유지. 단 autoDispose StateNotifier라면 "구독자 0" 짧은 순간 dispose → stream 끊김. **해결 2단계**: (a) Notifier가 `StreamSubscription` 보관 + dispose에서 cancel, (b) provider를 `StateNotifierProvider.autoDispose` → 일반 `StateNotifierProvider`로 변경하고 시작 시 명시적 `reset()` 호출. 애플리케이션-범위 상태(스트리밍 result)에는 autoDispose가 적합하지 않음.
+- **`ref.read(userProfileProvider).value?.name` 호환성**: FutureProvider에 `.value`(AsyncValue API)는 있지만 레거시 `.valueOrNull`은 Riverpod 3.0에서 제거됨. 사용 시 analyzer error. 항상 `.value?.x ?? fallback` 패턴 사용.
+
+## §16 보강 (2026-04-24 Phase 4.1)
+- **`flutter_test`에서 `rootBundle.loadString()` 실패**: 테스트 환경의 `PlatformAssetBundle`은 pubspec의 assets 매니페스트를 로드하지 못함 — 프로덕션에서 로드되는 JSON 에셋도 `"Unable to load asset"`. 해결 = 서비스에서 `AssetBundle` 인자를 받도록 (`{AssetBundle? bundle}`, 기본값 `rootBundle`), 테스트는 `CachingAssetBundle` 서브클래스(메모리 맵) 주입. flutter_test에서 `assets/mock/*`가 동작하는 이유는 `MockDataService.fromData(...)` 패턴으로 bundle을 아예 우회하기 때문. 새 서비스도 같은 주입 가능 구조 권장.
+- **MockAiService stream 초입 delay 필요**: widget 테스트가 최초 pump에서 로딩 프레임을 기대하는데, Stream 생성자에서 즉시 await하면 subscription 미 루프에서 에러가 나서 error-view로 전환. 해결 = Stream 본체 첫 줄에 `await Future.delayed(Duration(seconds: 1))` 등 명시적 yield 구간. 기존 Future-based mock도 동일 패턴으로 늦춰져 있음.
