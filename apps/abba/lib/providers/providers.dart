@@ -25,6 +25,7 @@ import '../services/ai_service.dart';
 import '../services/bible_text_service.dart';
 import '../services/community_repository.dart';
 import '../services/gemini_cache_manager.dart';
+import '../services/prayer_template_service.dart';
 import '../services/mock_data.dart';
 import '../services/notification_service.dart';
 import '../services/prayer_repository.dart';
@@ -52,6 +53,12 @@ final aiServiceProvider = Provider<AiService>((ref) {
 /// Lazy singleton — created when first Gemini call needs a cache id.
 final geminiCacheManagerProvider = Provider<GeminiCacheManager>((ref) {
   return GeminiCacheManager(Supabase.instance.client);
+});
+
+/// Phase 4.1 INT-033: Day-1 template fallback service.
+/// Loads bundled PrayerResult JSONs when Gemini is unreachable.
+final prayerTemplateServiceProvider = Provider<PrayerTemplateService>((ref) {
+  return PrayerTemplateService();
 });
 
 /// Looks up Bible verse text (Public Domain bundles) by reference + locale.

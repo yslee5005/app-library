@@ -93,3 +93,4 @@ flutter:
     - assets/prompts/
     - assets/prompts/prayer/
     - assets/prompts/qt/
+    - assets/prayer_templates/
