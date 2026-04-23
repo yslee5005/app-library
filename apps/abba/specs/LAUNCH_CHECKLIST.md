@@ -20,17 +20,16 @@
   - JSON 스키마 일치 검증 (hallucination / 필드 누락 여부)
   - Google Cloud Console → Gemini API billing 활성화 선행 필수
 
-### 0-1. Xcode GUI 수동 작업
+### 0-1. Xcode GUI 수동 작업 — ✅ 모두 완료 (`c6fa63c` + `e1aec39`)
 
-- [ ] **PrivacyInfo.xcprivacy를 Runner 타겟에 추가** (Xcode File → Add Files)
-  - 파일 경로: `ios/Runner/PrivacyInfo.xcprivacy` (Ralph #2에서 생성 완료)
-  - Target Membership: Runner 체크
-  - 확인: Build Phases → Copy Bundle Resources에 포함
-- [ ] **Runner 프로젝트 Localizations 섹션에 35 locale 추가**
-  - 위치: Runner.xcodeproj → Project → Info 탭 → Localizations
-  - 각 locale "+" 버튼으로 추가 시 `InfoPlist.strings` 체크
-  - 안 하면 `ios/Runner/{locale}.lproj/InfoPlist.strings` 35개가 bundle에 포함 안 됨
-  - Ralph #1에서 파일 생성 완료, GUI 등록만 사용자 작업
+- [x] **PrivacyInfo.xcprivacy를 Runner 타겟에 추가** — Ruby `xcodeproj` 스크립트로
+  project.pbxproj 직접 등록. PBXBuildFile + PBXFileReference + Group membership +
+  Copy Bundle Resources 4곳 모두 wired. `grep "PrivacyInfo.xcprivacy"` 4건 확인.
+- [x] **Runner 프로젝트 Localizations 섹션에 35 locale 추가** — `knownRegions` 배열에
+  en + Base + 34 locale 등록 (총 36 entries). 35개 `.lproj/InfoPlist.strings` 파일
+  전부 variant group으로 등록됨. `grep "InfoPlist.strings"` 40+건 확인.
+- **Xcode GUI 수동 작업 불필요** — 사용자는 이 섹션을 skip하고 실 Gemini 테스트로
+  바로 진행 가능.
 
 ---
 
