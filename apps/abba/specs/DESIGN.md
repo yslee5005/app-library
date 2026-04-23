@@ -116,21 +116,42 @@ abba/                          ← 독립 repo
                  │     └──────┬──────┘
                  │            │
               ┌──▼────────────▼──┐
-              │   AI Loading     │
-              │  (3-5초 자동)    │
+              │  SAVE TO SERVER   │  ← 2026-04-23: 즉시 저장
+              │  (status=pending) │
               └────────┬─────────┘
                        │
               ┌────────▼─────────┐
-              │   AI Dashboard   │
-              │  6 cards (scroll)│
-              │  [공유] [홈으로]  │
-              └──────────────────┘
+              │   AI Loading     │
+              │  (3-5초 자동)    │
+              └───┬────────┬─────┘
+             성공 │        │ 실패
+                 │        ▼
+                 │  ┌──────────────┐
+                 │  │  Error View  │
+                 │  │ [재시도] 3회 │
+                 │  │  [홈으로]    │
+                 │  └──────┬───────┘
+                 │         │ 유저 홈/종료
+                 ▼         ▼
+              ┌─────────────┐  ┌──────────────────┐
+              │ AI Dashboard │  │ status=pending   │
+              │ (completed)  │  │ → 다음 홈 진입 시│
+              │              │  │   Edge Function  │
+              └──────────────┘  │   lazy retry     │
+                                │ (10분 cooldown)  │
+                                └────────┬─────────┘
+                                         │ 성공
+                                         ▼
+                                ┌──────────────────┐
+                                │ 환영 모달 🌸      │
+                                │ "기도 완성됐어요" │
+                                └──────────────────┘
 
   ──── 탭바 접근 ────
 
-  [📅 Calendar]  →  기도 달력 + 히스토리
+  [📅 Calendar]  →  기도 달력 + 히스토리 (pending도 🌸로 표시, 스트릭 유지)
   [🌻 Community] →  피드 → 댓글/리플라이 → Write Post
-  [⚙️ Settings]  →  프로필 + Premium + 설정
+  [⚙️ Settings]  →  프로필 + Premium + 설정 + 데이터 관리(삭제)
 ```
 
 ---
@@ -183,11 +204,22 @@ GoRouter(
 class Prayer {
   final String id;
   final String userId;
-  final String transcript;      // Gemini 멀티모달 transcribe 결과 텍스트 (구: STT 변환)
-  final String mode;             // 'prayer' | 'qt'
-  final String? qtPassageRef;    // QT 모드일 때 말씀 참조
+  final String transcript;       // 텍스트 모드 원문 OR AI transcribe 결과 (pending 상태면 텍스트 모드만 채워짐)
+  final String? audioStoragePath; // Supabase Storage 경로 (음성 모드, 영구 보존)
+  final String mode;              // 'prayer' | 'qt'
+  final String? qtPassageRef;     // QT 모드일 때 말씀 참조
   final DateTime createdAt;
-  final PrayerResult? result;    // AI 분석 결과
+  final PrayerAiStatus aiStatus;  // pending | processing | completed | failed
+  final DateTime? lastRetryAt;    // Edge Function cooldown 체크용 (10분)
+  final PrayerResult? result;     // AI 분석 결과 (completed 때만 채워짐)
+}
+
+/// AI 분석 생명주기 상태 (2026-04-23 추가)
+enum PrayerAiStatus {
+  pending,     // 유저 원본 저장됨, AI 분석 대기 중
+  processing,  // Edge Function 실행 중 (짧은 과도기)
+  completed,   // AI 분석 완료, result 채워짐
+  failed,      // Edge Function 10회 초과 실패 (극히 드문 케이스)
 }
 
 class PrayerResult {
@@ -393,17 +425,26 @@ class PremiumBlur extends StatelessWidget {
 ## 7. Supabase 테이블 (Phase 2)
 
 ```sql
--- 기도 기록
+-- 기도 기록 (2026-04-23: Pending/Retry 아키텍처 반영)
 CREATE TABLE prayers (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   app_id TEXT NOT NULL DEFAULT 'abba',
   user_id UUID NOT NULL REFERENCES auth.users(id),
-  transcript TEXT NOT NULL,
+  transcript TEXT,                 -- 텍스트 모드 원문 OR AI transcribe 결과 (pending 때 null 가능)
+  audio_storage_path TEXT,         -- Supabase Storage path (음성 모드, 영구 보존)
   mode TEXT NOT NULL,              -- 'prayer' | 'qt'
   qt_passage_ref TEXT,
-  result JSONB,                    -- AI 분석 결과 전체
+  ai_status TEXT NOT NULL DEFAULT 'completed'
+    CHECK (ai_status IN ('pending', 'processing', 'completed', 'failed')),
+  last_retry_at TIMESTAMPTZ,       -- Edge Function cooldown 체크 (10분)
+  result JSONB,                    -- AI 분석 결과 전체 (completed 때만)
   created_at TIMESTAMPTZ DEFAULT now()
 );
+
+-- 홈 진입 시 pending 기도 조회용 인덱스
+CREATE INDEX idx_prayers_pending_per_user
+  ON prayers (user_id, ai_status, last_retry_at)
+  WHERE ai_status IN ('pending', 'processing');
 
 -- QT 말씀 (매일 cronjob)
 CREATE TABLE qt_passages (
@@ -523,3 +564,76 @@ dependencies:
   # just_audio: ^0.9.0         (TTS 재생)
   # http: ^1.2.0               (AI API)
 ```
+
+---
+
+## 10. Pending Prayer Retry Flow (2026-04-23)
+
+AI 실패 시 유저 기도 원본 유실 방지 + 자연스러운 재시도 아키텍처. REQUIREMENTS §11 "Always" 원칙 구현.
+
+### 10.1 책임 분리
+
+| 레이어 | 역할 | 한도 |
+|--------|------|------|
+| Client (ai_loading_view) | 기도 제출 → 즉시 저장 → AI 호출 → 실패 시 에러뷰 + 수동 재시도 | 세션당 3회 (앱 재시작 시 리셋) |
+| Edge Function (`process_pending_prayer`) | 유저 재방문 홈 진입 시 트리거, pending 기도 1개 처리 | 10분 cooldown, 10회 초과 시 `failed` |
+
+### 10.2 플로우
+
+```
+[유저 기도 제출]
+  ↓ Client
+[prayers INSERT (ai_status='pending', audio_storage_path or transcript)]
+  ↓ Client
+[Gemini 호출]
+  ├─ 성공 → UPDATE ai_status='completed', result=...
+  └─ 실패 (AiAnalysisException throw)
+       ↓ Client
+       [에러 뷰: "AI 서비스가 불안정해요" + [재시도] 버튼]
+       ↓ 유저 재시도 (세션 카운터 1~3)
+       [다시 Gemini 호출 → 성공 or 실패 반복]
+       ↓ 3회 실패
+       [안내: "저희가 나중에 다시 시도하겠습니다" + [홈으로]]
+       ↓ 유저 홈 복귀 or 앱 종료
+       [prayers.ai_status='pending' 유지]
+
+[유저 N분/시간/일 뒤 재방문]
+  ↓ Home 진입
+[SELECT * FROM prayers WHERE user_id=X AND ai_status='pending' LIMIT 1]
+  ├─ 없음 → 정상 홈
+  └─ 있음 → Edge Function 호출 (trigger)
+       ↓ Edge Function
+       [last_retry_at NOW - 10min 이상 지났는지 체크]
+       ├─ No → SKIP (cooldown)
+       └─ Yes → UPDATE ai_status='processing', last_retry_at=NOW
+            ↓ Gemini 호출
+            ├─ 성공 → UPDATE ai_status='completed', result=...
+            │        ↓ Client Realtime 감지
+            │        [환영 모달: "기도 분석이 완성됐어요 🌸"]
+            └─ 실패 → UPDATE ai_status='pending' (retry_count 없음 — 다음 방문 기다림)
+                     ↓ 만약 누적 서버 실패 10회 이상 → ai_status='failed'
+                     [상세 뷰: "AI 분석 어려움, 원본은 보관됨" + 수동 [다시 분석] 버튼]
+```
+
+### 10.3 완성된 기도 = Read-only
+
+**핵심 원칙**: `ai_status='completed'`인 기도에는 재시도 버튼 **노출 금지**.
+
+이유:
+- 토큰/비용 낭비 방지 (유저가 호기심에 계속 재분석)
+- AI diversity로 결과 달라짐 → UX 혼란 ("어, 바뀌었네?")
+- 기존 result 덮어쓰기/버전 관리 복잡성 제거
+
+상세 뷰 분기:
+- `completed` → 음성 재생 + transcript + scripture + **삭제만**
+- `pending` / `failed` → "분석 중/어려움" 안내 + [다시 분석해보기] 버튼 (세션 3회)
+
+### 10.4 비용 방어
+
+| 방어 장치 | 효과 |
+|-----------|------|
+| Client 세션 3회 | 유저 즉흥 과도 재시도 차단 |
+| 앱 재시작 시 리셋 | 긴급 상황 유저가 다시 시도할 퇴로 |
+| Server 10분 cooldown | 홈 재진입 스팸 시 Edge Function 폭주 방지 |
+| Server 10회 초과 `failed` | 진짜 불가능한 기도 (너무 짧음, 비기도 등) 무한 루프 방지 |
+| Mock 경로 분리 | `ENABLE_MOCK_AI=true` 시 Gemini 호출 0회 |

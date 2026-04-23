@@ -83,6 +83,70 @@
 - [ ] Sentry 마스킹 런타임 동작 확인 (기도 텍스트 / 이메일) — 수동 검증
 - [ ] RLS 전 테이블 활성화 + COALESCE NULL 방어 — 수동 검증
 
+### 4-1. AI Pending/Retry 아키텍처 (2026-04-23 신규 출시 블로커)
+
+**배경**: AI 실패 시 하드코딩 fallback → 유저 기도 원본 소실 + DB 가짜 데이터 오염. REQUIREMENTS §11 재정의 + DESIGN §10 Pending Flow 구현.
+
+#### Phase 2 — DB Schema Migration
+- [ ] `supabase/migrations/20260423_prayers_pending_status.sql` 작성
+  - `prayers.ai_status` TEXT 컬럼 (pending/processing/completed/failed)
+  - `prayers.last_retry_at` TIMESTAMPTZ
+  - `prayers.audio_storage_path` TEXT (기존 있으면 skip)
+  - `idx_prayers_pending_per_user` 인덱스
+- [ ] `prayer-audio` Storage bucket 생성 SQL + RLS (본인 파일만)
+- [ ] **사용자 승인 후** `supabase db push --linked` (DATABASE PROTECTION)
+
+#### Phase 3 — 클라이언트 저장 로직 + 에러 처리
+- [ ] `lib/services/ai_analysis_exception.dart` 신규
+- [ ] `gemini_service.dart` 4개 catch block: fallback 반환 → throw
+- [ ] `prayer_repository.dart`: AI 호출 **전** 즉시 INSERT (ai_status='pending')
+- [ ] `ai_loading_view.dart`: `_setErrorState` + 클라 세션 3회 재시도 카운터
+- [ ] 에러 뷰 UI (Morning Garden 톤, 56dp+ 버튼)
+- [ ] ARB 키 추가 (en + ko): `aiErrorNetwork`, `aiErrorAiService`, `aiErrorRetry`, `aiErrorWaitAndCheck`, `aiErrorHome`
+- [ ] 기존 테스트 수정 (`gemini_service_test.dart` — malformed JSON throw 기대)
+
+#### Phase 4 — Edge Function (process_pending_prayer)
+- [ ] `supabase/functions/process_pending_prayer/index.ts` 작성
+  - JWT 인증 (본인 기도만)
+  - 10분 cooldown 체크
+  - Gemini API 호출 + status 업데이트
+  - 10회 초과 시 `failed` 확정
+- [ ] **사용자 승인 후** `supabase functions deploy process_pending_prayer`
+
+#### Phase 5 — Pending UX + 재방문 트리거
+- [ ] `home_view.dart`: 진입 시 pending 기도 감지 → Edge Function 호출 → Realtime subscribe
+- [ ] 환영 모달: "기다리던 기도 분석이 완성됐어요 🌸 [보기]"
+- [ ] `calendar_view.dart`: pending 기도 🌸 표시 (스트릭 유지)
+- [ ] 상세 뷰 status별 분기 (completed=read-only, pending/failed=재시도 버튼)
+- [ ] ARB: `pendingAnalysisReady`, `pendingAnalyzing`, `viewAnalysisResult`
+
+#### Phase 6 — 음성 재생 + 기도 삭제 UI
+- [ ] `prayer_detail_view.dart`: `just_audio` 통합 (큰 재생 버튼)
+- [ ] Signed URL로 Storage 접근
+- [ ] 상세 뷰 하단 [🗑 삭제] + confirm dialog
+- [ ] `settings_view.dart`: "데이터 관리" 섹션 → "내 모든 기도 삭제"
+- [ ] ARB: `deletePrayer`, `deleteConfirm`, `dataManagement`, `deleteAllPrayers`
+
+#### Phase 7 — Privacy Policy + App Store Privacy Label
+- [ ] Privacy Policy 페이지 (GitHub Pages) 업데이트
+  - "음성 녹음 영구 저장 (AI 분석 + 유저 회고)" 섹션 추가
+  - "유저 삭제 권한" 명시
+- [ ] App Store Connect Privacy Label 변경
+  - Audio Data: **Linked to You** (기존 "Not Linked" → 변경)
+  - Used for App Functionality
+- [ ] 기존 유저에게 정책 변경 고지 (앱 업데이트 후 1회 모달 — 필요시)
+
+#### Phase 8 — 통합 테스트
+- [ ] `flutter analyze` 0 issues
+- [ ] `flutter test` 통과
+- [ ] 실기기 시나리오:
+  - 정상 기도 플로우
+  - 비행기 모드 → 에러 뷰 + [재시도] 버튼
+  - 3회 실패 → "나중에 다시" 메시지
+  - 앱 재진입 → Edge Function 자동 호출 + 환영 모달
+  - 완성된 기도 상세 뷰에 재시도 버튼 **없음** 확인
+  - 기도 삭제 → Storage 파일도 삭제 확인
+
 ### 5. 성능
 
 - [ ] 앱 시작 시간 < 3초

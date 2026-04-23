@@ -24,6 +24,17 @@
 - ARB 가격은 fallback 전용으로만 유지 (offering 로드 실패 / 네트워크 없음 시)
 - **Webhook은 선택**: client-side SDK `CustomerInfo.entitlement.isActive` + `addCustomerInfoUpdateListener`로 충분. 서버 DB 동기화가 필요한 경우에만 Edge Function + JWS 디코딩 구현
 
+## 2-1. AI 분석 실패 시 하드코딩 fallback으로 인한 DB 오염 + 유저 신뢰 위반
+- AI 호출 catch 블록에서 하드코딩 데이터를 성공한 척 반환하지 말 것
+  - ❌ `catch (e) { return _hardcodedResult(); }` → 유저는 "진짜 AI 응답"이라 착각, DB에 가짜 저장, 재시도 경로 없음
+  - ✅ `catch (e) { throw AiAnalysisException('...', cause: e); }` → UI 레이어가 명시적 에러 처리
+- **저장 우선 + AI 분리 패턴**: 유저 원본(텍스트/음성)은 AI 호출 **전** 즉시 DB 저장(`ai_status='pending'`) → AI는 별도 비동기 단계로 분리. 성공 시 `ai_status='completed'` UPDATE, 실패 시 원본은 보존됨
+- **재시도 카운터는 client-side session 스코프** (앱 재시작 시 리셋) — DB에 retry_count 박제하면 유저가 영구히 "더는 시도 불가" 상태에 갇힘
+- **서버측 cooldown (예: 10분)**으로 Edge Function 비용 폭증 방어. 누적 실패 10회 초과 시 `ai_status='failed'` 확정 (무한 루프 방지)
+- **완성된 레코드에 재시도 버튼 노출 금지** — 토큰 낭비 + AI diversity로 결과 매번 달라짐 → UX 혼란 + 기존 result 덮어쓰기/버전 관리 복잡성
+- **Lazy retry on visit 패턴**: 유저 재방문(홈 진입)이 트리거 → Edge Function이 pending 기도 1개 처리 → 성공 시 환영 모달. 주기적 cron 불필요 (유저 안 오면 비용 0)
+- 적용 사례: abba prayer AI analysis (REQUIREMENTS.md §11 Always, DESIGN.md §10 Pending Prayer Retry Flow)
+
 ## 3. Multi-tenant (Supabase)
 - 새 테이블 → RLS 즉시 활성화 + COALESCE NULL defense
 - 앱별 테이블은 `{app}.*` 스키마 또는 `{app}_*` prefix (apps.md 참조)
@@ -141,6 +152,14 @@
 - 프로젝트별 `memory/git_commit_account.md`에 기록 → 재확인 생략
 - `--global` 플래그 절대 사용 금지 (다른 프로젝트 영향)
 
+## 19. MoAI Phase별 Pre-Execution Report 룰
+- 여러 Phase로 구분된 작업은 **각 Phase 실행 전 반드시 Pre-Execution Report** 작성 → 사용자 승인 → 실행
+- Report 구성: 목적 / 수정 파일 / 변경 내역 / 변경 안 되는 것 (명시적 배제) / 리스크 / 검증 방법 / 사용자 승인 필요 사항 / 예상 시간 / 산출물
+- Phase 완료 후: "Post-Execution Summary" + 다음 Phase Pre-Execution Report 요청
+- 여러 Phase 묶어 임의 실행 금지 (🛡️ §1 자율성 등급 B3 "범위 외 작업" 위반)
+- `flutter_tools`처럼 `-D` vs `-d` 오타로 인해 Generated.xcconfig에 UUID가 base64 DART_DEFINES로 박제되는 등 캐시 오염이 발생 가능 → Phase 시작 전 `git status` + `flutter clean` 필요 시 실행
+- Phase 간 DB/Edge Function/배포 같은 **사용자 외부 액션이 필요한 중단점**을 명시
+
 ---
 
 ## 사용 가이드
@@ -155,3 +174,4 @@
 
 ## 업데이트 이력
 - 2026-04-22: §2/§3/§4 확장 + §17 Sentry 에러 로깅 + §18 Git 멀티계정 신규 (abba 출시 준비 세션에서 발견)
+- 2026-04-23: §2-1 AI fallback DB 오염 + §19 MoAI Phase-first Pre-Execution Report 신규 (abba pending/retry 아키텍처 세션)

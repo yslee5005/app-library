@@ -440,6 +440,7 @@ assets/mock/
 - OpenAI TTS 연동
 - Supabase Auth + DB
 - 기도 기록 저장/조회
+- **Pending/Retry 아키텍처** (2026-04-23): 유저 원본 즉시 저장(`status='pending'`) → AI 호출 분리 → 실패 시 에러 UI + 클라 3회 재시도 → Edge Function lazy retry (유저 재방문 홈 진입 트리거) → 완성 시 환영 모달. 음성 파일 영구 보존 (회고 기능). 개별/전체 삭제 권한 제공.
 
 ### Phase 3: 소셜 + 결제
 - 커뮤니티 CRUD (Supabase)
@@ -460,16 +461,21 @@ assets/mock/
 - 모든 UI 텍스트 → ARB 파일 (하드코딩 금지)
 - 버튼 최소 56dp, 텍스트 최소 18pt
 - Premium 잠금 → 타이틀 보임 + 내용 블러
-- 기도 녹음 데이터 → 온디바이스만 (서버 전송 시 텍스트만)
+- 유저 제출 원본(텍스트/음성) → **AI 호출 전 즉시 Supabase 저장** (status='pending')
+- 기도 음성 파일 영구 저장 (유저 회고 목적) — Privacy Policy에 명시, 개별/전체 삭제 권한 제공
+- AI 분석 실패 → 명시적 에러 UI + [재시도] 버튼 (클라 세션 3회) + Edge Function lazy retry (유저 재방문 시)
+- 완성된 기도(`status='completed'`) → read-only, 재시도 버튼 노출 금지 (토큰 낭비 방지)
 
 ### Never
 - 시니어에게 복잡한 온보딩 (슬라이드 3장 이상)
 - 5개 이상 탭바
 - 작은 글씨 (16pt 미만)
 - 스트릭 깨졌을 때 부정적 메시지
-- 기도 음성 파일 서버 저장 (프라이버시)
+- AI 실패 시 하드코딩 응답을 "진짜 AI 결과"처럼 표시 (DB 오염 + 신뢰 위반)
+- 기도 원본 유실 (AI 실패해도 텍스트/음성은 반드시 보존)
 
 ### Ask First
 - 새 AI 프롬프트 변경
 - Supabase 스키마 변경
 - 가격 변경
+- Privacy Policy 수정
