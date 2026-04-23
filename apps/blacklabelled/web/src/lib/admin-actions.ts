@@ -605,21 +605,36 @@ export async function reorderProductImages(
   return { success: true };
 }
 
-// ── Images - Delete (soft) ───────────────────────────────
+// ── Images - Delete (hard) ───────────────────────────────
 
 export async function deleteProductImage(
   imageId: string
 ): Promise<{ success: true } | { error: string }> {
   const supabase = await createSupabaseServerClient();
 
+  const { data: img } = await supabase
+    .from("product_images")
+    .select("storage_path")
+    .eq("id", imageId)
+    .single();
+
   const { error } = await supabase
     .from("product_images")
-    .update({ deleted_at: new Date().toISOString() })
+    .delete()
     .eq("id", imageId);
 
   if (error) {
     console.error("deleteProductImage error:", error);
     return { error: error.message };
+  }
+
+  if (img?.storage_path) {
+    const { error: storageError } = await supabase.storage
+      .from("blacklabelled")
+      .remove([img.storage_path]);
+    if (storageError) {
+      console.error("deleteProductImage storage cleanup error:", storageError);
+    }
   }
 
   revalidatePath("/");
