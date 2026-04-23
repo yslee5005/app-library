@@ -1,7 +1,10 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:app_lib_logging/logging.dart';
+import 'package:visibility_detector/visibility_detector.dart';
 
 import '../../../l10n/generated/app_localizations.dart';
 import '../../../models/prayer.dart';
@@ -39,10 +42,41 @@ class _PrayerDashboardViewState extends ConsumerState<PrayerDashboardView> {
   bool _premiumLoading = false;
   PremiumContent? _premiumContent;
 
+  /// Phase 4.1 INT-032 — 3s fallback timer. If the user never scrolls to the
+  /// Premium region (cold start on iPad where the list fits on screen), fire
+  /// T3 anyway so Pro users are not penalised for sitting still.
+  Timer? _t3FallbackTimer;
+
   @override
   void initState() {
     super.initState();
     prayerLog.info('Prayer dashboard opened');
+    _t3FallbackTimer = Timer(const Duration(seconds: 3), _maybeTriggerT3);
+  }
+
+  @override
+  void dispose() {
+    _t3FallbackTimer?.cancel();
+    super.dispose();
+  }
+
+  /// Phase 4.1 INT-032 — T3 trigger gate. Fired either by VisibilityDetector
+  /// (scroll >= 30%) or the 3s fallback timer, whichever comes first. The
+  /// notifier's `t3Triggered` flag prevents re-firing across sources.
+  void _maybeTriggerT3() {
+    if (!mounted) return;
+    final sections = ref.read(prayerSectionsProvider);
+    if (sections.t3Triggered) return;
+    final isPremium = ref.read(isPremiumProvider).value ?? false;
+    if (!isPremium) return;
+    // Need T1 and T2 context for coherent T3 generation.
+    if (sections.summary == null ||
+        sections.scripture == null ||
+        sections.bibleStory == null) {
+      return;
+    }
+    ref.read(prayerSectionsProvider.notifier).markT3Triggered();
+    _loadPremiumContent();
   }
 
   /// Phase 4.1 INT-028 — wrap a card that can appear mid-scroll (T2 / T3
@@ -226,12 +260,21 @@ class _PrayerDashboardViewState extends ConsumerState<PrayerDashboardView> {
             ),
           ),
         // 4. Prayer Coaching Card (Pro — first Pro card, on-demand analysis)
-        StaggeredFadeIn(
-          index: i++,
-          child: PrayerCoachingCard(
-            locale: locale,
-            isUserPremium: isPremium,
-            onUnlock: showPremiumUpgrade,
+        //    Wraps the Pro region entry with a VisibilityDetector so that
+        //    scrolling into the Pro territory fires T3 eagerly (faster
+        //    than the 3s fallback) for Pro users.
+        VisibilityDetector(
+          key: const Key('prayer-pro-region'),
+          onVisibilityChanged: (info) {
+            if (info.visibleFraction >= 0.3) _maybeTriggerT3();
+          },
+          child: StaggeredFadeIn(
+            index: i++,
+            child: PrayerCoachingCard(
+              locale: locale,
+              isUserPremium: isPremium,
+              onUnlock: showPremiumUpgrade,
+            ),
           ),
         ),
         // 5. Historical Story Card (T3 premium on-demand)

@@ -197,19 +197,28 @@ File: `apps/abba/lib/features/dashboard/view/prayer_dashboard_view.dart`
 - FadeIn animations (t2/t3 도착 시)
 - VisibilityDetector for T3 trigger
 
-### INT-029 — qt_dashboard_view Progressive
-File: `apps/abba/lib/features/dashboard/view/qt_dashboard_view.dart` (존재 시)
+### INT-029 — qt_dashboard_view Progressive **[DEFERRED]**
+File: `apps/abba/lib/features/dashboard/view/qt_dashboard_view.dart`
 - 동일 패턴 적용
+- **Deferred reason**: INT-023 (QT tier analyzers) not implemented in 4.1a
+  scope. QT mode still uses single-call `analyzeMeditation` → no tier
+  stream to drive progressive rendering. Apply the Prayer INT-028 pattern
+  when QT streaming lands in a future phase.
 
-### INT-030 — Scripture Card with streaming
+### INT-030 — Scripture Card with streaming **[DEFERRED]**
 File: `apps/abba/lib/features/dashboard/widgets/scripture_card.dart`
 - streaming 중 "reference + validation 진행" UI
 - verse text 도착 시 expand
+- **Deferred reason**: true token-level SSE not yet wired through
+  tier1_analyzer (current impl awaits full JSON). Card is only shown
+  once T1 settles, so there is no intermediate state to render. Revisit
+  when `generateContentStream` is used end-to-end.
 
-### INT-031 — PrayerSummaryCard streaming (기존 TypewriterText 대체)
+### INT-031 — PrayerSummaryCard streaming **[DEFERRED]**
 File: `apps/abba/lib/features/dashboard/widgets/prayer_summary_card.dart`
-- SSE chunks를 직접 render (기존 TypewriterText는 이미 받은 텍스트 애니메이션)
-- 실제 Gemini streaming chunks 표시
+- SSE chunks를 직접 render
+- **Deferred reason**: same as INT-030. The existing TypewriterText
+  (fake streaming) is good enough UX until true SSE is in place.
 
 ### INT-032 — VisibilityDetector T3 trigger
 File: `apps/abba/lib/features/dashboard/view/prayer_dashboard_view.dart`
