@@ -1245,60 +1245,61 @@ class AppLocalizationsTh extends AppLocalizations {
   String get qtPassagesRetryButton => 'ลองอีกครั้ง';
 
   @override
-  String get aiStreamingInitial => 'Meditating on your prayer...';
+  String get aiStreamingInitial => 'เรากำลังใคร่ครวญคำอธิษฐานของคุณ...';
 
   @override
-  String get aiTierProcessing => 'More reflections coming...';
+  String get aiTierProcessing => 'การไตร่ตรองเพิ่มเติมกำลังมา...';
 
   @override
-  String get aiScriptureValidating => 'Finding the right scripture...';
+  String get aiScriptureValidating => 'กำลังค้นหาข้อพระคัมภีร์ที่เหมาะสม...';
 
   @override
   String get aiScriptureValidatingFailed =>
-      'Preparing this scripture for you...';
+      'กำลังเตรียมข้อพระคัมภีร์นี้ให้คุณ...';
 
   @override
-  String get aiTemplateFallback => 'While we prepare your full analysis...';
+  String get aiTemplateFallback => 'ในขณะที่เราเตรียมการวิเคราะห์ฉบับเต็ม...';
 
   @override
-  String get aiPendingMore => 'Preparing more...';
+  String get aiPendingMore => 'กำลังเตรียมเพิ่มเติม...';
 
   @override
-  String get aiTierIncomplete => 'Coming soon, check back later';
+  String get aiTierIncomplete => 'มาถึงเร็วๆ นี้ โปรดกลับมาตรวจสอบภายหลัง';
 
   @override
-  String get tierCompleted => 'New reflection added';
+  String get tierCompleted => 'เพิ่มการไตร่ตรองใหม่แล้ว';
 
   @override
-  String get tierProcessingNotice => 'Generating more reflections...';
+  String get tierProcessingNotice => 'กำลังสร้างการไตร่ตรองเพิ่มเติม...';
 
   @override
-  String get proSectionLoading => 'Preparing your premium content...';
+  String get proSectionLoading => 'กำลังเตรียมเนื้อหาพรีเมียมให้คุณ...';
 
   @override
-  String get proSectionWillArrive => 'Your deep reflection will appear here';
+  String get proSectionWillArrive =>
+      'การไตร่ตรองอย่างลึกซึ้งของคุณจะปรากฏที่นี่';
 
   @override
-  String get templateCategoryHealth => 'For Health Concerns';
+  String get templateCategoryHealth => 'สำหรับปัญหาสุขภาพ';
 
   @override
-  String get templateCategoryFamily => 'For Family';
+  String get templateCategoryFamily => 'สำหรับครอบครัว';
 
   @override
-  String get templateCategoryWork => 'For Work & Studies';
+  String get templateCategoryWork => 'สำหรับการทำงานและการเรียน';
 
   @override
-  String get templateCategoryGratitude => 'A Thankful Heart';
+  String get templateCategoryGratitude => 'หัวใจที่สำนึกในพระคุณ';
 
   @override
-  String get templateCategoryGrief => 'In Grief or Loss';
+  String get templateCategoryGrief => 'ในความโศกเศร้าหรือการสูญเสีย';
 
   @override
-  String get sectionStatusCompleted => 'Analysis complete';
+  String get sectionStatusCompleted => 'วิเคราะห์เสร็จสมบูรณ์';
 
   @override
-  String get sectionStatusPartial => 'Partial analysis (more coming)';
+  String get sectionStatusPartial => 'วิเคราะห์บางส่วน (กำลังมาเพิ่ม)';
 
   @override
-  String get sectionStatusPending => 'Analysis in progress';
+  String get sectionStatusPending => 'กำลังวิเคราะห์';
 }

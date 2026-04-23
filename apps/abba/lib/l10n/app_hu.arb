@@ -490,11 +490,35 @@
   "homeFirstPrayerPrompt": "Kezdd el az első imádat",
   "homeFirstQtPrompt": "Kezdd el az első QT-dat",
   "homeActivityPrompt": "Ma is {activityName}",
-  "@homeActivityPrompt": {"placeholders": {"activityName": {"type": "String"}}},
+  "@homeActivityPrompt": {
+    "placeholders": {
+      "activityName": {
+        "type": "String"
+      }
+    }
+  },
   "homeStreakInProgress": "{count}. folyamatos {activityName} napja",
-  "@homeStreakInProgress": {"placeholders": {"count": {"type": "int"}, "activityName": {"type": "String"}}},
+  "@homeStreakInProgress": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "activityName": {
+        "type": "String"
+      }
+    }
+  },
   "homeDaysSinceLastActivity": "{days} napja volt az utolsó {activityName}",
-  "@homeDaysSinceLastActivity": {"placeholders": {"days": {"type": "int"}, "activityName": {"type": "String"}}},
+  "@homeDaysSinceLastActivity": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      },
+      "activityName": {
+        "type": "String"
+      }
+    }
+  },
   "homeActivityPrayer": "ima",
   "homeActivityQt": "QT",
   "prayerPlayerLoading": "Betöltés...",
@@ -502,5 +526,24 @@
   "heatmapLegendLess": "Kevesebb",
   "heatmapLegendMore": "Több",
   "qtPassagesLoadError": "A mai igék betöltése nem sikerült. Ellenőrizze a kapcsolatot.",
-  "qtPassagesRetryButton": "Újrapróbálkozás"
+  "qtPassagesRetryButton": "Újrapróbálkozás",
+  "aiStreamingInitial": "Elmélkedünk az imádságodon...",
+  "aiTierProcessing": "További gondolatok érkeznek...",
+  "aiScriptureValidating": "Keressük a megfelelő igehelyet...",
+  "aiScriptureValidatingFailed": "Készítjük számodra ezt az igehelyet...",
+  "aiTemplateFallback": "Miközben elkészítjük a teljes elemzést...",
+  "aiPendingMore": "Még többet készítünk...",
+  "aiTierIncomplete": "Hamarosan, nézz vissza később",
+  "tierCompleted": "Új elmélkedés hozzáadva",
+  "tierProcessingNotice": "További elmélkedéseket készítünk...",
+  "proSectionLoading": "Készítjük a prémium tartalmat...",
+  "proSectionWillArrive": "A mélyebb elmélkedés itt jelenik meg",
+  "templateCategoryHealth": "Egészségügyi aggodalmakért",
+  "templateCategoryFamily": "A családért",
+  "templateCategoryWork": "Munkáért és tanulásért",
+  "templateCategoryGratitude": "Hálás szív",
+  "templateCategoryGrief": "Gyászban vagy veszteségben",
+  "sectionStatusCompleted": "Elemzés kész",
+  "sectionStatusPartial": "Részleges elemzés (további jön)",
+  "sectionStatusPending": "Elemzés folyamatban"
 }

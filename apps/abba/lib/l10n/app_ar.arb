@@ -490,11 +490,35 @@
   "homeFirstPrayerPrompt": "ابدأ صلاتك الأولى",
   "homeFirstQtPrompt": "ابدأ QT الأول",
   "homeActivityPrompt": "اليوم أيضًا قم بـ{activityName}",
-  "@homeActivityPrompt": {"placeholders": {"activityName": {"type": "String"}}},
+  "@homeActivityPrompt": {
+    "placeholders": {
+      "activityName": {
+        "type": "String"
+      }
+    }
+  },
   "homeStreakInProgress": "اليوم {count} متواصل من {activityName}",
-  "@homeStreakInProgress": {"placeholders": {"count": {"type": "int"}, "activityName": {"type": "String"}}},
+  "@homeStreakInProgress": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "activityName": {
+        "type": "String"
+      }
+    }
+  },
   "homeDaysSinceLastActivity": "مر {days} أيام منذ آخر {activityName}",
-  "@homeDaysSinceLastActivity": {"placeholders": {"days": {"type": "int"}, "activityName": {"type": "String"}}},
+  "@homeDaysSinceLastActivity": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      },
+      "activityName": {
+        "type": "String"
+      }
+    }
+  },
   "homeActivityPrayer": "صلاة",
   "homeActivityQt": "QT",
   "prayerPlayerLoading": "جارٍ التحميل...",
@@ -502,5 +526,24 @@
   "heatmapLegendLess": "أقل",
   "heatmapLegendMore": "أكثر",
   "qtPassagesLoadError": "تعذّر تحميل آيات اليوم. يُرجى التحقق من الاتصال.",
-  "qtPassagesRetryButton": "إعادة المحاولة"
+  "qtPassagesRetryButton": "إعادة المحاولة",
+  "aiStreamingInitial": "نتأمل في صلاتك...",
+  "aiTierProcessing": "المزيد من التأملات قادمة...",
+  "aiScriptureValidating": "نبحث عن الآية المناسبة...",
+  "aiScriptureValidatingFailed": "نعدّ هذه الآية من أجلك...",
+  "aiTemplateFallback": "بينما نعدّ تحليلك الكامل...",
+  "aiPendingMore": "نُعدّ المزيد...",
+  "aiTierIncomplete": "قريبًا، يرجى التحقق لاحقًا",
+  "tierCompleted": "تمت إضافة تأمل جديد",
+  "tierProcessingNotice": "نُنشئ المزيد من التأملات...",
+  "proSectionLoading": "نُحضّر محتواك المميز...",
+  "proSectionWillArrive": "سيظهر تأملك العميق هنا",
+  "templateCategoryHealth": "من أجل المخاوف الصحية",
+  "templateCategoryFamily": "من أجل العائلة",
+  "templateCategoryWork": "من أجل العمل والدراسات",
+  "templateCategoryGratitude": "قلب شاكر",
+  "templateCategoryGrief": "في الحزن أو الفقدان",
+  "sectionStatusCompleted": "اكتمل التحليل",
+  "sectionStatusPartial": "تحليل جزئي (المزيد قادم)",
+  "sectionStatusPending": "التحليل قيد التقدم"
 }

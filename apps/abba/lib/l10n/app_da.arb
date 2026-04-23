@@ -490,11 +490,35 @@
   "homeFirstPrayerPrompt": "Start din første bøn",
   "homeFirstQtPrompt": "Start din første QT",
   "homeActivityPrompt": "Lav {activityName} også i dag",
-  "@homeActivityPrompt": {"placeholders": {"activityName": {"type": "String"}}},
+  "@homeActivityPrompt": {
+    "placeholders": {
+      "activityName": {
+        "type": "String"
+      }
+    }
+  },
   "homeStreakInProgress": "Dag {count} fortløbende {activityName}",
-  "@homeStreakInProgress": {"placeholders": {"count": {"type": "int"}, "activityName": {"type": "String"}}},
+  "@homeStreakInProgress": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "activityName": {
+        "type": "String"
+      }
+    }
+  },
   "homeDaysSinceLastActivity": "Der er gået {days} dage siden sidste {activityName}",
-  "@homeDaysSinceLastActivity": {"placeholders": {"days": {"type": "int"}, "activityName": {"type": "String"}}},
+  "@homeDaysSinceLastActivity": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      },
+      "activityName": {
+        "type": "String"
+      }
+    }
+  },
   "homeActivityPrayer": "bøn",
   "homeActivityQt": "QT",
   "prayerPlayerLoading": "Indlæser...",
@@ -502,5 +526,24 @@
   "heatmapLegendLess": "Mindre",
   "heatmapLegendMore": "Mere",
   "qtPassagesLoadError": "Dagens skriftsteder kunne ikke indlæses. Tjek din forbindelse.",
-  "qtPassagesRetryButton": "Prøv igen"
+  "qtPassagesRetryButton": "Prøv igen",
+  "aiStreamingInitial": "Mediterer over din bøn...",
+  "aiTierProcessing": "Flere refleksioner på vej...",
+  "aiScriptureValidating": "Finder det rette skriftsted...",
+  "aiScriptureValidatingFailed": "Forbereder dette skriftsted til dig...",
+  "aiTemplateFallback": "Mens vi forbereder din fulde analyse...",
+  "aiPendingMore": "Forbereder mere...",
+  "aiTierIncomplete": "Kommer snart, kig forbi senere",
+  "tierCompleted": "Ny refleksion tilføjet",
+  "tierProcessingNotice": "Genererer flere refleksioner...",
+  "proSectionLoading": "Forbereder dit premium-indhold...",
+  "proSectionWillArrive": "Din dybe refleksion vises her",
+  "templateCategoryHealth": "Til helbredsbekymringer",
+  "templateCategoryFamily": "Til familien",
+  "templateCategoryWork": "Til arbejde og studier",
+  "templateCategoryGratitude": "Et taknemmeligt hjerte",
+  "templateCategoryGrief": "I sorg eller tab",
+  "sectionStatusCompleted": "Analyse fuldført",
+  "sectionStatusPartial": "Delvis analyse (mere på vej)",
+  "sectionStatusPending": "Analyse i gang"
 }

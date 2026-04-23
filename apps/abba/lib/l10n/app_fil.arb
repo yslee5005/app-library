@@ -490,11 +490,35 @@
   "homeFirstPrayerPrompt": "Simulan ang iyong unang panalangin",
   "homeFirstQtPrompt": "Simulan ang iyong unang QT",
   "homeActivityPrompt": "Ngayon din ay {activityName}",
-  "@homeActivityPrompt": {"placeholders": {"activityName": {"type": "String"}}},
+  "@homeActivityPrompt": {
+    "placeholders": {
+      "activityName": {
+        "type": "String"
+      }
+    }
+  },
   "homeStreakInProgress": "Ika-{count} araw ng tuloy-tuloy na {activityName}",
-  "@homeStreakInProgress": {"placeholders": {"count": {"type": "int"}, "activityName": {"type": "String"}}},
+  "@homeStreakInProgress": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "activityName": {
+        "type": "String"
+      }
+    }
+  },
   "homeDaysSinceLastActivity": "{days} araw na mula sa huling {activityName}",
-  "@homeDaysSinceLastActivity": {"placeholders": {"days": {"type": "int"}, "activityName": {"type": "String"}}},
+  "@homeDaysSinceLastActivity": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      },
+      "activityName": {
+        "type": "String"
+      }
+    }
+  },
   "homeActivityPrayer": "panalangin",
   "homeActivityQt": "QT",
   "prayerPlayerLoading": "Naglo-load...",
@@ -502,5 +526,24 @@
   "heatmapLegendLess": "Kaunti",
   "heatmapLegendMore": "Marami",
   "qtPassagesLoadError": "Hindi ma-load ang mga talata ngayong araw. Pakisuri ang iyong koneksyon.",
-  "qtPassagesRetryButton": "Subukan muli"
+  "qtPassagesRetryButton": "Subukan muli",
+  "aiStreamingInitial": "Nagninilay sa iyong panalangin...",
+  "aiTierProcessing": "May mga reflection pang darating...",
+  "aiScriptureValidating": "Naghahanap ng tamang kasulatan...",
+  "aiScriptureValidatingFailed": "Inihahanda ang kasulatang ito para sa iyo...",
+  "aiTemplateFallback": "Habang inihahanda ang iyong buong pagsusuri...",
+  "aiPendingMore": "Naghahanda pa...",
+  "aiTierIncomplete": "Darating kaagad, balikan mamaya",
+  "tierCompleted": "May bagong reflection",
+  "tierProcessingNotice": "Gumagawa pa ng karagdagang reflection...",
+  "proSectionLoading": "Inihahanda ang iyong premium content...",
+  "proSectionWillArrive": "Ang iyong malalim na reflection ay lilitaw dito",
+  "templateCategoryHealth": "Para sa kalusugan",
+  "templateCategoryFamily": "Para sa pamilya",
+  "templateCategoryWork": "Para sa trabaho at pag-aaral",
+  "templateCategoryGratitude": "Isang pusong nagpapasalamat",
+  "templateCategoryGrief": "Sa lungkot o pagkawala",
+  "sectionStatusCompleted": "Tapos na ang pagsusuri",
+  "sectionStatusPartial": "Bahagyang pagsusuri (mayroon pang darating)",
+  "sectionStatusPending": "Pagsusuri sa proseso"
 }

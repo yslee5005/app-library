@@ -490,11 +490,35 @@
   "homeFirstPrayerPrompt": "Begin uw eerste gebed",
   "homeFirstQtPrompt": "Begin uw eerste QT",
   "homeActivityPrompt": "Doe vandaag ook {activityName}",
-  "@homeActivityPrompt": {"placeholders": {"activityName": {"type": "String"}}},
+  "@homeActivityPrompt": {
+    "placeholders": {
+      "activityName": {
+        "type": "String"
+      }
+    }
+  },
   "homeStreakInProgress": "Dag {count} doorlopend {activityName}",
-  "@homeStreakInProgress": {"placeholders": {"count": {"type": "int"}, "activityName": {"type": "String"}}},
+  "@homeStreakInProgress": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "activityName": {
+        "type": "String"
+      }
+    }
+  },
   "homeDaysSinceLastActivity": "Het is {days} dagen geleden sinds uw laatste {activityName}",
-  "@homeDaysSinceLastActivity": {"placeholders": {"days": {"type": "int"}, "activityName": {"type": "String"}}},
+  "@homeDaysSinceLastActivity": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      },
+      "activityName": {
+        "type": "String"
+      }
+    }
+  },
   "homeActivityPrayer": "gebed",
   "homeActivityQt": "QT",
   "prayerPlayerLoading": "Laden...",
@@ -502,5 +526,24 @@
   "heatmapLegendLess": "Minder",
   "heatmapLegendMore": "Meer",
   "qtPassagesLoadError": "De passages van vandaag konden niet worden geladen. Controleer je verbinding.",
-  "qtPassagesRetryButton": "Opnieuw proberen"
+  "qtPassagesRetryButton": "Opnieuw proberen",
+  "aiStreamingInitial": "We mediteren over je gebed...",
+  "aiTierProcessing": "Meer reflecties komen eraan...",
+  "aiScriptureValidating": "We zoeken het juiste schriftgedeelte...",
+  "aiScriptureValidatingFailed": "We bereiden dit schriftgedeelte voor je voor...",
+  "aiTemplateFallback": "Terwijl we je volledige analyse voorbereiden...",
+  "aiPendingMore": "Meer wordt voorbereid...",
+  "aiTierIncomplete": "Komt binnenkort, kijk later nog eens",
+  "tierCompleted": "Nieuwe reflectie toegevoegd",
+  "tierProcessingNotice": "We maken meer reflecties...",
+  "proSectionLoading": "We bereiden je premium inhoud voor...",
+  "proSectionWillArrive": "Je diepe reflectie verschijnt hier",
+  "templateCategoryHealth": "Voor gezondheidszorgen",
+  "templateCategoryFamily": "Voor het gezin",
+  "templateCategoryWork": "Voor werk en studie",
+  "templateCategoryGratitude": "Een dankbaar hart",
+  "templateCategoryGrief": "In rouw of verlies",
+  "sectionStatusCompleted": "Analyse voltooid",
+  "sectionStatusPartial": "Gedeeltelijke analyse (meer komt)",
+  "sectionStatusPending": "Analyse loopt"
 }

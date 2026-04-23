@@ -490,11 +490,35 @@
   "homeFirstPrayerPrompt": "Beginnen Sie Ihr erstes Gebet",
   "homeFirstQtPrompt": "Beginnen Sie Ihr erstes QT",
   "homeActivityPrompt": "Auch heute {activityName}",
-  "@homeActivityPrompt": {"placeholders": {"activityName": {"type": "String"}}},
+  "@homeActivityPrompt": {
+    "placeholders": {
+      "activityName": {
+        "type": "String"
+      }
+    }
+  },
   "homeStreakInProgress": "Tag {count} durchgehend {activityName}",
-  "@homeStreakInProgress": {"placeholders": {"count": {"type": "int"}, "activityName": {"type": "String"}}},
+  "@homeStreakInProgress": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "activityName": {
+        "type": "String"
+      }
+    }
+  },
   "homeDaysSinceLastActivity": "Es sind {days} Tage seit Ihrem letzten {activityName}",
-  "@homeDaysSinceLastActivity": {"placeholders": {"days": {"type": "int"}, "activityName": {"type": "String"}}},
+  "@homeDaysSinceLastActivity": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      },
+      "activityName": {
+        "type": "String"
+      }
+    }
+  },
   "homeActivityPrayer": "Gebet",
   "homeActivityQt": "QT",
   "prayerPlayerLoading": "Wird geladen...",
@@ -502,5 +526,24 @@
   "heatmapLegendLess": "Weniger",
   "heatmapLegendMore": "Mehr",
   "qtPassagesLoadError": "Die heutigen Bibelstellen konnten nicht geladen werden. Bitte Verbindung prüfen.",
-  "qtPassagesRetryButton": "Erneut versuchen"
+  "qtPassagesRetryButton": "Erneut versuchen",
+  "aiStreamingInitial": "Wir meditieren über dein Gebet...",
+  "aiTierProcessing": "Weitere Einsichten folgen...",
+  "aiScriptureValidating": "Wir suchen das passende Schriftwort...",
+  "aiScriptureValidatingFailed": "Wir bereiten dieses Schriftwort für dich vor...",
+  "aiTemplateFallback": "Während wir deine vollständige Analyse vorbereiten...",
+  "aiPendingMore": "Weitere Inhalte werden vorbereitet...",
+  "aiTierIncomplete": "Kommt bald, schau später noch einmal vorbei",
+  "tierCompleted": "Neue Einsicht hinzugefügt",
+  "tierProcessingNotice": "Wir erstellen weitere Einsichten...",
+  "proSectionLoading": "Dein Premium-Inhalt wird vorbereitet...",
+  "proSectionWillArrive": "Deine tiefere Einsicht erscheint hier",
+  "templateCategoryHealth": "Für gesundheitliche Sorgen",
+  "templateCategoryFamily": "Für die Familie",
+  "templateCategoryWork": "Für Arbeit und Studium",
+  "templateCategoryGratitude": "Ein dankbares Herz",
+  "templateCategoryGrief": "In Trauer oder Verlust",
+  "sectionStatusCompleted": "Analyse abgeschlossen",
+  "sectionStatusPartial": "Teilweise Analyse (weiteres folgt)",
+  "sectionStatusPending": "Analyse läuft"
 }

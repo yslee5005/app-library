@@ -1261,60 +1261,60 @@ class AppLocalizationsEl extends AppLocalizations {
   String get qtPassagesRetryButton => 'Δοκιμάστε ξανά';
 
   @override
-  String get aiStreamingInitial => 'Meditating on your prayer...';
+  String get aiStreamingInitial => 'Στοχαζόμαστε την προσευχή σας...';
 
   @override
-  String get aiTierProcessing => 'More reflections coming...';
+  String get aiTierProcessing => 'Περισσότεροι στοχασμοί έρχονται...';
 
   @override
-  String get aiScriptureValidating => 'Finding the right scripture...';
+  String get aiScriptureValidating => 'Αναζητούμε το σωστό εδάφιο...';
 
   @override
   String get aiScriptureValidatingFailed =>
-      'Preparing this scripture for you...';
+      'Ετοιμάζουμε αυτό το εδάφιο για εσάς...';
 
   @override
-  String get aiTemplateFallback => 'While we prepare your full analysis...';
+  String get aiTemplateFallback => 'Ενώ ετοιμάζουμε την πλήρη ανάλυσή σας...';
 
   @override
-  String get aiPendingMore => 'Preparing more...';
+  String get aiPendingMore => 'Ετοιμάζουμε περισσότερα...';
 
   @override
-  String get aiTierIncomplete => 'Coming soon, check back later';
+  String get aiTierIncomplete => 'Έρχεται σύντομα, ελέγξτε αργότερα';
 
   @override
-  String get tierCompleted => 'New reflection added';
+  String get tierCompleted => 'Προστέθηκε νέος στοχασμός';
 
   @override
-  String get tierProcessingNotice => 'Generating more reflections...';
+  String get tierProcessingNotice => 'Δημιουργούμε περισσότερους στοχασμούς...';
 
   @override
-  String get proSectionLoading => 'Preparing your premium content...';
+  String get proSectionLoading => 'Ετοιμάζουμε το premium περιεχόμενό σας...';
 
   @override
-  String get proSectionWillArrive => 'Your deep reflection will appear here';
+  String get proSectionWillArrive => 'Ο βαθύς στοχασμός σας θα εμφανιστεί εδώ';
 
   @override
-  String get templateCategoryHealth => 'For Health Concerns';
+  String get templateCategoryHealth => 'Για θέματα υγείας';
 
   @override
-  String get templateCategoryFamily => 'For Family';
+  String get templateCategoryFamily => 'Για την οικογένεια';
 
   @override
-  String get templateCategoryWork => 'For Work & Studies';
+  String get templateCategoryWork => 'Για εργασία και σπουδές';
 
   @override
-  String get templateCategoryGratitude => 'A Thankful Heart';
+  String get templateCategoryGratitude => 'Μια ευγνώμων καρδιά';
 
   @override
-  String get templateCategoryGrief => 'In Grief or Loss';
+  String get templateCategoryGrief => 'Σε θλίψη ή απώλεια';
 
   @override
-  String get sectionStatusCompleted => 'Analysis complete';
+  String get sectionStatusCompleted => 'Η ανάλυση ολοκληρώθηκε';
 
   @override
-  String get sectionStatusPartial => 'Partial analysis (more coming)';
+  String get sectionStatusPartial => 'Μερική ανάλυση (έρχονται περισσότερα)';
 
   @override
-  String get sectionStatusPending => 'Analysis in progress';
+  String get sectionStatusPending => 'Η ανάλυση σε εξέλιξη';
 }

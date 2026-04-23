@@ -490,11 +490,35 @@
   "homeFirstPrayerPrompt": "သင်၏ပထမဆုံးဆုတောင်းကိုစတင်ပါ",
   "homeFirstQtPrompt": "သင်၏ပထမဆုံး QT ကိုစတင်ပါ",
   "homeActivityPrompt": "ဒီနေ့လည်း {activityName} လုပ်ပါ",
-  "@homeActivityPrompt": {"placeholders": {"activityName": {"type": "String"}}},
+  "@homeActivityPrompt": {
+    "placeholders": {
+      "activityName": {
+        "type": "String"
+      }
+    }
+  },
   "homeStreakInProgress": "{activityName} ဆက်တိုက် {count} ရက်မြောက်",
-  "@homeStreakInProgress": {"placeholders": {"count": {"type": "int"}, "activityName": {"type": "String"}}},
+  "@homeStreakInProgress": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "activityName": {
+        "type": "String"
+      }
+    }
+  },
   "homeDaysSinceLastActivity": "နောက်ဆုံး {activityName} ကတည်းက {days} ရက်ကြာပြီ",
-  "@homeDaysSinceLastActivity": {"placeholders": {"days": {"type": "int"}, "activityName": {"type": "String"}}},
+  "@homeDaysSinceLastActivity": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      },
+      "activityName": {
+        "type": "String"
+      }
+    }
+  },
   "homeActivityPrayer": "ဆုတောင်း",
   "homeActivityQt": "QT",
   "prayerPlayerLoading": "ဖွင့်နေသည်...",
@@ -502,5 +526,24 @@
   "heatmapLegendLess": "နည်း",
   "heatmapLegendMore": "များ",
   "qtPassagesLoadError": "ယနေ့ကျမ်းပိုဒ်များကို တင်၍မရပါ။ ချိတ်ဆက်မှုကို စစ်ဆေးပါ။",
-  "qtPassagesRetryButton": "ထပ်မံကြိုးစားပါ"
+  "qtPassagesRetryButton": "ထပ်မံကြိုးစားပါ",
+  "aiStreamingInitial": "သင်၏ဆုတောင်းကို ဆင်ခြင်နေပါသည်...",
+  "aiTierProcessing": "ထပ်မံသောစဉ်းစားမှုများ လာနေပါသည်...",
+  "aiScriptureValidating": "သင့်လျော်သောကျမ်းပိုဒ်ကို ရှာနေပါသည်...",
+  "aiScriptureValidatingFailed": "ဤကျမ်းပိုဒ်ကို သင့်အတွက် ပြင်ဆင်နေပါသည်...",
+  "aiTemplateFallback": "သင်၏ခြုံငုံသုံးသပ်ချက်ကို ပြင်ဆင်နေစဉ်...",
+  "aiPendingMore": "ထပ်မံ ပြင်ဆင်နေပါသည်...",
+  "aiTierIncomplete": "မကြာမီ ရောက်မည်၊ နောက်ပိုင်း ပြန်ကြည့်ပါ",
+  "tierCompleted": "စဉ်းစားမှုအသစ် ထပ်ထည့်ထားသည်",
+  "tierProcessingNotice": "ထပ်မံစဉ်းစားမှုများ ဖန်တီးနေပါသည်...",
+  "proSectionLoading": "သင်၏ premium အကြောင်းအရာကို ပြင်ဆင်နေပါသည်...",
+  "proSectionWillArrive": "သင်၏နက်နဲသော စဉ်းစားမှုသည် ဤနေရာတွင် ပေါ်လာမည်",
+  "templateCategoryHealth": "ကျန်းမာရေးစိုးရိမ်မှုများအတွက်",
+  "templateCategoryFamily": "မိသားစုအတွက်",
+  "templateCategoryWork": "အလုပ်နှင့် ပညာရေးအတွက်",
+  "templateCategoryGratitude": "ကျေးဇူးတင်သောစိတ်",
+  "templateCategoryGrief": "ဝမ်းနည်းခြင်း သို့မဟုတ် ဆုံးရှုံးခြင်းတွင်",
+  "sectionStatusCompleted": "သုံးသပ်ချက် ပြီးဆုံးပြီ",
+  "sectionStatusPartial": "တစ်စိတ်တစ်ပိုင်း သုံးသပ်ချက် (ထပ်လာဆဲ)",
+  "sectionStatusPending": "သုံးသပ်ချက် ဆက်လက်လုပ်ဆောင်နေသည်"
 }

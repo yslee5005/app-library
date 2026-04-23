@@ -490,11 +490,35 @@
   "homeFirstPrayerPrompt": "Bắt đầu lời cầu nguyện đầu tiên",
   "homeFirstQtPrompt": "Bắt đầu QT đầu tiên",
   "homeActivityPrompt": "Hôm nay cũng {activityName}",
-  "@homeActivityPrompt": {"placeholders": {"activityName": {"type": "String"}}},
+  "@homeActivityPrompt": {
+    "placeholders": {
+      "activityName": {
+        "type": "String"
+      }
+    }
+  },
   "homeStreakInProgress": "Ngày thứ {count} liên tục {activityName}",
-  "@homeStreakInProgress": {"placeholders": {"count": {"type": "int"}, "activityName": {"type": "String"}}},
+  "@homeStreakInProgress": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "activityName": {
+        "type": "String"
+      }
+    }
+  },
   "homeDaysSinceLastActivity": "Đã {days} ngày kể từ {activityName} cuối",
-  "@homeDaysSinceLastActivity": {"placeholders": {"days": {"type": "int"}, "activityName": {"type": "String"}}},
+  "@homeDaysSinceLastActivity": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      },
+      "activityName": {
+        "type": "String"
+      }
+    }
+  },
   "homeActivityPrayer": "cầu nguyện",
   "homeActivityQt": "QT",
   "prayerPlayerLoading": "Đang tải...",
@@ -502,5 +526,24 @@
   "heatmapLegendLess": "Ít",
   "heatmapLegendMore": "Nhiều",
   "qtPassagesLoadError": "Không thể tải các phân đoạn hôm nay. Vui lòng kiểm tra kết nối.",
-  "qtPassagesRetryButton": "Thử lại"
+  "qtPassagesRetryButton": "Thử lại",
+  "aiStreamingInitial": "Chúng tôi đang suy ngẫm lời cầu nguyện của bạn...",
+  "aiTierProcessing": "Thêm những suy ngẫm đang đến...",
+  "aiScriptureValidating": "Đang tìm câu Kinh Thánh phù hợp...",
+  "aiScriptureValidatingFailed": "Đang chuẩn bị câu Kinh Thánh này cho bạn...",
+  "aiTemplateFallback": "Trong khi chúng tôi chuẩn bị phân tích đầy đủ...",
+  "aiPendingMore": "Đang chuẩn bị thêm...",
+  "aiTierIncomplete": "Sắp đến, vui lòng quay lại sau",
+  "tierCompleted": "Đã thêm suy ngẫm mới",
+  "tierProcessingNotice": "Đang tạo thêm suy ngẫm...",
+  "proSectionLoading": "Đang chuẩn bị nội dung cao cấp của bạn...",
+  "proSectionWillArrive": "Suy ngẫm sâu sắc của bạn sẽ xuất hiện ở đây",
+  "templateCategoryHealth": "Cho những mối lo về sức khỏe",
+  "templateCategoryFamily": "Cho gia đình",
+  "templateCategoryWork": "Cho công việc và học tập",
+  "templateCategoryGratitude": "Một trái tim biết ơn",
+  "templateCategoryGrief": "Trong tang thương hay mất mát",
+  "sectionStatusCompleted": "Phân tích hoàn tất",
+  "sectionStatusPartial": "Phân tích một phần (sắp có thêm)",
+  "sectionStatusPending": "Phân tích đang diễn ra"
 }

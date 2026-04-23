@@ -490,11 +490,35 @@
   "homeFirstPrayerPrompt": "最初の祈りを始めましょう",
   "homeFirstQtPrompt": "最初のQTを始めましょう",
   "homeActivityPrompt": "今日も{activityName}してみましょう",
-  "@homeActivityPrompt": {"placeholders": {"activityName": {"type": "String"}}},
+  "@homeActivityPrompt": {
+    "placeholders": {
+      "activityName": {
+        "type": "String"
+      }
+    }
+  },
   "homeStreakInProgress": "{count}日連続{activityName}中",
-  "@homeStreakInProgress": {"placeholders": {"count": {"type": "int"}, "activityName": {"type": "String"}}},
+  "@homeStreakInProgress": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "activityName": {
+        "type": "String"
+      }
+    }
+  },
   "homeDaysSinceLastActivity": "{days}日間{activityName}を休んでいます",
-  "@homeDaysSinceLastActivity": {"placeholders": {"days": {"type": "int"}, "activityName": {"type": "String"}}},
+  "@homeDaysSinceLastActivity": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      },
+      "activityName": {
+        "type": "String"
+      }
+    }
+  },
   "homeActivityPrayer": "祈り",
   "homeActivityQt": "QT",
   "prayerPlayerLoading": "読み込み中...",
@@ -502,5 +526,24 @@
   "heatmapLegendLess": "少ない",
   "heatmapLegendMore": "多い",
   "qtPassagesLoadError": "今日の御言葉を読み込めませんでした。接続をご確認ください。",
-  "qtPassagesRetryButton": "再試行"
+  "qtPassagesRetryButton": "再試行",
+  "aiStreamingInitial": "あなたの祈りに想いを巡らせています...",
+  "aiTierProcessing": "さらなる黙想を準備しています...",
+  "aiScriptureValidating": "ふさわしいみことばを探しています...",
+  "aiScriptureValidatingFailed": "このみことばをお届けする準備中です...",
+  "aiTemplateFallback": "完全な分析を準備している間...",
+  "aiPendingMore": "準備中...",
+  "aiTierIncomplete": "もうすぐ届きます。後ほどご確認ください",
+  "tierCompleted": "新しい黙想が届きました",
+  "tierProcessingNotice": "さらなる黙想を作成しています...",
+  "proSectionLoading": "プレミアムコンテンツを準備中です...",
+  "proSectionWillArrive": "深い黙想はここに現れます",
+  "templateCategoryHealth": "健康のための祈り",
+  "templateCategoryFamily": "家族のための祈り",
+  "templateCategoryWork": "仕事と学びのための祈り",
+  "templateCategoryGratitude": "感謝の心",
+  "templateCategoryGrief": "悲しみや喪失の中で",
+  "sectionStatusCompleted": "分析完了",
+  "sectionStatusPartial": "部分的な分析(続きが届きます)",
+  "sectionStatusPending": "分析中"
 }

@@ -490,11 +490,35 @@
   "homeFirstPrayerPrompt": "Начните свою первую молитву",
   "homeFirstQtPrompt": "Начните свой первый QT",
   "homeActivityPrompt": "Сегодня тоже {activityName}",
-  "@homeActivityPrompt": {"placeholders": {"activityName": {"type": "String"}}},
+  "@homeActivityPrompt": {
+    "placeholders": {
+      "activityName": {
+        "type": "String"
+      }
+    }
+  },
   "homeStreakInProgress": "День {count} непрерывный {activityName}",
-  "@homeStreakInProgress": {"placeholders": {"count": {"type": "int"}, "activityName": {"type": "String"}}},
+  "@homeStreakInProgress": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "activityName": {
+        "type": "String"
+      }
+    }
+  },
   "homeDaysSinceLastActivity": "Прошло {days} дней с последнего {activityName}",
-  "@homeDaysSinceLastActivity": {"placeholders": {"days": {"type": "int"}, "activityName": {"type": "String"}}},
+  "@homeDaysSinceLastActivity": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      },
+      "activityName": {
+        "type": "String"
+      }
+    }
+  },
   "homeActivityPrayer": "молитва",
   "homeActivityQt": "QT",
   "prayerPlayerLoading": "Загрузка...",
@@ -502,5 +526,24 @@
   "heatmapLegendLess": "Меньше",
   "heatmapLegendMore": "Больше",
   "qtPassagesLoadError": "Не удалось загрузить сегодняшние отрывки. Проверьте подключение.",
-  "qtPassagesRetryButton": "Повторить"
+  "qtPassagesRetryButton": "Повторить",
+  "aiStreamingInitial": "Размышляем над вашей молитвой...",
+  "aiTierProcessing": "Новые размышления уже в пути...",
+  "aiScriptureValidating": "Ищем подходящий отрывок...",
+  "aiScriptureValidatingFailed": "Готовим этот отрывок для вас...",
+  "aiTemplateFallback": "Пока мы готовим полный анализ...",
+  "aiPendingMore": "Готовим ещё...",
+  "aiTierIncomplete": "Скоро будет, загляните позже",
+  "tierCompleted": "Добавлено новое размышление",
+  "tierProcessingNotice": "Создаём новые размышления...",
+  "proSectionLoading": "Готовим ваш премиум-контент...",
+  "proSectionWillArrive": "Ваше глубокое размышление появится здесь",
+  "templateCategoryHealth": "О здоровье",
+  "templateCategoryFamily": "О семье",
+  "templateCategoryWork": "О работе и учёбе",
+  "templateCategoryGratitude": "Благодарное сердце",
+  "templateCategoryGrief": "В скорби или утрате",
+  "sectionStatusCompleted": "Анализ завершён",
+  "sectionStatusPartial": "Частичный анализ (скоро будет больше)",
+  "sectionStatusPending": "Анализ выполняется"
 }

@@ -490,11 +490,35 @@
   "homeFirstPrayerPrompt": "Započnite svoju prvu molitvu",
   "homeFirstQtPrompt": "Započnite svoj prvi QT",
   "homeActivityPrompt": "Danas također {activityName}",
-  "@homeActivityPrompt": {"placeholders": {"activityName": {"type": "String"}}},
+  "@homeActivityPrompt": {
+    "placeholders": {
+      "activityName": {
+        "type": "String"
+      }
+    }
+  },
   "homeStreakInProgress": "Dan {count} kontinuirano {activityName}",
-  "@homeStreakInProgress": {"placeholders": {"count": {"type": "int"}, "activityName": {"type": "String"}}},
+  "@homeStreakInProgress": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "activityName": {
+        "type": "String"
+      }
+    }
+  },
   "homeDaysSinceLastActivity": "Prošlo je {days} dana od posljednje {activityName}",
-  "@homeDaysSinceLastActivity": {"placeholders": {"days": {"type": "int"}, "activityName": {"type": "String"}}},
+  "@homeDaysSinceLastActivity": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      },
+      "activityName": {
+        "type": "String"
+      }
+    }
+  },
   "homeActivityPrayer": "molitva",
   "homeActivityQt": "QT",
   "prayerPlayerLoading": "Učitavanje...",
@@ -502,5 +526,24 @@
   "heatmapLegendLess": "Manje",
   "heatmapLegendMore": "Više",
   "qtPassagesLoadError": "Nije moguće učitati današnje odlomke. Provjerite vezu.",
-  "qtPassagesRetryButton": "Pokušaj ponovno"
+  "qtPassagesRetryButton": "Pokušaj ponovno",
+  "aiStreamingInitial": "Razmišljamo o vašoj molitvi...",
+  "aiTierProcessing": "Stižu daljnja razmatranja...",
+  "aiScriptureValidating": "Tražimo odgovarajući biblijski odlomak...",
+  "aiScriptureValidatingFailed": "Pripremamo ovaj odlomak za vas...",
+  "aiTemplateFallback": "Dok pripremamo vašu potpunu analizu...",
+  "aiPendingMore": "Pripremamo još...",
+  "aiTierIncomplete": "Uskoro stiže, provjerite kasnije",
+  "tierCompleted": "Dodano novo razmatranje",
+  "tierProcessingNotice": "Stvaramo daljnja razmatranja...",
+  "proSectionLoading": "Pripremamo vaš premium sadržaj...",
+  "proSectionWillArrive": "Vaše duboko razmatranje pojavit će se ovdje",
+  "templateCategoryHealth": "Za zdravstvene brige",
+  "templateCategoryFamily": "Za obitelj",
+  "templateCategoryWork": "Za posao i studij",
+  "templateCategoryGratitude": "Zahvalno srce",
+  "templateCategoryGrief": "U žalosti ili gubitku",
+  "sectionStatusCompleted": "Analiza je završena",
+  "sectionStatusPartial": "Djelomična analiza (stiže još)",
+  "sectionStatusPending": "Analiza u tijeku"
 }

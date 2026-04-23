@@ -490,11 +490,35 @@
   "homeFirstPrayerPrompt": "Start din første bønn",
   "homeFirstQtPrompt": "Start din første QT",
   "homeActivityPrompt": "Gjør {activityName} også i dag",
-  "@homeActivityPrompt": {"placeholders": {"activityName": {"type": "String"}}},
+  "@homeActivityPrompt": {
+    "placeholders": {
+      "activityName": {
+        "type": "String"
+      }
+    }
+  },
   "homeStreakInProgress": "Dag {count} kontinuerlig {activityName}",
-  "@homeStreakInProgress": {"placeholders": {"count": {"type": "int"}, "activityName": {"type": "String"}}},
+  "@homeStreakInProgress": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "activityName": {
+        "type": "String"
+      }
+    }
+  },
   "homeDaysSinceLastActivity": "Det er {days} dager siden siste {activityName}",
-  "@homeDaysSinceLastActivity": {"placeholders": {"days": {"type": "int"}, "activityName": {"type": "String"}}},
+  "@homeDaysSinceLastActivity": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      },
+      "activityName": {
+        "type": "String"
+      }
+    }
+  },
   "homeActivityPrayer": "bønn",
   "homeActivityQt": "QT",
   "prayerPlayerLoading": "Laster...",
@@ -502,5 +526,24 @@
   "heatmapLegendLess": "Mindre",
   "heatmapLegendMore": "Mer",
   "qtPassagesLoadError": "Kunne ikke laste dagens skriftsteder. Sjekk tilkoblingen din.",
-  "qtPassagesRetryButton": "Prøv igjen"
+  "qtPassagesRetryButton": "Prøv igjen",
+  "aiStreamingInitial": "Vi mediterer over bønnen din...",
+  "aiTierProcessing": "Flere refleksjoner kommer...",
+  "aiScriptureValidating": "Vi leter etter det rette skriftstedet...",
+  "aiScriptureValidatingFailed": "Vi gjør dette skriftstedet klart for deg...",
+  "aiTemplateFallback": "Mens vi forbereder den fullstendige analysen...",
+  "aiPendingMore": "Forbereder mer...",
+  "aiTierIncomplete": "Kommer snart, sjekk igjen senere",
+  "tierCompleted": "Ny refleksjon lagt til",
+  "tierProcessingNotice": "Vi lager flere refleksjoner...",
+  "proSectionLoading": "Vi forbereder premiuminnholdet...",
+  "proSectionWillArrive": "Din dype refleksjon vises her",
+  "templateCategoryHealth": "For helsebekymringer",
+  "templateCategoryFamily": "For familien",
+  "templateCategoryWork": "For arbeid og studier",
+  "templateCategoryGratitude": "Et takknemlig hjerte",
+  "templateCategoryGrief": "I sorg eller tap",
+  "sectionStatusCompleted": "Analyse fullført",
+  "sectionStatusPartial": "Delvis analyse (mer på vei)",
+  "sectionStatusPending": "Analyse pågår"
 }

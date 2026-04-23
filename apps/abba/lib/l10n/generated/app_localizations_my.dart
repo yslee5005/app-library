@@ -1267,60 +1267,63 @@ class AppLocalizationsMy extends AppLocalizations {
   String get qtPassagesRetryButton => 'ထပ်မံကြိုးစားပါ';
 
   @override
-  String get aiStreamingInitial => 'Meditating on your prayer...';
+  String get aiStreamingInitial => 'သင်၏ဆုတောင်းကို ဆင်ခြင်နေပါသည်...';
 
   @override
-  String get aiTierProcessing => 'More reflections coming...';
+  String get aiTierProcessing => 'ထပ်မံသောစဉ်းစားမှုများ လာနေပါသည်...';
 
   @override
-  String get aiScriptureValidating => 'Finding the right scripture...';
+  String get aiScriptureValidating => 'သင့်လျော်သောကျမ်းပိုဒ်ကို ရှာနေပါသည်...';
 
   @override
   String get aiScriptureValidatingFailed =>
-      'Preparing this scripture for you...';
+      'ဤကျမ်းပိုဒ်ကို သင့်အတွက် ပြင်ဆင်နေပါသည်...';
 
   @override
-  String get aiTemplateFallback => 'While we prepare your full analysis...';
+  String get aiTemplateFallback => 'သင်၏ခြုံငုံသုံးသပ်ချက်ကို ပြင်ဆင်နေစဉ်...';
 
   @override
-  String get aiPendingMore => 'Preparing more...';
+  String get aiPendingMore => 'ထပ်မံ ပြင်ဆင်နေပါသည်...';
 
   @override
-  String get aiTierIncomplete => 'Coming soon, check back later';
+  String get aiTierIncomplete => 'မကြာမီ ရောက်မည်၊ နောက်ပိုင်း ပြန်ကြည့်ပါ';
 
   @override
-  String get tierCompleted => 'New reflection added';
+  String get tierCompleted => 'စဉ်းစားမှုအသစ် ထပ်ထည့်ထားသည်';
 
   @override
-  String get tierProcessingNotice => 'Generating more reflections...';
+  String get tierProcessingNotice => 'ထပ်မံစဉ်းစားမှုများ ဖန်တီးနေပါသည်...';
 
   @override
-  String get proSectionLoading => 'Preparing your premium content...';
+  String get proSectionLoading =>
+      'သင်၏ premium အကြောင်းအရာကို ပြင်ဆင်နေပါသည်...';
 
   @override
-  String get proSectionWillArrive => 'Your deep reflection will appear here';
+  String get proSectionWillArrive =>
+      'သင်၏နက်နဲသော စဉ်းစားမှုသည် ဤနေရာတွင် ပေါ်လာမည်';
 
   @override
-  String get templateCategoryHealth => 'For Health Concerns';
+  String get templateCategoryHealth => 'ကျန်းမာရေးစိုးရိမ်မှုများအတွက်';
 
   @override
-  String get templateCategoryFamily => 'For Family';
+  String get templateCategoryFamily => 'မိသားစုအတွက်';
 
   @override
-  String get templateCategoryWork => 'For Work & Studies';
+  String get templateCategoryWork => 'အလုပ်နှင့် ပညာရေးအတွက်';
 
   @override
-  String get templateCategoryGratitude => 'A Thankful Heart';
+  String get templateCategoryGratitude => 'ကျေးဇူးတင်သောစိတ်';
 
   @override
-  String get templateCategoryGrief => 'In Grief or Loss';
+  String get templateCategoryGrief =>
+      'ဝမ်းနည်းခြင်း သို့မဟုတ် ဆုံးရှုံးခြင်းတွင်';
 
   @override
-  String get sectionStatusCompleted => 'Analysis complete';
+  String get sectionStatusCompleted => 'သုံးသပ်ချက် ပြီးဆုံးပြီ';
 
   @override
-  String get sectionStatusPartial => 'Partial analysis (more coming)';
+  String get sectionStatusPartial => 'တစ်စိတ်တစ်ပိုင်း သုံးသပ်ချက် (ထပ်လာဆဲ)';
 
   @override
-  String get sectionStatusPending => 'Analysis in progress';
+  String get sectionStatusPending => 'သုံးသပ်ချက် ဆက်လက်လုပ်ဆောင်နေသည်';
 }

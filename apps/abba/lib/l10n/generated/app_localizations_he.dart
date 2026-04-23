@@ -1235,60 +1235,59 @@ class AppLocalizationsHe extends AppLocalizations {
   String get qtPassagesRetryButton => 'נסה שוב';
 
   @override
-  String get aiStreamingInitial => 'Meditating on your prayer...';
+  String get aiStreamingInitial => 'מתבוננים בתפילתך...';
 
   @override
-  String get aiTierProcessing => 'More reflections coming...';
+  String get aiTierProcessing => 'הרהורים נוספים בדרך...';
 
   @override
-  String get aiScriptureValidating => 'Finding the right scripture...';
+  String get aiScriptureValidating => 'מחפשים את הפסוק המתאים...';
 
   @override
-  String get aiScriptureValidatingFailed =>
-      'Preparing this scripture for you...';
+  String get aiScriptureValidatingFailed => 'מכינים עבורך את הפסוק הזה...';
 
   @override
-  String get aiTemplateFallback => 'While we prepare your full analysis...';
+  String get aiTemplateFallback => 'בזמן שאנו מכינים את הניתוח המלא שלך...';
 
   @override
-  String get aiPendingMore => 'Preparing more...';
+  String get aiPendingMore => 'מכינים עוד...';
 
   @override
-  String get aiTierIncomplete => 'Coming soon, check back later';
+  String get aiTierIncomplete => 'בקרוב, בדוק שוב מאוחר יותר';
 
   @override
-  String get tierCompleted => 'New reflection added';
+  String get tierCompleted => 'נוסף הרהור חדש';
 
   @override
-  String get tierProcessingNotice => 'Generating more reflections...';
+  String get tierProcessingNotice => 'יוצרים הרהורים נוספים...';
 
   @override
-  String get proSectionLoading => 'Preparing your premium content...';
+  String get proSectionLoading => 'מכינים את התוכן הפרמיום שלך...';
 
   @override
-  String get proSectionWillArrive => 'Your deep reflection will appear here';
+  String get proSectionWillArrive => 'ההרהור העמוק שלך יופיע כאן';
 
   @override
-  String get templateCategoryHealth => 'For Health Concerns';
+  String get templateCategoryHealth => 'לדאגות בריאותיות';
 
   @override
-  String get templateCategoryFamily => 'For Family';
+  String get templateCategoryFamily => 'למשפחה';
 
   @override
-  String get templateCategoryWork => 'For Work & Studies';
+  String get templateCategoryWork => 'לעבודה וללימודים';
 
   @override
-  String get templateCategoryGratitude => 'A Thankful Heart';
+  String get templateCategoryGratitude => 'לב מודה';
 
   @override
-  String get templateCategoryGrief => 'In Grief or Loss';
+  String get templateCategoryGrief => 'באבל או באובדן';
 
   @override
-  String get sectionStatusCompleted => 'Analysis complete';
+  String get sectionStatusCompleted => 'הניתוח הושלם';
 
   @override
-  String get sectionStatusPartial => 'Partial analysis (more coming)';
+  String get sectionStatusPartial => 'ניתוח חלקי (יש עוד בדרך)';
 
   @override
-  String get sectionStatusPending => 'Analysis in progress';
+  String get sectionStatusPending => 'ניתוח בתהליך';
 }

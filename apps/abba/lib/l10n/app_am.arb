@@ -490,11 +490,35 @@
   "homeFirstPrayerPrompt": "የመጀመሪያ ጸሎትዎን ይጀምሩ",
   "homeFirstQtPrompt": "የመጀመሪያ QT ይጀምሩ",
   "homeActivityPrompt": "ዛሬም {activityName} ያድርጉ",
-  "@homeActivityPrompt": {"placeholders": {"activityName": {"type": "String"}}},
+  "@homeActivityPrompt": {
+    "placeholders": {
+      "activityName": {
+        "type": "String"
+      }
+    }
+  },
   "homeStreakInProgress": "ቀን {count} ቀጣይ {activityName}",
-  "@homeStreakInProgress": {"placeholders": {"count": {"type": "int"}, "activityName": {"type": "String"}}},
+  "@homeStreakInProgress": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "activityName": {
+        "type": "String"
+      }
+    }
+  },
   "homeDaysSinceLastActivity": "ከመጨረሻው {activityName} ጀምሮ {days} ቀናት አልፈዋል",
-  "@homeDaysSinceLastActivity": {"placeholders": {"days": {"type": "int"}, "activityName": {"type": "String"}}},
+  "@homeDaysSinceLastActivity": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      },
+      "activityName": {
+        "type": "String"
+      }
+    }
+  },
   "homeActivityPrayer": "ጸሎት",
   "homeActivityQt": "QT",
   "prayerPlayerLoading": "በመጫን ላይ...",
@@ -502,5 +526,24 @@
   "heatmapLegendLess": "ያነሰ",
   "heatmapLegendMore": "ብዙ",
   "qtPassagesLoadError": "የዛሬውን ቃላት ማምጣት አልተቻለም። እባክዎ ግንኙነትዎን ያረጋግጡ።",
-  "qtPassagesRetryButton": "እንደገና ሞክር"
+  "qtPassagesRetryButton": "እንደገና ሞክር",
+  "aiStreamingInitial": "ጸሎትዎን እያሰላሰልን ነው...",
+  "aiTierProcessing": "ተጨማሪ ማሰላሰያዎች በመምጣት ላይ...",
+  "aiScriptureValidating": "ትክክለኛውን የመጽሐፍ ቅዱስ ክፍል እየፈለግን ነው...",
+  "aiScriptureValidatingFailed": "ይህ የመጽሐፍ ቅዱስ ክፍል ለእርስዎ በመዘጋጀት ላይ ነው...",
+  "aiTemplateFallback": "ሙሉ ትንታኔዎ እስኪዘጋጅ ድረስ...",
+  "aiPendingMore": "ተጨማሪ በመዘጋጀት ላይ...",
+  "aiTierIncomplete": "በቅርቡ ይመጣል፣ ትንሽ ቆይተው ይመለሱ",
+  "tierCompleted": "አዲስ ማሰላሰያ ተጨምሯል",
+  "tierProcessingNotice": "ተጨማሪ ማሰላሰያዎችን እየፈጠርን ነው...",
+  "proSectionLoading": "የፕሪሚየም ይዘትዎን በማዘጋጀት ላይ...",
+  "proSectionWillArrive": "ጥልቅ ማሰላሰያዎ እዚህ ይታያል",
+  "templateCategoryHealth": "ለጤና ጭንቀቶች",
+  "templateCategoryFamily": "ለቤተሰብ",
+  "templateCategoryWork": "ለሥራ እና ትምህርት",
+  "templateCategoryGratitude": "አመስጋኝ ልብ",
+  "templateCategoryGrief": "በሀዘን ወይም ኪሳራ ውስጥ",
+  "sectionStatusCompleted": "ትንታኔ ተጠናቋል",
+  "sectionStatusPartial": "ከፊል ትንታኔ (ተጨማሪ በመምጣት ላይ)",
+  "sectionStatusPending": "ትንታኔ በሂደት ላይ"
 }

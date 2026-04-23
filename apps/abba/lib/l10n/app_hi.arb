@@ -490,11 +490,35 @@
   "homeFirstPrayerPrompt": "अपनी पहली प्रार्थना शुरू करें",
   "homeFirstQtPrompt": "अपना पहला QT शुरू करें",
   "homeActivityPrompt": "आज भी {activityName} करें",
-  "@homeActivityPrompt": {"placeholders": {"activityName": {"type": "String"}}},
+  "@homeActivityPrompt": {
+    "placeholders": {
+      "activityName": {
+        "type": "String"
+      }
+    }
+  },
   "homeStreakInProgress": "{activityName} का लगातार {count} दिन",
-  "@homeStreakInProgress": {"placeholders": {"count": {"type": "int"}, "activityName": {"type": "String"}}},
+  "@homeStreakInProgress": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "activityName": {
+        "type": "String"
+      }
+    }
+  },
   "homeDaysSinceLastActivity": "आपके अंतिम {activityName} को {days} दिन हो गए",
-  "@homeDaysSinceLastActivity": {"placeholders": {"days": {"type": "int"}, "activityName": {"type": "String"}}},
+  "@homeDaysSinceLastActivity": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      },
+      "activityName": {
+        "type": "String"
+      }
+    }
+  },
   "homeActivityPrayer": "प्रार्थना",
   "homeActivityQt": "QT",
   "prayerPlayerLoading": "लोड हो रहा है...",
@@ -502,5 +526,24 @@
   "heatmapLegendLess": "कम",
   "heatmapLegendMore": "ज्यादा",
   "qtPassagesLoadError": "आज के वचन लोड नहीं हो सके। कृपया अपना कनेक्शन जाँचें।",
-  "qtPassagesRetryButton": "फिर से प्रयास करें"
+  "qtPassagesRetryButton": "फिर से प्रयास करें",
+  "aiStreamingInitial": "आपकी प्रार्थना पर मनन कर रहे हैं...",
+  "aiTierProcessing": "और विचार आ रहे हैं...",
+  "aiScriptureValidating": "सही शास्त्रवचन ढूँढ़ रहे हैं...",
+  "aiScriptureValidatingFailed": "यह शास्त्रवचन आपके लिए तैयार कर रहे हैं...",
+  "aiTemplateFallback": "आपका पूरा विश्लेषण तैयार होने तक...",
+  "aiPendingMore": "और तैयार हो रहा है...",
+  "aiTierIncomplete": "जल्द आ रहा है, बाद में देखें",
+  "tierCompleted": "नया मनन जोड़ा गया",
+  "tierProcessingNotice": "और मनन बना रहे हैं...",
+  "proSectionLoading": "आपकी प्रीमियम सामग्री तैयार कर रहे हैं...",
+  "proSectionWillArrive": "आपका गहरा मनन यहाँ दिखाई देगा",
+  "templateCategoryHealth": "स्वास्थ्य चिंताओं के लिए",
+  "templateCategoryFamily": "परिवार के लिए",
+  "templateCategoryWork": "कार्य और अध्ययन के लिए",
+  "templateCategoryGratitude": "एक आभारी हृदय",
+  "templateCategoryGrief": "शोक या हानि में",
+  "sectionStatusCompleted": "विश्लेषण पूर्ण",
+  "sectionStatusPartial": "आंशिक विश्लेषण (और आ रहा है)",
+  "sectionStatusPending": "विश्लेषण प्रगति पर है"
 }

@@ -1259,60 +1259,63 @@ class AppLocalizationsVi extends AppLocalizations {
   String get qtPassagesRetryButton => 'Thử lại';
 
   @override
-  String get aiStreamingInitial => 'Meditating on your prayer...';
+  String get aiStreamingInitial =>
+      'Chúng tôi đang suy ngẫm lời cầu nguyện của bạn...';
 
   @override
-  String get aiTierProcessing => 'More reflections coming...';
+  String get aiTierProcessing => 'Thêm những suy ngẫm đang đến...';
 
   @override
-  String get aiScriptureValidating => 'Finding the right scripture...';
+  String get aiScriptureValidating => 'Đang tìm câu Kinh Thánh phù hợp...';
 
   @override
   String get aiScriptureValidatingFailed =>
-      'Preparing this scripture for you...';
+      'Đang chuẩn bị câu Kinh Thánh này cho bạn...';
 
   @override
-  String get aiTemplateFallback => 'While we prepare your full analysis...';
+  String get aiTemplateFallback =>
+      'Trong khi chúng tôi chuẩn bị phân tích đầy đủ...';
 
   @override
-  String get aiPendingMore => 'Preparing more...';
+  String get aiPendingMore => 'Đang chuẩn bị thêm...';
 
   @override
-  String get aiTierIncomplete => 'Coming soon, check back later';
+  String get aiTierIncomplete => 'Sắp đến, vui lòng quay lại sau';
 
   @override
-  String get tierCompleted => 'New reflection added';
+  String get tierCompleted => 'Đã thêm suy ngẫm mới';
 
   @override
-  String get tierProcessingNotice => 'Generating more reflections...';
+  String get tierProcessingNotice => 'Đang tạo thêm suy ngẫm...';
 
   @override
-  String get proSectionLoading => 'Preparing your premium content...';
+  String get proSectionLoading => 'Đang chuẩn bị nội dung cao cấp của bạn...';
 
   @override
-  String get proSectionWillArrive => 'Your deep reflection will appear here';
+  String get proSectionWillArrive =>
+      'Suy ngẫm sâu sắc của bạn sẽ xuất hiện ở đây';
 
   @override
-  String get templateCategoryHealth => 'For Health Concerns';
+  String get templateCategoryHealth => 'Cho những mối lo về sức khỏe';
 
   @override
-  String get templateCategoryFamily => 'For Family';
+  String get templateCategoryFamily => 'Cho gia đình';
 
   @override
-  String get templateCategoryWork => 'For Work & Studies';
+  String get templateCategoryWork => 'Cho công việc và học tập';
 
   @override
-  String get templateCategoryGratitude => 'A Thankful Heart';
+  String get templateCategoryGratitude => 'Một trái tim biết ơn';
 
   @override
-  String get templateCategoryGrief => 'In Grief or Loss';
+  String get templateCategoryGrief => 'Trong tang thương hay mất mát';
 
   @override
-  String get sectionStatusCompleted => 'Analysis complete';
+  String get sectionStatusCompleted => 'Phân tích hoàn tất';
 
   @override
-  String get sectionStatusPartial => 'Partial analysis (more coming)';
+  String get sectionStatusPartial => 'Phân tích một phần (sắp có thêm)';
 
   @override
-  String get sectionStatusPending => 'Analysis in progress';
+  String get sectionStatusPending => 'Phân tích đang diễn ra';
 }

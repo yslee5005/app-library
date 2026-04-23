@@ -83,12 +83,15 @@ en + ko 우선 번역. 나머지 33 locale은 영어 fallback (기존 패턴).
 - [ ] `scripts/check_l10n_sync.sh` 또는 Python JSON 기반 검증 통과
 - [ ] UI 렌더 시 하드코딩 문자열 0개 (`scripts/check_hardcoded_strings.sh`)
 
-## 33 locale fallback 전략
+## 35 locale 완전 번역 (2026-04-24 업데이트)
 
-Phase 4.1는 en + ko만 완전 번역. 나머지 33 locale은:
-- ARB 파일에 키 미추가 → `AppLocalizations` fallback → 영어로 표시
-- 기존 abba 앱의 fallback 패턴 그대로
-- 출시 후 Phase 2에서 주요 locale (es, pt, fr, de, ja, zh) 번역 추가 고려
+**Phase 4.1 출시 전 모든 35 locale 완전 번역 완료** (원래 spec의 "en+ko만" fallback 전략 취소).
+
+이유: 기존 abba 앱의 431 키는 이미 35 locale 모두 번역되어 있어 en/ko만 채우면 일관성이 깨짐. 시니어 유저가 비영어권에서 19 키만 영어로 보는 것은 부자연스러움.
+
+- ✅ en + ko: 수동 작성 (L10-32 위 표 참조)
+- ✅ 33 locale (am/ar/cs/da/de/el/es/fi/fil/fr/he/hi/hr/hu/id/it/ja/ms/my/nl/no/pl/pt/ro/ru/sk/sv/sw/th/tr/uk/vi/zh): AI 보조 번역
+- **사용자 검토 필요**: 19 키 × 33 locale = 627 항목 네이티브 스피커 검토 권장 (특히 신학 뉘앙스 있는 `aiScriptureValidating` / `templateCategory*`)
 
 ## 번역 작업 가이드 (사용자 검토 시)
 

@@ -490,11 +490,35 @@
   "homeFirstPrayerPrompt": "Börja din första bön",
   "homeFirstQtPrompt": "Börja din första QT",
   "homeActivityPrompt": "Gör {activityName} även idag",
-  "@homeActivityPrompt": {"placeholders": {"activityName": {"type": "String"}}},
+  "@homeActivityPrompt": {
+    "placeholders": {
+      "activityName": {
+        "type": "String"
+      }
+    }
+  },
   "homeStreakInProgress": "Dag {count} kontinuerligt {activityName}",
-  "@homeStreakInProgress": {"placeholders": {"count": {"type": "int"}, "activityName": {"type": "String"}}},
+  "@homeStreakInProgress": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "activityName": {
+        "type": "String"
+      }
+    }
+  },
   "homeDaysSinceLastActivity": "Det är {days} dagar sedan din senaste {activityName}",
-  "@homeDaysSinceLastActivity": {"placeholders": {"days": {"type": "int"}, "activityName": {"type": "String"}}},
+  "@homeDaysSinceLastActivity": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      },
+      "activityName": {
+        "type": "String"
+      }
+    }
+  },
   "homeActivityPrayer": "bön",
   "homeActivityQt": "QT",
   "prayerPlayerLoading": "Laddar...",
@@ -502,5 +526,24 @@
   "heatmapLegendLess": "Mindre",
   "heatmapLegendMore": "Mer",
   "qtPassagesLoadError": "Dagens bibelställen kunde inte laddas. Kontrollera anslutningen.",
-  "qtPassagesRetryButton": "Försök igen"
+  "qtPassagesRetryButton": "Försök igen",
+  "aiStreamingInitial": "Vi mediterar över din bön...",
+  "aiTierProcessing": "Fler reflektioner är på väg...",
+  "aiScriptureValidating": "Vi letar efter rätt bibelord...",
+  "aiScriptureValidatingFailed": "Vi förbereder detta bibelord åt dig...",
+  "aiTemplateFallback": "Medan vi förbereder din fullständiga analys...",
+  "aiPendingMore": "Förbereder mer...",
+  "aiTierIncomplete": "Kommer snart, kom tillbaka senare",
+  "tierCompleted": "Ny reflektion tillagd",
+  "tierProcessingNotice": "Vi skapar fler reflektioner...",
+  "proSectionLoading": "Vi förbereder ditt premium-innehåll...",
+  "proSectionWillArrive": "Din djupa reflektion visas här",
+  "templateCategoryHealth": "För hälsobekymmer",
+  "templateCategoryFamily": "För familjen",
+  "templateCategoryWork": "För arbete och studier",
+  "templateCategoryGratitude": "Ett tacksamt hjärta",
+  "templateCategoryGrief": "I sorg eller förlust",
+  "sectionStatusCompleted": "Analysen är klar",
+  "sectionStatusPartial": "Delvis analys (mer på väg)",
+  "sectionStatusPending": "Analys pågår"
 }

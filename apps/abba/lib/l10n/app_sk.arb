@@ -490,11 +490,35 @@
   "homeFirstPrayerPrompt": "Začnite svoju prvú modlitbu",
   "homeFirstQtPrompt": "Začnite svoj prvý QT",
   "homeActivityPrompt": "Dnes tiež {activityName}",
-  "@homeActivityPrompt": {"placeholders": {"activityName": {"type": "String"}}},
+  "@homeActivityPrompt": {
+    "placeholders": {
+      "activityName": {
+        "type": "String"
+      }
+    }
+  },
   "homeStreakInProgress": "Deň {count} nepretržite {activityName}",
-  "@homeStreakInProgress": {"placeholders": {"count": {"type": "int"}, "activityName": {"type": "String"}}},
+  "@homeStreakInProgress": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "activityName": {
+        "type": "String"
+      }
+    }
+  },
   "homeDaysSinceLastActivity": "Od posledného {activityName} uplynulo {days} dní",
-  "@homeDaysSinceLastActivity": {"placeholders": {"days": {"type": "int"}, "activityName": {"type": "String"}}},
+  "@homeDaysSinceLastActivity": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      },
+      "activityName": {
+        "type": "String"
+      }
+    }
+  },
   "homeActivityPrayer": "modlitba",
   "homeActivityQt": "QT",
   "prayerPlayerLoading": "Načítava sa...",
@@ -502,5 +526,24 @@
   "heatmapLegendLess": "Menej",
   "heatmapLegendMore": "Viac",
   "qtPassagesLoadError": "Dnešné verše sa nepodarilo načítať. Skontrolujte pripojenie.",
-  "qtPassagesRetryButton": "Skúsiť znova"
+  "qtPassagesRetryButton": "Skúsiť znova",
+  "aiStreamingInitial": "Rozjímame nad tvojou modlitbou...",
+  "aiTierProcessing": "Ďalšie úvahy prichádzajú...",
+  "aiScriptureValidating": "Hľadáme správny biblický text...",
+  "aiScriptureValidatingFailed": "Pripravujeme pre teba tento text...",
+  "aiTemplateFallback": "Kým pripravujeme úplnú analýzu...",
+  "aiPendingMore": "Pripravujeme viac...",
+  "aiTierIncomplete": "Už čoskoro, pozri sa neskôr",
+  "tierCompleted": "Pridaná nová úvaha",
+  "tierProcessingNotice": "Vytvárame ďalšie úvahy...",
+  "proSectionLoading": "Pripravujeme tvoj prémiový obsah...",
+  "proSectionWillArrive": "Tvoja hlboká úvaha sa zobrazí tu",
+  "templateCategoryHealth": "Pre zdravotné starosti",
+  "templateCategoryFamily": "Pre rodinu",
+  "templateCategoryWork": "Pre prácu a štúdium",
+  "templateCategoryGratitude": "Vďačné srdce",
+  "templateCategoryGrief": "V smútku alebo strate",
+  "sectionStatusCompleted": "Analýza dokončená",
+  "sectionStatusPartial": "Čiastočná analýza (ďalšia sa pripravuje)",
+  "sectionStatusPending": "Analýza prebieha"
 }

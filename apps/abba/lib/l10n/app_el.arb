@@ -490,11 +490,35 @@
   "homeFirstPrayerPrompt": "Ξεκινήστε την πρώτη σας προσευχή",
   "homeFirstQtPrompt": "Ξεκινήστε το πρώτο σας QT",
   "homeActivityPrompt": "Κάντε {activityName} και σήμερα",
-  "@homeActivityPrompt": {"placeholders": {"activityName": {"type": "String"}}},
+  "@homeActivityPrompt": {
+    "placeholders": {
+      "activityName": {
+        "type": "String"
+      }
+    }
+  },
   "homeStreakInProgress": "Ημέρα {count} συνεχούς {activityName}",
-  "@homeStreakInProgress": {"placeholders": {"count": {"type": "int"}, "activityName": {"type": "String"}}},
+  "@homeStreakInProgress": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "activityName": {
+        "type": "String"
+      }
+    }
+  },
   "homeDaysSinceLastActivity": "Πέρασαν {days} ημέρες από τη τελευταία {activityName}",
-  "@homeDaysSinceLastActivity": {"placeholders": {"days": {"type": "int"}, "activityName": {"type": "String"}}},
+  "@homeDaysSinceLastActivity": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      },
+      "activityName": {
+        "type": "String"
+      }
+    }
+  },
   "homeActivityPrayer": "προσευχή",
   "homeActivityQt": "QT",
   "prayerPlayerLoading": "Φόρτωση...",
@@ -502,5 +526,24 @@
   "heatmapLegendLess": "Λιγότερο",
   "heatmapLegendMore": "Περισσότερο",
   "qtPassagesLoadError": "Δεν ήταν δυνατή η φόρτωση των σημερινών εδαφίων. Ελέγξτε τη σύνδεση.",
-  "qtPassagesRetryButton": "Δοκιμάστε ξανά"
+  "qtPassagesRetryButton": "Δοκιμάστε ξανά",
+  "aiStreamingInitial": "Στοχαζόμαστε την προσευχή σας...",
+  "aiTierProcessing": "Περισσότεροι στοχασμοί έρχονται...",
+  "aiScriptureValidating": "Αναζητούμε το σωστό εδάφιο...",
+  "aiScriptureValidatingFailed": "Ετοιμάζουμε αυτό το εδάφιο για εσάς...",
+  "aiTemplateFallback": "Ενώ ετοιμάζουμε την πλήρη ανάλυσή σας...",
+  "aiPendingMore": "Ετοιμάζουμε περισσότερα...",
+  "aiTierIncomplete": "Έρχεται σύντομα, ελέγξτε αργότερα",
+  "tierCompleted": "Προστέθηκε νέος στοχασμός",
+  "tierProcessingNotice": "Δημιουργούμε περισσότερους στοχασμούς...",
+  "proSectionLoading": "Ετοιμάζουμε το premium περιεχόμενό σας...",
+  "proSectionWillArrive": "Ο βαθύς στοχασμός σας θα εμφανιστεί εδώ",
+  "templateCategoryHealth": "Για θέματα υγείας",
+  "templateCategoryFamily": "Για την οικογένεια",
+  "templateCategoryWork": "Για εργασία και σπουδές",
+  "templateCategoryGratitude": "Μια ευγνώμων καρδιά",
+  "templateCategoryGrief": "Σε θλίψη ή απώλεια",
+  "sectionStatusCompleted": "Η ανάλυση ολοκληρώθηκε",
+  "sectionStatusPartial": "Μερική ανάλυση (έρχονται περισσότερα)",
+  "sectionStatusPending": "Η ανάλυση σε εξέλιξη"
 }

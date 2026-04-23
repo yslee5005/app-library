@@ -490,11 +490,35 @@
   "homeFirstPrayerPrompt": "İlk duanızı başlatın",
   "homeFirstQtPrompt": "İlk QT'nizi başlatın",
   "homeActivityPrompt": "Bugün de {activityName} yapın",
-  "@homeActivityPrompt": {"placeholders": {"activityName": {"type": "String"}}},
+  "@homeActivityPrompt": {
+    "placeholders": {
+      "activityName": {
+        "type": "String"
+      }
+    }
+  },
   "homeStreakInProgress": "{activityName} süreklilik {count}. gün",
-  "@homeStreakInProgress": {"placeholders": {"count": {"type": "int"}, "activityName": {"type": "String"}}},
+  "@homeStreakInProgress": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "activityName": {
+        "type": "String"
+      }
+    }
+  },
   "homeDaysSinceLastActivity": "Son {activityName}dan bu yana {days} gün geçti",
-  "@homeDaysSinceLastActivity": {"placeholders": {"days": {"type": "int"}, "activityName": {"type": "String"}}},
+  "@homeDaysSinceLastActivity": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      },
+      "activityName": {
+        "type": "String"
+      }
+    }
+  },
   "homeActivityPrayer": "dua",
   "homeActivityQt": "QT",
   "prayerPlayerLoading": "Yükleniyor...",
@@ -502,5 +526,24 @@
   "heatmapLegendLess": "Az",
   "heatmapLegendMore": "Çok",
   "qtPassagesLoadError": "Bugünün ayetleri yüklenemedi. Lütfen bağlantınızı kontrol edin.",
-  "qtPassagesRetryButton": "Tekrar dene"
+  "qtPassagesRetryButton": "Tekrar dene",
+  "aiStreamingInitial": "Duanızı düşünüyoruz...",
+  "aiTierProcessing": "Daha fazla düşünce yolda...",
+  "aiScriptureValidating": "Doğru ayeti arıyoruz...",
+  "aiScriptureValidatingFailed": "Bu ayeti sizin için hazırlıyoruz...",
+  "aiTemplateFallback": "Tam analizinizi hazırlarken...",
+  "aiPendingMore": "Daha fazlasını hazırlıyoruz...",
+  "aiTierIncomplete": "Yakında, daha sonra tekrar kontrol edin",
+  "tierCompleted": "Yeni düşünce eklendi",
+  "tierProcessingNotice": "Daha fazla düşünce oluşturuyoruz...",
+  "proSectionLoading": "Premium içeriğinizi hazırlıyoruz...",
+  "proSectionWillArrive": "Derin düşünceniz burada görünecek",
+  "templateCategoryHealth": "Sağlık endişeleri için",
+  "templateCategoryFamily": "Aile için",
+  "templateCategoryWork": "İş ve çalışma için",
+  "templateCategoryGratitude": "Şükran dolu bir kalp",
+  "templateCategoryGrief": "Yas ya da kayıpta",
+  "sectionStatusCompleted": "Analiz tamamlandı",
+  "sectionStatusPartial": "Kısmi analiz (daha fazlası geliyor)",
+  "sectionStatusPending": "Analiz sürüyor"
 }

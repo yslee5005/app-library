@@ -490,11 +490,35 @@
   "homeFirstPrayerPrompt": "Aloita ensimmäinen rukouksesi",
   "homeFirstQtPrompt": "Aloita ensimmäinen QT-hetkesi",
   "homeActivityPrompt": "Tee {activityName} tänäänkin",
-  "@homeActivityPrompt": {"placeholders": {"activityName": {"type": "String"}}},
+  "@homeActivityPrompt": {
+    "placeholders": {
+      "activityName": {
+        "type": "String"
+      }
+    }
+  },
   "homeStreakInProgress": "Päivä {count} jatkuvaa {activityName}",
-  "@homeStreakInProgress": {"placeholders": {"count": {"type": "int"}, "activityName": {"type": "String"}}},
+  "@homeStreakInProgress": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "activityName": {
+        "type": "String"
+      }
+    }
+  },
   "homeDaysSinceLastActivity": "Edellisestä {activityName} on {days} päivää",
-  "@homeDaysSinceLastActivity": {"placeholders": {"days": {"type": "int"}, "activityName": {"type": "String"}}},
+  "@homeDaysSinceLastActivity": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      },
+      "activityName": {
+        "type": "String"
+      }
+    }
+  },
   "homeActivityPrayer": "rukous",
   "homeActivityQt": "QT",
   "prayerPlayerLoading": "Ladataan...",
@@ -502,5 +526,24 @@
   "heatmapLegendLess": "Vähemmän",
   "heatmapLegendMore": "Enemmän",
   "qtPassagesLoadError": "Päivän raamatunkohtia ei voitu ladata. Tarkista yhteytesi.",
-  "qtPassagesRetryButton": "Yritä uudelleen"
+  "qtPassagesRetryButton": "Yritä uudelleen",
+  "aiStreamingInitial": "Pohdimme rukoustasi...",
+  "aiTierProcessing": "Lisää pohdintoja tulossa...",
+  "aiScriptureValidating": "Etsimme sopivaa raamatunkohtaa...",
+  "aiScriptureValidatingFailed": "Valmistelemme tätä raamatunkohtaa sinulle...",
+  "aiTemplateFallback": "Kun valmistelemme täydellistä analyysiäsi...",
+  "aiPendingMore": "Valmistelemme lisää...",
+  "aiTierIncomplete": "Tulossa pian, tarkista myöhemmin",
+  "tierCompleted": "Uusi pohdinta lisätty",
+  "tierProcessingNotice": "Luomme lisää pohdintoja...",
+  "proSectionLoading": "Valmistelemme premium-sisältöäsi...",
+  "proSectionWillArrive": "Syvällinen pohdintasi näkyy tässä",
+  "templateCategoryHealth": "Terveyshuolille",
+  "templateCategoryFamily": "Perheelle",
+  "templateCategoryWork": "Työlle ja opinnoille",
+  "templateCategoryGratitude": "Kiitollinen sydän",
+  "templateCategoryGrief": "Surussa tai menetyksessä",
+  "sectionStatusCompleted": "Analyysi valmis",
+  "sectionStatusPartial": "Osittainen analyysi (lisää tulossa)",
+  "sectionStatusPending": "Analyysi käynnissä"
 }

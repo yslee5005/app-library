@@ -490,11 +490,35 @@
   "homeFirstPrayerPrompt": "Почніть свою першу молитву",
   "homeFirstQtPrompt": "Почніть свій перший QT",
   "homeActivityPrompt": "Сьогодні також {activityName}",
-  "@homeActivityPrompt": {"placeholders": {"activityName": {"type": "String"}}},
+  "@homeActivityPrompt": {
+    "placeholders": {
+      "activityName": {
+        "type": "String"
+      }
+    }
+  },
   "homeStreakInProgress": "День {count} безперервної {activityName}",
-  "@homeStreakInProgress": {"placeholders": {"count": {"type": "int"}, "activityName": {"type": "String"}}},
+  "@homeStreakInProgress": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "activityName": {
+        "type": "String"
+      }
+    }
+  },
   "homeDaysSinceLastActivity": "Минуло {days} днів з останньої {activityName}",
-  "@homeDaysSinceLastActivity": {"placeholders": {"days": {"type": "int"}, "activityName": {"type": "String"}}},
+  "@homeDaysSinceLastActivity": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      },
+      "activityName": {
+        "type": "String"
+      }
+    }
+  },
   "homeActivityPrayer": "молитва",
   "homeActivityQt": "QT",
   "prayerPlayerLoading": "Завантаження...",
@@ -502,5 +526,24 @@
   "heatmapLegendLess": "Менше",
   "heatmapLegendMore": "Більше",
   "qtPassagesLoadError": "Не вдалося завантажити сьогоднішні уривки. Перевірте з'єднання.",
-  "qtPassagesRetryButton": "Повторити"
+  "qtPassagesRetryButton": "Повторити",
+  "aiStreamingInitial": "Розмірковуємо над вашою молитвою...",
+  "aiTierProcessing": "Ще роздуми на підході...",
+  "aiScriptureValidating": "Шукаємо відповідне місце з Писання...",
+  "aiScriptureValidatingFailed": "Готуємо це місце з Писання для вас...",
+  "aiTemplateFallback": "Поки ми готуємо повний аналіз...",
+  "aiPendingMore": "Готуємо більше...",
+  "aiTierIncomplete": "Незабаром, загляньте пізніше",
+  "tierCompleted": "Додано новий роздум",
+  "tierProcessingNotice": "Створюємо нові роздуми...",
+  "proSectionLoading": "Готуємо ваш преміум-вміст...",
+  "proSectionWillArrive": "Ваш глибокий роздум з’явиться тут",
+  "templateCategoryHealth": "Про здоров’я",
+  "templateCategoryFamily": "Про сім’ю",
+  "templateCategoryWork": "Про роботу й навчання",
+  "templateCategoryGratitude": "Вдячне серце",
+  "templateCategoryGrief": "У скорботі чи втраті",
+  "sectionStatusCompleted": "Аналіз завершено",
+  "sectionStatusPartial": "Частковий аналіз (незабаром буде більше)",
+  "sectionStatusPending": "Аналіз виконується"
 }

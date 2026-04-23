@@ -490,11 +490,35 @@
   "homeFirstPrayerPrompt": "开始您的第一次祷告",
   "homeFirstQtPrompt": "开始您的第一次QT",
   "homeActivityPrompt": "今天也{activityName}吧",
-  "@homeActivityPrompt": {"placeholders": {"activityName": {"type": "String"}}},
+  "@homeActivityPrompt": {
+    "placeholders": {
+      "activityName": {
+        "type": "String"
+      }
+    }
+  },
   "homeStreakInProgress": "连续{activityName}第{count}天",
-  "@homeStreakInProgress": {"placeholders": {"count": {"type": "int"}, "activityName": {"type": "String"}}},
+  "@homeStreakInProgress": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "activityName": {
+        "type": "String"
+      }
+    }
+  },
   "homeDaysSinceLastActivity": "已经{days}天没有{activityName}了",
-  "@homeDaysSinceLastActivity": {"placeholders": {"days": {"type": "int"}, "activityName": {"type": "String"}}},
+  "@homeDaysSinceLastActivity": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      },
+      "activityName": {
+        "type": "String"
+      }
+    }
+  },
   "homeActivityPrayer": "祷告",
   "homeActivityQt": "QT",
   "prayerPlayerLoading": "加载中...",
@@ -502,5 +526,24 @@
   "heatmapLegendLess": "少",
   "heatmapLegendMore": "多",
   "qtPassagesLoadError": "无法加载今天的经文。请检查网络连接。",
-  "qtPassagesRetryButton": "重试"
+  "qtPassagesRetryButton": "重试",
+  "aiStreamingInitial": "正在默想您的祷告...",
+  "aiTierProcessing": "更多默想即将到来...",
+  "aiScriptureValidating": "正在寻找合适的经文...",
+  "aiScriptureValidatingFailed": "正在为您预备这段经文...",
+  "aiTemplateFallback": "我们正在准备完整分析时...",
+  "aiPendingMore": "准备中...",
+  "aiTierIncomplete": "即将到来,稍后再来查看",
+  "tierCompleted": "已添加新的默想",
+  "tierProcessingNotice": "正在生成更多默想...",
+  "proSectionLoading": "正在准备您的优质内容...",
+  "proSectionWillArrive": "您的深度默想将在此显示",
+  "templateCategoryHealth": "为健康的担忧",
+  "templateCategoryFamily": "为家庭",
+  "templateCategoryWork": "为工作与学习",
+  "templateCategoryGratitude": "感恩的心",
+  "templateCategoryGrief": "在悲伤或失去之中",
+  "sectionStatusCompleted": "分析完成",
+  "sectionStatusPartial": "部分分析(更多即将到来)",
+  "sectionStatusPending": "分析进行中"
 }

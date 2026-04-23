@@ -1225,60 +1225,59 @@ class AppLocalizationsZh extends AppLocalizations {
   String get qtPassagesRetryButton => '重试';
 
   @override
-  String get aiStreamingInitial => 'Meditating on your prayer...';
+  String get aiStreamingInitial => '正在默想您的祷告...';
 
   @override
-  String get aiTierProcessing => 'More reflections coming...';
+  String get aiTierProcessing => '更多默想即将到来...';
 
   @override
-  String get aiScriptureValidating => 'Finding the right scripture...';
+  String get aiScriptureValidating => '正在寻找合适的经文...';
 
   @override
-  String get aiScriptureValidatingFailed =>
-      'Preparing this scripture for you...';
+  String get aiScriptureValidatingFailed => '正在为您预备这段经文...';
 
   @override
-  String get aiTemplateFallback => 'While we prepare your full analysis...';
+  String get aiTemplateFallback => '我们正在准备完整分析时...';
 
   @override
-  String get aiPendingMore => 'Preparing more...';
+  String get aiPendingMore => '准备中...';
 
   @override
-  String get aiTierIncomplete => 'Coming soon, check back later';
+  String get aiTierIncomplete => '即将到来,稍后再来查看';
 
   @override
-  String get tierCompleted => 'New reflection added';
+  String get tierCompleted => '已添加新的默想';
 
   @override
-  String get tierProcessingNotice => 'Generating more reflections...';
+  String get tierProcessingNotice => '正在生成更多默想...';
 
   @override
-  String get proSectionLoading => 'Preparing your premium content...';
+  String get proSectionLoading => '正在准备您的优质内容...';
 
   @override
-  String get proSectionWillArrive => 'Your deep reflection will appear here';
+  String get proSectionWillArrive => '您的深度默想将在此显示';
 
   @override
-  String get templateCategoryHealth => 'For Health Concerns';
+  String get templateCategoryHealth => '为健康的担忧';
 
   @override
-  String get templateCategoryFamily => 'For Family';
+  String get templateCategoryFamily => '为家庭';
 
   @override
-  String get templateCategoryWork => 'For Work & Studies';
+  String get templateCategoryWork => '为工作与学习';
 
   @override
-  String get templateCategoryGratitude => 'A Thankful Heart';
+  String get templateCategoryGratitude => '感恩的心';
 
   @override
-  String get templateCategoryGrief => 'In Grief or Loss';
+  String get templateCategoryGrief => '在悲伤或失去之中';
 
   @override
-  String get sectionStatusCompleted => 'Analysis complete';
+  String get sectionStatusCompleted => '分析完成';
 
   @override
-  String get sectionStatusPartial => 'Partial analysis (more coming)';
+  String get sectionStatusPartial => '部分分析(更多即将到来)';
 
   @override
-  String get sectionStatusPending => 'Analysis in progress';
+  String get sectionStatusPending => '分析进行中';
 }

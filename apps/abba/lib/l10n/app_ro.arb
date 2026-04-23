@@ -490,11 +490,35 @@
   "homeFirstPrayerPrompt": "Începe prima ta rugăciune",
   "homeFirstQtPrompt": "Începe primul tău QT",
   "homeActivityPrompt": "Fă {activityName} și astăzi",
-  "@homeActivityPrompt": {"placeholders": {"activityName": {"type": "String"}}},
+  "@homeActivityPrompt": {
+    "placeholders": {
+      "activityName": {
+        "type": "String"
+      }
+    }
+  },
   "homeStreakInProgress": "Ziua {count} continuă de {activityName}",
-  "@homeStreakInProgress": {"placeholders": {"count": {"type": "int"}, "activityName": {"type": "String"}}},
+  "@homeStreakInProgress": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "activityName": {
+        "type": "String"
+      }
+    }
+  },
   "homeDaysSinceLastActivity": "Au trecut {days} zile de la ultimul {activityName}",
-  "@homeDaysSinceLastActivity": {"placeholders": {"days": {"type": "int"}, "activityName": {"type": "String"}}},
+  "@homeDaysSinceLastActivity": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      },
+      "activityName": {
+        "type": "String"
+      }
+    }
+  },
   "homeActivityPrayer": "rugăciune",
   "homeActivityQt": "QT",
   "prayerPlayerLoading": "Se încarcă...",
@@ -502,5 +526,24 @@
   "heatmapLegendLess": "Mai puțin",
   "heatmapLegendMore": "Mai mult",
   "qtPassagesLoadError": "Nu am putut încărca pasajele de astăzi. Verificați conexiunea.",
-  "qtPassagesRetryButton": "Încearcă din nou"
+  "qtPassagesRetryButton": "Încearcă din nou",
+  "aiStreamingInitial": "Medităm la rugăciunea ta...",
+  "aiTierProcessing": "Mai multe reflecții urmează...",
+  "aiScriptureValidating": "Căutăm versetul potrivit...",
+  "aiScriptureValidatingFailed": "Pregătim acest verset pentru tine...",
+  "aiTemplateFallback": "În timp ce pregătim analiza completă...",
+  "aiPendingMore": "Pregătim mai multe...",
+  "aiTierIncomplete": "În curând, revino mai târziu",
+  "tierCompleted": "O nouă reflecție a fost adăugată",
+  "tierProcessingNotice": "Generăm mai multe reflecții...",
+  "proSectionLoading": "Îți pregătim conținutul premium...",
+  "proSectionWillArrive": "Reflecția ta profundă va apărea aici",
+  "templateCategoryHealth": "Pentru îngrijorări de sănătate",
+  "templateCategoryFamily": "Pentru familie",
+  "templateCategoryWork": "Pentru muncă și studii",
+  "templateCategoryGratitude": "O inimă recunoscătoare",
+  "templateCategoryGrief": "În doliu sau pierdere",
+  "sectionStatusCompleted": "Analiză finalizată",
+  "sectionStatusPartial": "Analiză parțială (urmează mai mult)",
+  "sectionStatusPending": "Analiză în curs"
 }

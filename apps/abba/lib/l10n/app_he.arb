@@ -490,11 +490,35 @@
   "homeFirstPrayerPrompt": "התחל את התפילה הראשונה שלך",
   "homeFirstQtPrompt": "התחל את ה-QT הראשון שלך",
   "homeActivityPrompt": "גם היום {activityName}",
-  "@homeActivityPrompt": {"placeholders": {"activityName": {"type": "String"}}},
+  "@homeActivityPrompt": {
+    "placeholders": {
+      "activityName": {
+        "type": "String"
+      }
+    }
+  },
   "homeStreakInProgress": "יום {count} רצוף של {activityName}",
-  "@homeStreakInProgress": {"placeholders": {"count": {"type": "int"}, "activityName": {"type": "String"}}},
+  "@homeStreakInProgress": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "activityName": {
+        "type": "String"
+      }
+    }
+  },
   "homeDaysSinceLastActivity": "עברו {days} ימים מה{activityName} האחרונה",
-  "@homeDaysSinceLastActivity": {"placeholders": {"days": {"type": "int"}, "activityName": {"type": "String"}}},
+  "@homeDaysSinceLastActivity": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      },
+      "activityName": {
+        "type": "String"
+      }
+    }
+  },
   "homeActivityPrayer": "תפילה",
   "homeActivityQt": "QT",
   "prayerPlayerLoading": "טוען...",
@@ -502,5 +526,24 @@
   "heatmapLegendLess": "פחות",
   "heatmapLegendMore": "יותר",
   "qtPassagesLoadError": "לא הצלחנו לטעון את הפסוקים של היום. בדוק את החיבור שלך.",
-  "qtPassagesRetryButton": "נסה שוב"
+  "qtPassagesRetryButton": "נסה שוב",
+  "aiStreamingInitial": "מתבוננים בתפילתך...",
+  "aiTierProcessing": "הרהורים נוספים בדרך...",
+  "aiScriptureValidating": "מחפשים את הפסוק המתאים...",
+  "aiScriptureValidatingFailed": "מכינים עבורך את הפסוק הזה...",
+  "aiTemplateFallback": "בזמן שאנו מכינים את הניתוח המלא שלך...",
+  "aiPendingMore": "מכינים עוד...",
+  "aiTierIncomplete": "בקרוב, בדוק שוב מאוחר יותר",
+  "tierCompleted": "נוסף הרהור חדש",
+  "tierProcessingNotice": "יוצרים הרהורים נוספים...",
+  "proSectionLoading": "מכינים את התוכן הפרמיום שלך...",
+  "proSectionWillArrive": "ההרהור העמוק שלך יופיע כאן",
+  "templateCategoryHealth": "לדאגות בריאותיות",
+  "templateCategoryFamily": "למשפחה",
+  "templateCategoryWork": "לעבודה וללימודים",
+  "templateCategoryGratitude": "לב מודה",
+  "templateCategoryGrief": "באבל או באובדן",
+  "sectionStatusCompleted": "הניתוח הושלם",
+  "sectionStatusPartial": "ניתוח חלקי (יש עוד בדרך)",
+  "sectionStatusPending": "ניתוח בתהליך"
 }

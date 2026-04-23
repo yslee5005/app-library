@@ -303,7 +303,7 @@
 - [x] INT-028 Dashboard progressive rendering (`4a99425`)
 - [x] INT-032 VisibilityDetector T3 trigger (`0a991ca`)
 - [x] INT-033 Day-1 template fallback service + 6 bundled templates (`a3f832d`)
-- [x] INT-034/035 19 new ARB keys (en + ko) (`7503cd5`)
+- [x] INT-034/035 19 new ARB keys × **35 locales** (en+ko 수동, 33 locale AI 보조 번역) (`7503cd5` + `[hash pending]`)
 - [x] INT-040/043 notifier + template service tests (`88f5cad`)
 
 **사용자 action 필요**

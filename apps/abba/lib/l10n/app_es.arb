@@ -490,11 +490,35 @@
   "homeFirstPrayerPrompt": "Comienza tu primera oración",
   "homeFirstQtPrompt": "Comienza tu primer QT",
   "homeActivityPrompt": "Hoy también haz {activityName}",
-  "@homeActivityPrompt": {"placeholders": {"activityName": {"type": "String"}}},
+  "@homeActivityPrompt": {
+    "placeholders": {
+      "activityName": {
+        "type": "String"
+      }
+    }
+  },
   "homeStreakInProgress": "Día {count} continuo de {activityName}",
-  "@homeStreakInProgress": {"placeholders": {"count": {"type": "int"}, "activityName": {"type": "String"}}},
+  "@homeStreakInProgress": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "activityName": {
+        "type": "String"
+      }
+    }
+  },
   "homeDaysSinceLastActivity": "Han pasado {days} días desde tu último {activityName}",
-  "@homeDaysSinceLastActivity": {"placeholders": {"days": {"type": "int"}, "activityName": {"type": "String"}}},
+  "@homeDaysSinceLastActivity": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      },
+      "activityName": {
+        "type": "String"
+      }
+    }
+  },
   "homeActivityPrayer": "oración",
   "homeActivityQt": "QT",
   "prayerPlayerLoading": "Cargando...",
@@ -502,5 +526,24 @@
   "heatmapLegendLess": "Menos",
   "heatmapLegendMore": "Más",
   "qtPassagesLoadError": "No pudimos cargar los pasajes de hoy. Verifica tu conexión.",
-  "qtPassagesRetryButton": "Reintentar"
+  "qtPassagesRetryButton": "Reintentar",
+  "aiStreamingInitial": "Meditando en tu oración...",
+  "aiTierProcessing": "Más reflexiones en camino...",
+  "aiScriptureValidating": "Buscando el pasaje adecuado...",
+  "aiScriptureValidatingFailed": "Preparando este pasaje para ti...",
+  "aiTemplateFallback": "Mientras preparamos tu análisis completo...",
+  "aiPendingMore": "Preparando más...",
+  "aiTierIncomplete": "Pronto, vuelve a consultar más tarde",
+  "tierCompleted": "Nueva reflexión añadida",
+  "tierProcessingNotice": "Generando más reflexiones...",
+  "proSectionLoading": "Preparando tu contenido premium...",
+  "proSectionWillArrive": "Tu reflexión profunda aparecerá aquí",
+  "templateCategoryHealth": "Por preocupaciones de salud",
+  "templateCategoryFamily": "Por la familia",
+  "templateCategoryWork": "Por el trabajo y los estudios",
+  "templateCategoryGratitude": "Un corazón agradecido",
+  "templateCategoryGrief": "En duelo o pérdida",
+  "sectionStatusCompleted": "Análisis completo",
+  "sectionStatusPartial": "Análisis parcial (viene más)",
+  "sectionStatusPending": "Análisis en progreso"
 }

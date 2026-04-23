@@ -1225,60 +1225,59 @@ class AppLocalizationsJa extends AppLocalizations {
   String get qtPassagesRetryButton => '再試行';
 
   @override
-  String get aiStreamingInitial => 'Meditating on your prayer...';
+  String get aiStreamingInitial => 'あなたの祈りに想いを巡らせています...';
 
   @override
-  String get aiTierProcessing => 'More reflections coming...';
+  String get aiTierProcessing => 'さらなる黙想を準備しています...';
 
   @override
-  String get aiScriptureValidating => 'Finding the right scripture...';
+  String get aiScriptureValidating => 'ふさわしいみことばを探しています...';
 
   @override
-  String get aiScriptureValidatingFailed =>
-      'Preparing this scripture for you...';
+  String get aiScriptureValidatingFailed => 'このみことばをお届けする準備中です...';
 
   @override
-  String get aiTemplateFallback => 'While we prepare your full analysis...';
+  String get aiTemplateFallback => '完全な分析を準備している間...';
 
   @override
-  String get aiPendingMore => 'Preparing more...';
+  String get aiPendingMore => '準備中...';
 
   @override
-  String get aiTierIncomplete => 'Coming soon, check back later';
+  String get aiTierIncomplete => 'もうすぐ届きます。後ほどご確認ください';
 
   @override
-  String get tierCompleted => 'New reflection added';
+  String get tierCompleted => '新しい黙想が届きました';
 
   @override
-  String get tierProcessingNotice => 'Generating more reflections...';
+  String get tierProcessingNotice => 'さらなる黙想を作成しています...';
 
   @override
-  String get proSectionLoading => 'Preparing your premium content...';
+  String get proSectionLoading => 'プレミアムコンテンツを準備中です...';
 
   @override
-  String get proSectionWillArrive => 'Your deep reflection will appear here';
+  String get proSectionWillArrive => '深い黙想はここに現れます';
 
   @override
-  String get templateCategoryHealth => 'For Health Concerns';
+  String get templateCategoryHealth => '健康のための祈り';
 
   @override
-  String get templateCategoryFamily => 'For Family';
+  String get templateCategoryFamily => '家族のための祈り';
 
   @override
-  String get templateCategoryWork => 'For Work & Studies';
+  String get templateCategoryWork => '仕事と学びのための祈り';
 
   @override
-  String get templateCategoryGratitude => 'A Thankful Heart';
+  String get templateCategoryGratitude => '感謝の心';
 
   @override
-  String get templateCategoryGrief => 'In Grief or Loss';
+  String get templateCategoryGrief => '悲しみや喪失の中で';
 
   @override
-  String get sectionStatusCompleted => 'Analysis complete';
+  String get sectionStatusCompleted => '分析完了';
 
   @override
-  String get sectionStatusPartial => 'Partial analysis (more coming)';
+  String get sectionStatusPartial => '部分的な分析(続きが届きます)';
 
   @override
-  String get sectionStatusPending => 'Analysis in progress';
+  String get sectionStatusPending => '分析中';
 }

@@ -490,11 +490,35 @@
   "homeFirstPrayerPrompt": "เริ่มการอธิษฐานครั้งแรกของคุณ",
   "homeFirstQtPrompt": "เริ่ม QT ครั้งแรกของคุณ",
   "homeActivityPrompt": "วันนี้ก็ {activityName} ด้วย",
-  "@homeActivityPrompt": {"placeholders": {"activityName": {"type": "String"}}},
+  "@homeActivityPrompt": {
+    "placeholders": {
+      "activityName": {
+        "type": "String"
+      }
+    }
+  },
   "homeStreakInProgress": "{activityName} ต่อเนื่องวันที่ {count}",
-  "@homeStreakInProgress": {"placeholders": {"count": {"type": "int"}, "activityName": {"type": "String"}}},
+  "@homeStreakInProgress": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "activityName": {
+        "type": "String"
+      }
+    }
+  },
   "homeDaysSinceLastActivity": "ผ่านไป {days} วันนับจาก {activityName} ครั้งล่าสุด",
-  "@homeDaysSinceLastActivity": {"placeholders": {"days": {"type": "int"}, "activityName": {"type": "String"}}},
+  "@homeDaysSinceLastActivity": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      },
+      "activityName": {
+        "type": "String"
+      }
+    }
+  },
   "homeActivityPrayer": "การอธิษฐาน",
   "homeActivityQt": "QT",
   "prayerPlayerLoading": "กำลังโหลด...",
@@ -502,5 +526,24 @@
   "heatmapLegendLess": "น้อย",
   "heatmapLegendMore": "มาก",
   "qtPassagesLoadError": "ไม่สามารถโหลดข้อพระคัมภีร์ของวันนี้ กรุณาตรวจสอบการเชื่อมต่อ",
-  "qtPassagesRetryButton": "ลองอีกครั้ง"
+  "qtPassagesRetryButton": "ลองอีกครั้ง",
+  "aiStreamingInitial": "เรากำลังใคร่ครวญคำอธิษฐานของคุณ...",
+  "aiTierProcessing": "การไตร่ตรองเพิ่มเติมกำลังมา...",
+  "aiScriptureValidating": "กำลังค้นหาข้อพระคัมภีร์ที่เหมาะสม...",
+  "aiScriptureValidatingFailed": "กำลังเตรียมข้อพระคัมภีร์นี้ให้คุณ...",
+  "aiTemplateFallback": "ในขณะที่เราเตรียมการวิเคราะห์ฉบับเต็ม...",
+  "aiPendingMore": "กำลังเตรียมเพิ่มเติม...",
+  "aiTierIncomplete": "มาถึงเร็วๆ นี้ โปรดกลับมาตรวจสอบภายหลัง",
+  "tierCompleted": "เพิ่มการไตร่ตรองใหม่แล้ว",
+  "tierProcessingNotice": "กำลังสร้างการไตร่ตรองเพิ่มเติม...",
+  "proSectionLoading": "กำลังเตรียมเนื้อหาพรีเมียมให้คุณ...",
+  "proSectionWillArrive": "การไตร่ตรองอย่างลึกซึ้งของคุณจะปรากฏที่นี่",
+  "templateCategoryHealth": "สำหรับปัญหาสุขภาพ",
+  "templateCategoryFamily": "สำหรับครอบครัว",
+  "templateCategoryWork": "สำหรับการทำงานและการเรียน",
+  "templateCategoryGratitude": "หัวใจที่สำนึกในพระคุณ",
+  "templateCategoryGrief": "ในความโศกเศร้าหรือการสูญเสีย",
+  "sectionStatusCompleted": "วิเคราะห์เสร็จสมบูรณ์",
+  "sectionStatusPartial": "วิเคราะห์บางส่วน (กำลังมาเพิ่ม)",
+  "sectionStatusPending": "กำลังวิเคราะห์"
 }

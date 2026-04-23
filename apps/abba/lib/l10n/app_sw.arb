@@ -490,11 +490,35 @@
   "homeFirstPrayerPrompt": "Anza sala yako ya kwanza",
   "homeFirstQtPrompt": "Anza QT yako ya kwanza",
   "homeActivityPrompt": "Leo pia fanya {activityName}",
-  "@homeActivityPrompt": {"placeholders": {"activityName": {"type": "String"}}},
+  "@homeActivityPrompt": {
+    "placeholders": {
+      "activityName": {
+        "type": "String"
+      }
+    }
+  },
   "homeStreakInProgress": "Siku ya {count} mfululizo wa {activityName}",
-  "@homeStreakInProgress": {"placeholders": {"count": {"type": "int"}, "activityName": {"type": "String"}}},
+  "@homeStreakInProgress": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "activityName": {
+        "type": "String"
+      }
+    }
+  },
   "homeDaysSinceLastActivity": "Ni siku {days} tangu {activityName} ya mwisho",
-  "@homeDaysSinceLastActivity": {"placeholders": {"days": {"type": "int"}, "activityName": {"type": "String"}}},
+  "@homeDaysSinceLastActivity": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      },
+      "activityName": {
+        "type": "String"
+      }
+    }
+  },
   "homeActivityPrayer": "sala",
   "homeActivityQt": "QT",
   "prayerPlayerLoading": "Inapakia...",
@@ -502,5 +526,24 @@
   "heatmapLegendLess": "Kidogo",
   "heatmapLegendMore": "Zaidi",
   "qtPassagesLoadError": "Imeshindikana kupakia vifungu vya leo. Tafadhali angalia muunganisho wako.",
-  "qtPassagesRetryButton": "Jaribu tena"
+  "qtPassagesRetryButton": "Jaribu tena",
+  "aiStreamingInitial": "Tunatafakari sala yako...",
+  "aiTierProcessing": "Tafakari zaidi zinakuja...",
+  "aiScriptureValidating": "Tunatafuta andiko sahihi...",
+  "aiScriptureValidatingFailed": "Tunaandaa andiko hili kwa ajili yako...",
+  "aiTemplateFallback": "Wakati tunaandaa uchambuzi wako kamili...",
+  "aiPendingMore": "Tunaandaa zaidi...",
+  "aiTierIncomplete": "Inakuja hivi karibuni, angalia tena baadaye",
+  "tierCompleted": "Tafakari mpya imeongezwa",
+  "tierProcessingNotice": "Tunatengeneza tafakari zaidi...",
+  "proSectionLoading": "Tunaandaa maudhui yako ya premium...",
+  "proSectionWillArrive": "Tafakari yako ya kina itaonekana hapa",
+  "templateCategoryHealth": "Kwa ajili ya wasiwasi wa afya",
+  "templateCategoryFamily": "Kwa ajili ya familia",
+  "templateCategoryWork": "Kwa ajili ya kazi na masomo",
+  "templateCategoryGratitude": "Moyo wa shukrani",
+  "templateCategoryGrief": "Katika huzuni au hasara",
+  "sectionStatusCompleted": "Uchambuzi umekamilika",
+  "sectionStatusPartial": "Uchambuzi wa sehemu (zaidi inakuja)",
+  "sectionStatusPending": "Uchambuzi unaendelea"
 }

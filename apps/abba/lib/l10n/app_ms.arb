@@ -490,11 +490,35 @@
   "homeFirstPrayerPrompt": "Mulakan doa pertama anda",
   "homeFirstQtPrompt": "Mulakan QT pertama anda",
   "homeActivityPrompt": "Hari ini juga {activityName}",
-  "@homeActivityPrompt": {"placeholders": {"activityName": {"type": "String"}}},
+  "@homeActivityPrompt": {
+    "placeholders": {
+      "activityName": {
+        "type": "String"
+      }
+    }
+  },
   "homeStreakInProgress": "Hari {count} berturut-turut {activityName}",
-  "@homeStreakInProgress": {"placeholders": {"count": {"type": "int"}, "activityName": {"type": "String"}}},
+  "@homeStreakInProgress": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "activityName": {
+        "type": "String"
+      }
+    }
+  },
   "homeDaysSinceLastActivity": "Sudah {days} hari sejak {activityName} terakhir",
-  "@homeDaysSinceLastActivity": {"placeholders": {"days": {"type": "int"}, "activityName": {"type": "String"}}},
+  "@homeDaysSinceLastActivity": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      },
+      "activityName": {
+        "type": "String"
+      }
+    }
+  },
   "homeActivityPrayer": "doa",
   "homeActivityQt": "QT",
   "prayerPlayerLoading": "Memuatkan...",
@@ -502,5 +526,24 @@
   "heatmapLegendLess": "Kurang",
   "heatmapLegendMore": "Banyak",
   "qtPassagesLoadError": "Tidak dapat memuatkan petikan hari ini. Sila semak sambungan anda.",
-  "qtPassagesRetryButton": "Cuba lagi"
+  "qtPassagesRetryButton": "Cuba lagi",
+  "aiStreamingInitial": "Merenungkan doamu...",
+  "aiTierProcessing": "Renungan lain akan tiba...",
+  "aiScriptureValidating": "Mencari ayat yang sesuai...",
+  "aiScriptureValidatingFailed": "Menyediakan ayat ini untukmu...",
+  "aiTemplateFallback": "Sementara kami menyediakan analisis penuh...",
+  "aiPendingMore": "Menyediakan lagi...",
+  "aiTierIncomplete": "Akan tiba tidak lama lagi, semak semula kemudian",
+  "tierCompleted": "Renungan baharu ditambah",
+  "tierProcessingNotice": "Menjana renungan tambahan...",
+  "proSectionLoading": "Menyediakan kandungan premium anda...",
+  "proSectionWillArrive": "Renungan mendalam anda akan muncul di sini",
+  "templateCategoryHealth": "Untuk kebimbangan kesihatan",
+  "templateCategoryFamily": "Untuk keluarga",
+  "templateCategoryWork": "Untuk kerja dan pelajaran",
+  "templateCategoryGratitude": "Hati yang bersyukur",
+  "templateCategoryGrief": "Dalam kesedihan atau kehilangan",
+  "sectionStatusCompleted": "Analisis selesai",
+  "sectionStatusPartial": "Analisis separa (ada lagi yang akan datang)",
+  "sectionStatusPending": "Analisis sedang berjalan"
 }

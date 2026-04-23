@@ -490,11 +490,35 @@
   "homeFirstPrayerPrompt": "Rozpocznij swoją pierwszą modlitwę",
   "homeFirstQtPrompt": "Rozpocznij swój pierwszy QT",
   "homeActivityPrompt": "Dziś również {activityName}",
-  "@homeActivityPrompt": {"placeholders": {"activityName": {"type": "String"}}},
+  "@homeActivityPrompt": {
+    "placeholders": {
+      "activityName": {
+        "type": "String"
+      }
+    }
+  },
   "homeStreakInProgress": "Dzień {count} ciągłego {activityName}",
-  "@homeStreakInProgress": {"placeholders": {"count": {"type": "int"}, "activityName": {"type": "String"}}},
+  "@homeStreakInProgress": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "activityName": {
+        "type": "String"
+      }
+    }
+  },
   "homeDaysSinceLastActivity": "Minęło {days} dni od ostatniego {activityName}",
-  "@homeDaysSinceLastActivity": {"placeholders": {"days": {"type": "int"}, "activityName": {"type": "String"}}},
+  "@homeDaysSinceLastActivity": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      },
+      "activityName": {
+        "type": "String"
+      }
+    }
+  },
   "homeActivityPrayer": "modlitwa",
   "homeActivityQt": "QT",
   "prayerPlayerLoading": "Ładowanie...",
@@ -502,5 +526,24 @@
   "heatmapLegendLess": "Mniej",
   "heatmapLegendMore": "Więcej",
   "qtPassagesLoadError": "Nie udało się załadować dzisiejszych fragmentów. Sprawdź połączenie.",
-  "qtPassagesRetryButton": "Spróbuj ponownie"
+  "qtPassagesRetryButton": "Spróbuj ponownie",
+  "aiStreamingInitial": "Rozważamy twoją modlitwę...",
+  "aiTierProcessing": "Kolejne refleksje w drodze...",
+  "aiScriptureValidating": "Szukamy właściwego fragmentu...",
+  "aiScriptureValidatingFailed": "Przygotowujemy dla ciebie ten fragment...",
+  "aiTemplateFallback": "Gdy przygotowujemy pełną analizę...",
+  "aiPendingMore": "Przygotowujemy więcej...",
+  "aiTierIncomplete": "Wkrótce, sprawdź później",
+  "tierCompleted": "Dodano nową refleksję",
+  "tierProcessingNotice": "Generujemy kolejne refleksje...",
+  "proSectionLoading": "Przygotowujemy twoje treści premium...",
+  "proSectionWillArrive": "Twoja głęboka refleksja pojawi się tutaj",
+  "templateCategoryHealth": "W trosce o zdrowie",
+  "templateCategoryFamily": "Za rodzinę",
+  "templateCategoryWork": "Za pracę i naukę",
+  "templateCategoryGratitude": "Wdzięczne serce",
+  "templateCategoryGrief": "W żałobie lub stracie",
+  "sectionStatusCompleted": "Analiza zakończona",
+  "sectionStatusPartial": "Analiza częściowa (więcej w drodze)",
+  "sectionStatusPending": "Analiza w toku"
 }

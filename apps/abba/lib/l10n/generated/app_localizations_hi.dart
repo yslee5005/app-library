@@ -1253,60 +1253,60 @@ class AppLocalizationsHi extends AppLocalizations {
   String get qtPassagesRetryButton => 'फिर से प्रयास करें';
 
   @override
-  String get aiStreamingInitial => 'Meditating on your prayer...';
+  String get aiStreamingInitial => 'आपकी प्रार्थना पर मनन कर रहे हैं...';
 
   @override
-  String get aiTierProcessing => 'More reflections coming...';
+  String get aiTierProcessing => 'और विचार आ रहे हैं...';
 
   @override
-  String get aiScriptureValidating => 'Finding the right scripture...';
+  String get aiScriptureValidating => 'सही शास्त्रवचन ढूँढ़ रहे हैं...';
 
   @override
   String get aiScriptureValidatingFailed =>
-      'Preparing this scripture for you...';
+      'यह शास्त्रवचन आपके लिए तैयार कर रहे हैं...';
 
   @override
-  String get aiTemplateFallback => 'While we prepare your full analysis...';
+  String get aiTemplateFallback => 'आपका पूरा विश्लेषण तैयार होने तक...';
 
   @override
-  String get aiPendingMore => 'Preparing more...';
+  String get aiPendingMore => 'और तैयार हो रहा है...';
 
   @override
-  String get aiTierIncomplete => 'Coming soon, check back later';
+  String get aiTierIncomplete => 'जल्द आ रहा है, बाद में देखें';
 
   @override
-  String get tierCompleted => 'New reflection added';
+  String get tierCompleted => 'नया मनन जोड़ा गया';
 
   @override
-  String get tierProcessingNotice => 'Generating more reflections...';
+  String get tierProcessingNotice => 'और मनन बना रहे हैं...';
 
   @override
-  String get proSectionLoading => 'Preparing your premium content...';
+  String get proSectionLoading => 'आपकी प्रीमियम सामग्री तैयार कर रहे हैं...';
 
   @override
-  String get proSectionWillArrive => 'Your deep reflection will appear here';
+  String get proSectionWillArrive => 'आपका गहरा मनन यहाँ दिखाई देगा';
 
   @override
-  String get templateCategoryHealth => 'For Health Concerns';
+  String get templateCategoryHealth => 'स्वास्थ्य चिंताओं के लिए';
 
   @override
-  String get templateCategoryFamily => 'For Family';
+  String get templateCategoryFamily => 'परिवार के लिए';
 
   @override
-  String get templateCategoryWork => 'For Work & Studies';
+  String get templateCategoryWork => 'कार्य और अध्ययन के लिए';
 
   @override
-  String get templateCategoryGratitude => 'A Thankful Heart';
+  String get templateCategoryGratitude => 'एक आभारी हृदय';
 
   @override
-  String get templateCategoryGrief => 'In Grief or Loss';
+  String get templateCategoryGrief => 'शोक या हानि में';
 
   @override
-  String get sectionStatusCompleted => 'Analysis complete';
+  String get sectionStatusCompleted => 'विश्लेषण पूर्ण';
 
   @override
-  String get sectionStatusPartial => 'Partial analysis (more coming)';
+  String get sectionStatusPartial => 'आंशिक विश्लेषण (और आ रहा है)';
 
   @override
-  String get sectionStatusPending => 'Analysis in progress';
+  String get sectionStatusPending => 'विश्लेषण प्रगति पर है';
 }
