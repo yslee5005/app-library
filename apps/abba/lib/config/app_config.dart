@@ -86,6 +86,14 @@ class AppConfig {
   static bool get useMockAi =>
       (dotenv.env['ENABLE_MOCK_AI'] ?? 'true').toLowerCase() == 'true';
 
+  /// FCM toggle: when false, RealNotificationService skips Firebase
+  /// initialization entirely. Local notifications (flutter_local_notifications)
+  /// keep working independently. Flip to `true` once GoogleService-Info.plist
+  /// / google-services.json are configured. Defaults to `false` (safe —
+  /// no Firebase config required for local dev / 1st-pass launch).
+  static bool get enableFcm =>
+      (dotenv.env['ENABLE_FCM'] ?? 'false').toLowerCase() == 'true';
+
   /// Validate required environment variables.
   /// Skipped in mock mode — real mode requires Supabase + Gemini + RevenueCat + Google OAuth keys.
   ///

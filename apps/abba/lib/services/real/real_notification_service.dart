@@ -327,9 +327,15 @@ class RealNotificationService implements NotificationService {
   }
 
   /// Initialize Firebase and FCM.
-  /// All Firebase calls are wrapped in try/catch so the app still works
-  /// without Firebase configured (e.g., in development).
+  /// Gated by `AppConfig.enableFcm` — off by default until Firebase config
+  /// files are added. All Firebase calls are still wrapped in try/catch as
+  /// a defense-in-depth guard.
   Future<void> _initializeFcm() async {
+    if (!AppConfig.enableFcm) {
+      fcmLog.info('FCM disabled by ENABLE_FCM flag');
+      return;
+    }
+
     try {
       // Dynamically import and initialize Firebase
       // This will fail if google-services.json / GoogleService-Info.plist
