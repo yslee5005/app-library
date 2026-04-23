@@ -15,8 +15,11 @@ class MockAiService implements AiService {
     required String locale,
     required String userName,
   }) async* {
-    final result = await _mockData.getPrayerResult();
+    // Delay FIRST so widget tests can still render the initial loading
+    // frame before the stream starts emitting events (or throwing on
+    // asset-load failure in the harness).
     await Future<void>.delayed(const Duration(seconds: 1));
+    final result = await _mockData.getPrayerResult();
     if (result.prayerSummary != null) {
       yield TierT1Result(summary: result.prayerSummary!, scripture: result.scripture);
     }

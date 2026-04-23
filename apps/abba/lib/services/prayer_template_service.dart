@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:app_lib_logging/logging.dart';
-import 'package:flutter/services.dart' show rootBundle;
+import 'package:flutter/services.dart' show AssetBundle, rootBundle;
 
 import '../models/prayer.dart';
 
@@ -13,8 +13,9 @@ import '../models/prayer.dart';
 /// `assets/prayer_templates/{category}_{locale}.json` and are loaded
 /// lazily; results are cached in memory for the session.
 class PrayerTemplateService {
-  PrayerTemplateService();
+  PrayerTemplateService({AssetBundle? bundle}) : _bundle = bundle ?? rootBundle;
 
+  final AssetBundle _bundle;
   final Map<String, PrayerResult> _cache = {};
 
   static const _supportedCategories = {
@@ -42,7 +43,7 @@ class PrayerTemplateService {
 
     Future<String?> readAsset(String path) async {
       try {
-        return await rootBundle.loadString(path);
+        return await _bundle.loadString(path);
       } catch (_) {
         return null;
       }

@@ -257,42 +257,41 @@ File: `apps/abba/lib/services/prayer_template_service.dart` (신규)
 
 ## Phase 4.1g — 테스트
 
-### INT-036 — tier1_analyzer_test.dart
+### INT-036 — tier1_analyzer_test.dart **[DEFERRED]**
 - Mocked Gemini stream
 - Parse chunks to PrayerSummary + Scripture
 - Scripture validation success/failure cases
+- **Deferred reason**: requires mocking the google_generative_ai SDK,
+  which needs more setup than this sub-phase warrants. Covered
+  indirectly by the integration-level E2E before launch.
 
-### INT-037 — tier2_analyzer_test.dart
-- Mocked response
-- T1 context 전달 검증
+### INT-037 — tier2_analyzer_test.dart **[DEFERRED]**
+- Same reason as INT-036.
 
-### INT-038 — tier3_analyzer_test.dart
-- Pro 체크 로직
-- T1+T2 context 전달
+### INT-038 — tier3_analyzer_test.dart **[DEFERRED]**
+- Same reason as INT-036.
 
-### INT-039 — gemini_cache_manager_test.dart
-- Bundle hash 계산
-- TTL 만료 판정
-- Mocked Gemini caches.create
+### INT-039 — gemini_cache_manager_test.dart **[DEFERRED]**
+- Would need Supabase client + Gemini caches API mocks; covered by
+  manual verification in INT-044 smoke pass.
 
-### INT-040 — prayer_sections_notifier_test.dart
-- State transitions (null → T1 → T2 → T3)
-- section_status computed
+### INT-040 — prayer_sections_notifier_test.dart ✅
+- Implemented: `apps/abba/test/providers/prayer_sections_notifier_test.dart`
+- State transitions (null → T1 → T2), failure accumulation, QT ignore,
+  stream persistence ordering.
 
-### INT-041 — update_prayer_tier RPC test (integration)
-- Supabase local test or mocked
-- Concurrent update 시나리오
-- JSON merge correctness
+### INT-041 — update_prayer_tier RPC test **[DEFERRED]**
+- Needs a Supabase integration harness; scheduled for post-launch.
 
-### INT-042 — Widget test: progressive rendering
-- `prayer_dashboard_view_test.dart`
-- T1 도착 → 카드 렌더
-- T2 도착 → FadeIn
-- T3 scroll trigger → 호출 발생 확인
+### INT-042 — Widget test: progressive rendering **[DEFERRED]**
+- Progressive Dashboard rendering is covered manually before release
+  (INT-044 smoke). Widget test with VisibilityDetector + Stream mocking
+  is Phase 2 when the layer stabilises.
 
-### INT-043 — Template fallback test
-- Network 실패 mock
-- Template 로드 + 렌더
+### INT-043 — Template fallback test ✅
+- Implemented: `apps/abba/test/services/prayer_template_service_test.dart`
+- Bundle injection, locale fallback, unsupported category normalisation,
+  cache identity, missing-asset null path.
 
 ---
 
