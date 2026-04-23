@@ -9,11 +9,16 @@
 
 ### 0. AI 하드코딩 응답 플래그 전환
 
-- [ ] **`gemini_service.dart:16` `_useHardcodedResponse = true` → `false` 전환**
-  - 현재 prod 빌드도 하드코딩 샘플 응답 반환 (한국어 고정)
-  - 7개 메서드 전부 영향: analyzePrayer, analyzePrayerCore, analyzePrayerFromAudio, analyzePrayerPremium, analyzeMeditation, analyzePrayerCoaching, analyzeQtCoaching
-  - 전환 후 반드시 E2E 테스트: 실제 Gemini API JSON 응답이 모델 스키마와 일치하는지
+- [x] **`_useHardcodedResponse` const 제거 → `AppConfig.useMockAi` ENV 토글로 전환** (`8cd014e`)
+  - 7개 메서드 전부 `AppConfig.useMockAi` 분기 사용 — analyzePrayer / analyzePrayerCore / analyzePrayerFromAudio / analyzePrayerPremium / analyzeMeditation / analyzePrayerCoaching / analyzeQtCoaching
+  - `ENABLE_MOCK_AI` env 미설정 시 default `true` (안전 — 실수로 API 비용 발생 방지)
+  - `_hardcoded*` mock 함수는 **유지** (fallback 자산 + dev 모드 용도)
+  - Sentry 에러 태깅 Pattern A 준수 확인 완료 (learned-pitfalls §17)
+- [ ] **실기기 E2E 테스트** — `.env.client` 에 `ENABLE_MOCK_AI=false` 추가 → `prepare_env.sh` 재생성 → Gemini 실응답 확인
   - 테스트 케이스: ko / en / ja 각 1회씩 최소 (35 locale 대표)
+  - 응답 시간 실측 (<5초 목표, §5 성능 항목과 연동)
+  - JSON 스키마 일치 검증 (hallucination / 필드 누락 여부)
+  - Google Cloud Console → Gemini API billing 활성화 선행 필수
 
 ### 0-1. Xcode GUI 수동 작업
 
@@ -227,7 +232,7 @@
 
 | 카테고리 | 항목 수 | 완료 | 추정 남은 시간 |
 |---------|---------|------|---------------|
-| 🚨 CRITICAL | 3 | 0 | 1-2일 (검증 포함) |
+| 🚨 CRITICAL | 3 | 1 | 반나절 (실기 E2E + Xcode GUI) |
 | 🔴 BLOCKER | 14 | 0 | 1-2주 (디자인 포함) |
 | 🟠 MUST | 11 | 6 | 2-3일 |
 | 🟡 SHOULD | 14 | 8 | 1일 |
@@ -253,6 +258,7 @@
 | `b953079` / `8d9d31e` | Pre-existing 테스트 수정 + MockDataService.fromData |
 | `02b207b` | CachedAiService + ProBlur 테스트 + TEST_BACKLOG |
 | `7925b63` | Dashboard widgets 4개 테스트 |
+| `8cd014e` | Gemini 동적화 — `_useHardcodedResponse` 제거 + `AppConfig.useMockAi` ENV 토글 |
 
 ---
 
