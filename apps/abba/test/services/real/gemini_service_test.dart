@@ -3,6 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 
 import 'package:app_lib_logging/logging.dart';
 
+import 'package:abba/services/ai_analysis_exception.dart';
 import 'package:abba/services/real/gemini_service.dart';
 
 /// Tests the refactor introduced by commit `8cd014e`: all 7 `AiService`
@@ -94,18 +95,33 @@ void main() {
       expect(result.prayerSummary?.gratitude, contains('Thanks for morning'));
     });
 
-    test('malformed JSON falls back to hardcoded result', () {
-      final result = service.parsePrayerJson('not json at all', 'en');
-      // Fallback is _fallbackPrayerResult which returns the hardcoded sample
-      // (Psalm 23:1). We can't assert the exact fallback content without
-      // leaking internals; checking for a non-empty reference is enough to
-      // prove the catch block returned a valid PrayerResult.
-      expect(result.scripture.reference, isNotEmpty);
+    // 2026-04-23: Phase 3 Pending/Retry — parsePrayerJson no longer silently
+    // returns a hardcoded fallback on malformed input. Throws so the UI can
+    // show an explicit error view + retry CTA.
+    test('malformed JSON throws AiAnalysisException(parseError)', () {
+      expect(
+        () => service.parsePrayerJson('not json at all', 'en'),
+        throwsA(
+          isA<AiAnalysisException>().having(
+            (e) => e.kind,
+            'kind',
+            AiAnalysisFailureKind.parseError,
+          ),
+        ),
+      );
     });
 
-    test('null text falls back', () {
-      final result = service.parsePrayerJson(null, 'en');
-      expect(result.scripture.reference, isNotEmpty);
+    test('null text throws AiAnalysisException(parseError)', () {
+      expect(
+        () => service.parsePrayerJson(null, 'en'),
+        throwsA(
+          isA<AiAnalysisException>().having(
+            (e) => e.kind,
+            'kind',
+            AiAnalysisFailureKind.parseError,
+          ),
+        ),
+      );
     });
   });
 
@@ -183,7 +199,8 @@ void main() {
       expect(result.application.morningAction, 'Thank God.');
     });
 
-    test('missing scripture.reference triggers fallback', () {
+    // 2026-04-23: Phase 3 Pending/Retry — missing/malformed response throws.
+    test('missing scripture.reference throws parseError', () {
       const json = '''
       {
         "meditation_summary": {"summary": "S", "topic": "T", "insight": "I"},
@@ -194,15 +211,29 @@ void main() {
         "knowledge": {"historical_context": ""}
       }
       ''';
-      final result = service.parseMeditationJson(json, 'en');
-      // Fallback populates a real reference — asserting non-empty proves the
-      // sanity branch fired.
-      expect(result.scripture.reference, isNotEmpty);
+      expect(
+        () => service.parseMeditationJson(json, 'en'),
+        throwsA(
+          isA<AiAnalysisException>().having(
+            (e) => e.kind,
+            'kind',
+            AiAnalysisFailureKind.parseError,
+          ),
+        ),
+      );
     });
 
-    test('malformed JSON falls back', () {
-      final result = service.parseMeditationJson('bad', 'en');
-      expect(result.scripture.reference, isNotEmpty);
+    test('malformed JSON throws parseError', () {
+      expect(
+        () => service.parseMeditationJson('bad', 'en'),
+        throwsA(
+          isA<AiAnalysisException>().having(
+            (e) => e.kind,
+            'kind',
+            AiAnalysisFailureKind.parseError,
+          ),
+        ),
+      );
     });
   });
 

@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart' show visibleForTesting;
 import 'package:flutter/services.dart';
 
 import '../../models/prayer.dart';
+import '../../models/qt_meditation_result.dart';
 import '../prayer_repository.dart';
 
 class MockPrayerRepository implements PrayerRepository {
@@ -44,6 +45,52 @@ class MockPrayerRepository implements PrayerRepository {
   Future<void> savePrayer(Prayer prayer) async {
     await _ensureInitialized();
     _prayers.insert(0, prayer);
+  }
+
+  @override
+  Future<String> savePendingPrayer(Prayer prayer) async {
+    await _ensureInitialized();
+    final pendingPrayer = Prayer(
+      id: prayer.id,
+      userId: prayer.userId,
+      transcript: prayer.transcript,
+      mode: prayer.mode,
+      qtPassageRef: prayer.qtPassageRef,
+      audioPath: prayer.audioPath,
+      audioStoragePath: prayer.audioStoragePath,
+      durationSeconds: prayer.durationSeconds,
+      createdAt: prayer.createdAt,
+      aiStatus: PrayerAiStatus.pending,
+    );
+    _prayers.insert(0, pendingPrayer);
+    return pendingPrayer.id;
+  }
+
+  @override
+  Future<void> completePrayer({
+    required String prayerId,
+    required String transcript,
+    PrayerResult? result,
+    QtMeditationResult? qtResult,
+  }) async {
+    await _ensureInitialized();
+    final idx = _prayers.indexWhere((p) => p.id == prayerId);
+    if (idx < 0) return;
+    final existing = _prayers[idx];
+    _prayers[idx] = Prayer(
+      id: existing.id,
+      userId: existing.userId,
+      transcript: transcript,
+      mode: existing.mode,
+      qtPassageRef: existing.qtPassageRef,
+      audioPath: existing.audioPath,
+      audioStoragePath: existing.audioStoragePath,
+      durationSeconds: existing.durationSeconds,
+      createdAt: existing.createdAt,
+      result: result ?? existing.result,
+      qtResult: qtResult ?? existing.qtResult,
+      aiStatus: PrayerAiStatus.completed,
+    );
   }
 
   @override

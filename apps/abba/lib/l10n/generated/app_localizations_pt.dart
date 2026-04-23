@@ -106,6 +106,30 @@ class AppLocalizationsPt extends AppLocalizations {
       'Aquietai-vos e sabei que eu sou Deus.\n— Salmo 46:10';
 
   @override
+  String get aiErrorNetworkTitle => 'Connection unstable';
+
+  @override
+  String get aiErrorNetworkBody =>
+      'Your prayer is safely saved. Please try again in a moment.';
+
+  @override
+  String get aiErrorApiTitle => 'AI service is unstable';
+
+  @override
+  String get aiErrorApiBody =>
+      'Your prayer is safely saved. Please try again in a moment.';
+
+  @override
+  String get aiErrorRetry => 'Try again';
+
+  @override
+  String get aiErrorWaitAndCheck =>
+      'We\'ll try the analysis again later. Please come back soon — your prayer will be waiting.';
+
+  @override
+  String get aiErrorHome => 'Back to home';
+
+  @override
   String get dashboardTitle => 'Jardim de Oração';
 
   @override

@@ -11,6 +11,7 @@ import '../../../models/qt_meditation_result.dart';
 import '../../../providers/providers.dart';
 import 'package:app_lib_logging/logging.dart';
 
+import '../../../services/ai_analysis_exception.dart';
 import '../../../services/network_checker.dart';
 import '../../../theme/abba_theme.dart';
 
@@ -30,6 +31,23 @@ class _AiLoadingViewState extends ConsumerState<AiLoadingView>
   bool _aiDone = false;
   bool _minTimePassed = false;
   bool _navigated = false;
+
+  // Phase 3 Pending/Retry (2026-04-23)
+  // Client-session counter — resets on app restart so the user always has a
+  // fresh 3-try budget when returning to a stuck prayer.
+  int _retryCount = 0;
+  static const _maxRetries = 3;
+
+  // DB row id returned by savePendingPrayer. Shared across retries so we
+  // UPDATE the existing pending row instead of creating duplicates.
+  String? _pendingPrayerId;
+
+  // Cached audio storage path across retries (uploaded only once).
+  String? _savedAudioStoragePath;
+
+  // Non-null when the current attempt failed. Build() shows an error view
+  // instead of the loading animation.
+  AiAnalysisException? _error;
 
   static const _icons = ['🌱', '🌿', '🌸'];
 
@@ -78,53 +96,83 @@ class _AiLoadingViewState extends ConsumerState<AiLoadingView>
     final locale = ref.read(localeProvider);
     final aiService = ref.read(aiServiceProvider);
     final isVoiceMode = audioPath != null && audioPath.isNotEmpty;
-
-    // Get actual user id from auth state
     final userId = ref.read(currentUserProvider)?.id ?? 'anonymous';
+    final repo = ref.read(prayerRepositoryProvider);
 
-    // Check network before calling AI API
+    // ────────────────────────────────────────────────────────────────────
+    // Step 1 (first attempt only) — persist raw prayer BEFORE AI.
+    // Voice mode: upload audio to Storage first, then INSERT pending row.
+    // On retry (_pendingPrayerId != null), skip this block — row already
+    // exists.
+    // ────────────────────────────────────────────────────────────────────
+    if (_pendingPrayerId == null) {
+      try {
+        if (isVoiceMode) {
+          final storageService = ref.read(audioStorageServiceProvider);
+          final audioRecordId = _generateId();
+          final uploaded = await storageService
+              .uploadAudio(
+                localPath: audioPath,
+                userId: userId,
+                recordId: audioRecordId,
+              )
+              .catchError((_) => '');
+          _savedAudioStoragePath = uploaded.isEmpty ? null : uploaded;
+        }
+
+        _pendingPrayerId = await repo.savePendingPrayer(
+          Prayer(
+            id: _generateId(),
+            userId: userId,
+            transcript: isVoiceMode ? '' : transcript,
+            mode: 'prayer',
+            audioPath: isVoiceMode ? audioPath : null,
+            audioStoragePath: _savedAudioStoragePath,
+            createdAt: DateTime.now(),
+            aiStatus: PrayerAiStatus.pending,
+          ),
+        );
+        prayerLog.info('Pending prayer saved id=$_pendingPrayerId voice=$isVoiceMode');
+      } catch (e, st) {
+        prayerLog.error('savePendingPrayer failed', error: e, stackTrace: st);
+        _setErrorState(AiAnalysisException(
+          'Failed to save prayer',
+          kind: AiAnalysisFailureKind.network,
+          cause: e,
+          causeStackTrace: st,
+        ));
+        return;
+      }
+    }
+
+    // ────────────────────────────────────────────────────────────────────
+    // Step 2 — network precondition.
+    // ────────────────────────────────────────────────────────────────────
     final hasNetwork = await ref.read(networkCheckerProvider).hasConnection();
     if (!hasNetwork) {
-      _setFallbackResult(transcript);
-      _aiDone = true;
-      _navigateIfReady();
+      _setErrorState(const AiAnalysisException(
+        'No network connection',
+        kind: AiAnalysisFailureKind.network,
+      ));
       return;
     }
 
+    // ────────────────────────────────────────────────────────────────────
+    // Step 3 — Gemini analysis. Throws AiAnalysisException on failure.
+    // ────────────────────────────────────────────────────────────────────
     try {
       PrayerResult result;
       String savedTranscript;
-      String? audioStoragePath;
-      final prayerId = _generateId();
 
       if (isVoiceMode) {
-        // Voice mode: upload + analyze in parallel
-        final storageService = ref.read(audioStorageServiceProvider);
-
-        final futures = await Future.wait([
-          // [0] Gemini analysis (transcription + analysis)
-          aiService.analyzePrayerFromAudio(
-            audioFilePath: audioPath,
-            locale: locale,
-          ),
-          // [1] Storage upload
-          storageService.uploadAudio(
-            localPath: audioPath,
-            userId: userId,
-            recordId: prayerId,
-          ).catchError((_) => ''), // non-fatal: continue even if upload fails
-        ]);
-
-        final audioResult =
-            futures[0] as ({PrayerResult result, String transcription});
-        audioStoragePath = futures[1] as String;
-        if (audioStoragePath.isEmpty) audioStoragePath = null;
-
+        final audioResult = await aiService.analyzePrayerFromAudio(
+          audioFilePath: audioPath,
+          locale: locale,
+        );
         result = audioResult.result;
         savedTranscript = audioResult.transcription;
-        prayerLog.info('Voice prayer analyzed + uploaded, transcript=${savedTranscript.length}');
+        prayerLog.info('Voice prayer analyzed, transcript=${savedTranscript.length}');
       } else {
-        // Text mode: send transcript to Gemini
         result = await aiService.analyzePrayerCore(
           transcript: transcript,
           locale: locale,
@@ -141,27 +189,20 @@ class _AiLoadingViewState extends ConsumerState<AiLoadingView>
         'original=${result.scripture.originalWords.length}words',
       );
 
-      // Phase 6: fill Scripture.verse from PD bundle (BibleTextService).
+      // Fill Scripture.verse from PD bundle (BibleTextService).
       // AI only picks reference — verse text comes from the bundle.
       result = await _enrichScriptureVerse(result, locale);
 
-      ref.read(prayerResultProvider.notifier).state = AsyncValue.data(result);
-
-      // Save prayer with result
-      final repo = ref.read(prayerRepositoryProvider);
-      await repo.savePrayer(
-        Prayer(
-          id: prayerId,
-          userId: userId,
-          transcript: savedTranscript,
-          mode: 'prayer',
-          audioPath: isVoiceMode ? audioPath : null,
-          audioStoragePath: audioStoragePath,
-          createdAt: DateTime.now(),
-          result: result,
-        ),
+      // ──────────────────────────────────────────────────────────────
+      // Step 4 — flip pending → completed + persist result.
+      // ──────────────────────────────────────────────────────────────
+      await repo.completePrayer(
+        prayerId: _pendingPrayerId!,
+        transcript: savedTranscript,
+        result: result,
       );
-      await repo.updateStreak();
+
+      ref.read(prayerResultProvider.notifier).state = AsyncValue.data(result);
 
       // Invalidate providers so calendar/history/heatmap refresh
       ref.invalidate(streakProvider);
@@ -171,20 +212,23 @@ class _AiLoadingViewState extends ConsumerState<AiLoadingView>
       ref.invalidate(streakByModeProvider('prayer'));
       ref.invalidate(streakByModeProvider('qt'));
 
-      // Show streak celebration notification for milestones
       await _checkStreakCelebration();
 
-      prayerLog.info('Prayer saved successfully');
+      prayerLog.info('Prayer completed + saved');
+      _aiDone = true;
+      _navigateIfReady();
+    } on AiAnalysisException catch (e) {
+      prayerLog.error('AI analysis failed (${e.kind})', error: e.cause, stackTrace: e.causeStackTrace);
+      _setErrorState(e);
     } catch (e, stackTrace) {
-      prayerLog.error('Prayer AI analysis failed', error: e, stackTrace: stackTrace);
-      _setFallbackResult(transcript);
+      prayerLog.error('Unexpected AI error', error: e, stackTrace: stackTrace);
+      _setErrorState(AiAnalysisException(
+        'Unexpected error during analysis',
+        kind: AiAnalysisFailureKind.apiError,
+        cause: e,
+        causeStackTrace: stackTrace,
+      ));
     }
-
-    _aiDone = true;
-
-    prayerLog.info('AI loading finished');
-
-    _navigateIfReady();
   }
 
   Future<void> _analyzeQtMeditation() async {
@@ -193,17 +237,47 @@ class _AiLoadingViewState extends ConsumerState<AiLoadingView>
     final passageText = ref.read(currentPassageTextProvider);
     final locale = ref.read(localeProvider);
     final aiService = ref.read(aiServiceProvider);
-
     final userId = ref.read(currentUserProvider)?.id ?? 'anonymous';
+    final repo = ref.read(prayerRepositoryProvider);
 
+    // Step 1 — persist raw meditation BEFORE AI (first attempt only).
+    if (_pendingPrayerId == null) {
+      try {
+        _pendingPrayerId = await repo.savePendingPrayer(
+          Prayer(
+            id: _generateId(),
+            userId: userId,
+            transcript: meditationText,
+            mode: 'qt',
+            qtPassageRef: passageRef,
+            createdAt: DateTime.now(),
+            aiStatus: PrayerAiStatus.pending,
+          ),
+        );
+        qtLog.info('Pending QT saved id=$_pendingPrayerId');
+      } catch (e, st) {
+        qtLog.error('savePendingPrayer (QT) failed', error: e, stackTrace: st);
+        _setErrorState(AiAnalysisException(
+          'Failed to save meditation',
+          kind: AiAnalysisFailureKind.network,
+          cause: e,
+          causeStackTrace: st,
+        ));
+        return;
+      }
+    }
+
+    // Step 2 — network precondition.
     final hasNetwork = await ref.read(networkCheckerProvider).hasConnection();
     if (!hasNetwork) {
-      _setFallbackMeditationResult();
-      _aiDone = true;
-      _navigateIfReady();
+      _setErrorState(const AiAnalysisException(
+        'No network connection',
+        kind: AiAnalysisFailureKind.network,
+      ));
       return;
     }
 
+    // Step 3 — Gemini analysis. Throws AiAnalysisException on failure.
     try {
       QtMeditationResult result = await aiService.analyzeMeditation(
         passageReference: passageRef,
@@ -221,27 +295,19 @@ class _AiLoadingViewState extends ConsumerState<AiLoadingView>
         'original=${result.scripture.originalWords.length}words',
       );
 
-      // Phase 1 — fill Scripture.verse from PD bundle (BibleTextService),
+      // Fill Scripture.verse from PD bundle (BibleTextService),
       // mirroring prayer's _enrichScriptureVerse pattern.
       result = await _enrichQtScriptureVerse(result, locale);
 
+      // Step 4 — flip pending → completed + persist qtResult.
+      await repo.completePrayer(
+        prayerId: _pendingPrayerId!,
+        transcript: meditationText,
+        qtResult: result,
+      );
+
       ref.read(qtMeditationResultProvider.notifier).state =
           AsyncValue.data(result);
-
-      // Save as QT prayer — Phase 5D persists QT result via qt_result JSONB.
-      final repo = ref.read(prayerRepositoryProvider);
-      await repo.savePrayer(
-        Prayer(
-          id: _generateId(),
-          userId: userId,
-          transcript: meditationText,
-          mode: 'qt',
-          qtPassageRef: passageRef,
-          createdAt: DateTime.now(),
-          qtResult: result,
-        ),
-      );
-      await repo.updateStreak();
 
       // Invalidate providers so calendar/history/heatmap refresh
       ref.invalidate(streakProvider);
@@ -251,17 +317,23 @@ class _AiLoadingViewState extends ConsumerState<AiLoadingView>
       ref.invalidate(streakByModeProvider('prayer'));
       ref.invalidate(streakByModeProvider('qt'));
 
-      // Show streak celebration notification for milestones
       await _checkStreakCelebration();
 
-      qtLog.info('QT meditation saved successfully');
+      qtLog.info('QT meditation completed + saved');
+      _aiDone = true;
+      _navigateIfReady();
+    } on AiAnalysisException catch (e) {
+      qtLog.error('QT AI analysis failed (${e.kind})', error: e.cause, stackTrace: e.causeStackTrace);
+      _setErrorState(e);
     } catch (e, stackTrace) {
-      qtLog.error('QT meditation analysis failed', error: e, stackTrace: stackTrace);
-      _setFallbackMeditationResult();
+      qtLog.error('Unexpected QT AI error', error: e, stackTrace: stackTrace);
+      _setErrorState(AiAnalysisException(
+        'Unexpected error during QT analysis',
+        kind: AiAnalysisFailureKind.apiError,
+        cause: e,
+        causeStackTrace: stackTrace,
+      ));
     }
-
-    _aiDone = true;
-    _navigateIfReady();
   }
 
   /// Check current streak and show celebration notification for milestones
@@ -347,52 +419,45 @@ class _AiLoadingViewState extends ConsumerState<AiLoadingView>
     }
   }
 
-  void _setFallbackResult(String transcript) {
-    ref.read(prayerResultProvider.notifier).state = AsyncValue.data(
-      PrayerResult(
-        scripture: const Scripture(
-          reference: 'Psalm 23:1',
-          // verse populated at runtime by BibleTextService
-        ),
-        bibleStory: const BibleStory(
-          title: 'God is faithful',
-          summary:
-              'Even when we cannot see the way, God is faithfully guiding our steps.',
-        ),
-        testimony: transcript,
-      ),
+  /// Phase 3 Pending/Retry: set error state so build() renders error view
+  /// instead of the loading animation. DOES NOT navigate to Dashboard —
+  /// error view replaces loading in-place and exposes [재시도]/[홈으로].
+  void _setErrorState(AiAnalysisException error) {
+    if (!mounted) return;
+    setState(() {
+      _error = error;
+      _aiDone = true; // unblocks _navigateIfReady; but _error guard prevents nav
+    });
+    prayerLog.info(
+      'AI loading error state: kind=${error.kind.name} '
+      'retry=$_retryCount/$_maxRetries pendingId=$_pendingPrayerId',
     );
   }
 
-  void _setFallbackMeditationResult() {
-    ref.read(qtMeditationResultProvider.notifier).state = const AsyncValue.data(
-      QtMeditationResult(
-        meditationSummary: MeditationSummary(
-          summary: '',
-          topic: 'Meditating on God\'s Word',
-          // Phase 5C — insight absorbed from the removed MeditationAnalysis.
-          insight:
-              'Your meditation reveals a heart seeking God\'s guidance and peace.',
-        ),
-        scripture: Scripture(reference: 'Psalm 1:2'),
-        application: ApplicationSuggestion(
-          morningAction:
-              'Before rising, whisper "The Lord is my shepherd" three times in bed.',
-          dayAction:
-              'When frustrated during work, silently say "my shepherd" once.',
-          eveningAction:
-              'Before dinner, read Psalm 23:1 aloud with your family.',
-        ),
-        knowledge: RelatedKnowledge(
-          historicalContext:
-              'The biblical concept of meditation involves deep reflection on God\'s Word.',
-          crossReferences: [
-            CrossReference(reference: 'Psalm 1:2', text: ''),
-            CrossReference(reference: 'Joshua 1:8', text: ''),
-          ],
-        ),
-      ),
-    );
+  /// User tapped [다시 시도]. Clear error, reset AI status, trigger analysis.
+  /// Uses same _pendingPrayerId → UPDATE existing row on success (no dup).
+  void _onRetry() {
+    if (!mounted) return;
+    if (_retryCount >= _maxRetries) return;
+    setState(() {
+      _retryCount++;
+      _error = null;
+      _aiDone = false;
+    });
+    prayerLog.info('Retry triggered ($_retryCount/$_maxRetries)');
+    final mode = ref.read(currentPrayerModeProvider);
+    if (mode == 'qt') {
+      _analyzeQtMeditation();
+    } else {
+      _analyzeWithAi();
+    }
+  }
+
+  /// User tapped [홈으로]. Leave pending prayer in DB — Edge Function will
+  /// pick it up on next app visit (Phase 4/5).
+  void _onGoHome() {
+    if (!mounted) return;
+    context.go('/home');
   }
 
   /// Phase 1 (qt_output_redesign) — Fill QT Scripture.verse from PD bundle.
@@ -455,6 +520,7 @@ class _AiLoadingViewState extends ConsumerState<AiLoadingView>
 
   void _navigateIfReady() {
     if (_navigated) return;
+    if (_error != null) return; // Phase 3: don't navigate on error
     if (_aiDone && _minTimePassed && mounted) {
       _navigated = true;
       final mode = ref.read(currentPrayerModeProvider);
@@ -476,6 +542,11 @@ class _AiLoadingViewState extends ConsumerState<AiLoadingView>
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
+
+    // Phase 3 Pending/Retry: error view replaces loading animation in-place.
+    if (_error != null) {
+      return _buildErrorView(l10n, _error!);
+    }
 
     return Scaffold(
       backgroundColor: AbbaColors.cream,
@@ -521,6 +592,97 @@ class _AiLoadingViewState extends ConsumerState<AiLoadingView>
                 ),
               ),
             ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildErrorView(AppLocalizations l10n, AiAnalysisException error) {
+    final canRetry = _retryCount < _maxRetries;
+    final isNetwork = error.kind == AiAnalysisFailureKind.network;
+
+    final title = isNetwork ? l10n.aiErrorNetworkTitle : l10n.aiErrorApiTitle;
+    final body = canRetry
+        ? (isNetwork ? l10n.aiErrorNetworkBody : l10n.aiErrorApiBody)
+        : l10n.aiErrorWaitAndCheck;
+
+    return Scaffold(
+      backgroundColor: AbbaColors.cream,
+      body: SafeArea(
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: AbbaSpacing.xl),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text('🌿', style: TextStyle(fontSize: 80)),
+                const SizedBox(height: AbbaSpacing.xl),
+                Text(
+                  title,
+                  style: AbbaTypography.h1,
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: AbbaSpacing.md),
+                Text(
+                  body,
+                  style: AbbaTypography.body,
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: AbbaSpacing.xxl),
+                if (canRetry)
+                  SizedBox(
+                    width: double.infinity,
+                    height: 56,
+                    child: ElevatedButton(
+                      onPressed: _onRetry,
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: AbbaColors.sage,
+                        foregroundColor: Colors.white,
+                        shape: RoundedRectangleBorder(
+                          borderRadius:
+                              BorderRadius.circular(AbbaRadius.md),
+                        ),
+                      ),
+                      child: Text(
+                        l10n.aiErrorRetry,
+                        style: AbbaTypography.body.copyWith(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
+                  ),
+                if (canRetry) const SizedBox(height: AbbaSpacing.md),
+                SizedBox(
+                  width: double.infinity,
+                  height: 56,
+                  child: OutlinedButton(
+                    onPressed: _onGoHome,
+                    style: OutlinedButton.styleFrom(
+                      foregroundColor: AbbaColors.warmBrown,
+                      side: BorderSide(color: AbbaColors.muted),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(AbbaRadius.md),
+                      ),
+                    ),
+                    child: Text(
+                      l10n.aiErrorHome,
+                      style: AbbaTypography.body,
+                    ),
+                  ),
+                ),
+                if (!canRetry) ...[
+                  const SizedBox(height: AbbaSpacing.md),
+                  Text(
+                    '($_retryCount/$_maxRetries)',
+                    style: AbbaTypography.caption.copyWith(
+                      color: AbbaColors.muted,
+                    ),
+                  ),
+                ],
+              ],
+            ),
           ),
         ),
       ),

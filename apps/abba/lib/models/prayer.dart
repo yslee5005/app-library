@@ -1,5 +1,40 @@
 import 'qt_meditation_result.dart';
 
+/// AI analysis lifecycle state (2026-04-23 Pending/Retry 아키텍처).
+/// See apps/abba/specs/DESIGN.md §10.
+enum PrayerAiStatus {
+  /// Raw prayer saved, awaiting AI analysis.
+  pending,
+
+  /// Edge Function is currently running AI analysis.
+  processing,
+
+  /// AI analysis complete, `result`/`qtResult` populated.
+  completed,
+
+  /// Edge Function exceeded 10 retries — permanent failure. Raw prayer
+  /// still preserved; user sees "분석 어려움" message.
+  failed,
+}
+
+PrayerAiStatus _parseAiStatus(dynamic raw) {
+  if (raw is String) {
+    switch (raw) {
+      case 'pending':
+        return PrayerAiStatus.pending;
+      case 'processing':
+        return PrayerAiStatus.processing;
+      case 'failed':
+        return PrayerAiStatus.failed;
+      case 'completed':
+      default:
+        return PrayerAiStatus.completed;
+    }
+  }
+  // Legacy rows pre-migration: treat as completed (they were analyzed).
+  return PrayerAiStatus.completed;
+}
+
 class Prayer {
   final String id;
   final String userId;
@@ -13,6 +48,13 @@ class Prayer {
   final PrayerResult? result;     // mode='prayer' — AI prayer analysis
   final QtMeditationResult? qtResult; // Phase 5D — mode='qt' persistence
 
+  /// 2026-04-23 Pending/Retry: AI analysis lifecycle state.
+  final PrayerAiStatus aiStatus;
+
+  /// 2026-04-23 Pending/Retry: last Edge Function retry timestamp (for
+  /// 10-minute cooldown). Null = never retried server-side.
+  final DateTime? lastRetryAt;
+
   const Prayer({
     required this.id,
     required this.userId,
@@ -25,6 +67,8 @@ class Prayer {
     required this.createdAt,
     this.result,
     this.qtResult,
+    this.aiStatus = PrayerAiStatus.completed,
+    this.lastRetryAt,
   });
 
   factory Prayer.fromJson(Map<String, dynamic> json) {
@@ -46,10 +90,11 @@ class Prayer {
       }
     }
 
+    final lastRetryRaw = json['last_retry_at'];
     return Prayer(
       id: json['id'] as String,
       userId: json['user_id'] as String,
-      transcript: json['transcript'] as String,
+      transcript: json['transcript'] as String? ?? '',
       mode: mode,
       qtPassageRef: json['qt_passage_ref'] as String?,
       audioPath: json['audio_path'] as String?,
@@ -58,6 +103,8 @@ class Prayer {
       createdAt: DateTime.parse(json['created_at'] as String),
       result: prayerResult,
       qtResult: qtResult,
+      aiStatus: _parseAiStatus(json['ai_status']),
+      lastRetryAt: lastRetryRaw is String ? DateTime.parse(lastRetryRaw) : null,
     );
   }
 }

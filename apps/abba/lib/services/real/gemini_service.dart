@@ -10,6 +10,7 @@ import 'package:app_lib_logging/logging.dart';
 import '../../config/app_config.dart';
 import '../../models/prayer.dart';
 import '../../models/qt_meditation_result.dart';
+import '../ai_analysis_exception.dart';
 import '../ai_service.dart';
 
 // AI mock toggle lives in `AppConfig.useMockAi` (driven by `ENABLE_MOCK_AI`).
@@ -135,9 +136,16 @@ class GeminiService implements AiService {
       ]);
       _logAiCost(response, 'analyzePrayer');
       return parsePrayerJson(response.text, locale);
+    } on AiAnalysisException {
+      rethrow;
     } catch (e, stackTrace) {
       apiLog.error('Gemini prayer analysis failed', error: e, stackTrace: stackTrace);
-      return _fallbackPrayerResult(locale);
+      throw AiAnalysisException(
+        'Gemini prayer analysis failed',
+        kind: AiAnalysisFailureKind.apiError,
+        cause: e,
+        causeStackTrace: stackTrace,
+      );
     }
   }
 
@@ -162,9 +170,16 @@ class GeminiService implements AiService {
       ]);
       _logAiCost(response, 'analyzePrayerCore');
       return parsePrayerJson(response.text, locale);
+    } on AiAnalysisException {
+      rethrow;
     } catch (e, stackTrace) {
       apiLog.error('Gemini core analysis failed', error: e, stackTrace: stackTrace);
-      return _fallbackPrayerResult(locale);
+      throw AiAnalysisException(
+        'Gemini core analysis failed',
+        kind: AiAnalysisFailureKind.apiError,
+        cause: e,
+        causeStackTrace: stackTrace,
+      );
     }
   }
 
@@ -205,9 +220,24 @@ class GeminiService implements AiService {
       final transcription = json['transcription'] as String? ?? '';
       final result = PrayerResult.fromJson(json);
       return (result: result, transcription: transcription);
+    } on FormatException catch (e, stackTrace) {
+      apiLog.error('Gemini audio parse failed', error: e, stackTrace: stackTrace);
+      throw AiAnalysisException(
+        'Gemini audio response was malformed',
+        kind: AiAnalysisFailureKind.parseError,
+        cause: e,
+        causeStackTrace: stackTrace,
+      );
+    } on AiAnalysisException {
+      rethrow;
     } catch (e, stackTrace) {
       apiLog.error('Gemini audio analysis failed', error: e, stackTrace: stackTrace);
-      return (result: _fallbackPrayerResult(locale), transcription: '');
+      throw AiAnalysisException(
+        'Gemini audio analysis failed',
+        kind: AiAnalysisFailureKind.apiError,
+        cause: e,
+        causeStackTrace: stackTrace,
+      );
     }
   }
 
@@ -271,9 +301,16 @@ class GeminiService implements AiService {
       ]);
       _logAiCost(response, 'analyzeMeditation');
       return parseMeditationJson(response.text, locale);
+    } on AiAnalysisException {
+      rethrow;
     } catch (e, stackTrace) {
       apiLog.error('Gemini meditation analysis failed', error: e, stackTrace: stackTrace);
-      return _fallbackMeditationResult(locale);
+      throw AiAnalysisException(
+        'Gemini meditation analysis failed',
+        kind: AiAnalysisFailureKind.apiError,
+        cause: e,
+        causeStackTrace: stackTrace,
+      );
     }
   }
 
@@ -578,7 +615,12 @@ Rules (per QT Guide §4-6):
       return PrayerResult.fromJson(data);
     } catch (e, stackTrace) {
       apiLog.error('Prayer JSON parse failed', error: e, stackTrace: stackTrace);
-      return _fallbackPrayerResult(locale);
+      throw AiAnalysisException(
+        'Prayer JSON parse failed',
+        kind: AiAnalysisFailureKind.parseError,
+        cause: e,
+        causeStackTrace: stackTrace,
+      );
     }
   }
 
@@ -608,17 +650,25 @@ Rules (per QT Guide §4-6):
     try {
       final data = parseJsonFromResponse(text);
       final result = QtMeditationResult.fromJson(data);
-      // Sanity: if scripture.reference missing, fall back to hardcoded.
+      // Sanity: if scripture.reference missing, treat as parse failure —
+      // scripture lookup would fail downstream anyway.
       if (result.scripture.reference.isEmpty) {
         apiLog.warning(
-          'Meditation JSON missing scripture.reference — using fallback',
+          'Meditation JSON missing scripture.reference — treating as parse error',
         );
-        return _fallbackMeditationResult(locale);
+        throw const FormatException('Meditation JSON missing scripture.reference');
       }
       return result;
+    } on AiAnalysisException {
+      rethrow;
     } catch (e, stackTrace) {
       apiLog.error('Meditation JSON parse failed', error: e, stackTrace: stackTrace);
-      return _fallbackMeditationResult(locale);
+      throw AiAnalysisException(
+        'Meditation JSON parse failed',
+        kind: AiAnalysisFailureKind.parseError,
+        cause: e,
+        causeStackTrace: stackTrace,
+      );
     }
   }
 
@@ -879,13 +929,15 @@ Rules (per QT Guide §4-6):
   }
 
   // ---------------------------------------------------------------------------
-  // Fallbacks (for API error paths — reuse the rich hardcoded content)
+  // NOTE (2026-04-23): Previously, AI failures silently returned
+  // `_hardcodedPrayerResult` / `_hardcodedMeditationResult` as fallbacks so
+  // the user saw canned content mistaken for a real AI response. That polluted
+  // the DB and violated user trust. Those fallback wrappers have been removed —
+  // callers now throw AiAnalysisException and UI shows an explicit error view.
+  // The _hardcoded* builders below are retained strictly for the useMockAi=true
+  // dev path.
+  // See .claude/rules/learned-pitfalls.md §2-1.
   // ---------------------------------------------------------------------------
-
-  PrayerResult _fallbackPrayerResult(String locale) => _hardcodedPrayerResult(locale);
-
-  QtMeditationResult _fallbackMeditationResult(String locale) =>
-      _hardcodedMeditationResult(locale);
 
   // ---------------------------------------------------------------------------
   // Diversity hint

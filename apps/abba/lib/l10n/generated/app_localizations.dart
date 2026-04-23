@@ -338,6 +338,48 @@ abstract class AppLocalizations {
   /// **'Be still, and know that I am God.\n— Psalm 46:10'**
   String get aiLoadingVerse;
 
+  /// No description provided for @aiErrorNetworkTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Connection unstable'**
+  String get aiErrorNetworkTitle;
+
+  /// No description provided for @aiErrorNetworkBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Your prayer is safely saved. Please try again in a moment.'**
+  String get aiErrorNetworkBody;
+
+  /// No description provided for @aiErrorApiTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'AI service is unstable'**
+  String get aiErrorApiTitle;
+
+  /// No description provided for @aiErrorApiBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Your prayer is safely saved. Please try again in a moment.'**
+  String get aiErrorApiBody;
+
+  /// No description provided for @aiErrorRetry.
+  ///
+  /// In en, this message translates to:
+  /// **'Try again'**
+  String get aiErrorRetry;
+
+  /// No description provided for @aiErrorWaitAndCheck.
+  ///
+  /// In en, this message translates to:
+  /// **'We\'ll try the analysis again later. Please come back soon — your prayer will be waiting.'**
+  String get aiErrorWaitAndCheck;
+
+  /// No description provided for @aiErrorHome.
+  ///
+  /// In en, this message translates to:
+  /// **'Back to home'**
+  String get aiErrorHome;
+
   /// No description provided for @dashboardTitle.
   ///
   /// In en, this message translates to:

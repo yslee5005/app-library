@@ -1,6 +1,7 @@
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../models/prayer.dart';
+import '../../models/qt_meditation_result.dart';
 import '../prayer_repository.dart';
 
 class SupabasePrayerRepository implements PrayerRepository {
@@ -37,7 +38,56 @@ class SupabasePrayerRepository implements PrayerRepository {
       'audio_storage_path': prayer.audioStoragePath,
       'duration_seconds': prayer.durationSeconds,
       'result': resultJsonb,
+      // Legacy path still writes as 'completed' — callers using this method
+      // have already produced an AI result.
+      'ai_status': 'completed',
     });
+    await updateStreak();
+  }
+
+  @override
+  Future<String> savePendingPrayer(Prayer prayer) async {
+    // 2026-04-23 Pending/Retry: persist raw prayer BEFORE AI call.
+    // transcript can be null for voice mode (Gemini fills it on success).
+    final row = await _abba.from('prayers').insert({
+      'app_id': 'abba',
+      'user_id': _userId,
+      'transcript': prayer.transcript.isEmpty ? null : prayer.transcript,
+      'mode': prayer.mode,
+      'qt_passage_ref': prayer.qtPassageRef,
+      'audio_storage_path': prayer.audioStoragePath,
+      'duration_seconds': prayer.durationSeconds,
+      'ai_status': 'pending',
+    }).select('id').single();
+
+    return row['id'] as String;
+  }
+
+  @override
+  Future<void> completePrayer({
+    required String prayerId,
+    required String transcript,
+    PrayerResult? result,
+    QtMeditationResult? qtResult,
+  }) async {
+    // 2026-04-23 Pending/Retry: flip pending → completed, fill result.
+    Map<String, dynamic>? resultJsonb;
+    if (qtResult != null) {
+      resultJsonb = qtResult.toJson();
+    } else if (result != null) {
+      resultJsonb = _resultToJson(result);
+    }
+
+    await _abba
+        .from('prayers')
+        .update({
+          'transcript': transcript,
+          'result': resultJsonb,
+          'ai_status': 'completed',
+        })
+        .eq('id', prayerId)
+        .eq('user_id', _userId);
+
     await updateStreak();
   }
 

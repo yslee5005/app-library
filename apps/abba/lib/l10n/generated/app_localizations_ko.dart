@@ -104,6 +104,28 @@ class AppLocalizationsKo extends AppLocalizations {
   String get aiLoadingVerse => '너희는 가만히 있어 내가 하나님 됨을 알지어다.\n— 시편 46:10';
 
   @override
+  String get aiErrorNetworkTitle => '연결이 불안정해요';
+
+  @override
+  String get aiErrorNetworkBody => '기도는 안전하게 저장됐어요. 잠시 후 다시 시도해주세요.';
+
+  @override
+  String get aiErrorApiTitle => 'AI 서비스가 불안정해요';
+
+  @override
+  String get aiErrorApiBody => '기도는 안전하게 저장됐어요. 잠시 후 다시 시도해주세요.';
+
+  @override
+  String get aiErrorRetry => '다시 시도';
+
+  @override
+  String get aiErrorWaitAndCheck =>
+      '저희가 나중에 다시 분석해 드릴게요. 곧 다시 오세요 — 기도가 기다리고 있을 거예요.';
+
+  @override
+  String get aiErrorHome => '홈으로';
+
+  @override
   String get dashboardTitle => '기도 정원';
 
   @override
