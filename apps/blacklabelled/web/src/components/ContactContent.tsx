@@ -186,7 +186,7 @@ export default function ContactContent() {
                 이메일
               </p>
               <p className="text-text-primary font-body mt-2">
-                info@blacklabelled.co.kr
+                blacklabelled@naver.com
               </p>
             </div>
             <div>

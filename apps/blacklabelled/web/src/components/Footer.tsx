@@ -56,7 +56,7 @@ export default function Footer() {
               <p>2층 (주소지1층) 블랙라벨드</p>
               <p>Tel. 010-9887-2826(TR)</p>
               <p>Tel. 010-9046-3487(TD)</p>
-              <p>info@blacklabelled.co.kr</p>
+              <p>blacklabelled@naver.com</p>
             </div>
           </div>
 
