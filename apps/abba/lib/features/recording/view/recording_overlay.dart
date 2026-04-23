@@ -180,10 +180,9 @@ class _RecordingOverlayState extends ConsumerState<RecordingOverlay>
       'audioPath=$audioPath',
     );
 
-    if (context.mounted) {
-      Navigator.of(context).pop();
-      context.go('/home/ai-loading');
-    }
+    if (!mounted) return;
+    Navigator.of(context).pop();
+    context.go('/home/ai-loading');
   }
 
   Widget _buildWaveformOrPulse() {
