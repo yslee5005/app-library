@@ -249,4 +249,118 @@ class TestFixtures {
         topic: topic,
         insight: insight,
       );
+
+  // ---------------------------------------------------------------------------
+  // Ralph Task B — additional dashboard card fixtures.
+  // ---------------------------------------------------------------------------
+
+  /// BibleStory with realistic title + summary copy.
+  static BibleStory bibleStory({
+    String title = 'David the Shepherd King',
+    String summary =
+        'Before David became the mighty king of Israel, he was a humble shepherd boy who learned to trust God in quiet fields.',
+  }) => BibleStory(title: title, summary: summary);
+
+  /// Guidance with `isPremium` drives the ProBlur gate inside `GuidanceCard`.
+  static Guidance guidance({
+    bool isPremium = true,
+    String content =
+        'Your prayer reflects a heart of gratitude — keep leaning into that posture as you walk through today.',
+  }) => Guidance(content: content, isPremium: isPremium);
+
+  /// HistoricalStory with reference + summary + lesson populated.
+  /// `isPremium=true` combined with `isUserPremium=false` triggers ProBlur.
+  static HistoricalStory historicalStory({bool isPremium = true}) =>
+      HistoricalStory(
+        title: "Hannah's Prayer at Shiloh",
+        reference: '1 Samuel 1-2',
+        summary:
+            'Every year, Hannah went up to Shiloh with her family and wept bitterly before the Lord because she had no children.',
+        lesson: 'God hears prayers that have no sound.',
+        isPremium: isPremium,
+      );
+
+  /// PrayerSummary with gratitude/petition/intercession bucket data.
+  static PrayerSummary prayerSummary() => const PrayerSummary(
+        gratitude: [
+          'Thank You for my family.',
+          'Grateful for this morning light.',
+        ],
+        petition: ['Grant me wisdom for today\'s meeting.'],
+        intercession: [
+          'Watch over my mother\'s health.',
+          'Comfort my friend who is grieving.',
+        ],
+      );
+
+  /// PrayerCoaching with realistic scores + bullets + level.
+  /// `overallFeedback(locale)` picks the right locale variant.
+  static PrayerCoaching prayerCoaching() => const PrayerCoaching(
+        scores: CoachingScores(
+          specificity: 4,
+          godCenteredness: 3,
+          actsBalance: 5,
+          authenticity: 4,
+        ),
+        strengths: [
+          'You prayed with concrete, specific words rather than vague phrases.',
+          'Your confession named actual situations from today.',
+        ],
+        improvements: [
+          'Consider pausing longer after praise, before moving to petition.',
+        ],
+        overallFeedbackEn:
+            'Your prayer shows strong ACTS balance and real authenticity.',
+        overallFeedbackKo:
+            '기도에 ACTS 균형과 진정성이 잘 드러납니다.',
+        expertLevel: 'growing',
+      );
+
+  /// RelatedKnowledge fixture with `originalWord`, `historicalContext`,
+  /// and at least one `crossReference`. `includeOriginalWord=false` lets
+  /// tests cover the null-originalWord branch.
+  static RelatedKnowledge relatedKnowledge({
+    bool includeOriginalWord = true,
+  }) => RelatedKnowledge(
+        originalWord: includeOriginalWord
+            ? const OriginalWord(
+                word: "רֹעִי",
+                transliteration: "ro'i",
+                language: 'Hebrew',
+                meaning:
+                    'my shepherd — implies intimate, personal care and guidance.',
+              )
+            : null,
+        historicalContext:
+            'Psalm 23 was composed by David, drawing on his years as a shepherd in the hills around Bethlehem.',
+        crossReferences: const [
+          CrossReference(
+            reference: 'John 10:11',
+            text: 'I am the good shepherd.',
+          ),
+          CrossReference(
+            reference: 'Isaiah 40:11',
+            text: 'He tends his flock like a shepherd.',
+          ),
+        ],
+      );
+
+  /// ApplicationSuggestion with 3 time-block actions populated.
+  /// `hasTimeBlocks` will be true — card renders the 3-block layout.
+  static ApplicationSuggestion applicationSuggestion() =>
+      const ApplicationSuggestion(
+        morningAction:
+            'Thank God for one specific gift before you rise from bed.',
+        dayAction:
+            'Pause once mid-day to remember you are being led by a shepherd.',
+        eveningAction:
+            'Write one moment of care you received from God today.',
+      );
+
+  /// ApplicationSuggestion with only the legacy single `action` field.
+  /// `hasTimeBlocks` is false — card renders the legacy single-line layout.
+  static ApplicationSuggestion applicationSuggestionLegacy() =>
+      const ApplicationSuggestion(
+        action: 'Quietly trust that you are being led today, even when unclear.',
+      );
 }
