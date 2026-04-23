@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:math';
 
+import 'package:flutter/foundation.dart' show visibleForTesting;
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:google_generative_ai/google_generative_ai.dart';
 import 'package:app_lib_logging/logging.dart';
@@ -81,7 +82,7 @@ class GeminiService implements AiService {
       final response = await model.generateContent([
         Content('user', [TextPart(transcript)]),
       ]);
-      return _parsePrayerJson(response.text, locale);
+      return parsePrayerJson(response.text, locale);
     } catch (e, stackTrace) {
       apiLog.error('Gemini prayer analysis failed', error: e, stackTrace: stackTrace);
       return _fallbackPrayerResult(locale);
@@ -107,7 +108,7 @@ class GeminiService implements AiService {
       final response = await model.generateContent([
         Content('user', [TextPart(transcript)]),
       ]);
-      return _parsePrayerJson(response.text, locale);
+      return parsePrayerJson(response.text, locale);
     } catch (e, stackTrace) {
       apiLog.error('Gemini core analysis failed', error: e, stackTrace: stackTrace);
       return _fallbackPrayerResult(locale);
@@ -146,7 +147,7 @@ class GeminiService implements AiService {
         ]),
       ]);
 
-      final json = _parseJsonFromResponse(response.text);
+      final json = parseJsonFromResponse(response.text);
       final transcription = json['transcription'] as String? ?? '';
       final result = PrayerResult.fromJson(json);
       return (result: result, transcription: transcription);
@@ -179,7 +180,7 @@ class GeminiService implements AiService {
       final response = await model.generateContent([
         Content('user', [TextPart(transcript)]),
       ]);
-      return _parsePremiumJson(response.text);
+      return parsePremiumJson(response.text);
     } catch (e, stackTrace) {
       apiLog.error('Gemini premium analysis failed', error: e, stackTrace: stackTrace);
       return const PremiumContent();
@@ -213,7 +214,7 @@ class GeminiService implements AiService {
       final response = await model.generateContent([
         Content('user', [TextPart(userMessage)]),
       ]);
-      return _parseMeditationJson(response.text, locale);
+      return parseMeditationJson(response.text, locale);
     } catch (e, stackTrace) {
       apiLog.error('Gemini meditation analysis failed', error: e, stackTrace: stackTrace);
       return _fallbackMeditationResult(locale);
@@ -245,7 +246,7 @@ class GeminiService implements AiService {
       final response = await model.generateContent([
         Content('user', [TextPart(transcript)]),
       ]);
-      return _parseCoachingJson(response.text);
+      return parseCoachingJson(response.text);
     } catch (e, stackTrace) {
       apiLog.error(
         'Gemini coaching analysis failed',
@@ -280,9 +281,10 @@ class GeminiService implements AiService {
     );
   }
 
-  PrayerCoaching _parseCoachingJson(String? text) {
+  @visibleForTesting
+  PrayerCoaching parseCoachingJson(String? text) {
     try {
-      final data = _parseJsonFromResponse(text);
+      final data = parseJsonFromResponse(text);
       final coaching = PrayerCoaching.fromJson(data);
       if (_coachingContainsForbiddenWord(coaching)) {
         apiLog.info('Coaching forbidden-word hit — replacing with placeholder');
@@ -384,7 +386,7 @@ Rules (per Prayer Guide §4-6):
       final response = await model.generateContent([
         Content('user', [TextPart(userMessage)]),
       ]);
-      return _parseQtCoachingJson(response.text);
+      return parseQtCoachingJson(response.text);
     } catch (e, stackTrace) {
       apiLog.error(
         'Gemini QT coaching analysis failed',
@@ -419,9 +421,10 @@ Rules (per Prayer Guide §4-6):
     );
   }
 
-  QtCoaching _parseQtCoachingJson(String? text) {
+  @visibleForTesting
+  QtCoaching parseQtCoachingJson(String? text) {
     try {
-      final data = _parseJsonFromResponse(text);
+      final data = parseJsonFromResponse(text);
       final coaching = QtCoaching.fromJson(data);
       if (_qtCoachingContainsForbiddenWord(coaching)) {
         apiLog.info(
@@ -504,14 +507,16 @@ Rules (per QT Guide §4-6):
   // JSON parsing
   // ---------------------------------------------------------------------------
 
-  Map<String, dynamic> _parseJsonFromResponse(String? text) {
+  @visibleForTesting
+  Map<String, dynamic> parseJsonFromResponse(String? text) {
     if (text == null || text.isEmpty) throw FormatException('Empty response');
     return jsonDecode(text) as Map<String, dynamic>;
   }
 
-  PrayerResult _parsePrayerJson(String? text, String locale) {
+  @visibleForTesting
+  PrayerResult parsePrayerJson(String? text, String locale) {
     try {
-      final data = _parseJsonFromResponse(text);
+      final data = parseJsonFromResponse(text);
       return PrayerResult.fromJson(data);
     } catch (e, stackTrace) {
       apiLog.error('Prayer JSON parse failed', error: e, stackTrace: stackTrace);
@@ -519,9 +524,10 @@ Rules (per QT Guide §4-6):
     }
   }
 
-  PremiumContent _parsePremiumJson(String? text) {
+  @visibleForTesting
+  PremiumContent parsePremiumJson(String? text) {
     try {
-      final data = _parseJsonFromResponse(text);
+      final data = parseJsonFromResponse(text);
       return PremiumContent(
         historicalStory: data['historical_story'] != null
             ? HistoricalStory.fromJson(data['historical_story'] as Map<String, dynamic>)
@@ -539,9 +545,10 @@ Rules (per QT Guide §4-6):
     }
   }
 
-  QtMeditationResult _parseMeditationJson(String? text, String locale) {
+  @visibleForTesting
+  QtMeditationResult parseMeditationJson(String? text, String locale) {
     try {
-      final data = _parseJsonFromResponse(text);
+      final data = parseJsonFromResponse(text);
       final result = QtMeditationResult.fromJson(data);
       // Sanity: if scripture.reference missing, fall back to hardcoded.
       if (result.scripture.reference.isEmpty) {

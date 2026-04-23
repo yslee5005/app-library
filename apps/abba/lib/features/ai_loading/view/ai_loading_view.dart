@@ -83,7 +83,7 @@ class _AiLoadingViewState extends ConsumerState<AiLoadingView>
     final userId = ref.read(currentUserProvider)?.id ?? 'anonymous';
 
     // Check network before calling AI API
-    final hasNetwork = await NetworkChecker.hasConnection();
+    final hasNetwork = await ref.read(networkCheckerProvider).hasConnection();
     if (!hasNetwork) {
       _setFallbackResult(transcript);
       _aiDone = true;
@@ -196,7 +196,7 @@ class _AiLoadingViewState extends ConsumerState<AiLoadingView>
 
     final userId = ref.read(currentUserProvider)?.id ?? 'anonymous';
 
-    final hasNetwork = await NetworkChecker.hasConnection();
+    final hasNetwork = await ref.read(networkCheckerProvider).hasConnection();
     if (!hasNetwork) {
       _setFallbackMeditationResult();
       _aiDone = true;
