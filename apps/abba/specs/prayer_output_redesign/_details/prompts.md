@@ -66,7 +66,7 @@ PrayerResult(
 
 ### 하드코딩 응답 (개발/테스트용)
 
-`_useHardcodedResponse = true` 상태에서 반환할 샘플:
+`ENABLE_MOCK_AI=true` (→ `AppConfig.useMockAi=true`) 상태에서 반환할 샘플. 기존 `_useHardcodedResponse` const는 `8cd014e`에서 ENV 토글로 교체됨 — 이 문서의 "하드코딩 응답" 개념은 동일하게 `_hardcoded*` fallback 함수가 반환하는 값을 가리킴:
 ```json
 {
   "transcript": "주님, 오늘도 새로운 아침을 허락해 주셔서 감사합니다. 가족의 건강과 평안을 지켜 주시고, 오늘 하루 주님의 뜻을 따라 살아가게 하소서. 염려하는 친구를 위로하여 주시고, 주님의 사랑 안에서 모두가 평안하기를 간구합니다. 예수님의 이름으로 기도드립니다. 아멘.",

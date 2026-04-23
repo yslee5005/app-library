@@ -52,7 +52,7 @@ factory PrayerResult.fromJson(Map<String, dynamic> json) => _$PrayerResultFromJs
 `Testimony · My prayer` / `나의 간증 · 기도 원문` — 카드 제목으로 긴 편. `AbbaTypography.h2` (20pt) 기준 compact(320dp) overflow 확인 필수. `maxLines: 1` + `overflow: ellipsis` 강제 or `maxLines: 2` 허용.
 
 ### 4. Hardcoded fallback 업데이트 순서
-`_useHardcodedResponse = true` 상태이므로 **하드코딩부터 새 구조로 먼저 업데이트** → UI 검증 → 실제 API 프롬프트 수정 (API는 다음 Phase에서 활성화될 때).
+기본적으로 `ENABLE_MOCK_AI=true` (→ `AppConfig.useMockAi=true`) 이므로 **하드코딩부터 새 구조로 먼저 업데이트** → UI 검증 → 실제 API 프롬프트 수정 (API는 `.env`에서 `ENABLE_MOCK_AI=false` 전환 시 활성화). `8cd014e` 기준 단일 상수 `_useHardcodedResponse`는 제거됨.
 
 ## 전체 룰 참조
 
