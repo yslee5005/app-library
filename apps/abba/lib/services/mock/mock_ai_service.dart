@@ -1,4 +1,5 @@
 import '../../models/prayer.dart';
+import '../../models/prayer_tier_result.dart';
 import '../../models/qt_meditation_result.dart';
 import '../ai_service.dart';
 import '../mock_data.dart';
@@ -7,6 +8,38 @@ class MockAiService implements AiService {
   final MockDataService _mockData;
 
   MockAiService(this._mockData);
+
+  @override
+  Stream<TierResult> analyzePrayerStreamed({
+    required String transcript,
+    required String locale,
+    required String userName,
+  }) async* {
+    final result = await _mockData.getPrayerResult();
+    await Future<void>.delayed(const Duration(seconds: 1));
+    if (result.prayerSummary != null) {
+      yield TierT1Result(summary: result.prayerSummary!, scripture: result.scripture);
+    }
+    await Future<void>.delayed(const Duration(seconds: 1));
+    yield TierT2Result(bibleStory: result.bibleStory, testimony: result.testimony);
+  }
+
+  @override
+  Future<TierResult> analyzeTier3Prayer({
+    required String transcript,
+    required String locale,
+    required String userName,
+    required TierT1Result t1Context,
+    required TierT2Result t2Context,
+  }) async {
+    await Future<void>.delayed(const Duration(seconds: 2));
+    final result = await _mockData.getPrayerResult();
+    return TierT3Result(
+      guidance: result.guidance,
+      aiPrayer: result.aiPrayer,
+      historicalStory: result.historicalStory,
+    );
+  }
 
   @override
   Future<PrayerResult> analyzePrayer({

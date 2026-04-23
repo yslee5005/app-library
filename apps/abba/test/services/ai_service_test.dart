@@ -1,5 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:abba/models/prayer.dart';
+import 'package:abba/models/prayer_tier_result.dart';
 import 'package:abba/models/qt_meditation_result.dart';
 import 'package:abba/services/ai_service.dart';
 import 'package:abba/services/mock_data.dart';
@@ -157,5 +158,27 @@ class _CountingAiService implements AiService {
   }) async {
     callCount++;
     return QtCoaching.placeholder();
+  }
+
+  @override
+  Stream<TierResult> analyzePrayerStreamed({
+    required String transcript,
+    required String locale,
+    required String userName,
+  }) async* {
+    callCount++;
+    // Minimal stub — tests don't assert stream content
+  }
+
+  @override
+  Future<TierResult> analyzeTier3Prayer({
+    required String transcript,
+    required String locale,
+    required String userName,
+    required TierT1Result t1Context,
+    required TierT2Result t2Context,
+  }) async {
+    callCount++;
+    return const TierT3Result();
   }
 }

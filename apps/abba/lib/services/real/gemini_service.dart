@@ -9,9 +9,15 @@ import 'package:app_lib_logging/logging.dart';
 
 import '../../config/app_config.dart';
 import '../../models/prayer.dart';
+import '../../models/prayer_tier_result.dart';
 import '../../models/qt_meditation_result.dart';
 import '../ai_analysis_exception.dart';
 import '../ai_service.dart';
+import '../bible_text_service.dart';
+import '../gemini_cache_manager.dart';
+import 'section_analyzers/tier1_analyzer.dart';
+import 'section_analyzers/tier2_analyzer.dart';
+import 'section_analyzers/tier3_analyzer.dart';
 
 // AI mock toggle lives in `AppConfig.useMockAi` (driven by `ENABLE_MOCK_AI`).
 // Each AiService method short-circuits to the `_hardcoded*` builders below
@@ -23,6 +29,18 @@ const String _hardcodedTranscription =
     '주님의 사랑 안에서 모두가 평안하기를 간구합니다. 예수님의 이름으로 기도드립니다. 아멘.';
 
 class GeminiService implements AiService {
+  /// Phase 4.1 — lazy-initialized tier analyzers. Injected via providers
+  /// when `GeminiService` is constructed; otherwise lazy-fallback creates
+  /// them on first use with fresh instances (rubric bundle is app-local).
+  final GeminiCacheManager? _cacheManager;
+  final BibleTextService? _bibleService;
+
+  GeminiService({
+    GeminiCacheManager? cacheManager,
+    BibleTextService? bibleService,
+  })  : _cacheManager = cacheManager,
+        _bibleService = bibleService;
+
   // ---------------------------------------------------------------------------
   // AI cost tracking (dev-only)
   //
@@ -1408,5 +1426,133 @@ Writing style:
 lesson: 2-3 sentences in $langName. Speak directly to the reader ("you"),
 connecting THIS specific story to something the reader can apply TODAY.
 Not a platitude — reference a detail from the story above.''';
+  }
+
+  // ---------------------------------------------------------------------------
+  // Phase 4.1 — 3-tier lazy generation (Stream<TierResult>)
+  // ---------------------------------------------------------------------------
+
+  /// Emits TierResult events as each tier completes. T1 first (syn), T2
+  /// auto-background (fire-and-forget await). T3 called separately via
+  /// [analyzeTier3Prayer] on scroll trigger (Pro only).
+  ///
+  /// Errors in any tier emit [TierFailed] events — stream does NOT throw,
+  /// so callers can continue rendering partial data.
+  @override
+  Stream<TierResult> analyzePrayerStreamed({
+    required String transcript,
+    required String locale,
+    required String userName,
+  }) async* {
+    if (AppConfig.useMockAi) {
+      // Mock: synthesize T1+T2 from hardcoded result for development.
+      final result = _hardcodedPrayerResult(locale);
+      if (result.prayerSummary != null) {
+        yield TierT1Result(summary: result.prayerSummary!, scripture: result.scripture);
+      }
+      yield TierT2Result(
+        bibleStory: result.bibleStory,
+        testimony: result.testimony,
+      );
+      return;
+    }
+
+    final cache = _cacheManager;
+    final bible = _bibleService;
+    if (cache == null || bible == null) {
+      yield TierFailed(
+        tier: 't1',
+        error: const AiAnalysisException(
+          'GeminiService missing cache/bible services (DI not wired)',
+          kind: AiAnalysisFailureKind.apiError,
+        ),
+      );
+      return;
+    }
+
+    final tier1 = Tier1Analyzer(
+      cache: cache,
+      bible: bible,
+      apiKey: AppConfig.geminiApiKey,
+    );
+    final tier2 = Tier2Analyzer(
+      cache: cache,
+      apiKey: AppConfig.geminiApiKey,
+    );
+
+    // T1 — user waits
+    TierT1Result? t1;
+    try {
+      t1 = await tier1.analyze(
+        transcript: transcript,
+        locale: locale,
+        userName: userName,
+      );
+      yield t1;
+    } on AiAnalysisException catch (e) {
+      yield TierFailed(tier: 't1', error: e);
+      return; // No T2 if T1 failed
+    }
+
+    // T2 — background (still awaited here so caller sees it via stream,
+    // but UI already unblocked on T1 emit)
+    try {
+      final t2 = await tier2.analyze(
+        transcript: transcript,
+        locale: locale,
+        userName: userName,
+        t1Context: t1,
+      );
+      yield t2;
+    } on AiAnalysisException catch (e) {
+      yield TierFailed(tier: 't2', error: e);
+    }
+  }
+
+  /// T3 Pro-only. Caller must have checked `isPremiumProvider` first.
+  @override
+  Future<TierResult> analyzeTier3Prayer({
+    required String transcript,
+    required String locale,
+    required String userName,
+    required TierT1Result t1Context,
+    required TierT2Result t2Context,
+  }) async {
+    if (AppConfig.useMockAi) {
+      final premium = _hardcodedPremiumContent(locale);
+      return TierT3Result(
+        guidance: premium.guidance,
+        aiPrayer: premium.aiPrayer,
+        historicalStory: premium.historicalStory,
+      );
+    }
+
+    final cache = _cacheManager;
+    if (cache == null) {
+      return const TierFailed(
+        tier: 't3',
+        error: AiAnalysisException(
+          'GeminiService missing cache service (DI not wired)',
+          kind: AiAnalysisFailureKind.apiError,
+        ),
+      );
+    }
+
+    final tier3 = Tier3Analyzer(
+      cache: cache,
+      apiKey: AppConfig.geminiApiKey,
+    );
+
+    try {
+      return await tier3.analyze(
+        transcript: transcript,
+        locale: locale,
+        userName: userName,
+        t1Context: t1Context,
+        t2Context: t2Context,
+      );
+    } on AiAnalysisException catch (e) {
+      return TierFailed(tier: 't3', error: e);
+    }
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:abba/models/prayer.dart';
+import 'package:abba/models/prayer_tier_result.dart';
 import 'package:abba/models/qt_meditation_result.dart';
 import 'package:abba/services/ai_service.dart';
 import 'package:abba/services/cached_ai_service.dart';
@@ -271,4 +272,22 @@ class _CountingAiService implements AiService {
         bibleStory: BibleStory(title: 'stub', summary: 'stub'),
         testimony: 'stub',
       );
+
+  @override
+  Stream<TierResult> analyzePrayerStreamed({
+    required String transcript,
+    required String locale,
+    required String userName,
+  }) async* {
+    // Minimal stub — tier-based caching is pass-through
+  }
+
+  @override
+  Future<TierResult> analyzeTier3Prayer({
+    required String transcript,
+    required String locale,
+    required String userName,
+    required TierT1Result t1Context,
+    required TierT2Result t2Context,
+  }) async => const TierT3Result();
 }

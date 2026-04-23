@@ -1,4 +1,5 @@
 import '../models/prayer.dart';
+import '../models/prayer_tier_result.dart';
 import '../models/qt_meditation_result.dart';
 import 'ai_service.dart';
 
@@ -156,4 +157,32 @@ class CachedAiService implements AiService {
     _putInCache(_qtCoachingCache, key, result);
     return result;
   }
+
+  // Phase 4.1 — tier-based calls pass through uncached for now. Caching
+  // TierResult would require sealed-class map support; post-launch.
+  @override
+  Stream<TierResult> analyzePrayerStreamed({
+    required String transcript,
+    required String locale,
+    required String userName,
+  }) => _inner.analyzePrayerStreamed(
+        transcript: transcript,
+        locale: locale,
+        userName: userName,
+      );
+
+  @override
+  Future<TierResult> analyzeTier3Prayer({
+    required String transcript,
+    required String locale,
+    required String userName,
+    required TierT1Result t1Context,
+    required TierT2Result t2Context,
+  }) => _inner.analyzeTier3Prayer(
+        transcript: transcript,
+        locale: locale,
+        userName: userName,
+        t1Context: t1Context,
+        t2Context: t2Context,
+      );
 }
