@@ -19,7 +19,7 @@ Compose a ~300-word prayer written FOR the user (not by them). The prayer should
 - Self-congratulation: "[User] has served you faithfully, so now..."
 
 ### Structure prohibitions
-- Missing Trinitarian closing ("In Jesus' name, Amen" or equivalent)
+- Missing Christ-invoking closing ("In Jesus' name, Amen" or equivalent — the line itself is Christological; the overall prayer may still be Trinitarian in structure)
 - Missing submission clause ("in your will", "if it be your will", "주의 뜻대로")
 - Starting without addressing God ("Please help with...")
 - Ending without Amen equivalent
@@ -30,7 +30,7 @@ Compose a ~300-word prayer written FOR the user (not by them). The prayer should
 - "According to recent studies..." without verifiable source
 - Anachronistic quotes (modern phrases attributed to ancient figures)
 - More than 3 citations (dilutes the prayer)
-- Saint invocation in Protestant-baseline context (may include Mary reverently only if user denomination is Catholic/Orthodox)
+- Saint or Marian invocation introduced by the AI (default: omit — preserves ecumenical baseline across Catholic/Protestant/Orthodox users). If the user's own prayer used such language, the AI may echo it back in `testimony` but should not introduce it into `ai_prayer` unprompted.
 
 ### Length
 - Under 200 words — too thin for 2-minute read
@@ -44,7 +44,7 @@ Compose a ~300-word prayer written FOR the user (not by them). The prayer should
 ## 3. Verification Gates
 
 - [ ] Addresses God directly (2nd person)
-- [ ] Trinitarian closing present ("In Jesus' name, Amen" / "예수 그리스도의 이름으로 기도드립니다. 아멘." / "En el nombre de Jesús, amén.")
+- [ ] Christ-invoking closing present ("In Jesus' name, Amen" / "예수 그리스도의 이름으로 기도드립니다. 아멘." / "En el nombre de Jesús, amén.")
 - [ ] Submission clause present
 - [ ] 280-350 words in target locale (count more lenient for Korean/Japanese/Chinese)
 - [ ] 5-part structure visible (gentle opening → concrete image → insight → specific petition → quiet close)
@@ -72,7 +72,7 @@ We come before you tonight carrying Hye-jin's mother in our arms — not metapho
 
 You who held the earth when the mountains shook, hold her now. She does not ask for certainty. She asks to not be alone.
 
-C.S. Lewis once wrote that grief feels like fear — the same fluttering, the same inability to settle. If that is her today, Lord, sit with her in the fluttering. Do not rush her to peace; give her your company before your answers.
+C.S. Lewis opened his journal of grief with the line, "No one ever told me that grief felt so like fear." If that is her today, Lord — the fluttering, the unsettledness — sit with her there. Do not rush her to peace; give her your company before your answers.
 
 We pray — and we know we are only echoing prayers already on her lips — for wisdom for her doctors, for tenderness between her and her daughter, for whatever healing is within your will.
 
@@ -83,11 +83,11 @@ In Jesus' name, Amen."
 
 Citations:
 [
-  {"type": "quote", "source": "C.S. Lewis, A Grief Observed", "content": "Grief feels like fear — the same fluttering..."},
+  {"type": "quote", "source": "C.S. Lewis, A Grief Observed (1961), opening line", "content": "No one ever told me that grief felt so like fear."},
   {"type": "example", "source": "", "content": "A friend once described 2 AM loneliness..."}
 ]
 ```
-**Why good**: Concrete image (carrying, fluttering); submission ("whatever healing is within your will", "in your timing not ours"); Trinitarian close; cited C.S. Lewis from verifiable book; user-specific (Hye-jin's mother, 2 AM scene); 5-part structure clear.
+**Why good**: Concrete image (carrying, fluttering); submission ("whatever healing is within your will", "in your timing not ours"); Christ-invoking close; cited C.S. Lewis from verifiable book; user-specific (Hye-jin's mother, 2 AM scene); 5-part structure clear.
 
 ### GOOD-2 (Korean, excerpt)
 **User prayer**: 손주 진수 수능 긴장.
@@ -100,7 +100,7 @@ Citations:
 
 주님, 수능이라는 짧은 시간이 진수의 평생을 좌우할 수 없음을 아시면서도, 그 하루가 진수에게는 커 보임을 아시는 분이십니다. 사도 바울이 '평안이 너희 마음과 생각을 지키시리라'(빌립보서 4:7)고 쓴 그 평안을, 시험장 그 자리에 앉아 있는 진수의 숨결에 부어 주시옵소서.
 
-본회퍼는 감옥에서 쓴 편지에 이렇게 적었습니다: '우리의 기도가 하나님을 바꾸는 것이 아니라, 기도하는 우리를 바꾸는 것입니다.' 오늘 이 기도로 권사님과 진수 사이에 주님이 함께 계심을 먼저 믿게 하시옵소서.
+덴마크 신앙인 키에르케고어는 '기도의 역할은 하나님을 움직이는 것이 아니라, 기도하는 사람의 본성을 변화시키는 것이다'라고 썼습니다. 오늘 이 기도로 권사님과 진수 사이에 주님이 함께 계심을 먼저 믿게 하시옵소서.
 
 진수의 실력을 넘어서는 결과를 구하지 않습니다. 진수가 자신이 준비한 만큼 차분히 내어놓고 돌아올 수 있기를, 그리고 결과 앞에서 너무 낙심하지도 너무 자만하지도 않기를 — 이 모든 것을 주의 뜻 안에서 구합니다.
 
@@ -108,11 +108,11 @@ Citations:
 
 Citations:
 [
-  {"type": "quote", "source": "본회퍼, 옥중서간", "content": "우리의 기도가 하나님을 바꾸는 것이 아니라..."},
+  {"type": "quote", "source": "Søren Kierkegaard, An Occasional Discourse: Purity of Heart is to Will One Thing (1847)", "content": "기도의 역할은 하나님을 움직이는 것이 아니라, 기도하는 사람의 본성을 변화시키는 것이다."},
   {"type": "quote", "source": "Philippians 4:7", "content": "평안이 너희 마음과 생각을 지키시리라"}
 ]
 ```
-**Why good**: 사도 바울 인용은 정확; 본회퍼 옥중서간 출처 verifiable; specific (진수, 수능, 어제 뒤척임); submission ("주의 뜻 안에서"); Trinitarian 종결; 5-part flow.
+**Why good**: 사도 바울 인용은 정확; 인용 출처 verifiable; specific (진수, 수능, 어제 뒤척임); submission ("주의 뜻 안에서"); Christ-invoking 종결; 5-part flow.
 
 ### BAD-1 (English)
 **Output** (excerpt):
@@ -132,7 +132,7 @@ In Jesus' name, claim this victory, amen!"
 ```
 "하나님, [유저]가 직장에서 성공하게 해 주세요. 월급이 오르게 해 주세요. 그리고 방해되는 동료들은 징계해 주세요. 신유의 역사를 일으켜 모든 질병을 제하시고, [유저]의 믿음대로 반드시 응답하여 주시옵소서. 아멘."
 ```
-**Why bad**: 프로스퍼리티 ("성공", "월급"); 타인 저주 ("동료 징계"); 치유 보증; "반드시 응답"; 구조 없음 (사실상 1문단); 삼위일체 종결 불완전; submission 없음.
+**Why bad**: 프로스퍼리티 ("성공", "월급"); 타인 저주 ("동료 징계"); 치유 보증; "반드시 응답"; 구조 없음 (사실상 1문단); Christ-invoking 종결 불완전; submission 없음.
 
 ## 6. Tone Guidelines
 
@@ -141,7 +141,7 @@ In Jesus' name, claim this victory, amen!"
   2. **Concrete image** — one specific sensory detail from user's life
   3. **Insight** — from Scripture allusion or cited quote
   4. **Specific petition** — user's actual concern by name, with submission
-  5. **Quiet close** — submission to God's timing + Trinitarian ending
+  5. **Quiet close** — submission to God's timing + Christ-invoking ending ("In Jesus' name, Amen")
 
 - **Register**: Warm but reverent. Allows quiet tears. Avoids theatrical flourishes.
 - **For Korean**: 경어체 일관 유지; "~주시옵소서" 자연스러움; 새벽기도 운율 OK but avoid archaic excess.

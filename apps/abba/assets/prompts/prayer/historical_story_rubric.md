@@ -82,13 +82,13 @@ Tell a real church-history story (not Bible narrative — that's `bible_story`'s
 **Output**:
 ```json
 {
-  "title": "Müller's Empty Plates",
-  "reference": "Bristol, November 1838",
-  "summary": "On a cold November morning in 1838, three hundred children sat at long tables in the Bristol orphanage Müller had founded, staring down at empty pewter plates. Müller knew there was not a penny in his pocket nor bread in the kitchen. For one heartbeat, the thought flickered — 'perhaps we must let this morning pass.' Instead he stood, folded his hands, and said quietly: 'Father, we thank you for the food you are about to provide.' Before the amen was complete, a knock came at the kitchen door. The baker from Clifton Street stood there, flour still on his apron, saying he could not sleep and had baked enough for the children. Minutes later a milkman's cart broke its axle at the gate, and rather than let his cans sour he carried every one of them inside.",
-  "lesson": "Müller's provision did not mean security at the start of each morning — it meant honesty in the moment. Your financial worries do not disqualify you from being the kind of person to whom God sends bakers at unexpected hours."
+  "title": "Müller's Daily Trust",
+  "reference": "Bristol, 1830s-1840s (Narrative of the Lord's Dealings, Vols I-II)",
+  "summary": "George Müller kept a meticulous daily journal of the Bristol orphanage's finances. What the Narrative actually records is not one dramatic rescue but hundreds of small, ordinary entries: a letter arriving with a shilling exactly sufficient for the evening's needs, an anonymous donor leaving coins on the doorstep, a neighbor bringing bread because 'somehow they had baked more than needed today.' Müller's rule was simple — he never asked anyone directly for money, only God — and he wrote down every answer so he could read them back to himself on harder days. The miracle in his pages is the quiet regularity, not the spectacle.",
+  "lesson": "Müller's lesson was not that God always sends dramatic baker-at-the-door rescues. It was that trust could be a daily practice — kept honest by writing down what was asked and what was given. Your financial worry does not disqualify you from this kind of bookkeeping before God."
 }
 ```
-**Why good**: Müller is whitelist; date specific; sensory concrete (pewter plates, flour apron, cart axle); verifiable from "Narrative of the Lord's Dealings"; direct quote from his journal; connects to user's situation without forcing allegory.
+**Why good**: Müller is on the whitelist; `reference` uses a date *range* rather than a spuriously specific day; summary stays within what Müller himself documented (daily journal pattern — see *Narrative of the Lord's Dealings*, vol I ch. 2-3, archive.org); avoids the popular "empty plates + baker + milkman" scene, which researchers trace to *Adventuring with Sister Abigail* (Grace Sanger, repr. *Sunday School Times* 1920) and is **not** in Müller's own Narrative; the lesson echoes Müller's own practice (journaling answered prayer) rather than projecting a miracle genre.
 
 ### GOOD-2 (Korean)
 **User prayer context**: 자녀의 믿음 약해짐 속상함.

@@ -26,7 +26,11 @@ Phase 3에서 단일 Gemini call로 모든 AI 응답을 한 번에 생성하는 
 - SSE streaming on T1 (Gemini `generateContentStream`)
 - Progressive Dashboard UI (카드별 FadeIn)
 - Day-1 template fallback
-- Prayer + QT 양쪽 tier 구조 적용
+- **Prayer**: T1 + T2 + T3 전부 tier 구조 적용
+- **QT**: T1 (meditation_summary + scripture) + T2 (application + knowledge)만 tier
+  구조. Pro QT 가치는 **무제한 사용 + 기존 on-demand `QtCoaching` 카드**(Phase 3
+  구현, `qt_guide.md` 기반)로 제공하며, tier 스트림 밖에 머문다. 그래서
+  `apps/abba/assets/prompts/qt/` 는 T3 rubric 파일을 갖지 않는다 (의도적 생략).
 
 ### 제외 (Out-of-scope, Phase 2)
 - Gemini Pro model 도입 (비용 4배, 적자 확인)

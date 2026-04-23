@@ -34,7 +34,7 @@ Provide scholarly scaffolding for the user's meditation passage: historical cont
 ## 3. Verification Gates
 
 - [ ] `historical_context`: 3-4 sentences, settings facts only (author/date ranges, audience), no speculation
-- [ ] `cross_references`: 2-3 entries, each with `reference` (English book format) and `text` (from bundled translation)
+- [ ] `cross_references`: 2-3 entries, each providing ONLY `reference` (English book format). The app fills `text` at runtime from `BibleTextService` in the user's locale — the AI MUST NOT produce verse text itself.
 - [ ] `original_words`: 0-2 entries, each with word (Hebrew/Greek), transliteration, language, meaning, context
 - [ ] If uncertain about original word, return empty `original_words: []`
 - [ ] Historical claims stay within scholarly consensus range
@@ -56,10 +56,10 @@ Provide scholarly scaffolding for the user's meditation passage: historical cont
 **Output**:
 ```json
 {
-  "historical_context": "시편 23편은 다윗의 저작으로 전해지며, 시편 23편은 다윗의 양치기 시절이나 왕으로서의 박해 기간(아마 압살롬의 반란기) 중에 쓰였을 가능성이 학계에서 언급됩니다. 히브리 시편 구조상 '생명의 여정'을 목자-손님 은유로 노래합니다. 정확한 연대는 학자들 간 논의 중입니다.",
+  "historical_context": "시편 23편은 다윗의 저작으로 전해지며, 그의 양치기 시절이나 왕으로서의 박해 기간(아마 압살롬의 반란기) 중에 쓰였을 가능성이 학계에서 언급됩니다. 히브리 시편 구조상 '생명의 여정'을 목자-손님 은유로 노래합니다. 정확한 연대는 학자들 간 논의 중입니다.",
   "cross_references": [
-    {"reference": "John 10:11", "text": "나는 선한 목자라 선한 목자는 양들을 위하여 목숨을 버리거니와"},
-    {"reference": "Ezekiel 34:15", "text": "내가 친히 내 양의 목자가 되어 그것들을 누워 있게 할지라"}
+    {"reference": "John 10:11"},
+    {"reference": "Ezekiel 34:15"}
   ],
   "original_words": [
     {
@@ -82,8 +82,8 @@ Provide scholarly scaffolding for the user's meditation passage: historical cont
 {
   "historical_context": "Part of the Sermon on the Mount, likely delivered to a mixed Galilean crowd of peasants and disciples. Matthew's community (Jewish Christian, late 1st century) preserved this discourse. The 'birds of the air' and 'lilies of the field' references fit Palestinian rural imagery.",
   "cross_references": [
-    {"reference": "Luke 12:22-31", "text": "And he said unto his disciples, Therefore I say unto you, Take no thought for your life..."},
-    {"reference": "Philippians 4:6", "text": "Be careful for nothing; but in every thing by prayer and supplication with thanksgiving let your requests be made known unto God."}
+    {"reference": "Luke 12:22-31"},
+    {"reference": "Philippians 4:6"}
   ],
   "original_words": [
     {
@@ -151,7 +151,7 @@ Provide scholarly scaffolding for the user's meditation passage: historical cont
 - **Conservative confidence** — use "likely", "scholars suggest", "traditionally attributed to" over definitive claims
 - **Acknowledgment of dispute** when relevant ("Authorship is disputed", "Dating ranges...")
 - **Concrete imagery** in historical_context — a peasant listening, a shepherd's landscape — not just facts
-- **Cross-refs are invitations** — lead with `{text}` that resonates, not just reference
+- **Cross-refs are invitations** — pick references whose bundled `text` (filled by the app at runtime) will resonate with the user's meditation, not just surface-level keyword matches
 - **Original words honest** — if uncertain, empty array is better than fabrication
 
 ## 7. Common Pitfalls (max 6)
