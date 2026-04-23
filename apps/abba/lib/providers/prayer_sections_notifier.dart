@@ -1,7 +1,12 @@
+import 'dart:async';
+
+import 'package:app_lib_logging/logging.dart';
 import 'package:flutter_riverpod/legacy.dart';
 
 import '../models/prayer.dart';
+import '../models/prayer_tier_result.dart';
 import '../services/ai_analysis_exception.dart';
+import '../services/prayer_repository.dart';
 
 /// Phase 4.1 — state container for a single prayer's tier results.
 /// UI watches this to render Dashboard cards progressively as each tier
@@ -78,7 +83,13 @@ class PrayerSectionsState {
 class PrayerSectionsNotifier extends StateNotifier<PrayerSectionsState> {
   PrayerSectionsNotifier() : super(const PrayerSectionsState());
 
-  void reset() => state = const PrayerSectionsState();
+  StreamSubscription<TierResult>? _sub;
+
+  void reset() {
+    _sub?.cancel();
+    _sub = null;
+    state = const PrayerSectionsState();
+  }
 
   void setPrayerId(String id) {
     state = state.copyWith(prayerId: id);
@@ -127,11 +138,156 @@ class PrayerSectionsNotifier extends StateNotifier<PrayerSectionsState> {
   void markT3Triggered() {
     state = state.copyWith(t3Triggered: true);
   }
+
+  /// Phase 4.1 INT-027 — subscribe to a tiered Gemini stream.
+  ///
+  /// Lives on the notifier (not the view) so subscription survives navigation
+  /// from ai_loading_view → Dashboard. T2 arriving after navigation still
+  /// updates state; the Dashboard, watching this provider, rebuilds.
+  ///
+  /// [t1Completer] resolves on the first T1 event (success or failure) so the
+  /// caller can block navigation until T1 is decided. T2/T3 then flow in the
+  /// background and mutate state as they arrive.
+  void startPrayerStream({
+    required Stream<TierResult> stream,
+    required PrayerRepository repo,
+    required String prayerId,
+    required Completer<TierT1Result> t1Completer,
+  }) {
+    _sub?.cancel();
+    setPrayerId(prayerId);
+    _sub = stream.listen(
+      (tier) async {
+        switch (tier) {
+          case TierT1Result t1:
+            setT1(summary: t1.summary, scripture: t1.scripture);
+            if (!t1Completer.isCompleted) t1Completer.complete(t1);
+            await _persistTier(repo, prayerId, 't1', {
+              'prayer_summary': _summaryToJson(t1.summary),
+              'scripture': _scriptureToJson(t1.scripture),
+            });
+          case TierT2Result t2:
+            setT2(bibleStory: t2.bibleStory, testimony: t2.testimony);
+            await _persistTier(repo, prayerId, 't2', {
+              'bible_story': {
+                'title': t2.bibleStory.title,
+                'summary': t2.bibleStory.summary,
+              },
+              'testimony': t2.testimony,
+            });
+          case TierT3Result t3:
+            setT3(
+              guidance: t3.guidance,
+              aiPrayer: t3.aiPrayer,
+              historicalStory: t3.historicalStory,
+            );
+            await _persistTier(repo, prayerId, 't3', {
+              if (t3.guidance != null)
+                'guidance': {
+                  'content': t3.guidance!.content,
+                  'is_premium': t3.guidance!.isPremium,
+                },
+              if (t3.aiPrayer != null)
+                'ai_prayer': {
+                  'text': t3.aiPrayer!.text,
+                  'citations': t3.aiPrayer!.citations
+                      .map((c) => {
+                            'type': c.type,
+                            'source': c.source,
+                            'content': c.content,
+                          })
+                      .toList(),
+                  'is_premium': t3.aiPrayer!.isPremium,
+                },
+              if (t3.historicalStory != null)
+                'historical_story': {
+                  'title': t3.historicalStory!.title,
+                  'reference': t3.historicalStory!.reference,
+                  'summary': t3.historicalStory!.summary,
+                  'lesson': t3.historicalStory!.lesson,
+                  'is_premium': t3.historicalStory!.isPremium,
+                },
+            });
+          case TierFailed f:
+            setTierFailed(f.tier, f.error);
+            if (f.tier == 't1' && !t1Completer.isCompleted) {
+              t1Completer.completeError(f.error);
+            }
+          case QtTierT1Result _:
+          case QtTierT2Result _:
+            // QT tier events not used on prayer stream; ignore.
+            break;
+        }
+      },
+      onError: (Object e, StackTrace st) {
+        prayerLog.error('Prayer stream error', error: e, stackTrace: st);
+        if (!t1Completer.isCompleted) {
+          t1Completer.completeError(
+            AiAnalysisException(
+              'Stream error',
+              kind: AiAnalysisFailureKind.apiError,
+              cause: e,
+              causeStackTrace: st,
+            ),
+          );
+        }
+      },
+      cancelOnError: false,
+    );
+  }
+
+  Future<void> _persistTier(
+    PrayerRepository repo,
+    String prayerId,
+    String tier,
+    Map<String, dynamic> sectionData,
+  ) async {
+    try {
+      await repo.updateTierResult(
+        prayerId: prayerId,
+        tier: tier,
+        sectionData: sectionData,
+      );
+    } catch (e, st) {
+      // Non-fatal: client state is already updated; DB persistence can be
+      // retried by the Edge Function on next visit (§architecture.md).
+      prayerLog.error(
+        'updateTierResult failed tier=$tier',
+        error: e,
+        stackTrace: st,
+      );
+    }
+  }
+
+  Map<String, dynamic> _summaryToJson(PrayerSummary s) => {
+        'gratitude': s.gratitude,
+        'petition': s.petition,
+        'intercession': s.intercession,
+      };
+
+  Map<String, dynamic> _scriptureToJson(Scripture s) => {
+        'reference': s.reference,
+        'verse': s.verse,
+        'reason': s.reason,
+        'posture': s.posture,
+        'key_word_hint': s.keyWordHint,
+        'original_words': s.originalWords.map((w) => w.toJson()).toList(),
+      };
+
+  @override
+  void dispose() {
+    _sub?.cancel();
+    super.dispose();
+  }
 }
 
-/// Phase 4.1 — PrayerSectionsNotifier provider. AutoDispose so each
-/// new prayer gets a fresh state.
+/// Phase 4.1 — PrayerSectionsNotifier provider.
+///
+/// NOT autoDispose: ai_loading_view starts the stream, then navigates to
+/// Dashboard. Without navigation the notifier would be disposed mid-flight
+/// and T2/T3 events would be dropped. Callers must invoke [reset] before
+/// starting a new prayer to clear stale state.
 final prayerSectionsProvider =
-    StateNotifierProvider.autoDispose<PrayerSectionsNotifier, PrayerSectionsState>(
+    StateNotifierProvider<PrayerSectionsNotifier, PrayerSectionsState>(
   (ref) => PrayerSectionsNotifier(),
 );

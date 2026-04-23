@@ -7,7 +7,9 @@ import 'package:go_router/go_router.dart';
 
 import '../../../l10n/generated/app_localizations.dart';
 import '../../../models/prayer.dart';
+import '../../../models/prayer_tier_result.dart';
 import '../../../models/qt_meditation_result.dart';
+import '../../../providers/prayer_sections_notifier.dart';
 import '../../../providers/providers.dart';
 import 'package:app_lib_logging/logging.dart';
 
@@ -80,6 +82,10 @@ class _AiLoadingViewState extends ConsumerState<AiLoadingView>
     });
 
     prayerLog.info('AI loading started');
+
+    // Phase 4.1 INT-027 — reset section state for this prayer so stale
+    // sections from a prior run never flash on Dashboard.
+    ref.read(prayerSectionsProvider.notifier).reset();
 
     // Call AI service based on mode
     final mode = ref.read(currentPrayerModeProvider);
@@ -158,53 +164,84 @@ class _AiLoadingViewState extends ConsumerState<AiLoadingView>
     }
 
     // ────────────────────────────────────────────────────────────────────
-    // Step 3 — Gemini analysis. Throws AiAnalysisException on failure.
+    // Step 3 — Gemini analysis. Text mode streams tiers (T1 → navigate,
+    // T2 fills in on Dashboard). Voice mode still goes through the single
+    // multimodal call (transcribe + analyze) and then fans out to both
+    // providers so the Dashboard progressive renderer sees the result.
     // ────────────────────────────────────────────────────────────────────
-    try {
-      PrayerResult result;
-      String savedTranscript;
+    if (isVoiceMode) {
+      await _runAudioAnalysis(
+        aiService: aiService,
+        audioPath: audioPath,
+        locale: locale,
+        repo: repo,
+      );
+    } else {
+      await _runTextStreamAnalysis(
+        aiService: aiService,
+        transcript: transcript,
+        locale: locale,
+        repo: repo,
+      );
+    }
+  }
 
-      if (isVoiceMode) {
-        final audioResult = await aiService.analyzePrayerFromAudio(
-          audioFilePath: audioPath,
-          locale: locale,
-        );
-        result = audioResult.result;
-        savedTranscript = audioResult.transcription;
-        prayerLog.info('Voice prayer analyzed, transcript=${savedTranscript.length}');
-      } else {
-        result = await aiService.analyzePrayerCore(
-          transcript: transcript,
-          locale: locale,
-        );
-        savedTranscript = transcript;
-      }
+  /// Phase 4.1 INT-027 — text-mode streaming path. Hands the Gemini stream
+  /// to [PrayerSectionsNotifier] which persists each tier via the
+  /// `update_prayer_tier` RPC. The view awaits only T1; T2 continues to
+  /// flow in the background after navigation.
+  Future<void> _runTextStreamAnalysis({
+    required dynamic aiService,
+    required String transcript,
+    required String locale,
+    required dynamic repo,
+  }) async {
+    final userName = ref.read(userProfileProvider).value?.name ?? '';
+    final t1Completer = Completer<TierT1Result>();
+    final sectionsNotifier = ref.read(prayerSectionsProvider.notifier);
+
+    try {
+      final stream = aiService.analyzePrayerStreamed(
+        transcript: transcript,
+        locale: locale,
+        userName: userName,
+      ) as Stream<TierResult>;
+
+      sectionsNotifier.startPrayerStream(
+        stream: stream,
+        repo: repo,
+        prayerId: _pendingPrayerId!,
+        t1Completer: t1Completer,
+      );
+
+      final t1 = await t1Completer.future;
+      if (!mounted) return;
+
+      // Mirror T1 into the legacy [prayerResultProvider] so the current
+      // Dashboard (still reading from it until INT-028) renders with
+      // placeholders for T2+ fields. Empty BibleStory + testimony are safe:
+      // Dashboard already guards "result.prayerSummary != null" etc.
+      final partial = PrayerResult(
+        scripture: t1.scripture,
+        bibleStory: const BibleStory(title: '', summary: ''),
+        testimony: '',
+        prayerSummary: t1.summary,
+      );
+      ref.read(prayerResultProvider.notifier).state = AsyncValue.data(partial);
 
       prayerLog.info(
-        '[Prayer-Analyze] done: locale=$locale '
-        'ref="${result.scripture.reference}" '
-        'hint="${result.scripture.keyWordHint}" '
-        'reason=${result.scripture.reason.length}chars '
-        'posture=${result.scripture.posture.length}chars '
-        'original=${result.scripture.originalWords.length}words',
+        '[Prayer-Stream] T1 ready ref="${t1.scripture.reference}" — navigating',
       );
 
-      // Fill Scripture.verse from PD bundle (BibleTextService).
-      // AI only picks reference — verse text comes from the bundle.
-      result = await _enrichScriptureVerse(result, locale);
-
-      // ──────────────────────────────────────────────────────────────
-      // Step 4 — flip pending → completed + persist result.
-      // ──────────────────────────────────────────────────────────────
+      // Flip DB row to completed so Calendar/History pick it up. The T2
+      // UPDATE from the notifier stays a JSONB merge and does not clobber
+      // this completion marker.
       await repo.completePrayer(
         prayerId: _pendingPrayerId!,
-        transcript: savedTranscript,
-        result: result,
+        transcript: transcript,
+        result: partial,
       );
 
-      ref.read(prayerResultProvider.notifier).state = AsyncValue.data(result);
-
-      // Invalidate providers so calendar/history/heatmap refresh
       ref.invalidate(streakProvider);
       ref.invalidate(userProfileProvider);
       ref.invalidate(prayerHeatmapProvider('prayer'));
@@ -214,11 +251,77 @@ class _AiLoadingViewState extends ConsumerState<AiLoadingView>
 
       await _checkStreakCelebration();
 
-      prayerLog.info('Prayer completed + saved');
       _aiDone = true;
       _navigateIfReady();
     } on AiAnalysisException catch (e) {
-      prayerLog.error('AI analysis failed (${e.kind})', error: e.cause, stackTrace: e.causeStackTrace);
+      prayerLog.error(
+        'Prayer stream T1 failed (${e.kind})',
+        error: e.cause,
+        stackTrace: e.causeStackTrace,
+      );
+      _setErrorState(e);
+    } catch (e, stackTrace) {
+      prayerLog.error('Unexpected prayer stream error',
+          error: e, stackTrace: stackTrace);
+      _setErrorState(AiAnalysisException(
+        'Unexpected error during analysis',
+        kind: AiAnalysisFailureKind.apiError,
+        cause: e,
+        causeStackTrace: stackTrace,
+      ));
+    }
+  }
+
+  /// Legacy audio path. Multimodal Gemini returns a full [PrayerResult]
+  /// in one call, so we do not stream — but we still mirror the result
+  /// into [prayerSectionsProvider] so the Dashboard renders with the same
+  /// progressive widget tree the text path populates.
+  Future<void> _runAudioAnalysis({
+    required dynamic aiService,
+    required String audioPath,
+    required String locale,
+    required dynamic repo,
+  }) async {
+    try {
+      final audioResult = await aiService.analyzePrayerFromAudio(
+        audioFilePath: audioPath,
+        locale: locale,
+      );
+      PrayerResult result = audioResult.result;
+      final savedTranscript = audioResult.transcription;
+      prayerLog.info(
+        'Voice prayer analyzed, transcript=${savedTranscript.length}',
+      );
+
+      result = await _enrichScriptureVerse(result, locale);
+
+      await repo.completePrayer(
+        prayerId: _pendingPrayerId!,
+        transcript: savedTranscript,
+        result: result,
+      );
+
+      ref.read(prayerResultProvider.notifier).state = AsyncValue.data(result);
+      ref.read(prayerSectionsProvider.notifier).setAllFromResult(result);
+
+      ref.invalidate(streakProvider);
+      ref.invalidate(userProfileProvider);
+      ref.invalidate(prayerHeatmapProvider('prayer'));
+      ref.invalidate(prayerHeatmapProvider('qt'));
+      ref.invalidate(streakByModeProvider('prayer'));
+      ref.invalidate(streakByModeProvider('qt'));
+
+      await _checkStreakCelebration();
+
+      prayerLog.info('Prayer (audio) completed + saved');
+      _aiDone = true;
+      _navigateIfReady();
+    } on AiAnalysisException catch (e) {
+      prayerLog.error(
+        'AI analysis failed (${e.kind})',
+        error: e.cause,
+        stackTrace: e.causeStackTrace,
+      );
       _setErrorState(e);
     } catch (e, stackTrace) {
       prayerLog.error('Unexpected AI error', error: e, stackTrace: stackTrace);
