@@ -79,6 +79,13 @@ class AppConfig {
   /// true when running with real backend services
   static bool get isProduction => env == 'prod';
 
+  /// AI-only toggle: when true, AiService skips Gemini calls and returns
+  /// hardcoded mock responses. Independent from `useMock` so dev builds can
+  /// exercise real Supabase + real Gemini while sharing the `dev` ENV.
+  /// Defaults to `true` (safe — no accidental API cost) when unset.
+  static bool get useMockAi =>
+      (dotenv.env['ENABLE_MOCK_AI'] ?? 'true').toLowerCase() == 'true';
+
   /// Validate required environment variables.
   /// Skipped in mock mode — real mode requires Supabase + Gemini + RevenueCat + Google OAuth keys.
   ///

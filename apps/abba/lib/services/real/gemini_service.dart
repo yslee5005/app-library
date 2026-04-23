@@ -11,9 +11,9 @@ import '../../models/prayer.dart';
 import '../../models/qt_meditation_result.dart';
 import '../ai_service.dart';
 
-// Toggle: when true, skip Gemini API calls and return the hardcoded values
-// defined in `_hardcoded*` builders below. Flip to false to use real API.
-const bool _useHardcodedResponse = true;
+// AI mock toggle lives in `AppConfig.useMockAi` (driven by `ENABLE_MOCK_AI`).
+// Each AiService method short-circuits to the `_hardcoded*` builders below
+// when the flag is true; otherwise it calls Gemini.
 
 const String _hardcodedTranscription =
     '주님, 오늘도 새로운 아침을 허락해 주셔서 감사합니다. 가족의 건강과 평안을 지켜 주시고, '
@@ -67,8 +67,8 @@ class GeminiService implements AiService {
     required String transcript,
     required String locale,
   }) async {
-    if (_useHardcodedResponse) {
-      apiLog.info('Gemini analyzePrayer bypassed (hardcoded)');
+    if (AppConfig.useMockAi) {
+      apiLog.info('Gemini analyzePrayer bypassed (ENABLE_MOCK_AI=true)');
       return _hardcodedPrayerResult(locale);
     }
     final langName = _localeName(locale);
@@ -93,8 +93,8 @@ class GeminiService implements AiService {
     required String transcript,
     required String locale,
   }) async {
-    if (_useHardcodedResponse) {
-      apiLog.info('Gemini analyzePrayerCore bypassed (hardcoded)');
+    if (AppConfig.useMockAi) {
+      apiLog.info('Gemini analyzePrayerCore bypassed (ENABLE_MOCK_AI=true)');
       return _hardcodedPrayerResult(locale);
     }
     final langName = _localeName(locale);
@@ -123,8 +123,8 @@ class GeminiService implements AiService {
     required String audioFilePath,
     required String locale,
   }) async {
-    if (_useHardcodedResponse) {
-      apiLog.info('Gemini analyzePrayerFromAudio bypassed (hardcoded)');
+    if (AppConfig.useMockAi) {
+      apiLog.info('Gemini analyzePrayerFromAudio bypassed (ENABLE_MOCK_AI=true)');
       return (
         result: _hardcodedPrayerResult(locale),
         transcription: _hardcodedTranscription,
@@ -165,8 +165,8 @@ class GeminiService implements AiService {
     required String transcript,
     required String locale,
   }) async {
-    if (_useHardcodedResponse) {
-      apiLog.info('Gemini analyzePrayerPremium bypassed (hardcoded)');
+    if (AppConfig.useMockAi) {
+      apiLog.info('Gemini analyzePrayerPremium bypassed (ENABLE_MOCK_AI=true)');
       return _hardcodedPremiumContent(locale);
     }
     final langName = _localeName(locale);
@@ -197,8 +197,8 @@ class GeminiService implements AiService {
     required String meditationText,
     required String locale,
   }) async {
-    if (_useHardcodedResponse) {
-      apiLog.info('Gemini analyzeMeditation bypassed (hardcoded)');
+    if (AppConfig.useMockAi) {
+      apiLog.info('Gemini analyzeMeditation bypassed (ENABLE_MOCK_AI=true)');
       return _hardcodedMeditationResult(locale);
     }
     final langName = _localeName(locale);
@@ -229,8 +229,8 @@ class GeminiService implements AiService {
     required String transcript,
     required String locale,
   }) async {
-    if (_useHardcodedResponse) {
-      apiLog.info('Gemini analyzePrayerCoaching bypassed (hardcoded)');
+    if (AppConfig.useMockAi) {
+      apiLog.info('Gemini analyzePrayerCoaching bypassed (ENABLE_MOCK_AI=true)');
       return _hardcodedCoachingResult();
     }
     final langName = _localeName(locale);
@@ -366,8 +366,8 @@ Rules (per Prayer Guide §4-6):
     required String scriptureReference,
     required String locale,
   }) async {
-    if (_useHardcodedResponse) {
-      apiLog.info('Gemini analyzeQtCoaching bypassed (hardcoded)');
+    if (AppConfig.useMockAi) {
+      apiLog.info('Gemini analyzeQtCoaching bypassed (ENABLE_MOCK_AI=true)');
       return _hardcodedQtCoaching();
     }
     final langName = _localeName(locale);
@@ -558,7 +558,7 @@ Rules (per QT Guide §4-6):
   }
 
   // ---------------------------------------------------------------------------
-  // Hardcoded responses (visible sample data used when _useHardcodedResponse)
+  // Hardcoded responses (sample data returned when AppConfig.useMockAi is true).
   // Also used as graceful fallbacks when API calls fail.
   // ---------------------------------------------------------------------------
 
