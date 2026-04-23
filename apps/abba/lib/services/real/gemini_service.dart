@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:math';
 
-import 'package:flutter/foundation.dart' show visibleForTesting;
+import 'package:flutter/foundation.dart' show kDebugMode, visibleForTesting;
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:google_generative_ai/google_generative_ai.dart';
 import 'package:app_lib_logging/logging.dart';
@@ -22,6 +22,57 @@ const String _hardcodedTranscription =
     '주님의 사랑 안에서 모두가 평안하기를 간구합니다. 예수님의 이름으로 기도드립니다. 아멘.';
 
 class GeminiService implements AiService {
+  // ---------------------------------------------------------------------------
+  // AI cost tracking (dev-only)
+  //
+  // Pricing per 1M tokens (Gemini 2.5 Flash paid tier, verified 2026-04-22):
+  //   text/image/video input : $0.30
+  //   audio input            : $1.00
+  //   output (incl. thinking): $2.50
+  //
+  // Source: https://ai.google.dev/gemini-api/docs/pricing
+  // Re-verify quarterly. If the model in `_createModel` changes, bump these.
+  // ---------------------------------------------------------------------------
+  static const double _textInputPerMillion = 0.30;
+  static const double _audioInputPerMillion = 1.00;
+  static const double _outputPerMillion = 2.50;
+  static const String _pricingModel = 'gemini-2.5-flash';
+
+  /// Log Gemini call cost to the terminal. No-op in release builds so
+  /// production logs never carry pricing chatter.
+  void _logAiCost(
+    GenerateContentResponse response,
+    String method, {
+    bool hasAudioInput = false,
+  }) {
+    if (!kDebugMode) return;
+
+    final usage = response.usageMetadata;
+    if (usage == null) {
+      apiLog.info('[AI Cost] $method — usageMetadata missing');
+      return;
+    }
+
+    final promptTokens = usage.promptTokenCount ?? 0;
+    final candidateTokens = usage.candidatesTokenCount ?? 0;
+
+    final inputRate =
+        hasAudioInput ? _audioInputPerMillion : _textInputPerMillion;
+    final inputLabel = hasAudioInput ? 'audio' : 'text';
+    final inputCost = promptTokens * inputRate / 1000000;
+    final outputCost = candidateTokens * _outputPerMillion / 1000000;
+    final total = inputCost + outputCost;
+
+    apiLog.info(
+      '[AI Cost] $method ($_pricingModel)\n'
+      '    in:  $promptTokens $inputLabel tokens '
+      '(\$${inputRate.toStringAsFixed(2)}/M) = \$${inputCost.toStringAsFixed(6)}\n'
+      '    out: $candidateTokens text tokens  '
+      '(\$${_outputPerMillion.toStringAsFixed(2)}/M) = \$${outputCost.toStringAsFixed(6)}\n'
+      '    total: \$${total.toStringAsFixed(6)}',
+    );
+  }
+
   /// Cached prayer guide markdown — loaded once from bundle, reused across calls.
   String? _prayerGuideCache;
 
@@ -82,6 +133,7 @@ class GeminiService implements AiService {
       final response = await model.generateContent([
         Content('user', [TextPart(transcript)]),
       ]);
+      _logAiCost(response, 'analyzePrayer');
       return parsePrayerJson(response.text, locale);
     } catch (e, stackTrace) {
       apiLog.error('Gemini prayer analysis failed', error: e, stackTrace: stackTrace);
@@ -108,6 +160,7 @@ class GeminiService implements AiService {
       final response = await model.generateContent([
         Content('user', [TextPart(transcript)]),
       ]);
+      _logAiCost(response, 'analyzePrayerCore');
       return parsePrayerJson(response.text, locale);
     } catch (e, stackTrace) {
       apiLog.error('Gemini core analysis failed', error: e, stackTrace: stackTrace);
@@ -146,6 +199,7 @@ class GeminiService implements AiService {
           TextPart('This is a prayer audio recording. Transcribe and analyze it.'),
         ]),
       ]);
+      _logAiCost(response, 'analyzePrayerFromAudio', hasAudioInput: true);
 
       final json = parseJsonFromResponse(response.text);
       final transcription = json['transcription'] as String? ?? '';
@@ -180,6 +234,7 @@ class GeminiService implements AiService {
       final response = await model.generateContent([
         Content('user', [TextPart(transcript)]),
       ]);
+      _logAiCost(response, 'analyzePrayerPremium');
       return parsePremiumJson(response.text);
     } catch (e, stackTrace) {
       apiLog.error('Gemini premium analysis failed', error: e, stackTrace: stackTrace);
@@ -214,6 +269,7 @@ class GeminiService implements AiService {
       final response = await model.generateContent([
         Content('user', [TextPart(userMessage)]),
       ]);
+      _logAiCost(response, 'analyzeMeditation');
       return parseMeditationJson(response.text, locale);
     } catch (e, stackTrace) {
       apiLog.error('Gemini meditation analysis failed', error: e, stackTrace: stackTrace);
@@ -246,6 +302,7 @@ class GeminiService implements AiService {
       final response = await model.generateContent([
         Content('user', [TextPart(transcript)]),
       ]);
+      _logAiCost(response, 'analyzePrayerCoaching');
       return parseCoachingJson(response.text);
     } catch (e, stackTrace) {
       apiLog.error(
@@ -386,6 +443,7 @@ Rules (per Prayer Guide §4-6):
       final response = await model.generateContent([
         Content('user', [TextPart(userMessage)]),
       ]);
+      _logAiCost(response, 'analyzeQtCoaching');
       return parseQtCoachingJson(response.text);
     } catch (e, stackTrace) {
       apiLog.error(
@@ -924,7 +982,7 @@ Return a JSON object:
     "intercession": ["intercession items summarized in $langName"]
   },
   "scripture": {
-    "reference": "Book Chapter:Verse (e.g., Psalm 23:1-3) — DO NOT include verse text; the app looks it up from a PD bundle",
+    "reference": "Bible reference as lookup KEY. REQUIREMENT: English book name ONLY (e.g., 'Matthew 6:33', 'I Kings 19:12', 'Psalm 23:1-3'). Our bundle uses English keys regardless of $langName — NEVER translate the book name to $langName (e.g., NEVER '마태복음 6:33', 'マタイ 6:33', '马太福音 6:33', 'Mateo 6:33'). The verse text itself will be shown in $langName.",
     "reason": "Why this verse for this prayer (2-3 sentences in $langName)",
     "posture": "How to read it — action/mindset (2-3 sentences in $langName)",
     "key_word_hint": "One key word from the verse with its original-language meaning (1 short line in $langName). Example: 'my shepherd' = Hebrew 'roi' — not a job title, but 'the one who tends me personally'. Leave empty if not confident."
@@ -1032,7 +1090,7 @@ Return a JSON object with ONLY these core sections:
     "intercession": ["intercession items summarized in $langName"]
   },
   "scripture": {
-    "reference": "Book Chapter:Verse (e.g., Psalm 23:1-3) — DO NOT include verse text; the app looks it up from a PD bundle",
+    "reference": "Bible reference as lookup KEY. REQUIREMENT: English book name ONLY (e.g., 'Matthew 6:33', 'I Kings 19:12', 'Psalm 23:1-3'). Our bundle uses English keys regardless of $langName — NEVER translate the book name to $langName (e.g., NEVER '마태복음 6:33', 'マタイ 6:33', '马太福音 6:33', 'Mateo 6:33'). The verse text itself will be shown in $langName.",
     "reason": "Why this verse for this prayer (2-3 sentences in $langName)",
     "posture": "How to read it — action/mindset (2-3 sentences in $langName)",
     "key_word_hint": "One key word from the verse with its original-language meaning (1 short line in $langName). Example: 'my shepherd' = Hebrew 'roi' — not a job title, but 'the one who tends me personally'. Leave empty if not confident."
@@ -1041,10 +1099,7 @@ Return a JSON object with ONLY these core sections:
     "title": "story title in $langName",
     "summary": "3-4 sentence summary in $langName"
   },
-  "testimony": {
-    "transcript_en": "the prayer reorganized in English as a testimony",
-    "transcript_ko": "기도 내용을 한국어 간증문으로 재구성"
-  }
+  "testimony": "the prayer reorganized as a testimonial narrative in $langName"
 }
 
 IMPORTANT:
@@ -1073,7 +1128,7 @@ Return a JSON object:
     "intercession": ["intercession items summarized in $langName"]
   },
   "scripture": {
-    "reference": "Book Chapter:Verse (e.g., Psalm 23:1-3) — DO NOT include verse text; the app looks it up from a PD bundle",
+    "reference": "Bible reference as lookup KEY. REQUIREMENT: English book name ONLY (e.g., 'Matthew 6:33', 'I Kings 19:12', 'Psalm 23:1-3'). Our bundle uses English keys regardless of $langName — NEVER translate the book name to $langName (e.g., NEVER '마태복음 6:33', 'マタイ 6:33', '马太福音 6:33', 'Mateo 6:33'). The verse text itself will be shown in $langName.",
     "reason": "Why this verse for this prayer (2-3 sentences in $langName)",
     "posture": "How to read it — action/mindset (2-3 sentences in $langName)",
     "key_word_hint": "One key word from the verse with its original-language meaning (1 short line in $langName). Example: 'my shepherd' = Hebrew 'roi' — not a job title, but 'the one who tends me personally'. Leave empty if not confident."
@@ -1082,10 +1137,7 @@ Return a JSON object:
     "title": "story title in $langName",
     "summary": "3-4 sentence summary in $langName"
   },
-  "testimony": {
-    "transcript_en": "the prayer reorganized in English as a testimony",
-    "transcript_ko": "기도 내용을 한국어 간증문으로 재구성"
-  }
+  "testimony": "the prayer reorganized as a testimonial narrative in $langName"
 }
 
 IMPORTANT:
@@ -1188,7 +1240,7 @@ Return this JSON object:
     "insight": "<1-2 sentence AI insight — how today's passage meets the user's specific meditation, in $langName. Not generic; reference a concrete phrase from their meditation or the passage.>"
   },
   "scripture": {
-    "reference": "<Book Chapter:Verse — must match the passage the user meditated on>",
+    "reference": "<Bible reference as lookup KEY. REQUIREMENT: English book name ONLY (e.g., 'Psalm 23:1-6', 'Matthew 6:33'). Our bundle uses English keys regardless of $langName — NEVER translate the book name (e.g., NEVER '시편 23:1-6', 'マタイ 6:33'). Must match the passage the user meditated on. The verse text itself will be shown in $langName.>",
     "reason": "<Why this passage speaks to the user's meditation (2-3 sentences in $langName)>",
     "posture": "<How to continue meditating on this passage (2-3 sentences in $langName)>",
     "key_word_hint": "<One key word with original-language meaning (1 line in $langName). Example: \\"'my shepherd' = Hebrew 'ro\\'i' — the one who tends me personally\\". Leave empty if not confident.>",
