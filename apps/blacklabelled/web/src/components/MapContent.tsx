@@ -144,7 +144,7 @@ export default function MapContent({ products, categories }: MapContentProps) {
             .setHTML(
               `<div style="background:#141414;padding:8px;border-radius:2px;min-width:180px;border:1px solid #222;">
                 <div style="width:100%;height:60px;background:url(${product.mainImage}) center/cover;border-radius:1px;margin-bottom:6px;"></div>
-                <div style="font-family:Inter,sans-serif;font-size:14px;color:#F5F5F0;font-weight:400;margin-bottom:2px;">${product.name}</div>
+                <div style="font-family:NanumSquare,sans-serif;font-size:14px;color:#F5F5F0;font-weight:400;margin-bottom:2px;">${product.name}</div>
                 <div style="font-family:NanumSquare,sans-serif;font-size:10px;color:#999;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px;">${product.category}</div>
                 <div style="font-family:NanumSquare,sans-serif;font-size:11px;color:#FFF;cursor:pointer;" data-slug="${product.slug}">View Project →</div>
               </div>`

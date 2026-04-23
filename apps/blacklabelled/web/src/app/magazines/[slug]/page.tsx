@@ -107,7 +107,7 @@ export default async function MagazineDetailPage({ params }: PageProps) {
             <div
               className="magazine-content bg-white rounded-sm p-6 md:p-10"
               style={{
-                fontFamily: "'Noto Sans KR', 'NanumSquare', sans-serif",
+                fontFamily: "'NanumSquare', sans-serif",
                 lineHeight: 1.8,
                 color: "#222",
               }}

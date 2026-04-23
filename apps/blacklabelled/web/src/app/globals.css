@@ -21,9 +21,9 @@
   --color-border: #222222;
   --color-divider: #1A1A1A;
 
-  --font-heading: var(--font-sans);
+  --font-heading: 'NanumSquare', sans-serif;
   --font-body: 'NanumSquare', sans-serif;
-  --font-sans: var(--font-sans);
+  --font-sans: 'NanumSquare', sans-serif;
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
