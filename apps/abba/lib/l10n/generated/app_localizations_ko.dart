@@ -1221,4 +1221,61 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get qtPassagesRetryButton => '다시 시도';
+
+  @override
+  String get aiStreamingInitial => '당신의 기도를 묵상하고 있어요...';
+
+  @override
+  String get aiTierProcessing => '더 많은 이야기가 준비되고 있어요...';
+
+  @override
+  String get aiScriptureValidating => '오늘의 말씀을 찾고 있어요...';
+
+  @override
+  String get aiScriptureValidatingFailed => '이 말씀은 잠시 후 준비됩니다...';
+
+  @override
+  String get aiTemplateFallback => '분석이 완성되는 동안 잠시 묵상해보세요...';
+
+  @override
+  String get aiPendingMore => '준비 중...';
+
+  @override
+  String get aiTierIncomplete => '곧 완성돼요, 잠시 후 다시 확인해주세요';
+
+  @override
+  String get tierCompleted => '새로운 이야기가 도착했어요';
+
+  @override
+  String get tierProcessingNotice => '더 많은 이야기를 만들고 있어요...';
+
+  @override
+  String get proSectionLoading => '프리미엄 콘텐츠를 준비 중이에요...';
+
+  @override
+  String get proSectionWillArrive => '깊은 묵상이 곧 나타날 거예요';
+
+  @override
+  String get templateCategoryHealth => '건강을 위한 묵상';
+
+  @override
+  String get templateCategoryFamily => '가족을 위한 묵상';
+
+  @override
+  String get templateCategoryWork => '일과 공부를 위한 묵상';
+
+  @override
+  String get templateCategoryGratitude => '감사의 마음';
+
+  @override
+  String get templateCategoryGrief => '슬픔과 상실 중에';
+
+  @override
+  String get sectionStatusCompleted => '분석 완료';
+
+  @override
+  String get sectionStatusPartial => '부분 완성 (계속 진행 중)';
+
+  @override
+  String get sectionStatusPending => '분석 진행 중';
 }

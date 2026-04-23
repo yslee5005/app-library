@@ -1251,4 +1251,62 @@ class AppLocalizationsSv extends AppLocalizations {
 
   @override
   String get qtPassagesRetryButton => 'Försök igen';
+
+  @override
+  String get aiStreamingInitial => 'Meditating on your prayer...';
+
+  @override
+  String get aiTierProcessing => 'More reflections coming...';
+
+  @override
+  String get aiScriptureValidating => 'Finding the right scripture...';
+
+  @override
+  String get aiScriptureValidatingFailed =>
+      'Preparing this scripture for you...';
+
+  @override
+  String get aiTemplateFallback => 'While we prepare your full analysis...';
+
+  @override
+  String get aiPendingMore => 'Preparing more...';
+
+  @override
+  String get aiTierIncomplete => 'Coming soon, check back later';
+
+  @override
+  String get tierCompleted => 'New reflection added';
+
+  @override
+  String get tierProcessingNotice => 'Generating more reflections...';
+
+  @override
+  String get proSectionLoading => 'Preparing your premium content...';
+
+  @override
+  String get proSectionWillArrive => 'Your deep reflection will appear here';
+
+  @override
+  String get templateCategoryHealth => 'For Health Concerns';
+
+  @override
+  String get templateCategoryFamily => 'For Family';
+
+  @override
+  String get templateCategoryWork => 'For Work & Studies';
+
+  @override
+  String get templateCategoryGratitude => 'A Thankful Heart';
+
+  @override
+  String get templateCategoryGrief => 'In Grief or Loss';
+
+  @override
+  String get sectionStatusCompleted => 'Analysis complete';
+
+  @override
+  String get sectionStatusPartial => 'Partial analysis (more coming)';
+
+  @override
+  String get sectionStatusPending => 'Analysis in progress';
 }

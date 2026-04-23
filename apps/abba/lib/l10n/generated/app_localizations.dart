@@ -2455,6 +2455,120 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Try again'**
   String get qtPassagesRetryButton;
+
+  /// No description provided for @aiStreamingInitial.
+  ///
+  /// In en, this message translates to:
+  /// **'Meditating on your prayer...'**
+  String get aiStreamingInitial;
+
+  /// No description provided for @aiTierProcessing.
+  ///
+  /// In en, this message translates to:
+  /// **'More reflections coming...'**
+  String get aiTierProcessing;
+
+  /// No description provided for @aiScriptureValidating.
+  ///
+  /// In en, this message translates to:
+  /// **'Finding the right scripture...'**
+  String get aiScriptureValidating;
+
+  /// No description provided for @aiScriptureValidatingFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Preparing this scripture for you...'**
+  String get aiScriptureValidatingFailed;
+
+  /// No description provided for @aiTemplateFallback.
+  ///
+  /// In en, this message translates to:
+  /// **'While we prepare your full analysis...'**
+  String get aiTemplateFallback;
+
+  /// No description provided for @aiPendingMore.
+  ///
+  /// In en, this message translates to:
+  /// **'Preparing more...'**
+  String get aiPendingMore;
+
+  /// No description provided for @aiTierIncomplete.
+  ///
+  /// In en, this message translates to:
+  /// **'Coming soon, check back later'**
+  String get aiTierIncomplete;
+
+  /// No description provided for @tierCompleted.
+  ///
+  /// In en, this message translates to:
+  /// **'New reflection added'**
+  String get tierCompleted;
+
+  /// No description provided for @tierProcessingNotice.
+  ///
+  /// In en, this message translates to:
+  /// **'Generating more reflections...'**
+  String get tierProcessingNotice;
+
+  /// No description provided for @proSectionLoading.
+  ///
+  /// In en, this message translates to:
+  /// **'Preparing your premium content...'**
+  String get proSectionLoading;
+
+  /// No description provided for @proSectionWillArrive.
+  ///
+  /// In en, this message translates to:
+  /// **'Your deep reflection will appear here'**
+  String get proSectionWillArrive;
+
+  /// No description provided for @templateCategoryHealth.
+  ///
+  /// In en, this message translates to:
+  /// **'For Health Concerns'**
+  String get templateCategoryHealth;
+
+  /// No description provided for @templateCategoryFamily.
+  ///
+  /// In en, this message translates to:
+  /// **'For Family'**
+  String get templateCategoryFamily;
+
+  /// No description provided for @templateCategoryWork.
+  ///
+  /// In en, this message translates to:
+  /// **'For Work & Studies'**
+  String get templateCategoryWork;
+
+  /// No description provided for @templateCategoryGratitude.
+  ///
+  /// In en, this message translates to:
+  /// **'A Thankful Heart'**
+  String get templateCategoryGratitude;
+
+  /// No description provided for @templateCategoryGrief.
+  ///
+  /// In en, this message translates to:
+  /// **'In Grief or Loss'**
+  String get templateCategoryGrief;
+
+  /// No description provided for @sectionStatusCompleted.
+  ///
+  /// In en, this message translates to:
+  /// **'Analysis complete'**
+  String get sectionStatusCompleted;
+
+  /// No description provided for @sectionStatusPartial.
+  ///
+  /// In en, this message translates to:
+  /// **'Partial analysis (more coming)'**
+  String get sectionStatusPartial;
+
+  /// No description provided for @sectionStatusPending.
+  ///
+  /// In en, this message translates to:
+  /// **'Analysis in progress'**
+  String get sectionStatusPending;
 }
 
 class _AppLocalizationsDelegate
