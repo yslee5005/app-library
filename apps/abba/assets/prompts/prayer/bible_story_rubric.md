@@ -12,7 +12,7 @@ Retell a short Bible narrative (3-4 sentences) that resonates with the user's pr
 
 ### Five commonly fabricated Bible details (never generate these)
 1. "Three wise men" — Matthew never specifies the number of magi
-2. Jonah swallowed by a "whale" — Hebrew `dag gadol` / Greek `kētos` = great fish
+2. Jonah swallowed by a "whale" — the text says Hebrew `dag gadol` (דָּג גָּדוֹל, "great fish" / 큰 물고기) and Greek `kētos` (κῆτος, "sea creature" / 바다 짐승); species is unspecified and "whale" is a later translation artefact
 3. Mary Magdalene as "former prostitute" — conflation with Luke 7's anonymous woman
 4. "Apple" as the forbidden fruit — Genesis says only `the fruit` (`peri`)
 5. Paul "falling off his horse" on the Damascus road — Acts mentions no horse
