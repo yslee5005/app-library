@@ -4,6 +4,7 @@ import '../../../models/prayer.dart';
 import '../../../theme/abba_theme.dart';
 import '../../../widgets/expandable_card.dart';
 import '../../../widgets/prayer_player.dart';
+import '../../../widgets/typewriter_text.dart';
 
 class PrayerSummaryCard extends StatelessWidget {
   final PrayerSummary prayerSummary;
@@ -14,6 +15,13 @@ class PrayerSummaryCard extends StatelessWidget {
   final String? audioUrl;
   final String? audioLabel;
 
+  /// 2026-04-23 Phase 4 — ChatGPT-style fake streaming for the first
+  /// time a user sees this summary after AI analysis completes. Forces
+  /// the card open (no tap-to-expand gate) and types each item out at
+  /// ~25 chars/second. Revisits from Calendar/History should pass false
+  /// so the summary renders instantly.
+  final bool animate;
+
   const PrayerSummaryCard({
     super.key,
     required this.prayerSummary,
@@ -23,6 +31,7 @@ class PrayerSummaryCard extends StatelessWidget {
     required this.intercessionLabel,
     this.audioUrl,
     this.audioLabel,
+    this.animate = false,
   });
 
   String get _summary {
@@ -45,6 +54,7 @@ class PrayerSummaryCard extends StatelessWidget {
       icon: '📋',
       title: title,
       summary: _summary,
+      initiallyExpanded: animate,
       expandedContent: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -119,7 +129,11 @@ class PrayerSummaryCard extends StatelessWidget {
                 children: [
                   Text('• ', style: AbbaTypography.bodySmall),
                   Expanded(
-                    child: Text(item, style: AbbaTypography.bodySmall),
+                    child: TypewriterText(
+                      text: item,
+                      style: AbbaTypography.bodySmall,
+                      animate: animate,
+                    ),
                   ),
                 ],
               ),

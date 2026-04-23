@@ -163,6 +163,11 @@ class _PrayerDashboardViewState extends ConsumerState<PrayerDashboardView> {
               intercessionLabel: l10n.intercessionLabel,
               audioUrl: ref.watch(_currentAudioUrlProvider).value,
               audioLabel: l10n.myPrayerAudioLabel,
+              // 2026-04-23 Phase 4 fake streaming (chatGPT-style reveal).
+              // Current: animates on every Dashboard mount for the
+              // prayerResultProvider result. Calendar/History revisit gating
+              // deferred to Phase 5 (pass `false` there).
+              animate: true,
             ),
           ),
         // 2. Scripture Card
