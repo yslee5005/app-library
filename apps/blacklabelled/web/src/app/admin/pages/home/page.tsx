@@ -1,16 +1,14 @@
 import HomePageEditor from "@/components/admin/HomePageEditor";
-import {
-  getPageContentAdmin,
-  getAdminProducts,
-} from "@/lib/admin-actions";
+import { getPageContentAdmin } from "@/lib/admin-actions";
+import { getResidenceProducts } from "@/lib/data";
 
 export default async function HomePageSettingsPage() {
-  const [content, productsResult] = await Promise.all([
+  const [content, residenceProducts] = await Promise.all([
     getPageContentAdmin("home"),
-    getAdminProducts({ limit: 200 }),
+    getResidenceProducts(),
   ]);
 
-  const productOptions = productsResult.products.map((p) => ({
+  const productOptions = residenceProducts.map((p) => ({
     id: p.id,
     slug: p.slug,
     name: p.name,
