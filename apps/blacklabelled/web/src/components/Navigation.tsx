@@ -114,14 +114,14 @@ export default function Navigation() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-[100] bg-white flex flex-col"
+            className="fixed inset-0 z-[100] bg-black flex flex-col"
           >
             {/* Top bar */}
             <div className="max-w-[1400px] mx-auto px-6 md:px-10 flex items-center justify-between h-20 w-full">
               <Link
                 href="/"
                 onClick={() => setMobileOpen(false)}
-                className="font-heading text-black text-lg tracking-[0.15em] font-bold"
+                className="font-heading text-white text-lg tracking-[0.15em] font-bold"
               >
                 BLACKLABELLED
               </Link>
@@ -135,7 +135,7 @@ export default function Navigation() {
                 </Link>
                 <button
                   onClick={() => setMobileOpen(false)}
-                  className="text-black text-3xl font-light"
+                  className="text-white text-3xl font-light"
                   aria-label="닫기"
                 >
                   ✕
@@ -155,7 +155,7 @@ export default function Navigation() {
                   <Link
                     href="/about"
                     onClick={() => setMobileOpen(false)}
-                    className="text-4xl md:text-7xl font-black text-black hover:text-gray-500 transition-colors"
+                    className="text-4xl md:text-7xl font-black text-white hover:text-gray-400 transition-colors"
                   >
                     About
                   </Link>
@@ -168,7 +168,7 @@ export default function Navigation() {
                   <Link
                     href="/process"
                     onClick={() => setMobileOpen(false)}
-                    className="text-4xl md:text-7xl font-black text-black hover:text-gray-500 transition-colors"
+                    className="text-4xl md:text-7xl font-black text-white hover:text-gray-400 transition-colors"
                   >
                     Process
                   </Link>
@@ -176,7 +176,7 @@ export default function Navigation() {
               </div>
 
               {/* Divider — mobile only */}
-              <div className="my-6 border-t border-gray-200 md:hidden" />
+              <div className="my-6 border-t border-gray-800 md:hidden" />
 
               {/* Right — links with counts */}
               <div className="flex-1 flex flex-col md:flex-row md:flex-wrap md:content-center gap-y-4 md:gap-x-20 md:gap-y-6 md:pl-10">
@@ -195,7 +195,7 @@ export default function Navigation() {
                     <Link
                       href={item.href}
                       onClick={() => setMobileOpen(false)}
-                      className="text-2xl md:text-5xl font-bold text-black hover:text-gray-500 transition-colors relative inline-block"
+                      className="text-2xl md:text-5xl font-bold text-white hover:text-gray-400 transition-colors relative inline-block"
                     >
                       {item.label}
                       {item.count && (
@@ -210,17 +210,17 @@ export default function Navigation() {
             </div>
 
             {/* Bottom — SNS + watermark */}
-            <div className="px-10 md:px-20 pb-10 flex items-end justify-between border-t border-gray-200 pt-6">
+            <div className="px-10 md:px-20 pb-10 flex items-end justify-between border-t border-gray-800 pt-6">
               <div className="flex gap-6">
-                <a href="#" className="text-black text-sm hover:text-gray-500">Instagram ↗</a>
-                <a href="#" className="text-black text-sm hover:text-gray-500">Blog ↗</a>
+                <a href="#" className="text-white text-sm hover:text-gray-400">Instagram ↗</a>
+                <a href="#" className="text-white text-sm hover:text-gray-400">Blog ↗</a>
               </div>
-              <span className="text-gray-300 text-sm tracking-[0.3em] hidden md:block">
+              <span className="text-gray-600 text-sm tracking-[0.3em] hidden md:block">
                 Life Makes Sense
               </span>
               <div className="flex gap-6">
-                <a href="#" className="text-black text-sm hover:text-gray-500">Youtube ↗</a>
-                <a href="#" className="text-black text-sm hover:text-gray-500">Pinterest ↗</a>
+                <a href="#" className="text-white text-sm hover:text-gray-400">Youtube ↗</a>
+                <a href="#" className="text-white text-sm hover:text-gray-400">Pinterest ↗</a>
               </div>
             </div>
           </motion.div>
