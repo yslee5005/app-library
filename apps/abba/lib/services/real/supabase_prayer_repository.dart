@@ -92,6 +92,21 @@ class SupabasePrayerRepository implements PrayerRepository {
   }
 
   @override
+  Future<void> updateTierResult({
+    required String prayerId,
+    required String tier,
+    required Map<String, dynamic> sectionData,
+  }) async {
+    // Phase 4.1: RPC performs atomic merge — `result = result || sectionData`
+    // + `section_status` flag set, all in one UPDATE for concurrency safety.
+    await _abba.rpc('update_prayer_tier', params: {
+      'p_prayer_id': prayerId,
+      'p_tier': tier,
+      'p_section_data': sectionData,
+    });
+  }
+
+  @override
   Future<List<Prayer>> getPrayersByDate(DateTime date) async {
     final startOfDay = DateTime(date.year, date.month, date.day);
     final endOfDay = startOfDay.add(const Duration(days: 1));

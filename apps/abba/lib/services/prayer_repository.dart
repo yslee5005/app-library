@@ -24,6 +24,20 @@ abstract class PrayerRepository {
     QtMeditationResult? qtResult,
   });
 
+  /// Phase 4.1: Atomic per-tier UPDATE via `abba.update_prayer_tier` RPC.
+  /// Safely merges [sectionData] into `result JSONB` and flips the tier
+  /// flag in `section_status`. Server uses `||` operator so concurrent
+  /// T1/T2 updates never lose each other's data.
+  ///
+  /// [tier] must be 't1', 't2', or 't3'.
+  /// [sectionData] is a JSON map containing only the fields for that tier,
+  /// e.g. `{"summary": {...}, "scripture": {...}}` for T1.
+  Future<void> updateTierResult({
+    required String prayerId,
+    required String tier,
+    required Map<String, dynamic> sectionData,
+  });
+
   Future<List<Prayer>> getPrayersByDate(DateTime date);
   Future<List<Prayer>> getPrayersByMonth(int year, int month);
   Future<Prayer?> getLatestPrayer();

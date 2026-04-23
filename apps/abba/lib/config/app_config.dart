@@ -94,6 +94,14 @@ class AppConfig {
   static bool get enableFcm =>
       (dotenv.env['ENABLE_FCM'] ?? 'false').toLowerCase() == 'true';
 
+  /// Phase 4.1: Gemini Context Cache. When true, `GeminiCacheManager`
+  /// creates a shared cache (Strategy B) to reduce input token cost ~83%.
+  /// Falls back to uncached calls when the Dart SDK doesn't support
+  /// context caching yet (current state) or on cache miss. Defaults to
+  /// `true` — no downside when SDK is not ready (graceful degrade).
+  static bool get enableGeminiCache =>
+      (dotenv.env['ENABLE_GEMINI_CACHE'] ?? 'true').toLowerCase() == 'true';
+
   /// Validate required environment variables.
   /// Skipped in mock mode — real mode requires Supabase + Gemini + RevenueCat + Google OAuth keys.
   ///

@@ -89,3 +89,6 @@ flutter:
     - assets/mock/
     - assets/icon/
     - assets/docs/
+    - assets/prompts/
+    - assets/prompts/prayer/
+    - assets/prompts/qt/

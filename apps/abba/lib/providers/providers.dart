@@ -24,11 +24,13 @@ import '../models/user_profile.dart';
 import '../services/ai_service.dart';
 import '../services/bible_text_service.dart';
 import '../services/community_repository.dart';
+import '../services/gemini_cache_manager.dart';
 import '../services/mock_data.dart';
 import '../services/notification_service.dart';
 import '../services/prayer_repository.dart';
 import '../services/qt_repository.dart';
 import 'package:app_lib_subscriptions/subscriptions.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 // ---------------------------------------------------------------------------
 // Core data (kept for backward compat, loads JSON mock)
@@ -44,6 +46,12 @@ final mockDataServiceProvider = Provider<MockDataService>((ref) {
 
 final aiServiceProvider = Provider<AiService>((ref) {
   throw UnimplementedError('aiServiceProvider must be overridden');
+});
+
+/// Phase 4.1: Shared Gemini Context Cache manager (Strategy B).
+/// Lazy singleton — created when first Gemini call needs a cache id.
+final geminiCacheManagerProvider = Provider<GeminiCacheManager>((ref) {
+  return GeminiCacheManager(Supabase.instance.client);
 });
 
 /// Looks up Bible verse text (Public Domain bundles) by reference + locale.

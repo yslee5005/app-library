@@ -94,6 +94,21 @@ class MockPrayerRepository implements PrayerRepository {
   }
 
   @override
+  Future<void> updateTierResult({
+    required String prayerId,
+    required String tier,
+    required Map<String, dynamic> sectionData,
+  }) async {
+    // Mock: no-op tier merge. Phase 4.1 tests use this only to verify
+    // the call path; real JSONB merge lives in Supabase RPC.
+    await _ensureInitialized();
+    final idx = _prayers.indexWhere((p) => p.id == prayerId);
+    if (idx < 0) return;
+    // Mock does not reconstruct PrayerResult from partial JSON — tier
+    // progression flows via PrayerSectionsNotifier in-memory state.
+  }
+
+  @override
   Future<List<Prayer>> getPrayersByDate(DateTime date) async {
     await _ensureInitialized();
     return _prayers
