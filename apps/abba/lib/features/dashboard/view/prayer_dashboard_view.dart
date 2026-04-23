@@ -5,6 +5,7 @@ import 'package:app_lib_logging/logging.dart';
 
 import '../../../l10n/generated/app_localizations.dart';
 import '../../../models/prayer.dart';
+import '../../../providers/prayer_sections_notifier.dart';
 import '../../../providers/providers.dart';
 import '../../../services/ai_service.dart';
 import '../../../theme/abba_theme.dart';
@@ -44,6 +45,31 @@ class _PrayerDashboardViewState extends ConsumerState<PrayerDashboardView> {
     prayerLog.info('Prayer dashboard opened');
   }
 
+  /// Phase 4.1 INT-028 — wrap a card that can appear mid-scroll (T2 / T3
+  /// arrival) in an implicit fade + slide transition. Unlike
+  /// [StaggeredFadeIn], this doesn't rely on a mount-time delay; the
+  /// animation runs once the key is first inserted into the list.
+  Widget _progressiveFadeIn({
+    required Key key,
+    required int index,
+    required Widget child,
+  }) {
+    return TweenAnimationBuilder<double>(
+      key: key,
+      tween: Tween(begin: 0.0, end: 1.0),
+      duration: const Duration(milliseconds: 450),
+      curve: Curves.easeOut,
+      builder: (context, t, c) => Opacity(
+        opacity: t,
+        child: Transform.translate(
+          offset: Offset(0, (1 - t) * 16),
+          child: c,
+        ),
+      ),
+      child: child,
+    );
+  }
+
   Future<void> _loadPremiumContent() async {
     if (_premiumLoading || _premiumContent != null) return;
 
@@ -65,7 +91,7 @@ class _PrayerDashboardViewState extends ConsumerState<PrayerDashboardView> {
           _premiumLoading = false;
         });
 
-        // Merge premium content into prayerResultProvider
+        // Merge premium content into prayerResultProvider (legacy)
         final currentResult = ref.read(prayerResultProvider).value;
         if (currentResult != null) {
           ref.read(prayerResultProvider.notifier).state = AsyncValue.data(
@@ -76,6 +102,12 @@ class _PrayerDashboardViewState extends ConsumerState<PrayerDashboardView> {
             ),
           );
         }
+        // Phase 4.1 INT-028 — also surface to progressive renderer.
+        ref.read(prayerSectionsProvider.notifier).setT3(
+              guidance: content.guidance,
+              aiPrayer: content.aiPrayer,
+              historicalStory: content.historicalStory,
+            );
       }
     } catch (e, stackTrace) {
       prayerLog.error(
@@ -91,8 +123,17 @@ class _PrayerDashboardViewState extends ConsumerState<PrayerDashboardView> {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     final locale = ref.watch(localeProvider);
-    final resultAsync = ref.watch(prayerResultProvider);
+    // Phase 4.1 INT-028 — progressive source of truth. Streaming path
+    // (ai_loading_view) and Calendar/History revisit both populate this;
+    // prayerResultProvider stays as a compatibility read for a couple of
+    // downstream consumers (e.g. community write).
+    final sections = ref.watch(prayerSectionsProvider);
     final isPremium = ref.watch(isPremiumProvider).value ?? false;
+
+    // While T1 has not arrived (no scripture/summary yet), show spinner. The
+    // Dashboard is reachable as soon as T1 resolves from streaming, so this
+    // is mostly a safety net for past prayers with corrupt data.
+    final awaitingT1 = sections.summary == null && sections.scripture == null;
 
     return Scaffold(
       backgroundColor: AbbaColors.cream,
@@ -119,18 +160,15 @@ class _PrayerDashboardViewState extends ConsumerState<PrayerDashboardView> {
           ),
         ],
       ),
-      body: resultAsync.when(
-        data: (result) =>
-            _buildContent(context, result, l10n, locale, isPremium),
-        loading: () => const Center(child: CircularProgressIndicator()),
-        error: (e, s) => Center(child: Text(l10n.errorGeneric)),
-      ),
+      body: awaitingT1
+          ? const Center(child: CircularProgressIndicator())
+          : _buildContent(context, sections, l10n, locale, isPremium),
     );
   }
 
   Widget _buildContent(
     BuildContext context,
-    PrayerResult result,
+    PrayerSectionsState sections,
     AppLocalizations l10n,
     String locale,
     bool isPremium,
@@ -140,54 +178,53 @@ class _PrayerDashboardViewState extends ConsumerState<PrayerDashboardView> {
       context.push('/settings/membership');
     }
 
-    final testimonyText = result.testimony;
-
-    // Check if premium content is available (from full analyzePrayer or on-demand)
-    final hasHistoricalStory = result.historicalStory != null;
-    final hasAiPrayer = result.aiPrayer != null;
-    final showPremiumSection = isPremium && (!hasHistoricalStory || !hasAiPrayer);
+    final testimonyText = sections.testimony ?? '';
+    final hasTestimony = testimonyText.isNotEmpty;
+    final hasHistoricalStory = sections.historicalStory != null;
+    final hasAiPrayer = sections.aiPrayer != null;
+    final showPremiumSection =
+        isPremium && (!hasHistoricalStory || !hasAiPrayer);
 
     int i = 0;
     return ListView(
       padding: const EdgeInsets.only(bottom: AbbaSpacing.xl),
       children: [
-        // 1. Prayer Summary Card (with user prayer audio playback)
-        if (result.prayerSummary != null)
+        // 1. Prayer Summary Card (T1, animates)
+        if (sections.summary != null)
           StaggeredFadeIn(
             index: i++,
             child: PrayerSummaryCard(
-              prayerSummary: result.prayerSummary!,
+              prayerSummary: sections.summary!,
               title: l10n.prayerSummaryTitle,
               gratitudeLabel: l10n.gratitudeLabel,
               petitionLabel: l10n.petitionLabel,
               intercessionLabel: l10n.intercessionLabel,
               audioUrl: ref.watch(_currentAudioUrlProvider).value,
               audioLabel: l10n.myPrayerAudioLabel,
-              // 2026-04-23 Phase 4 fake streaming (chatGPT-style reveal).
-              // Current: animates on every Dashboard mount for the
-              // prayerResultProvider result. Calendar/History revisit gating
-              // deferred to Phase 5 (pass `false` there).
               animate: true,
             ),
           ),
-        // 2. Scripture Card
-        StaggeredFadeIn(
-          index: i++,
-          child: ScriptureCard(
-            scripture: result.scripture,
-            title: l10n.scriptureTitle,
-            initiallyExpanded: false,
+        // 2. Scripture Card (T1)
+        if (sections.scripture != null)
+          StaggeredFadeIn(
+            index: i++,
+            child: ScriptureCard(
+              scripture: sections.scripture!,
+              title: l10n.scriptureTitle,
+              initiallyExpanded: false,
+            ),
           ),
-        ),
-        // 3. Testimony Card (prayer transcript reflection; audio moved to Prayer Summary)
-        StaggeredFadeIn(
-          index: i++,
-          child: TestimonyCard(
-            testimony: testimonyText,
-            title: l10n.testimonyTitle,
-            helperText: l10n.testimonyHelperText,
+        // 3. Testimony Card (T2, fades in when background tier arrives)
+        if (hasTestimony)
+          _progressiveFadeIn(
+            key: const ValueKey('testimony'),
+            index: i++,
+            child: TestimonyCard(
+              testimony: testimonyText,
+              title: l10n.testimonyTitle,
+              helperText: l10n.testimonyHelperText,
+            ),
           ),
-        ),
         // 4. Prayer Coaching Card (Pro — first Pro card, on-demand analysis)
         StaggeredFadeIn(
           index: i++,
@@ -197,24 +234,26 @@ class _PrayerDashboardViewState extends ConsumerState<PrayerDashboardView> {
             onUnlock: showPremiumUpgrade,
           ),
         ),
-        // 5. Historical Story Card (Premium — on-demand)
+        // 5. Historical Story Card (T3 premium on-demand)
         if (hasHistoricalStory)
-          StaggeredFadeIn(
+          _progressiveFadeIn(
+            key: const ValueKey('historical-story'),
             index: i++,
             child: HistoricalStoryCard(
-              historicalStory: result.historicalStory!,
+              historicalStory: sections.historicalStory!,
               title: l10n.historicalStoryTitle,
               lessonLabel: l10n.todayLesson,
               onUnlock: showPremiumUpgrade,
               isUserPremium: isPremium,
             ),
           ),
-        // 5. AI Prayer Card (Premium — on-demand)
+        // 6. AI Prayer Card (T3 premium on-demand)
         if (hasAiPrayer)
-          StaggeredFadeIn(
+          _progressiveFadeIn(
+            key: const ValueKey('ai-prayer'),
             index: i++,
             child: AiPrayerCard(
-              aiPrayer: result.aiPrayer!,
+              aiPrayer: sections.aiPrayer!,
               title: l10n.aiPrayerTitle,
               onUnlock: showPremiumUpgrade,
               isUserPremium: isPremium,

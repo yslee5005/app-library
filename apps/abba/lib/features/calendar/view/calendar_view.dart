@@ -6,6 +6,7 @@ import 'package:intl/intl.dart';
 
 import '../../../l10n/generated/app_localizations.dart';
 import '../../../models/prayer.dart';
+import '../../../providers/prayer_sections_notifier.dart';
 import '../../../providers/providers.dart';
 import '../../../theme/abba_theme.dart';
 import '../../../widgets/abba_card.dart';
@@ -542,6 +543,11 @@ class _CalendarViewState extends ConsumerState<CalendarView> {
     prayerLog.debug('Prayer detail opened: ${prayer.id}');
     ref.read(prayerResultProvider.notifier).state =
         AsyncValue.data(prayer.result!);
+    // Phase 4.1 INT-028 — feed progressive renderer so the Dashboard
+    // reads from one source regardless of entry path (streaming vs. revisit).
+    ref.read(prayerSectionsProvider.notifier)
+      ..reset()
+      ..setAllFromResult(prayer.result!);
     context.push('/home/prayer-dashboard');
   }
 }

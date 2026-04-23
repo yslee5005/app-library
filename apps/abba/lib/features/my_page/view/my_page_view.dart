@@ -7,6 +7,7 @@ import 'package:intl/intl.dart';
 import '../../../l10n/generated/app_localizations.dart';
 import '../../../models/post.dart';
 import '../../../models/prayer.dart';
+import '../../../providers/prayer_sections_notifier.dart';
 import '../../../providers/providers.dart';
 import '../../../theme/abba_theme.dart';
 
@@ -183,6 +184,11 @@ class _PrayerItemCard extends ConsumerWidget {
         } else if (prayer.result != null) {
           ref.read(prayerResultProvider.notifier).state =
               AsyncValue.data(prayer.result!);
+          // Phase 4.1 INT-028 — feed progressive renderer so the Dashboard
+          // stays a single-source consumer regardless of entry path.
+          ref.read(prayerSectionsProvider.notifier)
+            ..reset()
+            ..setAllFromResult(prayer.result!);
           prayerLog.info('History item tapped: ${prayer.id}, navigating to dashboard');
           context.push('/home/prayer-dashboard');
         } else {
