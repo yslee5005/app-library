@@ -196,5 +196,122 @@ void main() {
       expect(t1Completer.isCompleted, isFalse);
       await controller.close();
     });
+
+    test('startPrayerStream: TierT1ScriptureRef resolves completer with '
+        'placeholder summary + stashes reference', () async {
+      final repo = _RecordingRepo();
+      final controller = StreamController<TierResult>();
+      final t1Completer = Completer<TierT1Result>();
+
+      notifier.startPrayerStream(
+        stream: controller.stream,
+        repo: repo,
+        prayerId: 'p1',
+        t1Completer: t1Completer,
+      );
+
+      controller.add(const TierT1ScriptureRef('Matthew 6:33'));
+      final arrived = await t1Completer.future;
+      // Placeholder summary (empty lists) — full summary lands on
+      // the subsequent TierT1Result.
+      expect(arrived.summary.gratitude, isEmpty);
+      expect(arrived.scripture.reference, 'Matthew 6:33');
+      expect(notifier.state.scripture?.reference, 'Matthew 6:33');
+      expect(notifier.state.scripture?.verse, isEmpty);
+      // ScriptureRef is a pre-persist signal; no RPC call yet.
+      expect(repo.calls, isEmpty);
+      await controller.close();
+    });
+
+    test('startPrayerStream: T1 payload shape includes all scripture fields',
+        () async {
+      final repo = _RecordingRepo();
+      final controller = StreamController<TierResult>();
+      final t1Completer = Completer<TierT1Result>();
+
+      notifier.startPrayerStream(
+        stream: controller.stream,
+        repo: repo,
+        prayerId: 'p-shape',
+        t1Completer: t1Completer,
+      );
+
+      controller.add(TierT1Result(
+        summary: const PrayerSummary(
+          gratitude: ['g1', 'g2'],
+          petition: ['p1'],
+          intercession: [],
+        ),
+        scripture: const Scripture(
+          reference: 'Psalm 23:1',
+          verse: 'The LORD is my shepherd...',
+          reason: 'comfort',
+          posture: 'read slowly',
+          keyWordHint: 'shepherd = ro\'i',
+          originalWords: [
+            ScriptureOriginalWord(
+              word: 'רֹעִי',
+              transliteration: 'ro\'i',
+              language: 'Hebrew',
+              meaning: 'my shepherd',
+            ),
+          ],
+        ),
+      ));
+      await t1Completer.future;
+      await Future<void>.delayed(Duration.zero);
+
+      expect(repo.calls.length, 1);
+      final (pid, tier, payload) = repo.calls.first;
+      expect(pid, 'p-shape');
+      expect(tier, 't1');
+      expect(payload['prayer_summary'], {
+        'gratitude': ['g1', 'g2'],
+        'petition': ['p1'],
+        'intercession': <String>[],
+      });
+      final sc = payload['scripture'] as Map;
+      expect(sc['reference'], 'Psalm 23:1');
+      expect(sc['verse'], 'The LORD is my shepherd...');
+      expect(sc['key_word_hint'], 'shepherd = ro\'i');
+      final words = sc['original_words'] as List;
+      expect(words, hasLength(1));
+      expect((words.first as Map)['transliteration'], 'ro\'i');
+      await controller.close();
+    });
+
+    test('startPrayerStream: T3 payload omits null sections', () async {
+      final repo = _RecordingRepo();
+      final controller = StreamController<TierResult>();
+      final t1Completer = Completer<TierT1Result>();
+
+      notifier.startPrayerStream(
+        stream: controller.stream,
+        repo: repo,
+        prayerId: 'p-t3',
+        t1Completer: t1Completer,
+      );
+
+      // Fast-forward past T1 so we can get to T3 assertion.
+      controller.add(TierT1Result(
+        summary: const PrayerSummary(
+            gratitude: [], petition: [], intercession: []),
+        scripture: const Scripture(reference: 'John 3:16'),
+      ));
+      await t1Completer.future;
+
+      // Partial T3 — only guidance, others null.
+      controller.add(const TierT3Result(
+        guidance: Guidance(content: 'take a small step', isPremium: true),
+      ));
+      await Future<void>.delayed(Duration.zero);
+
+      final t3Call = repo.calls.firstWhere((c) => c.$2 == 't3');
+      final payload = t3Call.$3;
+      expect(payload.containsKey('guidance'), isTrue);
+      expect(payload.containsKey('ai_prayer'), isFalse);
+      expect(payload.containsKey('historical_story'), isFalse);
+      await controller.close();
+    });
   });
 }

@@ -284,9 +284,18 @@ File: `apps/abba/lib/services/prayer_template_service.dart` (신규)
 - Needs a Supabase integration harness; scheduled for post-launch.
 
 ### INT-042 — Widget test: progressive rendering **[DEFERRED]**
-- Progressive Dashboard rendering is covered manually before release
-  (INT-044 smoke). Widget test with VisibilityDetector + Stream mocking
-  is Phase 2 when the layer stabilises.
+- **Phase 4.2 R-D3 attempt (2026-04-23)**: created a PrayerDashboardView
+  widget test with card-type finders + preset PrayerSectionsState. All
+  three non-empty cases hung at the 10-minute flutter_test timeout.
+  Root cause: PrayerSummaryCard's `animate: true` typewriter loop +
+  Dashboard's 3s T3 fallback Timer + VisibilityDetector + TweenAnimation
+  Builder continuous ticking prevent the test frame from settling without
+  a dedicated `fakeAsync` + timer-isolation harness.
+- Progressive state transitions ARE covered by
+  `test/providers/prayer_sections_notifier_test.dart` (11 cases, incl.
+  scripture-ref placeholder, T1/T2 payload shape, T3 null omission).
+  Dashboard UI verification stays in the real-device smoke test until a
+  timer-isolation harness is built in Phase 2.
 
 ### INT-043 — Template fallback test ✅
 - Implemented: `apps/abba/test/services/prayer_template_service_test.dart`
