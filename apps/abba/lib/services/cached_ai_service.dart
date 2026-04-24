@@ -185,4 +185,19 @@ class CachedAiService implements AiService {
         t1Context: t1Context,
         t2Context: t2Context,
       );
+
+  @override
+  Stream<TierResult> analyzeMeditationStreamed({
+    required String meditation,
+    required String passageRef,
+    required String passageText,
+    required String locale,
+    required String userName,
+  }) => _inner.analyzeMeditationStreamed(
+        meditation: meditation,
+        passageRef: passageRef,
+        passageText: passageText,
+        locale: locale,
+        userName: userName,
+      );
 }

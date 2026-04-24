@@ -4,13 +4,12 @@ import 'package:go_router/go_router.dart';
 import 'package:app_lib_logging/logging.dart';
 
 import '../../../l10n/generated/app_localizations.dart';
-import '../../../models/qt_meditation_result.dart';
 import '../../../providers/providers.dart';
+import '../../../providers/qt_sections_notifier.dart';
 import '../../../theme/abba_theme.dart';
 import '../../../widgets/abba_button.dart';
 import '../../../widgets/staggered_fade_in.dart';
 import '../widgets/application_card.dart';
-import '../widgets/growth_story_card.dart';
 import '../widgets/meditation_summary_card.dart';
 import '../widgets/qt_coaching_card.dart';
 import '../widgets/related_knowledge_card.dart';
@@ -30,12 +29,39 @@ class _QtDashboardViewState extends ConsumerState<QtDashboardView> {
     qtLog.info('QT dashboard opened');
   }
 
+  /// Phase 4.2 R-A6 — wrap a card that can appear mid-scroll (T2 arrival)
+  /// in an implicit fade + slide transition. Mirror of Prayer Dashboard.
+  Widget _progressiveFadeIn({
+    required Key key,
+    required Widget child,
+  }) {
+    return TweenAnimationBuilder<double>(
+      key: key,
+      tween: Tween(begin: 0.0, end: 1.0),
+      duration: const Duration(milliseconds: 450),
+      curve: Curves.easeOut,
+      builder: (context, t, c) => Opacity(
+        opacity: t,
+        child: Transform.translate(
+          offset: Offset(0, (1 - t) * 16),
+          child: c,
+        ),
+      ),
+      child: child,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     final locale = ref.watch(localeProvider);
-    final resultAsync = ref.watch(qtMeditationResultProvider);
+    // Phase 4.2 R-A6 — progressive source of truth. Streaming path
+    // (ai_loading_view) and Calendar/History revisit both populate this.
+    final sections = ref.watch(qtSectionsProvider);
     final isPremium = ref.watch(isPremiumProvider).value ?? false;
+
+    final awaitingT1 =
+        sections.meditationSummary == null && sections.scripture == null;
 
     return Scaffold(
       backgroundColor: AbbaColors.cream,
@@ -62,18 +88,15 @@ class _QtDashboardViewState extends ConsumerState<QtDashboardView> {
           ),
         ],
       ),
-      body: resultAsync.when(
-        data: (result) =>
-            _buildContent(context, result, l10n, locale, isPremium),
-        loading: () => const Center(child: CircularProgressIndicator()),
-        error: (e, s) => Center(child: Text(l10n.errorGeneric)),
-      ),
+      body: awaitingT1
+          ? const Center(child: CircularProgressIndicator())
+          : _buildContent(context, sections, l10n, locale, isPremium),
     );
   }
 
   Widget _buildContent(
     BuildContext context,
-    QtMeditationResult result,
+    QtSectionsState sections,
     AppLocalizations l10n,
     String locale,
     bool isPremium,
@@ -83,11 +106,19 @@ class _QtDashboardViewState extends ConsumerState<QtDashboardView> {
       context.push('/settings/membership');
     }
 
+    final hasApplication = sections.application != null &&
+        (sections.application!.hasTimeBlocks ||
+            sections.application!.action.isNotEmpty);
+    final hasKnowledge = sections.knowledge != null &&
+        (sections.knowledge!.historicalContext.isNotEmpty ||
+            sections.knowledge!.crossReferences.isNotEmpty ||
+            sections.knowledge!.originalWord != null);
+
     int i = 0;
     return ListView(
       padding: const EdgeInsets.only(bottom: AbbaSpacing.xl),
       children: [
-        // 0. QT Coaching Card (Phase 2 — Pro, top of list)
+        // 0. QT Coaching Card (Pro, on-demand — outside tier stream per SPEC §Scope)
         StaggeredFadeIn(
           index: i++,
           child: QtCoachingCard(
@@ -96,55 +127,46 @@ class _QtDashboardViewState extends ConsumerState<QtDashboardView> {
             onUnlock: showPremiumUpgrade,
           ),
         ),
-        // 1. Meditation Summary Card (Phase 1 — new first card)
-        StaggeredFadeIn(
-          index: i++,
-          child: MeditationSummaryCard(
-            meditationSummary: result.meditationSummary,
-            title: l10n.meditationSummaryTitle,
-            topicLabel: l10n.meditationTopicLabel,
+        // 1. Meditation Summary Card (T1)
+        if (sections.meditationSummary != null)
+          StaggeredFadeIn(
+            index: i++,
+            child: MeditationSummaryCard(
+              meditationSummary: sections.meditationSummary!,
+              title: l10n.meditationSummaryTitle,
+              topicLabel: l10n.meditationTopicLabel,
+            ),
           ),
-        ),
-        // 2. Scripture Card (Phase 1 — Scripture Deep reused)
-        if (result.scripture.reference.isNotEmpty)
+        // 2. Scripture Card (T1)
+        if (sections.scripture != null &&
+            sections.scripture!.reference.isNotEmpty)
           StaggeredFadeIn(
             index: i++,
             child: ScriptureCard(
-              scripture: result.scripture,
+              scripture: sections.scripture!,
               title: l10n.qtScriptureTitle,
               initiallyExpanded: true,
             ),
           ),
-        // 3. Application Card (Phase 5C — Meditation Analysis absorbed into
-        //    MeditationSummaryCard; standalone analysis card removed.)
-        StaggeredFadeIn(
-          index: i++,
-          child: ApplicationCard(
-            application: result.application,
-            title: l10n.applicationTitle,
+        // 3. Application Card (T2, fades in when background tier arrives)
+        if (hasApplication)
+          _progressiveFadeIn(
+            key: const ValueKey('qt-application'),
+            child: ApplicationCard(
+              application: sections.application!,
+              title: l10n.applicationTitle,
+            ),
           ),
-        ),
-        // 5. Related Knowledge Card
-        StaggeredFadeIn(
-          index: i++,
-          child: RelatedKnowledgeCard(
-            knowledge: result.knowledge,
-            title: l10n.relatedKnowledgeTitle,
-            originalWordLabel: l10n.originalWordLabel,
-            historicalContextLabel: l10n.historicalContextLabel,
-            crossReferencesLabel: l10n.crossReferencesLabel,
-          ),
-        ),
-        // 6. Growth Story Card (Premium)
-        if (result.growthStory != null)
-          StaggeredFadeIn(
-            index: i++,
-            child: GrowthStoryCard(
-              growthStory: result.growthStory!,
-              title: l10n.growthStoryTitle,
-              lessonLabel: l10n.todayLesson,
-              onUnlock: showPremiumUpgrade,
-              isUserPremium: isPremium,
+        // 4. Related Knowledge Card (T2)
+        if (hasKnowledge)
+          _progressiveFadeIn(
+            key: const ValueKey('qt-knowledge'),
+            child: RelatedKnowledgeCard(
+              knowledge: sections.knowledge!,
+              title: l10n.relatedKnowledgeTitle,
+              originalWordLabel: l10n.originalWordLabel,
+              historicalContextLabel: l10n.historicalContextLabel,
+              crossReferencesLabel: l10n.crossReferencesLabel,
             ),
           ),
         StaggeredFadeIn(

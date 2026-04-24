@@ -25,6 +25,19 @@ abstract class AiService {
     required TierT2Result t2Context,
   });
 
+  /// Phase 4.2 — QT 3-tier streamed analysis. Mirrors
+  /// [analyzePrayerStreamed] for QT mode. Emits [QtTierT1Result] first
+  /// (meditation_summary + scripture), then [QtTierT2Result]
+  /// (application + knowledge). No T3 for QT — the Pro QtCoaching card
+  /// remains on-demand outside the tier stream.
+  Stream<TierResult> analyzeMeditationStreamed({
+    required String meditation,
+    required String passageRef,
+    required String passageText,
+    required String locale,
+    required String userName,
+  });
+
   /// Analyze prayer transcript and return structured result (all sections)
   Future<PrayerResult> analyzePrayer({
     required String transcript,

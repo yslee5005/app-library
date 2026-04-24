@@ -181,4 +181,16 @@ class _CountingAiService implements AiService {
     callCount++;
     return const TierT3Result();
   }
+
+  @override
+  Stream<TierResult> analyzeMeditationStreamed({
+    required String meditation,
+    required String passageRef,
+    required String passageText,
+    required String locale,
+    required String userName,
+  }) async* {
+    callCount++;
+    // Minimal stub — tests don't assert stream content
+  }
 }

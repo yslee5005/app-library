@@ -290,4 +290,15 @@ class _CountingAiService implements AiService {
     required TierT1Result t1Context,
     required TierT2Result t2Context,
   }) async => const TierT3Result();
+
+  @override
+  Stream<TierResult> analyzeMeditationStreamed({
+    required String meditation,
+    required String passageRef,
+    required String passageText,
+    required String locale,
+    required String userName,
+  }) async* {
+    // Minimal stub — tier-based caching is pass-through
+  }
 }

@@ -45,6 +45,29 @@ class MockAiService implements AiService {
   }
 
   @override
+  Stream<TierResult> analyzeMeditationStreamed({
+    required String meditation,
+    required String passageRef,
+    required String passageText,
+    required String locale,
+    required String userName,
+  }) async* {
+    // Delay FIRST so widget tests can render the initial loading frame
+    // before the stream starts emitting (mirrors analyzePrayerStreamed).
+    await Future<void>.delayed(const Duration(seconds: 1));
+    final result = await _mockData.getQtMeditationResult();
+    yield QtTierT1Result(
+      meditationSummary: result.meditationSummary,
+      scripture: result.scripture,
+    );
+    await Future<void>.delayed(const Duration(seconds: 1));
+    yield QtTierT2Result(
+      application: result.application,
+      knowledge: result.knowledge,
+    );
+  }
+
+  @override
   Future<PrayerResult> analyzePrayer({
     required String transcript,
     required String locale,

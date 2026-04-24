@@ -8,6 +8,7 @@ import '../../../l10n/generated/app_localizations.dart';
 import '../../../models/prayer.dart';
 import '../../../providers/prayer_sections_notifier.dart';
 import '../../../providers/providers.dart';
+import '../../../providers/qt_sections_notifier.dart';
 import '../../../theme/abba_theme.dart';
 import '../../../widgets/abba_card.dart';
 import '../../../widgets/streak_garden.dart';
@@ -535,6 +536,11 @@ class _CalendarViewState extends ConsumerState<CalendarView> {
       prayerLog.debug('QT detail opened: ${prayer.id}');
       ref.read(qtMeditationResultProvider.notifier).state =
           AsyncValue.data(prayer.qtResult!);
+      // Phase 4.2 R-A6 — feed progressive renderer so qt_dashboard_view
+      // reads from one source regardless of entry path.
+      ref.read(qtSectionsProvider.notifier)
+        ..reset()
+        ..setAllFromResult(prayer.qtResult!);
       context.push('/home/qt-dashboard');
       return;
     }

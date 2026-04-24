@@ -9,6 +9,7 @@ import '../../../models/post.dart';
 import '../../../models/prayer.dart';
 import '../../../providers/prayer_sections_notifier.dart';
 import '../../../providers/providers.dart';
+import '../../../providers/qt_sections_notifier.dart';
 import '../../../theme/abba_theme.dart';
 
 class MyPageView extends ConsumerStatefulWidget {
@@ -179,6 +180,10 @@ class _PrayerItemCard extends ConsumerWidget {
         if (prayer.mode == 'qt' && prayer.qtResult != null) {
           ref.read(qtMeditationResultProvider.notifier).state =
               AsyncValue.data(prayer.qtResult!);
+          // Phase 4.2 R-A6 — feed progressive renderer.
+          ref.read(qtSectionsProvider.notifier)
+            ..reset()
+            ..setAllFromResult(prayer.qtResult!);
           prayerLog.info('History QT tapped: ${prayer.id}, navigating to qt-dashboard');
           context.push('/home/qt-dashboard');
         } else if (prayer.result != null) {

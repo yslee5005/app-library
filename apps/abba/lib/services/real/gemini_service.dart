@@ -15,6 +15,8 @@ import '../ai_analysis_exception.dart';
 import '../ai_service.dart';
 import '../bible_text_service.dart';
 import '../gemini_cache_manager.dart';
+import 'section_analyzers/qt_tier1_analyzer.dart';
+import 'section_analyzers/qt_tier2_analyzer.dart';
 import 'section_analyzers/tier1_analyzer.dart';
 import 'section_analyzers/tier2_analyzer.dart';
 import 'section_analyzers/tier3_analyzer.dart';
@@ -1553,6 +1555,88 @@ Not a platitude — reference a detail from the story above.''';
       );
     } on AiAnalysisException catch (e) {
       return TierFailed(tier: 't3', error: e);
+    }
+  }
+
+  // ---------------------------------------------------------------------------
+  // Phase 4.2 — QT 2-tier lazy generation (Stream<TierResult>)
+  // ---------------------------------------------------------------------------
+
+  /// Emits [QtTierT1Result] first (meditation_summary + scripture), then
+  /// [QtTierT2Result] (application + knowledge). QT has no T3 — Pro value
+  /// is the on-demand QtCoaching card (outside the tier stream).
+  @override
+  Stream<TierResult> analyzeMeditationStreamed({
+    required String meditation,
+    required String passageRef,
+    required String passageText,
+    required String locale,
+    required String userName,
+  }) async* {
+    if (AppConfig.useMockAi) {
+      final result = _hardcodedMeditationResult(locale);
+      yield QtTierT1Result(
+        meditationSummary: result.meditationSummary,
+        scripture: result.scripture,
+      );
+      yield QtTierT2Result(
+        application: result.application,
+        knowledge: result.knowledge,
+      );
+      return;
+    }
+
+    final cache = _cacheManager;
+    final bible = _bibleService;
+    if (cache == null || bible == null) {
+      yield TierFailed(
+        tier: 't1',
+        error: const AiAnalysisException(
+          'GeminiService missing cache/bible services (DI not wired)',
+          kind: AiAnalysisFailureKind.apiError,
+        ),
+      );
+      return;
+    }
+
+    final tier1 = QtTier1Analyzer(
+      cache: cache,
+      bible: bible,
+      apiKey: AppConfig.geminiApiKey,
+    );
+    final tier2 = QtTier2Analyzer(
+      cache: cache,
+      apiKey: AppConfig.geminiApiKey,
+    );
+
+    // T1 — user waits
+    QtTierT1Result? t1;
+    try {
+      t1 = await tier1.analyze(
+        meditation: meditation,
+        passageRef: passageRef,
+        passageText: passageText,
+        locale: locale,
+        userName: userName,
+      );
+      yield t1;
+    } on AiAnalysisException catch (e) {
+      yield TierFailed(tier: 't1', error: e);
+      return;
+    }
+
+    // T2 — background (caller has already unblocked on T1 emit)
+    try {
+      final t2 = await tier2.analyze(
+        meditation: meditation,
+        passageRef: passageRef,
+        locale: locale,
+        userName: userName,
+        t1Context: t1,
+      );
+      yield t2;
+    } on AiAnalysisException catch (e) {
+      yield TierFailed(tier: 't2', error: e);
     }
   }
 }

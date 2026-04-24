@@ -11,6 +11,7 @@ import '../../../models/prayer_tier_result.dart';
 import '../../../models/qt_meditation_result.dart';
 import '../../../providers/prayer_sections_notifier.dart';
 import '../../../providers/providers.dart';
+import '../../../providers/qt_sections_notifier.dart';
 import 'package:app_lib_logging/logging.dart';
 
 import '../../../services/ai_analysis_exception.dart';
@@ -83,9 +84,10 @@ class _AiLoadingViewState extends ConsumerState<AiLoadingView>
 
     prayerLog.info('AI loading started');
 
-    // Phase 4.1 INT-027 — reset section state for this prayer so stale
-    // sections from a prior run never flash on Dashboard.
+    // Phase 4.1 INT-027 / 4.2 R-A5 — reset section state for this
+    // prayer / meditation so stale sections from a prior run never flash.
     ref.read(prayerSectionsProvider.notifier).reset();
+    ref.read(qtSectionsProvider.notifier).reset();
 
     // Call AI service based on mode
     final mode = ref.read(currentPrayerModeProvider);
@@ -380,39 +382,77 @@ class _AiLoadingViewState extends ConsumerState<AiLoadingView>
       return;
     }
 
-    // Step 3 — Gemini analysis. Throws AiAnalysisException on failure.
+    // Step 3 — Gemini analysis via streamed QT tiers. Mirrors
+    // _runTextStreamAnalysis for Prayer.
+    await _runQtStreamAnalysis(
+      aiService: aiService,
+      meditation: meditationText,
+      passageRef: passageRef,
+      passageText: passageText,
+      locale: locale,
+      repo: repo,
+    );
+  }
+
+  /// Phase 4.2 R-A5 — QT streaming path. Hands the QT Gemini stream to
+  /// [QtSectionsNotifier] which persists each tier via `update_prayer_tier`
+  /// RPC. View awaits only T1; T2 continues in background after navigation.
+  Future<void> _runQtStreamAnalysis({
+    required dynamic aiService,
+    required String meditation,
+    required String passageRef,
+    required String passageText,
+    required String locale,
+    required dynamic repo,
+  }) async {
+    final userName = ref.read(userProfileProvider).value?.name ?? '';
+    final t1Completer = Completer<QtTierT1Result>();
+    final sectionsNotifier = ref.read(qtSectionsProvider.notifier);
+
     try {
-      QtMeditationResult result = await aiService.analyzeMeditation(
-        passageReference: passageRef,
+      final stream = aiService.analyzeMeditationStreamed(
+        meditation: meditation,
+        passageRef: passageRef,
         passageText: passageText,
-        meditationText: meditationText,
         locale: locale,
+        userName: userName,
+      ) as Stream<TierResult>;
+
+      sectionsNotifier.startMeditationStream(
+        stream: stream,
+        repo: repo,
+        prayerId: _pendingPrayerId!,
+        t1Completer: t1Completer,
       );
+
+      final t1 = await t1Completer.future;
+      if (!mounted) return;
 
       qtLog.info(
-        '[QT-Analyze] done: locale=$locale '
-        'ref="${result.scripture.reference}" '
-        'topic="${result.meditationSummary.topic}" '
-        'summaryLen=${result.meditationSummary.summary.length} '
-        'hint="${result.scripture.keyWordHint}" '
-        'original=${result.scripture.originalWords.length}words',
+        '[QT-Stream] T1 ready ref="${t1.scripture.reference}" '
+        'topic="${t1.meditationSummary.topic}" — navigating',
       );
 
-      // Fill Scripture.verse from PD bundle (BibleTextService),
-      // mirroring prayer's _enrichScriptureVerse pattern.
-      result = await _enrichQtScriptureVerse(result, locale);
+      // Mirror T1 into legacy qtMeditationResultProvider for downstream
+      // consumers still reading from it. T2 continues filling sections
+      // via the notifier after navigation.
+      final partial = QtMeditationResult(
+        meditationSummary: t1.meditationSummary,
+        scripture: t1.scripture,
+        application: const ApplicationSuggestion(),
+        knowledge: const RelatedKnowledge(),
+      );
+      ref.read(qtMeditationResultProvider.notifier).state =
+          AsyncValue.data(partial);
 
-      // Step 4 — flip pending → completed + persist qtResult.
+      // Flip DB row to completed so Calendar/History pick it up. T2 UPDATE
+      // from the notifier stays a JSONB merge and does not clobber this.
       await repo.completePrayer(
         prayerId: _pendingPrayerId!,
-        transcript: meditationText,
-        qtResult: result,
+        transcript: meditation,
+        qtResult: partial,
       );
 
-      ref.read(qtMeditationResultProvider.notifier).state =
-          AsyncValue.data(result);
-
-      // Invalidate providers so calendar/history/heatmap refresh
       ref.invalidate(streakProvider);
       ref.invalidate(userProfileProvider);
       ref.invalidate(prayerHeatmapProvider('prayer'));
@@ -422,14 +462,18 @@ class _AiLoadingViewState extends ConsumerState<AiLoadingView>
 
       await _checkStreakCelebration();
 
-      qtLog.info('QT meditation completed + saved');
       _aiDone = true;
       _navigateIfReady();
     } on AiAnalysisException catch (e) {
-      qtLog.error('QT AI analysis failed (${e.kind})', error: e.cause, stackTrace: e.causeStackTrace);
+      qtLog.error(
+        'QT stream T1 failed (${e.kind})',
+        error: e.cause,
+        stackTrace: e.causeStackTrace,
+      );
       _setErrorState(e);
     } catch (e, stackTrace) {
-      qtLog.error('Unexpected QT AI error', error: e, stackTrace: stackTrace);
+      qtLog.error('Unexpected QT stream error',
+          error: e, stackTrace: stackTrace);
       _setErrorState(AiAnalysisException(
         'Unexpected error during QT analysis',
         kind: AiAnalysisFailureKind.apiError,
@@ -563,56 +607,9 @@ class _AiLoadingViewState extends ConsumerState<AiLoadingView>
     context.go('/home');
   }
 
-  /// Phase 1 (qt_output_redesign) — Fill QT Scripture.verse from PD bundle.
-  /// Mirror of `_enrichScriptureVerse` for prayer.
-  Future<QtMeditationResult> _enrichQtScriptureVerse(
-    QtMeditationResult result,
-    String locale,
-  ) async {
-    final reference = result.scripture.reference;
-    if (reference.isEmpty) {
-      qtLog.warning(
-        '[QT-Bible-Enrich] skip: reference empty — AI did not select verse',
-      );
-      return result;
-    }
-    if (result.scripture.verse.isNotEmpty) {
-      qtLog.debug(
-        '[QT-Bible-Enrich] skip: verse already filled '
-        '(${result.scripture.verse.length} chars) — hardcoded path',
-      );
-      return result;
-    }
-
-    qtLog.info('[QT-Bible-Enrich] start: ref="$reference" locale=$locale');
-
-    try {
-      final bibleService = ref.read(bibleTextServiceProvider);
-      final verseText = await bibleService.lookup(reference, locale);
-      if (!mounted) return result;
-      if (verseText == null || verseText.isEmpty) {
-        qtLog.info(
-          '[QT-Bible-Enrich] null: ref="$reference" locale=$locale '
-          '→ UI reference-only fallback',
-        );
-        return result;
-      }
-      qtLog.info(
-        '[QT-Bible-Enrich] ok: ref="$reference" locale=$locale '
-        'verse=${verseText.length} chars',
-      );
-      return result.copyWithScripture(
-        result.scripture.withVerse(verseText),
-      );
-    } catch (e, stack) {
-      qtLog.error(
-        '[QT-Bible-Enrich] FAILED: ref="$reference" locale=$locale',
-        error: e,
-        stackTrace: stack,
-      );
-      return result;
-    }
-  }
+  // Phase 4.2 R-A5 — scripture enrichment moved inside QtTier1Analyzer so
+  // the validation + verse lookup happens atomically with T1 generation.
+  // The former `_enrichQtScriptureVerse` helper is no longer needed.
 
   /// Generate a unique ID: timestamp + random hex suffix
   static String _generateId() {
