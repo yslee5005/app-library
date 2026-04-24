@@ -7,6 +7,7 @@ import '../../../models/prayer.dart';
 import '../../../models/prayer_tier_result.dart';
 import '../../ai_analysis_exception.dart';
 import '../../gemini_cache_manager.dart';
+import 'tier_telemetry.dart';
 
 /// Phase 4.1 — T3 (guidance + ai_prayer + historical_story) generator.
 /// Pro-only, triggered by Dashboard scroll to premium area.
@@ -29,8 +30,9 @@ class Tier3Analyzer {
     required TierT2Result t2Context,
   }) async {
     final systemInstruction = await _cache.loadRubricBundle('prayer');
+    const modelName = 'gemini-2.5-flash';
     final model = GenerativeModel(
-      model: 'gemini-2.5-flash',
+      model: modelName,
       apiKey: _apiKey,
       systemInstruction: Content.system(systemInstruction),
       generationConfig: GenerationConfig(
@@ -66,6 +68,12 @@ class Tier3Analyzer {
       final response = await model.generateContent([
         Content('user', [TextPart(prompt.toString())]),
       ]);
+      logTierUsage(
+        response: response,
+        tier: 't3',
+        locale: locale,
+        model: modelName,
+      );
       final json = _parseJson(response.text);
 
       Guidance? guidance;

@@ -102,6 +102,15 @@ class AppConfig {
   static bool get enableGeminiCache =>
       (dotenv.env['ENABLE_GEMINI_CACHE'] ?? 'true').toLowerCase() == 'true';
 
+  /// Phase 4.1 Phase 2 A/B knob — model used for T2 (bible_story +
+  /// testimony) generation. Default is `gemini-2.5-flash` (same as T1/T3).
+  /// Flip to `gemini-2.5-flash-lite` to spot-check quality vs cost
+  /// (~1/3 input, ~1/3 output pricing) before committing production to
+  /// the cheaper model. Falling back to flash if env unset keeps dev
+  /// builds safe.
+  static String get tier2Model =>
+      dotenv.env['TIER2_MODEL'] ?? 'gemini-2.5-flash';
+
   /// Validate required environment variables.
   /// Skipped in mock mode — real mode requires Supabase + Gemini + RevenueCat + Google OAuth keys.
   ///

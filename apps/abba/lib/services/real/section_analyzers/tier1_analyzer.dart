@@ -8,6 +8,7 @@ import '../../../models/prayer_tier_result.dart';
 import '../../ai_analysis_exception.dart';
 import '../../bible_text_service.dart';
 import '../../gemini_cache_manager.dart';
+import 'tier_telemetry.dart';
 
 /// Phase 4.1 — T1 (summary + scripture) generator.
 ///
@@ -34,8 +35,9 @@ class Tier1Analyzer {
     required String userName,
   }) async {
     final systemInstruction = await _cache.loadRubricBundle('prayer');
+    const modelName = 'gemini-2.5-flash';
     final model = GenerativeModel(
-      model: 'gemini-2.5-flash',
+      model: modelName,
       apiKey: _apiKey,
       systemInstruction: Content.system(systemInstruction),
       generationConfig: GenerationConfig(
@@ -55,6 +57,12 @@ class Tier1Analyzer {
       final response = await model.generateContent([
         Content('user', [TextPart(userPrompt)]),
       ]);
+      logTierUsage(
+        response: response,
+        tier: 't1',
+        locale: locale,
+        model: modelName,
+      );
       final json = _parseJson(response.text);
       final draft = _extractT1(json, locale);
 
@@ -65,6 +73,7 @@ class Tier1Analyzer {
         transcript: transcript,
         userName: userName,
         model: model,
+        modelName: modelName,
       );
 
       return TierT1Result(summary: draft.summary, scripture: validated);
@@ -165,6 +174,7 @@ class Tier1Analyzer {
     required String transcript,
     required String userName,
     required GenerativeModel model,
+    required String modelName,
   }) async {
     final ref = draft.reference;
     if (ref.isEmpty) {
@@ -189,6 +199,13 @@ class Tier1Analyzer {
           ))
         ]),
       ]);
+      logTierUsage(
+        response: retryResp,
+        tier: 't1',
+        locale: locale,
+        model: modelName,
+        note: 'scripture-retry',
+      );
       final retryJson = _parseJson(retryResp.text);
       final retry = _extractT1(retryJson, locale);
       final retryVerse = await _bible.lookup(retry.scripture.reference, locale);

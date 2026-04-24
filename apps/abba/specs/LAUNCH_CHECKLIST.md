@@ -320,11 +320,19 @@
 - INT-036~039/041/042 tier / cache / RPC / 위젯 통합 테스트 (Gemini SDK 모킹 필요)
 - INT-047/048 항목은 이 체크리스트 업데이트로 대응 (`88f5cad` 이후)
 
-**Phase 2 후속 최적화 (출시 후 데이터 기반)**
-- [ ] Batch API for T3 — 월 $110 절감
-- [ ] Flash-Lite T2 routing — 월 $90 절감 (A/B test 후)
-- [ ] Output token tuning 2000 → 1400 — 월 $140 절감
-- [ ] 저자원 locale per-locale cache (아랍어/히브리어 필요 시)
+**Phase 2 후속 최적화 (사용자 결정 2026-04-24)**
+- ~~Batch API for T3~~ — **파기**. 즉시성 UX 손실 위험 + T3 호출 빈도 데이터
+  모르는 상태에서 배치 파이프라인 투자는 과잉 엔지니어링.
+- [x] **Flash-Lite T2 routing 가능하게 설정** — `AppConfig.tier2Model` +
+  `TIER2_MODEL` env로 교체 가능. 기본 `gemini-2.5-flash`. 실기 테스트 중
+  사용자가 직접 flash-lite로 flip해 품질 비교하고 결정.
+- [x] **Output token Sentry 로깅** — `tier_telemetry.dart` 헬퍼로 tier1/2/3
+  각 호출 후 `[Tier-Usage] tier=X locale=Y model=Z input=N output=M` 로그.
+  Sentry breadcrumb 로 캡처. 2~4주 뒤 p95 실측 후 max_tokens 조정 결정.
+- [ ] 저자원 locale per-locale cache (ar/he) — **HOLD**: 실 사용자 품질
+  피드백 쌓인 뒤 결정.
+- [ ] Hot field TEXT 컬럼 승격 — **HOLD**: `result` JSONB 쿼리 p95 측정
+  후 200ms 초과 시 migration.
 
 ---
 

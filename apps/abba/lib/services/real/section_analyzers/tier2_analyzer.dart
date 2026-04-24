@@ -3,10 +3,12 @@ import 'dart:convert';
 import 'package:app_lib_logging/logging.dart';
 import 'package:google_generative_ai/google_generative_ai.dart';
 
+import '../../../config/app_config.dart';
 import '../../../models/prayer.dart';
 import '../../../models/prayer_tier_result.dart';
 import '../../ai_analysis_exception.dart';
 import '../../gemini_cache_manager.dart';
+import 'tier_telemetry.dart';
 
 /// Phase 4.1 — T2 (bible_story + testimony) generator. Background call
 /// after T1 completes. Receives T1 context for coherence (avoid reusing
@@ -28,8 +30,9 @@ class Tier2Analyzer {
     required TierT1Result t1Context,
   }) async {
     final systemInstruction = await _cache.loadRubricBundle('prayer');
+    final modelName = AppConfig.tier2Model;
     final model = GenerativeModel(
-      model: 'gemini-2.5-flash',
+      model: modelName,
       apiKey: _apiKey,
       systemInstruction: Content.system(systemInstruction),
       generationConfig: GenerationConfig(
@@ -64,6 +67,12 @@ class Tier2Analyzer {
       final response = await model.generateContent([
         Content('user', [TextPart(prompt.toString())]),
       ]);
+      logTierUsage(
+        response: response,
+        tier: 't2',
+        locale: locale,
+        model: modelName,
+      );
       final json = _parseJson(response.text);
 
       final storyJson = json['bible_story'] as Map<String, dynamic>?;
