@@ -545,5 +545,12 @@
   "templateCategoryGrief": "En tiempos de duelo",
   "sectionStatusCompleted": "Análisis completo",
   "sectionStatusPartial": "Análisis parcial (viene más)",
-  "sectionStatusPending": "Análisis en progreso"
+  "sectionStatusPending": "Análisis en progreso",
+  "aiErrorNetworkTitle": "Conexión inestable",
+  "aiErrorNetworkBody": "Tu oración está guardada a salvo. Por favor, intenta de nuevo en un momento.",
+  "aiErrorApiTitle": "El servicio de IA está inestable",
+  "aiErrorApiBody": "Tu oración está guardada a salvo. Por favor, intenta de nuevo en un momento.",
+  "aiErrorRetry": "Intentar de nuevo",
+  "aiErrorWaitAndCheck": "Intentaremos el análisis más tarde. Vuelve pronto — tu oración estará esperándote.",
+  "aiErrorHome": "Volver al inicio"
 }

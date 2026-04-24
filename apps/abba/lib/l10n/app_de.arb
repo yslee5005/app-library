@@ -545,5 +545,12 @@
   "templateCategoryGrief": "In Zeiten der Trauer",
   "sectionStatusCompleted": "Analyse abgeschlossen",
   "sectionStatusPartial": "Teilweise Analyse (weiteres folgt)",
-  "sectionStatusPending": "Analyse läuft"
+  "sectionStatusPending": "Analyse läuft",
+  "aiErrorNetworkTitle": "Verbindung instabil",
+  "aiErrorNetworkBody": "Dein Gebet ist sicher gespeichert. Bitte versuche es gleich noch einmal.",
+  "aiErrorApiTitle": "KI-Dienst instabil",
+  "aiErrorApiBody": "Dein Gebet ist sicher gespeichert. Bitte versuche es gleich noch einmal.",
+  "aiErrorRetry": "Erneut versuchen",
+  "aiErrorWaitAndCheck": "Wir versuchen die Analyse später erneut. Komm bald wieder — dein Gebet wird warten.",
+  "aiErrorHome": "Zurück zum Start"
 }

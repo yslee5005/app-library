@@ -545,5 +545,12 @@
   "templateCategoryGrief": "በሀዘን ወይም ኪሳራ ውስጥ",
   "sectionStatusCompleted": "ትንታኔ ተጠናቋል",
   "sectionStatusPartial": "ከፊል ትንታኔ (ተጨማሪ በመምጣት ላይ)",
-  "sectionStatusPending": "ትንታኔ በሂደት ላይ"
+  "sectionStatusPending": "ትንታኔ በሂደት ላይ",
+  "aiErrorNetworkTitle": "ግንኙነቱ ያልተረጋጋ ነው",
+  "aiErrorNetworkBody": "ጸሎትዎ በደህና ተቀምጧል። እባክዎ ከትንሽ ቆይታ በኋላ እንደገና ይሞክሩ።",
+  "aiErrorApiTitle": "የAI አገልግሎቱ ያልተረጋጋ ነው",
+  "aiErrorApiBody": "ጸሎትዎ በደህና ተቀምጧል። እባክዎ ከትንሽ ቆይታ በኋላ እንደገና ይሞክሩ።",
+  "aiErrorRetry": "እንደገና ሞክር",
+  "aiErrorWaitAndCheck": "ትንታኔውን በኋላ እንደገና እንሞክራለን። እባክዎ ቶሎ ይመለሱ — ጸሎትዎ ይጠብቅዎታል።",
+  "aiErrorHome": "ወደ መነሻ ገጽ"
 }

@@ -105,28 +105,28 @@ class AppLocalizationsNl extends AppLocalizations {
       'Wees stil en weet dat Ik God ben.\n— Psalm 46:11';
 
   @override
-  String get aiErrorNetworkTitle => 'Connection unstable';
+  String get aiErrorNetworkTitle => 'Verbinding is onstabiel';
 
   @override
   String get aiErrorNetworkBody =>
-      'Your prayer is safely saved. Please try again in a moment.';
+      'Je gebed is veilig opgeslagen. Probeer het straks opnieuw.';
 
   @override
-  String get aiErrorApiTitle => 'AI service is unstable';
+  String get aiErrorApiTitle => 'AI-dienst is onstabiel';
 
   @override
   String get aiErrorApiBody =>
-      'Your prayer is safely saved. Please try again in a moment.';
+      'Je gebed is veilig opgeslagen. Probeer het straks opnieuw.';
 
   @override
-  String get aiErrorRetry => 'Try again';
+  String get aiErrorRetry => 'Opnieuw proberen';
 
   @override
   String get aiErrorWaitAndCheck =>
-      'We\'ll try the analysis again later. Please come back soon — your prayer will be waiting.';
+      'We proberen de analyse later opnieuw. Kom snel terug — je gebed staat op je te wachten.';
 
   @override
-  String get aiErrorHome => 'Back to home';
+  String get aiErrorHome => 'Terug naar start';
 
   @override
   String get dashboardTitle => 'Gebetstuin';

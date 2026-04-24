@@ -106,28 +106,28 @@ class AppLocalizationsDe extends AppLocalizations {
       'Seid still und erkennt, dass ich Gott bin.\n— Psalm 46,11';
 
   @override
-  String get aiErrorNetworkTitle => 'Connection unstable';
+  String get aiErrorNetworkTitle => 'Verbindung instabil';
 
   @override
   String get aiErrorNetworkBody =>
-      'Your prayer is safely saved. Please try again in a moment.';
+      'Dein Gebet ist sicher gespeichert. Bitte versuche es gleich noch einmal.';
 
   @override
-  String get aiErrorApiTitle => 'AI service is unstable';
+  String get aiErrorApiTitle => 'KI-Dienst instabil';
 
   @override
   String get aiErrorApiBody =>
-      'Your prayer is safely saved. Please try again in a moment.';
+      'Dein Gebet ist sicher gespeichert. Bitte versuche es gleich noch einmal.';
 
   @override
-  String get aiErrorRetry => 'Try again';
+  String get aiErrorRetry => 'Erneut versuchen';
 
   @override
   String get aiErrorWaitAndCheck =>
-      'We\'ll try the analysis again later. Please come back soon — your prayer will be waiting.';
+      'Wir versuchen die Analyse später erneut. Komm bald wieder — dein Gebet wird warten.';
 
   @override
-  String get aiErrorHome => 'Back to home';
+  String get aiErrorHome => 'Zurück zum Start';
 
   @override
   String get dashboardTitle => 'Gebetsgarten';

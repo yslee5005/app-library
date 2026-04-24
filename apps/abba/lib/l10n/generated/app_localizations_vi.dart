@@ -106,28 +106,28 @@ class AppLocalizationsVi extends AppLocalizations {
       'Hãy yên lặng và biết rằng Ta là Đức Chúa Trời.\n— Thi thiên 46:10';
 
   @override
-  String get aiErrorNetworkTitle => 'Connection unstable';
+  String get aiErrorNetworkTitle => 'Kết nối không ổn định';
 
   @override
   String get aiErrorNetworkBody =>
-      'Your prayer is safely saved. Please try again in a moment.';
+      'Lời cầu nguyện của bạn đã được lưu an toàn. Vui lòng thử lại trong giây lát.';
 
   @override
-  String get aiErrorApiTitle => 'AI service is unstable';
+  String get aiErrorApiTitle => 'Dịch vụ AI không ổn định';
 
   @override
   String get aiErrorApiBody =>
-      'Your prayer is safely saved. Please try again in a moment.';
+      'Lời cầu nguyện của bạn đã được lưu an toàn. Vui lòng thử lại trong giây lát.';
 
   @override
-  String get aiErrorRetry => 'Try again';
+  String get aiErrorRetry => 'Thử lại';
 
   @override
   String get aiErrorWaitAndCheck =>
-      'We\'ll try the analysis again later. Please come back soon — your prayer will be waiting.';
+      'Chúng tôi sẽ thử phân tích lại sau. Hãy sớm quay lại — lời cầu nguyện của bạn đang đợi bạn.';
 
   @override
-  String get aiErrorHome => 'Back to home';
+  String get aiErrorHome => 'Về trang chủ';
 
   @override
   String get dashboardTitle => 'Vườn Cầu Nguyện';

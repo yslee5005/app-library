@@ -545,5 +545,12 @@
   "templateCategoryGrief": "ในความโศกเศร้าหรือการสูญเสีย",
   "sectionStatusCompleted": "วิเคราะห์เสร็จสมบูรณ์",
   "sectionStatusPartial": "วิเคราะห์บางส่วน (กำลังมาเพิ่ม)",
-  "sectionStatusPending": "กำลังวิเคราะห์"
+  "sectionStatusPending": "กำลังวิเคราะห์",
+  "aiErrorNetworkTitle": "การเชื่อมต่อไม่เสถียร",
+  "aiErrorNetworkBody": "คำอธิษฐานของคุณได้รับการบันทึกอย่างปลอดภัย กรุณาลองอีกครั้งในอีกสักครู่",
+  "aiErrorApiTitle": "บริการ AI ไม่เสถียร",
+  "aiErrorApiBody": "คำอธิษฐานของคุณได้รับการบันทึกอย่างปลอดภัย กรุณาลองอีกครั้งในอีกสักครู่",
+  "aiErrorRetry": "ลองอีกครั้ง",
+  "aiErrorWaitAndCheck": "เราจะลองวิเคราะห์อีกครั้งภายหลัง กลับมาเร็วๆ นี้ — คำอธิษฐานของคุณจะรออยู่",
+  "aiErrorHome": "กลับสู่หน้าหลัก"
 }

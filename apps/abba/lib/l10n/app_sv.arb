@@ -545,5 +545,12 @@
   "templateCategoryGrief": "I sorg eller förlust",
   "sectionStatusCompleted": "Analysen är klar",
   "sectionStatusPartial": "Delvis analys (mer på väg)",
-  "sectionStatusPending": "Analys pågår"
+  "sectionStatusPending": "Analys pågår",
+  "aiErrorNetworkTitle": "Anslutningen är instabil",
+  "aiErrorNetworkBody": "Din bön är säkert sparad. Försök igen om en stund.",
+  "aiErrorApiTitle": "AI-tjänsten är instabil",
+  "aiErrorApiBody": "Din bön är säkert sparad. Försök igen om en stund.",
+  "aiErrorRetry": "Försök igen",
+  "aiErrorWaitAndCheck": "Vi försöker analysen senare. Kom tillbaka snart — din bön kommer att vänta.",
+  "aiErrorHome": "Tillbaka till startsidan"
 }

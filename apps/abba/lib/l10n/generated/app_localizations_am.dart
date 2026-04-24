@@ -104,28 +104,27 @@ class AppLocalizationsAm extends AppLocalizations {
   String get aiLoadingVerse => 'ዝም በሉ እኔ እግዚአብሔር እንደ ሆንሁ ዕወቁ።\n— መዝሙር 46:10';
 
   @override
-  String get aiErrorNetworkTitle => 'Connection unstable';
+  String get aiErrorNetworkTitle => 'ግንኙነቱ ያልተረጋጋ ነው';
 
   @override
   String get aiErrorNetworkBody =>
-      'Your prayer is safely saved. Please try again in a moment.';
+      'ጸሎትዎ በደህና ተቀምጧል። እባክዎ ከትንሽ ቆይታ በኋላ እንደገና ይሞክሩ።';
 
   @override
-  String get aiErrorApiTitle => 'AI service is unstable';
+  String get aiErrorApiTitle => 'የAI አገልግሎቱ ያልተረጋጋ ነው';
 
   @override
-  String get aiErrorApiBody =>
-      'Your prayer is safely saved. Please try again in a moment.';
+  String get aiErrorApiBody => 'ጸሎትዎ በደህና ተቀምጧል። እባክዎ ከትንሽ ቆይታ በኋላ እንደገና ይሞክሩ።';
 
   @override
-  String get aiErrorRetry => 'Try again';
+  String get aiErrorRetry => 'እንደገና ሞክር';
 
   @override
   String get aiErrorWaitAndCheck =>
-      'We\'ll try the analysis again later. Please come back soon — your prayer will be waiting.';
+      'ትንታኔውን በኋላ እንደገና እንሞክራለን። እባክዎ ቶሎ ይመለሱ — ጸሎትዎ ይጠብቅዎታል።';
 
   @override
-  String get aiErrorHome => 'Back to home';
+  String get aiErrorHome => 'ወደ መነሻ ገጽ';
 
   @override
   String get dashboardTitle => 'የጸሎት ገነት';

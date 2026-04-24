@@ -106,28 +106,28 @@ class AppLocalizationsUk extends AppLocalizations {
       'Зупиніться і пізнайте, що Я — Бог.\n— Псалом 45:11';
 
   @override
-  String get aiErrorNetworkTitle => 'Connection unstable';
+  String get aiErrorNetworkTitle => 'З’єднання нестабільне';
 
   @override
   String get aiErrorNetworkBody =>
-      'Your prayer is safely saved. Please try again in a moment.';
+      'Ваша молитва надійно збережена. Спробуйте ще раз за хвилину.';
 
   @override
-  String get aiErrorApiTitle => 'AI service is unstable';
+  String get aiErrorApiTitle => 'Сервіс ШІ нестабільний';
 
   @override
   String get aiErrorApiBody =>
-      'Your prayer is safely saved. Please try again in a moment.';
+      'Ваша молитва надійно збережена. Спробуйте ще раз за хвилину.';
 
   @override
-  String get aiErrorRetry => 'Try again';
+  String get aiErrorRetry => 'Спробувати знову';
 
   @override
   String get aiErrorWaitAndCheck =>
-      'We\'ll try the analysis again later. Please come back soon — your prayer will be waiting.';
+      'Ми спробуємо аналіз пізніше. Поверніться скоро — ваша молитва чекатиме.';
 
   @override
-  String get aiErrorHome => 'Back to home';
+  String get aiErrorHome => 'На головну';
 
   @override
   String get dashboardTitle => 'Сад молитви';

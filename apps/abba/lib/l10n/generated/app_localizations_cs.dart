@@ -106,28 +106,28 @@ class AppLocalizationsCs extends AppLocalizations {
       'Utište se a vězte, že já jsem Bůh.\n— Žalm 46:11';
 
   @override
-  String get aiErrorNetworkTitle => 'Connection unstable';
+  String get aiErrorNetworkTitle => 'Nestabilní spojení';
 
   @override
   String get aiErrorNetworkBody =>
-      'Your prayer is safely saved. Please try again in a moment.';
+      'Vaše modlitba je bezpečně uložena. Zkuste to prosím za chvíli znovu.';
 
   @override
-  String get aiErrorApiTitle => 'AI service is unstable';
+  String get aiErrorApiTitle => 'Služba AI je nestabilní';
 
   @override
   String get aiErrorApiBody =>
-      'Your prayer is safely saved. Please try again in a moment.';
+      'Vaše modlitba je bezpečně uložena. Zkuste to prosím za chvíli znovu.';
 
   @override
-  String get aiErrorRetry => 'Try again';
+  String get aiErrorRetry => 'Zkusit znovu';
 
   @override
   String get aiErrorWaitAndCheck =>
-      'We\'ll try the analysis again later. Please come back soon — your prayer will be waiting.';
+      'Analýzu zkusíme později. Vraťte se brzy — vaše modlitba bude čekat.';
 
   @override
-  String get aiErrorHome => 'Back to home';
+  String get aiErrorHome => 'Zpět domů';
 
   @override
   String get dashboardTitle => 'Zahrada modlitby';

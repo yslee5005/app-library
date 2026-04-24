@@ -545,5 +545,12 @@
   "templateCategoryGrief": "Sa lungkot o pagkawala",
   "sectionStatusCompleted": "Tapos na ang pagsusuri",
   "sectionStatusPartial": "Bahagyang pagsusuri (mayroon pang darating)",
-  "sectionStatusPending": "Pagsusuri sa proseso"
+  "sectionStatusPending": "Pagsusuri sa proseso",
+  "aiErrorNetworkTitle": "Hindi matatag ang koneksyon",
+  "aiErrorNetworkBody": "Ligtas na nai-save ang iyong panalangin. Pakisubukang muli sa ilang sandali.",
+  "aiErrorApiTitle": "Hindi matatag ang AI service",
+  "aiErrorApiBody": "Ligtas na nai-save ang iyong panalangin. Pakisubukang muli sa ilang sandali.",
+  "aiErrorRetry": "Subukang muli",
+  "aiErrorWaitAndCheck": "Susubukan nating muli ang pagsusuri mamaya. Bumalik kaagad — naghihintay ang iyong panalangin.",
+  "aiErrorHome": "Bumalik sa home"
 }

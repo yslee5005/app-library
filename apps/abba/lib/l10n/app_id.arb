@@ -545,5 +545,12 @@
   "templateCategoryGrief": "Dalam duka atau kehilangan",
   "sectionStatusCompleted": "Analisis selesai",
   "sectionStatusPartial": "Analisis sebagian (masih ada lainnya)",
-  "sectionStatusPending": "Analisis sedang berlangsung"
+  "sectionStatusPending": "Analisis sedang berlangsung",
+  "aiErrorNetworkTitle": "Koneksi tidak stabil",
+  "aiErrorNetworkBody": "Doamu tersimpan dengan aman. Silakan coba lagi sebentar.",
+  "aiErrorApiTitle": "Layanan AI tidak stabil",
+  "aiErrorApiBody": "Doamu tersimpan dengan aman. Silakan coba lagi sebentar.",
+  "aiErrorRetry": "Coba lagi",
+  "aiErrorWaitAndCheck": "Kami akan mencoba analisis lagi nanti. Segera kembali — doamu akan menantimu.",
+  "aiErrorHome": "Kembali ke beranda"
 }

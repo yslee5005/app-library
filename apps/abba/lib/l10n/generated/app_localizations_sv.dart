@@ -105,28 +105,28 @@ class AppLocalizationsSv extends AppLocalizations {
       'Var stilla och besinna att jag är Gud.\n— Psalm 46:10';
 
   @override
-  String get aiErrorNetworkTitle => 'Connection unstable';
+  String get aiErrorNetworkTitle => 'Anslutningen är instabil';
 
   @override
   String get aiErrorNetworkBody =>
-      'Your prayer is safely saved. Please try again in a moment.';
+      'Din bön är säkert sparad. Försök igen om en stund.';
 
   @override
-  String get aiErrorApiTitle => 'AI service is unstable';
+  String get aiErrorApiTitle => 'AI-tjänsten är instabil';
 
   @override
   String get aiErrorApiBody =>
-      'Your prayer is safely saved. Please try again in a moment.';
+      'Din bön är säkert sparad. Försök igen om en stund.';
 
   @override
-  String get aiErrorRetry => 'Try again';
+  String get aiErrorRetry => 'Försök igen';
 
   @override
   String get aiErrorWaitAndCheck =>
-      'We\'ll try the analysis again later. Please come back soon — your prayer will be waiting.';
+      'Vi försöker analysen senare. Kom tillbaka snart — din bön kommer att vänta.';
 
   @override
-  String get aiErrorHome => 'Back to home';
+  String get aiErrorHome => 'Tillbaka till startsidan';
 
   @override
   String get dashboardTitle => 'Bönens Trädgård';

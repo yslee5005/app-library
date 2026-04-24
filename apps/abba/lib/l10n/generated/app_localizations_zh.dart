@@ -104,28 +104,25 @@ class AppLocalizationsZh extends AppLocalizations {
   String get aiLoadingVerse => '你们要休息，要知道我是神。\n— 诗篇 46:10';
 
   @override
-  String get aiErrorNetworkTitle => 'Connection unstable';
+  String get aiErrorNetworkTitle => '网络连接不稳定';
 
   @override
-  String get aiErrorNetworkBody =>
-      'Your prayer is safely saved. Please try again in a moment.';
+  String get aiErrorNetworkBody => '您的祷告已安全保存。请稍后再试。';
 
   @override
-  String get aiErrorApiTitle => 'AI service is unstable';
+  String get aiErrorApiTitle => 'AI 服务不稳定';
 
   @override
-  String get aiErrorApiBody =>
-      'Your prayer is safely saved. Please try again in a moment.';
+  String get aiErrorApiBody => '您的祷告已安全保存。请稍后再试。';
 
   @override
-  String get aiErrorRetry => 'Try again';
+  String get aiErrorRetry => '再试一次';
 
   @override
-  String get aiErrorWaitAndCheck =>
-      'We\'ll try the analysis again later. Please come back soon — your prayer will be waiting.';
+  String get aiErrorWaitAndCheck => '我们稍后会再尝试分析。请尽快回来 — 您的祷告会在这里等着您。';
 
   @override
-  String get aiErrorHome => 'Back to home';
+  String get aiErrorHome => '返回主页';
 
   @override
   String get dashboardTitle => '祷告花园';

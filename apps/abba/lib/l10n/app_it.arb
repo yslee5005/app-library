@@ -545,5 +545,12 @@
   "templateCategoryGrief": "Nel tempo del dolore",
   "sectionStatusCompleted": "Analisi completa",
   "sectionStatusPartial": "Analisi parziale (altro in arrivo)",
-  "sectionStatusPending": "Analisi in corso"
+  "sectionStatusPending": "Analisi in corso",
+  "aiErrorNetworkTitle": "Connessione instabile",
+  "aiErrorNetworkBody": "La tua preghiera è salvata al sicuro. Riprova tra un momento, per favore.",
+  "aiErrorApiTitle": "Servizio IA instabile",
+  "aiErrorApiBody": "La tua preghiera è salvata al sicuro. Riprova tra un momento, per favore.",
+  "aiErrorRetry": "Riprova",
+  "aiErrorWaitAndCheck": "Riproveremo l'analisi più tardi. Torna presto — la tua preghiera ti aspetterà.",
+  "aiErrorHome": "Torna alla home"
 }

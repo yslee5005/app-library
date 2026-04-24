@@ -106,28 +106,28 @@ class AppLocalizationsHu extends AppLocalizations {
       'Csendesedjetek el, és ismerjétek el, hogy én vagyok az Isten!\n— Zsoltárok 46:11';
 
   @override
-  String get aiErrorNetworkTitle => 'Connection unstable';
+  String get aiErrorNetworkTitle => 'Instabil kapcsolat';
 
   @override
   String get aiErrorNetworkBody =>
-      'Your prayer is safely saved. Please try again in a moment.';
+      'Az imádságod biztonságban van elmentve. Kérjük, próbáld újra egy pillanat múlva.';
 
   @override
-  String get aiErrorApiTitle => 'AI service is unstable';
+  String get aiErrorApiTitle => 'Az AI szolgáltatás instabil';
 
   @override
   String get aiErrorApiBody =>
-      'Your prayer is safely saved. Please try again in a moment.';
+      'Az imádságod biztonságban van elmentve. Kérjük, próbáld újra egy pillanat múlva.';
 
   @override
-  String get aiErrorRetry => 'Try again';
+  String get aiErrorRetry => 'Próbáld újra';
 
   @override
   String get aiErrorWaitAndCheck =>
-      'We\'ll try the analysis again later. Please come back soon — your prayer will be waiting.';
+      'Később újra megpróbáljuk az elemzést. Gyere vissza hamarosan — az imádságod várni fog.';
 
   @override
-  String get aiErrorHome => 'Back to home';
+  String get aiErrorHome => 'Vissza a főoldalra';
 
   @override
   String get dashboardTitle => 'Imakert';

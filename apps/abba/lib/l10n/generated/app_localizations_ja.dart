@@ -104,28 +104,25 @@ class AppLocalizationsJa extends AppLocalizations {
   String get aiLoadingVerse => '静まりて、わたしこそ神であることを知れ。\n— 詩篇 46:10';
 
   @override
-  String get aiErrorNetworkTitle => 'Connection unstable';
+  String get aiErrorNetworkTitle => '接続が不安定です';
 
   @override
-  String get aiErrorNetworkBody =>
-      'Your prayer is safely saved. Please try again in a moment.';
+  String get aiErrorNetworkBody => 'お祈りは安全に保存されました。少し経ってからもう一度お試しください。';
 
   @override
-  String get aiErrorApiTitle => 'AI service is unstable';
+  String get aiErrorApiTitle => 'AIサービスが不安定です';
 
   @override
-  String get aiErrorApiBody =>
-      'Your prayer is safely saved. Please try again in a moment.';
+  String get aiErrorApiBody => 'お祈りは安全に保存されました。少し経ってからもう一度お試しください。';
 
   @override
-  String get aiErrorRetry => 'Try again';
+  String get aiErrorRetry => 'もう一度';
 
   @override
-  String get aiErrorWaitAndCheck =>
-      'We\'ll try the analysis again later. Please come back soon — your prayer will be waiting.';
+  String get aiErrorWaitAndCheck => '後ほど改めて分析いたします。またすぐお越しください — お祈りがお待ちしています。';
 
   @override
-  String get aiErrorHome => 'Back to home';
+  String get aiErrorHome => 'ホームに戻る';
 
   @override
   String get dashboardTitle => '祈りの庭';

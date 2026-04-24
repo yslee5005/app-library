@@ -106,28 +106,28 @@ class AppLocalizationsRu extends AppLocalizations {
       'Остановитесь и познайте, что Я — Бог.\n— Псалом 45:11';
 
   @override
-  String get aiErrorNetworkTitle => 'Connection unstable';
+  String get aiErrorNetworkTitle => 'Соединение нестабильно';
 
   @override
   String get aiErrorNetworkBody =>
-      'Your prayer is safely saved. Please try again in a moment.';
+      'Ваша молитва надёжно сохранена. Пожалуйста, повторите попытку через мгновение.';
 
   @override
-  String get aiErrorApiTitle => 'AI service is unstable';
+  String get aiErrorApiTitle => 'Сервис ИИ нестабилен';
 
   @override
   String get aiErrorApiBody =>
-      'Your prayer is safely saved. Please try again in a moment.';
+      'Ваша молитва надёжно сохранена. Пожалуйста, повторите попытку через мгновение.';
 
   @override
-  String get aiErrorRetry => 'Try again';
+  String get aiErrorRetry => 'Повторить';
 
   @override
   String get aiErrorWaitAndCheck =>
-      'We\'ll try the analysis again later. Please come back soon — your prayer will be waiting.';
+      'Мы попробуем анализ позже. Возвращайтесь скоро — ваша молитва будет ждать.';
 
   @override
-  String get aiErrorHome => 'Back to home';
+  String get aiErrorHome => 'На главную';
 
   @override
   String get dashboardTitle => 'Сад молитвы';

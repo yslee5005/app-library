@@ -106,28 +106,28 @@ class AppLocalizationsSw extends AppLocalizations {
       'Tulieni, mjue ya kuwa mimi ni Mungu.\n— Zaburi 46:10';
 
   @override
-  String get aiErrorNetworkTitle => 'Connection unstable';
+  String get aiErrorNetworkTitle => 'Muunganisho si thabiti';
 
   @override
   String get aiErrorNetworkBody =>
-      'Your prayer is safely saved. Please try again in a moment.';
+      'Sala yako imehifadhiwa salama. Tafadhali jaribu tena baada ya muda mfupi.';
 
   @override
-  String get aiErrorApiTitle => 'AI service is unstable';
+  String get aiErrorApiTitle => 'Huduma ya AI si thabiti';
 
   @override
   String get aiErrorApiBody =>
-      'Your prayer is safely saved. Please try again in a moment.';
+      'Sala yako imehifadhiwa salama. Tafadhali jaribu tena baada ya muda mfupi.';
 
   @override
-  String get aiErrorRetry => 'Try again';
+  String get aiErrorRetry => 'Jaribu tena';
 
   @override
   String get aiErrorWaitAndCheck =>
-      'We\'ll try the analysis again later. Please come back soon — your prayer will be waiting.';
+      'Tutajaribu uchambuzi baadaye. Rudi hivi karibuni — sala yako itakusubiri.';
 
   @override
-  String get aiErrorHome => 'Back to home';
+  String get aiErrorHome => 'Rudi nyumbani';
 
   @override
   String get dashboardTitle => 'Bustani ya Maombi';

@@ -105,28 +105,28 @@ class AppLocalizationsTr extends AppLocalizations {
       'Sakin olun ve bilin ki ben Tanrı\'yım.\n— Mezmur 46:10';
 
   @override
-  String get aiErrorNetworkTitle => 'Connection unstable';
+  String get aiErrorNetworkTitle => 'Bağlantı kararsız';
 
   @override
   String get aiErrorNetworkBody =>
-      'Your prayer is safely saved. Please try again in a moment.';
+      'Duan güvenle kaydedildi. Lütfen biraz sonra tekrar deneyin.';
 
   @override
-  String get aiErrorApiTitle => 'AI service is unstable';
+  String get aiErrorApiTitle => 'AI hizmeti kararsız';
 
   @override
   String get aiErrorApiBody =>
-      'Your prayer is safely saved. Please try again in a moment.';
+      'Duan güvenle kaydedildi. Lütfen biraz sonra tekrar deneyin.';
 
   @override
-  String get aiErrorRetry => 'Try again';
+  String get aiErrorRetry => 'Tekrar dene';
 
   @override
   String get aiErrorWaitAndCheck =>
-      'We\'ll try the analysis again later. Please come back soon — your prayer will be waiting.';
+      'Analizi daha sonra tekrar deneyeceğiz. Yakında tekrar gelin — duanız sizi bekliyor olacak.';
 
   @override
-  String get aiErrorHome => 'Back to home';
+  String get aiErrorHome => 'Ana sayfaya dön';
 
   @override
   String get dashboardTitle => 'Dua Bahçesi';

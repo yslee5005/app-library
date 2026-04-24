@@ -108,28 +108,28 @@ class AppLocalizationsHi extends AppLocalizations {
       'शांत रहो और जानो कि मैं परमेश्वर हूँ।\n— भजन संहिता 46:10';
 
   @override
-  String get aiErrorNetworkTitle => 'Connection unstable';
+  String get aiErrorNetworkTitle => 'कनेक्शन अस्थिर है';
 
   @override
   String get aiErrorNetworkBody =>
-      'Your prayer is safely saved. Please try again in a moment.';
+      'आपकी प्रार्थना सुरक्षित रूप से सहेजी गई है। कृपया थोड़ी देर में पुनः प्रयास करें।';
 
   @override
-  String get aiErrorApiTitle => 'AI service is unstable';
+  String get aiErrorApiTitle => 'AI सेवा अस्थिर है';
 
   @override
   String get aiErrorApiBody =>
-      'Your prayer is safely saved. Please try again in a moment.';
+      'आपकी प्रार्थना सुरक्षित रूप से सहेजी गई है। कृपया थोड़ी देर में पुनः प्रयास करें।';
 
   @override
-  String get aiErrorRetry => 'Try again';
+  String get aiErrorRetry => 'पुनः प्रयास करें';
 
   @override
   String get aiErrorWaitAndCheck =>
-      'We\'ll try the analysis again later. Please come back soon — your prayer will be waiting.';
+      'हम बाद में विश्लेषण का फिर प्रयास करेंगे। जल्द वापस आइए — आपकी प्रार्थना प्रतीक्षा करेगी।';
 
   @override
-  String get aiErrorHome => 'Back to home';
+  String get aiErrorHome => 'घर वापस';
 
   @override
   String get dashboardTitle => 'प्रार्थना बगीचा';

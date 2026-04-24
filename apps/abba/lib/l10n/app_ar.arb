@@ -545,5 +545,12 @@
   "templateCategoryGrief": "في أوقات الحزن والفقدان",
   "sectionStatusCompleted": "اكتمل التحليل",
   "sectionStatusPartial": "تحليل جزئي (المزيد قادم)",
-  "sectionStatusPending": "التحليل قيد التقدم"
+  "sectionStatusPending": "التحليل قيد التقدم",
+  "aiErrorNetworkTitle": "الاتصال غير مستقر",
+  "aiErrorNetworkBody": "صلاتك محفوظة بأمان. الرجاء المحاولة بعد قليل.",
+  "aiErrorApiTitle": "خدمة الذكاء الاصطناعي غير مستقرة",
+  "aiErrorApiBody": "صلاتك محفوظة بأمان. الرجاء المحاولة بعد قليل.",
+  "aiErrorRetry": "حاول مرة أخرى",
+  "aiErrorWaitAndCheck": "سنحاول التحليل لاحقًا. عُد قريبًا — صلاتك ستكون بانتظارك.",
+  "aiErrorHome": "العودة إلى الرئيسية"
 }

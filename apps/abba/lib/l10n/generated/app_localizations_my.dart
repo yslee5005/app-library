@@ -105,28 +105,28 @@ class AppLocalizationsMy extends AppLocalizations {
       'ငြိမ်သက်၍ ငါသည် ဘုရားသခင်ဖြစ်ကြောင်း သိကြလော့။\n— ဆာလံ 46:10';
 
   @override
-  String get aiErrorNetworkTitle => 'Connection unstable';
+  String get aiErrorNetworkTitle => 'ချိတ်ဆက်မှု မတည်ငြိမ်ပါ';
 
   @override
   String get aiErrorNetworkBody =>
-      'Your prayer is safely saved. Please try again in a moment.';
+      'သင်၏ဆုတောင်းကို လုံခြုံစွာ သိမ်းဆည်းထားပါသည်။ ခဏအကြာတွင် ထပ်စမ်းကြည့်ပါ။';
 
   @override
-  String get aiErrorApiTitle => 'AI service is unstable';
+  String get aiErrorApiTitle => 'AI ဝန်ဆောင်မှု မတည်ငြိမ်ပါ';
 
   @override
   String get aiErrorApiBody =>
-      'Your prayer is safely saved. Please try again in a moment.';
+      'သင်၏ဆုတောင်းကို လုံခြုံစွာ သိမ်းဆည်းထားပါသည်။ ခဏအကြာတွင် ထပ်စမ်းကြည့်ပါ။';
 
   @override
-  String get aiErrorRetry => 'Try again';
+  String get aiErrorRetry => 'ထပ်စမ်းကြည့်ပါ';
 
   @override
   String get aiErrorWaitAndCheck =>
-      'We\'ll try the analysis again later. Please come back soon — your prayer will be waiting.';
+      'နောက်မှ ထပ်၍ စိစစ်ပေးပါမည်။ မကြာမီ ပြန်လာပါ — သင့်ဆုတောင်းက စောင့်နေပါလိမ့်မည်။';
 
   @override
-  String get aiErrorHome => 'Back to home';
+  String get aiErrorHome => 'ပင်မစာမျက်နှာသို့';
 
   @override
   String get dashboardTitle => 'ဆုတောင်းခြင်းဥယျာဉ်';

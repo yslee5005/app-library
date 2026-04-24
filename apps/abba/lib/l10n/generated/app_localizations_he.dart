@@ -105,28 +105,26 @@ class AppLocalizationsHe extends AppLocalizations {
       'הַרְפּוּ וּדְעוּ כִּי אָנֹכִי אֱלֹהִים.\n— תהילים 46:10';
 
   @override
-  String get aiErrorNetworkTitle => 'Connection unstable';
+  String get aiErrorNetworkTitle => 'החיבור אינו יציב';
 
   @override
-  String get aiErrorNetworkBody =>
-      'Your prayer is safely saved. Please try again in a moment.';
+  String get aiErrorNetworkBody => 'תפילתך נשמרה בבטחה. נא נסה שוב בעוד רגע.';
 
   @override
-  String get aiErrorApiTitle => 'AI service is unstable';
+  String get aiErrorApiTitle => 'שירות ה-AI אינו יציב';
 
   @override
-  String get aiErrorApiBody =>
-      'Your prayer is safely saved. Please try again in a moment.';
+  String get aiErrorApiBody => 'תפילתך נשמרה בבטחה. נא נסה שוב בעוד רגע.';
 
   @override
-  String get aiErrorRetry => 'Try again';
+  String get aiErrorRetry => 'נסה שוב';
 
   @override
   String get aiErrorWaitAndCheck =>
-      'We\'ll try the analysis again later. Please come back soon — your prayer will be waiting.';
+      'ננסה את הניתוח מאוחר יותר. חזור בקרוב — תפילתך תחכה לך.';
 
   @override
-  String get aiErrorHome => 'Back to home';
+  String get aiErrorHome => 'חזרה לבית';
 
   @override
   String get dashboardTitle => 'גן התפילה';

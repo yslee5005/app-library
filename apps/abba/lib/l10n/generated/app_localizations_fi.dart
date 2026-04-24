@@ -106,28 +106,28 @@ class AppLocalizationsFi extends AppLocalizations {
       'Olkaa hiljaa ja tietäkää, että minä olen Jumala.\n— Psalmi 46:10';
 
   @override
-  String get aiErrorNetworkTitle => 'Connection unstable';
+  String get aiErrorNetworkTitle => 'Yhteys on epävakaa';
 
   @override
   String get aiErrorNetworkBody =>
-      'Your prayer is safely saved. Please try again in a moment.';
+      'Rukouksesi on tallessa. Yritä hetken päästä uudelleen.';
 
   @override
-  String get aiErrorApiTitle => 'AI service is unstable';
+  String get aiErrorApiTitle => 'AI-palvelu on epävakaa';
 
   @override
   String get aiErrorApiBody =>
-      'Your prayer is safely saved. Please try again in a moment.';
+      'Rukouksesi on tallessa. Yritä hetken päästä uudelleen.';
 
   @override
-  String get aiErrorRetry => 'Try again';
+  String get aiErrorRetry => 'Yritä uudelleen';
 
   @override
   String get aiErrorWaitAndCheck =>
-      'We\'ll try the analysis again later. Please come back soon — your prayer will be waiting.';
+      'Yritämme analyysin myöhemmin. Tule pian takaisin — rukouksesi odottaa sinua.';
 
   @override
-  String get aiErrorHome => 'Back to home';
+  String get aiErrorHome => 'Takaisin alkuun';
 
   @override
   String get dashboardTitle => 'Rukouspuutarha';

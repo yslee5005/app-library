@@ -545,5 +545,12 @@
   "templateCategoryGrief": "U žalosti ili gubitku",
   "sectionStatusCompleted": "Analiza je završena",
   "sectionStatusPartial": "Djelomična analiza (stiže još)",
-  "sectionStatusPending": "Analiza u tijeku"
+  "sectionStatusPending": "Analiza u tijeku",
+  "aiErrorNetworkTitle": "Veza je nestabilna",
+  "aiErrorNetworkBody": "Vaša molitva je sigurno spremljena. Molimo pokušajte ponovno za trenutak.",
+  "aiErrorApiTitle": "AI usluga je nestabilna",
+  "aiErrorApiBody": "Vaša molitva je sigurno spremljena. Molimo pokušajte ponovno za trenutak.",
+  "aiErrorRetry": "Pokušaj ponovno",
+  "aiErrorWaitAndCheck": "Analizu ćemo pokušati kasnije. Vratite se uskoro — vaša će molitva čekati.",
+  "aiErrorHome": "Povratak na početnu"
 }

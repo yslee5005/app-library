@@ -545,5 +545,12 @@
   "templateCategoryGrief": "באבל או באובדן",
   "sectionStatusCompleted": "הניתוח הושלם",
   "sectionStatusPartial": "ניתוח חלקי (יש עוד בדרך)",
-  "sectionStatusPending": "ניתוח בתהליך"
+  "sectionStatusPending": "ניתוח בתהליך",
+  "aiErrorNetworkTitle": "החיבור אינו יציב",
+  "aiErrorNetworkBody": "תפילתך נשמרה בבטחה. נא נסה שוב בעוד רגע.",
+  "aiErrorApiTitle": "שירות ה-AI אינו יציב",
+  "aiErrorApiBody": "תפילתך נשמרה בבטחה. נא נסה שוב בעוד רגע.",
+  "aiErrorRetry": "נסה שוב",
+  "aiErrorWaitAndCheck": "ננסה את הניתוח מאוחר יותר. חזור בקרוב — תפילתך תחכה לך.",
+  "aiErrorHome": "חזרה לבית"
 }

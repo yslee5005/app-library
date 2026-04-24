@@ -107,28 +107,28 @@ class AppLocalizationsRo extends AppLocalizations {
       'Opriți-vă și cunoașteți că Eu sunt Dumnezeu.\n— Psalmul 46:10';
 
   @override
-  String get aiErrorNetworkTitle => 'Connection unstable';
+  String get aiErrorNetworkTitle => 'Conexiunea este instabilă';
 
   @override
   String get aiErrorNetworkBody =>
-      'Your prayer is safely saved. Please try again in a moment.';
+      'Rugăciunea ta este salvată în siguranță. Te rugăm să încerci din nou în câteva momente.';
 
   @override
-  String get aiErrorApiTitle => 'AI service is unstable';
+  String get aiErrorApiTitle => 'Serviciul AI este instabil';
 
   @override
   String get aiErrorApiBody =>
-      'Your prayer is safely saved. Please try again in a moment.';
+      'Rugăciunea ta este salvată în siguranță. Te rugăm să încerci din nou în câteva momente.';
 
   @override
-  String get aiErrorRetry => 'Try again';
+  String get aiErrorRetry => 'Încearcă din nou';
 
   @override
   String get aiErrorWaitAndCheck =>
-      'We\'ll try the analysis again later. Please come back soon — your prayer will be waiting.';
+      'Vom încerca analiza mai târziu. Revino în curând — rugăciunea ta te va aștepta.';
 
   @override
-  String get aiErrorHome => 'Back to home';
+  String get aiErrorHome => 'Înapoi la pagina principală';
 
   @override
   String get dashboardTitle => 'Grădina rugăciunii';

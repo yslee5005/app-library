@@ -545,5 +545,12 @@
   "templateCategoryGrief": "I sorg eller tap",
   "sectionStatusCompleted": "Analyse fullført",
   "sectionStatusPartial": "Delvis analyse (mer på vei)",
-  "sectionStatusPending": "Analyse pågår"
+  "sectionStatusPending": "Analyse pågår",
+  "aiErrorNetworkTitle": "Forbindelsen er ustabil",
+  "aiErrorNetworkBody": "Bønnen din er trygt lagret. Prøv igjen om et øyeblikk.",
+  "aiErrorApiTitle": "AI-tjenesten er ustabil",
+  "aiErrorApiBody": "Bønnen din er trygt lagret. Prøv igjen om et øyeblikk.",
+  "aiErrorRetry": "Prøv igjen",
+  "aiErrorWaitAndCheck": "Vi prøver analysen igjen senere. Kom snart tilbake — bønnen din vil vente.",
+  "aiErrorHome": "Tilbake til hjem"
 }

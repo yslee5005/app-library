@@ -545,5 +545,12 @@
   "templateCategoryGrief": "Em tempos de luto",
   "sectionStatusCompleted": "Análise concluída",
   "sectionStatusPartial": "Análise parcial (mais a caminho)",
-  "sectionStatusPending": "Análise em andamento"
+  "sectionStatusPending": "Análise em andamento",
+  "aiErrorNetworkTitle": "Conexão instável",
+  "aiErrorNetworkBody": "Sua oração está guardada em segurança. Tente novamente em um instante.",
+  "aiErrorApiTitle": "Serviço de IA instável",
+  "aiErrorApiBody": "Sua oração está guardada em segurança. Tente novamente em um instante.",
+  "aiErrorRetry": "Tentar novamente",
+  "aiErrorWaitAndCheck": "Tentaremos a análise mais tarde. Volte em breve — sua oração estará esperando por você.",
+  "aiErrorHome": "Voltar ao início"
 }

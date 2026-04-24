@@ -545,5 +545,12 @@
   "templateCategoryGrief": "Ve smutku nebo ztrátě",
   "sectionStatusCompleted": "Analýza dokončena",
   "sectionStatusPartial": "Částečná analýza (další přichází)",
-  "sectionStatusPending": "Analýza probíhá"
+  "sectionStatusPending": "Analýza probíhá",
+  "aiErrorNetworkTitle": "Nestabilní spojení",
+  "aiErrorNetworkBody": "Vaše modlitba je bezpečně uložena. Zkuste to prosím za chvíli znovu.",
+  "aiErrorApiTitle": "Služba AI je nestabilní",
+  "aiErrorApiBody": "Vaše modlitba je bezpečně uložena. Zkuste to prosím za chvíli znovu.",
+  "aiErrorRetry": "Zkusit znovu",
+  "aiErrorWaitAndCheck": "Analýzu zkusíme později. Vraťte se brzy — vaše modlitba bude čekat.",
+  "aiErrorHome": "Zpět domů"
 }

@@ -545,5 +545,12 @@
   "templateCategoryGrief": "在失去挚爱之时",
   "sectionStatusCompleted": "分析完成",
   "sectionStatusPartial": "部分分析(更多即将到来)",
-  "sectionStatusPending": "分析进行中"
+  "sectionStatusPending": "分析进行中",
+  "aiErrorNetworkTitle": "网络连接不稳定",
+  "aiErrorNetworkBody": "您的祷告已安全保存。请稍后再试。",
+  "aiErrorApiTitle": "AI 服务不稳定",
+  "aiErrorApiBody": "您的祷告已安全保存。请稍后再试。",
+  "aiErrorRetry": "再试一次",
+  "aiErrorWaitAndCheck": "我们稍后会再尝试分析。请尽快回来 — 您的祷告会在这里等着您。",
+  "aiErrorHome": "返回主页"
 }

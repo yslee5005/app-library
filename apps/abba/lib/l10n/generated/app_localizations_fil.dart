@@ -109,28 +109,28 @@ class AppLocalizationsFil extends AppLocalizations {
       'Tumahimik kayo at kilalanin ninyo na ako ang Diyos.\n— Awit 46:10';
 
   @override
-  String get aiErrorNetworkTitle => 'Connection unstable';
+  String get aiErrorNetworkTitle => 'Hindi matatag ang koneksyon';
 
   @override
   String get aiErrorNetworkBody =>
-      'Your prayer is safely saved. Please try again in a moment.';
+      'Ligtas na nai-save ang iyong panalangin. Pakisubukang muli sa ilang sandali.';
 
   @override
-  String get aiErrorApiTitle => 'AI service is unstable';
+  String get aiErrorApiTitle => 'Hindi matatag ang AI service';
 
   @override
   String get aiErrorApiBody =>
-      'Your prayer is safely saved. Please try again in a moment.';
+      'Ligtas na nai-save ang iyong panalangin. Pakisubukang muli sa ilang sandali.';
 
   @override
-  String get aiErrorRetry => 'Try again';
+  String get aiErrorRetry => 'Subukang muli';
 
   @override
   String get aiErrorWaitAndCheck =>
-      'We\'ll try the analysis again later. Please come back soon — your prayer will be waiting.';
+      'Susubukan nating muli ang pagsusuri mamaya. Bumalik kaagad — naghihintay ang iyong panalangin.';
 
   @override
-  String get aiErrorHome => 'Back to home';
+  String get aiErrorHome => 'Bumalik sa home';
 
   @override
   String get dashboardTitle => 'Hardin ng Panalangin';

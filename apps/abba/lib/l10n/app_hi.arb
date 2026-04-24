@@ -545,5 +545,12 @@
   "templateCategoryGrief": "शोक या हानि में",
   "sectionStatusCompleted": "विश्लेषण पूर्ण",
   "sectionStatusPartial": "आंशिक विश्लेषण (और आ रहा है)",
-  "sectionStatusPending": "विश्लेषण प्रगति पर है"
+  "sectionStatusPending": "विश्लेषण प्रगति पर है",
+  "aiErrorNetworkTitle": "कनेक्शन अस्थिर है",
+  "aiErrorNetworkBody": "आपकी प्रार्थना सुरक्षित रूप से सहेजी गई है। कृपया थोड़ी देर में पुनः प्रयास करें।",
+  "aiErrorApiTitle": "AI सेवा अस्थिर है",
+  "aiErrorApiBody": "आपकी प्रार्थना सुरक्षित रूप से सहेजी गई है। कृपया थोड़ी देर में पुनः प्रयास करें।",
+  "aiErrorRetry": "पुनः प्रयास करें",
+  "aiErrorWaitAndCheck": "हम बाद में विश्लेषण का फिर प्रयास करेंगे। जल्द वापस आइए — आपकी प्रार्थना प्रतीक्षा करेगी।",
+  "aiErrorHome": "घर वापस"
 }

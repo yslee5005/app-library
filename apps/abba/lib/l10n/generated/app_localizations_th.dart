@@ -106,28 +106,28 @@ class AppLocalizationsTh extends AppLocalizations {
       'จงนิ่งสงบและรู้เถิดว่าเราคือพระเจ้า\n— สดุดี 46:10';
 
   @override
-  String get aiErrorNetworkTitle => 'Connection unstable';
+  String get aiErrorNetworkTitle => 'การเชื่อมต่อไม่เสถียร';
 
   @override
   String get aiErrorNetworkBody =>
-      'Your prayer is safely saved. Please try again in a moment.';
+      'คำอธิษฐานของคุณได้รับการบันทึกอย่างปลอดภัย กรุณาลองอีกครั้งในอีกสักครู่';
 
   @override
-  String get aiErrorApiTitle => 'AI service is unstable';
+  String get aiErrorApiTitle => 'บริการ AI ไม่เสถียร';
 
   @override
   String get aiErrorApiBody =>
-      'Your prayer is safely saved. Please try again in a moment.';
+      'คำอธิษฐานของคุณได้รับการบันทึกอย่างปลอดภัย กรุณาลองอีกครั้งในอีกสักครู่';
 
   @override
-  String get aiErrorRetry => 'Try again';
+  String get aiErrorRetry => 'ลองอีกครั้ง';
 
   @override
   String get aiErrorWaitAndCheck =>
-      'We\'ll try the analysis again later. Please come back soon — your prayer will be waiting.';
+      'เราจะลองวิเคราะห์อีกครั้งภายหลัง กลับมาเร็วๆ นี้ — คำอธิษฐานของคุณจะรออยู่';
 
   @override
-  String get aiErrorHome => 'Back to home';
+  String get aiErrorHome => 'กลับสู่หน้าหลัก';
 
   @override
   String get dashboardTitle => 'สวนอธิษฐาน';

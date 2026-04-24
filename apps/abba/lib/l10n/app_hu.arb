@@ -545,5 +545,12 @@
   "templateCategoryGrief": "Gyászban vagy veszteségben",
   "sectionStatusCompleted": "Elemzés kész",
   "sectionStatusPartial": "Részleges elemzés (további jön)",
-  "sectionStatusPending": "Elemzés folyamatban"
+  "sectionStatusPending": "Elemzés folyamatban",
+  "aiErrorNetworkTitle": "Instabil kapcsolat",
+  "aiErrorNetworkBody": "Az imádságod biztonságban van elmentve. Kérjük, próbáld újra egy pillanat múlva.",
+  "aiErrorApiTitle": "Az AI szolgáltatás instabil",
+  "aiErrorApiBody": "Az imádságod biztonságban van elmentve. Kérjük, próbáld újra egy pillanat múlva.",
+  "aiErrorRetry": "Próbáld újra",
+  "aiErrorWaitAndCheck": "Később újra megpróbáljuk az elemzést. Gyere vissza hamarosan — az imádságod várni fog.",
+  "aiErrorHome": "Vissza a főoldalra"
 }

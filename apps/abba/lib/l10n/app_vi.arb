@@ -545,5 +545,12 @@
   "templateCategoryGrief": "Trong tang thương hay mất mát",
   "sectionStatusCompleted": "Phân tích hoàn tất",
   "sectionStatusPartial": "Phân tích một phần (sắp có thêm)",
-  "sectionStatusPending": "Phân tích đang diễn ra"
+  "sectionStatusPending": "Phân tích đang diễn ra",
+  "aiErrorNetworkTitle": "Kết nối không ổn định",
+  "aiErrorNetworkBody": "Lời cầu nguyện của bạn đã được lưu an toàn. Vui lòng thử lại trong giây lát.",
+  "aiErrorApiTitle": "Dịch vụ AI không ổn định",
+  "aiErrorApiBody": "Lời cầu nguyện của bạn đã được lưu an toàn. Vui lòng thử lại trong giây lát.",
+  "aiErrorRetry": "Thử lại",
+  "aiErrorWaitAndCheck": "Chúng tôi sẽ thử phân tích lại sau. Hãy sớm quay lại — lời cầu nguyện của bạn đang đợi bạn.",
+  "aiErrorHome": "Về trang chủ"
 }

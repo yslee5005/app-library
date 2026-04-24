@@ -105,28 +105,28 @@ class AppLocalizationsMs extends AppLocalizations {
       'Diamlah dan ketahuilah bahawa Akulah Tuhan.\n— Mazmur 46:10';
 
   @override
-  String get aiErrorNetworkTitle => 'Connection unstable';
+  String get aiErrorNetworkTitle => 'Sambungan tidak stabil';
 
   @override
   String get aiErrorNetworkBody =>
-      'Your prayer is safely saved. Please try again in a moment.';
+      'Doamu telah disimpan dengan selamat. Sila cuba lagi sebentar.';
 
   @override
-  String get aiErrorApiTitle => 'AI service is unstable';
+  String get aiErrorApiTitle => 'Perkhidmatan AI tidak stabil';
 
   @override
   String get aiErrorApiBody =>
-      'Your prayer is safely saved. Please try again in a moment.';
+      'Doamu telah disimpan dengan selamat. Sila cuba lagi sebentar.';
 
   @override
-  String get aiErrorRetry => 'Try again';
+  String get aiErrorRetry => 'Cuba lagi';
 
   @override
   String get aiErrorWaitAndCheck =>
-      'We\'ll try the analysis again later. Please come back soon — your prayer will be waiting.';
+      'Kami akan mencuba analisis sekali lagi nanti. Kembali tidak lama lagi — doamu akan menantimu.';
 
   @override
-  String get aiErrorHome => 'Back to home';
+  String get aiErrorHome => 'Kembali ke laman utama';
 
   @override
   String get dashboardTitle => 'Taman Doa';

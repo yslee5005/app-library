@@ -107,28 +107,28 @@ class AppLocalizationsEl extends AppLocalizations {
       'Σταματήστε και γνωρίστε ότι εγώ είμαι ο Θεός.\n— Ψαλμός 46:10';
 
   @override
-  String get aiErrorNetworkTitle => 'Connection unstable';
+  String get aiErrorNetworkTitle => 'Η σύνδεση είναι ασταθής';
 
   @override
   String get aiErrorNetworkBody =>
-      'Your prayer is safely saved. Please try again in a moment.';
+      'Η προσευχή σας έχει αποθηκευτεί με ασφάλεια. Δοκιμάστε ξανά σε λίγο.';
 
   @override
-  String get aiErrorApiTitle => 'AI service is unstable';
+  String get aiErrorApiTitle => 'Η υπηρεσία AI είναι ασταθής';
 
   @override
   String get aiErrorApiBody =>
-      'Your prayer is safely saved. Please try again in a moment.';
+      'Η προσευχή σας έχει αποθηκευτεί με ασφάλεια. Δοκιμάστε ξανά σε λίγο.';
 
   @override
-  String get aiErrorRetry => 'Try again';
+  String get aiErrorRetry => 'Δοκιμάστε ξανά';
 
   @override
   String get aiErrorWaitAndCheck =>
-      'We\'ll try the analysis again later. Please come back soon — your prayer will be waiting.';
+      'Θα προσπαθήσουμε την ανάλυση αργότερα. Επιστρέψτε σύντομα — η προσευχή σας θα σας περιμένει.';
 
   @override
-  String get aiErrorHome => 'Back to home';
+  String get aiErrorHome => 'Επιστροφή στην αρχική';
 
   @override
   String get dashboardTitle => 'Κήπος Προσευχής';

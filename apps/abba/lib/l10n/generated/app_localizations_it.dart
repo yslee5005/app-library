@@ -106,28 +106,28 @@ class AppLocalizationsIt extends AppLocalizations {
       'Fermatevi e riconoscete che io sono Dio.\n— Salmo 46:10';
 
   @override
-  String get aiErrorNetworkTitle => 'Connection unstable';
+  String get aiErrorNetworkTitle => 'Connessione instabile';
 
   @override
   String get aiErrorNetworkBody =>
-      'Your prayer is safely saved. Please try again in a moment.';
+      'La tua preghiera è salvata al sicuro. Riprova tra un momento, per favore.';
 
   @override
-  String get aiErrorApiTitle => 'AI service is unstable';
+  String get aiErrorApiTitle => 'Servizio IA instabile';
 
   @override
   String get aiErrorApiBody =>
-      'Your prayer is safely saved. Please try again in a moment.';
+      'La tua preghiera è salvata al sicuro. Riprova tra un momento, per favore.';
 
   @override
-  String get aiErrorRetry => 'Try again';
+  String get aiErrorRetry => 'Riprova';
 
   @override
   String get aiErrorWaitAndCheck =>
-      'We\'ll try the analysis again later. Please come back soon — your prayer will be waiting.';
+      'Riproveremo l\'analisi più tardi. Torna presto — la tua preghiera ti aspetterà.';
 
   @override
-  String get aiErrorHome => 'Back to home';
+  String get aiErrorHome => 'Torna alla home';
 
   @override
   String get dashboardTitle => 'Giardino di preghiera';

@@ -545,5 +545,12 @@
   "templateCategoryGrief": "Surussa tai menetyksessä",
   "sectionStatusCompleted": "Analyysi valmis",
   "sectionStatusPartial": "Osittainen analyysi (lisää tulossa)",
-  "sectionStatusPending": "Analyysi käynnissä"
+  "sectionStatusPending": "Analyysi käynnissä",
+  "aiErrorNetworkTitle": "Yhteys on epävakaa",
+  "aiErrorNetworkBody": "Rukouksesi on tallessa. Yritä hetken päästä uudelleen.",
+  "aiErrorApiTitle": "AI-palvelu on epävakaa",
+  "aiErrorApiBody": "Rukouksesi on tallessa. Yritä hetken päästä uudelleen.",
+  "aiErrorRetry": "Yritä uudelleen",
+  "aiErrorWaitAndCheck": "Yritämme analyysin myöhemmin. Tule pian takaisin — rukouksesi odottaa sinua.",
+  "aiErrorHome": "Takaisin alkuun"
 }

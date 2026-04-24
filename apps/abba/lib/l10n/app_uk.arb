@@ -545,5 +545,12 @@
   "templateCategoryGrief": "У скорботі чи втраті",
   "sectionStatusCompleted": "Аналіз завершено",
   "sectionStatusPartial": "Частковий аналіз (незабаром буде більше)",
-  "sectionStatusPending": "Аналіз виконується"
+  "sectionStatusPending": "Аналіз виконується",
+  "aiErrorNetworkTitle": "З’єднання нестабільне",
+  "aiErrorNetworkBody": "Ваша молитва надійно збережена. Спробуйте ще раз за хвилину.",
+  "aiErrorApiTitle": "Сервіс ШІ нестабільний",
+  "aiErrorApiBody": "Ваша молитва надійно збережена. Спробуйте ще раз за хвилину.",
+  "aiErrorRetry": "Спробувати знову",
+  "aiErrorWaitAndCheck": "Ми спробуємо аналіз пізніше. Поверніться скоро — ваша молитва чекатиме.",
+  "aiErrorHome": "На головну"
 }

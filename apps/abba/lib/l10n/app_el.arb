@@ -545,5 +545,12 @@
   "templateCategoryGrief": "Σε θλίψη ή απώλεια",
   "sectionStatusCompleted": "Η ανάλυση ολοκληρώθηκε",
   "sectionStatusPartial": "Μερική ανάλυση (έρχονται περισσότερα)",
-  "sectionStatusPending": "Η ανάλυση σε εξέλιξη"
+  "sectionStatusPending": "Η ανάλυση σε εξέλιξη",
+  "aiErrorNetworkTitle": "Η σύνδεση είναι ασταθής",
+  "aiErrorNetworkBody": "Η προσευχή σας έχει αποθηκευτεί με ασφάλεια. Δοκιμάστε ξανά σε λίγο.",
+  "aiErrorApiTitle": "Η υπηρεσία AI είναι ασταθής",
+  "aiErrorApiBody": "Η προσευχή σας έχει αποθηκευτεί με ασφάλεια. Δοκιμάστε ξανά σε λίγο.",
+  "aiErrorRetry": "Δοκιμάστε ξανά",
+  "aiErrorWaitAndCheck": "Θα προσπαθήσουμε την ανάλυση αργότερα. Επιστρέψτε σύντομα — η προσευχή σας θα σας περιμένει.",
+  "aiErrorHome": "Επιστροφή στην αρχική"
 }

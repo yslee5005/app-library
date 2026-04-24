@@ -545,5 +545,12 @@
   "templateCategoryGrief": "Во времена скорби",
   "sectionStatusCompleted": "Анализ завершён",
   "sectionStatusPartial": "Частичный анализ (скоро будет больше)",
-  "sectionStatusPending": "Анализ выполняется"
+  "sectionStatusPending": "Анализ выполняется",
+  "aiErrorNetworkTitle": "Соединение нестабильно",
+  "aiErrorNetworkBody": "Ваша молитва надёжно сохранена. Пожалуйста, повторите попытку через мгновение.",
+  "aiErrorApiTitle": "Сервис ИИ нестабилен",
+  "aiErrorApiBody": "Ваша молитва надёжно сохранена. Пожалуйста, повторите попытку через мгновение.",
+  "aiErrorRetry": "Повторить",
+  "aiErrorWaitAndCheck": "Мы попробуем анализ позже. Возвращайтесь скоро — ваша молитва будет ждать.",
+  "aiErrorHome": "На главную"
 }

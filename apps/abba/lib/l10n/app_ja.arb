@@ -545,5 +545,12 @@
   "templateCategoryGrief": "大切な方を失ったとき",
   "sectionStatusCompleted": "分析完了",
   "sectionStatusPartial": "部分的な分析(続きが届きます)",
-  "sectionStatusPending": "分析中"
+  "sectionStatusPending": "分析中",
+  "aiErrorNetworkTitle": "接続が不安定です",
+  "aiErrorNetworkBody": "お祈りは安全に保存されました。少し経ってからもう一度お試しください。",
+  "aiErrorApiTitle": "AIサービスが不安定です",
+  "aiErrorApiBody": "お祈りは安全に保存されました。少し経ってからもう一度お試しください。",
+  "aiErrorRetry": "もう一度",
+  "aiErrorWaitAndCheck": "後ほど改めて分析いたします。またすぐお越しください — お祈りがお待ちしています。",
+  "aiErrorHome": "ホームに戻る"
 }

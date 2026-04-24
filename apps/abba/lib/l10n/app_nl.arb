@@ -545,5 +545,12 @@
   "templateCategoryGrief": "In rouw of verlies",
   "sectionStatusCompleted": "Analyse voltooid",
   "sectionStatusPartial": "Gedeeltelijke analyse (meer komt)",
-  "sectionStatusPending": "Analyse loopt"
+  "sectionStatusPending": "Analyse loopt",
+  "aiErrorNetworkTitle": "Verbinding is onstabiel",
+  "aiErrorNetworkBody": "Je gebed is veilig opgeslagen. Probeer het straks opnieuw.",
+  "aiErrorApiTitle": "AI-dienst is onstabiel",
+  "aiErrorApiBody": "Je gebed is veilig opgeslagen. Probeer het straks opnieuw.",
+  "aiErrorRetry": "Opnieuw proberen",
+  "aiErrorWaitAndCheck": "We proberen de analyse later opnieuw. Kom snel terug — je gebed staat op je te wachten.",
+  "aiErrorHome": "Terug naar start"
 }

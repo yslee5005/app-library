@@ -545,5 +545,12 @@
   "templateCategoryGrief": "Katika huzuni au hasara",
   "sectionStatusCompleted": "Uchambuzi umekamilika",
   "sectionStatusPartial": "Uchambuzi wa sehemu (zaidi inakuja)",
-  "sectionStatusPending": "Uchambuzi unaendelea"
+  "sectionStatusPending": "Uchambuzi unaendelea",
+  "aiErrorNetworkTitle": "Muunganisho si thabiti",
+  "aiErrorNetworkBody": "Sala yako imehifadhiwa salama. Tafadhali jaribu tena baada ya muda mfupi.",
+  "aiErrorApiTitle": "Huduma ya AI si thabiti",
+  "aiErrorApiBody": "Sala yako imehifadhiwa salama. Tafadhali jaribu tena baada ya muda mfupi.",
+  "aiErrorRetry": "Jaribu tena",
+  "aiErrorWaitAndCheck": "Tutajaribu uchambuzi baadaye. Rudi hivi karibuni — sala yako itakusubiri.",
+  "aiErrorHome": "Rudi nyumbani"
 }

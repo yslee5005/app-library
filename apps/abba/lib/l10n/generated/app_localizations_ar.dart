@@ -104,28 +104,27 @@ class AppLocalizationsAr extends AppLocalizations {
   String get aiLoadingVerse => 'كُفّوا واعلموا أني أنا الله.\n— مزمور 46:10';
 
   @override
-  String get aiErrorNetworkTitle => 'Connection unstable';
+  String get aiErrorNetworkTitle => 'الاتصال غير مستقر';
 
   @override
   String get aiErrorNetworkBody =>
-      'Your prayer is safely saved. Please try again in a moment.';
+      'صلاتك محفوظة بأمان. الرجاء المحاولة بعد قليل.';
 
   @override
-  String get aiErrorApiTitle => 'AI service is unstable';
+  String get aiErrorApiTitle => 'خدمة الذكاء الاصطناعي غير مستقرة';
 
   @override
-  String get aiErrorApiBody =>
-      'Your prayer is safely saved. Please try again in a moment.';
+  String get aiErrorApiBody => 'صلاتك محفوظة بأمان. الرجاء المحاولة بعد قليل.';
 
   @override
-  String get aiErrorRetry => 'Try again';
+  String get aiErrorRetry => 'حاول مرة أخرى';
 
   @override
   String get aiErrorWaitAndCheck =>
-      'We\'ll try the analysis again later. Please come back soon — your prayer will be waiting.';
+      'سنحاول التحليل لاحقًا. عُد قريبًا — صلاتك ستكون بانتظارك.';
 
   @override
-  String get aiErrorHome => 'Back to home';
+  String get aiErrorHome => 'العودة إلى الرئيسية';
 
   @override
   String get dashboardTitle => 'حديقة الصلاة';

@@ -105,28 +105,28 @@ class AppLocalizationsDa extends AppLocalizations {
       'Vær stille og vid, at jeg er Gud.\n— Salme 46:10';
 
   @override
-  String get aiErrorNetworkTitle => 'Connection unstable';
+  String get aiErrorNetworkTitle => 'Forbindelsen er ustabil';
 
   @override
   String get aiErrorNetworkBody =>
-      'Your prayer is safely saved. Please try again in a moment.';
+      'Din bøn er sikkert gemt. Prøv venligst igen om et øjeblik.';
 
   @override
-  String get aiErrorApiTitle => 'AI service is unstable';
+  String get aiErrorApiTitle => 'AI-tjenesten er ustabil';
 
   @override
   String get aiErrorApiBody =>
-      'Your prayer is safely saved. Please try again in a moment.';
+      'Din bøn er sikkert gemt. Prøv venligst igen om et øjeblik.';
 
   @override
-  String get aiErrorRetry => 'Try again';
+  String get aiErrorRetry => 'Prøv igen';
 
   @override
   String get aiErrorWaitAndCheck =>
-      'We\'ll try the analysis again later. Please come back soon — your prayer will be waiting.';
+      'Vi prøver analysen igen senere. Kom snart tilbage — din bøn vil vente.';
 
   @override
-  String get aiErrorHome => 'Back to home';
+  String get aiErrorHome => 'Tilbage til hjem';
 
   @override
   String get dashboardTitle => 'Bønnens Have';

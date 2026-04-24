@@ -545,5 +545,12 @@
   "templateCategoryGrief": "Yas ya da kayıpta",
   "sectionStatusCompleted": "Analiz tamamlandı",
   "sectionStatusPartial": "Kısmi analiz (daha fazlası geliyor)",
-  "sectionStatusPending": "Analiz sürüyor"
+  "sectionStatusPending": "Analiz sürüyor",
+  "aiErrorNetworkTitle": "Bağlantı kararsız",
+  "aiErrorNetworkBody": "Duan güvenle kaydedildi. Lütfen biraz sonra tekrar deneyin.",
+  "aiErrorApiTitle": "AI hizmeti kararsız",
+  "aiErrorApiBody": "Duan güvenle kaydedildi. Lütfen biraz sonra tekrar deneyin.",
+  "aiErrorRetry": "Tekrar dene",
+  "aiErrorWaitAndCheck": "Analizi daha sonra tekrar deneyeceğiz. Yakında tekrar gelin — duanız sizi bekliyor olacak.",
+  "aiErrorHome": "Ana sayfaya dön"
 }

@@ -545,5 +545,12 @@
   "templateCategoryGrief": "En temps de deuil",
   "sectionStatusCompleted": "Analyse terminée",
   "sectionStatusPartial": "Analyse partielle (suite à venir)",
-  "sectionStatusPending": "Analyse en cours"
+  "sectionStatusPending": "Analyse en cours",
+  "aiErrorNetworkTitle": "Connexion instable",
+  "aiErrorNetworkBody": "Votre prière est bien enregistrée. Réessayez dans un instant, s'il vous plaît.",
+  "aiErrorApiTitle": "Service IA instable",
+  "aiErrorApiBody": "Votre prière est bien enregistrée. Réessayez dans un instant, s'il vous plaît.",
+  "aiErrorRetry": "Réessayer",
+  "aiErrorWaitAndCheck": "Nous reprendrons l'analyse plus tard. Revenez bientôt — votre prière vous attendra.",
+  "aiErrorHome": "Retour à l'accueil"
 }

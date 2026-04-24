@@ -545,5 +545,12 @@
   "templateCategoryGrief": "W żałobie lub stracie",
   "sectionStatusCompleted": "Analiza zakończona",
   "sectionStatusPartial": "Analiza częściowa (więcej w drodze)",
-  "sectionStatusPending": "Analiza w toku"
+  "sectionStatusPending": "Analiza w toku",
+  "aiErrorNetworkTitle": "Połączenie niestabilne",
+  "aiErrorNetworkBody": "Twoja modlitwa jest bezpiecznie zapisana. Spróbuj ponownie za chwilę.",
+  "aiErrorApiTitle": "Usługa AI jest niestabilna",
+  "aiErrorApiBody": "Twoja modlitwa jest bezpiecznie zapisana. Spróbuj ponownie za chwilę.",
+  "aiErrorRetry": "Spróbuj ponownie",
+  "aiErrorWaitAndCheck": "Spróbujemy analizy później. Wróć niedługo — twoja modlitwa będzie czekać.",
+  "aiErrorHome": "Powrót do strony głównej"
 }

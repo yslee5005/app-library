@@ -545,5 +545,12 @@
   "templateCategoryGrief": "În doliu sau pierdere",
   "sectionStatusCompleted": "Analiză finalizată",
   "sectionStatusPartial": "Analiză parțială (urmează mai mult)",
-  "sectionStatusPending": "Analiză în curs"
+  "sectionStatusPending": "Analiză în curs",
+  "aiErrorNetworkTitle": "Conexiunea este instabilă",
+  "aiErrorNetworkBody": "Rugăciunea ta este salvată în siguranță. Te rugăm să încerci din nou în câteva momente.",
+  "aiErrorApiTitle": "Serviciul AI este instabil",
+  "aiErrorApiBody": "Rugăciunea ta este salvată în siguranță. Te rugăm să încerci din nou în câteva momente.",
+  "aiErrorRetry": "Încearcă din nou",
+  "aiErrorWaitAndCheck": "Vom încerca analiza mai târziu. Revino în curând — rugăciunea ta te va aștepta.",
+  "aiErrorHome": "Înapoi la pagina principală"
 }

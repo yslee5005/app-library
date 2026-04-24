@@ -107,28 +107,28 @@ class AppLocalizationsEs extends AppLocalizations {
       'Estad quietos, y conoced que yo soy Dios.\n— Salmo 46:10';
 
   @override
-  String get aiErrorNetworkTitle => 'Connection unstable';
+  String get aiErrorNetworkTitle => 'Conexión inestable';
 
   @override
   String get aiErrorNetworkBody =>
-      'Your prayer is safely saved. Please try again in a moment.';
+      'Tu oración está guardada a salvo. Por favor, intenta de nuevo en un momento.';
 
   @override
-  String get aiErrorApiTitle => 'AI service is unstable';
+  String get aiErrorApiTitle => 'El servicio de IA está inestable';
 
   @override
   String get aiErrorApiBody =>
-      'Your prayer is safely saved. Please try again in a moment.';
+      'Tu oración está guardada a salvo. Por favor, intenta de nuevo en un momento.';
 
   @override
-  String get aiErrorRetry => 'Try again';
+  String get aiErrorRetry => 'Intentar de nuevo';
 
   @override
   String get aiErrorWaitAndCheck =>
-      'We\'ll try the analysis again later. Please come back soon — your prayer will be waiting.';
+      'Intentaremos el análisis más tarde. Vuelve pronto — tu oración estará esperándote.';
 
   @override
-  String get aiErrorHome => 'Back to home';
+  String get aiErrorHome => 'Volver al inicio';
 
   @override
   String get dashboardTitle => 'Jardín de oración';
