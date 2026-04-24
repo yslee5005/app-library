@@ -115,10 +115,63 @@ class QtTier1Analyzer {
       );
     } on AiAnalysisException {
       rethrow;
-    } catch (e, st) {
-      apiLog.error('[QtTier1] analyze failed', error: e, stackTrace: st);
+    } on InvalidApiKey catch (e, st) {
+      apiLog.error(
+        '[QtTier1] InvalidApiKey — check GEMINI_API_KEY: ${e.message}',
+        error: e,
+        stackTrace: st,
+      );
       throw AiAnalysisException(
-        'QT Tier1 analysis failed',
+        'Gemini API key rejected: ${e.message}',
+        kind: AiAnalysisFailureKind.apiError,
+        cause: e,
+        causeStackTrace: st,
+      );
+    } on UnsupportedUserLocation catch (e, st) {
+      apiLog.error(
+        '[QtTier1] UnsupportedUserLocation',
+        error: e,
+        stackTrace: st,
+      );
+      throw AiAnalysisException(
+        'Gemini not available in this region',
+        kind: AiAnalysisFailureKind.apiError,
+        cause: e,
+        causeStackTrace: st,
+      );
+    } on ServerException catch (e, st) {
+      apiLog.error(
+        '[QtTier1] ServerException: ${e.message} (bufferLen=${buffer.length})',
+        error: e,
+        stackTrace: st,
+      );
+      throw AiAnalysisException(
+        'Gemini server error: ${e.message}',
+        kind: AiAnalysisFailureKind.apiError,
+        cause: e,
+        causeStackTrace: st,
+      );
+    } on GenerativeAIException catch (e, st) {
+      apiLog.error(
+        '[QtTier1] GenerativeAIException (${e.runtimeType}): ${e.toString()}',
+        error: e,
+        stackTrace: st,
+      );
+      throw AiAnalysisException(
+        'Gemini SDK error: ${e.toString()}',
+        kind: AiAnalysisFailureKind.apiError,
+        cause: e,
+        causeStackTrace: st,
+      );
+    } catch (e, st) {
+      apiLog.error(
+        '[QtTier1] analyze failed: ${e.runtimeType} — ${e.toString()} '
+        '(bufferLen=${buffer.length})',
+        error: e,
+        stackTrace: st,
+      );
+      throw AiAnalysisException(
+        'QT Tier1 analysis failed: ${e.runtimeType}',
         kind: AiAnalysisFailureKind.apiError,
         cause: e,
         causeStackTrace: st,

@@ -140,8 +140,12 @@ class GeminiCacheManager {
       apiLog.debug('[Cache] $mode reusing existing cache');
       return cacheId;
     } catch (e) {
-      apiLog.warning('[Cache] $mode getOrCreate failed — fallback to uncached',
-          error: e);
+      // warning() doesn't take stackTrace — runtimeType in message is
+      // enough triage since the fallback path is graceful.
+      apiLog.warning(
+        '[Cache] $mode getOrCreate failed (${e.runtimeType}) — fallback to uncached',
+        error: e,
+      );
       return null; // Graceful: caller will use regular call
     }
   }
@@ -201,7 +205,10 @@ class GeminiCacheManager {
       // ignore: dead_code
       return null;
     } catch (e) {
-      apiLog.warning('[Cache] $mode create failed', error: e);
+      apiLog.warning(
+        '[Cache] $mode create failed (${e.runtimeType})',
+        error: e,
+      );
       return null;
     }
   }

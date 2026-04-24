@@ -79,10 +79,26 @@ class Tier3Analyzer {
       return _extractT3(json);
     } on AiAnalysisException {
       rethrow;
-    } catch (e, st) {
-      apiLog.error('[Tier3] analyze failed', error: e, stackTrace: st);
+    } on GenerativeAIException catch (e, st) {
+      apiLog.error(
+        '[Tier3] GenerativeAIException (${e.runtimeType}): ${e.toString()}',
+        error: e,
+        stackTrace: st,
+      );
       throw AiAnalysisException(
-        'Tier3 analysis failed',
+        'Gemini SDK error: ${e.toString()}',
+        kind: AiAnalysisFailureKind.apiError,
+        cause: e,
+        causeStackTrace: st,
+      );
+    } catch (e, st) {
+      apiLog.error(
+        '[Tier3] analyze failed: ${e.runtimeType} — ${e.toString()}',
+        error: e,
+        stackTrace: st,
+      );
+      throw AiAnalysisException(
+        'Tier3 analysis failed: ${e.runtimeType}',
         kind: AiAnalysisFailureKind.apiError,
         cause: e,
         causeStackTrace: st,

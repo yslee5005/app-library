@@ -62,6 +62,12 @@ class Tier1Analyzer {
       excludeRef: null,
     );
 
+    apiLog.info(
+      '[Tier1] analyze start — model=$modelName locale=$locale '
+      'transcriptLen=${transcript.length} userNameLen=${userName.length} '
+      'systemInstrLen=${systemInstruction.length}',
+    );
+
     final buffer = StringBuffer();
     GenerateContentResponse? lastChunk;
     bool emittedRef = false;
@@ -109,10 +115,70 @@ class Tier1Analyzer {
       yield TierT1Result(summary: draft.summary, scripture: validated);
     } on AiAnalysisException {
       rethrow;
-    } catch (e, st) {
-      apiLog.error('[Tier1] analyze failed', error: e, stackTrace: st);
+    } on InvalidApiKey catch (e, st) {
+      // 401/403: GEMINI_API_KEY missing or revoked. Most common cause of
+      // instant tier1 failure — log with explicit cue for the user.
+      apiLog.error(
+        '[Tier1] InvalidApiKey — check GEMINI_API_KEY in .env.runtime: '
+        '${e.message}',
+        error: e,
+        stackTrace: st,
+      );
       throw AiAnalysisException(
-        'Tier1 analysis failed',
+        'Gemini API key rejected: ${e.message}',
+        kind: AiAnalysisFailureKind.apiError,
+        cause: e,
+        causeStackTrace: st,
+      );
+    } on UnsupportedUserLocation catch (e, st) {
+      apiLog.error(
+        '[Tier1] UnsupportedUserLocation — Gemini blocks this region',
+        error: e,
+        stackTrace: st,
+      );
+      throw AiAnalysisException(
+        'Gemini not available in this region',
+        kind: AiAnalysisFailureKind.apiError,
+        cause: e,
+        causeStackTrace: st,
+      );
+    } on ServerException catch (e, st) {
+      // 4xx / 5xx bubbled up from the REST layer. Message usually carries
+      // the server's own diagnostic — surface it verbatim for debugging.
+      apiLog.error(
+        '[Tier1] ServerException: ${e.message} (bufferLen=${buffer.length})',
+        error: e,
+        stackTrace: st,
+      );
+      throw AiAnalysisException(
+        'Gemini server error: ${e.message}',
+        kind: AiAnalysisFailureKind.apiError,
+        cause: e,
+        causeStackTrace: st,
+      );
+    } on GenerativeAIException catch (e, st) {
+      // Catch-all for other Gemini-SDK exception subtypes not handled above.
+      apiLog.error(
+        '[Tier1] GenerativeAIException (${e.runtimeType}): ${e.toString()}',
+        error: e,
+        stackTrace: st,
+      );
+      throw AiAnalysisException(
+        'Gemini SDK error: ${e.toString()}',
+        kind: AiAnalysisFailureKind.apiError,
+        cause: e,
+        causeStackTrace: st,
+      );
+    } catch (e, st) {
+      // Last-resort: any non-Gemini exception (parse, timeout, etc.).
+      apiLog.error(
+        '[Tier1] analyze failed: ${e.runtimeType} — ${e.toString()} '
+        '(bufferLen=${buffer.length})',
+        error: e,
+        stackTrace: st,
+      );
+      throw AiAnalysisException(
+        'Tier1 analysis failed: ${e.runtimeType}',
         kind: AiAnalysisFailureKind.apiError,
         cause: e,
         causeStackTrace: st,
@@ -252,7 +318,12 @@ class Tier1Analyzer {
         return retry.scripture.withVerse(retryVerse);
       }
     } catch (e) {
-      apiLog.warning('[Tier1] retry failed', error: e);
+      // warning() doesn't take stackTrace — retry is a soft path,
+      // runtimeType in the message is enough for triage.
+      apiLog.warning(
+        '[Tier1] retry failed: ${e.runtimeType}',
+        error: e,
+      );
     }
 
     // Safe fallback: keep ref but no verse — UI handles empty verse gracefully

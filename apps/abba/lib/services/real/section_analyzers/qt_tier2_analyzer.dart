@@ -99,10 +99,26 @@ class QtTier2Analyzer {
       );
     } on AiAnalysisException {
       rethrow;
-    } catch (e, st) {
-      apiLog.error('[QtTier2] analyze failed', error: e, stackTrace: st);
+    } on GenerativeAIException catch (e, st) {
+      apiLog.error(
+        '[QtTier2] GenerativeAIException (${e.runtimeType}): ${e.toString()}',
+        error: e,
+        stackTrace: st,
+      );
       throw AiAnalysisException(
-        'QT Tier2 analysis failed',
+        'Gemini SDK error: ${e.toString()}',
+        kind: AiAnalysisFailureKind.apiError,
+        cause: e,
+        causeStackTrace: st,
+      );
+    } catch (e, st) {
+      apiLog.error(
+        '[QtTier2] analyze failed: ${e.runtimeType} — ${e.toString()}',
+        error: e,
+        stackTrace: st,
+      );
+      throw AiAnalysisException(
+        'QT Tier2 analysis failed: ${e.runtimeType}',
         kind: AiAnalysisFailureKind.apiError,
         cause: e,
         causeStackTrace: st,
