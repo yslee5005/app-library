@@ -257,7 +257,7 @@ class _AiLoadingViewState extends ConsumerState<AiLoadingView>
       _navigateIfReady();
     } on AiAnalysisException catch (e) {
       prayerLog.error(
-        'Prayer stream T1 failed (${e.kind})',
+        'Prayer stream T1 failed (${e.kind}): ${e.message}',
         error: e.cause,
         stackTrace: e.causeStackTrace,
       );
@@ -466,7 +466,7 @@ class _AiLoadingViewState extends ConsumerState<AiLoadingView>
       _navigateIfReady();
     } on AiAnalysisException catch (e) {
       qtLog.error(
-        'QT stream T1 failed (${e.kind})',
+        'QT stream T1 failed (${e.kind}): ${e.message}',
         error: e.cause,
         stackTrace: e.causeStackTrace,
       );

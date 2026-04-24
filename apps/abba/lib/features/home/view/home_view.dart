@@ -206,7 +206,7 @@ class _HomeViewState extends ConsumerState<HomeView>
 
     prayerLog.info(
       'Prayer finished, mode=${_isTextMode ? "text" : "voice"}, '
-      'audioPath=$audioPath',
+      'audioPath=${_isTextMode ? "(text mode, no audio)" : audioPath}',
     );
 
     ref.read(isRecordingProvider.notifier).state = false;

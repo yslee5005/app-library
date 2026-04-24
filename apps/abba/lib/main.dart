@@ -27,6 +27,7 @@ import 'services/mock_data.dart';
 import 'services/notification_service.dart';
 import 'services/cached_ai_service.dart';
 import 'services/bible_text_service.dart';
+import 'services/gemini_cache_manager.dart';
 import 'services/mock/mock_bible_text_service.dart';
 import 'services/real/gemini_service.dart';
 import 'services/real/real_notification_service.dart';
@@ -171,12 +172,19 @@ Future<void> main() async {
     subscriptionService =
         RevenueCatSubscriptionService(apiKey: AppConfig.revenueCatApiKey);
 
+    // Phase 4.1/4.2 — tier-based streaming APIs require cacheManager +
+    // bibleService via constructor DI. Build these once up front so the
+    // AiService and the bibleTextService provider share the same instance.
+    final bibleService = SupabaseStorageBibleTextService(client: supabase);
+    final cacheManager = GeminiCacheManager(supabase);
+
     overrides.addAll([
       authRepositoryProvider.overrideWithValue(authRepo),
-      aiServiceProvider.overrideWithValue(CachedAiService(GeminiService())),
-      bibleTextServiceProvider.overrideWithValue(
-        SupabaseStorageBibleTextService(client: supabase),
-      ),
+      aiServiceProvider.overrideWithValue(CachedAiService(GeminiService(
+        cacheManager: cacheManager,
+        bibleService: bibleService,
+      ))),
+      bibleTextServiceProvider.overrideWithValue(bibleService),
       audioRecorderServiceProvider.overrideWithValue(RealAudioRecorderService()),
       audioStorageServiceProvider.overrideWithValue(
         SupabaseAudioStorageService(supabase),
