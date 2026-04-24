@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:app_lib_logging/logging.dart';
+import 'package:flutter/foundation.dart' show visibleForTesting;
 import 'package:google_generative_ai/google_generative_ai.dart';
 
 import '../../../config/app_config.dart';
@@ -101,6 +102,9 @@ class Tier2Analyzer {
       );
     }
   }
+
+  @visibleForTesting
+  Map<String, dynamic> parseJsonForTest(String? text) => _parseJson(text);
 
   Map<String, dynamic> _parseJson(String? text) {
     if (text == null || text.isEmpty) {

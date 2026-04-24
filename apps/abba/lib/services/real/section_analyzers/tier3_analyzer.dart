@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:app_lib_logging/logging.dart';
+import 'package:flutter/foundation.dart' show visibleForTesting;
 import 'package:google_generative_ai/google_generative_ai.dart';
 
 import '../../../models/prayer.dart';
@@ -75,36 +76,7 @@ class Tier3Analyzer {
         model: modelName,
       );
       final json = _parseJson(response.text);
-
-      Guidance? guidance;
-      AiPrayer? aiPrayer;
-      HistoricalStory? historicalStory;
-
-      final g = json['guidance'];
-      if (g is Map<String, dynamic>) {
-        guidance = Guidance.fromJson(g);
-      }
-      final ap = json['ai_prayer'];
-      if (ap is Map<String, dynamic>) {
-        aiPrayer = AiPrayer.fromJson(ap);
-      }
-      final hs = json['historical_story'];
-      if (hs is Map<String, dynamic>) {
-        historicalStory = HistoricalStory.fromJson(hs);
-      }
-
-      if (guidance == null && aiPrayer == null && historicalStory == null) {
-        throw AiAnalysisException(
-          'T3 response missing all premium sections',
-          kind: AiAnalysisFailureKind.parseError,
-        );
-      }
-
-      return TierT3Result(
-        guidance: guidance,
-        aiPrayer: aiPrayer,
-        historicalStory: historicalStory,
-      );
+      return _extractT3(json);
     } on AiAnalysisException {
       rethrow;
     } catch (e, st) {
@@ -116,6 +88,44 @@ class Tier3Analyzer {
         causeStackTrace: st,
       );
     }
+  }
+
+  @visibleForTesting
+  Map<String, dynamic> parseJsonForTest(String? text) => _parseJson(text);
+
+  @visibleForTesting
+  TierT3Result extractT3ForTest(Map<String, dynamic> json) => _extractT3(json);
+
+  TierT3Result _extractT3(Map<String, dynamic> json) {
+    Guidance? guidance;
+    AiPrayer? aiPrayer;
+    HistoricalStory? historicalStory;
+
+    final g = json['guidance'];
+    if (g is Map<String, dynamic>) {
+      guidance = Guidance.fromJson(g);
+    }
+    final ap = json['ai_prayer'];
+    if (ap is Map<String, dynamic>) {
+      aiPrayer = AiPrayer.fromJson(ap);
+    }
+    final hs = json['historical_story'];
+    if (hs is Map<String, dynamic>) {
+      historicalStory = HistoricalStory.fromJson(hs);
+    }
+
+    if (guidance == null && aiPrayer == null && historicalStory == null) {
+      throw AiAnalysisException(
+        'T3 response missing all premium sections',
+        kind: AiAnalysisFailureKind.parseError,
+      );
+    }
+
+    return TierT3Result(
+      guidance: guidance,
+      aiPrayer: aiPrayer,
+      historicalStory: historicalStory,
+    );
   }
 
   Map<String, dynamic> _parseJson(String? text) {

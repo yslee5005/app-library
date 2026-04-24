@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:app_lib_logging/logging.dart';
-import 'package:flutter/services.dart' show rootBundle;
+import 'package:flutter/services.dart' show AssetBundle, rootBundle;
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 /// Phase 4.1 — Gemini Context Cache manager (Strategy B: universal shared cache).
@@ -18,6 +18,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 ///   apps/abba/specs/phase_4_1_section_based_ai/_details/cache_strategy.md
 class GeminiCacheManager {
   final SupabaseClient _supabase;
+  final AssetBundle _bundle;
 
   /// Asset paths that form the "rubric bundle" per mode. Changing any of
   /// these files invalidates the cache (via SHA256 hash comparison).
@@ -45,7 +46,8 @@ class GeminiCacheManager {
   String? _cachedRubricBundlePrayer;
   String? _cachedRubricBundleQt;
 
-  GeminiCacheManager(this._supabase);
+  GeminiCacheManager(this._supabase, {AssetBundle? bundle})
+      : _bundle = bundle ?? rootBundle;
 
   /// Assemble the full rubric bundle content for a mode (concatenated md).
   /// Returns the raw system instruction string to send to Gemini.
@@ -56,7 +58,7 @@ class GeminiCacheManager {
     final assets = mode == 'prayer' ? _prayerAssets : _qtAssets;
     final buf = StringBuffer();
     for (final path in assets) {
-      buf.writeln(await rootBundle.loadString(path));
+      buf.writeln(await _bundle.loadString(path));
       buf.writeln();
     }
     final bundle = buf.toString();
