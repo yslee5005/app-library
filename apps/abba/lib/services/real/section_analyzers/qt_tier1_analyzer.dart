@@ -33,13 +33,16 @@ class QtTier1Analyzer {
         _bible = bible,
         _apiKey = apiKey;
 
-  Future<QtTierT1Result> analyze({
+  /// Phase 4.2 Phase C — true SSE streaming. Mirror of
+  /// [Tier1Analyzer.analyze] but emits [QtTierT1ScriptureRef] instead of
+  /// the Prayer variant.
+  Stream<TierResult> analyze({
     required String meditation,
     required String passageRef,
     required String passageText,
     required String locale,
     required String userName,
-  }) async {
+  }) async* {
     final systemInstruction = await _cache.loadRubricBundle('qt');
     const modelName = 'gemini-2.5-flash';
     final model = GenerativeModel(
@@ -61,23 +64,40 @@ class QtTier1Analyzer {
       excludeRef: null,
     );
 
+    final buffer = StringBuffer();
+    GenerateContentResponse? lastChunk;
+    bool emittedRef = false;
+    final refRegex = RegExp(r'"reference"\s*:\s*"([^"\\]+)"');
+
     try {
-      final response = await model.generateContent([
+      final stream = model.generateContentStream([
         Content('user', [TextPart(userPrompt)]),
       ]);
-      logTierUsage(
-        response: response,
-        tier: 'qt-t1',
-        locale: locale,
-        model: modelName,
-      );
-      final json = _parseJson(response.text);
+      await for (final chunk in stream) {
+        lastChunk = chunk;
+        final piece = chunk.text;
+        if (piece == null || piece.isEmpty) continue;
+        buffer.write(piece);
+        if (!emittedRef) {
+          final m = refRegex.firstMatch(buffer.toString());
+          if (m != null) {
+            emittedRef = true;
+            yield QtTierT1ScriptureRef(m.group(1)!);
+          }
+        }
+      }
+      if (lastChunk != null) {
+        logTierUsage(
+          response: lastChunk,
+          tier: 'qt-t1',
+          locale: locale,
+          model: modelName,
+        );
+      }
+
+      final json = _parseJson(buffer.toString());
       final draft = _extractT1(json, locale);
 
-      // Scripture validation — mirror Prayer tier1's logic. For QT, the
-      // expected reference is usually the passage itself; but the model
-      // may pick a different verse within the passage. Accept either so
-      // long as BibleTextService can resolve it.
       final validated = await _validateScripture(
         draft.scripture,
         locale,
@@ -89,7 +109,7 @@ class QtTier1Analyzer {
         modelName: modelName,
       );
 
-      return QtTierT1Result(
+      yield QtTierT1Result(
         meditationSummary: draft.meditationSummary,
         scripture: validated,
       );

@@ -27,13 +27,21 @@ class Tier1Analyzer {
         _bible = bible,
         _apiKey = apiKey;
 
-  /// Generate T1 content. Scripture is validated against Bible bundle;
-  /// if invalid, retry once (excluding the bad ref), then safe-fallback.
-  Future<TierT1Result> analyze({
+  /// Phase 4.2 Phase C — true SSE streaming. Consumes Gemini's
+  /// `generateContentStream` chunk-by-chunk and emits:
+  ///   1. [TierT1ScriptureRef] as soon as the regex finds
+  ///      `"reference": "..."` in the accumulated buffer (~2-3s into
+  ///      generation) — lets the caller unblock navigation.
+  ///   2. [TierT1Result] once the full JSON has arrived AND scripture
+  ///      has been validated against the Bible bundle.
+  ///
+  /// On invalid reference the validation retry remains non-streaming
+  /// (one full `generateContent` call) — MVP simplicity.
+  Stream<TierResult> analyze({
     required String transcript,
     required String locale,
     required String userName,
-  }) async {
+  }) async* {
     final systemInstruction = await _cache.loadRubricBundle('prayer');
     const modelName = 'gemini-2.5-flash';
     final model = GenerativeModel(
@@ -53,20 +61,41 @@ class Tier1Analyzer {
       excludeRef: null,
     );
 
+    final buffer = StringBuffer();
+    GenerateContentResponse? lastChunk;
+    bool emittedRef = false;
+    final refRegex = RegExp(r'"reference"\s*:\s*"([^"\\]+)"');
+
     try {
-      final response = await model.generateContent([
+      final stream = model.generateContentStream([
         Content('user', [TextPart(userPrompt)]),
       ]);
-      logTierUsage(
-        response: response,
-        tier: 't1',
-        locale: locale,
-        model: modelName,
-      );
-      final json = _parseJson(response.text);
+      await for (final chunk in stream) {
+        lastChunk = chunk;
+        final piece = chunk.text;
+        if (piece == null || piece.isEmpty) continue;
+        buffer.write(piece);
+        if (!emittedRef) {
+          final m = refRegex.firstMatch(buffer.toString());
+          if (m != null) {
+            emittedRef = true;
+            yield TierT1ScriptureRef(m.group(1)!);
+          }
+        }
+      }
+      if (lastChunk != null) {
+        logTierUsage(
+          response: lastChunk,
+          tier: 't1',
+          locale: locale,
+          model: modelName,
+        );
+      }
+
+      final json = _parseJson(buffer.toString());
       final draft = _extractT1(json, locale);
 
-      // Scripture validation
+      // Scripture validation (non-streaming retry path on hallucination)
       final validated = await _validateScripture(
         draft.scripture,
         locale,
@@ -76,7 +105,7 @@ class Tier1Analyzer {
         modelName: modelName,
       );
 
-      return TierT1Result(summary: draft.summary, scripture: validated);
+      yield TierT1Result(summary: draft.summary, scripture: validated);
     } on AiAnalysisException {
       rethrow;
     } catch (e, st) {

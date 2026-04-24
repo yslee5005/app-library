@@ -108,11 +108,21 @@ class QtSectionsNotifier extends StateNotifier<QtSectionsState> {
     state = state.copyWith(failedTiers: next);
   }
 
+  /// Phase 4.2 Phase C — stash a placeholder Scripture (reference only)
+  /// so the QT Dashboard Scripture card can appear with "finding verse…"
+  /// as soon as the SSE regex catches the reference.
+  void setScriptureRef(String reference) {
+    final existing = state.scripture;
+    if (existing != null && existing.verse.isNotEmpty) return;
+    state = state.copyWith(scripture: Scripture(reference: reference));
+  }
+
   /// Phase 4.2 — subscribe to a QT tiered Gemini stream. Same shape as
   /// [PrayerSectionsNotifier.startPrayerStream]: the notifier owns the
   /// subscription so it survives navigation from ai_loading_view to
-  /// Dashboard. [t1Completer] resolves on the first T1 event so the caller
-  /// can block navigation until T1 is decided.
+  /// Dashboard. [t1Completer] resolves on the **earliest actionable**
+  /// T1 signal — either [QtTierT1ScriptureRef] (Phase C fast path) or
+  /// the full [QtTierT1Result] fallback.
   void startMeditationStream({
     required Stream<TierResult> stream,
     required PrayerRepository repo,
@@ -124,6 +134,17 @@ class QtSectionsNotifier extends StateNotifier<QtSectionsState> {
     _sub = stream.listen(
       (tier) async {
         switch (tier) {
+          case QtTierT1ScriptureRef ref:
+            setScriptureRef(ref.reference);
+            if (!t1Completer.isCompleted) {
+              t1Completer.complete(QtTierT1Result(
+                meditationSummary: const MeditationSummary(
+                  summary: '',
+                  topic: '',
+                ),
+                scripture: Scripture(reference: ref.reference),
+              ));
+            }
           case QtTierT1Result t1:
             setT1(
               meditationSummary: t1.meditationSummary,
@@ -145,6 +166,7 @@ class QtSectionsNotifier extends StateNotifier<QtSectionsState> {
             if (f.tier == 't1' && !t1Completer.isCompleted) {
               t1Completer.completeError(f.error);
             }
+          case TierT1ScriptureRef _:
           case TierT1Result _:
           case TierT2Result _:
           case TierT3Result _:

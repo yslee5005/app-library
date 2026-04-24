@@ -139,15 +139,26 @@ class PrayerSectionsNotifier extends StateNotifier<PrayerSectionsState> {
     state = state.copyWith(t3Triggered: true);
   }
 
-  /// Phase 4.1 INT-027 — subscribe to a tiered Gemini stream.
+  /// Phase 4.2 Phase C — stash a placeholder Scripture (reference only,
+  /// verse empty) so the Dashboard can render the Scripture card with a
+  /// "finding verse…" state as soon as SSE regex catches the reference.
+  void setScriptureRef(String reference) {
+    final existing = state.scripture;
+    if (existing != null && existing.verse.isNotEmpty) return;
+    state = state.copyWith(scripture: Scripture(reference: reference));
+  }
+
+  /// Phase 4.1 INT-027 / 4.2 Phase C — subscribe to a tiered Gemini stream.
   ///
   /// Lives on the notifier (not the view) so subscription survives navigation
   /// from ai_loading_view → Dashboard. T2 arriving after navigation still
   /// updates state; the Dashboard, watching this provider, rebuilds.
   ///
-  /// [t1Completer] resolves on the first T1 event (success or failure) so the
-  /// caller can block navigation until T1 is decided. T2/T3 then flow in the
-  /// background and mutate state as they arrive.
+  /// [t1Completer] resolves on the **earliest actionable** T1 signal —
+  /// either [TierT1ScriptureRef] (Phase C fast path, ~2-3s after stream
+  /// start) or the full [TierT1Result] (fallback when regex never matches).
+  /// A placeholder [TierT1Result] is constructed for the fast path so
+  /// existing callers do not need to change their blocking contract.
   void startPrayerStream({
     required Stream<TierResult> stream,
     required PrayerRepository repo,
@@ -159,6 +170,18 @@ class PrayerSectionsNotifier extends StateNotifier<PrayerSectionsState> {
     _sub = stream.listen(
       (tier) async {
         switch (tier) {
+          case TierT1ScriptureRef ref:
+            setScriptureRef(ref.reference);
+            if (!t1Completer.isCompleted) {
+              t1Completer.complete(TierT1Result(
+                summary: const PrayerSummary(
+                  gratitude: [],
+                  petition: [],
+                  intercession: [],
+                ),
+                scripture: Scripture(reference: ref.reference),
+              ));
+            }
           case TierT1Result t1:
             setT1(summary: t1.summary, scripture: t1.scripture);
             if (!t1Completer.isCompleted) t1Completer.complete(t1);
@@ -213,6 +236,7 @@ class PrayerSectionsNotifier extends StateNotifier<PrayerSectionsState> {
             if (f.tier == 't1' && !t1Completer.isCompleted) {
               t1Completer.completeError(f.error);
             }
+          case QtTierT1ScriptureRef _:
           case QtTierT1Result _:
           case QtTierT2Result _:
             // QT tier events not used on prayer stream; ignore.

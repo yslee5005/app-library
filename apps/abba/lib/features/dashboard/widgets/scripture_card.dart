@@ -63,31 +63,71 @@ class _ScriptureCardState extends State<ScriptureCard> {
               ),
             ),
           ] else ...[
-            // PD bundle not available for this locale → reference-only fallback.
-            Container(
-              width: double.infinity,
-              padding: const EdgeInsets.all(AbbaSpacing.md),
-              decoration: BoxDecoration(
-                color: AbbaColors.muted.withValues(alpha: 0.08),
-                borderRadius: BorderRadius.circular(AbbaRadius.md),
-              ),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text('📖', style: TextStyle(fontSize: 18)),
-                  const SizedBox(width: AbbaSpacing.sm),
-                  Expanded(
-                    child: Text(
-                      l10n.bibleLookupReferenceHint,
-                      style: AbbaTypography.bodySmall.copyWith(
-                        color: AbbaColors.muted,
-                        height: 1.5,
+            // Verse empty. Two sub-cases:
+            //   (a) Phase 4.2 Phase C mid-stream — we only have the
+            //       reference from SSE regex; reason/posture still arriving.
+            //       Show "finding the right scripture..." placeholder.
+            //   (b) Stream finished but PD bundle missing the translation →
+            //       reference-only fallback (pre-Phase-C behaviour).
+            // Heuristic: if reason/posture are also empty we're still in
+            // the streaming window.
+            if (scripture.reason.isEmpty && scripture.posture.isEmpty)
+              Container(
+                width: double.infinity,
+                padding: const EdgeInsets.all(AbbaSpacing.md),
+                decoration: BoxDecoration(
+                  color: AbbaColors.sage.withValues(alpha: 0.08),
+                  borderRadius: BorderRadius.circular(AbbaRadius.md),
+                ),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      width: 18,
+                      height: 18,
+                      child: CircularProgressIndicator(
+                        strokeWidth: 2,
+                        color: AbbaColors.sage.withValues(alpha: 0.7),
                       ),
                     ),
-                  ),
-                ],
+                    const SizedBox(width: AbbaSpacing.sm),
+                    Expanded(
+                      child: Text(
+                        l10n.aiScriptureValidating,
+                        style: AbbaTypography.bodySmall.copyWith(
+                          color: AbbaColors.muted,
+                          height: 1.5,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              )
+            else
+              Container(
+                width: double.infinity,
+                padding: const EdgeInsets.all(AbbaSpacing.md),
+                decoration: BoxDecoration(
+                  color: AbbaColors.muted.withValues(alpha: 0.08),
+                  borderRadius: BorderRadius.circular(AbbaRadius.md),
+                ),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text('📖', style: TextStyle(fontSize: 18)),
+                    const SizedBox(width: AbbaSpacing.sm),
+                    Expanded(
+                      child: Text(
+                        l10n.bibleLookupReferenceHint,
+                        style: AbbaTypography.bodySmall.copyWith(
+                          color: AbbaColors.muted,
+                          height: 1.5,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
           ],
           if (scripture.keyWordHint.isNotEmpty) ...[
             const SizedBox(height: AbbaSpacing.md),

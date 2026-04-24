@@ -1482,15 +1482,29 @@ Not a platitude — reference a detail from the story above.''';
       apiKey: AppConfig.geminiApiKey,
     );
 
-    // T1 — user waits
+    // Phase 4.2 Phase C — tier1 now emits a Stream. Relay partial events
+    // (TierT1ScriptureRef) directly to the caller so the UI can navigate
+    // on early signal; capture the final TierT1Result for T2 context.
     TierT1Result? t1;
     try {
-      t1 = await tier1.analyze(
+      await for (final event in tier1.analyze(
         transcript: transcript,
         locale: locale,
         userName: userName,
-      );
-      yield t1;
+      )) {
+        yield event;
+        if (event is TierT1Result) t1 = event;
+      }
+      if (t1 == null) {
+        yield TierFailed(
+          tier: 't1',
+          error: const AiAnalysisException(
+            'Tier1 stream ended without TierT1Result',
+            kind: AiAnalysisFailureKind.parseError,
+          ),
+        );
+        return;
+      }
     } on AiAnalysisException catch (e) {
       yield TierFailed(tier: 't1', error: e);
       return; // No T2 if T1 failed
@@ -1609,17 +1623,29 @@ Not a platitude — reference a detail from the story above.''';
       apiKey: AppConfig.geminiApiKey,
     );
 
-    // T1 — user waits
+    // Phase 4.2 Phase C — QT tier1 now emits a Stream. Relay partials.
     QtTierT1Result? t1;
     try {
-      t1 = await tier1.analyze(
+      await for (final event in tier1.analyze(
         meditation: meditation,
         passageRef: passageRef,
         passageText: passageText,
         locale: locale,
         userName: userName,
-      );
-      yield t1;
+      )) {
+        yield event;
+        if (event is QtTierT1Result) t1 = event;
+      }
+      if (t1 == null) {
+        yield TierFailed(
+          tier: 't1',
+          error: const AiAnalysisException(
+            'QT Tier1 stream ended without QtTierT1Result',
+            kind: AiAnalysisFailureKind.parseError,
+          ),
+        );
+        return;
+      }
     } on AiAnalysisException catch (e) {
       yield TierFailed(tier: 't1', error: e);
       return;
