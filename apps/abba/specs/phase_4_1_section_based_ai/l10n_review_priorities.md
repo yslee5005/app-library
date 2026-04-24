@@ -106,3 +106,48 @@ Reviewer edits the suggested-rewording field inside their
 No code changes needed elsewhere — Phase 4.1 rubric and the Phase 4.2
 tier pipeline consume locale via `{{LANG_NAME}}` runtime variable, so
 new wordings take effect on the next Gemini call.
+
+---
+
+## Self-review status (2026-04-24)
+
+I performed a full second pass across all 171 entries (19 keys × 9
+locales). Applied changes by pass:
+
+- **Pass 1** (commit `659b63f`): 25 changes focused on the HIGH-risk
+  flags in this report — ar register words, ja senior softening, zh
+  concretisation, de/it/ru/es/pt/fr devotional "in times of" framing
+  for the grief category.
+- **Pass 2** (commit pending): 2 additional changes — both zh.
+  - `tierCompleted`: `已添加新的默想` → `新的默想到了` (more devotional
+    arrival feel vs UI-system "has been added")
+  - `proSectionWillArrive`: `...将在此显示` → `...将在此呈现` (present /
+    unfold vs UI display).
+
+### Pass 2 entries deliberately LEFT alone
+
+After checking every remaining key I did **not** apply further changes
+where I was not confident enough to override the initial output:
+
+- **fr** uses `vous / votre` consistently across all UI strings toward
+  the user. Swapping individual lines to `tu / ta` for warmth would
+  break register consistency. A French reviewer should make the whole-
+  file choice (stay formal / move to informal across all keys) in one
+  pass, not line by line.
+- **ru** `размышления` (reflections) is slightly detached; `раздумья`
+  could be warmer but is unusual in liturgical register. Reviewer's call.
+- **ja** remaining literary elements (e.g. `後ほど` in `aiTierIncomplete`)
+  could be softened but are idiomatic for senior register. Native
+  reviewer preference.
+- **ar** status pills (`sectionStatus*`) are neutral MSA — fine for
+  dashboard copy; a reviewer may choose richer devotional register.
+- All **category labels** other than `grief` (which was softened in
+  pass 1) are near-literal mappings of brief English nouns. Over-
+  rewording risks losing the "index button" feel.
+
+### Bottom line
+
+Two passes applied **27 changes** out of 171 candidate entries (~16%).
+The remaining 144 entries are "reasonable as-is"; the residual quality
+gap is shaped by subjective register preference that only a native
+speaker can close.

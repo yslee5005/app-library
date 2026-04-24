@@ -1246,7 +1246,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get aiTierIncomplete => '即将到来,稍后再来查看';
 
   @override
-  String get tierCompleted => '已添加新的默想';
+  String get tierCompleted => '新的默想到了';
 
   @override
   String get tierProcessingNotice => '正在生成更多默想...';
@@ -1255,7 +1255,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get proSectionLoading => '正在准备您的优质内容...';
 
   @override
-  String get proSectionWillArrive => '您的深度默想将在此显示';
+  String get proSectionWillArrive => '您的深度默想将在此呈现';
 
   @override
   String get templateCategoryHealth => '为康复与平安';
