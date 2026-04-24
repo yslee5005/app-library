@@ -1300,7 +1300,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get proSectionWillArrive => 'Deine tiefere Einsicht erscheint hier';
 
   @override
-  String get templateCategoryHealth => 'Für gesundheitliche Sorgen';
+  String get templateCategoryHealth => 'In Zeiten gesundheitlicher Sorgen';
 
   @override
   String get templateCategoryFamily => 'Für die Familie';
@@ -1312,7 +1312,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get templateCategoryGratitude => 'Ein dankbares Herz';
 
   @override
-  String get templateCategoryGrief => 'In Trauer oder Verlust';
+  String get templateCategoryGrief => 'In Zeiten der Trauer';
 
   @override
   String get sectionStatusCompleted => 'Analyse abgeschlossen';

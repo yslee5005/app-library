@@ -1306,7 +1306,7 @@ class AppLocalizationsPt extends AppLocalizations {
   String get templateCategoryGratitude => 'Um coração agradecido';
 
   @override
-  String get templateCategoryGrief => 'No luto ou perda';
+  String get templateCategoryGrief => 'Em tempos de luto';
 
   @override
   String get sectionStatusCompleted => 'Análise concluída';

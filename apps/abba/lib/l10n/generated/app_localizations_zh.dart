@@ -1237,7 +1237,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get aiScriptureValidatingFailed => '正在为您预备这段经文...';
 
   @override
-  String get aiTemplateFallback => '我们正在准备完整分析时...';
+  String get aiTemplateFallback => '在完整分析预备期间,与您静默片刻...';
 
   @override
   String get aiPendingMore => '准备中...';
@@ -1258,7 +1258,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get proSectionWillArrive => '您的深度默想将在此显示';
 
   @override
-  String get templateCategoryHealth => '为健康的担忧';
+  String get templateCategoryHealth => '为康复与平安';
 
   @override
   String get templateCategoryFamily => '为家庭';
@@ -1270,7 +1270,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get templateCategoryGratitude => '感恩的心';
 
   @override
-  String get templateCategoryGrief => '在悲伤或失去之中';
+  String get templateCategoryGrief => '在失去挚爱之时';
 
   @override
   String get sectionStatusCompleted => '分析完成';

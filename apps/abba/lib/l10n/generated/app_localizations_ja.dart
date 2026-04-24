@@ -1225,19 +1225,19 @@ class AppLocalizationsJa extends AppLocalizations {
   String get qtPassagesRetryButton => '再試行';
 
   @override
-  String get aiStreamingInitial => 'あなたの祈りに想いを巡らせています...';
+  String get aiStreamingInitial => 'あなたのお祈りに静かに耳を傾けています...';
 
   @override
-  String get aiTierProcessing => 'さらなる黙想を準備しています...';
+  String get aiTierProcessing => 'ほかのお話も、まもなく届きます...';
 
   @override
-  String get aiScriptureValidating => 'ふさわしいみことばを探しています...';
+  String get aiScriptureValidating => 'あなたにふさわしいみことばを探しています...';
 
   @override
-  String get aiScriptureValidatingFailed => 'このみことばをお届けする準備中です...';
+  String get aiScriptureValidatingFailed => 'このみことばを、少しずつ準備しています...';
 
   @override
-  String get aiTemplateFallback => '完全な分析を準備している間...';
+  String get aiTemplateFallback => '分析が整うまで、ひとときお供します...';
 
   @override
   String get aiPendingMore => '準備中...';
@@ -1246,16 +1246,16 @@ class AppLocalizationsJa extends AppLocalizations {
   String get aiTierIncomplete => 'もうすぐ届きます。後ほどご確認ください';
 
   @override
-  String get tierCompleted => '新しい黙想が届きました';
+  String get tierCompleted => '新しいお話が届きました';
 
   @override
-  String get tierProcessingNotice => 'さらなる黙想を作成しています...';
+  String get tierProcessingNotice => 'さらなるお話をお届けしています...';
 
   @override
   String get proSectionLoading => 'プレミアムコンテンツを準備中です...';
 
   @override
-  String get proSectionWillArrive => '深い黙想はここに現れます';
+  String get proSectionWillArrive => '深いお話がここに届きます';
 
   @override
   String get templateCategoryHealth => '健康のための祈り';
@@ -1270,7 +1270,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get templateCategoryGratitude => '感謝の心';
 
   @override
-  String get templateCategoryGrief => '悲しみや喪失の中で';
+  String get templateCategoryGrief => '大切な方を失ったとき';
 
   @override
   String get sectionStatusCompleted => '分析完了';

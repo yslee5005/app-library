@@ -1239,13 +1239,13 @@ class AppLocalizationsAr extends AppLocalizations {
   String get qtPassagesRetryButton => 'إعادة المحاولة';
 
   @override
-  String get aiStreamingInitial => 'نتأمل في صلاتك...';
+  String get aiStreamingInitial => 'نتأمّل في صلواتك...';
 
   @override
   String get aiTierProcessing => 'المزيد من التأملات قادمة...';
 
   @override
-  String get aiScriptureValidating => 'نبحث عن الآية المناسبة...';
+  String get aiScriptureValidating => 'نبحث عن آية تناسب قلبك...';
 
   @override
   String get aiScriptureValidatingFailed => 'نعدّ هذه الآية من أجلك...';
@@ -1272,19 +1272,19 @@ class AppLocalizationsAr extends AppLocalizations {
   String get proSectionWillArrive => 'سيظهر تأملك العميق هنا';
 
   @override
-  String get templateCategoryHealth => 'من أجل المخاوف الصحية';
+  String get templateCategoryHealth => 'من أجل العافية والشفاء';
 
   @override
   String get templateCategoryFamily => 'من أجل العائلة';
 
   @override
-  String get templateCategoryWork => 'من أجل العمل والدراسات';
+  String get templateCategoryWork => 'من أجل عملك ودراستك';
 
   @override
   String get templateCategoryGratitude => 'قلب شاكر';
 
   @override
-  String get templateCategoryGrief => 'في الحزن أو الفقدان';
+  String get templateCategoryGrief => 'في أوقات الحزن والفقدان';
 
   @override
   String get sectionStatusCompleted => 'اكتمل التحليل';

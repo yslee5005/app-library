@@ -1311,7 +1311,7 @@ class AppLocalizationsIt extends AppLocalizations {
   String get templateCategoryGratitude => 'Un cuore grato';
 
   @override
-  String get templateCategoryGrief => 'Nel dolore o nella perdita';
+  String get templateCategoryGrief => 'Nel tempo del dolore';
 
   @override
   String get sectionStatusCompleted => 'Analisi completa';

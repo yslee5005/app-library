@@ -1290,7 +1290,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get proSectionWillArrive => 'Ваше глубокое размышление появится здесь';
 
   @override
-  String get templateCategoryHealth => 'О здоровье';
+  String get templateCategoryHealth => 'О здравии';
 
   @override
   String get templateCategoryFamily => 'О семье';
@@ -1302,7 +1302,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get templateCategoryGratitude => 'Благодарное сердце';
 
   @override
-  String get templateCategoryGrief => 'В скорби или утрате';
+  String get templateCategoryGrief => 'Во времена скорби';
 
   @override
   String get sectionStatusCompleted => 'Анализ завершён';
