@@ -1,0 +1,53 @@
+# Supabase project config — managed manually for now.
+#
+# This file scopes Edge Function options. Other Supabase services
+# (api/db/auth/storage/studio) intentionally not declared — CLI uses
+# defaults until we have a reason to override them.
+
+project_id = "abba"
+
+# ─────────────────────────────────────────────────────────────────────
+# Edge Functions
+# ─────────────────────────────────────────────────────────────────────
+#
+# verify_jwt = true  (default)  → Supabase platform decodes & verifies
+#                                  the user JWT before calling the function.
+#                                  Recently the project's user JWTs are signed
+#                                  with ES256 (new "JWT Signing Keys" feature),
+#                                  which the legacy verifier on Edge Runtime
+#                                  rejects with 401 "UNSUPPORTED_TOKEN_ALGORITHM".
+#
+# verify_jwt = false             → platform skips JWT verification. The function
+#                                  must handle authorization itself (or be a
+#                                  public, user-agnostic function).
+#
+# Per-function override; other functions retain the default (true).
+
+# Returns today's QT passages for a given locale. Operates with
+# SERVICE_ROLE_KEY internally (see index.ts:83) and does NOT identify
+# the caller. All users in the same locale receive identical data, so
+# JWT verification adds no security and only blocks legitimate calls.
+[functions.abba-get-qt-passages]
+verify_jwt = false
+
+# Daily batch generator for QT passages across all 35 locales.
+# Triggered by pg_cron (or external scheduler). Uses SERVICE_ROLE_KEY
+# only — no user identity involved.
+[functions.abba-generate-qt-passages]
+verify_jwt = false
+
+# Cron-triggered streak reminder fan-out. Reads abba.notification_settings
+# and prayer history with SERVICE_ROLE_KEY; no user JWT.
+[functions.abba-streak-reminder]
+verify_jwt = false
+
+# Cron-triggered weekly summary email. Reads with SERVICE_ROLE_KEY;
+# no user JWT.
+[functions.abba-weekly-report]
+verify_jwt = false
+
+# process_pending_prayer is intentionally NOT listed here — that function
+# IS user-scoped (reads Authorization header, calls auth.getUser()) and
+# its JWT verification is part of its security model. If ES256 401 starts
+# hitting it, the fix is Edge Runtime upgrade or in-function JWKS verify,
+# NOT verify_jwt = false.

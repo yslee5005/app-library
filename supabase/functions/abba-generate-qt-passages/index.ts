@@ -88,6 +88,7 @@ serve(async (req: Request): Promise<Response> => {
 
     // Check if this batch already exists (check English as baseline)
     const { data: existing } = await supabase
+      .schema('abba')
       .from('qt_passages')
       .select('id')
       .eq('app_id', 'abba')
@@ -127,12 +128,13 @@ Requirements:
 - Keep each passage to 2-3 sentences
 - Each passage must match its assigned theme
 - Include a short topic label (2-3 words) for each theme in ${langName}
+- The "reference" field MUST also be in ${langName}, using the locale's natural Bible book naming (Korean: "시편 46:1-2", Japanese: "詩篇 46:1-2", Chinese: "诗篇 46:1-2", Spanish: "Salmo 46:1-2", English: "Psalm 46:1-2"). Chapter:verse numerals stay as digits.
 - Stay politically and socially neutral — focus only on universal human emotions and biblical wisdom
 
 Return JSON array with exactly 10 items in theme order:
 [{
   "theme": "anxiety",
-  "reference": "Psalm 46:1-2",
+  "reference": "<book name in ${langName}> chapter:verse (e.g., 시편 46:1-2 / Psalm 46:1-2 / 詩篇 46:1-2)",
   "text": "passage text in ${langName}...",
   "topic": "short topic label in ${langName}"
 }]
@@ -204,6 +206,7 @@ Only return the JSON array, no other text.`
     // Batch insert all records
     if (allRecords.length > 0) {
       const { error: insertError } = await supabase
+        .schema('abba')
         .from('qt_passages')
         .insert(allRecords)
 
@@ -241,6 +244,7 @@ Only return the JSON array, no other text.`
       const yesterday: string = new Date(estNow.getTime() - 86400000).toISOString().split('T')[0]
 
       const { data: yesterdayPassages } = await supabase
+        .schema('abba')
         .from('qt_passages')
         .select('reference, locale, text, topic, theme, icon, color_hex')
         .eq('app_id', 'abba')
@@ -260,7 +264,7 @@ Only return the JSON array, no other text.`
           date: today,
           batch_slot: batchSlot,
         }))
-        await supabase.from('qt_passages').insert(fallback)
+        await supabase.schema('abba').from('qt_passages').insert(fallback)
       }
     } catch (fallbackError) {
       console.error('Fallback also failed:', fallbackError)
