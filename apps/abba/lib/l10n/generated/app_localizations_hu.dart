@@ -1387,4 +1387,21 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String get dashboardPartialFailedHint => 'Ami már mentve van, megmarad.';
+
+  @override
+  String get deleteAccount => 'Fiók törlése';
+
+  @override
+  String get deleteAccountTitle => 'Törlöd a fiókodat?';
+
+  @override
+  String get deleteAccountBody =>
+      'Minden Abba-adatod (imák, elmélkedések, hangfelvételek) véglegesen törlődik. Ha nem használsz más ystech-alkalmazást, a bejelentkezési fiókod is törlődik.';
+
+  @override
+  String get deleteAccountConfirmHint => 'A megerősítéshez írd be: \'DELETE\'.';
+
+  @override
+  String get deleteAccountFailed =>
+      'A fiók törlése sikertelen. Próbáld meg később.';
 }

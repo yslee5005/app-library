@@ -578,5 +578,10 @@
   "recordingInterruptedSwitchToText": "Schrijf als tekst",
   "dashboardPartialFailedQt": "Een deel van de meditatie kon niet worden geladen. Begin een nieuwe meditatie.",
   "dashboardPartialFailedPrayer": "Een deel van de gebedsanalyse kon niet worden geladen. Begin een nieuw gebed.",
-  "dashboardPartialFailedHint": "Wat al is opgeslagen, blijft bewaard."
+  "dashboardPartialFailedHint": "Wat al is opgeslagen, blijft bewaard.",
+  "deleteAccount": "Account verwijderen",
+  "deleteAccountTitle": "Account verwijderen?",
+  "deleteAccountBody": "Alle Abba-gegevens (gebeden, meditaties, geluidsopnamen) worden permanent verwijderd. Als je geen andere ystech-apps gebruikt, wordt ook je inlogaccount verwijderd.",
+  "deleteAccountConfirmHint": "Typ 'DELETE' om te bevestigen.",
+  "deleteAccountFailed": "Kan account niet verwijderen. Probeer het later opnieuw."
 }

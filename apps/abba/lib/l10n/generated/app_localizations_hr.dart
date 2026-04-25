@@ -1390,4 +1390,21 @@ class AppLocalizationsHr extends AppLocalizations {
   @override
   String get dashboardPartialFailedHint =>
       'Već spremljeni sadržaj ostaje pohranjen.';
+
+  @override
+  String get deleteAccount => 'Izbriši račun';
+
+  @override
+  String get deleteAccountTitle => 'Izbrisati račun?';
+
+  @override
+  String get deleteAccountBody =>
+      'Svi vaši Abba podaci (molitve, meditacije, glasovne snimke) bit će trajno izbrisani. Ako ne koristite druge ystech aplikacije, bit će izbrisan i vaš račun za prijavu.';
+
+  @override
+  String get deleteAccountConfirmHint => 'Za potvrdu unesite \'DELETE\'.';
+
+  @override
+  String get deleteAccountFailed =>
+      'Nije moguće izbrisati račun. Pokušajte kasnije.';
 }

@@ -1385,4 +1385,21 @@ class AppLocalizationsNo extends AppLocalizations {
   @override
   String get dashboardPartialFailedHint =>
       'Det som allerede er lagret, beholdes.';
+
+  @override
+  String get deleteAccount => 'Slett konto';
+
+  @override
+  String get deleteAccountTitle => 'Slette kontoen din?';
+
+  @override
+  String get deleteAccountBody =>
+      'Alle Abba-dataene dine (bønner, andakter, lydopptak) blir permanent slettet. Hvis du ikke bruker andre ystech-apper, slettes også innloggingskontoen din.';
+
+  @override
+  String get deleteAccountConfirmHint => 'Skriv \'DELETE\' for å bekrefte.';
+
+  @override
+  String get deleteAccountFailed =>
+      'Kunne ikke slette kontoen. Prøv igjen senere.';
 }

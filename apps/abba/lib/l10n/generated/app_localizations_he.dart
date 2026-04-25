@@ -1362,4 +1362,21 @@ class AppLocalizationsHe extends AppLocalizations {
 
   @override
   String get dashboardPartialFailedHint => 'מה שכבר נשמר נשאר שמור.';
+
+  @override
+  String get deleteAccount => 'מחיקת חשבון';
+
+  @override
+  String get deleteAccountTitle => 'למחוק את החשבון שלך?';
+
+  @override
+  String get deleteAccountBody =>
+      'כל הנתונים שלך ב-Abba (תפילות, הגות, הקלטות קול) יימחקו לצמיתות. אם אינך משתמש באפליקציות ystech אחרות, גם חשבון ההתחברות שלך יימחק.';
+
+  @override
+  String get deleteAccountConfirmHint => 'הקלד \'DELETE\' לאישור.';
+
+  @override
+  String get deleteAccountFailed =>
+      'לא ניתן היה למחוק את החשבון. נסה שוב מאוחר יותר.';
 }

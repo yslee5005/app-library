@@ -578,5 +578,10 @@
   "recordingInterruptedSwitchToText": "テキストで書く",
   "dashboardPartialFailedQt": "一部の黙想内容を読み込めませんでした。新しい黙想を始めてください。",
   "dashboardPartialFailedPrayer": "一部の祈りの分析を読み込めませんでした。新しい祈りを始めてください。",
-  "dashboardPartialFailedHint": "保存済みの内容はそのまま保管されます。"
+  "dashboardPartialFailedHint": "保存済みの内容はそのまま保管されます。",
+  "deleteAccount": "アカウントを削除",
+  "deleteAccountTitle": "アカウントを削除しますか？",
+  "deleteAccountBody": "Abbaのすべてのデータ（祈り、黙想、音声録音）が完全に削除されます。他のystechアプリを使用していない場合は、サインインアカウントも削除されます。",
+  "deleteAccountConfirmHint": "確認するには 'DELETE' と入力してください。",
+  "deleteAccountFailed": "アカウントを削除できませんでした。しばらくしてから再度お試しください。"
 }

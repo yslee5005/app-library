@@ -578,5 +578,10 @@
   "recordingInterruptedSwitchToText": "Write as text instead",
   "dashboardPartialFailedQt": "Delar av meditationsinnehållet kunde inte laddas. Starta gärna en ny meditation.",
   "dashboardPartialFailedPrayer": "Delar av böneanalysen kunde inte laddas. Starta gärna en ny bön.",
-  "dashboardPartialFailedHint": "Det som redan är sparat behålls."
+  "dashboardPartialFailedHint": "Det som redan är sparat behålls.",
+  "deleteAccount": "Ta bort konto",
+  "deleteAccountTitle": "Ta bort ditt konto?",
+  "deleteAccountBody": "Alla dina Abba-data (böner, andakter, ljudinspelningar) raderas permanent. Om du inte använder andra ystech-appar tas även ditt inloggningskonto bort.",
+  "deleteAccountConfirmHint": "Skriv 'DELETE' för att bekräfta.",
+  "deleteAccountFailed": "Det gick inte att ta bort kontot. Försök igen senare."
 }

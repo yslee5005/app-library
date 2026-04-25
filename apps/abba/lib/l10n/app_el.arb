@@ -578,5 +578,10 @@
   "recordingInterruptedSwitchToText": "Write as text instead",
   "dashboardPartialFailedQt": "Δεν ήταν δυνατή η φόρτωση μέρους του στοχασμού. Ξεκινήστε έναν νέο στοχασμό.",
   "dashboardPartialFailedPrayer": "Δεν ήταν δυνατή η φόρτωση μέρους της ανάλυσης προσευχής. Ξεκινήστε μια νέα προσευχή.",
-  "dashboardPartialFailedHint": "Ό,τι έχει ήδη αποθηκευτεί παραμένει."
+  "dashboardPartialFailedHint": "Ό,τι έχει ήδη αποθηκευτεί παραμένει.",
+  "deleteAccount": "Διαγραφή λογαριασμού",
+  "deleteAccountTitle": "Διαγραφή του λογαριασμού σας;",
+  "deleteAccountBody": "Όλα τα δεδομένα σας στο Abba (προσευχές, στοχασμοί, ηχογραφήσεις) θα διαγραφούν οριστικά. Αν δεν χρησιμοποιείτε άλλες εφαρμογές ystech, θα διαγραφεί και ο λογαριασμός σύνδεσής σας.",
+  "deleteAccountConfirmHint": "Πληκτρολογήστε 'DELETE' για επιβεβαίωση.",
+  "deleteAccountFailed": "Δεν ήταν δυνατή η διαγραφή του λογαριασμού. Δοκιμάστε αργότερα."
 }

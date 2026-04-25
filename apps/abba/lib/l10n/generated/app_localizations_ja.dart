@@ -1344,4 +1344,20 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get dashboardPartialFailedHint => '保存済みの内容はそのまま保管されます。';
+
+  @override
+  String get deleteAccount => 'アカウントを削除';
+
+  @override
+  String get deleteAccountTitle => 'アカウントを削除しますか？';
+
+  @override
+  String get deleteAccountBody =>
+      'Abbaのすべてのデータ（祈り、黙想、音声録音）が完全に削除されます。他のystechアプリを使用していない場合は、サインインアカウントも削除されます。';
+
+  @override
+  String get deleteAccountConfirmHint => '確認するには \'DELETE\' と入力してください。';
+
+  @override
+  String get deleteAccountFailed => 'アカウントを削除できませんでした。しばらくしてから再度お試しください。';
 }

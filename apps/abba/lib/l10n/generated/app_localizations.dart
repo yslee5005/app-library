@@ -2695,6 +2695,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Anything already saved stays saved.'**
   String get dashboardPartialFailedHint;
+
+  /// No description provided for @deleteAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete account'**
+  String get deleteAccount;
+
+  /// No description provided for @deleteAccountTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete your account?'**
+  String get deleteAccountTitle;
+
+  /// No description provided for @deleteAccountBody.
+  ///
+  /// In en, this message translates to:
+  /// **'All your Abba data — prayers, QT, audio recordings — will be permanently deleted. If you don\'t use other ystech apps, your sign-in account will also be removed.'**
+  String get deleteAccountBody;
+
+  /// No description provided for @deleteAccountConfirmHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Type \'DELETE\' to confirm.'**
+  String get deleteAccountConfirmHint;
+
+  /// No description provided for @deleteAccountFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t delete account. Please try again later.'**
+  String get deleteAccountFailed;
 }
 
 class _AppLocalizationsDelegate

@@ -1391,4 +1391,20 @@ class AppLocalizationsId extends AppLocalizations {
   @override
   String get dashboardPartialFailedHint =>
       'Yang sudah tersimpan tetap aman tersimpan.';
+
+  @override
+  String get deleteAccount => 'Hapus akun';
+
+  @override
+  String get deleteAccountTitle => 'Hapus akun Anda?';
+
+  @override
+  String get deleteAccountBody =>
+      'Semua data Abba Anda (doa, renungan, rekaman audio) akan dihapus secara permanen. Jika Anda tidak menggunakan aplikasi ystech lain, akun masuk Anda juga akan dihapus.';
+
+  @override
+  String get deleteAccountConfirmHint => 'Ketik \'DELETE\' untuk konfirmasi.';
+
+  @override
+  String get deleteAccountFailed => 'Gagal menghapus akun. Coba lagi nanti.';
 }

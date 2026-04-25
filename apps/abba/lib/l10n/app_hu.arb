@@ -578,5 +578,10 @@
   "recordingInterruptedSwitchToText": "Write as text instead",
   "dashboardPartialFailedQt": "Az elmélkedés egy részét nem sikerült betölteni. Kérjük, kezdj új elmélkedést.",
   "dashboardPartialFailedPrayer": "Az imaelemzés egy részét nem sikerült betölteni. Kérjük, kezdj új imát.",
-  "dashboardPartialFailedHint": "Ami már mentve van, megmarad."
+  "dashboardPartialFailedHint": "Ami már mentve van, megmarad.",
+  "deleteAccount": "Fiók törlése",
+  "deleteAccountTitle": "Törlöd a fiókodat?",
+  "deleteAccountBody": "Minden Abba-adatod (imák, elmélkedések, hangfelvételek) véglegesen törlődik. Ha nem használsz más ystech-alkalmazást, a bejelentkezési fiókod is törlődik.",
+  "deleteAccountConfirmHint": "A megerősítéshez írd be: 'DELETE'.",
+  "deleteAccountFailed": "A fiók törlése sikertelen. Próbáld meg később."
 }

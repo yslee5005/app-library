@@ -578,5 +578,10 @@
   "recordingInterruptedSwitchToText": "टेक्स्ट के रूप में लिखें",
   "dashboardPartialFailedQt": "ध्यान की कुछ सामग्री लोड नहीं हो सकी। कृपया नया ध्यान शुरू करें।",
   "dashboardPartialFailedPrayer": "प्रार्थना विश्लेषण का कुछ भाग लोड नहीं हो सका। कृपया नई प्रार्थना शुरू करें।",
-  "dashboardPartialFailedHint": "जो पहले से सहेजा गया है वह सुरक्षित रहता है।"
+  "dashboardPartialFailedHint": "जो पहले से सहेजा गया है वह सुरक्षित रहता है।",
+  "deleteAccount": "खाता हटाएं",
+  "deleteAccountTitle": "क्या आप खाता हटाना चाहते हैं?",
+  "deleteAccountBody": "आपका Abba डेटा (प्रार्थनाएं, ध्यान, ऑडियो रिकॉर्डिंग) स्थायी रूप से हटा दिया जाएगा। यदि आप अन्य ystech ऐप्स का उपयोग नहीं करते हैं, तो आपका साइन-इन खाता भी हटा दिया जाएगा।",
+  "deleteAccountConfirmHint": "पुष्टि के लिए 'DELETE' टाइप करें।",
+  "deleteAccountFailed": "खाता हटाया नहीं जा सका। कृपया बाद में पुनः प्रयास करें।"
 }

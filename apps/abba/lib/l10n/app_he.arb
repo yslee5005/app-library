@@ -578,5 +578,10 @@
   "recordingInterruptedSwitchToText": "Write as text instead",
   "dashboardPartialFailedQt": "חלק מתוכן ההגות לא נטען. נא להתחיל הגות חדשה.",
   "dashboardPartialFailedPrayer": "חלק מניתוח התפילה לא נטען. נא להתחיל תפילה חדשה.",
-  "dashboardPartialFailedHint": "מה שכבר נשמר נשאר שמור."
+  "dashboardPartialFailedHint": "מה שכבר נשמר נשאר שמור.",
+  "deleteAccount": "מחיקת חשבון",
+  "deleteAccountTitle": "למחוק את החשבון שלך?",
+  "deleteAccountBody": "כל הנתונים שלך ב-Abba (תפילות, הגות, הקלטות קול) יימחקו לצמיתות. אם אינך משתמש באפליקציות ystech אחרות, גם חשבון ההתחברות שלך יימחק.",
+  "deleteAccountConfirmHint": "הקלד 'DELETE' לאישור.",
+  "deleteAccountFailed": "לא ניתן היה למחוק את החשבון. נסה שוב מאוחר יותר."
 }

@@ -1384,4 +1384,21 @@ class AppLocalizationsSv extends AppLocalizations {
 
   @override
   String get dashboardPartialFailedHint => 'Det som redan är sparat behålls.';
+
+  @override
+  String get deleteAccount => 'Ta bort konto';
+
+  @override
+  String get deleteAccountTitle => 'Ta bort ditt konto?';
+
+  @override
+  String get deleteAccountBody =>
+      'Alla dina Abba-data (böner, andakter, ljudinspelningar) raderas permanent. Om du inte använder andra ystech-appar tas även ditt inloggningskonto bort.';
+
+  @override
+  String get deleteAccountConfirmHint => 'Skriv \'DELETE\' för att bekräfta.';
+
+  @override
+  String get deleteAccountFailed =>
+      'Det gick inte att ta bort kontot. Försök igen senare.';
 }

@@ -578,5 +578,10 @@
   "recordingInterruptedSwitchToText": "Write as text instead",
   "dashboardPartialFailedQt": "Hindi na-load ang ilang bahagi ng nilalaman ng pagninilay. Mangyaring magsimula ng bagong pagninilay.",
   "dashboardPartialFailedPrayer": "Hindi na-load ang ilang bahagi ng pagsusuri ng panalangin. Mangyaring magsimula ng bagong panalangin.",
-  "dashboardPartialFailedHint": "Ang nakaimbak na ay nananatiling ligtas."
+  "dashboardPartialFailedHint": "Ang nakaimbak na ay nananatiling ligtas.",
+  "deleteAccount": "Tanggalin ang account",
+  "deleteAccountTitle": "Tanggalin ang iyong account?",
+  "deleteAccountBody": "Permanenteng tatanggalin ang lahat ng iyong data sa Abba (mga panalangin, pagninilay, mga voice recording). Kung hindi ka gumagamit ng iba pang ystech apps, tatanggalin din ang iyong sign-in account.",
+  "deleteAccountConfirmHint": "I-type ang 'DELETE' upang kumpirmahin.",
+  "deleteAccountFailed": "Hindi natanggal ang account. Subukan muli mamaya."
 }

@@ -578,5 +578,10 @@
   "recordingInterruptedSwitchToText": "เขียนเป็นข้อความ",
   "dashboardPartialFailedQt": "ไม่สามารถโหลดเนื้อหาการใคร่ครวญบางส่วนได้ กรุณาเริ่มการใคร่ครวญใหม่",
   "dashboardPartialFailedPrayer": "ไม่สามารถโหลดการวิเคราะห์คำอธิษฐานบางส่วนได้ กรุณาเริ่มคำอธิษฐานใหม่",
-  "dashboardPartialFailedHint": "สิ่งที่บันทึกไว้แล้วยังคงเก็บไว้อย่างปลอดภัย"
+  "dashboardPartialFailedHint": "สิ่งที่บันทึกไว้แล้วยังคงเก็บไว้อย่างปลอดภัย",
+  "deleteAccount": "ลบบัญชี",
+  "deleteAccountTitle": "ลบบัญชีของคุณหรือไม่?",
+  "deleteAccountBody": "ข้อมูล Abba ทั้งหมดของคุณ (คำอธิษฐาน การใคร่ครวญ การบันทึกเสียง) จะถูกลบอย่างถาวร หากคุณไม่ได้ใช้แอป ystech อื่น บัญชีเข้าสู่ระบบของคุณจะถูกลบด้วย",
+  "deleteAccountConfirmHint": "พิมพ์ 'DELETE' เพื่อยืนยัน",
+  "deleteAccountFailed": "ลบบัญชีไม่สำเร็จ กรุณาลองอีกครั้งในภายหลัง"
 }

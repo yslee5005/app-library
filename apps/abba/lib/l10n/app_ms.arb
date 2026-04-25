@@ -578,5 +578,10 @@
   "recordingInterruptedSwitchToText": "Tulis sebagai teks",
   "dashboardPartialFailedQt": "Sebahagian kandungan renungan tidak dapat dimuatkan. Sila mulakan renungan baru.",
   "dashboardPartialFailedPrayer": "Sebahagian analisis doa tidak dapat dimuatkan. Sila mulakan doa baru.",
-  "dashboardPartialFailedHint": "Yang sudah disimpan kekal tersimpan."
+  "dashboardPartialFailedHint": "Yang sudah disimpan kekal tersimpan.",
+  "deleteAccount": "Padam akaun",
+  "deleteAccountTitle": "Padam akaun anda?",
+  "deleteAccountBody": "Semua data Abba anda (doa, renungan, rakaman audio) akan dipadamkan secara kekal. Jika anda tidak menggunakan aplikasi ystech lain, akaun log masuk anda juga akan dipadamkan.",
+  "deleteAccountConfirmHint": "Taip 'DELETE' untuk mengesahkan.",
+  "deleteAccountFailed": "Gagal memadam akaun. Sila cuba lagi kemudian."
 }

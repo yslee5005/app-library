@@ -1385,4 +1385,21 @@ class AppLocalizationsSw extends AppLocalizations {
   @override
   String get dashboardPartialFailedHint =>
       'Yaliyokwisha hifadhiwa yanasalia salama.';
+
+  @override
+  String get deleteAccount => 'Futa akaunti';
+
+  @override
+  String get deleteAccountTitle => 'Futa akaunti yako?';
+
+  @override
+  String get deleteAccountBody =>
+      'Data yako yote ya Abba (sala, tafakari, rekodi za sauti) itafutwa kabisa. Ikiwa hutumii programu nyingine za ystech, akaunti yako ya kuingia pia itafutwa.';
+
+  @override
+  String get deleteAccountConfirmHint => 'Andika \'DELETE\' ili kuthibitisha.';
+
+  @override
+  String get deleteAccountFailed =>
+      'Imeshindwa kufuta akaunti. Tafadhali jaribu tena baadaye.';
 }

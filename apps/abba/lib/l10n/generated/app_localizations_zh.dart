@@ -1342,4 +1342,20 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get dashboardPartialFailedHint => '已保存的内容仍会保留。';
+
+  @override
+  String get deleteAccount => '删除账户';
+
+  @override
+  String get deleteAccountTitle => '删除您的账户？';
+
+  @override
+  String get deleteAccountBody =>
+      '您的所有 Abba 数据（祷告、默想、音频录音）将被永久删除。如果您未使用其他 ystech 应用，您的登录账户也将一并删除。';
+
+  @override
+  String get deleteAccountConfirmHint => '输入 \'DELETE\' 以确认。';
+
+  @override
+  String get deleteAccountFailed => '无法删除账户。请稍后再试。';
 }

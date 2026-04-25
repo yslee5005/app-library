@@ -1392,4 +1392,21 @@ class AppLocalizationsPl extends AppLocalizations {
   @override
   String get dashboardPartialFailedHint =>
       'To, co już zostało zapisane, pozostaje.';
+
+  @override
+  String get deleteAccount => 'Usuń konto';
+
+  @override
+  String get deleteAccountTitle => 'Usunąć konto?';
+
+  @override
+  String get deleteAccountBody =>
+      'Wszystkie Twoje dane Abba (modlitwy, rozważania, nagrania głosowe) zostaną trwale usunięte. Jeśli nie korzystasz z innych aplikacji ystech, Twoje konto logowania również zostanie usunięte.';
+
+  @override
+  String get deleteAccountConfirmHint => 'Wpisz \'DELETE\', aby potwierdzić.';
+
+  @override
+  String get deleteAccountFailed =>
+      'Nie udało się usunąć konta. Spróbuj później.';
 }

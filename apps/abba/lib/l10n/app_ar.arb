@@ -578,5 +578,10 @@
   "recordingInterruptedSwitchToText": "الكتابة كنص",
   "dashboardPartialFailedQt": "تعذّر تحميل بعض محتوى التأمل. يرجى بدء تأمل جديد.",
   "dashboardPartialFailedPrayer": "تعذّر تحميل بعض تحليل الصلاة. يرجى بدء صلاة جديدة.",
-  "dashboardPartialFailedHint": "ما تم حفظه يبقى محفوظًا."
+  "dashboardPartialFailedHint": "ما تم حفظه يبقى محفوظًا.",
+  "deleteAccount": "حذف الحساب",
+  "deleteAccountTitle": "هل تريد حذف حسابك؟",
+  "deleteAccountBody": "سيتم حذف جميع بيانات Abba (الصلوات والتأملات وتسجيلات الصوت) بشكل دائم. إذا كنت لا تستخدم تطبيقات ystech الأخرى، فسيتم حذف حساب تسجيل الدخول أيضًا.",
+  "deleteAccountConfirmHint": "اكتب 'DELETE' للتأكيد.",
+  "deleteAccountFailed": "تعذّر حذف الحساب. يرجى المحاولة لاحقًا."
 }

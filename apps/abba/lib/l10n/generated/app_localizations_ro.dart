@@ -1395,4 +1395,22 @@ class AppLocalizationsRo extends AppLocalizations {
   @override
   String get dashboardPartialFailedHint =>
       'Ceea ce este deja salvat rămâne păstrat.';
+
+  @override
+  String get deleteAccount => 'Șterge contul';
+
+  @override
+  String get deleteAccountTitle => 'Ștergeți contul?';
+
+  @override
+  String get deleteAccountBody =>
+      'Toate datele dvs. Abba (rugăciuni, meditații, înregistrări audio) vor fi șterse definitiv. Dacă nu utilizați alte aplicații ystech, va fi șters și contul de autentificare.';
+
+  @override
+  String get deleteAccountConfirmHint =>
+      'Tastați \'DELETE\' pentru confirmare.';
+
+  @override
+  String get deleteAccountFailed =>
+      'Contul nu a putut fi șters. Încercați din nou mai târziu.';
 }

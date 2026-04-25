@@ -578,5 +578,10 @@
   "recordingInterruptedSwitchToText": "Написать текстом",
   "dashboardPartialFailedQt": "Не удалось загрузить часть содержимого размышления. Начните новое размышление.",
   "dashboardPartialFailedPrayer": "Не удалось загрузить часть анализа молитвы. Начните новую молитву.",
-  "dashboardPartialFailedHint": "Сохранённое останется на месте."
+  "dashboardPartialFailedHint": "Сохранённое останется на месте.",
+  "deleteAccount": "Удалить аккаунт",
+  "deleteAccountTitle": "Удалить аккаунт?",
+  "deleteAccountBody": "Все ваши данные Abba (молитвы, размышления, аудиозаписи) будут безвозвратно удалены. Если вы не пользуетесь другими приложениями ystech, ваша учётная запись для входа также будет удалена.",
+  "deleteAccountConfirmHint": "Для подтверждения введите 'DELETE'.",
+  "deleteAccountFailed": "Не удалось удалить аккаунт. Попробуйте позже."
 }

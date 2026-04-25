@@ -578,5 +578,10 @@
   "recordingInterruptedSwitchToText": "Write as text instead",
   "dashboardPartialFailedQt": "En del af meditationsindholdet kunne ikke indlæses. Start gerne en ny meditation.",
   "dashboardPartialFailedPrayer": "En del af bønnens analyse kunne ikke indlæses. Start gerne en ny bøn.",
-  "dashboardPartialFailedHint": "Det, der allerede er gemt, bevares."
+  "dashboardPartialFailedHint": "Det, der allerede er gemt, bevares.",
+  "deleteAccount": "Slet konto",
+  "deleteAccountTitle": "Slet din konto?",
+  "deleteAccountBody": "Alle dine Abba-data (bønner, andagter, lydoptagelser) vil blive permanent slettet. Hvis du ikke bruger andre ystech-apps, slettes din loginkonto også.",
+  "deleteAccountConfirmHint": "Skriv 'DELETE' for at bekræfte.",
+  "deleteAccountFailed": "Kunne ikke slette kontoen. Prøv igen senere."
 }

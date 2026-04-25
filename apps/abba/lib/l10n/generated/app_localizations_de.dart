@@ -1397,4 +1397,22 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get dashboardPartialFailedHint =>
       'Bereits Gespeichertes bleibt erhalten.';
+
+  @override
+  String get deleteAccount => 'Konto löschen';
+
+  @override
+  String get deleteAccountTitle => 'Konto löschen?';
+
+  @override
+  String get deleteAccountBody =>
+      'Alle Ihre Abba-Daten (Gebete, Andachten, Sprachaufnahmen) werden dauerhaft gelöscht. Wenn Sie keine anderen ystech-Apps nutzen, wird auch Ihr Anmeldekonto entfernt.';
+
+  @override
+  String get deleteAccountConfirmHint =>
+      'Geben Sie \'DELETE\' ein, um zu bestätigen.';
+
+  @override
+  String get deleteAccountFailed =>
+      'Konto konnte nicht gelöscht werden. Bitte später erneut versuchen.';
 }

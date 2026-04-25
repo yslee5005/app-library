@@ -197,6 +197,26 @@ class AuthNotifier extends AsyncNotifier<AuthState> {
     };
   }
 
+  /// Phase A3 — Option C account deletion. Calls the app-scoped Edge
+  /// Function via the repository to purge all app data and (when this is
+  /// the last ystech app for the user) the auth.users row. The repository
+  /// signs the user out on success, so the resulting state is
+  /// [Unauthenticated]. On failure, [AuthError] surfaces the reason and
+  /// the local session is left intact for the caller to retry.
+  Future<void> deleteAccount() async {
+    state = const AsyncLoading();
+    final result = await _repo.deleteAccount();
+    state = switch (result) {
+      Success() => const AsyncData(Unauthenticated()),
+      Failure(:final exception) => AsyncData(
+        AuthError(
+          message: exception.message,
+          code: exception is AuthException ? exception.code : null,
+        ),
+      ),
+    };
+  }
+
   /// Signs out the current user.
   Future<void> signOut() async {
     state = const AsyncLoading();

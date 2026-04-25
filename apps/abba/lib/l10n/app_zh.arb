@@ -578,5 +578,10 @@
   "recordingInterruptedSwitchToText": "改用文字书写",
   "dashboardPartialFailedQt": "部分默想内容无法加载。请开始新的默想。",
   "dashboardPartialFailedPrayer": "部分祷告分析无法加载。请开始新的祷告。",
-  "dashboardPartialFailedHint": "已保存的内容仍会保留。"
+  "dashboardPartialFailedHint": "已保存的内容仍会保留。",
+  "deleteAccount": "删除账户",
+  "deleteAccountTitle": "删除您的账户？",
+  "deleteAccountBody": "您的所有 Abba 数据（祷告、默想、音频录音）将被永久删除。如果您未使用其他 ystech 应用，您的登录账户也将一并删除。",
+  "deleteAccountConfirmHint": "输入 'DELETE' 以确认。",
+  "deleteAccountFailed": "无法删除账户。请稍后再试。"
 }

@@ -194,15 +194,46 @@ class SupabaseAuthRepository implements AuthRepository {
         );
       }
 
-      // Delete profile first (cascade will handle related data).
-      await _client.raw
-          .from('profiles')
-          .delete()
-          .eq('app_id', _client.appId)
-          .eq('id', userId);
+      // Phase A3 — Option C account deletion via Edge Function.
+      // The function purges all app-scoped data (prayer-audio storage,
+      // abba.* rows, profiles row for this app, app-scoped user_devices)
+      // and conditionally deletes auth.users only when this is the user's
+      // last ystech app profile. Naming follows the multi-tenant
+      // convention: each app deploys its own `${appId}-delete-account`
+      // function so blast radius stays inside the calling app.
+      final functionName = '${_client.appId}-delete-account';
 
-      // Sign out (actual user deletion requires service_role via Edge Function).
-      await _auth.signOut();
+      try {
+        final response = await _client.raw.functions.invoke(functionName);
+        // FunctionResponse.status is the HTTP status of the underlying call.
+        if (response.status != null && response.status! >= 400) {
+          return Result.failure(
+            AuthException(
+              message:
+                  'Delete account failed: server returned ${response.status}',
+              code: 'delete_account_server_error',
+            ),
+          );
+        }
+      } on FunctionException catch (e, st) {
+        return Result.failure(
+          AuthException(
+            message: 'Delete account failed: ${e.details ?? e.toString()}',
+            code: 'delete_account_function_error',
+            originalError: e,
+            stackTrace: st,
+          ),
+        );
+      }
+
+      // Always sign out — even in abba_only scope (auth.users still exists)
+      // we want to clear the local session so the app returns to /welcome.
+      // A failure here is non-fatal: the server-side purge already succeeded.
+      try {
+        await _auth.signOut();
+      } catch (_) {
+        // Local session clear failed; not propagated.
+      }
 
       return const Result.success(null);
     } catch (e, st) {

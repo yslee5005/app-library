@@ -578,5 +578,10 @@
   "recordingInterruptedSwitchToText": "Write as text instead",
   "dashboardPartialFailedQt": "Sehemu ya maudhui ya tafakari haikupakuliwa. Tafadhali anza tafakari mpya.",
   "dashboardPartialFailedPrayer": "Sehemu ya uchambuzi wa sala haikupakuliwa. Tafadhali anza sala mpya.",
-  "dashboardPartialFailedHint": "Yaliyokwisha hifadhiwa yanasalia salama."
+  "dashboardPartialFailedHint": "Yaliyokwisha hifadhiwa yanasalia salama.",
+  "deleteAccount": "Futa akaunti",
+  "deleteAccountTitle": "Futa akaunti yako?",
+  "deleteAccountBody": "Data yako yote ya Abba (sala, tafakari, rekodi za sauti) itafutwa kabisa. Ikiwa hutumii programu nyingine za ystech, akaunti yako ya kuingia pia itafutwa.",
+  "deleteAccountConfirmHint": "Andika 'DELETE' ili kuthibitisha.",
+  "deleteAccountFailed": "Imeshindwa kufuta akaunti. Tafadhali jaribu tena baadaye."
 }

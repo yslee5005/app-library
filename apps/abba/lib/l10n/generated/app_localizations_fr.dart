@@ -1399,4 +1399,21 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get dashboardPartialFailedHint =>
       'Ce qui est déjà enregistré est conservé.';
+
+  @override
+  String get deleteAccount => 'Supprimer le compte';
+
+  @override
+  String get deleteAccountTitle => 'Supprimer votre compte ?';
+
+  @override
+  String get deleteAccountBody =>
+      'Toutes vos données Abba (prières, méditations, enregistrements audio) seront définitivement supprimées. Si vous n\'utilisez pas d\'autres applications ystech, votre compte de connexion sera également supprimé.';
+
+  @override
+  String get deleteAccountConfirmHint => 'Tapez \'DELETE\' pour confirmer.';
+
+  @override
+  String get deleteAccountFailed =>
+      'Impossible de supprimer le compte. Veuillez réessayer plus tard.';
 }

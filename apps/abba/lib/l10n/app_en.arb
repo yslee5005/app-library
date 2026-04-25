@@ -634,5 +634,10 @@
   "recordingInterruptedSwitchToText": "Write as text instead",
   "dashboardPartialFailedQt": "Some meditation content couldn't be loaded. Please start a new meditation.",
   "dashboardPartialFailedPrayer": "Some prayer analysis couldn't be loaded. Please start a new prayer.",
-  "dashboardPartialFailedHint": "Anything already saved stays saved."
+  "dashboardPartialFailedHint": "Anything already saved stays saved.",
+  "deleteAccount": "Delete account",
+  "deleteAccountTitle": "Delete your account?",
+  "deleteAccountBody": "All your Abba data — prayers, QT, audio recordings — will be permanently deleted. If you don't use other ystech apps, your sign-in account will also be removed.",
+  "deleteAccountConfirmHint": "Type 'DELETE' to confirm.",
+  "deleteAccountFailed": "Couldn't delete account. Please try again later."
 }

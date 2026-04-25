@@ -1389,4 +1389,21 @@ class AppLocalizationsNl extends AppLocalizations {
   @override
   String get dashboardPartialFailedHint =>
       'Wat al is opgeslagen, blijft bewaard.';
+
+  @override
+  String get deleteAccount => 'Account verwijderen';
+
+  @override
+  String get deleteAccountTitle => 'Account verwijderen?';
+
+  @override
+  String get deleteAccountBody =>
+      'Alle Abba-gegevens (gebeden, meditaties, geluidsopnamen) worden permanent verwijderd. Als je geen andere ystech-apps gebruikt, wordt ook je inlogaccount verwijderd.';
+
+  @override
+  String get deleteAccountConfirmHint => 'Typ \'DELETE\' om te bevestigen.';
+
+  @override
+  String get deleteAccountFailed =>
+      'Kan account niet verwijderen. Probeer het later opnieuw.';
 }

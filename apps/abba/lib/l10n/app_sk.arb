@@ -578,5 +578,10 @@
   "recordingInterruptedSwitchToText": "Write as text instead",
   "dashboardPartialFailedQt": "Časť obsahu meditácie sa nepodarilo načítať. Začnite, prosím, novú meditáciu.",
   "dashboardPartialFailedPrayer": "Časť analýzy modlitby sa nepodarilo načítať. Začnite, prosím, novú modlitbu.",
-  "dashboardPartialFailedHint": "Čo je už uložené, zostáva zachované."
+  "dashboardPartialFailedHint": "Čo je už uložené, zostáva zachované.",
+  "deleteAccount": "Odstrániť účet",
+  "deleteAccountTitle": "Odstrániť svoj účet?",
+  "deleteAccountBody": "Všetky vaše údaje v aplikácii Abba (modlitby, stíšenia, hlasové nahrávky) budú natrvalo odstránené. Ak nepoužívate iné aplikácie ystech, odstráni sa aj váš prihlasovací účet.",
+  "deleteAccountConfirmHint": "Pre potvrdenie napíšte 'DELETE'.",
+  "deleteAccountFailed": "Účet sa nepodarilo odstrániť. Skúste to neskôr."
 }

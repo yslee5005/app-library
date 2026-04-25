@@ -1384,4 +1384,22 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get dashboardPartialFailedHint => 'Сохранённое останется на месте.';
+
+  @override
+  String get deleteAccount => 'Удалить аккаунт';
+
+  @override
+  String get deleteAccountTitle => 'Удалить аккаунт?';
+
+  @override
+  String get deleteAccountBody =>
+      'Все ваши данные Abba (молитвы, размышления, аудиозаписи) будут безвозвратно удалены. Если вы не пользуетесь другими приложениями ystech, ваша учётная запись для входа также будет удалена.';
+
+  @override
+  String get deleteAccountConfirmHint =>
+      'Для подтверждения введите \'DELETE\'.';
+
+  @override
+  String get deleteAccountFailed =>
+      'Не удалось удалить аккаунт. Попробуйте позже.';
 }

@@ -1388,4 +1388,21 @@ class AppLocalizationsCs extends AppLocalizations {
   @override
   String get dashboardPartialFailedHint =>
       'Co je již uloženo, zůstává zachováno.';
+
+  @override
+  String get deleteAccount => 'Smazat účet';
+
+  @override
+  String get deleteAccountTitle => 'Smazat svůj účet?';
+
+  @override
+  String get deleteAccountBody =>
+      'Všechna vaše data v Abba (modlitby, ztišení, hlasové nahrávky) budou trvale smazána. Pokud nepoužíváte jiné aplikace ystech, bude smazán i váš přihlašovací účet.';
+
+  @override
+  String get deleteAccountConfirmHint => 'Pro potvrzení napište \'DELETE\'.';
+
+  @override
+  String get deleteAccountFailed =>
+      'Účet se nepodařilo smazat. Zkuste to prosím později.';
 }

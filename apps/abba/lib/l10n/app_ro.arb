@@ -578,5 +578,10 @@
   "recordingInterruptedSwitchToText": "Write as text instead",
   "dashboardPartialFailedQt": "O parte din conținutul meditației nu a putut fi încărcată. Începeți o nouă meditație.",
   "dashboardPartialFailedPrayer": "O parte din analiza rugăciunii nu a putut fi încărcată. Începeți o nouă rugăciune.",
-  "dashboardPartialFailedHint": "Ceea ce este deja salvat rămâne păstrat."
+  "dashboardPartialFailedHint": "Ceea ce este deja salvat rămâne păstrat.",
+  "deleteAccount": "Șterge contul",
+  "deleteAccountTitle": "Ștergeți contul?",
+  "deleteAccountBody": "Toate datele dvs. Abba (rugăciuni, meditații, înregistrări audio) vor fi șterse definitiv. Dacă nu utilizați alte aplicații ystech, va fi șters și contul de autentificare.",
+  "deleteAccountConfirmHint": "Tastați 'DELETE' pentru confirmare.",
+  "deleteAccountFailed": "Contul nu a putut fi șters. Încercați din nou mai târziu."
 }

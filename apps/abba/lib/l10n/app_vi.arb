@@ -578,5 +578,10 @@
   "recordingInterruptedSwitchToText": "Viết bằng văn bản",
   "dashboardPartialFailedQt": "Không thể tải một phần nội dung suy gẫm. Vui lòng bắt đầu một bài suy gẫm mới.",
   "dashboardPartialFailedPrayer": "Không thể tải một phần phân tích lời cầu nguyện. Vui lòng bắt đầu một lời cầu nguyện mới.",
-  "dashboardPartialFailedHint": "Nội dung đã lưu vẫn được giữ nguyên."
+  "dashboardPartialFailedHint": "Nội dung đã lưu vẫn được giữ nguyên.",
+  "deleteAccount": "Xóa tài khoản",
+  "deleteAccountTitle": "Xóa tài khoản của bạn?",
+  "deleteAccountBody": "Tất cả dữ liệu Abba của bạn (lời cầu nguyện, suy gẫm, bản ghi âm) sẽ bị xóa vĩnh viễn. Nếu bạn không dùng các ứng dụng ystech khác, tài khoản đăng nhập cũng sẽ bị xóa.",
+  "deleteAccountConfirmHint": "Nhập 'DELETE' để xác nhận.",
+  "deleteAccountFailed": "Không thể xóa tài khoản. Vui lòng thử lại sau."
 }

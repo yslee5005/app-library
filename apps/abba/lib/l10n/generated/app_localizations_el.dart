@@ -1392,4 +1392,22 @@ class AppLocalizationsEl extends AppLocalizations {
   @override
   String get dashboardPartialFailedHint =>
       'Ό,τι έχει ήδη αποθηκευτεί παραμένει.';
+
+  @override
+  String get deleteAccount => 'Διαγραφή λογαριασμού';
+
+  @override
+  String get deleteAccountTitle => 'Διαγραφή του λογαριασμού σας;';
+
+  @override
+  String get deleteAccountBody =>
+      'Όλα τα δεδομένα σας στο Abba (προσευχές, στοχασμοί, ηχογραφήσεις) θα διαγραφούν οριστικά. Αν δεν χρησιμοποιείτε άλλες εφαρμογές ystech, θα διαγραφεί και ο λογαριασμός σύνδεσής σας.';
+
+  @override
+  String get deleteAccountConfirmHint =>
+      'Πληκτρολογήστε \'DELETE\' για επιβεβαίωση.';
+
+  @override
+  String get deleteAccountFailed =>
+      'Δεν ήταν δυνατή η διαγραφή του λογαριασμού. Δοκιμάστε αργότερα.';
 }

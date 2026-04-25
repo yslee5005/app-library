@@ -1384,4 +1384,21 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get dashboardPartialFailedHint => 'Daha önce kaydedilenler korunur.';
+
+  @override
+  String get deleteAccount => 'Hesabı sil';
+
+  @override
+  String get deleteAccountTitle => 'Hesabınız silinsin mi?';
+
+  @override
+  String get deleteAccountBody =>
+      'Tüm Abba verileriniz (dualar, tefekkürler, ses kayıtları) kalıcı olarak silinecek. Diğer ystech uygulamalarını kullanmıyorsanız oturum açma hesabınız da silinir.';
+
+  @override
+  String get deleteAccountConfirmHint => 'Onaylamak için \'DELETE\' yazın.';
+
+  @override
+  String get deleteAccountFailed =>
+      'Hesap silinemedi. Lütfen daha sonra tekrar deneyin.';
 }

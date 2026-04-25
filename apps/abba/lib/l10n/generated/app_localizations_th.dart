@@ -1376,4 +1376,21 @@ class AppLocalizationsTh extends AppLocalizations {
   @override
   String get dashboardPartialFailedHint =>
       'สิ่งที่บันทึกไว้แล้วยังคงเก็บไว้อย่างปลอดภัย';
+
+  @override
+  String get deleteAccount => 'ลบบัญชี';
+
+  @override
+  String get deleteAccountTitle => 'ลบบัญชีของคุณหรือไม่?';
+
+  @override
+  String get deleteAccountBody =>
+      'ข้อมูล Abba ทั้งหมดของคุณ (คำอธิษฐาน การใคร่ครวญ การบันทึกเสียง) จะถูกลบอย่างถาวร หากคุณไม่ได้ใช้แอป ystech อื่น บัญชีเข้าสู่ระบบของคุณจะถูกลบด้วย';
+
+  @override
+  String get deleteAccountConfirmHint => 'พิมพ์ \'DELETE\' เพื่อยืนยัน';
+
+  @override
+  String get deleteAccountFailed =>
+      'ลบบัญชีไม่สำเร็จ กรุณาลองอีกครั้งในภายหลัง';
 }

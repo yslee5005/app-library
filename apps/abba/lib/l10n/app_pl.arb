@@ -578,5 +578,10 @@
   "recordingInterruptedSwitchToText": "Napisz jako tekst",
   "dashboardPartialFailedQt": "Nie udało się wczytać części treści medytacji. Rozpocznij nową medytację.",
   "dashboardPartialFailedPrayer": "Nie udało się wczytać części analizy modlitwy. Rozpocznij nową modlitwę.",
-  "dashboardPartialFailedHint": "To, co już zostało zapisane, pozostaje."
+  "dashboardPartialFailedHint": "To, co już zostało zapisane, pozostaje.",
+  "deleteAccount": "Usuń konto",
+  "deleteAccountTitle": "Usunąć konto?",
+  "deleteAccountBody": "Wszystkie Twoje dane Abba (modlitwy, rozważania, nagrania głosowe) zostaną trwale usunięte. Jeśli nie korzystasz z innych aplikacji ystech, Twoje konto logowania również zostanie usunięte.",
+  "deleteAccountConfirmHint": "Wpisz 'DELETE', aby potwierdzić.",
+  "deleteAccountFailed": "Nie udało się usunąć konta. Spróbuj później."
 }

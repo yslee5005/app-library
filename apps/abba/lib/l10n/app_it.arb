@@ -578,5 +578,10 @@
   "recordingInterruptedSwitchToText": "Scrivi come testo",
   "dashboardPartialFailedQt": "Non è stato possibile caricare parte del contenuto della meditazione. Inizia una nuova meditazione.",
   "dashboardPartialFailedPrayer": "Non è stato possibile caricare parte dell'analisi della preghiera. Inizia una nuova preghiera.",
-  "dashboardPartialFailedHint": "I contenuti già salvati restano al sicuro."
+  "dashboardPartialFailedHint": "I contenuti già salvati restano al sicuro.",
+  "deleteAccount": "Elimina account",
+  "deleteAccountTitle": "Eliminare il tuo account?",
+  "deleteAccountBody": "Tutti i tuoi dati Abba (preghiere, meditazioni, registrazioni audio) saranno eliminati definitivamente. Se non usi altre app ystech, sarà eliminato anche il tuo account di accesso.",
+  "deleteAccountConfirmHint": "Digita 'DELETE' per confermare.",
+  "deleteAccountFailed": "Impossibile eliminare l'account. Riprova più tardi."
 }

@@ -578,5 +578,10 @@
   "recordingInterruptedSwitchToText": "Stattdessen als Text schreiben",
   "dashboardPartialFailedQt": "Ein Teil der Meditationsinhalte konnte nicht geladen werden. Bitte beginnen Sie eine neue Meditation.",
   "dashboardPartialFailedPrayer": "Ein Teil der Gebetsanalyse konnte nicht geladen werden. Bitte beginnen Sie ein neues Gebet.",
-  "dashboardPartialFailedHint": "Bereits Gespeichertes bleibt erhalten."
+  "dashboardPartialFailedHint": "Bereits Gespeichertes bleibt erhalten.",
+  "deleteAccount": "Konto löschen",
+  "deleteAccountTitle": "Konto löschen?",
+  "deleteAccountBody": "Alle Ihre Abba-Daten (Gebete, Andachten, Sprachaufnahmen) werden dauerhaft gelöscht. Wenn Sie keine anderen ystech-Apps nutzen, wird auch Ihr Anmeldekonto entfernt.",
+  "deleteAccountConfirmHint": "Geben Sie 'DELETE' ein, um zu bestätigen.",
+  "deleteAccountFailed": "Konto konnte nicht gelöscht werden. Bitte später erneut versuchen."
 }

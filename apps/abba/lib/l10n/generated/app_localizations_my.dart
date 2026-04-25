@@ -1401,4 +1401,22 @@ class AppLocalizationsMy extends AppLocalizations {
   @override
   String get dashboardPartialFailedHint =>
       'သိမ်းဆည်းပြီးသားအကြောင်းအရာများ ဆက်လက်ထိန်းသိမ်းထားပါသည်။';
+
+  @override
+  String get deleteAccount => 'အကောင့်ဖျက်ရန်';
+
+  @override
+  String get deleteAccountTitle => 'အကောင့်ကိုဖျက်မလား?';
+
+  @override
+  String get deleteAccountBody =>
+      'သင့် Abba ဒေတာအားလုံး (ဆုတောင်းခြင်းများ၊ တရားရှုမှတ်ခြင်းများ၊ အသံဖိုင်များ) ကို အပြီးတိုင်ဖျက်ပစ်ပါမည်။ အခြား ystech အက်ပ်များမသုံးပါက သင်၏ ဝင်ရောက်အကောင့်လည်း ဖျက်ပစ်ပါမည်။';
+
+  @override
+  String get deleteAccountConfirmHint =>
+      'အတည်ပြုရန် \'DELETE\' ဟု ရိုက်ထည့်ပါ။';
+
+  @override
+  String get deleteAccountFailed =>
+      'အကောင့်ကိုဖျက်၍မရပါ။ နောက်မှ ပြန်လည်ကြိုးစားပါ။';
 }

@@ -578,5 +578,10 @@
   "recordingInterruptedSwitchToText": "Write as text instead",
   "dashboardPartialFailedQt": "Dio sadržaja meditacije nije bilo moguće učitati. Započnite novu meditaciju.",
   "dashboardPartialFailedPrayer": "Dio analize molitve nije bilo moguće učitati. Započnite novu molitvu.",
-  "dashboardPartialFailedHint": "Već spremljeni sadržaj ostaje pohranjen."
+  "dashboardPartialFailedHint": "Već spremljeni sadržaj ostaje pohranjen.",
+  "deleteAccount": "Izbriši račun",
+  "deleteAccountTitle": "Izbrisati račun?",
+  "deleteAccountBody": "Svi vaši Abba podaci (molitve, meditacije, glasovne snimke) bit će trajno izbrisani. Ako ne koristite druge ystech aplikacije, bit će izbrisan i vaš račun za prijavu.",
+  "deleteAccountConfirmHint": "Za potvrdu unesite 'DELETE'.",
+  "deleteAccountFailed": "Nije moguće izbrisati račun. Pokušajte kasnije."
 }

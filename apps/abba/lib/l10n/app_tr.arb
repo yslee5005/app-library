@@ -578,5 +578,10 @@
   "recordingInterruptedSwitchToText": "Metin olarak yaz",
   "dashboardPartialFailedQt": "Tefekkür içeriğinin bir kısmı yüklenemedi. Lütfen yeni bir tefekküre başlayın.",
   "dashboardPartialFailedPrayer": "Dua analizinin bir kısmı yüklenemedi. Lütfen yeni bir duaya başlayın.",
-  "dashboardPartialFailedHint": "Daha önce kaydedilenler korunur."
+  "dashboardPartialFailedHint": "Daha önce kaydedilenler korunur.",
+  "deleteAccount": "Hesabı sil",
+  "deleteAccountTitle": "Hesabınız silinsin mi?",
+  "deleteAccountBody": "Tüm Abba verileriniz (dualar, tefekkürler, ses kayıtları) kalıcı olarak silinecek. Diğer ystech uygulamalarını kullanmıyorsanız oturum açma hesabınız da silinir.",
+  "deleteAccountConfirmHint": "Onaylamak için 'DELETE' yazın.",
+  "deleteAccountFailed": "Hesap silinemedi. Lütfen daha sonra tekrar deneyin."
 }

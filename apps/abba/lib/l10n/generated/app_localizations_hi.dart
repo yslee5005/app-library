@@ -1383,4 +1383,21 @@ class AppLocalizationsHi extends AppLocalizations {
   @override
   String get dashboardPartialFailedHint =>
       'जो पहले से सहेजा गया है वह सुरक्षित रहता है।';
+
+  @override
+  String get deleteAccount => 'खाता हटाएं';
+
+  @override
+  String get deleteAccountTitle => 'क्या आप खाता हटाना चाहते हैं?';
+
+  @override
+  String get deleteAccountBody =>
+      'आपका Abba डेटा (प्रार्थनाएं, ध्यान, ऑडियो रिकॉर्डिंग) स्थायी रूप से हटा दिया जाएगा। यदि आप अन्य ystech ऐप्स का उपयोग नहीं करते हैं, तो आपका साइन-इन खाता भी हटा दिया जाएगा।';
+
+  @override
+  String get deleteAccountConfirmHint => 'पुष्टि के लिए \'DELETE\' टाइप करें।';
+
+  @override
+  String get deleteAccountFailed =>
+      'खाता हटाया नहीं जा सका। कृपया बाद में पुनः प्रयास करें।';
 }

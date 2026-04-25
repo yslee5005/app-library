@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:app_lib_auth/auth.dart' show AuthError, Unauthenticated;
 import 'package:app_lib_logging/logging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -230,6 +231,16 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
                     onTap: () => _showLogoutDialog(context, l10n),
                   ),
                 ],
+                // Phase A3 — account deletion is available to anon users too;
+                // they have abba data + an auth.users row that should be
+                // removable from inside the app per REQUIREMENTS §11.
+                const Divider(height: 1, indent: 56),
+                _SettingsRow(
+                  icon: Icons.delete_forever,
+                  title: l10n.deleteAccount,
+                  titleColor: AbbaColors.error,
+                  onTap: () => _showDeleteAccountDialog(context, l10n),
+                ),
               ],
             ),
           ),
@@ -511,6 +522,41 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
     }
   }
 
+  // ── Delete account dialog (Phase A3 — Option C) ─────────────────────
+  Future<void> _showDeleteAccountDialog(
+    BuildContext context,
+    AppLocalizations l10n,
+  ) async {
+    await showDialog<void>(
+      context: context,
+      barrierDismissible: false,
+      builder: (_) => _DeleteAccountDialog(
+        onConfirm: () async {
+          // Throws on failure so the dialog can show inline error and stay
+          // open; success closes the dialog from inside.
+          await ref.read(authNotifierProvider.notifier).deleteAccount();
+          final state = ref.read(authNotifierProvider).value;
+          if (state is AuthError) {
+            authLog.error(
+              'deleteAccount surfaced AuthError',
+              error: state.message,
+            );
+            throw Exception(state.message);
+          }
+        },
+      ),
+    );
+
+    // Dialog closed — navigate only when auth state confirms removal.
+    if (!context.mounted) return;
+    final state = ref.read(authNotifierProvider).value;
+    if (state is Unauthenticated) {
+      authLog.info('Account deleted, navigating to welcome');
+      context.go('/welcome');
+    }
+    // Otherwise the dialog was canceled or its inline error path took over.
+  }
+
   // ── Logout dialog ───────────────────────────────────────────────────
   void _showLogoutDialog(BuildContext context, AppLocalizations l10n) {
     showDialog(
@@ -540,6 +586,145 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
               l10n.logout,
               style: AbbaTypography.bodySmall.copyWith(color: AbbaColors.error),
             ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+// ── Delete account dialog widget ────────────────────────────────────────
+//
+// Phase A3 — type-confirmation dialog for account deletion. The user must
+// type the universal magic word "DELETE" (locale-independent so the same
+// confirmation gesture works across all 35 locales) before the destructive
+// button activates. While the deletion is in flight the dialog locks all
+// inputs and shows a spinner; on inline failure the body surfaces an error
+// message and lets the user retry without re-typing the word.
+class _DeleteAccountDialog extends StatefulWidget {
+  const _DeleteAccountDialog({required this.onConfirm});
+
+  /// Performs the actual deletion. Must throw on failure so the dialog can
+  /// surface an inline error and let the user retry. On success it returns
+  /// normally and the dialog closes itself.
+  final Future<void> Function() onConfirm;
+
+  @override
+  State<_DeleteAccountDialog> createState() => _DeleteAccountDialogState();
+}
+
+class _DeleteAccountDialogState extends State<_DeleteAccountDialog> {
+  static const _confirmWord = 'DELETE';
+  final _controller = TextEditingController();
+  bool _isProcessing = false;
+  String? _errorMessage;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller.addListener(_onTextChanged);
+  }
+
+  @override
+  void dispose() {
+    _controller.removeListener(_onTextChanged);
+    _controller.dispose();
+    super.dispose();
+  }
+
+  void _onTextChanged() {
+    setState(() {
+      // Clear inline error as soon as the user starts editing again.
+      if (_errorMessage != null) _errorMessage = null;
+    });
+  }
+
+  bool get _canDelete =>
+      !_isProcessing && _controller.text.trim() == _confirmWord;
+
+  Future<void> _handleConfirm() async {
+    setState(() {
+      _isProcessing = true;
+      _errorMessage = null;
+    });
+    try {
+      await widget.onConfirm();
+      if (!mounted) return;
+      Navigator.of(context).pop();
+    } catch (_) {
+      if (!mounted) return;
+      setState(() {
+        _isProcessing = false;
+        _errorMessage = AppLocalizations.of(context)!.deleteAccountFailed;
+      });
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+    return PopScope(
+      canPop: !_isProcessing,
+      child: AlertDialog(
+        backgroundColor: AbbaColors.cream,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(AbbaRadius.lg),
+        ),
+        title: Text(l10n.deleteAccountTitle, style: AbbaTypography.h2),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(l10n.deleteAccountBody, style: AbbaTypography.body),
+            const SizedBox(height: AbbaSpacing.md),
+            Text(
+              l10n.deleteAccountConfirmHint,
+              style: AbbaTypography.bodySmall.copyWith(color: AbbaColors.muted),
+            ),
+            const SizedBox(height: AbbaSpacing.sm),
+            TextField(
+              controller: _controller,
+              autofocus: true,
+              enabled: !_isProcessing,
+              decoration: const InputDecoration(
+                hintText: _confirmWord,
+                border: OutlineInputBorder(),
+                isDense: true,
+              ),
+            ),
+            if (_errorMessage != null) ...[
+              const SizedBox(height: AbbaSpacing.sm),
+              Text(
+                _errorMessage!,
+                style: AbbaTypography.bodySmall.copyWith(
+                  color: AbbaColors.error,
+                ),
+              ),
+            ],
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: _isProcessing ? null : () => Navigator.pop(context),
+            child: Text(
+              l10n.cancel,
+              style: AbbaTypography.bodySmall.copyWith(color: AbbaColors.muted),
+            ),
+          ),
+          TextButton(
+            onPressed: _canDelete ? _handleConfirm : null,
+            child: _isProcessing
+                ? const SizedBox(
+                    width: 16,
+                    height: 16,
+                    child: CircularProgressIndicator(strokeWidth: 2),
+                  )
+                : Text(
+                    l10n.deleteAccount,
+                    style: AbbaTypography.bodySmall.copyWith(
+                      color: AbbaColors.error,
+                    ),
+                  ),
           ),
         ],
       ),

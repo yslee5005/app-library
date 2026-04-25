@@ -1385,4 +1385,21 @@ class AppLocalizationsFi extends AppLocalizations {
 
   @override
   String get dashboardPartialFailedHint => 'Jo tallennettu pysyy tallessa.';
+
+  @override
+  String get deleteAccount => 'Poista tili';
+
+  @override
+  String get deleteAccountTitle => 'Poistetaanko tili?';
+
+  @override
+  String get deleteAccountBody =>
+      'Kaikki Abba-tietosi (rukoukset, mietiskelyt, äänitykset) poistetaan pysyvästi. Jos et käytä muita ystech-sovelluksia, myös kirjautumistilisi poistetaan.';
+
+  @override
+  String get deleteAccountConfirmHint => 'Vahvista kirjoittamalla \'DELETE\'.';
+
+  @override
+  String get deleteAccountFailed =>
+      'Tilin poisto epäonnistui. Yritä myöhemmin uudelleen.';
 }

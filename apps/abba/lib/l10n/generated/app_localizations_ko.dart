@@ -1344,4 +1344,20 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get dashboardPartialFailedHint => '이미 저장된 내용은 그대로 보관됩니다.';
+
+  @override
+  String get deleteAccount => '회원 탈퇴';
+
+  @override
+  String get deleteAccountTitle => '정말 탈퇴하시겠어요?';
+
+  @override
+  String get deleteAccountBody =>
+      'Abba의 모든 데이터(기도, QT, 음성 녹음)가 영구 삭제됩니다. 다른 ystech 앱을 사용하지 않으시면 계정도 함께 삭제됩니다.';
+
+  @override
+  String get deleteAccountConfirmHint => '확인하려면 \'DELETE\'를 입력해 주세요.';
+
+  @override
+  String get deleteAccountFailed => '탈퇴 처리에 실패했어요. 잠시 후 다시 시도해 주세요.';
 }

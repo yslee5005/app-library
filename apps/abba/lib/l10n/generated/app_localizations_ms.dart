@@ -1398,4 +1398,21 @@ class AppLocalizationsMs extends AppLocalizations {
   @override
   String get dashboardPartialFailedHint =>
       'Yang sudah disimpan kekal tersimpan.';
+
+  @override
+  String get deleteAccount => 'Padam akaun';
+
+  @override
+  String get deleteAccountTitle => 'Padam akaun anda?';
+
+  @override
+  String get deleteAccountBody =>
+      'Semua data Abba anda (doa, renungan, rakaman audio) akan dipadamkan secara kekal. Jika anda tidak menggunakan aplikasi ystech lain, akaun log masuk anda juga akan dipadamkan.';
+
+  @override
+  String get deleteAccountConfirmHint => 'Taip \'DELETE\' untuk mengesahkan.';
+
+  @override
+  String get deleteAccountFailed =>
+      'Gagal memadam akaun. Sila cuba lagi kemudian.';
 }

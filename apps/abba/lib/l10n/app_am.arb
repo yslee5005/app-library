@@ -578,5 +578,10 @@
   "recordingInterruptedSwitchToText": "Write as text instead",
   "dashboardPartialFailedQt": "የመንፈሳዊ ሕሊና ይዘት ከፊል መጫን አልተቻለም። እባክዎ አዲስ መንፈሳዊ ሕሊና ይጀምሩ።",
   "dashboardPartialFailedPrayer": "የጸሎት ትንታኔ ከፊል መጫን አልተቻለም። እባክዎ አዲስ ጸሎት ይጀምሩ።",
-  "dashboardPartialFailedHint": "አስቀድሞ የተቀመጠው ይቆያል።"
+  "dashboardPartialFailedHint": "አስቀድሞ የተቀመጠው ይቆያል።",
+  "deleteAccount": "መለያ ሰርዝ",
+  "deleteAccountTitle": "መለያዎን ይሰርዙ?",
+  "deleteAccountBody": "ሁሉም የAbba ውሂብዎ (ጸሎቶች፣ QT፣ ድምፅ ቀረጻዎች) በቋሚነት ይሰረዛሉ። ሌሎች የystech መተግበሪያዎችን የማይጠቀሙ ከሆነ የመግቢያ መለያዎም ይሰረዛል።",
+  "deleteAccountConfirmHint": "ለማረጋገጥ 'DELETE' ይተይቡ።",
+  "deleteAccountFailed": "መለያ መሰረዝ አልተቻለም። እባክዎ ቆይተው ይሞክሩ።"
 }

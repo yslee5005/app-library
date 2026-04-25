@@ -578,5 +578,10 @@
   "recordingInterruptedSwitchToText": "Write as text instead",
   "dashboardPartialFailedQt": "Osaa mietiskelyn sisällöstä ei voitu ladata. Aloita uusi mietiskely.",
   "dashboardPartialFailedPrayer": "Osaa rukousanalyysistä ei voitu ladata. Aloita uusi rukous.",
-  "dashboardPartialFailedHint": "Jo tallennettu pysyy tallessa."
+  "dashboardPartialFailedHint": "Jo tallennettu pysyy tallessa.",
+  "deleteAccount": "Poista tili",
+  "deleteAccountTitle": "Poistetaanko tili?",
+  "deleteAccountBody": "Kaikki Abba-tietosi (rukoukset, mietiskelyt, äänitykset) poistetaan pysyvästi. Jos et käytä muita ystech-sovelluksia, myös kirjautumistilisi poistetaan.",
+  "deleteAccountConfirmHint": "Vahvista kirjoittamalla 'DELETE'.",
+  "deleteAccountFailed": "Tilin poisto epäonnistui. Yritä myöhemmin uudelleen."
 }

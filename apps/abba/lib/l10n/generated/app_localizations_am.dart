@@ -1359,4 +1359,20 @@ class AppLocalizationsAm extends AppLocalizations {
 
   @override
   String get dashboardPartialFailedHint => 'አስቀድሞ የተቀመጠው ይቆያል።';
+
+  @override
+  String get deleteAccount => 'መለያ ሰርዝ';
+
+  @override
+  String get deleteAccountTitle => 'መለያዎን ይሰርዙ?';
+
+  @override
+  String get deleteAccountBody =>
+      'ሁሉም የAbba ውሂብዎ (ጸሎቶች፣ QT፣ ድምፅ ቀረጻዎች) በቋሚነት ይሰረዛሉ። ሌሎች የystech መተግበሪያዎችን የማይጠቀሙ ከሆነ የመግቢያ መለያዎም ይሰረዛል።';
+
+  @override
+  String get deleteAccountConfirmHint => 'ለማረጋገጥ \'DELETE\' ይተይቡ።';
+
+  @override
+  String get deleteAccountFailed => 'መለያ መሰረዝ አልተቻለም። እባክዎ ቆይተው ይሞክሩ።';
 }

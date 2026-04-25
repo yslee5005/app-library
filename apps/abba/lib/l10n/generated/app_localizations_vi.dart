@@ -1393,4 +1393,21 @@ class AppLocalizationsVi extends AppLocalizations {
   @override
   String get dashboardPartialFailedHint =>
       'Nội dung đã lưu vẫn được giữ nguyên.';
+
+  @override
+  String get deleteAccount => 'Xóa tài khoản';
+
+  @override
+  String get deleteAccountTitle => 'Xóa tài khoản của bạn?';
+
+  @override
+  String get deleteAccountBody =>
+      'Tất cả dữ liệu Abba của bạn (lời cầu nguyện, suy gẫm, bản ghi âm) sẽ bị xóa vĩnh viễn. Nếu bạn không dùng các ứng dụng ystech khác, tài khoản đăng nhập cũng sẽ bị xóa.';
+
+  @override
+  String get deleteAccountConfirmHint => 'Nhập \'DELETE\' để xác nhận.';
+
+  @override
+  String get deleteAccountFailed =>
+      'Không thể xóa tài khoản. Vui lòng thử lại sau.';
 }

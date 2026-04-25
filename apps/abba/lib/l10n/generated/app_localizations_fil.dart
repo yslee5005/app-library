@@ -1411,4 +1411,22 @@ class AppLocalizationsFil extends AppLocalizations {
   @override
   String get dashboardPartialFailedHint =>
       'Ang nakaimbak na ay nananatiling ligtas.';
+
+  @override
+  String get deleteAccount => 'Tanggalin ang account';
+
+  @override
+  String get deleteAccountTitle => 'Tanggalin ang iyong account?';
+
+  @override
+  String get deleteAccountBody =>
+      'Permanenteng tatanggalin ang lahat ng iyong data sa Abba (mga panalangin, pagninilay, mga voice recording). Kung hindi ka gumagamit ng iba pang ystech apps, tatanggalin din ang iyong sign-in account.';
+
+  @override
+  String get deleteAccountConfirmHint =>
+      'I-type ang \'DELETE\' upang kumpirmahin.';
+
+  @override
+  String get deleteAccountFailed =>
+      'Hindi natanggal ang account. Subukan muli mamaya.';
 }
