@@ -169,6 +169,30 @@ class SupabaseAuthRepository implements AuthRepository {
   @override
   Future<Result<void>> signOut() async {
     try {
+      // Phase A.5 follow-up — mark this app's FCM tokens inactive BEFORE
+      // signing out so the just-logged-out device stops receiving abba
+      // pushes. Scoped to (user_id, app_id) so other ystech apps the user
+      // may still be signed into are untouched.
+      //
+      // Update (not delete) is intentional: a future re-login on the same
+      // device upserts the same fcm_token via saveToken() and the
+      // on-conflict path naturally flips is_active back to true. RLS
+      // (user_id = auth.uid()) is satisfied because we run this BEFORE
+      // _auth.signOut() while the session is still active. Best-effort:
+      // a network or RLS failure here must NOT prevent the local sign-out.
+      final userId = _auth.currentUser?.id;
+      if (userId != null) {
+        try {
+          await _client.raw
+              .from('user_devices')
+              .update({'is_active': false})
+              .eq('user_id', userId)
+              .eq('app_id', _client.appId);
+        } catch (_) {
+          // Swallowed: server-side push cleanup is best-effort.
+        }
+      }
+
       await _googleAuth.signOut();
       await _auth.signOut();
       return const Result.success(null);
