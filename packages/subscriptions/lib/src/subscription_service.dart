@@ -48,4 +48,13 @@ abstract class SubscriptionService {
 
   Future<bool> get isPremium;
   Stream<SubscriptionStatus> get statusStream;
+
+  /// Returns true when the current user is eligible for the yearly
+  /// introductory free trial. Implementations must resolve the yearly
+  /// product identifier internally (no product id leaks to UI).
+  ///
+  /// Safe default: return `false` on any error. A `false` result means
+  /// the trial CTA is hidden and the standard yearly price is shown —
+  /// never a silent upsell of a trial to someone ineligible.
+  Future<bool> checkYearlyTrialEligibility();
 }

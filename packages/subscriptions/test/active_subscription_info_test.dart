@@ -63,8 +63,9 @@ void main() {
         expiresDate: DateTime.now().add(const Duration(days: 7)),
         willRenew: true,
         periodType: PeriodType.normal,
-        billingIssueDetectedAt:
-            DateTime.now().subtract(const Duration(days: 8)),
+        billingIssueDetectedAt: DateTime.now().subtract(
+          const Duration(days: 8),
+        ),
       );
 
       expect(info.gracePeriodDaysRemaining, 8);
@@ -76,8 +77,9 @@ void main() {
         expiresDate: DateTime.now().subtract(const Duration(days: 1)),
         willRenew: true,
         periodType: PeriodType.normal,
-        billingIssueDetectedAt:
-            DateTime.now().subtract(const Duration(days: 40)),
+        billingIssueDetectedAt: DateTime.now().subtract(
+          const Duration(days: 40),
+        ),
       );
 
       expect(info.gracePeriodDaysRemaining, 0);
@@ -89,8 +91,9 @@ void main() {
         expiresDate: DateTime.now(),
         willRenew: true,
         periodType: PeriodType.normal,
-        billingIssueDetectedAt:
-            DateTime.now().subtract(const Duration(days: 16, hours: 1)),
+        billingIssueDetectedAt: DateTime.now().subtract(
+          const Duration(days: 16, hours: 1),
+        ),
       );
 
       expect(info.gracePeriodDaysRemaining, 0);

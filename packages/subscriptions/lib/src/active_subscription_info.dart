@@ -34,8 +34,7 @@ class ActiveSubscriptionInfo {
   /// True when RevenueCat has flagged a billing issue **and** the user still
   /// intends to renew. `willRenew == false` means the user already opted
   /// out, so the expired-banner flow handles it instead.
-  bool get isInGracePeriod =>
-      billingIssueDetectedAt != null && willRenew;
+  bool get isInGracePeriod => billingIssueDetectedAt != null && willRenew;
 
   /// Days remaining in the [billingGracePeriodDays] window. Returns `null`
   /// when the subscription is not in a grace state, and `0` once the

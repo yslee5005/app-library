@@ -9,8 +9,18 @@ import 'subscription_status.dart';
 
 /// In-memory mock for development and testing.
 class MockSubscriptionService implements SubscriptionService {
+  MockSubscriptionService({
+    SubscriptionStatus initialStatus = SubscriptionStatus.free,
+    PeriodType initialPeriodType = PeriodType.normal,
+    bool trialEligible = true,
+  }) : _status = initialStatus,
+       _periodType = initialPeriodType,
+       _trialEligible = trialEligible;
+
   final _controller = StreamController<SubscriptionStatus>.broadcast();
-  SubscriptionStatus _status = SubscriptionStatus.free;
+  SubscriptionStatus _status;
+  PeriodType _periodType;
+  final bool _trialEligible;
 
   @override
   Future<void> initialize(String userId) async {}
@@ -35,6 +45,7 @@ class MockSubscriptionService implements SubscriptionService {
 
   Future<bool> _grantPremium() async {
     _status = SubscriptionStatus.premium;
+    _periodType = PeriodType.normal;
     _controller.add(_status);
     return true;
   }
@@ -63,7 +74,7 @@ class MockSubscriptionService implements SubscriptionService {
       productId: 'com.ystech.abba.monthly',
       expiresDate: DateTime.now().add(const Duration(days: 30)),
       willRenew: true,
-      periodType: PeriodType.normal,
+      periodType: _periodType,
     );
   }
 
@@ -72,6 +83,9 @@ class MockSubscriptionService implements SubscriptionService {
 
   @override
   Stream<SubscriptionStatus> get statusStream => _controller.stream;
+
+  @override
+  Future<bool> checkYearlyTrialEligibility() async => _trialEligible;
 
   void dispose() {
     _controller.close();

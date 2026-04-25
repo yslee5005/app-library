@@ -49,9 +49,10 @@ class RevenueCatSubscriptionService implements SubscriptionService {
 
   void _updateStatus(CustomerInfo info) {
     final entitlement = info.entitlements.all[entitlementId];
-    _currentStatus = entitlement != null && entitlement.isActive
-        ? SubscriptionStatus.premium
-        : SubscriptionStatus.free;
+    _currentStatus =
+        entitlement != null && entitlement.isActive
+            ? SubscriptionStatus.premium
+            : SubscriptionStatus.free;
     _statusController.add(_currentStatus);
   }
 
@@ -63,13 +64,15 @@ class RevenueCatSubscriptionService implements SubscriptionService {
   }
 
   @override
-  Future<bool> purchaseMonthly() => _purchasePackage((o) => o?.monthly, 'monthly');
+  Future<bool> purchaseMonthly() =>
+      _purchasePackage((o) => o?.monthly, 'monthly');
 
   @override
   Future<bool> purchaseYearly() => _purchasePackage((o) => o?.annual, 'yearly');
 
   @override
-  Future<bool> purchaseLifetime() => _purchasePackage((o) => o?.lifetime, 'lifetime');
+  Future<bool> purchaseLifetime() =>
+      _purchasePackage((o) => o?.lifetime, 'lifetime');
 
   Future<bool> _purchasePackage(
     Package? Function(Offering?) pick,
@@ -82,9 +85,7 @@ class RevenueCatSubscriptionService implements SubscriptionService {
       return false;
     }
     try {
-      final result = await Purchases.purchase(
-        PurchaseParams.package(package),
-      );
+      final result = await Purchases.purchase(PurchaseParams.package(package));
       _updateStatus(result.customerInfo);
       _log.info('$label purchase completed, status=$_currentStatus');
       return _currentStatus == SubscriptionStatus.premium;
@@ -97,9 +98,7 @@ class RevenueCatSubscriptionService implements SubscriptionService {
   @override
   Future<bool> presentPaywall() async {
     try {
-      final result = await RevenueCatUI.presentPaywallIfNeeded(
-        entitlementId,
-      );
+      final result = await RevenueCatUI.presentPaywallIfNeeded(entitlementId);
       _log.info('Paywall closed with result=$result');
       final info = await Purchases.getCustomerInfo();
       _updateStatus(info);
@@ -192,9 +191,10 @@ class RevenueCatSubscriptionService implements SubscriptionService {
             '$currencyCode ${yearlyPerMonth.toStringAsFixed(2)}';
       }
 
-      final int? savings = (monthlyPrice > 0 && yearlyPrice > 0)
-          ? (100 - (yearlyPrice / (monthlyPrice * 12) * 100)).round()
-          : null;
+      final int? savings =
+          (monthlyPrice > 0 && yearlyPrice > 0)
+              ? (100 - (yearlyPrice / (monthlyPrice * 12) * 100)).round()
+              : null;
 
       return OfferingPrices(
         monthlyPriceString: monthlyProduct.priceString,
@@ -219,12 +219,14 @@ class RevenueCatSubscriptionService implements SubscriptionService {
       final billingIssue = entitlement.billingIssueDetectedAt;
       return ActiveSubscriptionInfo(
         productId: entitlement.productIdentifier,
-        expiresDate: expires != null ? DateTime.tryParse(expires)?.toLocal() : null,
+        expiresDate:
+            expires != null ? DateTime.tryParse(expires)?.toLocal() : null,
         willRenew: entitlement.willRenew,
         periodType: entitlement.periodType,
-        billingIssueDetectedAt: billingIssue != null
-            ? DateTime.tryParse(billingIssue)?.toLocal()
-            : null,
+        billingIssueDetectedAt:
+            billingIssue != null
+                ? DateTime.tryParse(billingIssue)?.toLocal()
+                : null,
       );
     } catch (e, st) {
       _log.error('getActiveSubscription failed', error: e, stackTrace: st);
@@ -242,6 +244,35 @@ class RevenueCatSubscriptionService implements SubscriptionService {
 
   @override
   Stream<SubscriptionStatus> get statusStream => _statusController.stream;
+
+  @override
+  Future<bool> checkYearlyTrialEligibility() async {
+    try {
+      final offerings = await Purchases.getOfferings();
+      final yearly = offerings.current?.annual;
+      if (yearly == null) {
+        _log.warning('checkYearlyTrialEligibility: no yearly package');
+        return false;
+      }
+      final productId = yearly.storeProduct.identifier;
+      final map = await Purchases.checkTrialOrIntroductoryPriceEligibility([
+        productId,
+      ]);
+      final eligibility = map[productId];
+      if (eligibility == null) {
+        _log.warning('checkYearlyTrialEligibility: no entry for $productId');
+        return false;
+      }
+      return eligibility.status ==
+          IntroEligibilityStatus.introEligibilityStatusEligible;
+    } catch (e) {
+      _log.warning(
+        'checkYearlyTrialEligibility failed (defaulting to false)',
+        error: e,
+      );
+      return false;
+    }
+  }
 
   void dispose() {
     _statusController.close();
