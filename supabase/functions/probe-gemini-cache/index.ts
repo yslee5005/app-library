@@ -33,53 +33,29 @@
 //        -H 'Content-Type: application/json'                               \
 //        -d '{"runs": 5}'
 
-const MAX_RUNS_PER_PHASE = 10  // hard ceiling — abuse defense + cost cap
-
 import { serve } from 'https://deno.land/std@0.177.0/http/server.ts'
+import { PRAYER_RUBRIC_BUNDLE } from './_rubric_bundle.ts'
 
 const MODEL = 'gemini-2.5-flash'
 const API_BASE = 'https://generativelanguage.googleapis.com/v1beta'
+const MAX_RUNS_PER_PHASE = 10  // hard ceiling — abuse defense + cost cap
+const PER_CALL_TIMEOUT_MS = 20_000
 
-// ~1300 tokens of dummy "rubric" content to clear Gemini 2.5 Flash's 1024-token
-// minimum cache threshold. Content shape mimics our real rubric markdown so
-// the measurement reflects production-like token distribution.
-const DUMMY_SYSTEM_INSTRUCTION = `You are a Christian prayer counselor analyzing a believer's prayer.
+// ── DUMMY mode payload ──────────────────────────────────────────────────────
+// Hand-stretched generic content. Verified ≥ 1500 tokens so it clears
+// Gemini 2.5 Flash's 1024-token explicit cache minimum even with conservative
+// tokenizer estimates. Shape is generic on purpose (NOT prayer-app-specific)
+// — dummy mode measures the cache machinery itself, not our rubric prefix.
+const DUMMY_SYSTEM_INSTRUCTION =
+  'You are a content analysis assistant. The following is a generic system instruction designed to be long enough to exercise the Gemini context cache without leaking any production-specific prefix into the measurement. The text below intentionally repeats general guidance multiple times in slightly varied phrasing to clear the 1024-token minimum cache threshold while remaining stable across runs.\n\n'.repeat(6) +
+  '\n\nGUIDELINES:\n- Always respond in the language of the user request.\n- Format output as compact JSON when asked.\n- Do not invent facts about real people or institutions.\n- Cite a source string only when the user references a known work; otherwise leave the source field empty.\n- Avoid speculative claims about uncertain events.\n- When uncertain, prefer omission over fabrication.\n- When asked for a number, respond with a numeral, not a word, and include units explicitly.\n- Never use proprietary or trademarked terms unless the user introduces them first.\n- Treat the user words as the only source of factual claims about themselves; do not infer relationships, locations, or outcomes the user did not state.\n- When grammar in the user request is ambiguous, prefer the most neutral interpretation.\n- Emotional language directed at the reader is allowed only as a response framing, never asserted as the user current internal state.\n- Output schemas must be followed exactly; do not add or remove keys.\n- Numerical fields stay numeric; date fields use ISO 8601.\n- Reference identifiers used as lookup keys must remain in their canonical form regardless of the response language.\n- Display labels for the same identifier may be localized for human readers.\n- The distinction between a lookup identifier and a display label must be preserved in every response.\n- When the user asks for a brief answer, prefer two sentences. When asked for a thorough answer, prefer five to eight sentences.\n- Do not add disclaimers when the user did not ask for them.\n- Do not include trailing commentary after a JSON object.\n- Repetition of these guidelines across calls is intentional — it ensures the system instruction has a stable cacheable prefix.\n\nEND OF GUIDELINES.\n\n' +
+  'Stable padding line designed to keep the system instruction above the cache minimum threshold while not introducing any production policy. '.repeat(20)
 
-OUTPUT POLICY:
-- Respond entirely in the requested locale.
-- Do not generate verse text — only a Bible reference (English book name).
-- Refuse to invent quotes or attribute statements to figures without primary sources.
-- Avoid forbidden tradition errors (three wise men by count, whale not fish in Jonah,
-  apple as forbidden fruit, Paul falling from a horse, Mary Magdalene as a prostitute).
-- For posture fields, never wrap phrases in quote marks as if quoting the verse;
-  paraphrase in your own words.
-- For lookup_reference fields (scripture.reference, cross_references[].reference),
-  use English book names ONLY regardless of user locale. Never translate the book
-  name. The app resolves verse text from a Public Domain bundle keyed in English.
+type ProbeMode = 'dummy' | 'prayer'
 
-GROUNDING:
-- Every factual claim must be supported by the user's transcript.
-- Never invent ownership, relationships, locations, or outcomes the user did not state.
-- When grammar is ambiguous, prefer the target language's natural indefinite reference.
-- Emotional language is allowed only in scripture.reason and only as a response hedge,
-  never asserted as the user's actual state.
-
-OUTPUT FIELDS:
-- prayer_summary: { gratitude: string[], petition: string[], intercession: string[] }
-- scripture: { reference, reason, posture, key_word_hint }
-- bible_story: { title, summary }
-- testimony: a faithful summary preserving user ordering and ambiguity.
-
-EXAMPLES:
-GOOD-1 (Korean): user prays for grandchild facing exam — match Isaiah 26:3, posture
-suggests reading aloud at bedtime, key_word_hint explains shalom.
-GOOD-2 (English): user grieves miscarriage — match Matthew 5:4, reason cites the loss.
-BAD-1: select cliché Jeremiah 29:11 for any hopeful topic — irrelevant.
-BAD-2: posture wraps a paraphrased phrase in quotes that's not in the verse.
-
-This system instruction is large enough on purpose to clear the 1024-token
-caching threshold for Gemini 2.5 Flash. Repeated calls with this exact body
-should benefit from implicit prefix caching if it is active for the project.`
+function getSystemInstruction(mode: ProbeMode): string {
+  return mode === 'prayer' ? PRAYER_RUBRIC_BUNDLE : DUMMY_SYSTEM_INSTRUCTION
+}
 
 const USER_PROMPT_TEMPLATE = (n: number) =>
   `Test prayer #${n}: Lord, I'm grateful for today and ask for peace for my family.\n` +
@@ -114,12 +90,16 @@ async function callGenerate(
     body.cachedContent = cachedContentName
   }
 
+  const controller = new AbortController()
+  const timer = setTimeout(() => controller.abort(), PER_CALL_TIMEOUT_MS)
   try {
     const res = await fetch(`${API_BASE}/models/${MODEL}:generateContent?key=${apiKey}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(body),
+      signal: controller.signal,
     })
+    clearTimeout(timer)
     const latencyMs = Math.round(performance.now() - start)
     const json = await res.json()
 
@@ -147,6 +127,8 @@ async function callGenerate(
       totalTokens: usage.totalTokenCount ?? 0,
     }
   } catch (e) {
+    clearTimeout(timer)
+    const err = e as Error
     return {
       ok: false,
       status: 0,
@@ -155,7 +137,9 @@ async function callGenerate(
       candidateTokens: 0,
       cachedTokens: 0,
       totalTokens: 0,
-      errorBody: (e as Error).message,
+      errorBody: err.name === 'AbortError'
+        ? `client timeout after ${PER_CALL_TIMEOUT_MS}ms`
+        : err.message,
     }
   }
 }
@@ -165,6 +149,8 @@ async function createCache(
   systemInstruction: string,
 ): Promise<{ ok: boolean; name?: string; tokenCount?: number; expireTime?: string; status: number; latencyMs: number; errorBody?: string }> {
   const start = performance.now()
+  const controller = new AbortController()
+  const timer = setTimeout(() => controller.abort(), PER_CALL_TIMEOUT_MS)
   try {
     const res = await fetch(`${API_BASE}/cachedContents?key=${apiKey}`, {
       method: 'POST',
@@ -175,7 +161,9 @@ async function createCache(
         ttl: '600s',
         displayName: 'abba_probe',
       }),
+      signal: controller.signal,
     })
+    clearTimeout(timer)
     const latencyMs = Math.round(performance.now() - start)
     const json = await res.json()
     if (!res.ok) {
@@ -190,15 +178,31 @@ async function createCache(
       expireTime: json.expireTime,
     }
   } catch (e) {
-    return { ok: false, status: 0, latencyMs: Math.round(performance.now() - start), errorBody: (e as Error).message }
+    clearTimeout(timer)
+    const err = e as Error
+    return {
+      ok: false,
+      status: 0,
+      latencyMs: Math.round(performance.now() - start),
+      errorBody: err.name === 'AbortError'
+        ? `client timeout after ${PER_CALL_TIMEOUT_MS}ms`
+        : err.message,
+    }
   }
 }
 
 async function deleteCache(apiKey: string, name: string): Promise<boolean> {
+  const controller = new AbortController()
+  const timer = setTimeout(() => controller.abort(), PER_CALL_TIMEOUT_MS)
   try {
-    const res = await fetch(`${API_BASE}/${name}?key=${apiKey}`, { method: 'DELETE' })
+    const res = await fetch(`${API_BASE}/${name}?key=${apiKey}`, {
+      method: 'DELETE',
+      signal: controller.signal,
+    })
+    clearTimeout(timer)
     return res.ok
   } catch {
+    clearTimeout(timer)
     return false
   }
 }
@@ -269,20 +273,38 @@ serve(async (req: Request): Promise<Response> => {
   }
 
   let runs = 5
+  let mode: ProbeMode = 'dummy'
   try {
     const body = await req.json()
-    if (typeof body.runs === 'number' && body.runs >= 1 && body.runs <= MAX_RUNS_PER_PHASE) {
+    // runs — must be an integer in [1, MAX_RUNS_PER_PHASE]
+    if (typeof body.runs === 'number') {
+      if (!Number.isInteger(body.runs) || body.runs < 1 || body.runs > MAX_RUNS_PER_PHASE) {
+        return new Response(
+          JSON.stringify({
+            error: `runs must be an INTEGER between 1 and ${MAX_RUNS_PER_PHASE}`,
+            requested: body.runs,
+          }),
+          { status: 400, headers: { 'Content-Type': 'application/json' } },
+        )
+      }
       runs = body.runs
-    } else if (typeof body.runs === 'number' && body.runs > MAX_RUNS_PER_PHASE) {
-      return new Response(
-        JSON.stringify({
-          error: `runs must be between 1 and ${MAX_RUNS_PER_PHASE}`,
-          requested: body.runs,
-        }),
-        { status: 400, headers: { 'Content-Type': 'application/json' } },
-      )
     }
-  } catch { /* default 5 */ }
+    // mode — must be 'dummy' or 'prayer'
+    if (typeof body.mode === 'string') {
+      if (body.mode !== 'dummy' && body.mode !== 'prayer') {
+        return new Response(
+          JSON.stringify({
+            error: 'mode must be "dummy" or "prayer"',
+            requested: body.mode,
+          }),
+          { status: 400, headers: { 'Content-Type': 'application/json' } },
+        )
+      }
+      mode = body.mode
+    }
+  } catch { /* default: 5 runs, dummy mode */ }
+
+  const systemInstruction = getSystemInstruction(mode)
 
   const startedAt = new Date().toISOString()
 
@@ -290,12 +312,12 @@ serve(async (req: Request): Promise<Response> => {
   const implicitResults: CallResult[] = []
   for (let i = 0; i < runs; i++) {
     implicitResults.push(
-      await callGenerate(apiKey, DUMMY_SYSTEM_INSTRUCTION, null, USER_PROMPT_TEMPLATE(i + 1)),
+      await callGenerate(apiKey, systemInstruction, null, USER_PROMPT_TEMPLATE(i + 1)),
     )
   }
 
   // ---- Phase 2: explicit cache create ----
-  const create = await createCache(apiKey, DUMMY_SYSTEM_INSTRUCTION)
+  const create = await createCache(apiKey, systemInstruction)
 
   // ---- Phase 3: explicit cache use ----
   const explicitResults: CallResult[] = []
@@ -320,7 +342,10 @@ serve(async (req: Request): Promise<Response> => {
       {
         meta: {
           model: MODEL,
+          mode,
+          system_instruction_chars: systemInstruction.length,
           runs_per_phase: runs,
+          per_call_timeout_ms: PER_CALL_TIMEOUT_MS,
           started_at: startedAt,
           finished_at: finishedAt,
         },
