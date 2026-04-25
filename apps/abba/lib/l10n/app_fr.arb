@@ -62,6 +62,9 @@
   "aiPrayerTitle": "Une Prière pour Vous",
   "originalLangTitle": "Langue Originale",
   "proUnlock": "Débloquer avec Pro",
+  "proPreviewHistoricalHint": "Découvrez l'histoire profonde derrière un mot de votre prière",
+  "proPreviewPrayerHint": "Une prière de 300 mots vous attend",
+  "proPreviewCoachingHint": "Un conseil vous attend pour approfondir votre prochaine prière",
   "qtPageTitle": "Jardin du Matin",
   "qtMeditateButton": "Commencer la Méditation",
   "qtCompleted": "Terminé",
@@ -563,5 +566,14 @@
   },
   "trialLimitTitle": "Vous avez prié 3 fois aujourd'hui 🌸",
   "trialLimitBody": "Revenez demain — ou débloquez les prières illimitées avec Pro.",
-  "trialLimitCta": "Continuer avec Pro"
+  "trialLimitCta": "Continuer avec Pro",
+  "prayerTooShort": "Veuillez écrire un peu plus",
+  "switchToTextModeTitle": "Passer en mode texte ?",
+  "switchToTextModeBody": "L'enregistrement vocal de votre prière sera supprimé. Vous devrez écrire votre prière sous forme de texte.",
+  "switchToTextModeConfirm": "Passer au texte",
+  "switchToTextModeCancel": "Continuer l'enregistrement",
+  "recordingInterruptedTitle": "Votre enregistrement de prière a été interrompu",
+  "recordingInterruptedBody": "Pendant votre absence, l'enregistrement s'est arrêté. Que souhaitez-vous faire ?",
+  "recordingInterruptedRestart": "Recommencer l'enregistrement",
+  "recordingInterruptedSwitchToText": "Écrire en texte"
 }

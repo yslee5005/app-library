@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:app_lib_audio_recorder/audio_recorder.dart';
 import 'package:app_lib_logging/logging.dart';
@@ -20,18 +21,31 @@ class RecordingOverlay extends ConsumerStatefulWidget {
 }
 
 class _RecordingOverlayState extends ConsumerState<RecordingOverlay>
-    with SingleTickerProviderStateMixin {
+    with SingleTickerProviderStateMixin, WidgetsBindingObserver {
   Timer? _timer;
   int _seconds = 0;
   bool _isPaused = false;
   bool _isTextMode = false;
+  // Wave A fix #2 — locks the session text-only after destructive switch.
+  bool _textOnlyLocked = false;
+  // Wave A fix #3 — set when the OS suspends mid voice-recording.
+  bool _interruptedDuringPause = false;
   final _textController = TextEditingController();
   late AnimationController _pulseController;
   String? _audioFilePath;
 
+  /// Wave A fix #1 — minimum text length to send a text-mode meditation.
+  static const int _minTextLength = 5;
+
+  bool get _canFinish {
+    if (!_isTextMode) return true;
+    return _textController.text.trim().length >= _minTextLength;
+  }
+
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addObserver(this);
     Future(() {
       ref.read(isRecordingProvider.notifier).state = true;
     });
@@ -46,8 +60,42 @@ class _RecordingOverlayState extends ConsumerState<RecordingOverlay>
         _pulseController.repeat(reverse: true);
       }
     });
+    _textController.addListener(_onTextChanged);
     _startTimer();
     _startRecording();
+  }
+
+  void _onTextChanged() {
+    if (mounted) setState(() {});
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    // Wave A fix #3 — App lifecycle background guard. Voice mode only.
+    if (_isTextMode) return;
+    if (state == AppLifecycleState.paused ||
+        state == AppLifecycleState.inactive ||
+        state == AppLifecycleState.hidden) {
+      if (!_interruptedDuringPause) {
+        _interruptedDuringPause = true;
+        _timer?.cancel();
+        _pulseController.stop();
+        final recorder = ref.read(audioRecorderServiceProvider);
+        recorder.stopRecording().catchError((Object e, StackTrace st) {
+          prayerLog.warning('stopRecording on pause failed: $e');
+          return null;
+        });
+        prayerLog.info(
+          'Recording overlay auto-stopped due to app lifecycle pause',
+        );
+      }
+    } else if (state == AppLifecycleState.resumed &&
+        _interruptedDuringPause &&
+        mounted) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (mounted) _showInterruptedDialog();
+      });
+    }
   }
 
   Future<void> _startRecording() async {
@@ -68,8 +116,10 @@ class _RecordingOverlayState extends ConsumerState<RecordingOverlay>
 
   @override
   void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
     _timer?.cancel();
     _pulseController.dispose();
+    _textController.removeListener(_onTextChanged);
     _textController.dispose();
     ref.read(isRecordingProvider.notifier).state = false;
     super.dispose();
@@ -168,6 +218,15 @@ class _RecordingOverlayState extends ConsumerState<RecordingOverlay>
   }
 
   Future<void> _finishRecording() async {
+    final l10n = AppLocalizations.of(context)!;
+    // Wave A fix #1 — block too-short text-mode submissions.
+    if (_isTextMode &&
+        _textController.text.trim().length < _minTextLength) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(l10n.prayerTooShort)),
+      );
+      return;
+    }
     final recorder = ref.read(audioRecorderServiceProvider);
     final audioPath = await recorder.stopRecording();
 
@@ -187,6 +246,258 @@ class _RecordingOverlayState extends ConsumerState<RecordingOverlay>
     if (!mounted) return;
     Navigator.of(context).pop();
     context.go('/home/ai-loading');
+  }
+
+  /// Wave A fix #2 — destructive switch from voice → text.
+  Future<void> _onToggleTextMode() async {
+    final l10n = AppLocalizations.of(context)!;
+    if (_isTextMode) return;
+
+    final confirmed = await showDialog<bool>(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(AbbaRadius.lg),
+        ),
+        title: Text(
+          l10n.switchToTextModeTitle,
+          style: AbbaTypography.h2,
+          textAlign: TextAlign.center,
+        ),
+        content: Text(
+          l10n.switchToTextModeBody,
+          style: AbbaTypography.body,
+          textAlign: TextAlign.center,
+        ),
+        actionsPadding: const EdgeInsets.fromLTRB(
+          AbbaSpacing.lg,
+          0,
+          AbbaSpacing.lg,
+          AbbaSpacing.lg,
+        ),
+        actions: [
+          Column(
+            children: [
+              SizedBox(
+                width: double.infinity,
+                height: abbaButtonHeight,
+                child: ElevatedButton(
+                  onPressed: () => Navigator.pop(ctx, true),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: AbbaColors.error,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(AbbaRadius.md),
+                    ),
+                  ),
+                  child: Text(
+                    l10n.switchToTextModeConfirm,
+                    style: AbbaTypography.body.copyWith(
+                      color: AbbaColors.white,
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(height: AbbaSpacing.sm),
+              SizedBox(
+                width: double.infinity,
+                height: abbaButtonHeight,
+                child: OutlinedButton(
+                  onPressed: () => Navigator.pop(ctx, false),
+                  style: OutlinedButton.styleFrom(
+                    side: const BorderSide(color: AbbaColors.sage),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(AbbaRadius.md),
+                    ),
+                  ),
+                  child: Text(
+                    l10n.switchToTextModeCancel,
+                    style: AbbaTypography.body.copyWith(
+                      color: AbbaColors.sage,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+
+    if (confirmed != true) return;
+    if (!mounted) return;
+
+    final recorder = ref.read(audioRecorderServiceProvider);
+    try {
+      await recorder.stopRecording();
+    } catch (e) {
+      prayerLog.warning('stopRecording during destructive switch failed: $e');
+    }
+    final path = _audioFilePath;
+    if (path != null) {
+      try {
+        final f = File(path);
+        if (await f.exists()) await f.delete();
+      } catch (e) {
+        prayerLog.warning('Failed to delete recording $path: $e');
+      }
+    }
+    if (!mounted) return;
+    ref.read(currentAudioPathProvider.notifier).state = null;
+    setState(() {
+      _isTextMode = true;
+      _textOnlyLocked = true;
+      _isPaused = false;
+      _audioFilePath = null;
+    });
+    prayerLog.info('Destructively switched overlay to text-only');
+  }
+
+  /// Wave A fix #3 — recording interrupted recovery dialog.
+  Future<void> _showInterruptedDialog() async {
+    if (!mounted) return;
+    _interruptedDuringPause = false;
+    final l10n = AppLocalizations.of(context)!;
+    final choice = await showDialog<String>(
+      context: context,
+      barrierDismissible: false,
+      builder: (ctx) => AlertDialog(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(AbbaRadius.lg),
+        ),
+        title: Text(
+          l10n.recordingInterruptedTitle,
+          style: AbbaTypography.h2,
+          textAlign: TextAlign.center,
+        ),
+        content: Text(
+          l10n.recordingInterruptedBody,
+          style: AbbaTypography.body,
+          textAlign: TextAlign.center,
+        ),
+        actionsPadding: const EdgeInsets.fromLTRB(
+          AbbaSpacing.lg,
+          0,
+          AbbaSpacing.lg,
+          AbbaSpacing.lg,
+        ),
+        actions: [
+          Column(
+            children: [
+              SizedBox(
+                width: double.infinity,
+                height: abbaButtonHeight,
+                child: ElevatedButton(
+                  onPressed: () => Navigator.pop(ctx, 'restart'),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: AbbaColors.sageDark,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(AbbaRadius.md),
+                    ),
+                  ),
+                  child: Text(
+                    l10n.recordingInterruptedRestart,
+                    style: AbbaTypography.body.copyWith(
+                      color: AbbaColors.white,
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(height: AbbaSpacing.sm),
+              SizedBox(
+                width: double.infinity,
+                height: abbaButtonHeight,
+                child: OutlinedButton(
+                  onPressed: () => Navigator.pop(ctx, 'text'),
+                  style: OutlinedButton.styleFrom(
+                    side: const BorderSide(color: AbbaColors.sage),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(AbbaRadius.md),
+                    ),
+                  ),
+                  child: Text(
+                    l10n.recordingInterruptedSwitchToText,
+                    style: AbbaTypography.body.copyWith(
+                      color: AbbaColors.sage,
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(height: AbbaSpacing.sm),
+              SizedBox(
+                width: double.infinity,
+                height: abbaButtonHeight,
+                child: TextButton(
+                  onPressed: () => Navigator.pop(ctx, 'discard'),
+                  child: Text(
+                    l10n.leaveButton,
+                    style: AbbaTypography.body.copyWith(
+                      color: AbbaColors.error,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+
+    if (!mounted) return;
+    final old = _audioFilePath;
+    if (old != null) {
+      try {
+        final f = File(old);
+        if (await f.exists()) await f.delete();
+      } catch (e) {
+        prayerLog.warning('Failed to delete old recording $old: $e');
+      }
+    }
+    if (!mounted) return;
+
+    switch (choice) {
+      case 'restart':
+        try {
+          final dir = await getTemporaryDirectory();
+          _audioFilePath =
+              '${dir.path}/prayer_${DateTime.now().millisecondsSinceEpoch}.m4a';
+          final recorder = ref.read(audioRecorderServiceProvider);
+          await recorder.startRecording(path: _audioFilePath!);
+          if (!mounted) return;
+          setState(() {
+            _isPaused = false;
+            _seconds = 0;
+            _isTextMode = false;
+            _textOnlyLocked = false;
+          });
+          _pulseController.repeat(reverse: true);
+          if (_timer == null || !_timer!.isActive) {
+            _startTimer();
+          }
+          prayerLog.info('Overlay recording restarted after interrupt');
+        } catch (e) {
+          prayerLog.warning('Failed to restart overlay recording: $e');
+          if (!mounted) return;
+          Navigator.of(context).pop();
+        }
+        break;
+      case 'text':
+        ref.read(currentAudioPathProvider.notifier).state = null;
+        setState(() {
+          _isTextMode = true;
+          _textOnlyLocked = true;
+          _isPaused = false;
+          _audioFilePath = null;
+        });
+        if (_timer == null || !_timer!.isActive) _startTimer();
+        prayerLog.info('Overlay switched to text-only after interrupt');
+        break;
+      case 'discard':
+      default:
+        ref.read(currentAudioPathProvider.notifier).state = null;
+        if (mounted) Navigator.of(context).pop();
+        prayerLog.info('Overlay session discarded after interrupt');
+        break;
+    }
   }
 
   Widget _buildWaveformOrPulse() {
@@ -306,25 +617,22 @@ class _RecordingOverlayState extends ConsumerState<RecordingOverlay>
                     ),
                     Text(l10n.recordingTitle, style: AbbaTypography.h2),
                     TextButton.icon(
-                      onPressed: () async {
-                        final recorder = ref.read(audioRecorderServiceProvider);
-                        setState(() => _isTextMode = !_isTextMode);
-                        if (_isTextMode) {
-                          await recorder.pauseRecording();
-                          prayerLog.info('Switched to text mode');
-                        } else {
-                          await recorder.resumeRecording();
-                          prayerLog.info('Switched to voice mode');
-                        }
-                      },
+                      // Wave A fix #2 — destructive voice→text switch.
+                      onPressed: _textOnlyLocked
+                          ? null
+                          : () => _onToggleTextMode(),
                       icon: Icon(
                         _isTextMode ? Icons.mic : Icons.keyboard,
-                        color: AbbaColors.sage,
+                        color: _textOnlyLocked
+                            ? AbbaColors.muted
+                            : AbbaColors.sage,
                       ),
                       label: Text(
                         l10n.switchToText,
                         style: AbbaTypography.bodySmall.copyWith(
-                          color: AbbaColors.sage,
+                          color: _textOnlyLocked
+                              ? AbbaColors.muted
+                              : AbbaColors.sage,
                         ),
                       ),
                     ),
@@ -430,9 +738,17 @@ class _RecordingOverlayState extends ConsumerState<RecordingOverlay>
                     ),
                     const SizedBox(width: AbbaSpacing.md),
                     Expanded(
-                      child: AbbaButton(
-                        label: l10n.finishPrayer,
-                        onPressed: _finishRecording,
+                      // Wave A fix #1 — visually disable finish when
+                      // text-mode input is empty / under min length.
+                      child: Opacity(
+                        opacity: _canFinish ? 1.0 : 0.4,
+                        child: AbsorbPointer(
+                          absorbing: !_canFinish,
+                          child: AbbaButton(
+                            label: l10n.finishPrayer,
+                            onPressed: _finishRecording,
+                          ),
+                        ),
                       ),
                     ),
                   ],

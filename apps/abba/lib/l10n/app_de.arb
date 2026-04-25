@@ -62,6 +62,9 @@
   "aiPrayerTitle": "Ein Gebet für dich",
   "originalLangTitle": "Grundtext",
   "proUnlock": "Mit Pro freischalten",
+  "proPreviewHistoricalHint": "Entdecke die tiefere Geschichte hinter einem Wort aus deinem Gebet",
+  "proPreviewPrayerHint": "Ein 300-Wörter-Gebet wartet nur auf dich",
+  "proPreviewCoachingHint": "Ein Coaching-Tipp wartet, um dein nächstes Gebet zu vertiefen",
   "qtPageTitle": "Morgengarten",
   "qtMeditateButton": "Meditation beginnen",
   "qtCompleted": "Abgeschlossen",
@@ -563,5 +566,14 @@
   },
   "trialLimitTitle": "Du hast heute 3 Mal gebetet 🌸",
   "trialLimitBody": "Komm morgen wieder — oder schalte unbegrenztes Beten mit Pro frei.",
-  "trialLimitCta": "Mit Pro fortfahren"
+  "trialLimitCta": "Mit Pro fortfahren",
+  "prayerTooShort": "Bitte schreiben Sie etwas mehr",
+  "switchToTextModeTitle": "In Textmodus wechseln?",
+  "switchToTextModeBody": "Ihre bisherige Sprachaufnahme wird verworfen. Sie müssen Ihr Gebet stattdessen als Text schreiben.",
+  "switchToTextModeConfirm": "Zu Text wechseln",
+  "switchToTextModeCancel": "Aufnahme fortsetzen",
+  "recordingInterruptedTitle": "Ihre Gebetsaufnahme wurde unterbrochen",
+  "recordingInterruptedBody": "Während Sie weg waren, wurde die Aufnahme gestoppt. Was möchten Sie tun?",
+  "recordingInterruptedRestart": "Aufnahme neu starten",
+  "recordingInterruptedSwitchToText": "Stattdessen als Text schreiben"
 }

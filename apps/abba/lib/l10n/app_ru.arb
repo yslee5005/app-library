@@ -62,6 +62,9 @@
   "aiPrayerTitle": "Молитва для тебя",
   "originalLangTitle": "Оригинальный язык",
   "proUnlock": "Разблокировать с Pro",
+  "proPreviewHistoricalHint": "Откройте глубокую историю за словом из вашей молитвы",
+  "proPreviewPrayerHint": "Молитва из 300 слов ждёт именно вас",
+  "proPreviewCoachingHint": "Один совет поможет углубить вашу следующую молитву",
   "qtPageTitle": "Утренний сад",
   "qtMeditateButton": "Начать размышление",
   "qtCompleted": "Завершено",
@@ -563,5 +566,14 @@
   },
   "trialLimitTitle": "Вы помолились 3 раза сегодня 🌸",
   "trialLimitBody": "Возвращайтесь завтра — или откройте безлимитные молитвы с Pro.",
-  "trialLimitCta": "Продолжить с Pro"
+  "trialLimitCta": "Продолжить с Pro",
+  "prayerTooShort": "Пожалуйста, напишите немного больше",
+  "switchToTextModeTitle": "Переключиться в текстовый режим?",
+  "switchToTextModeBody": "Ваша голосовая запись будет удалена. Вам нужно будет написать молитву в виде текста.",
+  "switchToTextModeConfirm": "Переключить на текст",
+  "switchToTextModeCancel": "Продолжить запись",
+  "recordingInterruptedTitle": "Запись вашей молитвы была прервана",
+  "recordingInterruptedBody": "Пока вас не было, запись остановилась. Что вы хотите сделать?",
+  "recordingInterruptedRestart": "Начать запись заново",
+  "recordingInterruptedSwitchToText": "Написать текстом"
 }

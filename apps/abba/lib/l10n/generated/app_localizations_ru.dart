@@ -170,6 +170,17 @@ class AppLocalizationsRu extends AppLocalizations {
   String get proUnlock => 'Разблокировать с Pro';
 
   @override
+  String get proPreviewHistoricalHint =>
+      'Откройте глубокую историю за словом из вашей молитвы';
+
+  @override
+  String get proPreviewPrayerHint => 'Молитва из 300 слов ждёт именно вас';
+
+  @override
+  String get proPreviewCoachingHint =>
+      'Один совет поможет углубить вашу следующую молитву';
+
+  @override
   String get qtPageTitle => 'Утренний сад';
 
   @override
@@ -1333,4 +1344,33 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get trialLimitCta => 'Продолжить с Pro';
+
+  @override
+  String get prayerTooShort => 'Пожалуйста, напишите немного больше';
+
+  @override
+  String get switchToTextModeTitle => 'Переключиться в текстовый режим?';
+
+  @override
+  String get switchToTextModeBody =>
+      'Ваша голосовая запись будет удалена. Вам нужно будет написать молитву в виде текста.';
+
+  @override
+  String get switchToTextModeConfirm => 'Переключить на текст';
+
+  @override
+  String get switchToTextModeCancel => 'Продолжить запись';
+
+  @override
+  String get recordingInterruptedTitle => 'Запись вашей молитвы была прервана';
+
+  @override
+  String get recordingInterruptedBody =>
+      'Пока вас не было, запись остановилась. Что вы хотите сделать?';
+
+  @override
+  String get recordingInterruptedRestart => 'Начать запись заново';
+
+  @override
+  String get recordingInterruptedSwitchToText => 'Написать текстом';
 }

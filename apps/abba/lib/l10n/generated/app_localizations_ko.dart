@@ -165,6 +165,15 @@ class AppLocalizationsKo extends AppLocalizations {
   String get proUnlock => 'Pro로 보기';
 
   @override
+  String get proPreviewHistoricalHint => '당신의 기도에서 발견한 한 단어를 깊이 풀어드립니다';
+
+  @override
+  String get proPreviewPrayerHint => '당신을 위한 깊이 있는 기도문이 기다리고 있어요';
+
+  @override
+  String get proPreviewCoachingHint => '다음 기도가 더 깊어지는 한 가지 조언이 있어요';
+
+  @override
   String get qtPageTitle => '아침 정원';
 
   @override
@@ -1298,4 +1307,31 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get trialLimitCta => 'Pro로 계속하기';
+
+  @override
+  String get prayerTooShort => '조금 더 적어주세요';
+
+  @override
+  String get switchToTextModeTitle => '텍스트로 전환할까요?';
+
+  @override
+  String get switchToTextModeBody => '지금까지 녹음한 음성 기도가 사라집니다. 텍스트로 새로 작성하셔야 해요.';
+
+  @override
+  String get switchToTextModeConfirm => '텍스트로 작성';
+
+  @override
+  String get switchToTextModeCancel => '녹음 계속';
+
+  @override
+  String get recordingInterruptedTitle => '기도 녹음이 중단되었어요';
+
+  @override
+  String get recordingInterruptedBody => '앱을 잠시 떠난 사이 녹음이 멈췄어요. 어떻게 하시겠어요?';
+
+  @override
+  String get recordingInterruptedRestart => '다시 녹음하기';
+
+  @override
+  String get recordingInterruptedSwitchToText => '텍스트로 작성';
 }

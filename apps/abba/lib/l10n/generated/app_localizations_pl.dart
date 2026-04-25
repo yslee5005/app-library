@@ -170,6 +170,18 @@ class AppLocalizationsPl extends AppLocalizations {
   String get proUnlock => 'Odblokuj z Pro';
 
   @override
+  String get proPreviewHistoricalHint =>
+      'Odkryj głębszą historię stojącą za słowem z twojej modlitwy';
+
+  @override
+  String get proPreviewPrayerHint =>
+      'Modlitwa z 300 słów czeka właśnie na ciebie';
+
+  @override
+  String get proPreviewCoachingHint =>
+      'Jedna wskazówka czeka, aby pogłębić twoją kolejną modlitwę';
+
+  @override
   String get qtPageTitle => 'Poranny ogród';
 
   @override
@@ -1338,4 +1350,34 @@ class AppLocalizationsPl extends AppLocalizations {
 
   @override
   String get trialLimitCta => 'Kontynuuj z Pro';
+
+  @override
+  String get prayerTooShort => 'Proszę napisać trochę więcej';
+
+  @override
+  String get switchToTextModeTitle => 'Przełączyć na tryb tekstowy?';
+
+  @override
+  String get switchToTextModeBody =>
+      'Twoje dotychczasowe nagranie głosowe zostanie odrzucone. Musisz napisać modlitwę jako tekst.';
+
+  @override
+  String get switchToTextModeConfirm => 'Przełącz na tekst';
+
+  @override
+  String get switchToTextModeCancel => 'Kontynuuj nagrywanie';
+
+  @override
+  String get recordingInterruptedTitle =>
+      'Nagrywanie modlitwy zostało przerwane';
+
+  @override
+  String get recordingInterruptedBody =>
+      'Gdy byłeś nieobecny, nagrywanie się zatrzymało. Co chcesz zrobić?';
+
+  @override
+  String get recordingInterruptedRestart => 'Rozpocznij nagrywanie ponownie';
+
+  @override
+  String get recordingInterruptedSwitchToText => 'Napisz jako tekst';
 }

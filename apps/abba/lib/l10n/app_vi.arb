@@ -62,6 +62,9 @@
   "aiPrayerTitle": "Lời cầu nguyện cho bạn",
   "originalLangTitle": "Ngôn ngữ gốc",
   "proUnlock": "Mở khóa với Pro",
+  "proPreviewHistoricalHint": "Khám phá lịch sử sâu sắc đằng sau một từ trong lời cầu nguyện của bạn",
+  "proPreviewPrayerHint": "Một lời cầu nguyện 300 từ đang chờ đợi bạn",
+  "proPreviewCoachingHint": "Một lời khuyên đang chờ để làm sâu sắc thêm lời cầu nguyện tiếp theo của bạn",
   "qtPageTitle": "Vườn buổi sáng",
   "qtMeditateButton": "Bắt đầu suy ngẫm",
   "qtCompleted": "Hoàn thành",
@@ -563,5 +566,14 @@
   },
   "trialLimitTitle": "Bạn đã cầu nguyện 3 lần hôm nay 🌸",
   "trialLimitBody": "Hẹn gặp lại ngày mai — hoặc mở khóa cầu nguyện không giới hạn với Pro.",
-  "trialLimitCta": "Tiếp tục với Pro"
+  "trialLimitCta": "Tiếp tục với Pro",
+  "prayerTooShort": "Vui lòng viết thêm một chút",
+  "switchToTextModeTitle": "Chuyển sang chế độ văn bản?",
+  "switchToTextModeBody": "Bản ghi âm cầu nguyện của bạn cho đến nay sẽ bị xóa. Bạn cần viết lời cầu nguyện dưới dạng văn bản.",
+  "switchToTextModeConfirm": "Chuyển sang văn bản",
+  "switchToTextModeCancel": "Tiếp tục ghi âm",
+  "recordingInterruptedTitle": "Bản ghi cầu nguyện của bạn đã bị gián đoạn",
+  "recordingInterruptedBody": "Khi bạn đi vắng, bản ghi đã dừng. Bạn muốn làm gì?",
+  "recordingInterruptedRestart": "Bắt đầu lại ghi âm",
+  "recordingInterruptedSwitchToText": "Viết bằng văn bản"
 }

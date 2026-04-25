@@ -166,6 +166,16 @@ class AppLocalizationsAr extends AppLocalizations {
   String get proUnlock => 'افتح مع Pro';
 
   @override
+  String get proPreviewHistoricalHint =>
+      'اكتشف التاريخ العميق وراء كلمة من صلاتك';
+
+  @override
+  String get proPreviewPrayerHint => 'صلاة من 300 كلمة في انتظارك';
+
+  @override
+  String get proPreviewCoachingHint => 'نصيحة واحدة تنتظر لتعميق صلاتك التالية';
+
+  @override
   String get qtPageTitle => 'حديقة الصباح';
 
   @override
@@ -1313,4 +1323,33 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get trialLimitCta => 'متابعة مع Pro';
+
+  @override
+  String get prayerTooShort => 'الرجاء كتابة المزيد';
+
+  @override
+  String get switchToTextModeTitle => 'التبديل إلى وضع النص؟';
+
+  @override
+  String get switchToTextModeBody =>
+      'سيتم تجاهل تسجيلك الصوتي حتى الآن. ستحتاج إلى كتابة صلاتك كنص بدلاً من ذلك.';
+
+  @override
+  String get switchToTextModeConfirm => 'التبديل إلى النص';
+
+  @override
+  String get switchToTextModeCancel => 'متابعة التسجيل';
+
+  @override
+  String get recordingInterruptedTitle => 'تم انقطاع تسجيل صلاتك';
+
+  @override
+  String get recordingInterruptedBody =>
+      'أثناء غيابك، توقف التسجيل. ماذا تريد أن تفعل؟';
+
+  @override
+  String get recordingInterruptedRestart => 'إعادة بدء التسجيل';
+
+  @override
+  String get recordingInterruptedSwitchToText => 'الكتابة كنص';
 }

@@ -62,6 +62,9 @@
   "aiPrayerTitle": "Maombi kwa Ajili Yako",
   "originalLangTitle": "Lugha Asili",
   "proUnlock": "Fungua kwa Pro",
+  "proPreviewHistoricalHint": "Discover the deeper history behind a word from your prayer",
+  "proPreviewPrayerHint": "A 300-word prayer is waiting just for you",
+  "proPreviewCoachingHint": "One coaching tip waits to deepen your next prayer",
   "qtPageTitle": "Bustani ya Asubuhi",
   "qtMeditateButton": "Anza Kutafakari",
   "qtCompleted": "Imekamilika",
@@ -563,5 +566,14 @@
   },
   "trialLimitTitle": "You've prayed 3 times today 🌸",
   "trialLimitBody": "Come back tomorrow — or unlock unlimited prayer with Pro.",
-  "trialLimitCta": "Continue with Pro"
+  "trialLimitCta": "Continue with Pro",
+  "prayerTooShort": "Please write a little more",
+  "switchToTextModeTitle": "Switch to text mode?",
+  "switchToTextModeBody": "Your voice recording so far will be discarded. You'll need to write your prayer as text instead.",
+  "switchToTextModeConfirm": "Switch to text",
+  "switchToTextModeCancel": "Keep recording",
+  "recordingInterruptedTitle": "Your prayer recording was interrupted",
+  "recordingInterruptedBody": "While you were away, the recording stopped. What would you like to do?",
+  "recordingInterruptedRestart": "Restart recording",
+  "recordingInterruptedSwitchToText": "Write as text instead"
 }

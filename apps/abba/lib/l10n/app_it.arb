@@ -62,6 +62,9 @@
   "aiPrayerTitle": "Una preghiera per te",
   "originalLangTitle": "Lingua originale",
   "proUnlock": "Sblocca con Pro",
+  "proPreviewHistoricalHint": "Scopri la storia profonda dietro una parola della tua preghiera",
+  "proPreviewPrayerHint": "Una preghiera di 300 parole ti sta aspettando",
+  "proPreviewCoachingHint": "Un consiglio ti aspetta per approfondire la tua prossima preghiera",
   "qtPageTitle": "Giardino mattutino",
   "qtMeditateButton": "Inizia meditazione",
   "qtCompleted": "Completato",
@@ -563,5 +566,14 @@
   },
   "trialLimitTitle": "Hai pregato 3 volte oggi 🌸",
   "trialLimitBody": "Torna domani — oppure sblocca preghiere illimitate con Pro.",
-  "trialLimitCta": "Continua con Pro"
+  "trialLimitCta": "Continua con Pro",
+  "prayerTooShort": "Per favore, scriva un po' di più",
+  "switchToTextModeTitle": "Passare alla modalità testo?",
+  "switchToTextModeBody": "La registrazione vocale finora sarà eliminata. Dovrai scrivere la tua preghiera come testo.",
+  "switchToTextModeConfirm": "Passa al testo",
+  "switchToTextModeCancel": "Continua a registrare",
+  "recordingInterruptedTitle": "La tua registrazione di preghiera è stata interrotta",
+  "recordingInterruptedBody": "Mentre eri via, la registrazione si è fermata. Cosa vuoi fare?",
+  "recordingInterruptedRestart": "Ricomincia registrazione",
+  "recordingInterruptedSwitchToText": "Scrivi come testo"
 }

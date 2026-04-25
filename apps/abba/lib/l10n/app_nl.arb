@@ -62,6 +62,9 @@
   "aiPrayerTitle": "Een gebed voor jou",
   "originalLangTitle": "Oorspronkelijke taal",
   "proUnlock": "Ontgrendelen met Pro",
+  "proPreviewHistoricalHint": "Ontdek de diepere geschiedenis achter een woord uit jouw gebed",
+  "proPreviewPrayerHint": "Een gebed van 300 woorden wacht op jou",
+  "proPreviewCoachingHint": "Eén tip wacht om je volgende gebed te verdiepen",
   "qtPageTitle": "Ochtenttuin",
   "qtMeditateButton": "Begin meditatie",
   "qtCompleted": "Voltooid",
@@ -563,5 +566,14 @@
   },
   "trialLimitTitle": "Je hebt vandaag 3 keer gebeden 🌸",
   "trialLimitBody": "Kom morgen terug — of ontgrendel onbeperkt bidden met Pro.",
-  "trialLimitCta": "Doorgaan met Pro"
+  "trialLimitCta": "Doorgaan met Pro",
+  "prayerTooShort": "Schrijf alstublieft iets meer",
+  "switchToTextModeTitle": "Overschakelen naar tekstmodus?",
+  "switchToTextModeBody": "Je tot nu toe opgenomen gebed wordt verwijderd. Je moet je gebed in plaats daarvan als tekst schrijven.",
+  "switchToTextModeConfirm": "Schakel over naar tekst",
+  "switchToTextModeCancel": "Doorgaan met opnemen",
+  "recordingInterruptedTitle": "Je gebedsopname is onderbroken",
+  "recordingInterruptedBody": "Terwijl je weg was, is de opname gestopt. Wat wil je doen?",
+  "recordingInterruptedRestart": "Opname opnieuw starten",
+  "recordingInterruptedSwitchToText": "Schrijf als tekst"
 }

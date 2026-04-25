@@ -62,6 +62,9 @@
   "aiPrayerTitle": "คำอธิษฐานสำหรับคุณ",
   "originalLangTitle": "ภาษาต้นฉบับ",
   "proUnlock": "ปลดล็อกด้วย Pro",
+  "proPreviewHistoricalHint": "ค้นพบประวัติศาสตร์อันลึกซึ้งเบื้องหลังคำหนึ่งจากคำอธิษฐานของคุณ",
+  "proPreviewPrayerHint": "คำอธิษฐาน 300 คำกำลังรอคุณอยู่",
+  "proPreviewCoachingHint": "คำแนะนำหนึ่งข้อรอช่วยให้คำอธิษฐานครั้งต่อไปลึกซึ้งยิ่งขึ้น",
   "qtPageTitle": "สวนยามเช้า",
   "qtMeditateButton": "เริ่มการเฝ้าเดี่ยว",
   "qtCompleted": "เสร็จสิ้น",
@@ -563,5 +566,14 @@
   },
   "trialLimitTitle": "วันนี้คุณได้อธิษฐานไปแล้ว 3 ครั้ง 🌸",
   "trialLimitBody": "แล้วพบกันใหม่พรุ่งนี้ — หรือปลดล็อกการอธิษฐานไม่จำกัดด้วย Pro",
-  "trialLimitCta": "ดำเนินการต่อด้วย Pro"
+  "trialLimitCta": "ดำเนินการต่อด้วย Pro",
+  "prayerTooShort": "กรุณาเขียนเพิ่มอีกหน่อย",
+  "switchToTextModeTitle": "เปลี่ยนเป็นโหมดข้อความ?",
+  "switchToTextModeBody": "การบันทึกเสียงคำอธิษฐานของคุณจะถูกลบ คุณจะต้องเขียนคำอธิษฐานเป็นข้อความแทน",
+  "switchToTextModeConfirm": "เปลี่ยนเป็นข้อความ",
+  "switchToTextModeCancel": "บันทึกต่อ",
+  "recordingInterruptedTitle": "การบันทึกคำอธิษฐานของคุณถูกขัดจังหวะ",
+  "recordingInterruptedBody": "ขณะที่คุณไม่อยู่ การบันทึกหยุดลง คุณต้องการทำอะไร?",
+  "recordingInterruptedRestart": "เริ่มบันทึกใหม่",
+  "recordingInterruptedSwitchToText": "เขียนเป็นข้อความ"
 }

@@ -62,6 +62,9 @@
   "aiPrayerTitle": "صلاة من أجلك",
   "originalLangTitle": "اللغة الأصلية",
   "proUnlock": "افتح مع Pro",
+  "proPreviewHistoricalHint": "اكتشف التاريخ العميق وراء كلمة من صلاتك",
+  "proPreviewPrayerHint": "صلاة من 300 كلمة في انتظارك",
+  "proPreviewCoachingHint": "نصيحة واحدة تنتظر لتعميق صلاتك التالية",
   "qtPageTitle": "حديقة الصباح",
   "qtMeditateButton": "ابدأ التأمل",
   "qtCompleted": "مكتملة",
@@ -563,5 +566,14 @@
   },
   "trialLimitTitle": "لقد صليت 3 مرات اليوم 🌸",
   "trialLimitBody": "عد غدًا — أو افتح الصلاة اللامحدودة مع Pro.",
-  "trialLimitCta": "متابعة مع Pro"
+  "trialLimitCta": "متابعة مع Pro",
+  "prayerTooShort": "الرجاء كتابة المزيد",
+  "switchToTextModeTitle": "التبديل إلى وضع النص؟",
+  "switchToTextModeBody": "سيتم تجاهل تسجيلك الصوتي حتى الآن. ستحتاج إلى كتابة صلاتك كنص بدلاً من ذلك.",
+  "switchToTextModeConfirm": "التبديل إلى النص",
+  "switchToTextModeCancel": "متابعة التسجيل",
+  "recordingInterruptedTitle": "تم انقطاع تسجيل صلاتك",
+  "recordingInterruptedBody": "أثناء غيابك، توقف التسجيل. ماذا تريد أن تفعل؟",
+  "recordingInterruptedRestart": "إعادة بدء التسجيل",
+  "recordingInterruptedSwitchToText": "الكتابة كنص"
 }

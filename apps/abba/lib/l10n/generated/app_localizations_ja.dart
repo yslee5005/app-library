@@ -164,6 +164,15 @@ class AppLocalizationsJa extends AppLocalizations {
   String get proUnlock => 'Proで見る';
 
   @override
+  String get proPreviewHistoricalHint => 'あなたの祈りに込められた一つの言葉、その深い歴史をお届けします';
+
+  @override
+  String get proPreviewPrayerHint => 'あなたのための深い祈りの言葉が用意されています';
+
+  @override
+  String get proPreviewCoachingHint => '次の祈りをより深くする一つのアドバイスがあります';
+
+  @override
   String get qtPageTitle => '朝の庭';
 
   @override
@@ -1297,4 +1306,32 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get trialLimitCta => 'Pro で続ける';
+
+  @override
+  String get prayerTooShort => 'もう少し書いてください';
+
+  @override
+  String get switchToTextModeTitle => 'テキストモードに切り替えますか?';
+
+  @override
+  String get switchToTextModeBody =>
+      'これまで録音した音声の祈りは破棄されます。代わりにテキストで祈りを書く必要があります。';
+
+  @override
+  String get switchToTextModeConfirm => 'テキストに切り替え';
+
+  @override
+  String get switchToTextModeCancel => '録音を続ける';
+
+  @override
+  String get recordingInterruptedTitle => '祈りの録音が中断されました';
+
+  @override
+  String get recordingInterruptedBody => '離れている間に録音が停止しました。どうしますか?';
+
+  @override
+  String get recordingInterruptedRestart => '録音を再開';
+
+  @override
+  String get recordingInterruptedSwitchToText => 'テキストで書く';
 }

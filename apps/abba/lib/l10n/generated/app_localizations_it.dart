@@ -170,6 +170,18 @@ class AppLocalizationsIt extends AppLocalizations {
   String get proUnlock => 'Sblocca con Pro';
 
   @override
+  String get proPreviewHistoricalHint =>
+      'Scopri la storia profonda dietro una parola della tua preghiera';
+
+  @override
+  String get proPreviewPrayerHint =>
+      'Una preghiera di 300 parole ti sta aspettando';
+
+  @override
+  String get proPreviewCoachingHint =>
+      'Un consiglio ti aspetta per approfondire la tua prossima preghiera';
+
+  @override
   String get qtPageTitle => 'Giardino mattutino';
 
   @override
@@ -1342,4 +1354,34 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get trialLimitCta => 'Continua con Pro';
+
+  @override
+  String get prayerTooShort => 'Per favore, scriva un po\' di più';
+
+  @override
+  String get switchToTextModeTitle => 'Passare alla modalità testo?';
+
+  @override
+  String get switchToTextModeBody =>
+      'La registrazione vocale finora sarà eliminata. Dovrai scrivere la tua preghiera come testo.';
+
+  @override
+  String get switchToTextModeConfirm => 'Passa al testo';
+
+  @override
+  String get switchToTextModeCancel => 'Continua a registrare';
+
+  @override
+  String get recordingInterruptedTitle =>
+      'La tua registrazione di preghiera è stata interrotta';
+
+  @override
+  String get recordingInterruptedBody =>
+      'Mentre eri via, la registrazione si è fermata. Cosa vuoi fare?';
+
+  @override
+  String get recordingInterruptedRestart => 'Ricomincia registrazione';
+
+  @override
+  String get recordingInterruptedSwitchToText => 'Scrivi come testo';
 }

@@ -62,6 +62,9 @@
   "aiPrayerTitle": "Uma Oração para Você",
   "originalLangTitle": "Língua Original",
   "proUnlock": "Desbloquear com Pro",
+  "proPreviewHistoricalHint": "Descubra a história mais profunda por trás de uma palavra da sua oração",
+  "proPreviewPrayerHint": "Uma oração de 300 palavras está esperando por você",
+  "proPreviewCoachingHint": "Um conselho espera para aprofundar sua próxima oração",
   "qtPageTitle": "Jardim Matinal",
   "qtMeditateButton": "Iniciar Meditação",
   "qtCompleted": "Concluído",
@@ -563,5 +566,14 @@
   },
   "trialLimitTitle": "Você orou 3 vezes hoje 🌸",
   "trialLimitBody": "Volte amanhã — ou desbloqueie orações ilimitadas com o Pro.",
-  "trialLimitCta": "Continuar com Pro"
+  "trialLimitCta": "Continuar com Pro",
+  "prayerTooShort": "Por favor, escreva um pouco mais",
+  "switchToTextModeTitle": "Mudar para modo texto?",
+  "switchToTextModeBody": "Sua gravação de voz até agora será descartada. Você precisará escrever sua oração como texto.",
+  "switchToTextModeConfirm": "Mudar para texto",
+  "switchToTextModeCancel": "Continuar gravando",
+  "recordingInterruptedTitle": "Sua gravação de oração foi interrompida",
+  "recordingInterruptedBody": "Enquanto você estava ausente, a gravação parou. O que você gostaria de fazer?",
+  "recordingInterruptedRestart": "Reiniciar gravação",
+  "recordingInterruptedSwitchToText": "Escrever como texto"
 }

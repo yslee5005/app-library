@@ -169,6 +169,18 @@ class AppLocalizationsMs extends AppLocalizations {
   String get proUnlock => 'Buka dengan Pro';
 
   @override
+  String get proPreviewHistoricalHint =>
+      'Temui sejarah mendalam di sebalik perkataan daripada doa anda';
+
+  @override
+  String get proPreviewPrayerHint =>
+      'Doa 300 patah perkataan sedang menunggu anda';
+
+  @override
+  String get proPreviewCoachingHint =>
+      'Satu nasihat menanti untuk mendalami doa anda yang seterusnya';
+
+  @override
   String get qtPageTitle => 'Taman Pagi';
 
   @override
@@ -1345,4 +1357,33 @@ class AppLocalizationsMs extends AppLocalizations {
 
   @override
   String get trialLimitCta => 'Teruskan dengan Pro';
+
+  @override
+  String get prayerTooShort => 'Sila tulis sedikit lagi';
+
+  @override
+  String get switchToTextModeTitle => 'Tukar ke mod teks?';
+
+  @override
+  String get switchToTextModeBody =>
+      'Rakaman suara doa anda setakat ini akan dibuang. Anda perlu menulis doa sebagai teks.';
+
+  @override
+  String get switchToTextModeConfirm => 'Tukar ke teks';
+
+  @override
+  String get switchToTextModeCancel => 'Teruskan rakaman';
+
+  @override
+  String get recordingInterruptedTitle => 'Rakaman doa anda terganggu';
+
+  @override
+  String get recordingInterruptedBody =>
+      'Semasa anda tiada, rakaman terhenti. Apa yang anda mahu lakukan?';
+
+  @override
+  String get recordingInterruptedRestart => 'Mulakan semula rakaman';
+
+  @override
+  String get recordingInterruptedSwitchToText => 'Tulis sebagai teks';
 }

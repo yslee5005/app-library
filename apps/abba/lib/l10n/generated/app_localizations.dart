@@ -458,6 +458,24 @@ abstract class AppLocalizations {
   /// **'Unlock with Pro'**
   String get proUnlock;
 
+  /// No description provided for @proPreviewHistoricalHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Discover the deeper history behind a word from your prayer'**
+  String get proPreviewHistoricalHint;
+
+  /// No description provided for @proPreviewPrayerHint.
+  ///
+  /// In en, this message translates to:
+  /// **'A 300-word prayer is waiting just for you'**
+  String get proPreviewPrayerHint;
+
+  /// No description provided for @proPreviewCoachingHint.
+  ///
+  /// In en, this message translates to:
+  /// **'One coaching tip waits to deepen your next prayer'**
+  String get proPreviewCoachingHint;
+
   /// No description provided for @qtPageTitle.
   ///
   /// In en, this message translates to:
@@ -2605,6 +2623,60 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Continue with Pro'**
   String get trialLimitCta;
+
+  /// No description provided for @prayerTooShort.
+  ///
+  /// In en, this message translates to:
+  /// **'Please write a little more'**
+  String get prayerTooShort;
+
+  /// No description provided for @switchToTextModeTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Switch to text mode?'**
+  String get switchToTextModeTitle;
+
+  /// No description provided for @switchToTextModeBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Your voice recording so far will be discarded. You\'ll need to write your prayer as text instead.'**
+  String get switchToTextModeBody;
+
+  /// No description provided for @switchToTextModeConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Switch to text'**
+  String get switchToTextModeConfirm;
+
+  /// No description provided for @switchToTextModeCancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Keep recording'**
+  String get switchToTextModeCancel;
+
+  /// No description provided for @recordingInterruptedTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Your prayer recording was interrupted'**
+  String get recordingInterruptedTitle;
+
+  /// No description provided for @recordingInterruptedBody.
+  ///
+  /// In en, this message translates to:
+  /// **'While you were away, the recording stopped. What would you like to do?'**
+  String get recordingInterruptedBody;
+
+  /// No description provided for @recordingInterruptedRestart.
+  ///
+  /// In en, this message translates to:
+  /// **'Restart recording'**
+  String get recordingInterruptedRestart;
+
+  /// No description provided for @recordingInterruptedSwitchToText.
+  ///
+  /// In en, this message translates to:
+  /// **'Write as text instead'**
+  String get recordingInterruptedSwitchToText;
 }
 
 class _AppLocalizationsDelegate

@@ -171,6 +171,17 @@ class AppLocalizationsFr extends AppLocalizations {
   String get proUnlock => 'Débloquer avec Pro';
 
   @override
+  String get proPreviewHistoricalHint =>
+      'Découvrez l\'histoire profonde derrière un mot de votre prière';
+
+  @override
+  String get proPreviewPrayerHint => 'Une prière de 300 mots vous attend';
+
+  @override
+  String get proPreviewCoachingHint =>
+      'Un conseil vous attend pour approfondir votre prochaine prière';
+
+  @override
   String get qtPageTitle => 'Jardin du Matin';
 
   @override
@@ -1346,4 +1357,34 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get trialLimitCta => 'Continuer avec Pro';
+
+  @override
+  String get prayerTooShort => 'Veuillez écrire un peu plus';
+
+  @override
+  String get switchToTextModeTitle => 'Passer en mode texte ?';
+
+  @override
+  String get switchToTextModeBody =>
+      'L\'enregistrement vocal de votre prière sera supprimé. Vous devrez écrire votre prière sous forme de texte.';
+
+  @override
+  String get switchToTextModeConfirm => 'Passer au texte';
+
+  @override
+  String get switchToTextModeCancel => 'Continuer l\'enregistrement';
+
+  @override
+  String get recordingInterruptedTitle =>
+      'Votre enregistrement de prière a été interrompu';
+
+  @override
+  String get recordingInterruptedBody =>
+      'Pendant votre absence, l\'enregistrement s\'est arrêté. Que souhaitez-vous faire ?';
+
+  @override
+  String get recordingInterruptedRestart => 'Recommencer l\'enregistrement';
+
+  @override
+  String get recordingInterruptedSwitchToText => 'Écrire en texte';
 }

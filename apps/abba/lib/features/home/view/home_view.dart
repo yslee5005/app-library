@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:app_lib_audio_recorder/audio_recorder.dart';
 import 'package:app_lib_logging/logging.dart';
@@ -22,13 +23,20 @@ class HomeView extends ConsumerStatefulWidget {
 }
 
 class _HomeViewState extends ConsumerState<HomeView>
-    with SingleTickerProviderStateMixin {
+    with SingleTickerProviderStateMixin, WidgetsBindingObserver {
   int _selectedTab = 0; // 0 = prayer, 1 = QT
 
   // Prayer state
   bool _isPraying = false;
   bool _isPaused = false;
   bool _isTextMode = false;
+  // Locks the active session to text-only after the user destructively
+  // switches from voice → text via the toggle (Wave A fix #2). Reset on
+  // session start.
+  bool _textOnlyLocked = false;
+  // Set when the OS pauses the app while we're in voice mode mid-session
+  // (Wave A fix #3). When the user resumes we show a recovery dialog.
+  bool _interruptedDuringPause = false;
   int _seconds = 0;
   Timer? _timer;
   final _textController = TextEditingController();
@@ -38,18 +46,80 @@ class _HomeViewState extends ConsumerState<HomeView>
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addObserver(this);
     _pulseController = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 1500),
     );
+    // Rebuild the "기도 마침" button when the user types so the disabled
+    // gate on too-short text mode input flips live.
+    _textController.addListener(_onTextChanged);
   }
 
   @override
   void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
     _timer?.cancel();
     _pulseController.dispose();
+    _textController.removeListener(_onTextChanged);
     _textController.dispose();
     super.dispose();
+  }
+
+  void _onTextChanged() {
+    if (mounted) setState(() {});
+  }
+
+  /// Minimum trimmed text length required to send a text-mode prayer to
+  /// Gemini. Wave A fix #1 — empty/short text must not consume quota or
+  /// hit the AI gateway.
+  static const int _minTextLength = 5;
+
+  /// True when we should accept the current "기도 마침" tap. Voice mode
+  /// always passes (Gemini transcribes). Text mode requires ≥5 trimmed
+  /// chars.
+  bool get _canFinishPrayer {
+    if (!_isTextMode) return true;
+    return _textController.text.trim().length >= _minTextLength;
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    // Wave A fix #3 — App lifecycle background guard.
+    // When the OS suspends the app mid voice-recording, immediately stop
+    // the recorder so we don't burn battery / mic in the background and
+    // so the audio file is finalized before iOS may revoke our mic
+    // session. We DON'T discard the file here; on resume we ask the
+    // user what to do.
+    if (!_isPraying || _isTextMode) return;
+
+    if (state == AppLifecycleState.paused ||
+        state == AppLifecycleState.inactive ||
+        state == AppLifecycleState.hidden) {
+      if (!_interruptedDuringPause) {
+        _interruptedDuringPause = true;
+        _timer?.cancel();
+        _pulseController.stop();
+        final recorder = ref.read(audioRecorderServiceProvider);
+        // Fire-and-forget: stopRecording is async but the framework
+        // doesn't await us in didChangeAppLifecycleState.
+        recorder.stopRecording().catchError((Object e, StackTrace st) {
+          prayerLog.warning('stopRecording on pause failed: $e');
+          return null;
+        });
+        prayerLog.info(
+          'Recording auto-stopped due to app lifecycle pause',
+        );
+      }
+    } else if (state == AppLifecycleState.resumed &&
+        _interruptedDuringPause &&
+        mounted) {
+      // Trigger the recovery dialog on the next frame so the build
+      // tree is fully attached before showDialog.
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (mounted) _showRecordingInterruptedDialog();
+      });
+    }
   }
 
   // --- Prayer controls ---
@@ -94,6 +164,9 @@ class _HomeViewState extends ConsumerState<HomeView>
         _isPaused = false;
         _seconds = 0;
         _isTextMode = false;
+        _textOnlyLocked = false;
+        _interruptedDuringPause = false;
+        _textController.clear();
       });
       ref.read(isRecordingProvider.notifier).state = true;
 
@@ -141,6 +214,19 @@ class _HomeViewState extends ConsumerState<HomeView>
 
   Future<void> _finishPrayer() async {
     final l10n = AppLocalizations.of(context)!;
+
+    // Wave A fix #1 — guard text-mode finish against empty / too-short
+    // input. The button is also visually disabled by `_canFinishPrayer`,
+    // but this is the authoritative check (covers programmatic taps).
+    // No Gemini call, no quota debit, no DB row.
+    if (_isTextMode &&
+        _textController.text.trim().length < _minTextLength) {
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(l10n.prayerTooShort)),
+      );
+      return;
+    }
 
     // 기도 완료 확인 다이얼로그 (실수 방지)
     final confirmed = await showDialog<bool>(
@@ -239,6 +325,338 @@ class _HomeViewState extends ConsumerState<HomeView>
     ref.read(isRecordingProvider.notifier).state = false;
     setState(() => _isPraying = false);
     if (mounted) context.go('/home/ai-loading');
+  }
+
+  /// Wave A fix #2 — Destructive switch from voice → text.
+  ///
+  /// While a voice session is active, tapping the toggle:
+  ///   1. Shows a confirm dialog (cancel = no-op).
+  ///   2. On confirm: stops the recorder, deletes the in-progress
+  ///      audio file, clears `currentAudioPathProvider`, resets the
+  ///      visible timer, locks the session text-only.
+  ///
+  /// Going back from text → voice is forbidden once locked because the
+  /// audio context has been destroyed.
+  Future<void> _onToggleTextMode() async {
+    final l10n = AppLocalizations.of(context)!;
+
+    // No active voice recording (e.g. switching from text → voice
+    // before any voice was captured) — but in our flow voice is the
+    // default starting mode, so this branch only fires on a hypothetical
+    // "voice toggle while in text mode but not locked" path. Today
+    // _textOnlyLocked guards that. Safe early return.
+    if (_isTextMode) return;
+
+    final confirmed = await showDialog<bool>(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(AbbaRadius.lg),
+        ),
+        title: Text(
+          l10n.switchToTextModeTitle,
+          style: AbbaTypography.h2,
+          textAlign: TextAlign.center,
+        ),
+        content: Text(
+          l10n.switchToTextModeBody,
+          style: AbbaTypography.body,
+          textAlign: TextAlign.center,
+        ),
+        actionsPadding: const EdgeInsets.fromLTRB(
+          AbbaSpacing.lg,
+          0,
+          AbbaSpacing.lg,
+          AbbaSpacing.lg,
+        ),
+        actions: [
+          Column(
+            children: [
+              SizedBox(
+                width: double.infinity,
+                height: abbaButtonHeight,
+                child: ElevatedButton(
+                  onPressed: () => Navigator.pop(ctx, true),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: AbbaColors.error,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(AbbaRadius.md),
+                    ),
+                  ),
+                  child: Text(
+                    l10n.switchToTextModeConfirm,
+                    style: AbbaTypography.body.copyWith(
+                      color: AbbaColors.white,
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(height: AbbaSpacing.sm),
+              SizedBox(
+                width: double.infinity,
+                height: abbaButtonHeight,
+                child: OutlinedButton(
+                  onPressed: () => Navigator.pop(ctx, false),
+                  style: OutlinedButton.styleFrom(
+                    side: const BorderSide(color: AbbaColors.sage),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(AbbaRadius.md),
+                    ),
+                  ),
+                  child: Text(
+                    l10n.switchToTextModeCancel,
+                    style: AbbaTypography.body.copyWith(
+                      color: AbbaColors.sage,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+
+    if (confirmed != true) return;
+    if (!mounted) return;
+
+    // Stop + discard.
+    final recorder = ref.read(audioRecorderServiceProvider);
+    try {
+      await recorder.stopRecording();
+    } catch (e) {
+      prayerLog.warning('stopRecording during destructive switch failed: $e');
+    }
+
+    // Best-effort delete of the in-progress audio file.
+    final path = _audioFilePath;
+    if (path != null) {
+      try {
+        final f = File(path);
+        if (await f.exists()) await f.delete();
+      } catch (e) {
+        prayerLog.warning('Failed to delete recording file $path: $e');
+      }
+    }
+
+    // Reset state — timer to zero, audio path cleared, lock to text.
+    _timer?.cancel();
+    _pulseController.stop();
+    ref.read(currentAudioPathProvider.notifier).state = null;
+
+    if (!mounted) return;
+    setState(() {
+      _isTextMode = true;
+      _textOnlyLocked = true;
+      _isPaused = false;
+      _seconds = 0;
+      _audioFilePath = null;
+    });
+
+    // Restart timer so the user still sees session duration after switch.
+    _timer = Timer.periodic(const Duration(seconds: 1), (_) {
+      if (!_isPaused && mounted) setState(() => _seconds++);
+    });
+
+    prayerLog.info('Destructively switched to text-only mode');
+  }
+
+  /// Wave A fix #3 — Recording interrupted recovery dialog.
+  ///
+  /// Shown after [didChangeAppLifecycleState] auto-stopped the recorder
+  /// because the app was suspended mid voice-recording. Three options:
+  ///   - 다시 시작 (restart): start a new voice session (fresh file)
+  ///   - 텍스트로 작성 (switch to text): lock session text-only
+  ///   - 폐기 (discard): exit the prayer session entirely
+  Future<void> _showRecordingInterruptedDialog() async {
+    if (!mounted || !_isPraying) return;
+    // Reset the flag now so re-entering paused→resumed cycle doesn't
+    // re-fire the dialog while it's already up.
+    _interruptedDuringPause = false;
+
+    final l10n = AppLocalizations.of(context)!;
+    final choice = await showDialog<String>(
+      context: context,
+      barrierDismissible: false,
+      builder: (ctx) => AlertDialog(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(AbbaRadius.lg),
+        ),
+        title: Text(
+          l10n.recordingInterruptedTitle,
+          style: AbbaTypography.h2,
+          textAlign: TextAlign.center,
+        ),
+        content: Text(
+          l10n.recordingInterruptedBody,
+          style: AbbaTypography.body,
+          textAlign: TextAlign.center,
+        ),
+        actionsPadding: const EdgeInsets.fromLTRB(
+          AbbaSpacing.lg,
+          0,
+          AbbaSpacing.lg,
+          AbbaSpacing.lg,
+        ),
+        actions: [
+          Column(
+            children: [
+              SizedBox(
+                width: double.infinity,
+                height: abbaButtonHeight,
+                child: ElevatedButton(
+                  onPressed: () => Navigator.pop(ctx, 'restart'),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: AbbaColors.sageDark,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(AbbaRadius.md),
+                    ),
+                  ),
+                  child: Text(
+                    l10n.recordingInterruptedRestart,
+                    style: AbbaTypography.body.copyWith(
+                      color: AbbaColors.white,
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(height: AbbaSpacing.sm),
+              SizedBox(
+                width: double.infinity,
+                height: abbaButtonHeight,
+                child: OutlinedButton(
+                  onPressed: () => Navigator.pop(ctx, 'text'),
+                  style: OutlinedButton.styleFrom(
+                    side: const BorderSide(color: AbbaColors.sage),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(AbbaRadius.md),
+                    ),
+                  ),
+                  child: Text(
+                    l10n.recordingInterruptedSwitchToText,
+                    style: AbbaTypography.body.copyWith(
+                      color: AbbaColors.sage,
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(height: AbbaSpacing.sm),
+              SizedBox(
+                width: double.infinity,
+                height: abbaButtonHeight,
+                child: TextButton(
+                  onPressed: () => Navigator.pop(ctx, 'discard'),
+                  child: Text(
+                    l10n.leaveButton,
+                    style: AbbaTypography.body.copyWith(
+                      color: AbbaColors.error,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+
+    if (!mounted) return;
+
+    switch (choice) {
+      case 'restart':
+        // Discard the half-baked audio file then start fresh.
+        final old = _audioFilePath;
+        if (old != null) {
+          try {
+            final f = File(old);
+            if (await f.exists()) await f.delete();
+          } catch (e) {
+            prayerLog.warning('Failed to delete old recording $old: $e');
+          }
+        }
+        if (!mounted) return;
+        try {
+          final dir = await getTemporaryDirectory();
+          _audioFilePath =
+              '${dir.path}/prayer_${DateTime.now().millisecondsSinceEpoch}.m4a';
+          final recorder = ref.read(audioRecorderServiceProvider);
+          await recorder.startRecording(path: _audioFilePath!);
+          if (!mounted) return;
+          setState(() {
+            _isPaused = false;
+            _seconds = 0;
+            _isTextMode = false;
+            _textOnlyLocked = false;
+          });
+          _pulseController.repeat(reverse: true);
+          _timer = Timer.periodic(const Duration(seconds: 1), (_) {
+            if (!_isPaused && mounted) setState(() => _seconds++);
+          });
+          prayerLog.info('Recording restarted after lifecycle interrupt');
+        } catch (e) {
+          prayerLog.warning('Failed to restart recording: $e');
+          if (!mounted) return;
+          // Fall back to ending the session — recovery is best-effort.
+          _resetPrayerSession();
+        }
+        break;
+      case 'text':
+        // Switch to text-only — discard any partial audio.
+        final path = _audioFilePath;
+        if (path != null) {
+          try {
+            final f = File(path);
+            if (await f.exists()) await f.delete();
+          } catch (e) {
+            prayerLog.warning('Failed to delete recording $path: $e');
+          }
+        }
+        if (!mounted) return;
+        ref.read(currentAudioPathProvider.notifier).state = null;
+        setState(() {
+          _isTextMode = true;
+          _textOnlyLocked = true;
+          _isPaused = false;
+          _audioFilePath = null;
+        });
+        _timer = Timer.periodic(const Duration(seconds: 1), (_) {
+          if (!_isPaused && mounted) setState(() => _seconds++);
+        });
+        prayerLog.info('Switched to text-only after lifecycle interrupt');
+        break;
+      case 'discard':
+      default:
+        final path = _audioFilePath;
+        if (path != null) {
+          try {
+            final f = File(path);
+            if (await f.exists()) await f.delete();
+          } catch (e) {
+            prayerLog.warning('Failed to delete recording $path: $e');
+          }
+        }
+        _resetPrayerSession();
+        prayerLog.info('Prayer session discarded after lifecycle interrupt');
+        break;
+    }
+  }
+
+  /// Tear down active prayer state cleanly. Does not stop the recorder
+  /// (caller is expected to have already done so).
+  void _resetPrayerSession() {
+    _timer?.cancel();
+    _pulseController.stop();
+    ref.read(isRecordingProvider.notifier).state = false;
+    ref.read(currentAudioPathProvider.notifier).state = null;
+    if (!mounted) return;
+    setState(() {
+      _isPraying = false;
+      _isPaused = false;
+      _isTextMode = false;
+      _textOnlyLocked = false;
+      _seconds = 0;
+      _audioFilePath = null;
+    });
   }
 
   // --- Build ---
@@ -627,33 +1045,33 @@ class _HomeViewState extends ConsumerState<HomeView>
         return Column(
           children: [
             // Text mode toggle (top right)
+            // Wave A fix #2 — switching from voice → text is destructive
+            // (audio file is deleted, session locked text-only). Switch
+            // shows a confirm dialog. Already-text-mode locked sessions
+            // disable the toggle entirely.
             Align(
               alignment: Alignment.centerRight,
               child: Padding(
                 padding: EdgeInsets.only(right: horizontalPadding),
                 child: TextButton.icon(
-                  onPressed: () async {
-                    final recorder = ref.read(audioRecorderServiceProvider);
-                    setState(() => _isTextMode = !_isTextMode);
-                    if (_isTextMode) {
-                      await recorder.pauseRecording();
-                      prayerLog.info('Switched to text mode');
-                    } else {
-                      await recorder.resumeRecording();
-                      prayerLog.info('Switched to voice mode');
-                    }
-                  },
+                  onPressed: _textOnlyLocked
+                      ? null
+                      : () => _onToggleTextMode(),
                   icon: Icon(
                     _isTextMode ? Icons.mic : Icons.keyboard,
                     size: 18,
-                    color: AbbaColors.sage,
+                    color: _textOnlyLocked
+                        ? AbbaColors.muted
+                        : AbbaColors.sage,
                   ),
                   label: Text(
                     _isTextMode
                         ? l10n.switchToVoiceMode
                         : l10n.switchToTextMode,
                     style: AbbaTypography.caption.copyWith(
-                      color: AbbaColors.sage,
+                      color: _textOnlyLocked
+                          ? AbbaColors.muted
+                          : AbbaColors.sage,
                     ),
                   ),
                 ),
@@ -751,9 +1169,19 @@ class _HomeViewState extends ConsumerState<HomeView>
                   ),
                   const SizedBox(width: AbbaSpacing.md),
                   Expanded(
-                    child: AbbaButton(
-                      label: l10n.finishPrayer,
-                      onPressed: _finishPrayer,
+                    // Wave A fix #1 — disable finish when text-mode
+                    // input is empty / under the minimum length. A real
+                    // tap is also guarded inside `_finishPrayer` so a
+                    // programmatic / a11y route can't bypass.
+                    child: Opacity(
+                      opacity: _canFinishPrayer ? 1.0 : 0.4,
+                      child: AbsorbPointer(
+                        absorbing: !_canFinishPrayer,
+                        child: AbbaButton(
+                          label: l10n.finishPrayer,
+                          onPressed: _finishPrayer,
+                        ),
+                      ),
                     ),
                   ),
                 ],

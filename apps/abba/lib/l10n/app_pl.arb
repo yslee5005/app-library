@@ -62,6 +62,9 @@
   "aiPrayerTitle": "Modlitwa dla Ciebie",
   "originalLangTitle": "Język oryginalny",
   "proUnlock": "Odblokuj z Pro",
+  "proPreviewHistoricalHint": "Odkryj głębszą historię stojącą za słowem z twojej modlitwy",
+  "proPreviewPrayerHint": "Modlitwa z 300 słów czeka właśnie na ciebie",
+  "proPreviewCoachingHint": "Jedna wskazówka czeka, aby pogłębić twoją kolejną modlitwę",
   "qtPageTitle": "Poranny ogród",
   "qtMeditateButton": "Rozpocznij medytację",
   "qtCompleted": "Ukończone",
@@ -563,5 +566,14 @@
   },
   "trialLimitTitle": "Dziś modliłeś się 3 razy 🌸",
   "trialLimitBody": "Wróć jutro — lub odblokuj nieograniczoną modlitwę z Pro.",
-  "trialLimitCta": "Kontynuuj z Pro"
+  "trialLimitCta": "Kontynuuj z Pro",
+  "prayerTooShort": "Proszę napisać trochę więcej",
+  "switchToTextModeTitle": "Przełączyć na tryb tekstowy?",
+  "switchToTextModeBody": "Twoje dotychczasowe nagranie głosowe zostanie odrzucone. Musisz napisać modlitwę jako tekst.",
+  "switchToTextModeConfirm": "Przełącz na tekst",
+  "switchToTextModeCancel": "Kontynuuj nagrywanie",
+  "recordingInterruptedTitle": "Nagrywanie modlitwy zostało przerwane",
+  "recordingInterruptedBody": "Gdy byłeś nieobecny, nagrywanie się zatrzymało. Co chcesz zrobić?",
+  "recordingInterruptedRestart": "Rozpocznij nagrywanie ponownie",
+  "recordingInterruptedSwitchToText": "Napisz jako tekst"
 }

@@ -164,6 +164,15 @@ class AppLocalizationsZh extends AppLocalizations {
   String get proUnlock => '用Pro解锁';
 
   @override
+  String get proPreviewHistoricalHint => '深入探索您祷告中一个词背后的历史';
+
+  @override
+  String get proPreviewPrayerHint => '一篇专为您准备的深度祷文正在等候';
+
+  @override
+  String get proPreviewCoachingHint => '一条让下一次祷告更深入的建议';
+
+  @override
   String get qtPageTitle => '晨间花园';
 
   @override
@@ -1297,4 +1306,31 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get trialLimitCta => '使用 Pro 继续';
+
+  @override
+  String get prayerTooShort => '请再多写一些';
+
+  @override
+  String get switchToTextModeTitle => '切换到文字模式?';
+
+  @override
+  String get switchToTextModeBody => '您目前的录音祷告将被丢弃。您需要用文字重新写下您的祷告。';
+
+  @override
+  String get switchToTextModeConfirm => '切换到文字';
+
+  @override
+  String get switchToTextModeCancel => '继续录音';
+
+  @override
+  String get recordingInterruptedTitle => '您的祷告录音被中断了';
+
+  @override
+  String get recordingInterruptedBody => '您离开时录音停止了。您想怎么做?';
+
+  @override
+  String get recordingInterruptedRestart => '重新开始录音';
+
+  @override
+  String get recordingInterruptedSwitchToText => '改用文字书写';
 }

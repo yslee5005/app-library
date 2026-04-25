@@ -170,6 +170,17 @@ class AppLocalizationsDe extends AppLocalizations {
   String get proUnlock => 'Mit Pro freischalten';
 
   @override
+  String get proPreviewHistoricalHint =>
+      'Entdecke die tiefere Geschichte hinter einem Wort aus deinem Gebet';
+
+  @override
+  String get proPreviewPrayerHint => 'Ein 300-Wörter-Gebet wartet nur auf dich';
+
+  @override
+  String get proPreviewCoachingHint =>
+      'Ein Coaching-Tipp wartet, um dein nächstes Gebet zu vertiefen';
+
+  @override
   String get qtPageTitle => 'Morgengarten';
 
   @override
@@ -1343,4 +1354,35 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get trialLimitCta => 'Mit Pro fortfahren';
+
+  @override
+  String get prayerTooShort => 'Bitte schreiben Sie etwas mehr';
+
+  @override
+  String get switchToTextModeTitle => 'In Textmodus wechseln?';
+
+  @override
+  String get switchToTextModeBody =>
+      'Ihre bisherige Sprachaufnahme wird verworfen. Sie müssen Ihr Gebet stattdessen als Text schreiben.';
+
+  @override
+  String get switchToTextModeConfirm => 'Zu Text wechseln';
+
+  @override
+  String get switchToTextModeCancel => 'Aufnahme fortsetzen';
+
+  @override
+  String get recordingInterruptedTitle =>
+      'Ihre Gebetsaufnahme wurde unterbrochen';
+
+  @override
+  String get recordingInterruptedBody =>
+      'Während Sie weg waren, wurde die Aufnahme gestoppt. Was möchten Sie tun?';
+
+  @override
+  String get recordingInterruptedRestart => 'Aufnahme neu starten';
+
+  @override
+  String get recordingInterruptedSwitchToText =>
+      'Stattdessen als Text schreiben';
 }

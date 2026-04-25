@@ -169,6 +169,18 @@ class AppLocalizationsTr extends AppLocalizations {
   String get proUnlock => 'Pro ile Aç';
 
   @override
+  String get proPreviewHistoricalHint =>
+      'Duanızdaki bir kelimenin ardındaki derin tarihi keşfedin';
+
+  @override
+  String get proPreviewPrayerHint =>
+      'Sizin için 300 kelimelik bir dua bekliyor';
+
+  @override
+  String get proPreviewCoachingHint =>
+      'Bir sonraki duanızı derinleştirecek bir tavsiye bekliyor';
+
+  @override
   String get qtPageTitle => 'Sabah Bahçesi';
 
   @override
@@ -1332,4 +1344,33 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get trialLimitCta => 'Pro ile devam et';
+
+  @override
+  String get prayerTooShort => 'Lütfen biraz daha yazın';
+
+  @override
+  String get switchToTextModeTitle => 'Metin moduna geçilsin mi?';
+
+  @override
+  String get switchToTextModeBody =>
+      'Şu ana kadarki sesli dua kaydınız silinecektir. Bunun yerine duanızı metin olarak yazmanız gerekecek.';
+
+  @override
+  String get switchToTextModeConfirm => 'Metne geç';
+
+  @override
+  String get switchToTextModeCancel => 'Kayda devam et';
+
+  @override
+  String get recordingInterruptedTitle => 'Dua kaydınız kesintiye uğradı';
+
+  @override
+  String get recordingInterruptedBody =>
+      'Siz yokken kayıt durdu. Ne yapmak istersiniz?';
+
+  @override
+  String get recordingInterruptedRestart => 'Kaydı yeniden başlat';
+
+  @override
+  String get recordingInterruptedSwitchToText => 'Metin olarak yaz';
 }

@@ -62,6 +62,9 @@
   "aiPrayerTitle": "Sizin İçin Bir Dua",
   "originalLangTitle": "Orijinal Dil",
   "proUnlock": "Pro ile Aç",
+  "proPreviewHistoricalHint": "Duanızdaki bir kelimenin ardındaki derin tarihi keşfedin",
+  "proPreviewPrayerHint": "Sizin için 300 kelimelik bir dua bekliyor",
+  "proPreviewCoachingHint": "Bir sonraki duanızı derinleştirecek bir tavsiye bekliyor",
   "qtPageTitle": "Sabah Bahçesi",
   "qtMeditateButton": "Meditasyona Başla",
   "qtCompleted": "Tamamlandı",
@@ -563,5 +566,14 @@
   },
   "trialLimitTitle": "Bugün 3 kez dua ettiniz 🌸",
   "trialLimitBody": "Yarın tekrar gel — veya Pro ile sınırsız duanın kilidini aç.",
-  "trialLimitCta": "Pro ile devam et"
+  "trialLimitCta": "Pro ile devam et",
+  "prayerTooShort": "Lütfen biraz daha yazın",
+  "switchToTextModeTitle": "Metin moduna geçilsin mi?",
+  "switchToTextModeBody": "Şu ana kadarki sesli dua kaydınız silinecektir. Bunun yerine duanızı metin olarak yazmanız gerekecek.",
+  "switchToTextModeConfirm": "Metne geç",
+  "switchToTextModeCancel": "Kayda devam et",
+  "recordingInterruptedTitle": "Dua kaydınız kesintiye uğradı",
+  "recordingInterruptedBody": "Siz yokken kayıt durdu. Ne yapmak istersiniz?",
+  "recordingInterruptedRestart": "Kaydı yeniden başlat",
+  "recordingInterruptedSwitchToText": "Metin olarak yaz"
 }

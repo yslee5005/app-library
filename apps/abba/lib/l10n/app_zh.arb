@@ -62,6 +62,9 @@
   "aiPrayerTitle": "为你的祷告",
   "originalLangTitle": "原文深意",
   "proUnlock": "用Pro解锁",
+  "proPreviewHistoricalHint": "深入探索您祷告中一个词背后的历史",
+  "proPreviewPrayerHint": "一篇专为您准备的深度祷文正在等候",
+  "proPreviewCoachingHint": "一条让下一次祷告更深入的建议",
   "qtPageTitle": "晨间花园",
   "qtMeditateButton": "开始默想",
   "qtCompleted": "已完成",
@@ -563,5 +566,14 @@
   },
   "trialLimitTitle": "您今天已祈祷了 3 次 🌸",
   "trialLimitBody": "明天再见 — 或使用 Pro 解锁无限祈祷。",
-  "trialLimitCta": "使用 Pro 继续"
+  "trialLimitCta": "使用 Pro 继续",
+  "prayerTooShort": "请再多写一些",
+  "switchToTextModeTitle": "切换到文字模式?",
+  "switchToTextModeBody": "您目前的录音祷告将被丢弃。您需要用文字重新写下您的祷告。",
+  "switchToTextModeConfirm": "切换到文字",
+  "switchToTextModeCancel": "继续录音",
+  "recordingInterruptedTitle": "您的祷告录音被中断了",
+  "recordingInterruptedBody": "您离开时录音停止了。您想怎么做?",
+  "recordingInterruptedRestart": "重新开始录音",
+  "recordingInterruptedSwitchToText": "改用文字书写"
 }

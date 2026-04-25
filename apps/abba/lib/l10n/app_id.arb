@@ -62,6 +62,9 @@
   "aiPrayerTitle": "Doa untukmu",
   "originalLangTitle": "Bahasa Asli",
   "proUnlock": "Buka dengan Pro",
+  "proPreviewHistoricalHint": "Temukan sejarah mendalam di balik sebuah kata dari doa Anda",
+  "proPreviewPrayerHint": "Doa 300 kata sedang menunggu Anda",
+  "proPreviewCoachingHint": "Satu saran menanti untuk memperdalam doa Anda berikutnya",
   "qtPageTitle": "Taman Pagi",
   "qtMeditateButton": "Mulai Meditasi",
   "qtCompleted": "Selesai",
@@ -563,5 +566,14 @@
   },
   "trialLimitTitle": "Anda telah berdoa 3 kali hari ini 🌸",
   "trialLimitBody": "Kembali besok — atau buka doa tanpa batas dengan Pro.",
-  "trialLimitCta": "Lanjutkan dengan Pro"
+  "trialLimitCta": "Lanjutkan dengan Pro",
+  "prayerTooShort": "Mohon tulis sedikit lebih banyak",
+  "switchToTextModeTitle": "Beralih ke mode teks?",
+  "switchToTextModeBody": "Rekaman suara doa Anda sejauh ini akan dihapus. Anda perlu menulis doa sebagai teks.",
+  "switchToTextModeConfirm": "Beralih ke teks",
+  "switchToTextModeCancel": "Lanjutkan merekam",
+  "recordingInterruptedTitle": "Rekaman doa Anda terganggu",
+  "recordingInterruptedBody": "Saat Anda tidak ada, rekaman berhenti. Apa yang ingin Anda lakukan?",
+  "recordingInterruptedRestart": "Mulai ulang rekaman",
+  "recordingInterruptedSwitchToText": "Tulis sebagai teks"
 }

@@ -62,6 +62,9 @@
   "aiPrayerTitle": "あなたのための祈り",
   "originalLangTitle": "原語の深い意味",
   "proUnlock": "Proで見る",
+  "proPreviewHistoricalHint": "あなたの祈りに込められた一つの言葉、その深い歴史をお届けします",
+  "proPreviewPrayerHint": "あなたのための深い祈りの言葉が用意されています",
+  "proPreviewCoachingHint": "次の祈りをより深くする一つのアドバイスがあります",
   "qtPageTitle": "朝の庭",
   "qtMeditateButton": "黙想を始める",
   "qtCompleted": "完了",
@@ -563,5 +566,14 @@
   },
   "trialLimitTitle": "今日は3回お祈りされました 🌸",
   "trialLimitBody": "また明日お会いしましょう — もしくは Pro で無制限に祈りを。",
-  "trialLimitCta": "Pro で続ける"
+  "trialLimitCta": "Pro で続ける",
+  "prayerTooShort": "もう少し書いてください",
+  "switchToTextModeTitle": "テキストモードに切り替えますか?",
+  "switchToTextModeBody": "これまで録音した音声の祈りは破棄されます。代わりにテキストで祈りを書く必要があります。",
+  "switchToTextModeConfirm": "テキストに切り替え",
+  "switchToTextModeCancel": "録音を続ける",
+  "recordingInterruptedTitle": "祈りの録音が中断されました",
+  "recordingInterruptedBody": "離れている間に録音が停止しました。どうしますか?",
+  "recordingInterruptedRestart": "録音を再開",
+  "recordingInterruptedSwitchToText": "テキストで書く"
 }

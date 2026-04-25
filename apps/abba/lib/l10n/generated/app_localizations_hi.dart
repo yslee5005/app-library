@@ -172,6 +172,18 @@ class AppLocalizationsHi extends AppLocalizations {
   String get proUnlock => 'Pro से अनलॉक करें';
 
   @override
+  String get proPreviewHistoricalHint =>
+      'अपनी प्रार्थना के एक शब्द के पीछे के गहरे इतिहास को खोजें';
+
+  @override
+  String get proPreviewPrayerHint =>
+      '300 शब्दों की एक प्रार्थना आपका इंतज़ार कर रही है';
+
+  @override
+  String get proPreviewCoachingHint =>
+      'एक सलाह आपकी अगली प्रार्थना को गहरा बनाने के लिए तैयार है';
+
+  @override
   String get qtPageTitle => 'प्रातः बगीचा';
 
   @override
@@ -1330,4 +1342,33 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get trialLimitCta => 'Pro के साथ जारी रखें';
+
+  @override
+  String get prayerTooShort => 'कृपया थोड़ा और लिखें';
+
+  @override
+  String get switchToTextModeTitle => 'टेक्स्ट मोड पर स्विच करें?';
+
+  @override
+  String get switchToTextModeBody =>
+      'अब तक की आपकी आवाज़ रिकॉर्डिंग हटा दी जाएगी। आपको अपनी प्रार्थना को टेक्स्ट के रूप में लिखना होगा।';
+
+  @override
+  String get switchToTextModeConfirm => 'टेक्स्ट पर स्विच करें';
+
+  @override
+  String get switchToTextModeCancel => 'रिकॉर्डिंग जारी रखें';
+
+  @override
+  String get recordingInterruptedTitle => 'आपकी प्रार्थना रिकॉर्डिंग बाधित हुई';
+
+  @override
+  String get recordingInterruptedBody =>
+      'जब आप दूर थे, रिकॉर्डिंग रुक गई। आप क्या करना चाहेंगे?';
+
+  @override
+  String get recordingInterruptedRestart => 'रिकॉर्डिंग फिर से शुरू करें';
+
+  @override
+  String get recordingInterruptedSwitchToText => 'टेक्स्ट के रूप में लिखें';
 }

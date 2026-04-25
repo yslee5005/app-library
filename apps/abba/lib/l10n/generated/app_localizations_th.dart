@@ -169,6 +169,17 @@ class AppLocalizationsTh extends AppLocalizations {
   String get proUnlock => 'ปลดล็อกด้วย Pro';
 
   @override
+  String get proPreviewHistoricalHint =>
+      'ค้นพบประวัติศาสตร์อันลึกซึ้งเบื้องหลังคำหนึ่งจากคำอธิษฐานของคุณ';
+
+  @override
+  String get proPreviewPrayerHint => 'คำอธิษฐาน 300 คำกำลังรอคุณอยู่';
+
+  @override
+  String get proPreviewCoachingHint =>
+      'คำแนะนำหนึ่งข้อรอช่วยให้คำอธิษฐานครั้งต่อไปลึกซึ้งยิ่งขึ้น';
+
+  @override
   String get qtPageTitle => 'สวนยามเช้า';
 
   @override
@@ -1323,4 +1334,34 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get trialLimitCta => 'ดำเนินการต่อด้วย Pro';
+
+  @override
+  String get prayerTooShort => 'กรุณาเขียนเพิ่มอีกหน่อย';
+
+  @override
+  String get switchToTextModeTitle => 'เปลี่ยนเป็นโหมดข้อความ?';
+
+  @override
+  String get switchToTextModeBody =>
+      'การบันทึกเสียงคำอธิษฐานของคุณจะถูกลบ คุณจะต้องเขียนคำอธิษฐานเป็นข้อความแทน';
+
+  @override
+  String get switchToTextModeConfirm => 'เปลี่ยนเป็นข้อความ';
+
+  @override
+  String get switchToTextModeCancel => 'บันทึกต่อ';
+
+  @override
+  String get recordingInterruptedTitle =>
+      'การบันทึกคำอธิษฐานของคุณถูกขัดจังหวะ';
+
+  @override
+  String get recordingInterruptedBody =>
+      'ขณะที่คุณไม่อยู่ การบันทึกหยุดลง คุณต้องการทำอะไร?';
+
+  @override
+  String get recordingInterruptedRestart => 'เริ่มบันทึกใหม่';
+
+  @override
+  String get recordingInterruptedSwitchToText => 'เขียนเป็นข้อความ';
 }

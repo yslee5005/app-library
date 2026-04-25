@@ -170,6 +170,18 @@ class AppLocalizationsPt extends AppLocalizations {
   String get proUnlock => 'Desbloquear com Pro';
 
   @override
+  String get proPreviewHistoricalHint =>
+      'Descubra a história mais profunda por trás de uma palavra da sua oração';
+
+  @override
+  String get proPreviewPrayerHint =>
+      'Uma oração de 300 palavras está esperando por você';
+
+  @override
+  String get proPreviewCoachingHint =>
+      'Um conselho espera para aprofundar sua próxima oração';
+
+  @override
   String get qtPageTitle => 'Jardim Matinal';
 
   @override
@@ -1337,4 +1349,34 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get trialLimitCta => 'Continuar com Pro';
+
+  @override
+  String get prayerTooShort => 'Por favor, escreva um pouco mais';
+
+  @override
+  String get switchToTextModeTitle => 'Mudar para modo texto?';
+
+  @override
+  String get switchToTextModeBody =>
+      'Sua gravação de voz até agora será descartada. Você precisará escrever sua oração como texto.';
+
+  @override
+  String get switchToTextModeConfirm => 'Mudar para texto';
+
+  @override
+  String get switchToTextModeCancel => 'Continuar gravando';
+
+  @override
+  String get recordingInterruptedTitle =>
+      'Sua gravação de oração foi interrompida';
+
+  @override
+  String get recordingInterruptedBody =>
+      'Enquanto você estava ausente, a gravação parou. O que você gostaria de fazer?';
+
+  @override
+  String get recordingInterruptedRestart => 'Reiniciar gravação';
+
+  @override
+  String get recordingInterruptedSwitchToText => 'Escrever como texto';
 }

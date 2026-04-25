@@ -170,6 +170,18 @@ class AppLocalizationsVi extends AppLocalizations {
   String get proUnlock => 'Mở khóa với Pro';
 
   @override
+  String get proPreviewHistoricalHint =>
+      'Khám phá lịch sử sâu sắc đằng sau một từ trong lời cầu nguyện của bạn';
+
+  @override
+  String get proPreviewPrayerHint =>
+      'Một lời cầu nguyện 300 từ đang chờ đợi bạn';
+
+  @override
+  String get proPreviewCoachingHint =>
+      'Một lời khuyên đang chờ để làm sâu sắc thêm lời cầu nguyện tiếp theo của bạn';
+
+  @override
   String get qtPageTitle => 'Vườn buổi sáng';
 
   @override
@@ -1339,4 +1351,34 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String get trialLimitCta => 'Tiếp tục với Pro';
+
+  @override
+  String get prayerTooShort => 'Vui lòng viết thêm một chút';
+
+  @override
+  String get switchToTextModeTitle => 'Chuyển sang chế độ văn bản?';
+
+  @override
+  String get switchToTextModeBody =>
+      'Bản ghi âm cầu nguyện của bạn cho đến nay sẽ bị xóa. Bạn cần viết lời cầu nguyện dưới dạng văn bản.';
+
+  @override
+  String get switchToTextModeConfirm => 'Chuyển sang văn bản';
+
+  @override
+  String get switchToTextModeCancel => 'Tiếp tục ghi âm';
+
+  @override
+  String get recordingInterruptedTitle =>
+      'Bản ghi cầu nguyện của bạn đã bị gián đoạn';
+
+  @override
+  String get recordingInterruptedBody =>
+      'Khi bạn đi vắng, bản ghi đã dừng. Bạn muốn làm gì?';
+
+  @override
+  String get recordingInterruptedRestart => 'Bắt đầu lại ghi âm';
+
+  @override
+  String get recordingInterruptedSwitchToText => 'Viết bằng văn bản';
 }

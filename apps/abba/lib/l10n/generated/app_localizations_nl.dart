@@ -169,6 +169,17 @@ class AppLocalizationsNl extends AppLocalizations {
   String get proUnlock => 'Ontgrendelen met Pro';
 
   @override
+  String get proPreviewHistoricalHint =>
+      'Ontdek de diepere geschiedenis achter een woord uit jouw gebed';
+
+  @override
+  String get proPreviewPrayerHint => 'Een gebed van 300 woorden wacht op jou';
+
+  @override
+  String get proPreviewCoachingHint =>
+      'Eén tip wacht om je volgende gebed te verdiepen';
+
+  @override
   String get qtPageTitle => 'Ochtenttuin';
 
   @override
@@ -1337,4 +1348,33 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get trialLimitCta => 'Doorgaan met Pro';
+
+  @override
+  String get prayerTooShort => 'Schrijf alstublieft iets meer';
+
+  @override
+  String get switchToTextModeTitle => 'Overschakelen naar tekstmodus?';
+
+  @override
+  String get switchToTextModeBody =>
+      'Je tot nu toe opgenomen gebed wordt verwijderd. Je moet je gebed in plaats daarvan als tekst schrijven.';
+
+  @override
+  String get switchToTextModeConfirm => 'Schakel over naar tekst';
+
+  @override
+  String get switchToTextModeCancel => 'Doorgaan met opnemen';
+
+  @override
+  String get recordingInterruptedTitle => 'Je gebedsopname is onderbroken';
+
+  @override
+  String get recordingInterruptedBody =>
+      'Terwijl je weg was, is de opname gestopt. Wat wil je doen?';
+
+  @override
+  String get recordingInterruptedRestart => 'Opname opnieuw starten';
+
+  @override
+  String get recordingInterruptedSwitchToText => 'Schrijf als tekst';
 }

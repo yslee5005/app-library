@@ -62,6 +62,9 @@
   "aiPrayerTitle": "आपके लिए एक प्रार्थना",
   "originalLangTitle": "मूल भाषा",
   "proUnlock": "Pro से अनलॉक करें",
+  "proPreviewHistoricalHint": "अपनी प्रार्थना के एक शब्द के पीछे के गहरे इतिहास को खोजें",
+  "proPreviewPrayerHint": "300 शब्दों की एक प्रार्थना आपका इंतज़ार कर रही है",
+  "proPreviewCoachingHint": "एक सलाह आपकी अगली प्रार्थना को गहरा बनाने के लिए तैयार है",
   "qtPageTitle": "प्रातः बगीचा",
   "qtMeditateButton": "मनन शुरू करें",
   "qtCompleted": "पूर्ण",
@@ -563,5 +566,14 @@
   },
   "trialLimitTitle": "आपने आज 3 बार प्रार्थना की है 🌸",
   "trialLimitBody": "कल फिर आएं — या Pro के साथ असीमित प्रार्थना अनलॉक करें।",
-  "trialLimitCta": "Pro के साथ जारी रखें"
+  "trialLimitCta": "Pro के साथ जारी रखें",
+  "prayerTooShort": "कृपया थोड़ा और लिखें",
+  "switchToTextModeTitle": "टेक्स्ट मोड पर स्विच करें?",
+  "switchToTextModeBody": "अब तक की आपकी आवाज़ रिकॉर्डिंग हटा दी जाएगी। आपको अपनी प्रार्थना को टेक्स्ट के रूप में लिखना होगा।",
+  "switchToTextModeConfirm": "टेक्स्ट पर स्विच करें",
+  "switchToTextModeCancel": "रिकॉर्डिंग जारी रखें",
+  "recordingInterruptedTitle": "आपकी प्रार्थना रिकॉर्डिंग बाधित हुई",
+  "recordingInterruptedBody": "जब आप दूर थे, रिकॉर्डिंग रुक गई। आप क्या करना चाहेंगे?",
+  "recordingInterruptedRestart": "रिकॉर्डिंग फिर से शुरू करें",
+  "recordingInterruptedSwitchToText": "टेक्स्ट के रूप में लिखें"
 }

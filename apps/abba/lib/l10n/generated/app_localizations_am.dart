@@ -166,6 +166,18 @@ class AppLocalizationsAm extends AppLocalizations {
   String get proUnlock => 'በ Pro ክፈት';
 
   @override
+  String get proPreviewHistoricalHint =>
+      'Discover the deeper history behind a word from your prayer';
+
+  @override
+  String get proPreviewPrayerHint =>
+      'A 300-word prayer is waiting just for you';
+
+  @override
+  String get proPreviewCoachingHint =>
+      'One coaching tip waits to deepen your next prayer';
+
+  @override
   String get qtPageTitle => 'የጠዋት ገነት';
 
   @override
@@ -1306,4 +1318,34 @@ class AppLocalizationsAm extends AppLocalizations {
 
   @override
   String get trialLimitCta => 'Continue with Pro';
+
+  @override
+  String get prayerTooShort => 'Please write a little more';
+
+  @override
+  String get switchToTextModeTitle => 'Switch to text mode?';
+
+  @override
+  String get switchToTextModeBody =>
+      'Your voice recording so far will be discarded. You\'ll need to write your prayer as text instead.';
+
+  @override
+  String get switchToTextModeConfirm => 'Switch to text';
+
+  @override
+  String get switchToTextModeCancel => 'Keep recording';
+
+  @override
+  String get recordingInterruptedTitle =>
+      'Your prayer recording was interrupted';
+
+  @override
+  String get recordingInterruptedBody =>
+      'While you were away, the recording stopped. What would you like to do?';
+
+  @override
+  String get recordingInterruptedRestart => 'Restart recording';
+
+  @override
+  String get recordingInterruptedSwitchToText => 'Write as text instead';
 }
