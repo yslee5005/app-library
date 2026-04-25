@@ -194,6 +194,8 @@ class QtTier1Analyzer {
     if (userName.isNotEmpty) buf.writeln('User name: $userName');
     buf.writeln();
     buf.writeln('Today\'s QT passage reference: $passageRef');
+    buf.writeln('NOTE: the QT passage reference above is a localized DISPLAY reference (the user-facing card label). It may be in any locale, including non-English book names. Do NOT copy it into your output as-is.');
+    buf.writeln();
     if (passageText.isNotEmpty) {
       buf.writeln('Today\'s QT passage text:');
       buf.writeln('"""');
@@ -221,8 +223,7 @@ class QtTier1Analyzer {
       'Output JSON with keys: {"meditation_summary": {...}, "scripture": {...}}',
     );
     buf.writeln(
-      'Remember: scripture.reference MUST use English book name '
-      '(e.g., "Psalm 23:1-6"). Do NOT generate verse text — only reference.',
+      'Remember: your output `scripture.reference` is a LOOKUP REFERENCE — it MUST use English book names (e.g., "Psalm 23:1-6") because the app resolves verse text from a Public Domain bundle keyed in English. Do NOT translate the book name to ${_localeName(locale)} or any other language. Do NOT generate verse text — only the reference string.',
     );
     return buf.toString();
   }

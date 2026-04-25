@@ -129,13 +129,13 @@ Requirements:
 - Keep each passage to 2-3 sentences
 - Each passage must match its assigned theme
 - Include a short topic label (2-3 words) for each theme in ${langName}
-- The "reference" field MUST also be in ${langName}, using the locale's natural Bible book naming (Korean: "시편 46:1-2", Japanese: "詩篇 46:1-2", Chinese: "诗篇 46:1-2", Spanish: "Salmo 46:1-2", English: "Psalm 46:1-2"). Chapter:verse numerals stay as digits.
+- The "reference" field is a DISPLAY reference shown directly on the QT card — NOT a BibleTextService lookup key. Output it in ${langName} using THAT language's natural Bible book naming convention. Chapter:verse numerals stay as digits. Do not output the book name in any language other than ${langName}.
 - Stay politically and socially neutral — focus only on universal human emotions and biblical wisdom
 
 Return JSON array with exactly 10 items in theme order:
 [{
   "theme": "anxiety",
-  "reference": "<book name in ${langName}> chapter:verse (e.g., 시편 46:1-2 / Psalm 46:1-2 / 詩篇 46:1-2)",
+  "reference": "<book name in ${langName}> chapter:verse — display label, not a lookup key",
   "text": "passage text in ${langName}...",
   "topic": "short topic label in ${langName}"
 }]

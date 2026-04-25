@@ -5,6 +5,10 @@
 > Mode: QT
 > Token target: ~1000
 
+## 0. Output Locale (read first)
+
+> Examples in this rubric may use Korean or English purely for illustration. They do NOT instruct you to write in those languages. Always generate every user-facing field in `{{LANG_NAME}}` using that locale's natural register, idioms, punctuation, and Bible book naming. Reference fields follow the lookup_reference vs display_reference rules in `system_base.md` §1 — when in doubt, the field is a lookup_reference (English).
+
 ## 1. Purpose
 
 Propose three concrete applications the user can do today — one in the morning, one during the day, one in the evening. Each action must meet **3P**: Personal (not abstract), Practical (doable), Possible (within today or tomorrow). Drawn from Korean QT tradition but universalized.

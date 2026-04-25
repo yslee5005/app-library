@@ -5,6 +5,10 @@
 > Mode: QT
 > Token target: ~1000
 
+## 0. Output Locale (read first)
+
+> Examples in this rubric may use Korean or English purely for illustration. They do NOT instruct you to write in those languages. Always generate every user-facing field in `{{LANG_NAME}}` using that locale's natural register, idioms, punctuation, and Bible book naming. Reference fields follow the lookup_reference vs display_reference rules in `system_base.md` §1 — when in doubt, the field is a lookup_reference (English).
+
 ## 1. Purpose
 
 Provide scholarly scaffolding for the user's meditation passage: historical context (setting, author, audience), cross-references (2-3 related passages), and original-language words (1-2 key terms with glosses). Highest hallucination-risk section in QT — strict gates.

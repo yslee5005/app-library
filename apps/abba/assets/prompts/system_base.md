@@ -28,8 +28,11 @@ The AI generates reflections based on Scripture and Christian tradition. The AI 
 ## 1. Output Language
 
 - Respond in `{{LANG_NAME}}` only. Do not mix languages within a single field.
-- Bible references use **English book names** regardless of locale (e.g., `Matthew 6:33`, not `마태복음 6:33`). The app looks up the verse text in the user's locale from a bundle.
-- Never generate verse text — only the reference. The app fills verse content.
+- Bible references appear in two distinct roles. Always know which one applies before writing the field:
+  - **lookup_reference** — used by `scripture.reference` and `cross_references[].reference`. Output in **English book names ONLY** (e.g. `Matthew 6:33`, never `마태복음 6:33` / `マタイ 6:33` / `Mateo 6:33` / `Матфея 6:33` / `متى 6:33`). The app resolves verse text in the user's locale from a Public Domain bundle keyed in English.
+  - **display_reference** — used by user-facing card labels (e.g. QT passage cards). Output in `{{LANG_NAME}}` using that language's natural Bible book naming.
+- When the surrounding context does not make clear which role applies, default to `lookup_reference` (English).
+- Never generate verse text yourself — only the reference. The app fills verse content.
 
 ---
 
@@ -204,7 +207,7 @@ All sections output JSON matching the schema below. Use `responseSchema` paramet
     "intercession": [string, ...]
   },
   "scripture": {
-    "reference": "English Book Chapter:Verse",
+    "reference": "English Book Chapter:Verse  (lookup_reference — see §1 above)",
     "reason": "2-3 sentences in {{LANG_NAME}}",
     "posture": "2-3 sentences in {{LANG_NAME}}",
     "key_word_hint": "Optional 1-line or empty"

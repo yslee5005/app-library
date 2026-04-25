@@ -1131,7 +1131,7 @@ Return a JSON object:
     "intercession": ["intercession items summarized in $langName"]
   },
   "scripture": {
-    "reference": "Bible reference as lookup KEY. REQUIREMENT: English book name ONLY (e.g., 'Matthew 6:33', 'I Kings 19:12', 'Psalm 23:1-3'). Our bundle uses English keys regardless of $langName — NEVER translate the book name to $langName (e.g., NEVER '마태복음 6:33', 'マタイ 6:33', '马太福音 6:33', 'Mateo 6:33'). The verse text itself will be shown in $langName.",
+    "reference": "LOOKUP REFERENCE — Bible reference as a key for our Public Domain bundle. REQUIREMENT: English book name ONLY (e.g., 'Matthew 6:33', 'I Kings 19:12', 'Psalm 23:1-3'). Our bundle uses English keys regardless of $langName — NEVER translate the book name to $langName. Forbidden examples include localized forms in any language: '마태복음 6:33', 'マタイ 6:33', '马太福音 6:33', 'Mateo 6:33', 'Матфея 6:33', 'متى 6:33', 'मत्ती 6:33'. This restriction applies ONLY to lookup_reference fields like this one — user-facing display references (e.g. QT card labels) follow a different rule. The verse text itself will be shown in $langName.",
     "reason": "Why this verse for this prayer (2-3 sentences in $langName)",
     "posture": "How to read it — action/mindset (2-3 sentences in $langName)",
     "key_word_hint": "One key word from the verse with its original-language meaning (1 short line in $langName). Example: 'my shepherd' = Hebrew 'roi' — not a job title, but 'the one who tends me personally'. Leave empty if not confident."
@@ -1176,9 +1176,12 @@ HISTORICAL STORY QUALITY BAR (Phase 4):
   NEVER fabricate quotes or dates.
 
 AI PRAYER QUALITY BAR (Phase 5):
-- text length: ~300 words (2-minute read). For Korean/Japanese/Chinese:
-  aim for 10-12 sentences of natural breath. For English/European languages:
-  aim for ~300 words across 4-5 short paragraphs.
+- text length: aim for a natural 1.5–2 minute read in $langName. Use sentence
+  length, paragraphing, punctuation, and line breaks that feel native to that
+  language. CJK / Thai / Khmer scripts: prefer shorter breath units. RTL scripts
+  (Arabic / Hebrew): preserve natural script direction and the punctuation
+  conventions native to that language. The point is locale-natural rhythm, not
+  a fixed token count.
 - NEVER include audio/TTS references — text-only.
 - Structure: gentle opening → one concrete image or memory → one insight
   from Scripture or a real quote/science → specific prayer for the user's
@@ -1254,7 +1257,7 @@ Return a JSON object with ONLY these core sections:
     "intercession": ["intercession items summarized in $langName"]
   },
   "scripture": {
-    "reference": "Bible reference as lookup KEY. REQUIREMENT: English book name ONLY (e.g., 'Matthew 6:33', 'I Kings 19:12', 'Psalm 23:1-3'). Our bundle uses English keys regardless of $langName — NEVER translate the book name to $langName (e.g., NEVER '마태복음 6:33', 'マタイ 6:33', '马太福音 6:33', 'Mateo 6:33'). The verse text itself will be shown in $langName.",
+    "reference": "LOOKUP REFERENCE — Bible reference as a key for our Public Domain bundle. REQUIREMENT: English book name ONLY (e.g., 'Matthew 6:33', 'I Kings 19:12', 'Psalm 23:1-3'). Our bundle uses English keys regardless of $langName — NEVER translate the book name to $langName. Forbidden examples include localized forms in any language: '마태복음 6:33', 'マタイ 6:33', '马太福音 6:33', 'Mateo 6:33', 'Матфея 6:33', 'متى 6:33', 'मत्ती 6:33'. This restriction applies ONLY to lookup_reference fields like this one — user-facing display references (e.g. QT card labels) follow a different rule. The verse text itself will be shown in $langName.",
     "reason": "Why this verse for this prayer (2-3 sentences in $langName)",
     "posture": "How to read it — action/mindset (2-3 sentences in $langName)",
     "key_word_hint": "One key word from the verse with its original-language meaning (1 short line in $langName). Example: 'my shepherd' = Hebrew 'roi' — not a job title, but 'the one who tends me personally'. Leave empty if not confident."
@@ -1302,7 +1305,7 @@ Return a JSON object:
     "intercession": ["intercession items summarized in $langName"]
   },
   "scripture": {
-    "reference": "Bible reference as lookup KEY. REQUIREMENT: English book name ONLY (e.g., 'Matthew 6:33', 'I Kings 19:12', 'Psalm 23:1-3'). Our bundle uses English keys regardless of $langName — NEVER translate the book name to $langName (e.g., NEVER '마태복음 6:33', 'マタイ 6:33', '马太福音 6:33', 'Mateo 6:33'). The verse text itself will be shown in $langName.",
+    "reference": "LOOKUP REFERENCE — Bible reference as a key for our Public Domain bundle. REQUIREMENT: English book name ONLY (e.g., 'Matthew 6:33', 'I Kings 19:12', 'Psalm 23:1-3'). Our bundle uses English keys regardless of $langName — NEVER translate the book name to $langName. Forbidden examples include localized forms in any language: '마태복음 6:33', 'マタイ 6:33', '马太福音 6:33', 'Mateo 6:33', 'Матфея 6:33', 'متى 6:33', 'मत्ती 6:33'. This restriction applies ONLY to lookup_reference fields like this one — user-facing display references (e.g. QT card labels) follow a different rule. The verse text itself will be shown in $langName.",
     "reason": "Why this verse for this prayer (2-3 sentences in $langName)",
     "posture": "How to read it — action/mindset (2-3 sentences in $langName)",
     "key_word_hint": "One key word from the verse with its original-language meaning (1 short line in $langName). Example: 'my shepherd' = Hebrew 'roi' — not a job title, but 'the one who tends me personally'. Leave empty if not confident."
@@ -1383,9 +1386,12 @@ HISTORICAL STORY QUALITY BAR (Phase 4):
   NEVER fabricate quotes or dates.
 
 AI PRAYER QUALITY BAR (Phase 5):
-- text length: ~300 words (2-minute read). For Korean/Japanese/Chinese:
-  aim for 10-12 sentences of natural breath. For English/European languages:
-  aim for ~300 words across 4-5 short paragraphs.
+- text length: aim for a natural 1.5–2 minute read in $langName. Use sentence
+  length, paragraphing, punctuation, and line breaks that feel native to that
+  language. CJK / Thai / Khmer scripts: prefer shorter breath units. RTL scripts
+  (Arabic / Hebrew): preserve natural script direction and the punctuation
+  conventions native to that language. The point is locale-natural rhythm, not
+  a fixed token count.
 - NEVER include audio/TTS references — text-only.
 - Structure: gentle opening → one concrete image or memory → one insight
   from Scripture or a real quote/science → specific prayer for the user's
@@ -1432,7 +1438,7 @@ Return this JSON object:
     "insight": "<1-2 sentence AI insight — how today's passage meets the user's specific meditation, in $langName. Not generic; reference a concrete phrase from their meditation or the passage.>"
   },
   "scripture": {
-    "reference": "<Bible reference as lookup KEY. REQUIREMENT: English book name ONLY (e.g., 'Psalm 23:1-6', 'Matthew 6:33'). Our bundle uses English keys regardless of $langName — NEVER translate the book name (e.g., NEVER '시편 23:1-6', 'マタイ 6:33'). Must match the passage the user meditated on. The verse text itself will be shown in $langName.>",
+    "reference": "<LOOKUP REFERENCE — Bible reference as a key for our Public Domain bundle. REQUIREMENT: English book name ONLY (e.g., 'Psalm 23:1-6', 'Matthew 6:33'). Our bundle uses English keys regardless of $langName — NEVER translate the book name. Forbidden examples include localized forms in any language: '시편 23:1-6', 'マタイ 6:33', '诗篇 23:1-6', 'Salmo 23:1-6', 'Псалом 23:1-6', 'مزمور 23:1-6', 'भजन संहिता 23:1-6'. This restriction applies ONLY to lookup_reference fields like this one — user-facing display references (e.g. QT card labels) follow a different rule. Must match the passage the user meditated on. The verse text itself will be shown in $langName.>",
     "reason": "<Why this passage speaks to the user's meditation (2-3 sentences in $langName)>",
     "posture": "<How to continue meditating on this passage (2-3 sentences in $langName)>",
     "key_word_hint": "<One key word with original-language meaning (1 line in $langName). Example: \\"'my shepherd' = Hebrew 'ro\\'i' — the one who tends me personally\\". Leave empty if not confident.>",

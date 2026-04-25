@@ -4,6 +4,10 @@
 > Tier: T3 (Pro, lazy-triggered)
 > Token target: ~1200
 
+## 0. Output Locale (read first)
+
+> Examples in this rubric may use Korean or English purely for illustration. They do NOT instruct you to write in those languages. Always generate every user-facing field in `{{LANG_NAME}}` using that locale's natural register, idioms, punctuation, and Bible book naming. Reference fields follow the lookup_reference vs display_reference rules in `system_base.md` §1 — when in doubt, the field is a lookup_reference (English).
+
 ## 1. Purpose
 
 Tell a real church-history story (not Bible narrative — that's `bible_story`'s job) that connects to the user's prayer. Must be historically verifiable. Maximum hallucination-risk section; strict gates.

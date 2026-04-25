@@ -68,8 +68,8 @@ class QtTier2Analyzer {
         '3P rule (Personal / Practical / Possible). Each ≤15 min.',
       )
       ..writeln(
-        '- knowledge: historical_context (3-4 sentences), 2-3 cross_references '
-        '(reference ONLY — app fills verse text at runtime), '
+        '- knowledge: historical_context (3-4 sentences), '
+        '2-3 cross_references (LOOKUP REFERENCE — `reference` field must use English book names; the app fills the verse text in the user\'s locale at runtime from a Public Domain bundle), '
         '0-2 original_words with transliteration + meaning.',
       )
       ..writeln('Output JSON: {"application": {...}, "knowledge": {...}}');
