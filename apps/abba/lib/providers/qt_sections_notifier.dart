@@ -165,19 +165,30 @@ class QtSectionsNotifier extends StateNotifier<QtSectionsState> {
             });
           case TierFailed f:
             setTierFailed(f.tier, f.error);
-            // Phase A1 — persist the per-tier failure to DB section_status
-            // so the dashboard can render an inline indicator on revisit.
-            // Best-effort fire-and-forget: in-memory state is already
-            // updated above; DB write is an additional layer.
-            unawaited(
-              repo.markTierFailed(
-                prayerId: prayerId,
-                tier: f.tier,
-                errorKind: f.error.kind.name,
-              ),
-            );
+            // Signal the t1 completer FIRST — UX must unblock regardless
+            // of whether the optional DB write below succeeds.
             if (f.tier == 't1' && !t1Completer.isCompleted) {
               t1Completer.completeError(f.error);
+            }
+            // Phase A1 — persist the per-tier failure to DB section_status
+            // so the dashboard can render an inline indicator on revisit.
+            // Best-effort: a synchronous throw from a misbehaving repo
+            // (e.g., test double without markTierFailed) must NOT disrupt
+            // the listener or downstream tier events.
+            try {
+              unawaited(
+                repo.markTierFailed(
+                  prayerId: prayerId,
+                  tier: f.tier,
+                  errorKind: f.error.kind.name,
+                ),
+              );
+            } catch (e, st) {
+              qtLog.error(
+                'markTierFailed sync threw tier=${f.tier}',
+                error: e,
+                stackTrace: st,
+              );
             }
           case TierT1ScriptureRef _:
           case TierT1Result _:

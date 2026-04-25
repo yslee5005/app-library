@@ -8,10 +8,11 @@ import 'package:abba/services/prayer_repository.dart';
 import 'package:abba/models/qt_meditation_result.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-/// Test double — records each updateTierResult call so the assertions can
-/// verify both tier keys and section payloads.
+/// Test double — records each updateTierResult / markTierFailed call so the
+/// assertions can verify both tier keys and section payloads.
 class _RecordingRepo implements PrayerRepository {
   final List<(String, String, Map<String, dynamic>)> calls = [];
+  final List<(String, String, String)> failedCalls = [];
 
   @override
   Future<void> updateTierResult({
@@ -20,6 +21,16 @@ class _RecordingRepo implements PrayerRepository {
     required Map<String, dynamic> sectionData,
   }) async {
     calls.add((prayerId, tier, sectionData));
+  }
+
+  /// Phase A1 — record partial-failed signals as a no-op for assertions.
+  @override
+  Future<void> markTierFailed({
+    required String prayerId,
+    required String tier,
+    required String errorKind,
+  }) async {
+    failedCalls.add((prayerId, tier, errorKind));
   }
 
   // Unused members for these tests — throw to surface accidental calls.
