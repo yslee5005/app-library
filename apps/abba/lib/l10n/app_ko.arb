@@ -624,5 +624,8 @@
   "recordingInterruptedTitle": "기도 녹음이 중단되었어요",
   "recordingInterruptedBody": "앱을 잠시 떠난 사이 녹음이 멈췄어요. 어떻게 하시겠어요?",
   "recordingInterruptedRestart": "다시 녹음하기",
-  "recordingInterruptedSwitchToText": "텍스트로 작성"
+  "recordingInterruptedSwitchToText": "텍스트로 작성",
+  "dashboardPartialFailedQt": "일부 묵상 내용을 불러오지 못했어요. 새 묵상을 시작해 주세요.",
+  "dashboardPartialFailedPrayer": "일부 기도 분석을 불러오지 못했어요. 새 기도를 시작해 주세요.",
+  "dashboardPartialFailedHint": "이미 저장된 내용은 그대로 보관됩니다."
 }

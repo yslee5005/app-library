@@ -1374,4 +1374,15 @@ class AppLocalizationsFi extends AppLocalizations {
 
   @override
   String get recordingInterruptedSwitchToText => 'Write as text instead';
+
+  @override
+  String get dashboardPartialFailedQt =>
+      'Osaa mietiskelyn sisällöstä ei voitu ladata. Aloita uusi mietiskely.';
+
+  @override
+  String get dashboardPartialFailedPrayer =>
+      'Osaa rukousanalyysistä ei voitu ladata. Aloita uusi rukous.';
+
+  @override
+  String get dashboardPartialFailedHint => 'Jo tallennettu pysyy tallessa.';
 }

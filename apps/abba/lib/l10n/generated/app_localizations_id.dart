@@ -1379,4 +1379,16 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get recordingInterruptedSwitchToText => 'Tulis sebagai teks';
+
+  @override
+  String get dashboardPartialFailedQt =>
+      'Sebagian konten renungan tidak dapat dimuat. Silakan mulai renungan baru.';
+
+  @override
+  String get dashboardPartialFailedPrayer =>
+      'Sebagian analisis doa tidak dapat dimuat. Silakan mulai doa baru.';
+
+  @override
+  String get dashboardPartialFailedHint =>
+      'Yang sudah tersimpan tetap aman tersimpan.';
 }

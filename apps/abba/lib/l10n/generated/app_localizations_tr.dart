@@ -1373,4 +1373,15 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get recordingInterruptedSwitchToText => 'Metin olarak yaz';
+
+  @override
+  String get dashboardPartialFailedQt =>
+      'Tefekkür içeriğinin bir kısmı yüklenemedi. Lütfen yeni bir tefekküre başlayın.';
+
+  @override
+  String get dashboardPartialFailedPrayer =>
+      'Dua analizinin bir kısmı yüklenemedi. Lütfen yeni bir duaya başlayın.';
+
+  @override
+  String get dashboardPartialFailedHint => 'Daha önce kaydedilenler korunur.';
 }

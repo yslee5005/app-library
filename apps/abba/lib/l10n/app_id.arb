@@ -575,5 +575,8 @@
   "recordingInterruptedTitle": "Rekaman doa Anda terganggu",
   "recordingInterruptedBody": "Saat Anda tidak ada, rekaman berhenti. Apa yang ingin Anda lakukan?",
   "recordingInterruptedRestart": "Mulai ulang rekaman",
-  "recordingInterruptedSwitchToText": "Tulis sebagai teks"
+  "recordingInterruptedSwitchToText": "Tulis sebagai teks",
+  "dashboardPartialFailedQt": "Sebagian konten renungan tidak dapat dimuat. Silakan mulai renungan baru.",
+  "dashboardPartialFailedPrayer": "Sebagian analisis doa tidak dapat dimuat. Silakan mulai doa baru.",
+  "dashboardPartialFailedHint": "Yang sudah tersimpan tetap aman tersimpan."
 }

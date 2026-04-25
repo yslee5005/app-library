@@ -575,5 +575,8 @@
   "recordingInterruptedTitle": "Your prayer recording was interrupted",
   "recordingInterruptedBody": "While you were away, the recording stopped. What would you like to do?",
   "recordingInterruptedRestart": "Restart recording",
-  "recordingInterruptedSwitchToText": "Write as text instead"
+  "recordingInterruptedSwitchToText": "Write as text instead",
+  "dashboardPartialFailedQt": "Δεν ήταν δυνατή η φόρτωση μέρους του στοχασμού. Ξεκινήστε έναν νέο στοχασμό.",
+  "dashboardPartialFailedPrayer": "Δεν ήταν δυνατή η φόρτωση μέρους της ανάλυσης προσευχής. Ξεκινήστε μια νέα προσευχή.",
+  "dashboardPartialFailedHint": "Ό,τι έχει ήδη αποθηκευτεί παραμένει."
 }

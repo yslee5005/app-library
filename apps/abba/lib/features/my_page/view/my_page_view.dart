@@ -191,7 +191,10 @@ class _PrayerItemCard extends ConsumerWidget {
           // Phase 4.2 R-A6 — feed progressive renderer.
           ref.read(qtSectionsProvider.notifier)
             ..reset()
-            ..setAllFromResult(prayer.qtResult!);
+            ..setAllFromResult(
+              prayer.qtResult!,
+              sectionStatus: prayer.sectionStatus,
+            );
           prayerLog.info(
             'History QT tapped: ${prayer.id}, navigating to qt-dashboard',
           );
@@ -204,7 +207,10 @@ class _PrayerItemCard extends ConsumerWidget {
           // stays a single-source consumer regardless of entry path.
           ref.read(prayerSectionsProvider.notifier)
             ..reset()
-            ..setAllFromResult(prayer.result!);
+            ..setAllFromResult(
+              prayer.result!,
+              sectionStatus: prayer.sectionStatus,
+            );
           prayerLog.info(
             'History item tapped: ${prayer.id}, navigating to dashboard',
           );

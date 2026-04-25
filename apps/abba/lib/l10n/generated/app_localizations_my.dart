@@ -1389,4 +1389,16 @@ class AppLocalizationsMy extends AppLocalizations {
 
   @override
   String get recordingInterruptedSwitchToText => 'Write as text instead';
+
+  @override
+  String get dashboardPartialFailedQt =>
+      'တရားရှုမှတ်ခြင်းအကြောင်းအရာအချို့ကို ဆွဲတင်၍ မရပါ။ ကျေးဇူးပြု၍ တရားရှုမှတ်ခြင်းအသစ်ကို စတင်ပါ။';
+
+  @override
+  String get dashboardPartialFailedPrayer =>
+      'ဆုတောင်းခြင်းခွဲခြမ်းစိတ်ဖြာမှုအချို့ကို ဆွဲတင်၍ မရပါ။ ကျေးဇူးပြု၍ ဆုတောင်းခြင်းအသစ်ကို စတင်ပါ။';
+
+  @override
+  String get dashboardPartialFailedHint =>
+      'သိမ်းဆည်းပြီးသားအကြောင်းအရာများ ဆက်လက်ထိန်းသိမ်းထားပါသည်။';
 }

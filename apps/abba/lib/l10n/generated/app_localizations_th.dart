@@ -1364,4 +1364,16 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get recordingInterruptedSwitchToText => 'เขียนเป็นข้อความ';
+
+  @override
+  String get dashboardPartialFailedQt =>
+      'ไม่สามารถโหลดเนื้อหาการใคร่ครวญบางส่วนได้ กรุณาเริ่มการใคร่ครวญใหม่';
+
+  @override
+  String get dashboardPartialFailedPrayer =>
+      'ไม่สามารถโหลดการวิเคราะห์คำอธิษฐานบางส่วนได้ กรุณาเริ่มคำอธิษฐานใหม่';
+
+  @override
+  String get dashboardPartialFailedHint =>
+      'สิ่งที่บันทึกไว้แล้วยังคงเก็บไว้อย่างปลอดภัย';
 }

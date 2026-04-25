@@ -1348,4 +1348,15 @@ class AppLocalizationsAm extends AppLocalizations {
 
   @override
   String get recordingInterruptedSwitchToText => 'Write as text instead';
+
+  @override
+  String get dashboardPartialFailedQt =>
+      'የመንፈሳዊ ሕሊና ይዘት ከፊል መጫን አልተቻለም። እባክዎ አዲስ መንፈሳዊ ሕሊና ይጀምሩ።';
+
+  @override
+  String get dashboardPartialFailedPrayer =>
+      'የጸሎት ትንታኔ ከፊል መጫን አልተቻለም። እባክዎ አዲስ ጸሎት ይጀምሩ።';
+
+  @override
+  String get dashboardPartialFailedHint => 'አስቀድሞ የተቀመጠው ይቆያል።';
 }

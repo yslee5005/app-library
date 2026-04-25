@@ -22,7 +22,14 @@ class QtSectionsState {
   final RelatedKnowledge? knowledge;
 
   /// Per-tier failures (keys: 't1' | 't2').
+  /// Current-session rich exceptions; reset across app restart.
   final Map<String, AiAnalysisException> failedTiers;
+
+  /// Phase A2 — per-tier completion state mirroring `abba.prayers.section_status`.
+  /// Keys: 't1' | 't2'. Values: 'pending' | 'completed' | 'failed'.
+  /// Populated from streaming events and [setAllFromResult] (calendar/my-page
+  /// revisit). Dashboard reads this to render inline partial-failed indicators.
+  final Map<String, String> sectionStatus;
 
   /// DB row id once savePendingPrayer returns.
   final String? prayerId;
@@ -33,6 +40,7 @@ class QtSectionsState {
     this.application,
     this.knowledge,
     this.failedTiers = const {},
+    this.sectionStatus = const {},
     this.prayerId,
   });
 
@@ -46,6 +54,7 @@ class QtSectionsState {
     ApplicationSuggestion? application,
     RelatedKnowledge? knowledge,
     Map<String, AiAnalysisException>? failedTiers,
+    Map<String, String>? sectionStatus,
     String? prayerId,
   }) {
     return QtSectionsState(
@@ -54,6 +63,7 @@ class QtSectionsState {
       application: application ?? this.application,
       knowledge: knowledge ?? this.knowledge,
       failedTiers: failedTiers ?? this.failedTiers,
+      sectionStatus: sectionStatus ?? this.sectionStatus,
       prayerId: prayerId ?? this.prayerId,
     );
   }
@@ -93,19 +103,40 @@ class QtSectionsNotifier extends StateNotifier<QtSectionsState> {
 
   /// Fill every tier at once from a stored [QtMeditationResult] (used when
   /// revisiting a past QT from Calendar / My Page).
-  void setAllFromResult(QtMeditationResult result) {
+  ///
+  /// [sectionStatus] (Phase A2) — when revisiting from DB, pass the prayer's
+  /// `section_status` JSONB so the dashboard can render inline partial-failed
+  /// indicators for tiers that never completed in the original session.
+  void setAllFromResult(
+    QtMeditationResult result, {
+    Map<String, String>? sectionStatus,
+  }) {
     state = state.copyWith(
       meditationSummary: result.meditationSummary,
       scripture: result.scripture,
       application: result.application,
       knowledge: result.knowledge,
+      sectionStatus: sectionStatus ?? state.sectionStatus,
     );
   }
 
   void setTierFailed(String tier, AiAnalysisException error) {
     final next = Map<String, AiAnalysisException>.from(state.failedTiers);
     next[tier] = error;
-    state = state.copyWith(failedTiers: next);
+    // Phase A2 — mirror failure into sectionStatus so dashboard can render
+    // an inline indicator without consulting failedTiers' rich exception map.
+    final nextStatus = Map<String, String>.from(state.sectionStatus);
+    nextStatus[tier] = 'failed';
+    state = state.copyWith(failedTiers: next, sectionStatus: nextStatus);
+  }
+
+  /// Phase A2 — record successful tier completion in sectionStatus so the
+  /// dashboard inline indicator (set by [setTierFailed]) clears once the
+  /// tier eventually succeeds (e.g., retry path).
+  void _markTierCompleted(String tier) {
+    final next = Map<String, String>.from(state.sectionStatus);
+    next[tier] = 'completed';
+    state = state.copyWith(sectionStatus: next);
   }
 
   /// Phase 4.2 Phase C — stash a placeholder Scripture (reference only)
@@ -152,6 +183,7 @@ class QtSectionsNotifier extends StateNotifier<QtSectionsState> {
               meditationSummary: t1.meditationSummary,
               scripture: t1.scripture,
             );
+            _markTierCompleted('t1');
             if (!t1Completer.isCompleted) t1Completer.complete(t1);
             await _persistTier(repo, prayerId, 't1', {
               'meditation_summary': t1.meditationSummary.toJson(),
@@ -159,6 +191,7 @@ class QtSectionsNotifier extends StateNotifier<QtSectionsState> {
             });
           case QtTierT2Result t2:
             setT2(application: t2.application, knowledge: t2.knowledge);
+            _markTierCompleted('t2');
             await _persistTier(repo, prayerId, 't2', {
               'application': t2.application.toJson(),
               'knowledge': t2.knowledge.toJson(),

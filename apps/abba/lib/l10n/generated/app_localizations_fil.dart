@@ -1399,4 +1399,16 @@ class AppLocalizationsFil extends AppLocalizations {
 
   @override
   String get recordingInterruptedSwitchToText => 'Write as text instead';
+
+  @override
+  String get dashboardPartialFailedQt =>
+      'Hindi na-load ang ilang bahagi ng nilalaman ng pagninilay. Mangyaring magsimula ng bagong pagninilay.';
+
+  @override
+  String get dashboardPartialFailedPrayer =>
+      'Hindi na-load ang ilang bahagi ng pagsusuri ng panalangin. Mangyaring magsimula ng bagong panalangin.';
+
+  @override
+  String get dashboardPartialFailedHint =>
+      'Ang nakaimbak na ay nananatiling ligtas.';
 }

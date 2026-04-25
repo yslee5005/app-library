@@ -1373,4 +1373,16 @@ class AppLocalizationsSw extends AppLocalizations {
 
   @override
   String get recordingInterruptedSwitchToText => 'Write as text instead';
+
+  @override
+  String get dashboardPartialFailedQt =>
+      'Sehemu ya maudhui ya tafakari haikupakuliwa. Tafadhali anza tafakari mpya.';
+
+  @override
+  String get dashboardPartialFailedPrayer =>
+      'Sehemu ya uchambuzi wa sala haikupakuliwa. Tafadhali anza sala mpya.';
+
+  @override
+  String get dashboardPartialFailedHint =>
+      'Yaliyokwisha hifadhiwa yanasalia salama.';
 }

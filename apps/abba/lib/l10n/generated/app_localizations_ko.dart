@@ -1334,4 +1334,14 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get recordingInterruptedSwitchToText => '텍스트로 작성';
+
+  @override
+  String get dashboardPartialFailedQt => '일부 묵상 내용을 불러오지 못했어요. 새 묵상을 시작해 주세요.';
+
+  @override
+  String get dashboardPartialFailedPrayer =>
+      '일부 기도 분석을 불러오지 못했어요. 새 기도를 시작해 주세요.';
+
+  @override
+  String get dashboardPartialFailedHint => '이미 저장된 내용은 그대로 보관됩니다.';
 }

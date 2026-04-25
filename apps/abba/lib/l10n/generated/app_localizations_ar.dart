@@ -1352,4 +1352,15 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get recordingInterruptedSwitchToText => 'الكتابة كنص';
+
+  @override
+  String get dashboardPartialFailedQt =>
+      'تعذّر تحميل بعض محتوى التأمل. يرجى بدء تأمل جديد.';
+
+  @override
+  String get dashboardPartialFailedPrayer =>
+      'تعذّر تحميل بعض تحليل الصلاة. يرجى بدء صلاة جديدة.';
+
+  @override
+  String get dashboardPartialFailedHint => 'ما تم حفظه يبقى محفوظًا.';
 }

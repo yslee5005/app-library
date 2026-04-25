@@ -1333,4 +1333,13 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get recordingInterruptedSwitchToText => '改用文字书写';
+
+  @override
+  String get dashboardPartialFailedQt => '部分默想内容无法加载。请开始新的默想。';
+
+  @override
+  String get dashboardPartialFailedPrayer => '部分祷告分析无法加载。请开始新的祷告。';
+
+  @override
+  String get dashboardPartialFailedHint => '已保存的内容仍会保留。';
 }

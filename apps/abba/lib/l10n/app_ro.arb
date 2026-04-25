@@ -575,5 +575,8 @@
   "recordingInterruptedTitle": "Your prayer recording was interrupted",
   "recordingInterruptedBody": "While you were away, the recording stopped. What would you like to do?",
   "recordingInterruptedRestart": "Restart recording",
-  "recordingInterruptedSwitchToText": "Write as text instead"
+  "recordingInterruptedSwitchToText": "Write as text instead",
+  "dashboardPartialFailedQt": "O parte din conținutul meditației nu a putut fi încărcată. Începeți o nouă meditație.",
+  "dashboardPartialFailedPrayer": "O parte din analiza rugăciunii nu a putut fi încărcată. Începeți o nouă rugăciune.",
+  "dashboardPartialFailedHint": "Ceea ce este deja salvat rămâne păstrat."
 }

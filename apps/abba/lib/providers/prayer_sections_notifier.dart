@@ -26,7 +26,16 @@ class PrayerSectionsState {
   final HistoricalStory? historicalStory;
 
   /// Per-tier failures (empty = all OK). Keys: 't1' | 't2' | 't3'.
+  /// Carries the rich [AiAnalysisException] for the current session only.
+  /// Reset across app restart; use [sectionStatus] for the DB-backed view.
   final Map<String, AiAnalysisException> failedTiers;
+
+  /// Phase A2 — per-tier completion state mirroring `abba.prayers.section_status`.
+  /// Keys: 't1' | 't2' | 't3'. Values: 'pending' | 'completed' | 'failed' |
+  /// 'not_applicable'. Populated from streaming events (this session) and
+  /// from [setAllFromResult] (calendar/my-page revisit). Dashboard reads
+  /// this to render inline partial-failed indicators.
+  final Map<String, String> sectionStatus;
 
   /// The prayer DB row id, once savePendingPrayer returns. Used by
   /// tier UPDATE RPCs.
@@ -44,6 +53,7 @@ class PrayerSectionsState {
     this.aiPrayer,
     this.historicalStory,
     this.failedTiers = const {},
+    this.sectionStatus = const {},
     this.prayerId,
     this.t3Triggered = false,
   });
@@ -63,6 +73,7 @@ class PrayerSectionsState {
     AiPrayer? aiPrayer,
     HistoricalStory? historicalStory,
     Map<String, AiAnalysisException>? failedTiers,
+    Map<String, String>? sectionStatus,
     String? prayerId,
     bool? t3Triggered,
   }) {
@@ -75,6 +86,7 @@ class PrayerSectionsState {
       aiPrayer: aiPrayer ?? this.aiPrayer,
       historicalStory: historicalStory ?? this.historicalStory,
       failedTiers: failedTiers ?? this.failedTiers,
+      sectionStatus: sectionStatus ?? this.sectionStatus,
       prayerId: prayerId ?? this.prayerId,
       t3Triggered: t3Triggered ?? this.t3Triggered,
     );
@@ -131,7 +143,14 @@ class PrayerSectionsNotifier extends StateNotifier<PrayerSectionsState> {
 
   /// Instant fill all tiers (used when reviewing past prayer from Calendar).
   /// Skips tier animations; UI sees completed state immediately.
-  void setAllFromResult(PrayerResult result) {
+  ///
+  /// [sectionStatus] (Phase A2) — when revisiting from DB, pass the prayer's
+  /// `section_status` JSONB so the dashboard can render inline partial-failed
+  /// indicators for tiers that never completed in the original session.
+  void setAllFromResult(
+    PrayerResult result, {
+    Map<String, String>? sectionStatus,
+  }) {
     state = state.copyWith(
       summary: result.prayerSummary,
       scripture: result.scripture,
@@ -140,13 +159,27 @@ class PrayerSectionsNotifier extends StateNotifier<PrayerSectionsState> {
       guidance: result.guidance,
       aiPrayer: result.aiPrayer,
       historicalStory: result.historicalStory,
+      sectionStatus: sectionStatus ?? state.sectionStatus,
     );
   }
 
   void setTierFailed(String tier, AiAnalysisException error) {
     final next = Map<String, AiAnalysisException>.from(state.failedTiers);
     next[tier] = error;
-    state = state.copyWith(failedTiers: next);
+    // Phase A2 — mirror failure into sectionStatus so dashboard can render
+    // an inline indicator without consulting failedTiers' rich exception map.
+    final nextStatus = Map<String, String>.from(state.sectionStatus);
+    nextStatus[tier] = 'failed';
+    state = state.copyWith(failedTiers: next, sectionStatus: nextStatus);
+  }
+
+  /// Phase A2 — record successful tier completion in sectionStatus so the
+  /// dashboard inline indicator (set by [setTierFailed]) clears once the
+  /// tier eventually succeeds (e.g., retry path).
+  void _markTierCompleted(String tier) {
+    final next = Map<String, String>.from(state.sectionStatus);
+    next[tier] = 'completed';
+    state = state.copyWith(sectionStatus: next);
   }
 
   void markT3Triggered() {
@@ -207,6 +240,7 @@ class PrayerSectionsNotifier extends StateNotifier<PrayerSectionsState> {
             // clear the candidate (ref already inside t1.scripture).
             _scriptureRefCandidate = null;
             setT1(summary: t1.summary, scripture: t1.scripture);
+            _markTierCompleted('t1');
             if (!t1Completer.isCompleted) t1Completer.complete(t1);
             await _persistTier(repo, prayerId, 't1', {
               'prayer_summary': _summaryToJson(t1.summary),
@@ -214,6 +248,7 @@ class PrayerSectionsNotifier extends StateNotifier<PrayerSectionsState> {
             });
           case TierT2Result t2:
             setT2(bibleStory: t2.bibleStory, testimony: t2.testimony);
+            _markTierCompleted('t2');
             await _persistTier(repo, prayerId, 't2', {
               'bible_story': {
                 'title': t2.bibleStory.title,
@@ -227,6 +262,7 @@ class PrayerSectionsNotifier extends StateNotifier<PrayerSectionsState> {
               aiPrayer: t3.aiPrayer,
               historicalStory: t3.historicalStory,
             );
+            _markTierCompleted('t3');
             await _persistTier(repo, prayerId, 't3', {
               if (t3.guidance != null)
                 'guidance': {

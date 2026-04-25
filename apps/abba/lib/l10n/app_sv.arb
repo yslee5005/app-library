@@ -575,5 +575,8 @@
   "recordingInterruptedTitle": "Your prayer recording was interrupted",
   "recordingInterruptedBody": "While you were away, the recording stopped. What would you like to do?",
   "recordingInterruptedRestart": "Restart recording",
-  "recordingInterruptedSwitchToText": "Write as text instead"
+  "recordingInterruptedSwitchToText": "Write as text instead",
+  "dashboardPartialFailedQt": "Delar av meditationsinnehållet kunde inte laddas. Starta gärna en ny meditation.",
+  "dashboardPartialFailedPrayer": "Delar av böneanalysen kunde inte laddas. Starta gärna en ny bön.",
+  "dashboardPartialFailedHint": "Det som redan är sparat behålls."
 }

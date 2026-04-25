@@ -575,5 +575,8 @@
   "recordingInterruptedTitle": "Your prayer recording was interrupted",
   "recordingInterruptedBody": "While you were away, the recording stopped. What would you like to do?",
   "recordingInterruptedRestart": "Restart recording",
-  "recordingInterruptedSwitchToText": "Write as text instead"
+  "recordingInterruptedSwitchToText": "Write as text instead",
+  "dashboardPartialFailedQt": "חלק מתוכן ההגות לא נטען. נא להתחיל הגות חדשה.",
+  "dashboardPartialFailedPrayer": "חלק מניתוח התפילה לא נטען. נא להתחיל תפילה חדשה.",
+  "dashboardPartialFailedHint": "מה שכבר נשמר נשאר שמור."
 }

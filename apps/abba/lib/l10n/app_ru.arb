@@ -575,5 +575,8 @@
   "recordingInterruptedTitle": "Запись вашей молитвы была прервана",
   "recordingInterruptedBody": "Пока вас не было, запись остановилась. Что вы хотите сделать?",
   "recordingInterruptedRestart": "Начать запись заново",
-  "recordingInterruptedSwitchToText": "Написать текстом"
+  "recordingInterruptedSwitchToText": "Написать текстом",
+  "dashboardPartialFailedQt": "Не удалось загрузить часть содержимого размышления. Начните новое размышление.",
+  "dashboardPartialFailedPrayer": "Не удалось загрузить часть анализа молитвы. Начните новую молитву.",
+  "dashboardPartialFailedHint": "Сохранённое останется на месте."
 }

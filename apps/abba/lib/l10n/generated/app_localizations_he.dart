@@ -1351,4 +1351,15 @@ class AppLocalizationsHe extends AppLocalizations {
 
   @override
   String get recordingInterruptedSwitchToText => 'Write as text instead';
+
+  @override
+  String get dashboardPartialFailedQt =>
+      'חלק מתוכן ההגות לא נטען. נא להתחיל הגות חדשה.';
+
+  @override
+  String get dashboardPartialFailedPrayer =>
+      'חלק מניתוח התפילה לא נטען. נא להתחיל תפילה חדשה.';
+
+  @override
+  String get dashboardPartialFailedHint => 'מה שכבר נשמר נשאר שמור.';
 }

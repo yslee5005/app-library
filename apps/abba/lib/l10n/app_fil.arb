@@ -575,5 +575,8 @@
   "recordingInterruptedTitle": "Your prayer recording was interrupted",
   "recordingInterruptedBody": "While you were away, the recording stopped. What would you like to do?",
   "recordingInterruptedRestart": "Restart recording",
-  "recordingInterruptedSwitchToText": "Write as text instead"
+  "recordingInterruptedSwitchToText": "Write as text instead",
+  "dashboardPartialFailedQt": "Hindi na-load ang ilang bahagi ng nilalaman ng pagninilay. Mangyaring magsimula ng bagong pagninilay.",
+  "dashboardPartialFailedPrayer": "Hindi na-load ang ilang bahagi ng pagsusuri ng panalangin. Mangyaring magsimula ng bagong panalangin.",
+  "dashboardPartialFailedHint": "Ang nakaimbak na ay nananatiling ligtas."
 }

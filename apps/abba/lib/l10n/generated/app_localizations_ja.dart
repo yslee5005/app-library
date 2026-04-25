@@ -1334,4 +1334,14 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get recordingInterruptedSwitchToText => 'テキストで書く';
+
+  @override
+  String get dashboardPartialFailedQt => '一部の黙想内容を読み込めませんでした。新しい黙想を始めてください。';
+
+  @override
+  String get dashboardPartialFailedPrayer =>
+      '一部の祈りの分析を読み込めませんでした。新しい祈りを始めてください。';
+
+  @override
+  String get dashboardPartialFailedHint => '保存済みの内容はそのまま保管されます。';
 }

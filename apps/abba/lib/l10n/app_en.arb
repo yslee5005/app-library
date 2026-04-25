@@ -631,5 +631,8 @@
   "recordingInterruptedTitle": "Your prayer recording was interrupted",
   "recordingInterruptedBody": "While you were away, the recording stopped. What would you like to do?",
   "recordingInterruptedRestart": "Restart recording",
-  "recordingInterruptedSwitchToText": "Write as text instead"
+  "recordingInterruptedSwitchToText": "Write as text instead",
+  "dashboardPartialFailedQt": "Some meditation content couldn't be loaded. Please start a new meditation.",
+  "dashboardPartialFailedPrayer": "Some prayer analysis couldn't be loaded. Please start a new prayer.",
+  "dashboardPartialFailedHint": "Anything already saved stays saved."
 }

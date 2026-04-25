@@ -575,5 +575,8 @@
   "recordingInterruptedTitle": "Nagrywanie modlitwy zostało przerwane",
   "recordingInterruptedBody": "Gdy byłeś nieobecny, nagrywanie się zatrzymało. Co chcesz zrobić?",
   "recordingInterruptedRestart": "Rozpocznij nagrywanie ponownie",
-  "recordingInterruptedSwitchToText": "Napisz jako tekst"
+  "recordingInterruptedSwitchToText": "Napisz jako tekst",
+  "dashboardPartialFailedQt": "Nie udało się wczytać części treści medytacji. Rozpocznij nową medytację.",
+  "dashboardPartialFailedPrayer": "Nie udało się wczytać części analizy modlitwy. Rozpocznij nową modlitwę.",
+  "dashboardPartialFailedHint": "To, co już zostało zapisane, pozostaje."
 }

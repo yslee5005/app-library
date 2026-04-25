@@ -182,6 +182,10 @@ class _PrayerDashboardViewState extends ConsumerState<PrayerDashboardView> {
     // is mostly a safety net for past prayers with corrupt data.
     final awaitingT1 = sections.summary == null && sections.scripture == null;
 
+    // Phase A2 — partial-failed state. Honest copy: no auto-recovery
+    // promise (Edge partial retry is out of Phase A scope).
+    final t1Failed = sections.sectionStatus['t1'] == 'failed';
+
     return Scaffold(
       backgroundColor: AbbaColors.cream,
       appBar: AppBar(
@@ -207,9 +211,94 @@ class _PrayerDashboardViewState extends ConsumerState<PrayerDashboardView> {
           ),
         ],
       ),
-      body: awaitingT1
-          ? const Center(child: CircularProgressIndicator())
-          : _buildContent(context, sections, l10n, locale, isPremium),
+      body: t1Failed && awaitingT1
+          ? _buildPartialFailedBody(l10n)
+          : awaitingT1
+              ? const Center(child: CircularProgressIndicator())
+              : _buildContent(context, sections, l10n, locale, isPremium),
+    );
+  }
+
+  /// Phase A2 — full-body partial-failed indicator shown when T1 itself
+  /// failed. Honest UX: no retry button, no auto-recovery promise. The
+  /// user is asked to start a new prayer; their pending row stays in DB
+  /// so future Edge partial retry (Phase A.5+) can resurrect it.
+  Widget _buildPartialFailedBody(AppLocalizations l10n) {
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: AbbaSpacing.xl),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(
+              Icons.cloud_off_outlined,
+              size: 40,
+              color: AbbaColors.muted,
+              semanticLabel: l10n.dashboardPartialFailedPrayer,
+            ),
+            const SizedBox(height: AbbaSpacing.md),
+            Text(
+              l10n.dashboardPartialFailedPrayer,
+              style: AbbaTypography.body.copyWith(color: AbbaColors.warmBrown),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: AbbaSpacing.sm),
+            Text(
+              l10n.dashboardPartialFailedHint,
+              style: AbbaTypography.bodySmall.copyWith(
+                color: AbbaColors.muted,
+              ),
+              textAlign: TextAlign.center,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  /// Phase A2 — inline indicator placed where the missing tier's cards
+  /// would render. Smaller, in-flow version of [_buildPartialFailedBody].
+  Widget _inlinePartialFailed(AppLocalizations l10n) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(
+        horizontal: AbbaSpacing.md,
+        vertical: AbbaSpacing.md,
+      ),
+      child: Container(
+        padding: const EdgeInsets.all(AbbaSpacing.md),
+        decoration: BoxDecoration(
+          color: AbbaColors.cream,
+          borderRadius: BorderRadius.circular(AbbaRadius.md),
+          border: Border.all(color: AbbaColors.muted.withValues(alpha: 0.3)),
+        ),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Icon(Icons.cloud_off_outlined, size: 20, color: AbbaColors.muted),
+            const SizedBox(width: AbbaSpacing.sm),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    l10n.dashboardPartialFailedPrayer,
+                    style: AbbaTypography.bodySmall.copyWith(
+                      color: AbbaColors.warmBrown,
+                    ),
+                  ),
+                  const SizedBox(height: AbbaSpacing.xs),
+                  Text(
+                    l10n.dashboardPartialFailedHint,
+                    style: AbbaTypography.caption.copyWith(
+                      color: AbbaColors.muted,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 
@@ -229,8 +318,16 @@ class _PrayerDashboardViewState extends ConsumerState<PrayerDashboardView> {
     final hasTestimony = testimonyText.isNotEmpty;
     final hasHistoricalStory = sections.historicalStory != null;
     final hasAiPrayer = sections.aiPrayer != null;
+    final hasBibleStory = sections.bibleStory != null;
     final showPremiumSection =
         isPremium && (!hasHistoricalStory || !hasAiPrayer);
+
+    // Phase A2 — show inline partial-failed indicator when T2 failed AND
+    // neither the Bible Story nor Testimony cards arrived. (Both belong to
+    // T2; if at least one landed we render that card normally and skip the
+    // indicator.)
+    final t2Failed = sections.sectionStatus['t2'] == 'failed';
+    final showT2InlineFailed = t2Failed && !hasBibleStory && !hasTestimony;
 
     int i = 0;
     return ListView(
@@ -282,6 +379,9 @@ class _PrayerDashboardViewState extends ConsumerState<PrayerDashboardView> {
               helperText: l10n.testimonyHelperText,
             ),
           ),
+        // Phase A2 — T2 partial-failed inline indicator (Bible Story +
+        // Testimony slot when both are missing).
+        if (showT2InlineFailed) _inlinePartialFailed(l10n),
         // 4. Prayer Coaching Card (Pro — first Pro card, on-demand analysis)
         //    Wraps the Pro region entry with a VisibilityDetector so that
         //    scrolling into the Pro territory fires T3 eagerly (faster

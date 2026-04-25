@@ -1373,4 +1373,15 @@ class AppLocalizationsSv extends AppLocalizations {
 
   @override
   String get recordingInterruptedSwitchToText => 'Write as text instead';
+
+  @override
+  String get dashboardPartialFailedQt =>
+      'Delar av meditationsinnehållet kunde inte laddas. Starta gärna en ny meditation.';
+
+  @override
+  String get dashboardPartialFailedPrayer =>
+      'Delar av böneanalysen kunde inte laddas. Starta gärna en ny bön.';
+
+  @override
+  String get dashboardPartialFailedHint => 'Det som redan är sparat behålls.';
 }

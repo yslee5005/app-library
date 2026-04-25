@@ -1376,4 +1376,15 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String get recordingInterruptedSwitchToText => 'Write as text instead';
+
+  @override
+  String get dashboardPartialFailedQt =>
+      'Az elmélkedés egy részét nem sikerült betölteni. Kérjük, kezdj új elmélkedést.';
+
+  @override
+  String get dashboardPartialFailedPrayer =>
+      'Az imaelemzés egy részét nem sikerült betölteni. Kérjük, kezdj új imát.';
+
+  @override
+  String get dashboardPartialFailedHint => 'Ami már mentve van, megmarad.';
 }

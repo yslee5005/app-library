@@ -1381,4 +1381,16 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String get recordingInterruptedSwitchToText => 'Viết bằng văn bản';
+
+  @override
+  String get dashboardPartialFailedQt =>
+      'Không thể tải một phần nội dung suy gẫm. Vui lòng bắt đầu một bài suy gẫm mới.';
+
+  @override
+  String get dashboardPartialFailedPrayer =>
+      'Không thể tải một phần phân tích lời cầu nguyện. Vui lòng bắt đầu một lời cầu nguyện mới.';
+
+  @override
+  String get dashboardPartialFailedHint =>
+      'Nội dung đã lưu vẫn được giữ nguyên.';
 }

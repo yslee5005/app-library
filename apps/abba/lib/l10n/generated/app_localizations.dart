@@ -2677,6 +2677,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Write as text instead'**
   String get recordingInterruptedSwitchToText;
+
+  /// No description provided for @dashboardPartialFailedQt.
+  ///
+  /// In en, this message translates to:
+  /// **'Some meditation content couldn\'t be loaded. Please start a new meditation.'**
+  String get dashboardPartialFailedQt;
+
+  /// No description provided for @dashboardPartialFailedPrayer.
+  ///
+  /// In en, this message translates to:
+  /// **'Some prayer analysis couldn\'t be loaded. Please start a new prayer.'**
+  String get dashboardPartialFailedPrayer;
+
+  /// No description provided for @dashboardPartialFailedHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Anything already saved stays saved.'**
+  String get dashboardPartialFailedHint;
 }
 
 class _AppLocalizationsDelegate

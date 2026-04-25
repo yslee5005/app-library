@@ -575,5 +575,8 @@
   "recordingInterruptedTitle": "Ihre Gebetsaufnahme wurde unterbrochen",
   "recordingInterruptedBody": "Während Sie weg waren, wurde die Aufnahme gestoppt. Was möchten Sie tun?",
   "recordingInterruptedRestart": "Aufnahme neu starten",
-  "recordingInterruptedSwitchToText": "Stattdessen als Text schreiben"
+  "recordingInterruptedSwitchToText": "Stattdessen als Text schreiben",
+  "dashboardPartialFailedQt": "Ein Teil der Meditationsinhalte konnte nicht geladen werden. Bitte beginnen Sie eine neue Meditation.",
+  "dashboardPartialFailedPrayer": "Ein Teil der Gebetsanalyse konnte nicht geladen werden. Bitte beginnen Sie ein neues Gebet.",
+  "dashboardPartialFailedHint": "Bereits Gespeichertes bleibt erhalten."
 }

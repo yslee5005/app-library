@@ -1380,4 +1380,16 @@ class AppLocalizationsPl extends AppLocalizations {
 
   @override
   String get recordingInterruptedSwitchToText => 'Napisz jako tekst';
+
+  @override
+  String get dashboardPartialFailedQt =>
+      'Nie udało się wczytać części treści medytacji. Rozpocznij nową medytację.';
+
+  @override
+  String get dashboardPartialFailedPrayer =>
+      'Nie udało się wczytać części analizy modlitwy. Rozpocznij nową modlitwę.';
+
+  @override
+  String get dashboardPartialFailedHint =>
+      'To, co już zostało zapisane, pozostaje.';
 }

@@ -575,5 +575,8 @@
   "recordingInterruptedTitle": "Your prayer recording was interrupted",
   "recordingInterruptedBody": "While you were away, the recording stopped. What would you like to do?",
   "recordingInterruptedRestart": "Restart recording",
-  "recordingInterruptedSwitchToText": "Write as text instead"
+  "recordingInterruptedSwitchToText": "Write as text instead",
+  "dashboardPartialFailedQt": "Az elmélkedés egy részét nem sikerült betölteni. Kérjük, kezdj új elmélkedést.",
+  "dashboardPartialFailedPrayer": "Az imaelemzés egy részét nem sikerült betölteni. Kérjük, kezdj új imát.",
+  "dashboardPartialFailedHint": "Ami már mentve van, megmarad."
 }

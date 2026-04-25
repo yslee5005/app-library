@@ -1377,4 +1377,16 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get recordingInterruptedSwitchToText => 'Schrijf als tekst';
+
+  @override
+  String get dashboardPartialFailedQt =>
+      'Een deel van de meditatie kon niet worden geladen. Begin een nieuwe meditatie.';
+
+  @override
+  String get dashboardPartialFailedPrayer =>
+      'Een deel van de gebedsanalyse kon niet worden geladen. Begin een nieuw gebed.';
+
+  @override
+  String get dashboardPartialFailedHint =>
+      'Wat al is opgeslagen, blijft bewaard.';
 }

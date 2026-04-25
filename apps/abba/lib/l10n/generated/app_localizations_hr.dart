@@ -1378,4 +1378,16 @@ class AppLocalizationsHr extends AppLocalizations {
 
   @override
   String get recordingInterruptedSwitchToText => 'Write as text instead';
+
+  @override
+  String get dashboardPartialFailedQt =>
+      'Dio sadržaja meditacije nije bilo moguće učitati. Započnite novu meditaciju.';
+
+  @override
+  String get dashboardPartialFailedPrayer =>
+      'Dio analize molitve nije bilo moguće učitati. Započnite novu molitvu.';
+
+  @override
+  String get dashboardPartialFailedHint =>
+      'Već spremljeni sadržaj ostaje pohranjen.';
 }

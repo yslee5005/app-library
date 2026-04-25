@@ -575,5 +575,8 @@
   "recordingInterruptedTitle": "आपकी प्रार्थना रिकॉर्डिंग बाधित हुई",
   "recordingInterruptedBody": "जब आप दूर थे, रिकॉर्डिंग रुक गई। आप क्या करना चाहेंगे?",
   "recordingInterruptedRestart": "रिकॉर्डिंग फिर से शुरू करें",
-  "recordingInterruptedSwitchToText": "टेक्स्ट के रूप में लिखें"
+  "recordingInterruptedSwitchToText": "टेक्स्ट के रूप में लिखें",
+  "dashboardPartialFailedQt": "ध्यान की कुछ सामग्री लोड नहीं हो सकी। कृपया नया ध्यान शुरू करें।",
+  "dashboardPartialFailedPrayer": "प्रार्थना विश्लेषण का कुछ भाग लोड नहीं हो सका। कृपया नई प्रार्थना शुरू करें।",
+  "dashboardPartialFailedHint": "जो पहले से सहेजा गया है वह सुरक्षित रहता है।"
 }

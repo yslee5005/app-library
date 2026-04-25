@@ -575,5 +575,8 @@
   "recordingInterruptedTitle": "Your prayer recording was interrupted",
   "recordingInterruptedBody": "While you were away, the recording stopped. What would you like to do?",
   "recordingInterruptedRestart": "Restart recording",
-  "recordingInterruptedSwitchToText": "Write as text instead"
+  "recordingInterruptedSwitchToText": "Write as text instead",
+  "dashboardPartialFailedQt": "Не вдалося завантажити частину змісту роздумів. Розпочніть новий роздум.",
+  "dashboardPartialFailedPrayer": "Не вдалося завантажити частину аналізу молитви. Розпочніть нову молитву.",
+  "dashboardPartialFailedHint": "Уже збережене залишається."
 }

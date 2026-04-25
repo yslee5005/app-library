@@ -1380,4 +1380,16 @@ class AppLocalizationsEl extends AppLocalizations {
 
   @override
   String get recordingInterruptedSwitchToText => 'Write as text instead';
+
+  @override
+  String get dashboardPartialFailedQt =>
+      'Δεν ήταν δυνατή η φόρτωση μέρους του στοχασμού. Ξεκινήστε έναν νέο στοχασμό.';
+
+  @override
+  String get dashboardPartialFailedPrayer =>
+      'Δεν ήταν δυνατή η φόρτωση μέρους της ανάλυσης προσευχής. Ξεκινήστε μια νέα προσευχή.';
+
+  @override
+  String get dashboardPartialFailedHint =>
+      'Ό,τι έχει ήδη αποθηκευτεί παραμένει.';
 }

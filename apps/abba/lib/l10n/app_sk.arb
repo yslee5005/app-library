@@ -575,5 +575,8 @@
   "recordingInterruptedTitle": "Your prayer recording was interrupted",
   "recordingInterruptedBody": "While you were away, the recording stopped. What would you like to do?",
   "recordingInterruptedRestart": "Restart recording",
-  "recordingInterruptedSwitchToText": "Write as text instead"
+  "recordingInterruptedSwitchToText": "Write as text instead",
+  "dashboardPartialFailedQt": "Časť obsahu meditácie sa nepodarilo načítať. Začnite, prosím, novú meditáciu.",
+  "dashboardPartialFailedPrayer": "Časť analýzy modlitby sa nepodarilo načítať. Začnite, prosím, novú modlitbu.",
+  "dashboardPartialFailedHint": "Čo je už uložené, zostáva zachované."
 }

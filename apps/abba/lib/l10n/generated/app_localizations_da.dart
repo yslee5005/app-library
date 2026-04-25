@@ -1374,4 +1374,16 @@ class AppLocalizationsDa extends AppLocalizations {
 
   @override
   String get recordingInterruptedSwitchToText => 'Write as text instead';
+
+  @override
+  String get dashboardPartialFailedQt =>
+      'En del af meditationsindholdet kunne ikke indlæses. Start gerne en ny meditation.';
+
+  @override
+  String get dashboardPartialFailedPrayer =>
+      'En del af bønnens analyse kunne ikke indlæses. Start gerne en ny bøn.';
+
+  @override
+  String get dashboardPartialFailedHint =>
+      'Det, der allerede er gemt, bevares.';
 }

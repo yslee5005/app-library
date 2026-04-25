@@ -57,6 +57,10 @@ class _QtDashboardViewState extends ConsumerState<QtDashboardView> {
     final awaitingT1 =
         sections.meditationSummary == null && sections.scripture == null;
 
+    // Phase A2 — partial-failed state. Honest copy: no auto-recovery
+    // promise (Edge partial retry is out of Phase A scope).
+    final t1Failed = sections.sectionStatus['t1'] == 'failed';
+
     return Scaffold(
       backgroundColor: AbbaColors.cream,
       appBar: AppBar(
@@ -82,9 +86,94 @@ class _QtDashboardViewState extends ConsumerState<QtDashboardView> {
           ),
         ],
       ),
-      body: awaitingT1
-          ? const Center(child: CircularProgressIndicator())
-          : _buildContent(context, sections, l10n, locale, isPremium),
+      body: t1Failed && awaitingT1
+          ? _buildPartialFailedBody(l10n)
+          : awaitingT1
+              ? const Center(child: CircularProgressIndicator())
+              : _buildContent(context, sections, l10n, locale, isPremium),
+    );
+  }
+
+  /// Phase A2 — full-body partial-failed indicator shown when T1 itself
+  /// failed. Honest UX: no retry button, no auto-recovery promise. The
+  /// user is asked to start a new meditation; their pending row stays in
+  /// DB so future Edge partial retry (Phase A.5+) can resurrect it.
+  Widget _buildPartialFailedBody(AppLocalizations l10n) {
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: AbbaSpacing.xl),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(
+              Icons.cloud_off_outlined,
+              size: 40,
+              color: AbbaColors.muted,
+              semanticLabel: l10n.dashboardPartialFailedQt,
+            ),
+            const SizedBox(height: AbbaSpacing.md),
+            Text(
+              l10n.dashboardPartialFailedQt,
+              style: AbbaTypography.body.copyWith(color: AbbaColors.warmBrown),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: AbbaSpacing.sm),
+            Text(
+              l10n.dashboardPartialFailedHint,
+              style: AbbaTypography.bodySmall.copyWith(
+                color: AbbaColors.muted,
+              ),
+              textAlign: TextAlign.center,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  /// Phase A2 — inline indicator placed where the missing tier's cards
+  /// would render. Smaller, in-flow version of [_buildPartialFailedBody].
+  Widget _inlinePartialFailed(AppLocalizations l10n) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(
+        horizontal: AbbaSpacing.md,
+        vertical: AbbaSpacing.md,
+      ),
+      child: Container(
+        padding: const EdgeInsets.all(AbbaSpacing.md),
+        decoration: BoxDecoration(
+          color: AbbaColors.cream,
+          borderRadius: BorderRadius.circular(AbbaRadius.md),
+          border: Border.all(color: AbbaColors.muted.withValues(alpha: 0.3)),
+        ),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Icon(Icons.cloud_off_outlined, size: 20, color: AbbaColors.muted),
+            const SizedBox(width: AbbaSpacing.sm),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    l10n.dashboardPartialFailedQt,
+                    style: AbbaTypography.bodySmall.copyWith(
+                      color: AbbaColors.warmBrown,
+                    ),
+                  ),
+                  const SizedBox(height: AbbaSpacing.xs),
+                  Text(
+                    l10n.dashboardPartialFailedHint,
+                    style: AbbaTypography.caption.copyWith(
+                      color: AbbaColors.muted,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 
@@ -109,6 +198,13 @@ class _QtDashboardViewState extends ConsumerState<QtDashboardView> {
         (sections.knowledge!.historicalContext.isNotEmpty ||
             sections.knowledge!.crossReferences.isNotEmpty ||
             sections.knowledge!.originalWord != null);
+
+    // Phase A2 — show inline partial-failed indicator when T2 failed AND
+    // neither the Application nor Related Knowledge cards arrived. If even
+    // one T2 card landed before failure, we render that card; the indicator
+    // appears only when the entire tier is missing.
+    final t2Failed = sections.sectionStatus['t2'] == 'failed';
+    final showT2InlineFailed = t2Failed && !hasApplication && !hasKnowledge;
 
     int i = 0;
     return ListView(
@@ -165,6 +261,9 @@ class _QtDashboardViewState extends ConsumerState<QtDashboardView> {
               crossReferencesLabel: l10n.crossReferencesLabel,
             ),
           ),
+        // Phase A2 — T2 partial-failed inline indicator (occupies the slot
+        // where Application + Related Knowledge would have rendered).
+        if (showT2InlineFailed) _inlinePartialFailed(l10n),
         StaggeredFadeIn(
           index: i++,
           child: Padding(

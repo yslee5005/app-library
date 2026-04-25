@@ -1379,4 +1379,16 @@ class AppLocalizationsSk extends AppLocalizations {
 
   @override
   String get recordingInterruptedSwitchToText => 'Write as text instead';
+
+  @override
+  String get dashboardPartialFailedQt =>
+      'Časť obsahu meditácie sa nepodarilo načítať. Začnite, prosím, novú meditáciu.';
+
+  @override
+  String get dashboardPartialFailedPrayer =>
+      'Časť analýzy modlitby sa nepodarilo načítať. Začnite, prosím, novú modlitbu.';
+
+  @override
+  String get dashboardPartialFailedHint =>
+      'Čo je už uložené, zostáva zachované.';
 }

@@ -1383,4 +1383,16 @@ class AppLocalizationsRo extends AppLocalizations {
 
   @override
   String get recordingInterruptedSwitchToText => 'Write as text instead';
+
+  @override
+  String get dashboardPartialFailedQt =>
+      'O parte din conținutul meditației nu a putut fi încărcată. Începeți o nouă meditație.';
+
+  @override
+  String get dashboardPartialFailedPrayer =>
+      'O parte din analiza rugăciunii nu a putut fi încărcată. Începeți o nouă rugăciune.';
+
+  @override
+  String get dashboardPartialFailedHint =>
+      'Ceea ce este deja salvat rămâne păstrat.';
 }

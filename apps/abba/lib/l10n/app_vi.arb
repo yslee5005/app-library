@@ -575,5 +575,8 @@
   "recordingInterruptedTitle": "Bản ghi cầu nguyện của bạn đã bị gián đoạn",
   "recordingInterruptedBody": "Khi bạn đi vắng, bản ghi đã dừng. Bạn muốn làm gì?",
   "recordingInterruptedRestart": "Bắt đầu lại ghi âm",
-  "recordingInterruptedSwitchToText": "Viết bằng văn bản"
+  "recordingInterruptedSwitchToText": "Viết bằng văn bản",
+  "dashboardPartialFailedQt": "Không thể tải một phần nội dung suy gẫm. Vui lòng bắt đầu một bài suy gẫm mới.",
+  "dashboardPartialFailedPrayer": "Không thể tải một phần phân tích lời cầu nguyện. Vui lòng bắt đầu một lời cầu nguyện mới.",
+  "dashboardPartialFailedHint": "Nội dung đã lưu vẫn được giữ nguyên."
 }

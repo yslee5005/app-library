@@ -575,5 +575,8 @@
   "recordingInterruptedTitle": "Your prayer recording was interrupted",
   "recordingInterruptedBody": "While you were away, the recording stopped. What would you like to do?",
   "recordingInterruptedRestart": "Restart recording",
-  "recordingInterruptedSwitchToText": "Write as text instead"
+  "recordingInterruptedSwitchToText": "Write as text instead",
+  "dashboardPartialFailedQt": "တရားရှုမှတ်ခြင်းအကြောင်းအရာအချို့ကို ဆွဲတင်၍ မရပါ။ ကျေးဇူးပြု၍ တရားရှုမှတ်ခြင်းအသစ်ကို စတင်ပါ။",
+  "dashboardPartialFailedPrayer": "ဆုတောင်းခြင်းခွဲခြမ်းစိတ်ဖြာမှုအချို့ကို ဆွဲတင်၍ မရပါ။ ကျေးဇူးပြု၍ ဆုတောင်းခြင်းအသစ်ကို စတင်ပါ။",
+  "dashboardPartialFailedHint": "သိမ်းဆည်းပြီးသားအကြောင်းအရာများ ဆက်လက်ထိန်းသိမ်းထားပါသည်။"
 }

@@ -575,5 +575,8 @@
   "recordingInterruptedTitle": "Dua kaydınız kesintiye uğradı",
   "recordingInterruptedBody": "Siz yokken kayıt durdu. Ne yapmak istersiniz?",
   "recordingInterruptedRestart": "Kaydı yeniden başlat",
-  "recordingInterruptedSwitchToText": "Metin olarak yaz"
+  "recordingInterruptedSwitchToText": "Metin olarak yaz",
+  "dashboardPartialFailedQt": "Tefekkür içeriğinin bir kısmı yüklenemedi. Lütfen yeni bir tefekküre başlayın.",
+  "dashboardPartialFailedPrayer": "Dua analizinin bir kısmı yüklenemedi. Lütfen yeni bir duaya başlayın.",
+  "dashboardPartialFailedHint": "Daha önce kaydedilenler korunur."
 }

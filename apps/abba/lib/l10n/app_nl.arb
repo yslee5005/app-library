@@ -575,5 +575,8 @@
   "recordingInterruptedTitle": "Je gebedsopname is onderbroken",
   "recordingInterruptedBody": "Terwijl je weg was, is de opname gestopt. Wat wil je doen?",
   "recordingInterruptedRestart": "Opname opnieuw starten",
-  "recordingInterruptedSwitchToText": "Schrijf als tekst"
+  "recordingInterruptedSwitchToText": "Schrijf als tekst",
+  "dashboardPartialFailedQt": "Een deel van de meditatie kon niet worden geladen. Begin een nieuwe meditatie.",
+  "dashboardPartialFailedPrayer": "Een deel van de gebedsanalyse kon niet worden geladen. Begin een nieuw gebed.",
+  "dashboardPartialFailedHint": "Wat al is opgeslagen, blijft bewaard."
 }

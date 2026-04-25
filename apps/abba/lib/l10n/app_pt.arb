@@ -575,5 +575,8 @@
   "recordingInterruptedTitle": "Sua gravação de oração foi interrompida",
   "recordingInterruptedBody": "Enquanto você estava ausente, a gravação parou. O que você gostaria de fazer?",
   "recordingInterruptedRestart": "Reiniciar gravação",
-  "recordingInterruptedSwitchToText": "Escrever como texto"
+  "recordingInterruptedSwitchToText": "Escrever como texto",
+  "dashboardPartialFailedQt": "Não foi possível carregar parte do conteúdo de meditação. Inicie uma nova meditação.",
+  "dashboardPartialFailedPrayer": "Não foi possível carregar parte da análise de oração. Inicie uma nova oração.",
+  "dashboardPartialFailedHint": "O que já foi salvo é mantido."
 }

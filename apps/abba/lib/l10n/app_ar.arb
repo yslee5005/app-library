@@ -575,5 +575,8 @@
   "recordingInterruptedTitle": "تم انقطاع تسجيل صلاتك",
   "recordingInterruptedBody": "أثناء غيابك، توقف التسجيل. ماذا تريد أن تفعل؟",
   "recordingInterruptedRestart": "إعادة بدء التسجيل",
-  "recordingInterruptedSwitchToText": "الكتابة كنص"
+  "recordingInterruptedSwitchToText": "الكتابة كنص",
+  "dashboardPartialFailedQt": "تعذّر تحميل بعض محتوى التأمل. يرجى بدء تأمل جديد.",
+  "dashboardPartialFailedPrayer": "تعذّر تحميل بعض تحليل الصلاة. يرجى بدء صلاة جديدة.",
+  "dashboardPartialFailedHint": "ما تم حفظه يبقى محفوظًا."
 }

@@ -550,7 +550,10 @@ class _CalendarViewState extends ConsumerState<CalendarView> {
       // reads from one source regardless of entry path.
       ref.read(qtSectionsProvider.notifier)
         ..reset()
-        ..setAllFromResult(prayer.qtResult!);
+        ..setAllFromResult(
+          prayer.qtResult!,
+          sectionStatus: prayer.sectionStatus,
+        );
       context.push('/home/qt-dashboard');
       return;
     }
@@ -564,7 +567,10 @@ class _CalendarViewState extends ConsumerState<CalendarView> {
     // reads from one source regardless of entry path (streaming vs. revisit).
     ref.read(prayerSectionsProvider.notifier)
       ..reset()
-      ..setAllFromResult(prayer.result!);
+      ..setAllFromResult(
+        prayer.result!,
+        sectionStatus: prayer.sectionStatus,
+      );
     context.push('/home/prayer-dashboard');
   }
 }

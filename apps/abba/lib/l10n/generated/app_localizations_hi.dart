@@ -1371,4 +1371,16 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get recordingInterruptedSwitchToText => 'टेक्स्ट के रूप में लिखें';
+
+  @override
+  String get dashboardPartialFailedQt =>
+      'ध्यान की कुछ सामग्री लोड नहीं हो सकी। कृपया नया ध्यान शुरू करें।';
+
+  @override
+  String get dashboardPartialFailedPrayer =>
+      'प्रार्थना विश्लेषण का कुछ भाग लोड नहीं हो सका। कृपया नई प्रार्थना शुरू करें।';
+
+  @override
+  String get dashboardPartialFailedHint =>
+      'जो पहले से सहेजा गया है वह सुरक्षित रहता है।';
 }

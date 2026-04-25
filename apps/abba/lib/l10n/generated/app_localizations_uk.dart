@@ -1373,4 +1373,15 @@ class AppLocalizationsUk extends AppLocalizations {
 
   @override
   String get recordingInterruptedSwitchToText => 'Write as text instead';
+
+  @override
+  String get dashboardPartialFailedQt =>
+      'Не вдалося завантажити частину змісту роздумів. Розпочніть новий роздум.';
+
+  @override
+  String get dashboardPartialFailedPrayer =>
+      'Не вдалося завантажити частину аналізу молитви. Розпочніть нову молитву.';
+
+  @override
+  String get dashboardPartialFailedHint => 'Уже збережене залишається.';
 }
