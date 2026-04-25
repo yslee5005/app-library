@@ -213,7 +213,8 @@ void main() {
     );
 
     test('startPrayerStream: TierT1ScriptureRef resolves completer with '
-        'placeholder summary + stashes reference', () async {
+        'placeholder summary BUT does NOT leak unvalidated reference into '
+        'user-visible state (Wave B B2)', () async {
       final repo = _RecordingRepo();
       final controller = StreamController<TierResult>();
       final t1Completer = Completer<TierT1Result>();
@@ -231,10 +232,53 @@ void main() {
       // the subsequent TierT1Result.
       expect(arrived.summary.gratitude, isEmpty);
       expect(arrived.scripture.reference, 'Matthew 6:33');
-      expect(notifier.state.scripture?.reference, 'Matthew 6:33');
-      expect(notifier.state.scripture?.verse, isEmpty);
+      // B2 — candidate ref is held internally; UI state must NOT see it
+      // until validation completes.
+      expect(notifier.state.scripture, isNull);
+      expect(notifier.debugScriptureRefCandidate(), 'Matthew 6:33');
       // ScriptureRef is a pre-persist signal; no RPC call yet.
       expect(repo.calls, isEmpty);
+      await controller.close();
+    });
+
+    test('startPrayerStream: candidate ref is cleared and replaced with '
+        'validated scripture when TierT1Result arrives (Wave B B2)', () async {
+      final repo = _RecordingRepo();
+      final controller = StreamController<TierResult>();
+      final t1Completer = Completer<TierT1Result>();
+
+      notifier.startPrayerStream(
+        stream: controller.stream,
+        repo: repo,
+        prayerId: 'p2',
+        t1Completer: t1Completer,
+      );
+
+      controller.add(const TierT1ScriptureRef('Romans 8:28'));
+      await t1Completer.future;
+      expect(notifier.debugScriptureRefCandidate(), 'Romans 8:28');
+      expect(notifier.state.scripture, isNull);
+
+      controller.add(
+        TierT1Result(
+          summary: const PrayerSummary(
+            gratitude: ['g'],
+            petition: [],
+            intercession: [],
+          ),
+          // Note: validated scripture also includes verse text.
+          scripture: const Scripture(
+            reference: 'Romans 8:28',
+            verse: 'And we know that all things work together for good...',
+          ),
+        ),
+      );
+      await Future<void>.delayed(Duration.zero);
+
+      // Promotion: candidate cleared, state.scripture has validated verse.
+      expect(notifier.debugScriptureRefCandidate(), isNull);
+      expect(notifier.state.scripture?.reference, 'Romans 8:28');
+      expect(notifier.state.scripture?.verse, isNotEmpty);
       await controller.close();
     });
 

@@ -193,6 +193,17 @@ class QtTier1Analyzer {
     buf.writeln('Locale: $locale (respond in ${_localeName(locale)})');
     if (userName.isNotEmpty) buf.writeln('User name: $userName');
     buf.writeln();
+    buf.writeln('GROUNDING (★ critical):');
+    buf.writeln(
+      '- Every factual claim must be supported by the user\'s own words below.',
+    );
+    buf.writeln(
+      '- Do NOT invent ownership, relationships, locations, or outcomes the user did not state.',
+    );
+    buf.writeln(
+      '- When grammar is ambiguous, prefer the target language\'s natural indefinite reference rather than picking one interpretation as fact.',
+    );
+    buf.writeln();
     buf.writeln('Today\'s QT passage reference: $passageRef');
     buf.writeln('NOTE: the QT passage reference above is a localized DISPLAY reference (the user-facing card label). It may be in any locale, including non-English book names. Do NOT copy it into your output as-is.');
     buf.writeln();

@@ -53,10 +53,18 @@ class _ScriptureCardState extends State<ScriptureCard> {
       );
     }
 
+    // B2 — only surface the reference in the collapsed header AFTER bundle
+    // validation populates `verse`. While `verse` is empty (mid-stream
+    // candidate or bundle-missing fallback), keep the header empty so the
+    // user never sees an unvalidated reference flash.
+    final headerSummary = scripture.verse.isNotEmpty
+        ? scripture.reference
+        : '';
+
     return ExpandableCard(
       icon: '📜',
       title: widget.title,
-      summary: scripture.reference,
+      summary: headerSummary,
       initiallyExpanded: widget.initiallyExpanded,
       expandedContent: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

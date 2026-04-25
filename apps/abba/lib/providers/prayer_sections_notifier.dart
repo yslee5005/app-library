@@ -86,9 +86,22 @@ class PrayerSectionsNotifier extends StateNotifier<PrayerSectionsState> {
 
   StreamSubscription<TierResult>? _sub;
 
+  /// Phase 4.2 Wave B (B2) — pre-validation scripture reference holding area.
+  /// SSE regex emits the candidate ref ~2-3s into generation, BEFORE
+  /// `Tier1Analyzer._validateScripture` has confirmed it against the local
+  /// Bible bundle. We must not leak an unvalidated (possibly hallucinated)
+  /// reference into the user-visible state. Promotion to `state.scripture`
+  /// happens only when the full TierT1Result arrives (validation done).
+  String? _scriptureRefCandidate;
+
+  /// @visibleForTesting — exposed for assertions on the candidate buffer
+  /// without leaking it through public state.
+  String? debugScriptureRefCandidate() => _scriptureRefCandidate;
+
   void reset() {
     _sub?.cancel();
     _sub = null;
+    _scriptureRefCandidate = null;
     state = const PrayerSectionsState();
   }
 
@@ -140,13 +153,14 @@ class PrayerSectionsNotifier extends StateNotifier<PrayerSectionsState> {
     state = state.copyWith(t3Triggered: true);
   }
 
-  /// Phase 4.2 Phase C — stash a placeholder Scripture (reference only,
-  /// verse empty) so the Dashboard can render the Scripture card with a
-  /// "finding verse…" state as soon as SSE regex catches the reference.
-  void setScriptureRef(String reference) {
-    final existing = state.scripture;
-    if (existing != null && existing.verse.isNotEmpty) return;
-    state = state.copyWith(scripture: Scripture(reference: reference));
+  /// Phase 4.2 Wave B (B2) — internal: stash the candidate reference WITHOUT
+  /// promoting it to `state.scripture`. The candidate must remain hidden
+  /// from the UI until `Tier1Analyzer._validateScripture` has confirmed it
+  /// against the local Bible bundle (otherwise an unvalidated/hallucinated
+  /// ref could briefly render in the Dashboard scripture card header).
+  void _setCandidateRef(String reference) {
+    if (state.scripture != null && state.scripture!.verse.isNotEmpty) return;
+    _scriptureRefCandidate = reference;
   }
 
   /// Phase 4.1 INT-027 / 4.2 Phase C — subscribe to a tiered Gemini stream.
@@ -172,7 +186,10 @@ class PrayerSectionsNotifier extends StateNotifier<PrayerSectionsState> {
       (tier) async {
         switch (tier) {
           case TierT1ScriptureRef ref:
-            setScriptureRef(ref.reference);
+            // B2 — keep the candidate ref OFF user-visible state until the
+            // full T1 result (validated scripture) arrives. The completer
+            // still resolves so navigation can unblock.
+            _setCandidateRef(ref.reference);
             if (!t1Completer.isCompleted) {
               t1Completer.complete(
                 TierT1Result(
@@ -186,6 +203,9 @@ class PrayerSectionsNotifier extends StateNotifier<PrayerSectionsState> {
               );
             }
           case TierT1Result t1:
+            // B2 — promote validated scripture to user-visible state and
+            // clear the candidate (ref already inside t1.scripture).
+            _scriptureRefCandidate = null;
             setT1(summary: t1.summary, scripture: t1.scripture);
             if (!t1Completer.isCompleted) t1Completer.complete(t1);
             await _persistTier(repo, prayerId, 't1', {

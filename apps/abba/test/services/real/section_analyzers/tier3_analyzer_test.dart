@@ -46,9 +46,12 @@ void main() {
         'guidance': {'content': 'take a small step', 'is_premium': true},
         'ai_prayer': {'text': 'Father...', 'citations': [], 'is_premium': true},
         'historical_story': {
-          'title': 'Müller',
+          // Wave B (B4) — sanitizer now requires the FULL whitelist anchor
+          // (e.g. "George Müller"), not the standalone "müller" surname,
+          // because the standalone form admitted unrelated names.
+          'title': 'George Müller',
           'reference': 'Bristol, 1830s',
-          'summary': 's',
+          'summary': 'George Müller cared for orphans by faith.',
           'lesson': 'l',
           'is_premium': true,
         },
@@ -57,7 +60,7 @@ void main() {
       expect(out.guidance, isNotNull);
       expect(out.aiPrayer, isNotNull);
       expect(out.historicalStory, isNotNull);
-      expect(out.historicalStory!.title, 'Müller');
+      expect(out.historicalStory!.title, 'George Müller');
     });
 
     test('partial (only guidance) is allowed', () {

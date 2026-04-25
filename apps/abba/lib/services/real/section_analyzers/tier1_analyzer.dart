@@ -215,6 +215,17 @@ class Tier1Analyzer {
     buf.writeln('Locale: $locale (respond in ${_localeName(locale)})');
     if (userName.isNotEmpty) buf.writeln('User name: $userName');
     buf.writeln();
+    buf.writeln('GROUNDING (★ critical):');
+    buf.writeln(
+      '- Every factual claim must be supported by the user\'s own words below.',
+    );
+    buf.writeln(
+      '- Do NOT invent ownership, relationships, locations, or outcomes the user did not state.',
+    );
+    buf.writeln(
+      '- When grammar is ambiguous, prefer the target language\'s natural indefinite reference rather than picking one interpretation as fact.',
+    );
+    buf.writeln();
     buf.writeln('User prayer transcript:');
     buf.writeln('"""');
     buf.writeln(transcript);
@@ -274,7 +285,12 @@ class Tier1Analyzer {
   @visibleForTesting
   Scripture stripPostureQuotesForTest(Scripture s) => _stripPostureQuotes(s);
 
-  static final RegExp _postureQuoteRegex = RegExp(r'''['"‘’“”「」『』]''');
+  // B4 — extended to cover additional CJK/European quote glyphs the model
+  // sometimes leaks into `posture`: guillemets («»), German low quotes
+  // („‚), and Japanese book/dialogue marks (〝〞〟).
+  static final RegExp _postureQuoteRegex = RegExp(
+    r'''['"‘’“”「」『』«»„‚〝〞〟]''',
+  );
 
   Scripture _stripPostureQuotes(Scripture s) {
     if (s.posture.isEmpty) return s;

@@ -40,6 +40,22 @@ HistoricalStory? sanitizeHistoricalStory(HistoricalStory s) {
     );
     return null;
   }
+
+  // Wave B (B4) — historical-fabrication BAD-1 pattern: an authoritative-
+  // sounding "in <year> in <Capitalized place>" date stamp. If a story
+  // carries this stamp but lacks any strict full-name whitelist anchor
+  // (i.e. only loose substring matches like " calvin" inside an unrelated
+  // town name fired the gate above), drop it. Pattern is case-sensitive
+  // by design so it runs against the ORIGINAL `title + summary`, not the
+  // lowercased haystack.
+  final original = '${s.title} ${s.summary}';
+  if (_historicalDateStampRegex.hasMatch(original) &&
+      !_strictChurchHistoryAnchors.any((a) => haystack.contains(a))) {
+    apiLog.warning(
+      '[T3-filter] historical_story dropped — date-stamp pattern without strict whitelist anchor (title="${s.title}")',
+    );
+    return null;
+  }
   return s;
 }
 
@@ -98,29 +114,74 @@ const List<String> _churchHistoryWhitelist = <String>[
   'bonhoeffer',
   'george müller',
   'george muller',
-  'müller',
-  'muller',
+  // B4 — removed standalone 'müller' / 'muller' (matched countless unrelated
+  // names) and standalone 'moravian' (admitted fabricated anecdotes). Use
+  // anchored forms only.
   'hudson taylor',
   'corrie ten boom',
   'c.s. lewis',
   'c. s. lewis',
   'billy graham',
   'amy carmichael',
-  'moravian',
+  'moravian brethren',
+  'moravian missions',
   // Korean
   '주기철',
   '손양원',
   '한경직',
 ];
 
+/// Strict full-name anchors used by the BAD-1 date-stamp defense.
+/// A subset of [_churchHistoryWhitelist] limited to unambiguous full names
+/// (no leading-space substring tricks). If a story carries a "in 1547 in
+/// Wittenberg" style date stamp we require one of these to appear, so a
+/// hallucinated 16th-century narrative cannot piggy-back on " calvin" /
+/// " luther" substring matches against unrelated towns.
+const List<String> _strictChurchHistoryAnchors = <String>[
+  'augustine',
+  'martin luther',
+  'john calvin',
+  'john wesley',
+  'charles spurgeon',
+  'spurgeon',
+  'dietrich bonhoeffer',
+  'bonhoeffer',
+  'george müller',
+  'george muller',
+  'hudson taylor',
+  'corrie ten boom',
+  'c.s. lewis',
+  'c. s. lewis',
+  'billy graham',
+  'amy carmichael',
+  'moravian brethren',
+  'moravian missions',
+  '주기철',
+  '손양원',
+  '한경직',
+];
+
+/// BAD-1 historical-fabrication pattern: "In 1547 in Wittenberg" — an
+/// authoritative-sounding date + place stamp. We treat this as a red flag
+/// when no strict whitelist anchor is present. The leading "in"/"In" is
+/// matched explicitly (handles sentence-starts); the place must be a
+/// capital ASCII letter so it looks like a real toponym.
+final RegExp _historicalDateStampRegex = RegExp(r'[Ii]n 1\d{3} in [A-Z]');
+
 const List<String> _vagueReferencePatterns = <String>[
   'some time ago',
   'in the church history',
   'in history',
   'a long time ago',
+  // B4 — additional vague phrases historians actually never write.
+  'centuries ago',
+  'during the reformation',
   '오래전',
   '과거에',
   '예전에',
+  '옛날에',
+  '수세기 전',
+  '초대교회 시절',
 ];
 
 /// Patterns associated with fabricated or misattributed citations.
@@ -130,9 +191,21 @@ const List<String> _citationBadPatterns = <String>[
   'scientists say',
   'studies have shown',
   'according to research',
+  // B4 — additional generic-attribution patterns that flag
+  // hallucination-by-default ("research says…" with no source).
+  'research suggests',
+  'studies indicate',
+  'studies suggest',
+  'experts say',
+  'experts agree',
+  'data shows',
+  'as research shows',
   '연구에 따르면',
   '최근 연구',
   '과학자들은',
+  '전문가들에 따르면',
+  '한 연구에서',
+  '전문가에 따르면',
   // Common misattribution red flags — Einstein/Gandhi quotes online are
   // overwhelmingly fabricated without primary-source attribution.
   'einstein said',

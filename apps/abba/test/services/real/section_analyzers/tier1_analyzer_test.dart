@@ -1,3 +1,4 @@
+import 'package:abba/models/prayer.dart';
 import 'package:abba/services/ai_analysis_exception.dart';
 import 'package:abba/services/bible_text_service.dart';
 import 'package:abba/services/gemini_cache_manager.dart';
@@ -172,6 +173,42 @@ void main() {
       expect(out.scripture.originalWords.length, 1);
       expect(out.scripture.originalWords.single.transliteration, 'vayehi');
     });
+
+    test('GROUNDING block present in user prompt (Wave B B1)', () {
+      final a = build();
+      final prompt = a.buildUserPromptForTest(
+        transcript: 'I am thankful',
+        locale: 'en',
+        userName: 'Yong',
+      );
+      expect(prompt, contains('GROUNDING (★ critical):'));
+      expect(prompt, contains("user's own words"));
+      expect(prompt, contains('Do NOT invent ownership'));
+      expect(prompt, contains('grammar is ambiguous'));
+      // Order check — GROUNDING must come BEFORE the transcript.
+      final groundingIdx = prompt.indexOf('GROUNDING');
+      final transcriptIdx = prompt.indexOf('User prayer transcript:');
+      expect(groundingIdx, lessThan(transcriptIdx));
+    });
+
+    test(
+      'stripPostureQuotes removes guillemets / German low quotes / '
+      'Japanese book marks (Wave B B4)',
+      () {
+        final a = build();
+        // Stress every newly-added glyph in one shot. After stripping the
+        // posture should be a clean ASCII text.
+        final dirty = Scripture(
+          reference: 'Psalm 1:1',
+          posture: '«verse» „quote" 〝Japanese〟 ‚single‚',
+        );
+        final cleaned = a.stripPostureQuotesForTest(dirty);
+        for (final glyph in const ['«', '»', '„', '‚', '〝', '〟']) {
+          expect(cleaned.posture.contains(glyph), isFalse,
+              reason: 'glyph "$glyph" should be stripped');
+        }
+      },
+    );
 
     test('missing optional fields default to empty strings', () {
       final a = build();
