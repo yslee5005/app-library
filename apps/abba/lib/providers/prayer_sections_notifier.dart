@@ -258,6 +258,17 @@ class PrayerSectionsNotifier extends StateNotifier<PrayerSectionsState> {
             });
           case TierFailed f:
             setTierFailed(f.tier, f.error);
+            // Phase A1 — persist the per-tier failure to DB section_status
+            // so the dashboard can render an inline indicator on revisit.
+            // Best-effort fire-and-forget: in-memory state is already
+            // updated above; DB write is an additional layer.
+            unawaited(
+              repo.markTierFailed(
+                prayerId: prayerId,
+                tier: f.tier,
+                errorKind: f.error.kind.name,
+              ),
+            );
             if (f.tier == 't1' && !t1Completer.isCompleted) {
               t1Completer.completeError(f.error);
             }

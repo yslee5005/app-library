@@ -38,6 +38,27 @@ abstract class PrayerRepository {
     required Map<String, dynamic> sectionData,
   });
 
+  /// Phase A1 — record per-tier partial failure (T2/T3) in
+  /// `abba.prayers.section_status` JSONB without flipping `ai_status`.
+  /// Called from the notifier stream listener when a `TierFailed` event
+  /// arrives. The dashboard reads section_status to render an inline
+  /// "분석 일부를 불러오지 못했어요" indicator on revisit.
+  ///
+  /// Recovery: a subsequent successful [updateTierResult] for the same
+  /// tier overwrites the 'failed' value via the JSONB `||` operator —
+  /// no extra reset call needed.
+  ///
+  /// [tier] must be 't1', 't2', or 't3'.
+  /// [errorKind] is an opaque tag (e.g., AiAnalysisFailureKind.name) used
+  /// only for logging; the DB just records 'failed' state.
+  ///
+  /// Best-effort: implementations log on failure but never throw.
+  Future<void> markTierFailed({
+    required String prayerId,
+    required String tier,
+    required String errorKind,
+  });
+
   Future<List<Prayer>> getPrayersByDate(DateTime date);
   Future<List<Prayer>> getPrayersByMonth(int year, int month);
   Future<Prayer?> getLatestPrayer();

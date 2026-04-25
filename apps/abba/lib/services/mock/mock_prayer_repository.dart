@@ -107,6 +107,19 @@ class MockPrayerRepository implements PrayerRepository {
   }
 
   @override
+  Future<void> markTierFailed({
+    required String prayerId,
+    required String tier,
+    required String errorKind,
+  }) async {
+    // Mock: no-op. The notifier's in-memory `failedTiers` map already
+    // reflects the failure; mock prayers carry no persistent
+    // `section_status` — Phase A1 partial-failed UI is verified against
+    // the real (Supabase) repository in integration tests.
+    await _ensureInitialized();
+  }
+
+  @override
   Future<List<Prayer>> getPrayersByDate(DateTime date) async {
     await _ensureInitialized();
     return _prayers

@@ -1,3 +1,4 @@
+import 'package:app_lib_logging/logging.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../models/prayer.dart';
@@ -111,6 +112,34 @@ class SupabasePrayerRepository implements PrayerRepository {
         'p_section_data': sectionData,
       },
     );
+  }
+
+  @override
+  Future<void> markTierFailed({
+    required String prayerId,
+    required String tier,
+    required String errorKind,
+  }) async {
+    // Phase A1 — best-effort: in-memory failedTiers already reflects the
+    // failure for the current session. DB persistence is an additional
+    // layer so the dashboard can show the partial-failed state on revisit.
+    // Errors are logged but never propagated.
+    try {
+      await _abba.rpc(
+        'mark_tier_failed',
+        params: {
+          'p_prayer_id': prayerId,
+          'p_tier': tier,
+          'p_error_kind': errorKind,
+        },
+      );
+    } catch (e, st) {
+      prayerLog.error(
+        'mark_tier_failed RPC failed prayerId=$prayerId tier=$tier kind=$errorKind',
+        error: e,
+        stackTrace: st,
+      );
+    }
   }
 
   @override
