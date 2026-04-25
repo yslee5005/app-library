@@ -56,6 +56,13 @@ class Prayer {
   /// 10-minute cooldown). Null = never retried server-side.
   final DateTime? lastRetryAt;
 
+  /// Phase 4.1 — per-tier completion tracking from `abba.prayers.section_status`
+  /// JSONB. Keys: 't1' | 't2' | 't3'. Values: 'pending' | 'completed' |
+  /// 'failed' | 'not_applicable'. Empty map for legacy rows / fresh inserts
+  /// before any tier persists. Read by dashboard views to render inline
+  /// partial-failed indicators (Phase A1+A2).
+  final Map<String, String> sectionStatus;
+
   const Prayer({
     required this.id,
     required this.userId,
@@ -70,6 +77,7 @@ class Prayer {
     this.qtResult,
     this.aiStatus = PrayerAiStatus.completed,
     this.lastRetryAt,
+    this.sectionStatus = const {},
   });
 
   factory Prayer.fromJson(Map<String, dynamic> json) {
@@ -92,6 +100,18 @@ class Prayer {
     }
 
     final lastRetryRaw = json['last_retry_at'];
+
+    // Phase 4.1 — section_status JSONB → Map<String,String>. Coerces any
+    // non-string value to its string form so legacy/edge-case rows can't
+    // crash fromJson. Empty map for legacy rows that pre-date Phase 4.1.
+    final sectionStatusRaw = json['section_status'];
+    Map<String, String> sectionStatus = const {};
+    if (sectionStatusRaw is Map) {
+      sectionStatus = sectionStatusRaw.map(
+        (k, v) => MapEntry(k.toString(), v?.toString() ?? ''),
+      );
+    }
+
     return Prayer(
       id: json['id'] as String,
       userId: json['user_id'] as String,
@@ -106,6 +126,7 @@ class Prayer {
       qtResult: qtResult,
       aiStatus: _parseAiStatus(json['ai_status']),
       lastRetryAt: lastRetryRaw is String ? DateTime.parse(lastRetryRaw) : null,
+      sectionStatus: sectionStatus,
     );
   }
 }
