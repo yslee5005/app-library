@@ -8,10 +8,8 @@ import '../config/supabase_config.dart';
 /// ensuring multi-tenant data isolation at the application level.
 /// RLS policies provide the actual security layer at the database level.
 class AppSupabaseClient {
-  AppSupabaseClient({
-    required this.config,
-    required SupabaseClient client,
-  }) : _client = client;
+  AppSupabaseClient({required this.config, required SupabaseClient client})
+    : _client = client;
 
   final SupabaseConfig config;
   final SupabaseClient _client;
@@ -36,10 +34,11 @@ class AppSupabaseClient {
     String table,
     Map<String, dynamic> data,
   ) {
-    return _client.from(table).insert({
-      ...data,
-      'app_id': appId,
-    }).select().single();
+    return _client
+        .from(table)
+        .insert({...data, 'app_id': appId})
+        .select()
+        .single();
   }
 
   /// Update a row in a table (app_id scoping via RLS).
@@ -60,20 +59,11 @@ class AppSupabaseClient {
     String functionName, {
     Map<String, dynamic>? params,
   }) {
-    return _client.rpc(
-      functionName,
-      params: {
-        'p_app_id': appId,
-        ...?params,
-      },
-    );
+    return _client.rpc(functionName, params: {'p_app_id': appId, ...?params});
   }
 
   /// Initialize Supabase Flutter. Call once in main.dart.
   static Future<void> initialize(SupabaseConfig config) async {
-    await Supabase.initialize(
-      url: config.url,
-      anonKey: config.anonKey,
-    );
+    await Supabase.initialize(url: config.url, anonKey: config.anonKey);
   }
 }

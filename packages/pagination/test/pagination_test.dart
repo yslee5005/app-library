@@ -33,10 +33,7 @@ void main() {
     });
 
     test('loaded state without optional fields', () {
-      const state = PaginationLoaded<String>(
-        items: ['a'],
-        hasMore: false,
-      );
+      const state = PaginationLoaded<String>(items: ['a'], hasMore: false);
       expect(state.cursor, isNull);
       expect(state.totalCount, isNull);
     });
@@ -70,10 +67,7 @@ void main() {
         totalCount: 10,
       );
 
-      const nextPage = PaginatedResult<String>(
-        items: ['b'],
-        hasMore: false,
-      );
+      const nextPage = PaginatedResult<String>(items: ['b'], hasMore: false);
 
       final newState = state.appendPage(nextPage);
       expect(newState.totalCount, 10);
@@ -176,10 +170,7 @@ class _MockPaginatedRepository implements PaginatedRepository<String> {
     PaginationParams params,
   ) async {
     return const Result.success(
-      PaginatedResult(
-        items: ['item1', 'item2'],
-        hasMore: false,
-      ),
+      PaginatedResult(items: ['item1', 'item2'], hasMore: false),
     );
   }
 }

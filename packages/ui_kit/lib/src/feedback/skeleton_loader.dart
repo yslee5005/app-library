@@ -71,13 +71,20 @@ class _SkeletonLoaderState extends State<SkeletonLoader>
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final effectiveBaseColor = widget.baseColor ?? theme.colorScheme.surfaceContainerHighest;
-    final effectiveHighlightColor = widget.highlightColor ?? theme.colorScheme.surfaceContainerLow;
+    final effectiveBaseColor =
+        widget.baseColor ?? theme.colorScheme.surfaceContainerHighest;
+    final effectiveHighlightColor =
+        widget.highlightColor ?? theme.colorScheme.surfaceContainerLow;
 
     return AnimatedBuilder(
       animation: _animation,
       builder: (context, _) {
-        final color = Color.lerp(effectiveBaseColor, effectiveHighlightColor, _animation.value)!;
+        final color =
+            Color.lerp(
+              effectiveBaseColor,
+              effectiveHighlightColor,
+              _animation.value,
+            )!;
         return switch (widget.shape) {
           SkeletonShape.rectangle => _rectangle(color),
           SkeletonShape.circle => _circle(color),
@@ -114,13 +121,12 @@ class _SkeletonLoaderState extends State<SkeletonLoader>
       children: List.generate(widget.lineCount, (i) {
         final isLast = i == widget.lineCount - 1;
         return Padding(
-          padding: EdgeInsets.only(
-            bottom: isLast ? 0 : AppSpacing.sm,
-          ),
+          padding: EdgeInsets.only(bottom: isLast ? 0 : AppSpacing.sm),
           child: Container(
-            width: isLast
-                ? (widget.width ?? double.infinity) * 0.6
-                : widget.width ?? double.infinity,
+            width:
+                isLast
+                    ? (widget.width ?? double.infinity) * 0.6
+                    : widget.width ?? double.infinity,
             height: widget.height ?? 14,
             decoration: BoxDecoration(
               color: color,

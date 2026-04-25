@@ -26,7 +26,11 @@ class StreakCalculator {
     }
 
     final lastDate = current.lastActivityDate!;
-    final lastDateNormalized = DateTime(lastDate.year, lastDate.month, lastDate.day);
+    final lastDateNormalized = DateTime(
+      lastDate.year,
+      lastDate.month,
+      lastDate.day,
+    );
     final diff = todayDate.difference(lastDateNormalized).inDays;
 
     if (diff == 0) {
@@ -55,10 +59,6 @@ class StreakCalculator {
     }
 
     // Streak broken — reset
-    return Streak(
-      current: 1,
-      best: current.best,
-      lastActivityDate: todayDate,
-    );
+    return Streak(current: 1, best: current.best, lastActivityDate: todayDate);
   }
 }

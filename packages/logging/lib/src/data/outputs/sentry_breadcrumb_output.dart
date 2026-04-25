@@ -35,8 +35,8 @@ class SentryBreadcrumbOutput implements LogOutput {
   }
 
   static ErrorLevel _toErrorLevel(LogLevel level) => switch (level) {
-        LogLevel.error => ErrorLevel.error,
-        LogLevel.warning => ErrorLevel.warning,
-        _ => ErrorLevel.info,
-      };
+    LogLevel.error => ErrorLevel.error,
+    LogLevel.warning => ErrorLevel.warning,
+    _ => ErrorLevel.info,
+  };
 }

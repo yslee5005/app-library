@@ -45,8 +45,7 @@ class _GuideViewState extends State<GuideView> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(height: 16),
-              Text('가이드',
-                  style: Theme.of(context).textTheme.headlineMedium),
+              Text('가이드', style: Theme.of(context).textTheme.headlineMedium),
               const SizedBox(height: 8),
               Text(
                 '나이 맞춤 건강 관리 가이드',
@@ -72,12 +71,10 @@ class _GuideViewState extends State<GuideView> {
 
   Widget _buildHealthChecklistSection() {
     final age = _profile?.ageYears ?? 0;
-    final isSenior =
-        age >= (_breedInfo?.seniorAge ?? 7);
+    final isSenior = age >= (_breedInfo?.seniorAge ?? 7);
 
     final checklist = <_CheckItem>[
-      _CheckItem('기본 건강검진', isSenior ? '연 2회' : '연 1회',
-          '혈액검사, 신체검사, 체중 측정'),
+      _CheckItem('기본 건강검진', isSenior ? '연 2회' : '연 1회', '혈액검사, 신체검사, 체중 측정'),
       _CheckItem('치과 검진', '연 1회', '치석 제거, 치주 질환 확인'),
       _CheckItem('예방접종', '매년', 'DHPP, 광견병, 보르데텔라'),
       _CheckItem('심장사상충 예방', '매월', '월 1회 예방약 투여'),
@@ -97,9 +94,7 @@ class _GuideViewState extends State<GuideView> {
       icon: Icons.checklist,
       subtitle: isSenior ? '시니어 강화 검진 포함' : null,
       child: Column(
-        children: checklist
-            .map((item) => _buildCheckItem(item))
-            .toList(),
+        children: checklist.map((item) => _buildCheckItem(item)).toList(),
       ),
     );
   }
@@ -117,40 +112,49 @@ class _GuideViewState extends State<GuideView> {
       title: '예방접종 스케줄',
       icon: Icons.vaccines,
       child: Column(
-        children: schedules.map((s) {
-          return Padding(
-            padding: const EdgeInsets.only(bottom: 12),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(
-                  width: 80,
-                  child: Text(
-                    s.timing,
-                    style: TextStyle(
-                      color: AppConfig.accentColor,
-                      fontSize: 13,
-                      fontWeight: FontWeight.w600,
+        children:
+            schedules.map((s) {
+              return Padding(
+                padding: const EdgeInsets.only(bottom: 12),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      width: 80,
+                      child: Text(
+                        s.timing,
+                        style: TextStyle(
+                          color: AppConfig.accentColor,
+                          fontSize: 13,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
                     ),
-                  ),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            s.name,
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 14,
+                            ),
+                          ),
+                          Text(
+                            s.description,
+                            style: const TextStyle(
+                              color: Colors.white54,
+                              fontSize: 12,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(s.name,
-                          style: const TextStyle(
-                              color: Colors.white, fontSize: 14)),
-                      Text(s.description,
-                          style: const TextStyle(
-                              color: Colors.white54, fontSize: 12)),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          );
-        }).toList(),
+              );
+            }).toList(),
       ),
     );
   }
@@ -199,11 +203,7 @@ class _GuideViewState extends State<GuideView> {
             '5분 × 월령 (예: 3개월 = 15분)',
             '뼈와 관절이 아직 발달 중이므로 과도한 운동은 금지',
           ),
-          _buildGuideItem(
-            '성견 (1-7세)',
-            '견종별 권장량 준수',
-            '산책 + 놀이 + 훈련을 적절히 배분',
-          ),
+          _buildGuideItem('성견 (1-7세)', '견종별 권장량 준수', '산책 + 놀이 + 훈련을 적절히 배분'),
           _buildGuideItem(
             '시니어 (7세+)',
             '성견의 50-75%로 감소',
@@ -215,8 +215,7 @@ class _GuideViewState extends State<GuideView> {
   }
 
   Widget _buildDietSection() {
-    final isSenior =
-        (_profile?.ageYears ?? 0) >= (_breedInfo?.seniorAge ?? 7);
+    final isSenior = (_profile?.ageYears ?? 0) >= (_breedInfo?.seniorAge ?? 7);
 
     return _buildSection(
       title: isSenior ? '시니어 식이 가이드' : '식이 가이드',
@@ -225,32 +224,16 @@ class _GuideViewState extends State<GuideView> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           if (isSenior) ...[
-            _buildGuideItem(
-              '단백질',
-              '고품질 단백질 25% 이상',
-              '근육량 유지를 위해 단백질 비중을 높이세요',
-            ),
-            _buildGuideItem(
-              '칼로리',
-              '성견 대비 20-30% 감소',
-              '활동량 감소에 맞춰 비만을 방지하세요',
-            ),
+            _buildGuideItem('단백질', '고품질 단백질 25% 이상', '근육량 유지를 위해 단백질 비중을 높이세요'),
+            _buildGuideItem('칼로리', '성견 대비 20-30% 감소', '활동량 감소에 맞춰 비만을 방지하세요'),
             _buildGuideItem(
               '관절 보조제',
               '글루코사민 + 콘드로이틴',
               '관절 건강을 위해 수의사와 상담 후 추가',
             ),
-            _buildGuideItem(
-              '오메가-3',
-              'EPA/DHA 보충',
-              '인지 기능 유지와 염증 감소에 도움',
-            ),
+            _buildGuideItem('오메가-3', 'EPA/DHA 보충', '인지 기능 유지와 염증 감소에 도움'),
           ] else ...[
-            _buildGuideItem(
-              '급여 횟수',
-              '성견 1일 2회',
-              '규칙적인 식사 시간을 유지하세요',
-            ),
+            _buildGuideItem('급여 횟수', '성견 1일 2회', '규칙적인 식사 시간을 유지하세요'),
             _buildGuideItem(
               '적정 체중',
               _breedInfo?.weightKg != null
@@ -291,16 +274,8 @@ class _GuideViewState extends State<GuideView> {
             '하루 5-10분',
             '기존 명령 복습 + 새 트릭 학습. "사용하지 않으면 잃는다"',
           ),
-          _buildGuideItem(
-            '사회적 상호작용',
-            '다른 강아지/사람과의 교류',
-            '사회화는 정신 건강에 매우 중요합니다',
-          ),
-          _buildGuideItem(
-            '퍼즐 장난감',
-            '인터랙티브 피더',
-            '식사 시간에 퍼즐 피더를 사용하여 두뇌 자극',
-          ),
+          _buildGuideItem('사회적 상호작용', '다른 강아지/사람과의 교류', '사회화는 정신 건강에 매우 중요합니다'),
+          _buildGuideItem('퍼즐 장난감', '인터랙티브 피더', '식사 시간에 퍼즐 피더를 사용하여 두뇌 자극'),
         ],
       ),
     );
@@ -321,15 +296,15 @@ class _GuideViewState extends State<GuideView> {
           children: [
             Icon(icon, color: AppConfig.accentColor, size: 22),
             const SizedBox(width: 8),
-            Text(title,
-                style: Theme.of(context).textTheme.titleLarge),
+            Text(title, style: Theme.of(context).textTheme.titleLarge),
           ],
         ),
         if (subtitle != null) ...[
           const SizedBox(height: 4),
-          Text(subtitle,
-              style: TextStyle(
-                  color: AppConfig.accentColor, fontSize: 12)),
+          Text(
+            subtitle,
+            style: TextStyle(color: AppConfig.accentColor, fontSize: 12),
+          ),
         ],
         const SizedBox(height: 12),
         child,
@@ -349,8 +324,7 @@ class _GuideViewState extends State<GuideView> {
             height: 20,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(4),
-              border: Border.all(
-                  color: Colors.white.withValues(alpha: 0.3)),
+              border: Border.all(color: Colors.white.withValues(alpha: 0.3)),
             ),
           ),
           const SizedBox(width: 12),
@@ -360,19 +334,24 @@ class _GuideViewState extends State<GuideView> {
               children: [
                 Row(
                   children: [
-                    Text(item.title,
-                        style: const TextStyle(
-                            color: Colors.white, fontSize: 14)),
+                    Text(
+                      item.title,
+                      style: const TextStyle(color: Colors.white, fontSize: 14),
+                    ),
                     const SizedBox(width: 8),
-                    Text(item.frequency,
-                        style: TextStyle(
-                            color: AppConfig.accentColor,
-                            fontSize: 12)),
+                    Text(
+                      item.frequency,
+                      style: TextStyle(
+                        color: AppConfig.accentColor,
+                        fontSize: 12,
+                      ),
+                    ),
                   ],
                 ),
-                Text(item.description,
-                    style: const TextStyle(
-                        color: Colors.white54, fontSize: 12)),
+                Text(
+                  item.description,
+                  style: const TextStyle(color: Colors.white54, fontSize: 12),
+                ),
               ],
             ),
           ),
@@ -381,8 +360,7 @@ class _GuideViewState extends State<GuideView> {
     );
   }
 
-  Widget _buildGuideItem(
-      String title, String value, String description) {
+  Widget _buildGuideItem(String title, String value, String description) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 12),
       child: GlassCard(
@@ -393,21 +371,25 @@ class _GuideViewState extends State<GuideView> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(title,
-                    style: const TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w600,
-                        fontSize: 14)),
-                Text(value,
-                    style: TextStyle(
-                        color: AppConfig.accentColor,
-                        fontSize: 13)),
+                Text(
+                  title,
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w600,
+                    fontSize: 14,
+                  ),
+                ),
+                Text(
+                  value,
+                  style: TextStyle(color: AppConfig.accentColor, fontSize: 13),
+                ),
               ],
             ),
             const SizedBox(height: 4),
-            Text(description,
-                style: const TextStyle(
-                    color: Colors.white54, fontSize: 12)),
+            Text(
+              description,
+              style: const TextStyle(color: Colors.white54, fontSize: 12),
+            ),
           ],
         ),
       ),

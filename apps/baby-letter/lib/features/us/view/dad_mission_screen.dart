@@ -59,8 +59,10 @@ class _DadMissionScreenState extends State<DadMissionScreen> {
             padding: const EdgeInsets.only(right: 16),
             child: Center(
               child: Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 10,
+                  vertical: 4,
+                ),
                 decoration: BoxDecoration(
                   color: AppColors.coral.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(12),
@@ -68,9 +70,9 @@ class _DadMissionScreenState extends State<DadMissionScreen> {
                 child: Text(
                   '이번 주 미션 3개',
                   style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                        color: AppColors.coral,
-                        fontWeight: FontWeight.w600,
-                      ),
+                    color: AppColors.coral,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
               ),
             ),
@@ -131,11 +133,11 @@ class _DadMissionScreenState extends State<DadMissionScreen> {
                         const SizedBox(width: 8),
                         Text(
                           '이번 달 미션 현황',
-                          style:
-                              Theme.of(context).textTheme.titleMedium?.copyWith(
-                                    color: AppColors.textPrimary,
-                                    fontWeight: FontWeight.w600,
-                                  ),
+                          style: Theme.of(context).textTheme.titleMedium
+                              ?.copyWith(
+                                color: AppColors.textPrimary,
+                                fontWeight: FontWeight.w600,
+                              ),
                         ),
                       ],
                     ),
@@ -148,7 +150,8 @@ class _DadMissionScreenState extends State<DadMissionScreen> {
                         value: (8 + _completedCount) / 12,
                         backgroundColor: AppColors.surfaceVariant,
                         valueColor: const AlwaysStoppedAnimation<Color>(
-                            AppColors.coral),
+                          AppColors.coral,
+                        ),
                         minHeight: 10,
                       ),
                     ),
@@ -159,10 +162,8 @@ class _DadMissionScreenState extends State<DadMissionScreen> {
                       children: [
                         Text(
                           '완료 ${8 + _completedCount}/12 (${((8 + _completedCount) / 12 * 100).round()}%)',
-                          style:
-                              Theme.of(context).textTheme.bodyMedium?.copyWith(
-                                    color: AppColors.textSecondary,
-                                  ),
+                          style: Theme.of(context).textTheme.bodyMedium
+                              ?.copyWith(color: AppColors.textSecondary),
                         ),
                         // 배지
                         if ((8 + _completedCount) >= 10)
@@ -178,14 +179,14 @@ class _DadMissionScreenState extends State<DadMissionScreen> {
                             child: Row(
                               mainAxisSize: MainAxisSize.min,
                               children: [
-                                const Text('🏅',
-                                    style: TextStyle(fontSize: 14)),
+                                const Text(
+                                  '🏅',
+                                  style: TextStyle(fontSize: 14),
+                                ),
                                 const SizedBox(width: 4),
                                 Text(
                                   '슈퍼 아빠',
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .labelSmall
+                                  style: Theme.of(context).textTheme.labelSmall
                                       ?.copyWith(
                                         color: AppColors.amberDark,
                                         fontWeight: FontWeight.w700,
@@ -245,14 +246,10 @@ class _MissionCard extends StatelessWidget {
         width: double.infinity,
         padding: const EdgeInsets.all(20),
         decoration: BoxDecoration(
-          color: isCompleted
-              ? AppColors.successLight
-              : AppColors.surface,
+          color: isCompleted ? AppColors.successLight : AppColors.surface,
           borderRadius: BorderRadius.circular(16),
           border: isCompleted
-              ? Border.all(
-                  color: AppColors.success.withValues(alpha: 0.3),
-                )
+              ? Border.all(color: AppColors.success.withValues(alpha: 0.3))
               : null,
         ),
         child: Column(
@@ -267,12 +264,12 @@ class _MissionCard extends StatelessWidget {
                   child: Text(
                     mission.title,
                     style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                          color: AppColors.textPrimary,
-                          fontWeight: FontWeight.w600,
-                          decoration: isCompleted
-                              ? TextDecoration.lineThrough
-                              : null,
-                        ),
+                      color: AppColors.textPrimary,
+                      fontWeight: FontWeight.w600,
+                      decoration: isCompleted
+                          ? TextDecoration.lineThrough
+                          : null,
+                    ),
                   ),
                 ),
                 const Icon(
@@ -290,9 +287,9 @@ class _MissionCard extends StatelessWidget {
               child: Text(
                 mission.description,
                 style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                      color: AppColors.textSecondary,
-                      height: 1.4,
-                    ),
+                  color: AppColors.textSecondary,
+                  height: 1.4,
+                ),
               ),
             ),
             const SizedBox(height: 10),
@@ -317,11 +314,10 @@ class _MissionCard extends StatelessWidget {
                     Flexible(
                       child: Text(
                         mission.babyComment,
-                        style:
-                            Theme.of(context).textTheme.bodySmall?.copyWith(
-                                  color: AppColors.textPrimary,
-                                  fontStyle: FontStyle.italic,
-                                ),
+                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                          color: AppColors.textPrimary,
+                          fontStyle: FontStyle.italic,
+                        ),
                       ),
                     ),
                   ],
@@ -366,13 +362,13 @@ class _MissionCard extends StatelessWidget {
                     Text(
                       isCompleted ? '완료!' : '완료하기',
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                            color: isCompleted
-                                ? AppColors.success
-                                : AppColors.textSecondary,
-                            fontWeight: isCompleted
-                                ? FontWeight.w600
-                                : FontWeight.normal,
-                          ),
+                        color: isCompleted
+                            ? AppColors.success
+                            : AppColors.textSecondary,
+                        fontWeight: isCompleted
+                            ? FontWeight.w600
+                            : FontWeight.normal,
+                      ),
                     ),
                   ],
                 ),

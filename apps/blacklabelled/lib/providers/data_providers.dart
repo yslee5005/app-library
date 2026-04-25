@@ -51,4 +51,3 @@ final furnitureByIdProvider = FutureProvider.family<Furniture?, String>((
 final magazinesProvider = FutureProvider<List<Magazine>>((ref) {
   return ref.watch(magazineRepositoryProvider).getAll();
 });
-

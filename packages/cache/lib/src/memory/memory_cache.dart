@@ -36,10 +36,7 @@ class MemoryCache implements CacheInterface {
       _store.remove(_store.keys.first);
     }
 
-    _store[key] = CacheEntry<Object>(
-      value: value as Object,
-      ttl: ttl,
-    );
+    _store[key] = CacheEntry<Object>(value: value as Object, ttl: ttl);
   }
 
   @override

@@ -23,23 +23,21 @@ void main() {
     });
 
     testWidgets('is disabled when onPressed is null', (tester) async {
-      await tester.pumpWidget(
-        buildApp(const AppButton(label: 'Disabled')),
-      );
+      await tester.pumpWidget(buildApp(const AppButton(label: 'Disabled')));
       final button = tester.widget<FilledButton>(find.byType(FilledButton));
       expect(button.onPressed, isNull);
     });
 
     testWidgets('shows loading indicator when isLoading', (tester) async {
       await tester.pumpWidget(
-        buildApp(
-          AppButton(label: 'Save', isLoading: true, onPressed: () {}),
-        ),
+        buildApp(AppButton(label: 'Save', isLoading: true, onPressed: () {})),
       );
       expect(find.byType(CircularProgressIndicator), findsOneWidget);
     });
 
-    testWidgets('renders as OutlinedButton for outline variant', (tester) async {
+    testWidgets('renders as OutlinedButton for outline variant', (
+      tester,
+    ) async {
       await tester.pumpWidget(
         buildApp(
           AppButton(
@@ -67,13 +65,7 @@ void main() {
 
     testWidgets('renders icon when provided', (tester) async {
       await tester.pumpWidget(
-        buildApp(
-          AppButton(
-            label: 'Add',
-            icon: Icons.add,
-            onPressed: () {},
-          ),
-        ),
+        buildApp(AppButton(label: 'Add', icon: Icons.add, onPressed: () {})),
       );
       expect(find.byIcon(Icons.add), findsOneWidget);
       expect(find.text('Add'), findsOneWidget);

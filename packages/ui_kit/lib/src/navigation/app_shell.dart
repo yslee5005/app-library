@@ -73,15 +73,16 @@ class AppShell extends StatelessWidget {
         children: tabs.map((tab) => tab.body).toList(),
       ),
       bottomNavigationBar: AppBottomNavBar(
-        items: tabs
-            .map(
-              (tab) => AppBottomNavItem(
-                icon: tab.icon,
-                activeIcon: tab.activeIcon,
-                label: tab.label,
-              ),
-            )
-            .toList(),
+        items:
+            tabs
+                .map(
+                  (tab) => AppBottomNavItem(
+                    icon: tab.icon,
+                    activeIcon: tab.activeIcon,
+                    label: tab.label,
+                  ),
+                )
+                .toList(),
         currentIndex: currentIndex,
         onTap: onTabChanged,
       ),

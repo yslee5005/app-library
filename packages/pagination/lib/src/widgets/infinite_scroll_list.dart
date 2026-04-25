@@ -98,9 +98,11 @@ class _InfiniteScrollListState<T> extends State<InfiniteScrollList<T>> {
   Widget build(BuildContext context) {
     return switch (widget.state) {
       PaginationInitial() =>
-        widget.loadingWidget ?? const Center(child: CircularProgressIndicator()),
+        widget.loadingWidget ??
+            const Center(child: CircularProgressIndicator()),
       PaginationLoading(:final items) when items.isEmpty =>
-        widget.loadingWidget ?? const Center(child: CircularProgressIndicator()),
+        widget.loadingWidget ??
+            const Center(child: CircularProgressIndicator()),
       PaginationError(:final exception, :final items) when items.isEmpty =>
         widget.errorWidget?.call(exception) ??
             Center(child: Text('Error: $exception')),
@@ -136,8 +138,8 @@ class _InfiniteScrollListState<T> extends State<InfiniteScrollList<T>> {
       padding: widget.padding,
       physics: widget.physics ?? const AlwaysScrollableScrollPhysics(),
       itemCount: itemCount,
-      separatorBuilder: widget.separatorBuilder ??
-          (_, __) => const SizedBox.shrink(),
+      separatorBuilder:
+          widget.separatorBuilder ?? (_, __) => const SizedBox.shrink(),
       itemBuilder: (context, index) {
         if (index < items.length) {
           return widget.itemBuilder(context, items[index]);
@@ -159,10 +161,7 @@ class _InfiniteScrollListState<T> extends State<InfiniteScrollList<T>> {
     );
 
     if (widget.onRefresh != null) {
-      list = RefreshIndicator(
-        onRefresh: widget.onRefresh!,
-        child: list,
-      );
+      list = RefreshIndicator(onRefresh: widget.onRefresh!, child: list);
     }
 
     return list;

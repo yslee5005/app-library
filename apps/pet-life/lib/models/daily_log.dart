@@ -25,9 +25,10 @@ class DailyLog {
       date: json['date'] as String,
       routineId: json['routineId'] as String,
       completed: json['completed'] as bool,
-      completedAt: json['completedAt'] != null
-          ? DateTime.parse(json['completedAt'] as String)
-          : null,
+      completedAt:
+          json['completedAt'] != null
+              ? DateTime.parse(json['completedAt'] as String)
+              : null,
     );
   }
 

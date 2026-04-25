@@ -244,10 +244,7 @@ void main() {
 
   group('CommentFilter', () {
     test('constructs with required fields and defaults', () {
-      const filter = CommentFilter(
-        contentType: 'post',
-        contentId: 'p1',
-      );
+      const filter = CommentFilter(contentType: 'post', contentId: 'p1');
 
       expect(filter.contentType, 'post');
       expect(filter.contentId, 'p1');
@@ -273,10 +270,7 @@ void main() {
     });
 
     test('copyWith replaces specified fields', () {
-      const original = CommentFilter(
-        contentType: 'post',
-        contentId: 'p1',
-      );
+      const original = CommentFilter(contentType: 'post', contentId: 'p1');
 
       final updated = original.copyWith(
         sortBy: CommentSortBy.oldest,
@@ -290,10 +284,7 @@ void main() {
     });
 
     test('toString includes key fields', () {
-      const filter = CommentFilter(
-        contentType: 'post',
-        contentId: 'p1',
-      );
+      const filter = CommentFilter(contentType: 'post', contentId: 'p1');
 
       final str = filter.toString();
       expect(str, contains('post'));
@@ -432,9 +423,7 @@ class _MockCommentRepository implements CommentRepository {
     required PaginationParams params,
     String? currentUserId,
   }) async {
-    return const Result.success(
-      PaginatedResult(items: [], hasMore: false),
-    );
+    return const Result.success(PaginatedResult(items: [], hasMore: false));
   }
 
   @override

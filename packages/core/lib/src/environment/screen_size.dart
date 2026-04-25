@@ -42,25 +42,25 @@ enum ScreenSize {
 
   /// Number of grid columns recommended for this size.
   int get columns => switch (this) {
-        compact => 4,
-        medium => 8,
-        expanded => 12,
-        large => 12,
-      };
+    compact => 4,
+    medium => 8,
+    expanded => 12,
+    large => 12,
+  };
 
   /// Recommended content max width (0 = fill).
   double get maxContentWidth => switch (this) {
-        compact => double.infinity,
-        medium => double.infinity,
-        expanded => 840,
-        large => 1040,
-      };
+    compact => double.infinity,
+    medium => double.infinity,
+    expanded => 840,
+    large => 1040,
+  };
 
   /// Recommended horizontal padding.
   double get horizontalPadding => switch (this) {
-        compact => 16,
-        medium => 24,
-        expanded => 24,
-        large => 32,
-      };
+    compact => 16,
+    medium => 24,
+    expanded => 24,
+    large => 32,
+  };
 }

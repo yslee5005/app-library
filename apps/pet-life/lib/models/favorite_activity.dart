@@ -41,7 +41,10 @@ class FavoriteActivity {
   /// User-friendly frequency display
   String get frequencyDisplay {
     if (userFrequency <= 0) return '';
-    final num = userFrequency % 1 == 0 ? userFrequency.toInt().toString() : userFrequency.toStringAsFixed(1);
+    final num =
+        userFrequency % 1 == 0
+            ? userFrequency.toInt().toString()
+            : userFrequency.toStringAsFixed(1);
     return switch (frequencyUnit) {
       'weekly' => '주 $num회',
       'yearly' => '연 $num회',
@@ -124,17 +127,17 @@ class FavoriteActivity {
   }
 
   Map<String, dynamic> toJson() => {
-        'id': id,
-        'name': name,
-        'emoji': emoji,
-        'maxAgeAvailable': maxAgeAvailable,
-        'reason': reason,
-        'frequencyPerMonth': frequencyPerMonth,
-        'userFrequency': userFrequency,
-        'frequencyUnit': frequencyUnit,
-        'seasonUnit': seasonUnit,
-        'seasonsPerYear': seasonsPerYear,
-      };
+    'id': id,
+    'name': name,
+    'emoji': emoji,
+    'maxAgeAvailable': maxAgeAvailable,
+    'reason': reason,
+    'frequencyPerMonth': frequencyPerMonth,
+    'userFrequency': userFrequency,
+    'frequencyUnit': frequencyUnit,
+    'seasonUnit': seasonUnit,
+    'seasonsPerYear': seasonsPerYear,
+  };
 
   factory FavoriteActivity.fromJson(Map<String, dynamic> json) {
     return FavoriteActivity(
@@ -151,10 +154,7 @@ class FavoriteActivity {
     );
   }
 
-  FavoriteActivity copyWith({
-    double? userFrequency,
-    String? frequencyUnit,
-  }) {
+  FavoriteActivity copyWith({double? userFrequency, String? frequencyUnit}) {
     return FavoriteActivity(
       id: id,
       name: name,
@@ -171,111 +171,111 @@ class FavoriteActivity {
 
   /// All available activities for selection
   static List<FavoriteActivity> get allActivities => const [
-        FavoriteActivity(
-          id: 'swimming',
-          name: '수영',
-          emoji: '🏊',
-          maxAgeAvailable: 10,
-          reason: '체력 저하로 수영이 어려워짐',
-          frequencyPerMonth: 2,
-          seasonUnit: '여름',
-          seasonsPerYear: 1,
-        ),
-        FavoriteActivity(
-          id: 'ball_play',
-          name: '공놀이',
-          emoji: '🎾',
-          maxAgeAvailable: 9,
-          reason: '관절 문제로 격한 놀이 제한',
-          frequencyPerMonth: 15,
-        ),
-        FavoriteActivity(
-          id: 'hiking',
-          name: '등산',
-          emoji: '🏔️',
-          maxAgeAvailable: 10,
-          reason: '장거리 보행이 어려워짐',
-          frequencyPerMonth: 2,
-          seasonUnit: '가을',
-          seasonsPerYear: 2,
-        ),
-        FavoriteActivity(
-          id: 'beach',
-          name: '해변',
-          emoji: '🏖️',
-          maxAgeAvailable: 11,
-          reason: '더위와 체력 부담',
-          frequencyPerMonth: 1,
-          seasonUnit: '여름',
-          seasonsPerYear: 1,
-        ),
-        FavoriteActivity(
-          id: 'dog_friends',
-          name: '새 친구 사귀기',
-          emoji: '🐕',
-          maxAgeAvailable: 8,
-          reason: '8세 이후 낯선 강아지에게 스트레스',
-          frequencyPerMonth: 4,
-        ),
-        FavoriteActivity(
-          id: 'car_ride',
-          name: '드라이브',
-          emoji: '🚗',
-          maxAgeAvailable: 12,
-          reason: '차멀미 증가, 장시간 탑승 어려움',
-          frequencyPerMonth: 4,
-        ),
-        FavoriteActivity(
-          id: 'camping',
-          name: '캠핑',
-          emoji: '⛺',
-          maxAgeAvailable: 10,
-          reason: '야외 환경 적응 어려움',
-          frequencyPerMonth: 1,
-          seasonUnit: '캠핑 시즌',
-          seasonsPerYear: 2,
-        ),
-        FavoriteActivity(
-          id: 'snow_play',
-          name: '눈놀이',
-          emoji: '❄️',
-          maxAgeAvailable: 10,
-          reason: '추위에 관절 악화, 체온 조절 어려움',
-          frequencyPerMonth: 1,
-          seasonUnit: '겨울',
-          seasonsPerYear: 1,
-        ),
-        FavoriteActivity(
-          id: 'training',
-          name: '훈련/학습',
-          emoji: '🎯',
-          maxAgeAvailable: 11,
-          reason: '인지 능력 저하로 새 학습 어려움',
-          frequencyPerMonth: 8,
-        ),
-        FavoriteActivity(
-          id: 'toy_play',
-          name: '장난감 놀이',
-          emoji: '🧸',
-          maxAgeAvailable: 10,
-          reason: '흥미 감소, 활동량 저하',
-          frequencyPerMonth: 20,
-        ),
-        FavoriteActivity(
-          id: 'massage',
-          name: '마사지',
-          emoji: '💆',
-          maxAgeAvailable: 15,
-          reason: '오히려 나이들수록 필요해요',
-          frequencyPerMonth: 8,
-        ),
-        FavoriteActivity(
-          id: 'running',
-          name: '달리기',
-          emoji: '🏃',
-          maxAgeAvailable: 8,
-          reason: '관절 부담, 심폐 기능 저하',
-          frequencyPerMonth: 8,
-        ),
-      ];
+    FavoriteActivity(
+      id: 'swimming',
+      name: '수영',
+      emoji: '🏊',
+      maxAgeAvailable: 10,
+      reason: '체력 저하로 수영이 어려워짐',
+      frequencyPerMonth: 2,
+      seasonUnit: '여름',
+      seasonsPerYear: 1,
+    ),
+    FavoriteActivity(
+      id: 'ball_play',
+      name: '공놀이',
+      emoji: '🎾',
+      maxAgeAvailable: 9,
+      reason: '관절 문제로 격한 놀이 제한',
+      frequencyPerMonth: 15,
+    ),
+    FavoriteActivity(
+      id: 'hiking',
+      name: '등산',
+      emoji: '🏔️',
+      maxAgeAvailable: 10,
+      reason: '장거리 보행이 어려워짐',
+      frequencyPerMonth: 2,
+      seasonUnit: '가을',
+      seasonsPerYear: 2,
+    ),
+    FavoriteActivity(
+      id: 'beach',
+      name: '해변',
+      emoji: '🏖️',
+      maxAgeAvailable: 11,
+      reason: '더위와 체력 부담',
+      frequencyPerMonth: 1,
+      seasonUnit: '여름',
+      seasonsPerYear: 1,
+    ),
+    FavoriteActivity(
+      id: 'dog_friends',
+      name: '새 친구 사귀기',
+      emoji: '🐕',
+      maxAgeAvailable: 8,
+      reason: '8세 이후 낯선 강아지에게 스트레스',
+      frequencyPerMonth: 4,
+    ),
+    FavoriteActivity(
+      id: 'car_ride',
+      name: '드라이브',
+      emoji: '🚗',
+      maxAgeAvailable: 12,
+      reason: '차멀미 증가, 장시간 탑승 어려움',
+      frequencyPerMonth: 4,
+    ),
+    FavoriteActivity(
+      id: 'camping',
+      name: '캠핑',
+      emoji: '⛺',
+      maxAgeAvailable: 10,
+      reason: '야외 환경 적응 어려움',
+      frequencyPerMonth: 1,
+      seasonUnit: '캠핑 시즌',
+      seasonsPerYear: 2,
+    ),
+    FavoriteActivity(
+      id: 'snow_play',
+      name: '눈놀이',
+      emoji: '❄️',
+      maxAgeAvailable: 10,
+      reason: '추위에 관절 악화, 체온 조절 어려움',
+      frequencyPerMonth: 1,
+      seasonUnit: '겨울',
+      seasonsPerYear: 1,
+    ),
+    FavoriteActivity(
+      id: 'training',
+      name: '훈련/학습',
+      emoji: '🎯',
+      maxAgeAvailable: 11,
+      reason: '인지 능력 저하로 새 학습 어려움',
+      frequencyPerMonth: 8,
+    ),
+    FavoriteActivity(
+      id: 'toy_play',
+      name: '장난감 놀이',
+      emoji: '🧸',
+      maxAgeAvailable: 10,
+      reason: '흥미 감소, 활동량 저하',
+      frequencyPerMonth: 20,
+    ),
+    FavoriteActivity(
+      id: 'massage',
+      name: '마사지',
+      emoji: '💆',
+      maxAgeAvailable: 15,
+      reason: '오히려 나이들수록 필요해요',
+      frequencyPerMonth: 8,
+    ),
+    FavoriteActivity(
+      id: 'running',
+      name: '달리기',
+      emoji: '🏃',
+      maxAgeAvailable: 8,
+      reason: '관절 부담, 심폐 기능 저하',
+      frequencyPerMonth: 8,
+    ),
+  ];
 }

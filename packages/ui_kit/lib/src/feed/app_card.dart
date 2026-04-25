@@ -92,11 +92,12 @@ class AppCard extends StatelessWidget {
       clipBehavior: Clip.antiAlias,
       elevation: elevation,
       color: backgroundColor,
-      shape: borderRadius != null
-          ? RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(borderRadius!),
-            )
-          : null,
+      shape:
+          borderRadius != null
+              ? RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(borderRadius!),
+              )
+              : null,
       child: InkWell(
         onTap: onTap,
         child: switch (layout) {
@@ -113,11 +114,7 @@ class AppCard extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         if (image != null)
-          SizedBox(
-            height: imageHeight,
-            width: double.infinity,
-            child: image,
-          ),
+          SizedBox(height: imageHeight, width: double.infinity, child: image),
         Padding(
           padding: padding ?? const EdgeInsets.all(AppSpacing.md),
           child: Row(
@@ -154,11 +151,7 @@ class AppCard extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          if (image != null)
-            SizedBox(
-              width: imageWidth,
-              child: image,
-            ),
+          if (image != null) SizedBox(width: imageWidth, child: image),
           Expanded(
             child: Padding(
               padding: padding ?? const EdgeInsets.all(AppSpacing.md),
@@ -202,7 +195,8 @@ class AppCard extends StatelessWidget {
           bottom: 0,
           child: DecoratedBox(
             decoration: BoxDecoration(
-              gradient: overlayGradient ??
+              gradient:
+                  overlayGradient ??
                   LinearGradient(
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
@@ -220,7 +214,8 @@ class AppCard extends StatelessWidget {
                 children: [
                   Text(
                     title,
-                    style: titleStyle ??
+                    style:
+                        titleStyle ??
                         theme.textTheme.titleMedium?.copyWith(
                           color: Colors.white,
                         ),

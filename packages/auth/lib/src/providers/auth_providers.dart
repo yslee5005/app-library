@@ -29,8 +29,9 @@ final authRepositoryProvider = Provider<AuthRepository>((ref) {
 ///
 /// Automatically resolves the initial auth state on build by checking
 /// for an existing session through [AuthRepository.getCurrentUser].
-final authNotifierProvider =
-    AsyncNotifierProvider<AuthNotifier, AuthState>(AuthNotifier.new);
+final authNotifierProvider = AsyncNotifierProvider<AuthNotifier, AuthState>(
+  AuthNotifier.new,
+);
 
 /// Async notifier that manages the [AuthState] lifecycle.
 ///
@@ -66,11 +67,11 @@ class AuthNotifier extends AsyncNotifier<AuthState> {
     state = switch (result) {
       Success(:final value) => AsyncData(Authenticated(user: value)),
       Failure(:final exception) => AsyncData(
-          AuthError(
-            message: exception.message,
-            code: exception is AuthException ? exception.code : null,
-          ),
+        AuthError(
+          message: exception.message,
+          code: exception is AuthException ? exception.code : null,
         ),
+      ),
     };
   }
 
@@ -81,11 +82,11 @@ class AuthNotifier extends AsyncNotifier<AuthState> {
     state = switch (result) {
       Success(:final value) => AsyncData(Authenticated(user: value)),
       Failure(:final exception) => AsyncData(
-          AuthError(
-            message: exception.message,
-            code: exception is AuthException ? exception.code : null,
-          ),
+        AuthError(
+          message: exception.message,
+          code: exception is AuthException ? exception.code : null,
         ),
+      ),
     };
   }
 
@@ -102,11 +103,11 @@ class AuthNotifier extends AsyncNotifier<AuthState> {
     state = switch (result) {
       Success(:final value) => AsyncData(Authenticated(user: value)),
       Failure(:final exception) => AsyncData(
-          AuthError(
-            message: exception.message,
-            code: exception is AuthException ? exception.code : null,
-          ),
+        AuthError(
+          message: exception.message,
+          code: exception is AuthException ? exception.code : null,
         ),
+      ),
     };
   }
 
@@ -125,11 +126,11 @@ class AuthNotifier extends AsyncNotifier<AuthState> {
     state = switch (result) {
       Success(:final value) => AsyncData(Authenticated(user: value)),
       Failure(:final exception) => AsyncData(
-          AuthError(
-            message: exception.message,
-            code: exception is AuthException ? exception.code : null,
-          ),
+        AuthError(
+          message: exception.message,
+          code: exception is AuthException ? exception.code : null,
         ),
+      ),
     };
   }
 
@@ -140,11 +141,11 @@ class AuthNotifier extends AsyncNotifier<AuthState> {
     state = switch (result) {
       Success(:final value) => AsyncData(Authenticated(user: value)),
       Failure(:final exception) => AsyncData(
-          AuthError(
-            message: exception.message,
-            code: exception is AuthException ? exception.code : null,
-          ),
+        AuthError(
+          message: exception.message,
+          code: exception is AuthException ? exception.code : null,
         ),
+      ),
     };
   }
 
@@ -155,11 +156,11 @@ class AuthNotifier extends AsyncNotifier<AuthState> {
     state = switch (result) {
       Success(:final value) => AsyncData(Authenticated(user: value)),
       Failure(:final exception) => AsyncData(
-          AuthError(
-            message: exception.message,
-            code: exception is AuthException ? exception.code : null,
-          ),
+        AuthError(
+          message: exception.message,
+          code: exception is AuthException ? exception.code : null,
         ),
+      ),
     };
   }
 
@@ -170,11 +171,11 @@ class AuthNotifier extends AsyncNotifier<AuthState> {
     state = switch (result) {
       Success(:final value) => AsyncData(Authenticated(user: value)),
       Failure(:final exception) => AsyncData(
-          AuthError(
-            message: exception.message,
-            code: exception is AuthException ? exception.code : null,
-          ),
+        AuthError(
+          message: exception.message,
+          code: exception is AuthException ? exception.code : null,
         ),
+      ),
     };
   }
 
@@ -184,18 +185,15 @@ class AuthNotifier extends AsyncNotifier<AuthState> {
     required String password,
   }) async {
     state = const AsyncLoading();
-    final result = await _repo.linkWithEmail(
-      email: email,
-      password: password,
-    );
+    final result = await _repo.linkWithEmail(email: email, password: password);
     state = switch (result) {
       Success(:final value) => AsyncData(Authenticated(user: value)),
       Failure(:final exception) => AsyncData(
-          AuthError(
-            message: exception.message,
-            code: exception is AuthException ? exception.code : null,
-          ),
+        AuthError(
+          message: exception.message,
+          code: exception is AuthException ? exception.code : null,
         ),
+      ),
     };
   }
 
@@ -206,11 +204,11 @@ class AuthNotifier extends AsyncNotifier<AuthState> {
     state = switch (result) {
       Success() => const AsyncData(Unauthenticated()),
       Failure(:final exception) => AsyncData(
-          AuthError(
-            message: exception.message,
-            code: exception is AuthException ? exception.code : null,
-          ),
+        AuthError(
+          message: exception.message,
+          code: exception is AuthException ? exception.code : null,
         ),
+      ),
     };
   }
 }

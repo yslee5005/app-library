@@ -32,9 +32,9 @@ class _TimelineNodeDetailScreenState extends State<TimelineNodeDetailScreen> {
         title: Text(
           'Week ${widget.weekNumber}',
           style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                color: AppColors.textPrimary,
-                fontWeight: FontWeight.w600,
-              ),
+            color: AppColors.textPrimary,
+            fontWeight: FontWeight.w600,
+          ),
         ),
       ),
       body: SingleChildScrollView(
@@ -62,8 +62,10 @@ class _TimelineNodeDetailScreenState extends State<TimelineNodeDetailScreen> {
                   const Text('👶', style: TextStyle(fontSize: 48)),
                   const SizedBox(height: 12),
                   Container(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 8,
+                    ),
                     decoration: BoxDecoration(
                       color: Colors.white.withValues(alpha: 0.8),
                       borderRadius: BorderRadius.circular(20),
@@ -71,9 +73,9 @@ class _TimelineNodeDetailScreenState extends State<TimelineNodeDetailScreen> {
                     child: Text(
                       '▶️ 탭하여 재생',
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                            color: AppColors.textPrimary,
-                            fontWeight: FontWeight.w500,
-                          ),
+                        color: AppColors.textPrimary,
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
                   ),
                 ],
@@ -95,14 +97,8 @@ class _TimelineNodeDetailScreenState extends State<TimelineNodeDetailScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      _MeasurementChip(
-                        icon: '📏',
-                        label: '약 30cm',
-                      ),
-                      _MeasurementChip(
-                        icon: '⚖️',
-                        label: '약 600g',
-                      ),
+                      _MeasurementChip(icon: '📏', label: '약 30cm'),
+                      _MeasurementChip(icon: '⚖️', label: '약 600g'),
                     ],
                   ),
                   const SizedBox(height: 16),
@@ -117,8 +113,8 @@ class _TimelineNodeDetailScreenState extends State<TimelineNodeDetailScreen> {
                       '옥수수 크기만 해요 🌽',
                       textAlign: TextAlign.center,
                       style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                            color: AppColors.textPrimary,
-                          ),
+                        color: AppColors.textPrimary,
+                      ),
                     ),
                   ),
                 ],
@@ -141,24 +137,15 @@ class _TimelineNodeDetailScreenState extends State<TimelineNodeDetailScreen> {
                   Text(
                     '🧠 이번 주 발달',
                     style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                          fontWeight: FontWeight.w600,
-                        ),
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
                   const SizedBox(height: 16),
-                  _DevelopmentItem(
-                    icon: '👁️',
-                    text: '눈꺼풀이 열리기 시작해요',
-                  ),
+                  _DevelopmentItem(icon: '👁️', text: '눈꺼풀이 열리기 시작해요'),
                   const SizedBox(height: 12),
-                  _DevelopmentItem(
-                    icon: '🌙',
-                    text: 'REM 수면이 시작돼요',
-                  ),
+                  _DevelopmentItem(icon: '🌙', text: 'REM 수면이 시작돼요'),
                   const SizedBox(height: 12),
-                  _DevelopmentItem(
-                    icon: '💡',
-                    text: '빛에 반응할 수 있어요',
-                  ),
+                  _DevelopmentItem(icon: '💡', text: '빛에 반응할 수 있어요'),
                 ],
               ),
             ),
@@ -190,9 +177,7 @@ class _TimelineNodeDetailScreenState extends State<TimelineNodeDetailScreen> {
                         Expanded(
                           child: Text(
                             letter.title,
-                            style: Theme.of(context)
-                                .textTheme
-                                .titleMedium
+                            style: Theme.of(context).textTheme.titleMedium
                                 ?.copyWith(
                                   fontWeight: FontWeight.w600,
                                   color: AppColors.textPrimary,
@@ -205,9 +190,9 @@ class _TimelineNodeDetailScreenState extends State<TimelineNodeDetailScreen> {
                     Text(
                       letter.message,
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                            color: AppColors.textPrimary,
-                            height: 1.6,
-                          ),
+                        color: AppColors.textPrimary,
+                        height: 1.6,
+                      ),
                     ),
                     const SizedBox(height: 16),
                     Container(
@@ -222,28 +207,26 @@ class _TimelineNodeDetailScreenState extends State<TimelineNodeDetailScreen> {
                         children: [
                           Text(
                             '과학적 근거',
-                            style:
-                                Theme.of(context).textTheme.labelSmall?.copyWith(
-                                      color: AppColors.textHint,
-                                      fontWeight: FontWeight.w600,
-                                    ),
+                            style: Theme.of(context).textTheme.labelSmall
+                                ?.copyWith(
+                                  color: AppColors.textHint,
+                                  fontWeight: FontWeight.w600,
+                                ),
                           ),
                           const SizedBox(height: 4),
                           Text(
                             letter.scientificBasis,
-                            style:
-                                Theme.of(context).textTheme.bodySmall?.copyWith(
-                                      color: AppColors.textSecondary,
-                                    ),
+                            style: Theme.of(context).textTheme.bodySmall
+                                ?.copyWith(color: AppColors.textSecondary),
                           ),
                           const SizedBox(height: 2),
                           Text(
                             letter.source,
-                            style:
-                                Theme.of(context).textTheme.bodySmall?.copyWith(
-                                      color: AppColors.textHint,
-                                      fontStyle: FontStyle.italic,
-                                    ),
+                            style: Theme.of(context).textTheme.bodySmall
+                                ?.copyWith(
+                                  color: AppColors.textHint,
+                                  fontStyle: FontStyle.italic,
+                                ),
                           ),
                         ],
                       ),
@@ -268,8 +251,8 @@ class _TimelineNodeDetailScreenState extends State<TimelineNodeDetailScreen> {
                   Text(
                     '👩\u200d⚕️ 이 시기 체크',
                     style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                          fontWeight: FontWeight.w600,
-                        ),
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
                   const SizedBox(height: 12),
                   _ChecklistItem(
@@ -310,9 +293,9 @@ class _TimelineNodeDetailScreenState extends State<TimelineNodeDetailScreen> {
                   Text(
                     '참고 자료',
                     style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                          color: AppColors.textHint,
-                          fontWeight: FontWeight.w600,
-                        ),
+                      color: AppColors.textHint,
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
                   const SizedBox(height: 8),
                   Text(
@@ -320,9 +303,9 @@ class _TimelineNodeDetailScreenState extends State<TimelineNodeDetailScreen> {
                     '• Khan et al., Semin Fetal Neonatal Med, 2004\n'
                     '• Birnholz, 1981',
                     style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          color: AppColors.textHint,
-                          height: 1.5,
-                        ),
+                      color: AppColors.textHint,
+                      height: 1.5,
+                    ),
                   ),
                 ],
               ),
@@ -351,9 +334,9 @@ class _MeasurementChip extends StatelessWidget {
         Text(
           label,
           style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                fontWeight: FontWeight.w600,
-                color: AppColors.textPrimary,
-              ),
+            fontWeight: FontWeight.w600,
+            color: AppColors.textPrimary,
+          ),
         ),
       ],
     );
@@ -375,9 +358,9 @@ class _DevelopmentItem extends StatelessWidget {
         Expanded(
           child: Text(
             text,
-            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  color: AppColors.textPrimary,
-                ),
+            style: Theme.of(
+              context,
+            ).textTheme.bodyMedium?.copyWith(color: AppColors.textPrimary),
           ),
         ),
       ],
@@ -404,9 +387,9 @@ class _ChecklistItem extends StatelessWidget {
       title: Text(
         label,
         style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-              color: AppColors.textPrimary,
-              decoration: checked ? TextDecoration.lineThrough : null,
-            ),
+          color: AppColors.textPrimary,
+          decoration: checked ? TextDecoration.lineThrough : null,
+        ),
       ),
       activeColor: AppColors.coral,
       contentPadding: EdgeInsets.zero,

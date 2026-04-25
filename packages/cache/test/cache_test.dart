@@ -57,11 +57,7 @@ void main() {
     });
 
     test('returns null for expired entry', () {
-      cache.set<String>(
-        'key',
-        'value',
-        ttl: Duration.zero,
-      );
+      cache.set<String>('key', 'value', ttl: Duration.zero);
       // Immediately expired
       expect(cache.get<String>('key'), isNull);
     });
@@ -114,11 +110,10 @@ void main() {
     test('stores different types', () {
       cache.set<int>('number', 42, ttl: const Duration(minutes: 1));
       cache.set<bool>('flag', true, ttl: const Duration(minutes: 1));
-      cache.set<List<String>>(
-        'list',
-        ['a', 'b'],
-        ttl: const Duration(minutes: 1),
-      );
+      cache.set<List<String>>('list', [
+        'a',
+        'b',
+      ], ttl: const Duration(minutes: 1));
 
       expect(cache.get<int>('number'), 42);
       expect(cache.get<bool>('flag'), isTrue);
@@ -138,11 +133,7 @@ void main() {
     });
 
     test('getOrFetch returns from primary on hit', () async {
-      primary.set<String>(
-        'key',
-        'cached',
-        ttl: const Duration(minutes: 1),
-      );
+      primary.set<String>('key', 'cached', ttl: const Duration(minutes: 1));
 
       var fetchCalled = false;
       final value = await manager.getOrFetch<String>(

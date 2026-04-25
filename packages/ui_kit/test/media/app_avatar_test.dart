@@ -9,30 +9,22 @@ void main() {
 
   group('AppAvatar', () {
     testWidgets('shows initials when no image', (tester) async {
-      await tester.pumpWidget(
-        buildApp(const AppAvatar(name: 'John Doe')),
-      );
+      await tester.pumpWidget(buildApp(const AppAvatar(name: 'John Doe')));
       expect(find.text('JD'), findsOneWidget);
     });
 
     testWidgets('shows single initial for one-word name', (tester) async {
-      await tester.pumpWidget(
-        buildApp(const AppAvatar(name: 'Alice')),
-      );
+      await tester.pumpWidget(buildApp(const AppAvatar(name: 'Alice')));
       expect(find.text('A'), findsOneWidget);
     });
 
     testWidgets('shows ? when name is null', (tester) async {
-      await tester.pumpWidget(
-        buildApp(const AppAvatar()),
-      );
+      await tester.pumpWidget(buildApp(const AppAvatar()));
       expect(find.text('?'), findsOneWidget);
     });
 
     testWidgets('renders CircleAvatar', (tester) async {
-      await tester.pumpWidget(
-        buildApp(const AppAvatar(name: 'Test User')),
-      );
+      await tester.pumpWidget(buildApp(const AppAvatar(name: 'Test User')));
       expect(find.byType(CircleAvatar), findsOneWidget);
     });
 

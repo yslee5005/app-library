@@ -52,9 +52,7 @@ class _SearchViewState extends ConsumerState<SearchView> {
     }
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Search', style: LearnTypography.h1),
-      ),
+      appBar: AppBar(title: Text('Search', style: LearnTypography.h1)),
       body: Column(
         children: [
           Padding(
@@ -84,8 +82,9 @@ class _SearchViewState extends ConsumerState<SearchView> {
                       _controller.text.isEmpty
                           ? 'Type to search all articles'
                           : 'No results found',
-                      style: LearnTypography.body
-                          .copyWith(color: LearnColors.muted),
+                      style: LearnTypography.body.copyWith(
+                        color: LearnColors.muted,
+                      ),
                     ),
                   )
                 : ListView.builder(
@@ -107,22 +106,24 @@ class _SearchViewState extends ConsumerState<SearchView> {
                               ),
                             ),
                           ),
-                          ...sectionResults.map((r) => Card(
-                                clipBehavior: Clip.antiAlias,
-                                child: ListTile(
-                                  title: Text(
-                                    r.item.title,
-                                    style: LearnTypography.body,
-                                  ),
-                                  subtitle: Text(
-                                    r.snippet,
-                                    maxLines: 2,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: LearnTypography.caption,
-                                  ),
-                                  onTap: () => context.go('/read/${r.item.id}'),
+                          ...sectionResults.map(
+                            (r) => Card(
+                              clipBehavior: Clip.antiAlias,
+                              child: ListTile(
+                                title: Text(
+                                  r.item.title,
+                                  style: LearnTypography.body,
                                 ),
-                              )),
+                                subtitle: Text(
+                                  r.snippet,
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: LearnTypography.caption,
+                                ),
+                                onTap: () => context.go('/read/${r.item.id}'),
+                              ),
+                            ),
+                          ),
                           const SizedBox(height: 8),
                         ],
                       );

@@ -15,10 +15,7 @@ class UsScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                '우리',
-                style: Theme.of(context).textTheme.headlineLarge,
-              ),
+              Text('우리', style: Theme.of(context).textTheme.headlineLarge),
               const SizedBox(height: 20),
 
               // 삼각형 비주얼
@@ -33,10 +30,7 @@ class UsScreen extends StatelessWidget {
                   children: [
                     const Text('👶', style: TextStyle(fontSize: 48)),
                     const SizedBox(height: 4),
-                    Text(
-                      '콩이',
-                      style: Theme.of(context).textTheme.labelMedium,
-                    ),
+                    Text('콩이', style: Theme.of(context).textTheme.labelMedium),
                     const SizedBox(height: 16),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -81,9 +75,10 @@ class UsScreen extends StatelessWidget {
                           children: [
                             const Text('👩', style: TextStyle(fontSize: 36)),
                             const SizedBox(height: 4),
-                            Text('엄마',
-                                style:
-                                    Theme.of(context).textTheme.labelMedium),
+                            Text(
+                              '엄마',
+                              style: Theme.of(context).textTheme.labelMedium,
+                            ),
                           ],
                         ),
                         // 하단 선
@@ -96,9 +91,10 @@ class UsScreen extends StatelessWidget {
                           children: [
                             const Text('👨', style: TextStyle(fontSize: 36)),
                             const SizedBox(height: 4),
-                            Text('아빠',
-                                style:
-                                    Theme.of(context).textTheme.labelMedium),
+                            Text(
+                              '아빠',
+                              style: Theme.of(context).textTheme.labelMedium,
+                            ),
                           ],
                         ),
                       ],
@@ -190,8 +186,7 @@ class UsScreen extends StatelessWidget {
                           ),
                           Text(
                             '마음을 전해보세요',
-                            style:
-                                Theme.of(context).textTheme.bodySmall,
+                            style: Theme.of(context).textTheme.bodySmall,
                           ),
                         ],
                       ),
@@ -202,7 +197,9 @@ class UsScreen extends StatelessWidget {
                       },
                       style: ElevatedButton.styleFrom(
                         padding: const EdgeInsets.symmetric(
-                            horizontal: 16, vertical: 8),
+                          horizontal: 16,
+                          vertical: 8,
+                        ),
                       ),
                       child: const Text('보내기'),
                     ),
@@ -313,14 +310,13 @@ class _StatusCard extends StatelessWidget {
             children: [
               Text(emoji, style: const TextStyle(fontSize: 20)),
               const SizedBox(width: 8),
-              Text(
-                '$name 상태',
-                style: Theme.of(context).textTheme.titleMedium,
-              ),
+              Text('$name 상태', style: Theme.of(context).textTheme.titleMedium),
               const Spacer(),
               Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 10,
+                  vertical: 4,
+                ),
                 decoration: BoxDecoration(
                   color: statusColor.withValues(alpha: 0.15),
                   borderRadius: BorderRadius.circular(12),
@@ -338,9 +334,9 @@ class _StatusCard extends StatelessWidget {
           const SizedBox(height: 12),
           Text(
             message,
-            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-              color: AppColors.textSecondary,
-            ),
+            style: Theme.of(
+              context,
+            ).textTheme.bodyMedium?.copyWith(color: AppColors.textSecondary),
           ),
           const SizedBox(height: 12),
           Row(

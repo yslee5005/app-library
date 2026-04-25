@@ -28,9 +28,9 @@ class _GrowthChartScreenState extends State<GrowthChartScreen> {
         title: Text(
           '성장 차트',
           style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                color: AppColors.textPrimary,
-                fontWeight: FontWeight.w600,
-              ),
+            color: AppColors.textPrimary,
+            fontWeight: FontWeight.w600,
+          ),
         ),
       ),
       body: SingleChildScrollView(
@@ -84,8 +84,8 @@ class _GrowthChartScreenState extends State<GrowthChartScreen> {
                   Text(
                     _showHeight ? 'WHO 신장 백분위 곡선' : 'WHO 체중 백분위 곡선',
                     style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                          color: AppColors.textSecondary,
-                        ),
+                      color: AppColors.textSecondary,
+                    ),
                   ),
                   const SizedBox(height: 12),
                   // Chart
@@ -102,8 +102,9 @@ class _GrowthChartScreenState extends State<GrowthChartScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       _ChartLegend(
-                          color: AppColors.textHint.withValues(alpha: 0.3),
-                          label: '3%, 15%, 50%, 85%, 97%'),
+                        color: AppColors.textHint.withValues(alpha: 0.3),
+                        label: '3%, 15%, 50%, 85%, 97%',
+                      ),
                       const SizedBox(width: 16),
                       _ChartLegend(color: AppColors.coral, label: '내 아기'),
                     ],
@@ -128,21 +129,21 @@ class _GrowthChartScreenState extends State<GrowthChartScreen> {
                   Text(
                     '현재 ',
                     style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                          color: AppColors.textSecondary,
-                        ),
+                      color: AppColors.textSecondary,
+                    ),
                   ),
                   Text(
                     '50th',
                     style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                          color: AppColors.coral,
-                          fontWeight: FontWeight.w700,
-                        ),
+                      color: AppColors.coral,
+                      fontWeight: FontWeight.w700,
+                    ),
                   ),
                   Text(
                     ' 백분위',
                     style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                          color: AppColors.textSecondary,
-                        ),
+                      color: AppColors.textSecondary,
+                    ),
                   ),
                 ],
               ),
@@ -164,15 +165,14 @@ class _GrowthChartScreenState extends State<GrowthChartScreen> {
                     child: Text(
                       '조산아는 교정 월령 기준으로 표시할 수 있어요',
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                            color: AppColors.textSecondary,
-                          ),
+                        color: AppColors.textSecondary,
+                      ),
                     ),
                   ),
                   const SizedBox(width: 8),
                   Switch(
                     value: _useCorrectedAge,
-                    onChanged: (v) =>
-                        setState(() => _useCorrectedAge = v),
+                    onChanged: (v) => setState(() => _useCorrectedAge = v),
                     activeThumbColor: AppColors.coral,
                     activeTrackColor: AppColors.coralLight,
                   ),
@@ -210,9 +210,9 @@ class _ChartLegend extends StatelessWidget {
         const SizedBox(width: 4),
         Text(
           label,
-          style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                color: AppColors.textHint,
-              ),
+          style: Theme.of(
+            context,
+          ).textTheme.bodySmall?.copyWith(color: AppColors.textHint),
         ),
       ],
     );
@@ -330,24 +330,17 @@ class _WHOChartPainter extends CustomPainter {
     for (int i = 0; i <= yDivisions; i++) {
       final value = yMin + (yMax - yMin) * i / yDivisions;
       final y = mapY(value);
-      canvas.drawLine(
-        Offset(chartLeft, y),
-        Offset(chartRight, y),
-        gridPaint,
-      );
+      canvas.drawLine(Offset(chartLeft, y), Offset(chartRight, y), gridPaint);
       // Y label
       textPainter.text = TextSpan(
-        text: isHeight
-            ? value.toInt().toString()
-            : value.toStringAsFixed(1),
-        style: const TextStyle(
-          color: AppColors.textHint,
-          fontSize: 10,
-        ),
+        text: isHeight ? value.toInt().toString() : value.toStringAsFixed(1),
+        style: const TextStyle(color: AppColors.textHint, fontSize: 10),
       );
       textPainter.layout();
       textPainter.paint(
-          canvas, Offset(chartLeft - textPainter.width - 4, y - 6));
+        canvas,
+        Offset(chartLeft - textPainter.width - 4, y - 6),
+      );
     }
 
     // Draw vertical grid lines + X labels (months)
@@ -357,14 +350,13 @@ class _WHOChartPainter extends CustomPainter {
       // X label
       textPainter.text = TextSpan(
         text: '${month}m',
-        style: const TextStyle(
-          color: AppColors.textHint,
-          fontSize: 10,
-        ),
+        style: const TextStyle(color: AppColors.textHint, fontSize: 10),
       );
       textPainter.layout();
       textPainter.paint(
-          canvas, Offset(x - textPainter.width / 2, chartBottom + 6));
+        canvas,
+        Offset(x - textPainter.width / 2, chartBottom + 6),
+      );
     }
 
     // Draw percentile curves

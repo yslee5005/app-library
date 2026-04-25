@@ -18,18 +18,14 @@ class DogMessage {
   final String message;
   final String? source;
 
-  const DogMessage({
-    required this.state,
-    required this.message,
-    this.source,
-  });
+  const DogMessage({required this.state, required this.message, this.source});
 }
 
 class DogStateService {
   final BreedDataService _breedService;
 
   DogStateService({BreedDataService? breedService})
-      : _breedService = breedService ?? BreedDataService();
+    : _breedService = breedService ?? BreedDataService();
 
   /// Determine dog's current state based on logs and time
   Future<DogMessage> getDogState({
@@ -63,23 +59,32 @@ class DogStateService {
     }
 
     // Check recent days for missing routines
-    final walkRoutines = profile.routines
-        .where((r) => r.category == 'walk')
-        .map((r) => r.id)
-        .toSet();
-    final mealRoutines = profile.routines
-        .where((r) => r.category == 'meal')
-        .map((r) => r.id)
-        .toSet();
-    final careRoutines = profile.routines
-        .where((r) => r.category == 'care')
-        .map((r) => r.id)
-        .toSet();
+    final walkRoutines =
+        profile.routines
+            .where((r) => r.category == 'walk')
+            .map((r) => r.id)
+            .toSet();
+    final mealRoutines =
+        profile.routines
+            .where((r) => r.category == 'meal')
+            .map((r) => r.id)
+            .toSet();
+    final careRoutines =
+        profile.routines
+            .where((r) => r.category == 'care')
+            .map((r) => r.id)
+            .toSet();
 
     final daysMissingWalk = _daysSinceLastCompletion(
-        recentLogs, walkRoutines, now);
+      recentLogs,
+      walkRoutines,
+      now,
+    );
     final daysMissingCare = _daysSinceLastCompletion(
-        recentLogs, careRoutines, now);
+      recentLogs,
+      careRoutines,
+      now,
+    );
 
     // 7+ days no walk → very sad
     if (walkRoutines.isNotEmpty && daysMissingWalk >= 7) {
@@ -131,10 +136,7 @@ class DogStateService {
     // No routines done for 3+ days → sad
     final allDaysMissing = _daysSinceAnyCompletion(recentLogs, routineIds, now);
     if (allDaysMissing >= 3) {
-      return const DogMessage(
-        state: DogState.sad,
-        message: '요즘 많이 외로워요... 😔',
-      );
+      return const DogMessage(state: DogState.sad, message: '요즘 많이 외로워요... 😔');
     }
 
     // Health-based warnings (breed + age)
@@ -159,36 +161,28 @@ class DogStateService {
         '좋은 하루가 시작됐어요! 😊',
       ];
     } else if (hour >= 10 && hour < 14) {
-      return [
-        '오늘도 좋은 하루! 😊',
-        '같이 있어서 행복해요! 🐕',
-        '점심 맛있게 드세요! 🍽️',
-      ];
+      return ['오늘도 좋은 하루! 😊', '같이 있어서 행복해요! 🐕', '점심 맛있게 드세요! 🍽️'];
     } else if (hour >= 14 && hour < 18) {
-      return [
-        '오후도 화이팅! 💪',
-        '저녁 산책이 기대돼요! 🐾',
-        '오늘도 건강하게 보내요! 😊',
-      ];
+      return ['오후도 화이팅! 💪', '저녁 산책이 기대돼요! 🐾', '오늘도 건강하게 보내요! 😊'];
     } else {
-      return [
-        '오늘 하루도 수고했어요! 🌙',
-        '편안한 저녁 보내요! ✨',
-        '오늘도 좋은 하루였어요! 💖',
-      ];
+      return ['오늘 하루도 수고했어요! 🌙', '편안한 저녁 보내요! ✨', '오늘도 좋은 하루였어요! 💖'];
     }
   }
 
   int _daysSinceLastCompletion(
-      List<DailyLog> recentLogs, Set<String> routineIds, DateTime now) {
+    List<DailyLog> recentLogs,
+    Set<String> routineIds,
+    DateTime now,
+  ) {
     if (routineIds.isEmpty) return 0;
 
-    final completedDates = recentLogs
-        .where((l) => routineIds.contains(l.routineId) && l.completed)
-        .map((l) => l.date)
-        .toSet()
-        .toList()
-      ..sort((a, b) => b.compareTo(a));
+    final completedDates =
+        recentLogs
+            .where((l) => routineIds.contains(l.routineId) && l.completed)
+            .map((l) => l.date)
+            .toSet()
+            .toList()
+          ..sort((a, b) => b.compareTo(a));
 
     if (completedDates.isEmpty) return 30; // Assume long time
 
@@ -197,15 +191,19 @@ class DogStateService {
   }
 
   int _daysSinceAnyCompletion(
-      List<DailyLog> recentLogs, Set<String> routineIds, DateTime now) {
+    List<DailyLog> recentLogs,
+    Set<String> routineIds,
+    DateTime now,
+  ) {
     if (routineIds.isEmpty) return 0;
 
-    final completedDates = recentLogs
-        .where((l) => routineIds.contains(l.routineId) && l.completed)
-        .map((l) => l.date)
-        .toSet()
-        .toList()
-      ..sort((a, b) => b.compareTo(a));
+    final completedDates =
+        recentLogs
+            .where((l) => routineIds.contains(l.routineId) && l.completed)
+            .map((l) => l.date)
+            .toSet()
+            .toList()
+          ..sort((a, b) => b.compareTo(a));
 
     if (completedDates.isEmpty) return 30;
 
@@ -223,8 +221,7 @@ class DogStateService {
     if (age >= breed.seniorAge && age < breed.seniorAge + 1) {
       return DogMessage(
         state: DogState.healthWarning,
-        message:
-            '시니어에 진입했어요. 연 2회 건강검진을 추천해요.',
+        message: '시니어에 진입했어요. 연 2회 건강검진을 추천해요.',
         source: 'American Animal Hospital Association',
       );
     }

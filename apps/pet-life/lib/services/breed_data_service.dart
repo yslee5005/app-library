@@ -31,9 +31,10 @@ class BreedDataService {
       try {
         final jsonStr = await rootBundle.loadString(file);
         final data = json.decode(jsonStr) as Map<String, dynamic>;
-        final breeds = (data['breeds'] as List<dynamic>)
-            .map((e) => BreedInfo.fromJson(e as Map<String, dynamic>))
-            .toList();
+        final breeds =
+            (data['breeds'] as List<dynamic>)
+                .map((e) => BreedInfo.fromJson(e as Map<String, dynamic>))
+                .toList();
         allBreeds.addAll(breeds);
       } catch (_) {
         // Tier file might not exist, skip
@@ -83,11 +84,7 @@ class BreedDataService {
         event: '성견 도달',
         description: '신체 성장이 대부분 완료됩니다.',
       ),
-      const AgeMilestone(
-        age: 2.0,
-        event: '정서 성숙',
-        description: '행동이 안정됩니다.',
-      ),
+      const AgeMilestone(age: 2.0, event: '정서 성숙', description: '행동이 안정됩니다.'),
       AgeMilestone(
         age: seniorAge,
         event: '시니어 진입',

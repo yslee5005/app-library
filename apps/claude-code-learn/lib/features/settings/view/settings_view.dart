@@ -13,9 +13,7 @@ class SettingsView extends ConsumerWidget {
     final fontSize = ref.watch(fontSizeProvider);
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Settings', style: LearnTypography.h1),
-      ),
+      appBar: AppBar(title: Text('Settings', style: LearnTypography.h1)),
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
@@ -48,8 +46,7 @@ class SettingsView extends ConsumerWidget {
                     ],
                     selected: {themeMode},
                     onSelectionChanged: (selection) {
-                      ref.read(themeModeProvider.notifier).set(
-                          selection.first);
+                      ref.read(themeModeProvider.notifier).set(selection.first);
                     },
                   ),
                 ],

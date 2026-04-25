@@ -13,10 +13,7 @@ class SettingsScreen extends StatelessWidget {
         child: ListView(
           padding: const EdgeInsets.all(20),
           children: [
-            Text(
-              '설정',
-              style: Theme.of(context).textTheme.headlineLarge,
-            ),
+            Text('설정', style: Theme.of(context).textTheme.headlineLarge),
             const SizedBox(height: 24),
 
             // 프로필
@@ -24,14 +21,8 @@ class SettingsScreen extends StatelessWidget {
               title: '프로필',
               icon: Icons.person_rounded,
               items: [
-                _SettingsItem(
-                  title: '아기 정보 수정',
-                  onTap: () {},
-                ),
-                _SettingsItem(
-                  title: '파트너 초대/관리',
-                  onTap: () {},
-                ),
+                _SettingsItem(title: '아기 정보 수정', onTap: () {}),
+                _SettingsItem(title: '파트너 초대/관리', onTap: () {}),
                 _SettingsItem(
                   title: '계정 연결 (선택)',
                   subtitle: 'Google / Apple로 데이터 백업',
@@ -63,10 +54,7 @@ class SettingsScreen extends StatelessWidget {
               title: '데이터',
               icon: Icons.storage_rounded,
               items: [
-                _SettingsItem(
-                  title: '데이터 내보내기',
-                  onTap: () {},
-                ),
+                _SettingsItem(title: '데이터 내보내기', onTap: () {}),
                 _SettingsItem(
                   title: '데이터 삭제',
                   textColor: AppColors.danger,
@@ -82,23 +70,10 @@ class SettingsScreen extends StatelessWidget {
               title: '정보',
               icon: Icons.info_rounded,
               items: [
-                _SettingsItem(
-                  title: '앱 정보',
-                  subtitle: 'v1.0.0',
-                  onTap: () {},
-                ),
-                _SettingsItem(
-                  title: '개인정보 처리방침',
-                  onTap: () {},
-                ),
-                _SettingsItem(
-                  title: '이용약관',
-                  onTap: () {},
-                ),
-                _SettingsItem(
-                  title: '오픈소스 라이선스',
-                  onTap: () {},
-                ),
+                _SettingsItem(title: '앱 정보', subtitle: 'v1.0.0', onTap: () {}),
+                _SettingsItem(title: '개인정보 처리방침', onTap: () {}),
+                _SettingsItem(title: '이용약관', onTap: () {}),
+                _SettingsItem(title: '오픈소스 라이선스', onTap: () {}),
               ],
             ),
 
@@ -109,10 +84,7 @@ class SettingsScreen extends StatelessWidget {
               title: '계정',
               icon: Icons.lock_rounded,
               items: [
-                _SettingsItem(
-                  title: '로그아웃',
-                  onTap: () {},
-                ),
+                _SettingsItem(title: '로그아웃', onTap: () {}),
                 _SettingsItem(
                   title: '회원 탈퇴',
                   textColor: AppColors.danger,

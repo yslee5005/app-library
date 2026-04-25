@@ -61,32 +61,29 @@ class StatCard extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               if (icon != null) ...[
-                Icon(
-                  icon,
-                  size: 24,
-                  color: theme.colorScheme.primary,
-                ),
+                Icon(icon, size: 24, color: theme.colorScheme.primary),
                 const SizedBox(height: AppSpacing.sm),
               ],
               Text(
                 value,
-                style: valueStyle ?? theme.textTheme.headlineMedium?.copyWith(
-                  fontWeight: FontWeight.w700,
-                ),
+                style:
+                    valueStyle ??
+                    theme.textTheme.headlineMedium?.copyWith(
+                      fontWeight: FontWeight.w700,
+                    ),
               ),
               const SizedBox(height: AppSpacing.xs),
               Text(
                 label,
-                style: labelStyle ?? theme.textTheme.bodySmall?.copyWith(
-                  color: theme.colorScheme.onSurfaceVariant,
-                ),
+                style:
+                    labelStyle ??
+                    theme.textTheme.bodySmall?.copyWith(
+                      color: theme.colorScheme.onSurfaceVariant,
+                    ),
               ),
               if (trend != null && trendValue != null) ...[
                 const SizedBox(height: AppSpacing.sm),
-                _TrendIndicator(
-                  direction: trend!,
-                  value: trendValue!,
-                ),
+                _TrendIndicator(direction: trend!, value: trendValue!),
               ],
             ],
           ),
@@ -109,7 +106,10 @@ class _TrendIndicator extends StatelessWidget {
     final (icon, color) = switch (direction) {
       TrendDirection.up => (Icons.trending_up, Colors.green),
       TrendDirection.down => (Icons.trending_down, theme.colorScheme.error),
-      TrendDirection.neutral => (Icons.trending_flat, theme.colorScheme.onSurfaceVariant),
+      TrendDirection.neutral => (
+        Icons.trending_flat,
+        theme.colorScheme.onSurfaceVariant,
+      ),
     };
 
     return Row(

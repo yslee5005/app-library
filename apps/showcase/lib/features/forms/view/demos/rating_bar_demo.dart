@@ -20,16 +20,20 @@ class _RatingBarDemoState extends State<RatingBarDemo> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Tap a star to rate:',
-                style: Theme.of(context).textTheme.titleMedium),
+            Text(
+              'Tap a star to rate:',
+              style: Theme.of(context).textTheme.titleMedium,
+            ),
             const SizedBox(height: 16),
             AppRatingBar(
               rating: _rating,
               onRatingChanged: (r) => setState(() => _rating = r),
             ),
             const SizedBox(height: 16),
-            Text('Rating: ${_rating.toStringAsFixed(1)}',
-                style: Theme.of(context).textTheme.bodyLarge),
+            Text(
+              'Rating: ${_rating.toStringAsFixed(1)}',
+              style: Theme.of(context).textTheme.bodyLarge,
+            ),
           ],
         ),
       ),

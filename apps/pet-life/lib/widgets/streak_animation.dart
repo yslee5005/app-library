@@ -26,9 +26,10 @@ class _StreakAnimationState extends State<StreakAnimation>
       vsync: this,
     );
 
-    _scaleAnim = Tween<double>(begin: 0.0, end: 1.0).animate(
-      CurvedAnimation(parent: _controller, curve: Curves.elasticOut),
-    );
+    _scaleAnim = Tween<double>(
+      begin: 0.0,
+      end: 1.0,
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.elasticOut));
 
     _opacityAnim = Tween<double>(begin: 1.0, end: 0.0).animate(
       CurvedAnimation(
@@ -63,10 +64,7 @@ class _StreakAnimationState extends State<StreakAnimation>
                 color: AppConfig.accentColor.withValues(alpha: 0.3),
               ),
               child: const Center(
-                child: Text(
-                  '🔥',
-                  style: TextStyle(fontSize: 36),
-                ),
+                child: Text('🔥', style: TextStyle(fontSize: 36)),
               ),
             ),
           ),
@@ -97,9 +95,10 @@ class _CompletionCheckmarkState extends State<CompletionCheckmark>
       vsync: this,
     );
 
-    _scaleAnim = Tween<double>(begin: 0.0, end: 1.0).animate(
-      CurvedAnimation(parent: _controller, curve: Curves.elasticOut),
-    );
+    _scaleAnim = Tween<double>(
+      begin: 0.0,
+      end: 1.0,
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.elasticOut));
 
     _controller.forward();
   }

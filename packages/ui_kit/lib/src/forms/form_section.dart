@@ -36,8 +36,7 @@ class FormSection extends StatelessWidget {
     final theme = Theme.of(context);
 
     return Padding(
-      padding: padding ??
-          const EdgeInsets.symmetric(vertical: AppSpacing.md),
+      padding: padding ?? const EdgeInsets.symmetric(vertical: AppSpacing.md),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -54,9 +53,10 @@ class FormSection extends StatelessWidget {
           SizedBox(height: spacing ?? AppSpacing.sm),
           ...List.generate(
             children.length * 2 - 1,
-            (i) => i.isEven
-                ? children[i ~/ 2]
-                : SizedBox(height: spacing ?? AppSpacing.sm),
+            (i) =>
+                i.isEven
+                    ? children[i ~/ 2]
+                    : SizedBox(height: spacing ?? AppSpacing.sm),
           ),
         ],
       ),

@@ -32,12 +32,14 @@ class _MockFeedRepository implements PaginatedRepository<_FeedItem> {
       ),
     );
 
-    return Success(PaginatedResult(
-      items: items,
-      hasMore: end < _total,
-      cursor: end < _total ? '$end' : null,
-      totalCount: _total,
-    ),);
+    return Success(
+      PaginatedResult(
+        items: items,
+        hasMore: end < _total,
+        cursor: end < _total ? '$end' : null,
+        totalCount: _total,
+      ),
+    );
   }
 
   /// Simulates adding more items on the server.
@@ -47,8 +49,7 @@ class _MockFeedRepository implements PaginatedRepository<_FeedItem> {
 /// Notifier subclass that provides the mock repository.
 class _FeedNotifier extends PaginationNotifier<_FeedItem> {
   @override
-  PaginatedRepository<_FeedItem> get repository =>
-      ref.watch(_feedRepoProvider);
+  PaginatedRepository<_FeedItem> get repository => ref.watch(_feedRepoProvider);
 }
 
 final _feedRepoProvider = Provider<_MockFeedRepository>((ref) {
@@ -56,9 +57,9 @@ final _feedRepoProvider = Provider<_MockFeedRepository>((ref) {
 });
 
 final _feedListProvider = AsyncNotifierProvider<
-    PaginationNotifier<_FeedItem>, PaginationState<_FeedItem>>(
-  _FeedNotifier.new,
-);
+  PaginationNotifier<_FeedItem>,
+  PaginationState<_FeedItem>
+>(_FeedNotifier.new);
 
 class FeedListViewDemo extends ConsumerWidget {
   const FeedListViewDemo({super.key});
@@ -118,8 +119,9 @@ class _FeedBody extends ConsumerWidget {
           title: item.title,
           subtitle: item.subtitle,
           image: Container(
-            color: Colors.primaries[index % Colors.primaries.length]
-                .withValues(alpha: 0.3),
+            color: Colors.primaries[index % Colors.primaries.length].withValues(
+              alpha: 0.3,
+            ),
             child: Center(
               child: Icon(
                 Icons.image,
@@ -129,9 +131,9 @@ class _FeedBody extends ConsumerWidget {
             ),
           ),
           onTap: () {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text('Tapped ${item.title}')),
-            );
+            ScaffoldMessenger.of(
+              context,
+            ).showSnackBar(SnackBar(content: Text('Tapped ${item.title}')));
           },
         );
       },

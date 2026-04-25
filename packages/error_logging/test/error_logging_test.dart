@@ -42,9 +42,7 @@ void main() {
       });
 
       test('masks multiple emails', () {
-        final result = SensitiveDataFilter.mask(
-          'From a@b.com to c@d.com',
-        );
+        final result = SensitiveDataFilter.mask('From a@b.com to c@d.com');
         expect(result, isNot(contains('a@b.com')));
         expect(result, isNot(contains('c@d.com')));
       });
@@ -172,10 +170,7 @@ class _MockLoggingService implements ErrorLoggingService {
   final List<String> breadcrumbs = [];
 
   @override
-  Future<void> log(
-    String message, {
-    ErrorLevel level = ErrorLevel.info,
-  }) async {
+  Future<void> log(String message, {ErrorLevel level = ErrorLevel.info}) async {
     messages.add(message);
   }
 

@@ -51,8 +51,18 @@ class AppProgressBar extends StatelessWidget {
     final percentText = '${(value.clamp(0, 1) * 100).round()}%';
 
     return switch (type) {
-      ProgressBarType.linear => _buildLinear(theme, activeColor, trackColor, percentText),
-      ProgressBarType.circular => _buildCircular(theme, activeColor, trackColor, percentText),
+      ProgressBarType.linear => _buildLinear(
+        theme,
+        activeColor,
+        trackColor,
+        percentText,
+      ),
+      ProgressBarType.circular => _buildCircular(
+        theme,
+        activeColor,
+        trackColor,
+        percentText,
+      ),
     };
   }
 

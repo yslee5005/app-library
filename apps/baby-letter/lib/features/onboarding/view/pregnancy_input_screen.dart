@@ -52,10 +52,7 @@ class _PregnancyInputScreenState extends State<PregnancyInputScreen> {
         child: Column(
           children: [
             // 진행바
-            LinearProgressIndicator(
-              value: (_step + 1) / 3,
-              minHeight: 4,
-            ),
+            LinearProgressIndicator(value: (_step + 1) / 3, minHeight: 4),
 
             Expanded(
               child: Padding(
@@ -118,9 +115,9 @@ class _PregnancyInputScreenState extends State<PregnancyInputScreen> {
         const SizedBox(height: 8),
         Text(
           '아기의 성장 단계를 알려드릴게요',
-          style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-            color: AppColors.textSecondary,
-          ),
+          style: Theme.of(
+            context,
+          ).textTheme.bodyLarge?.copyWith(color: AppColors.textSecondary),
         ),
         const SizedBox(height: 32),
         // 날짜 선택 카드
@@ -128,16 +125,16 @@ class _PregnancyInputScreenState extends State<PregnancyInputScreen> {
           onTap: () async {
             final picked = await showDatePicker(
               context: context,
-              initialDate: _dueDate ??
-                  DateTime.now().add(const Duration(days: 140)),
+              initialDate:
+                  _dueDate ?? DateTime.now().add(const Duration(days: 140)),
               firstDate: DateTime.now(),
               lastDate: DateTime.now().add(const Duration(days: 300)),
               builder: (context, child) {
                 return Theme(
                   data: Theme.of(context).copyWith(
-                    colorScheme: Theme.of(context).colorScheme.copyWith(
-                      primary: AppColors.coral,
-                    ),
+                    colorScheme: Theme.of(
+                      context,
+                    ).colorScheme.copyWith(primary: AppColors.coral),
                   ),
                   child: child!,
                 );
@@ -164,7 +161,9 @@ class _PregnancyInputScreenState extends State<PregnancyInputScreen> {
               children: [
                 Icon(
                   Icons.calendar_today_rounded,
-                  color: _dueDate != null ? AppColors.coral : AppColors.textHint,
+                  color: _dueDate != null
+                      ? AppColors.coral
+                      : AppColors.textHint,
                 ),
                 const SizedBox(width: 12),
                 Text(
@@ -204,16 +203,13 @@ class _PregnancyInputScreenState extends State<PregnancyInputScreen> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const SizedBox(height: 20),
-        Text(
-          '아기의 태명이\n있나요?',
-          style: Theme.of(context).textTheme.headlineLarge,
-        ),
+        Text('아기의 태명이\n있나요?', style: Theme.of(context).textTheme.headlineLarge),
         const SizedBox(height: 8),
         Text(
           '편지에서 아기를 불러줄 이름이에요',
-          style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-            color: AppColors.textSecondary,
-          ),
+          style: Theme.of(
+            context,
+          ).textTheme.bodyLarge?.copyWith(color: AppColors.textSecondary),
         ),
         const SizedBox(height: 32),
         TextField(
@@ -235,16 +231,13 @@ class _PregnancyInputScreenState extends State<PregnancyInputScreen> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const SizedBox(height: 20),
-        Text(
-          '파트너를\n초대할까요?',
-          style: Theme.of(context).textTheme.headlineLarge,
-        ),
+        Text('파트너를\n초대할까요?', style: Theme.of(context).textTheme.headlineLarge),
         const SizedBox(height: 8),
         Text(
           '함께 기록하면 삼각형 케어가 완성돼요',
-          style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-            color: AppColors.textSecondary,
-          ),
+          style: Theme.of(
+            context,
+          ).textTheme.bodyLarge?.copyWith(color: AppColors.textSecondary),
         ),
         const SizedBox(height: 32),
         // 삼각형 비주얼
@@ -265,10 +258,7 @@ class _PregnancyInputScreenState extends State<PregnancyInputScreen> {
                   const Text('👩', style: TextStyle(fontSize: 32)),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 24),
-                    child: Text(
-                      '💛',
-                      style: TextStyle(fontSize: 24),
-                    ),
+                    child: Text('💛', style: TextStyle(fontSize: 24)),
                   ),
                   const Text('👨', style: TextStyle(fontSize: 32)),
                 ],

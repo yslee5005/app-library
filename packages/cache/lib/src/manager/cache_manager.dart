@@ -15,10 +15,7 @@ import '../interfaces/cache_interface.dart';
 /// );
 /// ```
 class CacheManager {
-  const CacheManager({
-    required this.primary,
-    this.secondary,
-  });
+  const CacheManager({required this.primary, this.secondary});
 
   /// First cache to check (typically memory).
   final CacheInterface primary;

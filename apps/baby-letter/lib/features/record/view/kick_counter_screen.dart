@@ -91,13 +91,8 @@ class _KickCounterScreenState extends State<KickCounterScreen> {
       barrierDismissible: false,
       builder: (context) => AlertDialog(
         backgroundColor: AppColors.surface,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
-        ),
-        title: const Text(
-          '🎉 10회 도달!',
-          textAlign: TextAlign.center,
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+        title: const Text('🎉 10회 도달!', textAlign: TextAlign.center),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -111,9 +106,9 @@ class _KickCounterScreenState extends State<KickCounterScreen> {
             const SizedBox(height: 12),
             Text(
               '아기가 활발하게 움직이고 있어요',
-              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                color: AppColors.textSecondary,
-              ),
+              style: Theme.of(
+                context,
+              ).textTheme.bodyMedium?.copyWith(color: AppColors.textSecondary),
               textAlign: TextAlign.center,
             ),
           ],
@@ -146,13 +141,9 @@ class _KickCounterScreenState extends State<KickCounterScreen> {
       context: context,
       builder: (context) => AlertDialog(
         backgroundColor: AppColors.surface,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
         title: const Text('태동 세기 종료'),
-        content: Text(
-          '$_kickCount회 기록되었습니다.\n종료하시겠어요?',
-        ),
+        content: Text('$_kickCount회 기록되었습니다.\n종료하시겠어요?'),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(false),
@@ -197,10 +188,7 @@ class _KickCounterScreenState extends State<KickCounterScreen> {
           icon: const Icon(Icons.arrow_back),
           color: AppColors.textPrimary,
         ),
-        title: Text(
-          '태동 카운터',
-          style: TextStyle(color: AppColors.textPrimary),
-        ),
+        title: Text('태동 카운터', style: TextStyle(color: AppColors.textPrimary)),
       ),
       body: Column(
         children: [
@@ -235,8 +223,9 @@ class _KickCounterScreenState extends State<KickCounterScreen> {
               child: LinearProgressIndicator(
                 value: _kickCount / _targetKicks,
                 backgroundColor: AppColors.coralLight,
-                valueColor:
-                    const AlwaysStoppedAnimation<Color>(AppColors.coral),
+                valueColor: const AlwaysStoppedAnimation<Color>(
+                  AppColors.coral,
+                ),
                 minHeight: 6,
               ),
             ),
@@ -301,9 +290,9 @@ class _KickCounterScreenState extends State<KickCounterScreen> {
                   Expanded(
                     child: Text(
                       '2시간 내 10회 미만이면 의료진과 상의하세요',
-                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        color: AppColors.info,
-                      ),
+                      style: Theme.of(
+                        context,
+                      ).textTheme.bodySmall?.copyWith(color: AppColors.info),
                     ),
                   ),
                 ],
@@ -353,12 +342,8 @@ class _KickCounterScreenState extends State<KickCounterScreen> {
                             const SizedBox(width: 12),
                             Text(
                               '${time.hour.toString().padLeft(2, '0')}:${time.minute.toString().padLeft(2, '0')}:${time.second.toString().padLeft(2, '0')}',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodyMedium
-                                  ?.copyWith(
-                                color: AppColors.textSecondary,
-                              ),
+                              style: Theme.of(context).textTheme.bodyMedium
+                                  ?.copyWith(color: AppColors.textSecondary),
                             ),
                           ],
                         ),

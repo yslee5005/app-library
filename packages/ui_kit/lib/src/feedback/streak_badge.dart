@@ -38,7 +38,10 @@ class StreakBadge extends StatelessWidget {
       children: [
         Text(icon, style: const TextStyle(fontSize: 32)),
         const SizedBox(width: 8),
-        Text('$days', style: daysStyle ?? Theme.of(context).textTheme.headlineSmall),
+        Text(
+          '$days',
+          style: daysStyle ?? Theme.of(context).textTheme.headlineSmall,
+        ),
       ],
     );
   }

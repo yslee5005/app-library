@@ -44,7 +44,8 @@ class AppListTile extends StatelessWidget {
       leading: leading,
       title: Text(title),
       subtitle: subtitle != null ? Text(subtitle!) : null,
-      trailing: trailing ?? (onTap != null ? const Icon(Icons.chevron_right) : null),
+      trailing:
+          trailing ?? (onTap != null ? const Icon(Icons.chevron_right) : null),
       onTap: onTap,
       dense: dense,
       contentPadding: contentPadding,

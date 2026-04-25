@@ -13,35 +13,42 @@ class BadgeWidgetDemo extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Badge with count',
-                style: Theme.of(context).textTheme.titleMedium),
+            Text(
+              'Badge with count',
+              style: Theme.of(context).textTheme.titleMedium,
+            ),
             const SizedBox(height: 16),
             Row(
               children: [
                 BadgeWidget(
                   count: 5,
-                  child: Icon(Icons.mail,
-                      size: 32,
-                      color: Theme.of(context).colorScheme.primary),
+                  child: Icon(
+                    Icons.mail,
+                    size: 32,
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
                 ),
                 const SizedBox(width: 24),
                 BadgeWidget(
                   count: 99,
-                  child: Icon(Icons.chat,
-                      size: 32,
-                      color: Theme.of(context).colorScheme.primary),
+                  child: Icon(
+                    Icons.chat,
+                    size: 32,
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
                 ),
               ],
             ),
             const SizedBox(height: 24),
-            Text('Dot badge',
-                style: Theme.of(context).textTheme.titleMedium),
+            Text('Dot badge', style: Theme.of(context).textTheme.titleMedium),
             const SizedBox(height: 16),
             BadgeWidget(
               showDot: true,
-              child: Icon(Icons.notifications,
-                  size: 32,
-                  color: Theme.of(context).colorScheme.primary),
+              child: Icon(
+                Icons.notifications,
+                size: 32,
+                color: Theme.of(context).colorScheme.primary,
+              ),
             ),
           ],
         ),

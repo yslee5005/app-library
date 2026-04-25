@@ -42,9 +42,11 @@ class UserState {
     if (mode == UserMode.pregnant) {
       final week = currentWeek;
       if (week == null) return '';
-      final day = (DateTime.now().difference(
-        dueDate!.subtract(const Duration(days: 280)),
-      ).inDays % 7);
+      final day =
+          (DateTime.now()
+              .difference(dueDate!.subtract(const Duration(days: 280)))
+              .inDays %
+          7);
       return '$week주 $day일';
     } else if (mode == UserMode.postnatal) {
       final days = daysSinceBirth;

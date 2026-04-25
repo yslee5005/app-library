@@ -57,9 +57,9 @@ class ChapterListView extends ConsumerWidget {
                       decoration: BoxDecoration(
                         color: isCompleted
                             ? LearnColors.progressGreen
-                            : Theme.of(context)
-                                .colorScheme
-                                .surfaceContainerHighest,
+                            : Theme.of(
+                                context,
+                              ).colorScheme.surfaceContainerHighest,
                         shape: BoxShape.circle,
                       ),
                       child: Center(
@@ -77,10 +77,7 @@ class ChapterListView extends ConsumerWidget {
                     ),
                     title: Text(item.title, style: LearnTypography.body),
                     subtitle: item.parentId != null
-                        ? Text(
-                            'Sub-chapter',
-                            style: LearnTypography.caption,
-                          )
+                        ? Text('Sub-chapter', style: LearnTypography.caption)
                         : null,
                     trailing: const Icon(Icons.chevron_right),
                     onTap: () => context.go('/read/${item.id}'),

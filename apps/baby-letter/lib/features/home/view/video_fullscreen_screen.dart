@@ -79,8 +79,7 @@ class VideoFullscreenScreen extends StatelessWidget {
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          const Text('👶',
-                              style: TextStyle(fontSize: 80)),
+                          const Text('👶', style: TextStyle(fontSize: 80)),
                           const SizedBox(height: 16),
                           Text(
                             'Week $currentWeek',

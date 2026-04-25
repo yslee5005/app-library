@@ -46,34 +46,43 @@ class BreedInfo {
       nameKo: json['name_ko'] as String,
       group: json['group'] as String?,
       size: json['size'] as String,
-      weightKg: json['weight_kg'] != null
-          ? RangeData.fromJson(json['weight_kg'] as Map<String, dynamic>)
-          : null,
-      heightCm: json['height_cm'] != null
-          ? RangeData.fromJson(json['height_cm'] as Map<String, dynamic>)
-          : null,
-      lifespanYears:
-          LifespanData.fromJson(json['lifespan_years'] as Map<String, dynamic>),
+      weightKg:
+          json['weight_kg'] != null
+              ? RangeData.fromJson(json['weight_kg'] as Map<String, dynamic>)
+              : null,
+      heightCm:
+          json['height_cm'] != null
+              ? RangeData.fromJson(json['height_cm'] as Map<String, dynamic>)
+              : null,
+      lifespanYears: LifespanData.fromJson(
+        json['lifespan_years'] as Map<String, dynamic>,
+      ),
       seniorAge: json['senior_age'] as int,
-      temperament: (json['temperament'] as List<dynamic>?)
-          ?.map((e) => e as String)
-          .toList(),
-      exerciseMinutesPerDay: json['exercise_minutes_per_day'] != null
-          ? RangeData.fromJson(
-              json['exercise_minutes_per_day'] as Map<String, dynamic>)
-          : null,
+      temperament:
+          (json['temperament'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList(),
+      exerciseMinutesPerDay:
+          json['exercise_minutes_per_day'] != null
+              ? RangeData.fromJson(
+                json['exercise_minutes_per_day'] as Map<String, dynamic>,
+              )
+              : null,
       groomingFrequency: json['grooming_frequency'] as String?,
       sheddingLevel: json['shedding_level'] as String?,
-      geneticHealthRisks: (json['genetic_health_risks'] as List<dynamic>?)
+      geneticHealthRisks:
+          (json['genetic_health_risks'] as List<dynamic>?)
               ?.map((e) => HealthRisk.fromJson(e as Map<String, dynamic>))
               .toList() ??
           const [],
-      ageMilestones: (json['age_milestones'] as List<dynamic>?)
-          ?.map((e) => AgeMilestone.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      funFacts: (json['fun_facts'] as List<dynamic>?)
-          ?.map((e) => e as String)
-          .toList(),
+      ageMilestones:
+          (json['age_milestones'] as List<dynamic>?)
+              ?.map((e) => AgeMilestone.fromJson(e as Map<String, dynamic>))
+              .toList(),
+      funFacts:
+          (json['fun_facts'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList(),
       dataConfidence: json['data_confidence'] as String?,
       dataNote: json['data_note'] as String?,
     );

@@ -108,9 +108,10 @@ class AppDateTimePicker extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final displayText = value != null
-        ? (dateFormat?.call(value!) ?? _formatDefault(value!))
-        : null;
+    final displayText =
+        value != null
+            ? (dateFormat?.call(value!) ?? _formatDefault(value!))
+            : null;
 
     final effectiveRadius = borderRadius ?? AppRadius.md;
     return InkWell(
@@ -127,15 +128,17 @@ class AppDateTimePicker extends StatelessWidget {
           ),
           filled: fillColor != null,
           fillColor: fillColor,
-          border: borderRadius != null
-              ? OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(borderRadius!),
-                )
-              : null,
+          border:
+              borderRadius != null
+                  ? OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(borderRadius!),
+                  )
+                  : null,
         ),
-        child: displayText != null
-            ? Text(displayText, style: theme.textTheme.bodyLarge)
-            : null,
+        child:
+            displayText != null
+                ? Text(displayText, style: theme.textTheme.bodyLarge)
+                : null,
       ),
     );
   }

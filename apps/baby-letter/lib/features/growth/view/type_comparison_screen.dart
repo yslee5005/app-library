@@ -19,9 +19,9 @@ class TypeComparisonScreen extends StatelessWidget {
         title: Text(
           '같은유형 비교',
           style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                color: AppColors.textPrimary,
-                fontWeight: FontWeight.w600,
-              ),
+            color: AppColors.textPrimary,
+            fontWeight: FontWeight.w600,
+          ),
         ),
       ),
       body: SingleChildScrollView(
@@ -42,10 +42,7 @@ class TypeComparisonScreen extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  _LegendDot(
-                    color: AppColors.coral,
-                    label: '내 아기',
-                  ),
+                  _LegendDot(color: AppColors.coral, label: '내 아기'),
                   const SizedBox(width: 24),
                   _LegendDot(
                     color: AppColors.amber.withValues(alpha: 0.4),
@@ -124,8 +121,8 @@ class TypeComparisonScreen extends StatelessWidget {
                     child: Text(
                       '모든 아기는 다릅니다. 이 비교는 참고용입니다.',
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                            color: AppColors.textSecondary,
-                          ),
+                        color: AppColors.textSecondary,
+                      ),
                     ),
                   ),
                 ],
@@ -169,17 +166,14 @@ class _LegendDot extends StatelessWidget {
           Container(
             width: 10,
             height: 10,
-            decoration: BoxDecoration(
-              color: color,
-              shape: BoxShape.circle,
-            ),
+            decoration: BoxDecoration(color: color, shape: BoxShape.circle),
           ),
         const SizedBox(width: 6),
         Text(
           label,
-          style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                color: AppColors.textSecondary,
-              ),
+          style: Theme.of(
+            context,
+          ).textTheme.bodySmall?.copyWith(color: AppColors.textSecondary),
         ),
       ],
     );
@@ -225,9 +219,9 @@ class _ComparisonCard extends StatelessWidget {
               Text(
                 label,
                 style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                      fontWeight: FontWeight.w600,
-                      color: AppColors.textPrimary,
-                    ),
+                  fontWeight: FontWeight.w600,
+                  color: AppColors.textPrimary,
+                ),
               ),
             ],
           ),
@@ -250,10 +244,8 @@ class _ComparisonCard extends StatelessWidget {
                         width: 60,
                         child: Text(
                           '내 아기',
-                          style:
-                              Theme.of(context).textTheme.bodySmall?.copyWith(
-                                    color: AppColors.textSecondary,
-                                  ),
+                          style: Theme.of(context).textTheme.bodySmall
+                              ?.copyWith(color: AppColors.textSecondary),
                         ),
                       ),
                       Expanded(
@@ -286,11 +278,11 @@ class _ComparisonCard extends StatelessWidget {
                         width: 50,
                         child: Text(
                           '${myValue % 1 == 0 ? myValue.toInt() : myValue}$unit',
-                          style:
-                              Theme.of(context).textTheme.bodySmall?.copyWith(
-                                    color: AppColors.coral,
-                                    fontWeight: FontWeight.w600,
-                                  ),
+                          style: Theme.of(context).textTheme.bodySmall
+                              ?.copyWith(
+                                color: AppColors.coral,
+                                fontWeight: FontWeight.w600,
+                              ),
                         ),
                       ),
                     ],
@@ -305,10 +297,8 @@ class _ComparisonCard extends StatelessWidget {
                         width: 60,
                         child: Text(
                           '평균',
-                          style:
-                              Theme.of(context).textTheme.bodySmall?.copyWith(
-                                    color: AppColors.textSecondary,
-                                  ),
+                          style: Theme.of(context).textTheme.bodySmall
+                              ?.copyWith(color: AppColors.textSecondary),
                         ),
                       ),
                       Expanded(
@@ -326,12 +316,14 @@ class _ComparisonCard extends StatelessWidget {
                             Positioned(
                               left: (barWidth - 60 - 58) * avgMinRatio,
                               child: Container(
-                                width: (barWidth - 60 - 58) *
+                                width:
+                                    (barWidth - 60 - 58) *
                                     (avgMaxRatio - avgMinRatio),
                                 height: 24,
                                 decoration: BoxDecoration(
-                                  color:
-                                      AppColors.amber.withValues(alpha: 0.35),
+                                  color: AppColors.amber.withValues(
+                                    alpha: 0.35,
+                                  ),
                                   borderRadius: BorderRadius.circular(12),
                                 ),
                               ),
@@ -344,11 +336,11 @@ class _ComparisonCard extends StatelessWidget {
                         width: 50,
                         child: Text(
                           '${avgMin % 1 == 0 ? avgMin.toInt() : avgMin}-${avgMax % 1 == 0 ? avgMax.toInt() : avgMax}',
-                          style:
-                              Theme.of(context).textTheme.bodySmall?.copyWith(
-                                    color: AppColors.textHint,
-                                    fontWeight: FontWeight.w500,
-                                  ),
+                          style: Theme.of(context).textTheme.bodySmall
+                              ?.copyWith(
+                                color: AppColors.textHint,
+                                fontWeight: FontWeight.w500,
+                              ),
                         ),
                       ),
                     ],

@@ -33,8 +33,10 @@ class _ChipFilterBarDemoState extends State<ChipFilterBarDemo> {
               onSelectionChanged: (s) => setState(() => _selected = s),
             ),
             const SizedBox(height: 16),
-            Text('Selected: ${_selected.join(', ')}',
-                style: Theme.of(context).textTheme.bodyLarge),
+            Text(
+              'Selected: ${_selected.join(', ')}',
+              style: Theme.of(context).textTheme.bodyLarge,
+            ),
           ],
         ),
       ),

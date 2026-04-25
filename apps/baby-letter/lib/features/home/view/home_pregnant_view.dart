@@ -104,11 +104,11 @@ class HomePregnantView extends StatelessWidget {
                               const SizedBox(height: 4),
                               Text(
                                 '약 30cm · 600g',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodyMedium
+                                style: Theme.of(context).textTheme.bodyMedium
                                     ?.copyWith(
-                                      color: Colors.white.withValues(alpha: 0.9),
+                                      color: Colors.white.withValues(
+                                        alpha: 0.9,
+                                      ),
                                     ),
                               ),
                             ],
@@ -254,18 +254,15 @@ class _TipCard extends StatelessWidget {
             children: [
               Icon(icon, color: iconColor, size: 20),
               const SizedBox(width: 8),
-              Text(
-                title,
-                style: Theme.of(context).textTheme.labelLarge,
-              ),
+              Text(title, style: Theme.of(context).textTheme.labelLarge),
             ],
           ),
           const SizedBox(height: 8),
           Text(
             subtitle,
-            style: Theme.of(context).textTheme.titleMedium?.copyWith(
-              fontWeight: FontWeight.w600,
-            ),
+            style: Theme.of(
+              context,
+            ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600),
           ),
           const SizedBox(height: 8),
           Text(
@@ -279,9 +276,9 @@ class _TipCard extends StatelessWidget {
             const SizedBox(height: 8),
             Text(
               source!,
-              style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                color: AppColors.textHint,
-              ),
+              style: Theme.of(
+                context,
+              ).textTheme.labelSmall?.copyWith(color: AppColors.textHint),
             ),
           ],
         ],
@@ -341,9 +338,9 @@ class _ActionCard extends StatelessWidget {
           const SizedBox(height: 8),
           Text(
             subtitle,
-            style: Theme.of(context).textTheme.titleMedium?.copyWith(
-              fontWeight: FontWeight.w600,
-            ),
+            style: Theme.of(
+              context,
+            ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600),
           ),
           const SizedBox(height: 4),
           Text(
@@ -356,10 +353,7 @@ class _ActionCard extends StatelessWidget {
           const SizedBox(height: 12),
           SizedBox(
             width: double.infinity,
-            child: OutlinedButton(
-              onPressed: onAction,
-              child: Text(actionText),
-            ),
+            child: OutlinedButton(onPressed: onAction, child: Text(actionText)),
           ),
         ],
       ),

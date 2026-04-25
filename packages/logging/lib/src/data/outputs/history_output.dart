@@ -61,16 +61,13 @@ class HistoryOutput implements LogOutput {
   }
 
   /// Export all entries (or filtered) as a single string for sharing.
-  String export({
-    LogLevel? level,
-    LogCategory? category,
-    String? search,
-  }) {
+  String export({LogLevel? level, LogCategory? category, String? search}) {
     final entries = where(level: level, category: category, search: search);
-    final buffer = StringBuffer()
-      ..writeln('=== App Logs (${entries.length} entries) ===')
-      ..writeln('Exported: ${DateTime.now().toIso8601String()}')
-      ..writeln();
+    final buffer =
+        StringBuffer()
+          ..writeln('=== App Logs (${entries.length} entries) ===')
+          ..writeln('Exported: ${DateTime.now().toIso8601String()}')
+          ..writeln();
 
     for (final e in entries) {
       buffer.write('${e.level.name.toUpperCase().padRight(7)} ');

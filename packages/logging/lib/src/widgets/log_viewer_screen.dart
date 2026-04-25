@@ -14,11 +14,7 @@ import '../domain/log_level.dart';
 /// ));
 /// ```
 class LogViewerScreen extends StatefulWidget {
-  const LogViewerScreen({
-    super.key,
-    required this.history,
-    this.onShare,
-  });
+  const LogViewerScreen({super.key, required this.history, this.onShare});
 
   final HistoryOutput history;
 
@@ -37,10 +33,10 @@ class _LogViewerScreenState extends State<LogViewerScreen> {
   final _scrollController = ScrollController();
 
   List<LogEntry> get _filteredEntries => widget.history.where(
-        level: _levelFilter,
-        category: _categoryFilter,
-        search: _searchController.text,
-      );
+    level: _levelFilter,
+    category: _categoryFilter,
+    search: _searchController.text,
+  );
 
   @override
   void dispose() {
@@ -85,8 +81,11 @@ class _LogViewerScreenState extends State<LogViewerScreen> {
           ),
           // Clear
           IconButton(
-            icon: const Icon(Icons.delete_outline,
-                color: Colors.redAccent, size: 20),
+            icon: const Icon(
+              Icons.delete_outline,
+              color: Colors.redAccent,
+              size: 20,
+            ),
             tooltip: 'Clear logs',
             onPressed: () {
               widget.history.clear();
@@ -111,26 +110,35 @@ class _LogViewerScreenState extends State<LogViewerScreen> {
               decoration: InputDecoration(
                 hintText: 'Search logs...',
                 hintStyle: TextStyle(color: Colors.grey[600], fontSize: 14),
-                prefixIcon:
-                    Icon(Icons.search, color: Colors.grey[600], size: 18),
-                suffixIcon: _searchController.text.isNotEmpty
-                    ? IconButton(
-                        icon: Icon(Icons.clear,
-                            color: Colors.grey[600], size: 18),
-                        onPressed: () {
-                          _searchController.clear();
-                          setState(() {});
-                        },
-                      )
-                    : null,
+                prefixIcon: Icon(
+                  Icons.search,
+                  color: Colors.grey[600],
+                  size: 18,
+                ),
+                suffixIcon:
+                    _searchController.text.isNotEmpty
+                        ? IconButton(
+                          icon: Icon(
+                            Icons.clear,
+                            color: Colors.grey[600],
+                            size: 18,
+                          ),
+                          onPressed: () {
+                            _searchController.clear();
+                            setState(() {});
+                          },
+                        )
+                        : null,
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(8),
                   borderSide: BorderSide.none,
                 ),
                 filled: true,
                 fillColor: const Color(0xFF3C3C3C),
-                contentPadding:
-                    const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                contentPadding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 8,
+                ),
                 isDense: true,
               ),
               onChanged: (_) => setState(() {}),
@@ -164,25 +172,26 @@ class _LogViewerScreenState extends State<LogViewerScreen> {
           const Divider(height: 1, color: Color(0xFF3C3C3C)),
           // Log entries
           Expanded(
-            child: entries.isEmpty
-                ? Center(
-                    child: Text(
-                      'No logs',
-                      style: TextStyle(color: Colors.grey[600], fontSize: 14),
+            child:
+                entries.isEmpty
+                    ? Center(
+                      child: Text(
+                        'No logs',
+                        style: TextStyle(color: Colors.grey[600], fontSize: 14),
+                      ),
+                    )
+                    : ListView.builder(
+                      controller: _scrollController,
+                      itemCount: entries.length,
+                      padding: const EdgeInsets.only(bottom: 16),
+                      itemBuilder: (context, index) {
+                        final entry = entries[index];
+                        return _LogEntryTile(
+                          entry: entry,
+                          onTap: () => _showDetail(entry),
+                        );
+                      },
                     ),
-                  )
-                : ListView.builder(
-                    controller: _scrollController,
-                    itemCount: entries.length,
-                    padding: const EdgeInsets.only(bottom: 16),
-                    itemBuilder: (context, index) {
-                      final entry = entries[index];
-                      return _LogEntryTile(
-                        entry: entry,
-                        onTap: () => _showDetail(entry),
-                      );
-                    },
-                  ),
           ),
         ],
       ),
@@ -229,8 +238,7 @@ class _LogViewerScreenState extends State<LogViewerScreen> {
               fontWeight: selected ? FontWeight.bold : FontWeight.normal,
             ),
           ),
-          backgroundColor:
-              selected ? Colors.blueGrey : const Color(0xFF3C3C3C),
+          backgroundColor: selected ? Colors.blueGrey : const Color(0xFF3C3C3C),
           padding: EdgeInsets.zero,
           materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
           visualDensity: VisualDensity.compact,
@@ -269,80 +277,100 @@ class _LogViewerScreenState extends State<LogViewerScreen> {
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(12)),
       ),
-      builder: (ctx) => DraggableScrollableSheet(
-        initialChildSize: 0.5,
-        minChildSize: 0.3,
-        maxChildSize: 0.9,
-        expand: false,
-        builder: (ctx, scroll) => SingleChildScrollView(
-          controller: scroll,
-          padding: const EdgeInsets.all(16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Center(
-                child: Container(
-                  width: 40,
-                  height: 4,
-                  decoration: BoxDecoration(
-                    color: Colors.grey[600],
-                    borderRadius: BorderRadius.circular(2),
+      builder:
+          (ctx) => DraggableScrollableSheet(
+            initialChildSize: 0.5,
+            minChildSize: 0.3,
+            maxChildSize: 0.9,
+            expand: false,
+            builder:
+                (ctx, scroll) => SingleChildScrollView(
+                  controller: scroll,
+                  padding: const EdgeInsets.all(16),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Center(
+                        child: Container(
+                          width: 40,
+                          height: 4,
+                          decoration: BoxDecoration(
+                            color: Colors.grey[600],
+                            borderRadius: BorderRadius.circular(2),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 16),
+                      _detailRow(
+                        'Level',
+                        entry.level.name.toUpperCase(),
+                        _levelColor(entry.level),
+                      ),
+                      _detailRow(
+                        'Category',
+                        entry.category.name.toUpperCase(),
+                        Colors.white,
+                      ),
+                      if (entry.tag != null)
+                        _detailRow('Tag', entry.tag!, Colors.white),
+                      _detailRow(
+                        'Time',
+                        entry.timestamp.toIso8601String(),
+                        Colors.grey[400]!,
+                      ),
+                      const SizedBox(height: 12),
+                      const Text(
+                        'Message',
+                        style: TextStyle(color: Colors.grey, fontSize: 12),
+                      ),
+                      const SizedBox(height: 4),
+                      SelectableText(
+                        entry.message,
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 14,
+                          fontFamily: 'monospace',
+                        ),
+                      ),
+                      if (entry.error != null) ...[
+                        const SizedBox(height: 12),
+                        const Text(
+                          'Error',
+                          style: TextStyle(
+                            color: Colors.redAccent,
+                            fontSize: 12,
+                          ),
+                        ),
+                        const SizedBox(height: 4),
+                        SelectableText(
+                          entry.error.toString(),
+                          style: const TextStyle(
+                            color: Colors.redAccent,
+                            fontSize: 13,
+                            fontFamily: 'monospace',
+                          ),
+                        ),
+                      ],
+                      if (entry.stackTrace != null) ...[
+                        const SizedBox(height: 12),
+                        const Text(
+                          'Stack Trace',
+                          style: TextStyle(color: Colors.orange, fontSize: 12),
+                        ),
+                        const SizedBox(height: 4),
+                        SelectableText(
+                          entry.stackTrace.toString(),
+                          style: TextStyle(
+                            color: Colors.orange[200],
+                            fontSize: 11,
+                            fontFamily: 'monospace',
+                          ),
+                        ),
+                      ],
+                    ],
                   ),
                 ),
-              ),
-              const SizedBox(height: 16),
-              _detailRow('Level', entry.level.name.toUpperCase(),
-                  _levelColor(entry.level)),
-              _detailRow(
-                  'Category', entry.category.name.toUpperCase(), Colors.white),
-              if (entry.tag != null)
-                _detailRow('Tag', entry.tag!, Colors.white),
-              _detailRow('Time', entry.timestamp.toIso8601String(),
-                  Colors.grey[400]!),
-              const SizedBox(height: 12),
-              const Text('Message',
-                  style: TextStyle(color: Colors.grey, fontSize: 12)),
-              const SizedBox(height: 4),
-              SelectableText(
-                entry.message,
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 14,
-                  fontFamily: 'monospace',
-                ),
-              ),
-              if (entry.error != null) ...[
-                const SizedBox(height: 12),
-                const Text('Error',
-                    style: TextStyle(color: Colors.redAccent, fontSize: 12)),
-                const SizedBox(height: 4),
-                SelectableText(
-                  entry.error.toString(),
-                  style: const TextStyle(
-                    color: Colors.redAccent,
-                    fontSize: 13,
-                    fontFamily: 'monospace',
-                  ),
-                ),
-              ],
-              if (entry.stackTrace != null) ...[
-                const SizedBox(height: 12),
-                const Text('Stack Trace',
-                    style: TextStyle(color: Colors.orange, fontSize: 12)),
-                const SizedBox(height: 4),
-                SelectableText(
-                  entry.stackTrace.toString(),
-                  style: TextStyle(
-                    color: Colors.orange[200],
-                    fontSize: 11,
-                    fontFamily: 'monospace',
-                  ),
-                ),
-              ],
-            ],
           ),
-        ),
-      ),
     );
   }
 
@@ -363,7 +391,10 @@ class _LogViewerScreenState extends State<LogViewerScreen> {
             child: Text(
               value,
               style: TextStyle(
-                  color: color, fontSize: 13, fontFamily: 'monospace'),
+                color: color,
+                fontSize: 13,
+                fontFamily: 'monospace',
+              ),
             ),
           ),
         ],
@@ -372,12 +403,12 @@ class _LogViewerScreenState extends State<LogViewerScreen> {
   }
 
   static Color _levelColor(LogLevel? level) => switch (level) {
-        LogLevel.error => Colors.redAccent,
-        LogLevel.warning => Colors.orangeAccent,
-        LogLevel.info => Colors.greenAccent,
-        LogLevel.debug => Colors.grey,
-        null => Colors.blueGrey,
-      };
+    LogLevel.error => Colors.redAccent,
+    LogLevel.warning => Colors.orangeAccent,
+    LogLevel.info => Colors.greenAccent,
+    LogLevel.debug => Colors.grey,
+    null => Colors.blueGrey,
+  };
 }
 
 // ---------------------------------------------------------------------------
@@ -398,10 +429,7 @@ class _LogEntryTile extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
         decoration: BoxDecoration(
           border: Border(
-            left: BorderSide(
-              color: _levelColor(entry.level),
-              width: 3,
-            ),
+            left: BorderSide(color: _levelColor(entry.level), width: 3),
           ),
         ),
         child: Column(
@@ -411,8 +439,10 @@ class _LogEntryTile extends StatelessWidget {
             Row(
               children: [
                 Container(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 4, vertical: 1),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 4,
+                    vertical: 1,
+                  ),
                   decoration: BoxDecoration(
                     color: _levelColor(entry.level).withValues(alpha: 0.2),
                     borderRadius: BorderRadius.circular(3),
@@ -489,9 +519,9 @@ class _LogEntryTile extends StatelessWidget {
   }
 
   static Color _levelColor(LogLevel level) => switch (level) {
-        LogLevel.error => Colors.redAccent,
-        LogLevel.warning => Colors.orangeAccent,
-        LogLevel.info => Colors.greenAccent,
-        LogLevel.debug => Colors.grey,
-      };
+    LogLevel.error => Colors.redAccent,
+    LogLevel.warning => Colors.orangeAccent,
+    LogLevel.info => Colors.greenAccent,
+    LogLevel.debug => Colors.grey,
+  };
 }

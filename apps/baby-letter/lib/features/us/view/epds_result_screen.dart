@@ -7,11 +7,7 @@ class EpdsResultScreen extends StatefulWidget {
   final int score;
   final bool isMom;
 
-  const EpdsResultScreen({
-    super.key,
-    required this.score,
-    required this.isMom,
-  });
+  const EpdsResultScreen({super.key, required this.score, required this.isMom});
 
   @override
   State<EpdsResultScreen> createState() => _EpdsResultScreenState();
@@ -37,10 +33,7 @@ class _EpdsResultScreenState extends State<EpdsResultScreen> {
           icon: const Icon(Icons.arrow_back, color: AppColors.textPrimary),
           onPressed: () => Navigator.of(context).pop(),
         ),
-        title: const Text(
-          '결과',
-          style: TextStyle(color: AppColors.textPrimary),
-        ),
+        title: const Text('결과', style: TextStyle(color: AppColors.textPrimary)),
       ),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -67,9 +60,9 @@ class _EpdsResultScreenState extends State<EpdsResultScreen> {
         Text(
           '잘 하고 있어요 💛',
           style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                color: AppColors.textPrimary,
-                fontWeight: FontWeight.w700,
-              ),
+            color: AppColors.textPrimary,
+            fontWeight: FontWeight.w700,
+          ),
         ),
         const SizedBox(height: 20),
 
@@ -82,9 +75,9 @@ class _EpdsResultScreenState extends State<EpdsResultScreen> {
         const SizedBox(height: 12),
         Text(
           '현재 상태가 양호해요',
-          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                color: AppColors.textSecondary,
-              ),
+          style: Theme.of(
+            context,
+          ).textTheme.bodyMedium?.copyWith(color: AppColors.textSecondary),
         ),
 
         const SizedBox(height: 28),
@@ -93,9 +86,9 @@ class _EpdsResultScreenState extends State<EpdsResultScreen> {
         Text(
           '나를 위한 셀프케어 💝',
           style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                color: AppColors.textPrimary,
-                fontWeight: FontWeight.w600,
-              ),
+            color: AppColors.textPrimary,
+            fontWeight: FontWeight.w600,
+          ),
         ),
         const SizedBox(height: 12),
 
@@ -140,8 +133,8 @@ class _EpdsResultScreenState extends State<EpdsResultScreen> {
                   Text(
                     '주간 변화 추이',
                     style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                          color: AppColors.textPrimary,
-                        ),
+                      color: AppColors.textPrimary,
+                    ),
                   ),
                 ],
               ),
@@ -153,9 +146,21 @@ class _EpdsResultScreenState extends State<EpdsResultScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
-                    _TrendDot(label: '1주전', height: 40, color: AppColors.success),
-                    _TrendDot(label: '2주전', height: 30, color: AppColors.success),
-                    _TrendDot(label: '지난주', height: 25, color: AppColors.success),
+                    _TrendDot(
+                      label: '1주전',
+                      height: 40,
+                      color: AppColors.success,
+                    ),
+                    _TrendDot(
+                      label: '2주전',
+                      height: 30,
+                      color: AppColors.success,
+                    ),
+                    _TrendDot(
+                      label: '지난주',
+                      height: 25,
+                      color: AppColors.success,
+                    ),
                     _TrendDot(
                       label: '이번주',
                       height: 20,
@@ -201,16 +206,16 @@ class _EpdsResultScreenState extends State<EpdsResultScreen> {
         Text(
           '요즘 좀 힘드시죠',
           style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                color: AppColors.textPrimary,
-                fontWeight: FontWeight.w700,
-              ),
+            color: AppColors.textPrimary,
+            fontWeight: FontWeight.w700,
+          ),
         ),
         const SizedBox(height: 8),
         Text(
           '그럴 수 있어요. 당신 잘못이 아니에요.',
-          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                color: AppColors.textSecondary,
-              ),
+          style: Theme.of(
+            context,
+          ).textTheme.bodyMedium?.copyWith(color: AppColors.textSecondary),
         ),
         const SizedBox(height: 20),
 
@@ -239,18 +244,18 @@ class _EpdsResultScreenState extends State<EpdsResultScreen> {
                 '육아는 정말 힘든 일이에요.\n지금 느끼는 감정은 자연스러운 거예요.',
                 textAlign: TextAlign.center,
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      color: AppColors.textPrimary,
-                      height: 1.6,
-                    ),
+                  color: AppColors.textPrimary,
+                  height: 1.6,
+                ),
               ),
               const SizedBox(height: 16),
               Text(
                 '전문 상담을 받아보시면\n마음이 한결 편해질 수 있어요.',
                 textAlign: TextAlign.center,
                 style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                      color: AppColors.textSecondary,
-                      height: 1.5,
-                    ),
+                  color: AppColors.textSecondary,
+                  height: 1.5,
+                ),
               ),
             ],
           ),
@@ -265,9 +270,7 @@ class _EpdsResultScreenState extends State<EpdsResultScreen> {
           decoration: BoxDecoration(
             color: AppColors.surface,
             borderRadius: BorderRadius.circular(12),
-            border: Border.all(
-              color: AppColors.warning.withValues(alpha: 0.3),
-            ),
+            border: Border.all(color: AppColors.warning.withValues(alpha: 0.3)),
           ),
           child: Row(
             children: [
@@ -280,16 +283,16 @@ class _EpdsResultScreenState extends State<EpdsResultScreen> {
                     Text(
                       '가까운 정신건강복지센터',
                       style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                            color: AppColors.textPrimary,
-                            fontWeight: FontWeight.w600,
-                          ),
+                        color: AppColors.textPrimary,
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
                     const SizedBox(height: 2),
                     Text(
                       '무료 상담을 받을 수 있어요',
                       style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                            color: AppColors.textSecondary,
-                          ),
+                        color: AppColors.textSecondary,
+                      ),
                     ),
                   ],
                 ),
@@ -321,15 +324,15 @@ class _EpdsResultScreenState extends State<EpdsResultScreen> {
                     Text(
                       '파트너에게 알릴까요?',
                       style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                            color: AppColors.textPrimary,
-                          ),
+                        color: AppColors.textPrimary,
+                      ),
                     ),
                     const SizedBox(height: 2),
                     Text(
                       '결과를 공유하면 서로 도울 수 있어요',
                       style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                            color: AppColors.textSecondary,
-                          ),
+                        color: AppColors.textSecondary,
+                      ),
                     ),
                   ],
                 ),
@@ -379,16 +382,16 @@ class _EpdsResultScreenState extends State<EpdsResultScreen> {
         Text(
           '당신은 혼자가 아니에요',
           style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                color: AppColors.textPrimary,
-                fontWeight: FontWeight.w700,
-              ),
+            color: AppColors.textPrimary,
+            fontWeight: FontWeight.w700,
+          ),
         ),
         const SizedBox(height: 8),
         Text(
           '도움을 요청하는 것은 용기 있는 일이에요',
-          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                color: AppColors.textSecondary,
-              ),
+          style: Theme.of(
+            context,
+          ).textTheme.bodyMedium?.copyWith(color: AppColors.textSecondary),
         ),
         const SizedBox(height: 20),
 
@@ -413,10 +416,10 @@ class _EpdsResultScreenState extends State<EpdsResultScreen> {
             '전문가와 이야기하는 것이\n가장 좋은 선택이에요',
             textAlign: TextAlign.center,
             style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                  color: AppColors.textPrimary,
-                  fontWeight: FontWeight.w600,
-                  height: 1.5,
-                ),
+              color: AppColors.textPrimary,
+              fontWeight: FontWeight.w600,
+              height: 1.5,
+            ),
           ),
         ),
 
@@ -472,15 +475,15 @@ class _EpdsResultScreenState extends State<EpdsResultScreen> {
                     Text(
                       '파트너에게 알리기',
                       style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                            color: AppColors.textPrimary,
-                          ),
+                        color: AppColors.textPrimary,
+                      ),
                     ),
                     const SizedBox(height: 2),
                     Text(
                       '함께 이겨낼 수 있어요',
                       style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                            color: AppColors.textSecondary,
-                          ),
+                        color: AppColors.textSecondary,
+                      ),
                     ),
                   ],
                 ),
@@ -505,9 +508,9 @@ class _EpdsResultScreenState extends State<EpdsResultScreen> {
           '이 설문은 선별 도구이며 진단이 아닙니다.\n정확한 진단은 전문가 상담이 필요합니다.',
           textAlign: TextAlign.center,
           style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                color: AppColors.textHint,
-                height: 1.5,
-              ),
+            color: AppColors.textHint,
+            height: 1.5,
+          ),
         ),
       ],
     );
@@ -557,15 +560,15 @@ class _ScoreCircle extends StatelessWidget {
           Text(
             '$score',
             style: Theme.of(context).textTheme.headlineLarge?.copyWith(
-                  color: color,
-                  fontWeight: FontWeight.w800,
-                ),
+              color: color,
+              fontWeight: FontWeight.w800,
+            ),
           ),
           Text(
             '/ $maxScore',
             style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                  color: color.withValues(alpha: 0.7),
-                ),
+              color: color.withValues(alpha: 0.7),
+            ),
           ),
         ],
       ),
@@ -605,17 +608,17 @@ class _SelfCareTipCard extends StatelessWidget {
                 Text(
                   title,
                   style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                        color: AppColors.textPrimary,
-                        fontWeight: FontWeight.w600,
-                      ),
+                    color: AppColors.textPrimary,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
                 const SizedBox(height: 2),
                 Text(
                   description,
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        color: AppColors.textSecondary,
-                        height: 1.4,
-                      ),
+                    color: AppColors.textSecondary,
+                    height: 1.4,
+                  ),
                 ),
               ],
             ),
@@ -655,7 +658,12 @@ class _TrendDot extends StatelessWidget {
                 ? Border.all(color: Colors.white, width: 2)
                 : null,
             boxShadow: isCurrent
-                ? [BoxShadow(color: color.withValues(alpha: 0.3), blurRadius: 6)]
+                ? [
+                    BoxShadow(
+                      color: color.withValues(alpha: 0.3),
+                      blurRadius: 6,
+                    ),
+                  ]
                 : null,
           ),
         ),
@@ -663,9 +671,9 @@ class _TrendDot extends StatelessWidget {
         Text(
           label,
           style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                color: AppColors.textHint,
-                fontSize: 9,
-              ),
+            color: AppColors.textHint,
+            fontSize: 9,
+          ),
         ),
       ],
     );
@@ -699,10 +707,7 @@ class _EmergencyButton extends StatelessWidget {
         decoration: BoxDecoration(
           color: AppColors.surface,
           borderRadius: BorderRadius.circular(16),
-          border: Border.all(
-            color: color.withValues(alpha: 0.3),
-            width: 1.5,
-          ),
+          border: Border.all(color: color.withValues(alpha: 0.3), width: 1.5),
         ),
         child: Row(
           children: [
@@ -715,26 +720,22 @@ class _EmergencyButton extends StatelessWidget {
                   Text(
                     title,
                     style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                          color: AppColors.textPrimary,
-                          fontWeight: FontWeight.w600,
-                        ),
+                      color: AppColors.textPrimary,
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
                   const SizedBox(height: 2),
                   Text(
                     subtitle,
                     style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                          color: color,
-                          fontWeight: FontWeight.w700,
-                        ),
+                      color: color,
+                      fontWeight: FontWeight.w700,
+                    ),
                   ),
                 ],
               ),
             ),
-            Icon(
-              Icons.phone_rounded,
-              color: color,
-              size: 28,
-            ),
+            Icon(Icons.phone_rounded, color: color, size: 28),
           ],
         ),
       ),

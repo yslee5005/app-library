@@ -28,8 +28,8 @@ class Logger {
     required this.config,
     required List<LogOutput> outputs,
     LogRedactor? redactor,
-  })  : _outputs = outputs,
-        _redactor = redactor;
+  }) : _outputs = outputs,
+       _redactor = redactor;
 
   final LogConfig config;
   final List<LogOutput> _outputs;
@@ -39,24 +39,26 @@ class Logger {
     String message, {
     LogCategory category = LogCategory.general,
     String? tag,
-  }) =>
-      _log(LogLevel.debug, message, category: category, tag: tag);
+  }) => _log(LogLevel.debug, message, category: category, tag: tag);
 
   void info(
     String message, {
     LogCategory category = LogCategory.general,
     String? tag,
-  }) =>
-      _log(LogLevel.info, message, category: category, tag: tag);
+  }) => _log(LogLevel.info, message, category: category, tag: tag);
 
   void warning(
     String message, {
     LogCategory category = LogCategory.general,
     String? tag,
     Object? error,
-  }) =>
-      _log(LogLevel.warning, message,
-          category: category, tag: tag, error: error);
+  }) => _log(
+    LogLevel.warning,
+    message,
+    category: category,
+    tag: tag,
+    error: error,
+  );
 
   void error(
     String message, {
@@ -64,9 +66,14 @@ class Logger {
     String? tag,
     Object? error,
     StackTrace? stackTrace,
-  }) =>
-      _log(LogLevel.error, message,
-          category: category, tag: tag, error: error, stackTrace: stackTrace);
+  }) => _log(
+    LogLevel.error,
+    message,
+    category: category,
+    tag: tag,
+    error: error,
+    stackTrace: stackTrace,
+  );
 
   /// Returns a category-scoped logger for convenience.
   CategoryLogger forCategory(LogCategory category) =>
@@ -90,11 +97,12 @@ class Logger {
     }
 
     // Redact if enabled
-    final finalMessage = (config.redactSensitiveData && _redactor != null)
-        ? _redactor.redact(message)
-        : (message.length > config.maxMessageLength
-            ? '${message.substring(0, config.maxMessageLength)}... [TRUNCATED]'
-            : message);
+    final finalMessage =
+        (config.redactSensitiveData && _redactor != null)
+            ? _redactor.redact(message)
+            : (message.length > config.maxMessageLength
+                ? '${message.substring(0, config.maxMessageLength)}... [TRUNCATED]'
+                : message);
 
     final entry = LogEntry(
       level: level,
@@ -128,8 +136,16 @@ class CategoryLogger {
   void warning(String message, {String? tag, Object? error}) =>
       _logger.warning(message, category: _category, tag: tag, error: error);
 
-  void error(String message,
-          {String? tag, Object? error, StackTrace? stackTrace}) =>
-      _logger.error(message,
-          category: _category, tag: tag, error: error, stackTrace: stackTrace);
+  void error(
+    String message, {
+    String? tag,
+    Object? error,
+    StackTrace? stackTrace,
+  }) => _logger.error(
+    message,
+    category: _category,
+    tag: tag,
+    error: error,
+    stackTrace: stackTrace,
+  );
 }

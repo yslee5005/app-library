@@ -23,14 +23,38 @@ void main() {
       return PetProfile(
         name: 'Test Dog',
         breedId: breedId,
-        birthDate: birthDate ?? DateTime.now().subtract(const Duration(days: 2555)), // ~7 years
+        birthDate:
+            birthDate ??
+            DateTime.now().subtract(const Duration(days: 2555)), // ~7 years
         weightKg: weightKg,
-        routines: routines ?? [
-          const DailyRoutine(id: 'walk_am', name: '아침 산책', icon: Icons.wb_sunny_outlined, category: 'walk'),
-          const DailyRoutine(id: 'walk_pm', name: '저녁 산책', icon: Icons.nightlight_outlined, category: 'walk'),
-          const DailyRoutine(id: 'meal_am', name: '아침 식사', icon: Icons.restaurant_outlined, category: 'meal'),
-          const DailyRoutine(id: 'meal_pm', name: '저녁 식사', icon: Icons.dinner_dining_outlined, category: 'meal'),
-        ],
+        routines:
+            routines ??
+            [
+              const DailyRoutine(
+                id: 'walk_am',
+                name: '아침 산책',
+                icon: Icons.wb_sunny_outlined,
+                category: 'walk',
+              ),
+              const DailyRoutine(
+                id: 'walk_pm',
+                name: '저녁 산책',
+                icon: Icons.nightlight_outlined,
+                category: 'walk',
+              ),
+              const DailyRoutine(
+                id: 'meal_am',
+                name: '아침 식사',
+                icon: Icons.restaurant_outlined,
+                category: 'meal',
+              ),
+              const DailyRoutine(
+                id: 'meal_pm',
+                name: '저녁 식사',
+                icon: Icons.dinner_dining_outlined,
+                category: 'meal',
+              ),
+            ],
         createdAt: DateTime.now(),
       );
     }
@@ -90,7 +114,9 @@ void main() {
 
     test('edge case: very old dog past median lifespan', () {
       final profile = _makeProfile(
-        birthDate: DateTime.now().subtract(const Duration(days: 5475)), // ~15 years
+        birthDate: DateTime.now().subtract(
+          const Duration(days: 5475),
+        ), // ~15 years
       );
       final stats = calculator.calculate(profile);
 

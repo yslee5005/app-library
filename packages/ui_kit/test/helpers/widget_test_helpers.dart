@@ -19,21 +19,11 @@ abstract final class TestScreenSizes {
 /// Wraps [child] in a [MaterialApp] + [Scaffold] for widget testing.
 ///
 /// Optionally set [screenSize] to test at specific dimensions.
-Widget buildTestApp(
-  Widget child, {
-  Size? screenSize,
-  ThemeData? theme,
-}) {
-  Widget app = MaterialApp(
-    theme: theme,
-    home: Scaffold(body: child),
-  );
+Widget buildTestApp(Widget child, {Size? screenSize, ThemeData? theme}) {
+  Widget app = MaterialApp(theme: theme, home: Scaffold(body: child));
 
   if (screenSize != null) {
-    app = MediaQuery(
-      data: MediaQueryData(size: screenSize),
-      child: app,
-    );
+    app = MediaQuery(data: MediaQueryData(size: screenSize), child: app);
   }
 
   return app;
@@ -96,12 +86,9 @@ void testResponsive(
   required Widget widget,
   List<Size>? sizes,
 }) {
-  final testSizes = sizes ??
-      [
-        TestScreenSizes.compact,
-        TestScreenSizes.phone,
-        TestScreenSizes.medium,
-      ];
+  final testSizes =
+      sizes ??
+      [TestScreenSizes.compact, TestScreenSizes.phone, TestScreenSizes.medium];
 
   group('$widgetName responsive', () {
     for (final size in testSizes) {

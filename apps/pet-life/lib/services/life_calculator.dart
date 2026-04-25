@@ -27,7 +27,7 @@ class LifeCalculator {
   final BreedDataService _breedService;
 
   LifeCalculator({BreedDataService? breedService})
-      : _breedService = breedService ?? BreedDataService();
+    : _breedService = breedService ?? BreedDataService();
 
   LifeStats calculate(PetProfile profile) {
     final breed = _breedService.getBreedById(profile.breedId);
@@ -53,8 +53,10 @@ class LifeCalculator {
     final humanAge = _calculateHumanAge(ageYears);
 
     // Life percentage
-    final lifePercentage =
-        ((ageYears / medianLifespan) * 100).clamp(0.0, 100.0);
+    final lifePercentage = ((ageYears / medianLifespan) * 100).clamp(
+      0.0,
+      100.0,
+    );
 
     return LifeStats(
       remainingDays: remainingDays,

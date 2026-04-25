@@ -83,23 +83,18 @@ class _RecordPregnantViewState extends State<RecordPregnantView> {
                   ),
                   child: Column(
                     children: [
-                      const Text(
-                        '👶',
-                        style: TextStyle(fontSize: 40),
-                      ),
+                      const Text('👶', style: TextStyle(fontSize: 40)),
                       const SizedBox(height: 12),
                       Text(
                         '태동 카운터',
-                        style:
-                            Theme.of(context).textTheme.titleLarge?.copyWith(
+                        style: Theme.of(context).textTheme.titleLarge?.copyWith(
                           color: AppColors.textPrimary,
                         ),
                       ),
                       const SizedBox(height: 8),
                       Text(
                         '아기의 움직임을 기록해보세요',
-                        style:
-                            Theme.of(context).textTheme.bodyMedium?.copyWith(
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                           color: AppColors.textSecondary,
                         ),
                       ),
@@ -166,8 +161,8 @@ class _RecordPregnantViewState extends State<RecordPregnantView> {
                               controller: _weightController,
                               keyboardType:
                                   const TextInputType.numberWithOptions(
-                                decimal: true,
-                              ),
+                                    decimal: true,
+                                  ),
                               decoration: InputDecoration(
                                 hintText: '__',
                                 suffixText: 'kg',
@@ -187,8 +182,9 @@ class _RecordPregnantViewState extends State<RecordPregnantView> {
                                 enabledBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(8),
                                   borderSide: BorderSide(
-                                    color:
-                                        AppColors.textHint.withValues(alpha: 0.5),
+                                    color: AppColors.textHint.withValues(
+                                      alpha: 0.5,
+                                    ),
                                   ),
                                 ),
                               ),
@@ -224,8 +220,9 @@ class _RecordPregnantViewState extends State<RecordPregnantView> {
                                 enabledBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(8),
                                   borderSide: BorderSide(
-                                    color:
-                                        AppColors.textHint.withValues(alpha: 0.5),
+                                    color: AppColors.textHint.withValues(
+                                      alpha: 0.5,
+                                    ),
                                   ),
                                 ),
                               ),
@@ -262,8 +259,9 @@ class _RecordPregnantViewState extends State<RecordPregnantView> {
                                 enabledBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(8),
                                   borderSide: BorderSide(
-                                    color:
-                                        AppColors.textHint.withValues(alpha: 0.5),
+                                    color: AppColors.textHint.withValues(
+                                      alpha: 0.5,
+                                    ),
                                   ),
                                 ),
                               ),
@@ -274,10 +272,7 @@ class _RecordPregnantViewState extends State<RecordPregnantView> {
                       const SizedBox(height: 16),
 
                       // 기분 이모지 셀렉터
-                      Text(
-                        '기분',
-                        style: Theme.of(context).textTheme.bodyMedium,
-                      ),
+                      Text('기분', style: Theme.of(context).textTheme.bodyMedium),
                       const SizedBox(height: 8),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -316,16 +311,14 @@ class _RecordPregnantViewState extends State<RecordPregnantView> {
                         maxLines: 3,
                         decoration: InputDecoration(
                           hintText: '오늘의 메모를 적어보세요...',
-                          hintStyle:
-                              const TextStyle(color: AppColors.textHint),
+                          hintStyle: const TextStyle(color: AppColors.textHint),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12),
                           ),
                           enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12),
                             borderSide: BorderSide(
-                              color:
-                                  AppColors.textHint.withValues(alpha: 0.5),
+                              color: AppColors.textHint.withValues(alpha: 0.5),
                             ),
                           ),
                         ),
@@ -366,11 +359,7 @@ class _RecordPregnantViewState extends State<RecordPregnantView> {
                             _WeekdayBar(label: '목', value: 0.7),
                             _WeekdayBar(label: '금', value: 0.9),
                             _WeekdayBar(label: '토', value: 0.4),
-                            _WeekdayBar(
-                              label: '일',
-                              value: 0.0,
-                              isToday: true,
-                            ),
+                            _WeekdayBar(label: '일', value: 0.0, isToday: true),
                           ],
                         ),
                       ),
@@ -458,9 +447,7 @@ class _KickCounterPlaceholder extends StatelessWidget {
         title: const Text('태동 카운터'),
         backgroundColor: AppColors.cream,
       ),
-      body: const Center(
-        child: Text('태동 카운터 화면 (C3)'),
-      ),
+      body: const Center(child: Text('태동 카운터 화면 (C3)')),
     );
   }
 }

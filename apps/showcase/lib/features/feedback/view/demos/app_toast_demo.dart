@@ -15,35 +15,39 @@ class AppToastDemo extends StatelessWidget {
           alignment: WrapAlignment.center,
           children: [
             ElevatedButton(
-              onPressed: () => AppToast.show(
-                context,
-                message: 'Info toast message',
-                variant: AppToastVariant.info,
-              ),
+              onPressed:
+                  () => AppToast.show(
+                    context,
+                    message: 'Info toast message',
+                    variant: AppToastVariant.info,
+                  ),
               child: const Text('Info Toast'),
             ),
             ElevatedButton(
-              onPressed: () => AppToast.show(
-                context,
-                message: 'Success toast message',
-                variant: AppToastVariant.success,
-              ),
+              onPressed:
+                  () => AppToast.show(
+                    context,
+                    message: 'Success toast message',
+                    variant: AppToastVariant.success,
+                  ),
               child: const Text('Success Toast'),
             ),
             ElevatedButton(
-              onPressed: () => AppToast.show(
-                context,
-                message: 'Error toast message',
-                variant: AppToastVariant.error,
-              ),
+              onPressed:
+                  () => AppToast.show(
+                    context,
+                    message: 'Error toast message',
+                    variant: AppToastVariant.error,
+                  ),
               child: const Text('Error Toast'),
             ),
             ElevatedButton(
-              onPressed: () => AppToast.show(
-                context,
-                message: 'Warning toast message',
-                variant: AppToastVariant.warning,
-              ),
+              onPressed:
+                  () => AppToast.show(
+                    context,
+                    message: 'Warning toast message',
+                    variant: AppToastVariant.warning,
+                  ),
               child: const Text('Warning Toast'),
             ),
           ],

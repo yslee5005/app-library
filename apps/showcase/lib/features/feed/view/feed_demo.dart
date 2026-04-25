@@ -19,42 +19,52 @@ class FeedDemo extends StatelessWidget {
             title: const Text('FeedListView'),
             subtitle: const Text('Infinite scroll feed with cards'),
             trailing: const Icon(Icons.chevron_right),
-            onTap: () => Navigator.push(
-              context,
-              MaterialPageRoute<void>(builder: (_) => const FeedListViewDemo()),
-            ),
+            onTap:
+                () => Navigator.push(
+                  context,
+                  MaterialPageRoute<void>(
+                    builder: (_) => const FeedListViewDemo(),
+                  ),
+                ),
           ),
           ListTile(
             leading: const Icon(Icons.credit_card),
             title: const Text('AppCard'),
-            subtitle: const Text('Vertical, horizontal, and text-only variants'),
-            trailing: const Icon(Icons.chevron_right),
-            onTap: () => Navigator.push(
-              context,
-              MaterialPageRoute<void>(builder: (_) => const AppCardDemo()),
+            subtitle: const Text(
+              'Vertical, horizontal, and text-only variants',
             ),
+            trailing: const Icon(Icons.chevron_right),
+            onTap:
+                () => Navigator.push(
+                  context,
+                  MaterialPageRoute<void>(builder: (_) => const AppCardDemo()),
+                ),
           ),
           ListTile(
             leading: const Icon(Icons.list),
             title: const Text('AppListTile'),
             subtitle: const Text('List tile with leading, trailing, and tap'),
             trailing: const Icon(Icons.chevron_right),
-            onTap: () => Navigator.push(
-              context,
-              MaterialPageRoute<void>(builder: (_) => const AppListTileDemo()),
-            ),
+            onTap:
+                () => Navigator.push(
+                  context,
+                  MaterialPageRoute<void>(
+                    builder: (_) => const AppListTileDemo(),
+                  ),
+                ),
           ),
           ListTile(
             leading: const Icon(Icons.article),
             title: const Text('DetailScreenLayout'),
             subtitle: const Text('Collapsing hero image detail screen'),
             trailing: const Icon(Icons.chevron_right),
-            onTap: () => Navigator.push(
-              context,
-              MaterialPageRoute<void>(
-                builder: (_) => const DetailScreenLayoutDemo(),
-              ),
-            ),
+            onTap:
+                () => Navigator.push(
+                  context,
+                  MaterialPageRoute<void>(
+                    builder: (_) => const DetailScreenLayoutDemo(),
+                  ),
+                ),
           ),
         ],
       ),

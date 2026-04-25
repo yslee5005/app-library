@@ -17,9 +17,9 @@ class AppListTileDemo extends StatelessWidget {
             leading: CircleAvatar(child: Text('${i + 1}')),
             trailing: const Icon(Icons.chevron_right),
             onTap: () {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text('Tapped item ${i + 1}')),
-              );
+              ScaffoldMessenger.of(
+                context,
+              ).showSnackBar(SnackBar(content: Text('Tapped item ${i + 1}')));
             },
           );
         },

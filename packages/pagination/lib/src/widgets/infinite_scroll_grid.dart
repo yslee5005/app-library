@@ -111,9 +111,11 @@ class _InfiniteScrollGridState<T> extends State<InfiniteScrollGrid<T>> {
   Widget build(BuildContext context) {
     return switch (widget.state) {
       PaginationInitial() =>
-        widget.loadingWidget ?? const Center(child: CircularProgressIndicator()),
+        widget.loadingWidget ??
+            const Center(child: CircularProgressIndicator()),
       PaginationLoading(:final items) when items.isEmpty =>
-        widget.loadingWidget ?? const Center(child: CircularProgressIndicator()),
+        widget.loadingWidget ??
+            const Center(child: CircularProgressIndicator()),
       PaginationError(:final exception, :final items) when items.isEmpty =>
         widget.errorWidget?.call(exception) ??
             Center(child: Text('Error: $exception')),
@@ -154,7 +156,8 @@ class _InfiniteScrollGridState<T> extends State<InfiniteScrollGrid<T>> {
         ),
         if (widget.state is PaginationLoading<T>)
           SliverToBoxAdapter(
-            child: widget.loadingWidget ??
+            child:
+                widget.loadingWidget ??
                 const Padding(
                   padding: EdgeInsets.all(16),
                   child: Center(child: CircularProgressIndicator()),
@@ -170,10 +173,7 @@ class _InfiniteScrollGridState<T> extends State<InfiniteScrollGrid<T>> {
     );
 
     if (widget.onRefresh != null) {
-      grid = RefreshIndicator(
-        onRefresh: widget.onRefresh!,
-        child: grid,
-      );
+      grid = RefreshIndicator(onRefresh: widget.onRefresh!, child: grid);
     }
 
     return grid;

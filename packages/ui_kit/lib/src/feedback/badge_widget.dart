@@ -46,10 +46,8 @@ class BadgeWidget extends StatelessWidget {
     final (top, right, bottom, left) = switch (position) {
       BadgePosition.topEnd => (0.0, 0.0, null as double?, null as double?),
       BadgePosition.topStart => (0.0, null as double?, null as double?, 0.0),
-      BadgePosition.bottomEnd =>
-        (null as double?, 0.0, 0.0, null as double?),
-      BadgePosition.bottomStart =>
-        (null as double?, null as double?, 0.0, 0.0),
+      BadgePosition.bottomEnd => (null as double?, 0.0, 0.0, null as double?),
+      BadgePosition.bottomStart => (null as double?, null as double?, 0.0, 0.0),
     };
 
     return Stack(
@@ -63,33 +61,40 @@ class BadgeWidget extends StatelessWidget {
           left: left,
           child: Transform.translate(
             offset: const Offset(4, -4),
-            child: showDot
-                ? Container(
-                    width: 10,
-                    height: 10,
-                    decoration: BoxDecoration(color: bg, shape: BoxShape.circle),
-                  )
-                : Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: AppSpacing.xs,
-                      vertical: 2,
-                    ),
-                    constraints: const BoxConstraints(minWidth: 18, minHeight: 18),
-                    decoration: BoxDecoration(
-                      color: bg,
-                      borderRadius: BorderRadius.circular(9),
-                    ),
-                    alignment: Alignment.center,
-                    child: Text(
-                      count! > 99 ? '99+' : count.toString(),
-                      style: theme.textTheme.labelSmall?.copyWith(
-                        color: fg,
-                        fontSize: 10,
-                        height: 1,
+            child:
+                showDot
+                    ? Container(
+                      width: 10,
+                      height: 10,
+                      decoration: BoxDecoration(
+                        color: bg,
+                        shape: BoxShape.circle,
                       ),
-                      textAlign: TextAlign.center,
+                    )
+                    : Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: AppSpacing.xs,
+                        vertical: 2,
+                      ),
+                      constraints: const BoxConstraints(
+                        minWidth: 18,
+                        minHeight: 18,
+                      ),
+                      decoration: BoxDecoration(
+                        color: bg,
+                        borderRadius: BorderRadius.circular(9),
+                      ),
+                      alignment: Alignment.center,
+                      child: Text(
+                        count! > 99 ? '99+' : count.toString(),
+                        style: theme.textTheme.labelSmall?.copyWith(
+                          color: fg,
+                          fontSize: 10,
+                          height: 1,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
                     ),
-                  ),
           ),
         ),
       ],

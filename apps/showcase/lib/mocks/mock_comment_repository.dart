@@ -39,12 +39,15 @@ class MockCommentRepository implements CommentRepository {
   }) async {
     await Future<void>.delayed(const Duration(milliseconds: 500));
 
-    final filtered = _comments
-        .where((c) =>
-            c.contentType == filter.contentType &&
-            c.contentId == filter.contentId &&
-            !c.isDeleted,)
-        .toList();
+    final filtered =
+        _comments
+            .where(
+              (c) =>
+                  c.contentType == filter.contentType &&
+                  c.contentId == filter.contentId &&
+                  !c.isDeleted,
+            )
+            .toList();
 
     // Apply cursor-based pagination
     var startIndex = 0;
@@ -59,16 +62,19 @@ class MockCommentRepository implements CommentRepository {
     );
 
     // Mark liked comments for current user
-    final items = pageItems.map((c) {
-      return c.copyWith(isLiked: _likedCommentIds.contains(c.id));
-    }).toList();
+    final items =
+        pageItems.map((c) {
+          return c.copyWith(isLiked: _likedCommentIds.contains(c.id));
+        }).toList();
 
-    return Success(PaginatedResult(
-      items: items,
-      hasMore: endIndex < filtered.length,
-      cursor: endIndex < filtered.length ? '$endIndex' : null,
-      totalCount: filtered.length,
-    ),);
+    return Success(
+      PaginatedResult(
+        items: items,
+        hasMore: endIndex < filtered.length,
+        cursor: endIndex < filtered.length ? '$endIndex' : null,
+        totalCount: filtered.length,
+      ),
+    );
   }
 
   @override
@@ -155,10 +161,7 @@ class MockCommentRepository implements CommentRepository {
       );
     }
 
-    return Success((
-      isLiked: !wasLiked,
-      likeCount: _comments[index].likeCount,
-    ),);
+    return Success((isLiked: !wasLiked, likeCount: _comments[index].likeCount));
   }
 
   @override
@@ -167,12 +170,15 @@ class MockCommentRepository implements CommentRepository {
     required String contentId,
   }) async {
     await Future<void>.delayed(const Duration(milliseconds: 200));
-    final count = _comments
-        .where((c) =>
-            c.contentType == contentType &&
-            c.contentId == contentId &&
-            !c.isDeleted,)
-        .length;
+    final count =
+        _comments
+            .where(
+              (c) =>
+                  c.contentType == contentType &&
+                  c.contentId == contentId &&
+                  !c.isDeleted,
+            )
+            .length;
     return Success(count);
   }
 }

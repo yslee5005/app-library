@@ -16,9 +16,9 @@ class ProfileEditFormDemo extends StatelessWidget {
           initialName: SampleData.userName,
           initialBio: SampleData.userBio,
           onSave: (name, bio) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text('Saved: $name')),
-            );
+            ScaffoldMessenger.of(
+              context,
+            ).showSnackBar(SnackBar(content: Text('Saved: $name')));
           },
         ),
       ),

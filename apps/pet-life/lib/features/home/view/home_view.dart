@@ -66,21 +66,21 @@ class _HomeViewState extends State<HomeView> {
   Future<void> _completeRoutine(DailyRoutine routine) async {
     HapticFeedback.mediumImpact();
     final today = PetStorageService.dateString(DateTime.now());
-    await PetStorageService().addLog(DailyLog(
-      date: today,
-      routineId: routine.id,
-      completed: true,
-      completedAt: DateTime.now(),
-    ));
+    await PetStorageService().addLog(
+      DailyLog(
+        date: today,
+        routineId: routine.id,
+        completed: true,
+        completedAt: DateTime.now(),
+      ),
+    );
     await _loadData();
   }
 
   @override
   Widget build(BuildContext context) {
     if (_profile == null) {
-      return const Scaffold(
-        body: Center(child: CircularProgressIndicator()),
-      );
+      return const Scaffold(body: Center(child: CircularProgressIndicator()));
     }
 
     return Scaffold(
@@ -118,7 +118,11 @@ class _HomeViewState extends State<HomeView> {
       children: [
         Text(
           '🐾 ${_profile!.name}',
-          style: const TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
+          style: const TextStyle(
+            color: Colors.white,
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+          ),
         ),
         const Spacer(),
         if (totalStreak > 0)
@@ -130,7 +134,11 @@ class _HomeViewState extends State<HomeView> {
             ),
             child: Text(
               '🔥 $totalStreak',
-              style: TextStyle(color: AppConfig.accentColor, fontSize: 13, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                color: AppConfig.accentColor,
+                fontSize: 13,
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ),
       ],
@@ -150,7 +158,11 @@ class _HomeViewState extends State<HomeView> {
               children: [
                 Text(
                   _dogMessage?.message ?? '안녕하세요! 🐾',
-                  style: const TextStyle(color: Colors.white, fontSize: 15, height: 1.4),
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 15,
+                    height: 1.4,
+                  ),
                 ),
                 const SizedBox(height: 4),
                 Text(
@@ -205,7 +217,11 @@ class _HomeViewState extends State<HomeView> {
       children: [
         const Text(
           '초코가 좋아하는 것들',
-          style: TextStyle(color: Colors.white, fontSize: 17, fontWeight: FontWeight.w600),
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 17,
+            fontWeight: FontWeight.w600,
+          ),
         ),
         const SizedBox(height: 4),
         const Text(
@@ -244,9 +260,10 @@ class _HomeViewState extends State<HomeView> {
       }
     }
 
-    final accentColor = urgency == 'critical'
-        ? const Color(0xFFFF6B6B)
-        : urgency == 'warning'
+    final accentColor =
+        urgency == 'critical'
+            ? const Color(0xFFFF6B6B)
+            : urgency == 'warning'
             ? const Color(0xFFFFB347)
             : const Color(0xFFD4A574);
 
@@ -275,7 +292,10 @@ class _HomeViewState extends State<HomeView> {
                     borderRadius: BorderRadius.circular(14),
                   ),
                   alignment: Alignment.center,
-                  child: Text(activity.emoji, style: const TextStyle(fontSize: 24)),
+                  child: Text(
+                    activity.emoji,
+                    style: const TextStyle(fontSize: 24),
+                  ),
                 ),
                 const SizedBox(width: 14),
                 // Name + freq
@@ -285,10 +305,20 @@ class _HomeViewState extends State<HomeView> {
                     children: [
                       Text(
                         activity.name,
-                        style: const TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w600),
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
                       if (freq.isNotEmpty)
-                        Text(freq, style: const TextStyle(color: Color(0xFF8888A0), fontSize: 12)),
+                        Text(
+                          freq,
+                          style: const TextStyle(
+                            color: Color(0xFF8888A0),
+                            fontSize: 12,
+                          ),
+                        ),
                     ],
                   ),
                 ),
@@ -299,7 +329,10 @@ class _HomeViewState extends State<HomeView> {
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     color: accentColor.withOpacity(0.12),
-                    border: Border.all(color: accentColor.withOpacity(0.3), width: 2),
+                    border: Border.all(
+                      color: accentColor.withOpacity(0.3),
+                      width: 2,
+                    ),
                   ),
                   alignment: Alignment.center,
                   child: Column(
@@ -307,9 +340,20 @@ class _HomeViewState extends State<HomeView> {
                     children: [
                       Text(
                         '$remaining',
-                        style: TextStyle(color: accentColor, fontSize: 20, fontWeight: FontWeight.bold, height: 1),
+                        style: TextStyle(
+                          color: accentColor,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          height: 1,
+                        ),
                       ),
-                      Text('번', style: TextStyle(color: accentColor.withOpacity(0.7), fontSize: 10)),
+                      Text(
+                        '번',
+                        style: TextStyle(
+                          color: accentColor.withOpacity(0.7),
+                          fontSize: 10,
+                        ),
+                      ),
                     ],
                   ),
                 ),
@@ -327,7 +371,12 @@ class _HomeViewState extends State<HomeView> {
               ),
               child: Text(
                 '$name와 $humanUnit',
-                style: TextStyle(color: accentColor, fontSize: 14, fontWeight: FontWeight.w500, height: 1.4),
+                style: TextStyle(
+                  color: accentColor,
+                  fontSize: 14,
+                  fontWeight: FontWeight.w500,
+                  height: 1.4,
+                ),
               ),
             ),
             const SizedBox(height: 12),
@@ -341,35 +390,49 @@ class _HomeViewState extends State<HomeView> {
                   height: 10,
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    color: isOverdue ? const Color(0xFFFF6B6B) : const Color(0xFF50C878),
+                    color:
+                        isOverdue
+                            ? const Color(0xFFFF6B6B)
+                            : const Color(0xFF50C878),
                   ),
                 ),
                 Container(
                   width: 40,
                   height: 2,
-                  color: isOverdue
-                      ? const Color(0xFFFF6B6B).withOpacity(0.3)
-                      : const Color(0xFF50C878).withOpacity(0.3),
+                  color:
+                      isOverdue
+                          ? const Color(0xFFFF6B6B).withOpacity(0.3)
+                          : const Color(0xFF50C878).withOpacity(0.3),
                 ),
                 const SizedBox(width: 8),
                 Text(
                   '마지막: $lastLabel',
                   style: TextStyle(
-                    color: isOverdue ? const Color(0xFFFF8A80) : const Color(0xFF90B0A0),
+                    color:
+                        isOverdue
+                            ? const Color(0xFFFF8A80)
+                            : const Color(0xFF90B0A0),
                     fontSize: 12,
                   ),
                 ),
                 if (isOverdue && missed > 0) ...[
                   const SizedBox(width: 6),
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 8,
+                      vertical: 2,
+                    ),
                     decoration: BoxDecoration(
                       color: const Color(0xFFFF6B6B).withOpacity(0.15),
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: Text(
                       '$missed번 놓침',
-                      style: const TextStyle(color: Color(0xFFFF8A80), fontSize: 10, fontWeight: FontWeight.w600),
+                      style: const TextStyle(
+                        color: Color(0xFFFF8A80),
+                        fontSize: 10,
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
                   ),
                 ],
@@ -389,7 +452,10 @@ class _HomeViewState extends State<HomeView> {
                         Flexible(
                           child: Text(
                             '1번 더 하면 → ${remainingIfMore}번',
-                            style: const TextStyle(color: Color(0xFF80D0A0), fontSize: 11),
+                            style: const TextStyle(
+                              color: Color(0xFF80D0A0),
+                              fontSize: 11,
+                            ),
                             overflow: TextOverflow.ellipsis,
                           ),
                         ),
@@ -400,7 +466,10 @@ class _HomeViewState extends State<HomeView> {
                   const Spacer(),
                 Text(
                   activity.lossMessage(age),
-                  style: const TextStyle(color: Color(0xFF606078), fontSize: 10),
+                  style: const TextStyle(
+                    color: Color(0xFF606078),
+                    fontSize: 10,
+                  ),
                 ),
               ],
             ),
@@ -417,11 +486,16 @@ class _HomeViewState extends State<HomeView> {
                     foregroundColor: accentColor,
                     elevation: 0,
                     padding: const EdgeInsets.symmetric(vertical: 12),
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(14),
+                    ),
                   ),
                   child: Text(
                     '$name와 ${activity.name} 가기 ${activity.emoji}',
-                    style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 14),
+                    style: const TextStyle(
+                      fontWeight: FontWeight.w600,
+                      fontSize: 14,
+                    ),
                   ),
                 ),
               ),
@@ -445,63 +519,81 @@ class _HomeViewState extends State<HomeView> {
         Wrap(
           spacing: 8,
           runSpacing: 8,
-          children: _profile!.routines.map((routine) {
-            final isCompleted = _todayLogs.any(
-              (l) => l.routineId == routine.id && l.completed,
-            );
-            final streak = _streaks[routine.id] ?? 0;
+          children:
+              _profile!.routines.map((routine) {
+                final isCompleted = _todayLogs.any(
+                  (l) => l.routineId == routine.id && l.completed,
+                );
+                final streak = _streaks[routine.id] ?? 0;
 
-            return GestureDetector(
-              onTap: isCompleted ? null : () => _completeRoutine(routine),
-              child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
-                decoration: BoxDecoration(
-                  color: isCompleted
-                      ? AppConfig.accentColor.withOpacity(0.15)
-                      : Colors.white.withOpacity(0.06),
-                  borderRadius: BorderRadius.circular(14),
-                  border: Border.all(
-                    color: isCompleted
-                        ? AppConfig.accentColor.withOpacity(0.3)
-                        : Colors.white.withOpacity(0.05),
+                return GestureDetector(
+                  onTap: isCompleted ? null : () => _completeRoutine(routine),
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 14,
+                      vertical: 10,
+                    ),
+                    decoration: BoxDecoration(
+                      color:
+                          isCompleted
+                              ? AppConfig.accentColor.withOpacity(0.15)
+                              : Colors.white.withOpacity(0.06),
+                      borderRadius: BorderRadius.circular(14),
+                      border: Border.all(
+                        color:
+                            isCompleted
+                                ? AppConfig.accentColor.withOpacity(0.3)
+                                : Colors.white.withOpacity(0.05),
+                      ),
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(
+                          routine.icon,
+                          size: 16,
+                          color:
+                              isCompleted
+                                  ? AppConfig.accentColor
+                                  : Colors.white38,
+                        ),
+                        const SizedBox(width: 6),
+                        Text(
+                          routine.name,
+                          style: TextStyle(
+                            color:
+                                isCompleted
+                                    ? AppConfig.accentColor
+                                    : Colors.white54,
+                            fontSize: 13,
+                          ),
+                        ),
+                        if (streak > 0 && isCompleted) ...[
+                          const SizedBox(width: 4),
+                          Text(
+                            '🔥$streak',
+                            style: TextStyle(
+                              color: AppConfig.accentColor,
+                              fontSize: 11,
+                            ),
+                          ),
+                        ],
+                        if (isCompleted)
+                          const Padding(
+                            padding: EdgeInsets.only(left: 4),
+                            child: Icon(
+                              Icons.check,
+                              size: 14,
+                              color: Colors.green,
+                            ),
+                          ),
+                      ],
+                    ),
                   ),
-                ),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Icon(
-                      routine.icon,
-                      size: 16,
-                      color: isCompleted ? AppConfig.accentColor : Colors.white38,
-                    ),
-                    const SizedBox(width: 6),
-                    Text(
-                      routine.name,
-                      style: TextStyle(
-                        color: isCompleted ? AppConfig.accentColor : Colors.white54,
-                        fontSize: 13,
-                      ),
-                    ),
-                    if (streak > 0 && isCompleted) ...[
-                      const SizedBox(width: 4),
-                      Text(
-                        '🔥$streak',
-                        style: TextStyle(color: AppConfig.accentColor, fontSize: 11),
-                      ),
-                    ],
-                    if (isCompleted)
-                      const Padding(
-                        padding: EdgeInsets.only(left: 4),
-                        child: Icon(Icons.check, size: 14, color: Colors.green),
-                      ),
-                  ],
-                ),
-              ),
-            );
-          }).toList(),
+                );
+              }).toList(),
         ),
       ],
     );
   }
-
 }

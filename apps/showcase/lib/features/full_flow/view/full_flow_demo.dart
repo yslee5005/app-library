@@ -44,12 +44,14 @@ class _MockArticleRepo implements PaginatedRepository<_Article> {
       ),
     );
 
-    return Success(PaginatedResult(
-      items: items,
-      hasMore: end < total,
-      cursor: end < total ? '$end' : null,
-      totalCount: total,
-    ),);
+    return Success(
+      PaginatedResult(
+        items: items,
+        hasMore: end < total,
+        cursor: end < total ? '$end' : null,
+        totalCount: total,
+      ),
+    );
   }
 }
 
@@ -64,9 +66,9 @@ final _articleRepoProvider = Provider<_MockArticleRepo>(
 );
 
 final _articleListProvider = AsyncNotifierProvider<
-    PaginationNotifier<_Article>, PaginationState<_Article>>(
-  _ArticleNotifier.new,
-);
+  PaginationNotifier<_Article>,
+  PaginationState<_Article>
+>(_ArticleNotifier.new);
 
 // ---------------------------------------------------------------------------
 // Entry point — decides Login vs Feed based on auth state
@@ -80,22 +82,25 @@ class FullFlowDemo extends ConsumerWidget {
     final authAsync = ref.watch(authNotifierProvider);
 
     return authAsync.when(
-      loading: () => Scaffold(
-        appBar: AppBar(title: const Text('Full Flow')),
-        body: const Center(child: CircularProgressIndicator()),
-      ),
-      error: (e, _) => Scaffold(
-        appBar: AppBar(title: const Text('Full Flow')),
-        body: Center(child: Text('Error: $e')),
-      ),
-      data: (state) => switch (state) {
-        Authenticated(:final user) => _FeedScreen(user: user),
-        AuthLoading() => Scaffold(
+      loading:
+          () => Scaffold(
             appBar: AppBar(title: const Text('Full Flow')),
             body: const Center(child: CircularProgressIndicator()),
           ),
-        _ => const _LoginScreen(),
-      },
+      error:
+          (e, _) => Scaffold(
+            appBar: AppBar(title: const Text('Full Flow')),
+            body: Center(child: Text('Error: $e')),
+          ),
+      data:
+          (state) => switch (state) {
+            Authenticated(:final user) => _FeedScreen(user: user),
+            AuthLoading() => Scaffold(
+              appBar: AppBar(title: const Text('Full Flow')),
+              body: const Center(child: CircularProgressIndicator()),
+            ),
+            _ => const _LoginScreen(),
+          },
     );
   }
 }
@@ -115,10 +120,9 @@ class _LoginScreen extends ConsumerWidget {
         padding: const EdgeInsets.all(16),
         child: LoginForm(
           onLogin: (email, password) {
-            ref.read(authNotifierProvider.notifier).signInWithEmail(
-                  email: email,
-                  password: password,
-                );
+            ref
+                .read(authNotifierProvider.notifier)
+                .signInWithEmail(email: email, password: password);
           },
           onGoogleLogin: () {
             ref.read(authNotifierProvider.notifier).signInWithGoogle();
@@ -166,8 +170,9 @@ class _FeedScreen extends ConsumerWidget {
       body: asyncState.when(
         loading: () => const Center(child: CircularProgressIndicator()),
         error: (e, _) => Center(child: Text('Error: $e')),
-        data: (paginationState) =>
-            _ArticleList(state: paginationState, user: user),
+        data:
+            (paginationState) =>
+                _ArticleList(state: paginationState, user: user),
       ),
     );
   }
@@ -225,8 +230,7 @@ class _ArticleList extends ConsumerWidget {
           onTap: () {
             Navigator.of(context).push(
               MaterialPageRoute<void>(
-                builder: (_) =>
-                    _DetailScreen(article: article, user: user),
+                builder: (_) => _DetailScreen(article: article, user: user),
               ),
             );
           },
@@ -256,10 +260,8 @@ class _DetailScreen extends ConsumerStatefulWidget {
 class _DetailScreenState extends ConsumerState<_DetailScreen> {
   final _commentController = TextEditingController();
 
-  CommentListKey get _key => CommentListKey(
-        contentType: 'article',
-        contentId: widget.article.id,
-      );
+  CommentListKey get _key =>
+      CommentListKey(contentType: 'article', contentId: widget.article.id);
 
   @override
   void dispose() {
@@ -281,8 +283,9 @@ class _DetailScreenState extends ConsumerState<_DetailScreen> {
           Container(
             width: double.infinity,
             height: 180,
-            color: Colors.primaries[widget.article.colorIndex]
-                .withValues(alpha: 0.2),
+            color: Colors.primaries[widget.article.colorIndex].withValues(
+              alpha: 0.2,
+            ),
             child: Center(
               child: Icon(
                 Icons.article,
@@ -322,11 +325,11 @@ class _DetailScreenState extends ConsumerState<_DetailScreen> {
           // Comments list
           Expanded(
             child: commentsAsync.when(
-              loading: () =>
-                  const Center(child: CircularProgressIndicator()),
+              loading: () => const Center(child: CircularProgressIndicator()),
               error: (e, _) => Center(child: Text('Error: $e')),
-              data: (paginationState) =>
-                  _CommentList(state: paginationState, commentKey: _key),
+              data:
+                  (paginationState) =>
+                      _CommentList(state: paginationState, commentKey: _key),
             ),
           ),
 
@@ -372,10 +375,9 @@ class _DetailScreenState extends ConsumerState<_DetailScreen> {
     final text = _commentController.text.trim();
     if (text.isEmpty) return;
 
-    ref.read(commentListProvider(_key).notifier).addComment(
-          body: text,
-          userId: widget.user.id,
-        );
+    ref
+        .read(commentListProvider(_key).notifier)
+        .addComment(body: text, userId: widget.user.id);
     _commentController.clear();
   }
 }
@@ -396,9 +398,7 @@ class _CommentList extends ConsumerWidget {
     };
 
     if (items.isEmpty) {
-      return const Center(
-        child: Text('No comments yet. Be the first!'),
-      );
+      return const Center(child: Text('No comments yet. Be the first!'));
     }
 
     final colors = Theme.of(context).colorScheme;
@@ -429,10 +429,9 @@ class _CommentList extends ConsumerWidget {
           trailing: InkWell(
             borderRadius: BorderRadius.circular(20),
             onTap: () {
-              ref.read(commentListProvider(commentKey).notifier).toggleLike(
-                    commentId: comment.id,
-                    userId: 'mock-user-1',
-                  );
+              ref
+                  .read(commentListProvider(commentKey).notifier)
+                  .toggleLike(commentId: comment.id, userId: 'mock-user-1');
             },
             child: Padding(
               padding: const EdgeInsets.all(8),
@@ -442,14 +441,12 @@ class _CommentList extends ConsumerWidget {
                   Icon(
                     comment.isLiked ? Icons.favorite : Icons.favorite_border,
                     size: 18,
-                    color: comment.isLiked ? Colors.red : colors.onSurfaceVariant,
+                    color:
+                        comment.isLiked ? Colors.red : colors.onSurfaceVariant,
                   ),
                   if (comment.likeCount > 0) ...[
                     const SizedBox(width: 4),
-                    Text(
-                      '${comment.likeCount}',
-                      style: textTheme.bodySmall,
-                    ),
+                    Text('${comment.likeCount}', style: textTheme.bodySmall),
                   ],
                 ],
               ),

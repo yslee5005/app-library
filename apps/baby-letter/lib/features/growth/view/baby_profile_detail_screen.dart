@@ -28,9 +28,9 @@ class _BabyProfileDetailScreenState extends State<BabyProfileDetailScreen> {
         title: Text(
           '아기 프로필',
           style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                color: AppColors.textPrimary,
-                fontWeight: FontWeight.w600,
-              ),
+            color: AppColors.textPrimary,
+            fontWeight: FontWeight.w600,
+          ),
         ),
       ),
       body: SingleChildScrollView(
@@ -49,18 +49,20 @@ class _BabyProfileDetailScreenState extends State<BabyProfileDetailScreen> {
                   children: [
                     Container(
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 16, vertical: 10),
+                        horizontal: 16,
+                        vertical: 10,
+                      ),
                       decoration: BoxDecoration(
                         color: AppColors.coral.withValues(alpha: 0.12),
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: Text(
                         'D+45',
-                        style:
-                            Theme.of(context).textTheme.headlineSmall?.copyWith(
-                                  color: AppColors.coral,
-                                  fontWeight: FontWeight.w700,
-                                ),
+                        style: Theme.of(context).textTheme.headlineSmall
+                            ?.copyWith(
+                              color: AppColors.coral,
+                              fontWeight: FontWeight.w700,
+                            ),
                       ),
                     ),
                     const SizedBox(width: 16),
@@ -68,8 +70,8 @@ class _BabyProfileDetailScreenState extends State<BabyProfileDetailScreen> {
                       child: Text(
                         '교정월령: 해당없음',
                         style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                              color: AppColors.textSecondary,
-                            ),
+                          color: AppColors.textSecondary,
+                        ),
                       ),
                     ),
                   ],
@@ -115,18 +117,19 @@ class _BabyProfileDetailScreenState extends State<BabyProfileDetailScreen> {
                   const SizedBox(height: 12),
                   Container(
                     padding: const EdgeInsets.symmetric(
-                        horizontal: 12, vertical: 6),
+                      horizontal: 12,
+                      vertical: 6,
+                    ),
                     decoration: BoxDecoration(
                       color: AppColors.coral.withValues(alpha: 0.12),
                       borderRadius: BorderRadius.circular(20),
                     ),
                     child: Text(
                       '활발한 아기',
-                      style:
-                          Theme.of(context).textTheme.labelLarge?.copyWith(
-                                color: AppColors.coral,
-                                fontWeight: FontWeight.w600,
-                              ),
+                      style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                        color: AppColors.coral,
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
                   ),
                   const SizedBox(height: 16),
@@ -134,9 +137,7 @@ class _BabyProfileDetailScreenState extends State<BabyProfileDetailScreen> {
                   SizedBox(
                     height: 200,
                     width: double.infinity,
-                    child: CustomPaint(
-                      painter: _RadarChartPainter(),
-                    ),
+                    child: CustomPaint(painter: _RadarChartPainter()),
                   ),
                   const SizedBox(height: 8),
                   // Legend
@@ -177,15 +178,17 @@ class _BabyProfileDetailScreenState extends State<BabyProfileDetailScreen> {
                       setState(() => _baselinePeriod = set.first);
                     },
                     style: ButtonStyle(
-                      backgroundColor:
-                          WidgetStateProperty.resolveWith((states) {
+                      backgroundColor: WidgetStateProperty.resolveWith((
+                        states,
+                      ) {
                         if (states.contains(WidgetState.selected)) {
                           return AppColors.coral;
                         }
                         return AppColors.surface;
                       }),
-                      foregroundColor:
-                          WidgetStateProperty.resolveWith((states) {
+                      foregroundColor: WidgetStateProperty.resolveWith((
+                        states,
+                      ) {
                         if (states.contains(WidgetState.selected)) {
                           return Colors.white;
                         }
@@ -216,11 +219,9 @@ class _BabyProfileDetailScreenState extends State<BabyProfileDetailScreen> {
                             _baselinePeriod == 0
                                 ? '최근 7일 추세'
                                 : _baselinePeriod == 1
-                                    ? '최근 14일 추세'
-                                    : '최근 30일 추세',
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodyMedium
+                                ? '최근 14일 추세'
+                                : '최근 30일 추세',
+                            style: Theme.of(context).textTheme.bodyMedium
                                 ?.copyWith(color: AppColors.textHint),
                           ),
                         ],
@@ -249,8 +250,8 @@ class _BabyProfileDetailScreenState extends State<BabyProfileDetailScreen> {
                     child: Text(
                       '이 프로필은 자동으로 업데이트됩니다',
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                            color: AppColors.textSecondary,
-                          ),
+                        color: AppColors.textSecondary,
+                      ),
                     ),
                   ),
                 ],
@@ -301,18 +302,18 @@ class _LayerCard extends StatelessWidget {
                   child: Text(
                     '$layerNumber',
                     style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                          color: AppColors.coral,
-                          fontWeight: FontWeight.w700,
-                        ),
+                      color: AppColors.coral,
+                      fontWeight: FontWeight.w700,
+                    ),
                   ),
                 ),
               ),
               const SizedBox(width: 10),
               Text(
                 title,
-                style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                      fontWeight: FontWeight.w600,
-                    ),
+                style: Theme.of(
+                  context,
+                ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600),
               ),
             ],
           ),
@@ -351,9 +352,9 @@ class _EnvironmentBadge extends StatelessWidget {
           Text(
             label,
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  color: color,
-                  fontWeight: FontWeight.w600,
-                ),
+              color: color,
+              fontWeight: FontWeight.w600,
+            ),
           ),
         ],
       ),
@@ -370,9 +371,9 @@ class _RadarLabel extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       text,
-      style: Theme.of(context).textTheme.bodySmall?.copyWith(
-            color: AppColors.textSecondary,
-          ),
+      style: Theme.of(
+        context,
+      ).textTheme.bodySmall?.copyWith(color: AppColors.textSecondary),
     );
   }
 }

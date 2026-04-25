@@ -23,18 +23,29 @@ class _SortSelectorDemoState extends State<SortSelectorDemo> {
             SortSelector(
               options: const [
                 SortOption(
-                    id: 'newest', label: 'Newest', icon: Icons.access_time),
+                  id: 'newest',
+                  label: 'Newest',
+                  icon: Icons.access_time,
+                ),
                 SortOption(
-                    id: 'popular', label: 'Popular', icon: Icons.trending_up),
+                  id: 'popular',
+                  label: 'Popular',
+                  icon: Icons.trending_up,
+                ),
                 SortOption(
-                    id: 'name', label: 'Name', icon: Icons.sort_by_alpha),
+                  id: 'name',
+                  label: 'Name',
+                  icon: Icons.sort_by_alpha,
+                ),
               ],
               selected: _selected,
               onSortChanged: (opt) => setState(() => _selected = opt.id),
             ),
             const SizedBox(height: 16),
-            Text('Selected: $_selected',
-                style: Theme.of(context).textTheme.bodyLarge),
+            Text(
+              'Selected: $_selected',
+              style: Theme.of(context).textTheme.bodyLarge,
+            ),
           ],
         ),
       ),

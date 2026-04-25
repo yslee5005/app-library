@@ -49,8 +49,7 @@ class _ShimmerWidgetState extends State<ShimmerWidget>
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final base =
-        widget.baseColor ?? theme.colorScheme.surfaceContainerHighest;
+    final base = widget.baseColor ?? theme.colorScheme.surfaceContainerHighest;
     final highlight =
         widget.highlightColor ?? theme.colorScheme.surfaceContainerLow;
 

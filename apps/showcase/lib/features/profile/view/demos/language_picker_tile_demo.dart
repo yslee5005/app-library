@@ -34,9 +34,9 @@ class _LanguagePickerTileDemoState extends State<LanguagePickerTileDemo> {
               ],
               onChanged: (code) {
                 setState(() => _currentLanguage = code);
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text('Language: $code')),
-                );
+                ScaffoldMessenger.of(
+                  context,
+                ).showSnackBar(SnackBar(content: Text('Language: $code')));
               },
             ),
           ],

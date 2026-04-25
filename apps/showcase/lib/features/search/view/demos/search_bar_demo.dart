@@ -24,15 +24,17 @@ class _SearchBarDemoState extends State<SearchBarDemo> {
               hint: 'Search components...',
               onChanged: (q) => setState(() => _query = q),
               onSubmitted: (q) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text('Searched: $q')),
-                );
+                ScaffoldMessenger.of(
+                  context,
+                ).showSnackBar(SnackBar(content: Text('Searched: $q')));
               },
             ),
             const SizedBox(height: 16),
             if (_query.isNotEmpty)
-              Text('Query: $_query',
-                  style: Theme.of(context).textTheme.bodyLarge),
+              Text(
+                'Query: $_query',
+                style: Theme.of(context).textTheme.bodyLarge,
+              ),
           ],
         ),
       ),

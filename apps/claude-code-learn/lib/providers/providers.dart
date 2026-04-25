@@ -52,8 +52,9 @@ class ThemeModeNotifier extends Notifier<ThemeMode> {
 }
 
 /// Light / Dark / System theme mode.
-final themeModeProvider =
-    NotifierProvider<ThemeModeNotifier, ThemeMode>(ThemeModeNotifier.new);
+final themeModeProvider = NotifierProvider<ThemeModeNotifier, ThemeMode>(
+  ThemeModeNotifier.new,
+);
 
 class FontSizeNotifier extends Notifier<double> {
   @override
@@ -63,5 +64,6 @@ class FontSizeNotifier extends Notifier<double> {
 }
 
 /// Reader font size (default 16.0).
-final fontSizeProvider =
-    NotifierProvider<FontSizeNotifier, double>(FontSizeNotifier.new);
+final fontSizeProvider = NotifierProvider<FontSizeNotifier, double>(
+  FontSizeNotifier.new,
+);

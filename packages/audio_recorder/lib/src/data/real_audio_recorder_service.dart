@@ -6,10 +6,11 @@ import '../domain/audio_recorder_service.dart';
 /// so that the calling UI can bind an `AudioWaveforms` widget to the same
 /// recording session for live visualization.
 class RealAudioRecorderService implements AudioRecorderService {
-  final RecorderController controller = RecorderController()
-    ..androidEncoder = AndroidEncoder.aac
-    ..androidOutputFormat = AndroidOutputFormat.mpeg4
-    ..sampleRate = 44100;
+  final RecorderController controller =
+      RecorderController()
+        ..androidEncoder = AndroidEncoder.aac
+        ..androidOutputFormat = AndroidOutputFormat.mpeg4
+        ..sampleRate = 44100;
 
   String? _currentPath;
   bool _isPaused = false;

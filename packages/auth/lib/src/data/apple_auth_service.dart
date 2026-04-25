@@ -116,10 +116,7 @@ class AppleAuthService {
     } on SignInWithAppleAuthorizationException catch (e, st) {
       if (e.code == AuthorizationErrorCode.canceled) {
         return const Result.failure(
-          AuthException(
-            message: 'Apple link cancelled',
-            code: 'cancelled',
-          ),
+          AuthException(message: 'Apple link cancelled', code: 'cancelled'),
         );
       }
       return Result.failure(
@@ -153,7 +150,7 @@ class AppleAuthService {
 
   /// Gets Apple credential with a generated nonce.
   Future<(String rawNonce, AuthorizationCredentialAppleID credential)>
-      _getAppleCredential() async {
+  _getAppleCredential() async {
     final rawNonce = _generateNonce();
     final hashedNonce = sha256.convert(utf8.encode(rawNonce)).toString();
 
@@ -173,7 +170,9 @@ class AppleAuthService {
     const charset =
         '0123456789ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvwxyz-._';
     final random = Random.secure();
-    return List.generate(length, (_) => charset[random.nextInt(charset.length)])
-        .join();
+    return List.generate(
+      length,
+      (_) => charset[random.nextInt(charset.length)],
+    ).join();
   }
 }

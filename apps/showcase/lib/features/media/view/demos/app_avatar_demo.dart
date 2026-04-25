@@ -25,8 +25,10 @@ class AppAvatarDemo extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 24),
-            Text('Different names',
-                style: Theme.of(context).textTheme.titleMedium),
+            Text(
+              'Different names',
+              style: Theme.of(context).textTheme.titleMedium,
+            ),
             const SizedBox(height: 16),
             Row(
               children: const [

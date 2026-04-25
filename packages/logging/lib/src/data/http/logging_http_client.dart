@@ -22,8 +22,8 @@ class LoggingHttpClient extends http.BaseClient {
     required http.Client inner,
     required Logger logger,
     this.category = LogCategory.api,
-  })  : _inner = inner,
-        _logger = logger;
+  }) : _inner = inner,
+       _logger = logger;
 
   final http.Client _inner;
   final Logger _logger;
@@ -31,10 +31,7 @@ class LoggingHttpClient extends http.BaseClient {
 
   @override
   Future<http.StreamedResponse> send(http.BaseRequest request) async {
-    _logger.debug(
-      '→ ${request.method} ${request.url}',
-      category: category,
-    );
+    _logger.debug('→ ${request.method} ${request.url}', category: category);
 
     final stopwatch = Stopwatch()..start();
     try {

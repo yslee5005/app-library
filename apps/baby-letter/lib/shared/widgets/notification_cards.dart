@@ -40,9 +40,9 @@ class LetterNotificationCard extends StatelessWidget {
                   Text(
                     '아기가 편지를 보냈어요',
                     style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          color: AppColors.textPrimary,
-                          fontWeight: FontWeight.w600,
-                        ),
+                      color: AppColors.textPrimary,
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
                   const SizedBox(height: 4),
                   Text(
@@ -50,9 +50,9 @@ class LetterNotificationCard extends StatelessWidget {
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                     style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          color: AppColors.textSecondary,
-                          height: 1.4,
-                        ),
+                      color: AppColors.textSecondary,
+                      height: 1.4,
+                    ),
                   ),
                 ],
               ),
@@ -60,9 +60,9 @@ class LetterNotificationCard extends StatelessWidget {
             const SizedBox(width: 8),
             Text(
               time,
-              style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                    color: AppColors.textHint,
-                  ),
+              style: Theme.of(
+                context,
+              ).textTheme.labelSmall?.copyWith(color: AppColors.textHint),
             ),
           ],
         ),
@@ -102,9 +102,9 @@ class DangerAlertCard extends StatelessWidget {
                 child: Text(
                   title,
                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w600,
-                      ),
+                    color: Colors.white,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
               ),
             ],
@@ -117,8 +117,10 @@ class DangerAlertCard extends StatelessWidget {
               style: TextButton.styleFrom(
                 backgroundColor: Colors.white,
                 foregroundColor: AppColors.danger,
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 20,
+                  vertical: 8,
+                ),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8),
                 ),
@@ -154,9 +156,7 @@ class EpdsReminderCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: AppColors.surface,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(
-          color: AppColors.textHint.withValues(alpha: 0.2),
-        ),
+        border: Border.all(color: AppColors.textHint.withValues(alpha: 0.2)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -170,9 +170,9 @@ class EpdsReminderCard extends StatelessWidget {
                 child: Text(
                   '이번 주 마음 체크를 아직 안 했어요.\n5분이면 돼요 💛',
                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                        color: AppColors.textPrimary,
-                        height: 1.5,
-                      ),
+                    color: AppColors.textPrimary,
+                    height: 1.5,
+                  ),
                 ),
               ),
             ],
@@ -194,8 +194,10 @@ class EpdsReminderCard extends StatelessWidget {
                 style: TextButton.styleFrom(
                   backgroundColor: AppColors.coral,
                   foregroundColor: Colors.white,
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 20,
+                    vertical: 8,
+                  ),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8),
                   ),
@@ -218,11 +220,7 @@ class PartnerMessageCard extends StatelessWidget {
   final String emotionEmoji;
   final VoidCallback? onTap;
 
-  const PartnerMessageCard({
-    super.key,
-    required this.emotionEmoji,
-    this.onTap,
-  });
+  const PartnerMessageCard({super.key, required this.emotionEmoji, this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -234,9 +232,7 @@ class PartnerMessageCard extends StatelessWidget {
         decoration: BoxDecoration(
           color: AppColors.surface,
           borderRadius: BorderRadius.circular(12),
-          border: Border.all(
-            color: AppColors.textHint.withValues(alpha: 0.2),
-          ),
+          border: Border.all(color: AppColors.textHint.withValues(alpha: 0.2)),
         ),
         child: Row(
           children: [
@@ -246,9 +242,9 @@ class PartnerMessageCard extends StatelessWidget {
               child: Text(
                 '파트너가 마음을 보냈어요',
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      color: AppColors.textPrimary,
-                      fontWeight: FontWeight.w600,
-                    ),
+                  color: AppColors.textPrimary,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
             ),
             Text(emotionEmoji, style: const TextStyle(fontSize: 28)),
@@ -284,9 +280,7 @@ class MilestoneCelebrationCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: AppColors.amberLight,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(
-          color: AppColors.amber.withValues(alpha: 0.5),
-        ),
+        border: Border.all(color: AppColors.amber.withValues(alpha: 0.5)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -299,9 +293,9 @@ class MilestoneCelebrationCard extends StatelessWidget {
                 child: Text(
                   milestoneName,
                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                        color: AppColors.textPrimary,
-                        fontWeight: FontWeight.w600,
-                      ),
+                    color: AppColors.textPrimary,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
               ),
               const Text('✨', style: TextStyle(fontSize: 16)),
@@ -315,8 +309,10 @@ class MilestoneCelebrationCard extends StatelessWidget {
               style: TextButton.styleFrom(
                 backgroundColor: AppColors.amberDark,
                 foregroundColor: Colors.white,
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 20,
+                  vertical: 8,
+                ),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8),
                 ),

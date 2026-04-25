@@ -13,8 +13,7 @@ class ExpandableTextDemo extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('2 lines max',
-                style: Theme.of(context).textTheme.titleMedium),
+            Text('2 lines max', style: Theme.of(context).textTheme.titleMedium),
             const SizedBox(height: 8),
             const ExpandableText(
               text:
@@ -28,8 +27,7 @@ class ExpandableTextDemo extends StatelessWidget {
               maxLines: 2,
             ),
             const SizedBox(height: 24),
-            Text('4 lines max',
-                style: Theme.of(context).textTheme.titleMedium),
+            Text('4 lines max', style: Theme.of(context).textTheme.titleMedium),
             const SizedBox(height: 8),
             const ExpandableText(
               text:

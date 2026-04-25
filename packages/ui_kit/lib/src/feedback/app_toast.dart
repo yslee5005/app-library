@@ -50,13 +50,14 @@ class AppToast {
           ),
           margin: const EdgeInsets.all(AppSpacing.md),
           duration: duration,
-          action: actionLabel != null
-              ? SnackBarAction(
-                  label: actionLabel,
-                  textColor: fg,
-                  onPressed: onAction ?? () {},
-                )
-              : null,
+          action:
+              actionLabel != null
+                  ? SnackBarAction(
+                    label: actionLabel,
+                    textColor: fg,
+                    onPressed: onAction ?? () {},
+                  )
+                  : null,
         ),
       );
   }
@@ -67,25 +68,25 @@ class AppToast {
   ) {
     return switch (variant) {
       AppToastVariant.success => (
-          Colors.green.shade800,
-          Colors.white,
-          Icons.check_circle,
-        ),
+        Colors.green.shade800,
+        Colors.white,
+        Icons.check_circle,
+      ),
       AppToastVariant.error => (
-          theme.colorScheme.error,
-          theme.colorScheme.onError,
-          Icons.error,
-        ),
+        theme.colorScheme.error,
+        theme.colorScheme.onError,
+        Icons.error,
+      ),
       AppToastVariant.info => (
-          theme.colorScheme.inverseSurface,
-          theme.colorScheme.onInverseSurface,
-          Icons.info,
-        ),
+        theme.colorScheme.inverseSurface,
+        theme.colorScheme.onInverseSurface,
+        Icons.info,
+      ),
       AppToastVariant.warning => (
-          Colors.orange.shade800,
-          Colors.white,
-          Icons.warning_amber,
-        ),
+        Colors.orange.shade800,
+        Colors.white,
+        Icons.warning_amber,
+      ),
     };
   }
 }

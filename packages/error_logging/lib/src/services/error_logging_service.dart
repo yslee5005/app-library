@@ -17,10 +17,7 @@ import 'error_level.dart';
 /// ```
 abstract interface class ErrorLoggingService {
   /// Logs a message at the given [level].
-  Future<void> log(
-    String message, {
-    ErrorLevel level = ErrorLevel.info,
-  });
+  Future<void> log(String message, {ErrorLevel level = ErrorLevel.info});
 
   /// Captures an exception with optional stack trace.
   Future<void> captureException(

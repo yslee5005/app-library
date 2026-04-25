@@ -59,27 +59,28 @@ class AppBottomNavBar extends StatelessWidget {
       onDestinationSelected: onTap,
       backgroundColor: backgroundColor,
       indicatorColor: selectedColor?.withAlpha(40),
-      destinations: items.map((item) {
-        Widget icon = Icon(item.icon, color: unselectedColor);
-        Widget activeIcon = Icon(item.activeIcon ?? item.icon, color: selectedColor);
+      destinations:
+          items.map((item) {
+            Widget icon = Icon(item.icon, color: unselectedColor);
+            Widget activeIcon = Icon(
+              item.activeIcon ?? item.icon,
+              color: selectedColor,
+            );
 
-        if (item.badgeCount != null && item.badgeCount! > 0) {
-          icon = Badge.count(
-            count: item.badgeCount!,
-            child: icon,
-          );
-          activeIcon = Badge.count(
-            count: item.badgeCount!,
-            child: activeIcon,
-          );
-        }
+            if (item.badgeCount != null && item.badgeCount! > 0) {
+              icon = Badge.count(count: item.badgeCount!, child: icon);
+              activeIcon = Badge.count(
+                count: item.badgeCount!,
+                child: activeIcon,
+              );
+            }
 
-        return NavigationDestination(
-          icon: icon,
-          selectedIcon: activeIcon,
-          label: item.label,
-        );
-      }).toList(),
+            return NavigationDestination(
+              icon: icon,
+              selectedIcon: activeIcon,
+              label: item.label,
+            );
+          }).toList(),
     );
   }
 }

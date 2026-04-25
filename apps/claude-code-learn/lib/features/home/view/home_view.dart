@@ -156,7 +156,9 @@ class _KoreanTab extends StatelessWidget {
           subtitle: 'Claude Code 완전 정복 6강',
           icon: Icons.school,
           sectionId: ContentSection.koreanCourse.name,
-          itemCount: ContentCatalog.bySection(ContentSection.koreanCourse).length,
+          itemCount: ContentCatalog.bySection(
+            ContentSection.koreanCourse,
+          ).length,
           completedCount: _completedIn(ContentSection.koreanCourse),
         ),
         const SizedBox(height: 12),
@@ -165,7 +167,9 @@ class _KoreanTab extends StatelessWidget {
           subtitle: '심화 학습 5편',
           icon: Icons.loop,
           sectionId: ContentSection.agenticLoop.name,
-          itemCount: ContentCatalog.bySection(ContentSection.agenticLoop).length,
+          itemCount: ContentCatalog.bySection(
+            ContentSection.agenticLoop,
+          ).length,
           completedCount: _completedIn(ContentSection.agenticLoop),
         ),
         const SizedBox(height: 12),
@@ -183,7 +187,9 @@ class _KoreanTab extends StatelessWidget {
 
   int _completedIn(ContentSection section) {
     final ids = ContentCatalog.bySection(section).map((e) => e.id).toSet();
-    return progressList.where((p) => p.isCompleted && ids.contains(p.contentId)).length;
+    return progressList
+        .where((p) => p.isCompleted && ids.contains(p.contentId))
+        .length;
   }
 }
 
@@ -204,7 +210,11 @@ class _EnglishTab extends StatelessWidget {
       (ContentSection.configuration, 'Configuration', Icons.settings),
       (ContentSection.guides, 'Guides', Icons.menu_book),
       (ContentSection.referenceCommands, 'Reference: Commands', Icons.terminal),
-      (ContentSection.referenceSdk, 'Reference: SDK', Icons.integration_instructions),
+      (
+        ContentSection.referenceSdk,
+        'Reference: SDK',
+        Icons.integration_instructions,
+      ),
       (ContentSection.referenceTools, 'Reference: Tools', Icons.build),
     ];
 
@@ -296,10 +306,7 @@ class _SectionCard extends StatelessWidget {
                 ),
               ),
               const SizedBox(width: 12),
-              Text(
-                '$completedCount/$itemCount',
-                style: LearnTypography.label,
-              ),
+              Text('$completedCount/$itemCount', style: LearnTypography.label),
             ],
           ),
         ),

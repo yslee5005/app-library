@@ -13,8 +13,10 @@ class SkeletonLoaderDemo extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Profile skeleton',
-                style: Theme.of(context).textTheme.titleMedium),
+            Text(
+              'Profile skeleton',
+              style: Theme.of(context).textTheme.titleMedium,
+            ),
             const SizedBox(height: 12),
             Row(
               children: [
@@ -37,8 +39,10 @@ class SkeletonLoaderDemo extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 24),
-            Text('Text skeleton',
-                style: Theme.of(context).textTheme.titleMedium),
+            Text(
+              'Text skeleton',
+              style: Theme.of(context).textTheme.titleMedium,
+            ),
             const SizedBox(height: 12),
             const SkeletonLoader(shape: SkeletonShape.text, lineCount: 4),
           ],

@@ -189,10 +189,7 @@ class _CalendarViewScreenState extends State<CalendarViewScreen> {
           icon: const Icon(Icons.arrow_back),
           color: AppColors.textPrimary,
         ),
-        title: Text(
-          '캘린더',
-          style: TextStyle(color: AppColors.textPrimary),
-        ),
+        title: Text('캘린더', style: TextStyle(color: AppColors.textPrimary)),
       ),
       body: Column(
         children: [
@@ -209,9 +206,9 @@ class _CalendarViewScreenState extends State<CalendarViewScreen> {
                 ),
                 Text(
                   _monthTitle(),
-                  style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                    fontWeight: FontWeight.w600,
-                  ),
+                  style: Theme.of(
+                    context,
+                  ).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w600),
                 ),
                 IconButton(
                   onPressed: _nextMonth,
@@ -239,8 +236,8 @@ class _CalendarViewScreenState extends State<CalendarViewScreen> {
                         color: isSunday
                             ? AppColors.danger
                             : isSaturday
-                                ? AppColors.feedingBlue
-                                : AppColors.textSecondary,
+                            ? AppColors.feedingBlue
+                            : AppColors.textSecondary,
                       ),
                     ),
                   ),
@@ -266,7 +263,8 @@ class _CalendarViewScreenState extends State<CalendarViewScreen> {
 
                     final records = _getRecordsForDay(day);
                     final isSelected = _selectedDay == day;
-                    final isToday = day == 16 &&
+                    final isToday =
+                        day == 16 &&
                         _currentMonth.month == 4 &&
                         _currentMonth.year == 2026;
 
@@ -280,14 +278,11 @@ class _CalendarViewScreenState extends State<CalendarViewScreen> {
                             color: isSelected
                                 ? AppColors.coral.withValues(alpha: 0.1)
                                 : isToday
-                                    ? AppColors.amberLight
-                                    : Colors.transparent,
+                                ? AppColors.amberLight
+                                : Colors.transparent,
                             borderRadius: BorderRadius.circular(8),
                             border: isToday
-                                ? Border.all(
-                                    color: AppColors.amber,
-                                    width: 1.5,
-                                  )
+                                ? Border.all(color: AppColors.amber, width: 1.5)
                                 : null,
                           ),
                           child: Column(
@@ -303,8 +298,8 @@ class _CalendarViewScreenState extends State<CalendarViewScreen> {
                                   color: col == 0
                                       ? AppColors.danger
                                       : col == 6
-                                          ? AppColors.feedingBlue
-                                          : AppColors.textPrimary,
+                                      ? AppColors.feedingBlue
+                                      : AppColors.textPrimary,
                                 ),
                               ),
                               const SizedBox(height: 4),
@@ -347,18 +342,9 @@ class _CalendarViewScreenState extends State<CalendarViewScreen> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  _LegendItem(
-                    color: AppColors.feedingBlue,
-                    label: '수유',
-                  ),
-                  _LegendItem(
-                    color: AppColors.sleepPurple,
-                    label: '수면',
-                  ),
-                  _LegendItem(
-                    color: AppColors.diaperGreen,
-                    label: '기저귀',
-                  ),
+                  _LegendItem(color: AppColors.feedingBlue, label: '수유'),
+                  _LegendItem(color: AppColors.sleepPurple, label: '수면'),
+                  _LegendItem(color: AppColors.diaperGreen, label: '기저귀'),
                 ],
               ),
             ),
@@ -384,10 +370,7 @@ class _Dot extends StatelessWidget {
       width: 6,
       height: 6,
       margin: const EdgeInsets.symmetric(horizontal: 1),
-      decoration: BoxDecoration(
-        color: color,
-        shape: BoxShape.circle,
-      ),
+      decoration: BoxDecoration(color: color, shape: BoxShape.circle),
     );
   }
 }
@@ -396,10 +379,7 @@ class _LegendItem extends StatelessWidget {
   final Color color;
   final String label;
 
-  const _LegendItem({
-    required this.color,
-    required this.label,
-  });
+  const _LegendItem({required this.color, required this.label});
 
   @override
   Widget build(BuildContext context) {
@@ -409,17 +389,14 @@ class _LegendItem extends StatelessWidget {
         Container(
           width: 8,
           height: 8,
-          decoration: BoxDecoration(
-            color: color,
-            shape: BoxShape.circle,
-          ),
+          decoration: BoxDecoration(color: color, shape: BoxShape.circle),
         ),
         const SizedBox(width: 4),
         Text(
           label,
-          style: Theme.of(context).textTheme.bodySmall?.copyWith(
-            color: AppColors.textSecondary,
-          ),
+          style: Theme.of(
+            context,
+          ).textTheme.bodySmall?.copyWith(color: AppColors.textSecondary),
         ),
       ],
     );
@@ -447,17 +424,17 @@ class _SummaryItem extends StatelessWidget {
         const SizedBox(width: 12),
         Text(
           label,
-          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-            fontWeight: FontWeight.w500,
-          ),
+          style: Theme.of(
+            context,
+          ).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w500),
         ),
         const SizedBox(width: 12),
         Expanded(
           child: Text(
             value,
-            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-              color: AppColors.textSecondary,
-            ),
+            style: Theme.of(
+              context,
+            ).textTheme.bodyMedium?.copyWith(color: AppColors.textSecondary),
             textAlign: TextAlign.end,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,

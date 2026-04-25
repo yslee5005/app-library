@@ -25,44 +25,39 @@ class _DadMissionDetailScreenState extends State<DadMissionDetailScreen> {
 
   // 미션별 단계별 가이드
   Map<String, List<String>> get _stepGuides => {
-        '목욕 시키기': [
-          '욕조에 37-38°C 물을 준비해요',
-          '아기 옷을 벗기고 부드럽게 안아요',
-          '머리부터 발끝까지 천천히 씻겨요',
-          '아기와 눈을 맞추며 이야기해요',
-          '부드러운 수건으로 감싸 닦아줘요',
-        ],
-        '새벽 수유 1회': [
-          '분유/모유를 적정 온도로 준비해요',
-          '아기를 조심스럽게 안아올려요',
-          '편안한 자세로 앉아 수유해요',
-          '수유 후 트림을 시켜줘요',
-          '아기를 다시 재워줘요',
-        ],
-        '엄마 자유시간 2시간': [
-          '엄마에게 "오늘 2시간 쉬어" 말해요',
-          '기저귀, 분유, 장난감 미리 준비해요',
-          '아기와 놀아주며 시간을 보내요',
-          '필요한 것은 스스로 해결해봐요',
-          '엄마가 돌아오면 "다녀와서 좋았어?" 물어봐요',
-        ],
-      };
+    '목욕 시키기': [
+      '욕조에 37-38°C 물을 준비해요',
+      '아기 옷을 벗기고 부드럽게 안아요',
+      '머리부터 발끝까지 천천히 씻겨요',
+      '아기와 눈을 맞추며 이야기해요',
+      '부드러운 수건으로 감싸 닦아줘요',
+    ],
+    '새벽 수유 1회': [
+      '분유/모유를 적정 온도로 준비해요',
+      '아기를 조심스럽게 안아올려요',
+      '편안한 자세로 앉아 수유해요',
+      '수유 후 트림을 시켜줘요',
+      '아기를 다시 재워줘요',
+    ],
+    '엄마 자유시간 2시간': [
+      '엄마에게 "오늘 2시간 쉬어" 말해요',
+      '기저귀, 분유, 장난감 미리 준비해요',
+      '아기와 놀아주며 시간을 보내요',
+      '필요한 것은 스스로 해결해봐요',
+      '엄마가 돌아오면 "다녀와서 좋았어?" 물어봐요',
+    ],
+  };
 
   // 미션별 아기 반응
   Map<String, String> get _babyReactions => {
-        '목욕 시키기': '아빠랑 목욕하니까 더 재밌어! 물놀이 최고!',
-        '새벽 수유 1회': '아빠 품도 따뜻하고 좋아~ 잘 먹었어!',
-        '엄마 자유시간 2시간': '아빠랑 둘이 보내는 시간도 좋아! 아빠 최고!',
-      };
+    '목욕 시키기': '아빠랑 목욕하니까 더 재밌어! 물놀이 최고!',
+    '새벽 수유 1회': '아빠 품도 따뜻하고 좋아~ 잘 먹었어!',
+    '엄마 자유시간 2시간': '아빠랑 둘이 보내는 시간도 좋아! 아빠 최고!',
+  };
 
   List<String> get _steps =>
       _stepGuides[widget.title] ??
-      [
-        '미션을 시작해요',
-        '차근차근 진행해요',
-        '아기와 즐거운 시간을 보내요',
-        '미션 완료!',
-      ];
+      ['미션을 시작해요', '차근차근 진행해요', '아기와 즐거운 시간을 보내요', '미션 완료!'];
 
   String get _babyReaction =>
       _babyReactions[widget.title] ?? '아빠가 미션을 해주니까 너무 좋아!';
@@ -129,8 +124,7 @@ class _DadMissionDetailScreenState extends State<DadMissionDetailScreen> {
                           shape: BoxShape.circle,
                           boxShadow: [
                             BoxShadow(
-                              color:
-                                  AppColors.coral.withValues(alpha: 0.15),
+                              color: AppColors.coral.withValues(alpha: 0.15),
                               blurRadius: 20,
                               offset: const Offset(0, 4),
                             ),
@@ -151,11 +145,10 @@ class _DadMissionDetailScreenState extends State<DadMissionDetailScreen> {
                       child: Text(
                         widget.description,
                         textAlign: TextAlign.center,
-                        style:
-                            Theme.of(context).textTheme.bodyMedium?.copyWith(
-                                  color: AppColors.textSecondary,
-                                  height: 1.5,
-                                ),
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                          color: AppColors.textSecondary,
+                          height: 1.5,
+                        ),
                       ),
                     ),
 
@@ -164,11 +157,10 @@ class _DadMissionDetailScreenState extends State<DadMissionDetailScreen> {
                     // 단계별 가이드
                     Text(
                       '이렇게 해보세요',
-                      style:
-                          Theme.of(context).textTheme.titleMedium?.copyWith(
-                                color: AppColors.textPrimary,
-                                fontWeight: FontWeight.w600,
-                              ),
+                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                        color: AppColors.textPrimary,
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
                     const SizedBox(height: 12),
 
@@ -183,15 +175,12 @@ class _DadMissionDetailScreenState extends State<DadMissionDetailScreen> {
                               height: 28,
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
-                                color:
-                                    AppColors.coral.withValues(alpha: 0.1),
+                                color: AppColors.coral.withValues(alpha: 0.1),
                               ),
                               child: Center(
                                 child: Text(
                                   '${index + 1}',
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .labelMedium
+                                  style: Theme.of(context).textTheme.labelMedium
                                       ?.copyWith(
                                         color: AppColors.coral,
                                         fontWeight: FontWeight.w700,
@@ -205,9 +194,7 @@ class _DadMissionDetailScreenState extends State<DadMissionDetailScreen> {
                                 padding: const EdgeInsets.only(top: 4),
                                 child: Text(
                                   _steps[index],
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .bodyMedium
+                                  style: Theme.of(context).textTheme.bodyMedium
                                       ?.copyWith(
                                         color: AppColors.textPrimary,
                                         height: 1.4,
@@ -234,19 +221,13 @@ class _DadMissionDetailScreenState extends State<DadMissionDetailScreen> {
                         children: [
                           Text(
                             '타이머',
-                            style: Theme.of(context)
-                                .textTheme
-                                .titleSmall
-                                ?.copyWith(
-                                  color: AppColors.textSecondary,
-                                ),
+                            style: Theme.of(context).textTheme.titleSmall
+                                ?.copyWith(color: AppColors.textSecondary),
                           ),
                           const SizedBox(height: 8),
                           Text(
                             _timerDisplay,
-                            style: Theme.of(context)
-                                .textTheme
-                                .headlineLarge
+                            style: Theme.of(context).textTheme.headlineLarge
                                 ?.copyWith(
                                   color: AppColors.textPrimary,
                                   fontWeight: FontWeight.w300,
@@ -264,12 +245,10 @@ class _DadMissionDetailScreenState extends State<DadMissionDetailScreen> {
                             ),
                             label: Text(
                               _isTimerRunning ? '일시정지' : '시작',
-                              style:
-                                  const TextStyle(color: AppColors.coral),
+                              style: const TextStyle(color: AppColors.coral),
                             ),
                             style: OutlinedButton.styleFrom(
-                              side:
-                                  const BorderSide(color: AppColors.coral),
+                              side: const BorderSide(color: AppColors.coral),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(12),
                               ),
@@ -300,27 +279,18 @@ class _DadMissionDetailScreenState extends State<DadMissionDetailScreen> {
                         ),
                         child: Column(
                           children: [
-                            const Text('📸',
-                                style: TextStyle(fontSize: 36)),
+                            const Text('📸', style: TextStyle(fontSize: 36)),
                             const SizedBox(height: 8),
                             Text(
                               '완료 사진 찍기',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .titleSmall
-                                  ?.copyWith(
-                                    color: AppColors.textSecondary,
-                                  ),
+                              style: Theme.of(context).textTheme.titleSmall
+                                  ?.copyWith(color: AppColors.textSecondary),
                             ),
                             const SizedBox(height: 4),
                             Text(
                               '소중한 순간을 남겨보세요',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodySmall
-                                  ?.copyWith(
-                                    color: AppColors.textHint,
-                                  ),
+                              style: Theme.of(context).textTheme.bodySmall
+                                  ?.copyWith(color: AppColors.textHint),
                             ),
                           ],
                         ),
@@ -339,19 +309,15 @@ class _DadMissionDetailScreenState extends State<DadMissionDetailScreen> {
                       ),
                       child: Row(
                         children: [
-                          const Text('👶',
-                              style: TextStyle(fontSize: 28)),
+                          const Text('👶', style: TextStyle(fontSize: 28)),
                           const SizedBox(width: 12),
                           Expanded(
                             child: Column(
-                              crossAxisAlignment:
-                                  CrossAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
                                   '아기의 한마디',
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .labelSmall
+                                  style: Theme.of(context).textTheme.labelSmall
                                       ?.copyWith(
                                         color: AppColors.amberDark,
                                         fontWeight: FontWeight.w600,
@@ -360,9 +326,7 @@ class _DadMissionDetailScreenState extends State<DadMissionDetailScreen> {
                                 const SizedBox(height: 4),
                                 Text(
                                   _babyReaction,
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .bodyMedium
+                                  style: Theme.of(context).textTheme.bodyMedium
                                       ?.copyWith(
                                         color: AppColors.textPrimary,
                                         fontStyle: FontStyle.italic,
@@ -406,10 +370,7 @@ class _DadMissionDetailScreenState extends State<DadMissionDetailScreen> {
                   ),
                   child: const Text(
                     '완료!',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w600,
-                    ),
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
                   ),
                 ),
               ),

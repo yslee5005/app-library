@@ -65,60 +65,59 @@ class AppDialog extends StatelessWidget {
   }) {
     return showDialog<void>(
       context: context,
-      builder: (_) => AppDialog(
-        title: title,
-        content: content,
-        contentWidget: contentWidget,
-        variant: variant,
-        primaryLabel: primaryLabel,
-        secondaryLabel: secondaryLabel,
-        onPrimary: onPrimary,
-        onSecondary: onSecondary,
-        icon: icon,
-        borderRadius: borderRadius,
-      ),
+      builder:
+          (_) => AppDialog(
+            title: title,
+            content: content,
+            contentWidget: contentWidget,
+            variant: variant,
+            primaryLabel: primaryLabel,
+            secondaryLabel: secondaryLabel,
+            onPrimary: onPrimary,
+            onSecondary: onSecondary,
+            icon: icon,
+            borderRadius: borderRadius,
+          ),
     );
   }
 
   IconData get _defaultIcon => switch (variant) {
-        AppDialogVariant.info => Icons.info_outline,
-        AppDialogVariant.success => Icons.check_circle_outline,
-        AppDialogVariant.error => Icons.error_outline,
-        AppDialogVariant.confirm => Icons.help_outline,
-      };
+    AppDialogVariant.info => Icons.info_outline,
+    AppDialogVariant.success => Icons.check_circle_outline,
+    AppDialogVariant.error => Icons.error_outline,
+    AppDialogVariant.confirm => Icons.help_outline,
+  };
 
   Color _iconColor(ThemeData theme) => switch (variant) {
-        AppDialogVariant.info => theme.colorScheme.primary,
-        AppDialogVariant.success => Colors.green,
-        AppDialogVariant.error => theme.colorScheme.error,
-        AppDialogVariant.confirm => theme.colorScheme.primary,
-      };
+    AppDialogVariant.info => theme.colorScheme.primary,
+    AppDialogVariant.success => Colors.green,
+    AppDialogVariant.error => theme.colorScheme.error,
+    AppDialogVariant.confirm => theme.colorScheme.primary,
+  };
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
     return AlertDialog(
-      shape: borderRadius != null
-          ? RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(borderRadius!),
-            )
-          : null,
-      icon: Icon(
-        icon ?? _defaultIcon,
-        size: 40,
-        color: _iconColor(theme),
-      ),
+      shape:
+          borderRadius != null
+              ? RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(borderRadius!),
+              )
+              : null,
+      icon: Icon(icon ?? _defaultIcon, size: 40, color: _iconColor(theme)),
       title: Text(title, textAlign: TextAlign.center),
-      content: contentWidget ??
+      content:
+          contentWidget ??
           (content != null
               ? Text(
-                  content!,
-                  style: theme.textTheme.bodyMedium?.copyWith(
-                    color: theme.colorScheme.onSurfaceVariant,
-                  ),
-                  textAlign: TextAlign.center,
-                )
+                content!,
+                style: theme.textTheme.bodyMedium?.copyWith(
+                  color: theme.colorScheme.onSurfaceVariant,
+                ),
+                textAlign: TextAlign.center,
+              )
               : null),
       actionsAlignment: MainAxisAlignment.center,
       actions: [

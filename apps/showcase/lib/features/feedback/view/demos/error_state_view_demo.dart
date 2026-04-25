@@ -12,9 +12,9 @@ class ErrorStateViewDemo extends StatelessWidget {
         child: ErrorStateView(
           message: 'Something went wrong. Please try again.',
           onRetry: () {
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text('Retry tapped')),
-            );
+            ScaffoldMessenger.of(
+              context,
+            ).showSnackBar(const SnackBar(content: Text('Retry tapped')));
           },
         ),
       ),

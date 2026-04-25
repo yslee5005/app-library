@@ -66,18 +66,22 @@ class AppDrawerMenu extends StatelessWidget {
       child: Column(
         children: [
           UserAccountsDrawerHeader(
-            decoration: headerDecoration ??
-                BoxDecoration(color: headerBackgroundColor ?? colorScheme.primaryContainer),
+            decoration:
+                headerDecoration ??
+                BoxDecoration(
+                  color: headerBackgroundColor ?? colorScheme.primaryContainer,
+                ),
             accountName: Text(
               displayName ?? '',
               style: TextStyle(color: colorScheme.onPrimaryContainer),
             ),
-            accountEmail: email != null
-                ? Text(
-                    email!,
-                    style: TextStyle(color: colorScheme.onPrimaryContainer),
-                  )
-                : null,
+            accountEmail:
+                email != null
+                    ? Text(
+                      email!,
+                      style: TextStyle(color: colorScheme.onPrimaryContainer),
+                    )
+                    : null,
             currentAccountPicture: GestureDetector(
               onTap: onHeaderTap,
               child: CircleAvatar(
@@ -92,8 +96,8 @@ class AppDrawerMenu extends StatelessWidget {
             child: ListView.separated(
               padding: const EdgeInsets.symmetric(vertical: AppSpacing.sm),
               itemCount: items.length,
-              separatorBuilder: (_, __) =>
-                  const SizedBox(height: AppSpacing.xs),
+              separatorBuilder:
+                  (_, __) => const SizedBox(height: AppSpacing.xs),
               itemBuilder: (context, index) {
                 final item = items[index];
                 return ListTile(

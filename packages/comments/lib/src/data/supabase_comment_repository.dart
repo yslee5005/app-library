@@ -13,7 +13,7 @@ import '../domain/create_comment_request.dart';
 /// for atomic operation.
 class SupabaseCommentRepository implements CommentRepository {
   SupabaseCommentRepository({required AppSupabaseClient client})
-      : _client = client;
+    : _client = client;
 
   final AppSupabaseClient _client;
 
@@ -59,34 +59,31 @@ class SupabaseCommentRepository implements CommentRepository {
           }
         } else {
           // Fallback: single cursor (backward compatible).
-          query = filter.sortBy.ascending
-              ? query.gt(filter.sortBy.column, cursorTime)
-              : query.lt(filter.sortBy.column, cursorTime);
+          query =
+              filter.sortBy.ascending
+                  ? query.gt(filter.sortBy.column, cursorTime)
+                  : query.lt(filter.sortBy.column, cursorTime);
         }
       }
 
       // Fetch one extra to determine hasMore.
       // Secondary sort by id for deterministic ordering.
       final data = await query
-          .order(
-            filter.sortBy.column,
-            ascending: filter.sortBy.ascending,
-          )
+          .order(filter.sortBy.column, ascending: filter.sortBy.ascending)
           .order('id', ascending: filter.sortBy.ascending)
           .limit(params.limit + 1);
 
       final hasMore = data.length > params.limit;
       final items = hasMore ? data.sublist(0, params.limit) : data;
 
-      final comments = items
-          .map((json) => CommentModel.fromJson(json))
-          .toList();
+      final comments =
+          items.map((json) => CommentModel.fromJson(json)).toList();
 
-      final cursor = comments.isNotEmpty
-          ? comments.last.createdAt?.toIso8601String()
-          : null;
-      final cursorId =
-          comments.isNotEmpty ? comments.last.id : null;
+      final cursor =
+          comments.isNotEmpty
+              ? comments.last.createdAt?.toIso8601String()
+              : null;
+      final cursorId = comments.isNotEmpty ? comments.last.id : null;
 
       return Result.success(
         PaginatedResult(
@@ -148,17 +145,18 @@ class SupabaseCommentRepository implements CommentRepository {
     required String userId,
   }) async {
     try {
-      final data = await _client.raw
-          .from('comments')
-          .update({
-            'body': body,
-            'updated_at': DateTime.now().toUtc().toIso8601String(),
-          })
-          .eq('id', commentId)
-          .eq('user_id', userId)
-          .eq('app_id', _client.appId)
-          .select()
-          .single();
+      final data =
+          await _client.raw
+              .from('comments')
+              .update({
+                'body': body,
+                'updated_at': DateTime.now().toUtc().toIso8601String(),
+              })
+              .eq('id', commentId)
+              .eq('user_id', userId)
+              .eq('app_id', _client.appId)
+              .select()
+              .single();
 
       return Result.success(CommentModel.fromJson(data));
     } catch (e, st) {
@@ -210,19 +208,14 @@ class SupabaseCommentRepository implements CommentRepository {
     try {
       final result = await _client.rpc(
         'toggle_comment_like',
-        params: {
-          'p_user_id': userId,
-          'p_comment_id': commentId,
-        },
+        params: {'p_user_id': userId, 'p_comment_id': commentId},
       );
 
       final data = result as Map<String, dynamic>;
-      return Result.success(
-        (
-          isLiked: data['is_liked'] as bool,
-          likeCount: data['like_count'] as int,
-        ),
-      );
+      return Result.success((
+        isLiked: data['is_liked'] as bool,
+        likeCount: data['like_count'] as int,
+      ));
     } catch (e, st) {
       return Result.failure(
         DatabaseException(
@@ -241,15 +234,16 @@ class SupabaseCommentRepository implements CommentRepository {
     required String contentId,
   }) async {
     try {
-      final result = await _client.raw
-          .from('comments')
-          .select()
-          .eq('app_id', _client.appId)
-          .eq('content_type', contentType)
-          .eq('content_id', contentId)
-          .eq('is_deleted', false)
-          .isFilter('parent_comment_id', null)
-          .count();
+      final result =
+          await _client.raw
+              .from('comments')
+              .select()
+              .eq('app_id', _client.appId)
+              .eq('content_type', contentType)
+              .eq('content_id', contentId)
+              .eq('is_deleted', false)
+              .isFilter('parent_comment_id', null)
+              .count();
 
       return Result.success(result.count);
     } catch (e, st) {

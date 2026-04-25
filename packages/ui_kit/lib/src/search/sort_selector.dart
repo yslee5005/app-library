@@ -3,11 +3,7 @@ import 'package:flutter/material.dart';
 
 /// A sort option displayed by [SortSelector].
 class SortOption {
-  const SortOption({
-    required this.id,
-    required this.label,
-    this.icon,
-  });
+  const SortOption({required this.id, required this.label, this.icon});
 
   /// Unique identifier returned via the callback.
   final String id;
@@ -52,36 +48,41 @@ class SortSelector extends StatelessWidget {
 
     return PopupMenuButton<SortOption>(
       onSelected: onSortChanged,
-      itemBuilder: (_) => options.map((option) {
-        return PopupMenuItem<SortOption>(
-          value: option,
-          child: Row(
-            children: [
-              if (option.icon != null) ...[
-                Icon(
-                  option.icon,
-                  size: 20,
-                  color: option.id == selected
-                      ? theme.colorScheme.primary
-                      : theme.colorScheme.onSurface,
-                ),
-                const SizedBox(width: AppSpacing.sm),
-              ],
-              Text(
-                option.label,
-                style: theme.textTheme.bodyMedium?.copyWith(
-                  color: option.id == selected
-                      ? theme.colorScheme.primary
-                      : null,
-                  fontWeight: option.id == selected
-                      ? FontWeight.w600
-                      : FontWeight.normal,
-                ),
-              ),
-            ],
-          ),
-        );
-      }).toList(),
+      itemBuilder:
+          (_) =>
+              options.map((option) {
+                return PopupMenuItem<SortOption>(
+                  value: option,
+                  child: Row(
+                    children: [
+                      if (option.icon != null) ...[
+                        Icon(
+                          option.icon,
+                          size: 20,
+                          color:
+                              option.id == selected
+                                  ? theme.colorScheme.primary
+                                  : theme.colorScheme.onSurface,
+                        ),
+                        const SizedBox(width: AppSpacing.sm),
+                      ],
+                      Text(
+                        option.label,
+                        style: theme.textTheme.bodyMedium?.copyWith(
+                          color:
+                              option.id == selected
+                                  ? theme.colorScheme.primary
+                                  : null,
+                          fontWeight:
+                              option.id == selected
+                                  ? FontWeight.w600
+                                  : FontWeight.normal,
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              }).toList(),
       child: Padding(
         padding: const EdgeInsets.symmetric(
           horizontal: AppSpacing.sm,
@@ -90,10 +91,7 @@ class SortSelector extends StatelessWidget {
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text(
-              '$label: ${current.label}',
-              style: theme.textTheme.labelLarge,
-            ),
+            Text('$label: ${current.label}', style: theme.textTheme.labelLarge),
             const SizedBox(width: AppSpacing.xs),
             const Icon(Icons.arrow_drop_down, size: 20),
           ],

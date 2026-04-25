@@ -19,42 +19,52 @@ class SearchDemo extends StatelessWidget {
             title: const Text('AppSearchBar'),
             subtitle: const Text('Search bar with debounced input'),
             trailing: const Icon(Icons.chevron_right),
-            onTap: () => Navigator.push(
-              context,
-              MaterialPageRoute<void>(builder: (_) => const SearchBarDemo()),
-            ),
+            onTap:
+                () => Navigator.push(
+                  context,
+                  MaterialPageRoute<void>(
+                    builder: (_) => const SearchBarDemo(),
+                  ),
+                ),
           ),
           ListTile(
             leading: const Icon(Icons.filter_list),
             title: const Text('FilterBottomSheet'),
             subtitle: const Text('Bottom sheet with filter options'),
             trailing: const Icon(Icons.chevron_right),
-            onTap: () => Navigator.push(
-              context,
-              MaterialPageRoute<void>(
-                builder: (_) => const FilterBottomSheetDemo(),
-              ),
-            ),
+            onTap:
+                () => Navigator.push(
+                  context,
+                  MaterialPageRoute<void>(
+                    builder: (_) => const FilterBottomSheetDemo(),
+                  ),
+                ),
           ),
           ListTile(
             leading: const Icon(Icons.sort),
             title: const Text('SortSelector'),
             subtitle: const Text('Sort dropdown with icons'),
             trailing: const Icon(Icons.chevron_right),
-            onTap: () => Navigator.push(
-              context,
-              MaterialPageRoute<void>(builder: (_) => const SortSelectorDemo()),
-            ),
+            onTap:
+                () => Navigator.push(
+                  context,
+                  MaterialPageRoute<void>(
+                    builder: (_) => const SortSelectorDemo(),
+                  ),
+                ),
           ),
           ListTile(
             leading: const Icon(Icons.filter_alt),
             title: const Text('ChipFilterBar'),
             subtitle: const Text('Horizontal scrollable chip filters'),
             trailing: const Icon(Icons.chevron_right),
-            onTap: () => Navigator.push(
-              context,
-              MaterialPageRoute<void>(builder: (_) => const ChipFilterBarDemo()),
-            ),
+            onTap:
+                () => Navigator.push(
+                  context,
+                  MaterialPageRoute<void>(
+                    builder: (_) => const ChipFilterBarDemo(),
+                  ),
+                ),
           ),
         ],
       ),

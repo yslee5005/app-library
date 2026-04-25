@@ -49,9 +49,9 @@ class DangerAlertScreen extends StatelessWidget {
                   Text(
                     alertType,
                     style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                          color: AppColors.danger,
-                          fontWeight: FontWeight.w700,
-                        ),
+                      color: AppColors.danger,
+                      fontWeight: FontWeight.w700,
+                    ),
                     textAlign: TextAlign.center,
                   ),
                 ],
@@ -75,11 +75,10 @@ class DangerAlertScreen extends StatelessWidget {
                       ),
                       child: Text(
                         description,
-                        style:
-                            Theme.of(context).textTheme.bodyLarge?.copyWith(
-                                  color: AppColors.textPrimary,
-                                  height: 1.6,
-                                ),
+                        style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                          color: AppColors.textPrimary,
+                          height: 1.6,
+                        ),
                       ),
                     ),
 
@@ -101,9 +100,7 @@ class DangerAlertScreen extends StatelessWidget {
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(16),
                           ),
-                          textStyle: Theme.of(context)
-                              .textTheme
-                              .titleMedium
+                          textStyle: Theme.of(context).textTheme.titleMedium
                               ?.copyWith(
                                 fontWeight: FontWeight.w600,
                                 color: Colors.white,
@@ -129,12 +126,8 @@ class DangerAlertScreen extends StatelessWidget {
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(16),
                           ),
-                          textStyle: Theme.of(context)
-                              .textTheme
-                              .titleMedium
-                              ?.copyWith(
-                                fontWeight: FontWeight.w600,
-                              ),
+                          textStyle: Theme.of(context).textTheme.titleMedium
+                              ?.copyWith(fontWeight: FontWeight.w600),
                         ),
                       ),
                     ),
@@ -162,12 +155,8 @@ class DangerAlertScreen extends StatelessWidget {
                               const SizedBox(width: 8),
                               Text(
                                 '참고: 정상 범위',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .labelLarge
-                                    ?.copyWith(
-                                      color: AppColors.info,
-                                    ),
+                                style: Theme.of(context).textTheme.labelLarge
+                                    ?.copyWith(color: AppColors.info),
                               ),
                             ],
                           ),
@@ -176,18 +165,9 @@ class DangerAlertScreen extends StatelessWidget {
                             label: '대변 색상',
                             value: '노란색, 녹색, 갈색 — 정상',
                           ),
-                          _ReferenceRow(
-                            label: '체온',
-                            value: '36.5~37.5°C — 정상',
-                          ),
-                          _ReferenceRow(
-                            label: '수유 횟수',
-                            value: '신생아 8-12회/일',
-                          ),
-                          _ReferenceRow(
-                            label: '기저귀',
-                            value: '소변 6회+/일 — 정상',
-                          ),
+                          _ReferenceRow(label: '체온', value: '36.5~37.5°C — 정상'),
+                          _ReferenceRow(label: '수유 횟수', value: '신생아 8-12회/일'),
+                          _ReferenceRow(label: '기저귀', value: '소변 6회+/일 — 정상'),
                         ],
                       ),
                     ),
@@ -214,9 +194,7 @@ class DangerAlertScreen extends StatelessWidget {
                           Expanded(
                             child: Text(
                               '이 알림은 절대 위험신호에만 표시됩니다\n(연간 2-3회 이하)',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodySmall
+                              style: Theme.of(context).textTheme.bodySmall
                                   ?.copyWith(
                                     color: AppColors.success,
                                     height: 1.5,
@@ -256,17 +234,17 @@ class _ReferenceRow extends StatelessWidget {
             width: 80,
             child: Text(
               label,
-              style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                    color: AppColors.textHint,
-                  ),
+              style: Theme.of(
+                context,
+              ).textTheme.bodySmall?.copyWith(color: AppColors.textHint),
             ),
           ),
           Expanded(
             child: Text(
               value,
-              style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                    color: AppColors.textSecondary,
-                  ),
+              style: Theme.of(
+                context,
+              ).textTheme.bodySmall?.copyWith(color: AppColors.textSecondary),
             ),
           ),
         ],

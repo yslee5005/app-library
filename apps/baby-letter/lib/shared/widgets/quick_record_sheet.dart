@@ -71,9 +71,9 @@ class _QuickRecordSheet extends StatelessWidget {
             Text(
               '빠른 기록',
               style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                    color: AppColors.textPrimary,
-                    fontWeight: FontWeight.w600,
-                  ),
+                color: AppColors.textPrimary,
+                fontWeight: FontWeight.w600,
+              ),
             ),
 
             const SizedBox(height: 24),
@@ -153,11 +153,7 @@ class _QuickButton extends StatelessWidget {
   final String label;
   final VoidCallback? onTap;
 
-  const _QuickButton({
-    required this.emoji,
-    required this.label,
-    this.onTap,
-  });
+  const _QuickButton({required this.emoji, required this.label, this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -176,9 +172,9 @@ class _QuickButton extends StatelessWidget {
             Text(
               label,
               style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                    color: AppColors.textPrimary,
-                    fontWeight: FontWeight.w500,
-                  ),
+                color: AppColors.textPrimary,
+                fontWeight: FontWeight.w500,
+              ),
             ),
           ],
         ),

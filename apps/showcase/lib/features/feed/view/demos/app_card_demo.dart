@@ -11,12 +11,15 @@ class AppCardDemo extends StatelessWidget {
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
-          Text('Vertical layout',
-              style: Theme.of(context).textTheme.titleMedium),
+          Text(
+            'Vertical layout',
+            style: Theme.of(context).textTheme.titleMedium,
+          ),
           const SizedBox(height: 8),
           AppCard(
             title: 'Vertical Card',
-            subtitle: 'This card uses the default vertical layout with an image on top.',
+            subtitle:
+                'This card uses the default vertical layout with an image on top.',
             image: Container(
               color: Theme.of(context).colorScheme.primaryContainer,
               child: const Center(child: Icon(Icons.image, size: 48)),
@@ -24,12 +27,15 @@ class AppCardDemo extends StatelessWidget {
             onTap: () {},
           ),
           const SizedBox(height: 24),
-          Text('Horizontal layout',
-              style: Theme.of(context).textTheme.titleMedium),
+          Text(
+            'Horizontal layout',
+            style: Theme.of(context).textTheme.titleMedium,
+          ),
           const SizedBox(height: 8),
           AppCard(
             title: 'Horizontal Card',
-            subtitle: 'This card uses a horizontal layout with image on the side.',
+            subtitle:
+                'This card uses a horizontal layout with image on the side.',
             layout: AppCardLayout.horizontal,
             image: Container(
               color: Theme.of(context).colorScheme.secondaryContainer,
@@ -38,8 +44,7 @@ class AppCardDemo extends StatelessWidget {
             onTap: () {},
           ),
           const SizedBox(height: 24),
-          Text('Without image',
-              style: Theme.of(context).textTheme.titleMedium),
+          Text('Without image', style: Theme.of(context).textTheme.titleMedium),
           const SizedBox(height: 8),
           AppCard(
             title: 'Text-only Card',

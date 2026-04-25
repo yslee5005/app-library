@@ -41,11 +41,7 @@ class ErrorStateView extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(
-              icon,
-              size: iconSize,
-              color: theme.colorScheme.error,
-            ),
+            Icon(icon, size: iconSize, color: theme.colorScheme.error),
             SizedBox(height: spacing ?? AppSpacing.md),
             Text(
               message,

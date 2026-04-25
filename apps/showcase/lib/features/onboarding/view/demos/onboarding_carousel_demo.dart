@@ -11,19 +11,20 @@ class OnboardingCarouselDemo extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('OnboardingCarousel')),
       body: OnboardingCarousel(
-        pages: SampleData.onboardingPages
-            .map(
-              (p) => OnboardingPage(
-                title: p['title']!,
-                subtitle: p['subtitle']!,
-                image: Icon(
-                  Icons.widgets,
-                  size: 80,
-                  color: Theme.of(context).colorScheme.primary,
-                ),
-              ),
-            )
-            .toList(),
+        pages:
+            SampleData.onboardingPages
+                .map(
+                  (p) => OnboardingPage(
+                    title: p['title']!,
+                    subtitle: p['subtitle']!,
+                    image: Icon(
+                      Icons.widgets,
+                      size: 80,
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
+                  ),
+                )
+                .toList(),
         onFinish: () => Navigator.pop(context),
       ),
     );

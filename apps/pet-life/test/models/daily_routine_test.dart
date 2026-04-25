@@ -40,15 +40,19 @@ void main() {
     test('defaults returns 4 routines', () {
       final defaults = DailyRoutine.defaults;
       expect(defaults.length, 4);
-      expect(defaults.map((r) => r.id),
-          containsAll(['walk_am', 'walk_pm', 'meal_am', 'meal_pm']));
+      expect(
+        defaults.map((r) => r.id),
+        containsAll(['walk_am', 'walk_pm', 'meal_am', 'meal_pm']),
+      );
     });
 
     test('optionals returns 4 routines', () {
       final optionals = DailyRoutine.optionals;
       expect(optionals.length, 4);
-      expect(optionals.map((r) => r.id),
-          containsAll(['teeth', 'meds', 'snack', 'play']));
+      expect(
+        optionals.map((r) => r.id),
+        containsAll(['teeth', 'meds', 'snack', 'play']),
+      );
     });
 
     test('copyWith creates new instance', () {

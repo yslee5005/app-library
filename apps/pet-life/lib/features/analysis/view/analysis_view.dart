@@ -59,9 +59,7 @@ class _AnalysisViewState extends State<AnalysisView> {
   @override
   Widget build(BuildContext context) {
     if (_profile == null || _lifeStats == null) {
-      return const Scaffold(
-        body: Center(child: CircularProgressIndicator()),
-      );
+      return const Scaffold(body: Center(child: CircularProgressIndicator()));
     }
 
     return Scaffold(
@@ -119,13 +117,20 @@ class _AnalysisViewState extends State<AnalysisView> {
         children: [
           const Text(
             '🐾 여정',
-            style: TextStyle(color: Colors.white, fontSize: 17, fontWeight: FontWeight.w600),
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 17,
+              fontWeight: FontWeight.w600,
+            ),
           ),
           const SizedBox(height: 16),
           // Mini timeline bar
           Row(
             children: [
-              const Text('탄생', style: TextStyle(color: Colors.white38, fontSize: 11)),
+              const Text(
+                '탄생',
+                style: TextStyle(color: Colors.white38, fontSize: 11),
+              ),
               const SizedBox(width: 8),
               Expanded(
                 child: Stack(
@@ -145,7 +150,10 @@ class _AnalysisViewState extends State<AnalysisView> {
                         height: 6,
                         decoration: BoxDecoration(
                           gradient: LinearGradient(
-                            colors: [AppConfig.accentColor.withOpacity(0.5), AppConfig.accentColor],
+                            colors: [
+                              AppConfig.accentColor.withOpacity(0.5),
+                              AppConfig.accentColor,
+                            ],
                           ),
                           borderRadius: BorderRadius.circular(3),
                         ),
@@ -153,7 +161,10 @@ class _AnalysisViewState extends State<AnalysisView> {
                     ),
                     // Dog position
                     Positioned(
-                      left: (MediaQuery.of(context).size.width - 80) * (percentage / 100) - 8,
+                      left:
+                          (MediaQuery.of(context).size.width - 80) *
+                              (percentage / 100) -
+                          8,
                       top: -5,
                       child: const Text('🐕', style: TextStyle(fontSize: 16)),
                     ),
@@ -186,7 +197,11 @@ class _AnalysisViewState extends State<AnalysisView> {
         children: [
           const Text(
             '🏆 돌봄 점수',
-            style: TextStyle(color: Colors.white, fontSize: 17, fontWeight: FontWeight.w600),
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 17,
+              fontWeight: FontWeight.w600,
+            ),
           ),
           const SizedBox(height: 20),
           // Circular score
@@ -207,8 +222,8 @@ class _AnalysisViewState extends State<AnalysisView> {
                       score >= 70
                           ? Colors.green
                           : score >= 40
-                              ? AppConfig.accentColor
-                              : Colors.redAccent,
+                          ? AppConfig.accentColor
+                          : Colors.redAccent,
                     ),
                   ),
                 ),
@@ -223,7 +238,10 @@ class _AnalysisViewState extends State<AnalysisView> {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    const Text('/ 100', style: TextStyle(color: Colors.white38, fontSize: 13)),
+                    const Text(
+                      '/ 100',
+                      style: TextStyle(color: Colors.white38, fontSize: 13),
+                    ),
                   ],
                 ),
               ],
@@ -249,7 +267,11 @@ class _AnalysisViewState extends State<AnalysisView> {
       children: [
         const Text(
           '📊 항목별 비교',
-          style: TextStyle(color: Colors.white, fontSize: 17, fontWeight: FontWeight.w600),
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 17,
+            fontWeight: FontWeight.w600,
+          ),
         ),
         const SizedBox(height: 4),
         const Text(
@@ -257,7 +279,9 @@ class _AnalysisViewState extends State<AnalysisView> {
           style: TextStyle(color: Colors.white38, fontSize: 12),
         ),
         const SizedBox(height: 16),
-        ...standards.categories.map((category) => _buildCategoryGroup(category)),
+        ...standards.categories.map(
+          (category) => _buildCategoryGroup(category),
+        ),
       ],
     );
   }
@@ -270,7 +294,11 @@ class _AnalysisViewState extends State<AnalysisView> {
           padding: const EdgeInsets.only(bottom: 8, top: 8),
           child: Text(
             '${category.icon} ${category.name}',
-            style: const TextStyle(color: Colors.white54, fontSize: 14, fontWeight: FontWeight.w600),
+            style: const TextStyle(
+              color: Colors.white54,
+              fontSize: 14,
+              fontWeight: FontWeight.w600,
+            ),
           ),
         ),
         ...category.items.map((item) {
@@ -327,9 +355,15 @@ class _AnalysisViewState extends State<AnalysisView> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(title, style: const TextStyle(color: Colors.white, fontSize: 14)),
+                  Text(
+                    title,
+                    style: const TextStyle(color: Colors.white, fontSize: 14),
+                  ),
                   const SizedBox(height: 2),
-                  Text('기록 없음 · 권장 $recommended$unit', style: const TextStyle(color: Colors.white30, fontSize: 11)),
+                  Text(
+                    '기록 없음 · 권장 $recommended$unit',
+                    style: const TextStyle(color: Colors.white30, fontSize: 11),
+                  ),
                 ],
               ),
             ),
@@ -337,7 +371,10 @@ class _AnalysisViewState extends State<AnalysisView> {
               onPressed: () {},
               style: TextButton.styleFrom(
                 foregroundColor: AppConfig.accentColor,
-                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 10,
+                  vertical: 4,
+                ),
                 minimumSize: Size.zero,
                 tapTargetSize: MaterialTapTargetSize.shrinkWrap,
               ),
@@ -348,7 +385,10 @@ class _AnalysisViewState extends State<AnalysisView> {
       );
     }
 
-    final percentage = recommended > 0 ? (current / recommended * 100).clamp(0, 100).round() : 0;
+    final percentage =
+        recommended > 0
+            ? (current / recommended * 100).clamp(0, 100).round()
+            : 0;
     final deficit = recommended - current;
 
     return GlassCard(
@@ -360,14 +400,25 @@ class _AnalysisViewState extends State<AnalysisView> {
             children: [
               Text(icon, style: const TextStyle(fontSize: 20)),
               const SizedBox(width: 8),
-              Text(title, style: const TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w600)),
+              Text(
+                title,
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
               const Spacer(),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 10,
+                  vertical: 4,
+                ),
                 decoration: BoxDecoration(
-                  color: percentage >= 80
-                      ? Colors.green.withOpacity(0.2)
-                      : percentage >= 50
+                  color:
+                      percentage >= 80
+                          ? Colors.green.withOpacity(0.2)
+                          : percentage >= 50
                           ? AppConfig.accentColor.withOpacity(0.2)
                           : Colors.redAccent.withOpacity(0.2),
                   borderRadius: BorderRadius.circular(12),
@@ -375,7 +426,12 @@ class _AnalysisViewState extends State<AnalysisView> {
                 child: Text(
                   '$percentage%',
                   style: TextStyle(
-                    color: percentage >= 80 ? Colors.green : percentage >= 50 ? AppConfig.accentColor : Colors.redAccent,
+                    color:
+                        percentage >= 80
+                            ? Colors.green
+                            : percentage >= 50
+                            ? AppConfig.accentColor
+                            : Colors.redAccent,
                     fontSize: 13,
                     fontWeight: FontWeight.bold,
                   ),
@@ -389,7 +445,10 @@ class _AnalysisViewState extends State<AnalysisView> {
             children: [
               SizedBox(
                 width: 30,
-                child: Text('나', style: TextStyle(color: Colors.white54, fontSize: 11)),
+                child: Text(
+                  '나',
+                  style: TextStyle(color: Colors.white54, fontSize: 11),
+                ),
               ),
               Expanded(
                 child: ClipRRect(
@@ -397,13 +456,18 @@ class _AnalysisViewState extends State<AnalysisView> {
                   child: LinearProgressIndicator(
                     value: percentage / 100,
                     backgroundColor: Colors.white.withOpacity(0.08),
-                    valueColor: AlwaysStoppedAnimation<Color>(AppConfig.accentColor),
+                    valueColor: AlwaysStoppedAnimation<Color>(
+                      AppConfig.accentColor,
+                    ),
                     minHeight: 8,
                   ),
                 ),
               ),
               const SizedBox(width: 8),
-              Text('$current$unit', style: const TextStyle(color: Colors.white70, fontSize: 12)),
+              Text(
+                '$current$unit',
+                style: const TextStyle(color: Colors.white70, fontSize: 12),
+              ),
             ],
           ),
           const SizedBox(height: 6),
@@ -411,7 +475,10 @@ class _AnalysisViewState extends State<AnalysisView> {
             children: [
               SizedBox(
                 width: 30,
-                child: Text('권장', style: TextStyle(color: Colors.white38, fontSize: 11)),
+                child: Text(
+                  '권장',
+                  style: TextStyle(color: Colors.white38, fontSize: 11),
+                ),
               ),
               Expanded(
                 child: ClipRRect(
@@ -419,13 +486,18 @@ class _AnalysisViewState extends State<AnalysisView> {
                   child: LinearProgressIndicator(
                     value: 1.0,
                     backgroundColor: Colors.white.withOpacity(0.08),
-                    valueColor: AlwaysStoppedAnimation<Color>(Colors.white.withOpacity(0.15)),
+                    valueColor: AlwaysStoppedAnimation<Color>(
+                      Colors.white.withOpacity(0.15),
+                    ),
                     minHeight: 8,
                   ),
                 ),
               ),
               const SizedBox(width: 8),
-              Text('$recommended$unit', style: const TextStyle(color: Colors.white38, fontSize: 12)),
+              Text(
+                '$recommended$unit',
+                style: const TextStyle(color: Colors.white38, fontSize: 12),
+              ),
             ],
           ),
           const SizedBox(height: 12),
@@ -434,18 +506,27 @@ class _AnalysisViewState extends State<AnalysisView> {
             Container(
               padding: const EdgeInsets.all(10),
               decoration: BoxDecoration(
-                color: isCritical ? Colors.redAccent.withOpacity(0.1) : AppConfig.accentColor.withOpacity(0.08),
+                color:
+                    isCritical
+                        ? Colors.redAccent.withOpacity(0.1)
+                        : AppConfig.accentColor.withOpacity(0.08),
                 borderRadius: BorderRadius.circular(10),
               ),
               child: Row(
                 children: [
-                  Text(isCritical ? '🔴' : '💡', style: const TextStyle(fontSize: 14)),
+                  Text(
+                    isCritical ? '🔴' : '💡',
+                    style: const TextStyle(fontSize: 14),
+                  ),
                   const SizedBox(width: 8),
                   Expanded(
                     child: Text(
                       tip,
                       style: TextStyle(
-                        color: isCritical ? Colors.redAccent.shade100 : Colors.white60,
+                        color:
+                            isCritical
+                                ? Colors.redAccent.shade100
+                                : Colors.white60,
                         fontSize: 12,
                       ),
                     ),
@@ -464,13 +545,19 @@ class _AnalysisViewState extends State<AnalysisView> {
                 children: [
                   Text('✅', style: TextStyle(fontSize: 14)),
                   SizedBox(width: 8),
-                  Text('잘하고 있어요!', style: TextStyle(color: Colors.green, fontSize: 12)),
+                  Text(
+                    '잘하고 있어요!',
+                    style: TextStyle(color: Colors.green, fontSize: 12),
+                  ),
                 ],
               ),
             ),
           // Source
           const SizedBox(height: 6),
-          Text(source, style: const TextStyle(color: Colors.white24, fontSize: 10)),
+          Text(
+            source,
+            style: const TextStyle(color: Colors.white24, fontSize: 10),
+          ),
         ],
       ),
     );
@@ -492,16 +579,33 @@ class _AnalysisViewState extends State<AnalysisView> {
             children: [
               const Text('⚖️', style: TextStyle(fontSize: 20)),
               const SizedBox(width: 8),
-              const Text('체중', style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w600)),
+              const Text(
+                '체중',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
               const Spacer(),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 10,
+                  vertical: 4,
+                ),
                 decoration: BoxDecoration(
-                  color: isInRange ? Colors.green.withOpacity(0.2) : Colors.redAccent.withOpacity(0.2),
+                  color:
+                      isInRange
+                          ? Colors.green.withOpacity(0.2)
+                          : Colors.redAccent.withOpacity(0.2),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Text(
-                  isInRange ? '적정' : isOver ? '과체중' : '저체중',
+                  isInRange
+                      ? '적정'
+                      : isOver
+                      ? '과체중'
+                      : '저체중',
                   style: TextStyle(
                     color: isInRange ? Colors.green : Colors.redAccent,
                     fontSize: 13,
@@ -539,12 +643,22 @@ class _AnalysisViewState extends State<AnalysisView> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text('${minWeight.round()}kg', style: const TextStyle(color: Colors.white38, fontSize: 11)),
+              Text(
+                '${minWeight.round()}kg',
+                style: const TextStyle(color: Colors.white38, fontSize: 11),
+              ),
               Text(
                 '${weight}kg (현재)',
-                style: TextStyle(color: AppConfig.accentColor, fontSize: 12, fontWeight: FontWeight.w600),
+                style: TextStyle(
+                  color: AppConfig.accentColor,
+                  fontSize: 12,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
-              Text('${maxWeight.round()}kg', style: const TextStyle(color: Colors.white38, fontSize: 11)),
+              Text(
+                '${maxWeight.round()}kg',
+                style: const TextStyle(color: Colors.white38, fontSize: 11),
+              ),
             ],
           ),
           if (isOver) ...[
@@ -585,7 +699,11 @@ class _AnalysisViewState extends State<AnalysisView> {
       children: [
         const Text(
           '⚠️ 건강 위험',
-          style: TextStyle(color: Colors.white, fontSize: 17, fontWeight: FontWeight.w600),
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 17,
+            fontWeight: FontWeight.w600,
+          ),
         ),
         const SizedBox(height: 12),
         ..._breedInfo!.geneticHealthRisks.take(4).map(_buildHealthRiskCard),
@@ -594,9 +712,10 @@ class _AnalysisViewState extends State<AnalysisView> {
   }
 
   Widget _buildHealthRiskCard(HealthRisk risk) {
-    final color = risk.severity == 'critical'
-        ? Colors.redAccent
-        : risk.severity == 'high'
+    final color =
+        risk.severity == 'critical'
+            ? Colors.redAccent
+            : risk.severity == 'high'
             ? Colors.orange
             : Colors.amber;
 
@@ -621,7 +740,11 @@ class _AnalysisViewState extends State<AnalysisView> {
                 children: [
                   Text(
                     risk.conditionKo,
-                    style: const TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w500),
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
                   const SizedBox(height: 2),
                   Text(
@@ -639,7 +762,11 @@ class _AnalysisViewState extends State<AnalysisView> {
               ),
               child: Text(
                 '${risk.prevalencePercent}%',
-                style: TextStyle(color: color, fontSize: 12, fontWeight: FontWeight.bold),
+                style: TextStyle(
+                  color: color,
+                  fontSize: 12,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
           ],
@@ -661,14 +788,22 @@ class _AnalysisViewState extends State<AnalysisView> {
             pointsToTop > 0
                 ? '${_profile!.name}의 돌봄 점수를 올리면\n더 건강하고 오래 함께할 수 있어요'
                 : '${_profile!.name}를 정말 잘 돌보고 계시네요! 💛',
-            style: const TextStyle(color: Colors.white70, fontSize: 14, height: 1.5),
+            style: const TextStyle(
+              color: Colors.white70,
+              fontSize: 14,
+              height: 1.5,
+            ),
             textAlign: TextAlign.center,
           ),
           if (pointsToTop > 0) ...[
             const SizedBox(height: 4),
             Text(
               '오늘 +${(pointsToTop * 0.3).round()}점 가능해요!',
-              style: TextStyle(color: AppConfig.accentColor, fontSize: 13, fontWeight: FontWeight.w600),
+              style: TextStyle(
+                color: AppConfig.accentColor,
+                fontSize: 13,
+                fontWeight: FontWeight.w600,
+              ),
             ),
           ],
           const SizedBox(height: 16),
@@ -689,7 +824,9 @@ class _AnalysisViewState extends State<AnalysisView> {
                 foregroundColor: AppConfig.accentColor,
                 side: BorderSide(color: AppConfig.accentColor.withOpacity(0.3)),
                 padding: const EdgeInsets.symmetric(vertical: 14),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16),
+                ),
               ),
             ),
           ),
@@ -742,8 +879,11 @@ class _AnalysisViewState extends State<AnalysisView> {
     return _allLogs.where((l) {
       final date = DateTime.tryParse(l.date);
       if (date == null) return false;
-      final routine = _profile!.routines.where((r) => r.id == l.routineId).firstOrNull;
-      return l.completed && date.isAfter(weekAgo) && routine?.category == category;
+      final routine =
+          _profile!.routines.where((r) => r.id == l.routineId).firstOrNull;
+      return l.completed &&
+          date.isAfter(weekAgo) &&
+          routine?.category == category;
     }).length;
   }
 

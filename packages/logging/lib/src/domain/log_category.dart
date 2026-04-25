@@ -13,5 +13,5 @@ enum LogCategory {
   stt,
   fcm,
   subscription,
-  general;
+  general,
 }

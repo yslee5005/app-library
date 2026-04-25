@@ -6,11 +6,9 @@ import 'package:app_lib_core/core.dart';
 
 /// Handles Google Sign-In and exchanges the credential with Supabase Auth.
 class GoogleAuthService {
-  GoogleAuthService({
-    required GoTrueClient auth,
-    GoogleSignIn? googleSignIn,
-  })  : _auth = auth,
-        _googleSignIn = googleSignIn ?? GoogleSignIn();
+  GoogleAuthService({required GoTrueClient auth, GoogleSignIn? googleSignIn})
+    : _auth = auth,
+      _googleSignIn = googleSignIn ?? GoogleSignIn();
 
   final GoTrueClient _auth;
   final GoogleSignIn _googleSignIn;

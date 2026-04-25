@@ -58,31 +58,33 @@ class LanguagePickerTile extends StatelessWidget {
   void _showPicker(BuildContext context) {
     showDialog<String>(
       context: context,
-      builder: (context) => SimpleDialog(
-        title: Text(title),
-        children: languages.map((lang) {
-          return SimpleDialogOption(
-            onPressed: () {
-              Navigator.of(context).pop(lang.code);
-              onChanged(lang.code);
-            },
-            child: Row(
-              children: [
-                if (lang.code == currentLanguage)
-                  Icon(
-                    Icons.check,
-                    size: 20,
-                    color: Theme.of(context).colorScheme.primary,
-                  )
-                else
-                  const SizedBox(width: 20),
-                const SizedBox(width: 12),
-                Text(lang.label),
-              ],
-            ),
-          );
-        }).toList(),
-      ),
+      builder:
+          (context) => SimpleDialog(
+            title: Text(title),
+            children:
+                languages.map((lang) {
+                  return SimpleDialogOption(
+                    onPressed: () {
+                      Navigator.of(context).pop(lang.code);
+                      onChanged(lang.code);
+                    },
+                    child: Row(
+                      children: [
+                        if (lang.code == currentLanguage)
+                          Icon(
+                            Icons.check,
+                            size: 20,
+                            color: Theme.of(context).colorScheme.primary,
+                          )
+                        else
+                          const SizedBox(width: 20),
+                        const SizedBox(width: 12),
+                        Text(lang.label),
+                      ],
+                    ),
+                  );
+                }).toList(),
+          ),
     );
   }
 }

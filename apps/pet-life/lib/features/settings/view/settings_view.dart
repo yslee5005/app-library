@@ -40,8 +40,7 @@ class _SettingsViewState extends State<SettingsView> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(height: 16),
-              Text('설정',
-                  style: Theme.of(context).textTheme.headlineMedium),
+              Text('설정', style: Theme.of(context).textTheme.headlineMedium),
               const SizedBox(height: 24),
 
               // Pet info section
@@ -137,47 +136,48 @@ class _SettingsViewState extends State<SettingsView> {
     if (_profile == null) return const SizedBox.shrink();
 
     final allRoutines = [...DailyRoutine.defaults, ...DailyRoutine.optionals];
-    final activeIds =
-        _profile!.routines.map((r) => r.id).toSet();
+    final activeIds = _profile!.routines.map((r) => r.id).toSet();
 
     return GlassCard(
       child: Column(
-        children: allRoutines.asMap().entries.map((entry) {
-          final routine = entry.value;
-          final isActive = activeIds.contains(routine.id);
+        children:
+            allRoutines.asMap().entries.map((entry) {
+              final routine = entry.value;
+              final isActive = activeIds.contains(routine.id);
 
-          return Column(
-            children: [
-              if (entry.key > 0) const Divider(height: 1),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 8),
-                child: Row(
-                  children: [
-                    Icon(routine.icon,
-                        color: isActive
-                            ? AppConfig.accentColor
-                            : Colors.white38,
-                        size: 22),
-                    const SizedBox(width: 12),
-                    Expanded(
-                      child: Text(
-                        routine.name,
-                        style: TextStyle(
-                          color: isActive ? Colors.white : Colors.white54,
+              return Column(
+                children: [
+                  if (entry.key > 0) const Divider(height: 1),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 8),
+                    child: Row(
+                      children: [
+                        Icon(
+                          routine.icon,
+                          color:
+                              isActive ? AppConfig.accentColor : Colors.white38,
+                          size: 22,
                         ),
-                      ),
+                        const SizedBox(width: 12),
+                        Expanded(
+                          child: Text(
+                            routine.name,
+                            style: TextStyle(
+                              color: isActive ? Colors.white : Colors.white54,
+                            ),
+                          ),
+                        ),
+                        Switch(
+                          value: isActive,
+                          activeColor: AppConfig.accentColor,
+                          onChanged: (v) => _toggleRoutine(routine, v),
+                        ),
+                      ],
                     ),
-                    Switch(
-                      value: isActive,
-                      activeColor: AppConfig.accentColor,
-                      onChanged: (v) => _toggleRoutine(routine, v),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          );
-        }).toList(),
+                  ),
+                ],
+              );
+            }).toList(),
       ),
     );
   }
@@ -228,11 +228,7 @@ class _SettingsViewState extends State<SettingsView> {
             ),
           ),
           const Divider(height: 24),
-          _buildSettingRow(
-            icon: Icons.language,
-            label: '언어',
-            value: '한국어',
-          ),
+          _buildSettingRow(icon: Icons.language, label: '언어', value: '한국어'),
         ],
       ),
     );
@@ -293,17 +289,20 @@ class _SettingsViewState extends State<SettingsView> {
           Icon(icon, color: Colors.white54, size: 22),
           const SizedBox(width: 12),
           Expanded(
-            child: Text(label,
-                style: const TextStyle(color: Colors.white, fontSize: 15)),
+            child: Text(
+              label,
+              style: const TextStyle(color: Colors.white, fontSize: 15),
+            ),
           ),
           if (trailing != null)
             trailing
           else if (value != null)
-            Text(value,
-                style: const TextStyle(color: Colors.white54, fontSize: 14))
+            Text(
+              value,
+              style: const TextStyle(color: Colors.white54, fontSize: 14),
+            )
           else if (onTap != null)
-            const Icon(Icons.chevron_right,
-                color: Colors.white38, size: 20),
+            const Icon(Icons.chevron_right, color: Colors.white38, size: 20),
         ],
       ),
     );
@@ -312,29 +311,29 @@ class _SettingsViewState extends State<SettingsView> {
   // ─── Actions ───
 
   Future<void> _editName() async {
-    final controller =
-        TextEditingController(text: _profile!.name);
+    final controller = TextEditingController(text: _profile!.name);
     final result = await showDialog<String>(
       context: context,
-      builder: (ctx) => AlertDialog(
-        backgroundColor: AppConfig.backgroundColor,
-        title: const Text('이름 변경',
-            style: TextStyle(color: Colors.white)),
-        content: TextField(
-          controller: controller,
-          autofocus: true,
-          decoration: const InputDecoration(hintText: '새 이름'),
-        ),
-        actions: [
-          TextButton(
-              onPressed: () => Navigator.pop(ctx),
-              child: const Text('취소')),
-          TextButton(
-            onPressed: () => Navigator.pop(ctx, controller.text.trim()),
-            child: const Text('저장'),
+      builder:
+          (ctx) => AlertDialog(
+            backgroundColor: AppConfig.backgroundColor,
+            title: const Text('이름 변경', style: TextStyle(color: Colors.white)),
+            content: TextField(
+              controller: controller,
+              autofocus: true,
+              decoration: const InputDecoration(hintText: '새 이름'),
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(ctx),
+                child: const Text('취소'),
+              ),
+              TextButton(
+                onPressed: () => Navigator.pop(ctx, controller.text.trim()),
+                child: const Text('저장'),
+              ),
+            ],
           ),
-        ],
-      ),
     );
 
     if (result != null && result.isNotEmpty) {
@@ -346,33 +345,36 @@ class _SettingsViewState extends State<SettingsView> {
 
   Future<void> _editWeight() async {
     final controller = TextEditingController(
-        text: _profile!.weightKg.toString());
+      text: _profile!.weightKg.toString(),
+    );
     final result = await showDialog<String>(
       context: context,
-      builder: (ctx) => AlertDialog(
-        backgroundColor: AppConfig.backgroundColor,
-        title: const Text('체중 변경',
-            style: TextStyle(color: Colors.white)),
-        content: TextField(
-          controller: controller,
-          autofocus: true,
-          keyboardType:
-              const TextInputType.numberWithOptions(decimal: true),
-          decoration: const InputDecoration(
-            hintText: '체중 (kg)',
-            suffixText: 'kg',
+      builder:
+          (ctx) => AlertDialog(
+            backgroundColor: AppConfig.backgroundColor,
+            title: const Text('체중 변경', style: TextStyle(color: Colors.white)),
+            content: TextField(
+              controller: controller,
+              autofocus: true,
+              keyboardType: const TextInputType.numberWithOptions(
+                decimal: true,
+              ),
+              decoration: const InputDecoration(
+                hintText: '체중 (kg)',
+                suffixText: 'kg',
+              ),
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(ctx),
+                child: const Text('취소'),
+              ),
+              TextButton(
+                onPressed: () => Navigator.pop(ctx, controller.text.trim()),
+                child: const Text('저장'),
+              ),
+            ],
           ),
-        ),
-        actions: [
-          TextButton(
-              onPressed: () => Navigator.pop(ctx),
-              child: const Text('취소')),
-          TextButton(
-            onPressed: () => Navigator.pop(ctx, controller.text.trim()),
-            child: const Text('저장'),
-          ),
-        ],
-      ),
     );
 
     if (result != null) {
@@ -404,91 +406,94 @@ class _SettingsViewState extends State<SettingsView> {
   void _showDisclaimer() {
     showDialog<void>(
       context: context,
-      builder: (ctx) => AlertDialog(
-        backgroundColor: AppConfig.backgroundColor,
-        title: const Text('면책 조항',
-            style: TextStyle(color: Colors.white)),
-        content: const Text(
-          'Pet Life 앱에서 제공하는 건강 정보는 참고 목적으로만 제공되며, '
-          '수의학적 진단이나 치료를 대체하지 않습니다.\n\n'
-          '반려견의 건강에 관한 결정은 반드시 수의사와 상담하시기 바랍니다.\n\n'
-          '건강 데이터는 학술 논문과 공인 기관의 통계를 기반으로 하며, '
-          '개별 반려견에게 그대로 적용되지 않을 수 있습니다.',
-          style: TextStyle(color: Colors.white70, fontSize: 14),
-        ),
-        actions: [
-          TextButton(
-              onPressed: () => Navigator.pop(ctx),
-              child: const Text('확인')),
-        ],
-      ),
+      builder:
+          (ctx) => AlertDialog(
+            backgroundColor: AppConfig.backgroundColor,
+            title: const Text('면책 조항', style: TextStyle(color: Colors.white)),
+            content: const Text(
+              'Pet Life 앱에서 제공하는 건강 정보는 참고 목적으로만 제공되며, '
+              '수의학적 진단이나 치료를 대체하지 않습니다.\n\n'
+              '반려견의 건강에 관한 결정은 반드시 수의사와 상담하시기 바랍니다.\n\n'
+              '건강 데이터는 학술 논문과 공인 기관의 통계를 기반으로 하며, '
+              '개별 반려견에게 그대로 적용되지 않을 수 있습니다.',
+              style: TextStyle(color: Colors.white70, fontSize: 14),
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(ctx),
+                child: const Text('확인'),
+              ),
+            ],
+          ),
     );
   }
 
   void _showSources() {
     showDialog<void>(
       context: context,
-      builder: (ctx) => AlertDialog(
-        backgroundColor: AppConfig.backgroundColor,
-        title: const Text('데이터 출처',
-            style: TextStyle(color: Colors.white)),
-        content: const SingleChildScrollView(
-          child: Text(
-            '• PMC: Life expectancy tables (13M+ dogs)\n'
-            '  doi:10.3389/fvets.2023.1082102\n\n'
-            '• UK Kennel Club mortality study (5,663 dogs)\n'
-            '  doi:10.1186/s40575-018-0066-8\n\n'
-            '• PLOS Genetics: 152 genetic disorders (100K+ dogs)\n'
-            '  doi:10.1371/journal.pgen.1007361\n\n'
-            '• CIDD: Canine Inherited Disorders Database\n'
-            '  cidd.discoveryspace.ca\n\n'
-            '• AVMA: Overweight dogs lifespan study (50K+ dogs)\n\n'
-            '• Dog Aging Project — dogagingproject.org\n\n'
-            '• AKC Breed Standards — akc.org\n\n'
-            '• Human age formula: Tina Wang et al. (2019)\n'
-            '  Cell Systems — 16 × ln(dog_age) + 31',
-            style: TextStyle(color: Colors.white70, fontSize: 13),
+      builder:
+          (ctx) => AlertDialog(
+            backgroundColor: AppConfig.backgroundColor,
+            title: const Text('데이터 출처', style: TextStyle(color: Colors.white)),
+            content: const SingleChildScrollView(
+              child: Text(
+                '• PMC: Life expectancy tables (13M+ dogs)\n'
+                '  doi:10.3389/fvets.2023.1082102\n\n'
+                '• UK Kennel Club mortality study (5,663 dogs)\n'
+                '  doi:10.1186/s40575-018-0066-8\n\n'
+                '• PLOS Genetics: 152 genetic disorders (100K+ dogs)\n'
+                '  doi:10.1371/journal.pgen.1007361\n\n'
+                '• CIDD: Canine Inherited Disorders Database\n'
+                '  cidd.discoveryspace.ca\n\n'
+                '• AVMA: Overweight dogs lifespan study (50K+ dogs)\n\n'
+                '• Dog Aging Project — dogagingproject.org\n\n'
+                '• AKC Breed Standards — akc.org\n\n'
+                '• Human age formula: Tina Wang et al. (2019)\n'
+                '  Cell Systems — 16 × ln(dog_age) + 31',
+                style: TextStyle(color: Colors.white70, fontSize: 13),
+              ),
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(ctx),
+                child: const Text('확인'),
+              ),
+            ],
           ),
-        ),
-        actions: [
-          TextButton(
-              onPressed: () => Navigator.pop(ctx),
-              child: const Text('확인')),
-        ],
-      ),
     );
   }
 
   void _confirmReset() {
     showDialog<void>(
       context: context,
-      builder: (ctx) => AlertDialog(
-        backgroundColor: AppConfig.backgroundColor,
-        title: const Text('데이터 초기화',
-            style: TextStyle(color: Colors.white)),
-        content: const Text(
-          '모든 데이터가 삭제됩니다. 이 작업은 되돌릴 수 없습니다.',
-          style: TextStyle(color: Colors.white70),
-        ),
-        actions: [
-          TextButton(
-              onPressed: () => Navigator.pop(ctx),
-              child: const Text('취소')),
-          TextButton(
-            onPressed: () async {
-              Navigator.pop(ctx);
-              await _storageService.deleteProfile();
-              await _storageService.setOnboardingComplete(false);
-              await _storageService.saveLogs([]);
-              if (mounted) {
-                context.go('/onboarding');
-              }
-            },
-            style: TextButton.styleFrom(foregroundColor: Colors.red),
-            child: const Text('초기화'),
+      builder:
+          (ctx) => AlertDialog(
+            backgroundColor: AppConfig.backgroundColor,
+            title: const Text('데이터 초기화', style: TextStyle(color: Colors.white)),
+            content: const Text(
+              '모든 데이터가 삭제됩니다. 이 작업은 되돌릴 수 없습니다.',
+              style: TextStyle(color: Colors.white70),
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(ctx),
+                child: const Text('취소'),
+              ),
+              TextButton(
+                onPressed: () async {
+                  Navigator.pop(ctx);
+                  await _storageService.deleteProfile();
+                  await _storageService.setOnboardingComplete(false);
+                  await _storageService.saveLogs([]);
+                  if (mounted) {
+                    context.go('/onboarding');
+                  }
+                },
+                style: TextButton.styleFrom(foregroundColor: Colors.red),
+                child: const Text('초기화'),
+              ),
+            ],
           ),
-        ],
-      ),
     );
   }
 }

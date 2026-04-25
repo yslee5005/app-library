@@ -57,10 +57,7 @@ class _PostnatalInputScreenState extends State<PostnatalInputScreen> {
       body: SafeArea(
         child: Column(
           children: [
-            LinearProgressIndicator(
-              value: (_step + 1) / 3,
-              minHeight: 4,
-            ),
+            LinearProgressIndicator(value: (_step + 1) / 3, minHeight: 4),
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.all(24),
@@ -80,7 +77,8 @@ class _PostnatalInputScreenState extends State<PostnatalInputScreen> {
               child: SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
-                  onPressed: (_step == 0 && _birthDate == null) ||
+                  onPressed:
+                      (_step == 0 && _birthDate == null) ||
                           (_step == 2 && _feedingType == null)
                       ? null
                       : _nextStep,
@@ -107,9 +105,9 @@ class _PostnatalInputScreenState extends State<PostnatalInputScreen> {
         const SizedBox(height: 8),
         Text(
           '정확한 발달 단계를 계산할게요',
-          style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-            color: AppColors.textSecondary,
-          ),
+          style: Theme.of(
+            context,
+          ).textTheme.bodyLarge?.copyWith(color: AppColors.textSecondary),
         ),
         const SizedBox(height: 32),
         GestureDetector(
@@ -122,9 +120,9 @@ class _PostnatalInputScreenState extends State<PostnatalInputScreen> {
               builder: (context, child) {
                 return Theme(
                   data: Theme.of(context).copyWith(
-                    colorScheme: Theme.of(context).colorScheme.copyWith(
-                      primary: AppColors.coral,
-                    ),
+                    colorScheme: Theme.of(
+                      context,
+                    ).colorScheme.copyWith(primary: AppColors.coral),
                   ),
                   child: child!,
                 );
@@ -151,8 +149,9 @@ class _PostnatalInputScreenState extends State<PostnatalInputScreen> {
               children: [
                 Icon(
                   Icons.cake_rounded,
-                  color:
-                      _birthDate != null ? AppColors.coral : AppColors.textHint,
+                  color: _birthDate != null
+                      ? AppColors.coral
+                      : AppColors.textHint,
                 ),
                 const SizedBox(width: 12),
                 Text(
@@ -194,9 +193,7 @@ class _PostnatalInputScreenState extends State<PostnatalInputScreen> {
           child: Container(
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
-              color: _isPremature
-                  ? AppColors.amberLight
-                  : AppColors.surface,
+              color: _isPremature ? AppColors.amberLight : AppColors.surface,
               borderRadius: BorderRadius.circular(12),
               border: Border.all(
                 color: _isPremature
@@ -210,8 +207,7 @@ class _PostnatalInputScreenState extends State<PostnatalInputScreen> {
                   _isPremature
                       ? Icons.check_circle_rounded
                       : Icons.circle_outlined,
-                  color:
-                      _isPremature ? AppColors.amber : AppColors.textHint,
+                  color: _isPremature ? AppColors.amber : AppColors.textHint,
                 ),
                 const SizedBox(width: 12),
                 Expanded(
@@ -243,16 +239,13 @@ class _PostnatalInputScreenState extends State<PostnatalInputScreen> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const SizedBox(height: 20),
-        Text(
-          '아기 이름을\n알려주세요',
-          style: Theme.of(context).textTheme.headlineLarge,
-        ),
+        Text('아기 이름을\n알려주세요', style: Theme.of(context).textTheme.headlineLarge),
         const SizedBox(height: 8),
         Text(
           '편지에서 아기를 불러줄 이름이에요',
-          style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-            color: AppColors.textSecondary,
-          ),
+          style: Theme.of(
+            context,
+          ).textTheme.bodyLarge?.copyWith(color: AppColors.textSecondary),
         ),
         const SizedBox(height: 32),
         TextField(
@@ -263,10 +256,7 @@ class _PostnatalInputScreenState extends State<PostnatalInputScreen> {
           ),
         ),
         const SizedBox(height: 24),
-        Text(
-          '성별',
-          style: Theme.of(context).textTheme.titleMedium,
-        ),
+        Text('성별', style: Theme.of(context).textTheme.titleMedium),
         const SizedBox(height: 12),
         Row(
           children: BabyGender.values.map((g) {
@@ -328,16 +318,16 @@ class _PostnatalInputScreenState extends State<PostnatalInputScreen> {
         const SizedBox(height: 8),
         Text(
           '아기 패턴을 더 정확하게 이해할 수 있어요',
-          style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-            color: AppColors.textSecondary,
-          ),
+          style: Theme.of(
+            context,
+          ).textTheme.bodyLarge?.copyWith(color: AppColors.textSecondary),
         ),
         const SizedBox(height: 12),
         Text(
           '수유 방식에 따라 아기 패턴의 편차가 41-70% 줄어들어요',
-          style: Theme.of(context).textTheme.bodySmall?.copyWith(
-            color: AppColors.textHint,
-          ),
+          style: Theme.of(
+            context,
+          ).textTheme.bodySmall?.copyWith(color: AppColors.textHint),
         ),
         const SizedBox(height: 32),
         ...FeedingType.values.map((type) {
@@ -360,9 +350,7 @@ class _PostnatalInputScreenState extends State<PostnatalInputScreen> {
                 width: double.infinity,
                 padding: const EdgeInsets.all(20),
                 decoration: BoxDecoration(
-                  color: isSelected
-                      ? AppColors.coralLight
-                      : AppColors.surface,
+                  color: isSelected ? AppColors.coralLight : AppColors.surface,
                   borderRadius: BorderRadius.circular(16),
                   border: Border.all(
                     color: isSelected
@@ -381,9 +369,7 @@ class _PostnatalInputScreenState extends State<PostnatalInputScreen> {
                         children: [
                           Text(
                             type.label,
-                            style: Theme.of(context)
-                                .textTheme
-                                .titleMedium
+                            style: Theme.of(context).textTheme.titleMedium
                                 ?.copyWith(
                                   color: isSelected
                                       ? AppColors.coral
@@ -394,15 +380,16 @@ class _PostnatalInputScreenState extends State<PostnatalInputScreen> {
                           const SizedBox(height: 2),
                           Text(
                             desc,
-                            style:
-                                Theme.of(context).textTheme.bodySmall,
+                            style: Theme.of(context).textTheme.bodySmall,
                           ),
                         ],
                       ),
                     ),
                     if (isSelected)
-                      const Icon(Icons.check_circle_rounded,
-                          color: AppColors.coral),
+                      const Icon(
+                        Icons.check_circle_rounded,
+                        color: AppColors.coral,
+                      ),
                   ],
                 ),
               ),

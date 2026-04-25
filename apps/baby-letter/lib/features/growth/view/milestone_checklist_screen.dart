@@ -43,9 +43,9 @@ class _MilestoneChecklistScreenState extends State<MilestoneChecklistScreen>
         title: Text(
           '발달 마일스톤',
           style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                color: AppColors.textPrimary,
-                fontWeight: FontWeight.w600,
-              ),
+            color: AppColors.textPrimary,
+            fontWeight: FontWeight.w600,
+          ),
         ),
         bottom: TabBar(
           controller: _tabController,
@@ -83,9 +83,7 @@ class _MilestoneChecklistScreenState extends State<MilestoneChecklistScreen>
             padding: const EdgeInsets.fromLTRB(20, 8, 20, 0),
             child: TextButton(
               onPressed: () {},
-              style: TextButton.styleFrom(
-                foregroundColor: AppColors.coral,
-              ),
+              style: TextButton.styleFrom(foregroundColor: AppColors.coral),
               child: const Text('📋 소아과용 리포트 →'),
             ),
           ),
@@ -96,9 +94,9 @@ class _MilestoneChecklistScreenState extends State<MilestoneChecklistScreen>
             child: Text(
               'ℹ️ CDC 기반 체크리스트. 발달은 범위이지 정확한 시점이 아닙니다.',
               textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                    color: AppColors.textHint,
-                  ),
+              style: Theme.of(
+                context,
+              ).textTheme.bodySmall?.copyWith(color: AppColors.textHint),
             ),
           ),
         ],
@@ -124,9 +122,9 @@ class _MilestoneChecklistScreenState extends State<MilestoneChecklistScreen>
                 Text(
                   category.title,
                   style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                        fontWeight: FontWeight.w600,
-                        color: AppColors.textPrimary,
-                      ),
+                    fontWeight: FontWeight.w600,
+                    color: AppColors.textPrimary,
+                  ),
                 ),
               ],
             ),
@@ -159,16 +157,16 @@ class _MilestoneChecklistScreenState extends State<MilestoneChecklistScreen>
         title: Text(
           item.label,
           style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                color: AppColors.textPrimary,
-                fontWeight: isChecked ? FontWeight.w500 : FontWeight.w400,
-              ),
+            color: AppColors.textPrimary,
+            fontWeight: isChecked ? FontWeight.w500 : FontWeight.w400,
+          ),
         ),
         subtitle: isChecked
             ? Text(
                 item.achievedDate ?? '',
-                style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                      color: AppColors.success,
-                    ),
+                style: Theme.of(
+                  context,
+                ).textTheme.bodySmall?.copyWith(color: AppColors.success),
               )
             : Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -177,14 +175,14 @@ class _MilestoneChecklistScreenState extends State<MilestoneChecklistScreen>
                     Text(
                       '예상 시기: ${item.expectedRange}',
                       style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                            color: AppColors.textHint,
-                          ),
+                        color: AppColors.textHint,
+                      ),
                     ),
                   Text(
                     '아직이어도 괜찮아요 💛',
-                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          color: AppColors.amber,
-                        ),
+                    style: Theme.of(
+                      context,
+                    ).textTheme.bodySmall?.copyWith(color: AppColors.amber),
                   ),
                 ],
               ),
@@ -266,11 +264,7 @@ const _period0to3 = [
         achieved: true,
         achievedDate: 'D+42 달성',
       ),
-      _MilestoneItem(
-        id: '0_3_lang_3',
-        label: '옹알이 시작',
-        expectedRange: '2-3개월',
-      ),
+      _MilestoneItem(id: '0_3_lang_3', label: '옹알이 시작', expectedRange: '2-3개월'),
     ],
   ),
   _MilestoneCategory(
@@ -289,11 +283,7 @@ const _period0to3 = [
         achieved: true,
         achievedDate: 'D+38 달성',
       ),
-      _MilestoneItem(
-        id: '0_3_cog_3',
-        label: '손 쳐다보기',
-        expectedRange: '2-3개월',
-      ),
+      _MilestoneItem(id: '0_3_cog_3', label: '손 쳐다보기', expectedRange: '2-3개월'),
     ],
   ),
 ];
@@ -303,11 +293,7 @@ const _period3to6 = [
     icon: '🏃',
     title: '대근육',
     items: [
-      _MilestoneItem(
-        id: '3_6_gross_1',
-        label: '뒤집기',
-        expectedRange: '4-6개월',
-      ),
+      _MilestoneItem(id: '3_6_gross_1', label: '뒤집기', expectedRange: '4-6개월'),
       _MilestoneItem(
         id: '3_6_gross_2',
         label: '도움 없이 앉기 시작',
@@ -329,11 +315,7 @@ const _period3to6 = [
         label: '자음+모음 옹알이 (바바, 마마)',
         expectedRange: '4-6개월',
       ),
-      _MilestoneItem(
-        id: '3_6_lang_2',
-        label: '이름에 반응',
-        expectedRange: '5-6개월',
-      ),
+      _MilestoneItem(id: '3_6_lang_2', label: '이름에 반응', expectedRange: '5-6개월'),
       _MilestoneItem(
         id: '3_6_lang_3',
         label: '감정 표현 (기쁨, 불만)',
@@ -369,11 +351,7 @@ const _period6to9 = [
     icon: '🏃',
     title: '대근육',
     items: [
-      _MilestoneItem(
-        id: '6_9_gross_1',
-        label: '혼자 앉기',
-        expectedRange: '6-8개월',
-      ),
+      _MilestoneItem(id: '6_9_gross_1', label: '혼자 앉기', expectedRange: '6-8개월'),
       _MilestoneItem(
         id: '6_9_gross_2',
         label: '배밀이/기기 시작',
@@ -416,11 +394,7 @@ const _period6to9 = [
         label: '까꿍 놀이 이해',
         expectedRange: '6-8개월',
       ),
-      _MilestoneItem(
-        id: '6_9_cog_2',
-        label: '낯가림 시작',
-        expectedRange: '7-9개월',
-      ),
+      _MilestoneItem(id: '6_9_cog_2', label: '낯가림 시작', expectedRange: '7-9개월'),
       _MilestoneItem(
         id: '6_9_cog_3',
         label: '물건 영속성 이해 시작',

@@ -38,8 +38,9 @@ void main() {
     expect(find.text('No items'), findsOneWidget);
   });
 
-  testWidgets('shows loading indicator when isLoadingMore is true',
-      (tester) async {
+  testWidgets('shows loading indicator when isLoadingMore is true', (
+    tester,
+  ) async {
     await tester.pumpWidget(
       buildApp(
         FeedListView(
@@ -54,8 +55,9 @@ void main() {
     expect(find.byType(CircularProgressIndicator), findsOneWidget);
   });
 
-  testWidgets('does not show loading indicator when hasMore is false',
-      (tester) async {
+  testWidgets('does not show loading indicator when hasMore is false', (
+    tester,
+  ) async {
     await tester.pumpWidget(
       buildApp(
         FeedListView(
@@ -70,16 +72,16 @@ void main() {
     expect(find.byType(CircularProgressIndicator), findsNothing);
   });
 
-  testWidgets('supports pull-to-refresh when onRefresh is provided',
-      (tester) async {
+  testWidgets('supports pull-to-refresh when onRefresh is provided', (
+    tester,
+  ) async {
     await tester.pumpWidget(
       buildApp(
         FeedListView(
           itemCount: 3,
-          itemBuilder: (context, index) => SizedBox(
-            height: 50,
-            child: Text('Item $index'),
-          ),
+          itemBuilder:
+              (context, index) =>
+                  SizedBox(height: 50, child: Text('Item $index')),
           onRefresh: () async {},
         ),
       ),

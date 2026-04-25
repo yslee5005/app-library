@@ -45,10 +45,7 @@ class _HomeViewState extends ConsumerState<HomeView> {
       padding: EdgeInsets.zero,
       children: [
         // Hero Section — full-screen branding with parallax
-        _HeroSection(
-          featuredAsync: featuredAsync,
-          scrollOffset: _scrollOffset,
-        ),
+        _HeroSection(featuredAsync: featuredAsync, scrollOffset: _scrollOffset),
 
         // Selected Works — Bento grid with scroll reveal
         const SizedBox(height: BlackLabelledSpacing.sectionSpacing),
@@ -59,12 +56,13 @@ class _HomeViewState extends ConsumerState<HomeView> {
         const SizedBox(height: BlackLabelledSpacing.lg),
         allProjectsAsync.when(
           data: (projects) => _BentoGrid(projects: projects),
-          loading: () => const SizedBox(
-            height: 400,
-            child: Center(
-              child: CircularProgressIndicator(color: Colors.white24),
-            ),
-          ),
+          loading:
+              () => const SizedBox(
+                height: 400,
+                child: Center(
+                  child: CircularProgressIndicator(color: Colors.white24),
+                ),
+              ),
           error: (_, __) => const SizedBox(height: 400),
         ),
 
@@ -77,26 +75,28 @@ class _HomeViewState extends ConsumerState<HomeView> {
 
         // Curated Items — horizontal furniture scroll
         const SizedBox(height: BlackLabelledSpacing.sectionSpacing),
-        _SectionHeader(title: 'Curated Items', trailing: '전체보기')
-            .animate()
-            .fadeIn(duration: 600.ms, curve: Curves.easeOut),
+        _SectionHeader(
+          title: 'Curated Items',
+          trailing: '전체보기',
+        ).animate().fadeIn(duration: 600.ms, curve: Curves.easeOut),
         const SizedBox(height: BlackLabelledSpacing.lg),
         furnitureAsync.when(
           data: (items) => _CuratedItems(items: items),
-          loading: () => const SizedBox(
-            height: 300,
-            child: Center(
-              child: CircularProgressIndicator(color: Colors.white24),
-            ),
-          ),
+          loading:
+              () => const SizedBox(
+                height: 300,
+                child: Center(
+                  child: CircularProgressIndicator(color: Colors.white24),
+                ),
+              ),
           error: (_, __) => const SizedBox(height: 300),
         ),
 
         // Journal
         const SizedBox(height: BlackLabelledSpacing.sectionSpacing),
-        _SectionHeader(title: 'Journal')
-            .animate()
-            .fadeIn(duration: 600.ms, curve: Curves.easeOut),
+        _SectionHeader(
+          title: 'Journal',
+        ).animate().fadeIn(duration: 600.ms, curve: Curves.easeOut),
         const SizedBox(height: BlackLabelledSpacing.lg),
         magazinesAsync.when(
           data: (magazines) => _JournalSection(magazines: magazines),
@@ -119,10 +119,7 @@ class _HeroSection extends StatefulWidget {
   final AsyncValue<List<dynamic>> featuredAsync;
   final double scrollOffset;
 
-  const _HeroSection({
-    required this.featuredAsync,
-    required this.scrollOffset,
-  });
+  const _HeroSection({required this.featuredAsync, required this.scrollOffset});
 
   @override
   State<_HeroSection> createState() => _HeroSectionState();
@@ -186,10 +183,12 @@ class _HeroSectionState extends State<_HeroSection>
 
   List<String> _extractImageUrls() {
     return widget.featuredAsync.whenOrNull(
-          data: (projects) => projects
-              .where((p) => (p.images as List).isNotEmpty)
-              .map((p) => p.images[0] as String)
-              .toList(),
+          data:
+              (projects) =>
+                  projects
+                      .where((p) => (p.images as List).isNotEmpty)
+                      .map((p) => p.images[0] as String)
+                      .toList(),
         ) ??
         [];
   }
@@ -226,8 +225,10 @@ class _HeroSectionState extends State<_HeroSection>
     if (_imageUrls.isEmpty) _tryStartAnimation();
 
     final height = MediaQuery.of(context).size.height * 0.85;
-    final heroOpacity =
-        (1.0 - (widget.scrollOffset / (height * 0.8))).clamp(0.0, 1.0);
+    final heroOpacity = (1.0 - (widget.scrollOffset / (height * 0.8))).clamp(
+      0.0,
+      1.0,
+    );
     // Parallax on scroll
     final parallaxOffset = widget.scrollOffset * 0.3;
 
@@ -246,13 +247,14 @@ class _HeroSectionState extends State<_HeroSection>
                 animation: _zoomController,
                 builder: (context, child) {
                   final scale = 1.0 + (_zoomController.value * 0.10);
-                  final alignment = _zoomAlignments[
-                      _currentIndex % _zoomAlignments.length];
+                  final alignment =
+                      _zoomAlignments[_currentIndex % _zoomAlignments.length];
                   return Transform(
                     alignment: alignment,
-                    transform: Matrix4.identity()
-                      ..translate(0.0, -parallaxOffset)
-                      ..scale(scale),
+                    transform:
+                        Matrix4.identity()
+                          ..translate(0.0, -parallaxOffset)
+                          ..scale(scale),
                     child: child,
                   );
                 },
@@ -262,10 +264,11 @@ class _HeroSectionState extends State<_HeroSection>
                   fit: BoxFit.cover,
                   width: double.infinity,
                   height: double.infinity,
-                  placeholder: (_, __) =>
-                      Container(color: BlackLabelledColors.surface),
-                  errorWidget: (_, __, ___) =>
-                      Container(color: BlackLabelledColors.surface),
+                  placeholder:
+                      (_, __) => Container(color: BlackLabelledColors.surface),
+                  errorWidget:
+                      (_, __, ___) =>
+                          Container(color: BlackLabelledColors.surface),
                 ),
               ),
 
@@ -280,20 +283,22 @@ class _HeroSectionState extends State<_HeroSection>
                   return Opacity(
                     opacity: Curves.easeInOut.transform(_fadeController.value),
                     child: Transform(
-                      alignment: _zoomAlignments[
-                          _nextIndex % _zoomAlignments.length],
-                      transform: Matrix4.identity()
-                        ..translate(0.0, -parallaxOffset)
-                        ..scale(1.0), // next image starts at 1.0
+                      alignment:
+                          _zoomAlignments[_nextIndex % _zoomAlignments.length],
+                      transform:
+                          Matrix4.identity()
+                            ..translate(0.0, -parallaxOffset)
+                            ..scale(1.0), // next image starts at 1.0
                       child: child,
                     ),
                   );
                 },
                 child: CachedNetworkImage(
                   key: ValueKey('hero-next-$_nextIndex'),
-                  imageUrl: _imageUrls.isNotEmpty
-                      ? _imageUrls[_nextIndex % _imageUrls.length]
-                      : '',
+                  imageUrl:
+                      _imageUrls.isNotEmpty
+                          ? _imageUrls[_nextIndex % _imageUrls.length]
+                          : '',
                   fit: BoxFit.cover,
                   width: double.infinity,
                   height: double.infinity,
@@ -354,8 +359,9 @@ class _HeroSectionState extends State<_HeroSection>
                         style: GoogleFonts.notoSansKr(
                           fontSize: 13,
                           fontWeight: FontWeight.w300,
-                          color: BlackLabelledColors.textSecondary
-                              .withValues(alpha: 0.8),
+                          color: BlackLabelledColors.textSecondary.withValues(
+                            alpha: 0.8,
+                          ),
                           height: 1.6,
                         ),
                       ),
@@ -509,16 +515,18 @@ class _BentoItem extends StatelessWidget {
             CachedNetworkImage(
               imageUrl: imageUrl,
               fit: BoxFit.cover,
-              placeholder: (_, __) =>
-                  Container(color: BlackLabelledColors.surfaceContainer),
-              errorWidget: (_, __, ___) => Container(
-                color: BlackLabelledColors.surfaceContainer,
-                child: const Icon(
-                  Icons.image_outlined,
-                  size: 32,
-                  color: BlackLabelledColors.textMuted,
-                ),
-              ),
+              placeholder:
+                  (_, __) =>
+                      Container(color: BlackLabelledColors.surfaceContainer),
+              errorWidget:
+                  (_, __, ___) => Container(
+                    color: BlackLabelledColors.surfaceContainer,
+                    child: const Icon(
+                      Icons.image_outlined,
+                      size: 32,
+                      color: BlackLabelledColors.textMuted,
+                    ),
+                  ),
             ),
             // Bottom gradient for text
             Positioned(
@@ -611,8 +619,8 @@ class _CuratedItems extends StatelessWidget {
         ),
         scrollDirection: Axis.horizontal,
         itemCount: itemCount,
-        separatorBuilder: (_, __) =>
-            const SizedBox(width: BlackLabelledSpacing.lg),
+        separatorBuilder:
+            (_, __) => const SizedBox(width: BlackLabelledSpacing.lg),
         itemBuilder: (context, index) {
           final item = items[index];
           return _CuratedCard(item: item, index: index);
@@ -637,75 +645,79 @@ class _CuratedCardState extends State<_CuratedCard> {
 
   @override
   Widget build(BuildContext context) {
-    final imageUrl = (widget.item.images as List).isNotEmpty
-        ? widget.item.images[0] as String
-        : '';
+    final imageUrl =
+        (widget.item.images as List).isNotEmpty
+            ? widget.item.images[0] as String
+            : '';
 
     return GestureDetector(
-      onTapDown: (_) => setState(() => _isPressed = true),
-      onTapUp: (_) {
-        setState(() => _isPressed = false);
-        context.push('/furniture/${widget.item.id}');
-      },
-      onTapCancel: () => setState(() => _isPressed = false),
-      child: AnimatedScale(
-        scale: _isPressed ? 0.95 : 1.0,
-        duration: const Duration(milliseconds: 200),
-        curve: Curves.easeOutCubic,
-        child: SizedBox(
-          width: 180,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // Image with subtle perspective
-              Expanded(
-                child: Transform(
-                  alignment: Alignment.center,
-                  transform: Matrix4.identity()
-                    ..setEntry(3, 2, 0.001)
-                    ..rotateY(0.01), // barely perceptible tilt
-                  child: CachedNetworkImage(
-                    imageUrl: imageUrl,
-                    fit: BoxFit.cover,
-                    placeholder: (_, __) => Container(
-                      color: BlackLabelledColors.surfaceContainer,
-                    ),
-                    errorWidget: (_, __, ___) => Container(
-                      color: BlackLabelledColors.surfaceContainer,
-                      child: const Icon(
-                        Icons.image_outlined,
-                        color: BlackLabelledColors.textMuted,
+          onTapDown: (_) => setState(() => _isPressed = true),
+          onTapUp: (_) {
+            setState(() => _isPressed = false);
+            context.push('/furniture/${widget.item.id}');
+          },
+          onTapCancel: () => setState(() => _isPressed = false),
+          child: AnimatedScale(
+            scale: _isPressed ? 0.95 : 1.0,
+            duration: const Duration(milliseconds: 200),
+            curve: Curves.easeOutCubic,
+            child: SizedBox(
+              width: 180,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // Image with subtle perspective
+                  Expanded(
+                    child: Transform(
+                      alignment: Alignment.center,
+                      transform:
+                          Matrix4.identity()
+                            ..setEntry(3, 2, 0.001)
+                            ..rotateY(0.01), // barely perceptible tilt
+                      child: CachedNetworkImage(
+                        imageUrl: imageUrl,
+                        fit: BoxFit.cover,
+                        placeholder:
+                            (_, __) => Container(
+                              color: BlackLabelledColors.surfaceContainer,
+                            ),
+                        errorWidget:
+                            (_, __, ___) => Container(
+                              color: BlackLabelledColors.surfaceContainer,
+                              child: const Icon(
+                                Icons.image_outlined,
+                                color: BlackLabelledColors.textMuted,
+                              ),
+                            ),
                       ),
                     ),
                   ),
-                ),
+                  const SizedBox(height: 12),
+                  Text(
+                    (widget.item.title as String).toUpperCase(),
+                    style: GoogleFonts.inter(
+                      fontSize: 11,
+                      fontWeight: FontWeight.w700,
+                      letterSpacing: -0.5,
+                      color: Colors.white,
+                    ),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  const SizedBox(height: 2),
+                  Text(
+                    widget.item.category as String,
+                    style: GoogleFonts.openSans(
+                      fontSize: 10,
+                      fontWeight: FontWeight.w400,
+                      color: BlackLabelledColors.textMuted,
+                    ),
+                  ),
+                ],
               ),
-              const SizedBox(height: 12),
-              Text(
-                (widget.item.title as String).toUpperCase(),
-                style: GoogleFonts.inter(
-                  fontSize: 11,
-                  fontWeight: FontWeight.w700,
-                  letterSpacing: -0.5,
-                  color: Colors.white,
-                ),
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-              ),
-              const SizedBox(height: 2),
-              Text(
-                widget.item.category as String,
-                style: GoogleFonts.openSans(
-                  fontSize: 10,
-                  fontWeight: FontWeight.w400,
-                  color: BlackLabelledColors.textMuted,
-                ),
-              ),
-            ],
+            ),
           ),
-        ),
-      ),
-    )
+        )
         .animate(delay: (100 * widget.index).ms)
         .fadeIn(duration: 500.ms, curve: Curves.easeOut)
         .slideX(
@@ -731,78 +743,83 @@ class _JournalSection extends StatelessWidget {
         horizontal: BlackLabelledSpacing.contentPadding,
       ),
       child: Column(
-        children: magazines.asMap().entries.map((entry) {
-          final index = entry.key;
-          final m = entry.value;
-          return Padding(
-            padding: const EdgeInsets.only(bottom: BlackLabelledSpacing.lg),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(
-                  width: 100,
-                  height: 100,
-                  child: CachedNetworkImage(
-                    imageUrl: m.thumbnail as String,
-                    fit: BoxFit.cover,
-                    placeholder: (_, __) => Container(
-                      color: BlackLabelledColors.surfaceContainer,
+        children:
+            magazines.asMap().entries.map((entry) {
+              final index = entry.key;
+              final m = entry.value;
+              return Padding(
+                    padding: const EdgeInsets.only(
+                      bottom: BlackLabelledSpacing.lg,
                     ),
-                    errorWidget: (_, __, ___) => Container(
-                      color: BlackLabelledColors.surfaceContainer,
-                      child: const Icon(
-                        Icons.article_outlined,
-                        color: BlackLabelledColors.textMuted,
-                      ),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                          width: 100,
+                          height: 100,
+                          child: CachedNetworkImage(
+                            imageUrl: m.thumbnail as String,
+                            fit: BoxFit.cover,
+                            placeholder:
+                                (_, __) => Container(
+                                  color: BlackLabelledColors.surfaceContainer,
+                                ),
+                            errorWidget:
+                                (_, __, ___) => Container(
+                                  color: BlackLabelledColors.surfaceContainer,
+                                  child: const Icon(
+                                    Icons.article_outlined,
+                                    color: BlackLabelledColors.textMuted,
+                                  ),
+                                ),
+                          ),
+                        ),
+                        const SizedBox(width: BlackLabelledSpacing.md),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                m.title as String,
+                                style: GoogleFonts.montserrat(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w400,
+                                  color: BlackLabelledColors.textPrimary,
+                                ),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                              const SizedBox(height: 4),
+                              Text(
+                                m.summary as String,
+                                style: GoogleFonts.notoSansKr(
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w300,
+                                  color: BlackLabelledColors.textSecondary,
+                                  height: 1.5,
+                                ),
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                              const SizedBox(height: 8),
+                              Text(
+                                m.date as String,
+                                style: GoogleFonts.openSans(
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.w400,
+                                  color: BlackLabelledColors.textMuted,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
                     ),
-                  ),
-                ),
-                const SizedBox(width: BlackLabelledSpacing.md),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        m.title as String,
-                        style: GoogleFonts.montserrat(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w400,
-                          color: BlackLabelledColors.textPrimary,
-                        ),
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                      const SizedBox(height: 4),
-                      Text(
-                        m.summary as String,
-                        style: GoogleFonts.notoSansKr(
-                          fontSize: 12,
-                          fontWeight: FontWeight.w300,
-                          color: BlackLabelledColors.textSecondary,
-                          height: 1.5,
-                        ),
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                      const SizedBox(height: 8),
-                      Text(
-                        m.date as String,
-                        style: GoogleFonts.openSans(
-                          fontSize: 10,
-                          fontWeight: FontWeight.w400,
-                          color: BlackLabelledColors.textMuted,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          )
-              .animate(delay: (150 * index).ms)
-              .fadeIn(duration: 500.ms, curve: Curves.easeOut)
-              .slideY(begin: 0.05, end: 0, duration: 500.ms);
-        }).toList(),
+                  )
+                  .animate(delay: (150 * index).ms)
+                  .fadeIn(duration: 500.ms, curve: Curves.easeOut)
+                  .slideY(begin: 0.05, end: 0, duration: 500.ms);
+            }).toList(),
       ),
     );
   }

@@ -5,8 +5,7 @@
 library;
 
 // Re-export core pagination models for convenience
-export 'package:app_lib_core/core.dart'
-    show PaginatedResult, PaginationParams;
+export 'package:app_lib_core/core.dart' show PaginatedResult, PaginationParams;
 
 // Domain
 export 'src/domain/paginated_repository.dart';

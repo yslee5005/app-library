@@ -66,29 +66,31 @@ class _ChronotypeQuizScreenState extends State<ChronotypeQuizScreen> {
 
   _ChronotypeResult _calculateResult() {
     // 점수 계산: 0=아침형, 3=저녁형
-    final totalScore =
-        _answers.fold<int>(0, (sum, a) => sum + (a < 0 ? 1 : a));
+    final totalScore = _answers.fold<int>(0, (sum, a) => sum + (a < 0 ? 1 : a));
     final avgScore = totalScore / _questions.length;
 
     if (avgScore <= 1.0) {
       return _ChronotypeResult(
         type: '아침형',
         icon: '🌅',
-        description: '이른 아침에 활력이 넘치고, 밤에는 일찍 잠드는 타입이에요.\n'
+        description:
+            '이른 아침에 활력이 넘치고, 밤에는 일찍 잠드는 타입이에요.\n'
             '아기의 이른 기상 패턴과 잘 맞을 수 있어요.',
       );
     } else if (avgScore <= 2.0) {
       return _ChronotypeResult(
         type: '중간형',
         icon: '☀️',
-        description: '균형 잡힌 수면 패턴을 가지고 있어요.\n'
+        description:
+            '균형 잡힌 수면 패턴을 가지고 있어요.\n'
             '아기 리듬에 유연하게 적응할 수 있는 타입이에요.',
       );
     } else {
       return _ChronotypeResult(
         type: '저녁형',
         icon: '🌙',
-        description: '밤에 더 활동적이고, 아침에는 천천히 깨어나는 타입이에요.\n'
+        description:
+            '밤에 더 활동적이고, 아침에는 천천히 깨어나는 타입이에요.\n'
             '야간 수유 시간에 상대적으로 적응이 편할 수 있어요.',
       );
     }
@@ -111,9 +113,9 @@ class _ChronotypeQuizScreenState extends State<ChronotypeQuizScreen> {
             onPressed: () => Navigator.of(context).pop(),
             child: Text(
               '✕ 나중에 할게요',
-              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    color: AppColors.textSecondary,
-                  ),
+              style: Theme.of(
+                context,
+              ).textTheme.bodyMedium?.copyWith(color: AppColors.textSecondary),
             ),
           ),
         ],
@@ -130,18 +132,17 @@ class _ChronotypeQuizScreenState extends State<ChronotypeQuizScreen> {
                   const SizedBox(height: 12),
                   Text(
                     '나의 수면 유형',
-                    style:
-                        Theme.of(context).textTheme.headlineMedium?.copyWith(
-                              color: AppColors.textPrimary,
-                              fontWeight: FontWeight.bold,
-                            ),
+                    style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                      color: AppColors.textPrimary,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                   const SizedBox(height: 8),
                   Text(
                     '엄마의 수면 패턴이 아기 수면에도 영향을 줘요',
                     style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          color: AppColors.textSecondary,
-                        ),
+                      color: AppColors.textSecondary,
+                    ),
                   ),
                 ],
               ),
@@ -191,8 +192,9 @@ class _ChronotypeQuizScreenState extends State<ChronotypeQuizScreen> {
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.coral,
                     foregroundColor: Colors.white,
-                    disabledBackgroundColor:
-                        AppColors.textHint.withValues(alpha: 0.3),
+                    disabledBackgroundColor: AppColors.textHint.withValues(
+                      alpha: 0.3,
+                    ),
                     disabledForegroundColor: AppColors.textHint,
                     padding: const EdgeInsets.symmetric(vertical: 16),
                     shape: RoundedRectangleBorder(
@@ -200,9 +202,7 @@ class _ChronotypeQuizScreenState extends State<ChronotypeQuizScreen> {
                     ),
                   ),
                   child: Text(
-                    _currentPage < _questions.length - 1
-                        ? '다음 →'
-                        : '결과 보기',
+                    _currentPage < _questions.length - 1 ? '다음 →' : '결과 보기',
                     style: const TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w600,
@@ -235,9 +235,9 @@ class _ChronotypeQuizScreenState extends State<ChronotypeQuizScreen> {
               Text(
                 result.type,
                 style: Theme.of(context).textTheme.headlineLarge?.copyWith(
-                      color: AppColors.textPrimary,
-                      fontWeight: FontWeight.bold,
-                    ),
+                  color: AppColors.textPrimary,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
 
               const SizedBox(height: 20),
@@ -254,9 +254,9 @@ class _ChronotypeQuizScreenState extends State<ChronotypeQuizScreen> {
                   result.description,
                   textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                        color: AppColors.textPrimary,
-                        height: 1.6,
-                      ),
+                    color: AppColors.textPrimary,
+                    height: 1.6,
+                  ),
                 ),
               ),
 
@@ -274,8 +274,8 @@ class _ChronotypeQuizScreenState extends State<ChronotypeQuizScreen> {
                   '이 정보가 아기 수면 예측에 도움이 돼요',
                   textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                        color: AppColors.textSecondary,
-                      ),
+                    color: AppColors.textSecondary,
+                  ),
                 ),
               ),
 
@@ -295,10 +295,7 @@ class _ChronotypeQuizScreenState extends State<ChronotypeQuizScreen> {
                   ),
                   child: const Text(
                     '확인',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                    ),
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
                   ),
                 ),
               ),
@@ -338,9 +335,9 @@ class _ProgressBar extends StatelessWidget {
         const SizedBox(height: 8),
         Text(
           '$current/$total',
-          style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                color: AppColors.textHint,
-              ),
+          style: Theme.of(
+            context,
+          ).textTheme.bodySmall?.copyWith(color: AppColors.textHint),
         ),
       ],
     );
@@ -371,9 +368,9 @@ class _QuestionPage extends StatelessWidget {
           Text(
             question,
             style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                  color: AppColors.textPrimary,
-                  fontWeight: FontWeight.w600,
-                ),
+              color: AppColors.textPrimary,
+              fontWeight: FontWeight.w600,
+            ),
           ),
           const SizedBox(height: 20),
           ...List.generate(options.length, (i) {
@@ -386,8 +383,9 @@ class _QuestionPage extends StatelessWidget {
                   width: double.infinity,
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
-                    color:
-                        isSelected ? AppColors.coralLight : AppColors.surface,
+                    color: isSelected
+                        ? AppColors.coralLight
+                        : AppColors.surface,
                     borderRadius: BorderRadius.circular(12),
                     border: Border.all(
                       color: isSelected
@@ -399,12 +397,13 @@ class _QuestionPage extends StatelessWidget {
                   child: Text(
                     options[i],
                     style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                          color: isSelected
-                              ? AppColors.coralDark
-                              : AppColors.textPrimary,
-                          fontWeight:
-                              isSelected ? FontWeight.w600 : FontWeight.normal,
-                        ),
+                      color: isSelected
+                          ? AppColors.coralDark
+                          : AppColors.textPrimary,
+                      fontWeight: isSelected
+                          ? FontWeight.w600
+                          : FontWeight.normal,
+                    ),
                   ),
                 ),
               ),

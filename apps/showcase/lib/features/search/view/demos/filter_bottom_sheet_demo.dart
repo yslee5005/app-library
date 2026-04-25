@@ -19,12 +19,7 @@ class FilterBottomSheetDemo extends StatelessWidget {
                 FilterSection(
                   id: 'category',
                   title: 'Category',
-                  options: const [
-                    'Navigation',
-                    'Forms',
-                    'Feedback',
-                    'Media',
-                  ],
+                  options: const ['Navigation', 'Forms', 'Feedback', 'Media'],
                 ),
                 FilterSection(
                   id: 'rating',

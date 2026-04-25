@@ -107,8 +107,8 @@ class HomePostnatalView extends StatelessWidget {
                             ),
                             child: Text(
                               '활발한 아기',
-                              style:
-                                  Theme.of(context).textTheme.labelSmall?.copyWith(
+                              style: Theme.of(context).textTheme.labelSmall
+                                  ?.copyWith(
                                     color: AppColors.amberDark,
                                     fontWeight: FontWeight.w600,
                                   ),
@@ -159,8 +159,8 @@ class HomePostnatalView extends StatelessWidget {
                             const SizedBox(width: 8),
                             Text(
                               '정상 범위 안에 있어요',
-                              style:
-                                  Theme.of(context).textTheme.bodySmall?.copyWith(
+                              style: Theme.of(context).textTheme.bodySmall
+                                  ?.copyWith(
                                     color: AppColors.success,
                                     fontWeight: FontWeight.w500,
                                   ),
@@ -225,9 +225,8 @@ class HomePostnatalView extends StatelessWidget {
                       const SizedBox(height: 8),
                       Text(
                         '오늘의 응답 연습',
-                        style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                          fontWeight: FontWeight.w600,
-                        ),
+                        style: Theme.of(context).textTheme.titleMedium
+                            ?.copyWith(fontWeight: FontWeight.w600),
                       ),
                       const SizedBox(height: 4),
                       Text(
@@ -321,9 +320,9 @@ class HomePostnatalView extends StatelessWidget {
                 child: Center(
                   child: Text(
                     '지금은 아기와 함께하는 시간이에요 💛',
-                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                      color: AppColors.textHint,
-                    ),
+                    style: Theme.of(
+                      context,
+                    ).textTheme.bodySmall?.copyWith(color: AppColors.textHint),
                   ),
                 ),
               ),
@@ -359,14 +358,11 @@ class _StatItem extends StatelessWidget {
           const SizedBox(height: 4),
           Text(
             value,
-            style: Theme.of(context).textTheme.titleMedium?.copyWith(
-              fontWeight: FontWeight.w600,
-            ),
+            style: Theme.of(
+              context,
+            ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600),
           ),
-          Text(
-            label,
-            style: Theme.of(context).textTheme.labelSmall,
-          ),
+          Text(label, style: Theme.of(context).textTheme.labelSmall),
         ],
       ),
     );
@@ -385,14 +381,11 @@ class _MiniStat extends StatelessWidget {
       children: [
         Text(
           value,
-          style: Theme.of(context).textTheme.titleMedium?.copyWith(
-            fontWeight: FontWeight.w600,
-          ),
+          style: Theme.of(
+            context,
+          ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600),
         ),
-        Text(
-          label,
-          style: Theme.of(context).textTheme.labelSmall,
-        ),
+        Text(label, style: Theme.of(context).textTheme.labelSmall),
       ],
     );
   }

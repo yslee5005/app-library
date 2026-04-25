@@ -52,27 +52,29 @@ class AppCachedImage extends StatelessWidget {
       height: height,
       fit: fit,
       fadeInDuration: fadeInDuration,
-      placeholder: (context, url) =>
-          placeholder ??
-          Container(
-            width: width,
-            height: height,
-            color: theme.colorScheme.surfaceContainerHighest,
-            alignment: Alignment.center,
-            child: const CircularProgressIndicator(strokeWidth: 2),
-          ),
-      errorWidget: (context, url, error) =>
-          errorWidget ??
-          Container(
-            width: width,
-            height: height,
-            color: theme.colorScheme.surfaceContainerHighest,
-            alignment: Alignment.center,
-            child: Icon(
-              Icons.broken_image_outlined,
-              color: theme.colorScheme.onSurfaceVariant,
-            ),
-          ),
+      placeholder:
+          (context, url) =>
+              placeholder ??
+              Container(
+                width: width,
+                height: height,
+                color: theme.colorScheme.surfaceContainerHighest,
+                alignment: Alignment.center,
+                child: const CircularProgressIndicator(strokeWidth: 2),
+              ),
+      errorWidget:
+          (context, url, error) =>
+              errorWidget ??
+              Container(
+                width: width,
+                height: height,
+                color: theme.colorScheme.surfaceContainerHighest,
+                alignment: Alignment.center,
+                child: Icon(
+                  Icons.broken_image_outlined,
+                  color: theme.colorScheme.onSurfaceVariant,
+                ),
+              ),
     );
 
     if (borderRadius != null) {

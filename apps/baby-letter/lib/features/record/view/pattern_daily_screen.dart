@@ -18,10 +18,7 @@ class PatternDailyScreen extends StatelessWidget {
           icon: const Icon(Icons.arrow_back),
           color: AppColors.textPrimary,
         ),
-        title: Text(
-          '일간 패턴',
-          style: TextStyle(color: AppColors.textPrimary),
-        ),
+        title: Text('일간 패턴', style: TextStyle(color: AppColors.textPrimary)),
       ),
       body: Column(
         children: [
@@ -91,10 +88,7 @@ class PatternDailyScreen extends StatelessWidget {
               itemCount: 24,
               itemBuilder: (context, index) {
                 final activities = _getDemoActivities(index);
-                return _HourBlock(
-                  hour: index,
-                  activities: activities,
-                );
+                return _HourBlock(hour: index, activities: activities);
               },
             ),
           ),
@@ -104,30 +98,16 @@ class PatternDailyScreen extends StatelessWidget {
             padding: const EdgeInsets.fromLTRB(20, 12, 20, 24),
             decoration: const BoxDecoration(
               color: AppColors.surface,
-              border: Border(
-                top: BorderSide(
-                  color: AppColors.cream,
-                  width: 1,
-                ),
-              ),
+              border: Border(top: BorderSide(color: AppColors.cream, width: 1)),
             ),
             child: SafeArea(
               top: false,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  _LegendItem(
-                    color: AppColors.feedingBlue,
-                    label: '수유',
-                  ),
-                  _LegendItem(
-                    color: AppColors.sleepPurple,
-                    label: '수면',
-                  ),
-                  _LegendItem(
-                    color: AppColors.diaperGreen,
-                    label: '기저귀',
-                  ),
+                  _LegendItem(color: AppColors.feedingBlue, label: '수유'),
+                  _LegendItem(color: AppColors.sleepPurple, label: '수면'),
+                  _LegendItem(color: AppColors.diaperGreen, label: '기저귀'),
                 ],
               ),
             ),
@@ -196,22 +176,25 @@ class _ActivityData {
 
   const _ActivityData({required this.type, required this.color});
 
-  factory _ActivityData.feeding() =>
-      const _ActivityData(type: _ActivityType.feeding, color: AppColors.feedingBlue);
-  factory _ActivityData.sleep() =>
-      const _ActivityData(type: _ActivityType.sleep, color: AppColors.sleepPurple);
-  factory _ActivityData.diaper() =>
-      const _ActivityData(type: _ActivityType.diaper, color: AppColors.diaperGreen);
+  factory _ActivityData.feeding() => const _ActivityData(
+    type: _ActivityType.feeding,
+    color: AppColors.feedingBlue,
+  );
+  factory _ActivityData.sleep() => const _ActivityData(
+    type: _ActivityType.sleep,
+    color: AppColors.sleepPurple,
+  );
+  factory _ActivityData.diaper() => const _ActivityData(
+    type: _ActivityType.diaper,
+    color: AppColors.diaperGreen,
+  );
 }
 
 class _HourBlock extends StatelessWidget {
   final int hour;
   final List<_ActivityData> activities;
 
-  const _HourBlock({
-    required this.hour,
-    required this.activities,
-  });
+  const _HourBlock({required this.hour, required this.activities});
 
   @override
   Widget build(BuildContext context) {
@@ -240,9 +223,7 @@ class _HourBlock extends StatelessWidget {
           Expanded(
             child: Container(
               decoration: BoxDecoration(
-                color: hasActivity
-                    ? Colors.transparent
-                    : AppColors.surface,
+                color: hasActivity ? Colors.transparent : AppColors.surface,
                 borderRadius: BorderRadius.circular(6),
               ),
               child: hasActivity
@@ -285,10 +266,7 @@ class _LegendItem extends StatelessWidget {
   final Color color;
   final String label;
 
-  const _LegendItem({
-    required this.color,
-    required this.label,
-  });
+  const _LegendItem({required this.color, required this.label});
 
   @override
   Widget build(BuildContext context) {
@@ -307,9 +285,9 @@ class _LegendItem extends StatelessWidget {
         const SizedBox(width: 6),
         Text(
           label,
-          style: Theme.of(context).textTheme.bodySmall?.copyWith(
-            color: AppColors.textSecondary,
-          ),
+          style: Theme.of(
+            context,
+          ).textTheme.bodySmall?.copyWith(color: AppColors.textSecondary),
         ),
       ],
     );

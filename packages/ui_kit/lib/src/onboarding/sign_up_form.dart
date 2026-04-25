@@ -79,105 +79,107 @@ class _SignUpFormState extends State<SignUpForm> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-            // Name
-            TextFormField(
-              controller: _nameController,
-              decoration: InputDecoration(labelText: widget.nameLabel),
-              autofillHints: const [AutofillHints.name],
-              textInputAction: TextInputAction.next,
-              validator: (value) {
-                if (value == null || value.trim().isEmpty) {
-                  return '${widget.nameLabel} is required';
-                }
-                return null;
-              },
-            ),
-            SizedBox(height: widget.spacing ?? AppSpacing.md),
-
-            // Email
-            TextFormField(
-              controller: _emailController,
-              decoration: InputDecoration(labelText: widget.emailLabel),
-              keyboardType: TextInputType.emailAddress,
-              autofillHints: const [AutofillHints.email],
-              textInputAction: TextInputAction.next,
-              validator: (value) {
-                if (value == null || value.trim().isEmpty) {
-                  return '${widget.emailLabel} is required';
-                }
-                return null;
-              },
-            ),
-            SizedBox(height: widget.spacing ?? AppSpacing.md),
-
-            // Password
-            TextFormField(
-              controller: _passwordController,
-              decoration: InputDecoration(
-                labelText: widget.passwordLabel,
-                suffixIcon: IconButton(
-                  icon: Icon(
-                    _obscurePassword
-                        ? Icons.visibility_off
-                        : Icons.visibility,
-                  ),
-                  onPressed: () =>
-                      setState(() => _obscurePassword = !_obscurePassword),
-                ),
+              // Name
+              TextFormField(
+                controller: _nameController,
+                decoration: InputDecoration(labelText: widget.nameLabel),
+                autofillHints: const [AutofillHints.name],
+                textInputAction: TextInputAction.next,
+                validator: (value) {
+                  if (value == null || value.trim().isEmpty) {
+                    return '${widget.nameLabel} is required';
+                  }
+                  return null;
+                },
               ),
-              obscureText: _obscurePassword,
-              autofillHints: const [AutofillHints.newPassword],
-              textInputAction: TextInputAction.next,
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return '${widget.passwordLabel} is required';
-                }
-                return null;
-              },
-            ),
-            SizedBox(height: widget.spacing ?? AppSpacing.md),
+              SizedBox(height: widget.spacing ?? AppSpacing.md),
 
-            // Confirm password
-            TextFormField(
-              controller: _confirmPasswordController,
-              decoration: InputDecoration(
-                labelText: widget.confirmPasswordLabel,
-                suffixIcon: IconButton(
-                  icon: Icon(
-                    _obscureConfirm
-                        ? Icons.visibility_off
-                        : Icons.visibility,
-                  ),
-                  onPressed: () =>
-                      setState(() => _obscureConfirm = !_obscureConfirm),
-                ),
+              // Email
+              TextFormField(
+                controller: _emailController,
+                decoration: InputDecoration(labelText: widget.emailLabel),
+                keyboardType: TextInputType.emailAddress,
+                autofillHints: const [AutofillHints.email],
+                textInputAction: TextInputAction.next,
+                validator: (value) {
+                  if (value == null || value.trim().isEmpty) {
+                    return '${widget.emailLabel} is required';
+                  }
+                  return null;
+                },
               ),
-              obscureText: _obscureConfirm,
-              autofillHints: const [AutofillHints.newPassword],
-              textInputAction: TextInputAction.done,
-              onFieldSubmitted: (_) => _submit(),
-              validator: (value) {
-                if (value != _passwordController.text) {
-                  return widget.passwordMismatchError;
-                }
-                return null;
-              },
-            ),
-            SizedBox(height: widget.spacing ?? AppSpacing.lg),
+              SizedBox(height: widget.spacing ?? AppSpacing.md),
 
-            // Sign up button
-            FilledButton(
-              onPressed: widget.isLoading ? null : _submit,
-              style: widget.buttonStyle,
-              child: widget.isLoading
-                  ? const SizedBox(
-                      height: 20,
-                      width: 20,
-                      child: CircularProgressIndicator(strokeWidth: 2),
-                    )
-                  : Text(widget.signUpLabel),
-            ),
-          ],
+              // Password
+              TextFormField(
+                controller: _passwordController,
+                decoration: InputDecoration(
+                  labelText: widget.passwordLabel,
+                  suffixIcon: IconButton(
+                    icon: Icon(
+                      _obscurePassword
+                          ? Icons.visibility_off
+                          : Icons.visibility,
+                    ),
+                    onPressed:
+                        () => setState(
+                          () => _obscurePassword = !_obscurePassword,
+                        ),
+                  ),
+                ),
+                obscureText: _obscurePassword,
+                autofillHints: const [AutofillHints.newPassword],
+                textInputAction: TextInputAction.next,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return '${widget.passwordLabel} is required';
+                  }
+                  return null;
+                },
+              ),
+              SizedBox(height: widget.spacing ?? AppSpacing.md),
+
+              // Confirm password
+              TextFormField(
+                controller: _confirmPasswordController,
+                decoration: InputDecoration(
+                  labelText: widget.confirmPasswordLabel,
+                  suffixIcon: IconButton(
+                    icon: Icon(
+                      _obscureConfirm ? Icons.visibility_off : Icons.visibility,
+                    ),
+                    onPressed:
+                        () =>
+                            setState(() => _obscureConfirm = !_obscureConfirm),
+                  ),
+                ),
+                obscureText: _obscureConfirm,
+                autofillHints: const [AutofillHints.newPassword],
+                textInputAction: TextInputAction.done,
+                onFieldSubmitted: (_) => _submit(),
+                validator: (value) {
+                  if (value != _passwordController.text) {
+                    return widget.passwordMismatchError;
+                  }
+                  return null;
+                },
+              ),
+              SizedBox(height: widget.spacing ?? AppSpacing.lg),
+
+              // Sign up button
+              FilledButton(
+                onPressed: widget.isLoading ? null : _submit,
+                style: widget.buttonStyle,
+                child:
+                    widget.isLoading
+                        ? const SizedBox(
+                          height: 20,
+                          width: 20,
+                          child: CircularProgressIndicator(strokeWidth: 2),
+                        )
+                        : Text(widget.signUpLabel),
+              ),
+            ],
           ),
         ),
       ),

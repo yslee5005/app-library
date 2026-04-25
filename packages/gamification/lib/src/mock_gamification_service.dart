@@ -32,7 +32,10 @@ class MockGamificationService implements GamificationService {
 
     for (final entry in _milestoneThresholds.entries) {
       if (!achieved.contains(entry.key) && _streak.current >= entry.value) {
-        final milestone = Milestone(type: entry.key, achievedAt: DateTime.now());
+        final milestone = Milestone(
+          type: entry.key,
+          achievedAt: DateTime.now(),
+        );
         _milestones.add(milestone);
         newMilestones.add(entry.key);
       }

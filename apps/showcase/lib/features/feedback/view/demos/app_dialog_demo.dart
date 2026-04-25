@@ -15,44 +15,48 @@ class AppDialogDemo extends StatelessWidget {
           alignment: WrapAlignment.center,
           children: [
             ElevatedButton(
-              onPressed: () => AppDialog.show(
-                context,
-                title: 'Info',
-                content: 'This is an informational dialog.',
-                variant: AppDialogVariant.info,
-                primaryLabel: 'OK',
-              ),
+              onPressed:
+                  () => AppDialog.show(
+                    context,
+                    title: 'Info',
+                    content: 'This is an informational dialog.',
+                    variant: AppDialogVariant.info,
+                    primaryLabel: 'OK',
+                  ),
               child: const Text('Info'),
             ),
             ElevatedButton(
-              onPressed: () => AppDialog.show(
-                context,
-                title: 'Success',
-                content: 'Operation completed successfully!',
-                variant: AppDialogVariant.success,
-                primaryLabel: 'Great',
-              ),
+              onPressed:
+                  () => AppDialog.show(
+                    context,
+                    title: 'Success',
+                    content: 'Operation completed successfully!',
+                    variant: AppDialogVariant.success,
+                    primaryLabel: 'Great',
+                  ),
               child: const Text('Success'),
             ),
             ElevatedButton(
-              onPressed: () => AppDialog.show(
-                context,
-                title: 'Error',
-                content: 'An error occurred.',
-                variant: AppDialogVariant.error,
-                primaryLabel: 'Dismiss',
-              ),
+              onPressed:
+                  () => AppDialog.show(
+                    context,
+                    title: 'Error',
+                    content: 'An error occurred.',
+                    variant: AppDialogVariant.error,
+                    primaryLabel: 'Dismiss',
+                  ),
               child: const Text('Error'),
             ),
             ElevatedButton(
-              onPressed: () => AppDialog.show(
-                context,
-                title: 'Confirm',
-                content: 'Are you sure you want to proceed?',
-                variant: AppDialogVariant.confirm,
-                primaryLabel: 'Yes',
-                secondaryLabel: 'No',
-              ),
+              onPressed:
+                  () => AppDialog.show(
+                    context,
+                    title: 'Confirm',
+                    content: 'Are you sure you want to proceed?',
+                    variant: AppDialogVariant.confirm,
+                    primaryLabel: 'Yes',
+                    secondaryLabel: 'No',
+                  ),
               child: const Text('Confirm'),
             ),
           ],

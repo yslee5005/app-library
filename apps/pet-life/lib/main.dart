@@ -37,11 +37,26 @@ Future<void> _injectSampleData() async {
       DailyRoutine.optionals[0], // 양치질
     ],
     favoriteActivities: [
-      FavoriteActivity.allActivities[0].copyWith(userFrequency: 1, frequencyUnit: 'monthly'), // 수영 월 1회
-      FavoriteActivity.allActivities[1].copyWith(userFrequency: 3, frequencyUnit: 'weekly'), // 공놀이 주 3회
-      FavoriteActivity.allActivities[2].copyWith(userFrequency: 4, frequencyUnit: 'yearly'), // 등산 연 4회
-      FavoriteActivity.allActivities[4].copyWith(userFrequency: 2, frequencyUnit: 'monthly'), // 친구 만남 월 2회
-      FavoriteActivity.allActivities[5].copyWith(userFrequency: 2, frequencyUnit: 'monthly'), // 드라이브 월 2회
+      FavoriteActivity.allActivities[0].copyWith(
+        userFrequency: 1,
+        frequencyUnit: 'monthly',
+      ), // 수영 월 1회
+      FavoriteActivity.allActivities[1].copyWith(
+        userFrequency: 3,
+        frequencyUnit: 'weekly',
+      ), // 공놀이 주 3회
+      FavoriteActivity.allActivities[2].copyWith(
+        userFrequency: 4,
+        frequencyUnit: 'yearly',
+      ), // 등산 연 4회
+      FavoriteActivity.allActivities[4].copyWith(
+        userFrequency: 2,
+        frequencyUnit: 'monthly',
+      ), // 친구 만남 월 2회
+      FavoriteActivity.allActivities[5].copyWith(
+        userFrequency: 2,
+        frequencyUnit: 'monthly',
+      ), // 드라이브 월 2회
     ],
     lastActivityDates: {
       'swimming': DateTime.now().subtract(const Duration(days: 60)),
@@ -61,18 +76,22 @@ Future<void> _injectSampleData() async {
   final logs = <DailyLog>[];
 
   // 오늘: 아침 산책 + 아침 식사 완료
-  logs.add(DailyLog(
-    date: today,
-    routineId: 'walk_am',
-    completed: true,
-    completedAt: DateTime.now().subtract(const Duration(hours: 3)),
-  ));
-  logs.add(DailyLog(
-    date: today,
-    routineId: 'meal_am',
-    completed: true,
-    completedAt: DateTime.now().subtract(const Duration(hours: 4)),
-  ));
+  logs.add(
+    DailyLog(
+      date: today,
+      routineId: 'walk_am',
+      completed: true,
+      completedAt: DateTime.now().subtract(const Duration(hours: 3)),
+    ),
+  );
+  logs.add(
+    DailyLog(
+      date: today,
+      routineId: 'meal_am',
+      completed: true,
+      completedAt: DateTime.now().subtract(const Duration(hours: 4)),
+    ),
+  );
 
   // 과거 14일 — 전부 완료 (스트릭 14일)
   for (int i = 1; i <= 14; i++) {
@@ -80,12 +99,14 @@ Future<void> _injectSampleData() async {
       DateTime.now().subtract(Duration(days: i)),
     );
     for (final routineId in ['walk_am', 'walk_pm', 'meal_am', 'meal_pm']) {
-      logs.add(DailyLog(
-        date: date,
-        routineId: routineId,
-        completed: true,
-        completedAt: DateTime.now().subtract(Duration(days: i)),
-      ));
+      logs.add(
+        DailyLog(
+          date: date,
+          routineId: routineId,
+          completed: true,
+          completedAt: DateTime.now().subtract(Duration(days: i)),
+        ),
+      );
     }
   }
 

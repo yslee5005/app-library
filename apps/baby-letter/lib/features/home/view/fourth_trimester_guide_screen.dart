@@ -51,17 +51,15 @@ class FourthTrimesterGuideScreen extends StatelessWidget {
                   children: [
                     Text(
                       '출산 후 첫 3개월',
-                      style:
-                          Theme.of(context).textTheme.headlineMedium?.copyWith(
-                                fontWeight: FontWeight.w600,
-                              ),
+                      style: Theme.of(context).textTheme.headlineMedium
+                          ?.copyWith(fontWeight: FontWeight.w600),
                     ),
                     const SizedBox(height: 4),
                     Text(
                       '아기에게는 "네 번째 삼분기"예요',
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                            color: AppColors.textSecondary,
-                          ),
+                        color: AppColors.textSecondary,
+                      ),
                     ),
                     const SizedBox(height: 16),
                     // 비교 테이블
@@ -72,9 +70,7 @@ class FourthTrimesterGuideScreen extends StatelessWidget {
                             children: [
                               Text(
                                 '자궁 안',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .labelLarge
+                                style: Theme.of(context).textTheme.labelLarge
                                     ?.copyWith(
                                       color: AppColors.coralDark,
                                       fontWeight: FontWeight.w600,
@@ -98,9 +94,7 @@ class FourthTrimesterGuideScreen extends StatelessWidget {
                             children: [
                               Text(
                                 '세상 밖',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .labelLarge
+                                style: Theme.of(context).textTheme.labelLarge
                                     ?.copyWith(
                                       color: AppColors.info,
                                       fontWeight: FontWeight.w600,
@@ -192,9 +186,9 @@ class _ComparisonItem extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 4),
       child: Text(
         text,
-        style: Theme.of(context).textTheme.bodySmall?.copyWith(
-              color: AppColors.textSecondary,
-            ),
+        style: Theme.of(
+          context,
+        ).textTheme.bodySmall?.copyWith(color: AppColors.textSecondary),
         textAlign: TextAlign.center,
       ),
     );
@@ -217,9 +211,9 @@ class _TabContent extends StatelessWidget {
           // 제목
           Text(
             title,
-            style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                  fontWeight: FontWeight.w600,
-                ),
+            style: Theme.of(
+              context,
+            ).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w600),
           ),
           const SizedBox(height: 16),
 
@@ -244,9 +238,9 @@ class _TabContent extends StatelessWidget {
                     child: Text(
                       tip,
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                            color: AppColors.textPrimary,
-                            height: 1.5,
-                          ),
+                        color: AppColors.textPrimary,
+                        height: 1.5,
+                      ),
                     ),
                   ),
                 ],
@@ -263,9 +257,7 @@ class _TabContent extends StatelessWidget {
             decoration: BoxDecoration(
               color: AppColors.letterCard,
               borderRadius: BorderRadius.circular(16),
-              border: Border.all(
-                color: AppColors.amber.withValues(alpha: 0.3),
-              ),
+              border: Border.all(color: AppColors.amber.withValues(alpha: 0.3)),
             ),
             child: Column(
               children: [
@@ -273,9 +265,9 @@ class _TabContent extends StatelessWidget {
                 const SizedBox(height: 8),
                 Text(
                   '아기의 마음',
-                  style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                        color: AppColors.coralDark,
-                      ),
+                  style: Theme.of(
+                    context,
+                  ).textTheme.labelLarge?.copyWith(color: AppColors.coralDark),
                 ),
                 const SizedBox(height: 8),
                 Text(
@@ -284,9 +276,9 @@ class _TabContent extends StatelessWidget {
                   '조금만 더 그렇게 해주면\n'
                   '세상에 익숙해질 수 있을 거야.',
                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                        color: AppColors.textPrimary,
-                        height: 1.6,
-                      ),
+                    color: AppColors.textPrimary,
+                    height: 1.6,
+                  ),
                   textAlign: TextAlign.center,
                 ),
               ],

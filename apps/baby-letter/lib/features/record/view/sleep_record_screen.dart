@@ -20,11 +20,7 @@ class _SleepRecordScreenState extends State<SleepRecordScreen> {
 
   // 난이도: 0=쉬움, 1=보통, 2=어려움
   int? _difficulty;
-  static const _difficultyOptions = [
-    ('쉬움', '😊'),
-    ('보통', '😐'),
-    ('어려움', '😫'),
-  ];
+  static const _difficultyOptions = [('쉬움', '😊'), ('보통', '😐'), ('어려움', '😫')];
 
   /// 6am~8pm -> 낮잠, 그 외 -> 밤잠
   bool get _isNap {
@@ -103,10 +99,7 @@ class _SleepRecordScreenState extends State<SleepRecordScreen> {
           icon: const Icon(Icons.arrow_back),
           color: AppColors.textPrimary,
         ),
-        title: Text(
-          '수면 기록',
-          style: TextStyle(color: AppColors.textPrimary),
-        ),
+        title: Text('수면 기록', style: TextStyle(color: AppColors.textPrimary)),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(20),
@@ -176,13 +169,11 @@ class _SleepRecordScreenState extends State<SleepRecordScreen> {
                           ),
                           child: Text(
                             _formatTime(_startTime),
-                            style: Theme.of(context)
-                                .textTheme
-                                .titleMedium
+                            style: Theme.of(context).textTheme.titleMedium
                                 ?.copyWith(
-                              color: AppColors.sleepPurple,
-                              fontWeight: FontWeight.w600,
-                            ),
+                                  color: AppColors.sleepPurple,
+                                  fontWeight: FontWeight.w600,
+                                ),
                           ),
                         ),
                       ],
@@ -218,13 +209,11 @@ class _SleepRecordScreenState extends State<SleepRecordScreen> {
                           ),
                           child: Text(
                             _formatTime(_endTime),
-                            style: Theme.of(context)
-                                .textTheme
-                                .titleMedium
+                            style: Theme.of(context).textTheme.titleMedium
                                 ?.copyWith(
-                              color: AppColors.amber,
-                              fontWeight: FontWeight.w600,
-                            ),
+                                  color: AppColors.amber,
+                                  fontWeight: FontWeight.w600,
+                                ),
                           ),
                         ),
                       ],
@@ -253,10 +242,7 @@ class _SleepRecordScreenState extends State<SleepRecordScreen> {
             const SizedBox(height: 24),
 
             // 수면 환경
-            Text(
-              '수면 환경',
-              style: Theme.of(context).textTheme.titleSmall,
-            ),
+            Text('수면 환경', style: Theme.of(context).textTheme.titleSmall),
             const SizedBox(height: 12),
             Wrap(
               spacing: 8,
@@ -295,10 +281,7 @@ class _SleepRecordScreenState extends State<SleepRecordScreen> {
             const SizedBox(height: 24),
 
             // 재우기 난이도
-            Text(
-              '재우기 난이도',
-              style: Theme.of(context).textTheme.titleSmall,
-            ),
+            Text('재우기 난이도', style: Theme.of(context).textTheme.titleSmall),
             const SizedBox(height: 12),
             Row(
               children: List.generate(_difficultyOptions.length, (index) {
@@ -331,10 +314,7 @@ class _SleepRecordScreenState extends State<SleepRecordScreen> {
                         ),
                         child: Column(
                           children: [
-                            Text(
-                              emoji,
-                              style: const TextStyle(fontSize: 28),
-                            ),
+                            Text(emoji, style: const TextStyle(fontSize: 28)),
                             const SizedBox(height: 4),
                             Text(
                               label,

@@ -11,9 +11,7 @@ void main() {
     });
 
     test('Failure contains exception', () {
-      const result = Result<int>.failure(
-        NetworkException(message: 'timeout'),
-      );
+      const result = Result<int>.failure(NetworkException(message: 'timeout'));
       expect(result.isSuccess, isFalse);
       expect(result.isFailure, isTrue);
       expect(() => result.getOrThrow(), throwsA(isA<NetworkException>()));
@@ -38,9 +36,7 @@ void main() {
     });
 
     test('map preserves failure', () {
-      const result = Result<int>.failure(
-        CacheException(message: 'expired'),
-      );
+      const result = Result<int>.failure(CacheException(message: 'expired'));
       final mapped = result.map((v) => v.toString());
       expect(mapped.isFailure, isTrue);
     });

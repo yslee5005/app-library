@@ -27,10 +27,7 @@ class WelcomeScreen extends StatelessWidget {
                   shape: BoxShape.circle,
                 ),
                 child: const Center(
-                  child: Text(
-                    '💌',
-                    style: TextStyle(fontSize: 80),
-                  ),
+                  child: Text('💌', style: TextStyle(fontSize: 80)),
                 ),
               ),
 
@@ -40,9 +37,9 @@ class WelcomeScreen extends StatelessWidget {
               Text(
                 '아기가 편지를\n보내기 시작했어요',
                 textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.displayLarge?.copyWith(
-                  height: 1.3,
-                ),
+                style: Theme.of(
+                  context,
+                ).textTheme.displayLarge?.copyWith(height: 1.3),
               ),
 
               const SizedBox(height: 16),

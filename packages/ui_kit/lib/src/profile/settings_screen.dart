@@ -147,18 +147,20 @@ class SettingsScreen extends StatelessWidget {
   void _showSelectDialog(BuildContext context, SettingsItem item) {
     showDialog<String>(
       context: context,
-      builder: (context) => SimpleDialog(
-        title: Text(item.title),
-        children: item.options!.map((option) {
-          return SimpleDialogOption(
-            onPressed: () {
-              Navigator.of(context).pop(option);
-              item.onChanged?.call(option);
-            },
-            child: Text(option),
-          );
-        }).toList(),
-      ),
+      builder:
+          (context) => SimpleDialog(
+            title: Text(item.title),
+            children:
+                item.options!.map((option) {
+                  return SimpleDialogOption(
+                    onPressed: () {
+                      Navigator.of(context).pop(option);
+                      item.onChanged?.call(option);
+                    },
+                    child: Text(option),
+                  );
+                }).toList(),
+          ),
     );
   }
 }

@@ -69,7 +69,9 @@ class AppRatingBar extends StatelessWidget {
           onTapUp: (details) {
             if (allowHalf) {
               final isLeftHalf = details.localPosition.dx < size / 2;
-              onRatingChanged!(isLeftHalf ? starValue - 0.5 : starValue.toDouble());
+              onRatingChanged!(
+                isLeftHalf ? starValue - 0.5 : starValue.toDouble(),
+              );
             } else {
               onRatingChanged!(starValue.toDouble());
             }

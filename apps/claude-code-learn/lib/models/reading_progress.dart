@@ -33,12 +33,12 @@ class ReadingProgress {
   }
 
   Map<String, dynamic> toJson() => {
-        'contentId': contentId,
-        'scrollPosition': scrollPosition,
-        'isCompleted': isCompleted,
-        'lastReadAt': lastReadAt.toIso8601String(),
-        'timeSpentSeconds': timeSpentSeconds,
-      };
+    'contentId': contentId,
+    'scrollPosition': scrollPosition,
+    'isCompleted': isCompleted,
+    'lastReadAt': lastReadAt.toIso8601String(),
+    'timeSpentSeconds': timeSpentSeconds,
+  };
 
   factory ReadingProgress.fromJson(Map<String, dynamic> json) {
     return ReadingProgress(

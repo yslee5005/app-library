@@ -23,12 +23,7 @@ void main() {
 
     testWidgets('renders icon when provided', (tester) async {
       await tester.pumpWidget(
-        buildApp(
-          const EmptyStateView(
-            title: 'Empty',
-            icon: Icons.inbox,
-          ),
-        ),
+        buildApp(const EmptyStateView(title: 'Empty', icon: Icons.inbox)),
       );
       expect(find.byIcon(Icons.inbox), findsOneWidget);
     });
@@ -50,9 +45,7 @@ void main() {
     });
 
     testWidgets('hides action button when no label', (tester) async {
-      await tester.pumpWidget(
-        buildApp(const EmptyStateView(title: 'Empty')),
-      );
+      await tester.pumpWidget(buildApp(const EmptyStateView(title: 'Empty')));
       expect(find.byType(FilledButton), findsNothing);
     });
   });

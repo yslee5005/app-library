@@ -30,10 +30,7 @@ final commentRepositoryProvider = Provider<CommentRepository>((ref) {
 /// Key for the [commentListProvider] family — identifies a comment list
 /// by its content type and content ID.
 class CommentListKey {
-  const CommentListKey({
-    required this.contentType,
-    required this.contentId,
-  });
+  const CommentListKey({required this.contentType, required this.contentId});
 
   final String contentType;
   final String contentId;
@@ -58,10 +55,11 @@ class CommentListKey {
 /// final key = CommentListKey(contentType: 'article', contentId: '123');
 /// final comments = ref.watch(commentListProvider(key));
 /// ```
-final commentListProvider = AsyncNotifierProvider.family<CommentListNotifier,
-    PaginationState<CommentModel>, CommentListKey>(
-  CommentListNotifier.new,
-);
+final commentListProvider = AsyncNotifierProvider.family<
+  CommentListNotifier,
+  PaginationState<CommentModel>,
+  CommentListKey
+>(CommentListNotifier.new);
 
 // ---------------------------------------------------------------------------
 // Adapter: wraps CommentRepository as PaginatedRepository<CommentModel>
@@ -73,8 +71,8 @@ class _CommentPaginatedAdapter implements PaginatedRepository<CommentModel> {
   const _CommentPaginatedAdapter({
     required CommentRepository repository,
     required CommentFilter filter,
-  })  : _repository = repository,
-        _filter = filter;
+  }) : _repository = repository,
+       _filter = filter;
 
   final CommentRepository _repository;
   final CommentFilter _filter;
@@ -96,8 +94,7 @@ class _CommentPaginatedAdapter implements PaginatedRepository<CommentModel> {
 ///
 /// Extends [PaginationNotifier] to reuse generic pagination logic
 /// (build, loadMore, refresh, prependItem, updateItem, removeItem).
-class CommentListNotifier
-    extends PaginationNotifier<CommentModel> {
+class CommentListNotifier extends PaginationNotifier<CommentModel> {
   CommentListNotifier(this._key);
 
   final CommentListKey _key;
@@ -145,18 +142,12 @@ class CommentListNotifier
     required String commentId,
     required String userId,
   }) async {
-    final result = await _repo.toggleLike(
-      commentId: commentId,
-      userId: userId,
-    );
+    final result = await _repo.toggleLike(commentId: commentId, userId: userId);
 
     if (result case Success(:final value)) {
       updateItem(
         (c) => c.id == commentId,
-        (c) => c.copyWith(
-          isLiked: value.isLiked,
-          likeCount: value.likeCount,
-        ),
+        (c) => c.copyWith(isLiked: value.isLiked, likeCount: value.likeCount),
       );
     }
   }
@@ -203,8 +194,7 @@ class ReplyListKey {
           parentCommentId == other.parentCommentId;
 
   @override
-  int get hashCode =>
-      Object.hash(contentType, contentId, parentCommentId);
+  int get hashCode => Object.hash(contentType, contentId, parentCommentId);
 }
 
 /// Family provider for paginated reply lists.
@@ -220,17 +210,17 @@ class ReplyListKey {
 /// );
 /// final replies = ref.watch(replyListProvider(key));
 /// ```
-final replyListProvider = AsyncNotifierProvider.family<ReplyListNotifier,
-    PaginationState<CommentModel>, ReplyListKey>(
-  ReplyListNotifier.new,
-);
+final replyListProvider = AsyncNotifierProvider.family<
+  ReplyListNotifier,
+  PaginationState<CommentModel>,
+  ReplyListKey
+>(ReplyListNotifier.new);
 
 /// Manages paginated reply loading for a specific parent comment.
 ///
 /// Replies are sorted oldest-first (ascending) unlike parent comments.
 /// Extends [PaginationNotifier] for generic pagination.
-class ReplyListNotifier
-    extends PaginationNotifier<CommentModel> {
+class ReplyListNotifier extends PaginationNotifier<CommentModel> {
   ReplyListNotifier(this._key);
 
   final ReplyListKey _key;
@@ -259,10 +249,7 @@ class ReplyListNotifier
   ///
   /// Unlike parent comments which are prepended (newest first),
   /// replies are appended (oldest first).
-  Future<void> addReply({
-    required String body,
-    required String userId,
-  }) async {
+  Future<void> addReply({required String body, required String userId}) async {
     final request = CreateCommentRequest(
       contentType: _filter.contentType,
       contentId: _filter.contentId,
@@ -283,18 +270,12 @@ class ReplyListNotifier
     required String commentId,
     required String userId,
   }) async {
-    final result = await _repo.toggleLike(
-      commentId: commentId,
-      userId: userId,
-    );
+    final result = await _repo.toggleLike(commentId: commentId, userId: userId);
 
     if (result case Success(:final value)) {
       updateItem(
         (c) => c.id == commentId,
-        (c) => c.copyWith(
-          isLiked: value.isLiked,
-          likeCount: value.likeCount,
-        ),
+        (c) => c.copyWith(isLiked: value.isLiked, likeCount: value.likeCount),
       );
     }
   }

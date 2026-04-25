@@ -14,8 +14,9 @@ class ShowcaseApp extends StatefulWidget {
   static final _generator = ThemeGenerator(themeConfig);
 
   /// Global notifier so any screen can toggle dark mode.
-  static final ValueNotifier<ThemeMode> themeMode =
-      ValueNotifier(ThemeMode.system);
+  static final ValueNotifier<ThemeMode> themeMode = ValueNotifier(
+    ThemeMode.system,
+  );
 
   @override
   State<ShowcaseApp> createState() => _ShowcaseAppState();

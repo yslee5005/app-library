@@ -86,10 +86,7 @@ class _EpdsSurveyScreenState extends State<EpdsSurveyScreen> {
       final score = _calculateTotalScore();
       Navigator.of(context).push(
         MaterialPageRoute(
-          builder: (_) => EpdsResultScreen(
-            score: score,
-            isMom: widget.isMom,
-          ),
+          builder: (_) => EpdsResultScreen(score: score, isMom: widget.isMom),
         ),
       );
     }
@@ -140,9 +137,9 @@ class _EpdsSurveyScreenState extends State<EpdsSurveyScreen> {
                       child: Text(
                         '아빠도 힘들 수 있어요.\n육아는 둘 다 처음이니까요.',
                         style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                              color: AppColors.info,
-                              fontWeight: FontWeight.w500,
-                            ),
+                          color: AppColors.info,
+                          fontWeight: FontWeight.w500,
+                        ),
                       ),
                     ),
                   ],
@@ -159,16 +156,14 @@ class _EpdsSurveyScreenState extends State<EpdsSurveyScreen> {
                     children: [
                       Text(
                         '${_currentPage + 1}/10',
-                        style:
-                            Theme.of(context).textTheme.labelMedium?.copyWith(
-                                  color: AppColors.textSecondary,
-                                ),
+                        style: Theme.of(context).textTheme.labelMedium
+                            ?.copyWith(color: AppColors.textSecondary),
                       ),
                       Text(
                         '솔직하게 답해주세요. 정답은 없어요 💛',
                         style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                              color: AppColors.textHint,
-                            ),
+                          color: AppColors.textHint,
+                        ),
                       ),
                     ],
                   ),
@@ -178,8 +173,9 @@ class _EpdsSurveyScreenState extends State<EpdsSurveyScreen> {
                     child: LinearProgressIndicator(
                       value: (_currentPage + 1) / 10,
                       backgroundColor: AppColors.surfaceVariant,
-                      valueColor:
-                          const AlwaysStoppedAnimation<Color>(AppColors.coral),
+                      valueColor: const AlwaysStoppedAnimation<Color>(
+                        AppColors.coral,
+                      ),
                       minHeight: 6,
                     ),
                   ),
@@ -237,8 +233,9 @@ class _EpdsSurveyScreenState extends State<EpdsSurveyScreen> {
                       // 다음/완료 버튼
                       Expanded(
                         child: ElevatedButton(
-                          onPressed:
-                              _answers[_currentPage] != null ? _goToNext : null,
+                          onPressed: _answers[_currentPage] != null
+                              ? _goToNext
+                              : null,
                           style: ElevatedButton.styleFrom(
                             backgroundColor: AppColors.coral,
                             disabledBackgroundColor: AppColors.coralLight,
@@ -248,9 +245,7 @@ class _EpdsSurveyScreenState extends State<EpdsSurveyScreen> {
                               borderRadius: BorderRadius.circular(12),
                             ),
                           ),
-                          child: Text(
-                            _currentPage == 9 ? '완료' : '다음',
-                          ),
+                          child: Text(_currentPage == 9 ? '완료' : '다음'),
                         ),
                       ),
                     ],
@@ -258,9 +253,9 @@ class _EpdsSurveyScreenState extends State<EpdsSurveyScreen> {
                   const SizedBox(height: 12),
                   Text(
                     '이 설문은 선별 도구이며 진단이 아닙니다',
-                    style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                          color: AppColors.textHint,
-                        ),
+                    style: Theme.of(
+                      context,
+                    ).textTheme.labelSmall?.copyWith(color: AppColors.textHint),
                     textAlign: TextAlign.center,
                   ),
                 ],
@@ -292,25 +287,25 @@ class _EpdsSurveyScreenState extends State<EpdsSurveyScreen> {
                 Text(
                   'Q${index + 1}',
                   style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                        color: AppColors.coral,
-                        fontWeight: FontWeight.w700,
-                      ),
+                    color: AppColors.coral,
+                    fontWeight: FontWeight.w700,
+                  ),
                 ),
                 const SizedBox(height: 8),
                 Text(
                   '지난 7일 동안...',
-                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        color: AppColors.textHint,
-                      ),
+                  style: Theme.of(
+                    context,
+                  ).textTheme.bodySmall?.copyWith(color: AppColors.textHint),
                 ),
                 const SizedBox(height: 4),
                 Text(
                   _questions[index],
                   style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                        color: AppColors.textPrimary,
-                        fontWeight: FontWeight.w600,
-                        height: 1.4,
-                      ),
+                    color: AppColors.textPrimary,
+                    fontWeight: FontWeight.w600,
+                    height: 1.4,
+                  ),
                 ),
               ],
             ),
@@ -339,8 +334,9 @@ class _EpdsSurveyScreenState extends State<EpdsSurveyScreen> {
                         : AppColors.surface,
                     borderRadius: BorderRadius.circular(12),
                     border: Border.all(
-                      color:
-                          isSelected ? AppColors.coral : AppColors.surfaceVariant,
+                      color: isSelected
+                          ? AppColors.coral
+                          : AppColors.surfaceVariant,
                       width: isSelected ? 2 : 1,
                     ),
                   ),
@@ -373,9 +369,7 @@ class _EpdsSurveyScreenState extends State<EpdsSurveyScreen> {
                       Expanded(
                         child: Text(
                           _optionLabels[optionIndex],
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodyLarge
+                          style: Theme.of(context).textTheme.bodyLarge
                               ?.copyWith(
                                 color: isSelected
                                     ? AppColors.coral

@@ -15,37 +15,36 @@ class LoginFormDemo extends ConsumerWidget {
       body: authState.when(
         loading: () => const Center(child: CircularProgressIndicator()),
         error: (e, _) => Center(child: Text('Error: $e')),
-        data: (state) => switch (state) {
-          Authenticated(:final user) => _AuthenticatedView(
-              user: user,
-              onSignOut: () =>
-                  ref.read(authNotifierProvider.notifier).signOut(),
-            ),
-          AuthLoading() =>
-            const Center(child: CircularProgressIndicator()),
-          _ => SingleChildScrollView(
-              padding: const EdgeInsets.all(16),
-              child: LoginForm(
-                onLogin: (email, password) {
-                  ref.read(authNotifierProvider.notifier).signInWithEmail(
-                        email: email,
-                        password: password,
-                      );
-                },
-                onGoogleLogin: () {
-                  ref.read(authNotifierProvider.notifier).signInWithGoogle();
-                },
-                onAppleLogin: () {
-                  ref.read(authNotifierProvider.notifier).signInWithApple();
-                },
-                onForgotPassword: () {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('Forgot password (mock)')),
-                  );
-                },
+        data:
+            (state) => switch (state) {
+              Authenticated(:final user) => _AuthenticatedView(
+                user: user,
+                onSignOut:
+                    () => ref.read(authNotifierProvider.notifier).signOut(),
               ),
-            ),
-        },
+              AuthLoading() => const Center(child: CircularProgressIndicator()),
+              _ => SingleChildScrollView(
+                padding: const EdgeInsets.all(16),
+                child: LoginForm(
+                  onLogin: (email, password) {
+                    ref
+                        .read(authNotifierProvider.notifier)
+                        .signInWithEmail(email: email, password: password);
+                  },
+                  onGoogleLogin: () {
+                    ref.read(authNotifierProvider.notifier).signInWithGoogle();
+                  },
+                  onAppleLogin: () {
+                    ref.read(authNotifierProvider.notifier).signInWithApple();
+                  },
+                  onForgotPassword: () {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('Forgot password (mock)')),
+                    );
+                  },
+                ),
+              ),
+            },
       ),
     );
   }
@@ -72,10 +71,7 @@ class _AuthenticatedView extends StatelessWidget {
             const SizedBox(height: 16),
             Text('Welcome!', style: textTheme.headlineSmall),
             const SizedBox(height: 8),
-            Text(
-              user.displayName ?? 'User',
-              style: textTheme.titleMedium,
-            ),
+            Text(user.displayName ?? 'User', style: textTheme.titleMedium),
             Text(
               user.email ?? '',
               style: textTheme.bodyMedium?.copyWith(

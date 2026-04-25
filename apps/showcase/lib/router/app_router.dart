@@ -15,10 +15,7 @@ import '../features/search/view/search_demo.dart';
 final appRouter = GoRouter(
   initialLocation: '/',
   routes: [
-    GoRoute(
-      path: '/',
-      builder: (context, state) => const HomeView(),
-    ),
+    GoRoute(path: '/', builder: (context, state) => const HomeView()),
     GoRoute(
       path: '/navigation',
       builder: (context, state) => const NavigationDemo(),
@@ -27,34 +24,16 @@ final appRouter = GoRouter(
       path: '/onboarding',
       builder: (context, state) => const OnboardingDemo(),
     ),
-    GoRoute(
-      path: '/profile',
-      builder: (context, state) => const ProfileDemo(),
-    ),
-    GoRoute(
-      path: '/feed',
-      builder: (context, state) => const FeedDemo(),
-    ),
-    GoRoute(
-      path: '/search',
-      builder: (context, state) => const SearchDemo(),
-    ),
-    GoRoute(
-      path: '/forms',
-      builder: (context, state) => const FormsDemo(),
-    ),
+    GoRoute(path: '/profile', builder: (context, state) => const ProfileDemo()),
+    GoRoute(path: '/feed', builder: (context, state) => const FeedDemo()),
+    GoRoute(path: '/search', builder: (context, state) => const SearchDemo()),
+    GoRoute(path: '/forms', builder: (context, state) => const FormsDemo()),
     GoRoute(
       path: '/feedback',
       builder: (context, state) => const FeedbackDemo(),
     ),
-    GoRoute(
-      path: '/media',
-      builder: (context, state) => const MediaDemo(),
-    ),
-    GoRoute(
-      path: '/charts',
-      builder: (context, state) => const ChartsDemo(),
-    ),
+    GoRoute(path: '/media', builder: (context, state) => const MediaDemo()),
+    GoRoute(path: '/charts', builder: (context, state) => const ChartsDemo()),
     GoRoute(
       path: '/full-flow',
       builder: (context, state) => const FullFlowDemo(),

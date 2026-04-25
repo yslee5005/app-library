@@ -63,10 +63,7 @@ class _LoginFormState extends State<LoginForm> {
 
   void _submit() {
     if (_formKey.currentState?.validate() ?? false) {
-      widget.onLogin(
-        _emailController.text.trim(),
-        _passwordController.text,
-      );
+      widget.onLogin(_emailController.text.trim(), _passwordController.text);
     }
   }
 
@@ -88,113 +85,115 @@ class _LoginFormState extends State<LoginForm> {
           padding: const EdgeInsets.all(AppSpacing.lg),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            // Email
-            TextFormField(
-              controller: _emailController,
-              decoration: InputDecoration(labelText: widget.emailLabel),
-              keyboardType: TextInputType.emailAddress,
-              autofillHints: const [AutofillHints.email],
-              textInputAction: TextInputAction.next,
-              validator: (value) {
-                if (value == null || value.trim().isEmpty) {
-                  return '${widget.emailLabel} is required';
-                }
-                return null;
-              },
-            ),
-            SizedBox(height: widget.spacing ?? AppSpacing.md),
-
-            // Password
-            TextFormField(
-              controller: _passwordController,
-              decoration: InputDecoration(
-                labelText: widget.passwordLabel,
-                suffixIcon: IconButton(
-                  icon: Icon(
-                    _obscurePassword
-                        ? Icons.visibility_off
-                        : Icons.visibility,
-                  ),
-                  onPressed: () =>
-                      setState(() => _obscurePassword = !_obscurePassword),
-                ),
+            children: [
+              // Email
+              TextFormField(
+                controller: _emailController,
+                decoration: InputDecoration(labelText: widget.emailLabel),
+                keyboardType: TextInputType.emailAddress,
+                autofillHints: const [AutofillHints.email],
+                textInputAction: TextInputAction.next,
+                validator: (value) {
+                  if (value == null || value.trim().isEmpty) {
+                    return '${widget.emailLabel} is required';
+                  }
+                  return null;
+                },
               ),
-              obscureText: _obscurePassword,
-              autofillHints: const [AutofillHints.password],
-              textInputAction: TextInputAction.done,
-              onFieldSubmitted: (_) => _submit(),
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return '${widget.passwordLabel} is required';
-                }
-                return null;
-              },
-            ),
+              SizedBox(height: widget.spacing ?? AppSpacing.md),
 
-            // Forgot password
-            if (widget.onForgotPassword != null)
-              Align(
-                alignment: Alignment.centerRight,
-                child: TextButton(
-                  onPressed: widget.onForgotPassword,
-                  child: Text(widget.forgotPasswordLabel),
-                ),
-              ),
-
-            SizedBox(height: widget.spacing ?? AppSpacing.md),
-
-            // Login button
-            FilledButton(
-              onPressed: widget.isLoading ? null : _submit,
-              style: widget.buttonStyle,
-              child: widget.isLoading
-                  ? const SizedBox(
-                      height: 20,
-                      width: 20,
-                      child: CircularProgressIndicator(strokeWidth: 2),
-                    )
-                  : Text(widget.loginLabel),
-            ),
-
-            // Social login section
-            if (widget.onGoogleLogin != null ||
-                widget.onAppleLogin != null) ...[
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: AppSpacing.lg),
-                child: Row(
-                  children: [
-                    const Expanded(child: Divider()),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: AppSpacing.md,
-                      ),
-                      child: Text(
-                        widget.orDividerLabel,
-                        style: theme.textTheme.bodySmall,
-                      ),
+              // Password
+              TextFormField(
+                controller: _passwordController,
+                decoration: InputDecoration(
+                  labelText: widget.passwordLabel,
+                  suffixIcon: IconButton(
+                    icon: Icon(
+                      _obscurePassword
+                          ? Icons.visibility_off
+                          : Icons.visibility,
                     ),
-                    const Expanded(child: Divider()),
-                  ],
+                    onPressed:
+                        () => setState(
+                          () => _obscurePassword = !_obscurePassword,
+                        ),
+                  ),
                 ),
+                obscureText: _obscurePassword,
+                autofillHints: const [AutofillHints.password],
+                textInputAction: TextInputAction.done,
+                onFieldSubmitted: (_) => _submit(),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return '${widget.passwordLabel} is required';
+                  }
+                  return null;
+                },
               ),
-              if (widget.onGoogleLogin != null) ...[
-                OutlinedButton.icon(
-                  onPressed: widget.isLoading ? null : widget.onGoogleLogin,
-                  icon: const Icon(Icons.g_mobiledata),
-                  label: Text(widget.googleLabel),
+
+              // Forgot password
+              if (widget.onForgotPassword != null)
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: TextButton(
+                    onPressed: widget.onForgotPassword,
+                    child: Text(widget.forgotPasswordLabel),
+                  ),
                 ),
-                const SizedBox(height: AppSpacing.sm),
+
+              SizedBox(height: widget.spacing ?? AppSpacing.md),
+
+              // Login button
+              FilledButton(
+                onPressed: widget.isLoading ? null : _submit,
+                style: widget.buttonStyle,
+                child:
+                    widget.isLoading
+                        ? const SizedBox(
+                          height: 20,
+                          width: 20,
+                          child: CircularProgressIndicator(strokeWidth: 2),
+                        )
+                        : Text(widget.loginLabel),
+              ),
+
+              // Social login section
+              if (widget.onGoogleLogin != null ||
+                  widget.onAppleLogin != null) ...[
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: AppSpacing.lg),
+                  child: Row(
+                    children: [
+                      const Expanded(child: Divider()),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: AppSpacing.md,
+                        ),
+                        child: Text(
+                          widget.orDividerLabel,
+                          style: theme.textTheme.bodySmall,
+                        ),
+                      ),
+                      const Expanded(child: Divider()),
+                    ],
+                  ),
+                ),
+                if (widget.onGoogleLogin != null) ...[
+                  OutlinedButton.icon(
+                    onPressed: widget.isLoading ? null : widget.onGoogleLogin,
+                    icon: const Icon(Icons.g_mobiledata),
+                    label: Text(widget.googleLabel),
+                  ),
+                  const SizedBox(height: AppSpacing.sm),
+                ],
+                if (widget.onAppleLogin != null)
+                  OutlinedButton.icon(
+                    onPressed: widget.isLoading ? null : widget.onAppleLogin,
+                    icon: const Icon(Icons.apple),
+                    label: Text(widget.appleLabel),
+                  ),
               ],
-              if (widget.onAppleLogin != null)
-                OutlinedButton.icon(
-                  onPressed: widget.isLoading ? null : widget.onAppleLogin,
-                  icon: const Icon(Icons.apple),
-                  label: Text(widget.appleLabel),
-                ),
             ],
-          ],
           ),
         ),
       ),

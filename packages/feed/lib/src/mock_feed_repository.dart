@@ -18,8 +18,9 @@ class MockFeedRepository implements FeedRepository {
     String? cursor,
     int limit = 20,
   }) async {
-    var items = _posts.values.toList()
-      ..sort((a, b) => b.createdAt.compareTo(a.createdAt));
+    var items =
+        _posts.values.toList()
+          ..sort((a, b) => b.createdAt.compareTo(a.createdAt));
 
     if (category != null) {
       items = items.where((i) => i.category == category).toList();

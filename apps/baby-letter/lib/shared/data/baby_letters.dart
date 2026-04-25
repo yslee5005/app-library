@@ -97,16 +97,14 @@ const pregnancyLetters = <BabyLetter>[
     title: '눈을 떴어!',
     message:
         '엄마, 오늘 내 눈꺼풀이 조금 열렸어!\n빛이 아주 조금 보이는 것 같아.\n엄마 배 위에 손전등 비추면\n내가 고개를 돌린대!\n\n그리고 요즘 꿈을 꾸기 시작했어.\nREM 수면이 생겼거든! 🌙',
-    scientificBasis:
-        '24주: 안검열(눈꺼풀 분리) 형성, REM sleep onset, 빛 반응',
+    scientificBasis: '24주: 안검열(눈꺼풀 분리) 형성, REM sleep onset, 빛 반응',
     source: 'Khan et al., 2004; Birnholz, 1981',
     emoji: '👁️',
   ),
   BabyLetter(
     weekKey: 'week_26',
     title: '엄마가 먹는 게 느껴져!',
-    message:
-        '엄마, 엄마가 먹는 맛이\n양수를 통해 전해져!\n단 맛이 제일 좋고\n쓴 맛은 좀 싫어.\n오늘 뭐 먹었어? 🍓',
+    message: '엄마, 엄마가 먹는 맛이\n양수를 통해 전해져!\n단 맛이 제일 좋고\n쓴 맛은 좀 싫어.\n오늘 뭐 먹었어? 🍓',
     scientificBasis: '26주: 미뢰 발달 완성, 양수 속 맛 분자 감지',
     source: 'Mennella et al., Pediatrics, 2001',
     emoji: '🍓',

@@ -19,40 +19,50 @@ class NavigationDemo extends StatelessWidget {
             title: const Text('AppShell'),
             subtitle: const Text('Full shell with bottom nav + tab bodies'),
             trailing: const Icon(Icons.chevron_right),
-            onTap: () => Navigator.push(
-              context,
-              MaterialPageRoute<void>(builder: (_) => const AppShellDemo()),
-            ),
+            onTap:
+                () => Navigator.push(
+                  context,
+                  MaterialPageRoute<void>(builder: (_) => const AppShellDemo()),
+                ),
           ),
           ListTile(
             leading: const Icon(Icons.view_compact),
             title: const Text('AppBottomNavBar'),
             subtitle: const Text('Standalone bottom navigation bar'),
             trailing: const Icon(Icons.chevron_right),
-            onTap: () => Navigator.push(
-              context,
-              MaterialPageRoute<void>(builder: (_) => const BottomNavBarDemo()),
-            ),
+            onTap:
+                () => Navigator.push(
+                  context,
+                  MaterialPageRoute<void>(
+                    builder: (_) => const BottomNavBarDemo(),
+                  ),
+                ),
           ),
           ListTile(
             leading: const Icon(Icons.menu),
             title: const Text('AppDrawerMenu'),
             subtitle: const Text('Drawer with header and menu items'),
             trailing: const Icon(Icons.chevron_right),
-            onTap: () => Navigator.push(
-              context,
-              MaterialPageRoute<void>(builder: (_) => const DrawerMenuDemo()),
-            ),
+            onTap:
+                () => Navigator.push(
+                  context,
+                  MaterialPageRoute<void>(
+                    builder: (_) => const DrawerMenuDemo(),
+                  ),
+                ),
           ),
           ListTile(
             leading: const Icon(Icons.tab),
             title: const Text('AppTabLayout'),
             subtitle: const Text('TabBar with swipeable content'),
             trailing: const Icon(Icons.chevron_right),
-            onTap: () => Navigator.push(
-              context,
-              MaterialPageRoute<void>(builder: (_) => const TabLayoutDemo()),
-            ),
+            onTap:
+                () => Navigator.push(
+                  context,
+                  MaterialPageRoute<void>(
+                    builder: (_) => const TabLayoutDemo(),
+                  ),
+                ),
           ),
         ],
       ),

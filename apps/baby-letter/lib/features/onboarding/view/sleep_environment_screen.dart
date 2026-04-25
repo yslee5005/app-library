@@ -23,11 +23,7 @@ class _SleepEnvironmentScreenState extends State<SleepEnvironmentScreen> {
       title: '동침 (같은 침대)',
       description: '부모와 같은 침대에서 잠을 자요',
     ),
-    _SleepOption(
-      emoji: '🔄',
-      title: '혼합 (상황에 따라)',
-      description: '상황에 따라 달라져요',
-    ),
+    _SleepOption(emoji: '🔄', title: '혼합 (상황에 따라)', description: '상황에 따라 달라져요'),
   ];
 
   @override
@@ -43,9 +39,9 @@ class _SleepEnvironmentScreenState extends State<SleepEnvironmentScreen> {
         ),
         title: Text(
           '수면 환경',
-          style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                color: AppColors.textPrimary,
-              ),
+          style: Theme.of(
+            context,
+          ).textTheme.titleMedium?.copyWith(color: AppColors.textPrimary),
         ),
       ),
       body: SafeArea(
@@ -57,9 +53,9 @@ class _SleepEnvironmentScreenState extends State<SleepEnvironmentScreen> {
               Text(
                 '어느 것이 좋다/나쁘다가 아닙니다.\n패턴 분석을 위한 정보예요',
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      color: AppColors.textSecondary,
-                      height: 1.5,
-                    ),
+                  color: AppColors.textSecondary,
+                  height: 1.5,
+                ),
               ),
 
               const SizedBox(height: 32),
@@ -99,9 +95,7 @@ class _SleepEnvironmentScreenState extends State<SleepEnvironmentScreen> {
                               children: [
                                 Text(
                                   option.title,
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .titleMedium
+                                  style: Theme.of(context).textTheme.titleMedium
                                       ?.copyWith(
                                         color: isSelected
                                             ? AppColors.coralDark
@@ -112,9 +106,7 @@ class _SleepEnvironmentScreenState extends State<SleepEnvironmentScreen> {
                                 const SizedBox(height: 4),
                                 Text(
                                   option.description,
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .bodySmall
+                                  style: Theme.of(context).textTheme.bodySmall
                                       ?.copyWith(
                                         color: AppColors.textSecondary,
                                       ),
@@ -150,9 +142,9 @@ class _SleepEnvironmentScreenState extends State<SleepEnvironmentScreen> {
                   '판단하지 않고, 아기의 수면 패턴을 이해하는 데 활용할게요.',
                   textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        color: AppColors.textSecondary,
-                        height: 1.5,
-                      ),
+                    color: AppColors.textSecondary,
+                    height: 1.5,
+                  ),
                 ),
               ),
 
@@ -168,8 +160,9 @@ class _SleepEnvironmentScreenState extends State<SleepEnvironmentScreen> {
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.coral,
                     foregroundColor: Colors.white,
-                    disabledBackgroundColor:
-                        AppColors.textHint.withValues(alpha: 0.3),
+                    disabledBackgroundColor: AppColors.textHint.withValues(
+                      alpha: 0.3,
+                    ),
                     disabledForegroundColor: AppColors.textHint,
                     padding: const EdgeInsets.symmetric(vertical: 16),
                     shape: RoundedRectangleBorder(
@@ -178,10 +171,7 @@ class _SleepEnvironmentScreenState extends State<SleepEnvironmentScreen> {
                   ),
                   child: const Text(
                     '확인',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                    ),
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
                   ),
                 ),
               ),

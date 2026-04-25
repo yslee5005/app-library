@@ -29,10 +29,7 @@ class PatternWeeklyScreen extends StatelessWidget {
           icon: const Icon(Icons.arrow_back),
           color: AppColors.textPrimary,
         ),
-        title: Text(
-          '주간 패턴',
-          style: TextStyle(color: AppColors.textPrimary),
-        ),
+        title: Text('주간 패턴', style: TextStyle(color: AppColors.textPrimary)),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(20),
@@ -174,10 +171,7 @@ class PatternWeeklyScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    '주간 평균',
-                    style: Theme.of(context).textTheme.titleMedium,
-                  ),
+                  Text('주간 평균', style: Theme.of(context).textTheme.titleMedium),
                   const SizedBox(height: 16),
                   _StatRow(
                     icon: Icons.nightlight_round,
@@ -228,9 +222,9 @@ class PatternWeeklyScreen extends StatelessWidget {
                   Text(
                     '2주 이상 데이터가 쌓이면\n월간 트렌드를 보여드려요',
                     textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                      color: AppColors.textHint,
-                    ),
+                    style: Theme.of(
+                      context,
+                    ).textTheme.bodySmall?.copyWith(color: AppColors.textHint),
                   ),
                 ],
               ),
@@ -284,9 +278,7 @@ class _DayColumn extends StatelessWidget {
           height: sleepHeight,
           decoration: BoxDecoration(
             color: AppColors.sleepPurple.withValues(alpha: 0.7),
-            borderRadius: const BorderRadius.vertical(
-              top: Radius.circular(4),
-            ),
+            borderRadius: const BorderRadius.vertical(top: Radius.circular(4)),
           ),
         ),
         // 수유 (중간)
@@ -309,10 +301,7 @@ class _DayColumn extends StatelessWidget {
         const SizedBox(height: 6),
         Text(
           data.label,
-          style: const TextStyle(
-            fontSize: 12,
-            color: AppColors.textSecondary,
-          ),
+          style: const TextStyle(fontSize: 12, color: AppColors.textSecondary),
         ),
       ],
     );
@@ -323,10 +312,7 @@ class _ChartLegend extends StatelessWidget {
   final Color color;
   final String label;
 
-  const _ChartLegend({
-    required this.color,
-    required this.label,
-  });
+  const _ChartLegend({required this.color, required this.label});
 
   @override
   Widget build(BuildContext context) {
@@ -344,10 +330,7 @@ class _ChartLegend extends StatelessWidget {
         const SizedBox(width: 4),
         Text(
           label,
-          style: const TextStyle(
-            fontSize: 11,
-            color: AppColors.textSecondary,
-          ),
+          style: const TextStyle(fontSize: 11, color: AppColors.textSecondary),
         ),
       ],
     );
@@ -373,10 +356,7 @@ class _StatRow extends StatelessWidget {
       children: [
         Icon(icon, size: 20, color: color),
         const SizedBox(width: 12),
-        Text(
-          label,
-          style: Theme.of(context).textTheme.bodyMedium,
-        ),
+        Text(label, style: Theme.of(context).textTheme.bodyMedium),
         const Spacer(),
         Text(
           value,

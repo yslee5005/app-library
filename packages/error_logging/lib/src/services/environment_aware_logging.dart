@@ -32,12 +32,11 @@ final class EnvironmentAwareLogging implements ErrorLoggingService {
   final AppEnvironment environment;
 
   @override
-  Future<void> log(
-    String message, {
-    ErrorLevel level = ErrorLevel.info,
-  }) async {
+  Future<void> log(String message, {ErrorLevel level = ErrorLevel.info}) async {
     // In dev, only print locally — don't send info/warning to remote.
-    if (environment.isDebug && level != ErrorLevel.fatal && level != ErrorLevel.error) {
+    if (environment.isDebug &&
+        level != ErrorLevel.fatal &&
+        level != ErrorLevel.error) {
       return;
     }
     await inner.log(message, level: level);
@@ -51,10 +50,7 @@ final class EnvironmentAwareLogging implements ErrorLoggingService {
     Map<String, String>? tags,
   }) async {
     // Always capture exceptions, but add environment tag.
-    final enrichedTags = {
-      ...?tags,
-      'environment': environment.name,
-    };
+    final enrichedTags = {...?tags, 'environment': environment.name};
 
     // In prod, strip stack trace from non-fatal errors to reduce noise.
     final effectiveStack = environment.showStackTraces ? stackTrace : null;

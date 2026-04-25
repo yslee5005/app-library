@@ -48,9 +48,7 @@ class _RecordsViewState extends State<RecordsView> {
   @override
   Widget build(BuildContext context) {
     if (_profile == null) {
-      return const Scaffold(
-        body: Center(child: CircularProgressIndicator()),
-      );
+      return const Scaffold(body: Center(child: CircularProgressIndicator()));
     }
 
     return Scaffold(
@@ -137,23 +135,26 @@ class _RecordsViewState extends State<RecordsView> {
 
               return Container(
                 decoration: BoxDecoration(
-                  color: isFuture
-                      ? Colors.white.withOpacity(0.03)
-                      : isCompleted
+                  color:
+                      isFuture
+                          ? Colors.white.withOpacity(0.03)
+                          : isCompleted
                           ? AppConfig.accentColor.withOpacity(0.7)
                           : Colors.white.withOpacity(0.08),
                   borderRadius: BorderRadius.circular(8),
-                  border: isToday
-                      ? Border.all(color: AppConfig.accentColor, width: 2)
-                      : null,
+                  border:
+                      isToday
+                          ? Border.all(color: AppConfig.accentColor, width: 2)
+                          : null,
                 ),
                 alignment: Alignment.center,
                 child: Text(
                   '$day',
                   style: TextStyle(
-                    color: isFuture
-                        ? Colors.white24
-                        : isCompleted
+                    color:
+                        isFuture
+                            ? Colors.white24
+                            : isCompleted
                             ? Colors.white
                             : Colors.white54,
                     fontSize: 12,
@@ -192,7 +193,10 @@ class _RecordsViewState extends State<RecordsView> {
           ),
         ),
         const SizedBox(width: 4),
-        Text(label, style: const TextStyle(color: Colors.white38, fontSize: 11)),
+        Text(
+          label,
+          style: const TextStyle(color: Colors.white38, fontSize: 11),
+        ),
       ],
     );
   }
@@ -227,17 +231,22 @@ class _RecordsViewState extends State<RecordsView> {
                     ),
                   ),
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 10,
+                      vertical: 4,
+                    ),
                     decoration: BoxDecoration(
-                      color: streak > 0
-                          ? AppConfig.accentColor.withOpacity(0.2)
-                          : Colors.white.withOpacity(0.05),
+                      color:
+                          streak > 0
+                              ? AppConfig.accentColor.withOpacity(0.2)
+                              : Colors.white.withOpacity(0.05),
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: Text(
                       streak > 0 ? '🔥 $streak일' : '0일',
                       style: TextStyle(
-                        color: streak > 0 ? AppConfig.accentColor : Colors.white38,
+                        color:
+                            streak > 0 ? AppConfig.accentColor : Colors.white38,
                         fontSize: 13,
                         fontWeight: FontWeight.w600,
                       ),
@@ -254,14 +263,19 @@ class _RecordsViewState extends State<RecordsView> {
 
   Widget _buildMonthlyStats() {
     final now = DateTime.now();
-    final thisMonthLogs = _logs.where((l) {
-      final date = DateTime.tryParse(l.date);
-      return date != null && date.year == now.year && date.month == now.month && l.completed;
-    }).toList();
+    final thisMonthLogs =
+        _logs.where((l) {
+          final date = DateTime.tryParse(l.date);
+          return date != null &&
+              date.year == now.year &&
+              date.month == now.month &&
+              l.completed;
+        }).toList();
 
     final totalRoutines = _profile!.routines.length * now.day;
     final completedCount = thisMonthLogs.length;
-    final percentage = totalRoutines > 0 ? (completedCount / totalRoutines * 100).round() : 0;
+    final percentage =
+        totalRoutines > 0 ? (completedCount / totalRoutines * 100).round() : 0;
 
     return GlassCard(
       padding: const EdgeInsets.all(16),

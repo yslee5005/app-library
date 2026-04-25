@@ -86,10 +86,7 @@ class _AppSearchBarState extends State<AppSearchBar> {
           listenable: _controller,
           builder: (context, _) {
             if (_controller.text.isEmpty) return const SizedBox.shrink();
-            return IconButton(
-              icon: const Icon(Icons.clear),
-              onPressed: _clear,
-            );
+            return IconButton(icon: const Icon(Icons.clear), onPressed: _clear);
           },
         ),
         filled: true,

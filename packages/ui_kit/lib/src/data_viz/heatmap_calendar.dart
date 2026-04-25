@@ -47,7 +47,8 @@ class HeatmapCalendar extends StatelessWidget {
   final void Function(DateTime date, int value)? onDayTap;
 
   /// Normalize a DateTime to midnight.
-  static DateTime _normalize(DateTime dt) => DateTime(dt.year, dt.month, dt.day);
+  static DateTime _normalize(DateTime dt) =>
+      DateTime(dt.year, dt.month, dt.day);
 
   @override
   Widget build(BuildContext context) {
@@ -117,9 +118,10 @@ class HeatmapCalendar extends StatelessWidget {
                     }
 
                     return GestureDetector(
-                      onTap: onDayTap != null
-                          ? () => onDayTap!(normalised, value)
-                          : null,
+                      onTap:
+                          onDayTap != null
+                              ? () => onDayTap!(normalised, value)
+                              : null,
                       child: Container(
                         width: cellSize,
                         height: cellSize,

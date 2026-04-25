@@ -12,9 +12,9 @@ class SignUpFormDemo extends StatelessWidget {
         padding: const EdgeInsets.all(16),
         child: SignUpForm(
           onSignUp: (name, email, password) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text('Sign up: $name ($email)')),
-            );
+            ScaffoldMessenger.of(
+              context,
+            ).showSnackBar(SnackBar(content: Text('Sign up: $name ($email)')));
           },
         ),
       ),

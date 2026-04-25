@@ -54,24 +54,29 @@ class SupabaseProjectRepository implements ProjectRepository {
         .select('id, name')
         .eq('parent_id', projectParentId);
 
-    _projectCategoryIds = (childRows as List)
-        .where((row) => row['name'] != 'Layout_Design')
-        .map<String>((row) => row['id'] as String)
-        .toList();
+    _projectCategoryIds =
+        (childRows as List)
+            .where((row) => row['name'] != 'Layout_Design')
+            .map<String>((row) => row['id'] as String)
+            .toList();
 
     return _projectCategoryIds!;
   }
 
   Project _fromRow(Map<String, dynamic> row) {
-    final images = (row['product_images'] as List? ?? [])
-        .where((img) => img['deleted_at'] == null)
-        .toList()
-      ..sort(
-          (a, b) => (a['sort_order'] as int).compareTo(b['sort_order'] as int));
+    final images =
+        (row['product_images'] as List? ?? [])
+            .where((img) => img['deleted_at'] == null)
+            .toList()
+          ..sort(
+            (a, b) =>
+                (a['sort_order'] as int).compareTo(b['sort_order'] as int),
+          );
 
-    final imageUrls = images
-        .map<String>((img) => _storageUrl(img['storage_path'] as String))
-        .toList();
+    final imageUrls =
+        images
+            .map<String>((img) => _storageUrl(img['storage_path'] as String))
+            .toList();
 
     final mainCatName = row['categories']?['name'] as String? ?? '';
 
@@ -122,11 +127,12 @@ class SupabaseProjectRepository implements ProjectRepository {
 
   @override
   Future<Project?> getById(String id) async {
-    final response = await _products
-        .select(_select)
-        .eq('id', id)
-        .isFilter('deleted_at', null)
-        .maybeSingle();
+    final response =
+        await _products
+            .select(_select)
+            .eq('id', id)
+            .isFilter('deleted_at', null)
+            .maybeSingle();
 
     if (response == null) return null;
     return _fromRow(response);

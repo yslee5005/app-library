@@ -24,41 +24,13 @@ class _StoolColorSheetState extends State<_StoolColorSheet> {
   bool _showDangerWarning = false;
 
   static const _colors = [
-    _StoolColor(
-      name: '겨자노랑',
-      color: Color(0xFFD4A017),
-      isDanger: false,
-    ),
-    _StoolColor(
-      name: '황갈색',
-      color: Color(0xFF8B6914),
-      isDanger: false,
-    ),
-    _StoolColor(
-      name: '녹색',
-      color: Color(0xFF4CAF50),
-      isDanger: false,
-    ),
-    _StoolColor(
-      name: '연갈색',
-      color: Color(0xFFA0522D),
-      isDanger: false,
-    ),
-    _StoolColor(
-      name: '회백색',
-      color: Color(0xFFE0E0E0),
-      isDanger: true,
-    ),
-    _StoolColor(
-      name: '흰색',
-      color: Colors.white,
-      isDanger: true,
-    ),
-    _StoolColor(
-      name: '빨간색',
-      color: Colors.red,
-      isDanger: true,
-    ),
+    _StoolColor(name: '겨자노랑', color: Color(0xFFD4A017), isDanger: false),
+    _StoolColor(name: '황갈색', color: Color(0xFF8B6914), isDanger: false),
+    _StoolColor(name: '녹색', color: Color(0xFF4CAF50), isDanger: false),
+    _StoolColor(name: '연갈색', color: Color(0xFFA0522D), isDanger: false),
+    _StoolColor(name: '회백색', color: Color(0xFFE0E0E0), isDanger: true),
+    _StoolColor(name: '흰색', color: Colors.white, isDanger: true),
+    _StoolColor(name: '빨간색', color: Colors.red, isDanger: true),
   ];
 
   void _selectColor(int index) {
@@ -96,9 +68,9 @@ class _StoolColorSheetState extends State<_StoolColorSheet> {
             Text(
               '대변 색상',
               style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                    color: AppColors.textPrimary,
-                    fontWeight: FontWeight.w600,
-                  ),
+                color: AppColors.textPrimary,
+                fontWeight: FontWeight.w600,
+              ),
             ),
 
             const SizedBox(height: 24),
@@ -128,16 +100,18 @@ class _StoolColorSheetState extends State<_StoolColorSheet> {
                               color: stoolColor.isDanger
                                   ? AppColors.danger
                                   : isSelected
-                                      ? AppColors.coral
-                                      : AppColors.textHint
-                                          .withValues(alpha: 0.3),
-                              width: stoolColor.isDanger ? 3 : (isSelected ? 3 : 1),
+                                  ? AppColors.coral
+                                  : AppColors.textHint.withValues(alpha: 0.3),
+                              width: stoolColor.isDanger
+                                  ? 3
+                                  : (isSelected ? 3 : 1),
                             ),
                             boxShadow: isSelected
                                 ? [
                                     BoxShadow(
-                                      color:
-                                          AppColors.coral.withValues(alpha: 0.3),
+                                      color: AppColors.coral.withValues(
+                                        alpha: 0.3,
+                                      ),
                                       blurRadius: 8,
                                       spreadRadius: 2,
                                     ),
@@ -157,10 +131,8 @@ class _StoolColorSheetState extends State<_StoolColorSheet> {
                         const SizedBox(height: 6),
                         Text(
                           stoolColor.name,
-                          style:
-                              Theme.of(context).textTheme.labelSmall?.copyWith(
-                                    color: AppColors.textSecondary,
-                                  ),
+                          style: Theme.of(context).textTheme.labelSmall
+                              ?.copyWith(color: AppColors.textSecondary),
                         ),
                       ],
                     ),
@@ -192,11 +164,11 @@ class _StoolColorSheetState extends State<_StoolColorSheet> {
                       Expanded(
                         child: Text(
                           '즉시 소아과 방문이 필요합니다',
-                          style:
-                              Theme.of(context).textTheme.bodyMedium?.copyWith(
-                                    color: AppColors.danger,
-                                    fontWeight: FontWeight.w600,
-                                  ),
+                          style: Theme.of(context).textTheme.bodyMedium
+                              ?.copyWith(
+                                color: AppColors.danger,
+                                fontWeight: FontWeight.w600,
+                              ),
                         ),
                       ),
                     ],
@@ -218,8 +190,9 @@ class _StoolColorSheetState extends State<_StoolColorSheet> {
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.coral,
                     foregroundColor: Colors.white,
-                    disabledBackgroundColor:
-                        AppColors.textHint.withValues(alpha: 0.3),
+                    disabledBackgroundColor: AppColors.textHint.withValues(
+                      alpha: 0.3,
+                    ),
                     disabledForegroundColor: AppColors.textHint,
                     padding: const EdgeInsets.symmetric(vertical: 16),
                     shape: RoundedRectangleBorder(
@@ -228,10 +201,7 @@ class _StoolColorSheetState extends State<_StoolColorSheet> {
                   ),
                   child: const Text(
                     '선택',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                    ),
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
                   ),
                 ),
               ),

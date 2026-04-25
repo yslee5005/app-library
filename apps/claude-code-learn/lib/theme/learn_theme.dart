@@ -35,40 +35,30 @@ class LearnColors {
 class LearnTypography {
   LearnTypography._();
 
-  static TextStyle get hero => GoogleFonts.notoSans(
-        fontSize: 28,
-        fontWeight: FontWeight.w700,
-      );
+  static TextStyle get hero =>
+      GoogleFonts.notoSans(fontSize: 28, fontWeight: FontWeight.w700);
 
-  static TextStyle get h1 => GoogleFonts.notoSans(
-        fontSize: 22,
-        fontWeight: FontWeight.w600,
-      );
+  static TextStyle get h1 =>
+      GoogleFonts.notoSans(fontSize: 22, fontWeight: FontWeight.w600);
 
-  static TextStyle get h2 => GoogleFonts.notoSans(
-        fontSize: 18,
-        fontWeight: FontWeight.w600,
-      );
+  static TextStyle get h2 =>
+      GoogleFonts.notoSans(fontSize: 18, fontWeight: FontWeight.w600);
 
   static TextStyle get body => GoogleFonts.notoSans(
-        fontSize: 16,
-        fontWeight: FontWeight.w400,
-        height: 1.6,
-      );
+    fontSize: 16,
+    fontWeight: FontWeight.w400,
+    height: 1.6,
+  );
 
-  static TextStyle get bodySmall => GoogleFonts.notoSans(
-        fontSize: 14,
-        fontWeight: FontWeight.w400,
-      );
+  static TextStyle get bodySmall =>
+      GoogleFonts.notoSans(fontSize: 14, fontWeight: FontWeight.w400);
 
-  static TextStyle get label => GoogleFonts.notoSans(
-        fontSize: 13,
-        fontWeight: FontWeight.w500,
-      );
+  static TextStyle get label =>
+      GoogleFonts.notoSans(fontSize: 13, fontWeight: FontWeight.w500);
 
   static TextStyle get caption => GoogleFonts.notoSans(
-        fontSize: 12,
-        fontWeight: FontWeight.w400,
-        color: LearnColors.muted,
-      );
+    fontSize: 12,
+    fontWeight: FontWeight.w400,
+    color: LearnColors.muted,
+  );
 }

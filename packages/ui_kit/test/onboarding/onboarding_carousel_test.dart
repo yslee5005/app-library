@@ -4,10 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   final pages = [
-    const OnboardingPage(
-      title: 'Welcome',
-      subtitle: 'First page description',
-    ),
+    const OnboardingPage(title: 'Welcome', subtitle: 'First page description'),
     const OnboardingPage(
       title: 'Features',
       subtitle: 'Second page description',
@@ -19,10 +16,7 @@ void main() {
     ),
   ];
 
-  Widget buildApp({
-    VoidCallback? onFinish,
-    VoidCallback? onSkip,
-  }) {
+  Widget buildApp({VoidCallback? onFinish, VoidCallback? onSkip}) {
     return MaterialApp(
       home: Scaffold(
         body: OnboardingCarousel(
@@ -80,8 +74,9 @@ void main() {
     expect(find.text('Get Started'), findsWidgets);
   });
 
-  testWidgets('calls onFinish when finish button is tapped on last page',
-      (tester) async {
+  testWidgets('calls onFinish when finish button is tapped on last page', (
+    tester,
+  ) async {
     bool finished = false;
     await tester.pumpWidget(buildApp(onFinish: () => finished = true));
 

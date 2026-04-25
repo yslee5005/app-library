@@ -57,9 +57,9 @@ class _DoctorReportScreenState extends State<DoctorReportScreen> {
         title: Text(
           '소아과 리포트',
           style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                color: AppColors.textPrimary,
-                fontWeight: FontWeight.w600,
-              ),
+            color: AppColors.textPrimary,
+            fontWeight: FontWeight.w600,
+          ),
         ),
       ),
       body: Column(
@@ -71,8 +71,10 @@ class _DoctorReportScreenState extends State<DoctorReportScreen> {
               onTap: _pickDateRange,
               child: Container(
                 width: double.infinity,
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 14,
+                ),
                 decoration: BoxDecoration(
                   color: AppColors.surface,
                   borderRadius: BorderRadius.circular(12),
@@ -83,19 +85,25 @@ class _DoctorReportScreenState extends State<DoctorReportScreen> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Icon(Icons.calendar_today_rounded,
-                        size: 18, color: AppColors.coral),
+                    const Icon(
+                      Icons.calendar_today_rounded,
+                      size: 18,
+                      color: AppColors.coral,
+                    ),
                     const SizedBox(width: 10),
                     Text(
                       '${_formatDate(_dateRange.start)} ~ ${_formatDate(_dateRange.end)}',
                       style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                            color: AppColors.textPrimary,
-                            fontWeight: FontWeight.w500,
-                          ),
+                        color: AppColors.textPrimary,
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
                     const SizedBox(width: 8),
-                    const Icon(Icons.keyboard_arrow_down_rounded,
-                        size: 20, color: AppColors.textHint),
+                    const Icon(
+                      Icons.keyboard_arrow_down_rounded,
+                      size: 20,
+                      color: AppColors.textHint,
+                    ),
                   ],
                 ),
               ),
@@ -159,10 +167,8 @@ class _DoctorReportScreenState extends State<DoctorReportScreen> {
                   icon: '⭐',
                   title: '마일스톤 달성',
                   items: const [
-                    _ReportItem(
-                        label: '사회적 미소', value: 'D+42 달성'),
-                    _ReportItem(
-                        label: '고개 돌리기', value: 'D+38 달성'),
+                    _ReportItem(label: '사회적 미소', value: 'D+42 달성'),
+                    _ReportItem(label: '고개 돌리기', value: 'D+38 달성'),
                     _ReportItem(label: '쿠잉 소리', value: 'D+35 달성'),
                   ],
                 ),
@@ -270,9 +276,9 @@ class _ReportCard extends StatelessWidget {
               Text(
                 title,
                 style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                      fontWeight: FontWeight.w600,
-                      color: AppColors.textPrimary,
-                    ),
+                  fontWeight: FontWeight.w600,
+                  color: AppColors.textPrimary,
+                ),
               ),
             ],
           ),
@@ -290,17 +296,17 @@ class _ReportCard extends StatelessWidget {
                     child: Text(
                       item.label,
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                            color: AppColors.textSecondary,
-                          ),
+                        color: AppColors.textSecondary,
+                      ),
                     ),
                   ),
                   Expanded(
                     child: Text(
                       item.value,
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                            color: AppColors.textPrimary,
-                            fontWeight: FontWeight.w500,
-                          ),
+                        color: AppColors.textPrimary,
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
                   ),
                 ],

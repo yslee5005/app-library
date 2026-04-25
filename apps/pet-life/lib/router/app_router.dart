@@ -24,27 +24,26 @@ class AppRouter {
         routes: [
           GoRoute(
             path: '/home',
-            pageBuilder: (context, state) => const NoTransitionPage(
-              child: HomeView(),
-            ),
+            pageBuilder:
+                (context, state) => const NoTransitionPage(child: HomeView()),
           ),
           GoRoute(
             path: '/analysis',
-            pageBuilder: (context, state) => const NoTransitionPage(
-              child: AnalysisView(),
-            ),
+            pageBuilder:
+                (context, state) =>
+                    const NoTransitionPage(child: AnalysisView()),
           ),
           GoRoute(
             path: '/records',
-            pageBuilder: (context, state) => const NoTransitionPage(
-              child: RecordsView(),
-            ),
+            pageBuilder:
+                (context, state) =>
+                    const NoTransitionPage(child: RecordsView()),
           ),
           GoRoute(
             path: '/settings',
-            pageBuilder: (context, state) => const NoTransitionPage(
-              child: SettingsView(),
-            ),
+            pageBuilder:
+                (context, state) =>
+                    const NoTransitionPage(child: SettingsView()),
           ),
         ],
       ),

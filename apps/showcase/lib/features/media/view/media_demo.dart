@@ -19,40 +19,52 @@ class MediaDemo extends StatelessWidget {
             title: const Text('AppCachedImage'),
             subtitle: const Text('Cached image grid with placeholders'),
             trailing: const Icon(Icons.chevron_right),
-            onTap: () => Navigator.push(
-              context,
-              MaterialPageRoute<void>(builder: (_) => const AppCachedImageDemo()),
-            ),
+            onTap:
+                () => Navigator.push(
+                  context,
+                  MaterialPageRoute<void>(
+                    builder: (_) => const AppCachedImageDemo(),
+                  ),
+                ),
           ),
           ListTile(
             leading: const Icon(Icons.view_carousel),
             title: const Text('ImageCarousel'),
             subtitle: const Text('Swipeable image slider'),
             trailing: const Icon(Icons.chevron_right),
-            onTap: () => Navigator.push(
-              context,
-              MaterialPageRoute<void>(builder: (_) => const ImageCarouselDemo()),
-            ),
+            onTap:
+                () => Navigator.push(
+                  context,
+                  MaterialPageRoute<void>(
+                    builder: (_) => const ImageCarouselDemo(),
+                  ),
+                ),
           ),
           ListTile(
             leading: const Icon(Icons.account_circle),
             title: const Text('AppAvatar'),
             subtitle: const Text('Avatar sizes: sm, md, lg with initials'),
             trailing: const Icon(Icons.chevron_right),
-            onTap: () => Navigator.push(
-              context,
-              MaterialPageRoute<void>(builder: (_) => const AppAvatarDemo()),
-            ),
+            onTap:
+                () => Navigator.push(
+                  context,
+                  MaterialPageRoute<void>(
+                    builder: (_) => const AppAvatarDemo(),
+                  ),
+                ),
           ),
           ListTile(
             leading: const Icon(Icons.expand_more),
             title: const Text('ExpandableText'),
             subtitle: const Text('Show more/less text'),
             trailing: const Icon(Icons.chevron_right),
-            onTap: () => Navigator.push(
-              context,
-              MaterialPageRoute<void>(builder: (_) => const ExpandableTextDemo()),
-            ),
+            onTap:
+                () => Navigator.push(
+                  context,
+                  MaterialPageRoute<void>(
+                    builder: (_) => const ExpandableTextDemo(),
+                  ),
+                ),
           ),
         ],
       ),

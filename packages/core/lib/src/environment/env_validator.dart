@@ -115,8 +115,9 @@ final class EnvValidationException implements Exception {
       parts.add('Empty: ${empty.join(', ')}');
     }
     if (formatErrors.isNotEmpty) {
-      final formatted =
-          formatErrors.entries.map((e) => '${e.key}: ${e.value}').join(', ');
+      final formatted = formatErrors.entries
+          .map((e) => '${e.key}: ${e.value}')
+          .join(', ');
       parts.add('Invalid format: $formatted');
     }
 

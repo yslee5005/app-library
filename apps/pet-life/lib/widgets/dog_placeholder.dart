@@ -17,11 +17,7 @@ class DogPlaceholder extends StatelessWidget {
         color: AppConfig.accentColor.withValues(alpha: 0.2),
         borderRadius: BorderRadius.circular(size / 2),
       ),
-      child: Icon(
-        Icons.pets,
-        size: size * 0.4,
-        color: AppConfig.accentColor,
-      ),
+      child: Icon(Icons.pets, size: size * 0.4, color: AppConfig.accentColor),
     );
   }
 }

@@ -14,12 +14,13 @@ class ConsoleOutput implements LogOutput {
   @override
   void write(LogEntry entry) {
     final icon = _levelIcon(entry.level);
-    final buffer = StringBuffer()
-      ..write(icon)
-      ..write(' ')
-      ..write(entry.prefix)
-      ..write(' ')
-      ..write(entry.message);
+    final buffer =
+        StringBuffer()
+          ..write(icon)
+          ..write(' ')
+          ..write(entry.prefix)
+          ..write(' ')
+          ..write(entry.message);
 
     if (entry.error != null) {
       buffer
@@ -41,9 +42,9 @@ class ConsoleOutput implements LogOutput {
   }
 
   static String _levelIcon(LogLevel level) => switch (level) {
-        LogLevel.debug => '\u{1F535}',  // 🔵
-        LogLevel.info => '\u{1F7E2}',   // 🟢
-        LogLevel.warning => '\u{1F7E1}', // 🟡
-        LogLevel.error => '\u{1F534}',   // 🔴
-      };
+    LogLevel.debug => '\u{1F535}', // 🔵
+    LogLevel.info => '\u{1F7E2}', // 🟢
+    LogLevel.warning => '\u{1F7E1}', // 🟡
+    LogLevel.error => '\u{1F534}', // 🔴
+  };
 }

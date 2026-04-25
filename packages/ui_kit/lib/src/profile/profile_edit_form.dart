@@ -61,10 +61,7 @@ class _ProfileEditFormState extends State<ProfileEditForm> {
 
   void _submit() {
     if (_formKey.currentState?.validate() ?? false) {
-      widget.onSave(
-        _nameController.text.trim(),
-        _bioController.text.trim(),
-      );
+      widget.onSave(_nameController.text.trim(), _bioController.text.trim());
     }
   }
 
@@ -86,75 +83,78 @@ class _ProfileEditFormState extends State<ProfileEditForm> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-          // Avatar picker
-          Center(
-            child: GestureDetector(
-              onTap: widget.onAvatarTap,
-              child: Stack(
-                children: [
-                  CircleAvatar(
-                    radius: 48,
-                    backgroundImage: widget.avatarUrl != null
-                        ? NetworkImage(widget.avatarUrl!)
-                        : null,
-                    child: widget.avatarUrl == null
-                        ? const Icon(Icons.person, size: 48)
-                        : null,
-                  ),
-                  Positioned(
-                    bottom: 0,
-                    right: 0,
-                    child: CircleAvatar(
-                      radius: 16,
-                      backgroundColor: theme.colorScheme.primary,
-                      child: Icon(
-                        Icons.camera_alt,
-                        size: 16,
-                        color: theme.colorScheme.onPrimary,
+            // Avatar picker
+            Center(
+              child: GestureDetector(
+                onTap: widget.onAvatarTap,
+                child: Stack(
+                  children: [
+                    CircleAvatar(
+                      radius: 48,
+                      backgroundImage:
+                          widget.avatarUrl != null
+                              ? NetworkImage(widget.avatarUrl!)
+                              : null,
+                      child:
+                          widget.avatarUrl == null
+                              ? const Icon(Icons.person, size: 48)
+                              : null,
+                    ),
+                    Positioned(
+                      bottom: 0,
+                      right: 0,
+                      child: CircleAvatar(
+                        radius: 16,
+                        backgroundColor: theme.colorScheme.primary,
+                        child: Icon(
+                          Icons.camera_alt,
+                          size: 16,
+                          color: theme.colorScheme.onPrimary,
+                        ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
-          ),
-          SizedBox(height: widget.spacing ?? AppSpacing.lg),
+            SizedBox(height: widget.spacing ?? AppSpacing.lg),
 
-          // Name
-          TextFormField(
-            controller: _nameController,
-            decoration: InputDecoration(labelText: widget.nameLabel),
-            textInputAction: TextInputAction.next,
-            validator: (value) {
-              if (value == null || value.trim().isEmpty) {
-                return '${widget.nameLabel} is required';
-              }
-              return null;
-            },
-          ),
-          SizedBox(height: widget.spacing ?? AppSpacing.md),
+            // Name
+            TextFormField(
+              controller: _nameController,
+              decoration: InputDecoration(labelText: widget.nameLabel),
+              textInputAction: TextInputAction.next,
+              validator: (value) {
+                if (value == null || value.trim().isEmpty) {
+                  return '${widget.nameLabel} is required';
+                }
+                return null;
+              },
+            ),
+            SizedBox(height: widget.spacing ?? AppSpacing.md),
 
-          // Bio
-          TextFormField(
-            controller: _bioController,
-            decoration: InputDecoration(labelText: widget.bioLabel),
-            maxLines: 3,
-            textInputAction: TextInputAction.done,
-          ),
-          SizedBox(height: widget.spacing ?? AppSpacing.lg),
+            // Bio
+            TextFormField(
+              controller: _bioController,
+              decoration: InputDecoration(labelText: widget.bioLabel),
+              maxLines: 3,
+              textInputAction: TextInputAction.done,
+            ),
+            SizedBox(height: widget.spacing ?? AppSpacing.lg),
 
-          // Save button
-          FilledButton(
-            onPressed: widget.isLoading ? null : _submit,
-            child: widget.isLoading
-                ? const SizedBox(
-                    height: 20,
-                    width: 20,
-                    child: CircularProgressIndicator(strokeWidth: 2),
-                  )
-                : Text(widget.saveLabel),
-          ),
-        ],
+            // Save button
+            FilledButton(
+              onPressed: widget.isLoading ? null : _submit,
+              child:
+                  widget.isLoading
+                      ? const SizedBox(
+                        height: 20,
+                        width: 20,
+                        child: CircularProgressIndicator(strokeWidth: 2),
+                      )
+                      : Text(widget.saveLabel),
+            ),
+          ],
         ),
       ),
     );

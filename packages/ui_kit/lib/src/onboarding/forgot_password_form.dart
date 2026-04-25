@@ -62,45 +62,46 @@ class _ForgotPasswordFormState extends State<ForgotPasswordForm> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-          if (widget.description != null) ...[
-            Text(
-              widget.description!,
-              style: theme.textTheme.bodyMedium?.copyWith(
-                color: theme.colorScheme.onSurfaceVariant,
+            if (widget.description != null) ...[
+              Text(
+                widget.description!,
+                style: theme.textTheme.bodyMedium?.copyWith(
+                  color: theme.colorScheme.onSurfaceVariant,
+                ),
               ),
+              SizedBox(height: widget.spacing ?? AppSpacing.lg),
+            ],
+
+            // Email
+            TextFormField(
+              controller: _emailController,
+              decoration: InputDecoration(labelText: widget.emailLabel),
+              keyboardType: TextInputType.emailAddress,
+              autofillHints: const [AutofillHints.email],
+              textInputAction: TextInputAction.done,
+              onFieldSubmitted: (_) => _submit(),
+              validator: (value) {
+                if (value == null || value.trim().isEmpty) {
+                  return '${widget.emailLabel} is required';
+                }
+                return null;
+              },
             ),
             SizedBox(height: widget.spacing ?? AppSpacing.lg),
+
+            // Submit button
+            FilledButton(
+              onPressed: widget.isLoading ? null : _submit,
+              child:
+                  widget.isLoading
+                      ? const SizedBox(
+                        height: 20,
+                        width: 20,
+                        child: CircularProgressIndicator(strokeWidth: 2),
+                      )
+                      : Text(widget.submitLabel),
+            ),
           ],
-
-          // Email
-          TextFormField(
-            controller: _emailController,
-            decoration: InputDecoration(labelText: widget.emailLabel),
-            keyboardType: TextInputType.emailAddress,
-            autofillHints: const [AutofillHints.email],
-            textInputAction: TextInputAction.done,
-            onFieldSubmitted: (_) => _submit(),
-            validator: (value) {
-              if (value == null || value.trim().isEmpty) {
-                return '${widget.emailLabel} is required';
-              }
-              return null;
-            },
-          ),
-          SizedBox(height: widget.spacing ?? AppSpacing.lg),
-
-          // Submit button
-          FilledButton(
-            onPressed: widget.isLoading ? null : _submit,
-            child: widget.isLoading
-                ? const SizedBox(
-                    height: 20,
-                    width: 20,
-                    child: CircularProgressIndicator(strokeWidth: 2),
-                  )
-                : Text(widget.submitLabel),
-          ),
-        ],
         ),
       ),
     );

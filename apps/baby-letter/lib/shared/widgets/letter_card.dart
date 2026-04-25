@@ -20,9 +20,7 @@ class LetterCard extends StatelessWidget {
         decoration: BoxDecoration(
           color: AppColors.letterCard,
           borderRadius: BorderRadius.circular(16),
-          border: Border.all(
-            color: AppColors.amber.withValues(alpha: 0.3),
-          ),
+          border: Border.all(color: AppColors.amber.withValues(alpha: 0.3)),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -33,9 +31,9 @@ class LetterCard extends StatelessWidget {
                 const SizedBox(width: 8),
                 Text(
                   '아기의 편지',
-                  style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                    color: AppColors.coralDark,
-                  ),
+                  style: Theme.of(
+                    context,
+                  ).textTheme.labelLarge?.copyWith(color: AppColors.coralDark),
                 ),
                 const Spacer(),
                 Icon(

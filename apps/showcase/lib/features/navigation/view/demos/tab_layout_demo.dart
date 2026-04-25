@@ -15,9 +15,8 @@ class TabLayoutDemo extends StatelessWidget {
             icon: Icons.access_time,
             body: ListView.builder(
               itemCount: 10,
-              itemBuilder: (context, i) => ListTile(
-                title: Text('Recent item ${i + 1}'),
-              ),
+              itemBuilder:
+                  (context, i) => ListTile(title: Text('Recent item ${i + 1}')),
             ),
           ),
           AppTab(
@@ -25,10 +24,11 @@ class TabLayoutDemo extends StatelessWidget {
             icon: Icons.favorite,
             body: ListView.builder(
               itemCount: 5,
-              itemBuilder: (context, i) => ListTile(
-                leading: const Icon(Icons.star, color: Colors.amber),
-                title: Text('Favorite ${i + 1}'),
-              ),
+              itemBuilder:
+                  (context, i) => ListTile(
+                    leading: const Icon(Icons.star, color: Colors.amber),
+                    title: Text('Favorite ${i + 1}'),
+                  ),
             ),
           ),
           AppTab(

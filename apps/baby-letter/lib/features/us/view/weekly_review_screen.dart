@@ -78,15 +78,9 @@ class WeeklyReviewScreen extends StatelessWidget {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              _LegendDot(
-                                color: AppColors.coral,
-                                label: '엄마',
-                              ),
+                              _LegendDot(color: AppColors.coral, label: '엄마'),
                               const SizedBox(width: 20),
-                              _LegendDot(
-                                color: AppColors.info,
-                                label: '아빠',
-                              ),
+                              _LegendDot(color: AppColors.info, label: '아빠'),
                             ],
                           ),
                           const SizedBox(height: 20),
@@ -126,10 +120,8 @@ class WeeklyReviewScreen extends StatelessWidget {
                           const SizedBox(height: 8),
                           Text(
                             'EPDS 점수 추이 (낮을수록 양호)',
-                            style:
-                                Theme.of(context).textTheme.labelSmall?.copyWith(
-                                      color: AppColors.textHint,
-                                    ),
+                            style: Theme.of(context).textTheme.labelSmall
+                                ?.copyWith(color: AppColors.textHint),
                           ),
                         ],
                       ),
@@ -161,9 +153,7 @@ class WeeklyReviewScreen extends StatelessWidget {
                               children: [
                                 Text(
                                   '매일 기록을 빠짐없이 했어요!',
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .titleSmall
+                                  style: Theme.of(context).textTheme.titleSmall
                                       ?.copyWith(
                                         color: AppColors.textPrimary,
                                         fontWeight: FontWeight.w600,
@@ -172,9 +162,7 @@ class WeeklyReviewScreen extends StatelessWidget {
                                 const SizedBox(height: 4),
                                 Text(
                                   '7일 연속 기록 달성! 꾸준함이 대단해요.',
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .bodySmall
+                                  style: Theme.of(context).textTheme.bodySmall
                                       ?.copyWith(
                                         color: AppColors.textSecondary,
                                         height: 1.4,
@@ -271,9 +259,9 @@ class _SectionTitle extends StatelessWidget {
         Text(
           title,
           style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                color: AppColors.textPrimary,
-                fontWeight: FontWeight.w700,
-              ),
+            color: AppColors.textPrimary,
+            fontWeight: FontWeight.w700,
+          ),
         ),
       ],
     );
@@ -326,25 +314,25 @@ class _HighlightCard extends StatelessWidget {
                 Text(
                   title,
                   style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                        color: AppColors.textSecondary,
-                      ),
+                    color: AppColors.textSecondary,
+                  ),
                 ),
                 const SizedBox(height: 2),
                 Text(
                   value,
                   style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                        color: AppColors.textPrimary,
-                        fontWeight: FontWeight.w600,
-                      ),
+                    color: AppColors.textPrimary,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
               ],
             ),
           ),
           Text(
             subtitle,
-            style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                  color: AppColors.textHint,
-                ),
+            style: Theme.of(
+              context,
+            ).textTheme.labelSmall?.copyWith(color: AppColors.textHint),
           ),
         ],
       ),
@@ -367,17 +355,14 @@ class _LegendDot extends StatelessWidget {
         Container(
           width: 10,
           height: 10,
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            color: color,
-          ),
+          decoration: BoxDecoration(shape: BoxShape.circle, color: color),
         ),
         const SizedBox(width: 6),
         Text(
           label,
-          style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                color: AppColors.textSecondary,
-              ),
+          style: Theme.of(
+            context,
+          ).textTheme.labelSmall?.copyWith(color: AppColors.textSecondary),
         ),
       ],
     );
@@ -439,11 +424,10 @@ class _WeekColumn extends StatelessWidget {
         Text(
           label,
           style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                color:
-                    isCurrent ? AppColors.textPrimary : AppColors.textHint,
-                fontWeight: isCurrent ? FontWeight.w600 : FontWeight.normal,
-                fontSize: 10,
-              ),
+            color: isCurrent ? AppColors.textPrimary : AppColors.textHint,
+            fontWeight: isCurrent ? FontWeight.w600 : FontWeight.normal,
+            fontSize: 10,
+          ),
         ),
       ],
     );
@@ -494,16 +478,16 @@ class _UpcomingCard extends StatelessWidget {
                 Text(
                   title,
                   style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                        color: AppColors.textPrimary,
-                        fontWeight: FontWeight.w600,
-                      ),
+                    color: AppColors.textPrimary,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
                 const SizedBox(height: 2),
                 Text(
                   subtitle,
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        color: AppColors.textSecondary,
-                      ),
+                    color: AppColors.textSecondary,
+                  ),
                 ),
               ],
             ),

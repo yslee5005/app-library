@@ -34,8 +34,8 @@ class _GrowthPostnatalViewState extends State<GrowthPostnatalView> {
                     Text(
                       '👶 콩이 · D+45',
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                            color: AppColors.textSecondary,
-                          ),
+                        color: AppColors.textSecondary,
+                      ),
                     ),
                   ],
                 ),
@@ -59,13 +59,17 @@ class _GrowthPostnatalViewState extends State<GrowthPostnatalView> {
                       setState(() => _selectedTab = set.first);
                     },
                     style: ButtonStyle(
-                      backgroundColor: WidgetStateProperty.resolveWith((states) {
+                      backgroundColor: WidgetStateProperty.resolveWith((
+                        states,
+                      ) {
                         if (states.contains(WidgetState.selected)) {
                           return AppColors.coral;
                         }
                         return AppColors.surface;
                       }),
-                      foregroundColor: WidgetStateProperty.resolveWith((states) {
+                      foregroundColor: WidgetStateProperty.resolveWith((
+                        states,
+                      ) {
                         if (states.contains(WidgetState.selected)) {
                           return Colors.white;
                         }
@@ -125,17 +129,13 @@ class _GrowthPostnatalViewState extends State<GrowthPostnatalView> {
                         children: [
                           Text(
                             '콩이',
-                            style: Theme.of(context)
-                                .textTheme
-                                .titleLarge
+                            style: Theme.of(context).textTheme.titleLarge
                                 ?.copyWith(fontWeight: FontWeight.w700),
                           ),
                           const SizedBox(height: 2),
                           Text(
                             '남아 · D+45',
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodyMedium
+                            style: Theme.of(context).textTheme.bodyMedium
                                 ?.copyWith(color: AppColors.textSecondary),
                           ),
                         ],
@@ -191,8 +191,8 @@ class _GrowthPostnatalViewState extends State<GrowthPostnatalView> {
                 Text(
                   '이번 주 요약',
                   style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                        fontWeight: FontWeight.w600,
-                      ),
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
                 const SizedBox(height: 16),
                 _SummaryRow(
@@ -239,27 +239,15 @@ class _GrowthPostnatalViewState extends State<GrowthPostnatalView> {
                 Text(
                   '최근 마일스톤',
                   style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                        fontWeight: FontWeight.w600,
-                      ),
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
                 const SizedBox(height: 16),
-                _MilestoneRow(
-                  achieved: true,
-                  label: '사회적 미소',
-                  detail: 'D+42',
-                ),
+                _MilestoneRow(achieved: true, label: '사회적 미소', detail: 'D+42'),
                 const SizedBox(height: 10),
-                _MilestoneRow(
-                  achieved: true,
-                  label: '고개 돌리기',
-                  detail: 'D+38',
-                ),
+                _MilestoneRow(achieved: true, label: '고개 돌리기', detail: 'D+38'),
                 const SizedBox(height: 10),
-                _MilestoneRow(
-                  achieved: false,
-                  label: '옹알이',
-                  detail: '예상 D+60',
-                ),
+                _MilestoneRow(achieved: false, label: '옹알이', detail: '예상 D+60'),
               ],
             ),
           ),
@@ -291,9 +279,9 @@ class _GrowthPostnatalViewState extends State<GrowthPostnatalView> {
                   const SizedBox(height: 8),
                   Text(
                     '미니 성장 차트',
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          color: AppColors.textHint,
-                        ),
+                    style: Theme.of(
+                      context,
+                    ).textTheme.bodyMedium?.copyWith(color: AppColors.textHint),
                   ),
                 ],
               ),
@@ -310,9 +298,9 @@ class _GrowthPostnatalViewState extends State<GrowthPostnatalView> {
         child: Center(
           child: Text(
             '성장 차트가 여기에 표시됩니다',
-            style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                  color: AppColors.textHint,
-                ),
+            style: Theme.of(
+              context,
+            ).textTheme.bodyLarge?.copyWith(color: AppColors.textHint),
           ),
         ),
       ),
@@ -325,9 +313,9 @@ class _GrowthPostnatalViewState extends State<GrowthPostnatalView> {
         child: Center(
           child: Text(
             '마일스톤이 여기에 표시됩니다',
-            style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                  color: AppColors.textHint,
-                ),
+            style: Theme.of(
+              context,
+            ).textTheme.bodyLarge?.copyWith(color: AppColors.textHint),
           ),
         ),
       ),
@@ -352,9 +340,9 @@ class _Badge extends StatelessWidget {
       child: Text(
         label,
         style: Theme.of(context).textTheme.labelMedium?.copyWith(
-              color: color,
-              fontWeight: FontWeight.w600,
-            ),
+          color: color,
+          fontWeight: FontWeight.w600,
+        ),
       ),
     );
   }
@@ -382,9 +370,9 @@ class _SummaryRow extends StatelessWidget {
         Expanded(
           child: Text(
             label,
-            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  color: AppColors.textSecondary,
-                ),
+            style: Theme.of(
+              context,
+            ).textTheme.bodyMedium?.copyWith(color: AppColors.textSecondary),
           ),
         ),
         Container(
@@ -396,9 +384,9 @@ class _SummaryRow extends StatelessWidget {
           child: Text(
             value,
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  color: color,
-                  fontWeight: FontWeight.w600,
-                ),
+              color: color,
+              fontWeight: FontWeight.w600,
+            ),
           ),
         ),
       ],
@@ -421,24 +409,21 @@ class _MilestoneRow extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Text(
-          achieved ? '✅' : '⬜',
-          style: const TextStyle(fontSize: 18),
-        ),
+        Text(achieved ? '✅' : '⬜', style: const TextStyle(fontSize: 18)),
         const SizedBox(width: 12),
         Expanded(
           child: Text(
             label,
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  color: achieved ? AppColors.textPrimary : AppColors.textHint,
-                ),
+              color: achieved ? AppColors.textPrimary : AppColors.textHint,
+            ),
           ),
         ),
         Text(
           detail,
-          style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                color: AppColors.textSecondary,
-              ),
+          style: Theme.of(
+            context,
+          ).textTheme.bodySmall?.copyWith(color: AppColors.textSecondary),
         ),
       ],
     );

@@ -16,9 +16,8 @@ class ImageCarouselDemo extends StatelessWidget {
               return Container(
                 margin: const EdgeInsets.symmetric(horizontal: 8),
                 decoration: BoxDecoration(
-                  color:
-                      Colors.primaries[(index * 3) % Colors.primaries.length]
-                          .withValues(alpha: 0.4),
+                  color: Colors.primaries[(index * 3) % Colors.primaries.length]
+                      .withValues(alpha: 0.4),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Center(

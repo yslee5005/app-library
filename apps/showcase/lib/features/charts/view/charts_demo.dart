@@ -18,30 +18,37 @@ class ChartsDemo extends StatelessWidget {
             title: const Text('StatCard'),
             subtitle: const Text('Stat cards with trend indicators'),
             trailing: const Icon(Icons.chevron_right),
-            onTap: () => Navigator.push(
-              context,
-              MaterialPageRoute<void>(builder: (_) => const StatCardDemo()),
-            ),
+            onTap:
+                () => Navigator.push(
+                  context,
+                  MaterialPageRoute<void>(builder: (_) => const StatCardDemo()),
+                ),
           ),
           ListTile(
             leading: const Icon(Icons.linear_scale),
             title: const Text('AppProgressBar'),
             subtitle: const Text('Linear and circular progress indicators'),
             trailing: const Icon(Icons.chevron_right),
-            onTap: () => Navigator.push(
-              context,
-              MaterialPageRoute<void>(builder: (_) => const AppProgressBarDemo()),
-            ),
+            onTap:
+                () => Navigator.push(
+                  context,
+                  MaterialPageRoute<void>(
+                    builder: (_) => const AppProgressBarDemo(),
+                  ),
+                ),
           ),
           ListTile(
             leading: const Icon(Icons.calendar_view_month),
             title: const Text('HeatmapCalendar'),
             subtitle: const Text('GitHub-style activity heatmap'),
             trailing: const Icon(Icons.chevron_right),
-            onTap: () => Navigator.push(
-              context,
-              MaterialPageRoute<void>(builder: (_) => const HeatmapCalendarDemo()),
-            ),
+            onTap:
+                () => Navigator.push(
+                  context,
+                  MaterialPageRoute<void>(
+                    builder: (_) => const HeatmapCalendarDemo(),
+                  ),
+                ),
           ),
         ],
       ),

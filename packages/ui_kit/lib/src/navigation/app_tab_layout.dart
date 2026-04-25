@@ -2,11 +2,7 @@ import 'package:flutter/material.dart';
 
 /// A single tab entry for [AppTabLayout].
 class AppTab {
-  const AppTab({
-    required this.label,
-    required this.body,
-    this.icon,
-  });
+  const AppTab({required this.label, required this.body, this.icon});
 
   /// Tab label.
   final String label;
@@ -68,19 +64,18 @@ class AppTabLayout extends StatelessWidget {
             indicatorColor: indicatorColor,
             labelColor: labelColor,
             unselectedLabelColor: unselectedLabelColor,
-            tabs: tabs
-                .map(
-                  (tab) => Tab(
-                    text: tab.label,
-                    icon: tab.icon != null ? Icon(tab.icon) : null,
-                  ),
-                )
-                .toList(),
+            tabs:
+                tabs
+                    .map(
+                      (tab) => Tab(
+                        text: tab.label,
+                        icon: tab.icon != null ? Icon(tab.icon) : null,
+                      ),
+                    )
+                    .toList(),
           ),
           Expanded(
-            child: TabBarView(
-              children: tabs.map((tab) => tab.body).toList(),
-            ),
+            child: TabBarView(children: tabs.map((tab) => tab.body).toList()),
           ),
         ],
       ),

@@ -18,10 +18,30 @@ void main() {
         birthDate: DateTime.now().subtract(const Duration(days: 2555)),
         weightKg: 30.0,
         routines: [
-          const DailyRoutine(id: 'walk_am', name: '아침 산책', icon: Icons.wb_sunny_outlined, category: 'walk'),
-          const DailyRoutine(id: 'walk_pm', name: '저녁 산책', icon: Icons.nightlight_outlined, category: 'walk'),
-          const DailyRoutine(id: 'meal_am', name: '아침 식사', icon: Icons.restaurant_outlined, category: 'meal'),
-          const DailyRoutine(id: 'meal_pm', name: '저녁 식사', icon: Icons.dinner_dining_outlined, category: 'meal'),
+          const DailyRoutine(
+            id: 'walk_am',
+            name: '아침 산책',
+            icon: Icons.wb_sunny_outlined,
+            category: 'walk',
+          ),
+          const DailyRoutine(
+            id: 'walk_pm',
+            name: '저녁 산책',
+            icon: Icons.nightlight_outlined,
+            category: 'walk',
+          ),
+          const DailyRoutine(
+            id: 'meal_am',
+            name: '아침 식사',
+            icon: Icons.restaurant_outlined,
+            category: 'meal',
+          ),
+          const DailyRoutine(
+            id: 'meal_pm',
+            name: '저녁 식사',
+            icon: Icons.dinner_dining_outlined,
+            category: 'meal',
+          ),
         ],
         createdAt: DateTime.now(),
       );
@@ -112,10 +132,7 @@ void main() {
       );
 
       // Should be bored (walk missing 3+ days) or sad
-      expect(
-        [DogState.bored, DogState.sad].contains(result.state),
-        true,
-      );
+      expect([DogState.bored, DogState.sad].contains(result.state), true);
     });
 
     test('returns bored when walk not done for 3+ days', () async {
@@ -132,16 +149,14 @@ void main() {
           completed: true,
         ),
         // Recent meal to prevent generic "sad" from triggering first
-        DailyLog(
-          date: _dateStr(now),
-          routineId: 'meal_am',
-          completed: true,
-        ),
+        DailyLog(date: _dateStr(now), routineId: 'meal_am', completed: true),
       ];
 
       final result = await service.getDogState(
         profile: profile,
-        todayLogs: [DailyLog(date: _dateStr(now), routineId: 'meal_am', completed: true)],
+        todayLogs: [
+          DailyLog(date: _dateStr(now), routineId: 'meal_am', completed: true),
+        ],
         recentLogs: recentLogs,
         now: now,
       );
@@ -158,7 +173,12 @@ void main() {
         birthDate: DateTime.now().subtract(const Duration(days: 730)),
         weightKg: 30.0,
         routines: const [
-          DailyRoutine(id: 'meal_am', name: '식사', icon: Icons.restaurant, category: 'meal'),
+          DailyRoutine(
+            id: 'meal_am',
+            name: '식사',
+            icon: Icons.restaurant,
+            category: 'meal',
+          ),
         ],
         createdAt: DateTime.now(),
       );
@@ -170,7 +190,11 @@ void main() {
       ];
       final recentLogs = [
         ...todayLogs,
-        DailyLog(date: _dateStr(now.subtract(const Duration(days: 1))), routineId: 'meal_am', completed: true),
+        DailyLog(
+          date: _dateStr(now.subtract(const Duration(days: 1))),
+          routineId: 'meal_am',
+          completed: true,
+        ),
       ];
 
       final result = await service.getDogState(

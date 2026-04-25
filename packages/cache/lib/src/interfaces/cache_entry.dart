@@ -1,10 +1,7 @@
 /// A cached value with metadata for TTL-based expiration.
 class CacheEntry<T> {
-  CacheEntry({
-    required this.value,
-    required this.ttl,
-    DateTime? createdAt,
-  }) : createdAt = createdAt ?? DateTime.now();
+  CacheEntry({required this.value, required this.ttl, DateTime? createdAt})
+    : createdAt = createdAt ?? DateTime.now();
 
   /// The cached value.
   final T value;

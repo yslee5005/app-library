@@ -50,9 +50,7 @@ class EmailAuthService {
     required String password,
   }) async {
     try {
-      await _auth.updateUser(
-        UserAttributes(email: email, password: password),
-      );
+      await _auth.updateUser(UserAttributes(email: email, password: password));
       return const Result.success(null);
     } on AuthApiException catch (e, st) {
       return Result.failure(

@@ -53,9 +53,7 @@ class _LetterHistoryScreenState extends State<LetterHistoryScreen> {
 
     return Scaffold(
       backgroundColor: AppColors.cream,
-      appBar: AppBar(
-        title: const Text('아기의 편지 모음'),
-      ),
+      appBar: AppBar(title: const Text('아기의 편지 모음')),
       body: Column(
         children: [
           // 필터 칩
@@ -76,14 +74,16 @@ class _LetterHistoryScreenState extends State<LetterHistoryScreen> {
                     label: '임신',
                     selected: _currentFilter == _LetterFilter.pregnancy,
                     onSelected: () => setState(
-                        () => _currentFilter = _LetterFilter.pregnancy),
+                      () => _currentFilter = _LetterFilter.pregnancy,
+                    ),
                   ),
                   const SizedBox(width: 8),
                   _FilterChip(
                     label: '출산후',
                     selected: _currentFilter == _LetterFilter.postnatal,
                     onSelected: () => setState(
-                        () => _currentFilter = _LetterFilter.postnatal),
+                      () => _currentFilter = _LetterFilter.postnatal,
+                    ),
                   ),
                   const SizedBox(width: 8),
                   _FilterChip(
@@ -115,10 +115,9 @@ class _LetterHistoryScreenState extends State<LetterHistoryScreen> {
                       padding: const EdgeInsets.only(top: 16, bottom: 8),
                       child: Text(
                         '📅 $groupName',
-                        style:
-                            Theme.of(context).textTheme.labelLarge?.copyWith(
-                                  color: AppColors.textSecondary,
-                                ),
+                        style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                          color: AppColors.textSecondary,
+                        ),
                       ),
                     ),
 
@@ -181,9 +180,9 @@ class _FilterChip extends StatelessWidget {
         child: Text(
           label,
           style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                color: selected ? AppColors.coralDark : AppColors.textSecondary,
-                fontWeight: selected ? FontWeight.w600 : FontWeight.w400,
-              ),
+            color: selected ? AppColors.coralDark : AppColors.textSecondary,
+            fontWeight: selected ? FontWeight.w600 : FontWeight.w400,
+          ),
         ),
       ),
     );
@@ -236,10 +235,7 @@ class _LetterPreviewCard extends StatelessWidget {
                 borderRadius: BorderRadius.circular(12),
               ),
               child: Center(
-                child: Text(
-                  letter.emoji,
-                  style: const TextStyle(fontSize: 22),
-                ),
+                child: Text(letter.emoji, style: const TextStyle(fontSize: 22)),
               ),
             ),
             const SizedBox(width: 12),
@@ -253,19 +249,18 @@ class _LetterPreviewCard extends StatelessWidget {
                     children: [
                       Text(
                         _weekLabel,
-                        style:
-                            Theme.of(context).textTheme.labelMedium?.copyWith(
-                                  color: AppColors.coralDark,
-                                  fontWeight: FontWeight.w600,
-                                ),
+                        style: Theme.of(context).textTheme.labelMedium
+                            ?.copyWith(
+                              color: AppColors.coralDark,
+                              fontWeight: FontWeight.w600,
+                            ),
                       ),
                       const Spacer(),
                       Text(
                         letter.title,
-                        style:
-                            Theme.of(context).textTheme.labelSmall?.copyWith(
-                                  color: AppColors.textHint,
-                                ),
+                        style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                          color: AppColors.textHint,
+                        ),
                       ),
                     ],
                   ),
@@ -275,9 +270,9 @@ class _LetterPreviewCard extends StatelessWidget {
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                     style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          color: AppColors.textSecondary,
-                          height: 1.4,
-                        ),
+                      color: AppColors.textSecondary,
+                      height: 1.4,
+                    ),
                   ),
                 ],
               ),

@@ -29,9 +29,7 @@ class AppTheme {
       cardTheme: CardThemeData(
         color: AppColors.surface,
         elevation: 0,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         shadowColor: AppColors.textPrimary.withValues(alpha: 0.08),
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
@@ -68,21 +66,25 @@ class AppTheme {
         fillColor: AppColors.surface,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: BorderSide(color: AppColors.textHint.withValues(alpha: 0.3)),
+          borderSide: BorderSide(
+            color: AppColors.textHint.withValues(alpha: 0.3),
+          ),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: BorderSide(color: AppColors.textHint.withValues(alpha: 0.3)),
+          borderSide: BorderSide(
+            color: AppColors.textHint.withValues(alpha: 0.3),
+          ),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
           borderSide: const BorderSide(color: AppColors.coral, width: 2),
         ),
-        contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-        hintStyle: GoogleFonts.inter(
-          color: AppColors.textHint,
-          fontSize: 14,
+        contentPadding: const EdgeInsets.symmetric(
+          horizontal: 16,
+          vertical: 14,
         ),
+        hintStyle: GoogleFonts.inter(color: AppColors.textHint, fontSize: 14),
       ),
       bottomNavigationBarTheme: const BottomNavigationBarThemeData(
         backgroundColor: AppColors.surface,
@@ -106,9 +108,7 @@ class AppTheme {
         backgroundColor: AppColors.surface,
         selectedColor: AppColors.coralLight,
         labelStyle: GoogleFonts.inter(fontSize: 14),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         side: BorderSide(color: AppColors.textHint.withValues(alpha: 0.3)),
       ),
       progressIndicatorTheme: const ProgressIndicatorThemeData(

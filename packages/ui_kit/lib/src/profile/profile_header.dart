@@ -60,14 +60,15 @@ class ProfileHeader extends StatelessWidget {
             radius: avatarRadius,
             backgroundImage:
                 avatarUrl != null ? NetworkImage(avatarUrl!) : null,
-            child: avatarUrl == null
-                ? Text(
-                    displayName.isNotEmpty
-                        ? displayName[0].toUpperCase()
-                        : '?',
-                    style: theme.textTheme.headlineLarge,
-                  )
-                : null,
+            child:
+                avatarUrl == null
+                    ? Text(
+                      displayName.isNotEmpty
+                          ? displayName[0].toUpperCase()
+                          : '?',
+                      style: theme.textTheme.headlineLarge,
+                    )
+                    : null,
           ),
         ),
         SizedBox(height: spacing ?? AppSpacing.md),
@@ -92,27 +93,29 @@ class ProfileHeader extends StatelessWidget {
           SizedBox(height: spacing ?? AppSpacing.md),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: stats.map((stat) {
-              return Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: AppSpacing.md),
-                child: Column(
-                  children: [
-                    Text(
-                      stat.count.toString(),
-                      style: theme.textTheme.titleMedium,
+            children:
+                stats.map((stat) {
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: AppSpacing.md,
                     ),
-                    const SizedBox(height: AppSpacing.xs),
-                    Text(
-                      stat.label,
-                      style: theme.textTheme.bodySmall?.copyWith(
-                        color: colorScheme.onSurfaceVariant,
-                      ),
+                    child: Column(
+                      children: [
+                        Text(
+                          stat.count.toString(),
+                          style: theme.textTheme.titleMedium,
+                        ),
+                        const SizedBox(height: AppSpacing.xs),
+                        Text(
+                          stat.label,
+                          style: theme.textTheme.bodySmall?.copyWith(
+                            color: colorScheme.onSurfaceVariant,
+                          ),
+                        ),
+                      ],
                     ),
-                  ],
-                ),
-              );
-            }).toList(),
+                  );
+                }).toList(),
           ),
         ],
       ],

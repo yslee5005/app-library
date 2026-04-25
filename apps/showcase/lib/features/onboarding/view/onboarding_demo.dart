@@ -19,44 +19,52 @@ class OnboardingDemo extends StatelessWidget {
             title: const Text('OnboardingCarousel'),
             subtitle: const Text('Swipeable pages with indicator'),
             trailing: const Icon(Icons.chevron_right),
-            onTap: () => Navigator.push(
-              context,
-              MaterialPageRoute<void>(
-                builder: (_) => const OnboardingCarouselDemo(),
-              ),
-            ),
+            onTap:
+                () => Navigator.push(
+                  context,
+                  MaterialPageRoute<void>(
+                    builder: (_) => const OnboardingCarouselDemo(),
+                  ),
+                ),
           ),
           ListTile(
             leading: const Icon(Icons.login),
             title: const Text('LoginForm'),
             subtitle: const Text('Email + password + social login'),
             trailing: const Icon(Icons.chevron_right),
-            onTap: () => Navigator.push(
-              context,
-              MaterialPageRoute<void>(builder: (_) => const LoginFormDemo()),
-            ),
+            onTap:
+                () => Navigator.push(
+                  context,
+                  MaterialPageRoute<void>(
+                    builder: (_) => const LoginFormDemo(),
+                  ),
+                ),
           ),
           ListTile(
             leading: const Icon(Icons.person_add),
             title: const Text('SignUpForm'),
             subtitle: const Text('Name, email, password registration'),
             trailing: const Icon(Icons.chevron_right),
-            onTap: () => Navigator.push(
-              context,
-              MaterialPageRoute<void>(builder: (_) => const SignUpFormDemo()),
-            ),
+            onTap:
+                () => Navigator.push(
+                  context,
+                  MaterialPageRoute<void>(
+                    builder: (_) => const SignUpFormDemo(),
+                  ),
+                ),
           ),
           ListTile(
             leading: const Icon(Icons.lock_reset),
             title: const Text('ForgotPasswordForm'),
             subtitle: const Text('Email-based password reset'),
             trailing: const Icon(Icons.chevron_right),
-            onTap: () => Navigator.push(
-              context,
-              MaterialPageRoute<void>(
-                builder: (_) => const ForgotPasswordFormDemo(),
-              ),
-            ),
+            onTap:
+                () => Navigator.push(
+                  context,
+                  MaterialPageRoute<void>(
+                    builder: (_) => const ForgotPasswordFormDemo(),
+                  ),
+                ),
           ),
         ],
       ),

@@ -20,52 +20,65 @@ class ProfileDemo extends StatelessWidget {
             title: const Text('ProfileHeader'),
             subtitle: const Text('Avatar, name, bio, and stats'),
             trailing: const Icon(Icons.chevron_right),
-            onTap: () => Navigator.push(
-              context,
-              MaterialPageRoute<void>(builder: (_) => const ProfileHeaderDemo()),
-            ),
+            onTap:
+                () => Navigator.push(
+                  context,
+                  MaterialPageRoute<void>(
+                    builder: (_) => const ProfileHeaderDemo(),
+                  ),
+                ),
           ),
           ListTile(
             leading: const Icon(Icons.edit),
             title: const Text('ProfileEditForm'),
             subtitle: const Text('Editable name and bio fields'),
             trailing: const Icon(Icons.chevron_right),
-            onTap: () => Navigator.push(
-              context,
-              MaterialPageRoute<void>(builder: (_) => const ProfileEditFormDemo()),
-            ),
+            onTap:
+                () => Navigator.push(
+                  context,
+                  MaterialPageRoute<void>(
+                    builder: (_) => const ProfileEditFormDemo(),
+                  ),
+                ),
           ),
           ListTile(
             leading: const Icon(Icons.settings),
             title: const Text('SettingsScreen'),
             subtitle: const Text('Grouped settings with toggles and nav'),
             trailing: const Icon(Icons.chevron_right),
-            onTap: () => Navigator.push(
-              context,
-              MaterialPageRoute<void>(builder: (_) => const SettingsScreenDemo()),
-            ),
+            onTap:
+                () => Navigator.push(
+                  context,
+                  MaterialPageRoute<void>(
+                    builder: (_) => const SettingsScreenDemo(),
+                  ),
+                ),
           ),
           ListTile(
             leading: const Icon(Icons.dark_mode),
             title: const Text('ThemeSwitchTile'),
             subtitle: const Text('Dark mode toggle tile'),
             trailing: const Icon(Icons.chevron_right),
-            onTap: () => Navigator.push(
-              context,
-              MaterialPageRoute<void>(builder: (_) => const ThemeSwitchTileDemo()),
-            ),
+            onTap:
+                () => Navigator.push(
+                  context,
+                  MaterialPageRoute<void>(
+                    builder: (_) => const ThemeSwitchTileDemo(),
+                  ),
+                ),
           ),
           ListTile(
             leading: const Icon(Icons.language),
             title: const Text('LanguagePickerTile'),
             subtitle: const Text('Language selector dropdown'),
             trailing: const Icon(Icons.chevron_right),
-            onTap: () => Navigator.push(
-              context,
-              MaterialPageRoute<void>(
-                builder: (_) => const LanguagePickerTileDemo(),
-              ),
-            ),
+            onTap:
+                () => Navigator.push(
+                  context,
+                  MaterialPageRoute<void>(
+                    builder: (_) => const LanguagePickerTileDemo(),
+                  ),
+                ),
           ),
         ],
       ),

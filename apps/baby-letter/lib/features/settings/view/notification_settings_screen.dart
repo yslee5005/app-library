@@ -41,9 +41,9 @@ class _NotificationSettingsScreenState
         ),
         title: Text(
           '알림 설정',
-          style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                color: AppColors.textPrimary,
-              ),
+          style: Theme.of(
+            context,
+          ).textTheme.titleMedium?.copyWith(color: AppColors.textPrimary),
         ),
       ),
       body: ListView(
@@ -102,10 +102,8 @@ class _NotificationSettingsScreenState
                         Expanded(
                           child: Text(
                             '끄지 않는 것을 권장합니다',
-                            style:
-                                Theme.of(context).textTheme.bodySmall?.copyWith(
-                                      color: AppColors.textPrimary,
-                                    ),
+                            style: Theme.of(context).textTheme.bodySmall
+                                ?.copyWith(color: AppColors.textPrimary),
                           ),
                         ),
                       ],
@@ -172,13 +170,7 @@ class _NotificationSettingsScreenState
                 ? _TimePicker(
                     label: '간격',
                     value: _recordInterval,
-                    options: const [
-                      '1시간',
-                      '2시간',
-                      '3시간',
-                      '4시간',
-                      '6시간',
-                    ],
+                    options: const ['1시간', '2시간', '3시간', '4시간', '6시간'],
                     onChanged: (v) => setState(() => _recordInterval = v),
                   )
                 : null,
@@ -223,9 +215,9 @@ class _NotificationCard extends StatelessWidget {
                 child: Text(
                   title,
                   style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                        color: AppColors.textPrimary,
-                        fontWeight: FontWeight.w600,
-                      ),
+                    color: AppColors.textPrimary,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
               ),
               Switch(
@@ -234,8 +226,7 @@ class _NotificationCard extends StatelessWidget {
                 activeThumbColor: AppColors.coral,
                 activeTrackColor: AppColors.coralLight,
                 inactiveThumbColor: AppColors.textHint,
-                inactiveTrackColor:
-                    AppColors.textHint.withValues(alpha: 0.3),
+                inactiveTrackColor: AppColors.textHint.withValues(alpha: 0.3),
               ),
             ],
           ),
@@ -268,9 +259,9 @@ class _TimePicker extends StatelessWidget {
         children: [
           Text(
             '$label:',
-            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  color: AppColors.textSecondary,
-                ),
+            style: Theme.of(
+              context,
+            ).textTheme.bodyMedium?.copyWith(color: AppColors.textSecondary),
           ),
           const SizedBox(width: 8),
           Container(
@@ -290,9 +281,9 @@ class _TimePicker extends StatelessWidget {
                 Icons.arrow_drop_down,
                 color: AppColors.textSecondary,
               ),
-              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    color: AppColors.textPrimary,
-                  ),
+              style: Theme.of(
+                context,
+              ).textTheme.bodyMedium?.copyWith(color: AppColors.textPrimary),
               items: options
                   .map((o) => DropdownMenuItem(value: o, child: Text(o)))
                   .toList(),

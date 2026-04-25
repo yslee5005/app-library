@@ -61,10 +61,7 @@ class _SplashScreenState extends State<SplashScreen>
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
-            colors: [
-              AppColors.amber,
-              AppColors.coral,
-            ],
+            colors: [AppColors.amber, AppColors.coral],
           ),
         ),
         child: Center(
@@ -73,10 +70,7 @@ class _SplashScreenState extends State<SplashScreen>
             builder: (context, child) {
               return Opacity(
                 opacity: _fadeIn.value,
-                child: Transform.scale(
-                  scale: _pulse.value,
-                  child: child,
-                ),
+                child: Transform.scale(scale: _pulse.value, child: child),
               );
             },
             child: Column(

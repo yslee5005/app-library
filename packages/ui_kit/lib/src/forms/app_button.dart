@@ -55,67 +55,74 @@ class AppButton extends StatelessWidget {
 
     final effectiveOnPressed = isLoading ? null : onPressed;
 
-    final child = isLoading
-        ? SizedBox(
-            width: 20,
-            height: 20,
-            child: CircularProgressIndicator(
-              strokeWidth: 2,
-              color: variant == AppButtonVariant.primary
-                  ? theme.colorScheme.onPrimary
-                  : theme.colorScheme.primary,
-            ),
-          )
-        : icon != null
+    final child =
+        isLoading
+            ? SizedBox(
+              width: 20,
+              height: 20,
+              child: CircularProgressIndicator(
+                strokeWidth: 2,
+                color:
+                    variant == AppButtonVariant.primary
+                        ? theme.colorScheme.onPrimary
+                        : theme.colorScheme.primary,
+              ),
+            )
+            : icon != null
             ? Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Icon(icon, size: 18),
-                  const SizedBox(width: AppSpacing.sm),
-                  Text(label),
-                ],
-              )
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Icon(icon, size: 18),
+                const SizedBox(width: AppSpacing.sm),
+                Text(label),
+              ],
+            )
             : Text(label);
 
-    final hasOverrides = expand || padding != null || elevation != null || borderRadius != null;
-    final style = hasOverrides
-        ? ButtonStyle(
-            minimumSize: expand
-                ? const WidgetStatePropertyAll(Size(double.infinity, 48))
-                : null,
-            padding: padding != null ? WidgetStatePropertyAll(padding) : null,
-            elevation: elevation != null ? WidgetStatePropertyAll(elevation) : null,
-            shape: borderRadius != null
-                ? WidgetStatePropertyAll(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(borderRadius!),
-                    ),
-                  )
-                : null,
-          )
-        : null;
+    final hasOverrides =
+        expand || padding != null || elevation != null || borderRadius != null;
+    final style =
+        hasOverrides
+            ? ButtonStyle(
+              minimumSize:
+                  expand
+                      ? const WidgetStatePropertyAll(Size(double.infinity, 48))
+                      : null,
+              padding: padding != null ? WidgetStatePropertyAll(padding) : null,
+              elevation:
+                  elevation != null ? WidgetStatePropertyAll(elevation) : null,
+              shape:
+                  borderRadius != null
+                      ? WidgetStatePropertyAll(
+                        RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(borderRadius!),
+                        ),
+                      )
+                      : null,
+            )
+            : null;
 
     return switch (variant) {
       AppButtonVariant.primary => FilledButton(
-          onPressed: effectiveOnPressed,
-          style: style,
-          child: child,
-        ),
+        onPressed: effectiveOnPressed,
+        style: style,
+        child: child,
+      ),
       AppButtonVariant.secondary => FilledButton.tonal(
-          onPressed: effectiveOnPressed,
-          style: style,
-          child: child,
-        ),
+        onPressed: effectiveOnPressed,
+        style: style,
+        child: child,
+      ),
       AppButtonVariant.outline => OutlinedButton(
-          onPressed: effectiveOnPressed,
-          style: style,
-          child: child,
-        ),
+        onPressed: effectiveOnPressed,
+        style: style,
+        child: child,
+      ),
       AppButtonVariant.text => TextButton(
-          onPressed: effectiveOnPressed,
-          style: style,
-          child: child,
-        ),
+        onPressed: effectiveOnPressed,
+        style: style,
+        child: child,
+      ),
     };
   }
 }

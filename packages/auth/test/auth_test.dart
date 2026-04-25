@@ -31,10 +31,7 @@ void main() {
     });
 
     test('fromJson handles null optional fields', () {
-      final json = {
-        'id': 'user-456',
-        'app_id': 'other_app',
-      };
+      final json = {'id': 'user-456', 'app_id': 'other_app'};
 
       final profile = UserProfile.fromJson(json);
 

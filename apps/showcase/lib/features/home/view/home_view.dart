@@ -32,14 +32,11 @@ class HomeView extends StatelessWidget {
             builder: (context, mode, _) {
               return IconButton(
                 icon: Icon(
-                  mode == ThemeMode.dark
-                      ? Icons.light_mode
-                      : Icons.dark_mode,
+                  mode == ThemeMode.dark ? Icons.light_mode : Icons.dark_mode,
                 ),
                 onPressed: () {
-                  ShowcaseApp.themeMode.value = mode == ThemeMode.dark
-                      ? ThemeMode.light
-                      : ThemeMode.dark;
+                  ShowcaseApp.themeMode.value =
+                      mode == ThemeMode.dark ? ThemeMode.light : ThemeMode.dark;
                 },
               );
             },

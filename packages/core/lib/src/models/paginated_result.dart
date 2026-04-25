@@ -10,11 +10,11 @@ class PaginatedResult<T> {
 
   /// Creates an empty result.
   const PaginatedResult.empty()
-      : items = const [],
-        hasMore = false,
-        cursor = null,
-        cursorId = null,
-        totalCount = 0;
+    : items = const [],
+      hasMore = false,
+      cursor = null,
+      cursorId = null,
+      totalCount = 0;
 
   /// The items in this page.
   final List<T> items;

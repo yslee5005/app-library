@@ -9,18 +9,14 @@ void main() {
 
   group('AppCard vertical layout', () {
     testWidgets('renders title', (tester) async {
-      await tester.pumpWidget(
-        buildApp(const AppCard(title: 'Test Title')),
-      );
+      await tester.pumpWidget(buildApp(const AppCard(title: 'Test Title')));
 
       expect(find.text('Test Title'), findsOneWidget);
     });
 
     testWidgets('renders subtitle when provided', (tester) async {
       await tester.pumpWidget(
-        buildApp(
-          const AppCard(title: 'Title', subtitle: 'Subtitle text'),
-        ),
+        buildApp(const AppCard(title: 'Title', subtitle: 'Subtitle text')),
       );
 
       expect(find.text('Subtitle text'), findsOneWidget);
@@ -28,12 +24,7 @@ void main() {
 
     testWidgets('renders image when provided', (tester) async {
       await tester.pumpWidget(
-        buildApp(
-          const AppCard(
-            title: 'With Image',
-            image: Placeholder(),
-          ),
-        ),
+        buildApp(const AppCard(title: 'With Image', image: Placeholder())),
       );
 
       expect(find.byType(Placeholder), findsOneWidget);
@@ -42,10 +33,7 @@ void main() {
     testWidgets('renders trailing widget', (tester) async {
       await tester.pumpWidget(
         buildApp(
-          const AppCard(
-            title: 'With Trailing',
-            trailing: Icon(Icons.bookmark),
-          ),
+          const AppCard(title: 'With Trailing', trailing: Icon(Icons.bookmark)),
         ),
       );
 
@@ -55,9 +43,7 @@ void main() {
     testWidgets('calls onTap when tapped', (tester) async {
       bool tapped = false;
       await tester.pumpWidget(
-        buildApp(
-          AppCard(title: 'Tappable', onTap: () => tapped = true),
-        ),
+        buildApp(AppCard(title: 'Tappable', onTap: () => tapped = true)),
       );
 
       await tester.tap(find.text('Tappable'));

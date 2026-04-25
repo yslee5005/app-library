@@ -3,11 +3,7 @@ import 'package:flutter/material.dart';
 
 /// A single step in a [ProcessTimeline].
 class ProcessStep {
-  const ProcessStep({
-    required this.title,
-    this.description,
-    this.icon,
-  });
+  const ProcessStep({required this.title, this.description, this.icon});
 
   /// Short title for the step.
   final String title;
@@ -143,9 +139,10 @@ class ProcessTimeline extends StatelessWidget {
                     Container(
                       width: connectorThickness,
                       height: showDescriptions ? 48 : 24,
-                      color: _isStepActive(i + 1)
-                          ? active
-                          : inactive.withAlpha(80),
+                      color:
+                          _isStepActive(i + 1)
+                              ? active
+                              : inactive.withAlpha(80),
                     ),
                 ],
               ),
@@ -162,8 +159,7 @@ class ProcessTimeline extends StatelessWidget {
                           color: _isStepActive(i) ? null : inactive,
                         ),
                       ),
-                      if (showDescriptions &&
-                          steps[i].description != null) ...[
+                      if (showDescriptions && steps[i].description != null) ...[
                         const SizedBox(height: AppSpacing.xs),
                         Text(
                           steps[i].description!,
@@ -204,20 +200,21 @@ class ProcessTimeline extends StatelessWidget {
         ),
       ),
       alignment: Alignment.center,
-      child: step.icon != null
-          ? Icon(
-              step.icon,
-              size: circleSize * 0.5,
-              color: isActive ? Colors.white : inactive,
-            )
-          : Text(
-              '${index + 1}',
-              style: TextStyle(
-                fontSize: circleSize * 0.38,
-                fontWeight: FontWeight.w600,
+      child:
+          step.icon != null
+              ? Icon(
+                step.icon,
+                size: circleSize * 0.5,
                 color: isActive ? Colors.white : inactive,
+              )
+              : Text(
+                '${index + 1}',
+                style: TextStyle(
+                  fontSize: circleSize * 0.38,
+                  fontWeight: FontWeight.w600,
+                  color: isActive ? Colors.white : inactive,
+                ),
               ),
-            ),
     );
   }
 

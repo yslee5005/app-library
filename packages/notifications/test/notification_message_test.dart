@@ -5,11 +5,7 @@ import 'package:app_lib_notifications/notifications.dart';
 void main() {
   group('NotificationMessage', () {
     test('creates immediate notification when scheduledAt is null', () {
-      const msg = NotificationMessage(
-        id: 1,
-        title: 'Test',
-        body: 'Hello',
-      );
+      const msg = NotificationMessage(id: 1, title: 'Test', body: 'Hello');
 
       expect(msg.id, 1);
       expect(msg.title, 'Test');

@@ -155,7 +155,10 @@ void main() {
       final blueTheme = ThemeGenerator(blueConfig).light();
       final redTheme = ThemeGenerator(redConfig).light();
 
-      expect(blueTheme.colorScheme.primary, isNot(redTheme.colorScheme.primary));
+      expect(
+        blueTheme.colorScheme.primary,
+        isNot(redTheme.colorScheme.primary),
+      );
     });
   });
 }

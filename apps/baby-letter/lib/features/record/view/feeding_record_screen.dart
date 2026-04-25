@@ -97,10 +97,7 @@ class _FeedingRecordScreenState extends State<FeedingRecordScreen> {
           icon: const Icon(Icons.arrow_back),
           color: AppColors.textPrimary,
         ),
-        title: Text(
-          '수유 기록',
-          style: TextStyle(color: AppColors.textPrimary),
-        ),
+        title: Text('수유 기록', style: TextStyle(color: AppColors.textPrimary)),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(20),
@@ -154,10 +151,7 @@ class _FeedingRecordScreenState extends State<FeedingRecordScreen> {
             ],
 
             // 메모
-            Text(
-              '메모',
-              style: Theme.of(context).textTheme.titleSmall,
-            ),
+            Text('메모', style: Theme.of(context).textTheme.titleSmall),
             const SizedBox(height: 8),
             TextField(
               controller: _memoController,
@@ -176,10 +170,7 @@ class _FeedingRecordScreenState extends State<FeedingRecordScreen> {
             const SizedBox(height: 16),
 
             // 환경 태그
-            Text(
-              '태그',
-              style: Theme.of(context).textTheme.titleSmall,
-            ),
+            Text('태그', style: Theme.of(context).textTheme.titleSmall),
             const SizedBox(height: 8),
             Wrap(
               spacing: 8,
@@ -253,10 +244,7 @@ class _FeedingRecordScreenState extends State<FeedingRecordScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            '모유 수유',
-            style: Theme.of(context).textTheme.titleMedium,
-          ),
+          Text('모유 수유', style: Theme.of(context).textTheme.titleMedium),
           const SizedBox(height: 16),
           Row(
             children: [
@@ -287,10 +275,7 @@ class _FeedingRecordScreenState extends State<FeedingRecordScreen> {
             children: [
               const Text(
                 '동시 수유',
-                style: TextStyle(
-                  fontSize: 14,
-                  color: AppColors.textSecondary,
-                ),
+                style: TextStyle(fontSize: 14, color: AppColors.textSecondary),
               ),
               const SizedBox(width: 8),
               GestureDetector(
@@ -347,10 +332,7 @@ class _FeedingRecordScreenState extends State<FeedingRecordScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            '분유',
-            style: Theme.of(context).textTheme.titleMedium,
-          ),
+          Text('분유', style: Theme.of(context).textTheme.titleMedium),
           const SizedBox(height: 16),
           Center(
             child: Text(
@@ -381,15 +363,15 @@ class _FeedingRecordScreenState extends State<FeedingRecordScreen> {
             children: [
               Text(
                 '0 ml',
-                style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                  color: AppColors.textHint,
-                ),
+                style: Theme.of(
+                  context,
+                ).textTheme.bodySmall?.copyWith(color: AppColors.textHint),
               ),
               Text(
                 '300 ml',
-                style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                  color: AppColors.textHint,
-                ),
+                style: Theme.of(
+                  context,
+                ).textTheme.bodySmall?.copyWith(color: AppColors.textHint),
               ),
             ],
           ),
@@ -407,17 +389,16 @@ class _FeedingRecordScreenState extends State<FeedingRecordScreen> {
                     vertical: 6,
                   ),
                   decoration: BoxDecoration(
-                    color: isSelected
-                        ? AppColors.feedingBlue
-                        : AppColors.cream,
+                    color: isSelected ? AppColors.feedingBlue : AppColors.cream,
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: Text(
                     '$ml',
                     style: TextStyle(
                       fontSize: 12,
-                      fontWeight:
-                          isSelected ? FontWeight.w600 : FontWeight.normal,
+                      fontWeight: isSelected
+                          ? FontWeight.w600
+                          : FontWeight.normal,
                       color: isSelected
                           ? Colors.white
                           : AppColors.textSecondary,
@@ -518,9 +499,7 @@ class _BreastButton extends StatelessWidget {
               style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
-                color: isActive
-                    ? AppColors.feedingBlue
-                    : AppColors.textHint,
+                color: isActive ? AppColors.feedingBlue : AppColors.textHint,
               ),
             ),
             const SizedBox(height: 8),

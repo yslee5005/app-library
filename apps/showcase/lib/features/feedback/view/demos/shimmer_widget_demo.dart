@@ -13,8 +13,10 @@ class ShimmerWidgetDemo extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Shimmer effect',
-                style: Theme.of(context).textTheme.titleMedium),
+            Text(
+              'Shimmer effect',
+              style: Theme.of(context).textTheme.titleMedium,
+            ),
             const SizedBox(height: 12),
             ShimmerWidget(
               child: Container(

@@ -7,26 +7,19 @@ class ServeReturnGuideScreen extends StatefulWidget {
   const ServeReturnGuideScreen({super.key});
 
   @override
-  State<ServeReturnGuideScreen> createState() =>
-      _ServeReturnGuideScreenState();
+  State<ServeReturnGuideScreen> createState() => _ServeReturnGuideScreenState();
 }
 
 class _ServeReturnGuideScreenState extends State<ServeReturnGuideScreen> {
   final List<bool> _checklist = [false, false, false];
 
-  static const _checklistItems = [
-    '5분간 아기와 대화',
-    '아기 신호 3개 발견',
-    '2초 안에 응답하기',
-  ];
+  static const _checklistItems = ['5분간 아기와 대화', '아기 신호 3개 발견', '2초 안에 응답하기'];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.cream,
-      appBar: AppBar(
-        title: const Text('Serve & Return'),
-      ),
+      appBar: AppBar(title: const Text('Serve & Return')),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(20),
         child: Column(
@@ -60,17 +53,17 @@ class _ServeReturnGuideScreenState extends State<ServeReturnGuideScreen> {
                   Text(
                     '아기와 주고받는 작은 상호작용 하나하나가\n뇌의 신경 연결을 만들어요.',
                     style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          color: AppColors.textSecondary,
-                          height: 1.5,
-                        ),
+                      color: AppColors.textSecondary,
+                      height: 1.5,
+                    ),
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(height: 8),
                   Text(
                     'Harvard Center on the Developing Child',
-                    style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                          color: AppColors.textHint,
-                        ),
+                    style: Theme.of(
+                      context,
+                    ).textTheme.labelSmall?.copyWith(color: AppColors.textHint),
                   ),
                 ],
               ),
@@ -82,24 +75,21 @@ class _ServeReturnGuideScreenState extends State<ServeReturnGuideScreen> {
             _StepCard(
               stepNumber: 1,
               title: '아기가 신호를 보내요',
-              description:
-                  '옹알이, 손 뻗기, 눈 맞춤, 울음 등\n아기의 모든 행동은 "대화의 시작"이에요.',
+              description: '옹알이, 손 뻗기, 눈 맞춤, 울음 등\n아기의 모든 행동은 "대화의 시작"이에요.',
             ),
             const SizedBox(height: 12),
 
             _StepCard(
               stepNumber: 2,
               title: '신호를 알아차려요',
-              description:
-                  '아기의 시선을 따라가 보세요.\n무엇을 보고 있는지, 어디에 관심이 있는지 관찰해요.',
+              description: '아기의 시선을 따라가 보세요.\n무엇을 보고 있는지, 어디에 관심이 있는지 관찰해요.',
             ),
             const SizedBox(height: 12),
 
             _StepCard(
               stepNumber: 3,
               title: '이름 붙여줘요',
-              description:
-                  '"아~ 고양이가 보이니?"\n"배가 고프구나!"\n아기의 경험에 말로 이름을 붙여주세요.',
+              description: '"아~ 고양이가 보이니?"\n"배가 고프구나!"\n아기의 경험에 말로 이름을 붙여주세요.',
             ),
             const SizedBox(height: 12),
 
@@ -141,8 +131,8 @@ class _ServeReturnGuideScreenState extends State<ServeReturnGuideScreen> {
                   Text(
                     '오늘의 실천',
                     style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                          fontWeight: FontWeight.w600,
-                        ),
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
                   const SizedBox(height: 12),
                   ...List.generate(_checklistItems.length, (index) {
@@ -154,7 +144,8 @@ class _ServeReturnGuideScreenState extends State<ServeReturnGuideScreen> {
                             value: _checklist[index],
                             onChanged: (value) {
                               setState(
-                                  () => _checklist[index] = value ?? false);
+                                () => _checklist[index] = value ?? false,
+                              );
                             },
                             activeColor: AppColors.coral,
                             shape: RoundedRectangleBorder(
@@ -164,9 +155,7 @@ class _ServeReturnGuideScreenState extends State<ServeReturnGuideScreen> {
                           Expanded(
                             child: Text(
                               _checklistItems[index],
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodyMedium
+                              style: Theme.of(context).textTheme.bodyMedium
                                   ?.copyWith(
                                     color: _checklist[index]
                                         ? AppColors.textHint
@@ -209,21 +198,13 @@ class _ServeReturnGuideScreenState extends State<ServeReturnGuideScreen> {
                         children: [
                           Text(
                             '더 알아보기',
-                            style: Theme.of(context)
-                                .textTheme
-                                .labelLarge
-                                ?.copyWith(
-                                  color: AppColors.info,
-                                ),
+                            style: Theme.of(context).textTheme.labelLarge
+                                ?.copyWith(color: AppColors.info),
                           ),
                           Text(
                             'Still Face 실험 — 아기에게 무반응이 어떤 영향을 미치는지',
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodySmall
-                                ?.copyWith(
-                                  color: AppColors.textSecondary,
-                                ),
+                            style: Theme.of(context).textTheme.bodySmall
+                                ?.copyWith(color: AppColors.textSecondary),
                           ),
                         ],
                       ),
@@ -287,9 +268,9 @@ class _StepCard extends StatelessWidget {
               child: Text(
                 '$stepNumber',
                 style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                      color: AppColors.coralDark,
-                      fontWeight: FontWeight.w700,
-                    ),
+                  color: AppColors.coralDark,
+                  fontWeight: FontWeight.w700,
+                ),
               ),
             ),
           ),
@@ -303,16 +284,16 @@ class _StepCard extends StatelessWidget {
                 Text(
                   title,
                   style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                        fontWeight: FontWeight.w600,
-                      ),
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
                 const SizedBox(height: 6),
                 Text(
                   description,
                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                        color: AppColors.textSecondary,
-                        height: 1.5,
-                      ),
+                    color: AppColors.textSecondary,
+                    height: 1.5,
+                  ),
                 ),
               ],
             ),

@@ -119,8 +119,9 @@ class _OnboardingCarouselState extends State<OnboardingCarousel> {
             itemBuilder: (context, index) {
               final page = widget.pages[index];
               return Padding(
-                padding:
-                    EdgeInsets.symmetric(horizontal: widget.pageSpacing ?? AppSpacing.lg),
+                padding: EdgeInsets.symmetric(
+                  horizontal: widget.pageSpacing ?? AppSpacing.lg,
+                ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -158,14 +159,15 @@ class _OnboardingCarouselState extends State<OnboardingCarousel> {
               final isActive = index == _currentPage;
               return AnimatedContainer(
                 duration: const Duration(milliseconds: 200),
-                margin:
-                    const EdgeInsets.symmetric(horizontal: AppSpacing.xs),
+                margin: const EdgeInsets.symmetric(horizontal: AppSpacing.xs),
                 width: isActive ? 24.0 : 8.0,
                 height: 8.0,
                 decoration: BoxDecoration(
-                  color: isActive
-                      ? (widget.indicatorActiveColor ?? colorScheme.primary)
-                      : (widget.indicatorInactiveColor ?? colorScheme.outlineVariant),
+                  color:
+                      isActive
+                          ? (widget.indicatorActiveColor ?? colorScheme.primary)
+                          : (widget.indicatorInactiveColor ??
+                              colorScheme.outlineVariant),
                   borderRadius: AppRadius.smAll,
                 ),
               );

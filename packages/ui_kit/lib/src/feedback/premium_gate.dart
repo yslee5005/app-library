@@ -32,7 +32,8 @@ class PremiumGate extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  if (icon != null) Text(icon!, style: const TextStyle(fontSize: 24)),
+                  if (icon != null)
+                    Text(icon!, style: const TextStyle(fontSize: 24)),
                   if (icon != null) const SizedBox(width: 8),
                   Text(title, style: Theme.of(context).textTheme.titleMedium),
                 ],
@@ -53,7 +54,8 @@ class PremiumGate extends StatelessWidget {
           children: [
             Row(
               children: [
-                if (icon != null) Text(icon!, style: const TextStyle(fontSize: 24)),
+                if (icon != null)
+                  Text(icon!, style: const TextStyle(fontSize: 24)),
                 if (icon != null) const SizedBox(width: 8),
                 Text(title, style: Theme.of(context).textTheme.titleMedium),
               ],

@@ -8,9 +8,5 @@ void main() {
   // TODO: Anonymous-First 인증 (signInAnonymously)
   // TODO: Supabase 초기화
 
-  runApp(
-    const ProviderScope(
-      child: BabyLetterApp(),
-    ),
-  );
+  runApp(const ProviderScope(child: BabyLetterApp()));
 }

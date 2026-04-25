@@ -86,38 +86,40 @@ class _AppTextFieldState extends State<AppTextField> {
         labelText: widget.label,
         hintText: widget.hint,
         errorText: widget.errorText,
-        prefixIcon: widget.prefixIcon != null
-            ? Icon(widget.prefixIcon)
-            : null,
-        suffixIcon: widget.obscure
-            ? IconButton(
-                icon: Icon(
-                  _obscured ? Icons.visibility_off : Icons.visibility,
-                ),
-                onPressed: () => setState(() => _obscured = !_obscured),
-              )
-            : widget.suffixIcon,
+        prefixIcon: widget.prefixIcon != null ? Icon(widget.prefixIcon) : null,
+        suffixIcon:
+            widget.obscure
+                ? IconButton(
+                  icon: Icon(
+                    _obscured ? Icons.visibility_off : Icons.visibility,
+                  ),
+                  onPressed: () => setState(() => _obscured = !_obscured),
+                )
+                : widget.suffixIcon,
         contentPadding: const EdgeInsets.symmetric(
           horizontal: AppSpacing.md,
           vertical: AppSpacing.sm,
         ),
         filled: widget.fillColor != null,
         fillColor: widget.fillColor,
-        border: widget.borderRadius != null
-            ? OutlineInputBorder(
-                borderRadius: BorderRadius.circular(widget.borderRadius!),
-              )
-            : null,
-        enabledBorder: widget.borderRadius != null
-            ? OutlineInputBorder(
-                borderRadius: BorderRadius.circular(widget.borderRadius!),
-              )
-            : null,
-        focusedBorder: widget.borderRadius != null
-            ? OutlineInputBorder(
-                borderRadius: BorderRadius.circular(widget.borderRadius!),
-              )
-            : null,
+        border:
+            widget.borderRadius != null
+                ? OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(widget.borderRadius!),
+                )
+                : null,
+        enabledBorder:
+            widget.borderRadius != null
+                ? OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(widget.borderRadius!),
+                )
+                : null,
+        focusedBorder:
+            widget.borderRadius != null
+                ? OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(widget.borderRadius!),
+                )
+                : null,
       ),
     );
   }

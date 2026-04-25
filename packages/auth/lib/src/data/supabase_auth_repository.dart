@@ -23,10 +23,10 @@ class SupabaseAuthRepository implements AuthRepository {
     required GoogleAuthService googleAuth,
     required AppleAuthService appleAuth,
     required EmailAuthService emailAuth,
-  })  : _client = client,
-        _googleAuth = googleAuth,
-        _appleAuth = appleAuth,
-        _emailAuth = emailAuth;
+  }) : _client = client,
+       _googleAuth = googleAuth,
+       _appleAuth = appleAuth,
+       _emailAuth = emailAuth;
 
   final AppSupabaseClient _client;
   final GoogleAuthService _googleAuth;
@@ -58,10 +58,7 @@ class SupabaseAuthRepository implements AuthRepository {
     required String email,
     required String password,
   }) async {
-    final result = await _emailAuth.signIn(
-      email: email,
-      password: password,
-    );
+    final result = await _emailAuth.signIn(email: email, password: password);
     return switch (result) {
       Success(:final value) => _fetchOrCreateProfile(value, 'email'),
       Failure(:final exception) => Result.failure(exception),
@@ -77,9 +74,7 @@ class SupabaseAuthRepository implements AuthRepository {
     final result = await _emailAuth.signUp(
       email: email,
       password: password,
-      metadata: {
-        if (displayName != null) 'full_name': displayName,
-      },
+      metadata: {if (displayName != null) 'full_name': displayName},
     );
     return switch (result) {
       Success(:final value) => _fetchOrCreateProfile(value, 'email'),
@@ -138,10 +133,7 @@ class SupabaseAuthRepository implements AuthRepository {
     required String email,
     required String password,
   }) async {
-    final result = await _emailAuth.linkEmail(
-      email: email,
-      password: password,
-    );
+    final result = await _emailAuth.linkEmail(email: email, password: password);
     return switch (result) {
       Success() => _refreshProfile(),
       Failure(:final exception) => Result.failure(exception),
@@ -162,10 +154,7 @@ class SupabaseAuthRepository implements AuthRepository {
         AuthException(message: 'No authenticated user', code: 'not_auth'),
       );
     }
-    final data = await _client
-        .from('profiles')
-        .eq('id', user.id)
-        .maybeSingle();
+    final data = await _client.from('profiles').eq('id', user.id).maybeSingle();
     if (data == null) {
       return const Result.failure(
         AuthException(
@@ -236,10 +225,8 @@ class SupabaseAuthRepository implements AuthRepository {
         return const Result.success(null);
       }
 
-      final data = await _client
-          .from('profiles')
-          .eq('id', user.id)
-          .maybeSingle();
+      final data =
+          await _client.from('profiles').eq('id', user.id).maybeSingle();
 
       if (data == null) {
         return const Result.success(null);
@@ -280,13 +267,14 @@ class SupabaseAuthRepository implements AuthRepository {
         'updated_at': DateTime.now().toUtc().toIso8601String(),
       };
 
-      final data = await _client.raw
-          .from('profiles')
-          .update(updates)
-          .eq('app_id', _client.appId)
-          .eq('id', userId)
-          .select()
-          .single();
+      final data =
+          await _client.raw
+              .from('profiles')
+              .update(updates)
+              .eq('app_id', _client.appId)
+              .eq('id', userId)
+              .select()
+              .single();
 
       return Result.success(UserProfile.fromJson(data));
     } catch (e, st) {
@@ -312,8 +300,7 @@ class SupabaseAuthRepository implements AuthRepository {
           return switch (profileResult) {
             Success(value: final profile?) => Authenticated(user: profile),
             Success(value: null) => const Unauthenticated(),
-            Failure(:final exception) =>
-              AuthError(message: exception.message),
+            Failure(:final exception) => AuthError(message: exception.message),
           };
         case AuthChangeEvent.signedOut:
           return const Unauthenticated();
@@ -338,14 +325,13 @@ class SupabaseAuthRepository implements AuthRepository {
 
       // The handle_new_user trigger creates the profile automatically.
       // Try fetching it; if not found, create it manually as a fallback.
-      final data = await _client
-              .from('profiles')
-              .eq('id', user.id)
-              .maybeSingle() ??
+      final data =
+          await _client.from('profiles').eq('id', user.id).maybeSingle() ??
           await _client.insert('profiles', {
             'id': user.id,
             'email': user.email,
-            'display_name': user.userMetadata?['full_name'] as String? ??
+            'display_name':
+                user.userMetadata?['full_name'] as String? ??
                 user.userMetadata?['name'] as String?,
             'avatar_url': user.userMetadata?['avatar_url'] as String?,
             'provider': provider,

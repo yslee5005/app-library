@@ -96,18 +96,13 @@ class _DiaperRecordScreenState extends State<DiaperRecordScreen> {
       context: context,
       builder: (context) => AlertDialog(
         backgroundColor: AppColors.surface,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
         title: Row(
           children: [
             const Icon(Icons.warning_rounded, color: AppColors.danger),
             const SizedBox(width: 8),
             const Expanded(
-              child: Text(
-                '주의가 필요해요',
-                style: TextStyle(fontSize: 18),
-              ),
+              child: Text('주의가 필요해요', style: TextStyle(fontSize: 18)),
             ),
           ],
         ),
@@ -170,10 +165,7 @@ class _DiaperRecordScreenState extends State<DiaperRecordScreen> {
           icon: const Icon(Icons.arrow_back),
           color: AppColors.textPrimary,
         ),
-        title: Text(
-          '기저귀 기록',
-          style: TextStyle(color: AppColors.textPrimary),
-        ),
+        title: Text('기저귀 기록', style: TextStyle(color: AppColors.textPrimary)),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(20),
@@ -181,10 +173,7 @@ class _DiaperRecordScreenState extends State<DiaperRecordScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // 타입 선택
-            Text(
-              '종류',
-              style: Theme.of(context).textTheme.titleSmall,
-            ),
+            Text('종류', style: Theme.of(context).textTheme.titleSmall),
             const SizedBox(height: 12),
             Row(
               children: List.generate(_typeLabels.length, (index) {
@@ -232,16 +221,13 @@ class _DiaperRecordScreenState extends State<DiaperRecordScreen> {
 
             // 대변 색상 (대변 또는 둘 다 선택 시)
             if (showStoolSection) ...[
-              Text(
-                '대변 색상',
-                style: Theme.of(context).textTheme.titleSmall,
-              ),
+              Text('대변 색상', style: Theme.of(context).textTheme.titleSmall),
               const SizedBox(height: 4),
               Text(
                 '아기의 대변 색상을 선택해주세요',
-                style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                  color: AppColors.textHint,
-                ),
+                style: Theme.of(
+                  context,
+                ).textTheme.bodySmall?.copyWith(color: AppColors.textHint),
               ),
               const SizedBox(height: 12),
               Container(
@@ -286,11 +272,11 @@ class _DiaperRecordScreenState extends State<DiaperRecordScreen> {
                         const SizedBox(width: 4),
                         Text(
                           '주의 필요',
-                          style:
-                              Theme.of(context).textTheme.bodySmall?.copyWith(
-                            color: AppColors.danger,
-                            fontWeight: FontWeight.w500,
-                          ),
+                          style: Theme.of(context).textTheme.bodySmall
+                              ?.copyWith(
+                                color: AppColors.danger,
+                                fontWeight: FontWeight.w500,
+                              ),
                         ),
                       ],
                     ),
@@ -345,10 +331,7 @@ class _DiaperRecordScreenState extends State<DiaperRecordScreen> {
             ],
 
             // 양
-            Text(
-              '양',
-              style: Theme.of(context).textTheme.titleSmall,
-            ),
+            Text('양', style: Theme.of(context).textTheme.titleSmall),
             const SizedBox(height: 12),
             Row(
               children: List.generate(_amountLabels.length, (index) {
@@ -418,10 +401,7 @@ class _DiaperRecordScreenState extends State<DiaperRecordScreen> {
             const SizedBox(height: 24),
 
             // 메모
-            Text(
-              '메모',
-              style: Theme.of(context).textTheme.titleSmall,
-            ),
+            Text('메모', style: Theme.of(context).textTheme.titleSmall),
             const SizedBox(height: 8),
             TextField(
               controller: _memoController,
@@ -509,17 +489,22 @@ class _StoolColorCircle extends StatelessWidget {
                 color: colorInfo.isDanger
                     ? AppColors.danger
                     : isSelected
-                        ? AppColors.diaperGreen
-                        : AppColors.textHint.withValues(alpha: 0.3),
-                width: isSelected ? 3 : colorInfo.isDanger ? 2 : 1,
+                    ? AppColors.diaperGreen
+                    : AppColors.textHint.withValues(alpha: 0.3),
+                width: isSelected
+                    ? 3
+                    : colorInfo.isDanger
+                    ? 2
+                    : 1,
               ),
               boxShadow: isSelected
                   ? [
                       BoxShadow(
-                        color: (colorInfo.isDanger
-                                ? AppColors.danger
-                                : AppColors.diaperGreen)
-                            .withValues(alpha: 0.3),
+                        color:
+                            (colorInfo.isDanger
+                                    ? AppColors.danger
+                                    : AppColors.diaperGreen)
+                                .withValues(alpha: 0.3),
                         blurRadius: 8,
                         spreadRadius: 1,
                       ),

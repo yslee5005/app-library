@@ -83,32 +83,32 @@ class ChipFilterBar extends StatelessWidget {
   Widget _buildChips(BuildContext context) {
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
-      padding: padding ??
-          const EdgeInsets.symmetric(horizontal: AppSpacing.md),
+      padding: padding ?? const EdgeInsets.symmetric(horizontal: AppSpacing.md),
       child: Row(
-        children: options.map((option) {
-          final isSelected = selected.contains(option);
-          return Padding(
-            padding: const EdgeInsets.only(right: AppSpacing.sm),
-            child: FilterChip(
-              label: Text(option),
-              selected: isSelected,
-              onSelected: (value) {
-                if (singleSelect) {
-                  onSelectionChanged({option});
-                } else {
-                  final updated = Set.of(selected);
-                  if (value) {
-                    updated.add(option);
-                  } else {
-                    updated.remove(option);
-                  }
-                  onSelectionChanged(updated);
-                }
-              },
-            ),
-          );
-        }).toList(),
+        children:
+            options.map((option) {
+              final isSelected = selected.contains(option);
+              return Padding(
+                padding: const EdgeInsets.only(right: AppSpacing.sm),
+                child: FilterChip(
+                  label: Text(option),
+                  selected: isSelected,
+                  onSelected: (value) {
+                    if (singleSelect) {
+                      onSelectionChanged({option});
+                    } else {
+                      final updated = Set.of(selected);
+                      if (value) {
+                        updated.add(option);
+                      } else {
+                        updated.remove(option);
+                      }
+                      onSelectionChanged(updated);
+                    }
+                  },
+                ),
+              );
+            }).toList(),
       ),
     );
   }
@@ -120,44 +120,47 @@ class ChipFilterBar extends StatelessWidget {
       height: height ?? 48,
       child: SingleChildScrollView(
         scrollDirection: Axis.horizontal,
-        padding: padding ??
-            const EdgeInsets.symmetric(horizontal: AppSpacing.md),
+        padding:
+            padding ?? const EdgeInsets.symmetric(horizontal: AppSpacing.md),
         child: Row(
-          children: options.map((option) {
-            final isSelected = selected.contains(option);
-            return GestureDetector(
-              onTap: () => _handleSelection(option),
-              child: Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: AppSpacing.md,
-                  vertical: AppSpacing.sm,
-                ),
-                decoration: BoxDecoration(
-                  border: Border(
-                    bottom: BorderSide(
-                      color: isSelected
-                          ? theme.colorScheme.primary
-                          : Colors.transparent,
-                      width: 2,
+          children:
+              options.map((option) {
+                final isSelected = selected.contains(option);
+                return GestureDetector(
+                  onTap: () => _handleSelection(option),
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: AppSpacing.md,
+                      vertical: AppSpacing.sm,
+                    ),
+                    decoration: BoxDecoration(
+                      border: Border(
+                        bottom: BorderSide(
+                          color:
+                              isSelected
+                                  ? theme.colorScheme.primary
+                                  : Colors.transparent,
+                          width: 2,
+                        ),
+                      ),
+                    ),
+                    child: Text(
+                      option,
+                      style:
+                          isSelected
+                              ? (selectedTextStyle ??
+                                  theme.textTheme.labelLarge?.copyWith(
+                                    color: theme.colorScheme.onSurface,
+                                  ))
+                              : (unselectedTextStyle ??
+                                  theme.textTheme.labelLarge?.copyWith(
+                                    color: theme.colorScheme.onSurfaceVariant,
+                                    fontWeight: FontWeight.w400,
+                                  )),
                     ),
                   ),
-                ),
-                child: Text(
-                  option,
-                  style: isSelected
-                      ? (selectedTextStyle ??
-                          theme.textTheme.labelLarge?.copyWith(
-                            color: theme.colorScheme.onSurface,
-                          ))
-                      : (unselectedTextStyle ??
-                          theme.textTheme.labelLarge?.copyWith(
-                            color: theme.colorScheme.onSurfaceVariant,
-                            fontWeight: FontWeight.w400,
-                          )),
-                ),
-              ),
-            );
-          }).toList(),
+                );
+              }).toList(),
         ),
       ),
     );

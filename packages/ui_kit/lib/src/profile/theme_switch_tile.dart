@@ -26,7 +26,9 @@ class ThemeSwitchTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return SwitchListTile(
       title: Text(title),
-      secondary: Icon(icon ?? (isDarkMode ? Icons.dark_mode : Icons.light_mode)),
+      secondary: Icon(
+        icon ?? (isDarkMode ? Icons.dark_mode : Icons.light_mode),
+      ),
       value: isDarkMode,
       onChanged: onChanged,
     );

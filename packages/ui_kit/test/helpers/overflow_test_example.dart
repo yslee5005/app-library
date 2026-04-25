@@ -25,9 +25,7 @@ void main() {
   // ── Pattern 2: Custom sizes ───────────────────────────────────
   testResponsive(
     'ErrorStateView',
-    widget: const ErrorStateView(
-      message: 'Something went wrong',
-    ),
+    widget: const ErrorStateView(message: 'Something went wrong'),
     sizes: [
       TestScreenSizes.compact,
       TestScreenSizes.medium,
@@ -39,9 +37,11 @@ void main() {
   testOverflow(
     'EmptyStateView does not overflow with very long text',
     widget: const EmptyStateView(
-      title: 'This is an extremely long title that should wrap '
+      title:
+          'This is an extremely long title that should wrap '
           'properly without causing any overflow issues in the layout',
-      subtitle: 'This subtitle is also quite long and should handle '
+      subtitle:
+          'This subtitle is also quite long and should handle '
           'wrapping gracefully across different screen sizes',
     ),
     size: TestScreenSizes.compact,
@@ -53,10 +53,7 @@ void main() {
     addTearDown(() => tester.binding.setSurfaceSize(null));
 
     await tester.pumpWidget(
-      buildTestApp(
-        const SkeletonLoader(),
-        screenSize: TestScreenSizes.compact,
-      ),
+      buildTestApp(const SkeletonLoader(), screenSize: TestScreenSizes.compact),
     );
 
     expect(find.byType(SkeletonLoader), findsOneWidget);

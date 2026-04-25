@@ -20,9 +20,7 @@ class _LetterDetailScreenState extends State<LetterDetailScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.cream,
-      appBar: AppBar(
-        title: const Text('아기의 편지'),
-      ),
+      appBar: AppBar(title: const Text('아기의 편지')),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(24),
         child: Column(
@@ -33,9 +31,9 @@ class _LetterDetailScreenState extends State<LetterDetailScreen> {
               widget.letter.weekKey.startsWith('week_')
                   ? '임신 ${widget.letter.weekKey.substring(5)}주'
                   : 'D+${widget.letter.weekKey.substring(2)}',
-              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                color: AppColors.textSecondary,
-              ),
+              style: Theme.of(
+                context,
+              ).textTheme.bodyMedium?.copyWith(color: AppColors.textSecondary),
             ),
 
             const SizedBox(height: 24),
@@ -65,9 +63,8 @@ class _LetterDetailScreenState extends State<LetterDetailScreen> {
                   Center(
                     child: Text(
                       widget.letter.title,
-                      style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                        fontWeight: FontWeight.w600,
-                      ),
+                      style: Theme.of(context).textTheme.headlineMedium
+                          ?.copyWith(fontWeight: FontWeight.w600),
                     ),
                   ),
                   const SizedBox(height: 24),
@@ -112,10 +109,8 @@ class _LetterDetailScreenState extends State<LetterDetailScreen> {
                         const SizedBox(width: 8),
                         Text(
                           '과학적 근거',
-                          style:
-                              Theme.of(context).textTheme.labelLarge?.copyWith(
-                                color: AppColors.info,
-                              ),
+                          style: Theme.of(context).textTheme.labelLarge
+                              ?.copyWith(color: AppColors.info),
                         ),
                         const Spacer(),
                         Icon(

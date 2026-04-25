@@ -38,10 +38,7 @@ class _TemperamentQuizScreenState extends State<TemperamentQuizScreen> {
       question: '울음 강도는?',
       options: ['조용히 칭얼', '보통', '크고 강하게', '매우 다양'],
     ),
-    _QuizQuestion(
-      question: '기분 전환이?',
-      options: ['쉬움', '보통', '어려움', '매우 어려움'],
-    ),
+    _QuizQuestion(question: '기분 전환이?', options: ['쉬움', '보통', '어려움', '매우 어려움']),
     _QuizQuestion(
       question: '수면 패턴은?',
       options: ['잘 잠', '보통', '자주 깸', '잠들기 어려움'],
@@ -80,11 +77,13 @@ class _TemperamentQuizScreenState extends State<TemperamentQuizScreen> {
     // 규칙성(Q3), 적응성(Q2,Q4), 반응강도(Q5,Q8), 기분(Q6)
     final regularity = _answers[2] < 0 ? 1 : _answers[2]; // 0=규칙적, 3=불규칙
     final adaptability =
-        ((_answers[1] < 0 ? 1 : _answers[1]) + (_answers[3] < 0 ? 1 : _answers[3])) /
-            2; // 0=쉬움, 3=어려움
+        ((_answers[1] < 0 ? 1 : _answers[1]) +
+            (_answers[3] < 0 ? 1 : _answers[3])) /
+        2; // 0=쉬움, 3=어려움
     final intensity =
-        ((_answers[4] < 0 ? 1 : _answers[4]) + (_answers[7] < 0 ? 1 : _answers[7])) /
-            2; // 0=낮음, 3=높음
+        ((_answers[4] < 0 ? 1 : _answers[4]) +
+            (_answers[7] < 0 ? 1 : _answers[7])) /
+        2; // 0=낮음, 3=높음
     final mood = _answers[5] < 0 ? 1 : _answers[5]; // 0=쉬움, 3=어려움
     final activity = _answers[0] < 0 ? 1 : _answers[0]; // 0=매우활발, 3=조용
 
@@ -144,9 +143,9 @@ class _TemperamentQuizScreenState extends State<TemperamentQuizScreen> {
             onPressed: () => Navigator.of(context).pop(),
             child: Text(
               '✕ 나중에 할게요',
-              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    color: AppColors.textSecondary,
-                  ),
+              style: Theme.of(
+                context,
+              ).textTheme.bodyMedium?.copyWith(color: AppColors.textSecondary),
             ),
           ),
         ],
@@ -163,18 +162,17 @@ class _TemperamentQuizScreenState extends State<TemperamentQuizScreen> {
                   const SizedBox(height: 12),
                   Text(
                     '아기의 기질 알아보기',
-                    style:
-                        Theme.of(context).textTheme.headlineMedium?.copyWith(
-                              color: AppColors.textPrimary,
-                              fontWeight: FontWeight.bold,
-                            ),
+                    style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                      color: AppColors.textPrimary,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                   const SizedBox(height: 8),
                   Text(
                     '아기의 성격을 이해하면 육아가 편해져요',
                     style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          color: AppColors.textSecondary,
-                        ),
+                      color: AppColors.textSecondary,
+                    ),
                   ),
                 ],
               ),
@@ -224,8 +222,9 @@ class _TemperamentQuizScreenState extends State<TemperamentQuizScreen> {
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.coral,
                     foregroundColor: Colors.white,
-                    disabledBackgroundColor:
-                        AppColors.textHint.withValues(alpha: 0.3),
+                    disabledBackgroundColor: AppColors.textHint.withValues(
+                      alpha: 0.3,
+                    ),
                     disabledForegroundColor: AppColors.textHint,
                     padding: const EdgeInsets.symmetric(vertical: 16),
                     shape: RoundedRectangleBorder(
@@ -233,9 +232,7 @@ class _TemperamentQuizScreenState extends State<TemperamentQuizScreen> {
                     ),
                   ),
                   child: Text(
-                    _currentPage < _questions.length - 1
-                        ? '다음 →'
-                        : '결과 보기',
+                    _currentPage < _questions.length - 1 ? '다음 →' : '결과 보기',
                     style: const TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w600,
@@ -270,17 +267,19 @@ class _TemperamentQuizScreenState extends State<TemperamentQuizScreen> {
               Text(
                 result.type,
                 style: Theme.of(context).textTheme.headlineLarge?.copyWith(
-                      color: AppColors.textPrimary,
-                      fontWeight: FontWeight.bold,
-                    ),
+                  color: AppColors.textPrimary,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
 
               const SizedBox(height: 8),
 
               // Percentage badge
               Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 6,
+                ),
                 decoration: BoxDecoration(
                   color: AppColors.amberLight,
                   borderRadius: BorderRadius.circular(20),
@@ -288,8 +287,8 @@ class _TemperamentQuizScreenState extends State<TemperamentQuizScreen> {
                 child: Text(
                   '아기의 약 ${result.percentage}가 이 유형이에요',
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        color: AppColors.textSecondary,
-                      ),
+                    color: AppColors.textSecondary,
+                  ),
                 ),
               ),
 
@@ -309,9 +308,9 @@ class _TemperamentQuizScreenState extends State<TemperamentQuizScreen> {
                       result.description,
                       textAlign: TextAlign.center,
                       style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                            color: AppColors.textPrimary,
-                            height: 1.6,
-                          ),
+                        color: AppColors.textPrimary,
+                        height: 1.6,
+                      ),
                     ),
                   ],
                 ),
@@ -333,10 +332,7 @@ class _TemperamentQuizScreenState extends State<TemperamentQuizScreen> {
                   ),
                   child: const Text(
                     '확인',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                    ),
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
                   ),
                 ),
               ),
@@ -376,9 +372,9 @@ class _ProgressBar extends StatelessWidget {
         const SizedBox(height: 8),
         Text(
           '$current/$total',
-          style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                color: AppColors.textHint,
-              ),
+          style: Theme.of(
+            context,
+          ).textTheme.bodySmall?.copyWith(color: AppColors.textHint),
         ),
       ],
     );
@@ -409,9 +405,9 @@ class _QuestionPage extends StatelessWidget {
           Text(
             question,
             style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                  color: AppColors.textPrimary,
-                  fontWeight: FontWeight.w600,
-                ),
+              color: AppColors.textPrimary,
+              fontWeight: FontWeight.w600,
+            ),
           ),
           const SizedBox(height: 20),
           ...List.generate(options.length, (i) {
@@ -424,8 +420,9 @@ class _QuestionPage extends StatelessWidget {
                   width: double.infinity,
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
-                    color:
-                        isSelected ? AppColors.coralLight : AppColors.surface,
+                    color: isSelected
+                        ? AppColors.coralLight
+                        : AppColors.surface,
                     borderRadius: BorderRadius.circular(12),
                     border: Border.all(
                       color: isSelected
@@ -437,12 +434,13 @@ class _QuestionPage extends StatelessWidget {
                   child: Text(
                     options[i],
                     style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                          color: isSelected
-                              ? AppColors.coralDark
-                              : AppColors.textPrimary,
-                          fontWeight:
-                              isSelected ? FontWeight.w600 : FontWeight.normal,
-                        ),
+                      color: isSelected
+                          ? AppColors.coralDark
+                          : AppColors.textPrimary,
+                      fontWeight: isSelected
+                          ? FontWeight.w600
+                          : FontWeight.normal,
+                    ),
                   ),
                 ),
               ),

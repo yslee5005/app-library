@@ -19,10 +19,7 @@ final appRouter = GoRouter(
   initialLocation: '/splash',
   routes: [
     // --- Onboarding ---
-    GoRoute(
-      path: '/splash',
-      builder: (context, state) => const SplashScreen(),
-    ),
+    GoRoute(path: '/splash', builder: (context, state) => const SplashScreen()),
     GoRoute(
       path: '/welcome',
       builder: (context, state) => const WelcomeScreen(),
@@ -68,10 +65,7 @@ final appRouter = GoRouter(
         ),
         StatefulShellBranch(
           routes: [
-            GoRoute(
-              path: '/us',
-              builder: (context, state) => const UsScreen(),
-            ),
+            GoRoute(path: '/us', builder: (context, state) => const UsScreen()),
           ],
         ),
         StatefulShellBranch(

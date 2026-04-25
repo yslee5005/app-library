@@ -68,9 +68,8 @@ class _OnboardingViewState extends State<OnboardingView> {
 
     final weight = double.tryParse(_weightController.text) ?? 10.0;
     final allRoutines = [...DailyRoutine.defaults, ...DailyRoutine.optionals];
-    final selectedRoutines = allRoutines
-        .where((r) => _selectedRoutineIds.contains(r.id))
-        .toList();
+    final selectedRoutines =
+        allRoutines.where((r) => _selectedRoutineIds.contains(r.id)).toList();
 
     final profile = PetProfile(
       name: _nameController.text.trim(),
@@ -107,9 +106,10 @@ class _OnboardingViewState extends State<OnboardingView> {
                       margin: EdgeInsets.only(right: i < 2 ? 8 : 0),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(2),
-                        color: i <= _currentPage
-                            ? AppConfig.accentColor
-                            : Colors.white.withValues(alpha: 0.1),
+                        color:
+                            i <= _currentPage
+                                ? AppConfig.accentColor
+                                : Colors.white.withValues(alpha: 0.1),
                       ),
                     ),
                   );
@@ -145,15 +145,9 @@ class _OnboardingViewState extends State<OnboardingView> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const SizedBox(height: 16),
-          Text(
-            '반려견 정보',
-            style: Theme.of(context).textTheme.headlineMedium,
-          ),
+          Text('반려견 정보', style: Theme.of(context).textTheme.headlineMedium),
           const SizedBox(height: 8),
-          Text(
-            '함께하는 가족을 알려주세요',
-            style: Theme.of(context).textTheme.bodyMedium,
-          ),
+          Text('함께하는 가족을 알려주세요', style: Theme.of(context).textTheme.bodyMedium),
           const SizedBox(height: 32),
 
           // Name
@@ -173,18 +167,19 @@ class _OnboardingViewState extends State<OnboardingView> {
             controller: _breedSearchController,
             decoration: InputDecoration(
               hintText: '견종 검색 (예: 골든 리트리버)',
-              suffixIcon: _selectedBreed != null
-                  ? IconButton(
-                      icon: const Icon(Icons.clear, size: 18),
-                      onPressed: () {
-                        setState(() {
-                          _selectedBreed = null;
-                          _breedSearchController.clear();
-                          _showBreedResults = false;
-                        });
-                      },
-                    )
-                  : null,
+              suffixIcon:
+                  _selectedBreed != null
+                      ? IconButton(
+                        icon: const Icon(Icons.clear, size: 18),
+                        onPressed: () {
+                          setState(() {
+                            _selectedBreed = null;
+                            _breedSearchController.clear();
+                            _showBreedResults = false;
+                          });
+                        },
+                      )
+                      : null,
             ),
             onChanged: (v) {
               setState(() => _showBreedResults = v.isNotEmpty);
@@ -204,7 +199,8 @@ class _OnboardingViewState extends State<OnboardingView> {
               final date = await showDatePicker(
                 context: context,
                 initialDate:
-                    _birthDate ?? DateTime.now().subtract(const Duration(days: 365)),
+                    _birthDate ??
+                    DateTime.now().subtract(const Duration(days: 365)),
                 firstDate: DateTime(2000),
                 lastDate: DateTime.now(),
                 builder: (context, child) {
@@ -225,8 +221,11 @@ class _OnboardingViewState extends State<OnboardingView> {
             },
             child: Row(
               children: [
-                Icon(Icons.calendar_today,
-                    color: AppConfig.accentColor, size: 20),
+                Icon(
+                  Icons.calendar_today,
+                  color: AppConfig.accentColor,
+                  size: 20,
+                ),
                 const SizedBox(width: 12),
                 Text(
                   _birthDate != null
@@ -249,9 +248,10 @@ class _OnboardingViewState extends State<OnboardingView> {
             decoration: InputDecoration(
               hintText: '현재 체중',
               suffixText: 'kg',
-              helperText: _selectedBreed?.weightKg != null
-                  ? '적정 범위: ${_selectedBreed!.weightKg!.min.toInt()}-${_selectedBreed!.weightKg!.max.toInt()} kg'
-                  : null,
+              helperText:
+                  _selectedBreed?.weightKg != null
+                      ? '적정 범위: ${_selectedBreed!.weightKg!.min.toInt()}-${_selectedBreed!.weightKg!.max.toInt()} kg'
+                      : null,
               helperStyle: TextStyle(color: AppConfig.accentColor),
             ),
             keyboardType: const TextInputType.numberWithOptions(decimal: true),
@@ -279,8 +279,9 @@ class _OnboardingViewState extends State<OnboardingView> {
   }
 
   Widget _buildBreedSearchResults() {
-    final results =
-        BreedDataService().searchBreeds(_breedSearchController.text);
+    final results = BreedDataService().searchBreeds(
+      _breedSearchController.text,
+    );
     final displayResults = results.take(10).toList();
 
     return Container(
@@ -298,8 +299,10 @@ class _OnboardingViewState extends State<OnboardingView> {
           final breed = displayResults[index];
           return ListTile(
             dense: true,
-            title: Text(breed.nameKo,
-                style: const TextStyle(color: Colors.white)),
+            title: Text(
+              breed.nameKo,
+              style: const TextStyle(color: Colors.white),
+            ),
             subtitle: Text(
               '${breed.name} · ${breed.size} · 수명 ${breed.lifespanYears.median.toStringAsFixed(0)}년',
               style: const TextStyle(color: Colors.white54, fontSize: 12),
@@ -329,13 +332,18 @@ class _OnboardingViewState extends State<OnboardingView> {
             children: [
               Icon(Icons.pets, color: AppConfig.accentColor, size: 20),
               const SizedBox(width: 8),
-              Text(breed.nameKo,
-                  style: Theme.of(context).textTheme.titleMedium),
+              Text(
+                breed.nameKo,
+                style: Theme.of(context).textTheme.titleMedium,
+              ),
             ],
           ),
           const SizedBox(height: 8),
           _infoRow('크기', breed.size),
-          _infoRow('평균 수명', '${breed.lifespanYears.median.toStringAsFixed(0)}년'),
+          _infoRow(
+            '평균 수명',
+            '${breed.lifespanYears.median.toStringAsFixed(0)}년',
+          ),
           if (breed.exerciseMinutesPerDay != null)
             _infoRow(
               '운동 권장',
@@ -365,11 +373,15 @@ class _OnboardingViewState extends State<OnboardingView> {
         children: [
           SizedBox(
             width: 80,
-            child: Text(label,
-                style: const TextStyle(color: Colors.white54, fontSize: 13)),
+            child: Text(
+              label,
+              style: const TextStyle(color: Colors.white54, fontSize: 13),
+            ),
           ),
-          Text(value,
-              style: const TextStyle(color: Colors.white, fontSize: 13)),
+          Text(
+            value,
+            style: const TextStyle(color: Colors.white, fontSize: 13),
+          ),
         ],
       ),
     );
@@ -383,10 +395,7 @@ class _OnboardingViewState extends State<OnboardingView> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const SizedBox(height: 16),
-          Text(
-            '데일리 루틴',
-            style: Theme.of(context).textTheme.headlineMedium,
-          ),
+          Text('데일리 루틴', style: Theme.of(context).textTheme.headlineMedium),
           const SizedBox(height: 8),
           Text(
             '매일 챙길 루틴을 선택하세요',
@@ -394,14 +403,12 @@ class _OnboardingViewState extends State<OnboardingView> {
           ),
           const SizedBox(height: 24),
 
-          Text('기본 추천',
-              style: Theme.of(context).textTheme.titleMedium),
+          Text('기본 추천', style: Theme.of(context).textTheme.titleMedium),
           const SizedBox(height: 12),
           ...DailyRoutine.defaults.map(_buildRoutineToggle),
 
           const SizedBox(height: 24),
-          Text('선택 루틴',
-              style: Theme.of(context).textTheme.titleMedium),
+          Text('선택 루틴', style: Theme.of(context).textTheme.titleMedium),
           const SizedBox(height: 12),
           ...DailyRoutine.optionals.map(_buildRoutineToggle),
 
@@ -412,8 +419,11 @@ class _OnboardingViewState extends State<OnboardingView> {
               padding: const EdgeInsets.all(16),
               child: Row(
                 children: [
-                  Icon(Icons.lightbulb_outline,
-                      color: AppConfig.accentColor, size: 20),
+                  Icon(
+                    Icons.lightbulb_outline,
+                    color: AppConfig.accentColor,
+                    size: 20,
+                  ),
                   const SizedBox(width: 12),
                   Expanded(
                     child: Text(
@@ -422,7 +432,9 @@ class _OnboardingViewState extends State<OnboardingView> {
                       '${_selectedBreed!.exerciseMinutesPerDay!.max.toInt()}분 '
                       '산책을 권장해요',
                       style: const TextStyle(
-                          color: Colors.white70, fontSize: 13),
+                        color: Colors.white70,
+                        fontSize: 13,
+                      ),
                     ),
                   ),
                 ],
@@ -443,8 +455,7 @@ class _OnboardingViewState extends State<OnboardingView> {
               Expanded(
                 flex: 2,
                 child: ElevatedButton(
-                  onPressed:
-                      _selectedRoutineIds.isNotEmpty ? _nextPage : null,
+                  onPressed: _selectedRoutineIds.isNotEmpty ? _nextPage : null,
                   child: const Text('다음'),
                 ),
               ),
@@ -472,9 +483,11 @@ class _OnboardingViewState extends State<OnboardingView> {
       },
       child: Row(
         children: [
-          Icon(routine.icon,
-              color: selected ? AppConfig.accentColor : Colors.white38,
-              size: 24),
+          Icon(
+            routine.icon,
+            color: selected ? AppConfig.accentColor : Colors.white38,
+            size: 24,
+          ),
           const SizedBox(width: 12),
           Expanded(
             child: Text(
@@ -491,18 +504,21 @@ class _OnboardingViewState extends State<OnboardingView> {
             height: 24,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: selected
-                  ? AppConfig.accentColor
-                  : Colors.white.withValues(alpha: 0.1),
+              color:
+                  selected
+                      ? AppConfig.accentColor
+                      : Colors.white.withValues(alpha: 0.1),
               border: Border.all(
-                color: selected
-                    ? AppConfig.accentColor
-                    : Colors.white.withValues(alpha: 0.2),
+                color:
+                    selected
+                        ? AppConfig.accentColor
+                        : Colors.white.withValues(alpha: 0.2),
               ),
             ),
-            child: selected
-                ? const Icon(Icons.check, size: 16, color: Colors.black)
-                : null,
+            child:
+                selected
+                    ? const Icon(Icons.check, size: 16, color: Colors.black)
+                    : null,
           ),
         ],
       ),
@@ -512,9 +528,8 @@ class _OnboardingViewState extends State<OnboardingView> {
   // ─── Step 3: Summary ───
   Widget _buildStep3Summary() {
     final allRoutines = [...DailyRoutine.defaults, ...DailyRoutine.optionals];
-    final selectedRoutines = allRoutines
-        .where((r) => _selectedRoutineIds.contains(r.id))
-        .toList();
+    final selectedRoutines =
+        allRoutines.where((r) => _selectedRoutineIds.contains(r.id)).toList();
 
     return SingleChildScrollView(
       padding: const EdgeInsets.symmetric(horizontal: 24),
@@ -522,15 +537,9 @@ class _OnboardingViewState extends State<OnboardingView> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const SizedBox(height: 16),
-          Text(
-            '준비 완료!',
-            style: Theme.of(context).textTheme.headlineMedium,
-          ),
+          Text('준비 완료!', style: Theme.of(context).textTheme.headlineMedium),
           const SizedBox(height: 8),
-          Text(
-            '정보를 확인하고 시작하세요',
-            style: Theme.of(context).textTheme.bodyMedium,
-          ),
+          Text('정보를 확인하고 시작하세요', style: Theme.of(context).textTheme.bodyMedium),
           const SizedBox(height: 32),
 
           // Dog placeholder
@@ -542,8 +551,11 @@ class _OnboardingViewState extends State<OnboardingView> {
                 color: AppConfig.accentColor.withValues(alpha: 0.2),
                 borderRadius: BorderRadius.circular(60),
               ),
-              child: const Icon(Icons.pets,
-                  size: 48, color: AppConfig.accentColor),
+              child: const Icon(
+                Icons.pets,
+                size: 48,
+                color: AppConfig.accentColor,
+              ),
             ),
           ),
           const SizedBox(height: 16),
@@ -581,33 +593,47 @@ class _OnboardingViewState extends State<OnboardingView> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('데일리 루틴 (${selectedRoutines.length}개)',
-                    style: Theme.of(context).textTheme.titleMedium),
+                Text(
+                  '데일리 루틴 (${selectedRoutines.length}개)',
+                  style: Theme.of(context).textTheme.titleMedium,
+                ),
                 const SizedBox(height: 12),
                 Wrap(
                   spacing: 8,
                   runSpacing: 8,
-                  children: selectedRoutines.map((r) {
-                    return Container(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 12, vertical: 6),
-                      decoration: BoxDecoration(
-                        color: AppConfig.accentColor.withValues(alpha: 0.15),
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Icon(r.icon,
-                              size: 16, color: AppConfig.accentColor),
-                          const SizedBox(width: 4),
-                          Text(r.name,
-                              style: const TextStyle(
-                                  fontSize: 13, color: Colors.white)),
-                        ],
-                      ),
-                    );
-                  }).toList(),
+                  children:
+                      selectedRoutines.map((r) {
+                        return Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 12,
+                            vertical: 6,
+                          ),
+                          decoration: BoxDecoration(
+                            color: AppConfig.accentColor.withValues(
+                              alpha: 0.15,
+                            ),
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Icon(
+                                r.icon,
+                                size: 16,
+                                color: AppConfig.accentColor,
+                              ),
+                              const SizedBox(width: 4),
+                              Text(
+                                r.name,
+                                style: const TextStyle(
+                                  fontSize: 13,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ],
+                          ),
+                        );
+                      }).toList(),
                 ),
               ],
             ),
@@ -643,9 +669,13 @@ class _OnboardingViewState extends State<OnboardingView> {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(label, style: const TextStyle(color: Colors.white54)),
-        Text(value,
-            style: const TextStyle(
-                color: Colors.white, fontWeight: FontWeight.w500)),
+        Text(
+          value,
+          style: const TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.w500,
+          ),
+        ),
       ],
     );
   }

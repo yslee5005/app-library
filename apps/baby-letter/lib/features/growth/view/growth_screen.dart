@@ -60,17 +60,14 @@ class _PregnancyTimelineView extends StatelessWidget {
             ),
             // 타임라인
             SliverList(
-              delegate: SliverChildBuilderDelegate(
-                (context, index) {
-                  final node = _nodes[index];
-                  return _TimelineItem(
-                    node: node,
-                    isFirst: index == 0,
-                    isLast: index == _nodes.length - 1,
-                  );
-                },
-                childCount: _nodes.length,
-              ),
+              delegate: SliverChildBuilderDelegate((context, index) {
+                final node = _nodes[index];
+                return _TimelineItem(
+                  node: node,
+                  isFirst: index == 0,
+                  isLast: index == _nodes.length - 1,
+                );
+              }, childCount: _nodes.length),
             ),
             const SliverToBoxAdapter(child: SizedBox(height: 24)),
           ],
@@ -112,8 +109,8 @@ class _TimelineItem extends StatelessWidget {
     final dotColor = node.isCurrent
         ? AppColors.coral
         : node.isPast
-            ? AppColors.amber
-            : AppColors.textHint.withValues(alpha: 0.3);
+        ? AppColors.amber
+        : AppColors.textHint.withValues(alpha: 0.3);
     final lineColor = node.isPast
         ? AppColors.amber.withValues(alpha: 0.5)
         : AppColors.textHint.withValues(alpha: 0.15);
@@ -144,14 +141,15 @@ class _TimelineItem extends StatelessWidget {
                     child: node.isPast && !node.isCurrent
                         ? null
                         : node.isCurrent
-                            ? null
-                            : Icon(Icons.lock_rounded,
-                                size: 8, color: AppColors.textHint),
+                        ? null
+                        : Icon(
+                            Icons.lock_rounded,
+                            size: 8,
+                            color: AppColors.textHint,
+                          ),
                   ),
                   if (!isLast)
-                    Expanded(
-                      child: Container(width: 2, color: lineColor),
-                    ),
+                    Expanded(child: Container(width: 2, color: lineColor)),
                 ],
               ),
             ),
@@ -165,8 +163,8 @@ class _TimelineItem extends StatelessWidget {
                   color: node.isCurrent
                       ? AppColors.coralLight.withValues(alpha: 0.5)
                       : node.isPast
-                          ? AppColors.surface
-                          : AppColors.surface.withValues(alpha: 0.5),
+                      ? AppColors.surface
+                      : AppColors.surface.withValues(alpha: 0.5),
                   borderRadius: BorderRadius.circular(12),
                   border: node.isCurrent
                       ? Border.all(color: AppColors.coral, width: 2)
@@ -180,9 +178,7 @@ class _TimelineItem extends StatelessWidget {
                         children: [
                           Text(
                             node.label,
-                            style: Theme.of(context)
-                                .textTheme
-                                .titleMedium
+                            style: Theme.of(context).textTheme.titleMedium
                                 ?.copyWith(
                                   fontWeight: FontWeight.w600,
                                   color: node.isPast || node.isCurrent
@@ -193,12 +189,12 @@ class _TimelineItem extends StatelessWidget {
                           const SizedBox(height: 2),
                           Text(
                             '${node.milestone} · ${node.size}',
-                            style:
-                                Theme.of(context).textTheme.bodySmall?.copyWith(
-                                      color: node.isPast || node.isCurrent
-                                          ? AppColors.textSecondary
-                                          : AppColors.textHint,
-                                    ),
+                            style: Theme.of(context).textTheme.bodySmall
+                                ?.copyWith(
+                                  color: node.isPast || node.isCurrent
+                                      ? AppColors.textSecondary
+                                      : AppColors.textHint,
+                                ),
                           ),
                         ],
                       ),
@@ -215,11 +211,11 @@ class _TimelineItem extends StatelessWidget {
                         ),
                         child: Text(
                           '현재',
-                          style:
-                              Theme.of(context).textTheme.labelSmall?.copyWith(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w600,
-                                  ),
+                          style: Theme.of(context).textTheme.labelSmall
+                              ?.copyWith(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w600,
+                              ),
                         ),
                       ),
                     if (node.isPast && !node.isCurrent)

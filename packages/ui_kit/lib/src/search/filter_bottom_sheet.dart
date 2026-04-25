@@ -3,10 +3,7 @@ import 'package:flutter/material.dart';
 
 /// Represents the state of all applied filters.
 class FilterState {
-  const FilterState({
-    this.selected = const {},
-    this.rangeValues = const {},
-  });
+  const FilterState({this.selected = const {}, this.rangeValues = const {}});
 
   /// Keys are section identifiers, values are the selected option labels.
   final Map<String, Set<String>> selected;
@@ -72,13 +69,14 @@ class FilterBottomSheet extends StatefulWidget {
       context: context,
       isScrollControlled: true,
       useSafeArea: true,
-      builder: (_) => FilterBottomSheet(
-        sections: sections,
-        onApply: onApply,
-        title: title,
-        applyLabel: applyLabel,
-        resetLabel: resetLabel,
-      ),
+      builder:
+          (_) => FilterBottomSheet(
+            sections: sections,
+            onApply: onApply,
+            title: title,
+            applyLabel: applyLabel,
+            resetLabel: resetLabel,
+          ),
     );
   }
 
@@ -126,54 +124,58 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
       initialChildSize: 0.6,
       minChildSize: 0.3,
       maxChildSize: 0.9,
-      builder: (context, scrollController) => Column(
-        children: [
-          // Header
-          Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: AppSpacing.md,
-              vertical: AppSpacing.sm,
-            ),
-            child: Row(
-              children: [
-                Text(widget.title, style: theme.textTheme.titleLarge),
-                const Spacer(),
-                TextButton(onPressed: _reset, child: Text(widget.resetLabel)),
-              ],
-            ),
-          ),
-          const Divider(height: 1),
-
-          // Sections
-          Expanded(
-            child: ListView.separated(
-              controller: scrollController,
-              padding: const EdgeInsets.all(AppSpacing.md),
-              itemCount: widget.sections.length,
-              separatorBuilder: (_, __) =>
-                  const SizedBox(height: AppSpacing.lg),
-              itemBuilder: (context, index) {
-                final section = widget.sections[index];
-                return _buildSection(section, theme);
-              },
-            ),
-          ),
-
-          // Apply button
-          SafeArea(
-            child: Padding(
-              padding: const EdgeInsets.all(AppSpacing.md),
-              child: SizedBox(
-                width: double.infinity,
-                child: FilledButton(
-                  onPressed: _apply,
-                  child: Text(widget.applyLabel),
+      builder:
+          (context, scrollController) => Column(
+            children: [
+              // Header
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: AppSpacing.md,
+                  vertical: AppSpacing.sm,
+                ),
+                child: Row(
+                  children: [
+                    Text(widget.title, style: theme.textTheme.titleLarge),
+                    const Spacer(),
+                    TextButton(
+                      onPressed: _reset,
+                      child: Text(widget.resetLabel),
+                    ),
+                  ],
                 ),
               ),
-            ),
+              const Divider(height: 1),
+
+              // Sections
+              Expanded(
+                child: ListView.separated(
+                  controller: scrollController,
+                  padding: const EdgeInsets.all(AppSpacing.md),
+                  itemCount: widget.sections.length,
+                  separatorBuilder:
+                      (_, __) => const SizedBox(height: AppSpacing.lg),
+                  itemBuilder: (context, index) {
+                    final section = widget.sections[index];
+                    return _buildSection(section, theme);
+                  },
+                ),
+              ),
+
+              // Apply button
+              SafeArea(
+                child: Padding(
+                  padding: const EdgeInsets.all(AppSpacing.md),
+                  child: SizedBox(
+                    width: double.infinity,
+                    child: FilledButton(
+                      onPressed: _apply,
+                      child: Text(widget.applyLabel),
+                    ),
+                  ),
+                ),
+              ),
+            ],
           ),
-        ],
-      ),
     );
   }
 
@@ -196,22 +198,23 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
     return Wrap(
       spacing: AppSpacing.sm,
       runSpacing: AppSpacing.xs,
-      children: section.options.map((option) {
-        final isSelected = selected.contains(option);
-        return FilterChip(
-          label: Text(option),
-          selected: isSelected,
-          onSelected: (value) {
-            setState(() {
-              if (value) {
-                selected.add(option);
-              } else {
-                selected.remove(option);
-              }
-            });
-          },
-        );
-      }).toList(),
+      children:
+          section.options.map((option) {
+            final isSelected = selected.contains(option);
+            return FilterChip(
+              label: Text(option),
+              selected: isSelected,
+              onSelected: (value) {
+                setState(() {
+                  if (value) {
+                    selected.add(option);
+                  } else {
+                    selected.remove(option);
+                  }
+                });
+              },
+            );
+          }).toList(),
     );
   }
 

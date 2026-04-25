@@ -70,8 +70,7 @@ class PetStorageService {
   Future<void> addLog(DailyLog log) async {
     final logs = await loadLogs();
     // Remove existing log for same date + routine
-    logs.removeWhere(
-        (l) => l.date == log.date && l.routineId == log.routineId);
+    logs.removeWhere((l) => l.date == log.date && l.routineId == log.routineId);
     logs.add(log);
     await saveLogs(logs);
   }
@@ -84,21 +83,20 @@ class PetStorageService {
   /// Get streak count for a routine (consecutive days completed)
   Future<int> getStreak(String routineId) async {
     final logs = await loadLogs();
-    final completedLogs = logs
-        .where((l) => l.routineId == routineId && l.completed)
-        .toList();
+    final completedLogs =
+        logs.where((l) => l.routineId == routineId && l.completed).toList();
 
     if (completedLogs.isEmpty) return 0;
 
     // Get unique completed dates, sorted descending
-    final dates = completedLogs
-        .map((l) => l.date)
-        .toSet()
-        .toList()
-      ..sort((a, b) => b.compareTo(a));
+    final dates =
+        completedLogs.map((l) => l.date).toSet().toList()
+          ..sort((a, b) => b.compareTo(a));
 
     final today = _dateString(DateTime.now());
-    final yesterday = _dateString(DateTime.now().subtract(const Duration(days: 1)));
+    final yesterday = _dateString(
+      DateTime.now().subtract(const Duration(days: 1)),
+    );
 
     // Streak must start from today or yesterday
     if (dates.first != today && dates.first != yesterday) return 0;

@@ -60,16 +60,18 @@ class DetailScreenLayout extends StatelessWidget {
             pinned: true,
             title: title != null ? Text(title!) : null,
             actions: actions,
-            flexibleSpace: hasHero
-                ? FlexibleSpaceBar(
-                    background: hasGallery
-                        ? _HeroGallery(
-                            imageUrls: heroImages!,
-                            indicatorBuilder: indicatorBuilder,
-                          )
-                        : heroImage,
-                  )
-                : null,
+            flexibleSpace:
+                hasHero
+                    ? FlexibleSpaceBar(
+                      background:
+                          hasGallery
+                              ? _HeroGallery(
+                                imageUrls: heroImages!,
+                                indicatorBuilder: indicatorBuilder,
+                              )
+                              : heroImage,
+                    )
+                    : null,
           ),
           SliverPadding(
             padding: bodyPadding ?? const EdgeInsets.all(AppSpacing.md),
@@ -83,10 +85,7 @@ class DetailScreenLayout extends StatelessWidget {
 }
 
 class _HeroGallery extends StatefulWidget {
-  const _HeroGallery({
-    required this.imageUrls,
-    this.indicatorBuilder,
-  });
+  const _HeroGallery({required this.imageUrls, this.indicatorBuilder});
 
   final List<String> imageUrls;
   final Widget Function(int pageCount, int currentPage)? indicatorBuilder;
@@ -112,14 +111,15 @@ class _HeroGalleryState extends State<_HeroGallery> {
             return Image.network(
               widget.imageUrls[index],
               fit: BoxFit.cover,
-              errorBuilder: (_, __, ___) => Container(
-                color: theme.colorScheme.surfaceContainerHighest,
-                alignment: Alignment.center,
-                child: Icon(
-                  Icons.broken_image_outlined,
-                  color: theme.colorScheme.onSurfaceVariant,
-                ),
-              ),
+              errorBuilder:
+                  (_, __, ___) => Container(
+                    color: theme.colorScheme.surfaceContainerHighest,
+                    alignment: Alignment.center,
+                    child: Icon(
+                      Icons.broken_image_outlined,
+                      color: theme.colorScheme.onSurfaceVariant,
+                    ),
+                  ),
             );
           },
         ),
@@ -128,32 +128,33 @@ class _HeroGalleryState extends State<_HeroGallery> {
             bottom: AppSpacing.sm,
             left: 0,
             right: 0,
-            child: widget.indicatorBuilder != null
-                ? Center(
-                    child: widget.indicatorBuilder!(
-                      widget.imageUrls.length,
-                      _currentPage,
+            child:
+                widget.indicatorBuilder != null
+                    ? Center(
+                      child: widget.indicatorBuilder!(
+                        widget.imageUrls.length,
+                        _currentPage,
+                      ),
+                    )
+                    : Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: List.generate(widget.imageUrls.length, (index) {
+                        final isActive = index == _currentPage;
+                        return AnimatedContainer(
+                          duration: const Duration(milliseconds: 200),
+                          margin: const EdgeInsets.symmetric(horizontal: 3),
+                          width: isActive ? 20 : 8,
+                          height: 8,
+                          decoration: BoxDecoration(
+                            color:
+                                isActive
+                                    ? theme.colorScheme.primary
+                                    : theme.colorScheme.onSurface.withAlpha(80),
+                            borderRadius: BorderRadius.circular(4),
+                          ),
+                        );
+                      }),
                     ),
-                  )
-                : Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children:
-                        List.generate(widget.imageUrls.length, (index) {
-                      final isActive = index == _currentPage;
-                      return AnimatedContainer(
-                        duration: const Duration(milliseconds: 200),
-                        margin: const EdgeInsets.symmetric(horizontal: 3),
-                        width: isActive ? 20 : 8,
-                        height: 8,
-                        decoration: BoxDecoration(
-                          color: isActive
-                              ? theme.colorScheme.primary
-                              : theme.colorScheme.onSurface.withAlpha(80),
-                          borderRadius: BorderRadius.circular(4),
-                        ),
-                      );
-                    }),
-                  ),
           ),
       ],
     );

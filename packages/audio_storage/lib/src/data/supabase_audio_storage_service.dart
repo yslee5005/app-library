@@ -8,10 +8,8 @@ import '../domain/audio_storage_service.dart';
 /// Private bucket + signed URLs; path layout `{userId}/{recordId}.{ext}`
 /// to match the RLS policy `auth.uid()::text = (storage.foldername(name))[1]`.
 class SupabaseAudioStorageService implements AudioStorageService {
-  SupabaseAudioStorageService(
-    this._client, {
-    String bucket = 'audio-prayers',
-  }) : _bucket = bucket;
+  SupabaseAudioStorageService(this._client, {String bucket = 'audio-prayers'})
+    : _bucket = bucket;
 
   final SupabaseClient _client;
   final String _bucket;
@@ -29,7 +27,9 @@ class SupabaseAudioStorageService implements AudioStorageService {
     }
     final storagePath = '$userId/$recordId.$extension';
     try {
-      await _client.storage.from(_bucket).upload(
+      await _client.storage
+          .from(_bucket)
+          .upload(
             storagePath,
             file,
             fileOptions: FileOptions(

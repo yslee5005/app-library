@@ -13,11 +13,7 @@ class AppButtonDemo extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            AppButton(
-              label: 'Primary',
-              onPressed: () {},
-              expand: true,
-            ),
+            AppButton(label: 'Primary', onPressed: () {}, expand: true),
             const SizedBox(height: 8),
             AppButton(
               label: 'Secondary',
@@ -47,11 +43,7 @@ class AppButtonDemo extends StatelessWidget {
               expand: true,
             ),
             const SizedBox(height: 8),
-            const AppButton(
-              label: 'Loading',
-              isLoading: true,
-              expand: true,
-            ),
+            const AppButton(label: 'Loading', isLoading: true, expand: true),
             const SizedBox(height: 8),
             const AppButton(label: 'Disabled', expand: true),
           ],

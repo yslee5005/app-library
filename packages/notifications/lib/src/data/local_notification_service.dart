@@ -25,9 +25,7 @@ class LocalNotificationService implements NotificationRepository {
   final String channelDescription;
 
   /// Initializes the plugin. Call once at app startup.
-  Future<void> initialize({
-    void Function(NotificationResponse)? onTap,
-  }) async {
+  Future<void> initialize({void Function(NotificationResponse)? onTap}) async {
     const androidSettings = AndroidInitializationSettings(
       '@mipmap/ic_launcher',
     );
@@ -43,22 +41,19 @@ class LocalNotificationService implements NotificationRepository {
       macOS: darwinSettings,
     );
 
-    await _plugin.initialize(
-      settings,
-      onDidReceiveNotificationResponse: onTap,
-    );
+    await _plugin.initialize(settings, onDidReceiveNotificationResponse: onTap);
   }
 
   NotificationDetails get _defaultDetails => NotificationDetails(
-        android: AndroidNotificationDetails(
-          channelId,
-          channelName,
-          channelDescription: channelDescription,
-          importance: Importance.high,
-          priority: Priority.high,
-        ),
-        iOS: const DarwinNotificationDetails(),
-      );
+    android: AndroidNotificationDetails(
+      channelId,
+      channelName,
+      channelDescription: channelDescription,
+      importance: Importance.high,
+      priority: Priority.high,
+    ),
+    iOS: const DarwinNotificationDetails(),
+  );
 
   @override
   Future<void> show(NotificationMessage message) async {
@@ -75,7 +70,9 @@ class LocalNotificationService implements NotificationRepository {
   Future<void> schedule(NotificationMessage message) async {
     final scheduledAt = message.scheduledAt;
     if (scheduledAt == null) {
-      throw ArgumentError('scheduledAt must not be null for scheduled notifications');
+      throw ArgumentError(
+        'scheduledAt must not be null for scheduled notifications',
+      );
     }
 
     await _plugin.zonedSchedule(
@@ -102,8 +99,11 @@ class LocalNotificationService implements NotificationRepository {
   @override
   Future<bool> requestPermission() async {
     // iOS permission request
-    final ios = _plugin.resolvePlatformSpecificImplementation<
-        IOSFlutterLocalNotificationsPlugin>();
+    final ios =
+        _plugin
+            .resolvePlatformSpecificImplementation<
+              IOSFlutterLocalNotificationsPlugin
+            >();
     if (ios != null) {
       final result = await ios.requestPermissions(
         alert: true,
@@ -114,8 +114,11 @@ class LocalNotificationService implements NotificationRepository {
     }
 
     // Android 13+ permission request
-    final android = _plugin.resolvePlatformSpecificImplementation<
-        AndroidFlutterLocalNotificationsPlugin>();
+    final android =
+        _plugin
+            .resolvePlatformSpecificImplementation<
+              AndroidFlutterLocalNotificationsPlugin
+            >();
     if (android != null) {
       final result = await android.requestNotificationsPermission();
       return result ?? false;

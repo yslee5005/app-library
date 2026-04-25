@@ -4,11 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   final tabs = [
-    const AppShellTab(
-      icon: Icons.home,
-      label: 'Home',
-      body: Text('Home Page'),
-    ),
+    const AppShellTab(icon: Icons.home, label: 'Home', body: Text('Home Page')),
     const AppShellTab(
       icon: Icons.settings,
       activeIcon: Icons.settings_outlined,
@@ -53,12 +49,11 @@ void main() {
     expect(tester.getSize(homeFinder).width, greaterThan(0));
   });
 
-  testWidgets('calls onTabChanged when a nav destination is tapped',
-      (tester) async {
+  testWidgets('calls onTabChanged when a nav destination is tapped', (
+    tester,
+  ) async {
     int? tappedIndex;
-    await tester.pumpWidget(
-      buildApp(onTabChanged: (i) => tappedIndex = i),
-    );
+    await tester.pumpWidget(buildApp(onTabChanged: (i) => tappedIndex = i));
 
     await tester.tap(find.text('Settings'));
     await tester.pumpAndSettle();
@@ -83,8 +78,9 @@ void main() {
     );
 
     // Open drawer via scaffold
-    final scaffoldState =
-        tester.firstState<ScaffoldState>(find.byType(Scaffold));
+    final scaffoldState = tester.firstState<ScaffoldState>(
+      find.byType(Scaffold),
+    );
     scaffoldState.openDrawer();
     await tester.pumpAndSettle();
 

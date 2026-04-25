@@ -7,8 +7,8 @@ import '../tokens/app_typography.dart';
 /// Generates [ThemeData] for light and dark modes from a [ThemeConfig].
 class ThemeGenerator {
   ThemeGenerator(this.config)
-      : colors = AppColors.fromSeed(config.seedColor),
-        typography = AppTypography(fontFamily: config.fontFamily);
+    : colors = AppColors.fromSeed(config.seedColor),
+      typography = AppTypography(fontFamily: config.fontFamily);
 
   /// The configuration used to generate themes.
   final ThemeConfig config;
@@ -62,9 +62,7 @@ class ThemeGenerator {
         ),
       ),
       inputDecorationTheme: InputDecorationTheme(
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(radius),
-        ),
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(radius)),
         filled: true,
       ),
       chipTheme: ChipThemeData(

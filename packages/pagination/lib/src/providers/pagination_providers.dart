@@ -22,7 +22,7 @@ import '../domain/pagination_state.dart';
 /// )
 /// ```
 AsyncNotifierProvider<PaginationNotifier<T>, PaginationState<T>>
-    createPaginationProvider<T>() {
+createPaginationProvider<T>() {
   return AsyncNotifierProvider<PaginationNotifier<T>, PaginationState<T>>(
     PaginationNotifier<T>.new,
   );
@@ -40,8 +40,7 @@ class PaginationKey {
 
   @override
   bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is PaginationKey && id == other.id;
+      identical(this, other) || other is PaginationKey && id == other.id;
 
   @override
   int get hashCode => id.hashCode;
@@ -74,12 +73,12 @@ class PaginationNotifier<T> extends AsyncNotifier<PaginationState<T>> {
     final result = await repository.fetchPage(const PaginationParams());
     return switch (result) {
       Success(:final value) => PaginationLoaded<T>(
-          items: value.items,
-          hasMore: value.hasMore,
-          cursor: value.cursor,
-          cursorId: value.cursorId,
-          totalCount: value.totalCount,
-        ),
+        items: value.items,
+        hasMore: value.hasMore,
+        cursor: value.cursor,
+        cursorId: value.cursorId,
+        totalCount: value.totalCount,
+      ),
       Failure(:final exception) => PaginationError<T>(exception: exception),
     };
   }
@@ -96,17 +95,14 @@ class PaginationNotifier<T> extends AsyncNotifier<PaginationState<T>> {
     state = AsyncData(PaginationLoading<T>(items: current.items));
 
     final result = await repository.fetchPage(
-      PaginationParams(
-        cursor: current.cursor,
-        cursorId: current.cursorId,
-      ),
+      PaginationParams(cursor: current.cursor, cursorId: current.cursorId),
     );
 
     state = switch (result) {
       Success(:final value) => AsyncData(current.appendPage(value)),
       Failure(:final exception) => AsyncData(
-          PaginationError<T>(exception: exception, items: current.items),
-        ),
+        PaginationError<T>(exception: exception, items: current.items),
+      ),
     };
   }
 
@@ -118,16 +114,17 @@ class PaginationNotifier<T> extends AsyncNotifier<PaginationState<T>> {
 
     state = switch (result) {
       Success(:final value) => AsyncData(
-          PaginationLoaded<T>(
-            items: value.items,
-            hasMore: value.hasMore,
-            cursor: value.cursor,
-            cursorId: value.cursorId,
-            totalCount: value.totalCount,
-          ),
+        PaginationLoaded<T>(
+          items: value.items,
+          hasMore: value.hasMore,
+          cursor: value.cursor,
+          cursorId: value.cursorId,
+          totalCount: value.totalCount,
         ),
-      Failure(:final exception) =>
-        AsyncData(PaginationError<T>(exception: exception)),
+      ),
+      Failure(:final exception) => AsyncData(
+        PaginationError<T>(exception: exception),
+      ),
     };
   }
 

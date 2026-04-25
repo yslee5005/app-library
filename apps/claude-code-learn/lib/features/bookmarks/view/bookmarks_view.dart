@@ -14,9 +14,7 @@ class BookmarksView extends ConsumerWidget {
     final bookmarksAsync = ref.watch(bookmarksProvider);
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Bookmarks', style: LearnTypography.h1),
-      ),
+      appBar: AppBar(title: Text('Bookmarks', style: LearnTypography.h1)),
       body: bookmarksAsync.when(
         loading: () => const Center(child: CircularProgressIndicator()),
         error: (e, _) => Center(child: Text('Error: $e')),
@@ -34,8 +32,9 @@ class BookmarksView extends ConsumerWidget {
                   const SizedBox(height: 16),
                   Text(
                     'No bookmarks yet',
-                    style: LearnTypography.body
-                        .copyWith(color: LearnColors.muted),
+                    style: LearnTypography.body.copyWith(
+                      color: LearnColors.muted,
+                    ),
                   ),
                   const SizedBox(height: 8),
                   Text(

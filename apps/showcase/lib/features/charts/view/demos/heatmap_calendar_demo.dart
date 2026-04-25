@@ -15,8 +15,10 @@ class HeatmapCalendarDemo extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Activity heatmap (17 weeks)',
-                style: Theme.of(context).textTheme.titleMedium),
+            Text(
+              'Activity heatmap (17 weeks)',
+              style: Theme.of(context).textTheme.titleMedium,
+            ),
             const SizedBox(height: 16),
             HeatmapCalendar(
               data: SampleData.heatmapData,

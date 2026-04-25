@@ -54,23 +54,26 @@ class SupabaseFurnitureRepository implements FurnitureRepository {
         .select('id, name')
         .eq('parent_id', furnitureParentId);
 
-    _furnitureCategoryIds = (childRows as List)
-        .map<String>((row) => row['id'] as String)
-        .toList();
+    _furnitureCategoryIds =
+        (childRows as List).map<String>((row) => row['id'] as String).toList();
 
     return _furnitureCategoryIds!;
   }
 
   Furniture _fromRow(Map<String, dynamic> row) {
-    final images = (row['product_images'] as List? ?? [])
-        .where((img) => img['deleted_at'] == null)
-        .toList()
-      ..sort(
-          (a, b) => (a['sort_order'] as int).compareTo(b['sort_order'] as int));
+    final images =
+        (row['product_images'] as List? ?? [])
+            .where((img) => img['deleted_at'] == null)
+            .toList()
+          ..sort(
+            (a, b) =>
+                (a['sort_order'] as int).compareTo(b['sort_order'] as int),
+          );
 
-    final imageUrls = images
-        .map<String>((img) => _storageUrl(img['storage_path'] as String))
-        .toList();
+    final imageUrls =
+        images
+            .map<String>((img) => _storageUrl(img['storage_path'] as String))
+            .toList();
 
     final mainCatName = row['categories']?['name'] as String? ?? '';
 
@@ -112,11 +115,12 @@ class SupabaseFurnitureRepository implements FurnitureRepository {
 
   @override
   Future<Furniture?> getById(String id) async {
-    final response = await _products
-        .select(_select)
-        .eq('id', id)
-        .isFilter('deleted_at', null)
-        .maybeSingle();
+    final response =
+        await _products
+            .select(_select)
+            .eq('id', id)
+            .isFilter('deleted_at', null)
+            .maybeSingle();
 
     if (response == null) return null;
     return _fromRow(response);

@@ -88,8 +88,7 @@ class _ImageCarouselState extends State<ImageCarousel> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final radius =
-        widget.borderRadius ?? BorderRadius.circular(AppRadius.lg);
+    final radius = widget.borderRadius ?? BorderRadius.circular(AppRadius.lg);
 
     return SizedBox(
       height: widget.height,
@@ -120,14 +119,15 @@ class _ImageCarouselState extends State<ImageCarousel> {
                           ),
                         );
                   },
-                  errorBuilder: (_, __, ___) => Container(
-                    color: theme.colorScheme.surfaceContainerHighest,
-                    alignment: Alignment.center,
-                    child: Icon(
-                      Icons.broken_image_outlined,
-                      color: theme.colorScheme.onSurfaceVariant,
-                    ),
-                  ),
+                  errorBuilder:
+                      (_, __, ___) => Container(
+                        color: theme.colorScheme.surfaceContainerHighest,
+                        alignment: Alignment.center,
+                        child: Icon(
+                          Icons.broken_image_outlined,
+                          color: theme.colorScheme.onSurfaceVariant,
+                        ),
+                      ),
                 );
               },
             ),
@@ -139,33 +139,38 @@ class _ImageCarouselState extends State<ImageCarousel> {
               bottom: AppSpacing.sm,
               left: 0,
               right: 0,
-              child: widget.indicatorBuilder != null
-                  ? Center(
-                      child: widget.indicatorBuilder!(
-                        widget.imageUrls.length,
-                        _currentPage,
+              child:
+                  widget.indicatorBuilder != null
+                      ? Center(
+                        child: widget.indicatorBuilder!(
+                          widget.imageUrls.length,
+                          _currentPage,
+                        ),
+                      )
+                      : Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: List.generate(widget.imageUrls.length, (
+                          index,
+                        ) {
+                          final isActive = index == _currentPage;
+                          return AnimatedContainer(
+                            duration: const Duration(milliseconds: 200),
+                            margin: const EdgeInsets.symmetric(horizontal: 3),
+                            width: isActive ? 20 : 8,
+                            height: 8,
+                            decoration: BoxDecoration(
+                              color:
+                                  isActive
+                                      ? (widget.indicatorColor ??
+                                          theme.colorScheme.primary)
+                                      : theme.colorScheme.onSurface.withAlpha(
+                                        80,
+                                      ),
+                              borderRadius: BorderRadius.circular(4),
+                            ),
+                          );
+                        }),
                       ),
-                    )
-                  : Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children:
-                          List.generate(widget.imageUrls.length, (index) {
-                        final isActive = index == _currentPage;
-                        return AnimatedContainer(
-                          duration: const Duration(milliseconds: 200),
-                          margin: const EdgeInsets.symmetric(horizontal: 3),
-                          width: isActive ? 20 : 8,
-                          height: 8,
-                          decoration: BoxDecoration(
-                            color: isActive
-                                ? (widget.indicatorColor ??
-                                    theme.colorScheme.primary)
-                                : theme.colorScheme.onSurface.withAlpha(80),
-                            borderRadius: BorderRadius.circular(4),
-                          ),
-                        );
-                      }),
-                    ),
             ),
         ],
       ),

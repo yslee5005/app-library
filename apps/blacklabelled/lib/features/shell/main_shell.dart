@@ -13,29 +13,31 @@ class MainShell extends StatelessWidget {
 
     return Scaffold(
       extendBodyBehindAppBar: isHome,
-      appBar: isHome
-          ? null
-          : AppBar(
-              title: Text(
-                'BlackLabelled',
-                style: GoogleFonts.epilogue(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w300,
-                  fontStyle: FontStyle.italic,
-                  letterSpacing: -0.5,
-                  color: Colors.white,
+      appBar:
+          isHome
+              ? null
+              : AppBar(
+                title: Text(
+                  'BlackLabelled',
+                  style: GoogleFonts.epilogue(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w300,
+                    fontStyle: FontStyle.italic,
+                    letterSpacing: -0.5,
+                    color: Colors.white,
+                  ),
                 ),
+                centerTitle: true,
+                backgroundColor: Colors.black,
               ),
-              centerTitle: true,
-              backgroundColor: Colors.black,
-            ),
       body: navigationShell,
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: navigationShell.currentIndex,
-        onTap: (index) => navigationShell.goBranch(
-          index,
-          initialLocation: index == navigationShell.currentIndex,
-        ),
+        onTap:
+            (index) => navigationShell.goBranch(
+              index,
+              initialLocation: index == navigationShell.currentIndex,
+            ),
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home_outlined),

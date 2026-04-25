@@ -9,7 +9,9 @@ void main() {
 
   group('AppSearchBar', () {
     testWidgets('renders with hint text', (tester) async {
-      await tester.pumpWidget(buildApp(const AppSearchBar(hint: 'Search here')));
+      await tester.pumpWidget(
+        buildApp(const AppSearchBar(hint: 'Search here')),
+      );
       expect(find.text('Search here'), findsOneWidget);
     });
 

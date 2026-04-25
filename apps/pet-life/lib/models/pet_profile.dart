@@ -86,15 +86,19 @@ class PetProfile {
       birthDate: DateTime.parse(json['birthDate'] as String),
       weightKg: (json['weightKg'] as num).toDouble(),
       neutered: json['neutered'] as bool? ?? false,
-      routines: (json['routines'] as List<dynamic>)
-          .map((e) => DailyRoutine.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      favoriteActivities: (json['favoriteActivities'] as List<dynamic>?)
+      routines:
+          (json['routines'] as List<dynamic>)
+              .map((e) => DailyRoutine.fromJson(e as Map<String, dynamic>))
+              .toList(),
+      favoriteActivities:
+          (json['favoriteActivities'] as List<dynamic>?)
               ?.map((e) => FavoriteActivity.fromJson(e as Map<String, dynamic>))
               .toList() ??
           [],
-      lastActivityDates: (json['lastActivityDates'] as Map<String, dynamic>?)
-              ?.map((k, v) => MapEntry(k, DateTime.parse(v as String))) ??
+      lastActivityDates:
+          (json['lastActivityDates'] as Map<String, dynamic>?)?.map(
+            (k, v) => MapEntry(k, DateTime.parse(v as String)),
+          ) ??
           {},
       createdAt: DateTime.parse(json['createdAt'] as String),
     );

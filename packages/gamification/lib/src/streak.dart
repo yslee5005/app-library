@@ -10,11 +10,7 @@ class Streak {
   final int best;
   final DateTime? lastActivityDate;
 
-  Streak copyWith({
-    int? current,
-    int? best,
-    DateTime? lastActivityDate,
-  }) {
+  Streak copyWith({int? current, int? best, DateTime? lastActivityDate}) {
     return Streak(
       current: current ?? this.current,
       best: best ?? this.best,

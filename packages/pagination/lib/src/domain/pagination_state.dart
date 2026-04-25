@@ -99,10 +99,7 @@ final class PaginationLoaded<T> extends PaginationState<T> {
   ///
   /// Finds the first item matching [test] and replaces it with the result
   /// of [update]. Returns an unchanged state if no match is found.
-  PaginationLoaded<T> updateItem(
-    bool Function(T) test,
-    T Function(T) update,
-  ) {
+  PaginationLoaded<T> updateItem(bool Function(T) test, T Function(T) update) {
     final index = items.indexWhere(test);
     if (index == -1) return this;
 
@@ -142,10 +139,7 @@ final class PaginationLoaded<T> extends PaginationState<T> {
 ///
 /// [items] contains previously loaded items (if any).
 final class PaginationError<T> extends PaginationState<T> {
-  const PaginationError({
-    required this.exception,
-    this.items = const [],
-  });
+  const PaginationError({required this.exception, this.items = const []});
 
   final AppException exception;
 

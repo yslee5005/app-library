@@ -76,9 +76,7 @@ class FeedListView extends StatelessWidget {
         return RefreshIndicator(
           onRefresh: onRefresh!,
           child: CustomScrollView(
-            slivers: [
-              SliverFillRemaining(child: emptyWidget!),
-            ],
+            slivers: [SliverFillRemaining(child: emptyWidget!)],
           ),
         );
       }
@@ -90,9 +88,10 @@ class FeedListView extends StatelessWidget {
     // Total count: items + optional loading indicator
     final totalCount = itemCount + (isLoadingMore && hasMore ? 1 : 0);
 
-    final defaultSeparator = isHorizontal
-        ? SizedBox(width: itemSpacing ?? AppSpacing.sm)
-        : SizedBox(height: itemSpacing ?? AppSpacing.sm);
+    final defaultSeparator =
+        isHorizontal
+            ? SizedBox(width: itemSpacing ?? AppSpacing.sm)
+            : SizedBox(height: itemSpacing ?? AppSpacing.sm);
 
     Widget listView = ListView.separated(
       scrollDirection: scrollDirection,
@@ -141,10 +140,7 @@ class FeedListView extends StatelessWidget {
 
     // Wrap with RefreshIndicator (vertical only)
     if (onRefresh != null && !isHorizontal) {
-      listView = RefreshIndicator(
-        onRefresh: onRefresh!,
-        child: listView,
-      );
+      listView = RefreshIndicator(onRefresh: onRefresh!, child: listView);
     }
 
     // Constrain height for horizontal lists

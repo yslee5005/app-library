@@ -36,10 +36,7 @@ class _MilestoneCelebrationScreenState extends State<MilestoneCelebrationScreen>
       duration: const Duration(milliseconds: 1200),
     );
     _scaleAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
-      CurvedAnimation(
-        parent: _scaleController,
-        curve: Curves.elasticOut,
-      ),
+      CurvedAnimation(parent: _scaleController, curve: Curves.elasticOut),
     );
     _scaleController.forward();
 
@@ -123,10 +120,7 @@ class _MilestoneCelebrationScreenState extends State<MilestoneCelebrationScreen>
                   // 축하 이모지 (스케일 애니메이션)
                   ScaleTransition(
                     scale: _scaleAnimation,
-                    child: const Text(
-                      '🎉',
-                      style: TextStyle(fontSize: 80),
-                    ),
+                    child: const Text('🎉', style: TextStyle(fontSize: 80)),
                   ),
 
                   const SizedBox(height: 32),
@@ -134,11 +128,10 @@ class _MilestoneCelebrationScreenState extends State<MilestoneCelebrationScreen>
                   // 마일스톤 텍스트
                   Text(
                     widget.milestoneName,
-                    style:
-                        Theme.of(context).textTheme.headlineMedium?.copyWith(
-                              fontWeight: FontWeight.w700,
-                              color: AppColors.textPrimary,
-                            ),
+                    style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                      fontWeight: FontWeight.w700,
+                      color: AppColors.textPrimary,
+                    ),
                     textAlign: TextAlign.center,
                   ),
 
@@ -156,10 +149,9 @@ class _MilestoneCelebrationScreenState extends State<MilestoneCelebrationScreen>
                     ),
                     child: Text(
                       _formattedDate,
-                      style:
-                          Theme.of(context).textTheme.labelLarge?.copyWith(
-                                color: AppColors.textSecondary,
-                              ),
+                      style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                        color: AppColors.textSecondary,
+                      ),
                     ),
                   ),
 
@@ -167,9 +159,9 @@ class _MilestoneCelebrationScreenState extends State<MilestoneCelebrationScreen>
 
                   Text(
                     '이 순간을 기록해두세요',
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          color: AppColors.textHint,
-                        ),
+                    style: Theme.of(
+                      context,
+                    ).textTheme.bodyMedium?.copyWith(color: AppColors.textHint),
                   ),
 
                   const Spacer(flex: 3),
@@ -184,8 +176,10 @@ class _MilestoneCelebrationScreenState extends State<MilestoneCelebrationScreen>
                             onPressed: () {
                               // TODO: 사진 추가 기능
                             },
-                            icon: const Text('📸',
-                                style: TextStyle(fontSize: 18)),
+                            icon: const Text(
+                              '📸',
+                              style: TextStyle(fontSize: 18),
+                            ),
                             label: const Text('사진 추가'),
                           ),
                         ),
@@ -198,8 +192,10 @@ class _MilestoneCelebrationScreenState extends State<MilestoneCelebrationScreen>
                             onPressed: () {
                               // TODO: 공유하기 기능
                             },
-                            icon: const Text('📤',
-                                style: TextStyle(fontSize: 18)),
+                            icon: const Text(
+                              '📤',
+                              style: TextStyle(fontSize: 18),
+                            ),
                             label: const Text('공유하기'),
                           ),
                         ),
@@ -256,8 +252,7 @@ class _ParticlePainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     for (final particle in particles) {
-      final animatedY =
-          (particle.y + progress * particle.speed) % 1.0;
+      final animatedY = (particle.y + progress * particle.speed) % 1.0;
       final opacity = (1.0 - animatedY).clamp(0.0, 0.6);
 
       final paint = Paint()
@@ -265,10 +260,7 @@ class _ParticlePainter extends CustomPainter {
         ..style = PaintingStyle.fill;
 
       canvas.drawCircle(
-        Offset(
-          particle.x * size.width,
-          animatedY * size.height,
-        ),
+        Offset(particle.x * size.width, animatedY * size.height),
         particle.size,
         paint,
       );

@@ -80,32 +80,37 @@ class _ReaderViewState extends ConsumerState<ReaderView> {
     final existing = await repo.getProgress(widget.contentId);
     if (existing != null && existing.isCompleted) return;
 
-    await repo.upsertProgress(ReadingProgress(
-      contentId: widget.contentId,
-      scrollPosition: 1.0,
-      isCompleted: true,
-      lastReadAt: DateTime.now(),
-      timeSpentSeconds: _timeSpent,
-    ));
+    await repo.upsertProgress(
+      ReadingProgress(
+        contentId: widget.contentId,
+        scrollPosition: 1.0,
+        isCompleted: true,
+        lastReadAt: DateTime.now(),
+        timeSpentSeconds: _timeSpent,
+      ),
+    );
     ref.invalidate(allProgressProvider);
   }
 
   Future<void> _saveProgress() async {
     if (!_scrollController.hasClients) return;
     final pos = _scrollController.position;
-    final ratio =
-        pos.maxScrollExtent > 0 ? pos.pixels / pos.maxScrollExtent : 0.0;
+    final ratio = pos.maxScrollExtent > 0
+        ? pos.pixels / pos.maxScrollExtent
+        : 0.0;
 
     final repo = ref.read(progressRepositoryProvider);
     final existing = await repo.getProgress(widget.contentId);
 
-    await repo.upsertProgress(ReadingProgress(
-      contentId: widget.contentId,
-      scrollPosition: ratio,
-      isCompleted: existing?.isCompleted ?? (ratio >= 0.95),
-      lastReadAt: DateTime.now(),
-      timeSpentSeconds: (existing?.timeSpentSeconds ?? 0) + _timeSpent,
-    ));
+    await repo.upsertProgress(
+      ReadingProgress(
+        contentId: widget.contentId,
+        scrollPosition: ratio,
+        isCompleted: existing?.isCompleted ?? (ratio >= 0.95),
+        lastReadAt: DateTime.now(),
+        timeSpentSeconds: (existing?.timeSpentSeconds ?? 0) + _timeSpent,
+      ),
+    );
     ref.invalidate(allProgressProvider);
   }
 
@@ -124,10 +129,7 @@ class _ReaderViewState extends ConsumerState<ReaderView> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          item?.title ?? 'Reading',
-          style: LearnTypography.h2,
-        ),
+        title: Text(item?.title ?? 'Reading', style: LearnTypography.h2),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: _toggleBookmark,
@@ -144,12 +146,16 @@ class _ReaderViewState extends ConsumerState<ReaderView> {
               config: isDark
                   ? MarkdownConfig.darkConfig.copy(
                       configs: [
-                        PConfig(textStyle: TextStyle(fontSize: fontSize, height: 1.7)),
+                        PConfig(
+                          textStyle: TextStyle(fontSize: fontSize, height: 1.7),
+                        ),
                       ],
                     )
                   : MarkdownConfig.defaultConfig.copy(
                       configs: [
-                        PConfig(textStyle: TextStyle(fontSize: fontSize, height: 1.7)),
+                        PConfig(
+                          textStyle: TextStyle(fontSize: fontSize, height: 1.7),
+                        ),
                       ],
                     ),
             ),
