@@ -66,10 +66,13 @@ class _PrayerDashboardViewState extends ConsumerState<PrayerDashboardView> {
   /// notifier's `t3Triggered` flag prevents re-firing across sources.
   void _maybeTriggerT3() {
     if (!mounted) return;
+    // Free / Trial users MUST NOT hit Premium AI. ProBlur shows preview UI
+    // instead (Wave C). T3 Premium is Pro-only — Trial daily 3-cap is for
+    // T1/T2 only per effectiveTierProvider semantics.
+    final tier = ref.read(effectiveTierProvider).value;
+    if (tier != EffectiveTier.pro) return;
     final sections = ref.read(prayerSectionsProvider);
     if (sections.t3Triggered) return;
-    final isPremium = ref.read(isPremiumProvider).value ?? false;
-    if (!isPremium) return;
     // Need T1 and T2 context for coherent T3 generation.
     if (sections.summary == null ||
         sections.scripture == null ||
@@ -103,6 +106,11 @@ class _PrayerDashboardViewState extends ConsumerState<PrayerDashboardView> {
   }
 
   Future<void> _loadPremiumContent() async {
+    // Free / Trial users MUST NOT hit Premium AI. ProBlur shows preview UI
+    // instead (Wave C). Defensive gate — also enforced by _maybeTriggerT3 and
+    // by the showPremiumSection visibility guard.
+    final tier = ref.read(effectiveTierProvider).value;
+    if (tier != EffectiveTier.pro) return;
     if (_premiumLoading || _premiumContent != null) return;
 
     setState(() => _premiumLoading = true);
@@ -163,6 +171,11 @@ class _PrayerDashboardViewState extends ConsumerState<PrayerDashboardView> {
     // downstream consumers (e.g. community write).
     final sections = ref.watch(prayerSectionsProvider);
     final isPremium = ref.watch(isPremiumProvider).value ?? false;
+    // Wave C — warm effectiveTierProvider so the synchronous read inside
+    // _maybeTriggerT3 / _loadPremiumContent resolves to a non-null value by
+    // the time the 3s fallback timer fires. Without this watch the provider
+    // never starts its async fetch.
+    ref.watch(effectiveTierProvider);
 
     // While T1 has not arrived (no scripture/summary yet), show spinner. The
     // Dashboard is reachable as soon as T1 resolves from streaming, so this

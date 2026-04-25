@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../l10n/generated/app_localizations.dart';
 import '../../../models/prayer.dart';
 import '../../../theme/abba_theme.dart';
 import '../../../widgets/expandable_card.dart';
@@ -25,13 +26,15 @@ class HistoricalStoryCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final isLocked = historicalStory.isPremium && !isUserPremium;
 
-    // Locked: show ProBlur with 3-line preview
+    // Locked: show ProBlur skeleton preview (no real Premium AI call).
     if (isLocked) {
+      final l10n = AppLocalizations.of(context)!;
       return ProBlur(
         title: title,
         icon: '📖',
         isLocked: true,
         onUnlock: onUnlock,
+        lockedHint: l10n.proPreviewHistoricalHint,
         content: const SizedBox.shrink(),
       );
     }

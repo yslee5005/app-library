@@ -31,6 +31,7 @@ class PrayerCoachingCard extends ConsumerWidget {
         icon: '🎯',
         isLocked: true,
         onUnlock: onUnlock,
+        lockedHint: l10n.proPreviewCoachingHint,
         content: const SizedBox.shrink(),
       );
     }

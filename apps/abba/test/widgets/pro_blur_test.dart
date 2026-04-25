@@ -69,11 +69,15 @@ void main() {
       expect(find.text('AI Guidance'), findsOneWidget);
       expect(find.text('💡'), findsOneWidget);
       expect(find.text('secret-body-text'), findsOneWidget);
+      // Skeleton + hint must NOT render in unlocked mode.
+      expect(find.byKey(const ValueKey('pro_blur_skeleton')), findsNothing);
+      expect(find.byKey(const ValueKey('pro_blur_hint')), findsNothing);
     });
 
-    testWidgets('locked: hides content body and shows membership badge', (
+    testWidgets('locked with lockedHint: renders skeleton + hint + body hidden', (
       tester,
     ) async {
+      const hint = 'Discover the deeper history behind a word';
       await tester.pumpWidget(
         _buildHarness(
           child: const ProBlur(
@@ -82,7 +86,7 @@ void main() {
             isLocked: true,
             onUnlock: _noop,
             content: Text('secret-body-text'),
-            previewText: 'Your prayer, deepened',
+            lockedHint: hint,
           ),
         ),
       );
@@ -95,10 +99,50 @@ void main() {
       // Body content is NOT rendered while locked.
       expect(find.text('secret-body-text'), findsNothing);
 
-      // Preview text is shown when provided.
-      expect(find.text('Your prayer, deepened'), findsOneWidget);
+      // Skeleton blur preview is rendered (visual placeholder, no real text).
+      expect(find.byKey(const ValueKey('pro_blur_skeleton')), findsOneWidget);
+
+      // BackdropFilter must be present inside the skeleton.
+      expect(find.byType(BackdropFilter), findsOneWidget);
+
+      // Hint is rendered with its key.
+      expect(find.byKey(const ValueKey('pro_blur_hint')), findsOneWidget);
+      expect(find.text(hint), findsOneWidget);
 
       // Membership badge (l10n.membershipTitle = "Membership") is shown.
+      expect(find.text('Membership'), findsOneWidget);
+
+      // Pro CTA copy ("Unlock with Pro" in en).
+      expect(find.text('Unlock with Pro'), findsOneWidget);
+    });
+
+    testWidgets('locked without lockedHint: skeleton renders, hint omitted', (
+      tester,
+    ) async {
+      await tester.pumpWidget(
+        _buildHarness(
+          child: const ProBlur(
+            title: 'AI Guidance',
+            icon: '💡',
+            isLocked: true,
+            onUnlock: _noop,
+            content: Text('secret-body-text'),
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      // Skeleton always renders when locked.
+      expect(find.byKey(const ValueKey('pro_blur_skeleton')), findsOneWidget);
+
+      // Hint key must NOT exist when no hint is supplied.
+      expect(find.byKey(const ValueKey('pro_blur_hint')), findsNothing);
+
+      // Body still hidden.
+      expect(find.text('secret-body-text'), findsNothing);
+
+      // Title + badge still visible.
+      expect(find.text('AI Guidance'), findsOneWidget);
       expect(find.text('Membership'), findsOneWidget);
     });
 

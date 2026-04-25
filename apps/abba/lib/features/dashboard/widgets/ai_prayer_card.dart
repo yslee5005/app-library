@@ -31,6 +31,7 @@ class AiPrayerCard extends StatelessWidget {
         icon: '🙏',
         isLocked: true,
         onUnlock: onUnlock,
+        lockedHint: l10n.proPreviewPrayerHint,
         content: const SizedBox.shrink(),
       );
     }
