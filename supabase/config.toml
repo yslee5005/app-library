@@ -51,3 +51,10 @@ verify_jwt = false
 # its JWT verification is part of its security model. If ES256 401 starts
 # hitting it, the fix is Edge Runtime upgrade or in-function JWKS verify,
 # NOT verify_jwt = false.
+
+# Throwaway probe to measure Gemini implicit/explicit cache behavior before
+# the AI gateway migration (see specs/AI_GATEWAY_MIGRATION_SPEC.md Step B).
+# Operator-only — invoked manually with curl. Remove this function and entry
+# after Step C decision is locked.
+[functions.probe-gemini-cache]
+verify_jwt = false
