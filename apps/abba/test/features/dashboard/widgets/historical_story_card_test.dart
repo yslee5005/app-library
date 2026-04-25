@@ -16,49 +16,51 @@ import '../../../helpers/test_fixtures.dart';
 ///   - Free user: ProBlur lock — no story body rendered.
 void main() {
   group('HistoricalStoryCard', () {
-    testWidgets('Pro user: renders title, reference, summary, and lesson block',
-        (tester) async {
-      final story = TestFixtures.historicalStory();
+    testWidgets(
+      'Pro user: renders title, reference, summary, and lesson block',
+      (tester) async {
+        final story = TestFixtures.historicalStory();
 
-      await tester.pumpWidget(
-        buildTestApp(
-          Scaffold(
-            body: SingleChildScrollView(
-              child: HistoricalStoryCard(
-                historicalStory: story,
-                title: 'Historical Story',
-                lessonLabel: 'Lesson',
-                isUserPremium: true,
-                onUnlock: () {},
+        await tester.pumpWidget(
+          buildTestApp(
+            Scaffold(
+              body: SingleChildScrollView(
+                child: HistoricalStoryCard(
+                  historicalStory: story,
+                  title: 'Historical Story',
+                  lessonLabel: 'Lesson',
+                  isUserPremium: true,
+                  onUnlock: () {},
+                ),
               ),
             ),
           ),
-        ),
-      );
-      await tester.pumpAndSettle();
+        );
+        await tester.pumpAndSettle();
 
-      // Header visible + collapsed summary row shows the story title.
-      expect(find.text('Historical Story'), findsOneWidget);
-      expect(find.text('📖'), findsOneWidget);
-      expect(find.text(story.title), findsOneWidget);
-      // No ProBlur (unlocked).
-      expect(find.byType(ProBlur), findsNothing);
+        // Header visible + collapsed summary row shows the story title.
+        expect(find.text('Historical Story'), findsOneWidget);
+        expect(find.text('📖'), findsOneWidget);
+        expect(find.text(story.title), findsOneWidget);
+        // No ProBlur (unlocked).
+        expect(find.byType(ProBlur), findsNothing);
 
-      // Expand the card.
-      await tester.tap(find.text('Historical Story'));
-      await tester.pumpAndSettle();
+        // Expand the card.
+        await tester.tap(find.text('Historical Story'));
+        await tester.pumpAndSettle();
 
-      // Reference renders (italic caption).
-      expect(find.text(story.reference), findsOneWidget);
+        // Reference renders (italic caption).
+        expect(find.text(story.reference), findsOneWidget);
 
-      // Summary body text.
-      expect(find.text(story.summary), findsOneWidget);
+        // Summary body text.
+        expect(find.text(story.summary), findsOneWidget);
 
-      // Lesson block: label + lesson text + 💡 bulb.
-      expect(find.text('Lesson'), findsOneWidget);
-      expect(find.text(story.lesson), findsOneWidget);
-      expect(find.text('💡'), findsOneWidget);
-    });
+        // Lesson block: label + lesson text + 💡 bulb.
+        expect(find.text('Lesson'), findsOneWidget);
+        expect(find.text(story.lesson), findsOneWidget);
+        expect(find.text('💡'), findsOneWidget);
+      },
+    );
 
     testWidgets('Free user: ProBlur lock hides story body', (tester) async {
       final story = TestFixtures.historicalStory();

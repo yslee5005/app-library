@@ -103,7 +103,7 @@
   "monthlyPrice": "₪24.90 / חודש",
   "yearlyPrice": "₪179.90 / שנה",
   "yearlySave": "חסכון 40%",
-  "launchPromo": "3 חודשים ב-₪14.90/חודש!",
+  "launchPromo": "",
   "startPro": "התחל Pro",
   "comingSoon": "בקרוב",
   "notificationSetting": "התראות",
@@ -152,7 +152,7 @@
   "groupInviteMessage": "בואו נתפלל יחד! הצטרפו לקבוצת התפילה שלי ב-Abba.",
   "noGroups": "הצטרף או צור קבוצה להתפלל יחד.",
   "promoTitle": "מבצע השקה",
-  "promoBanner": "3 חודשים ראשונים ב-₪14.90/חודש!",
+  "promoBanner": "",
   "promoEndsOn": "המבצע נגמר ב-{date}",
   "@promoEndsOn": {
     "placeholders": {
@@ -248,6 +248,7 @@
   "originalWordNuanceLabel": "ניואנס לעומת תרגום",
   "originalWordsCountLabel": "{count} מילים",
   "seeMore": "ראה עוד",
+  "seeLess": "הצג פחות",
   "seeAllComments": "צפה בכל {count} התגובות",
   "@seeAllComments": {
     "placeholders": {
@@ -552,5 +553,15 @@
   "aiErrorApiBody": "תפילתך נשמרה בבטחה. נא נסה שוב בעוד רגע.",
   "aiErrorRetry": "נסה שוב",
   "aiErrorWaitAndCheck": "ננסה את הניתוח מאוחר יותר. חזור בקרוב — תפילתך תחכה לך.",
-  "aiErrorHome": "חזרה לבית"
+  "aiErrorHome": "חזרה לבית",
+  "trialStartCta": "Start 1 month free",
+  "trialAutoRenewDisclosure": "Then {price}/year, auto-renews. Cancel anytime in Settings.",
+  "@trialAutoRenewDisclosure": {
+    "placeholders": {
+      "price": {}
+    }
+  },
+  "trialLimitTitle": "You've prayed 3 times today 🌸",
+  "trialLimitBody": "Come back tomorrow — or unlock unlimited prayer with Pro.",
+  "trialLimitCta": "Continue with Pro"
 }

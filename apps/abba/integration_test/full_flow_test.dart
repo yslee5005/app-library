@@ -25,22 +25,27 @@ void main() {
       await tester.pumpWidget(
         ProviderScope(
           overrides: [
-            authRepositoryProvider
-                .overrideWithValue(MockAuthRepository(mockData)),
-            aiServiceProvider
-                .overrideWithValue(MockAiService(mockData)),
-            audioRecorderServiceProvider.overrideWithValue(MockAudioRecorderService()),
-            audioStorageServiceProvider.overrideWithValue(MockAudioStorageService()),
-            prayerRepositoryProvider
-                .overrideWithValue(MockPrayerRepository()),
-            communityRepositoryProvider
-                .overrideWithValue(MockCommunityRepository(mockData)),
-            subscriptionServiceProvider
-                .overrideWithValue(MockSubscriptionService()),
-            notificationServiceProvider
-                .overrideWithValue(MockNotificationService()),
-            qtRepositoryProvider
-                .overrideWithValue(MockQtRepository(mockData)),
+            authRepositoryProvider.overrideWithValue(
+              MockAuthRepository(mockData),
+            ),
+            aiServiceProvider.overrideWithValue(MockAiService(mockData)),
+            audioRecorderServiceProvider.overrideWithValue(
+              MockAudioRecorderService(),
+            ),
+            audioStorageServiceProvider.overrideWithValue(
+              MockAudioStorageService(),
+            ),
+            prayerRepositoryProvider.overrideWithValue(MockPrayerRepository()),
+            communityRepositoryProvider.overrideWithValue(
+              MockCommunityRepository(mockData),
+            ),
+            subscriptionServiceProvider.overrideWithValue(
+              MockSubscriptionService(),
+            ),
+            notificationServiceProvider.overrideWithValue(
+              MockNotificationService(),
+            ),
+            qtRepositoryProvider.overrideWithValue(MockQtRepository(mockData)),
           ],
           child: const AbbaApp(),
         ),
@@ -71,22 +76,27 @@ void main() {
       await tester.pumpWidget(
         ProviderScope(
           overrides: [
-            authRepositoryProvider
-                .overrideWithValue(MockAuthRepository(mockData)),
-            aiServiceProvider
-                .overrideWithValue(MockAiService(mockData)),
-            audioRecorderServiceProvider.overrideWithValue(MockAudioRecorderService()),
-            audioStorageServiceProvider.overrideWithValue(MockAudioStorageService()),
-            prayerRepositoryProvider
-                .overrideWithValue(MockPrayerRepository()),
-            communityRepositoryProvider
-                .overrideWithValue(MockCommunityRepository(mockData)),
-            subscriptionServiceProvider
-                .overrideWithValue(MockSubscriptionService()),
-            notificationServiceProvider
-                .overrideWithValue(MockNotificationService()),
-            qtRepositoryProvider
-                .overrideWithValue(MockQtRepository(mockData)),
+            authRepositoryProvider.overrideWithValue(
+              MockAuthRepository(mockData),
+            ),
+            aiServiceProvider.overrideWithValue(MockAiService(mockData)),
+            audioRecorderServiceProvider.overrideWithValue(
+              MockAudioRecorderService(),
+            ),
+            audioStorageServiceProvider.overrideWithValue(
+              MockAudioStorageService(),
+            ),
+            prayerRepositoryProvider.overrideWithValue(MockPrayerRepository()),
+            communityRepositoryProvider.overrideWithValue(
+              MockCommunityRepository(mockData),
+            ),
+            subscriptionServiceProvider.overrideWithValue(
+              MockSubscriptionService(),
+            ),
+            notificationServiceProvider.overrideWithValue(
+              MockNotificationService(),
+            ),
+            qtRepositoryProvider.overrideWithValue(MockQtRepository(mockData)),
           ],
           child: const AbbaApp(),
         ),

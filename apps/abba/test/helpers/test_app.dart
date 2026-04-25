@@ -4,6 +4,7 @@ import 'package:app_lib_subscriptions/subscriptions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:abba/l10n/generated/app_localizations.dart';
 import 'package:abba/models/prayer.dart';
@@ -15,17 +16,25 @@ import 'package:abba/services/mock/mock_prayer_repository.dart';
 import 'package:abba/services/mock/mock_qt_repository.dart';
 import 'package:abba/services/mock_data.dart';
 import 'package:abba/services/mock/mock_ai_service.dart';
+import 'package:abba/services/recent_references_service.dart';
 import 'package:abba/theme/abba_theme.dart';
 
-/// Wraps a widget with all necessary providers for testing
+/// Wraps a widget with all necessary providers for testing.
+///
+/// Callers must call [SharedPreferences.setMockInitialValues] BEFORE
+/// invoking [buildTestApp] because the [sharedPreferencesProvider]
+/// needs a resolved prefs instance at build time.
 Widget buildTestApp(
   Widget child, {
   String locale = 'en',
   List<dynamic>? overrides,
+  SharedPreferences? prefs,
+  SubscriptionService? subscriptionService,
 }) {
   final mockData = MockDataService();
 
   final defaultOverrides = [
+    if (prefs != null) sharedPreferencesProvider.overrideWithValue(prefs),
     authRepositoryProvider.overrideWithValue(MockAuthRepository(mockData)),
     aiServiceProvider.overrideWithValue(MockAiService(mockData)),
     audioRecorderServiceProvider.overrideWithValue(MockAudioRecorderService()),
@@ -34,9 +43,14 @@ Widget buildTestApp(
     communityRepositoryProvider.overrideWithValue(
       MockCommunityRepository(mockData),
     ),
-    subscriptionServiceProvider.overrideWithValue(MockSubscriptionService()),
+    subscriptionServiceProvider.overrideWithValue(
+      subscriptionService ?? MockSubscriptionService(),
+    ),
     notificationServiceProvider.overrideWithValue(MockNotificationService()),
     qtRepositoryProvider.overrideWithValue(MockQtRepository(mockData)),
+    recentReferencesServiceProvider.overrideWithValue(
+      NoopRecentReferencesService(),
+    ),
     localeProvider.overrideWith((ref) => locale),
   ];
 
@@ -69,17 +83,8 @@ const testPrayerResult = PrayerResult(
     reference: 'Psalm 23:1',
     verse: 'The LORD is my shepherd.',
   ),
-  bibleStory: BibleStory(
-    title: 'David',
-    summary: 'David was a shepherd.',
-  ),
+  bibleStory: BibleStory(title: 'David', summary: 'David was a shepherd.'),
   testimony: 'Test prayer transcript.',
-  guidance: Guidance(
-    content: 'Guidance content.',
-    isPremium: true,
-  ),
-  aiPrayer: AiPrayer(
-    text: 'A prayer for you.',
-    isPremium: true,
-  ),
+  guidance: Guidance(content: 'Guidance content.', isPremium: true),
+  aiPrayer: AiPrayer(text: 'A prayer for you.', isPremium: true),
 );

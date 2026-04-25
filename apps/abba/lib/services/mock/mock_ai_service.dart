@@ -14,6 +14,7 @@ class MockAiService implements AiService {
     required String transcript,
     required String locale,
     required String userName,
+    List<String> recentReferences = const [],
   }) async* {
     // Delay FIRST so widget tests can still render the initial loading
     // frame before the stream starts emitting events (or throwing on
@@ -21,10 +22,16 @@ class MockAiService implements AiService {
     await Future<void>.delayed(const Duration(seconds: 1));
     final result = await _mockData.getPrayerResult();
     if (result.prayerSummary != null) {
-      yield TierT1Result(summary: result.prayerSummary!, scripture: result.scripture);
+      yield TierT1Result(
+        summary: result.prayerSummary!,
+        scripture: result.scripture,
+      );
     }
     await Future<void>.delayed(const Duration(seconds: 1));
-    yield TierT2Result(bibleStory: result.bibleStory, testimony: result.testimony);
+    yield TierT2Result(
+      bibleStory: result.bibleStory,
+      testimony: result.testimony,
+    );
   }
 
   @override
@@ -106,7 +113,8 @@ class MockAiService implements AiService {
     );
     return (
       result: result,
-      transcription: 'Dear Lord, I thank you for this beautiful morning. Please guide my steps today.',
+      transcription:
+          'Dear Lord, I thank you for this beautiful morning. Please guide my steps today.',
     );
   }
 

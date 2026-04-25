@@ -103,7 +103,7 @@
   "monthlyPrice": "₱399 / buwan",
   "yearlyPrice": "₱2,990 / taon",
   "yearlySave": "Makatipid ng 40%",
-  "launchPromo": "3 buwan sa ₱117/buwan!",
+  "launchPromo": "",
   "startPro": "Simulan ang Pro",
   "comingSoon": "Malapit na",
   "notificationSetting": "Mga Notification",
@@ -152,7 +152,7 @@
   "groupInviteMessage": "Manalangin tayo nang sama-sama! Sumali sa aking prayer group sa Abba.",
   "noGroups": "Sumali o gumawa ng grupo para manalangin nang sama-sama.",
   "promoTitle": "Launch Special",
-  "promoBanner": "Unang 3 buwan sa ₱117/buwan!",
+  "promoBanner": "",
   "promoEndsOn": "Ang alok ay hanggang {date}",
   "@promoEndsOn": {
     "placeholders": {
@@ -248,6 +248,7 @@
   "originalWordNuanceLabel": "Nuance vs pagsasalin",
   "originalWordsCountLabel": "{count} salita",
   "seeMore": "Tingnan pa",
+  "seeLess": "Mas kaunti",
   "seeAllComments": "Tingnan lahat ng {count} komento",
   "@seeAllComments": {
     "placeholders": {
@@ -552,5 +553,15 @@
   "aiErrorApiBody": "Ligtas na nai-save ang iyong panalangin. Pakisubukang muli sa ilang sandali.",
   "aiErrorRetry": "Subukang muli",
   "aiErrorWaitAndCheck": "Susubukan nating muli ang pagsusuri mamaya. Bumalik kaagad — naghihintay ang iyong panalangin.",
-  "aiErrorHome": "Bumalik sa home"
+  "aiErrorHome": "Bumalik sa home",
+  "trialStartCta": "Simulan ang 1 buwang libre",
+  "trialAutoRenewDisclosure": "Pagkatapos {price}/taon, auto-renew. Kanselahin anumang oras sa Settings.",
+  "@trialAutoRenewDisclosure": {
+    "placeholders": {
+      "price": {}
+    }
+  },
+  "trialLimitTitle": "Nanalangin ka na ng 3 beses ngayon 🌸",
+  "trialLimitBody": "Bumalik ka bukas — o i-unlock ang walang limitasyong panalangin gamit ang Pro.",
+  "trialLimitCta": "Magpatuloy sa Pro"
 }

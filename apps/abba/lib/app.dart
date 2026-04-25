@@ -74,7 +74,9 @@ class AbbaApp extends ConsumerWidget {
       // AppLocalizations instance (localizationsDelegates are already loaded
       // at this level).
       builder: (context, child) {
-        return _NotificationLocalizationBridge(child: child ?? const SizedBox());
+        return _NotificationLocalizationBridge(
+          child: child ?? const SizedBox(),
+        );
       },
     );
   }

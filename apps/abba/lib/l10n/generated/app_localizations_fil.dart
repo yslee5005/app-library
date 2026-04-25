@@ -284,7 +284,7 @@ class AppLocalizationsFil extends AppLocalizations {
   String get yearlySave => 'Makatipid ng 40%';
 
   @override
-  String get launchPromo => '3 buwan sa ₱117/buwan!';
+  String get launchPromo => '';
 
   @override
   String get startPro => 'Simulan ang Pro';
@@ -414,7 +414,7 @@ class AppLocalizationsFil extends AppLocalizations {
   String get promoTitle => 'Launch Special';
 
   @override
-  String get promoBanner => 'Unang 3 buwan sa ₱117/buwan!';
+  String get promoBanner => '';
 
   @override
   String promoEndsOn(Object date) {
@@ -683,6 +683,9 @@ class AppLocalizationsFil extends AppLocalizations {
 
   @override
   String get seeMore => 'Tingnan pa';
+
+  @override
+  String get seeLess => 'Mas kaunti';
 
   @override
   String seeAllComments(Object count) {
@@ -1336,4 +1339,22 @@ class AppLocalizationsFil extends AppLocalizations {
 
   @override
   String get sectionStatusPending => 'Pagsusuri sa proseso';
+
+  @override
+  String get trialStartCta => 'Simulan ang 1 buwang libre';
+
+  @override
+  String trialAutoRenewDisclosure(Object price) {
+    return 'Pagkatapos $price/taon, auto-renew. Kanselahin anumang oras sa Settings.';
+  }
+
+  @override
+  String get trialLimitTitle => 'Nanalangin ka na ng 3 beses ngayon 🌸';
+
+  @override
+  String get trialLimitBody =>
+      'Bumalik ka bukas — o i-unlock ang walang limitasyong panalangin gamit ang Pro.';
+
+  @override
+  String get trialLimitCta => 'Magpatuloy sa Pro';
 }

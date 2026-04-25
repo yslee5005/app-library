@@ -274,7 +274,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get yearlySave => '40%お得';
 
   @override
-  String get launchPromo => '3ヶ月間¥580/月!';
+  String get launchPromo => '';
 
   @override
   String get startPro => 'Pro開始';
@@ -395,7 +395,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get promoTitle => '特別キャンペーン';
 
   @override
-  String get promoBanner => '3ヶ月間¥580/月!';
+  String get promoBanner => '';
 
   @override
   String promoEndsOn(Object date) {
@@ -657,6 +657,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get seeMore => 'もっと見る';
+
+  @override
+  String get seeLess => '閉じる';
 
   @override
   String seeAllComments(Object count) {
@@ -1277,4 +1280,21 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get sectionStatusPending => '分析中';
+
+  @override
+  String get trialStartCta => '1ヶ月間無料で開始';
+
+  @override
+  String trialAutoRenewDisclosure(Object price) {
+    return 'その後、年 $price で自動更新されます。設定からいつでもキャンセルできます。';
+  }
+
+  @override
+  String get trialLimitTitle => '今日は3回お祈りされました 🌸';
+
+  @override
+  String get trialLimitBody => 'また明日お会いしましょう — もしくは Pro で無制限に祈りを。';
+
+  @override
+  String get trialLimitCta => 'Pro で続ける';
 }

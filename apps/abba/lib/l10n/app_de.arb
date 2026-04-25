@@ -103,7 +103,7 @@
   "monthlyPrice": "6,99€ / Monat",
   "yearlyPrice": "49,99€ / Jahr",
   "yearlySave": "40% sparen",
-  "launchPromo": "3 Monate für 3,99€/Monat!",
+  "launchPromo": "",
   "startPro": "Pro starten",
   "comingSoon": "Demnächst",
   "notificationSetting": "Benachrichtigungen",
@@ -152,7 +152,7 @@
   "groupInviteMessage": "Lasst uns gemeinsam beten! Tritt meiner Gebetsgruppe auf Abba bei.",
   "noGroups": "Tritt einer Gruppe bei oder erstelle eine, um gemeinsam zu beten.",
   "promoTitle": "Einführungsaktion",
-  "promoBanner": "Die ersten 3 Monate für 3,99€/Monat!",
+  "promoBanner": "",
   "promoEndsOn": "Angebot endet am {date}",
   "@promoEndsOn": {
     "placeholders": {
@@ -248,6 +248,7 @@
   "originalWordNuanceLabel": "Nuance vs Übersetzung",
   "originalWordsCountLabel": "{count} Wörter",
   "seeMore": "Mehr anzeigen",
+  "seeLess": "Weniger anzeigen",
   "seeAllComments": "Alle {count} Kommentare anzeigen",
   "@seeAllComments": {
     "placeholders": {
@@ -552,5 +553,15 @@
   "aiErrorApiBody": "Dein Gebet ist sicher gespeichert. Bitte versuche es gleich noch einmal.",
   "aiErrorRetry": "Erneut versuchen",
   "aiErrorWaitAndCheck": "Wir versuchen die Analyse später erneut. Komm bald wieder — dein Gebet wird warten.",
-  "aiErrorHome": "Zurück zum Start"
+  "aiErrorHome": "Zurück zum Start",
+  "trialStartCta": "1 Monat kostenlos starten",
+  "trialAutoRenewDisclosure": "Danach {price}/Jahr, automatische Verlängerung. Jederzeit in den Einstellungen kündbar.",
+  "@trialAutoRenewDisclosure": {
+    "placeholders": {
+      "price": {}
+    }
+  },
+  "trialLimitTitle": "Du hast heute 3 Mal gebetet 🌸",
+  "trialLimitBody": "Komm morgen wieder — oder schalte unbegrenztes Beten mit Pro frei.",
+  "trialLimitCta": "Mit Pro fortfahren"
 }

@@ -38,9 +38,7 @@ void main() {
               ),
             ),
           ),
-          overrides: [
-            qtCoachingProvider.overrideWith((ref) => coaching),
-          ],
+          overrides: [qtCoachingProvider.overrideWith((ref) => coaching)],
         ),
       );
       await tester.pumpAndSettle();
@@ -49,15 +47,9 @@ void main() {
 
       // Title (with 🌿 growing badge appended) + 🎯 icon.
       expect(find.text('🎯'), findsOneWidget);
-      expect(
-        find.textContaining(l10n.qtCoachingTitle),
-        findsWidgets,
-      );
+      expect(find.textContaining(l10n.qtCoachingTitle), findsWidgets);
       // Growing level badge emoji ('🌿 Growing') — 'growing' per fixture.
-      expect(
-        find.textContaining(l10n.qtCoachingLevelGrowing),
-        findsOneWidget,
-      );
+      expect(find.textContaining(l10n.qtCoachingLevelGrowing), findsOneWidget);
 
       // All 4 score axis labels.
       expect(find.text(l10n.qtCoachingScoreComprehension), findsOneWidget);
@@ -91,8 +83,9 @@ void main() {
       );
     });
 
-    testWidgets('Pro user + loading: shows loading message + spinner',
-        (tester) async {
+    testWidgets('Pro user + loading: shows loading message + spinner', (
+      tester,
+    ) async {
       // Never-completing future → loading state forever.
       final completer = Completer<QtCoaching>();
       addTearDown(() {
@@ -155,8 +148,9 @@ void main() {
       expect(find.byIcon(Icons.refresh), findsOneWidget);
     });
 
-    testWidgets('Free user: shows ProBlur lock without reading provider',
-        (tester) async {
+    testWidgets('Free user: shows ProBlur lock without reading provider', (
+      tester,
+    ) async {
       await tester.pumpWidget(
         buildTestApp(
           const Scaffold(

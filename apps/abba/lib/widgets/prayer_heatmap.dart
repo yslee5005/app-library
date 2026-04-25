@@ -10,6 +10,7 @@ import '../theme/abba_theme.dart';
 enum HeatmapColorScheme {
   /// Sage green gradient (prayer)
   sage,
+
   /// Soft gold gradient (QT)
   gold,
 }
@@ -56,11 +57,16 @@ class _PrayerHeatmapState extends State<PrayerHeatmap> {
   static const _goldLevel3 = Color(0xFFD4A574);
   static const _goldLevel4 = Color(0xFFB8864A);
 
-  Color get _emptyColor => widget.colorScheme == HeatmapColorScheme.gold ? _goldEmpty : _sageEmpty;
-  Color get _level1 => widget.colorScheme == HeatmapColorScheme.gold ? _goldLevel1 : _sageLevel1;
-  Color get _level2 => widget.colorScheme == HeatmapColorScheme.gold ? _goldLevel2 : _sageLevel2;
-  Color get _level3 => widget.colorScheme == HeatmapColorScheme.gold ? _goldLevel3 : _sageLevel3;
-  Color get _level4 => widget.colorScheme == HeatmapColorScheme.gold ? _goldLevel4 : _sageLevel4;
+  Color get _emptyColor =>
+      widget.colorScheme == HeatmapColorScheme.gold ? _goldEmpty : _sageEmpty;
+  Color get _level1 =>
+      widget.colorScheme == HeatmapColorScheme.gold ? _goldLevel1 : _sageLevel1;
+  Color get _level2 =>
+      widget.colorScheme == HeatmapColorScheme.gold ? _goldLevel2 : _sageLevel2;
+  Color get _level3 =>
+      widget.colorScheme == HeatmapColorScheme.gold ? _goldLevel3 : _sageLevel3;
+  Color get _level4 =>
+      widget.colorScheme == HeatmapColorScheme.gold ? _goldLevel4 : _sageLevel4;
 
   Color _colorForCount(int count) {
     if (count <= 0) return _emptyColor;
@@ -93,7 +99,10 @@ class _PrayerHeatmapState extends State<PrayerHeatmap> {
     final dy = details.localPosition.dy - 22; // month label height + gap
 
     if (dx < 0 || dy < 0) {
-      setState(() { _selectedDate = null; _selectedDay = null; });
+      setState(() {
+        _selectedDate = null;
+        _selectedDay = null;
+      });
       return;
     }
 
@@ -101,7 +110,10 @@ class _PrayerHeatmapState extends State<PrayerHeatmap> {
     final row = (dy / _step).floor();
 
     if (col < 0 || col >= _cols || row < 0 || row >= 7) {
-      setState(() { _selectedDate = null; _selectedDay = null; });
+      setState(() {
+        _selectedDate = null;
+        _selectedDay = null;
+      });
       return;
     }
 
@@ -110,7 +122,10 @@ class _PrayerHeatmapState extends State<PrayerHeatmap> {
     final dateKey = DateTime(date.year, date.month, date.day);
 
     if (dateKey.isAfter(_today)) {
-      setState(() { _selectedDate = null; _selectedDay = null; });
+      setState(() {
+        _selectedDate = null;
+        _selectedDay = null;
+      });
       return;
     }
 
@@ -265,7 +280,8 @@ class _PrayerHeatmapState extends State<PrayerHeatmap> {
     final day = _selectedDay!;
     final locale = Localizations.localeOf(context).toString();
     // Full localized date: "Apr 22 (Tue)" / "4월 22일 (화)" 등
-    final dateStr = '${DateFormat.MMMd(locale).format(d)} '
+    final dateStr =
+        '${DateFormat.MMMd(locale).format(d)} '
         '(${DateFormat.E(locale).format(d)})';
 
     return Container(
@@ -298,9 +314,7 @@ class _PrayerHeatmapState extends State<PrayerHeatmap> {
           else
             Text(
               AppLocalizations.of(context)!.heatmapNoPrayer,
-              style: AbbaTypography.bodySmall.copyWith(
-                color: AbbaColors.muted,
-              ),
+              style: AbbaTypography.bodySmall.copyWith(color: AbbaColors.muted),
             ),
         ],
       ),

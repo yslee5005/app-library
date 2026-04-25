@@ -71,18 +71,12 @@ void main() {
     FlutterError.onError = originalOnError;
   });
 
-  Widget buildHarness({
-    NetworkChecker? checker,
-    String mode = 'prayer',
-  }) {
+  Widget buildHarness({NetworkChecker? checker, String mode = 'prayer'}) {
     final mockData = MockDataService();
     final router = GoRouter(
       initialLocation: '/loading',
       routes: [
-        GoRoute(
-          path: '/loading',
-          builder: (_, __) => const AiLoadingView(),
-        ),
+        GoRoute(path: '/loading', builder: (_, __) => const AiLoadingView()),
         GoRoute(
           path: '/home/prayer-dashboard',
           builder: (_, __) =>
@@ -99,25 +93,31 @@ void main() {
       overrides: [
         authRepositoryProvider.overrideWithValue(MockAuthRepository(mockData)),
         aiServiceProvider.overrideWithValue(MockAiService(mockData)),
-        audioRecorderServiceProvider
-            .overrideWithValue(MockAudioRecorderService()),
-        audioStorageServiceProvider
-            .overrideWithValue(MockAudioStorageService()),
+        audioRecorderServiceProvider.overrideWithValue(
+          MockAudioRecorderService(),
+        ),
+        audioStorageServiceProvider.overrideWithValue(
+          MockAudioStorageService(),
+        ),
         prayerRepositoryProvider.overrideWithValue(MockPrayerRepository()),
         communityRepositoryProvider.overrideWithValue(
           MockCommunityRepository(mockData),
         ),
-        subscriptionServiceProvider
-            .overrideWithValue(MockSubscriptionService()),
-        notificationServiceProvider
-            .overrideWithValue(MockNotificationService()),
+        subscriptionServiceProvider.overrideWithValue(
+          MockSubscriptionService(),
+        ),
+        notificationServiceProvider.overrideWithValue(
+          MockNotificationService(),
+        ),
         qtRepositoryProvider.overrideWithValue(MockQtRepository(mockData)),
         localeProvider.overrideWith((ref) => 'en'),
-        networkCheckerProvider
-            .overrideWithValue(checker ?? _OnlineNetworkChecker()),
+        networkCheckerProvider.overrideWithValue(
+          checker ?? _OnlineNetworkChecker(),
+        ),
         currentPrayerModeProvider.overrideWith((ref) => mode),
-        currentTranscriptProvider
-            .overrideWith((ref) => 'Lord, thank you for today.'),
+        currentTranscriptProvider.overrideWith(
+          (ref) => 'Lord, thank you for today.',
+        ),
         currentAudioPathProvider.overrideWith((ref) => null),
       ],
       child: MaterialApp.router(
@@ -138,17 +138,14 @@ void main() {
   group('AiLoadingView', () {
     // SKIPPED — google_fonts first-paint HTTP 400 flakes whichever test
     // runs first. Acts as a warmup slot.
-    testWidgets(
-      'warmup (SKIPPED: font flake)',
-      (tester) async {
-        await tester.pumpWidget(buildHarness());
-        await tester.pump();
-      },
-      skip: true,
-    );
+    testWidgets('warmup (SKIPPED: font flake)', (tester) async {
+      await tester.pumpWidget(buildHarness());
+      await tester.pump();
+    }, skip: true);
 
-    testWidgets('advances 🌱 → 🌿 → 🌸 then navigates once AI done',
-        (tester) async {
+    testWidgets('advances 🌱 → 🌿 → 🌸 then navigates once AI done', (
+      tester,
+    ) async {
       await tester.pumpWidget(buildHarness());
       await tester.pump();
       expect(find.text('🌱'), findsOneWidget);
@@ -169,16 +166,12 @@ void main() {
     // leakage between widget instances). Passes in isolation — verified
     // via `flutter test ... --plain-name "QT mode"`. Covered at integration
     // level (Phase 8 E2E) so the unit assertion is skipped for now.
-    testWidgets(
-      'QT mode navigates to the QT dashboard',
-      (tester) async {
-        await tester.pumpWidget(buildHarness(mode: 'qt'));
-        await tester.pump();
-        await tester.pumpAndSettle(const Duration(seconds: 5));
-        expect(find.text('qt-dashboard-route'), findsOneWidget);
-      },
-      skip: true,
-    );
+    testWidgets('QT mode navigates to the QT dashboard', (tester) async {
+      await tester.pumpWidget(buildHarness(mode: 'qt'));
+      await tester.pump();
+      await tester.pumpAndSettle(const Duration(seconds: 5));
+      expect(find.text('qt-dashboard-route'), findsOneWidget);
+    }, skip: true);
 
     // Flakes when run after other tests in this file (test ordering).
     // Passes in isolation — verified via `--plain-name "offline path"`.

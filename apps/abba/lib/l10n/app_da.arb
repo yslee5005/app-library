@@ -103,7 +103,7 @@
   "monthlyPrice": "49 kr / mdr",
   "yearlyPrice": "369 kr / år",
   "yearlySave": "Spar 40%",
-  "launchPromo": "3 måneder for 29kr/md!",
+  "launchPromo": "",
   "startPro": "Start Pro",
   "comingSoon": "Kommer snart",
   "notificationSetting": "Notifikationer",
@@ -152,7 +152,7 @@
   "groupInviteMessage": "Lad os bede sammen! Bliv medlem af min bønnegruppe på Abba.",
   "noGroups": "Tilmeld dig eller opret en gruppe for at bede sammen.",
   "promoTitle": "Lanceringstilbud",
-  "promoBanner": "Første 3 måneder for 29kr/md!",
+  "promoBanner": "",
   "promoEndsOn": "Tilbuddet udløber {date}",
   "@promoEndsOn": {
     "placeholders": {
@@ -248,6 +248,7 @@
   "originalWordNuanceLabel": "Nuance vs oversættelse",
   "originalWordsCountLabel": "{count} ord",
   "seeMore": "Se mere",
+  "seeLess": "Se mindre",
   "seeAllComments": "Se alle {count} kommentarer",
   "@seeAllComments": {
     "placeholders": {
@@ -552,5 +553,15 @@
   "aiErrorApiBody": "Din bøn er sikkert gemt. Prøv venligst igen om et øjeblik.",
   "aiErrorRetry": "Prøv igen",
   "aiErrorWaitAndCheck": "Vi prøver analysen igen senere. Kom snart tilbage — din bøn vil vente.",
-  "aiErrorHome": "Tilbage til hjem"
+  "aiErrorHome": "Tilbage til hjem",
+  "trialStartCta": "Start 1 month free",
+  "trialAutoRenewDisclosure": "Then {price}/year, auto-renews. Cancel anytime in Settings.",
+  "@trialAutoRenewDisclosure": {
+    "placeholders": {
+      "price": {}
+    }
+  },
+  "trialLimitTitle": "You've prayed 3 times today 🌸",
+  "trialLimitBody": "Come back tomorrow — or unlock unlimited prayer with Pro.",
+  "trialLimitCta": "Continue with Pro"
 }

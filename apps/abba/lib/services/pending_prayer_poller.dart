@@ -33,7 +33,9 @@ class PendingPrayerPoller {
   /// `completed` or `failed`, or [timeout] elapses.
   Future<PollResult> waitForCompletion(String prayerId) async {
     final deadline = DateTime.now().add(timeout);
-    apiLog.info('[Poller] start id=$prayerId interval=$interval timeout=$timeout');
+    apiLog.info(
+      '[Poller] start id=$prayerId interval=$interval timeout=$timeout',
+    );
 
     while (DateTime.now().isBefore(deadline)) {
       try {
@@ -50,9 +52,7 @@ class PendingPrayerPoller {
         }
 
         final prayer = Prayer.fromJson(data);
-        apiLog.debug(
-          '[Poller] id=$prayerId status=${prayer.aiStatus.name}',
-        );
+        apiLog.debug('[Poller] id=$prayerId status=${prayer.aiStatus.name}');
 
         switch (prayer.aiStatus) {
           case PrayerAiStatus.completed:

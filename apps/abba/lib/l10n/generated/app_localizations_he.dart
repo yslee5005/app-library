@@ -276,7 +276,7 @@ class AppLocalizationsHe extends AppLocalizations {
   String get yearlySave => 'חסכון 40%';
 
   @override
-  String get launchPromo => '3 חודשים ב-₪14.90/חודש!';
+  String get launchPromo => '';
 
   @override
   String get startPro => 'התחל Pro';
@@ -400,7 +400,7 @@ class AppLocalizationsHe extends AppLocalizations {
   String get promoTitle => 'מבצע השקה';
 
   @override
-  String get promoBanner => '3 חודשים ראשונים ב-₪14.90/חודש!';
+  String get promoBanner => '';
 
   @override
   String promoEndsOn(Object date) {
@@ -663,6 +663,9 @@ class AppLocalizationsHe extends AppLocalizations {
 
   @override
   String get seeMore => 'ראה עוד';
+
+  @override
+  String get seeLess => 'הצג פחות';
 
   @override
   String seeAllComments(Object count) {
@@ -1288,4 +1291,22 @@ class AppLocalizationsHe extends AppLocalizations {
 
   @override
   String get sectionStatusPending => 'ניתוח בתהליך';
+
+  @override
+  String get trialStartCta => 'Start 1 month free';
+
+  @override
+  String trialAutoRenewDisclosure(Object price) {
+    return 'Then $price/year, auto-renews. Cancel anytime in Settings.';
+  }
+
+  @override
+  String get trialLimitTitle => 'You\'ve prayed 3 times today 🌸';
+
+  @override
+  String get trialLimitBody =>
+      'Come back tomorrow — or unlock unlimited prayer with Pro.';
+
+  @override
+  String get trialLimitCta => 'Continue with Pro';
 }

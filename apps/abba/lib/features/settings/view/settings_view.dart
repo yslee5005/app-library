@@ -34,9 +34,7 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
 
     return Scaffold(
       backgroundColor: AbbaColors.cream,
-      appBar: AppBar(
-        title: Text(l10n.settingsTitle, style: AbbaTypography.h1),
-      ),
+      appBar: AppBar(title: Text(l10n.settingsTitle, style: AbbaTypography.h1)),
       body: ListView(
         padding: const EdgeInsets.symmetric(
           horizontal: AbbaSpacing.md,
@@ -60,10 +58,7 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
                   icon: Icons.person_outline,
                   title: isAnon ? l10n.linkAccountTitle : l10n.linkAccountTitle,
                   trailing: isAnon
-                      ? const Icon(
-                          Icons.chevron_right,
-                          color: AbbaColors.muted,
-                        )
+                      ? const Icon(Icons.chevron_right, color: AbbaColors.muted)
                       : Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
@@ -110,21 +105,22 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
                         child: Text(
                           isPremium ? l10n.proPlan : l10n.freePlan,
                           style: AbbaTypography.caption.copyWith(
-                            color:
-                                isPremium ? AbbaColors.sage : AbbaColors.muted,
+                            color: isPremium
+                                ? AbbaColors.sage
+                                : AbbaColors.muted,
                             fontWeight: FontWeight.w600,
                           ),
                         ),
                       ),
                       const SizedBox(width: AbbaSpacing.xs),
-                      const Icon(
-                        Icons.chevron_right,
-                        color: AbbaColors.muted,
-                      ),
+                      const Icon(Icons.chevron_right, color: AbbaColors.muted),
                     ],
                   ),
                   onTap: () {
-                    appLogger.debug('Membership page opened', category: LogCategory.subscription);
+                    appLogger.debug(
+                      'Membership page opened',
+                      category: LogCategory.subscription,
+                    );
                     context.go('/settings/membership');
                   },
                 ),
@@ -279,8 +275,8 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
                 isAnon
                     ? '\u{1F64F}'
                     : (profile.name.isNotEmpty
-                        ? profile.name[0].toUpperCase()
-                        : '?'),
+                          ? profile.name[0].toUpperCase()
+                          : '?'),
                 style: AbbaTypography.h2.copyWith(color: AbbaColors.sage),
               ),
             ),
@@ -381,13 +377,14 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
           ref.read(localeProvider.notifier).state = v;
           final prefs = await SharedPreferences.getInstance();
           await prefs.setString('locale', v);
-          appLogger.info('Language changed to $v', category: LogCategory.general);
+          appLogger.info(
+            'Language changed to $v',
+            category: LogCategory.general,
+          );
           // Preload the PD Bible bundle so the first prayer doesn't pay the
           // download cost. Safe to fire-and-forget — Bible text service
           // dedupes in-flight requests.
-          unawaited(
-            ref.read(bibleTextServiceProvider).preload(v),
-          );
+          unawaited(ref.read(bibleTextServiceProvider).preload(v));
         }
       },
     );
@@ -400,9 +397,9 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
     } else {
       if (mounted) {
         final l10n = AppLocalizations.of(context)!;
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(l10n.comingSoon)),
-        );
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text(l10n.comingSoon)));
       }
     }
   }
@@ -437,8 +434,9 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
               const SizedBox(height: AbbaSpacing.sm),
               Text(
                 l10n.linkAccountDescription,
-                style:
-                    AbbaTypography.bodySmall.copyWith(color: AbbaColors.muted),
+                style: AbbaTypography.bodySmall.copyWith(
+                  color: AbbaColors.muted,
+                ),
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: AbbaSpacing.lg),
@@ -540,8 +538,7 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
             },
             child: Text(
               l10n.logout,
-              style:
-                  AbbaTypography.bodySmall.copyWith(color: AbbaColors.error),
+              style: AbbaTypography.bodySmall.copyWith(color: AbbaColors.error),
             ),
           ),
         ],

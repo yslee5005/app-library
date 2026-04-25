@@ -47,7 +47,10 @@ class ProBlur extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.fromLTRB(
-                AbbaSpacing.md + 4, 0, AbbaSpacing.md + 4, AbbaSpacing.md + 4,
+                AbbaSpacing.md + 4,
+                0,
+                AbbaSpacing.md + 4,
+                AbbaSpacing.md + 4,
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,

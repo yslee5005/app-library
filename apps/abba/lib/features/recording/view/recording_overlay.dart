@@ -94,7 +94,10 @@ class _RecordingOverlayState extends ConsumerState<RecordingOverlay>
           textAlign: TextAlign.center,
         ),
         actionsPadding: const EdgeInsets.fromLTRB(
-          AbbaSpacing.lg, 0, AbbaSpacing.lg, AbbaSpacing.lg,
+          AbbaSpacing.lg,
+          0,
+          AbbaSpacing.lg,
+          AbbaSpacing.lg,
         ),
         actions: [
           Column(
@@ -112,7 +115,9 @@ class _RecordingOverlayState extends ConsumerState<RecordingOverlay>
                   ),
                   child: Text(
                     l10n.leaveButton,
-                    style: AbbaTypography.body.copyWith(color: AbbaColors.white),
+                    style: AbbaTypography.body.copyWith(
+                      color: AbbaColors.white,
+                    ),
                   ),
                 ),
               ),
@@ -167,8 +172,7 @@ class _RecordingOverlayState extends ConsumerState<RecordingOverlay>
     final audioPath = await recorder.stopRecording();
 
     if (_isTextMode) {
-      ref.read(currentTranscriptProvider.notifier).state =
-          _textController.text;
+      ref.read(currentTranscriptProvider.notifier).state = _textController.text;
       ref.read(currentAudioPathProvider.notifier).state = null;
     } else {
       ref.read(currentAudioPathProvider.notifier).state = audioPath;
@@ -265,160 +269,180 @@ class _RecordingOverlayState extends ConsumerState<RecordingOverlay>
         }
       },
       child: Container(
-      decoration: const BoxDecoration(
-        color: AbbaColors.cream,
-        borderRadius: BorderRadius.vertical(
-          top: Radius.circular(AbbaRadius.xl),
+        decoration: const BoxDecoration(
+          color: AbbaColors.cream,
+          borderRadius: BorderRadius.vertical(
+            top: Radius.circular(AbbaRadius.xl),
+          ),
         ),
-      ),
-      child: SafeArea(
-        child: Column(
-          children: [
-            // Top bar
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: AbbaSpacing.md,
-                vertical: AbbaSpacing.sm,
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Semantics(
-                    label: l10n.closeRecording,
-                    button: true,
-                    child: IconButton(
+        child: SafeArea(
+          child: Column(
+            children: [
+              // Top bar
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: AbbaSpacing.md,
+                  vertical: AbbaSpacing.sm,
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Semantics(
+                      label: l10n.closeRecording,
+                      button: true,
+                      child: IconButton(
+                        onPressed: () async {
+                          if (await _confirmLeave()) {
+                            final recorder = ref.read(
+                              audioRecorderServiceProvider,
+                            );
+                            await recorder.stopRecording();
+                            if (context.mounted) Navigator.of(context).pop();
+                          }
+                        },
+                        icon: const Icon(Icons.close, size: 28),
+                        color: AbbaColors.warmBrown,
+                      ),
+                    ),
+                    Text(l10n.recordingTitle, style: AbbaTypography.h2),
+                    TextButton.icon(
                       onPressed: () async {
-                        if (await _confirmLeave()) {
-                          final recorder = ref.read(audioRecorderServiceProvider);
-                          await recorder.stopRecording();
-                          if (context.mounted) Navigator.of(context).pop();
+                        final recorder = ref.read(audioRecorderServiceProvider);
+                        setState(() => _isTextMode = !_isTextMode);
+                        if (_isTextMode) {
+                          await recorder.pauseRecording();
+                          prayerLog.info('Switched to text mode');
+                        } else {
+                          await recorder.resumeRecording();
+                          prayerLog.info('Switched to voice mode');
                         }
                       },
-                      icon: const Icon(Icons.close, size: 28),
-                      color: AbbaColors.warmBrown,
-                    ),
-                  ),
-                  Text(l10n.recordingTitle, style: AbbaTypography.h2),
-                  TextButton.icon(
-                    onPressed: () async {
-                      final recorder = ref.read(audioRecorderServiceProvider);
-                      setState(() => _isTextMode = !_isTextMode);
-                      if (_isTextMode) {
-                        await recorder.pauseRecording();
-                        prayerLog.info('Switched to text mode');
-                      } else {
-                        await recorder.resumeRecording();
-                        prayerLog.info('Switched to voice mode');
-                      }
-                    },
-                    icon: Icon(
-                      _isTextMode ? Icons.mic : Icons.keyboard,
-                      color: AbbaColors.sage,
-                    ),
-                    label: Text(
-                      l10n.switchToText,
-                      style: AbbaTypography.bodySmall.copyWith(
+                      icon: Icon(
+                        _isTextMode ? Icons.mic : Icons.keyboard,
                         color: AbbaColors.sage,
                       ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            // Waveform or text input
-            Expanded(child: SingleChildScrollView(child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-            const SizedBox(height: AbbaSpacing.xl),
-            if (_isTextMode)
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: AbbaSpacing.xl),
-                child: TextField(
-                  controller: _textController,
-                  maxLines: 8,
-                  style: AbbaTypography.body,
-                  decoration: InputDecoration(
-                    hintText: l10n.textInputHint,
-                    hintStyle: AbbaTypography.body.copyWith(
-                      color: AbbaColors.muted,
-                    ),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(AbbaRadius.lg),
-                      borderSide: const BorderSide(color: AbbaColors.sage),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(AbbaRadius.lg),
-                      borderSide: const BorderSide(
-                        color: AbbaColors.sage,
-                        width: 2,
-                      ),
-                    ),
-                    filled: true,
-                    fillColor: AbbaColors.white,
-                    contentPadding: const EdgeInsets.all(AbbaSpacing.md),
-                  ),
-                ),
-              )
-            else
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: AbbaSpacing.xl),
-                child: _buildWaveformOrPulse(),
-              ),
-            const SizedBox(height: AbbaSpacing.xl),
-            // Timer
-            Text(
-              _formattedTime,
-              style: AbbaTypography.hero.copyWith(fontSize: 36),
-            ),
-            const SizedBox(height: AbbaSpacing.xl),
-              ],
-            ))),
-            // Buttons
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: AbbaSpacing.xl),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: SizedBox(
-                      height: abbaButtonHeight,
-                      child: OutlinedButton.icon(
-                        onPressed: _togglePause,
-                        icon: Icon(
-                          _isPaused ? Icons.play_arrow : Icons.pause,
+                      label: Text(
+                        l10n.switchToText,
+                        style: AbbaTypography.bodySmall.copyWith(
                           color: AbbaColors.sage,
                         ),
-                        label: Text(
-                          _isPaused
-                              ? l10n.recordingResume
-                              : l10n.recordingPause,
-                          style: AbbaTypography.body.copyWith(
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              // Waveform or text input
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const SizedBox(height: AbbaSpacing.xl),
+                      if (_isTextMode)
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: AbbaSpacing.xl,
+                          ),
+                          child: TextField(
+                            controller: _textController,
+                            maxLines: 8,
+                            style: AbbaTypography.body,
+                            decoration: InputDecoration(
+                              hintText: l10n.textInputHint,
+                              hintStyle: AbbaTypography.body.copyWith(
+                                color: AbbaColors.muted,
+                              ),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(
+                                  AbbaRadius.lg,
+                                ),
+                                borderSide: const BorderSide(
+                                  color: AbbaColors.sage,
+                                ),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(
+                                  AbbaRadius.lg,
+                                ),
+                                borderSide: const BorderSide(
+                                  color: AbbaColors.sage,
+                                  width: 2,
+                                ),
+                              ),
+                              filled: true,
+                              fillColor: AbbaColors.white,
+                              contentPadding: const EdgeInsets.all(
+                                AbbaSpacing.md,
+                              ),
+                            ),
+                          ),
+                        )
+                      else
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: AbbaSpacing.xl,
+                          ),
+                          child: _buildWaveformOrPulse(),
+                        ),
+                      const SizedBox(height: AbbaSpacing.xl),
+                      // Timer
+                      Text(
+                        _formattedTime,
+                        style: AbbaTypography.hero.copyWith(fontSize: 36),
+                      ),
+                      const SizedBox(height: AbbaSpacing.xl),
+                    ],
+                  ),
+                ),
+              ),
+              // Buttons
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: AbbaSpacing.xl),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: SizedBox(
+                        height: abbaButtonHeight,
+                        child: OutlinedButton.icon(
+                          onPressed: _togglePause,
+                          icon: Icon(
+                            _isPaused ? Icons.play_arrow : Icons.pause,
                             color: AbbaColors.sage,
                           ),
-                        ),
-                        style: OutlinedButton.styleFrom(
-                          side: const BorderSide(color: AbbaColors.sage),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(AbbaRadius.lg),
+                          label: Text(
+                            _isPaused
+                                ? l10n.recordingResume
+                                : l10n.recordingPause,
+                            style: AbbaTypography.body.copyWith(
+                              color: AbbaColors.sage,
+                            ),
+                          ),
+                          style: OutlinedButton.styleFrom(
+                            side: const BorderSide(color: AbbaColors.sage),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(
+                                AbbaRadius.lg,
+                              ),
+                            ),
                           ),
                         ),
                       ),
                     ),
-                  ),
-                  const SizedBox(width: AbbaSpacing.md),
-                  Expanded(
-                    child: AbbaButton(
-                      label: l10n.finishPrayer,
-                      onPressed: _finishRecording,
+                    const SizedBox(width: AbbaSpacing.md),
+                    Expanded(
+                      child: AbbaButton(
+                        label: l10n.finishPrayer,
+                        onPressed: _finishRecording,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-            const SizedBox(height: AbbaSpacing.xxl),
-          ],
+              const SizedBox(height: AbbaSpacing.xxl),
+            ],
+          ),
         ),
       ),
-    ),
     );
   }
 }

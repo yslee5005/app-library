@@ -38,18 +38,18 @@ class PrayerCoachingCard extends ConsumerWidget {
     final coachingAsync = ref.watch(prayerCoachingProvider);
 
     return coachingAsync.when(
-      loading: () => _LoadingCard(title: l10n.coachingTitle, message: l10n.coachingLoadingText),
+      loading: () => _LoadingCard(
+        title: l10n.coachingTitle,
+        message: l10n.coachingLoadingText,
+      ),
       error: (_, __) => _ErrorCard(
         title: l10n.coachingTitle,
         message: l10n.coachingErrorText,
         retryLabel: l10n.coachingRetryButton,
         onRetry: () => ref.invalidate(prayerCoachingProvider),
       ),
-      data: (coaching) => _DataCard(
-        coaching: coaching,
-        locale: locale,
-        l10n: l10n,
-      ),
+      data: (coaching) =>
+          _DataCard(coaching: coaching, locale: locale, l10n: l10n),
     );
   }
 }
@@ -150,7 +150,8 @@ class _DataCard extends StatelessWidget {
 
     return ExpandableCard(
       icon: '🎯',
-      title: '${l10n.coachingTitle}  ${_levelBadgeText(coaching.expertLevel, l10n)}',
+      title:
+          '${l10n.coachingTitle}  ${_levelBadgeText(coaching.expertLevel, l10n)}',
       summary: summary,
       initiallyExpanded: true,
       expandedContent: Column(
@@ -212,10 +213,19 @@ class _ScoresSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final rows = <_ScoreRow>[
-      _ScoreRow(label: l10n.coachingScoreSpecificity, score: scores.specificity),
-      _ScoreRow(label: l10n.coachingScoreGodCentered, score: scores.godCenteredness),
+      _ScoreRow(
+        label: l10n.coachingScoreSpecificity,
+        score: scores.specificity,
+      ),
+      _ScoreRow(
+        label: l10n.coachingScoreGodCentered,
+        score: scores.godCenteredness,
+      ),
       _ScoreRow(label: l10n.coachingScoreActs, score: scores.actsBalance),
-      _ScoreRow(label: l10n.coachingScoreAuthenticity, score: scores.authenticity),
+      _ScoreRow(
+        label: l10n.coachingScoreAuthenticity,
+        score: scores.authenticity,
+      ),
     ];
 
     return Column(

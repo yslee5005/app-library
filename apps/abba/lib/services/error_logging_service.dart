@@ -67,10 +67,7 @@ class ErrorLoggingService {
     var result = text;
 
     // 1. Email
-    result = result.replaceAll(
-      RegExp(r'[\w.+-]+@[\w-]+\.[\w.]+'),
-      '[EMAIL]',
-    );
+    result = result.replaceAll(RegExp(r'[\w.+-]+@[\w-]+\.[\w.]+'), '[EMAIL]');
 
     // 2. Phone (E.164 `+<digits>` or hyphen-separated KR/US)
     result = result.replaceAll(
@@ -79,10 +76,7 @@ class ErrorLoggingService {
     );
 
     // 3. JWT-like tokens (3 base64url segments separated by dots, starts with eyJ)
-    result = result.replaceAll(
-      RegExp(r'eyJ[\w-]+\.[\w-]+\.[\w-]+'),
-      '[JWT]',
-    );
+    result = result.replaceAll(RegExp(r'eyJ[\w-]+\.[\w-]+\.[\w-]+'), '[JWT]');
 
     // 4. Long Korean runs (transcript / prayer content)
     result = result.replaceAllMapped(

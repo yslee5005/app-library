@@ -13,18 +13,16 @@ import '../../../helpers/test_fixtures.dart';
 ///   - Tapping expands to reveal `bibleStory.summary` body.
 void main() {
   group('BibleStoryCard', () {
-    testWidgets('collapsed: shows title + 📖 icon + story title summary',
-        (tester) async {
+    testWidgets('collapsed: shows title + 📖 icon + story title summary', (
+      tester,
+    ) async {
       final story = TestFixtures.bibleStory();
 
       await tester.pumpWidget(
         buildTestApp(
           Scaffold(
             body: SingleChildScrollView(
-              child: BibleStoryCard(
-                bibleStory: story,
-                title: 'Bible Story',
-              ),
+              child: BibleStoryCard(bibleStory: story, title: 'Bible Story'),
             ),
           ),
         ),
@@ -42,18 +40,16 @@ void main() {
       expect(find.text(story.summary), findsNothing);
     });
 
-    testWidgets('expanded: tapping header reveals story title + summary body',
-        (tester) async {
+    testWidgets('expanded: tapping header reveals story title + summary body', (
+      tester,
+    ) async {
       final story = TestFixtures.bibleStory();
 
       await tester.pumpWidget(
         buildTestApp(
           Scaffold(
             body: SingleChildScrollView(
-              child: BibleStoryCard(
-                bibleStory: story,
-                title: 'Bible Story',
-              ),
+              child: BibleStoryCard(bibleStory: story, title: 'Bible Story'),
             ),
           ),
         ),

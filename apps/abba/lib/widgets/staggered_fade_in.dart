@@ -29,22 +29,12 @@ class _StaggeredFadeInState extends State<StaggeredFadeIn>
   @override
   void initState() {
     super.initState();
-    _controller = AnimationController(
-      vsync: this,
-      duration: widget.duration,
-    );
-    _opacity = CurvedAnimation(
-      parent: _controller,
-      curve: Curves.easeOut,
-    );
+    _controller = AnimationController(vsync: this, duration: widget.duration);
+    _opacity = CurvedAnimation(parent: _controller, curve: Curves.easeOut);
     _offset = Tween<Offset>(
       begin: const Offset(0, 0.08),
       end: Offset.zero,
-    ).animate(CurvedAnimation(
-      parent: _controller,
-      curve: Curves.easeOut,
-    ));
-
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeOut));
   }
 
   bool _started = false;
@@ -74,10 +64,7 @@ class _StaggeredFadeInState extends State<StaggeredFadeIn>
   Widget build(BuildContext context) {
     return FadeTransition(
       opacity: _opacity,
-      child: SlideTransition(
-        position: _offset,
-        child: widget.child,
-      ),
+      child: SlideTransition(position: _offset, child: widget.child),
     );
   }
 }

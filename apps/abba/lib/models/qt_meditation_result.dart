@@ -8,8 +8,9 @@ import 'prayer.dart';
 /// three fields in a single unified card.
 class MeditationSummary {
   final String summary; // 1-2 sentence summary of the user's meditation text
-  final String topic;   // Short 1-line topic of today's passage
-  final String insight; // Phase 5C — AI insight (absorbed from MeditationAnalysis)
+  final String topic; // Short 1-line topic of today's passage
+  final String
+  insight; // Phase 5C — AI insight (absorbed from MeditationAnalysis)
 
   const MeditationSummary({
     required this.summary,
@@ -27,17 +28,18 @@ class MeditationSummary {
 
   /// Phase 5D — snake_case keys, single-field only (no legacy `_en`/`_ko`).
   Map<String, dynamic> toJson() => {
-        'summary': summary,
-        'topic': topic,
-        'insight': insight,
-      };
+    'summary': summary,
+    'topic': topic,
+    'insight': insight,
+  };
 
   bool get isEmpty => summary.isEmpty && topic.isEmpty && insight.isEmpty;
 }
 
 class QtMeditationResult {
-  final MeditationSummary meditationSummary; // Phase 1 + 5C — summary/topic/insight
-  final Scripture scripture;                 // Phase 1 — Scripture Deep
+  final MeditationSummary
+  meditationSummary; // Phase 1 + 5C — summary/topic/insight
+  final Scripture scripture; // Phase 1 — Scripture Deep
   final ApplicationSuggestion application;
   final RelatedKnowledge knowledge;
   final GrowthStory? growthStory;
@@ -67,20 +69,19 @@ class QtMeditationResult {
   /// `fromJson` input. `verse` is intentionally NOT persisted (comes from the
   /// PD bundle via BibleTextService at read time — same convention as Prayer).
   Map<String, dynamic> toJson() => {
-        'meditation_summary': meditationSummary.toJson(),
-        'scripture': {
-          'reference': scripture.reference,
-          // verse not persisted — BibleTextService fills at read time.
-          'reason': scripture.reason,
-          'posture': scripture.posture,
-          'key_word_hint': scripture.keyWordHint,
-          'original_words':
-              scripture.originalWords.map((w) => w.toJson()).toList(),
-        },
-        'application': application.toJson(),
-        'knowledge': knowledge.toJson(),
-        if (growthStory != null) 'growth_story': growthStory!.toJson(),
-      };
+    'meditation_summary': meditationSummary.toJson(),
+    'scripture': {
+      'reference': scripture.reference,
+      // verse not persisted — BibleTextService fills at read time.
+      'reason': scripture.reason,
+      'posture': scripture.posture,
+      'key_word_hint': scripture.keyWordHint,
+      'original_words': scripture.originalWords.map((w) => w.toJson()).toList(),
+    },
+    'application': application.toJson(),
+    'knowledge': knowledge.toJson(),
+    if (growthStory != null) 'growth_story': growthStory!.toJson(),
+  };
 
   /// Defensive cast: tolerates `Map<dynamic, dynamic>` JSON literals (common
   /// in tests and from some JSON libraries) without throwing.
@@ -100,10 +101,11 @@ class QtMeditationResult {
     String legacyInsight = '';
     if (rawAnalysis is Map) {
       final analysisMap = _asMap(rawAnalysis);
-      legacyInsight = (analysisMap['insight'] as String?)
-          ?? (analysisMap['insight_en'] as String?)
-          ?? (analysisMap['insight_ko'] as String?)
-          ?? '';
+      legacyInsight =
+          (analysisMap['insight'] as String?) ??
+          (analysisMap['insight_en'] as String?) ??
+          (analysisMap['insight_ko'] as String?) ??
+          '';
     }
 
     MeditationSummary summary;
@@ -160,10 +162,10 @@ class QtMeditationResult {
 /// UI prefers 3-block rendering when `hasTimeBlocks` is true; otherwise it
 /// falls back to the single `action` string.
 class ApplicationSuggestion {
-  final String action;          // legacy / fallback — single action
-  final String morningAction;   // Phase 5B — before the day starts, ≤10 min
-  final String dayAction;       // Phase 5B — during work or daily errands
-  final String eveningAction;   // Phase 5B — family or alone, in the evening
+  final String action; // legacy / fallback — single action
+  final String morningAction; // Phase 5B — before the day starts, ≤10 min
+  final String dayAction; // Phase 5B — during work or daily errands
+  final String eveningAction; // Phase 5B — family or alone, in the evening
 
   const ApplicationSuggestion({
     this.action = '',
@@ -198,7 +200,8 @@ class ApplicationSuggestion {
     }
     // Oldest legacy: `action_ko` / `action_en` pair.
     return ApplicationSuggestion(
-      action: json['action_ko'] as String? ?? json['action_en'] as String? ?? '',
+      action:
+          json['action_ko'] as String? ?? json['action_en'] as String? ?? '',
     );
   }
 
@@ -231,10 +234,7 @@ class CrossReference {
   }
 
   /// Phase 5D — snake_case persistence.
-  Map<String, dynamic> toJson() => {
-        'reference': reference,
-        'text': text,
-      };
+  Map<String, dynamic> toJson() => {'reference': reference, 'text': text};
 }
 
 class RelatedKnowledge {
@@ -258,23 +258,22 @@ class RelatedKnowledge {
   factory RelatedKnowledge.fromJson(Map<String, dynamic> json) {
     return RelatedKnowledge(
       originalWord: json['original_word'] != null
-          ? OriginalWord.fromJson(
-              json['original_word'] as Map<String, dynamic>,
-            )
+          ? OriginalWord.fromJson(json['original_word'] as Map<String, dynamic>)
           : null,
       // Phase 5A — single-field resolver with legacy fallbacks.
-      historicalContext: json['historical_context'] as String?
-          ?? json['historical_context_en'] as String?
-          ?? json['historical_context_ko'] as String?
-          ?? '',
-      crossReferences: (json['cross_references'] as List<dynamic>?)
-              ?.map((e) {
-                if (e is String) return CrossReference(reference: e, text: '');
-                return CrossReference.fromJson(e as Map<String, dynamic>);
-              })
-              .toList() ??
+      historicalContext:
+          json['historical_context'] as String? ??
+          json['historical_context_en'] as String? ??
+          json['historical_context_ko'] as String? ??
+          '',
+      crossReferences:
+          (json['cross_references'] as List<dynamic>?)?.map((e) {
+            if (e is String) return CrossReference(reference: e, text: '');
+            return CrossReference.fromJson(e as Map<String, dynamic>);
+          }).toList() ??
           [],
-      citations: (json['citations'] as List<dynamic>?)
+      citations:
+          (json['citations'] as List<dynamic>?)
               ?.map((e) => Citation.fromJson(e as Map<String, dynamic>))
               .where((c) => c.content.isNotEmpty)
               .toList() ??
@@ -284,18 +283,13 @@ class RelatedKnowledge {
 
   /// Phase 5D — single-field snake_case write. Mirrors `fromJson` shape.
   Map<String, dynamic> toJson() => {
-        if (originalWord != null) 'original_word': originalWord!.toJson(),
-        'historical_context': historicalContext,
-        'cross_references':
-            crossReferences.map((c) => c.toJson()).toList(),
-        'citations': citations
-            .map((c) => {
-                  'type': c.type,
-                  'source': c.source,
-                  'content': c.content,
-                })
-            .toList(),
-      };
+    if (originalWord != null) 'original_word': originalWord!.toJson(),
+    'historical_context': historicalContext,
+    'cross_references': crossReferences.map((c) => c.toJson()).toList(),
+    'citations': citations
+        .map((c) => {'type': c.type, 'source': c.source, 'content': c.content})
+        .toList(),
+  };
 }
 
 class OriginalWord {
@@ -317,20 +311,21 @@ class OriginalWord {
       transliteration: json['transliteration'] as String,
       language: json['language'] as String,
       // Phase 5A — single-field resolver with legacy fallbacks.
-      meaning: json['meaning'] as String?
-          ?? json['meaning_en'] as String?
-          ?? json['meaning_ko'] as String?
-          ?? '',
+      meaning:
+          json['meaning'] as String? ??
+          json['meaning_en'] as String? ??
+          json['meaning_ko'] as String? ??
+          '',
     );
   }
 
   /// Phase 5D — snake_case, single-field only.
   Map<String, dynamic> toJson() => {
-        'word': word,
-        'transliteration': transliteration,
-        'language': language,
-        'meaning': meaning,
-      };
+    'word': word,
+    'transliteration': transliteration,
+    'language': language,
+    'meaning': meaning,
+  };
 }
 
 /// Spiritual growth story tied to today's meditation. Phase 4 of
@@ -338,9 +333,10 @@ class OriginalWord {
 /// locale by Gemini). Legacy DB records that still carry `_en`/`_ko` pairs
 /// fall through a 3-stage resolver: `title` → `title_en` → `title_ko`.
 class GrowthStory {
-  final String title;   // In the user's locale (Gemini-generated)
-  final String summary; // 8-12 sentence narrative of a REAL Bible/church-history figure
-  final String lesson;  // 2-3 sentence application tied to today's meditation
+  final String title; // In the user's locale (Gemini-generated)
+  final String
+  summary; // 8-12 sentence narrative of a REAL Bible/church-history figure
+  final String lesson; // 2-3 sentence application tied to today's meditation
   final bool isPremium;
 
   const GrowthStory({
@@ -355,29 +351,32 @@ class GrowthStory {
     // fallbacks so historical DB records keep rendering. No locale info is
     // available here, so prefer English, then Korean, then empty string.
     return GrowthStory(
-      title: json['title'] as String?
-          ?? json['title_en'] as String?
-          ?? json['title_ko'] as String?
-          ?? '',
-      summary: json['summary'] as String?
-          ?? json['summary_en'] as String?
-          ?? json['summary_ko'] as String?
-          ?? '',
-      lesson: json['lesson'] as String?
-          ?? json['lesson_en'] as String?
-          ?? json['lesson_ko'] as String?
-          ?? '',
+      title:
+          json['title'] as String? ??
+          json['title_en'] as String? ??
+          json['title_ko'] as String? ??
+          '',
+      summary:
+          json['summary'] as String? ??
+          json['summary_en'] as String? ??
+          json['summary_ko'] as String? ??
+          '',
+      lesson:
+          json['lesson'] as String? ??
+          json['lesson_en'] as String? ??
+          json['lesson_ko'] as String? ??
+          '',
       isPremium: json['is_premium'] as bool? ?? true,
     );
   }
 
   /// Phase 5D — single-field snake_case persistence.
   Map<String, dynamic> toJson() => {
-        'title': title,
-        'summary': summary,
-        'lesson': lesson,
-        'is_premium': isPremium,
-      };
+    'title': title,
+    'summary': summary,
+    'lesson': lesson,
+    'is_premium': isPremium,
+  };
 }
 
 /// QT Coaching scores — Pro-only, mirrors `CoachingScores` but with the
@@ -385,9 +384,9 @@ class GrowthStory {
 /// Phase 2 of qt_output_redesign (INT-112).
 class QtScores {
   final int comprehension; // 본문 이해 1-5
-  final int application;    // 개인 적용 (3P) 1-5
-  final int depth;          // 영적 깊이 1-5
-  final int authenticity;   // 진정성 1-5
+  final int application; // 개인 적용 (3P) 1-5
+  final int depth; // 영적 깊이 1-5
+  final int authenticity; // 진정성 1-5
 
   const QtScores({
     required this.comprehension,
@@ -439,11 +438,13 @@ class QtCoaching {
       scores: QtScores.fromJson(
         json['scores'] as Map<String, dynamic>? ?? const {},
       ),
-      strengths: (json['strengths'] as List<dynamic>?)
+      strengths:
+          (json['strengths'] as List<dynamic>?)
               ?.map((e) => e as String)
               .toList() ??
           const [],
-      improvements: (json['improvements'] as List<dynamic>?)
+      improvements:
+          (json['improvements'] as List<dynamic>?)
               ?.map((e) => e as String)
               .toList() ??
           const [],
@@ -456,17 +457,16 @@ class QtCoaching {
 
   /// Placeholder for locked card display (Free users) and API failures.
   factory QtCoaching.placeholder() => const QtCoaching(
-        scores: QtScores(
-          comprehension: 0,
-          application: 0,
-          depth: 0,
-          authenticity: 0,
-        ),
-        strengths: [],
-        improvements: [],
-        overallFeedbackEn:
-            'Unlock your personal meditation coaching feedback...',
-        overallFeedbackKo: 'Pro로 당신의 묵상에 대한 맞춤 코칭을 받아보세요...',
-        expertLevel: 'growing',
-      );
+    scores: QtScores(
+      comprehension: 0,
+      application: 0,
+      depth: 0,
+      authenticity: 0,
+    ),
+    strengths: [],
+    improvements: [],
+    overallFeedbackEn: 'Unlock your personal meditation coaching feedback...',
+    overallFeedbackKo: 'Pro로 당신의 묵상에 대한 맞춤 코칭을 받아보세요...',
+    expertLevel: 'growing',
+  );
 }

@@ -20,10 +20,7 @@ void main() {
         buildTestApp(
           const Scaffold(
             body: SingleChildScrollView(
-              child: TestimonyCard(
-                testimony: shortText,
-                title: 'My Testimony',
-              ),
+              child: TestimonyCard(testimony: shortText, title: 'My Testimony'),
             ),
           ),
         ),
@@ -48,10 +45,7 @@ void main() {
         buildTestApp(
           const Scaffold(
             body: SingleChildScrollView(
-              child: TestimonyCard(
-                testimony: longText,
-                title: 'My Testimony',
-              ),
+              child: TestimonyCard(testimony: longText, title: 'My Testimony'),
             ),
           ),
         ),
@@ -70,33 +64,35 @@ void main() {
       expect(find.text(longText), findsOneWidget);
     });
 
-    testWidgets('expanded: helper text renders above transcript when provided',
-        (tester) async {
-      const text = 'A prayer from the heart this morning, with gratitude.';
+    testWidgets(
+      'expanded: helper text renders above transcript when provided',
+      (tester) async {
+        const text = 'A prayer from the heart this morning, with gratitude.';
 
-      await tester.pumpWidget(
-        buildTestApp(
-          const Scaffold(
-            body: SingleChildScrollView(
-              child: TestimonyCard(
-                testimony: text,
-                title: 'My Testimony',
-                helperText: 'Auto-transcribed from your voice.',
+        await tester.pumpWidget(
+          buildTestApp(
+            const Scaffold(
+              body: SingleChildScrollView(
+                child: TestimonyCard(
+                  testimony: text,
+                  title: 'My Testimony',
+                  helperText: 'Auto-transcribed from your voice.',
+                ),
               ),
             ),
           ),
-        ),
-      );
-      await tester.pumpAndSettle();
+        );
+        await tester.pumpAndSettle();
 
-      // Helper text only shows in expanded body.
-      expect(find.text('Auto-transcribed from your voice.'), findsNothing);
+        // Helper text only shows in expanded body.
+        expect(find.text('Auto-transcribed from your voice.'), findsNothing);
 
-      await tester.tap(find.text('My Testimony'));
-      await tester.pumpAndSettle();
+        await tester.tap(find.text('My Testimony'));
+        await tester.pumpAndSettle();
 
-      expect(find.text('Auto-transcribed from your voice.'), findsOneWidget);
-      expect(find.text(text), findsOneWidget);
-    });
+        expect(find.text('Auto-transcribed from your voice.'), findsOneWidget);
+        expect(find.text(text), findsOneWidget);
+      },
+    );
   });
 }

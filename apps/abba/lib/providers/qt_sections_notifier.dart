@@ -137,13 +137,15 @@ class QtSectionsNotifier extends StateNotifier<QtSectionsState> {
           case QtTierT1ScriptureRef ref:
             setScriptureRef(ref.reference);
             if (!t1Completer.isCompleted) {
-              t1Completer.complete(QtTierT1Result(
-                meditationSummary: const MeditationSummary(
-                  summary: '',
-                  topic: '',
+              t1Completer.complete(
+                QtTierT1Result(
+                  meditationSummary: const MeditationSummary(
+                    summary: '',
+                    topic: '',
+                  ),
+                  scripture: Scripture(reference: ref.reference),
                 ),
-                scripture: Scripture(reference: ref.reference),
-              ));
+              );
             }
           case QtTierT1Result t1:
             setT1(
@@ -213,13 +215,13 @@ class QtSectionsNotifier extends StateNotifier<QtSectionsState> {
   }
 
   Map<String, dynamic> _scriptureToJson(Scripture s) => {
-        'reference': s.reference,
-        'verse': s.verse,
-        'reason': s.reason,
-        'posture': s.posture,
-        'key_word_hint': s.keyWordHint,
-        'original_words': s.originalWords.map((w) => w.toJson()).toList(),
-      };
+    'reference': s.reference,
+    'verse': s.verse,
+    'reason': s.reason,
+    'posture': s.posture,
+    'key_word_hint': s.keyWordHint,
+    'original_words': s.originalWords.map((w) => w.toJson()).toList(),
+  };
 
   @override
   void dispose() {
@@ -233,5 +235,5 @@ class QtSectionsNotifier extends StateNotifier<QtSectionsState> {
 /// call [reset] before starting a new meditation to clear stale state.
 final qtSectionsProvider =
     StateNotifierProvider<QtSectionsNotifier, QtSectionsState>(
-  (ref) => QtSectionsNotifier(),
-);
+      (ref) => QtSectionsNotifier(),
+    );

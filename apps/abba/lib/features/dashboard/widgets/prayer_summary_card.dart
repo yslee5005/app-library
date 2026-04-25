@@ -59,9 +59,17 @@ class PrayerSummaryCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           if (prayerSummary.gratitude.isNotEmpty)
-            _buildSection(gratitudeLabel, prayerSummary.gratitude, AbbaColors.sage),
+            _buildSection(
+              gratitudeLabel,
+              prayerSummary.gratitude,
+              AbbaColors.sage,
+            ),
           if (prayerSummary.petition.isNotEmpty)
-            _buildSection(petitionLabel, prayerSummary.petition, AbbaColors.softGold),
+            _buildSection(
+              petitionLabel,
+              prayerSummary.petition,
+              AbbaColors.softGold,
+            ),
           if (prayerSummary.intercession.isNotEmpty)
             _buildSection(
               intercessionLabel,

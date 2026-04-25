@@ -42,10 +42,11 @@ class Prayer {
   final String mode; // 'prayer' | 'qt'
   final String? qtPassageRef;
   final String? audioPath; // local file path for voice recordings
-  final String? audioStoragePath; // Supabase Storage path (e.g., 'abba/{userId}/{id}.m4a')
+  final String?
+  audioStoragePath; // Supabase Storage path (e.g., 'abba/{userId}/{id}.m4a')
   final int durationSeconds;
   final DateTime createdAt;
-  final PrayerResult? result;     // mode='prayer' — AI prayer analysis
+  final PrayerResult? result; // mode='prayer' — AI prayer analysis
   final QtMeditationResult? qtResult; // Phase 5D — mode='qt' persistence
 
   /// 2026-04-23 Pending/Retry: AI analysis lifecycle state.
@@ -124,15 +125,18 @@ class PrayerSummary {
 
   factory PrayerSummary.fromJson(Map<String, dynamic> json) {
     return PrayerSummary(
-      gratitude: (json['gratitude'] as List<dynamic>?)
+      gratitude:
+          (json['gratitude'] as List<dynamic>?)
               ?.map((e) => e as String)
               .toList() ??
           [],
-      petition: (json['petition'] as List<dynamic>?)
+      petition:
+          (json['petition'] as List<dynamic>?)
               ?.map((e) => e as String)
               .toList() ??
           [],
-      intercession: (json['intercession'] as List<dynamic>?)
+      intercession:
+          (json['intercession'] as List<dynamic>?)
               ?.map((e) => e as String)
               .toList() ??
           [],
@@ -158,33 +162,36 @@ class HistoricalStory {
 
   factory HistoricalStory.fromJson(Map<String, dynamic> json) {
     return HistoricalStory(
-      title: json['title'] as String?
-          ?? json['title_en'] as String?
-          ?? json['title_ko'] as String?
-          ?? '',
+      title:
+          json['title'] as String? ??
+          json['title_en'] as String? ??
+          json['title_ko'] as String? ??
+          '',
       reference: json['reference'] as String? ?? '',
-      summary: json['summary'] as String?
-          ?? json['summary_en'] as String?
-          ?? json['summary_ko'] as String?
-          ?? '',
-      lesson: json['lesson'] as String?
-          ?? json['lesson_en'] as String?
-          ?? json['lesson_ko'] as String?
-          ?? '',
+      summary:
+          json['summary'] as String? ??
+          json['summary_en'] as String? ??
+          json['summary_ko'] as String? ??
+          '',
+      lesson:
+          json['lesson'] as String? ??
+          json['lesson_en'] as String? ??
+          json['lesson_ko'] as String? ??
+          '',
       isPremium: json['is_premium'] as bool? ?? true,
     );
   }
 
   /// Placeholder for locked premium card display (locale-aware).
   factory HistoricalStory.placeholder(String locale) => HistoricalStory(
-        title: locale == 'ko' ? '믿음의 이야기' : 'A Story of Faith',
-        reference: '',
-        summary: locale == 'ko'
-            ? '성경 역사 속 감동적인 이야기를 만나보세요...'
-            : 'Unlock to discover a powerful story from Bible history...',
-        lesson: '',
-        isPremium: true,
-      );
+    title: locale == 'ko' ? '믿음의 이야기' : 'A Story of Faith',
+    reference: '',
+    summary: locale == 'ko'
+        ? '성경 역사 속 감동적인 이야기를 만나보세요...'
+        : 'Unlock to discover a powerful story from Bible history...',
+    lesson: '',
+    isPremium: true,
+  );
 }
 
 class PrayerResult {
@@ -229,10 +236,11 @@ class PrayerResult {
     final testimonyRaw = json['testimony'];
     final String testimonyValue = switch (testimonyRaw) {
       String s => s,
-      Map m => (m['transcript'] as String?)
-          ?? (m['transcript_en'] as String?)
-          ?? (m['transcript_ko'] as String?)
-          ?? '',
+      Map m =>
+        (m['transcript'] as String?) ??
+            (m['transcript_en'] as String?) ??
+            (m['transcript_ko'] as String?) ??
+            '',
       _ => '',
     };
     return PrayerResult(
@@ -263,10 +271,10 @@ class PrayerResult {
 
 class Scripture {
   final String reference;
-  final String verse;        // PD translation text (from BibleTextService lookup)
-  final String reason;       // AI 창작 (사용자 locale)
-  final String posture;      // AI 창작
-  final String keyWordHint;  // ✨ 핵심 단어 원-라이너 (AI 창작)
+  final String verse; // PD translation text (from BibleTextService lookup)
+  final String reason; // AI 창작 (사용자 locale)
+  final String posture; // AI 창작
+  final String keyWordHint; // ✨ 핵심 단어 원-라이너 (AI 창작)
   final List<ScriptureOriginalWord> originalWords;
 
   const Scripture({
@@ -283,17 +291,23 @@ class Scripture {
       reference: json['reference'] as String? ?? '',
       // BibleTextService가 runtime에 채움. legacy verse_en/verse_ko 는 무시.
       verse: json['verse'] as String? ?? '',
-      reason: json['reason'] as String?
-          ?? json['reason_en'] as String?
-          ?? json['reason_ko'] as String?
-          ?? '',
-      posture: json['posture'] as String?
-          ?? json['posture_en'] as String?
-          ?? json['posture_ko'] as String?
-          ?? '',
+      reason:
+          json['reason'] as String? ??
+          json['reason_en'] as String? ??
+          json['reason_ko'] as String? ??
+          '',
+      posture:
+          json['posture'] as String? ??
+          json['posture_en'] as String? ??
+          json['posture_ko'] as String? ??
+          '',
       keyWordHint: json['key_word_hint'] as String? ?? '',
-      originalWords: (json['original_words'] as List<dynamic>?)
-              ?.map((e) => ScriptureOriginalWord.fromJson(e as Map<String, dynamic>))
+      originalWords:
+          (json['original_words'] as List<dynamic>?)
+              ?.map(
+                (e) =>
+                    ScriptureOriginalWord.fromJson(e as Map<String, dynamic>),
+              )
               .toList() ??
           const [],
     );
@@ -301,13 +315,13 @@ class Scripture {
 
   /// Immutable copy with verse text filled (e.g., after BibleTextService lookup).
   Scripture withVerse(String verseText) => Scripture(
-        reference: reference,
-        verse: verseText,
-        reason: reason,
-        posture: posture,
-        keyWordHint: keyWordHint,
-        originalWords: originalWords,
-      );
+    reference: reference,
+    verse: verseText,
+    reason: reason,
+    posture: posture,
+    keyWordHint: keyWordHint,
+    originalWords: originalWords,
+  );
 }
 
 /// Phase 5A (qt_output_redesign) — single-field in user's locale (Gemini
@@ -334,25 +348,27 @@ class ScriptureOriginalWord {
       word: json['word'] as String,
       transliteration: json['transliteration'] as String,
       language: json['language'] as String,
-      meaning: json['meaning'] as String?
-          ?? json['meaning_en'] as String?
-          ?? json['meaning_ko'] as String?
-          ?? '',
-      nuance: json['nuance'] as String?
-          ?? json['nuance_en'] as String?
-          ?? json['nuance_ko'] as String?
-          ?? '',
+      meaning:
+          json['meaning'] as String? ??
+          json['meaning_en'] as String? ??
+          json['meaning_ko'] as String? ??
+          '',
+      nuance:
+          json['nuance'] as String? ??
+          json['nuance_en'] as String? ??
+          json['nuance_ko'] as String? ??
+          '',
     );
   }
 
   /// Phase 5D — single-field snake_case (no legacy `_en`/`_ko` dual write).
   Map<String, dynamic> toJson() => {
-        'word': word,
-        'transliteration': transliteration,
-        'language': language,
-        'meaning': meaning,
-        'nuance': nuance,
-      };
+    'word': word,
+    'transliteration': transliteration,
+    'language': language,
+    'meaning': meaning,
+    'nuance': nuance,
+  };
 
   bool get isRtl => language == 'Hebrew';
 }
@@ -365,14 +381,16 @@ class BibleStory {
 
   factory BibleStory.fromJson(Map<String, dynamic> json) {
     return BibleStory(
-      title: json['title'] as String?
-          ?? json['title_en'] as String?
-          ?? json['title_ko'] as String?
-          ?? '',
-      summary: json['summary'] as String?
-          ?? json['summary_en'] as String?
-          ?? json['summary_ko'] as String?
-          ?? '',
+      title:
+          json['title'] as String? ??
+          json['title_en'] as String? ??
+          json['title_ko'] as String? ??
+          '',
+      summary:
+          json['summary'] as String? ??
+          json['summary_en'] as String? ??
+          json['summary_ko'] as String? ??
+          '',
     );
   }
 }
@@ -385,10 +403,11 @@ class Guidance {
 
   factory Guidance.fromJson(Map<String, dynamic> json) {
     return Guidance(
-      content: json['content'] as String?
-          ?? json['content_en'] as String?
-          ?? json['content_ko'] as String?
-          ?? '',
+      content:
+          json['content'] as String? ??
+          json['content_en'] as String? ??
+          json['content_ko'] as String? ??
+          '',
       isPremium: json['is_premium'] as bool? ?? true,
     );
   }
@@ -407,11 +426,13 @@ class AiPrayer {
 
   factory AiPrayer.fromJson(Map<String, dynamic> json) {
     return AiPrayer(
-      text: json['text'] as String?
-          ?? json['text_en'] as String?
-          ?? json['text_ko'] as String?
-          ?? '',
-      citations: (json['citations'] as List<dynamic>?)
+      text:
+          json['text'] as String? ??
+          json['text_en'] as String? ??
+          json['text_ko'] as String? ??
+          '',
+      citations:
+          (json['citations'] as List<dynamic>?)
               ?.map((e) => Citation.fromJson(e as Map<String, dynamic>))
               .where((c) => c.content.isNotEmpty)
               .toList() ??
@@ -422,19 +443,19 @@ class AiPrayer {
 
   /// Placeholder for locked premium card display (locale-aware).
   factory AiPrayer.placeholder(String locale) => AiPrayer(
-        text: locale == 'ko'
-            ? '당신만을 위한 기도문을 받아보세요...'
-            : 'Unlock to receive a personalized prayer...',
-        isPremium: true,
-      );
+    text: locale == 'ko'
+        ? '당신만을 위한 기도문을 받아보세요...'
+        : 'Unlock to receive a personalized prayer...',
+    isPremium: true,
+  );
 }
 
 /// Citation attached to an AI-generated prayer or QT meditation — source
 /// for a quote, scientific fact, historical reference, or concrete example.
 /// Used to deepen meaning with verifiable references.
 class Citation {
-  final String type;    // "quote" | "science" | "history" | "example"
-  final String source;  // author, work, or study (may be empty for "example")
+  final String type; // "quote" | "science" | "history" | "example"
+  final String source; // author, work, or study (may be empty for "example")
   final String content; // the quoted text or factual statement in user locale
 
   const Citation({
@@ -505,11 +526,13 @@ class PrayerCoaching {
       scores: CoachingScores.fromJson(
         json['scores'] as Map<String, dynamic>? ?? const {},
       ),
-      strengths: (json['strengths'] as List<dynamic>?)
+      strengths:
+          (json['strengths'] as List<dynamic>?)
               ?.map((e) => e as String)
               .toList() ??
           const [],
-      improvements: (json['improvements'] as List<dynamic>?)
+      improvements:
+          (json['improvements'] as List<dynamic>?)
               ?.map((e) => e as String)
               .toList() ??
           const [],
@@ -522,16 +545,16 @@ class PrayerCoaching {
 
   /// Placeholder for locked premium card display (Free users).
   factory PrayerCoaching.placeholder() => const PrayerCoaching(
-        scores: CoachingScores(
-          specificity: 0,
-          godCenteredness: 0,
-          actsBalance: 0,
-          authenticity: 0,
-        ),
-        strengths: [],
-        improvements: [],
-        overallFeedbackEn: 'Unlock your personal prayer coaching feedback...',
-        overallFeedbackKo: 'Pro로 당신의 기도에 대한 맞춤 코칭을 받아보세요...',
-        expertLevel: 'growing',
-      );
+    scores: CoachingScores(
+      specificity: 0,
+      godCenteredness: 0,
+      actsBalance: 0,
+      authenticity: 0,
+    ),
+    strengths: [],
+    improvements: [],
+    overallFeedbackEn: 'Unlock your personal prayer coaching feedback...',
+    overallFeedbackKo: 'Pro로 당신의 기도에 대한 맞춤 코칭을 받아보세요...',
+    expertLevel: 'growing',
+  );
 }

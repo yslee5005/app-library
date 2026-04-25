@@ -280,7 +280,7 @@ class AppLocalizationsMy extends AppLocalizations {
   String get yearlySave => '40% ချွေတာ';
 
   @override
-  String get launchPromo => '3 လ \$4.99/လ ဖြင့်!';
+  String get launchPromo => '';
 
   @override
   String get startPro => 'Pro စတင်ရန်';
@@ -407,7 +407,7 @@ class AppLocalizationsMy extends AppLocalizations {
   String get promoTitle => 'မိတ်ဆက်အထူးလျှော့ဈေး';
 
   @override
-  String get promoBanner => 'ပထမ 3 လ \$4.99/လ ဖြင့်!';
+  String get promoBanner => '';
 
   @override
   String promoEndsOn(Object date) {
@@ -676,6 +676,9 @@ class AppLocalizationsMy extends AppLocalizations {
 
   @override
   String get seeMore => 'ပိုမိုကြည့်ရန်';
+
+  @override
+  String get seeLess => 'လျှော့ကြည့်ရန်';
 
   @override
   String seeAllComments(Object count) {
@@ -1326,4 +1329,22 @@ class AppLocalizationsMy extends AppLocalizations {
 
   @override
   String get sectionStatusPending => 'သုံးသပ်ချက် ဆက်လက်လုပ်ဆောင်နေသည်';
+
+  @override
+  String get trialStartCta => 'Start 1 month free';
+
+  @override
+  String trialAutoRenewDisclosure(Object price) {
+    return 'Then $price/year, auto-renews. Cancel anytime in Settings.';
+  }
+
+  @override
+  String get trialLimitTitle => 'You\'ve prayed 3 times today 🌸';
+
+  @override
+  String get trialLimitBody =>
+      'Come back tomorrow — or unlock unlimited prayer with Pro.';
+
+  @override
+  String get trialLimitCta => 'Continue with Pro';
 }

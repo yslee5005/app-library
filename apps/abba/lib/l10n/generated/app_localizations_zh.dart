@@ -274,7 +274,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get yearlySave => '省40%';
 
   @override
-  String get launchPromo => '3个月¥25/月!';
+  String get launchPromo => '';
 
   @override
   String get startPro => '开通Pro';
@@ -395,7 +395,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get promoTitle => '上线特惠';
 
   @override
-  String get promoBanner => '3个月¥25/月!';
+  String get promoBanner => '';
 
   @override
   String promoEndsOn(Object date) {
@@ -657,6 +657,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get seeMore => '查看更多';
+
+  @override
+  String get seeLess => '收起';
 
   @override
   String seeAllComments(Object count) {
@@ -1277,4 +1280,21 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get sectionStatusPending => '分析进行中';
+
+  @override
+  String get trialStartCta => '免费开始 1 个月';
+
+  @override
+  String trialAutoRenewDisclosure(Object price) {
+    return '之后每年 $price,自动续订。可随时在\"设置\"中取消。';
+  }
+
+  @override
+  String get trialLimitTitle => '您今天已祈祷了 3 次 🌸';
+
+  @override
+  String get trialLimitBody => '明天再见 — 或使用 Pro 解锁无限祈祷。';
+
+  @override
+  String get trialLimitCta => '使用 Pro 继续';
 }

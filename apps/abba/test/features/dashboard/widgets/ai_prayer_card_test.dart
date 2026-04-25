@@ -51,9 +51,7 @@ void main() {
 
       // Tap the citations chevron to reveal them.
       final l10n = await AppLocalizations.delegate.load(const Locale('en'));
-      final citationsHeader = find.textContaining(
-        l10n.aiPrayerCitationsTitle,
-      );
+      final citationsHeader = find.textContaining(l10n.aiPrayerCitationsTitle);
       expect(citationsHeader, findsOneWidget);
       await tester.tap(citationsHeader);
       await tester.pumpAndSettle();
@@ -73,8 +71,9 @@ void main() {
       );
     });
 
-    testWidgets('Free user: shows ProBlur lock and hides prayer text',
-        (tester) async {
+    testWidgets('Free user: shows ProBlur lock and hides prayer text', (
+      tester,
+    ) async {
       final prayer = TestFixtures.aiPrayer(isPremium: true);
 
       await tester.pumpWidget(
@@ -103,8 +102,9 @@ void main() {
       expect(find.text(l10n.membershipTitle), findsOneWidget);
     });
 
-    testWidgets('Free fallback: placeholder hides body, shows lock',
-        (tester) async {
+    testWidgets('Free fallback: placeholder hides body, shows lock', (
+      tester,
+    ) async {
       // AiPrayer.placeholder() is the Free fallback the card system hands to
       // locked users — verify the card still treats it as locked.
       final placeholder = AiPrayer.placeholder('en');

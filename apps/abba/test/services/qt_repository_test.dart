@@ -31,8 +31,7 @@ void main() {
       expect(ko, hasLength(5));
     });
 
-    test('getTodayPassages passages have non-empty reference + text',
-        () async {
+    test('getTodayPassages passages have non-empty reference + text', () async {
       final passages = await repo.getTodayPassages(locale: 'en');
       for (final p in passages) {
         expect(p.reference, isNotEmpty);

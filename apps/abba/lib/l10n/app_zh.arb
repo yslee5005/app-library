@@ -103,7 +103,7 @@
   "monthlyPrice": "¥50 / 月",
   "yearlyPrice": "¥388 / 年",
   "yearlySave": "省40%",
-  "launchPromo": "3个月¥25/月!",
+  "launchPromo": "",
   "startPro": "开通Pro",
   "comingSoon": "即将推出",
   "notificationSetting": "通知",
@@ -152,7 +152,7 @@
   "groupInviteMessage": "一起祷告吧！加入我在Abba的祷告小组。",
   "noGroups": "加入或创建小组，一起祷告。",
   "promoTitle": "上线特惠",
-  "promoBanner": "3个月¥25/月!",
+  "promoBanner": "",
   "promoEndsOn": "优惠截止{date}",
   "@promoEndsOn": {
     "placeholders": {
@@ -248,6 +248,7 @@
   "originalWordNuanceLabel": "与译文的细微差别",
   "originalWordsCountLabel": "{count}个词",
   "seeMore": "查看更多",
+  "seeLess": "收起",
   "seeAllComments": "查看全部{count}条评论",
   "@seeAllComments": {
     "placeholders": {
@@ -552,5 +553,15 @@
   "aiErrorApiBody": "您的祷告已安全保存。请稍后再试。",
   "aiErrorRetry": "再试一次",
   "aiErrorWaitAndCheck": "我们稍后会再尝试分析。请尽快回来 — 您的祷告会在这里等着您。",
-  "aiErrorHome": "返回主页"
+  "aiErrorHome": "返回主页",
+  "trialStartCta": "免费开始 1 个月",
+  "trialAutoRenewDisclosure": "之后每年 {price},自动续订。可随时在\"设置\"中取消。",
+  "@trialAutoRenewDisclosure": {
+    "placeholders": {
+      "price": {}
+    }
+  },
+  "trialLimitTitle": "您今天已祈祷了 3 次 🌸",
+  "trialLimitBody": "明天再见 — 或使用 Pro 解锁无限祈祷。",
+  "trialLimitCta": "使用 Pro 继续"
 }

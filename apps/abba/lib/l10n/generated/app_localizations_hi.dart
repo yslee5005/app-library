@@ -282,7 +282,7 @@ class AppLocalizationsHi extends AppLocalizations {
   String get yearlySave => '40% बचाएँ';
 
   @override
-  String get launchPromo => '3 महीने ₹167/माह पर!';
+  String get launchPromo => '';
 
   @override
   String get startPro => 'Pro शुरू करें';
@@ -409,7 +409,7 @@ class AppLocalizationsHi extends AppLocalizations {
   String get promoTitle => 'लॉन्च ऑफ़र';
 
   @override
-  String get promoBanner => 'पहले 3 महीने ₹167/माह!';
+  String get promoBanner => '';
 
   @override
   String promoEndsOn(Object date) {
@@ -674,6 +674,9 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get seeMore => 'और देखें';
+
+  @override
+  String get seeLess => 'कम देखें';
 
   @override
   String seeAllComments(Object count) {
@@ -1309,4 +1312,22 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get sectionStatusPending => 'विश्लेषण प्रगति पर है';
+
+  @override
+  String get trialStartCta => '1 महीना मुफ्त शुरू करें';
+
+  @override
+  String trialAutoRenewDisclosure(Object price) {
+    return 'फिर $price/वर्ष, स्वतः नवीनीकरण। सेटिंग्स में कभी भी रद्द करें।';
+  }
+
+  @override
+  String get trialLimitTitle => 'आपने आज 3 बार प्रार्थना की है 🌸';
+
+  @override
+  String get trialLimitBody =>
+      'कल फिर आएं — या Pro के साथ असीमित प्रार्थना अनलॉक करें।';
+
+  @override
+  String get trialLimitCta => 'Pro के साथ जारी रखें';
 }

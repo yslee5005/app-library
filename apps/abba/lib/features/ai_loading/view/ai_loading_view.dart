@@ -140,15 +140,19 @@ class _AiLoadingViewState extends ConsumerState<AiLoadingView>
             aiStatus: PrayerAiStatus.pending,
           ),
         );
-        prayerLog.info('Pending prayer saved id=$_pendingPrayerId voice=$isVoiceMode');
+        prayerLog.info(
+          'Pending prayer saved id=$_pendingPrayerId voice=$isVoiceMode',
+        );
       } catch (e, st) {
         prayerLog.error('savePendingPrayer failed', error: e, stackTrace: st);
-        _setErrorState(AiAnalysisException(
-          'Failed to save prayer',
-          kind: AiAnalysisFailureKind.network,
-          cause: e,
-          causeStackTrace: st,
-        ));
+        _setErrorState(
+          AiAnalysisException(
+            'Failed to save prayer',
+            kind: AiAnalysisFailureKind.network,
+            cause: e,
+            causeStackTrace: st,
+          ),
+        );
         return;
       }
     }
@@ -158,10 +162,12 @@ class _AiLoadingViewState extends ConsumerState<AiLoadingView>
     // ────────────────────────────────────────────────────────────────────
     final hasNetwork = await ref.read(networkCheckerProvider).hasConnection();
     if (!hasNetwork) {
-      _setErrorState(const AiAnalysisException(
-        'No network connection',
-        kind: AiAnalysisFailureKind.network,
-      ));
+      _setErrorState(
+        const AiAnalysisException(
+          'No network connection',
+          kind: AiAnalysisFailureKind.network,
+        ),
+      );
       return;
     }
 
@@ -202,12 +208,25 @@ class _AiLoadingViewState extends ConsumerState<AiLoadingView>
     final t1Completer = Completer<TierT1Result>();
     final sectionsNotifier = ref.read(prayerSectionsProvider.notifier);
 
+    // v7 — fire recent-references fetch in parallel; service has its own
+    // 500ms timeout so we never block T1. Empty list on any failure.
+    final userId = ref.read(currentUserProvider)?.id ?? '';
+    final recentRefsFuture = userId.isEmpty
+        ? Future<List<String>>.value(const [])
+        : ref
+              .read(recentReferencesServiceProvider)
+              .getRecentReferences(userId: userId);
+
     try {
-      final stream = aiService.analyzePrayerStreamed(
-        transcript: transcript,
-        locale: locale,
-        userName: userName,
-      ) as Stream<TierResult>;
+      final recentRefs = await recentRefsFuture;
+      final stream =
+          aiService.analyzePrayerStreamed(
+                transcript: transcript,
+                locale: locale,
+                userName: userName,
+                recentReferences: recentRefs,
+              )
+              as Stream<TierResult>;
 
       sectionsNotifier.startPrayerStream(
         stream: stream,
@@ -250,6 +269,9 @@ class _AiLoadingViewState extends ConsumerState<AiLoadingView>
       ref.invalidate(prayerHeatmapProvider('qt'));
       ref.invalidate(streakByModeProvider('prayer'));
       ref.invalidate(streakByModeProvider('qt'));
+      // v7 — refresh recent-references list so the next prayer this session
+      // sees the verse just chosen (autoDispose family keyed on userId).
+      _invalidateRecentReferences();
 
       await _checkStreakCelebration();
 
@@ -263,14 +285,19 @@ class _AiLoadingViewState extends ConsumerState<AiLoadingView>
       );
       _setErrorState(e);
     } catch (e, stackTrace) {
-      prayerLog.error('Unexpected prayer stream error',
-          error: e, stackTrace: stackTrace);
-      _setErrorState(AiAnalysisException(
-        'Unexpected error during analysis',
-        kind: AiAnalysisFailureKind.apiError,
-        cause: e,
-        causeStackTrace: stackTrace,
-      ));
+      prayerLog.error(
+        'Unexpected prayer stream error',
+        error: e,
+        stackTrace: stackTrace,
+      );
+      _setErrorState(
+        AiAnalysisException(
+          'Unexpected error during analysis',
+          kind: AiAnalysisFailureKind.apiError,
+          cause: e,
+          causeStackTrace: stackTrace,
+        ),
+      );
     }
   }
 
@@ -312,6 +339,9 @@ class _AiLoadingViewState extends ConsumerState<AiLoadingView>
       ref.invalidate(prayerHeatmapProvider('qt'));
       ref.invalidate(streakByModeProvider('prayer'));
       ref.invalidate(streakByModeProvider('qt'));
+      // v7 — refresh recent-references list so the next prayer this session
+      // sees the verse just chosen (autoDispose family keyed on userId).
+      _invalidateRecentReferences();
 
       await _checkStreakCelebration();
 
@@ -327,12 +357,14 @@ class _AiLoadingViewState extends ConsumerState<AiLoadingView>
       _setErrorState(e);
     } catch (e, stackTrace) {
       prayerLog.error('Unexpected AI error', error: e, stackTrace: stackTrace);
-      _setErrorState(AiAnalysisException(
-        'Unexpected error during analysis',
-        kind: AiAnalysisFailureKind.apiError,
-        cause: e,
-        causeStackTrace: stackTrace,
-      ));
+      _setErrorState(
+        AiAnalysisException(
+          'Unexpected error during analysis',
+          kind: AiAnalysisFailureKind.apiError,
+          cause: e,
+          causeStackTrace: stackTrace,
+        ),
+      );
     }
   }
 
@@ -362,12 +394,14 @@ class _AiLoadingViewState extends ConsumerState<AiLoadingView>
         qtLog.info('Pending QT saved id=$_pendingPrayerId');
       } catch (e, st) {
         qtLog.error('savePendingPrayer (QT) failed', error: e, stackTrace: st);
-        _setErrorState(AiAnalysisException(
-          'Failed to save meditation',
-          kind: AiAnalysisFailureKind.network,
-          cause: e,
-          causeStackTrace: st,
-        ));
+        _setErrorState(
+          AiAnalysisException(
+            'Failed to save meditation',
+            kind: AiAnalysisFailureKind.network,
+            cause: e,
+            causeStackTrace: st,
+          ),
+        );
         return;
       }
     }
@@ -375,10 +409,12 @@ class _AiLoadingViewState extends ConsumerState<AiLoadingView>
     // Step 2 — network precondition.
     final hasNetwork = await ref.read(networkCheckerProvider).hasConnection();
     if (!hasNetwork) {
-      _setErrorState(const AiAnalysisException(
-        'No network connection',
-        kind: AiAnalysisFailureKind.network,
-      ));
+      _setErrorState(
+        const AiAnalysisException(
+          'No network connection',
+          kind: AiAnalysisFailureKind.network,
+        ),
+      );
       return;
     }
 
@@ -410,13 +446,15 @@ class _AiLoadingViewState extends ConsumerState<AiLoadingView>
     final sectionsNotifier = ref.read(qtSectionsProvider.notifier);
 
     try {
-      final stream = aiService.analyzeMeditationStreamed(
-        meditation: meditation,
-        passageRef: passageRef,
-        passageText: passageText,
-        locale: locale,
-        userName: userName,
-      ) as Stream<TierResult>;
+      final stream =
+          aiService.analyzeMeditationStreamed(
+                meditation: meditation,
+                passageRef: passageRef,
+                passageText: passageText,
+                locale: locale,
+                userName: userName,
+              )
+              as Stream<TierResult>;
 
       sectionsNotifier.startMeditationStream(
         stream: stream,
@@ -442,8 +480,9 @@ class _AiLoadingViewState extends ConsumerState<AiLoadingView>
         application: const ApplicationSuggestion(),
         knowledge: const RelatedKnowledge(),
       );
-      ref.read(qtMeditationResultProvider.notifier).state =
-          AsyncValue.data(partial);
+      ref.read(qtMeditationResultProvider.notifier).state = AsyncValue.data(
+        partial,
+      );
 
       // Flip DB row to completed so Calendar/History pick it up. T2 UPDATE
       // from the notifier stays a JSONB merge and does not clobber this.
@@ -459,6 +498,9 @@ class _AiLoadingViewState extends ConsumerState<AiLoadingView>
       ref.invalidate(prayerHeatmapProvider('qt'));
       ref.invalidate(streakByModeProvider('prayer'));
       ref.invalidate(streakByModeProvider('qt'));
+      // v7 — refresh recent-references list so the next prayer this session
+      // sees the verse just chosen (autoDispose family keyed on userId).
+      _invalidateRecentReferences();
 
       await _checkStreakCelebration();
 
@@ -472,15 +514,28 @@ class _AiLoadingViewState extends ConsumerState<AiLoadingView>
       );
       _setErrorState(e);
     } catch (e, stackTrace) {
-      qtLog.error('Unexpected QT stream error',
-          error: e, stackTrace: stackTrace);
-      _setErrorState(AiAnalysisException(
-        'Unexpected error during QT analysis',
-        kind: AiAnalysisFailureKind.apiError,
-        cause: e,
-        causeStackTrace: stackTrace,
-      ));
+      qtLog.error(
+        'Unexpected QT stream error',
+        error: e,
+        stackTrace: stackTrace,
+      );
+      _setErrorState(
+        AiAnalysisException(
+          'Unexpected error during QT analysis',
+          kind: AiAnalysisFailureKind.apiError,
+          cause: e,
+          causeStackTrace: stackTrace,
+        ),
+      );
     }
+  }
+
+  /// v7 — invalidate the per-user recent-references provider so the next
+  /// prayer in this same session sees the freshly-completed reference.
+  void _invalidateRecentReferences() {
+    final userId = ref.read(currentUserProvider)?.id ?? '';
+    if (userId.isEmpty) return;
+    ref.invalidate(recentReferencesProvider(userId));
   }
 
   /// Check current streak and show celebration notification for milestones
@@ -531,9 +586,7 @@ class _AiLoadingViewState extends ConsumerState<AiLoadingView>
       return result;
     }
 
-    prayerLog.info(
-      '[Bible-Enrich] start: ref="$reference" locale=$locale',
-    );
+    prayerLog.info('[Bible-Enrich] start: ref="$reference" locale=$locale');
 
     try {
       final bibleService = ref.read(bibleTextServiceProvider);
@@ -573,7 +626,8 @@ class _AiLoadingViewState extends ConsumerState<AiLoadingView>
     if (!mounted) return;
     setState(() {
       _error = error;
-      _aiDone = true; // unblocks _navigateIfReady; but _error guard prevents nav
+      _aiDone =
+          true; // unblocks _navigateIfReady; but _error guard prevents nav
     });
     prayerLog.info(
       'AI loading error state: kind=${error.kind.name} '
@@ -740,8 +794,7 @@ class _AiLoadingViewState extends ConsumerState<AiLoadingView>
                         backgroundColor: AbbaColors.sage,
                         foregroundColor: Colors.white,
                         shape: RoundedRectangleBorder(
-                          borderRadius:
-                              BorderRadius.circular(AbbaRadius.md),
+                          borderRadius: BorderRadius.circular(AbbaRadius.md),
                         ),
                       ),
                       child: Text(
@@ -766,10 +819,7 @@ class _AiLoadingViewState extends ConsumerState<AiLoadingView>
                         borderRadius: BorderRadius.circular(AbbaRadius.md),
                       ),
                     ),
-                    child: Text(
-                      l10n.aiErrorHome,
-                      style: AbbaTypography.body,
-                    ),
+                    child: Text(l10n.aiErrorHome, style: AbbaTypography.body),
                   ),
                 ),
                 if (!canRetry) ...[

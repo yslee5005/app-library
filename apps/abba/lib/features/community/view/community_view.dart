@@ -86,8 +86,9 @@ class _CommunityViewState extends ConsumerState<CommunityView> {
     setState(() {
       _posts.clear();
       _posts.addAll(posts);
-      _cursor =
-          posts.isNotEmpty ? posts.last.createdAt.toIso8601String() : null;
+      _cursor = posts.isNotEmpty
+          ? posts.last.createdAt.toIso8601String()
+          : null;
       _hasMore = posts.length >= 20;
       _initialLoaded = true;
       _isLoadingInitial = false;
@@ -121,7 +122,10 @@ class _CommunityViewState extends ConsumerState<CommunityView> {
       return Scaffold(
         backgroundColor: AbbaColors.cream,
         appBar: AppBar(
-          title: Text('${l10n.communityTitle} \ud83c\udf3b', style: AbbaTypography.h1),
+          title: Text(
+            '${l10n.communityTitle} \ud83c\udf3b',
+            style: AbbaTypography.h1,
+          ),
         ),
         body: const Center(child: CircularProgressIndicator()),
       );
@@ -130,7 +134,10 @@ class _CommunityViewState extends ConsumerState<CommunityView> {
     return Scaffold(
       backgroundColor: AbbaColors.cream,
       appBar: AppBar(
-        title: Text('${l10n.communityTitle} \ud83c\udf3b', style: AbbaTypography.h1),
+        title: Text(
+          '${l10n.communityTitle} \ud83c\udf3b',
+          style: AbbaTypography.h1,
+        ),
       ),
       body: Column(
         children: [
@@ -188,8 +195,7 @@ class _CommunityViewState extends ConsumerState<CommunityView> {
                         if (index == _posts.length) {
                           return const Padding(
                             padding: EdgeInsets.all(AbbaSpacing.md),
-                            child:
-                                Center(child: CircularProgressIndicator()),
+                            child: Center(child: CircularProgressIndicator()),
                           );
                         }
                         return _PostItem(
@@ -294,7 +300,10 @@ class _PostItemState extends ConsumerState<_PostItem> {
       children: [
         // ── Facebook-style card ──
         Container(
-          margin: const EdgeInsets.symmetric(horizontal: AbbaSpacing.md, vertical: 6),
+          margin: const EdgeInsets.symmetric(
+            horizontal: AbbaSpacing.md,
+            vertical: 6,
+          ),
           decoration: BoxDecoration(
             color: AbbaColors.white,
             borderRadius: BorderRadius.circular(AbbaRadius.lg), // 16px
@@ -327,9 +336,12 @@ class _PostItemState extends ConsumerState<_PostItem> {
                           // Avatar circle 40px
                           CircleAvatar(
                             radius: 20,
-                            backgroundColor: AbbaColors.sage.withValues(alpha: 0.2),
+                            backgroundColor: AbbaColors.sage.withValues(
+                              alpha: 0.2,
+                            ),
                             child: Text(
-                              (post.displayName != null && post.displayName!.isNotEmpty)
+                              (post.displayName != null &&
+                                      post.displayName!.isNotEmpty)
                                   ? post.displayName![0].toUpperCase()
                                   : '\ud83c\udf3f',
                               style: AbbaTypography.bodySmall,
@@ -363,8 +375,12 @@ class _PostItemState extends ConsumerState<_PostItem> {
                                       ),
                                       decoration: BoxDecoration(
                                         color: post.category == 'testimony'
-                                            ? AbbaColors.sage.withValues(alpha: 0.15)
-                                            : AbbaColors.softGold.withValues(alpha: 0.15),
+                                            ? AbbaColors.sage.withValues(
+                                                alpha: 0.15,
+                                              )
+                                            : AbbaColors.softGold.withValues(
+                                                alpha: 0.15,
+                                              ),
                                         borderRadius: BorderRadius.circular(10),
                                       ),
                                       child: Text(
@@ -395,9 +411,14 @@ class _PostItemState extends ConsumerState<_PostItem> {
                           ),
                           // Overflow menu (keep existing)
                           PopupMenuButton<String>(
-                            icon: Icon(Icons.more_horiz, color: AbbaColors.muted, size: 20),
+                            icon: Icon(
+                              Icons.more_horiz,
+                              color: AbbaColors.muted,
+                              size: 20,
+                            ),
                             padding: EdgeInsets.zero,
-                            onSelected: (value) => _handleMenuAction(value, post, l10n),
+                            onSelected: (value) =>
+                                _handleMenuAction(value, post, l10n),
                             itemBuilder: (context) {
                               final currentUser = ref.read(currentUserProvider);
                               final isOwner = currentUser?.id == post.userId;
@@ -407,8 +428,11 @@ class _PostItemState extends ConsumerState<_PostItem> {
                                     value: 'delete',
                                     child: Row(
                                       children: [
-                                        Icon(Icons.delete_outline,
-                                            size: 18, color: AbbaColors.error),
+                                        Icon(
+                                          Icons.delete_outline,
+                                          size: 18,
+                                          color: AbbaColors.error,
+                                        ),
                                         const SizedBox(width: AbbaSpacing.sm),
                                         Text(l10n.deletePost),
                                       ],
@@ -418,8 +442,11 @@ class _PostItemState extends ConsumerState<_PostItem> {
                                   value: 'report',
                                   child: Row(
                                     children: [
-                                      Icon(Icons.flag_outlined,
-                                          size: 18, color: AbbaColors.muted),
+                                      Icon(
+                                        Icons.flag_outlined,
+                                        size: 18,
+                                        color: AbbaColors.muted,
+                                      ),
                                       const SizedBox(width: AbbaSpacing.sm),
                                       Text(l10n.reportPost),
                                     ],
@@ -469,9 +496,13 @@ class _PostItemState extends ConsumerState<_PostItem> {
                           // Like button
                           Expanded(
                             child: _CardActionButton(
-                              icon: _isLiked ? Icons.favorite : Icons.favorite_border,
+                              icon: _isLiked
+                                  ? Icons.favorite
+                                  : Icons.favorite_border,
                               label: l10n.actionLike,
-                              color: _isLiked ? AbbaColors.error : AbbaColors.muted,
+                              color: _isLiked
+                                  ? AbbaColors.error
+                                  : AbbaColors.muted,
                               onTap: _handleLike,
                             ),
                           ),
@@ -481,15 +512,20 @@ class _PostItemState extends ConsumerState<_PostItem> {
                               icon: Icons.chat_bubble_outline,
                               label: l10n.actionComment,
                               color: AbbaColors.muted,
-                              onTap: () => _showCommentsSheet(context, post, l10n),
+                              onTap: () =>
+                                  _showCommentsSheet(context, post, l10n),
                             ),
                           ),
                           // Save button
                           Expanded(
                             child: _CardActionButton(
-                              icon: _isSaved ? Icons.bookmark : Icons.bookmark_border,
+                              icon: _isSaved
+                                  ? Icons.bookmark
+                                  : Icons.bookmark_border,
                               label: l10n.actionSave,
-                              color: _isSaved ? AbbaColors.softGold : AbbaColors.muted,
+                              color: _isSaved
+                                  ? AbbaColors.softGold
+                                  : AbbaColors.muted,
                               onTap: _handleSave,
                             ),
                           ),
@@ -510,8 +546,11 @@ class _PostItemState extends ConsumerState<_PostItem> {
                           opacity: value > 0.5 ? 2 - value * 2 : value * 2,
                           child: Transform.scale(
                             scale: 0.5 + value * 0.5,
-                            child: Icon(Icons.favorite,
-                                size: 80, color: AbbaColors.error),
+                            child: Icon(
+                              Icons.favorite,
+                              size: 80,
+                              color: AbbaColors.error,
+                            ),
                           ),
                         ),
                       ),
@@ -558,8 +597,7 @@ class _PostItemState extends ConsumerState<_PostItem> {
     }
   }
 
-  Future<void> _showDeleteConfirm(
-      String postId, AppLocalizations l10n) async {
+  Future<void> _showDeleteConfirm(String postId, AppLocalizations l10n) async {
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (ctx) => AlertDialog(
@@ -589,8 +627,7 @@ class _PostItemState extends ConsumerState<_PostItem> {
     }
   }
 
-  Future<void> _showReportDialog(
-      String postId, AppLocalizations l10n) async {
+  Future<void> _showReportDialog(String postId, AppLocalizations l10n) async {
     final reason = await showDialog<String>(
       context: context,
       builder: (ctx) {
@@ -612,7 +649,9 @@ class _PostItemState extends ConsumerState<_PostItem> {
             children: [
               Text(
                 l10n.reportReasonHint,
-                style: AbbaTypography.bodySmall.copyWith(color: AbbaColors.muted),
+                style: AbbaTypography.bodySmall.copyWith(
+                  color: AbbaColors.muted,
+                ),
               ),
               const SizedBox(height: AbbaSpacing.sm),
               TextField(
@@ -620,8 +659,9 @@ class _PostItemState extends ConsumerState<_PostItem> {
                 style: AbbaTypography.body,
                 decoration: InputDecoration(
                   hintText: l10n.reportReasonPlaceholder,
-                  hintStyle:
-                      AbbaTypography.body.copyWith(color: AbbaColors.muted),
+                  hintStyle: AbbaTypography.body.copyWith(
+                    color: AbbaColors.muted,
+                  ),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(AbbaRadius.md),
                   ),
@@ -661,9 +701,9 @@ class _PostItemState extends ConsumerState<_PostItem> {
       communityLog.info('Post $postId reported');
 
       if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(l10n.reportSubmitted)),
-        );
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text(l10n.reportSubmitted)));
       }
     }
   }
@@ -679,7 +719,9 @@ class _PostItemState extends ConsumerState<_PostItem> {
       isScrollControlled: true,
       backgroundColor: AbbaColors.white,
       shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(AbbaRadius.lg)),
+        borderRadius: BorderRadius.vertical(
+          top: Radius.circular(AbbaRadius.lg),
+        ),
       ),
       builder: (ctx) => DraggableScrollableSheet(
         initialChildSize: 0.6,
@@ -824,10 +866,7 @@ class _CommentsSheetState extends ConsumerState<_CommentsSheet> {
 
   Future<void> _loadComments() async {
     final repo = ref.read(communityRepositoryProvider);
-    final comments = await repo.getComments(
-      widget.post.id,
-      limit: _pageSize,
-    );
+    final comments = await repo.getComments(widget.post.id, limit: _pageSize);
     if (!mounted) return;
     setState(() {
       _comments.clear();
@@ -838,7 +877,9 @@ class _CommentsSheetState extends ConsumerState<_CommentsSheet> {
       _hasMore = comments.length >= _pageSize;
       _isLoading = false;
     });
-    communityLog.debug('Loaded ${comments.length} comments for post ${widget.post.id}');
+    communityLog.debug(
+      'Loaded ${comments.length} comments for post ${widget.post.id}',
+    );
   }
 
   Future<void> _loadMore() async {
@@ -891,56 +932,50 @@ class _CommentsSheetState extends ConsumerState<_CommentsSheet> {
           child: _isLoading
               ? const Center(child: CircularProgressIndicator())
               : _comments.isEmpty
-                  ? Center(
-                      child: Text(
-                        l10n.commentButton,
-                        style: AbbaTypography.body.copyWith(
-                          color: AbbaColors.muted,
-                        ),
-                      ),
-                    )
-                  : ListView.builder(
-                      controller: widget.scrollController,
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: AbbaSpacing.md,
-                        vertical: AbbaSpacing.sm,
-                      ),
-                      itemCount:
-                          _comments.length + (_isLoadingMore ? 1 : 0),
-                      itemBuilder: (context, index) {
-                        if (index == _comments.length) {
-                          return const Padding(
-                            padding: EdgeInsets.all(AbbaSpacing.md),
-                            child: Center(
-                              child: SizedBox(
-                                width: 24,
-                                height: 24,
-                                child: CircularProgressIndicator(
-                                  strokeWidth: 2,
-                                ),
-                              ),
-                            ),
-                          );
-                        }
-                        final comment = _comments[index];
-                        return _ThreadedCommentTile(
-                          comment: comment,
-                          isReply: false,
-                          anonymousLabel: l10n.anonymous,
-                          onReply: () => setState(() {
-                            _replyToCommentId = comment.id;
-                            _replyToName =
-                                comment.displayName ?? l10n.anonymous;
-                          }),
-                          onDelete: () =>
-                              _handleDeleteComment(comment.id),
-                          isOwner: ref.read(currentUserProvider)?.id ==
-                              comment.userId,
-                          onCommentLike: (id) =>
-                              _handleCommentLike(id),
-                        );
-                      },
+              ? Center(
+                  child: Text(
+                    l10n.commentButton,
+                    style: AbbaTypography.body.copyWith(
+                      color: AbbaColors.muted,
                     ),
+                  ),
+                )
+              : ListView.builder(
+                  controller: widget.scrollController,
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: AbbaSpacing.md,
+                    vertical: AbbaSpacing.sm,
+                  ),
+                  itemCount: _comments.length + (_isLoadingMore ? 1 : 0),
+                  itemBuilder: (context, index) {
+                    if (index == _comments.length) {
+                      return const Padding(
+                        padding: EdgeInsets.all(AbbaSpacing.md),
+                        child: Center(
+                          child: SizedBox(
+                            width: 24,
+                            height: 24,
+                            child: CircularProgressIndicator(strokeWidth: 2),
+                          ),
+                        ),
+                      );
+                    }
+                    final comment = _comments[index];
+                    return _ThreadedCommentTile(
+                      comment: comment,
+                      isReply: false,
+                      anonymousLabel: l10n.anonymous,
+                      onReply: () => setState(() {
+                        _replyToCommentId = comment.id;
+                        _replyToName = comment.displayName ?? l10n.anonymous;
+                      }),
+                      onDelete: () => _handleDeleteComment(comment.id),
+                      isOwner:
+                          ref.read(currentUserProvider)?.id == comment.userId,
+                      onCommentLike: (id) => _handleCommentLike(id),
+                    );
+                  },
+                ),
         ),
         // Reply indicator
         if (_replyToCommentId != null)
@@ -952,9 +987,7 @@ class _CommentsSheetState extends ConsumerState<_CommentsSheet> {
             decoration: BoxDecoration(
               color: AbbaColors.sage.withValues(alpha: 0.1),
               border: Border(
-                top: BorderSide(
-                  color: AbbaColors.sage.withValues(alpha: 0.2),
-                ),
+                top: BorderSide(color: AbbaColors.sage.withValues(alpha: 0.2)),
               ),
             ),
             child: Row(
@@ -977,8 +1010,7 @@ class _CommentsSheetState extends ConsumerState<_CommentsSheet> {
                   }),
                   child: Padding(
                     padding: const EdgeInsets.all(AbbaSpacing.xs),
-                    child:
-                        Icon(Icons.close, size: 18, color: AbbaColors.muted),
+                    child: Icon(Icons.close, size: 18, color: AbbaColors.muted),
                   ),
                 ),
               ],
@@ -990,9 +1022,7 @@ class _CommentsSheetState extends ConsumerState<_CommentsSheet> {
           decoration: BoxDecoration(
             color: AbbaColors.white,
             border: Border(
-              top: BorderSide(
-                color: AbbaColors.muted.withValues(alpha: 0.2),
-              ),
+              top: BorderSide(color: AbbaColors.muted.withValues(alpha: 0.2)),
             ),
           ),
           child: SafeArea(
@@ -1063,8 +1093,9 @@ class _CommentsSheetState extends ConsumerState<_CommentsSheet> {
 
     if (_replyToCommentId != null) {
       // Optimistic: append reply under the parent comment
-      final parentIndex =
-          _comments.indexWhere((c) => c.id == _replyToCommentId);
+      final parentIndex = _comments.indexWhere(
+        (c) => c.id == _replyToCommentId,
+      );
       if (parentIndex != -1) {
         final parent = _comments[parentIndex];
         _comments[parentIndex] = parent.copyWith(
@@ -1076,7 +1107,9 @@ class _CommentsSheetState extends ConsumerState<_CommentsSheet> {
       _comments.insert(0, newComment);
     }
 
-    communityLog.info('Comment added to post $postId${_replyToCommentId != null ? " (reply to $_replyToCommentId)" : ""}');
+    communityLog.info(
+      'Comment added to post $postId${_replyToCommentId != null ? " (reply to $_replyToCommentId)" : ""}',
+    );
 
     setState(() {
       _replyToCommentId = null;
@@ -1233,11 +1266,11 @@ class _ThreadedCommentTileState extends State<_ThreadedCommentTile> {
                           const Spacer(),
                           // Comment like button
                           GestureDetector(
-                            onTap: () =>
-                                widget.onCommentLike(comment.id),
+                            onTap: () => widget.onCommentLike(comment.id),
                             child: Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 4),
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 4,
+                              ),
                               child: Row(
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
@@ -1271,7 +1304,8 @@ class _ThreadedCommentTileState extends State<_ThreadedCommentTile> {
                               onTap: widget.onDelete,
                               child: Padding(
                                 padding: const EdgeInsets.only(
-                                    left: AbbaSpacing.xs),
+                                  left: AbbaSpacing.xs,
+                                ),
                                 child: Icon(
                                   Icons.close,
                                   size: 14,
@@ -1294,8 +1328,7 @@ class _ThreadedCommentTileState extends State<_ThreadedCommentTile> {
                         GestureDetector(
                           onTap: widget.onReply,
                           child: Padding(
-                            padding:
-                                const EdgeInsets.only(top: AbbaSpacing.xs),
+                            padding: const EdgeInsets.only(top: AbbaSpacing.xs),
                             child: Text(
                               l10n.replyButton,
                               style: AbbaTypography.caption.copyWith(
@@ -1400,12 +1433,7 @@ class _CardActionButton extends StatelessWidget {
           children: [
             Icon(icon, size: 20, color: color),
             const SizedBox(width: AbbaSpacing.xs),
-            Text(
-              label,
-              style: AbbaTypography.bodySmall.copyWith(
-                color: color,
-              ),
-            ),
+            Text(label, style: AbbaTypography.bodySmall.copyWith(color: color)),
           ],
         ),
       ),

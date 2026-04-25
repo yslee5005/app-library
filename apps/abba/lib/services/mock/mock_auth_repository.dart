@@ -93,13 +93,15 @@ class MockAuthRepository implements AuthRepository {
     bool? onboardingCompleted,
   }) async {
     final mockProfile = await _mockData.getUserProfile();
-    return Result.success(UserProfile(
-      id: mockProfile.id,
-      appId: 'abba',
-      email: mockProfile.email,
-      displayName: displayName ?? mockProfile.name,
-      avatarUrl: avatarUrl,
-    ));
+    return Result.success(
+      UserProfile(
+        id: mockProfile.id,
+        appId: 'abba',
+        email: mockProfile.email,
+        displayName: displayName ?? mockProfile.name,
+        avatarUrl: avatarUrl,
+      ),
+    );
   }
 
   @override

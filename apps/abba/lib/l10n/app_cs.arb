@@ -103,7 +103,7 @@
   "monthlyPrice": "169 Kč / měs",
   "yearlyPrice": "1 190 Kč / rok",
   "yearlySave": "Ušetři 40%",
-  "launchPromo": "3 měsíce za 99Kč/měs.!",
+  "launchPromo": "",
   "startPro": "Začít Pro",
   "comingSoon": "Již brzy",
   "notificationSetting": "Oznámení",
@@ -152,7 +152,7 @@
   "groupInviteMessage": "Modleme se společně! Přidej se k mé modlitební skupině v Abba.",
   "noGroups": "Přidej se nebo vytvoř skupinu pro společnou modlitbu.",
   "promoTitle": "Úvodní akce",
-  "promoBanner": "První 3 měsíce za 99Kč/měs.!",
+  "promoBanner": "",
   "promoEndsOn": "Nabídka končí {date}",
   "@promoEndsOn": {
     "placeholders": {
@@ -248,6 +248,7 @@
   "originalWordNuanceLabel": "Nuance vs překlad",
   "originalWordsCountLabel": "{count} slov",
   "seeMore": "Zobrazit více",
+  "seeLess": "Zobrazit méně",
   "seeAllComments": "Zobrazit všech {count} komentářů",
   "@seeAllComments": {
     "placeholders": {
@@ -552,5 +553,15 @@
   "aiErrorApiBody": "Vaše modlitba je bezpečně uložena. Zkuste to prosím za chvíli znovu.",
   "aiErrorRetry": "Zkusit znovu",
   "aiErrorWaitAndCheck": "Analýzu zkusíme později. Vraťte se brzy — vaše modlitba bude čekat.",
-  "aiErrorHome": "Zpět domů"
+  "aiErrorHome": "Zpět domů",
+  "trialStartCta": "Start 1 month free",
+  "trialAutoRenewDisclosure": "Then {price}/year, auto-renews. Cancel anytime in Settings.",
+  "@trialAutoRenewDisclosure": {
+    "placeholders": {
+      "price": {}
+    }
+  },
+  "trialLimitTitle": "You've prayed 3 times today 🌸",
+  "trialLimitBody": "Come back tomorrow — or unlock unlimited prayer with Pro.",
+  "trialLimitCta": "Continue with Pro"
 }

@@ -43,7 +43,9 @@ Widget _buildApp({required SubscriptionService service}) {
     overrides: [
       authRepositoryProvider.overrideWithValue(MockAuthRepository(mockData)),
       aiServiceProvider.overrideWithValue(MockAiService(mockData)),
-      audioRecorderServiceProvider.overrideWithValue(MockAudioRecorderService()),
+      audioRecorderServiceProvider.overrideWithValue(
+        MockAudioRecorderService(),
+      ),
       audioStorageServiceProvider.overrideWithValue(MockAudioStorageService()),
       prayerRepositoryProvider.overrideWithValue(MockPrayerRepository()),
       communityRepositoryProvider.overrideWithValue(
@@ -71,16 +73,18 @@ Widget _buildApp({required SubscriptionService service}) {
 
 void main() {
   group('MembershipView grace period banner', () {
-    testWidgets('renders banner + update CTA when billing issue is flagged',
-        (tester) async {
+    testWidgets('renders banner + update CTA when billing issue is flagged', (
+      tester,
+    ) async {
       final service = _GraceStubSubscriptionService(
         ActiveSubscriptionInfo(
           productId: 'com.ystech.abba.monthly',
           expiresDate: DateTime.now().add(const Duration(days: 10)),
           willRenew: true,
           periodType: PeriodType.normal,
-          billingIssueDetectedAt:
-              DateTime.now().subtract(const Duration(days: 2)),
+          billingIssueDetectedAt: DateTime.now().subtract(
+            const Duration(days: 2),
+          ),
         ),
       );
 
@@ -93,8 +97,9 @@ void main() {
       expect(find.text('Update payment'), findsOneWidget);
     });
 
-    testWidgets('stays silent when no billing issue is flagged',
-        (tester) async {
+    testWidgets('stays silent when no billing issue is flagged', (
+      tester,
+    ) async {
       final service = _GraceStubSubscriptionService(
         ActiveSubscriptionInfo(
           productId: 'com.ystech.abba.monthly',

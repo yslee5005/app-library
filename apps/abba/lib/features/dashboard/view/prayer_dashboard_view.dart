@@ -15,6 +15,7 @@ import '../../../theme/abba_theme.dart';
 import '../../../widgets/abba_button.dart';
 import '../../../widgets/staggered_fade_in.dart';
 import '../widgets/ai_prayer_card.dart';
+import '../widgets/bible_story_card.dart';
 import '../widgets/historical_story_card.dart';
 import '../widgets/prayer_coaching_card.dart';
 import '../widgets/prayer_summary_card.dart';
@@ -95,10 +96,7 @@ class _PrayerDashboardViewState extends ConsumerState<PrayerDashboardView> {
       curve: Curves.easeOut,
       builder: (context, t, c) => Opacity(
         opacity: t,
-        child: Transform.translate(
-          offset: Offset(0, (1 - t) * 16),
-          child: c,
-        ),
+        child: Transform.translate(offset: Offset(0, (1 - t) * 16), child: c),
       ),
       child: child,
     );
@@ -137,7 +135,9 @@ class _PrayerDashboardViewState extends ConsumerState<PrayerDashboardView> {
           );
         }
         // Phase 4.1 INT-028 — also surface to progressive renderer.
-        ref.read(prayerSectionsProvider.notifier).setT3(
+        ref
+            .read(prayerSectionsProvider.notifier)
+            .setT3(
               guidance: content.guidance,
               aiPrayer: content.aiPrayer,
               historicalStory: content.historicalStory,
@@ -248,7 +248,17 @@ class _PrayerDashboardViewState extends ConsumerState<PrayerDashboardView> {
               initiallyExpanded: false,
             ),
           ),
-        // 3. Testimony Card (T2, fades in when background tier arrives)
+        // 3. Bible Story Card (T2) — REQUIREMENTS §4.6 Free+Premium 모두 노출
+        if (sections.bibleStory != null)
+          _progressiveFadeIn(
+            key: const ValueKey('bible-story'),
+            index: i++,
+            child: BibleStoryCard(
+              bibleStory: sections.bibleStory!,
+              title: l10n.bibleStoryTitle,
+            ),
+          ),
+        // 4. Testimony Card (T2, fades in when background tier arrives)
         if (hasTestimony)
           _progressiveFadeIn(
             key: const ValueKey('testimony'),

@@ -103,7 +103,7 @@
   "monthlyPrice": "€6,99 / maand",
   "yearlyPrice": "€49,99 / jaar",
   "yearlySave": "Bespaar 40%",
-  "launchPromo": "3 maanden voor €3,99/maand!",
+  "launchPromo": "",
   "startPro": "Start Pro",
   "comingSoon": "Binnenkort",
   "notificationSetting": "Meldingen",
@@ -152,7 +152,7 @@
   "groupInviteMessage": "Laten we samen bidden! Doe mee met mijn gebedsgroep op Abba.",
   "noGroups": "Doe mee of maak een groep om samen te bidden.",
   "promoTitle": "Introductieaanbieding",
-  "promoBanner": "De eerste 3 maanden voor €3,99/maand!",
+  "promoBanner": "",
   "promoEndsOn": "Aanbieding eindigt op {date}",
   "@promoEndsOn": {
     "placeholders": {
@@ -248,6 +248,7 @@
   "originalWordNuanceLabel": "Nuance vs vertaling",
   "originalWordsCountLabel": "{count} woorden",
   "seeMore": "Meer bekijken",
+  "seeLess": "Minder bekijken",
   "seeAllComments": "Bekijk alle {count} reacties",
   "@seeAllComments": {
     "placeholders": {
@@ -552,5 +553,15 @@
   "aiErrorApiBody": "Je gebed is veilig opgeslagen. Probeer het straks opnieuw.",
   "aiErrorRetry": "Opnieuw proberen",
   "aiErrorWaitAndCheck": "We proberen de analyse later opnieuw. Kom snel terug — je gebed staat op je te wachten.",
-  "aiErrorHome": "Terug naar start"
+  "aiErrorHome": "Terug naar start",
+  "trialStartCta": "Begin 1 maand gratis",
+  "trialAutoRenewDisclosure": "Daarna {price}/jaar, automatische verlenging. Altijd te annuleren in Instellingen.",
+  "@trialAutoRenewDisclosure": {
+    "placeholders": {
+      "price": {}
+    }
+  },
+  "trialLimitTitle": "Je hebt vandaag 3 keer gebeden 🌸",
+  "trialLimitBody": "Kom morgen terug — of ontgrendel onbeperkt bidden met Pro.",
+  "trialLimitCta": "Doorgaan met Pro"
 }

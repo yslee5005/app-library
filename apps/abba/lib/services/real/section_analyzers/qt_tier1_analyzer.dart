@@ -29,9 +29,9 @@ class QtTier1Analyzer {
     required GeminiCacheManager cache,
     required BibleTextService bible,
     required String apiKey,
-  })  : _cache = cache,
-        _bible = bible,
-        _apiKey = apiKey;
+  }) : _cache = cache,
+       _bible = bible,
+       _apiKey = apiKey;
 
   /// Phase 4.2 Phase C — true SSE streaming. Mirror of
   /// [Tier1Analyzer.analyze] but emits [QtTierT1ScriptureRef] instead of
@@ -207,15 +207,23 @@ class QtTier1Analyzer {
     buf.writeln('"""');
     buf.writeln();
     if (excludeRef != null) {
-      buf.writeln('IMPORTANT: Previous attempt chose scripture "$excludeRef" '
-          'which could not be resolved. Pick a DIFFERENT verse within or '
-          'closely related to today\'s passage that fits the user\'s meditation.');
+      buf.writeln(
+        'IMPORTANT: Previous attempt chose scripture "$excludeRef" '
+        'which could not be resolved. Pick a DIFFERENT verse within or '
+        'closely related to today\'s passage that fits the user\'s meditation.',
+      );
       buf.writeln();
     }
-    buf.writeln('Generate ONLY the T1 sections: "meditation_summary" and "scripture".');
-    buf.writeln('Output JSON with keys: {"meditation_summary": {...}, "scripture": {...}}');
-    buf.writeln('Remember: scripture.reference MUST use English book name '
-        '(e.g., "Psalm 23:1-6"). Do NOT generate verse text — only reference.');
+    buf.writeln(
+      'Generate ONLY the T1 sections: "meditation_summary" and "scripture".',
+    );
+    buf.writeln(
+      'Output JSON with keys: {"meditation_summary": {...}, "scripture": {...}}',
+    );
+    buf.writeln(
+      'Remember: scripture.reference MUST use English book name '
+      '(e.g., "Psalm 23:1-6"). Do NOT generate verse text — only reference.',
+    );
     return buf.toString();
   }
 
@@ -232,7 +240,8 @@ class QtTier1Analyzer {
       );
     }
     final summary = MeditationSummary.fromJson(ms);
-    final originalWords = (sc['original_words'] as List<dynamic>?)
+    final originalWords =
+        (sc['original_words'] as List<dynamic>?)
             ?.map((raw) {
               final m = raw as Map<String, dynamic>;
               return ScriptureOriginalWord(
@@ -280,14 +289,16 @@ class QtTier1Analyzer {
     try {
       final retryResp = await model.generateContent([
         Content('user', [
-          TextPart(_buildUserPrompt(
-            meditation: meditation,
-            passageRef: passageRef,
-            passageText: passageText,
-            locale: locale,
-            userName: userName,
-            excludeRef: ref,
-          ))
+          TextPart(
+            _buildUserPrompt(
+              meditation: meditation,
+              passageRef: passageRef,
+              passageText: passageText,
+              locale: locale,
+              userName: userName,
+              excludeRef: ref,
+            ),
+          ),
         ]),
       ]);
       logTierUsage(
@@ -299,8 +310,7 @@ class QtTier1Analyzer {
       );
       final retryJson = _parseJson(retryResp.text);
       final retry = _extractT1(retryJson, locale);
-      final retryVerse =
-          await _bible.lookup(retry.scripture.reference, locale);
+      final retryVerse = await _bible.lookup(retry.scripture.reference, locale);
       if (retryVerse != null && retryVerse.isNotEmpty) {
         apiLog.info('[QtTier1] retry succeeded: ${retry.scripture.reference}');
         return retry.scripture.withVerse(retryVerse);

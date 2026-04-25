@@ -61,18 +61,28 @@ class _HomeViewState extends ConsumerState<HomeView>
     _isStarting = true;
 
     try {
-      // Free user check
-      final isPremium = ref.read(isPremiumProvider).value ?? false;
-      final todayCount = ref.read(todayPrayerCountProvider);
+      // Resolve tier + limit. Errors default to the strictest path
+      // (free = 1/day) — fail closed so we never accidentally grant
+      // unlimited access to a free user.
+      final tier = await ref
+          .read(effectiveTierProvider.future)
+          .catchError((_) => EffectiveTier.free);
+      final limit = await ref
+          .read(dailyPrayerLimitProvider.future)
+          .catchError((_) => 1);
 
-      if (!isPremium && todayCount >= 1) {
-        if (context.mounted) {
-          final purchased = await showProPrompt(context);
-          if (!purchased) return;
-        }
+      final quota = ref.read(prayerQuotaServiceProvider);
+      final canStart = await quota.canStart(limit: limit);
+
+      if (!canStart) {
+        if (!mounted) return;
+        // ignore: use_build_context_synchronously
+        await (tier == EffectiveTier.trial
+            ? showTrialLimitPrompt(context)
+            : showProPrompt(context));
+        // Do NOT start recording, do NOT increment.
+        return;
       }
-
-      ref.read(todayPrayerCountProvider.notifier).state = todayCount + 1;
 
       // Generate audio file path
       final dir = await getTemporaryDirectory();
@@ -92,9 +102,22 @@ class _HomeViewState extends ConsumerState<HomeView>
         if (!_isPaused && mounted) setState(() => _seconds++);
       });
 
-      // Start audio recording
+      // Start audio recording — increment quota only after the recorder
+      // actually starts. If startRecording throws we bail without
+      // consuming the user's daily slot.
       final recorder = ref.read(audioRecorderServiceProvider);
-      await recorder.startRecording(path: _audioFilePath!);
+      try {
+        await recorder.startRecording(path: _audioFilePath!);
+      } catch (e) {
+        _timer?.cancel();
+        _pulseController.stop();
+        if (mounted) {
+          setState(() => _isPraying = false);
+        }
+        ref.read(isRecordingProvider.notifier).state = false;
+        rethrow;
+      }
+      await quota.increment();
 
       prayerLog.info('Prayer recording started');
     } finally {
@@ -137,7 +160,10 @@ class _HomeViewState extends ConsumerState<HomeView>
           textAlign: TextAlign.center,
         ),
         actionsPadding: const EdgeInsets.fromLTRB(
-          AbbaSpacing.lg, 0, AbbaSpacing.lg, AbbaSpacing.lg,
+          AbbaSpacing.lg,
+          0,
+          AbbaSpacing.lg,
+          AbbaSpacing.lg,
         ),
         actions: [
           Column(
@@ -155,7 +181,9 @@ class _HomeViewState extends ConsumerState<HomeView>
                   ),
                   child: Text(
                     l10n.finishPrayer,
-                    style: AbbaTypography.body.copyWith(color: AbbaColors.white),
+                    style: AbbaTypography.body.copyWith(
+                      color: AbbaColors.white,
+                    ),
                   ),
                 ),
               ),
@@ -194,8 +222,7 @@ class _HomeViewState extends ConsumerState<HomeView>
 
     if (_isTextMode) {
       // Text mode: send transcript directly
-      ref.read(currentTranscriptProvider.notifier).state =
-          _textController.text;
+      ref.read(currentTranscriptProvider.notifier).state = _textController.text;
       ref.read(currentAudioPathProvider.notifier).state = null;
     } else {
       // Voice mode: send audio file to Gemini
@@ -234,7 +261,10 @@ class _HomeViewState extends ConsumerState<HomeView>
             // --- TOP: Tab bar + Streak (single row, no scrolling) ---
             Padding(
               padding: const EdgeInsets.fromLTRB(
-                AbbaSpacing.md, AbbaSpacing.sm, AbbaSpacing.md, 0,
+                AbbaSpacing.md,
+                AbbaSpacing.sm,
+                AbbaSpacing.md,
+                0,
               ),
               child: Row(
                 children: [
@@ -363,7 +393,10 @@ class _HomeViewState extends ConsumerState<HomeView>
                     color: AbbaColors.sage,
                   ),
                   child: Center(
-                    child: Text('\u{1F64F}', style: TextStyle(fontSize: emojiSize)),
+                    child: Text(
+                      '\u{1F64F}',
+                      style: TextStyle(fontSize: emojiSize),
+                    ),
                   ),
                 ),
               ),
@@ -406,8 +439,13 @@ class _HomeViewState extends ConsumerState<HomeView>
     if (heatmapData != null) {
       for (int i = 0; i <= 84; i++) {
         final checkDate = today.subtract(Duration(days: i));
-        final dateKey = DateTime(checkDate.year, checkDate.month, checkDate.day);
-        if (heatmapData.containsKey(dateKey) && (heatmapData[dateKey]?.count ?? 0) > 0) {
+        final dateKey = DateTime(
+          checkDate.year,
+          checkDate.month,
+          checkDate.day,
+        );
+        if (heatmapData.containsKey(dateKey) &&
+            (heatmapData[dateKey]?.count ?? 0) > 0) {
           daysSinceLastActivity = i;
           break;
         }
@@ -415,8 +453,9 @@ class _HomeViewState extends ConsumerState<HomeView>
     }
 
     final isPrayer = mode == 'prayer';
-    final activityName =
-        isPrayer ? l10n.homeActivityPrayer : l10n.homeActivityQt;
+    final activityName = isPrayer
+        ? l10n.homeActivityPrayer
+        : l10n.homeActivityQt;
     String emoji;
     String message;
 
@@ -428,8 +467,10 @@ class _HomeViewState extends ConsumerState<HomeView>
       message = isPrayer ? l10n.homeFirstPrayerPrompt : l10n.homeFirstQtPrompt;
     } else if (daysSinceLastActivity >= 2) {
       emoji = '😴';
-      message =
-          l10n.homeDaysSinceLastActivity(daysSinceLastActivity, activityName);
+      message = l10n.homeDaysSinceLastActivity(
+        daysSinceLastActivity,
+        activityName,
+      );
     } else {
       emoji = isPrayer ? '🙏' : '📖';
       message = l10n.homeActivityPrompt(activityName);
@@ -469,16 +510,15 @@ class _HomeViewState extends ConsumerState<HomeView>
             decoration: BoxDecoration(
               color: accentColor.withValues(alpha: 0.06),
               borderRadius: BorderRadius.circular(AbbaRadius.lg),
-              border: Border.all(
-                color: accentColor.withValues(alpha: 0.12),
-              ),
+              border: Border.all(color: accentColor.withValues(alpha: 0.12)),
             ),
             child: LayoutBuilder(
               builder: (context, constraints) {
                 const labelWidth = 24.0;
                 const spacing = 3.0;
                 const weeks = 8;
-                final availableWidth = constraints.maxWidth - labelWidth - AbbaSpacing.md * 2;
+                final availableWidth =
+                    constraints.maxWidth - labelWidth - AbbaSpacing.md * 2;
                 final cols = weeks + 1;
                 final cellSize = (availableWidth - (cols - 1) * spacing) / cols;
 
@@ -576,121 +616,153 @@ class _HomeViewState extends ConsumerState<HomeView>
   }
 
   Widget _buildActivePrayer(AppLocalizations l10n) {
-    return Column(
-      children: [
-        // Text mode toggle (top right)
-        Align(
-          alignment: Alignment.centerRight,
-          child: Padding(
-            padding: const EdgeInsets.only(right: AbbaSpacing.lg),
-            child: TextButton.icon(
-              onPressed: () async {
-                final recorder = ref.read(audioRecorderServiceProvider);
-                setState(() => _isTextMode = !_isTextMode);
-                if (_isTextMode) {
-                  await recorder.pauseRecording();
-                  prayerLog.info('Switched to text mode');
-                } else {
-                  await recorder.resumeRecording();
-                  prayerLog.info('Switched to voice mode');
-                }
-              },
-              icon: Icon(
-                _isTextMode ? Icons.mic : Icons.keyboard,
-                size: 18,
-                color: AbbaColors.sage,
-              ),
-              label: Text(
-                _isTextMode ? l10n.switchToVoiceMode : l10n.switchToTextMode,
-                style: AbbaTypography.caption.copyWith(color: AbbaColors.sage),
-              ),
-            ),
-          ),
-        ),
-        const SizedBox(height: AbbaSpacing.md),
-        // Waveform or text input
-        if (_isTextMode)
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: AbbaSpacing.xl),
-            child: TextField(
-              controller: _textController,
-              maxLines: 6,
-              style: AbbaTypography.body,
-              decoration: InputDecoration(
-                hintText: l10n.textInputHint,
-                hintStyle: AbbaTypography.body.copyWith(color: AbbaColors.muted),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(AbbaRadius.lg),
-                  borderSide: const BorderSide(color: AbbaColors.sage),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(AbbaRadius.lg),
-                  borderSide: const BorderSide(color: AbbaColors.sage, width: 2),
-                ),
-                filled: true,
-                fillColor: AbbaColors.white,
-                contentPadding: const EdgeInsets.all(AbbaSpacing.md),
-              ),
-            ),
-          )
-        else
-          _buildWaveformOrPulse(),
-        const SizedBox(height: AbbaSpacing.md),
-        // Timer
-        Text(
-          _formattedTime,
-          style: AbbaTypography.hero.copyWith(fontSize: 36),
-        ),
-        const Spacer(),
-        // Controls
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: AbbaSpacing.xl),
-          child: Row(
-            children: [
-              Expanded(
-                child: SizedBox(
-                  height: abbaButtonHeight,
-                  child: OutlinedButton(
-                    onPressed: _togglePause,
-                    style: OutlinedButton.styleFrom(
-                      side: const BorderSide(color: AbbaColors.sage),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(AbbaRadius.lg),
-                      ),
-                    ),
-                    child: FittedBox(
-                      fit: BoxFit.scaleDown,
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Icon(
-                            _isPaused ? Icons.play_arrow : Icons.pause,
-                            color: AbbaColors.sage,
-                            size: 20,
-                          ),
-                          const SizedBox(width: 4),
-                          Text(
-                            _isPaused ? l10n.recordingResume : l10n.recordingPause,
-                            style: AbbaTypography.bodySmall.copyWith(color: AbbaColors.sage),
-                          ),
-                        ],
-                      ),
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final compact = constraints.maxHeight < 520;
+        final gap = compact ? AbbaSpacing.sm : AbbaSpacing.md;
+        final horizontalPadding = compact ? AbbaSpacing.lg : AbbaSpacing.xl;
+        final timerSize = compact ? 32.0 : 36.0;
+        final bottomGap = compact ? AbbaSpacing.sm : AbbaSpacing.lg;
+
+        return Column(
+          children: [
+            // Text mode toggle (top right)
+            Align(
+              alignment: Alignment.centerRight,
+              child: Padding(
+                padding: EdgeInsets.only(right: horizontalPadding),
+                child: TextButton.icon(
+                  onPressed: () async {
+                    final recorder = ref.read(audioRecorderServiceProvider);
+                    setState(() => _isTextMode = !_isTextMode);
+                    if (_isTextMode) {
+                      await recorder.pauseRecording();
+                      prayerLog.info('Switched to text mode');
+                    } else {
+                      await recorder.resumeRecording();
+                      prayerLog.info('Switched to voice mode');
+                    }
+                  },
+                  icon: Icon(
+                    _isTextMode ? Icons.mic : Icons.keyboard,
+                    size: 18,
+                    color: AbbaColors.sage,
+                  ),
+                  label: Text(
+                    _isTextMode
+                        ? l10n.switchToVoiceMode
+                        : l10n.switchToTextMode,
+                    style: AbbaTypography.caption.copyWith(
+                      color: AbbaColors.sage,
                     ),
                   ),
                 ),
               ),
-              const SizedBox(width: AbbaSpacing.md),
-              Expanded(
-                child: AbbaButton(
-                  label: l10n.finishPrayer,
-                  onPressed: _finishPrayer,
-                ),
+            ),
+            SizedBox(height: gap),
+            // Waveform or text input. This flexes so text mode cannot push the
+            // timer/buttons off-screen on shorter devices.
+            Expanded(
+              child: _isTextMode
+                  ? Padding(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: horizontalPadding,
+                      ),
+                      child: TextField(
+                        controller: _textController,
+                        expands: true,
+                        maxLines: null,
+                        minLines: null,
+                        textAlignVertical: TextAlignVertical.top,
+                        style: AbbaTypography.body,
+                        decoration: InputDecoration(
+                          hintText: l10n.textInputHint,
+                          hintStyle: AbbaTypography.body.copyWith(
+                            color: AbbaColors.muted,
+                          ),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(AbbaRadius.lg),
+                            borderSide: const BorderSide(
+                              color: AbbaColors.sage,
+                            ),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(AbbaRadius.lg),
+                            borderSide: const BorderSide(
+                              color: AbbaColors.sage,
+                              width: 2,
+                            ),
+                          ),
+                          filled: true,
+                          fillColor: AbbaColors.white,
+                          contentPadding: const EdgeInsets.all(AbbaSpacing.md),
+                        ),
+                      ),
+                    )
+                  : Center(child: _buildWaveformOrPulse()),
+            ),
+            SizedBox(height: gap),
+            // Timer
+            Text(
+              _formattedTime,
+              style: AbbaTypography.hero.copyWith(fontSize: timerSize),
+            ),
+            SizedBox(height: gap),
+            // Controls
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: SizedBox(
+                      height: abbaButtonHeight,
+                      child: OutlinedButton(
+                        onPressed: _togglePause,
+                        style: OutlinedButton.styleFrom(
+                          side: const BorderSide(color: AbbaColors.sage),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(AbbaRadius.lg),
+                          ),
+                        ),
+                        child: FittedBox(
+                          fit: BoxFit.scaleDown,
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Icon(
+                                _isPaused ? Icons.play_arrow : Icons.pause,
+                                color: AbbaColors.sage,
+                                size: 20,
+                              ),
+                              const SizedBox(width: 4),
+                              Text(
+                                _isPaused
+                                    ? l10n.recordingResume
+                                    : l10n.recordingPause,
+                                style: AbbaTypography.bodySmall.copyWith(
+                                  color: AbbaColors.sage,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: AbbaSpacing.md),
+                  Expanded(
+                    child: AbbaButton(
+                      label: l10n.finishPrayer,
+                      onPressed: _finishPrayer,
+                    ),
+                  ),
+                ],
               ),
-            ],
-          ),
-        ),
-        const SizedBox(height: AbbaSpacing.xxl),
-      ],
+            ),
+            SizedBox(height: bottomGap),
+          ],
+        );
+      },
     );
   }
 
@@ -725,7 +797,10 @@ class _HomeViewState extends ConsumerState<HomeView>
                     color: AbbaColors.softGold,
                   ),
                   child: Center(
-                    child: Text('\u{1F4D6}', style: TextStyle(fontSize: emojiSize)),
+                    child: Text(
+                      '\u{1F4D6}',
+                      style: TextStyle(fontSize: emojiSize),
+                    ),
                   ),
                 ),
               ),
@@ -753,4 +828,3 @@ class _HomeViewState extends ConsumerState<HomeView>
     );
   }
 }
-

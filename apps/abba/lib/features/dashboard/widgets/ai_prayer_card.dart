@@ -96,7 +96,9 @@ class _CitationsSectionState extends State<_CitationsSection> {
                   ),
                 ),
                 Icon(
-                  _expanded ? Icons.keyboard_arrow_up : Icons.keyboard_arrow_down,
+                  _expanded
+                      ? Icons.keyboard_arrow_up
+                      : Icons.keyboard_arrow_down,
                   color: AbbaColors.muted,
                 ),
               ],

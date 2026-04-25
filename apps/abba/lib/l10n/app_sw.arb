@@ -103,7 +103,7 @@
   "monthlyPrice": "$6.99 / mwezi",
   "yearlyPrice": "$49.99 / mwaka",
   "yearlySave": "Okoa 40%",
-  "launchPromo": "Miezi 3 kwa TSh4,992/mwezi!",
+  "launchPromo": "",
   "startPro": "Anza Pro",
   "comingSoon": "Inakuja hivi karibuni",
   "notificationSetting": "Arifa",
@@ -152,7 +152,7 @@
   "groupInviteMessage": "Tuombe pamoja! Jiunge na kikundi changu cha maombi kwenye Abba.",
   "noGroups": "Jiunge au unda kikundi ili kuomba pamoja.",
   "promoTitle": "Ofa Maalum ya Uzinduzi",
-  "promoBanner": "Miezi 3 ya kwanza kwa TSh4,992/mwezi!",
+  "promoBanner": "",
   "promoEndsOn": "Ofa inaisha {date}",
   "@promoEndsOn": {
     "placeholders": {
@@ -248,6 +248,7 @@
   "originalWordNuanceLabel": "Tofauti na tafsiri",
   "originalWordsCountLabel": "Maneno {count}",
   "seeMore": "Tazama zaidi",
+  "seeLess": "Tazama kidogo",
   "seeAllComments": "Tazama maoni yote {count}",
   "@seeAllComments": {
     "placeholders": {
@@ -552,5 +553,15 @@
   "aiErrorApiBody": "Sala yako imehifadhiwa salama. Tafadhali jaribu tena baada ya muda mfupi.",
   "aiErrorRetry": "Jaribu tena",
   "aiErrorWaitAndCheck": "Tutajaribu uchambuzi baadaye. Rudi hivi karibuni — sala yako itakusubiri.",
-  "aiErrorHome": "Rudi nyumbani"
+  "aiErrorHome": "Rudi nyumbani",
+  "trialStartCta": "Start 1 month free",
+  "trialAutoRenewDisclosure": "Then {price}/year, auto-renews. Cancel anytime in Settings.",
+  "@trialAutoRenewDisclosure": {
+    "placeholders": {
+      "price": {}
+    }
+  },
+  "trialLimitTitle": "You've prayed 3 times today 🌸",
+  "trialLimitBody": "Come back tomorrow — or unlock unlimited prayer with Pro.",
+  "trialLimitCta": "Continue with Pro"
 }

@@ -1,6 +1,7 @@
 import 'package:app_lib_subscriptions/subscriptions.dart';
 
-export 'package:app_lib_subscriptions/subscriptions.dart' show SubscriptionStatus;
+export 'package:app_lib_subscriptions/subscriptions.dart'
+    show SubscriptionStatus;
 
 /// Abba domain user profile — combines auth profile + app-specific settings.
 ///
@@ -42,7 +43,8 @@ class UserProfile {
   factory UserProfile.fromJson(Map<String, dynamic> json) {
     return UserProfile(
       id: json['id'] as String,
-      displayName: json['display_name'] as String? ?? json['name'] as String? ?? '',
+      displayName:
+          json['display_name'] as String? ?? json['name'] as String? ?? '',
       email: json['email'] as String? ?? '',
       avatarUrl: json['avatar_url'] as String?,
       totalPrayers: json['total_prayers'] as int? ?? 0,

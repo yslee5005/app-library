@@ -26,7 +26,10 @@ void showAbbaSnackBar(
       duration: duration,
       action: onRetry != null
           ? SnackBarAction(
-              label: retryLabel ?? AppLocalizations.of(context)?.retryButton ?? 'Retry',
+              label:
+                  retryLabel ??
+                  AppLocalizations.of(context)?.retryButton ??
+                  'Retry',
               textColor: AbbaColors.sage,
               onPressed: onRetry,
             )

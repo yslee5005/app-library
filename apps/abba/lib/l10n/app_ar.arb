@@ -103,7 +103,7 @@
   "monthlyPrice": "$6.99 / شهر",
   "yearlyPrice": "$49.99 / سنة",
   "yearlySave": "وفّر 40%",
-  "launchPromo": "3 أشهر بسعر $4.99/شهر!",
+  "launchPromo": "",
   "startPro": "ابدأ Pro",
   "comingSoon": "قريبًا",
   "notificationSetting": "الإشعارات",
@@ -152,7 +152,7 @@
   "groupInviteMessage": "لنصلِّ معًا! انضم إلى مجموعة الصلاة على Abba.",
   "noGroups": "انضم أو أنشئ مجموعة للصلاة معًا.",
   "promoTitle": "عرض الإطلاق",
-  "promoBanner": "أول 3 أشهر بسعر $4.99/شهر!",
+  "promoBanner": "",
   "promoEndsOn": "ينتهي العرض في {date}",
   "@promoEndsOn": {
     "placeholders": {
@@ -248,6 +248,7 @@
   "originalWordNuanceLabel": "الفرق عن الترجمة",
   "originalWordsCountLabel": "{count} كلمات",
   "seeMore": "عرض المزيد",
+  "seeLess": "عرض أقل",
   "seeAllComments": "عرض جميع التعليقات ({count})",
   "@seeAllComments": {
     "placeholders": {
@@ -552,5 +553,15 @@
   "aiErrorApiBody": "صلاتك محفوظة بأمان. الرجاء المحاولة بعد قليل.",
   "aiErrorRetry": "حاول مرة أخرى",
   "aiErrorWaitAndCheck": "سنحاول التحليل لاحقًا. عُد قريبًا — صلاتك ستكون بانتظارك.",
-  "aiErrorHome": "العودة إلى الرئيسية"
+  "aiErrorHome": "العودة إلى الرئيسية",
+  "trialStartCta": "ابدأ شهرًا مجانيًا",
+  "trialAutoRenewDisclosure": "ثم {price}/سنة، مع تجديد تلقائي. يمكنك الإلغاء في أي وقت من الإعدادات.",
+  "@trialAutoRenewDisclosure": {
+    "placeholders": {
+      "price": {}
+    }
+  },
+  "trialLimitTitle": "لقد صليت 3 مرات اليوم 🌸",
+  "trialLimitBody": "عد غدًا — أو افتح الصلاة اللامحدودة مع Pro.",
+  "trialLimitCta": "متابعة مع Pro"
 }

@@ -280,7 +280,7 @@ class AppLocalizationsVi extends AppLocalizations {
   String get yearlySave => 'Tiết kiệm 40%';
 
   @override
-  String get launchPromo => '3 tháng chỉ 99.000₫/tháng!';
+  String get launchPromo => '';
 
   @override
   String get startPro => 'Bắt đầu Pro';
@@ -407,7 +407,7 @@ class AppLocalizationsVi extends AppLocalizations {
   String get promoTitle => 'Ưu đãi ra mắt';
 
   @override
-  String get promoBanner => '3 tháng đầu chỉ 99.000₫/tháng!';
+  String get promoBanner => '';
 
   @override
   String promoEndsOn(Object date) {
@@ -675,6 +675,9 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String get seeMore => 'Xem thêm';
+
+  @override
+  String get seeLess => 'Thu gọn';
 
   @override
   String seeAllComments(Object count) {
@@ -1318,4 +1321,22 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String get sectionStatusPending => 'Phân tích đang diễn ra';
+
+  @override
+  String get trialStartCta => 'Bắt đầu miễn phí 1 tháng';
+
+  @override
+  String trialAutoRenewDisclosure(Object price) {
+    return 'Sau đó $price/năm, tự động gia hạn. Hủy bất cứ lúc nào trong Cài đặt.';
+  }
+
+  @override
+  String get trialLimitTitle => 'Bạn đã cầu nguyện 3 lần hôm nay 🌸';
+
+  @override
+  String get trialLimitBody =>
+      'Hẹn gặp lại ngày mai — hoặc mở khóa cầu nguyện không giới hạn với Pro.';
+
+  @override
+  String get trialLimitCta => 'Tiếp tục với Pro';
 }

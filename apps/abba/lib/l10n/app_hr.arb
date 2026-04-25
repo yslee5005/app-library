@@ -103,7 +103,7 @@
   "monthlyPrice": "6,99€ / mjes",
   "yearlyPrice": "49,99€ / god",
   "yearlySave": "Uštedi 40%",
-  "launchPromo": "3 mjeseca po 3,99€/mj!",
+  "launchPromo": "",
   "startPro": "Započni Pro",
   "comingSoon": "Uskoro",
   "notificationSetting": "Obavijesti",
@@ -152,7 +152,7 @@
   "groupInviteMessage": "Molimo se zajedno! Pridruži se mojoj molitvenoj grupi na Abba.",
   "noGroups": "Pridruži se ili stvori grupu za zajedničku molitvu.",
   "promoTitle": "Posebna ponuda",
-  "promoBanner": "Prva 3 mjeseca po 3,99€/mj!",
+  "promoBanner": "",
   "promoEndsOn": "Ponuda istječe {date}",
   "@promoEndsOn": {
     "placeholders": {
@@ -248,6 +248,7 @@
   "originalWordNuanceLabel": "Nijansa vs prijevod",
   "originalWordsCountLabel": "{count} riječi",
   "seeMore": "Vidi više",
+  "seeLess": "Vidi manje",
   "seeAllComments": "Pogledaj svih {count} komentara",
   "@seeAllComments": {
     "placeholders": {
@@ -552,5 +553,15 @@
   "aiErrorApiBody": "Vaša molitva je sigurno spremljena. Molimo pokušajte ponovno za trenutak.",
   "aiErrorRetry": "Pokušaj ponovno",
   "aiErrorWaitAndCheck": "Analizu ćemo pokušati kasnije. Vratite se uskoro — vaša će molitva čekati.",
-  "aiErrorHome": "Povratak na početnu"
+  "aiErrorHome": "Povratak na početnu",
+  "trialStartCta": "Start 1 month free",
+  "trialAutoRenewDisclosure": "Then {price}/year, auto-renews. Cancel anytime in Settings.",
+  "@trialAutoRenewDisclosure": {
+    "placeholders": {
+      "price": {}
+    }
+  },
+  "trialLimitTitle": "You've prayed 3 times today 🌸",
+  "trialLimitBody": "Come back tomorrow — or unlock unlimited prayer with Pro.",
+  "trialLimitCta": "Continue with Pro"
 }

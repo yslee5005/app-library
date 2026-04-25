@@ -103,7 +103,7 @@
   "monthlyPrice": "6,99€ / μήνα",
   "yearlyPrice": "49,99€ / έτος",
   "yearlySave": "Εξοικονόμηση 40%",
-  "launchPromo": "3 μήνες στα 3,99€/μήνα!",
+  "launchPromo": "",
   "startPro": "Ξεκίνα Pro",
   "comingSoon": "Έρχεται σύντομα",
   "notificationSetting": "Ειδοποιήσεις",
@@ -152,7 +152,7 @@
   "groupInviteMessage": "Ας προσευχηθούμε μαζί! Εγγραφείτε στην ομάδα προσευχής μου στο Abba.",
   "noGroups": "Εγγραφείτε ή δημιουργήστε ομάδα για να προσεύχεστε μαζί.",
   "promoTitle": "Ειδική Προσφορά",
-  "promoBanner": "3 πρώτοι μήνες στα 3,99€/μήνα!",
+  "promoBanner": "",
   "promoEndsOn": "Η προσφορά λήγει {date}",
   "@promoEndsOn": {
     "placeholders": {
@@ -248,6 +248,7 @@
   "originalWordNuanceLabel": "Απόχρωση vs μετάφραση",
   "originalWordsCountLabel": "{count} λέξεις",
   "seeMore": "Δείτε περισσότερα",
+  "seeLess": "Δείτε λιγότερα",
   "seeAllComments": "Δείτε όλα τα {count} σχόλια",
   "@seeAllComments": {
     "placeholders": {
@@ -552,5 +553,15 @@
   "aiErrorApiBody": "Η προσευχή σας έχει αποθηκευτεί με ασφάλεια. Δοκιμάστε ξανά σε λίγο.",
   "aiErrorRetry": "Δοκιμάστε ξανά",
   "aiErrorWaitAndCheck": "Θα προσπαθήσουμε την ανάλυση αργότερα. Επιστρέψτε σύντομα — η προσευχή σας θα σας περιμένει.",
-  "aiErrorHome": "Επιστροφή στην αρχική"
+  "aiErrorHome": "Επιστροφή στην αρχική",
+  "trialStartCta": "Start 1 month free",
+  "trialAutoRenewDisclosure": "Then {price}/year, auto-renews. Cancel anytime in Settings.",
+  "@trialAutoRenewDisclosure": {
+    "placeholders": {
+      "price": {}
+    }
+  },
+  "trialLimitTitle": "You've prayed 3 times today 🌸",
+  "trialLimitBody": "Come back tomorrow — or unlock unlimited prayer with Pro.",
+  "trialLimitCta": "Continue with Pro"
 }

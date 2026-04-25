@@ -165,11 +165,13 @@ class CachedAiService implements AiService {
     required String transcript,
     required String locale,
     required String userName,
+    List<String> recentReferences = const [],
   }) => _inner.analyzePrayerStreamed(
-        transcript: transcript,
-        locale: locale,
-        userName: userName,
-      );
+    transcript: transcript,
+    locale: locale,
+    userName: userName,
+    recentReferences: recentReferences,
+  );
 
   @override
   Future<TierResult> analyzeTier3Prayer({
@@ -179,12 +181,12 @@ class CachedAiService implements AiService {
     required TierT1Result t1Context,
     required TierT2Result t2Context,
   }) => _inner.analyzeTier3Prayer(
-        transcript: transcript,
-        locale: locale,
-        userName: userName,
-        t1Context: t1Context,
-        t2Context: t2Context,
-      );
+    transcript: transcript,
+    locale: locale,
+    userName: userName,
+    t1Context: t1Context,
+    t2Context: t2Context,
+  );
 
   @override
   Stream<TierResult> analyzeMeditationStreamed({
@@ -194,10 +196,10 @@ class CachedAiService implements AiService {
     required String locale,
     required String userName,
   }) => _inner.analyzeMeditationStreamed(
-        meditation: meditation,
-        passageRef: passageRef,
-        passageText: passageText,
-        locale: locale,
-        userName: userName,
-      );
+    meditation: meditation,
+    passageRef: passageRef,
+    passageText: passageText,
+    locale: locale,
+    userName: userName,
+  );
 }

@@ -29,8 +29,9 @@ Widget buildTestAppWithQtRepo(QtRepository qtRepo, {String locale = 'en'}) {
     overrides: [
       authRepositoryProvider.overrideWithValue(MockAuthRepository(mockData)),
       aiServiceProvider.overrideWithValue(MockAiService(mockData)),
-      audioRecorderServiceProvider
-          .overrideWithValue(MockAudioRecorderService()),
+      audioRecorderServiceProvider.overrideWithValue(
+        MockAudioRecorderService(),
+      ),
       audioStorageServiceProvider.overrideWithValue(MockAudioStorageService()),
       prayerRepositoryProvider.overrideWithValue(MockPrayerRepository()),
       communityRepositoryProvider.overrideWithValue(
@@ -73,13 +74,12 @@ void main() {
       expect(find.byType(Scaffold), findsWidgets);
     });
 
-    testWidgets('shows error state with Retry when repository throws',
-        (tester) async {
+    testWidgets('shows error state with Retry when repository throws', (
+      tester,
+    ) async {
       int callCount = 0;
       await tester.pumpWidget(
-        buildTestAppWithQtRepo(
-          _FailingQtRepository(onCall: () => callCount++),
-        ),
+        buildTestAppWithQtRepo(_FailingQtRepository(onCall: () => callCount++)),
       );
       // Let the FutureProvider's async future settle, then pump frames.
       // runAsync processes real microtasks (needed for FutureProvider's
@@ -103,9 +103,7 @@ void main() {
     testWidgets('Retry button re-invokes repository', (tester) async {
       int callCount = 0;
       await tester.pumpWidget(
-        buildTestAppWithQtRepo(
-          _FailingQtRepository(onCall: () => callCount++),
-        ),
+        buildTestAppWithQtRepo(_FailingQtRepository(onCall: () => callCount++)),
       );
       await tester.pump();
       await tester.pump(const Duration(milliseconds: 50));
@@ -124,11 +122,10 @@ void main() {
       );
     });
 
-    testWidgets('shows error state when repository returns empty list',
-        (tester) async {
-      await tester.pumpWidget(
-        buildTestAppWithQtRepo(_EmptyQtRepository()),
-      );
+    testWidgets('shows error state when repository returns empty list', (
+      tester,
+    ) async {
+      await tester.pumpWidget(buildTestAppWithQtRepo(_EmptyQtRepository()));
       await tester.pump();
       await tester.pump(const Duration(milliseconds: 50));
 

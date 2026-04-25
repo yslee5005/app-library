@@ -103,7 +103,7 @@
   "monthlyPrice": "₹549 / माह",
   "yearlyPrice": "₹4,099 / वर्ष",
   "yearlySave": "40% बचाएँ",
-  "launchPromo": "3 महीने ₹167/माह पर!",
+  "launchPromo": "",
   "startPro": "Pro शुरू करें",
   "comingSoon": "जल्द आ रहा है",
   "notificationSetting": "सूचनाएँ",
@@ -152,7 +152,7 @@
   "groupInviteMessage": "आइए साथ प्रार्थना करें! Abba पर मेरे प्रार्थना समूह में शामिल हों।",
   "noGroups": "साथ प्रार्थना करने के लिए समूह बनाएँ या जुड़ें।",
   "promoTitle": "लॉन्च ऑफ़र",
-  "promoBanner": "पहले 3 महीने ₹167/माह!",
+  "promoBanner": "",
   "promoEndsOn": "ऑफ़र {date} तक",
   "@promoEndsOn": {
     "placeholders": {
@@ -248,6 +248,7 @@
   "originalWordNuanceLabel": "अनुवाद की तुलना में सूक्ष्मता",
   "originalWordsCountLabel": "{count} शब्द",
   "seeMore": "और देखें",
+  "seeLess": "कम देखें",
   "seeAllComments": "सभी {count} टिप्पणियाँ देखें",
   "@seeAllComments": {
     "placeholders": {
@@ -552,5 +553,15 @@
   "aiErrorApiBody": "आपकी प्रार्थना सुरक्षित रूप से सहेजी गई है। कृपया थोड़ी देर में पुनः प्रयास करें।",
   "aiErrorRetry": "पुनः प्रयास करें",
   "aiErrorWaitAndCheck": "हम बाद में विश्लेषण का फिर प्रयास करेंगे। जल्द वापस आइए — आपकी प्रार्थना प्रतीक्षा करेगी।",
-  "aiErrorHome": "घर वापस"
+  "aiErrorHome": "घर वापस",
+  "trialStartCta": "1 महीना मुफ्त शुरू करें",
+  "trialAutoRenewDisclosure": "फिर {price}/वर्ष, स्वतः नवीनीकरण। सेटिंग्स में कभी भी रद्द करें।",
+  "@trialAutoRenewDisclosure": {
+    "placeholders": {
+      "price": {}
+    }
+  },
+  "trialLimitTitle": "आपने आज 3 बार प्रार्थना की है 🌸",
+  "trialLimitBody": "कल फिर आएं — या Pro के साथ असीमित प्रार्थना अनलॉक करें।",
+  "trialLimitCta": "Pro के साथ जारी रखें"
 }

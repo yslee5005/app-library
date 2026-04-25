@@ -120,11 +120,7 @@ class Comment {
     required this.createdAt,
   });
 
-  Comment copyWith({
-    int? likeCount,
-    bool? isLiked,
-    List<Comment>? replies,
-  }) {
+  Comment copyWith({int? likeCount, bool? isLiked, List<Comment>? replies}) {
     return Comment(
       id: id,
       userId: userId,
@@ -147,7 +143,8 @@ class Comment {
       parentCommentId: json['parent_comment_id'] as String?,
       likeCount: json['like_count'] as int? ?? 0,
       isLiked: json['is_liked'] as bool? ?? false,
-      replies: (json['replies'] as List<dynamic>?)
+      replies:
+          (json['replies'] as List<dynamic>?)
               ?.map((e) => Comment.fromJson(e as Map<String, dynamic>))
               .toList() ??
           [],

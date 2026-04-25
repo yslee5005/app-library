@@ -281,7 +281,7 @@ class AppLocalizationsPl extends AppLocalizations {
   String get yearlySave => 'Oszczędź 40%';
 
   @override
-  String get launchPromo => '3 miesiące za 15,99zł/mies.!';
+  String get launchPromo => '';
 
   @override
   String get startPro => 'Rozpocznij Pro';
@@ -409,7 +409,7 @@ class AppLocalizationsPl extends AppLocalizations {
   String get promoTitle => 'Oferta premierowa';
 
   @override
-  String get promoBanner => 'Pierwsze 3 miesiące za 15,99zł/mies.!';
+  String get promoBanner => '';
 
   @override
   String promoEndsOn(Object date) {
@@ -676,6 +676,9 @@ class AppLocalizationsPl extends AppLocalizations {
 
   @override
   String get seeMore => 'Zobacz więcej';
+
+  @override
+  String get seeLess => 'Zobacz mniej';
 
   @override
   String seeAllComments(Object count) {
@@ -1317,4 +1320,22 @@ class AppLocalizationsPl extends AppLocalizations {
 
   @override
   String get sectionStatusPending => 'Analiza w toku';
+
+  @override
+  String get trialStartCta => 'Rozpocznij 1 miesiąc za darmo';
+
+  @override
+  String trialAutoRenewDisclosure(Object price) {
+    return 'Następnie $price/rok, automatyczne odnawianie. Anuluj w dowolnym momencie w Ustawieniach.';
+  }
+
+  @override
+  String get trialLimitTitle => 'Dziś modliłeś się 3 razy 🌸';
+
+  @override
+  String get trialLimitBody =>
+      'Wróć jutro — lub odblokuj nieograniczoną modlitwę z Pro.';
+
+  @override
+  String get trialLimitCta => 'Kontynuuj z Pro';
 }

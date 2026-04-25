@@ -24,6 +24,21 @@ class ScriptureCard extends StatefulWidget {
 
 class _ScriptureCardState extends State<ScriptureCard> {
   bool _originalWordsExpanded = false;
+  bool _verseExpanded = false;
+
+  /// v7 — fold long verse passages so the rest of the card remains scannable.
+  /// Triggers when (a) reference is a range (`Romans 8:31-39`), or (b) the
+  /// verse text exceeds ~140 chars. Truncated preview is ~110 chars.
+  static const int _verseFoldThresholdChars = 140;
+  static const int _versePreviewChars = 110;
+
+  bool _shouldFoldVerse(Scripture s) {
+    if (s.verse.length <= _verseFoldThresholdChars) {
+      return s.reference.contains('-') &&
+          s.verse.length > _versePreviewChars;
+    }
+    return true;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,13 +62,7 @@ class _ScriptureCardState extends State<ScriptureCard> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           if (scripture.verse.isNotEmpty) ...[
-            Text(
-              scripture.verse,
-              style: AbbaTypography.body.copyWith(
-                color: AbbaColors.warmBrown,
-                height: 1.7,
-              ),
-            ),
+            _buildVerseText(l10n, scripture),
             const SizedBox(height: AbbaSpacing.sm),
             Text(
               '— ${scripture.reference}',
@@ -155,6 +164,53 @@ class _ScriptureCardState extends State<ScriptureCard> {
           ],
         ],
       ),
+    );
+  }
+
+  Widget _buildVerseText(AppLocalizations l10n, Scripture scripture) {
+    final fold = _shouldFoldVerse(scripture);
+    final showFull = !fold || _verseExpanded;
+    final body = showFull
+        ? scripture.verse
+        : '${scripture.verse.substring(0, _versePreviewChars).trimRight()}…';
+    final textStyle = AbbaTypography.body.copyWith(
+      color: AbbaColors.warmBrown,
+      height: 1.7,
+    );
+    if (!fold) {
+      return Text(scripture.verse, style: textStyle);
+    }
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(body, style: textStyle),
+        const SizedBox(height: AbbaSpacing.xs),
+        InkWell(
+          onTap: () => setState(() => _verseExpanded = !_verseExpanded),
+          borderRadius: BorderRadius.circular(AbbaRadius.sm),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 4),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  _verseExpanded ? l10n.seeLess : l10n.seeMore,
+                  style: AbbaTypography.bodySmall.copyWith(
+                    color: AbbaColors.sage,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                const SizedBox(width: 2),
+                Icon(
+                  _verseExpanded ? Icons.expand_less : Icons.expand_more,
+                  size: 18,
+                  color: AbbaColors.sage,
+                ),
+              ],
+            ),
+          ),
+        ),
+      ],
     );
   }
 
@@ -287,7 +343,9 @@ class _ScriptureCardState extends State<ScriptureCard> {
               children: [
                 if (idx > 0)
                   Padding(
-                    padding: const EdgeInsets.symmetric(vertical: AbbaSpacing.sm),
+                    padding: const EdgeInsets.symmetric(
+                      vertical: AbbaSpacing.sm,
+                    ),
                     child: Divider(
                       color: AbbaColors.muted.withValues(alpha: 0.2),
                       height: 1,

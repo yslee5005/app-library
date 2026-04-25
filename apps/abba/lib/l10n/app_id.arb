@@ -103,7 +103,7 @@
   "monthlyPrice": "Rp109.000 / bulan",
   "yearlyPrice": "Rp829.000 / tahun",
   "yearlySave": "Hemat 40%",
-  "launchPromo": "3 bulan hanya Rp59.900/bln!",
+  "launchPromo": "",
   "startPro": "Mulai Pro",
   "comingSoon": "Segera hadir",
   "notificationSetting": "Notifikasi",
@@ -152,7 +152,7 @@
   "groupInviteMessage": "Mari berdoa bersama! Bergabunglah dengan grup doa saya di Abba.",
   "noGroups": "Bergabung atau buat grup untuk berdoa bersama.",
   "promoTitle": "Promo Peluncuran",
-  "promoBanner": "3 bulan pertama hanya Rp59.900/bln!",
+  "promoBanner": "",
   "promoEndsOn": "Promo berakhir {date}",
   "@promoEndsOn": {
     "placeholders": {
@@ -248,6 +248,7 @@
   "originalWordNuanceLabel": "Nuansa vs terjemahan",
   "originalWordsCountLabel": "{count} kata",
   "seeMore": "Lihat selengkapnya",
+  "seeLess": "Lihat lebih sedikit",
   "seeAllComments": "Lihat semua {count} komentar",
   "@seeAllComments": {
     "placeholders": {
@@ -552,5 +553,15 @@
   "aiErrorApiBody": "Doamu tersimpan dengan aman. Silakan coba lagi sebentar.",
   "aiErrorRetry": "Coba lagi",
   "aiErrorWaitAndCheck": "Kami akan mencoba analisis lagi nanti. Segera kembali — doamu akan menantimu.",
-  "aiErrorHome": "Kembali ke beranda"
+  "aiErrorHome": "Kembali ke beranda",
+  "trialStartCta": "Mulai gratis 1 bulan",
+  "trialAutoRenewDisclosure": "Kemudian {price}/tahun, perpanjangan otomatis. Batalkan kapan saja di Pengaturan.",
+  "@trialAutoRenewDisclosure": {
+    "placeholders": {
+      "price": {}
+    }
+  },
+  "trialLimitTitle": "Anda telah berdoa 3 kali hari ini 🌸",
+  "trialLimitBody": "Kembali besok — atau buka doa tanpa batas dengan Pro.",
+  "trialLimitCta": "Lanjutkan dengan Pro"
 }

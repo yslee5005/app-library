@@ -24,9 +24,9 @@ class Tier1Analyzer {
     required GeminiCacheManager cache,
     required BibleTextService bible,
     required String apiKey,
-  })  : _cache = cache,
-        _bible = bible,
-        _apiKey = apiKey;
+  }) : _cache = cache,
+       _bible = bible,
+       _apiKey = apiKey;
 
   /// Phase 4.2 Phase C — true SSE streaming. Consumes Gemini's
   /// `generateContentStream` chunk-by-chunk and emits:
@@ -42,6 +42,7 @@ class Tier1Analyzer {
     required String transcript,
     required String locale,
     required String userName,
+    List<String> recentReferences = const [],
   }) async* {
     final systemInstruction = await _cache.loadRubricBundle('prayer');
     const modelName = 'gemini-2.5-flash';
@@ -51,7 +52,7 @@ class Tier1Analyzer {
       systemInstruction: Content.system(systemInstruction),
       generationConfig: GenerationConfig(
         responseMimeType: 'application/json',
-        temperature: 0.85,
+        temperature: 0.75,
       ),
     );
 
@@ -60,6 +61,7 @@ class Tier1Analyzer {
       locale: locale,
       userName: userName,
       excludeRef: null,
+      recentReferences: recentReferences,
     );
 
     apiLog.info(
@@ -100,14 +102,28 @@ class Tier1Analyzer {
       }
 
       final json = _parseJson(buffer.toString());
+      // v7 telemetry — log model's verse_span_recommendation when present.
+      // Field is metadata only; not propagated to Scripture model (MVP simplicity).
+      final scriptureMeta = json['scripture'];
+      if (scriptureMeta is Map &&
+          scriptureMeta['verse_span_recommendation'] is String) {
+        apiLog.info(
+          '[Tier1] verse_span_recommendation='
+          '${scriptureMeta['verse_span_recommendation']}',
+        );
+      }
       final draft = _extractT1(json, locale);
+      // v7 — strip any leaked quote marks from `posture` (model paraphrases
+      // were being read as verbatim verse quotes → trust break). Audit-log.
+      final stripped = _stripPostureQuotes(draft.scripture);
 
       // Scripture validation (non-streaming retry path on hallucination)
       final validated = await _validateScripture(
-        draft.scripture,
+        stripped,
         locale,
         transcript: transcript,
         userName: userName,
+        recentReferences: recentReferences,
         model: model,
         modelName: modelName,
       );
@@ -191,6 +207,7 @@ class Tier1Analyzer {
     required String locale,
     required String userName,
     required String? excludeRef,
+    List<String> recentReferences = const [],
   }) {
     final buf = StringBuffer();
     buf.writeln('Mode: prayer');
@@ -203,14 +220,77 @@ class Tier1Analyzer {
     buf.writeln(transcript);
     buf.writeln('"""');
     buf.writeln();
+    if (recentReferences.isNotEmpty) {
+      buf.writeln(
+        'Recent scripture references already used (last 30 days, most recent first) — AVOID picking these unless absolutely uniquely apt for this prayer:',
+      );
+      for (final ref in recentReferences) {
+        buf.writeln('- $ref');
+      }
+      buf.writeln();
+      buf.writeln(
+        'Rotation rule: pick a DIFFERENT canonical reference. ESCAPE: if the user\'s prayer is sustained lament or grief AND no recent reference clearly matches the depth of this prayer, you MAY repeat one — and in that case, briefly note in `reason` why this passage was returned.',
+      );
+      buf.writeln();
+    }
     if (excludeRef != null) {
-      buf.writeln('IMPORTANT: Do NOT select scripture "$excludeRef" (previous attempt failed). Choose a DIFFERENT verse that fits this prayer.');
+      buf.writeln(
+        'IMPORTANT: Do NOT select scripture "$excludeRef" (previous attempt failed). Choose a DIFFERENT verse that fits this prayer.',
+      );
       buf.writeln();
     }
     buf.writeln('Generate ONLY the T1 sections: "summary" and "scripture".');
-    buf.writeln('Output JSON with keys: {"summary": {...}, "scripture": {...}}');
-    buf.writeln('Remember: scripture.reference MUST use English book name (e.g., "Matthew 6:33").');
+    buf.writeln(
+      'Output JSON with keys: {"summary": {...}, "scripture": {...}}',
+    );
+    buf.writeln(
+      'Remember: scripture.reference MUST use English book name (e.g., "Matthew 6:33").',
+    );
+    buf.writeln(
+      'Range format note: ranges like "Romans 8:31-39" are supported only within the same chapter. Cross-chapter ranges are NOT supported.',
+    );
     return buf.toString();
+  }
+
+  @visibleForTesting
+  String buildUserPromptForTest({
+    required String transcript,
+    required String locale,
+    required String userName,
+    String? excludeRef,
+    List<String> recentReferences = const [],
+  }) => _buildUserPrompt(
+    transcript: transcript,
+    locale: locale,
+    userName: userName,
+    excludeRef: excludeRef,
+    recentReferences: recentReferences,
+  );
+
+  /// v7 — Removes ASCII + CJK quotation marks from `posture` only, leaving
+  /// `key_word_hint` (which legitimately quotes original-language words)
+  /// untouched. Logs a warning when anything was stripped — that signal
+  /// tells us the rubric rule is leaking despite §2 prohibition.
+  @visibleForTesting
+  Scripture stripPostureQuotesForTest(Scripture s) => _stripPostureQuotes(s);
+
+  static final RegExp _postureQuoteRegex = RegExp(r'''['"‘’“”「」『』]''');
+
+  Scripture _stripPostureQuotes(Scripture s) {
+    if (s.posture.isEmpty) return s;
+    final cleaned = s.posture.replaceAll(_postureQuoteRegex, '');
+    if (cleaned == s.posture) return s;
+    apiLog.warning(
+      '[Tier1] posture contained quote marks — stripped (rubric §2 leak)',
+    );
+    return Scripture(
+      reference: s.reference,
+      verse: s.verse,
+      reason: s.reason,
+      posture: cleaned,
+      keyWordHint: s.keyWordHint,
+      originalWords: s.originalWords,
+    );
   }
 
   @visibleForTesting
@@ -218,8 +298,9 @@ class Tier1Analyzer {
 
   @visibleForTesting
   ({PrayerSummary summary, Scripture scripture}) extractT1ForTest(
-          Map<String, dynamic> json, String locale) =>
-      _extractT1(json, locale);
+    Map<String, dynamic> json,
+    String locale,
+  ) => _extractT1(json, locale);
 
   Map<String, dynamic> _parseJson(String? text) {
     if (text == null || text.isEmpty) {
@@ -257,7 +338,9 @@ class Tier1Analyzer {
   }
 
   ({PrayerSummary summary, Scripture scripture}) _extractT1(
-      Map<String, dynamic> json, String locale) {
+    Map<String, dynamic> json,
+    String locale,
+  ) {
     final summaryJson = json['summary'] as Map<String, dynamic>?;
     final scriptureJson = json['scripture'] as Map<String, dynamic>?;
     if (summaryJson == null || scriptureJson == null) {
@@ -277,6 +360,7 @@ class Tier1Analyzer {
     String locale, {
     required String transcript,
     required String userName,
+    required List<String> recentReferences,
     required GenerativeModel model,
     required String modelName,
   }) async {
@@ -295,12 +379,15 @@ class Tier1Analyzer {
     try {
       final retryResp = await model.generateContent([
         Content('user', [
-          TextPart(_buildUserPrompt(
-            transcript: transcript,
-            locale: locale,
-            userName: userName,
-            excludeRef: ref,
-          ))
+          TextPart(
+            _buildUserPrompt(
+              transcript: transcript,
+              locale: locale,
+              userName: userName,
+              excludeRef: ref,
+              recentReferences: recentReferences,
+            ),
+          ),
         ]),
       ]);
       logTierUsage(
@@ -312,18 +399,16 @@ class Tier1Analyzer {
       );
       final retryJson = _parseJson(retryResp.text);
       final retry = _extractT1(retryJson, locale);
-      final retryVerse = await _bible.lookup(retry.scripture.reference, locale);
+      final retryStripped = _stripPostureQuotes(retry.scripture);
+      final retryVerse = await _bible.lookup(retryStripped.reference, locale);
       if (retryVerse != null && retryVerse.isNotEmpty) {
-        apiLog.info('[Tier1] retry succeeded: ${retry.scripture.reference}');
-        return retry.scripture.withVerse(retryVerse);
+        apiLog.info('[Tier1] retry succeeded: ${retryStripped.reference}');
+        return retryStripped.withVerse(retryVerse);
       }
     } catch (e) {
       // warning() doesn't take stackTrace — retry is a soft path,
       // runtimeType in the message is enough for triage.
-      apiLog.warning(
-        '[Tier1] retry failed: ${e.runtimeType}',
-        error: e,
-      );
+      apiLog.warning('[Tier1] retry failed: ${e.runtimeType}', error: e);
     }
 
     // Safe fallback: keep ref but no verse — UI handles empty verse gracefully

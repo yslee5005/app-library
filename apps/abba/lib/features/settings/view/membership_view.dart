@@ -62,9 +62,7 @@ class _MembershipViewState extends ConsumerState<MembershipView>
 
     return Scaffold(
       backgroundColor: AbbaColors.cream,
-      appBar: AppBar(
-        title: Text('Abba Pro', style: AbbaTypography.h2),
-      ),
+      appBar: AppBar(title: Text('Abba Pro', style: AbbaTypography.h2)),
       body: SafeArea(
         child: ListView(
           padding: const EdgeInsets.symmetric(
@@ -227,11 +225,15 @@ class _MembershipViewState extends ConsumerState<MembershipView>
     );
   }
 
-  Widget _buildActiveDetails(AppLocalizations l10n, ActiveSubscriptionInfo info) {
+  Widget _buildActiveDetails(
+    AppLocalizations l10n,
+    ActiveSubscriptionInfo info,
+  ) {
     final locale = Localizations.localeOf(context).languageCode;
     final expires = info.expiresDate;
-    final dateLabel =
-        expires != null ? DateFormat.yMMMd(locale).format(expires) : '—';
+    final dateLabel = expires != null
+        ? DateFormat.yMMMd(locale).format(expires)
+        : '—';
     final billingLabel = info.willRenew
         ? l10n.nextBillingDate(dateLabel)
         : l10n.accessUntil(dateLabel);
@@ -239,9 +241,7 @@ class _MembershipViewState extends ConsumerState<MembershipView>
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        _buildDetailRow(
-          label: l10n.currentPlan(_planDisplayName(l10n, info)),
-        ),
+        _buildDetailRow(label: l10n.currentPlan(_planDisplayName(l10n, info))),
         const SizedBox(height: AbbaSpacing.xs),
         _buildDetailRow(label: billingLabel),
         if (info.isInGracePeriod) ...[
@@ -335,9 +335,7 @@ class _MembershipViewState extends ConsumerState<MembershipView>
       decoration: BoxDecoration(
         color: AbbaColors.softPeach.withValues(alpha: 0.45),
         borderRadius: BorderRadius.circular(AbbaRadius.md),
-        border: Border.all(
-          color: AbbaColors.softGold.withValues(alpha: 0.7),
-        ),
+        border: Border.all(color: AbbaColors.softGold.withValues(alpha: 0.7)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -360,8 +358,9 @@ class _MembershipViewState extends ConsumerState<MembershipView>
           const SizedBox(height: AbbaSpacing.xs),
           Text(
             l10n.billingIssueBody(days),
-            style: AbbaTypography.bodySmall
-                .copyWith(color: AbbaColors.warmBrown),
+            style: AbbaTypography.bodySmall.copyWith(
+              color: AbbaColors.warmBrown,
+            ),
           ),
           const SizedBox(height: AbbaSpacing.sm),
           SizedBox(
@@ -406,8 +405,9 @@ class _MembershipViewState extends ConsumerState<MembershipView>
           Expanded(
             child: Text(
               l10n.subscriptionCancelledNotice(dateLabel),
-              style: AbbaTypography.caption
-                  .copyWith(color: AbbaColors.warmBrown),
+              style: AbbaTypography.caption.copyWith(
+                color: AbbaColors.warmBrown,
+              ),
             ),
           ),
         ],
@@ -435,14 +435,18 @@ class _MembershipViewState extends ConsumerState<MembershipView>
             child: GestureDetector(
               onTap: () {
                 setState(() => _selectedPlan = 0);
-                appLogger.info('Membership plan selected: monthly', category: LogCategory.subscription);
+                appLogger.info(
+                  'Membership plan selected: monthly',
+                  category: LogCategory.subscription,
+                );
               },
               child: AnimatedContainer(
                 duration: const Duration(milliseconds: 200),
                 padding: const EdgeInsets.symmetric(vertical: AbbaSpacing.md),
                 decoration: BoxDecoration(
-                  color:
-                      _selectedPlan == 0 ? AbbaColors.sage : Colors.transparent,
+                  color: _selectedPlan == 0
+                      ? AbbaColors.sage
+                      : Colors.transparent,
                   borderRadius: BorderRadius.circular(AbbaRadius.md),
                 ),
                 alignment: Alignment.center,
@@ -462,14 +466,18 @@ class _MembershipViewState extends ConsumerState<MembershipView>
             child: GestureDetector(
               onTap: () {
                 setState(() => _selectedPlan = 1);
-                appLogger.info('Membership plan selected: yearly', category: LogCategory.subscription);
+                appLogger.info(
+                  'Membership plan selected: yearly',
+                  category: LogCategory.subscription,
+                );
               },
               child: AnimatedContainer(
                 duration: const Duration(milliseconds: 200),
                 padding: const EdgeInsets.symmetric(vertical: AbbaSpacing.md),
                 decoration: BoxDecoration(
-                  color:
-                      _selectedPlan == 1 ? AbbaColors.sage : Colors.transparent,
+                  color: _selectedPlan == 1
+                      ? AbbaColors.sage
+                      : Colors.transparent,
                   borderRadius: BorderRadius.circular(AbbaRadius.md),
                 ),
                 alignment: Alignment.center,
@@ -514,6 +522,13 @@ class _MembershipViewState extends ConsumerState<MembershipView>
         ? (prices?.yearlyPriceString ?? l10n.yearlyPrice)
         : (prices?.monthlyPriceString ?? l10n.monthlyPrice);
 
+    // Yearly free trial eligibility. `trialEligibleYearlyProvider` defaults
+    // to `false` on any error, and we only surface the trial CTA on the
+    // Yearly tab — Monthly has no intro offer.
+    final trialEligibleAsync = ref.watch(trialEligibleYearlyProvider);
+    final showTrial = isYearly && (trialEligibleAsync.value ?? false);
+    final ctaLabel = showTrial ? l10n.trialStartCta : l10n.startMembership;
+
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.all(AbbaSpacing.lg),
@@ -555,9 +570,7 @@ class _MembershipViewState extends ConsumerState<MembershipView>
           // Price
           Text(
             priceLabel,
-            style: AbbaTypography.hero.copyWith(
-              fontWeight: FontWeight.w700,
-            ),
+            style: AbbaTypography.hero.copyWith(fontWeight: FontWeight.w700),
           ),
           if (isYearly) ...[
             const SizedBox(height: AbbaSpacing.xs),
@@ -601,7 +614,7 @@ class _MembershipViewState extends ConsumerState<MembershipView>
                       ),
                     )
                   : Text(
-                      l10n.startMembership,
+                      ctaLabel,
                       style: AbbaTypography.body.copyWith(
                         color: AbbaColors.white,
                         fontWeight: FontWeight.w700,
@@ -609,6 +622,15 @@ class _MembershipViewState extends ConsumerState<MembershipView>
                     ),
             ),
           ),
+          if (showTrial) ...[
+            const SizedBox(height: AbbaSpacing.sm),
+            // Apple GL 3.1.2 — auto-renew disclosure immediately under CTA.
+            Text(
+              l10n.trialAutoRenewDisclosure(priceLabel),
+              style: AbbaTypography.caption.copyWith(color: AbbaColors.muted),
+              textAlign: TextAlign.center,
+            ),
+          ],
           const SizedBox(height: AbbaSpacing.sm),
           // Apple Guideline 3.1.2 — Terms / Privacy links immediately under CTA
           Wrap(
@@ -619,7 +641,9 @@ class _MembershipViewState extends ConsumerState<MembershipView>
                 onPressed: () => launchUrl(Uri.parse(AppConfig.termsUrl)),
                 child: Text(
                   l10n.termsOfService,
-                  style: AbbaTypography.caption.copyWith(color: AbbaColors.muted),
+                  style: AbbaTypography.caption.copyWith(
+                    color: AbbaColors.muted,
+                  ),
                 ),
               ),
               Text(
@@ -630,7 +654,9 @@ class _MembershipViewState extends ConsumerState<MembershipView>
                 onPressed: () => launchUrl(Uri.parse(AppConfig.privacyUrl)),
                 child: Text(
                   l10n.privacyPolicy,
-                  style: AbbaTypography.caption.copyWith(color: AbbaColors.muted),
+                  style: AbbaTypography.caption.copyWith(
+                    color: AbbaColors.muted,
+                  ),
                 ),
               ),
             ],
@@ -641,9 +667,7 @@ class _MembershipViewState extends ConsumerState<MembershipView>
             onPressed: _restoring ? null : _restore,
             child: Text(
               l10n.restorePurchase,
-              style: AbbaTypography.bodySmall.copyWith(
-                color: AbbaColors.muted,
-              ),
+              style: AbbaTypography.bodySmall.copyWith(color: AbbaColors.muted),
             ),
           ),
           const SizedBox(height: AbbaSpacing.sm),
@@ -673,11 +697,7 @@ class _MembershipViewState extends ConsumerState<MembershipView>
               padding: const EdgeInsets.only(bottom: AbbaSpacing.sm),
               child: Row(
                 children: [
-                  Icon(
-                    Icons.check_rounded,
-                    size: 20,
-                    color: AbbaColors.sage,
-                  ),
+                  Icon(Icons.check_rounded, size: 20, color: AbbaColors.sage),
                   const SizedBox(width: AbbaSpacing.sm),
                   Expanded(
                     child: Text(
@@ -699,7 +719,10 @@ class _MembershipViewState extends ConsumerState<MembershipView>
   Future<void> _purchase() async {
     final l10n = AppLocalizations.of(context)!;
     final productId = _selectedPlan == 1 ? 'yearly' : 'monthly';
-    appLogger.info('Purchase initiated: $productId', category: LogCategory.subscription);
+    appLogger.info(
+      'Purchase initiated: $productId',
+      category: LogCategory.subscription,
+    );
     setState(() => _purchasing = true);
     try {
       final service = ref.read(subscriptionServiceProvider);
@@ -708,18 +731,29 @@ class _MembershipViewState extends ConsumerState<MembershipView>
           : await service.purchaseMonthly();
       if (!mounted) return;
       if (success) {
-        appLogger.info('Purchase successful', category: LogCategory.subscription);
+        appLogger.info(
+          'Purchase successful',
+          category: LogCategory.subscription,
+        );
         ref.invalidate(isPremiumProvider);
         ref.invalidate(activeSubscriptionProvider);
         showAbbaSnackBar(context, message: l10n.purchaseSuccess);
       }
     } on PlatformException catch (e) {
-      appLogger.error('Purchase failed', category: LogCategory.subscription, error: e);
+      appLogger.error(
+        'Purchase failed',
+        category: LogCategory.subscription,
+        error: e,
+      );
       if (!mounted) return;
       final code = PurchasesErrorHelper.getErrorCode(e);
       _handlePurchaseError(code, l10n);
     } catch (e) {
-      appLogger.error('Purchase failed', category: LogCategory.subscription, error: e);
+      appLogger.error(
+        'Purchase failed',
+        category: LogCategory.subscription,
+        error: e,
+      );
       if (!mounted) return;
       showAbbaSnackBar(context, message: l10n.purchaseFailedGeneric);
     } finally {
@@ -729,7 +763,10 @@ class _MembershipViewState extends ConsumerState<MembershipView>
 
   Future<void> _upgradeToYearly() async {
     final l10n = AppLocalizations.of(context)!;
-    appLogger.info('Upgrade to yearly initiated', category: LogCategory.subscription);
+    appLogger.info(
+      'Upgrade to yearly initiated',
+      category: LogCategory.subscription,
+    );
     setState(() => _purchasing = true);
     try {
       final service = ref.read(subscriptionServiceProvider);
@@ -741,12 +778,20 @@ class _MembershipViewState extends ConsumerState<MembershipView>
         showAbbaSnackBar(context, message: l10n.upgradeSuccess);
       }
     } on PlatformException catch (e) {
-      appLogger.error('Upgrade failed', category: LogCategory.subscription, error: e);
+      appLogger.error(
+        'Upgrade failed',
+        category: LogCategory.subscription,
+        error: e,
+      );
       if (!mounted) return;
       final code = PurchasesErrorHelper.getErrorCode(e);
       _handlePurchaseError(code, l10n);
     } catch (e) {
-      appLogger.error('Upgrade failed', category: LogCategory.subscription, error: e);
+      appLogger.error(
+        'Upgrade failed',
+        category: LogCategory.subscription,
+        error: e,
+      );
       if (!mounted) return;
       showAbbaSnackBar(context, message: l10n.purchaseFailedGeneric);
     } finally {
@@ -768,7 +813,10 @@ class _MembershipViewState extends ConsumerState<MembershipView>
 
   Future<void> _restore() async {
     final l10n = AppLocalizations.of(context)!;
-    appLogger.info('Restore purchase initiated', category: LogCategory.subscription);
+    appLogger.info(
+      'Restore purchase initiated',
+      category: LogCategory.subscription,
+    );
     setState(() => _restoring = true);
     showAbbaSnackBar(context, message: l10n.restoreInProgress);
     try {
@@ -786,7 +834,11 @@ class _MembershipViewState extends ConsumerState<MembershipView>
     } on TimeoutException {
       if (mounted) showAbbaSnackBar(context, message: l10n.restoreTimeout);
     } catch (e) {
-      appLogger.error('Restore failed', category: LogCategory.subscription, error: e);
+      appLogger.error(
+        'Restore failed',
+        category: LogCategory.subscription,
+        error: e,
+      );
       if (mounted) showAbbaSnackBar(context, message: l10n.restoreFailed);
     } finally {
       if (mounted) setState(() => _restoring = false);
@@ -794,7 +846,10 @@ class _MembershipViewState extends ConsumerState<MembershipView>
   }
 
   Future<void> _manageSubscription() async {
-    appLogger.info('Manage subscription initiated', category: LogCategory.subscription);
+    appLogger.info(
+      'Manage subscription initiated',
+      category: LogCategory.subscription,
+    );
     try {
       final service = ref.read(subscriptionServiceProvider);
       await service.presentCustomerCenter();
@@ -808,7 +863,9 @@ class _MembershipViewState extends ConsumerState<MembershipView>
         category: LogCategory.subscription,
         error: e,
       );
-      await launchUrl(Uri.parse('https://apps.apple.com/account/subscriptions'));
+      await launchUrl(
+        Uri.parse('https://apps.apple.com/account/subscriptions'),
+      );
     }
   }
 }

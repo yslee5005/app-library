@@ -38,11 +38,7 @@ class QtView extends ConsumerWidget {
                 l10n: l10n,
                 onRetry: () => ref.invalidate(qtPassagesProvider),
               )
-            : _QtRevealContent(
-                passages: passages,
-                locale: locale,
-                l10n: l10n,
-              ),
+            : _QtRevealContent(passages: passages, locale: locale, l10n: l10n),
         loading: () => const _QtLoadingView(),
         error: (e, s) => _QtErrorView(
           l10n: l10n,
@@ -219,9 +215,8 @@ class _QtRevealContentState extends State<_QtRevealContent>
   // Split passages into pages of 5
   List<QTPassage> get _page1 =>
       widget.passages.sublist(0, min(5, widget.passages.length));
-  List<QTPassage> get _page2 => widget.passages.length > 5
-      ? widget.passages.sublist(5)
-      : <QTPassage>[];
+  List<QTPassage> get _page2 =>
+      widget.passages.length > 5 ? widget.passages.sublist(5) : <QTPassage>[];
   bool get _hasPage2 => _page2.isNotEmpty;
   int get _pageCount => _hasPage2 ? 2 : 1;
 
@@ -329,10 +324,7 @@ class _QtRevealContentState extends State<_QtRevealContent>
                           onPageChanged: (page) {
                             setState(() => _currentPage = page);
                           },
-                          children: [
-                            _buildPage1(),
-                            _buildPage2(),
-                          ],
+                          children: [_buildPage1(), _buildPage2()],
                         )
                       : _buildPage1(),
                 ),
@@ -548,8 +540,7 @@ class _QtCard extends StatelessWidget {
     container.read(currentPrayerModeProvider.notifier).state = 'qt';
     container.read(currentPassageRefProvider.notifier).state =
         passage.reference;
-    container.read(currentPassageTextProvider.notifier).state =
-        passage.text;
+    container.read(currentPassageTextProvider.notifier).state = passage.text;
 
     showModalBottomSheet(
       context: context,

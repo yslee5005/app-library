@@ -279,7 +279,7 @@ class AppLocalizationsTr extends AppLocalizations {
   String get yearlySave => '%40 Tasarruf';
 
   @override
-  String get launchPromo => '3 ay boyunca ₺129/ay!';
+  String get launchPromo => '';
 
   @override
   String get startPro => 'Pro Başlat';
@@ -410,7 +410,7 @@ class AppLocalizationsTr extends AppLocalizations {
   String get promoTitle => 'Lansman Özel';
 
   @override
-  String get promoBanner => 'İlk 3 ay ₺129/ay!';
+  String get promoBanner => '';
 
   @override
   String promoEndsOn(Object date) {
@@ -676,6 +676,9 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get seeMore => 'Daha fazla';
+
+  @override
+  String get seeLess => 'Daha az';
 
   @override
   String seeAllComments(Object count) {
@@ -1311,4 +1314,22 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get sectionStatusPending => 'Analiz sürüyor';
+
+  @override
+  String get trialStartCta => '1 ay ücretsiz başla';
+
+  @override
+  String trialAutoRenewDisclosure(Object price) {
+    return 'Ardından $price/yıl, otomatik yenilenir. Ayarlar\'dan istediğin zaman iptal edebilirsin.';
+  }
+
+  @override
+  String get trialLimitTitle => 'Bugün 3 kez dua ettiniz 🌸';
+
+  @override
+  String get trialLimitBody =>
+      'Yarın tekrar gel — veya Pro ile sınırsız duanın kilidini aç.';
+
+  @override
+  String get trialLimitCta => 'Pro ile devam et';
 }

@@ -15,8 +15,9 @@ import '../../../helpers/test_fixtures.dart';
 ///   - Lesson label is wired through the `lessonLabel` prop.
 void main() {
   group('GrowthStoryCard', () {
-    testWidgets('Pro user: renders title, summary, lesson, and seedling icon',
-        (tester) async {
+    testWidgets('Pro user: renders title, summary, lesson, and seedling icon', (
+      tester,
+    ) async {
       final story = TestFixtures.growthStory();
 
       await tester.pumpWidget(

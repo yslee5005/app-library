@@ -55,30 +55,32 @@ void main() {
       expect(inner.premiumCount, 1);
     });
 
-    test('analyzeMeditation: keyed on passageReference + meditationText',
-        () async {
-      await cached.analyzeMeditation(
-        passageReference: 'Ps 23',
-        passageText: 'The Lord is my shepherd',
-        meditationText: 'I felt peace',
-        locale: 'en',
-      );
-      await cached.analyzeMeditation(
-        passageReference: 'Ps 23',
-        passageText: 'The Lord is my shepherd',
-        meditationText: 'I felt peace',
-        locale: 'en',
-      );
-      // Same passage, different meditation text → cache miss.
-      await cached.analyzeMeditation(
-        passageReference: 'Ps 23',
-        passageText: 'The Lord is my shepherd',
-        meditationText: 'Different reflection',
-        locale: 'en',
-      );
+    test(
+      'analyzeMeditation: keyed on passageReference + meditationText',
+      () async {
+        await cached.analyzeMeditation(
+          passageReference: 'Ps 23',
+          passageText: 'The Lord is my shepherd',
+          meditationText: 'I felt peace',
+          locale: 'en',
+        );
+        await cached.analyzeMeditation(
+          passageReference: 'Ps 23',
+          passageText: 'The Lord is my shepherd',
+          meditationText: 'I felt peace',
+          locale: 'en',
+        );
+        // Same passage, different meditation text → cache miss.
+        await cached.analyzeMeditation(
+          passageReference: 'Ps 23',
+          passageText: 'The Lord is my shepherd',
+          meditationText: 'Different reflection',
+          locale: 'en',
+        );
 
-      expect(inner.meditationCount, 2);
-    });
+        expect(inner.meditationCount, 2);
+      },
+    );
 
     test('analyzePrayerCoaching: cached independently from prayer', () async {
       await cached.analyzePrayer(transcript: 'hello', locale: 'en');
@@ -268,16 +270,17 @@ class _CountingAiService implements AiService {
   }
 
   PrayerResult _stubResult() => const PrayerResult(
-        scripture: Scripture(reference: 'Test 1:1', verse: 'stub'),
-        bibleStory: BibleStory(title: 'stub', summary: 'stub'),
-        testimony: 'stub',
-      );
+    scripture: Scripture(reference: 'Test 1:1', verse: 'stub'),
+    bibleStory: BibleStory(title: 'stub', summary: 'stub'),
+    testimony: 'stub',
+  );
 
   @override
   Stream<TierResult> analyzePrayerStreamed({
     required String transcript,
     required String locale,
     required String userName,
+    List<String> recentReferences = const [],
   }) async* {
     // Minimal stub — tier-based caching is pass-through
   }

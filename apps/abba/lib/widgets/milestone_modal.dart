@@ -9,10 +9,7 @@ class MilestoneInfo {
   final String type;
   final String emoji;
 
-  const MilestoneInfo({
-    required this.type,
-    required this.emoji,
-  });
+  const MilestoneInfo({required this.type, required this.emoji});
 
   /// Localized title for this milestone.
   String title(AppLocalizations l10n) {

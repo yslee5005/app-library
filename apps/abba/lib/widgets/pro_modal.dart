@@ -89,6 +89,89 @@ Future<bool> showProPrompt(BuildContext context) async {
   return false;
 }
 
+/// Soft prompt for trial users who hit the 3-prayer daily soft cap.
+/// Same style as [showProPrompt] — different copy ("You've prayed 3
+/// times today, come back tomorrow or upgrade to Pro for unlimited").
+/// Returns [Future<void>] — does not communicate a purchase outcome.
+Future<void> showTrialLimitPrompt(BuildContext context) async {
+  final l10n = AppLocalizations.of(context)!;
+
+  final wantsToSee = await showDialog<bool>(
+    context: context,
+    builder: (ctx) => AlertDialog(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(AbbaRadius.lg),
+      ),
+      backgroundColor: AbbaColors.cream,
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          const Text('🌸', style: TextStyle(fontSize: 40)),
+          const SizedBox(height: AbbaSpacing.md),
+          Text(
+            l10n.trialLimitTitle,
+            style: AbbaTypography.h2,
+            textAlign: TextAlign.center,
+          ),
+          const SizedBox(height: AbbaSpacing.sm),
+          Text(
+            l10n.trialLimitBody,
+            style: AbbaTypography.bodySmall.copyWith(color: AbbaColors.muted),
+            textAlign: TextAlign.center,
+          ),
+        ],
+      ),
+      actionsPadding: const EdgeInsets.fromLTRB(
+        AbbaSpacing.lg,
+        0,
+        AbbaSpacing.lg,
+        AbbaSpacing.lg,
+      ),
+      actions: [
+        Column(
+          children: [
+            SizedBox(
+              width: double.infinity,
+              height: abbaButtonHeight,
+              child: ElevatedButton.icon(
+                onPressed: () => Navigator.pop(ctx, true),
+                icon: const Text('💎', style: TextStyle(fontSize: 16)),
+                label: Text(
+                  l10n.trialLimitCta,
+                  style: AbbaTypography.body.copyWith(
+                    color: AbbaColors.white,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: AbbaColors.sageDark,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(AbbaRadius.md),
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(height: AbbaSpacing.sm),
+            TextButton(
+              onPressed: () => Navigator.pop(ctx, false),
+              child: Text(
+                l10n.maybeLater,
+                style: AbbaTypography.bodySmall.copyWith(
+                  color: AbbaColors.muted,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ],
+    ),
+  );
+
+  if (wantsToSee == true && context.mounted) {
+    context.push('/settings/membership');
+  }
+}
+
 /// Shows a soft modal when free user hits daily prayer limit.
 /// Returns true if user successfully purchased Premium, false otherwise.
 Future<bool> showProModal(BuildContext context) async {
@@ -105,8 +188,7 @@ class _ProModalContent extends ConsumerStatefulWidget {
   const _ProModalContent();
 
   @override
-  ConsumerState<_ProModalContent> createState() =>
-      _ProModalContentState();
+  ConsumerState<_ProModalContent> createState() => _ProModalContentState();
 }
 
 class _ProModalContentState extends ConsumerState<_ProModalContent> {
@@ -136,81 +218,81 @@ class _ProModalContentState extends ConsumerState<_ProModalContent> {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-            const Text('🌸', style: TextStyle(fontSize: 48)),
-            const SizedBox(height: AbbaSpacing.md),
-            Text(
-              l10n.proLimitTitle,
-              style: AbbaTypography.h1,
-              textAlign: TextAlign.center,
-            ),
-            const SizedBox(height: AbbaSpacing.sm),
-            Text(
-              l10n.proLimitBody,
-              style: AbbaTypography.body.copyWith(color: AbbaColors.muted),
-              textAlign: TextAlign.center,
-            ),
-            const SizedBox(height: AbbaSpacing.xl),
-            // Monthly button
-            SizedBox(
-              width: double.infinity,
-              height: abbaHeroButtonHeight,
-              child: ElevatedButton(
-                onPressed: _purchasing ? null : _purchaseMonthly,
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: AbbaColors.premium,
-                  foregroundColor: AbbaColors.white,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(AbbaRadius.lg),
-                  ),
-                ),
-                child: _purchasing
-                    ? const SizedBox(
-                        width: 24,
-                        height: 24,
-                        child: CircularProgressIndicator(
-                          color: AbbaColors.white,
-                          strokeWidth: 2,
-                        ),
-                      )
-                    : Text(
-                        '💎 ${l10n.startPro} — $monthlyLabel',
-                        style: AbbaTypography.body.copyWith(
-                          color: AbbaColors.white,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
+              const Text('🌸', style: TextStyle(fontSize: 48)),
+              const SizedBox(height: AbbaSpacing.md),
+              Text(
+                l10n.proLimitTitle,
+                style: AbbaTypography.h1,
+                textAlign: TextAlign.center,
               ),
-            ),
-            const SizedBox(height: AbbaSpacing.sm),
-            // Yearly button
-            SizedBox(
-              width: double.infinity,
-              height: abbaButtonHeight,
-              child: OutlinedButton(
-                onPressed: _purchasing ? null : _purchaseYearly,
-                style: OutlinedButton.styleFrom(
-                  side: const BorderSide(color: AbbaColors.premium),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(AbbaRadius.lg),
-                  ),
-                ),
-                child: Text(
-                  '$yearlyLabel (${l10n.yearlySave})',
-                  style: AbbaTypography.body.copyWith(
-                    color: AbbaColors.premium,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-              ),
-            ),
-            const SizedBox(height: AbbaSpacing.md),
-            TextButton(
-              onPressed: () => Navigator.of(context).pop(false),
-              child: Text(
-                l10n.laterButton,
+              const SizedBox(height: AbbaSpacing.sm),
+              Text(
+                l10n.proLimitBody,
                 style: AbbaTypography.body.copyWith(color: AbbaColors.muted),
+                textAlign: TextAlign.center,
               ),
-            ),
+              const SizedBox(height: AbbaSpacing.xl),
+              // Monthly button
+              SizedBox(
+                width: double.infinity,
+                height: abbaHeroButtonHeight,
+                child: ElevatedButton(
+                  onPressed: _purchasing ? null : _purchaseMonthly,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: AbbaColors.premium,
+                    foregroundColor: AbbaColors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(AbbaRadius.lg),
+                    ),
+                  ),
+                  child: _purchasing
+                      ? const SizedBox(
+                          width: 24,
+                          height: 24,
+                          child: CircularProgressIndicator(
+                            color: AbbaColors.white,
+                            strokeWidth: 2,
+                          ),
+                        )
+                      : Text(
+                          '💎 ${l10n.startPro} — $monthlyLabel',
+                          style: AbbaTypography.body.copyWith(
+                            color: AbbaColors.white,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                ),
+              ),
+              const SizedBox(height: AbbaSpacing.sm),
+              // Yearly button
+              SizedBox(
+                width: double.infinity,
+                height: abbaButtonHeight,
+                child: OutlinedButton(
+                  onPressed: _purchasing ? null : _purchaseYearly,
+                  style: OutlinedButton.styleFrom(
+                    side: const BorderSide(color: AbbaColors.premium),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(AbbaRadius.lg),
+                    ),
+                  ),
+                  child: Text(
+                    '$yearlyLabel (${l10n.yearlySave})',
+                    style: AbbaTypography.body.copyWith(
+                      color: AbbaColors.premium,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(height: AbbaSpacing.md),
+              TextButton(
+                onPressed: () => Navigator.of(context).pop(false),
+                child: Text(
+                  l10n.laterButton,
+                  style: AbbaTypography.body.copyWith(color: AbbaColors.muted),
+                ),
+              ),
             ],
           ),
         ),

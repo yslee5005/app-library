@@ -103,7 +103,7 @@
   "monthlyPrice": "$6.99 / міс",
   "yearlyPrice": "$49.99 / рік",
   "yearlySave": "Економія 40%",
-  "launchPromo": "3 місяці за 159₴/міс.!",
+  "launchPromo": "",
   "startPro": "Почати Pro",
   "comingSoon": "Незабаром",
   "notificationSetting": "Сповіщення",
@@ -152,7 +152,7 @@
   "groupInviteMessage": "Давай молитися разом! Приєднуйся до моєї молитовної групи в Abba.",
   "noGroups": "Приєднайтесь або створіть групу для спільної молитви.",
   "promoTitle": "Спеціальна пропозиція",
-  "promoBanner": "Перші 3 місяці за 159₴/міс.!",
+  "promoBanner": "",
   "promoEndsOn": "Пропозиція діє до {date}",
   "@promoEndsOn": {
     "placeholders": {
@@ -248,6 +248,7 @@
   "originalWordNuanceLabel": "Нюанс vs переклад",
   "originalWordsCountLabel": "{count} слів",
   "seeMore": "Показати більше",
+  "seeLess": "Показати менше",
   "seeAllComments": "Переглянути всі {count} коментарів",
   "@seeAllComments": {
     "placeholders": {
@@ -552,5 +553,15 @@
   "aiErrorApiBody": "Ваша молитва надійно збережена. Спробуйте ще раз за хвилину.",
   "aiErrorRetry": "Спробувати знову",
   "aiErrorWaitAndCheck": "Ми спробуємо аналіз пізніше. Поверніться скоро — ваша молитва чекатиме.",
-  "aiErrorHome": "На головну"
+  "aiErrorHome": "На головну",
+  "trialStartCta": "Start 1 month free",
+  "trialAutoRenewDisclosure": "Then {price}/year, auto-renews. Cancel anytime in Settings.",
+  "@trialAutoRenewDisclosure": {
+    "placeholders": {
+      "price": {}
+    }
+  },
+  "trialLimitTitle": "You've prayed 3 times today 🌸",
+  "trialLimitBody": "Come back tomorrow — or unlock unlimited prayer with Pro.",
+  "trialLimitCta": "Continue with Pro"
 }

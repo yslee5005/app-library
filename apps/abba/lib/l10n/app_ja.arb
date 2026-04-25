@@ -103,7 +103,7 @@
   "monthlyPrice": "¥1,200 / 月",
   "yearlyPrice": "¥9,800 / 年",
   "yearlySave": "40%お得",
-  "launchPromo": "3ヶ月間¥580/月!",
+  "launchPromo": "",
   "startPro": "Pro開始",
   "comingSoon": "近日公開",
   "notificationSetting": "通知",
@@ -152,7 +152,7 @@
   "groupInviteMessage": "一緒に祈りましょう！Abbaの祈りグループに参加してください。",
   "noGroups": "グループに参加または作成して一緒に祈りましょう。",
   "promoTitle": "特別キャンペーン",
-  "promoBanner": "3ヶ月間¥580/月!",
+  "promoBanner": "",
   "promoEndsOn": "{date}まで特別価格",
   "@promoEndsOn": {
     "placeholders": {
@@ -248,6 +248,7 @@
   "originalWordNuanceLabel": "翻訳とのニュアンスの違い",
   "originalWordsCountLabel": "{count}語",
   "seeMore": "もっと見る",
+  "seeLess": "閉じる",
   "seeAllComments": "コメント{count}件すべて見る",
   "@seeAllComments": {
     "placeholders": {
@@ -552,5 +553,15 @@
   "aiErrorApiBody": "お祈りは安全に保存されました。少し経ってからもう一度お試しください。",
   "aiErrorRetry": "もう一度",
   "aiErrorWaitAndCheck": "後ほど改めて分析いたします。またすぐお越しください — お祈りがお待ちしています。",
-  "aiErrorHome": "ホームに戻る"
+  "aiErrorHome": "ホームに戻る",
+  "trialStartCta": "1ヶ月間無料で開始",
+  "trialAutoRenewDisclosure": "その後、年 {price} で自動更新されます。設定からいつでもキャンセルできます。",
+  "@trialAutoRenewDisclosure": {
+    "placeholders": {
+      "price": {}
+    }
+  },
+  "trialLimitTitle": "今日は3回お祈りされました 🌸",
+  "trialLimitBody": "また明日お会いしましょう — もしくは Pro で無制限に祈りを。",
+  "trialLimitCta": "Pro で続ける"
 }

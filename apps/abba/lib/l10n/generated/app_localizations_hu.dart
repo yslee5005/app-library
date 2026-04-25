@@ -281,7 +281,7 @@ class AppLocalizationsHu extends AppLocalizations {
   String get yearlySave => '40% megtakarítás';
 
   @override
-  String get launchPromo => '3 hónap 1590Ft/hó áron!';
+  String get launchPromo => '';
 
   @override
   String get startPro => 'Pro indítása';
@@ -410,7 +410,7 @@ class AppLocalizationsHu extends AppLocalizations {
   String get promoTitle => 'Bevezető akció';
 
   @override
-  String get promoBanner => 'Az első 3 hónap 1590Ft/hó!';
+  String get promoBanner => '';
 
   @override
   String promoEndsOn(Object date) {
@@ -677,6 +677,9 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String get seeMore => 'Több megtekintése';
+
+  @override
+  String get seeLess => 'Kevesebb megtekintése';
 
   @override
   String seeAllComments(Object count) {
@@ -1313,4 +1316,22 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String get sectionStatusPending => 'Elemzés folyamatban';
+
+  @override
+  String get trialStartCta => 'Start 1 month free';
+
+  @override
+  String trialAutoRenewDisclosure(Object price) {
+    return 'Then $price/year, auto-renews. Cancel anytime in Settings.';
+  }
+
+  @override
+  String get trialLimitTitle => 'You\'ve prayed 3 times today 🌸';
+
+  @override
+  String get trialLimitBody =>
+      'Come back tomorrow — or unlock unlimited prayer with Pro.';
+
+  @override
+  String get trialLimitCta => 'Continue with Pro';
 }

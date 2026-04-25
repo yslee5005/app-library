@@ -103,7 +103,7 @@
   "monthlyPrice": "599 ₽ / мес",
   "yearlyPrice": "4 390 ₽ / год",
   "yearlySave": "Экономия 40%",
-  "launchPromo": "3 месяца за 399₽/мес.!",
+  "launchPromo": "",
   "startPro": "Начать Pro",
   "comingSoon": "Скоро",
   "notificationSetting": "Уведомления",
@@ -152,7 +152,7 @@
   "groupInviteMessage": "Давай молиться вместе! Присоединяйся к моей молитвенной группе в Abba.",
   "noGroups": "Присоединитесь или создайте группу для совместной молитвы.",
   "promoTitle": "Специальное предложение",
-  "promoBanner": "Первые 3 месяца за 399₽/мес.!",
+  "promoBanner": "",
   "promoEndsOn": "Предложение действует до {date}",
   "@promoEndsOn": {
     "placeholders": {
@@ -248,6 +248,7 @@
   "originalWordNuanceLabel": "Нюанс vs перевод",
   "originalWordsCountLabel": "{count} слов",
   "seeMore": "Показать ещё",
+  "seeLess": "Свернуть",
   "seeAllComments": "Посмотреть все {count} комментариев",
   "@seeAllComments": {
     "placeholders": {
@@ -552,5 +553,15 @@
   "aiErrorApiBody": "Ваша молитва надёжно сохранена. Пожалуйста, повторите попытку через мгновение.",
   "aiErrorRetry": "Повторить",
   "aiErrorWaitAndCheck": "Мы попробуем анализ позже. Возвращайтесь скоро — ваша молитва будет ждать.",
-  "aiErrorHome": "На главную"
+  "aiErrorHome": "На главную",
+  "trialStartCta": "Начать 1 месяц бесплатно",
+  "trialAutoRenewDisclosure": "Затем {price}/год, автопродление. Отменить в любое время в Настройках.",
+  "@trialAutoRenewDisclosure": {
+    "placeholders": {
+      "price": {}
+    }
+  },
+  "trialLimitTitle": "Вы помолились 3 раза сегодня 🌸",
+  "trialLimitBody": "Возвращайтесь завтра — или откройте безлимитные молитвы с Pro.",
+  "trialLimitCta": "Продолжить с Pro"
 }

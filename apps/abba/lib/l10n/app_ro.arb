@@ -103,7 +103,7 @@
   "monthlyPrice": "34,99 lei / lună",
   "yearlyPrice": "249,99 lei / an",
   "yearlySave": "Economisești 40%",
-  "launchPromo": "3 luni la 17,99lei/lună!",
+  "launchPromo": "",
   "startPro": "Începe Pro",
   "comingSoon": "În curând",
   "notificationSetting": "Notificări",
@@ -152,7 +152,7 @@
   "groupInviteMessage": "Hai să ne rugăm împreună! Alătură-te grupului meu de rugăciune pe Abba.",
   "noGroups": "Alătură-te sau creează un grup pentru rugăciune în comun.",
   "promoTitle": "Ofertă de lansare",
-  "promoBanner": "Primele 3 luni la 17,99lei/lună!",
+  "promoBanner": "",
   "promoEndsOn": "Oferta expiră pe {date}",
   "@promoEndsOn": {
     "placeholders": {
@@ -248,6 +248,7 @@
   "originalWordNuanceLabel": "Nuanță vs traducere",
   "originalWordsCountLabel": "{count} cuvinte",
   "seeMore": "Vezi mai mult",
+  "seeLess": "Vezi mai puțin",
   "seeAllComments": "Vezi toate cele {count} comentarii",
   "@seeAllComments": {
     "placeholders": {
@@ -552,5 +553,15 @@
   "aiErrorApiBody": "Rugăciunea ta este salvată în siguranță. Te rugăm să încerci din nou în câteva momente.",
   "aiErrorRetry": "Încearcă din nou",
   "aiErrorWaitAndCheck": "Vom încerca analiza mai târziu. Revino în curând — rugăciunea ta te va aștepta.",
-  "aiErrorHome": "Înapoi la pagina principală"
+  "aiErrorHome": "Înapoi la pagina principală",
+  "trialStartCta": "Start 1 month free",
+  "trialAutoRenewDisclosure": "Then {price}/year, auto-renews. Cancel anytime in Settings.",
+  "@trialAutoRenewDisclosure": {
+    "placeholders": {
+      "price": {}
+    }
+  },
+  "trialLimitTitle": "You've prayed 3 times today 🌸",
+  "trialLimitBody": "Come back tomorrow — or unlock unlimited prayer with Pro.",
+  "trialLimitCta": "Continue with Pro"
 }

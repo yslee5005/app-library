@@ -113,10 +113,7 @@ void main() {
     test('schedule + cancel are no-op but do not throw', () async {
       await service.initialize();
       await service.requestPermission();
-      await service.scheduleMorningReminder(
-        time: '06:00',
-        userName: 'Grace',
-      );
+      await service.scheduleMorningReminder(time: '06:00', userName: 'Grace');
       await service.scheduleEveningReminder();
       await service.scheduleAfternoonNudge();
       await service.showStreakCelebration(7);

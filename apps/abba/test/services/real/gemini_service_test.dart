@@ -383,10 +383,7 @@ void main() {
         locale: 'en',
       );
       // Hardcoded premium content has at least historicalStory or aiPrayer set.
-      expect(
-        result.historicalStory != null || result.aiPrayer != null,
-        isTrue,
-      );
+      expect(result.historicalStory != null || result.aiPrayer != null, isTrue);
     });
 
     test('analyzeMeditation returns hardcoded QT result', () async {

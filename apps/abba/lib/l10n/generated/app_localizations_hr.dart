@@ -281,7 +281,7 @@ class AppLocalizationsHr extends AppLocalizations {
   String get yearlySave => 'Uštedi 40%';
 
   @override
-  String get launchPromo => '3 mjeseca po 3,99€/mj!';
+  String get launchPromo => '';
 
   @override
   String get startPro => 'Započni Pro';
@@ -410,7 +410,7 @@ class AppLocalizationsHr extends AppLocalizations {
   String get promoTitle => 'Posebna ponuda';
 
   @override
-  String get promoBanner => 'Prva 3 mjeseca po 3,99€/mj!';
+  String get promoBanner => '';
 
   @override
   String promoEndsOn(Object date) {
@@ -677,6 +677,9 @@ class AppLocalizationsHr extends AppLocalizations {
 
   @override
   String get seeMore => 'Vidi više';
+
+  @override
+  String get seeLess => 'Vidi manje';
 
   @override
   String seeAllComments(Object count) {
@@ -1315,4 +1318,22 @@ class AppLocalizationsHr extends AppLocalizations {
 
   @override
   String get sectionStatusPending => 'Analiza u tijeku';
+
+  @override
+  String get trialStartCta => 'Start 1 month free';
+
+  @override
+  String trialAutoRenewDisclosure(Object price) {
+    return 'Then $price/year, auto-renews. Cancel anytime in Settings.';
+  }
+
+  @override
+  String get trialLimitTitle => 'You\'ve prayed 3 times today 🌸';
+
+  @override
+  String get trialLimitBody =>
+      'Come back tomorrow — or unlock unlimited prayer with Pro.';
+
+  @override
+  String get trialLimitCta => 'Continue with Pro';
 }

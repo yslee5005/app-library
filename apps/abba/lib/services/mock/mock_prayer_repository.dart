@@ -12,17 +12,15 @@ class MockPrayerRepository implements PrayerRepository {
   final Set<String> _achievedMilestones = {};
   bool _initialized;
 
-  MockPrayerRepository()
-      : _prayers = [],
-        _initialized = false;
+  MockPrayerRepository() : _prayers = [], _initialized = false;
 
   /// Test-only constructor: skip asset load and inject data directly.
   /// Use this in tests where the rootBundle asset shim is not wired, so
   /// `_ensureInitialized` would otherwise fail loading `assets/mock/prayers.json`.
   @visibleForTesting
   MockPrayerRepository.fromData(List<Prayer> prayers)
-      : _prayers = List.of(prayers),
-        _initialized = true {
+    : _prayers = List.of(prayers),
+      _initialized = true {
     // Sort newest first so getLatestPrayer returns correct result.
     _prayers.sort((a, b) => b.createdAt.compareTo(a.createdAt));
   }
@@ -178,7 +176,9 @@ class MockPrayerRepository implements PrayerRepository {
     if (_prayers.length == 100) candidates.add('100_prayers');
 
     // Return only NEW milestones (not already achieved)
-    final newMilestones = candidates.where((m) => !_achievedMilestones.contains(m)).toList();
+    final newMilestones = candidates
+        .where((m) => !_achievedMilestones.contains(m))
+        .toList();
     _achievedMilestones.addAll(newMilestones);
     return newMilestones;
   }
@@ -190,7 +190,9 @@ class MockPrayerRepository implements PrayerRepository {
     // Collect unique prayer dates (date-only, no time).
     final prayerDates = <DateTime>{};
     for (final p in _prayers) {
-      prayerDates.add(DateTime(p.createdAt.year, p.createdAt.month, p.createdAt.day));
+      prayerDates.add(
+        DateTime(p.createdAt.year, p.createdAt.month, p.createdAt.day),
+      );
     }
 
     // Sort dates descending (most recent first).

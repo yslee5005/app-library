@@ -38,7 +38,9 @@ Widget _buildMembershipTestApp({
     overrides: [
       authRepositoryProvider.overrideWithValue(MockAuthRepository(mockData)),
       aiServiceProvider.overrideWithValue(MockAiService(mockData)),
-      audioRecorderServiceProvider.overrideWithValue(MockAudioRecorderService()),
+      audioRecorderServiceProvider.overrideWithValue(
+        MockAudioRecorderService(),
+      ),
       audioStorageServiceProvider.overrideWithValue(MockAudioStorageService()),
       prayerRepositoryProvider.overrideWithValue(MockPrayerRepository()),
       communityRepositoryProvider.overrideWithValue(
@@ -59,10 +61,7 @@ Widget _buildMembershipTestApp({
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
-      supportedLocales: const [
-        Locale('en'),
-        Locale('ko'),
-      ],
+      supportedLocales: const [Locale('en'), Locale('ko')],
     ),
   );
 }
@@ -94,20 +93,19 @@ void main() {
       },
     );
 
-    testWidgets(
-      'falls back to ARB yearly price when offering returns null',
-      (tester) async {
-        // Plain MockSubscriptionService.getOfferingPrices returns a USD
-        // OfferingPrices by default; stub a null-returning variant.
-        final service = _StubPricesSubscriptionService(null);
+    testWidgets('falls back to ARB yearly price when offering returns null', (
+      tester,
+    ) async {
+      // Plain MockSubscriptionService.getOfferingPrices returns a USD
+      // OfferingPrices by default; stub a null-returning variant.
+      final service = _StubPricesSubscriptionService(null);
 
-        await tester.pumpWidget(_buildMembershipTestApp(service: service));
-        await tester.pump();
-        await tester.pump(const Duration(milliseconds: 50));
+      await tester.pumpWidget(_buildMembershipTestApp(service: service));
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 50));
 
-        // ARB (English) default for yearlyPrice in app_en.arb is "$49.99 / yr".
-        expect(find.text(r'$49.99 / yr'), findsOneWidget);
-      },
-    );
+      // ARB (English) default for yearlyPrice in app_en.arb is "$49.99 / yr".
+      expect(find.text(r'$49.99 / yr'), findsOneWidget);
+    });
   });
 }

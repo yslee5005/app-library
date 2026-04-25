@@ -24,7 +24,11 @@ class LoginView extends ConsumerWidget {
         authLog.info('Login success: $provider');
         if (context.mounted) context.go('/home');
       } catch (e, stackTrace) {
-        authLog.error('Login failed: $provider', error: e, stackTrace: stackTrace);
+        authLog.error(
+          'Login failed: $provider',
+          error: e,
+          stackTrace: stackTrace,
+        );
         if (context.mounted) {
           ScaffoldMessenger.of(
             context,
@@ -59,9 +63,8 @@ class LoginView extends ConsumerWidget {
                 backgroundColor: AbbaColors.warmBrown,
                 textColor: AbbaColors.white,
                 onTap: () => handleSignIn(
-                  () => ref
-                      .read(authNotifierProvider.notifier)
-                      .signInWithApple(),
+                  () =>
+                      ref.read(authNotifierProvider.notifier).signInWithApple(),
                   'Apple',
                 ),
               ),
@@ -84,19 +87,16 @@ class LoginView extends ConsumerWidget {
                 icon: Icons.email_outlined,
                 backgroundColor: AbbaColors.sageDark,
                 textColor: AbbaColors.white,
-                onTap: () => handleSignIn(
-                  () async {
-                    final credentials = await _showEmailDialog(context, l10n);
-                    if (credentials == null) return;
-                    await ref
-                        .read(authNotifierProvider.notifier)
-                        .signInWithEmail(
-                          email: credentials.$1,
-                          password: credentials.$2,
-                        );
-                  },
-                  'Email',
-                ),
+                onTap: () => handleSignIn(() async {
+                  final credentials = await _showEmailDialog(context, l10n);
+                  if (credentials == null) return;
+                  await ref
+                      .read(authNotifierProvider.notifier)
+                      .signInWithEmail(
+                        email: credentials.$1,
+                        password: credentials.$2,
+                      );
+                }, 'Email'),
               ),
               const Spacer(flex: 3),
             ],

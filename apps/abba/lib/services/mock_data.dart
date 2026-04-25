@@ -37,11 +37,11 @@ class MockDataService {
     List<QTPassage>? qtPassages,
     List<CommunityPost>? communityPosts,
     UserProfile? userProfile,
-  })  : _prayerResult = prayerResult,
-        _qtMeditationResult = qtMeditationResult,
-        _qtPassages = qtPassages,
-        _communityPosts = communityPosts,
-        _userProfile = userProfile;
+  }) : _prayerResult = prayerResult,
+       _qtMeditationResult = qtMeditationResult,
+       _qtPassages = qtPassages,
+       _communityPosts = communityPosts,
+       _userProfile = userProfile;
 
   Future<PrayerResult> getPrayerResult() async {
     if (_prayerResult != null) return _prayerResult!;

@@ -13,7 +13,9 @@ void main() {
       expect(find.textContaining('Settings'), findsAtLeastNWidgets(1));
     });
 
-    testWidgets('renders link account section for anonymous user', (tester) async {
+    testWidgets('renders link account section for anonymous user', (
+      tester,
+    ) async {
       await tester.pumpWidget(buildTestApp(const SettingsView()));
       await tester.pump(const Duration(milliseconds: 100));
 

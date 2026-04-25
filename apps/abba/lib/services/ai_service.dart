@@ -13,6 +13,7 @@ abstract class AiService {
     required String transcript,
     required String locale,
     required String userName,
+    List<String> recentReferences,
   });
 
   /// Phase 4.1 — T3 Pro-only. Called on scroll trigger from Dashboard.
@@ -96,9 +97,5 @@ class PremiumContent {
   final AiPrayer? aiPrayer;
   final Guidance? guidance;
 
-  const PremiumContent({
-    this.historicalStory,
-    this.aiPrayer,
-    this.guidance,
-  });
+  const PremiumContent({this.historicalStory, this.aiPrayer, this.guidance});
 }

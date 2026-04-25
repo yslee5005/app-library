@@ -39,9 +39,7 @@ void main() {
               ),
             ),
           ),
-          overrides: [
-            prayerCoachingProvider.overrideWith((ref) => coaching),
-          ],
+          overrides: [prayerCoachingProvider.overrideWith((ref) => coaching)],
         ),
       );
       await tester.pumpAndSettle();
@@ -53,10 +51,7 @@ void main() {
       expect(find.textContaining(l10n.coachingTitle), findsWidgets);
 
       // Level badge ('🌿 Growing') — from 'growing' fixture level.
-      expect(
-        find.textContaining(l10n.coachingLevelGrowing),
-        findsOneWidget,
-      );
+      expect(find.textContaining(l10n.coachingLevelGrowing), findsOneWidget);
 
       // 4 score axis labels.
       expect(find.text(l10n.coachingScoreSpecificity), findsOneWidget);
@@ -97,8 +92,9 @@ void main() {
       );
     });
 
-    testWidgets('Pro user + loading: shows loading message + spinner',
-        (tester) async {
+    testWidgets('Pro user + loading: shows loading message + spinner', (
+      tester,
+    ) async {
       // Never-completing future → loading state forever.
       final completer = Completer<PrayerCoaching>();
       addTearDown(() {
@@ -160,8 +156,9 @@ void main() {
       expect(find.byIcon(Icons.refresh), findsOneWidget);
     });
 
-    testWidgets('Free user: shows ProBlur lock without reading provider',
-        (tester) async {
+    testWidgets('Free user: shows ProBlur lock without reading provider', (
+      tester,
+    ) async {
       await tester.pumpWidget(
         buildTestApp(
           const Scaffold(

@@ -72,10 +72,7 @@ void main() {
 
     test('empty text throws parseError', () {
       final a = build();
-      expect(
-        () => a.parseJsonForTest(''),
-        throwsA(isA<AiAnalysisException>()),
-      );
+      expect(() => a.parseJsonForTest(''), throwsA(isA<AiAnalysisException>()));
     });
 
     test('malformed JSON throws parseError', () {
@@ -122,7 +119,7 @@ void main() {
               'language': 'Hebrew',
               'meaning': '나의 목자',
               'nuance': '개인적 돌봄',
-            }
+            },
           ],
         },
       }, 'ko');
@@ -179,7 +176,11 @@ void main() {
     test('missing optional fields default to empty strings', () {
       final a = build();
       final out = a.extractT1ForTest({
-        'summary': {'gratitude': ['g'], 'petition': [], 'intercession': []},
+        'summary': {
+          'gratitude': ['g'],
+          'petition': [],
+          'intercession': [],
+        },
         'scripture': {'reference': 'John 3:16'},
       }, 'en');
 

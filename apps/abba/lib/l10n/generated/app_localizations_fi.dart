@@ -280,7 +280,7 @@ class AppLocalizationsFi extends AppLocalizations {
   String get yearlySave => 'Säästä 40%';
 
   @override
-  String get launchPromo => '3 kuukautta hintaan 3,99€/kk!';
+  String get launchPromo => '';
 
   @override
   String get startPro => 'Aloita Pro';
@@ -408,7 +408,7 @@ class AppLocalizationsFi extends AppLocalizations {
   String get promoTitle => 'Lanseeraustarjous';
 
   @override
-  String get promoBanner => '3 ensimmäistä kuukautta 3,99€/kk!';
+  String get promoBanner => '';
 
   @override
   String promoEndsOn(Object date) {
@@ -673,6 +673,9 @@ class AppLocalizationsFi extends AppLocalizations {
 
   @override
   String get seeMore => 'Näytä lisää';
+
+  @override
+  String get seeLess => 'Näytä vähemmän';
 
   @override
   String seeAllComments(Object count) {
@@ -1311,4 +1314,22 @@ class AppLocalizationsFi extends AppLocalizations {
 
   @override
   String get sectionStatusPending => 'Analyysi käynnissä';
+
+  @override
+  String get trialStartCta => 'Start 1 month free';
+
+  @override
+  String trialAutoRenewDisclosure(Object price) {
+    return 'Then $price/year, auto-renews. Cancel anytime in Settings.';
+  }
+
+  @override
+  String get trialLimitTitle => 'You\'ve prayed 3 times today 🌸';
+
+  @override
+  String get trialLimitBody =>
+      'Come back tomorrow — or unlock unlimited prayer with Pro.';
+
+  @override
+  String get trialLimitCta => 'Continue with Pro';
 }

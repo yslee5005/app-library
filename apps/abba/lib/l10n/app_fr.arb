@@ -103,7 +103,7 @@
   "monthlyPrice": "6,99€ / mois",
   "yearlyPrice": "49,99€ / an",
   "yearlySave": "Économisez 40%",
-  "launchPromo": "3 mois à 2,92€/mois !",
+  "launchPromo": "",
   "startPro": "Passer au Pro",
   "comingSoon": "Bientôt disponible",
   "notificationSetting": "Notifications",
@@ -152,7 +152,7 @@
   "groupInviteMessage": "Prions ensemble ! Rejoignez mon groupe de prière sur Abba.",
   "noGroups": "Rejoignez ou créez un groupe pour prier ensemble.",
   "promoTitle": "Offre de Lancement",
-  "promoBanner": "Les 3 premiers mois à 2,92€/mois !",
+  "promoBanner": "",
   "promoEndsOn": "Offre valable jusqu'au {date}",
   "@promoEndsOn": {
     "placeholders": {
@@ -248,6 +248,7 @@
   "originalWordNuanceLabel": "Nuance vs traduction",
   "originalWordsCountLabel": "{count} mots",
   "seeMore": "Voir plus",
+  "seeLess": "Voir moins",
   "seeAllComments": "Voir les {count} commentaires",
   "@seeAllComments": {
     "placeholders": {
@@ -552,5 +553,15 @@
   "aiErrorApiBody": "Votre prière est bien enregistrée. Réessayez dans un instant, s'il vous plaît.",
   "aiErrorRetry": "Réessayer",
   "aiErrorWaitAndCheck": "Nous reprendrons l'analyse plus tard. Revenez bientôt — votre prière vous attendra.",
-  "aiErrorHome": "Retour à l'accueil"
+  "aiErrorHome": "Retour à l'accueil",
+  "trialStartCta": "Commencer 1 mois gratuit",
+  "trialAutoRenewDisclosure": "Puis {price}/an, renouvellement automatique. Annulable à tout moment dans Réglages.",
+  "@trialAutoRenewDisclosure": {
+    "placeholders": {
+      "price": {}
+    }
+  },
+  "trialLimitTitle": "Vous avez prié 3 fois aujourd'hui 🌸",
+  "trialLimitBody": "Revenez demain — ou débloquez les prières illimitées avec Pro.",
+  "trialLimitCta": "Continuer avec Pro"
 }

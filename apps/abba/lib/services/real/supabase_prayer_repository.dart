@@ -49,16 +49,20 @@ class SupabasePrayerRepository implements PrayerRepository {
   Future<String> savePendingPrayer(Prayer prayer) async {
     // 2026-04-23 Pending/Retry: persist raw prayer BEFORE AI call.
     // transcript can be null for voice mode (Gemini fills it on success).
-    final row = await _abba.from('prayers').insert({
-      'app_id': 'abba',
-      'user_id': _userId,
-      'transcript': prayer.transcript.isEmpty ? null : prayer.transcript,
-      'mode': prayer.mode,
-      'qt_passage_ref': prayer.qtPassageRef,
-      'audio_storage_path': prayer.audioStoragePath,
-      'duration_seconds': prayer.durationSeconds,
-      'ai_status': 'pending',
-    }).select('id').single();
+    final row = await _abba
+        .from('prayers')
+        .insert({
+          'app_id': 'abba',
+          'user_id': _userId,
+          'transcript': prayer.transcript.isEmpty ? null : prayer.transcript,
+          'mode': prayer.mode,
+          'qt_passage_ref': prayer.qtPassageRef,
+          'audio_storage_path': prayer.audioStoragePath,
+          'duration_seconds': prayer.durationSeconds,
+          'ai_status': 'pending',
+        })
+        .select('id')
+        .single();
 
     return row['id'] as String;
   }
@@ -99,11 +103,14 @@ class SupabasePrayerRepository implements PrayerRepository {
   }) async {
     // Phase 4.1: RPC performs atomic merge — `result = result || sectionData`
     // + `section_status` flag set, all in one UPDATE for concurrency safety.
-    await _abba.rpc('update_prayer_tier', params: {
-      'p_prayer_id': prayerId,
-      'p_tier': tier,
-      'p_section_data': sectionData,
-    });
+    await _abba.rpc(
+      'update_prayer_tier',
+      params: {
+        'p_prayer_id': prayerId,
+        'p_tier': tier,
+        'p_section_data': sectionData,
+      },
+    );
   }
 
   @override
@@ -306,14 +313,16 @@ class SupabasePrayerRepository implements PrayerRepository {
         'posture': result.scripture.posture,
         'key_word_hint': result.scripture.keyWordHint,
         'original_words': result.scripture.originalWords
-            .map((w) => {
-                  'word': w.word,
-                  'transliteration': w.transliteration,
-                  'language': w.language,
-                  // Phase 5A — single-field write (fromJson reads legacy _en/_ko).
-                  'meaning': w.meaning,
-                  'nuance': w.nuance,
-                })
+            .map(
+              (w) => {
+                'word': w.word,
+                'transliteration': w.transliteration,
+                'language': w.language,
+                // Phase 5A — single-field write (fromJson reads legacy _en/_ko).
+                'meaning': w.meaning,
+                'nuance': w.nuance,
+              },
+            )
             .toList(),
       },
       'bible_story': {
@@ -330,11 +339,13 @@ class SupabasePrayerRepository implements PrayerRepository {
         'ai_prayer': {
           'text': result.aiPrayer!.text,
           'citations': result.aiPrayer!.citations
-              .map((c) => {
-                    'type': c.type,
-                    'source': c.source,
-                    'content': c.content,
-                  })
+              .map(
+                (c) => {
+                  'type': c.type,
+                  'source': c.source,
+                  'content': c.content,
+                },
+              )
               .toList(),
           'is_premium': result.aiPrayer!.isPremium,
         },

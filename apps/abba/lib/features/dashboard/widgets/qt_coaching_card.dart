@@ -51,11 +51,8 @@ class QtCoachingCard extends ConsumerWidget {
         retryLabel: l10n.qtCoachingRetryButton,
         onRetry: () => ref.invalidate(qtCoachingProvider),
       ),
-      data: (coaching) => _DataCard(
-        coaching: coaching,
-        locale: locale,
-        l10n: l10n,
-      ),
+      data: (coaching) =>
+          _DataCard(coaching: coaching, locale: locale, l10n: l10n),
     );
   }
 }

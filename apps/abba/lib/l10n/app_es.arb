@@ -103,7 +103,7 @@
   "monthlyPrice": "$6.99 / mes",
   "yearlyPrice": "$49.99 / año",
   "yearlySave": "Ahorra 40%",
-  "launchPromo": "¡3 meses a $3.99/mes!",
+  "launchPromo": "",
   "startPro": "Iniciar Pro",
   "comingSoon": "Próximamente",
   "notificationSetting": "Notificaciones",
@@ -152,7 +152,7 @@
   "groupInviteMessage": "¡Oremos juntos! Únete a mi grupo de oración en Abba.",
   "noGroups": "Únete o crea un grupo para orar juntos.",
   "promoTitle": "Oferta de lanzamiento",
-  "promoBanner": "¡3 meses a $3.99/mes!",
+  "promoBanner": "",
   "promoEndsOn": "Oferta hasta {date}",
   "@promoEndsOn": {
     "placeholders": {
@@ -248,6 +248,7 @@
   "originalWordNuanceLabel": "Matiz vs traducción",
   "originalWordsCountLabel": "{count} palabras",
   "seeMore": "Ver más",
+  "seeLess": "Ver menos",
   "seeAllComments": "Ver los {count} comentarios",
   "@seeAllComments": {
     "placeholders": {
@@ -552,5 +553,15 @@
   "aiErrorApiBody": "Tu oración está guardada a salvo. Por favor, intenta de nuevo en un momento.",
   "aiErrorRetry": "Intentar de nuevo",
   "aiErrorWaitAndCheck": "Intentaremos el análisis más tarde. Vuelve pronto — tu oración estará esperándote.",
-  "aiErrorHome": "Volver al inicio"
+  "aiErrorHome": "Volver al inicio",
+  "trialStartCta": "Empezar 1 mes gratis",
+  "trialAutoRenewDisclosure": "Luego {price}/año, se renueva automáticamente. Cancela cuando quieras en Ajustes.",
+  "@trialAutoRenewDisclosure": {
+    "placeholders": {
+      "price": {}
+    }
+  },
+  "trialLimitTitle": "Has orado 3 veces hoy 🌸",
+  "trialLimitBody": "Vuelve mañana — o desbloquea oraciones ilimitadas con Pro.",
+  "trialLimitCta": "Continuar con Pro"
 }

@@ -103,7 +103,7 @@
   "monthlyPrice": "79 kr / mån",
   "yearlyPrice": "559 kr / år",
   "yearlySave": "Spara 40%",
-  "launchPromo": "3 månader för 45kr/mån!",
+  "launchPromo": "",
   "startPro": "Starta Pro",
   "comingSoon": "Kommer snart",
   "notificationSetting": "Aviseringar",
@@ -152,7 +152,7 @@
   "groupInviteMessage": "Låt oss be tillsammans! Gå med i min bönegrupp på Abba.",
   "noGroups": "Gå med eller skapa en grupp för att be tillsammans.",
   "promoTitle": "Lanseringserbjudande",
-  "promoBanner": "Första 3 månaderna för 45kr/mån!",
+  "promoBanner": "",
   "promoEndsOn": "Erbjudandet slutar {date}",
   "@promoEndsOn": {
     "placeholders": {
@@ -248,6 +248,7 @@
   "originalWordNuanceLabel": "Nyans vs översättning",
   "originalWordsCountLabel": "{count} ord",
   "seeMore": "Se mer",
+  "seeLess": "Se mindre",
   "seeAllComments": "Visa alla {count} kommentarer",
   "@seeAllComments": {
     "placeholders": {
@@ -552,5 +553,15 @@
   "aiErrorApiBody": "Din bön är säkert sparad. Försök igen om en stund.",
   "aiErrorRetry": "Försök igen",
   "aiErrorWaitAndCheck": "Vi försöker analysen senare. Kom tillbaka snart — din bön kommer att vänta.",
-  "aiErrorHome": "Tillbaka till startsidan"
+  "aiErrorHome": "Tillbaka till startsidan",
+  "trialStartCta": "Start 1 month free",
+  "trialAutoRenewDisclosure": "Then {price}/year, auto-renews. Cancel anytime in Settings.",
+  "@trialAutoRenewDisclosure": {
+    "placeholders": {
+      "price": {}
+    }
+  },
+  "trialLimitTitle": "You've prayed 3 times today 🌸",
+  "trialLimitBody": "Come back tomorrow — or unlock unlimited prayer with Pro.",
+  "trialLimitCta": "Continue with Pro"
 }

@@ -45,9 +45,9 @@ const _allAssets = <String>[
 ];
 
 Map<String, String> _bundleWith(String systemBase) => {
-      for (final p in _allAssets) p: '# ${p.split('/').last}\nplaceholder body',
-      'assets/prompts/system_base.md': systemBase,
-    };
+  for (final p in _allAssets) p: '# ${p.split('/').last}\nplaceholder body',
+  'assets/prompts/system_base.md': systemBase,
+};
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();

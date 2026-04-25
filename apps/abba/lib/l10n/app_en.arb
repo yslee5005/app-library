@@ -110,7 +110,7 @@
   "monthlyPrice": "$6.99 / mo",
   "yearlyPrice": "$49.99 / yr",
   "yearlySave": "Save 40%",
-  "launchPromo": "3 months at $3.99/mo!",
+  "launchPromo": "",
   "startPro": "Start Pro",
   "comingSoon": "Coming soon",
   "notificationSetting": "Notifications",
@@ -159,7 +159,7 @@
   "groupInviteMessage": "Let's pray together! Join my prayer group on Abba.",
   "noGroups": "Join or create a group to pray together.",
   "promoTitle": "Launch Special",
-  "promoBanner": "First 3 months at $3.99/mo!",
+  "promoBanner": "",
   "promoEndsOn": "Offer ends {date}",
   "@promoEndsOn": {
     "placeholders": {
@@ -262,6 +262,7 @@
     }
   },
   "seeMore": "See more",
+  "seeLess": "See less",
   "seeAllComments": "View all {count} comments",
   "@seeAllComments": {
     "placeholders": {
@@ -553,11 +554,35 @@
   "homeFirstPrayerPrompt": "Start your first prayer",
   "homeFirstQtPrompt": "Start your first QT",
   "homeActivityPrompt": "Pray {activityName} today as well",
-  "@homeActivityPrompt": {"placeholders": {"activityName": {"type": "String"}}},
+  "@homeActivityPrompt": {
+    "placeholders": {
+      "activityName": {
+        "type": "String"
+      }
+    }
+  },
   "homeStreakInProgress": "Day {count} of continuous {activityName}",
-  "@homeStreakInProgress": {"placeholders": {"count": {"type": "int"}, "activityName": {"type": "String"}}},
+  "@homeStreakInProgress": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "activityName": {
+        "type": "String"
+      }
+    }
+  },
   "homeDaysSinceLastActivity": "It's been {days} days since your last {activityName}",
-  "@homeDaysSinceLastActivity": {"placeholders": {"days": {"type": "int"}, "activityName": {"type": "String"}}},
+  "@homeDaysSinceLastActivity": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      },
+      "activityName": {
+        "type": "String"
+      }
+    }
+  },
   "homeActivityPrayer": "prayer",
   "homeActivityQt": "QT",
   "prayerPlayerLoading": "Loading...",
@@ -584,5 +609,15 @@
   "templateCategoryGrief": "In Grief or Loss",
   "sectionStatusCompleted": "Analysis complete",
   "sectionStatusPartial": "Partial analysis (more coming)",
-  "sectionStatusPending": "Analysis in progress"
+  "sectionStatusPending": "Analysis in progress",
+  "trialStartCta": "Start 1 month free",
+  "trialAutoRenewDisclosure": "Then {price}/year, auto-renews. Cancel anytime in Settings.",
+  "@trialAutoRenewDisclosure": {
+    "placeholders": {
+      "price": {}
+    }
+  },
+  "trialLimitTitle": "You've prayed 3 times today 🌸",
+  "trialLimitBody": "Come back tomorrow — or unlock unlimited prayer with Pro.",
+  "trialLimitCta": "Continue with Pro"
 }

@@ -24,10 +24,7 @@ void main() {
         buildTestApp(
           Scaffold(
             body: SingleChildScrollView(
-              child: ApplicationCard(
-                application: app,
-                title: 'Application',
-              ),
+              child: ApplicationCard(application: app, title: 'Application'),
             ),
           ),
         ),
@@ -60,18 +57,16 @@ void main() {
       expect(find.text(app.eveningAction), findsOneWidget);
     });
 
-    testWidgets('legacy single action: renders single-line body on expand',
-        (tester) async {
+    testWidgets('legacy single action: renders single-line body on expand', (
+      tester,
+    ) async {
       final app = TestFixtures.applicationSuggestionLegacy();
 
       await tester.pumpWidget(
         buildTestApp(
           Scaffold(
             body: SingleChildScrollView(
-              child: ApplicationCard(
-                application: app,
-                title: 'Application',
-              ),
+              child: ApplicationCard(application: app, title: 'Application'),
             ),
           ),
         ),

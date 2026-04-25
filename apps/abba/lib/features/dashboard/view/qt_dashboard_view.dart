@@ -31,10 +31,7 @@ class _QtDashboardViewState extends ConsumerState<QtDashboardView> {
 
   /// Phase 4.2 R-A6 — wrap a card that can appear mid-scroll (T2 arrival)
   /// in an implicit fade + slide transition. Mirror of Prayer Dashboard.
-  Widget _progressiveFadeIn({
-    required Key key,
-    required Widget child,
-  }) {
+  Widget _progressiveFadeIn({required Key key, required Widget child}) {
     return TweenAnimationBuilder<double>(
       key: key,
       tween: Tween(begin: 0.0, end: 1.0),
@@ -42,10 +39,7 @@ class _QtDashboardViewState extends ConsumerState<QtDashboardView> {
       curve: Curves.easeOut,
       builder: (context, t, c) => Opacity(
         opacity: t,
-        child: Transform.translate(
-          offset: Offset(0, (1 - t) * 16),
-          child: c,
-        ),
+        child: Transform.translate(offset: Offset(0, (1 - t) * 16), child: c),
       ),
       child: child,
     );
@@ -106,10 +100,12 @@ class _QtDashboardViewState extends ConsumerState<QtDashboardView> {
       context.push('/settings/membership');
     }
 
-    final hasApplication = sections.application != null &&
+    final hasApplication =
+        sections.application != null &&
         (sections.application!.hasTimeBlocks ||
             sections.application!.action.isNotEmpty);
-    final hasKnowledge = sections.knowledge != null &&
+    final hasKnowledge =
+        sections.knowledge != null &&
         (sections.knowledge!.historicalContext.isNotEmpty ||
             sections.knowledge!.crossReferences.isNotEmpty ||
             sections.knowledge!.originalWord != null);

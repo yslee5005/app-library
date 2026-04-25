@@ -279,7 +279,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get yearlySave => 'Bespaar 40%';
 
   @override
-  String get launchPromo => '3 maanden voor €3,99/maand!';
+  String get launchPromo => '';
 
   @override
   String get startPro => 'Start Pro';
@@ -408,7 +408,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get promoTitle => 'Introductieaanbieding';
 
   @override
-  String get promoBanner => 'De eerste 3 maanden voor €3,99/maand!';
+  String get promoBanner => '';
 
   @override
   String promoEndsOn(Object date) {
@@ -676,6 +676,9 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get seeMore => 'Meer bekijken';
+
+  @override
+  String get seeLess => 'Minder bekijken';
 
   @override
   String seeAllComments(Object count) {
@@ -1316,4 +1319,22 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get sectionStatusPending => 'Analyse loopt';
+
+  @override
+  String get trialStartCta => 'Begin 1 maand gratis';
+
+  @override
+  String trialAutoRenewDisclosure(Object price) {
+    return 'Daarna $price/jaar, automatische verlenging. Altijd te annuleren in Instellingen.';
+  }
+
+  @override
+  String get trialLimitTitle => 'Je hebt vandaag 3 keer gebeden 🌸';
+
+  @override
+  String get trialLimitBody =>
+      'Kom morgen terug — of ontgrendel onbeperkt bidden met Pro.';
+
+  @override
+  String get trialLimitCta => 'Doorgaan met Pro';
 }

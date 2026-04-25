@@ -20,6 +20,7 @@ import 'section_analyzers/qt_tier2_analyzer.dart';
 import 'section_analyzers/tier1_analyzer.dart';
 import 'section_analyzers/tier2_analyzer.dart';
 import 'section_analyzers/tier3_analyzer.dart';
+import 'section_analyzers/tier3_hallucination_filters.dart';
 
 // AI mock toggle lives in `AppConfig.useMockAi` (driven by `ENABLE_MOCK_AI`).
 // Each AiService method short-circuits to the `_hardcoded*` builders below
@@ -40,8 +41,8 @@ class GeminiService implements AiService {
   GeminiService({
     GeminiCacheManager? cacheManager,
     BibleTextService? bibleService,
-  })  : _cacheManager = cacheManager,
-        _bibleService = bibleService;
+  }) : _cacheManager = cacheManager,
+       _bibleService = bibleService;
 
   // ---------------------------------------------------------------------------
   // AI cost tracking (dev-only)
@@ -77,8 +78,9 @@ class GeminiService implements AiService {
     final promptTokens = usage.promptTokenCount ?? 0;
     final candidateTokens = usage.candidatesTokenCount ?? 0;
 
-    final inputRate =
-        hasAudioInput ? _audioInputPerMillion : _textInputPerMillion;
+    final inputRate = hasAudioInput
+        ? _audioInputPerMillion
+        : _textInputPerMillion;
     final inputLabel = hasAudioInput ? 'audio' : 'text';
     final inputCost = promptTokens * inputRate / 1000000;
     final outputCost = candidateTokens * _outputPerMillion / 1000000;
@@ -159,7 +161,11 @@ class GeminiService implements AiService {
     } on AiAnalysisException {
       rethrow;
     } catch (e, stackTrace) {
-      apiLog.error('Gemini prayer analysis failed', error: e, stackTrace: stackTrace);
+      apiLog.error(
+        'Gemini prayer analysis failed',
+        error: e,
+        stackTrace: stackTrace,
+      );
       throw AiAnalysisException(
         'Gemini prayer analysis failed',
         kind: AiAnalysisFailureKind.apiError,
@@ -193,7 +199,11 @@ class GeminiService implements AiService {
     } on AiAnalysisException {
       rethrow;
     } catch (e, stackTrace) {
-      apiLog.error('Gemini core analysis failed', error: e, stackTrace: stackTrace);
+      apiLog.error(
+        'Gemini core analysis failed',
+        error: e,
+        stackTrace: stackTrace,
+      );
       throw AiAnalysisException(
         'Gemini core analysis failed',
         kind: AiAnalysisFailureKind.apiError,
@@ -213,7 +223,9 @@ class GeminiService implements AiService {
     required String locale,
   }) async {
     if (AppConfig.useMockAi) {
-      apiLog.info('Gemini analyzePrayerFromAudio bypassed (ENABLE_MOCK_AI=true)');
+      apiLog.info(
+        'Gemini analyzePrayerFromAudio bypassed (ENABLE_MOCK_AI=true)',
+      );
       return (
         result: _hardcodedPrayerResult(locale),
         transcription: _hardcodedTranscription,
@@ -231,7 +243,9 @@ class GeminiService implements AiService {
       final response = await model.generateContent([
         Content('user', [
           DataPart('audio/mp4', audioBytes),
-          TextPart('This is a prayer audio recording. Transcribe and analyze it.'),
+          TextPart(
+            'This is a prayer audio recording. Transcribe and analyze it.',
+          ),
         ]),
       ]);
       _logAiCost(response, 'analyzePrayerFromAudio', hasAudioInput: true);
@@ -241,7 +255,11 @@ class GeminiService implements AiService {
       final result = PrayerResult.fromJson(json);
       return (result: result, transcription: transcription);
     } on FormatException catch (e, stackTrace) {
-      apiLog.error('Gemini audio parse failed', error: e, stackTrace: stackTrace);
+      apiLog.error(
+        'Gemini audio parse failed',
+        error: e,
+        stackTrace: stackTrace,
+      );
       throw AiAnalysisException(
         'Gemini audio response was malformed',
         kind: AiAnalysisFailureKind.parseError,
@@ -251,7 +269,11 @@ class GeminiService implements AiService {
     } on AiAnalysisException {
       rethrow;
     } catch (e, stackTrace) {
-      apiLog.error('Gemini audio analysis failed', error: e, stackTrace: stackTrace);
+      apiLog.error(
+        'Gemini audio analysis failed',
+        error: e,
+        stackTrace: stackTrace,
+      );
       throw AiAnalysisException(
         'Gemini audio analysis failed',
         kind: AiAnalysisFailureKind.apiError,
@@ -280,14 +302,33 @@ class GeminiService implements AiService {
     try {
       final model = _createModel(
         systemPrompt: _buildPremiumSystemPrompt(langName) + _diversityHint(),
+        // Lower than default 0.9 to reduce citation/quote fabrication rate.
+        temperature: 0.7,
       );
       final response = await model.generateContent([
         Content('user', [TextPart(transcript)]),
       ]);
       _logAiCost(response, 'analyzePrayerPremium');
-      return parsePremiumJson(response.text);
+      final parsed = parsePremiumJson(response.text);
+      // Same T3 hallucination filters as the tier analyzer path so Pro
+      // users on the legacy dashboard path get the same guardrails.
+      final historical = parsed.historicalStory == null
+          ? null
+          : sanitizeHistoricalStory(parsed.historicalStory!);
+      final aiPrayer = parsed.aiPrayer == null
+          ? null
+          : sanitizeAiPrayer(parsed.aiPrayer!);
+      return PremiumContent(
+        historicalStory: historical,
+        aiPrayer: aiPrayer,
+        guidance: parsed.guidance,
+      );
     } catch (e, stackTrace) {
-      apiLog.error('Gemini premium analysis failed', error: e, stackTrace: stackTrace);
+      apiLog.error(
+        'Gemini premium analysis failed',
+        error: e,
+        stackTrace: stackTrace,
+      );
       return const PremiumContent();
     }
   }
@@ -324,7 +365,11 @@ class GeminiService implements AiService {
     } on AiAnalysisException {
       rethrow;
     } catch (e, stackTrace) {
-      apiLog.error('Gemini meditation analysis failed', error: e, stackTrace: stackTrace);
+      apiLog.error(
+        'Gemini meditation analysis failed',
+        error: e,
+        stackTrace: stackTrace,
+      );
       throw AiAnalysisException(
         'Gemini meditation analysis failed',
         kind: AiAnalysisFailureKind.apiError,
@@ -344,7 +389,9 @@ class GeminiService implements AiService {
     required String locale,
   }) async {
     if (AppConfig.useMockAi) {
-      apiLog.info('Gemini analyzePrayerCoaching bypassed (ENABLE_MOCK_AI=true)');
+      apiLog.info(
+        'Gemini analyzePrayerCoaching bypassed (ENABLE_MOCK_AI=true)',
+      );
       return _hardcodedCoachingResult();
     }
     final langName = _localeName(locale);
@@ -416,8 +463,14 @@ class GeminiService implements AiService {
   }
 
   static const List<String> _coachingForbidden = [
-    '부족', '못 하', '못하', '잘못',
-    'inadequate', 'lacking', 'wrong', 'poor',
+    '부족',
+    '못 하',
+    '못하',
+    '잘못',
+    'inadequate',
+    'lacking',
+    'wrong',
+    'poor',
   ];
 
   bool _coachingContainsForbiddenWord(PrayerCoaching coaching) {
@@ -559,8 +612,14 @@ Rules (per Prayer Guide §4-6):
   }
 
   static const List<String> _qtCoachingForbidden = [
-    '부족', '못 하', '못하', '잘못',
-    'inadequate', 'lacking', 'wrong', 'poor',
+    '부족',
+    '못 하',
+    '못하',
+    '잘못',
+    'inadequate',
+    'lacking',
+    'wrong',
+    'poor',
   ];
 
   bool _qtCoachingContainsForbiddenWord(QtCoaching coaching) {
@@ -634,7 +693,11 @@ Rules (per QT Guide §4-6):
       final data = parseJsonFromResponse(text);
       return PrayerResult.fromJson(data);
     } catch (e, stackTrace) {
-      apiLog.error('Prayer JSON parse failed', error: e, stackTrace: stackTrace);
+      apiLog.error(
+        'Prayer JSON parse failed',
+        error: e,
+        stackTrace: stackTrace,
+      );
       throw AiAnalysisException(
         'Prayer JSON parse failed',
         kind: AiAnalysisFailureKind.parseError,
@@ -650,7 +713,9 @@ Rules (per QT Guide §4-6):
       final data = parseJsonFromResponse(text);
       return PremiumContent(
         historicalStory: data['historical_story'] != null
-            ? HistoricalStory.fromJson(data['historical_story'] as Map<String, dynamic>)
+            ? HistoricalStory.fromJson(
+                data['historical_story'] as Map<String, dynamic>,
+              )
             : null,
         aiPrayer: data['ai_prayer'] != null
             ? AiPrayer.fromJson(data['ai_prayer'] as Map<String, dynamic>)
@@ -660,7 +725,11 @@ Rules (per QT Guide §4-6):
             : null,
       );
     } catch (e, stackTrace) {
-      apiLog.error('Premium JSON parse failed', error: e, stackTrace: stackTrace);
+      apiLog.error(
+        'Premium JSON parse failed',
+        error: e,
+        stackTrace: stackTrace,
+      );
       return const PremiumContent();
     }
   }
@@ -676,13 +745,19 @@ Rules (per QT Guide §4-6):
         apiLog.warning(
           'Meditation JSON missing scripture.reference — treating as parse error',
         );
-        throw const FormatException('Meditation JSON missing scripture.reference');
+        throw const FormatException(
+          'Meditation JSON missing scripture.reference',
+        );
       }
       return result;
     } on AiAnalysisException {
       rethrow;
     } catch (e, stackTrace) {
-      apiLog.error('Meditation JSON parse failed', error: e, stackTrace: stackTrace);
+      apiLog.error(
+        'Meditation JSON parse failed',
+        error: e,
+        stackTrace: stackTrace,
+      );
       throw AiAnalysisException(
         'Meditation JSON parse failed',
         kind: AiAnalysisFailureKind.parseError,
@@ -806,7 +881,8 @@ Rules (per QT Guide §4-6):
         ),
         Citation(
           type: 'science',
-          source: 'Harvard Study of Adult Development (Waldinger, 85-year study)',
+          source:
+              'Harvard Study of Adult Development (Waldinger, 85-year study)',
           content:
               'The single strongest predictor of human flourishing is the depth of our close relationships.',
         ),
@@ -937,12 +1013,10 @@ Rules (per QT Guide §4-6):
             : 'George Müller — The Morning of "I Shall Not Want"',
         summary: isKo
             ? '1838년 11월, 브리스톨 윌슨 거리의 고아원 마당에는 차가운 안개가 낮게 깔려 있었습니다. 식당 안에는 삼백 명의 아이들이 긴 나무 식탁에 앉아, 빈 주석 접시를 바라보고 있었습니다. 문 위의 낡은 시계가 조지 뮐러의 심장보다 더 크게 째깍거렸습니다. 그는 주머니에 단 한 푼도 없었고, 우유 통도, 빵 부대도 비어 있다는 것을 알고 있었습니다. "오늘 아침은 그냥 지나가는 수밖에 없겠다"는 생각이 잠시 스쳤습니다. 하지만 그는 식당 앞에 서서 조용히 손을 모으고 이렇게 말했습니다. "아버지, 우리에게 주실 음식에 대해 감사합니다." 아멘이라는 말이 떨어지기도 전에, 부엌 쪽에서 문 두드리는 소리가 났습니다. 클리프턴 거리의 빵집 주인이 앞치마에 밀가루를 묻힌 채 서 있었습니다. "밤새 잠을 이룰 수 없어서, 아이들 먹을 빵을 구웠습니다"라고 그는 말했습니다. 몇 분 뒤에는 배달 마차의 축이 고아원 정문 앞에서 부러졌고, 우유 장수는 상하기 전에 그것을 전부 들여놓았습니다. 그날 저녁 일기에 뮐러는 이렇게 적었습니다: "아이들은 자신들이 굶주렸다는 사실조차 알지 못했다." 그는 평생 기부를 구하러 다니지 않았고, 오직 목자이신 한 분에게만 구했습니다.'
-            : 'On a cold November morning in 1838, a low mist still clung to the orphanage yard on Wilson Street in Bristol. Inside, three hundred children sat at long wooden tables, staring down at empty pewter plates. The old clock above the door ticked louder than George Müller\'s own heart. He knew there was not a single penny in his pocket, and the milk cans and bread baskets in the kitchen were bare. For one heartbeat, the thought flickered — "perhaps we must simply let this morning pass." Instead he stood at the head of the hall, folded his hands, and said quietly, "Father, we thank You for the food You are about to provide." Before the "amen" had left his lips, a knock came at the kitchen door. The baker from Clifton Street stood there, flour still on his apron. "I could not sleep last night," he said, "so I baked enough for the children." Minutes later a milkman\'s cart broke its axle at the gate, and rather than let his cans sour he carried every one of them inside. That evening Müller wrote in his journal: "The children did not know they had been hungry." For sixty years he refused to ask a single human being for money — he asked only the Shepherd.'
-        ,
+            : 'On a cold November morning in 1838, a low mist still clung to the orphanage yard on Wilson Street in Bristol. Inside, three hundred children sat at long wooden tables, staring down at empty pewter plates. The old clock above the door ticked louder than George Müller\'s own heart. He knew there was not a single penny in his pocket, and the milk cans and bread baskets in the kitchen were bare. For one heartbeat, the thought flickered — "perhaps we must simply let this morning pass." Instead he stood at the head of the hall, folded his hands, and said quietly, "Father, we thank You for the food You are about to provide." Before the "amen" had left his lips, a knock came at the kitchen door. The baker from Clifton Street stood there, flour still on his apron. "I could not sleep last night," he said, "so I baked enough for the children." Minutes later a milkman\'s cart broke its axle at the gate, and rather than let his cans sour he carried every one of them inside. That evening Müller wrote in his journal: "The children did not know they had been hungry." For sixty years he refused to ask a single human being for money — he asked only the Shepherd.',
         lesson: isKo
             ? '시편 23편 1절의 "내게 부족함이 없으리로다"는 텅 빈 창고를 본 후에야 참된 의미가 드러나는 고백입니다. 오늘 당신이 비어 있다고 느끼는 그 자리에 대해 — 구하기 전에 목자께서 이미 응답의 길을 여셨음을 기억하세요.'
-            : 'The confession "I shall not want" in Psalm 23:1 only reveals its true weight after you have looked inside an empty storehouse. For whatever feels empty in your life today, remember this: the Shepherd was already opening the door of provision before you finished the sentence of your prayer.'
-        ,
+            : 'The confession "I shall not want" in Psalm 23:1 only reveals its true weight after you have looked inside an empty storehouse. For whatever feels empty in your life today, remember this: the Shepherd was already opening the door of provision before you finished the sentence of your prayer.',
         isPremium: true,
       ),
     );
@@ -981,7 +1055,10 @@ Rules (per QT Guide §4-6):
       'TODAY: Feature a church history figure (not biblical) in the historical story.',
       'TODAY: Choose a verse from Hebrews, James, or 1 Peter.',
     ];
-    final index = (DateTime.now().millisecondsSinceEpoch ~/ 1000 + Random().nextInt(hints.length)) % hints.length;
+    final index =
+        (DateTime.now().millisecondsSinceEpoch ~/ 1000 +
+            Random().nextInt(hints.length)) %
+        hints.length;
     return '\n\n${hints[index]}';
   }
 
@@ -1090,10 +1167,13 @@ HISTORICAL STORY QUALITY BAR (Phase 4):
   render naturally.
 - Avoid generic phrases like "and they trusted God" — show the trust through
   a specific action, words, or silence.
-- TRUTHFULNESS: the story MUST be a real person from the Bible or verified
-  church history (Augustine, Luther, Moravians, Hudson Taylor, Amy Carmichael,
-  George Müller, Corrie ten Boom, etc.). If you are not confident about
-  historicity, choose a different story. NEVER fabricate quotes or dates.
+- TRUTHFULNESS: the story MUST be a real person from verified church
+  history (Augustine, Luther, Calvin, Spurgeon, Bonhoeffer, George Müller,
+  Hudson Taylor, Corrie ten Boom, Amy Carmichael, Moravians, Billy Graham,
+  C.S. Lewis, 주기철, 손양원, 한경직). NOT Bible narrative — Bible figures
+  belong in `bible_story`, which a different tier produces. If you are not
+  confident about historicity, choose a different whitelisted figure.
+  NEVER fabricate quotes or dates.
 
 AI PRAYER QUALITY BAR (Phase 5):
 - text length: ~300 words (2-minute read). For Korean/Japanese/Chinese:
@@ -1151,7 +1231,19 @@ CRITICAL RULES:
 3. SCRIPTURE: Do NOT generate verse text. Output only the "reference" — the
    app looks up the exact Public Domain verse text from a bundle. Output
    keys "verse_en"/"verse_ko"/"verse" are FORBIDDEN.
-3. The user's prayer transcript is their raw spoken words — summarize and organize it in $langName.
+4. The user's prayer transcript is their raw spoken words — summarize and organize it in $langName.
+5. GROUNDING (★ critical): Every factual claim (who, whose, where, when,
+   what happened) MUST be supported by the user's own words. DO NOT invent
+   relationships (whose house/family), ownership, or spatial connections
+   the user did not state. When grammar is ambiguous, prefer the target
+   language's natural indefinite reference rather than picking one
+   interpretation as fact.
+6. EMOTION SCOPING: emotional language is allowed ONLY in scripture.reason
+   and ONLY as a response hedge ("이런 상황에서 느끼실 수 있는…"), never
+   asserted as the user's actual state ("당신은 …입니다"). Other fields
+   stay factual.
+7. TONE PRESERVED: Keep testimony warm and reverent. You MAY include a
+   short prayerful closing breath, but only with facts the user stated.
 
 Return a JSON object with ONLY these core sections:
 
@@ -1189,6 +1281,16 @@ STEP 2: Analyze the prayer with deep empathy and biblical wisdom.
 CRITICAL RULES:
 1. All analysis fields must be in $langName.
 2. The "transcription" field must contain the EXACT words spoken in the audio.
+3. GROUNDING (★ critical): Every factual claim (who, whose, where, when,
+   what happened) MUST be supported by what the user actually said. DO NOT
+   invent relationships, ownership, or spatial connections not in the audio.
+   When the recording is ambiguous, prefer the target language's natural
+   indefinite reference rather than picking one interpretation as fact.
+4. EMOTION SCOPING: emotional language is allowed ONLY in scripture.reason
+   and ONLY as a response hedge ("이런 상황에서 느끼실 수 있는…"), never
+   asserted as the user's actual state ("당신은 …입니다").
+5. TONE PRESERVED: Keep testimony warm and reverent. You MAY include a
+   short prayerful closing breath, but only with facts the user stated.
 
 Return a JSON object:
 
@@ -1227,6 +1329,21 @@ CRITICAL RULES:
 3. SCRIPTURE: Do NOT generate verse text. Output only the "reference" — the
    app looks up the exact Public Domain verse text from a bundle. Output
    keys "verse_en"/"verse_ko"/"verse" are FORBIDDEN.
+4. GROUNDING (★ critical): every factual claim about the USER's situation
+   must come from their transcript. Do NOT invent ownership, relationships,
+   locations, or outcomes the user did not state.
+5. EMOTION SCOPING: emotional language is allowed in `ai_prayer` text only
+   as a response hedge ("이런 상황에서 느끼실 수 있는…"), never asserted
+   as the user's actual state ("당신은 불안합니다").
+6. historical_story is CHURCH HISTORY ONLY — a post-biblical Christian
+   figure (Augustine, Luther, Calvin, Spurgeon, Bonhoeffer, George Müller,
+   Hudson Taylor, Corrie ten Boom, Amy Carmichael, Moravians, Billy Graham,
+   C.S. Lewis, 주기철, 손양원, 한경직). Bible figures (Jesus, Paul, Moses,
+   David, Mary Magdalene, Esther, etc.) are FORBIDDEN here — they belong
+   in bible_story which a separate tier produces.
+7. citations MUST name a real author/work/study. Never use "recent studies",
+   "scientists say", unattributed "Einstein said"/"Gandhi said" patterns.
+   If unsure → omit the citation entirely.
 
 Return a JSON object with ONLY these premium sections:
 
@@ -1257,10 +1374,13 @@ HISTORICAL STORY QUALITY BAR (Phase 4):
   render naturally.
 - Avoid generic phrases like "and they trusted God" — show the trust through
   a specific action, words, or silence.
-- TRUTHFULNESS: the story MUST be a real person from the Bible or verified
-  church history (Augustine, Luther, Moravians, Hudson Taylor, Amy Carmichael,
-  George Müller, Corrie ten Boom, etc.). If you are not confident about
-  historicity, choose a different story. NEVER fabricate quotes or dates.
+- TRUTHFULNESS: the story MUST be a real person from verified church
+  history (Augustine, Luther, Calvin, Spurgeon, Bonhoeffer, George Müller,
+  Hudson Taylor, Corrie ten Boom, Amy Carmichael, Moravians, Billy Graham,
+  C.S. Lewis, 주기철, 손양원, 한경직). NOT Bible narrative — Bible figures
+  belong in `bible_story`, which a different tier produces. If you are not
+  confident about historicity, choose a different whitelisted figure.
+  NEVER fabricate quotes or dates.
 
 AI PRAYER QUALITY BAR (Phase 5):
 - text length: ~300 words (2-minute read). For Korean/Japanese/Chinese:
@@ -1445,12 +1565,16 @@ Not a platitude — reference a detail from the story above.''';
     required String transcript,
     required String locale,
     required String userName,
+    List<String> recentReferences = const [],
   }) async* {
     if (AppConfig.useMockAi) {
       // Mock: synthesize T1+T2 from hardcoded result for development.
       final result = _hardcodedPrayerResult(locale);
       if (result.prayerSummary != null) {
-        yield TierT1Result(summary: result.prayerSummary!, scripture: result.scripture);
+        yield TierT1Result(
+          summary: result.prayerSummary!,
+          scripture: result.scripture,
+        );
       }
       yield TierT2Result(
         bibleStory: result.bibleStory,
@@ -1477,10 +1601,7 @@ Not a platitude — reference a detail from the story above.''';
       bible: bible,
       apiKey: AppConfig.geminiApiKey,
     );
-    final tier2 = Tier2Analyzer(
-      cache: cache,
-      apiKey: AppConfig.geminiApiKey,
-    );
+    final tier2 = Tier2Analyzer(cache: cache, apiKey: AppConfig.geminiApiKey);
 
     // Phase 4.2 Phase C — tier1 now emits a Stream. Relay partial events
     // (TierT1ScriptureRef) directly to the caller so the UI can navigate
@@ -1491,6 +1612,7 @@ Not a platitude — reference a detail from the story above.''';
         transcript: transcript,
         locale: locale,
         userName: userName,
+        recentReferences: recentReferences,
       )) {
         yield event;
         if (event is TierT1Result) t1 = event;
@@ -1554,10 +1676,7 @@ Not a platitude — reference a detail from the story above.''';
       );
     }
 
-    final tier3 = Tier3Analyzer(
-      cache: cache,
-      apiKey: AppConfig.geminiApiKey,
-    );
+    final tier3 = Tier3Analyzer(cache: cache, apiKey: AppConfig.geminiApiKey);
 
     try {
       return await tier3.analyze(
@@ -1618,10 +1737,7 @@ Not a platitude — reference a detail from the story above.''';
       bible: bible,
       apiKey: AppConfig.geminiApiKey,
     );
-    final tier2 = QtTier2Analyzer(
-      cache: cache,
-      apiKey: AppConfig.geminiApiKey,
-    );
+    final tier2 = QtTier2Analyzer(cache: cache, apiKey: AppConfig.geminiApiKey);
 
     // Phase 4.2 Phase C — QT tier1 now emits a Stream. Relay partials.
     QtTierT1Result? t1;

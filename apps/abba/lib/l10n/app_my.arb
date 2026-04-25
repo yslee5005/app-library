@@ -103,7 +103,7 @@
   "monthlyPrice": "$6.99 / လ",
   "yearlyPrice": "$49.99 / နှစ်",
   "yearlySave": "40% ချွေတာ",
-  "launchPromo": "3 လ $4.99/လ ဖြင့်!",
+  "launchPromo": "",
   "startPro": "Pro စတင်ရန်",
   "comingSoon": "မကြာမီ",
   "notificationSetting": "အကြောင်းကြားချက်များ",
@@ -152,7 +152,7 @@
   "groupInviteMessage": "အတူဆုတောင်းကြရအောင်! Abba ပေါ်ရှိ ဆုတောင်းအဖွဲ့သို့ ပါဝင်ပါ။",
   "noGroups": "အတူဆုတောင်းရန် အဖွဲ့တစ်ခု ပါဝင်ပါ သို့ ဖွဲ့စည်းပါ။",
   "promoTitle": "မိတ်ဆက်အထူးလျှော့ဈေး",
-  "promoBanner": "ပထမ 3 လ $4.99/လ ဖြင့်!",
+  "promoBanner": "",
   "promoEndsOn": "ကမ်းလှမ်းချက် {date} တွင် ကုန်ဆုံးမည်",
   "@promoEndsOn": {
     "placeholders": {
@@ -248,6 +248,7 @@
   "originalWordNuanceLabel": "ဘာသာပြန်နှင့်ခြားနားချက်",
   "originalWordsCountLabel": "{count} စကားလုံး",
   "seeMore": "ပိုမိုကြည့်ရန်",
+  "seeLess": "လျှော့ကြည့်ရန်",
   "seeAllComments": "မှတ်ချက် {count} ခုလုံးကို ကြည့်ရန်",
   "@seeAllComments": {
     "placeholders": {
@@ -552,5 +553,15 @@
   "aiErrorApiBody": "သင်၏ဆုတောင်းကို လုံခြုံစွာ သိမ်းဆည်းထားပါသည်။ ခဏအကြာတွင် ထပ်စမ်းကြည့်ပါ။",
   "aiErrorRetry": "ထပ်စမ်းကြည့်ပါ",
   "aiErrorWaitAndCheck": "နောက်မှ ထပ်၍ စိစစ်ပေးပါမည်။ မကြာမီ ပြန်လာပါ — သင့်ဆုတောင်းက စောင့်နေပါလိမ့်မည်။",
-  "aiErrorHome": "ပင်မစာမျက်နှာသို့"
+  "aiErrorHome": "ပင်မစာမျက်နှာသို့",
+  "trialStartCta": "Start 1 month free",
+  "trialAutoRenewDisclosure": "Then {price}/year, auto-renews. Cancel anytime in Settings.",
+  "@trialAutoRenewDisclosure": {
+    "placeholders": {
+      "price": {}
+    }
+  },
+  "trialLimitTitle": "You've prayed 3 times today 🌸",
+  "trialLimitBody": "Come back tomorrow — or unlock unlimited prayer with Pro.",
+  "trialLimitCta": "Continue with Pro"
 }

@@ -54,29 +54,29 @@ void main() {
 
     TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
         .setMockMethodCallHandler(
-      const MethodChannel('plugins.flutter.io/path_provider'),
-      (call) async {
-        if (call.method == 'getTemporaryDirectory') return '/tmp/abba-test';
-        return null;
-      },
-    );
+          const MethodChannel('plugins.flutter.io/path_provider'),
+          (call) async {
+            if (call.method == 'getTemporaryDirectory') return '/tmp/abba-test';
+            return null;
+          },
+        );
   });
 
   tearDownAll(() {
     TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
         .setMockMethodCallHandler(
-      const MethodChannel('plugins.flutter.io/path_provider'),
-      null,
-    );
+          const MethodChannel('plugins.flutter.io/path_provider'),
+          null,
+        );
     FlutterError.onError = originalOnError;
   });
 
   Widget buildOverlay() => buildTestApp(
-        MediaQuery(
-          data: const MediaQueryData(disableAnimations: true),
-          child: const RecordingOverlay(),
-        ),
-      );
+    MediaQuery(
+      data: const MediaQueryData(disableAnimations: true),
+      child: const RecordingOverlay(),
+    ),
+  );
 
   Future<void> cleanUnmount(WidgetTester tester) async {
     await tester.pump(const Duration(milliseconds: 100));
@@ -116,8 +116,7 @@ void main() {
       await cleanUnmount(tester);
     });
 
-    testWidgets('pause freezes the timer; resume continues it',
-        (tester) async {
+    testWidgets('pause freezes the timer; resume continues it', (tester) async {
       await tester.pumpWidget(buildOverlay());
       await tester.pump();
       await tester.pump(const Duration(seconds: 2));
@@ -126,8 +125,11 @@ void main() {
       await tester.tap(find.byIcon(Icons.pause));
       await tester.pump();
       await tester.pump(const Duration(seconds: 2));
-      expect(find.text('00:02'), findsOneWidget,
-          reason: 'timer must not advance while paused');
+      expect(
+        find.text('00:02'),
+        findsOneWidget,
+        reason: 'timer must not advance while paused',
+      );
 
       await tester.tap(find.byIcon(Icons.play_arrow));
       await tester.pump();
@@ -151,8 +153,9 @@ void main() {
       await cleanUnmount(tester);
     });
 
-    testWidgets('toggling back from text mode hides the TextField',
-        (tester) async {
+    testWidgets('toggling back from text mode hides the TextField', (
+      tester,
+    ) async {
       await tester.pumpWidget(buildOverlay());
       await tester.pump();
 
@@ -167,8 +170,9 @@ void main() {
       await cleanUnmount(tester);
     });
 
-    testWidgets('close button opens the leave confirmation dialog',
-        (tester) async {
+    testWidgets('close button opens the leave confirmation dialog', (
+      tester,
+    ) async {
       await tester.pumpWidget(buildOverlay());
       await tester.pump();
 

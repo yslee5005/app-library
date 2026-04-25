@@ -103,7 +103,7 @@
   "monthlyPrice": "29,99 zł / mies.",
   "yearlyPrice": "219,99 zł / rok",
   "yearlySave": "Oszczędź 40%",
-  "launchPromo": "3 miesiące za 15,99zł/mies.!",
+  "launchPromo": "",
   "startPro": "Rozpocznij Pro",
   "comingSoon": "Wkrótce",
   "notificationSetting": "Powiadomienia",
@@ -152,7 +152,7 @@
   "groupInviteMessage": "Módlmy się razem! Dołącz do mojej grupy modlitewnej w Abba.",
   "noGroups": "Dołącz lub utwórz grupę, aby modlić się razem.",
   "promoTitle": "Oferta premierowa",
-  "promoBanner": "Pierwsze 3 miesiące za 15,99zł/mies.!",
+  "promoBanner": "",
   "promoEndsOn": "Oferta kończy się {date}",
   "@promoEndsOn": {
     "placeholders": {
@@ -248,6 +248,7 @@
   "originalWordNuanceLabel": "Niuans vs tłumaczenie",
   "originalWordsCountLabel": "{count} słów",
   "seeMore": "Zobacz więcej",
+  "seeLess": "Zobacz mniej",
   "seeAllComments": "Zobacz wszystkie komentarze ({count})",
   "@seeAllComments": {
     "placeholders": {
@@ -552,5 +553,15 @@
   "aiErrorApiBody": "Twoja modlitwa jest bezpiecznie zapisana. Spróbuj ponownie za chwilę.",
   "aiErrorRetry": "Spróbuj ponownie",
   "aiErrorWaitAndCheck": "Spróbujemy analizy później. Wróć niedługo — twoja modlitwa będzie czekać.",
-  "aiErrorHome": "Powrót do strony głównej"
+  "aiErrorHome": "Powrót do strony głównej",
+  "trialStartCta": "Rozpocznij 1 miesiąc za darmo",
+  "trialAutoRenewDisclosure": "Następnie {price}/rok, automatyczne odnawianie. Anuluj w dowolnym momencie w Ustawieniach.",
+  "@trialAutoRenewDisclosure": {
+    "placeholders": {
+      "price": {}
+    }
+  },
+  "trialLimitTitle": "Dziś modliłeś się 3 razy 🌸",
+  "trialLimitBody": "Wróć jutro — lub odblokuj nieograniczoną modlitwę z Pro.",
+  "trialLimitCta": "Kontynuuj z Pro"
 }

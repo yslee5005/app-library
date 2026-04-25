@@ -21,11 +21,9 @@ class QtTier2Analyzer {
   final GeminiCacheManager _cache;
   final String _apiKey;
 
-  QtTier2Analyzer({
-    required GeminiCacheManager cache,
-    required String apiKey,
-  })  : _cache = cache,
-        _apiKey = apiKey;
+  QtTier2Analyzer({required GeminiCacheManager cache, required String apiKey})
+    : _cache = cache,
+      _apiKey = apiKey;
 
   Future<QtTierT2Result> analyze({
     required String meditation,
@@ -65,11 +63,15 @@ class QtTier2Analyzer {
       ..writeln('- Scripture chosen in T1: ${t1Context.scripture.reference}')
       ..writeln()
       ..writeln('Generate ONLY T2 sections: "application" and "knowledge".')
-      ..writeln('- application: 3 time-block actions (morning_action, day_action, evening_action). '
-          '3P rule (Personal / Practical / Possible). Each ≤15 min.')
-      ..writeln('- knowledge: historical_context (3-4 sentences), 2-3 cross_references '
-          '(reference ONLY — app fills verse text at runtime), '
-          '0-2 original_words with transliteration + meaning.')
+      ..writeln(
+        '- application: 3 time-block actions (morning_action, day_action, evening_action). '
+        '3P rule (Personal / Practical / Possible). Each ≤15 min.',
+      )
+      ..writeln(
+        '- knowledge: historical_context (3-4 sentences), 2-3 cross_references '
+        '(reference ONLY — app fills verse text at runtime), '
+        '0-2 original_words with transliteration + meaning.',
+      )
       ..writeln('Output JSON: {"application": {...}, "knowledge": {...}}');
 
     try {

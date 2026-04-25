@@ -103,7 +103,7 @@
   "monthlyPrice": "$6.99 / ወር",
   "yearlyPrice": "$49.99 / ዓመት",
   "yearlySave": "40% ቆጥብ",
-  "launchPromo": "3 ወራት $4.99/ወር!",
+  "launchPromo": "",
   "startPro": "Pro ጀምር",
   "comingSoon": "በቅርቡ",
   "notificationSetting": "ማሳወቂያዎች",
@@ -152,7 +152,7 @@
   "groupInviteMessage": "እንጸልይ! በ Abba ላይ ያለውን የጸሎት ቡድኔን ተቀላቀል።",
   "noGroups": "አብረን ለመጸለይ ቡድን ተቀላቀሉ ወይም ፍጠሩ።",
   "promoTitle": "የማስተዋወቂያ ልዩ",
-  "promoBanner": "የመጀመሪያዎቹ 3 ወራት $4.99/ወር!",
+  "promoBanner": "",
   "promoEndsOn": "ቅናሹ {date} ያበቃል",
   "@promoEndsOn": {
     "placeholders": {
@@ -248,6 +248,7 @@
   "originalWordNuanceLabel": "ከትርጉም ልዩነት",
   "originalWordsCountLabel": "{count} ቃላት",
   "seeMore": "ተጨማሪ ይመልከቱ",
+  "seeLess": "አሳንስ",
   "seeAllComments": "ሁሉንም {count} አስተያየቶች ይመልከቱ",
   "@seeAllComments": {
     "placeholders": {
@@ -552,5 +553,15 @@
   "aiErrorApiBody": "ጸሎትዎ በደህና ተቀምጧል። እባክዎ ከትንሽ ቆይታ በኋላ እንደገና ይሞክሩ።",
   "aiErrorRetry": "እንደገና ሞክር",
   "aiErrorWaitAndCheck": "ትንታኔውን በኋላ እንደገና እንሞክራለን። እባክዎ ቶሎ ይመለሱ — ጸሎትዎ ይጠብቅዎታል።",
-  "aiErrorHome": "ወደ መነሻ ገጽ"
+  "aiErrorHome": "ወደ መነሻ ገጽ",
+  "trialStartCta": "Start 1 month free",
+  "trialAutoRenewDisclosure": "Then {price}/year, auto-renews. Cancel anytime in Settings.",
+  "@trialAutoRenewDisclosure": {
+    "placeholders": {
+      "price": {}
+    }
+  },
+  "trialLimitTitle": "You've prayed 3 times today 🌸",
+  "trialLimitBody": "Come back tomorrow — or unlock unlimited prayer with Pro.",
+  "trialLimitCta": "Continue with Pro"
 }

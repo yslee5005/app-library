@@ -103,7 +103,7 @@
   "monthlyPrice": "6,99€ / kk",
   "yearlyPrice": "49,99€ / vuosi",
   "yearlySave": "Säästä 40%",
-  "launchPromo": "3 kuukautta hintaan 3,99€/kk!",
+  "launchPromo": "",
   "startPro": "Aloita Pro",
   "comingSoon": "Tulossa pian",
   "notificationSetting": "Ilmoitukset",
@@ -152,7 +152,7 @@
   "groupInviteMessage": "Rukoillaan yhdessä! Liity rukousryhmääni Abbassa.",
   "noGroups": "Liity tai luo ryhmä rukoillaksesi yhdessä.",
   "promoTitle": "Lanseeraustarjous",
-  "promoBanner": "3 ensimmäistä kuukautta 3,99€/kk!",
+  "promoBanner": "",
   "promoEndsOn": "Tarjous päättyy {date}",
   "@promoEndsOn": {
     "placeholders": {
@@ -248,6 +248,7 @@
   "originalWordNuanceLabel": "Vivahde vs käännös",
   "originalWordsCountLabel": "{count} sanaa",
   "seeMore": "Näytä lisää",
+  "seeLess": "Näytä vähemmän",
   "seeAllComments": "Näytä kaikki {count} kommenttia",
   "@seeAllComments": {
     "placeholders": {
@@ -552,5 +553,15 @@
   "aiErrorApiBody": "Rukouksesi on tallessa. Yritä hetken päästä uudelleen.",
   "aiErrorRetry": "Yritä uudelleen",
   "aiErrorWaitAndCheck": "Yritämme analyysin myöhemmin. Tule pian takaisin — rukouksesi odottaa sinua.",
-  "aiErrorHome": "Takaisin alkuun"
+  "aiErrorHome": "Takaisin alkuun",
+  "trialStartCta": "Start 1 month free",
+  "trialAutoRenewDisclosure": "Then {price}/year, auto-renews. Cancel anytime in Settings.",
+  "@trialAutoRenewDisclosure": {
+    "placeholders": {
+      "price": {}
+    }
+  },
+  "trialLimitTitle": "You've prayed 3 times today 🌸",
+  "trialLimitBody": "Come back tomorrow — or unlock unlimited prayer with Pro.",
+  "trialLimitCta": "Continue with Pro"
 }

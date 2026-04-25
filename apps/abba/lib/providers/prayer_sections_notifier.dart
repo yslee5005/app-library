@@ -50,7 +50,8 @@ class PrayerSectionsState {
 
   bool get isT1Complete => summary != null && scripture != null;
   bool get isT2Complete => bibleStory != null && testimony != null;
-  bool get isT3Complete => guidance != null || aiPrayer != null || historicalStory != null;
+  bool get isT3Complete =>
+      guidance != null || aiPrayer != null || historicalStory != null;
   bool get hasAnyFailure => failedTiers.isNotEmpty;
 
   PrayerSectionsState copyWith({
@@ -173,14 +174,16 @@ class PrayerSectionsNotifier extends StateNotifier<PrayerSectionsState> {
           case TierT1ScriptureRef ref:
             setScriptureRef(ref.reference);
             if (!t1Completer.isCompleted) {
-              t1Completer.complete(TierT1Result(
-                summary: const PrayerSummary(
-                  gratitude: [],
-                  petition: [],
-                  intercession: [],
+              t1Completer.complete(
+                TierT1Result(
+                  summary: const PrayerSummary(
+                    gratitude: [],
+                    petition: [],
+                    intercession: [],
+                  ),
+                  scripture: Scripture(reference: ref.reference),
                 ),
-                scripture: Scripture(reference: ref.reference),
-              ));
+              );
             }
           case TierT1Result t1:
             setT1(summary: t1.summary, scripture: t1.scripture);
@@ -214,11 +217,13 @@ class PrayerSectionsNotifier extends StateNotifier<PrayerSectionsState> {
                 'ai_prayer': {
                   'text': t3.aiPrayer!.text,
                   'citations': t3.aiPrayer!.citations
-                      .map((c) => {
-                            'type': c.type,
-                            'source': c.source,
-                            'content': c.content,
-                          })
+                      .map(
+                        (c) => {
+                          'type': c.type,
+                          'source': c.source,
+                          'content': c.content,
+                        },
+                      )
                       .toList(),
                   'is_premium': t3.aiPrayer!.isPremium,
                 },
@@ -284,19 +289,19 @@ class PrayerSectionsNotifier extends StateNotifier<PrayerSectionsState> {
   }
 
   Map<String, dynamic> _summaryToJson(PrayerSummary s) => {
-        'gratitude': s.gratitude,
-        'petition': s.petition,
-        'intercession': s.intercession,
-      };
+    'gratitude': s.gratitude,
+    'petition': s.petition,
+    'intercession': s.intercession,
+  };
 
   Map<String, dynamic> _scriptureToJson(Scripture s) => {
-        'reference': s.reference,
-        'verse': s.verse,
-        'reason': s.reason,
-        'posture': s.posture,
-        'key_word_hint': s.keyWordHint,
-        'original_words': s.originalWords.map((w) => w.toJson()).toList(),
-      };
+    'reference': s.reference,
+    'verse': s.verse,
+    'reason': s.reason,
+    'posture': s.posture,
+    'key_word_hint': s.keyWordHint,
+    'original_words': s.originalWords.map((w) => w.toJson()).toList(),
+  };
 
   @override
   void dispose() {
@@ -313,5 +318,5 @@ class PrayerSectionsNotifier extends StateNotifier<PrayerSectionsState> {
 /// starting a new prayer to clear stale state.
 final prayerSectionsProvider =
     StateNotifierProvider<PrayerSectionsNotifier, PrayerSectionsState>(
-  (ref) => PrayerSectionsNotifier(),
-);
+      (ref) => PrayerSectionsNotifier(),
+    );

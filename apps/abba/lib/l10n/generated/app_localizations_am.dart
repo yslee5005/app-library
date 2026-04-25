@@ -276,7 +276,7 @@ class AppLocalizationsAm extends AppLocalizations {
   String get yearlySave => '40% ቆጥብ';
 
   @override
-  String get launchPromo => '3 ወራት \$4.99/ወር!';
+  String get launchPromo => '';
 
   @override
   String get startPro => 'Pro ጀምር';
@@ -397,7 +397,7 @@ class AppLocalizationsAm extends AppLocalizations {
   String get promoTitle => 'የማስተዋወቂያ ልዩ';
 
   @override
-  String get promoBanner => 'የመጀመሪያዎቹ 3 ወራት \$4.99/ወር!';
+  String get promoBanner => '';
 
   @override
   String promoEndsOn(Object date) {
@@ -659,6 +659,9 @@ class AppLocalizationsAm extends AppLocalizations {
 
   @override
   String get seeMore => 'ተጨማሪ ይመልከቱ';
+
+  @override
+  String get seeLess => 'አሳንስ';
 
   @override
   String seeAllComments(Object count) {
@@ -1285,4 +1288,22 @@ class AppLocalizationsAm extends AppLocalizations {
 
   @override
   String get sectionStatusPending => 'ትንታኔ በሂደት ላይ';
+
+  @override
+  String get trialStartCta => 'Start 1 month free';
+
+  @override
+  String trialAutoRenewDisclosure(Object price) {
+    return 'Then $price/year, auto-renews. Cancel anytime in Settings.';
+  }
+
+  @override
+  String get trialLimitTitle => 'You\'ve prayed 3 times today 🌸';
+
+  @override
+  String get trialLimitBody =>
+      'Come back tomorrow — or unlock unlimited prayer with Pro.';
+
+  @override
+  String get trialLimitCta => 'Continue with Pro';
 }

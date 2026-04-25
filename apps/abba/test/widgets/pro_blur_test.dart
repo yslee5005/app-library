@@ -17,7 +17,10 @@ Widget _buildHarness({
   final router = GoRouter(
     initialLocation: '/',
     routes: [
-      GoRoute(path: '/', builder: (_, __) => Scaffold(body: child)),
+      GoRoute(
+        path: '/',
+        builder: (_, __) => Scaffold(body: child),
+      ),
       GoRoute(
         path: '/settings/membership',
         builder: (_, __) {
@@ -44,8 +47,9 @@ Widget _buildHarness({
 
 void main() {
   group('ProBlur', () {
-    testWidgets('unlocked: renders full content without lock CTA',
-        (tester) async {
+    testWidgets('unlocked: renders full content without lock CTA', (
+      tester,
+    ) async {
       await tester.pumpWidget(
         _buildHarness(
           child: const ProBlur(
@@ -67,8 +71,9 @@ void main() {
       expect(find.text('secret-body-text'), findsOneWidget);
     });
 
-    testWidgets('locked: hides content body and shows membership badge',
-        (tester) async {
+    testWidgets('locked: hides content body and shows membership badge', (
+      tester,
+    ) async {
       await tester.pumpWidget(
         _buildHarness(
           child: const ProBlur(
@@ -97,8 +102,9 @@ void main() {
       expect(find.text('Membership'), findsOneWidget);
     });
 
-    testWidgets('locked: tap pushes /settings/membership route',
-        (tester) async {
+    testWidgets('locked: tap pushes /settings/membership route', (
+      tester,
+    ) async {
       var navigatedToMembership = false;
       await tester.pumpWidget(
         _buildHarness(

@@ -55,9 +55,9 @@ Reorganize the user's raw prayer into a personal testimony — a first-person na
 
 **Output**:
 ```
-"아들 민수가 교회를 멀리한 지 몇 달이 됐습니다. 속상한 마음을 부인하지 않고 주님께 가져갔습니다. 아직 민수는 돌아오지 않았지만, 제 마음이 먼저 주님께 돌아왔습니다. 이것도 응답이라 믿습니다."
+"아들 민수가 교회를 멀리한 지 몇 달이 됐습니다. 속상한 마음을 부인하지 않고 주님께 가져갔습니다. 민수가 돌아오길 기다리는 이 마음도 함께 기도로 올려드립니다."
 ```
-**Why good**: 1st person; keeps "민수", "교회", "속상"; tense honest (not claiming answered); natural conversational.
+**Why good**: 1st person; keeps "민수", "교회", "속상"; tense honest (not claiming an answer the user never received); natural conversational. **AVOID** phrasing like "이것도 응답이라 믿습니다" — the user did not say they received an answer; declaring one on their behalf is fabrication.
 
 ### GOOD-2 (English)
 **User prayer**: "God, I've been struggling with anger toward my coworker. I know I should forgive but it's hard."

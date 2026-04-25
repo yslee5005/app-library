@@ -22,7 +22,8 @@ class AiAnalysisException implements Exception {
   });
 
   @override
-  String toString() => 'AiAnalysisException(${kind.name}): $message'
+  String toString() =>
+      'AiAnalysisException(${kind.name}): $message'
       '${cause != null ? " — $cause" : ""}';
 }
 

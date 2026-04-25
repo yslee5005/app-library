@@ -282,7 +282,7 @@ class AppLocalizationsEl extends AppLocalizations {
   String get yearlySave => 'Εξοικονόμηση 40%';
 
   @override
-  String get launchPromo => '3 μήνες στα 3,99€/μήνα!';
+  String get launchPromo => '';
 
   @override
   String get startPro => 'Ξεκίνα Pro';
@@ -412,7 +412,7 @@ class AppLocalizationsEl extends AppLocalizations {
   String get promoTitle => 'Ειδική Προσφορά';
 
   @override
-  String get promoBanner => '3 πρώτοι μήνες στα 3,99€/μήνα!';
+  String get promoBanner => '';
 
   @override
   String promoEndsOn(Object date) {
@@ -678,6 +678,9 @@ class AppLocalizationsEl extends AppLocalizations {
 
   @override
   String get seeMore => 'Δείτε περισσότερα';
+
+  @override
+  String get seeLess => 'Δείτε λιγότερα';
 
   @override
   String seeAllComments(Object count) {
@@ -1317,4 +1320,22 @@ class AppLocalizationsEl extends AppLocalizations {
 
   @override
   String get sectionStatusPending => 'Η ανάλυση σε εξέλιξη';
+
+  @override
+  String get trialStartCta => 'Start 1 month free';
+
+  @override
+  String trialAutoRenewDisclosure(Object price) {
+    return 'Then $price/year, auto-renews. Cancel anytime in Settings.';
+  }
+
+  @override
+  String get trialLimitTitle => 'You\'ve prayed 3 times today 🌸';
+
+  @override
+  String get trialLimitBody =>
+      'Come back tomorrow — or unlock unlimited prayer with Pro.';
+
+  @override
+  String get trialLimitCta => 'Continue with Pro';
 }

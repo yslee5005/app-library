@@ -67,7 +67,9 @@ class _CalendarViewState extends ConsumerState<CalendarView> {
                         _currentMonth.year,
                         _currentMonth.month - 1,
                       );
-                      prayerLog.debug('Calendar month changed: ${_currentMonth.year}-${_currentMonth.month}');
+                      prayerLog.debug(
+                        'Calendar month changed: ${_currentMonth.year}-${_currentMonth.month}',
+                      );
                     }),
                     child: Icon(
                       Icons.chevron_left,
@@ -85,7 +87,8 @@ class _CalendarViewState extends ConsumerState<CalendarView> {
                     onTap: () {
                       final now = DateTime.now();
                       if (_currentMonth.year > now.year ||
-                          (_currentMonth.year == now.year && _currentMonth.month >= now.month)) {
+                          (_currentMonth.year == now.year &&
+                              _currentMonth.month >= now.month)) {
                         return;
                       }
                       setState(() {
@@ -93,18 +96,24 @@ class _CalendarViewState extends ConsumerState<CalendarView> {
                           _currentMonth.year,
                           _currentMonth.month + 1,
                         );
-                        prayerLog.debug('Calendar month changed: ${_currentMonth.year}-${_currentMonth.month}');
+                        prayerLog.debug(
+                          'Calendar month changed: ${_currentMonth.year}-${_currentMonth.month}',
+                        );
                       });
                     },
                     child: Builder(
                       builder: (context) {
                         final now = DateTime.now();
-                        final isFuture = _currentMonth.year > now.year ||
-                            (_currentMonth.year == now.year && _currentMonth.month >= now.month);
+                        final isFuture =
+                            _currentMonth.year > now.year ||
+                            (_currentMonth.year == now.year &&
+                                _currentMonth.month >= now.month);
                         return Icon(
                           Icons.chevron_right,
                           size: 28,
-                          color: AbbaColors.warmBrown.withValues(alpha: isFuture ? 0.15 : 0.5),
+                          color: AbbaColors.warmBrown.withValues(
+                            alpha: isFuture ? 0.15 : 0.5,
+                          ),
                         );
                       },
                     ),
@@ -121,8 +130,9 @@ class _CalendarViewState extends ConsumerState<CalendarView> {
                     Row(
                       children: List.generate(7, (i) {
                         final date = DateTime(2024, 1, 7 + i);
-                        final label =
-                            DateFormat.E(locale).format(date)[0].toUpperCase();
+                        final label = DateFormat.E(
+                          locale,
+                        ).format(date)[0].toUpperCase();
                         return Expanded(
                           child: Center(
                             child: Text(
@@ -310,10 +320,9 @@ class _CalendarViewState extends ConsumerState<CalendarView> {
                   Text(
                     '$day',
                     style: AbbaTypography.bodySmall.copyWith(
-                      fontWeight:
-                          isToday || isSelected
-                              ? FontWeight.w700
-                              : FontWeight.w400,
+                      fontWeight: isToday || isSelected
+                          ? FontWeight.w700
+                          : FontWeight.w400,
                       color: isSelected ? AbbaColors.white : null,
                     ),
                   ),
@@ -534,8 +543,9 @@ class _CalendarViewState extends ConsumerState<CalendarView> {
     // re-entry opens the correct dashboard.
     if (prayer.mode == 'qt' && prayer.qtResult != null) {
       prayerLog.debug('QT detail opened: ${prayer.id}');
-      ref.read(qtMeditationResultProvider.notifier).state =
-          AsyncValue.data(prayer.qtResult!);
+      ref.read(qtMeditationResultProvider.notifier).state = AsyncValue.data(
+        prayer.qtResult!,
+      );
       // Phase 4.2 R-A6 — feed progressive renderer so qt_dashboard_view
       // reads from one source regardless of entry path.
       ref.read(qtSectionsProvider.notifier)
@@ -547,8 +557,9 @@ class _CalendarViewState extends ConsumerState<CalendarView> {
     if (prayer.result == null) return;
 
     prayerLog.debug('Prayer detail opened: ${prayer.id}');
-    ref.read(prayerResultProvider.notifier).state =
-        AsyncValue.data(prayer.result!);
+    ref.read(prayerResultProvider.notifier).state = AsyncValue.data(
+      prayer.result!,
+    );
     // Phase 4.1 INT-028 — feed progressive renderer so the Dashboard
     // reads from one source regardless of entry path (streaming vs. revisit).
     ref.read(prayerSectionsProvider.notifier)

@@ -8,6 +8,7 @@ import '../../../models/prayer.dart';
 import '../../../models/prayer_tier_result.dart';
 import '../../ai_analysis_exception.dart';
 import '../../gemini_cache_manager.dart';
+import 'tier3_hallucination_filters.dart';
 import 'tier_telemetry.dart';
 
 /// Phase 4.1 — T3 (guidance + ai_prayer + historical_story) generator.
@@ -16,11 +17,9 @@ class Tier3Analyzer {
   final GeminiCacheManager _cache;
   final String _apiKey;
 
-  Tier3Analyzer({
-    required GeminiCacheManager cache,
-    required String apiKey,
-  })  : _cache = cache,
-        _apiKey = apiKey;
+  Tier3Analyzer({required GeminiCacheManager cache, required String apiKey})
+    : _cache = cache,
+      _apiKey = apiKey;
 
   /// Generate premium sections. Caller should check Pro status before calling.
   Future<TierT3Result> analyze({
@@ -38,7 +37,7 @@ class Tier3Analyzer {
       systemInstruction: Content.system(systemInstruction),
       generationConfig: GenerationConfig(
         responseMimeType: 'application/json',
-        temperature: 0.9,
+        temperature: 0.7,
       ),
     );
 
@@ -48,6 +47,17 @@ class Tier3Analyzer {
       ..writeln('Is Pro: true')
       ..writeln('Locale: $locale (respond in ${_localeName(locale)})')
       ..writeln(userName.isNotEmpty ? 'User name: $userName' : '')
+      ..writeln()
+      ..writeln('GROUNDING (★ critical):')
+      ..writeln(
+        '- Every factual claim about the USER\'s situation MUST come from their transcript. Do NOT invent ownership, relationships, or outcomes the user did not state.',
+      )
+      ..writeln(
+        '- EMOTION SCOPING: emotional language is allowed in guidance, but framed as a response ("이런 상황에서 느끼실 수 있는…" / "You may feel…"), NEVER asserted as the user\'s actual state ("당신은 불안합니다" / "You are afraid").',
+      )
+      ..writeln(
+        '- historical_story must name a real church-history figure and event; citations must name a real author/work/study. No "recent studies" or unattributed quotes.',
+      )
       ..writeln()
       ..writeln('User prayer transcript:')
       ..writeln('"""')
@@ -59,11 +69,27 @@ class Tier3Analyzer {
       ..writeln('- Bible story: ${t2Context.bibleStory.title}')
       ..writeln('- Testimony echoes: ${_truncate(t2Context.testimony, 100)}')
       ..writeln()
-      ..writeln('Generate ONLY T3 premium sections: "guidance", "ai_prayer", "historical_story".')
-      ..writeln('- guidance: ONE actionable suggestion, 3P (Personal/Practical/Possible), submission clause')
-      ..writeln('- ai_prayer: ~300 words, 5-part structure, Trinitarian close, 2-3 citations with sources')
-      ..writeln('- historical_story: Whitelist figure only (Augustine/Luther/Müller/Bonhoeffer/주기철/손양원 등)')
-      ..writeln('Output JSON: {"guidance": {...}, "ai_prayer": {...}, "historical_story": {...}}');
+      ..writeln(
+        'Generate ONLY T3 premium sections: "guidance", "ai_prayer", "historical_story".',
+      )
+      ..writeln(
+        '- guidance: ONE actionable suggestion, 3P (Personal/Practical/Possible), submission clause',
+      )
+      ..writeln(
+        '- ai_prayer: ~300 words, 5-part structure, Trinitarian close, 2-3 citations with sources',
+      )
+      ..writeln(
+        '- historical_story: Church-history figure ONLY (Augustine/Luther/Müller/Bonhoeffer/주기철/손양원 등).',
+      )
+      ..writeln(
+        '  STRICT: NEVER use Bible figures (Jesus, Paul, Peter, David, Moses, Abraham, Mary, Esther, Noah, Solomon, Nehemiah, Job, Daniel, John, etc.) — Bible narrative belongs in bible_story (T2), not historical_story.',
+      )
+      ..writeln(
+        '  STRICT: citations.source MUST name a real author/work/study. Forbidden patterns: "recent studies", "scientists say", "연구에 따르면", fabricated attributions to Einstein/Gandhi/etc.',
+      )
+      ..writeln(
+        'Output JSON: {"guidance": {...}, "ai_prayer": {...}, "historical_story": {...}}',
+      );
 
     try {
       final response = await model.generateContent([
@@ -123,11 +149,11 @@ class Tier3Analyzer {
     }
     final ap = json['ai_prayer'];
     if (ap is Map<String, dynamic>) {
-      aiPrayer = AiPrayer.fromJson(ap);
+      aiPrayer = sanitizeAiPrayer(AiPrayer.fromJson(ap));
     }
     final hs = json['historical_story'];
     if (hs is Map<String, dynamic>) {
-      historicalStory = HistoricalStory.fromJson(hs);
+      historicalStory = sanitizeHistoricalStory(HistoricalStory.fromJson(hs));
     }
 
     if (guidance == null && aiPrayer == null && historicalStory == null) {
@@ -177,7 +203,8 @@ class Tier3Analyzer {
     return trimmed;
   }
 
-  String _truncate(String s, int n) => s.length <= n ? s : '${s.substring(0, n)}...';
+  String _truncate(String s, int n) =>
+      s.length <= n ? s : '${s.substring(0, n)}...';
 
   static String _localeName(String locale) {
     return switch (locale) {

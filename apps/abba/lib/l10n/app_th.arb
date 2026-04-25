@@ -103,7 +103,7 @@
   "monthlyPrice": "฿239 / เดือน",
   "yearlyPrice": "฿1,790 / ปี",
   "yearlySave": "ประหยัด 40%",
-  "launchPromo": "3 เดือนแรก ฿159/เดือน!",
+  "launchPromo": "",
   "startPro": "เริ่มต้น Pro",
   "comingSoon": "เร็วๆ นี้",
   "notificationSetting": "การแจ้งเตือน",
@@ -152,7 +152,7 @@
   "groupInviteMessage": "มาอธิษฐานด้วยกัน! เข้าร่วมกลุ่มอธิษฐานของฉันบน Abba",
   "noGroups": "เข้าร่วมหรือสร้างกลุ่มเพื่ออธิษฐานด้วยกัน",
   "promoTitle": "โปรโมชันพิเศษ",
-  "promoBanner": "3 เดือนแรก ฿159/เดือน!",
+  "promoBanner": "",
   "promoEndsOn": "ข้อเสนอสิ้นสุด {date}",
   "@promoEndsOn": {
     "placeholders": {
@@ -248,6 +248,7 @@
   "originalWordNuanceLabel": "ความแตกต่างจากการแปล",
   "originalWordsCountLabel": "{count} คำ",
   "seeMore": "ดูเพิ่มเติม",
+  "seeLess": "แสดงน้อยลง",
   "seeAllComments": "ดูความคิดเห็นทั้ง {count} รายการ",
   "@seeAllComments": {
     "placeholders": {
@@ -552,5 +553,15 @@
   "aiErrorApiBody": "คำอธิษฐานของคุณได้รับการบันทึกอย่างปลอดภัย กรุณาลองอีกครั้งในอีกสักครู่",
   "aiErrorRetry": "ลองอีกครั้ง",
   "aiErrorWaitAndCheck": "เราจะลองวิเคราะห์อีกครั้งภายหลัง กลับมาเร็วๆ นี้ — คำอธิษฐานของคุณจะรออยู่",
-  "aiErrorHome": "กลับสู่หน้าหลัก"
+  "aiErrorHome": "กลับสู่หน้าหลัก",
+  "trialStartCta": "เริ่ม 1 เดือนฟรี",
+  "trialAutoRenewDisclosure": "หลังจากนั้น {price}/ปี ต่ออายุอัตโนมัติ ยกเลิกได้ตลอดเวลาในการตั้งค่า",
+  "@trialAutoRenewDisclosure": {
+    "placeholders": {
+      "price": {}
+    }
+  },
+  "trialLimitTitle": "วันนี้คุณได้อธิษฐานไปแล้ว 3 ครั้ง 🌸",
+  "trialLimitBody": "แล้วพบกันใหม่พรุ่งนี้ — หรือปลดล็อกการอธิษฐานไม่จำกัดด้วย Pro",
+  "trialLimitCta": "ดำเนินการต่อด้วย Pro"
 }

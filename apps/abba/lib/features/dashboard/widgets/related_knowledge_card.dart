@@ -89,10 +89,7 @@ class RelatedKnowledgeCard extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 4),
-          Text(
-            knowledge.historicalContext,
-            style: AbbaTypography.bodySmall,
-          ),
+          Text(knowledge.historicalContext, style: AbbaTypography.bodySmall),
           // Cross References
           if (knowledge.crossReferences.isNotEmpty) ...[
             const SizedBox(height: AbbaSpacing.md),

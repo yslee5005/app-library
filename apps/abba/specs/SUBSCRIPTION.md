@@ -11,7 +11,7 @@
 |------|---------|--------|------|------|
 | **Monthly** | $6.99 / mo | $6.99 | - | 정가 |
 | **Yearly** | $49.99 / yr | $4.17 | **40%** | Save 40% 메시지 |
-| 런칭 프로모션 | $3.99 / mo (3개월) | - | 43% | 출시 후 3개월 한정 |
+| 런칭 프로모션 | Yearly: 1-month free trial (new subscribers) | - | - | Apple eligibility = New Subscribers. 이후 $49.99/yr 자동 갱신 |
 
 ### 1.1 글로벌 가격
 
@@ -72,6 +72,9 @@ scripture responses, guided daily devotionals (QT), and original
 Hebrew/Greek word insights for deeper Bible study. 
 Renews monthly at $6.99.
 
+First-time subscribers see a 1-month free trial for Yearly before 
+$49.99/year. Monthly has no free trial.
+
 Product ID: com.ystech.abba.monthly
 
 Note: Sign-in is optional (for cross-device sync only). 
@@ -92,6 +95,9 @@ Abba Pro Yearly unlocks unlimited prayer recordings with matched
 scripture responses, guided daily devotionals (QT), and original 
 Hebrew/Greek word insights for deeper Bible study.
 Renews yearly at $49.99 (~$4.17/month, 40% savings vs monthly).
+
+First-time subscribers see a 1-month free trial for Yearly before 
+$49.99/year. Monthly has no free trial.
 
 Product ID: com.ystech.abba.yearly
 
@@ -333,3 +339,9 @@ Sandbox에서 Grace Period 시뮬레이션:
 - `.claude/rules/learned-pitfalls.md` §2 — Subscription / Payment Crash 방지 16항목
 - RevenueCat Dashboard: https://app.revenuecat.com
 - App Store Connect: https://appstoreconnect.apple.com
+
+---
+
+## 10. Trial Daily Cap
+
+유료 전환 탐색 중인 trial 유저에게는 하루 3회 기도 soft cap을 적용한다. Free는 1회/일(기존), Pro는 무제한(기존). 티어 판정은 `effectiveTierProvider`가 `activeSubscriptionProvider`를 watch해 `PeriodType.trial` → `trial`, null → `free`, 그 외 active → `pro` 로 매핑한다. 카운트는 `PrayerQuotaService`가 `SharedPreferences`에 로컬 날짜(YYYY-MM-DD, device local tz) 기준으로 저장하며 자정에 자동 리셋된다. Limit 초과 시 trial은 `showTrialLimitPrompt` (3회 완료 알림 + Pro CTA), free는 기존 `showProPrompt`.

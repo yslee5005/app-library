@@ -28,10 +28,7 @@ class TierT1Result extends TierResult {
   final PrayerSummary summary;
   final Scripture scripture;
 
-  const TierT1Result({
-    required this.summary,
-    required this.scripture,
-  });
+  const TierT1Result({required this.summary, required this.scripture});
 }
 
 /// T2 result — bible_story + testimony (background).
@@ -39,10 +36,7 @@ class TierT2Result extends TierResult {
   final BibleStory bibleStory;
   final String testimony;
 
-  const TierT2Result({
-    required this.bibleStory,
-    required this.testimony,
-  });
+  const TierT2Result({required this.bibleStory, required this.testimony});
 }
 
 /// T3 result — Pro premium sections (on scroll trigger).
@@ -51,11 +45,7 @@ class TierT3Result extends TierResult {
   final AiPrayer? aiPrayer;
   final HistoricalStory? historicalStory;
 
-  const TierT3Result({
-    this.guidance,
-    this.aiPrayer,
-    this.historicalStory,
-  });
+  const TierT3Result({this.guidance, this.aiPrayer, this.historicalStory});
 }
 
 /// Phase 4.2 Phase C — QT equivalent of [TierT1ScriptureRef]. Emitted as
@@ -84,10 +74,7 @@ class QtTierT2Result extends TierResult {
   final ApplicationSuggestion application;
   final RelatedKnowledge knowledge;
 
-  const QtTierT2Result({
-    required this.application,
-    required this.knowledge,
-  });
+  const QtTierT2Result({required this.application, required this.knowledge});
 }
 
 /// Tier failed — emit this instead of the tier-specific result. UI may
@@ -96,8 +83,5 @@ class TierFailed extends TierResult {
   final String tier; // 't1' | 't2' | 't3'
   final AiAnalysisException error;
 
-  const TierFailed({
-    required this.tier,
-    required this.error,
-  });
+  const TierFailed({required this.tier, required this.error});
 }

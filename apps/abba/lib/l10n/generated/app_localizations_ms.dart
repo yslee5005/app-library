@@ -279,7 +279,7 @@ class AppLocalizationsMs extends AppLocalizations {
   String get yearlySave => 'Jimat 40%';
 
   @override
-  String get launchPromo => '3 bulan pada RM16.90/bulan!';
+  String get launchPromo => '';
 
   @override
   String get startPro => 'Mulakan Pro';
@@ -408,7 +408,7 @@ class AppLocalizationsMs extends AppLocalizations {
   String get promoTitle => 'Tawaran Pelancaran';
 
   @override
-  String get promoBanner => '3 bulan pertama pada RM16.90/bulan!';
+  String get promoBanner => '';
 
   @override
   String promoEndsOn(Object date) {
@@ -677,6 +677,9 @@ class AppLocalizationsMs extends AppLocalizations {
 
   @override
   String get seeMore => 'Lihat lagi';
+
+  @override
+  String get seeLess => 'Lihat kurang';
 
   @override
   String seeAllComments(Object count) {
@@ -1324,4 +1327,22 @@ class AppLocalizationsMs extends AppLocalizations {
 
   @override
   String get sectionStatusPending => 'Analisis sedang berjalan';
+
+  @override
+  String get trialStartCta => 'Mula 1 bulan percuma';
+
+  @override
+  String trialAutoRenewDisclosure(Object price) {
+    return 'Kemudian $price/tahun, perbaharuan automatik. Batalkan bila-bila masa dalam Tetapan.';
+  }
+
+  @override
+  String get trialLimitTitle => 'Anda telah berdoa 3 kali hari ini 🌸';
+
+  @override
+  String get trialLimitBody =>
+      'Jumpa lagi esok — atau buka doa tanpa had dengan Pro.';
+
+  @override
+  String get trialLimitCta => 'Teruskan dengan Pro';
 }

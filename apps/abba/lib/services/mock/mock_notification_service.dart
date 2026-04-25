@@ -34,7 +34,9 @@ class MockNotificationService implements NotificationService {
     required String time,
     required String userName,
   }) async {
-    fcmLog.debug('[MockNotification] scheduleMorningReminder: $time for $userName');
+    fcmLog.debug(
+      '[MockNotification] scheduleMorningReminder: $time for $userName',
+    );
   }
 
   @override

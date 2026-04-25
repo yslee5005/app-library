@@ -322,7 +322,8 @@ class RealNotificationService implements NotificationService {
 
     await _plugin
         .resolvePlatformSpecificImplementation<
-            AndroidFlutterLocalNotificationsPlugin>()
+          AndroidFlutterLocalNotificationsPlugin
+        >()
         ?.createNotificationChannel(androidChannel);
   }
 
@@ -375,7 +376,11 @@ class RealNotificationService implements NotificationService {
         saveToken(newToken);
       });
     } catch (e, st) {
-      fcmLog.error('Initialization failed (app continues without FCM)', error: e, stackTrace: st);
+      fcmLog.error(
+        'Initialization failed (app continues without FCM)',
+        error: e,
+        stackTrace: st,
+      );
       _firebaseInitialized = false;
     }
   }
@@ -445,17 +450,14 @@ class RealNotificationService implements NotificationService {
       final platform = Platform.isIOS ? 'ios' : 'android';
       final appId = AppConfig.appId;
 
-      await supabase.from('user_devices').upsert(
-        {
-          'app_id': appId,
-          'user_id': user.id,
-          'fcm_token': token,
-          'platform': platform,
-          'is_active': true,
-          'updated_at': DateTime.now().toUtc().toIso8601String(),
-        },
-        onConflict: 'app_id,user_id,fcm_token',
-      );
+      await supabase.from('user_devices').upsert({
+        'app_id': appId,
+        'user_id': user.id,
+        'fcm_token': token,
+        'platform': platform,
+        'is_active': true,
+        'updated_at': DateTime.now().toUtc().toIso8601String(),
+      }, onConflict: 'app_id,user_id,fcm_token');
 
       fcmLog.info('Token saved to user_devices for user ${user.id}');
     } catch (e) {
@@ -469,13 +471,15 @@ class RealNotificationService implements NotificationService {
     // Request iOS permissions
     await _plugin
         .resolvePlatformSpecificImplementation<
-            IOSFlutterLocalNotificationsPlugin>()
+          IOSFlutterLocalNotificationsPlugin
+        >()
         ?.requestPermissions(alert: true, badge: true, sound: true);
 
     // Request Android 13+ permissions
     await _plugin
         .resolvePlatformSpecificImplementation<
-            AndroidFlutterLocalNotificationsPlugin>()
+          AndroidFlutterLocalNotificationsPlugin
+        >()
         ?.requestNotificationsPermission();
   }
 
@@ -505,7 +509,9 @@ class RealNotificationService implements NotificationService {
       payload: 'morning_prayer',
     );
 
-    fcmLog.info('Morning reminder scheduled at $hour:${minute.toString().padLeft(2, '0')} — "$title"');
+    fcmLog.info(
+      'Morning reminder scheduled at $hour:${minute.toString().padLeft(2, '0')} — "$title"',
+    );
   }
 
   @override
@@ -597,11 +603,23 @@ class RealNotificationService implements NotificationService {
 
     // Save to SharedPreferences (Phase 1: local-only)
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setBool(_PrefKeys.morningReminder, _cachedSettings.morningReminder);
+    await prefs.setBool(
+      _PrefKeys.morningReminder,
+      _cachedSettings.morningReminder,
+    );
     await prefs.setString(_PrefKeys.morningTime, _cachedSettings.morningTime);
-    await prefs.setBool(_PrefKeys.eveningReminder, _cachedSettings.eveningReminder);
-    await prefs.setBool(_PrefKeys.afternoonNudge, _cachedSettings.afternoonNudge);
-    await prefs.setBool(_PrefKeys.streakReminder, _cachedSettings.streakReminder);
+    await prefs.setBool(
+      _PrefKeys.eveningReminder,
+      _cachedSettings.eveningReminder,
+    );
+    await prefs.setBool(
+      _PrefKeys.afternoonNudge,
+      _cachedSettings.afternoonNudge,
+    );
+    await prefs.setBool(
+      _PrefKeys.streakReminder,
+      _cachedSettings.streakReminder,
+    );
     await prefs.setBool(_PrefKeys.weeklySummary, _cachedSettings.weeklySummary);
 
     // Reschedule notifications based on new settings
@@ -647,7 +665,14 @@ class RealNotificationService implements NotificationService {
   /// Calculate the next instance of a specific time today or tomorrow
   tz.TZDateTime _nextInstanceOfTime(int hour, int minute) {
     final now = tz.TZDateTime.now(tz.local);
-    var scheduled = tz.TZDateTime(tz.local, now.year, now.month, now.day, hour, minute);
+    var scheduled = tz.TZDateTime(
+      tz.local,
+      now.year,
+      now.month,
+      now.day,
+      hour,
+      minute,
+    );
 
     if (scheduled.isBefore(now)) {
       scheduled = scheduled.add(const Duration(days: 1));

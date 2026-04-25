@@ -37,10 +37,7 @@ class GrowthStoryCard extends StatelessWidget {
             style: AbbaTypography.body.copyWith(fontWeight: FontWeight.w700),
           ),
           const SizedBox(height: AbbaSpacing.sm),
-          Text(
-            growthStory.summary,
-            style: AbbaTypography.bodySmall,
-          ),
+          Text(growthStory.summary, style: AbbaTypography.bodySmall),
           const SizedBox(height: AbbaSpacing.md),
           Container(
             padding: const EdgeInsets.all(AbbaSpacing.sm),

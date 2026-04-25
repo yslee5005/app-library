@@ -19,10 +19,7 @@ class TestimonyDetailView extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: AbbaColors.cream,
-      appBar: AppBar(
-        backgroundColor: AbbaColors.cream,
-        elevation: 0,
-      ),
+      appBar: AppBar(backgroundColor: AbbaColors.cream, elevation: 0),
       body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(
           horizontal: AbbaSpacing.lg,
@@ -57,9 +54,7 @@ class TestimonyDetailView extends StatelessWidget {
             // Date & time
             Text(
               '${dateFormat.format(post.createdAt)}  ${timeFormat.format(post.createdAt)}',
-              style: AbbaTypography.bodySmall.copyWith(
-                color: AbbaColors.muted,
-              ),
+              style: AbbaTypography.bodySmall.copyWith(color: AbbaColors.muted),
             ),
             const SizedBox(height: AbbaSpacing.lg),
 
@@ -93,8 +88,11 @@ class TestimonyDetailView extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(width: AbbaSpacing.lg),
-                Icon(Icons.chat_bubble_outline,
-                    size: 18, color: AbbaColors.muted),
+                Icon(
+                  Icons.chat_bubble_outline,
+                  size: 18,
+                  color: AbbaColors.muted,
+                ),
                 const SizedBox(width: AbbaSpacing.xs),
                 Text(
                   '${post.commentCount}',

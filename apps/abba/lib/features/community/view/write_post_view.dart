@@ -51,165 +51,165 @@ class _WritePostViewState extends ConsumerState<WritePostView> {
         }
       },
       child: Scaffold(
-      backgroundColor: AbbaColors.cream,
-      appBar: AppBar(
-        leading: IconButton(
-          onPressed: () {
-            if (_textController.text.isEmpty) {
-              context.pop();
-            } else {
-              _showDiscardDialog();
-            }
-          },
-          icon: const Icon(Icons.close),
-        ),
-        title: Text('${l10n.writePostTitle} 🌸', style: AbbaTypography.h1),
-        actions: [
-          TextButton(
-            onPressed: _isSubmitting ? null : _submitPost,
-            child: Text(
-              l10n.sharePostButton,
-              style: AbbaTypography.body.copyWith(
-                color: _isSubmitting ? AbbaColors.muted : AbbaColors.sage,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
+        backgroundColor: AbbaColors.cream,
+        appBar: AppBar(
+          leading: IconButton(
+            onPressed: () {
+              if (_textController.text.isEmpty) {
+                context.pop();
+              } else {
+                _showDiscardDialog();
+              }
+            },
+            icon: const Icon(Icons.close),
           ),
-        ],
-      ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(AbbaSpacing.lg),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // Anonymous/Real name toggle
-            Container(
-              padding: const EdgeInsets.all(AbbaSpacing.sm),
-              decoration: BoxDecoration(
-                color: AbbaColors.white,
-                borderRadius: BorderRadius.circular(AbbaRadius.xl),
-              ),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: GestureDetector(
-                      onTap: () => setState(() => _isAnonymous = true),
-                      child: Container(
-                        height: abbaButtonHeight,
-                        decoration: BoxDecoration(
-                          color: _isAnonymous
-                              ? AbbaColors.sage
-                              : Colors.transparent,
-                          borderRadius: BorderRadius.circular(AbbaRadius.xl),
-                        ),
-                        alignment: Alignment.center,
-                        child: Text(
-                          '🌿 ${l10n.anonymousToggle}',
-                          style: AbbaTypography.body.copyWith(
-                            color: _isAnonymous
-                                ? AbbaColors.white
-                                : AbbaColors.warmBrown,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    child: GestureDetector(
-                      onTap: () => setState(() => _isAnonymous = false),
-                      child: Container(
-                        height: abbaButtonHeight,
-                        decoration: BoxDecoration(
-                          color: !_isAnonymous
-                              ? AbbaColors.sage
-                              : Colors.transparent,
-                          borderRadius: BorderRadius.circular(AbbaRadius.xl),
-                        ),
-                        alignment: Alignment.center,
-                        child: Text(
-                          l10n.realNameToggle,
-                          style: AbbaTypography.body.copyWith(
-                            color: !_isAnonymous
-                                ? AbbaColors.white
-                                : AbbaColors.warmBrown,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(height: AbbaSpacing.lg),
-            // Category chips
-            Row(
-              children: [
-                _CategoryChip(
-                  label: l10n.categoryTestimony,
-                  isSelected: _category == 'testimony',
-                  onTap: () => setState(() => _category = 'testimony'),
-                ),
-                const SizedBox(width: AbbaSpacing.sm),
-                _CategoryChip(
-                  label: l10n.categoryPrayerRequest,
-                  isSelected: _category == 'prayer_request',
-                  onTap: () => setState(() => _category = 'prayer_request'),
-                ),
-              ],
-            ),
-            const SizedBox(height: AbbaSpacing.lg),
-            // Text input
-            TextField(
-              controller: _textController,
-              maxLines: null,
-              minLines: 8,
-              style: AbbaTypography.body,
-              decoration: InputDecoration(
-                hintText: l10n.writePostHint,
-                hintStyle: AbbaTypography.body.copyWith(
-                  color: AbbaColors.muted,
-                ),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(AbbaRadius.lg),
-                  borderSide: BorderSide.none,
-                ),
-                filled: true,
-                fillColor: AbbaColors.white,
-                contentPadding: const EdgeInsets.all(AbbaSpacing.md),
-              ),
-            ),
-            const SizedBox(height: AbbaSpacing.md),
-            // Import from prayer
-            OutlinedButton.icon(
-              onPressed: _importFromPrayer,
-              icon: const Text('🎙️', style: TextStyle(fontSize: 18)),
-              label: Text(
-                l10n.importFromPrayer,
-                style: AbbaTypography.body.copyWith(color: AbbaColors.sage),
-              ),
-              style: OutlinedButton.styleFrom(
-                minimumSize: const Size(double.infinity, abbaButtonHeight),
-                side: const BorderSide(color: AbbaColors.sage),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(AbbaRadius.lg),
+          title: Text('${l10n.writePostTitle} 🌸', style: AbbaTypography.h1),
+          actions: [
+            TextButton(
+              onPressed: _isSubmitting ? null : _submitPost,
+              child: Text(
+                l10n.sharePostButton,
+                style: AbbaTypography.body.copyWith(
+                  color: _isSubmitting ? AbbaColors.muted : AbbaColors.sage,
+                  fontWeight: FontWeight.w600,
                 ),
               ),
-            ),
-            const SizedBox(height: AbbaSpacing.xl),
-            // Share button
-            AbbaButton(
-              label: '${l10n.sharePostButton} 🌱',
-              onPressed: () {
-                if (!_isSubmitting) _submitPost();
-              },
-              isHero: true,
             ),
           ],
         ),
+        body: SingleChildScrollView(
+          padding: const EdgeInsets.all(AbbaSpacing.lg),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Anonymous/Real name toggle
+              Container(
+                padding: const EdgeInsets.all(AbbaSpacing.sm),
+                decoration: BoxDecoration(
+                  color: AbbaColors.white,
+                  borderRadius: BorderRadius.circular(AbbaRadius.xl),
+                ),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: GestureDetector(
+                        onTap: () => setState(() => _isAnonymous = true),
+                        child: Container(
+                          height: abbaButtonHeight,
+                          decoration: BoxDecoration(
+                            color: _isAnonymous
+                                ? AbbaColors.sage
+                                : Colors.transparent,
+                            borderRadius: BorderRadius.circular(AbbaRadius.xl),
+                          ),
+                          alignment: Alignment.center,
+                          child: Text(
+                            '🌿 ${l10n.anonymousToggle}',
+                            style: AbbaTypography.body.copyWith(
+                              color: _isAnonymous
+                                  ? AbbaColors.white
+                                  : AbbaColors.warmBrown,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: GestureDetector(
+                        onTap: () => setState(() => _isAnonymous = false),
+                        child: Container(
+                          height: abbaButtonHeight,
+                          decoration: BoxDecoration(
+                            color: !_isAnonymous
+                                ? AbbaColors.sage
+                                : Colors.transparent,
+                            borderRadius: BorderRadius.circular(AbbaRadius.xl),
+                          ),
+                          alignment: Alignment.center,
+                          child: Text(
+                            l10n.realNameToggle,
+                            style: AbbaTypography.body.copyWith(
+                              color: !_isAnonymous
+                                  ? AbbaColors.white
+                                  : AbbaColors.warmBrown,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: AbbaSpacing.lg),
+              // Category chips
+              Row(
+                children: [
+                  _CategoryChip(
+                    label: l10n.categoryTestimony,
+                    isSelected: _category == 'testimony',
+                    onTap: () => setState(() => _category = 'testimony'),
+                  ),
+                  const SizedBox(width: AbbaSpacing.sm),
+                  _CategoryChip(
+                    label: l10n.categoryPrayerRequest,
+                    isSelected: _category == 'prayer_request',
+                    onTap: () => setState(() => _category = 'prayer_request'),
+                  ),
+                ],
+              ),
+              const SizedBox(height: AbbaSpacing.lg),
+              // Text input
+              TextField(
+                controller: _textController,
+                maxLines: null,
+                minLines: 8,
+                style: AbbaTypography.body,
+                decoration: InputDecoration(
+                  hintText: l10n.writePostHint,
+                  hintStyle: AbbaTypography.body.copyWith(
+                    color: AbbaColors.muted,
+                  ),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(AbbaRadius.lg),
+                    borderSide: BorderSide.none,
+                  ),
+                  filled: true,
+                  fillColor: AbbaColors.white,
+                  contentPadding: const EdgeInsets.all(AbbaSpacing.md),
+                ),
+              ),
+              const SizedBox(height: AbbaSpacing.md),
+              // Import from prayer
+              OutlinedButton.icon(
+                onPressed: _importFromPrayer,
+                icon: const Text('🎙️', style: TextStyle(fontSize: 18)),
+                label: Text(
+                  l10n.importFromPrayer,
+                  style: AbbaTypography.body.copyWith(color: AbbaColors.sage),
+                ),
+                style: OutlinedButton.styleFrom(
+                  minimumSize: const Size(double.infinity, abbaButtonHeight),
+                  side: const BorderSide(color: AbbaColors.sage),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(AbbaRadius.lg),
+                  ),
+                ),
+              ),
+              const SizedBox(height: AbbaSpacing.xl),
+              // Share button
+              AbbaButton(
+                label: '${l10n.sharePostButton} 🌱',
+                onPressed: () {
+                  if (!_isSubmitting) _submitPost();
+                },
+                isHero: true,
+              ),
+            ],
+          ),
+        ),
       ),
-    ),
     );
   }
 

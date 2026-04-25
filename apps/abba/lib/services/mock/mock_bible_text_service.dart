@@ -13,8 +13,7 @@ class MockBibleTextService implements BibleTextService {
       'John 3:16':
           '하나님이 세상을 이처럼 사랑하사 독생자를 주셨으니 이는 저를 믿는 자마다 멸망치 않고 영생을 얻게 하려 하심이니라',
       'Genesis 1:1': '태초에 하나님이 천지를 창조하시니라',
-      'Matthew 6:9':
-          '그러므로 너희는 이렇게 기도하라 하늘에 계신 우리 아버지여 이름이 거룩히 여김을 받으시오며',
+      'Matthew 6:9': '그러므로 너희는 이렇게 기도하라 하늘에 계신 우리 아버지여 이름이 거룩히 여김을 받으시오며',
     },
     'en': {
       'Psalm 23:1': 'Yahweh is my shepherd: I shall lack nothing.',
@@ -35,15 +34,12 @@ class MockBibleTextService implements BibleTextService {
 
   @override
   Map<String, BibleTranslationInfo> attributions() => const {
-        'ko': BibleTranslationInfo(
-          name: '개역한글 (KRV)',
-          license: 'Public Domain',
-        ),
-        'en': BibleTranslationInfo(
-          name: 'World English Bible',
-          license: 'Public Domain',
-        ),
-      };
+    'ko': BibleTranslationInfo(name: '개역한글 (KRV)', license: 'Public Domain'),
+    'en': BibleTranslationInfo(
+      name: 'World English Bible',
+      license: 'Public Domain',
+    ),
+  };
 
   @override
   Future<void> preload(String locale) async {

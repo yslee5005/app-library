@@ -15,8 +15,9 @@ import '../../../helpers/test_fixtures.dart';
 ///   - Free user: ProBlur lock (no content body, membership badge visible).
 void main() {
   group('GuidanceCard', () {
-    testWidgets('Pro user: renders title, 💬 icon, and guidance content',
-        (tester) async {
+    testWidgets('Pro user: renders title, 💬 icon, and guidance content', (
+      tester,
+    ) async {
       final guidance = TestFixtures.guidance();
 
       await tester.pumpWidget(
@@ -49,8 +50,9 @@ void main() {
       expect(find.text(guidance.content), findsWidgets);
     });
 
-    testWidgets('Free user: shows ProBlur lock and hides guidance content',
-        (tester) async {
+    testWidgets('Free user: shows ProBlur lock and hides guidance content', (
+      tester,
+    ) async {
       final guidance = TestFixtures.guidance();
 
       await tester.pumpWidget(

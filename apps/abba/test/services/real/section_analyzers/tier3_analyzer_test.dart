@@ -44,11 +44,7 @@ void main() {
       final a = build();
       final out = a.extractT3ForTest({
         'guidance': {'content': 'take a small step', 'is_premium': true},
-        'ai_prayer': {
-          'text': 'Father...',
-          'citations': [],
-          'is_premium': true,
-        },
+        'ai_prayer': {'text': 'Father...', 'citations': [], 'is_premium': true},
         'historical_story': {
           'title': 'Müller',
           'reference': 'Bristol, 1830s',
@@ -93,10 +89,7 @@ void main() {
       final a = build();
       final out = a.extractT3ForTest({
         'guidance': 'this should be a map',
-        'ai_prayer': {
-          'text': 'Father...',
-          'is_premium': true,
-        },
+        'ai_prayer': {'text': 'Father...', 'is_premium': true},
       });
 
       expect(out.guidance, isNull);

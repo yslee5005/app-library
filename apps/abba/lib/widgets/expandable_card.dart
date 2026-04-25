@@ -79,10 +79,7 @@ class _ExpandableCardState extends State<ExpandableCard>
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          widget.title,
-                          style: AbbaTypography.h2,
-                        ),
+                        Text(widget.title, style: AbbaTypography.h2),
                         if (!_expanded && widget.summary.isNotEmpty) ...[
                           const SizedBox(height: AbbaSpacing.xs),
                           Text(

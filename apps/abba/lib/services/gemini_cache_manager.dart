@@ -47,12 +47,14 @@ class GeminiCacheManager {
   String? _cachedRubricBundleQt;
 
   GeminiCacheManager(this._supabase, {AssetBundle? bundle})
-      : _bundle = bundle ?? rootBundle;
+    : _bundle = bundle ?? rootBundle;
 
   /// Assemble the full rubric bundle content for a mode (concatenated md).
   /// Returns the raw system instruction string to send to Gemini.
   Future<String> loadRubricBundle(String mode) async {
-    final cached = mode == 'prayer' ? _cachedRubricBundlePrayer : _cachedRubricBundleQt;
+    final cached = mode == 'prayer'
+        ? _cachedRubricBundlePrayer
+        : _cachedRubricBundleQt;
     if (cached != null) return cached;
 
     final assets = mode == 'prayer' ? _prayerAssets : _qtAssets;
@@ -117,7 +119,9 @@ class GeminiCacheManager {
       final currentHash = await computeBundleHash(mode);
 
       // 1. Hash mismatch → rubric changed, force re-create.
-      if (storedHash == null || storedHash.isEmpty || storedHash != currentHash) {
+      if (storedHash == null ||
+          storedHash.isEmpty ||
+          storedHash != currentHash) {
         apiLog.info('[Cache] $mode hash mismatch — creating new cache');
         return await _createAndSave(mode, currentHash);
       }
@@ -130,7 +134,9 @@ class GeminiCacheManager {
       if (expiresAtRaw is String) {
         final expiresAt = DateTime.tryParse(expiresAtRaw);
         if (expiresAt == null ||
-            expiresAt.isBefore(DateTime.now().add(const Duration(minutes: 5)))) {
+            expiresAt.isBefore(
+              DateTime.now().add(const Duration(minutes: 5)),
+            )) {
           apiLog.info('[Cache] $mode expiring soon — re-creating');
           return await _createAndSave(mode, currentHash);
         }
@@ -224,11 +230,13 @@ class GeminiCacheManager {
   }
 
   Future<void> _upsertSystemConfig(Map<String, dynamic> entries) async {
-    final rows = entries.entries.map((e) => {
-          'key': e.key,
-          'value': e.value,
-          'updated_at': DateTime.now().toUtc().toIso8601String(),
-        });
+    final rows = entries.entries.map(
+      (e) => {
+        'key': e.key,
+        'value': e.value,
+        'updated_at': DateTime.now().toUtc().toIso8601String(),
+      },
+    );
     for (final row in rows) {
       await _supabase.from('system_config').upsert(row);
     }

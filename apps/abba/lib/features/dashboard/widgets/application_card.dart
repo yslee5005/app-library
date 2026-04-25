@@ -20,10 +20,10 @@ class ApplicationCard extends StatelessWidget {
   String get _summary {
     final text = application.hasTimeBlocks
         ? (application.morningAction.isNotEmpty
-            ? application.morningAction
-            : (application.dayAction.isNotEmpty
-                ? application.dayAction
-                : application.eveningAction))
+              ? application.morningAction
+              : (application.dayAction.isNotEmpty
+                    ? application.dayAction
+                    : application.eveningAction))
         : application.action;
     if (text.length <= 40) return text;
     return '${text.substring(0, 40)}...';

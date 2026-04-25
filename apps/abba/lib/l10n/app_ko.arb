@@ -110,7 +110,7 @@
   "monthlyPrice": "₩8,900 / 월",
   "yearlyPrice": "₩65,000 / 년",
   "yearlySave": "40% 절약",
-  "launchPromo": "3개월간 ₩5,900/월!",
+  "launchPromo": "",
   "startPro": "Pro 시작하기",
   "comingSoon": "곧 출시됩니다",
   "notificationSetting": "알림",
@@ -159,7 +159,7 @@
   "groupInviteMessage": "같이 기도해요! Abba에서 기도 그룹에 참여하세요.",
   "noGroups": "그룹에 참여하거나 만들어 함께 기도하세요.",
   "promoTitle": "런칭 특가",
-  "promoBanner": "3개월간 ₩5,900/월!",
+  "promoBanner": "",
   "promoEndsOn": "{date}까지 특가",
   "@promoEndsOn": {
     "placeholders": {
@@ -255,6 +255,7 @@
   "originalWordNuanceLabel": "번역과의 뉘앙스 차이",
   "originalWordsCountLabel": "{count}개 단어",
   "seeMore": "더 보기",
+  "seeLess": "접기",
   "seeAllComments": "댓글 {count}개 모두 보기",
   "@seeAllComments": {
     "placeholders": {
@@ -546,11 +547,35 @@
   "homeFirstPrayerPrompt": "첫 기도를 시작해보세요",
   "homeFirstQtPrompt": "첫 QT를 시작해보세요",
   "homeActivityPrompt": "오늘도 {activityName}해보세요",
-  "@homeActivityPrompt": {"placeholders": {"activityName": {"type": "String"}}},
+  "@homeActivityPrompt": {
+    "placeholders": {
+      "activityName": {
+        "type": "String"
+      }
+    }
+  },
   "homeStreakInProgress": "{count}일째 연속 {activityName} 중",
-  "@homeStreakInProgress": {"placeholders": {"count": {"type": "int"}, "activityName": {"type": "String"}}},
+  "@homeStreakInProgress": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "activityName": {
+        "type": "String"
+      }
+    }
+  },
   "homeDaysSinceLastActivity": "{days}일째 {activityName}을 쉬고 있어요",
-  "@homeDaysSinceLastActivity": {"placeholders": {"days": {"type": "int"}, "activityName": {"type": "String"}}},
+  "@homeDaysSinceLastActivity": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      },
+      "activityName": {
+        "type": "String"
+      }
+    }
+  },
   "homeActivityPrayer": "기도",
   "homeActivityQt": "QT",
   "prayerPlayerLoading": "로딩 중...",
@@ -577,5 +602,15 @@
   "templateCategoryGrief": "슬픔과 상실 중에",
   "sectionStatusCompleted": "분석 완료",
   "sectionStatusPartial": "부분 완성 (계속 진행 중)",
-  "sectionStatusPending": "분석 진행 중"
+  "sectionStatusPending": "분석 진행 중",
+  "trialStartCta": "1개월 무료로 시작",
+  "trialAutoRenewDisclosure": "이후 연 {price}, 자동 갱신됩니다. 설정에서 언제든 취소할 수 있어요.",
+  "@trialAutoRenewDisclosure": {
+    "placeholders": {
+      "price": {}
+    }
+  },
+  "trialLimitTitle": "오늘 3번 기도하셨어요 🌸",
+  "trialLimitBody": "내일 다시 만나요 — 또는 Pro로 무제한 기도를 시작하세요.",
+  "trialLimitCta": "Pro로 계속하기"
 }

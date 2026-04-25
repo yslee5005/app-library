@@ -276,7 +276,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get yearlySave => 'وفّر 40%';
 
   @override
-  String get launchPromo => '3 أشهر بسعر \$4.99/شهر!';
+  String get launchPromo => '';
 
   @override
   String get startPro => 'ابدأ Pro';
@@ -404,7 +404,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get promoTitle => 'عرض الإطلاق';
 
   @override
-  String get promoBanner => 'أول 3 أشهر بسعر \$4.99/شهر!';
+  String get promoBanner => '';
 
   @override
   String promoEndsOn(Object date) {
@@ -667,6 +667,9 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get seeMore => 'عرض المزيد';
+
+  @override
+  String get seeLess => 'عرض أقل';
 
   @override
   String seeAllComments(Object count) {
@@ -1293,4 +1296,21 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get sectionStatusPending => 'التحليل قيد التقدم';
+
+  @override
+  String get trialStartCta => 'ابدأ شهرًا مجانيًا';
+
+  @override
+  String trialAutoRenewDisclosure(Object price) {
+    return 'ثم $price/سنة، مع تجديد تلقائي. يمكنك الإلغاء في أي وقت من الإعدادات.';
+  }
+
+  @override
+  String get trialLimitTitle => 'لقد صليت 3 مرات اليوم 🌸';
+
+  @override
+  String get trialLimitBody => 'عد غدًا — أو افتح الصلاة اللامحدودة مع Pro.';
+
+  @override
+  String get trialLimitCta => 'متابعة مع Pro';
 }

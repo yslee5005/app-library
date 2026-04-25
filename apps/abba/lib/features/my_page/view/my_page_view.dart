@@ -41,9 +41,7 @@ class _MyPageViewState extends ConsumerState<MyPageView>
 
     return Scaffold(
       backgroundColor: AbbaColors.cream,
-      appBar: AppBar(
-        title: Text(l10n.myPageTitle, style: AbbaTypography.h1),
-      ),
+      appBar: AppBar(title: Text(l10n.myPageTitle, style: AbbaTypography.h1)),
       body: Column(
         children: [
           // Tab bar
@@ -94,19 +92,22 @@ class _MyPageViewState extends ConsumerState<MyPageView>
 
 /// Provider: monthly prayers filtered by mode, sorted newest first.
 final _monthlyPrayersByModeProvider = FutureProvider.autoDispose
-    .family<List<Prayer>, ({int year, int month, String mode})>((ref, params) async {
-  try {
-    final repo = ref.watch(prayerRepositoryProvider);
-    final all = await repo.getPrayersByMonth(params.year, params.month);
-    prayerLog.debug('getPrayersByMonth returned ${all.length} items');
-    final filtered = all.where((p) => p.mode == params.mode).toList()
-      ..sort((a, b) => b.createdAt.compareTo(a.createdAt));
-    return filtered;
-  } catch (e, st) {
-    prayerLog.error('_monthlyPrayersByModeProvider failed: $e\n$st');
-    rethrow;
-  }
-});
+    .family<List<Prayer>, ({int year, int month, String mode})>((
+      ref,
+      params,
+    ) async {
+      try {
+        final repo = ref.watch(prayerRepositoryProvider);
+        final all = await repo.getPrayersByMonth(params.year, params.month);
+        prayerLog.debug('getPrayersByMonth returned ${all.length} items');
+        final filtered = all.where((p) => p.mode == params.mode).toList()
+          ..sort((a, b) => b.createdAt.compareTo(a.createdAt));
+        return filtered;
+      } catch (e, st) {
+        prayerLog.error('_monthlyPrayersByModeProvider failed: $e\n$st');
+        rethrow;
+      }
+    });
 
 class _PrayerListTab extends ConsumerWidget {
   final String mode; // 'prayer' or 'qt'
@@ -119,7 +120,11 @@ class _PrayerListTab extends ConsumerWidget {
     final locale = Localizations.localeOf(context).languageCode;
     final now = DateTime.now();
     final prayersAsync = ref.watch(
-      _monthlyPrayersByModeProvider((year: now.year, month: now.month, mode: mode)),
+      _monthlyPrayersByModeProvider((
+        year: now.year,
+        month: now.month,
+        mode: mode,
+      )),
     );
 
     return prayersAsync.when(
@@ -147,8 +152,10 @@ class _PrayerListTab extends ConsumerWidget {
       error: (e, st) {
         prayerLog.error('History $mode tab error: $e');
         return Center(
-          child: Text(l10n.errorGeneric,
-              style: AbbaTypography.body.copyWith(color: AbbaColors.muted)),
+          child: Text(
+            l10n.errorGeneric,
+            style: AbbaTypography.body.copyWith(color: AbbaColors.muted),
+          ),
         );
       },
     );
@@ -178,26 +185,34 @@ class _PrayerItemCard extends ConsumerWidget {
         // Phase 5D — QT records persist qtResult; open qt-dashboard for QT
         // and prayer-dashboard for Prayer mode.
         if (prayer.mode == 'qt' && prayer.qtResult != null) {
-          ref.read(qtMeditationResultProvider.notifier).state =
-              AsyncValue.data(prayer.qtResult!);
+          ref.read(qtMeditationResultProvider.notifier).state = AsyncValue.data(
+            prayer.qtResult!,
+          );
           // Phase 4.2 R-A6 — feed progressive renderer.
           ref.read(qtSectionsProvider.notifier)
             ..reset()
             ..setAllFromResult(prayer.qtResult!);
-          prayerLog.info('History QT tapped: ${prayer.id}, navigating to qt-dashboard');
+          prayerLog.info(
+            'History QT tapped: ${prayer.id}, navigating to qt-dashboard',
+          );
           context.push('/home/qt-dashboard');
         } else if (prayer.result != null) {
-          ref.read(prayerResultProvider.notifier).state =
-              AsyncValue.data(prayer.result!);
+          ref.read(prayerResultProvider.notifier).state = AsyncValue.data(
+            prayer.result!,
+          );
           // Phase 4.1 INT-028 — feed progressive renderer so the Dashboard
           // stays a single-source consumer regardless of entry path.
           ref.read(prayerSectionsProvider.notifier)
             ..reset()
             ..setAllFromResult(prayer.result!);
-          prayerLog.info('History item tapped: ${prayer.id}, navigating to dashboard');
+          prayerLog.info(
+            'History item tapped: ${prayer.id}, navigating to dashboard',
+          );
           context.push('/home/prayer-dashboard');
         } else {
-          prayerLog.warning('History item tapped: ${prayer.id}, but no result available');
+          prayerLog.warning(
+            'History item tapped: ${prayer.id}, but no result available',
+          );
         }
       },
       child: Padding(
@@ -269,8 +284,11 @@ class _PrayerItemCard extends ConsumerWidget {
                 const SizedBox(height: AbbaSpacing.xs),
                 Row(
                   children: [
-                    Icon(Icons.menu_book_outlined,
-                        size: 14, color: AbbaColors.softGold),
+                    Icon(
+                      Icons.menu_book_outlined,
+                      size: 14,
+                      color: AbbaColors.softGold,
+                    ),
                     const SizedBox(width: AbbaSpacing.xs),
                     Expanded(
                       child: Text(
@@ -350,17 +368,17 @@ class _SavedPostsTab extends ConsumerWidget {
           itemCount: posts.length,
           itemBuilder: (context, index) => _PostTile(
             post: posts[index],
-            onTap: () => context.push(
-              '/home/my-records/testimony',
-              extra: posts[index],
-            ),
+            onTap: () =>
+                context.push('/home/my-records/testimony', extra: posts[index]),
           ),
         );
       },
       loading: () => const Center(child: CircularProgressIndicator()),
       error: (_, st) => Center(
-        child: Text(l10n.errorGeneric,
-            style: AbbaTypography.body.copyWith(color: AbbaColors.muted)),
+        child: Text(
+          l10n.errorGeneric,
+          style: AbbaTypography.body.copyWith(color: AbbaColors.muted),
+        ),
       ),
     );
   }
@@ -433,8 +451,11 @@ class _PostTile extends StatelessWidget {
                   const SizedBox(width: AbbaSpacing.xs),
                   Text('${post.likeCount}', style: AbbaTypography.caption),
                   const SizedBox(width: AbbaSpacing.md),
-                  Icon(Icons.chat_bubble_outline,
-                      size: 14, color: AbbaColors.muted),
+                  Icon(
+                    Icons.chat_bubble_outline,
+                    size: 14,
+                    color: AbbaColors.muted,
+                  ),
                   const SizedBox(width: AbbaSpacing.xs),
                   Text('${post.commentCount}', style: AbbaTypography.caption),
                   const Spacer(),

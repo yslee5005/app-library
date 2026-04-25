@@ -103,7 +103,7 @@
   "monthlyPrice": "169.000đ / tháng",
   "yearlyPrice": "1.249.000đ / năm",
   "yearlySave": "Tiết kiệm 40%",
-  "launchPromo": "3 tháng chỉ 99.000₫/tháng!",
+  "launchPromo": "",
   "startPro": "Bắt đầu Pro",
   "comingSoon": "Sắp ra mắt",
   "notificationSetting": "Thông báo",
@@ -152,7 +152,7 @@
   "groupInviteMessage": "Hãy cùng cầu nguyện! Tham gia nhóm cầu nguyện của tôi trên Abba.",
   "noGroups": "Tham gia hoặc tạo nhóm để cùng cầu nguyện.",
   "promoTitle": "Ưu đãi ra mắt",
-  "promoBanner": "3 tháng đầu chỉ 99.000₫/tháng!",
+  "promoBanner": "",
   "promoEndsOn": "Ưu đãi kết thúc {date}",
   "@promoEndsOn": {
     "placeholders": {
@@ -248,6 +248,7 @@
   "originalWordNuanceLabel": "Sắc thái so với bản dịch",
   "originalWordsCountLabel": "{count} từ",
   "seeMore": "Xem thêm",
+  "seeLess": "Thu gọn",
   "seeAllComments": "Xem tất cả {count} bình luận",
   "@seeAllComments": {
     "placeholders": {
@@ -552,5 +553,15 @@
   "aiErrorApiBody": "Lời cầu nguyện của bạn đã được lưu an toàn. Vui lòng thử lại trong giây lát.",
   "aiErrorRetry": "Thử lại",
   "aiErrorWaitAndCheck": "Chúng tôi sẽ thử phân tích lại sau. Hãy sớm quay lại — lời cầu nguyện của bạn đang đợi bạn.",
-  "aiErrorHome": "Về trang chủ"
+  "aiErrorHome": "Về trang chủ",
+  "trialStartCta": "Bắt đầu miễn phí 1 tháng",
+  "trialAutoRenewDisclosure": "Sau đó {price}/năm, tự động gia hạn. Hủy bất cứ lúc nào trong Cài đặt.",
+  "@trialAutoRenewDisclosure": {
+    "placeholders": {
+      "price": {}
+    }
+  },
+  "trialLimitTitle": "Bạn đã cầu nguyện 3 lần hôm nay 🌸",
+  "trialLimitBody": "Hẹn gặp lại ngày mai — hoặc mở khóa cầu nguyện không giới hạn với Pro.",
+  "trialLimitCta": "Tiếp tục với Pro"
 }

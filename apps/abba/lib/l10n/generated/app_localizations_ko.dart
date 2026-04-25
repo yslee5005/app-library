@@ -275,7 +275,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get yearlySave => '40% 절약';
 
   @override
-  String get launchPromo => '3개월간 ₩5,900/월!';
+  String get launchPromo => '';
 
   @override
   String get startPro => 'Pro 시작하기';
@@ -396,7 +396,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get promoTitle => '런칭 특가';
 
   @override
-  String get promoBanner => '3개월간 ₩5,900/월!';
+  String get promoBanner => '';
 
   @override
   String promoEndsOn(Object date) {
@@ -658,6 +658,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get seeMore => '더 보기';
+
+  @override
+  String get seeLess => '접기';
 
   @override
   String seeAllComments(Object count) {
@@ -1278,4 +1281,21 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get sectionStatusPending => '분석 진행 중';
+
+  @override
+  String get trialStartCta => '1개월 무료로 시작';
+
+  @override
+  String trialAutoRenewDisclosure(Object price) {
+    return '이후 연 $price, 자동 갱신됩니다. 설정에서 언제든 취소할 수 있어요.';
+  }
+
+  @override
+  String get trialLimitTitle => '오늘 3번 기도하셨어요 🌸';
+
+  @override
+  String get trialLimitBody => '내일 다시 만나요 — 또는 Pro로 무제한 기도를 시작하세요.';
+
+  @override
+  String get trialLimitCta => 'Pro로 계속하기';
 }

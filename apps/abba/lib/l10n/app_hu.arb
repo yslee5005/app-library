@@ -103,7 +103,7 @@
   "monthlyPrice": "2 490 Ft / hó",
   "yearlyPrice": "18 990 Ft / év",
   "yearlySave": "40% megtakarítás",
-  "launchPromo": "3 hónap 1590Ft/hó áron!",
+  "launchPromo": "",
   "startPro": "Pro indítása",
   "comingSoon": "Hamarosan",
   "notificationSetting": "Értesítések",
@@ -152,7 +152,7 @@
   "groupInviteMessage": "Imádkozzunk együtt! Csatlakozz az imacsoportomhoz az Abba-ban.",
   "noGroups": "Csatlakozz vagy hozz létre egy csoportot a közös imádkozáshoz.",
   "promoTitle": "Bevezető akció",
-  "promoBanner": "Az első 3 hónap 1590Ft/hó!",
+  "promoBanner": "",
   "promoEndsOn": "Az ajánlat lejár: {date}",
   "@promoEndsOn": {
     "placeholders": {
@@ -248,6 +248,7 @@
   "originalWordNuanceLabel": "Árnyalat vs fordítás",
   "originalWordsCountLabel": "{count} szó",
   "seeMore": "Több megtekintése",
+  "seeLess": "Kevesebb megtekintése",
   "seeAllComments": "Mind a {count} hozzászólás megtekintése",
   "@seeAllComments": {
     "placeholders": {
@@ -552,5 +553,15 @@
   "aiErrorApiBody": "Az imádságod biztonságban van elmentve. Kérjük, próbáld újra egy pillanat múlva.",
   "aiErrorRetry": "Próbáld újra",
   "aiErrorWaitAndCheck": "Később újra megpróbáljuk az elemzést. Gyere vissza hamarosan — az imádságod várni fog.",
-  "aiErrorHome": "Vissza a főoldalra"
+  "aiErrorHome": "Vissza a főoldalra",
+  "trialStartCta": "Start 1 month free",
+  "trialAutoRenewDisclosure": "Then {price}/year, auto-renews. Cancel anytime in Settings.",
+  "@trialAutoRenewDisclosure": {
+    "placeholders": {
+      "price": {}
+    }
+  },
+  "trialLimitTitle": "You've prayed 3 times today 🌸",
+  "trialLimitBody": "Come back tomorrow — or unlock unlimited prayer with Pro.",
+  "trialLimitCta": "Continue with Pro"
 }

@@ -281,7 +281,7 @@ class AppLocalizationsUk extends AppLocalizations {
   String get yearlySave => 'Економія 40%';
 
   @override
-  String get launchPromo => '3 місяці за 159₴/міс.!';
+  String get launchPromo => '';
 
   @override
   String get startPro => 'Почати Pro';
@@ -409,7 +409,7 @@ class AppLocalizationsUk extends AppLocalizations {
   String get promoTitle => 'Спеціальна пропозиція';
 
   @override
-  String get promoBanner => 'Перші 3 місяці за 159₴/міс.!';
+  String get promoBanner => '';
 
   @override
   String promoEndsOn(Object date) {
@@ -675,6 +675,9 @@ class AppLocalizationsUk extends AppLocalizations {
 
   @override
   String get seeMore => 'Показати більше';
+
+  @override
+  String get seeLess => 'Показати менше';
 
   @override
   String seeAllComments(Object count) {
@@ -1310,4 +1313,22 @@ class AppLocalizationsUk extends AppLocalizations {
 
   @override
   String get sectionStatusPending => 'Аналіз виконується';
+
+  @override
+  String get trialStartCta => 'Start 1 month free';
+
+  @override
+  String trialAutoRenewDisclosure(Object price) {
+    return 'Then $price/year, auto-renews. Cancel anytime in Settings.';
+  }
+
+  @override
+  String get trialLimitTitle => 'You\'ve prayed 3 times today 🌸';
+
+  @override
+  String get trialLimitBody =>
+      'Come back tomorrow — or unlock unlimited prayer with Pro.';
+
+  @override
+  String get trialLimitCta => 'Continue with Pro';
 }

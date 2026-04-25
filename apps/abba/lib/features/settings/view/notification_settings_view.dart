@@ -40,7 +40,9 @@ class NotificationSettingsView extends ConsumerWidget {
                           .read(notificationServiceProvider)
                           .updateSettings(morningReminder: v);
                       ref.invalidate(notificationSettingsProvider);
-                      fcmLog.info('Morning reminder ${v ? "enabled" : "disabled"}');
+                      fcmLog.info(
+                        'Morning reminder ${v ? "enabled" : "disabled"}',
+                      );
                     },
                     activeTrackColor: AbbaColors.sage,
                   ),
@@ -55,8 +57,9 @@ class NotificationSettingsView extends ConsumerWidget {
                       final currentTime = settings?.morningTime ?? '06:00';
                       final parts = currentTime.split(':');
                       final hour = int.tryParse(parts[0]) ?? 6;
-                      final minute =
-                          parts.length > 1 ? int.tryParse(parts[1]) ?? 0 : 0;
+                      final minute = parts.length > 1
+                          ? int.tryParse(parts[1]) ?? 0
+                          : 0;
 
                       final time = await showTimePicker(
                         context: context,
@@ -86,7 +89,9 @@ class NotificationSettingsView extends ConsumerWidget {
                           .read(notificationServiceProvider)
                           .updateSettings(eveningReminder: v);
                       ref.invalidate(notificationSettingsProvider);
-                      fcmLog.info('Evening reminder ${v ? "enabled" : "disabled"}');
+                      fcmLog.info(
+                        'Evening reminder ${v ? "enabled" : "disabled"}',
+                      );
                     },
                     activeTrackColor: AbbaColors.sage,
                   ),
@@ -103,7 +108,9 @@ class NotificationSettingsView extends ConsumerWidget {
                           .read(notificationServiceProvider)
                           .updateSettings(afternoonNudge: v);
                       ref.invalidate(notificationSettingsProvider);
-                      fcmLog.info('Afternoon nudge ${v ? "enabled" : "disabled"}');
+                      fcmLog.info(
+                        'Afternoon nudge ${v ? "enabled" : "disabled"}',
+                      );
                     },
                     activeTrackColor: AbbaColors.sage,
                   ),
@@ -120,7 +127,9 @@ class NotificationSettingsView extends ConsumerWidget {
                           .read(notificationServiceProvider)
                           .updateSettings(streakReminder: v);
                       ref.invalidate(notificationSettingsProvider);
-                      fcmLog.info('Streak reminder ${v ? "enabled" : "disabled"}');
+                      fcmLog.info(
+                        'Streak reminder ${v ? "enabled" : "disabled"}',
+                      );
                     },
                     activeTrackColor: AbbaColors.sage,
                   ),
@@ -137,7 +146,9 @@ class NotificationSettingsView extends ConsumerWidget {
                           .read(notificationServiceProvider)
                           .updateSettings(weeklySummary: v);
                       ref.invalidate(notificationSettingsProvider);
-                      fcmLog.info('Weekly summary ${v ? "enabled" : "disabled"}');
+                      fcmLog.info(
+                        'Weekly summary ${v ? "enabled" : "disabled"}',
+                      );
                     },
                     activeTrackColor: AbbaColors.sage,
                   ),
@@ -172,7 +183,8 @@ class _NotificationTile extends StatelessWidget {
         title,
         style: AbbaTypography.body.copyWith(color: AbbaColors.warmBrown),
       ),
-      trailing: trailing ??
+      trailing:
+          trailing ??
           (onTap != null
               ? const Icon(Icons.chevron_right, color: AbbaColors.muted)
               : null),

@@ -91,11 +91,7 @@ void main() {
         'qt_passage_ref': 'Psalm 23:1',
         'created_at': '2026-04-20T08:00:00Z',
         'result': {
-          'meditation_summary': {
-            'summary': 's',
-            'topic': 't',
-            'insight': 'i',
-          },
+          'meditation_summary': {'summary': 's', 'topic': 't', 'insight': 'i'},
           'scripture': {'reference': 'Psalm 23:1'},
           'application': {
             'morning_action': 'm',
@@ -145,49 +141,55 @@ void main() {
       expect(prayer.result!.scripture.reference, 'Psalm 23:1');
     });
 
-    test('result=null → both result and qtResult stay null (legacy QT row)', () {
-      final json = {
-        'id': 'qt-legacy',
-        'user_id': 'user-1',
-        'transcript': 'Legacy QT before Phase 5D',
-        'mode': 'qt',
-        'qt_passage_ref': 'Psalm 1:1',
-        'created_at': '2026-04-01T08:00:00Z',
-        'result': null,
-      };
+    test(
+      'result=null → both result and qtResult stay null (legacy QT row)',
+      () {
+        final json = {
+          'id': 'qt-legacy',
+          'user_id': 'user-1',
+          'transcript': 'Legacy QT before Phase 5D',
+          'mode': 'qt',
+          'qt_passage_ref': 'Psalm 1:1',
+          'created_at': '2026-04-01T08:00:00Z',
+          'result': null,
+        };
 
-      final prayer = Prayer.fromJson(json);
+        final prayer = Prayer.fromJson(json);
 
-      expect(prayer.mode, 'qt');
-      expect(prayer.result, isNull);
-      expect(prayer.qtResult, isNull);
-      expect(prayer.qtPassageRef, 'Psalm 1:1');
-    });
+        expect(prayer.mode, 'qt');
+        expect(prayer.result, isNull);
+        expect(prayer.qtResult, isNull);
+        expect(prayer.qtPassageRef, 'Psalm 1:1');
+      },
+    );
 
-    test('QT round-trip Prayer.qtResult → toJson → fromJson preserves payload', () {
-      final qt = QtMeditationResult.fromJson({
-        'meditation_summary': {'summary': 's', 'topic': 't', 'insight': 'i'},
-        'scripture': {'reference': 'John 10:11'},
-        'application': {'action': 'read aloud'},
-        'knowledge': {},
-      });
-      final jsonb = qt.toJson();
+    test(
+      'QT round-trip Prayer.qtResult → toJson → fromJson preserves payload',
+      () {
+        final qt = QtMeditationResult.fromJson({
+          'meditation_summary': {'summary': 's', 'topic': 't', 'insight': 'i'},
+          'scripture': {'reference': 'John 10:11'},
+          'application': {'action': 'read aloud'},
+          'knowledge': {},
+        });
+        final jsonb = qt.toJson();
 
-      // Simulate DB row read: same JSONB encoded back into a Prayer row.
-      final row = {
-        'id': 'qt-rt',
-        'user_id': 'u',
-        'transcript': 'text',
-        'mode': 'qt',
-        'qt_passage_ref': 'John 10:11',
-        'created_at': '2026-04-20T10:00:00Z',
-        'result': jsonb,
-      };
-      final prayer = Prayer.fromJson(row);
-      expect(prayer.qtResult, isNotNull);
-      expect(prayer.qtResult!.scripture.reference, 'John 10:11');
-      expect(prayer.qtResult!.application.action, 'read aloud');
-    });
+        // Simulate DB row read: same JSONB encoded back into a Prayer row.
+        final row = {
+          'id': 'qt-rt',
+          'user_id': 'u',
+          'transcript': 'text',
+          'mode': 'qt',
+          'qt_passage_ref': 'John 10:11',
+          'created_at': '2026-04-20T10:00:00Z',
+          'result': jsonb,
+        };
+        final prayer = Prayer.fromJson(row);
+        expect(prayer.qtResult, isNotNull);
+        expect(prayer.qtResult!.scripture.reference, 'John 10:11');
+        expect(prayer.qtResult!.application.action, 'read aloud');
+      },
+    );
   });
 
   group('PrayerResult', () {

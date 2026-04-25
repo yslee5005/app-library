@@ -95,10 +95,6 @@ class _TypewriterTextState extends State<TypewriterText> {
 
   @override
   Widget build(BuildContext context) {
-    return Text(
-      _displayed,
-      style: widget.style,
-      textAlign: widget.textAlign,
-    );
+    return Text(_displayed, style: widget.style, textAlign: widget.textAlign);
   }
 }

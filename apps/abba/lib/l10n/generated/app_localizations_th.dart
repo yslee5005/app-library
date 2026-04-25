@@ -279,7 +279,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get yearlySave => 'ประหยัด 40%';
 
   @override
-  String get launchPromo => '3 เดือนแรก ฿159/เดือน!';
+  String get launchPromo => '';
 
   @override
   String get startPro => 'เริ่มต้น Pro';
@@ -403,7 +403,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get promoTitle => 'โปรโมชันพิเศษ';
 
   @override
-  String get promoBanner => '3 เดือนแรก ฿159/เดือน!';
+  String get promoBanner => '';
 
   @override
   String promoEndsOn(Object date) {
@@ -666,6 +666,9 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get seeMore => 'ดูเพิ่มเติม';
+
+  @override
+  String get seeLess => 'แสดงน้อยลง';
 
   @override
   String seeAllComments(Object count) {
@@ -1302,4 +1305,22 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get sectionStatusPending => 'กำลังวิเคราะห์';
+
+  @override
+  String get trialStartCta => 'เริ่ม 1 เดือนฟรี';
+
+  @override
+  String trialAutoRenewDisclosure(Object price) {
+    return 'หลังจากนั้น $price/ปี ต่ออายุอัตโนมัติ ยกเลิกได้ตลอดเวลาในการตั้งค่า';
+  }
+
+  @override
+  String get trialLimitTitle => 'วันนี้คุณได้อธิษฐานไปแล้ว 3 ครั้ง 🌸';
+
+  @override
+  String get trialLimitBody =>
+      'แล้วพบกันใหม่พรุ่งนี้ — หรือปลดล็อกการอธิษฐานไม่จำกัดด้วย Pro';
+
+  @override
+  String get trialLimitCta => 'ดำเนินการต่อด้วย Pro';
 }

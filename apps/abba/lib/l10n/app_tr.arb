@@ -103,7 +103,7 @@
   "monthlyPrice": "₺219 / ay",
   "yearlyPrice": "₺1.590 / yıl",
   "yearlySave": "%40 Tasarruf",
-  "launchPromo": "3 ay boyunca ₺129/ay!",
+  "launchPromo": "",
   "startPro": "Pro Başlat",
   "comingSoon": "Yakında",
   "notificationSetting": "Bildirimler",
@@ -152,7 +152,7 @@
   "groupInviteMessage": "Birlikte dua edelim! Abba'daki dua grubuma katıl.",
   "noGroups": "Birlikte dua etmek için bir gruba katılın veya oluşturun.",
   "promoTitle": "Lansman Özel",
-  "promoBanner": "İlk 3 ay ₺129/ay!",
+  "promoBanner": "",
   "promoEndsOn": "Teklif {date} tarihinde sona erer",
   "@promoEndsOn": {
     "placeholders": {
@@ -248,6 +248,7 @@
   "originalWordNuanceLabel": "Çeviri farkı",
   "originalWordsCountLabel": "{count} kelime",
   "seeMore": "Daha fazla",
+  "seeLess": "Daha az",
   "seeAllComments": "Tüm {count} yorumu gör",
   "@seeAllComments": {
     "placeholders": {
@@ -552,5 +553,15 @@
   "aiErrorApiBody": "Duan güvenle kaydedildi. Lütfen biraz sonra tekrar deneyin.",
   "aiErrorRetry": "Tekrar dene",
   "aiErrorWaitAndCheck": "Analizi daha sonra tekrar deneyeceğiz. Yakında tekrar gelin — duanız sizi bekliyor olacak.",
-  "aiErrorHome": "Ana sayfaya dön"
+  "aiErrorHome": "Ana sayfaya dön",
+  "trialStartCta": "1 ay ücretsiz başla",
+  "trialAutoRenewDisclosure": "Ardından {price}/yıl, otomatik yenilenir. Ayarlar'dan istediğin zaman iptal edebilirsin.",
+  "@trialAutoRenewDisclosure": {
+    "placeholders": {
+      "price": {}
+    }
+  },
+  "trialLimitTitle": "Bugün 3 kez dua ettiniz 🌸",
+  "trialLimitBody": "Yarın tekrar gel — veya Pro ile sınırsız duanın kilidini aç.",
+  "trialLimitCta": "Pro ile devam et"
 }

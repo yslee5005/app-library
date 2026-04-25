@@ -16,8 +16,9 @@ import '../../../helpers/test_fixtures.dart';
 ///   - Hides the topic row when topic is empty.
 void main() {
   group('MeditationSummaryCard', () {
-    testWidgets('renders all three fields (summary, topic, insight)',
-        (tester) async {
+    testWidgets('renders all three fields (summary, topic, insight)', (
+      tester,
+    ) async {
       final summary = TestFixtures.meditationSummary();
 
       await tester.pumpWidget(
@@ -50,8 +51,9 @@ void main() {
       expect(find.text(summary.insight), findsOneWidget);
     });
 
-    testWidgets('empty summary → renders SizedBox.shrink (hidden)',
-        (tester) async {
+    testWidgets('empty summary → renders SizedBox.shrink (hidden)', (
+      tester,
+    ) async {
       const empty = MeditationSummary(summary: '', topic: '', insight: '');
 
       await tester.pumpWidget(

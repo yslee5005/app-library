@@ -58,13 +58,8 @@ void main() {
           'depth': 4,
           'authenticity': 4,
         },
-        'strengths': [
-          '본문의 핵심을 잘 포착하셨어요.',
-          '일상과 연결한 점이 좋습니다.',
-        ],
-        'improvements': [
-          '오늘의 작은 행동을 한 가지 더하시면 3P 적용이 완성됩니다.',
-        ],
+        'strengths': ['본문의 핵심을 잘 포착하셨어요.', '일상과 연결한 점이 좋습니다.'],
+        'improvements': ['오늘의 작은 행동을 한 가지 더하시면 3P 적용이 완성됩니다.'],
         'overall_feedback_en':
             'Your meditation shows honest reflection and trust.',
         'overall_feedback_ko': '신뢰가 아름답게 드러난 묵상이에요.',

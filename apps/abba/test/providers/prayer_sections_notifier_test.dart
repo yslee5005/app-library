@@ -66,7 +66,10 @@ void main() {
     test('reset clears all sections and the subscription', () {
       notifier.setT1(
         summary: const PrayerSummary(
-            gratitude: ['a'], petition: [], intercession: []),
+          gratitude: ['a'],
+          petition: [],
+          intercession: [],
+        ),
         scripture: const Scripture(reference: 'Psalm 23:1'),
       );
       notifier.markT3Triggered();
@@ -84,74 +87,82 @@ void main() {
       expect(notifier.state.failedTiers.keys, contains('t2'));
     });
 
-    test('startPrayerStream: T1 then T2 update state and persist in order',
-        () async {
-      final repo = _RecordingRepo();
-      final controller = StreamController<TierResult>();
-      final t1Completer = Completer<TierT1Result>();
+    test(
+      'startPrayerStream: T1 then T2 update state and persist in order',
+      () async {
+        final repo = _RecordingRepo();
+        final controller = StreamController<TierResult>();
+        final t1Completer = Completer<TierT1Result>();
 
-      notifier.startPrayerStream(
-        stream: controller.stream,
-        repo: repo,
-        prayerId: 'p1',
-        t1Completer: t1Completer,
-      );
+        notifier.startPrayerStream(
+          stream: controller.stream,
+          repo: repo,
+          prayerId: 'p1',
+          t1Completer: t1Completer,
+        );
 
-      final t1 = TierT1Result(
-        summary: const PrayerSummary(
-            gratitude: ['g'], petition: [], intercession: []),
-        scripture: const Scripture(reference: 'Psalm 23:1'),
-      );
-      controller.add(t1);
-      final arrived = await t1Completer.future;
-      expect(arrived.scripture.reference, 'Psalm 23:1');
-      expect(notifier.state.isT1Complete, isTrue);
+        final t1 = TierT1Result(
+          summary: const PrayerSummary(
+            gratitude: ['g'],
+            petition: [],
+            intercession: [],
+          ),
+          scripture: const Scripture(reference: 'Psalm 23:1'),
+        );
+        controller.add(t1);
+        final arrived = await t1Completer.future;
+        expect(arrived.scripture.reference, 'Psalm 23:1');
+        expect(notifier.state.isT1Complete, isTrue);
 
-      controller.add(const TierT2Result(
-        bibleStory: BibleStory(title: 'story', summary: 's'),
-        testimony: 'testimony text',
-      ));
-      await controller.close();
-      // Let microtasks drain.
-      await Future<void>.delayed(Duration.zero);
+        controller.add(
+          const TierT2Result(
+            bibleStory: BibleStory(title: 'story', summary: 's'),
+            testimony: 'testimony text',
+          ),
+        );
+        await controller.close();
+        // Let microtasks drain.
+        await Future<void>.delayed(Duration.zero);
 
-      expect(notifier.state.isT2Complete, isTrue);
-      expect(notifier.state.testimony, 'testimony text');
-      expect(repo.calls.length, 2);
-      expect(repo.calls[0].$1, 'p1');
-      expect(repo.calls[0].$2, 't1');
-      expect(repo.calls[1].$2, 't2');
-    });
+        expect(notifier.state.isT2Complete, isTrue);
+        expect(notifier.state.testimony, 'testimony text');
+        expect(repo.calls.length, 2);
+        expect(repo.calls[0].$1, 'p1');
+        expect(repo.calls[0].$2, 't1');
+        expect(repo.calls[1].$2, 't2');
+      },
+    );
 
-    test('startPrayerStream: TierFailed on t1 surfaces to t1Completer',
-        () async {
-      final repo = _RecordingRepo();
-      final controller = StreamController<TierResult>();
-      final t1Completer = Completer<TierT1Result>();
+    test(
+      'startPrayerStream: TierFailed on t1 surfaces to t1Completer',
+      () async {
+        final repo = _RecordingRepo();
+        final controller = StreamController<TierResult>();
+        final t1Completer = Completer<TierT1Result>();
 
-      notifier.startPrayerStream(
-        stream: controller.stream,
-        repo: repo,
-        prayerId: 'p1',
-        t1Completer: t1Completer,
-      );
+        notifier.startPrayerStream(
+          stream: controller.stream,
+          repo: repo,
+          prayerId: 'p1',
+          t1Completer: t1Completer,
+        );
 
-      controller.add(const TierFailed(
-        tier: 't1',
-        error: AiAnalysisException(
-          'net',
-          kind: AiAnalysisFailureKind.network,
-        ),
-      ));
+        controller.add(
+          const TierFailed(
+            tier: 't1',
+            error: AiAnalysisException(
+              'net',
+              kind: AiAnalysisFailureKind.network,
+            ),
+          ),
+        );
 
-      expect(
-        t1Completer.future,
-        throwsA(isA<AiAnalysisException>()),
-      );
-      await Future<void>.delayed(Duration.zero);
-      expect(notifier.state.failedTiers['t1'], isNotNull);
-      await controller.close();
-    });
+        expect(t1Completer.future, throwsA(isA<AiAnalysisException>()));
+        await Future<void>.delayed(Duration.zero);
+        expect(notifier.state.failedTiers['t1'], isNotNull);
+        await controller.close();
+      },
+    );
 
     test('setAllFromResult fills every section at once', () {
       final result = PrayerResult(
@@ -169,33 +180,37 @@ void main() {
       expect(notifier.state.isT2Complete, isTrue);
     });
 
-    test('QT tier events on the prayer stream are ignored gracefully',
-        () async {
-      final repo = _RecordingRepo();
-      final controller = StreamController<TierResult>();
-      final t1Completer = Completer<TierT1Result>();
+    test(
+      'QT tier events on the prayer stream are ignored gracefully',
+      () async {
+        final repo = _RecordingRepo();
+        final controller = StreamController<TierResult>();
+        final t1Completer = Completer<TierT1Result>();
 
-      notifier.startPrayerStream(
-        stream: controller.stream,
-        repo: repo,
-        prayerId: 'p1',
-        t1Completer: t1Completer,
-      );
+        notifier.startPrayerStream(
+          stream: controller.stream,
+          repo: repo,
+          prayerId: 'p1',
+          t1Completer: t1Completer,
+        );
 
-      controller.add(const QtTierT1Result(
-        meditationSummary: MeditationSummary(
-          topic: 't',
-          summary: 's',
-          insight: 'i',
-        ),
-        scripture: Scripture(reference: 'r'),
-      ));
-      await Future<void>.delayed(Duration.zero);
-      expect(notifier.state.summary, isNull);
-      expect(repo.calls, isEmpty);
-      expect(t1Completer.isCompleted, isFalse);
-      await controller.close();
-    });
+        controller.add(
+          const QtTierT1Result(
+            meditationSummary: MeditationSummary(
+              topic: 't',
+              summary: 's',
+              insight: 'i',
+            ),
+            scripture: Scripture(reference: 'r'),
+          ),
+        );
+        await Future<void>.delayed(Duration.zero);
+        expect(notifier.state.summary, isNull);
+        expect(repo.calls, isEmpty);
+        expect(t1Completer.isCompleted, isFalse);
+        await controller.close();
+      },
+    );
 
     test('startPrayerStream: TierT1ScriptureRef resolves completer with '
         'placeholder summary + stashes reference', () async {
@@ -223,62 +238,66 @@ void main() {
       await controller.close();
     });
 
-    test('startPrayerStream: T1 payload shape includes all scripture fields',
-        () async {
-      final repo = _RecordingRepo();
-      final controller = StreamController<TierResult>();
-      final t1Completer = Completer<TierT1Result>();
+    test(
+      'startPrayerStream: T1 payload shape includes all scripture fields',
+      () async {
+        final repo = _RecordingRepo();
+        final controller = StreamController<TierResult>();
+        final t1Completer = Completer<TierT1Result>();
 
-      notifier.startPrayerStream(
-        stream: controller.stream,
-        repo: repo,
-        prayerId: 'p-shape',
-        t1Completer: t1Completer,
-      );
+        notifier.startPrayerStream(
+          stream: controller.stream,
+          repo: repo,
+          prayerId: 'p-shape',
+          t1Completer: t1Completer,
+        );
 
-      controller.add(TierT1Result(
-        summary: const PrayerSummary(
-          gratitude: ['g1', 'g2'],
-          petition: ['p1'],
-          intercession: [],
-        ),
-        scripture: const Scripture(
-          reference: 'Psalm 23:1',
-          verse: 'The LORD is my shepherd...',
-          reason: 'comfort',
-          posture: 'read slowly',
-          keyWordHint: 'shepherd = ro\'i',
-          originalWords: [
-            ScriptureOriginalWord(
-              word: 'רֹעִי',
-              transliteration: 'ro\'i',
-              language: 'Hebrew',
-              meaning: 'my shepherd',
+        controller.add(
+          TierT1Result(
+            summary: const PrayerSummary(
+              gratitude: ['g1', 'g2'],
+              petition: ['p1'],
+              intercession: [],
             ),
-          ],
-        ),
-      ));
-      await t1Completer.future;
-      await Future<void>.delayed(Duration.zero);
+            scripture: const Scripture(
+              reference: 'Psalm 23:1',
+              verse: 'The LORD is my shepherd...',
+              reason: 'comfort',
+              posture: 'read slowly',
+              keyWordHint: 'shepherd = ro\'i',
+              originalWords: [
+                ScriptureOriginalWord(
+                  word: 'רֹעִי',
+                  transliteration: 'ro\'i',
+                  language: 'Hebrew',
+                  meaning: 'my shepherd',
+                ),
+              ],
+            ),
+          ),
+        );
+        await t1Completer.future;
+        await Future<void>.delayed(Duration.zero);
 
-      expect(repo.calls.length, 1);
-      final (pid, tier, payload) = repo.calls.first;
-      expect(pid, 'p-shape');
-      expect(tier, 't1');
-      expect(payload['prayer_summary'], {
-        'gratitude': ['g1', 'g2'],
-        'petition': ['p1'],
-        'intercession': <String>[],
-      });
-      final sc = payload['scripture'] as Map;
-      expect(sc['reference'], 'Psalm 23:1');
-      expect(sc['verse'], 'The LORD is my shepherd...');
-      expect(sc['key_word_hint'], 'shepherd = ro\'i');
-      final words = sc['original_words'] as List;
-      expect(words, hasLength(1));
-      expect((words.first as Map)['transliteration'], 'ro\'i');
-      await controller.close();
-    });
+        expect(repo.calls.length, 1);
+        final (pid, tier, payload) = repo.calls.first;
+        expect(pid, 'p-shape');
+        expect(tier, 't1');
+        expect(payload['prayer_summary'], {
+          'gratitude': ['g1', 'g2'],
+          'petition': ['p1'],
+          'intercession': <String>[],
+        });
+        final sc = payload['scripture'] as Map;
+        expect(sc['reference'], 'Psalm 23:1');
+        expect(sc['verse'], 'The LORD is my shepherd...');
+        expect(sc['key_word_hint'], 'shepherd = ro\'i');
+        final words = sc['original_words'] as List;
+        expect(words, hasLength(1));
+        expect((words.first as Map)['transliteration'], 'ro\'i');
+        await controller.close();
+      },
+    );
 
     test('startPrayerStream: T3 payload omits null sections', () async {
       final repo = _RecordingRepo();
@@ -293,17 +312,24 @@ void main() {
       );
 
       // Fast-forward past T1 so we can get to T3 assertion.
-      controller.add(TierT1Result(
-        summary: const PrayerSummary(
-            gratitude: [], petition: [], intercession: []),
-        scripture: const Scripture(reference: 'John 3:16'),
-      ));
+      controller.add(
+        TierT1Result(
+          summary: const PrayerSummary(
+            gratitude: [],
+            petition: [],
+            intercession: [],
+          ),
+          scripture: const Scripture(reference: 'John 3:16'),
+        ),
+      );
       await t1Completer.future;
 
       // Partial T3 — only guidance, others null.
-      controller.add(const TierT3Result(
-        guidance: Guidance(content: 'take a small step', isPremium: true),
-      ));
+      controller.add(
+        const TierT3Result(
+          guidance: Guidance(content: 'take a small step', isPremium: true),
+        ),
+      );
       await Future<void>.delayed(Duration.zero);
 
       final t3Call = repo.calls.firstWhere((c) => c.$2 == 't3');

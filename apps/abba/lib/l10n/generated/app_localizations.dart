@@ -677,7 +677,7 @@ abstract class AppLocalizations {
   /// No description provided for @launchPromo.
   ///
   /// In en, this message translates to:
-  /// **'3 months at \$3.99/mo!'**
+  /// **''**
   String get launchPromo;
 
   /// No description provided for @startPro.
@@ -911,7 +911,7 @@ abstract class AppLocalizations {
   /// No description provided for @promoBanner.
   ///
   /// In en, this message translates to:
-  /// **'First 3 months at \$3.99/mo!'**
+  /// **''**
   String get promoBanner;
 
   /// No description provided for @promoEndsOn.
@@ -1423,6 +1423,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'See more'**
   String get seeMore;
+
+  /// No description provided for @seeLess.
+  ///
+  /// In en, this message translates to:
+  /// **'See less'**
+  String get seeLess;
 
   /// No description provided for @seeAllComments.
   ///
@@ -2569,6 +2575,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Analysis in progress'**
   String get sectionStatusPending;
+
+  /// No description provided for @trialStartCta.
+  ///
+  /// In en, this message translates to:
+  /// **'Start 1 month free'**
+  String get trialStartCta;
+
+  /// No description provided for @trialAutoRenewDisclosure.
+  ///
+  /// In en, this message translates to:
+  /// **'Then {price}/year, auto-renews. Cancel anytime in Settings.'**
+  String trialAutoRenewDisclosure(Object price);
+
+  /// No description provided for @trialLimitTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'You\'ve prayed 3 times today 🌸'**
+  String get trialLimitTitle;
+
+  /// No description provided for @trialLimitBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Come back tomorrow — or unlock unlimited prayer with Pro.'**
+  String get trialLimitBody;
+
+  /// No description provided for @trialLimitCta.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue with Pro'**
+  String get trialLimitCta;
 }
 
 class _AppLocalizationsDelegate

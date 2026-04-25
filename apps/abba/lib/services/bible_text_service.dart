@@ -42,6 +42,7 @@ class _BundleDescriptor {
   final String locale;
   final String code;
   final String name;
+
   /// Short license tag for the Settings attribution page.
   /// Defaults to "Public Domain" — override for CC-licensed bundles.
   final String license;
@@ -61,8 +62,8 @@ class SupabaseStorageBibleTextService implements BibleTextService {
   SupabaseStorageBibleTextService({
     SupabaseClient? client,
     String bucket = 'abba',
-  })  : _client = client ?? Supabase.instance.client,
-        _bucket = bucket;
+  }) : _client = client ?? Supabase.instance.client,
+       _bucket = bucket;
 
   final SupabaseClient _client;
   final String _bucket;
@@ -74,33 +75,89 @@ class SupabaseStorageBibleTextService implements BibleTextService {
   /// `apps/abba/specs/bible_text_i18n/COPYRIGHT.md`.
   static const Map<String, _BundleDescriptor> _bundles = {
     'ko': _BundleDescriptor(locale: 'ko', code: 'krv', name: '개역한글 (KRV)'),
-    'en': _BundleDescriptor(locale: 'en', code: 'web', name: 'World English Bible'),
-    'es': _BundleDescriptor(locale: 'es', code: 'rv1909', name: 'Reina-Valera Antigua'),
-    'fr': _BundleDescriptor(locale: 'fr', code: 'synodale', name: 'Synodale 1921'),
-    'de': _BundleDescriptor(locale: 'de', code: 'elb1905', name: 'Elberfelder 1905'),
+    'en': _BundleDescriptor(
+      locale: 'en',
+      code: 'web',
+      name: 'World English Bible',
+    ),
+    'es': _BundleDescriptor(
+      locale: 'es',
+      code: 'rv1909',
+      name: 'Reina-Valera Antigua',
+    ),
+    'fr': _BundleDescriptor(
+      locale: 'fr',
+      code: 'synodale',
+      name: 'Synodale 1921',
+    ),
+    'de': _BundleDescriptor(
+      locale: 'de',
+      code: 'elb1905',
+      name: 'Elberfelder 1905',
+    ),
     'pt': _BundleDescriptor(locale: 'pt', code: 'almeida', name: 'Almeida'),
-    'ru': _BundleDescriptor(locale: 'ru', code: 'synodal', name: 'Synodal 1876'),
-    'zh': _BundleDescriptor(locale: 'zh', code: 'union', name: '和合本 (Chinese Union Version)'),
+    'ru': _BundleDescriptor(
+      locale: 'ru',
+      code: 'synodal',
+      name: 'Synodal 1876',
+    ),
+    'zh': _BundleDescriptor(
+      locale: 'zh',
+      code: 'union',
+      name: '和合本 (Chinese Union Version)',
+    ),
     'ja': _BundleDescriptor(locale: 'ja', code: 'kougo', name: '口語訳'),
     'nl': _BundleDescriptor(locale: 'nl', code: 'svv', name: 'Statenvertaling'),
     'el': _BundleDescriptor(locale: 'el', code: 'vamvas', name: 'Βάμβας'),
-    'pl': _BundleDescriptor(locale: 'pl', code: 'gdanska', name: 'Biblia Gdańska'),
+    'pl': _BundleDescriptor(
+      locale: 'pl',
+      code: 'gdanska',
+      name: 'Biblia Gdańska',
+    ),
     'cs': _BundleDescriptor(locale: 'cs', code: 'bkr', name: 'Bible Kralická'),
-    'he': _BundleDescriptor(locale: 'he', code: 'modern', name: 'Modern Hebrew Bible'),
+    'he': _BundleDescriptor(
+      locale: 'he',
+      code: 'modern',
+      name: 'Modern Hebrew Bible',
+    ),
     'sv': _BundleDescriptor(locale: 'sv', code: '1917', name: 'Bibeln 1917'),
-    'fi': _BundleDescriptor(locale: 'fi', code: 'pr1933', name: 'Raamattu 1933/38'),
+    'fi': _BundleDescriptor(
+      locale: 'fi',
+      code: 'pr1933',
+      name: 'Raamattu 1933/38',
+    ),
     'hu': _BundleDescriptor(locale: 'hu', code: 'karoli', name: 'Károli'),
-    'vi': _BundleDescriptor(locale: 'vi', code: 'bible', name: 'Kinh Thánh Việt'),
-    'fil': _BundleDescriptor(locale: 'fil', code: 'adb', name: 'Ang Dating Biblia'),
-    'ro': _BundleDescriptor(locale: 'ro', code: 'ronc', name: 'Cornilescu 1924'),
-    'it': _BundleDescriptor(locale: 'it', code: 'diodati', name: 'Diodati 1927'),
+    'vi': _BundleDescriptor(
+      locale: 'vi',
+      code: 'bible',
+      name: 'Kinh Thánh Việt',
+    ),
+    'fil': _BundleDescriptor(
+      locale: 'fil',
+      code: 'adb',
+      name: 'Ang Dating Biblia',
+    ),
+    'ro': _BundleDescriptor(
+      locale: 'ro',
+      code: 'ronc',
+      name: 'Cornilescu 1924',
+    ),
+    'it': _BundleDescriptor(
+      locale: 'it',
+      code: 'diodati',
+      name: 'Diodati 1927',
+    ),
     'id': _BundleDescriptor(
       locale: 'id',
       code: 'tl',
       name: 'Alkitab BahasaKita (Albata)',
       license: 'CC BY-SA 4.0 · © Yayasan Alkitab BahasaKita',
     ),
-    'sw': _BundleDescriptor(locale: 'sw', code: 'swh1850', name: 'Swahili 1850 (NT)'),
+    'sw': _BundleDescriptor(
+      locale: 'sw',
+      code: 'swh1850',
+      name: 'Swahili 1850 (NT)',
+    ),
     'tr': _BundleDescriptor(
       locale: 'tr',
       code: 'turobt',
@@ -113,10 +170,18 @@ class SupabaseStorageBibleTextService implements BibleTextService {
       name: 'Hindi Common Version',
       license: 'CC BY-SA 4.0 · © Biblica',
     ),
-    'da': _BundleDescriptor(locale: 'da', code: '1871', name: 'Dansk 1871/1907'),
+    'da': _BundleDescriptor(
+      locale: 'da',
+      code: '1871',
+      name: 'Dansk 1871/1907',
+    ),
     'uk': _BundleDescriptor(locale: 'uk', code: 'ogienko', name: 'Огієнко'),
     'my': _BundleDescriptor(locale: 'my', code: 'judson', name: 'Judson 1835'),
-    'hr': _BundleDescriptor(locale: 'hr', code: 'sh', name: 'Croatian Bible (Šarić)'),
+    'hr': _BundleDescriptor(
+      locale: 'hr',
+      code: 'sh',
+      name: 'Croatian Bible (Šarić)',
+    ),
     // CC BY-SA / BY-ND 4.0 — commercial OK with attribution (see Settings).
     'ms': _BundleDescriptor(
       locale: 'ms',
@@ -247,10 +312,7 @@ class SupabaseStorageBibleTextService implements BibleTextService {
         apiLog.debug('[Bible] file-cache miss: $locale — will download');
       }
     } catch (e) {
-      apiLog.warning(
-        '[Bible] file-cache read failed: $locale',
-        error: e,
-      );
+      apiLog.warning('[Bible] file-cache read failed: $locale', error: e);
     }
 
     // 3rd tier: download from Supabase Storage.
@@ -259,7 +321,9 @@ class SupabaseStorageBibleTextService implements BibleTextService {
       apiLog.info(
         '[Bible] download start: $locale ← $_bucket/${desc.storagePath}',
       );
-      final bytes = await _client.storage.from(_bucket).download(desc.storagePath);
+      final bytes = await _client.storage
+          .from(_bucket)
+          .download(desc.storagePath);
       final raw = utf8.decode(bytes);
       final verses = _parseVersesFromJson(raw);
       stopwatch.stop();
@@ -333,7 +397,7 @@ class SupabaseStorageBibleTextService implements BibleTextService {
     if (colon < 0) return null;
 
     final bookChapter = reference.substring(0, colon); // e.g., "Psalm 23"
-    final versePart = reference.substring(colon + 1);  // e.g., "1-3"
+    final versePart = reference.substring(colon + 1); // e.g., "1-3"
     final dash = versePart.indexOf('-');
     if (dash < 0) {
       // Single verse but direct lookup already failed.

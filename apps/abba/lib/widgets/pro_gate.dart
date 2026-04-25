@@ -18,10 +18,7 @@ import '../providers/providers.dart';
 class ProGate {
   ProGate._();
 
-  static Future<bool> run(
-    WidgetRef ref,
-    Future<void> Function() action,
-  ) async {
+  static Future<bool> run(WidgetRef ref, Future<void> Function() action) async {
     final service = ref.read(subscriptionServiceProvider);
     if (await service.isPremium) {
       await action();
@@ -39,11 +36,7 @@ class ProGate {
 /// [ProGate.run]. Use when the whole widget (a card, list tile, etc.) is
 /// premium-only. For more granular control, call [ProGate.run] directly.
 class ProGateTap extends ConsumerWidget {
-  const ProGateTap({
-    super.key,
-    required this.child,
-    required this.onAccess,
-  });
+  const ProGateTap({super.key, required this.child, required this.onAccess});
 
   final Widget child;
   final Future<void> Function() onAccess;

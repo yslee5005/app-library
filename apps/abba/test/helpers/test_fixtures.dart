@@ -27,58 +27,57 @@ class TestFixtures {
   //   - historicalStory not null
   // ---------------------------------------------------------------------------
   static PrayerResult prayerResult() => const PrayerResult(
-        scripture: Scripture(
-          reference: '시편 23:1-3',
-          verse: 'The LORD is my shepherd; I shall not want.',
-        ),
-        bibleStory: BibleStory(
-          title: 'David the Shepherd King',
-          summary:
-              'Before David became the mighty king of Israel, he was a humble shepherd boy.',
-        ),
-        testimony:
-            'Lord, thank You for this new morning. Guide my steps today.',
-        prayerSummary: PrayerSummary(
-          gratitude: ['감사합니다'],
-          petition: ['오늘 지혜를 구합니다'],
-          intercession: ['이웃을 위해 기도합니다'],
-        ),
-        historicalStory: HistoricalStory(
-          title: "Hannah's Prayer",
-          reference: '사무엘상 1-2장',
-          summary: 'Every year, the journey to Shiloh was the same...',
-          lesson: 'God hears prayers that have no sound.',
-          isPremium: true,
-        ),
-        aiPrayer: AiPrayer(
-          text:
-              'Father, before the world spun its first rotation, You were already here.',
-          isPremium: true,
-        ),
-      );
+    scripture: Scripture(
+      reference: '시편 23:1-3',
+      verse: 'The LORD is my shepherd; I shall not want.',
+    ),
+    bibleStory: BibleStory(
+      title: 'David the Shepherd King',
+      summary:
+          'Before David became the mighty king of Israel, he was a humble shepherd boy.',
+    ),
+    testimony: 'Lord, thank You for this new morning. Guide my steps today.',
+    prayerSummary: PrayerSummary(
+      gratitude: ['감사합니다'],
+      petition: ['오늘 지혜를 구합니다'],
+      intercession: ['이웃을 위해 기도합니다'],
+    ),
+    historicalStory: HistoricalStory(
+      title: "Hannah's Prayer",
+      reference: '사무엘상 1-2장',
+      summary: 'Every year, the journey to Shiloh was the same...',
+      lesson: 'God hears prayers that have no sound.',
+      isPremium: true,
+    ),
+    aiPrayer: AiPrayer(
+      text:
+          'Father, before the world spun its first rotation, You were already here.',
+      isPremium: true,
+    ),
+  );
 
   // ---------------------------------------------------------------------------
   // QtMeditationResult — minimal valid shape.
   // ---------------------------------------------------------------------------
   static QtMeditationResult qtMeditationResult() => const QtMeditationResult(
-        meditationSummary: MeditationSummary(
-          summary: 'Today I meditated on God as my shepherd.',
-          topic: "Shepherd's Care",
-          insight: 'Trusting God in uncertainty.',
-        ),
-        scripture: Scripture(reference: 'Psalm 23:1-3'),
-        application: ApplicationSuggestion(
-          morningAction: 'Thank God for one gift before rising.',
-          dayAction: 'Pause once to remember you are being led.',
-          eveningAction: 'Write one moment of care from today.',
-        ),
-        knowledge: RelatedKnowledge(
-          historicalContext: 'Psalm 23 was written by David.',
-          crossReferences: [
-            CrossReference(reference: 'John 10:11', text: 'The good shepherd'),
-          ],
-        ),
-      );
+    meditationSummary: MeditationSummary(
+      summary: 'Today I meditated on God as my shepherd.',
+      topic: "Shepherd's Care",
+      insight: 'Trusting God in uncertainty.',
+    ),
+    scripture: Scripture(reference: 'Psalm 23:1-3'),
+    application: ApplicationSuggestion(
+      morningAction: 'Thank God for one gift before rising.',
+      dayAction: 'Pause once to remember you are being led.',
+      eveningAction: 'Write one moment of care from today.',
+    ),
+    knowledge: RelatedKnowledge(
+      historicalContext: 'Psalm 23 was written by David.',
+      crossReferences: [
+        CrossReference(reference: 'John 10:11', text: 'The good shepherd'),
+      ],
+    ),
+  );
 
   // ---------------------------------------------------------------------------
   // QTPassages — 5 items, matches length + first id/reference asserted by
@@ -170,15 +169,15 @@ class TestFixtures {
   // asserted in `mock_data_service_test.dart`.
   // ---------------------------------------------------------------------------
   static UserProfile userProfile() => const UserProfile(
-        id: 'mock-user-1',
-        displayName: 'Grace',
-        email: 'grace@example.com',
-        totalPrayers: 45,
-        currentStreak: 7,
-        bestStreak: 21,
-        locale: 'en',
-        reminderTime: '06:00',
-      );
+    id: 'mock-user-1',
+    displayName: 'Grace',
+    email: 'grace@example.com',
+    totalPrayers: 45,
+    currentStreak: 7,
+    bestStreak: 21,
+    locale: 'en',
+    reminderTime: '06:00',
+  );
 
   // ---------------------------------------------------------------------------
   // Ralph #6 — Dashboard card fixtures.
@@ -187,68 +186,61 @@ class TestFixtures {
   /// AiPrayer with a representative citation per (quote/science/example) type.
   /// `isPremium` drives the ProBlur gate inside `AiPrayerCard`.
   static AiPrayer aiPrayer({bool isPremium = true}) => AiPrayer(
-        text: 'Father, guide our steps today.',
-        isPremium: isPremium,
-        citations: const [
-          Citation(
-            type: 'quote',
-            source: 'Augustine',
-            content: 'Our hearts are restless until they rest in You.',
-          ),
-          Citation(
-            type: 'science',
-            source: 'Harvard Study 2023',
-            content: 'Gratitude practice lowers cortisol by 23%.',
-          ),
-          Citation(
-            type: 'example',
-            source: '',
-            content: 'A widow keeps a morning gratitude journal.',
-          ),
-        ],
-      );
+    text: 'Father, guide our steps today.',
+    isPremium: isPremium,
+    citations: const [
+      Citation(
+        type: 'quote',
+        source: 'Augustine',
+        content: 'Our hearts are restless until they rest in You.',
+      ),
+      Citation(
+        type: 'science',
+        source: 'Harvard Study 2023',
+        content: 'Gratitude practice lowers cortisol by 23%.',
+      ),
+      Citation(
+        type: 'example',
+        source: '',
+        content: 'A widow keeps a morning gratitude journal.',
+      ),
+    ],
+  );
 
   /// GrowthStory — spiritual narrative of a biblical figure. `isPremium=true`
   /// combined with `isUserPremium=false` makes `GrowthStoryCard` show ProBlur.
   static GrowthStory growthStory({bool isPremium = true}) => GrowthStory(
-        title: 'Hannah at Shiloh',
-        summary: 'Hannah wept bitterly before the Lord, pouring out her soul.',
-        lesson: 'Even silent prayers reach God when the heart is broken.',
-        isPremium: isPremium,
-      );
+    title: 'Hannah at Shiloh',
+    summary: 'Hannah wept bitterly before the Lord, pouring out her soul.',
+    lesson: 'Even silent prayers reach God when the heart is broken.',
+    isPremium: isPremium,
+  );
 
   /// QtCoaching — realistic scores + bullets. `overallFeedback(locale)` picks
   /// the right locale variant; both are filled so `en`/`ko` tests both work.
   static QtCoaching qtCoaching() => const QtCoaching(
-        scores: QtScores(
-          comprehension: 4,
-          application: 3,
-          depth: 5,
-          authenticity: 4,
-        ),
-        strengths: [
-          'You tied the passage to your morning commute.',
-          'Your confession was specific, not generic.',
-        ],
-        improvements: [
-          'Consider memorizing one key word for the week.',
-        ],
-        overallFeedbackEn:
-            'Your meditation shows deep engagement with the text.',
-        overallFeedbackKo: '본문과 깊이 씨름하신 흔적이 느껴집니다.',
-        expertLevel: 'growing',
-      );
+    scores: QtScores(
+      comprehension: 4,
+      application: 3,
+      depth: 5,
+      authenticity: 4,
+    ),
+    strengths: [
+      'You tied the passage to your morning commute.',
+      'Your confession was specific, not generic.',
+    ],
+    improvements: ['Consider memorizing one key word for the week.'],
+    overallFeedbackEn: 'Your meditation shows deep engagement with the text.',
+    overallFeedbackKo: '본문과 깊이 씨름하신 흔적이 느껴집니다.',
+    expertLevel: 'growing',
+  );
 
   /// MeditationSummary with all three fields populated.
   static MeditationSummary meditationSummary({
     String summary = 'Today I meditated on God as my shepherd.',
     String topic = "Shepherd's Care",
     String insight = 'Trusting God in uncertainty is an act of worship.',
-  }) => MeditationSummary(
-        summary: summary,
-        topic: topic,
-        insight: insight,
-      );
+  }) => MeditationSummary(summary: summary, topic: topic, insight: insight);
 
   // ---------------------------------------------------------------------------
   // Ralph Task B — additional dashboard card fixtures.
@@ -270,51 +262,48 @@ class TestFixtures {
 
   /// HistoricalStory with reference + summary + lesson populated.
   /// `isPremium=true` combined with `isUserPremium=false` triggers ProBlur.
-  static HistoricalStory historicalStory({bool isPremium = true}) =>
-      HistoricalStory(
-        title: "Hannah's Prayer at Shiloh",
-        reference: '1 Samuel 1-2',
-        summary:
-            'Every year, Hannah went up to Shiloh with her family and wept bitterly before the Lord because she had no children.',
-        lesson: 'God hears prayers that have no sound.',
-        isPremium: isPremium,
-      );
+  static HistoricalStory historicalStory({
+    bool isPremium = true,
+  }) => HistoricalStory(
+    title: "Hannah's Prayer at Shiloh",
+    reference: '1 Samuel 1-2',
+    summary:
+        'Every year, Hannah went up to Shiloh with her family and wept bitterly before the Lord because she had no children.',
+    lesson: 'God hears prayers that have no sound.',
+    isPremium: isPremium,
+  );
 
   /// PrayerSummary with gratitude/petition/intercession bucket data.
   static PrayerSummary prayerSummary() => const PrayerSummary(
-        gratitude: [
-          'Thank You for my family.',
-          'Grateful for this morning light.',
-        ],
-        petition: ['Grant me wisdom for today\'s meeting.'],
-        intercession: [
-          'Watch over my mother\'s health.',
-          'Comfort my friend who is grieving.',
-        ],
-      );
+    gratitude: ['Thank You for my family.', 'Grateful for this morning light.'],
+    petition: ['Grant me wisdom for today\'s meeting.'],
+    intercession: [
+      'Watch over my mother\'s health.',
+      'Comfort my friend who is grieving.',
+    ],
+  );
 
   /// PrayerCoaching with realistic scores + bullets + level.
   /// `overallFeedback(locale)` picks the right locale variant.
   static PrayerCoaching prayerCoaching() => const PrayerCoaching(
-        scores: CoachingScores(
-          specificity: 4,
-          godCenteredness: 3,
-          actsBalance: 5,
-          authenticity: 4,
-        ),
-        strengths: [
-          'You prayed with concrete, specific words rather than vague phrases.',
-          'Your confession named actual situations from today.',
-        ],
-        improvements: [
-          'Consider pausing longer after praise, before moving to petition.',
-        ],
-        overallFeedbackEn:
-            'Your prayer shows strong ACTS balance and real authenticity.',
-        overallFeedbackKo:
-            '기도에 ACTS 균형과 진정성이 잘 드러납니다.',
-        expertLevel: 'growing',
-      );
+    scores: CoachingScores(
+      specificity: 4,
+      godCenteredness: 3,
+      actsBalance: 5,
+      authenticity: 4,
+    ),
+    strengths: [
+      'You prayed with concrete, specific words rather than vague phrases.',
+      'Your confession named actual situations from today.',
+    ],
+    improvements: [
+      'Consider pausing longer after praise, before moving to petition.',
+    ],
+    overallFeedbackEn:
+        'Your prayer shows strong ACTS balance and real authenticity.',
+    overallFeedbackKo: '기도에 ACTS 균형과 진정성이 잘 드러납니다.',
+    expertLevel: 'growing',
+  );
 
   /// RelatedKnowledge fixture with `originalWord`, `historicalContext`,
   /// and at least one `crossReference`. `includeOriginalWord=false` lets
@@ -322,28 +311,25 @@ class TestFixtures {
   static RelatedKnowledge relatedKnowledge({
     bool includeOriginalWord = true,
   }) => RelatedKnowledge(
-        originalWord: includeOriginalWord
-            ? const OriginalWord(
-                word: "רֹעִי",
-                transliteration: "ro'i",
-                language: 'Hebrew',
-                meaning:
-                    'my shepherd — implies intimate, personal care and guidance.',
-              )
-            : null,
-        historicalContext:
-            'Psalm 23 was composed by David, drawing on his years as a shepherd in the hills around Bethlehem.',
-        crossReferences: const [
-          CrossReference(
-            reference: 'John 10:11',
-            text: 'I am the good shepherd.',
-          ),
-          CrossReference(
-            reference: 'Isaiah 40:11',
-            text: 'He tends his flock like a shepherd.',
-          ),
-        ],
-      );
+    originalWord: includeOriginalWord
+        ? const OriginalWord(
+            word: "רֹעִי",
+            transliteration: "ro'i",
+            language: 'Hebrew',
+            meaning:
+                'my shepherd — implies intimate, personal care and guidance.',
+          )
+        : null,
+    historicalContext:
+        'Psalm 23 was composed by David, drawing on his years as a shepherd in the hills around Bethlehem.',
+    crossReferences: const [
+      CrossReference(reference: 'John 10:11', text: 'I am the good shepherd.'),
+      CrossReference(
+        reference: 'Isaiah 40:11',
+        text: 'He tends his flock like a shepherd.',
+      ),
+    ],
+  );
 
   /// ApplicationSuggestion with 3 time-block actions populated.
   /// `hasTimeBlocks` will be true — card renders the 3-block layout.
@@ -353,14 +339,14 @@ class TestFixtures {
             'Thank God for one specific gift before you rise from bed.',
         dayAction:
             'Pause once mid-day to remember you are being led by a shepherd.',
-        eveningAction:
-            'Write one moment of care you received from God today.',
+        eveningAction: 'Write one moment of care you received from God today.',
       );
 
   /// ApplicationSuggestion with only the legacy single `action` field.
   /// `hasTimeBlocks` is false — card renders the legacy single-line layout.
   static ApplicationSuggestion applicationSuggestionLegacy() =>
       const ApplicationSuggestion(
-        action: 'Quietly trust that you are being led today, even when unclear.',
+        action:
+            'Quietly trust that you are being led today, even when unclear.',
       );
 }

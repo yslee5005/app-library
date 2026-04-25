@@ -16,8 +16,9 @@ import '../../../helpers/test_fixtures.dart';
 ///   - Empty bucket hides that label entirely.
 void main() {
   group('PrayerSummaryCard', () {
-    testWidgets('expanded: renders all 3 bucket labels and bullets',
-        (tester) async {
+    testWidgets('expanded: renders all 3 bucket labels and bullets', (
+      tester,
+    ) async {
       final summary = TestFixtures.prayerSummary();
 
       await tester.pumpWidget(
@@ -68,8 +69,9 @@ void main() {
       }
     });
 
-    testWidgets('empty intercession bucket is omitted from summary and body',
-        (tester) async {
+    testWidgets('empty intercession bucket is omitted from summary and body', (
+      tester,
+    ) async {
       const summary = PrayerSummary(
         gratitude: ['Thanks for today.'],
         petition: ['Grant wisdom.'],

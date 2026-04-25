@@ -29,19 +29,18 @@ String _fixture({
   required String locale,
   String reference = 'Psalm 1:1',
   String testimony = 'Thank you God.',
-}) =>
-    jsonEncode({
-      'category': category,
-      'locale': locale,
-      'scripture': {'reference': reference},
-      'bible_story': {'title': 'title', 'summary': 'summary'},
-      'testimony': testimony,
-      'prayer_summary': {
-        'gratitude': ['g'],
-        'petition': [],
-        'intercession': [],
-      },
-    });
+}) => jsonEncode({
+  'category': category,
+  'locale': locale,
+  'scripture': {'reference': reference},
+  'bible_story': {'title': 'title', 'summary': 'summary'},
+  'testimony': testimony,
+  'prayer_summary': {
+    'gratitude': ['g'],
+    'petition': [],
+    'intercession': [],
+  },
+});
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
@@ -57,8 +56,11 @@ void main() {
   group('PrayerTemplateService', () {
     test('loads health_ko template from injected bundle', () async {
       final bundle = _InMemoryAssetBundle({
-        'assets/prayer_templates/health_ko.json':
-            _fixture(category: 'health', locale: 'ko', reference: 'Psalm 103:3'),
+        'assets/prayer_templates/health_ko.json': _fixture(
+          category: 'health',
+          locale: 'ko',
+          reference: 'Psalm 103:3',
+        ),
       });
       final service = PrayerTemplateService(bundle: bundle);
 
@@ -108,37 +110,41 @@ void main() {
       expect(result!.scripture.reference, 'Joshua 24:15');
     });
 
-    test('second call for the same key hits the cache (identity check)',
-        () async {
-      final bundle = _InMemoryAssetBundle({
-        'assets/prayer_templates/gratitude_ko.json': _fixture(
+    test(
+      'second call for the same key hits the cache (identity check)',
+      () async {
+        final bundle = _InMemoryAssetBundle({
+          'assets/prayer_templates/gratitude_ko.json': _fixture(
+            category: 'gratitude',
+            locale: 'ko',
+          ),
+        });
+        final service = PrayerTemplateService(bundle: bundle);
+
+        final first = await service.loadTemplate(
           category: 'gratitude',
           locale: 'ko',
-        ),
-      });
-      final service = PrayerTemplateService(bundle: bundle);
+        );
+        final second = await service.loadTemplate(
+          category: 'gratitude',
+          locale: 'ko',
+        );
+        expect(identical(first, second), isTrue);
+      },
+    );
 
-      final first = await service.loadTemplate(
-        category: 'gratitude',
-        locale: 'ko',
-      );
-      final second = await service.loadTemplate(
-        category: 'gratitude',
-        locale: 'ko',
-      );
-      expect(identical(first, second), isTrue);
-    });
+    test(
+      'returns null when neither primary nor fallback asset exists',
+      () async {
+        final bundle = _InMemoryAssetBundle({});
+        final service = PrayerTemplateService(bundle: bundle);
 
-    test('returns null when neither primary nor fallback asset exists',
-        () async {
-      final bundle = _InMemoryAssetBundle({});
-      final service = PrayerTemplateService(bundle: bundle);
-
-      final result = await service.loadTemplate(
-        category: 'health',
-        locale: 'ja',
-      );
-      expect(result, isNull);
-    });
+        final result = await service.loadTemplate(
+          category: 'health',
+          locale: 'ja',
+        );
+        expect(result, isNull);
+      },
+    );
   });
 }

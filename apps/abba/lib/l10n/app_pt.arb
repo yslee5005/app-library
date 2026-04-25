@@ -103,7 +103,7 @@
   "monthlyPrice": "R$34,90 / mês",
   "yearlyPrice": "R$249,90 / ano",
   "yearlySave": "Economize 40%",
-  "launchPromo": "3 meses por R$9,99/mês!",
+  "launchPromo": "",
   "startPro": "Iniciar Pro",
   "comingSoon": "Em breve",
   "notificationSetting": "Notificações",
@@ -152,7 +152,7 @@
   "groupInviteMessage": "Vamos orar juntos! Junte-se ao meu grupo de oração no Abba.",
   "noGroups": "Participe ou crie um grupo para orar juntos.",
   "promoTitle": "Oferta de Lançamento",
-  "promoBanner": "Primeiros 3 meses por R$9,99/mês!",
+  "promoBanner": "",
   "promoEndsOn": "Oferta termina em {date}",
   "@promoEndsOn": {
     "placeholders": {
@@ -248,6 +248,7 @@
   "originalWordNuanceLabel": "Nuance vs tradução",
   "originalWordsCountLabel": "{count} palavras",
   "seeMore": "Ver mais",
+  "seeLess": "Ver menos",
   "seeAllComments": "Ver todos os {count} comentários",
   "@seeAllComments": {
     "placeholders": {
@@ -552,5 +553,15 @@
   "aiErrorApiBody": "Sua oração está guardada em segurança. Tente novamente em um instante.",
   "aiErrorRetry": "Tentar novamente",
   "aiErrorWaitAndCheck": "Tentaremos a análise mais tarde. Volte em breve — sua oração estará esperando por você.",
-  "aiErrorHome": "Voltar ao início"
+  "aiErrorHome": "Voltar ao início",
+  "trialStartCta": "Começar 1 mês grátis",
+  "trialAutoRenewDisclosure": "Depois {price}/ano, com renovação automática. Cancele quando quiser nas Configurações.",
+  "@trialAutoRenewDisclosure": {
+    "placeholders": {
+      "price": {}
+    }
+  },
+  "trialLimitTitle": "Você orou 3 vezes hoje 🌸",
+  "trialLimitBody": "Volte amanhã — ou desbloqueie orações ilimitadas com o Pro.",
+  "trialLimitCta": "Continuar com Pro"
 }

@@ -30,9 +30,7 @@ class MockCommunityRepository implements CommunityRepository {
 
     // First pass: index all comments with mock like counts
     for (final c in flat) {
-      byId[c.id] = c.copyWith(
-        likeCount: (c.id.hashCode % 5).abs(),
-      );
+      byId[c.id] = c.copyWith(likeCount: (c.id.hashCode % 5).abs());
     }
 
     // Second pass: attach replies to parents
@@ -141,10 +139,9 @@ class MockCommunityRepository implements CommunityRepository {
     );
 
     // Top-level comments only (replies are nested inside each comment)
-    var topLevel = post.comments
-        .where((c) => c.parentCommentId == null)
-        .toList()
-      ..sort((a, b) => b.createdAt.compareTo(a.createdAt)); // newest first
+    var topLevel =
+        post.comments.where((c) => c.parentCommentId == null).toList()
+          ..sort((a, b) => b.createdAt.compareTo(a.createdAt)); // newest first
 
     // Cursor-based filtering
     if (cursor != null) {
@@ -284,10 +281,7 @@ class MockCommunityRepository implements CommunityRepository {
     }
     // Update comment like counts in posts
     for (int i = 0; i < _posts.length; i++) {
-      final updated = _updateCommentLikeInList(
-        _posts[i].comments,
-        commentId,
-      );
+      final updated = _updateCommentLikeInList(_posts[i].comments, commentId);
       if (updated != null) {
         _posts[i] = _posts[i].copyWith(comments: updated);
         break;

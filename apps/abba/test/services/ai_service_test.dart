@@ -80,14 +80,8 @@ class _CountingAiService implements AiService {
   }) async {
     callCount++;
     return const PrayerResult(
-      scripture: Scripture(
-        reference: 'Test 1:1',
-        verse: 'Test verse',
-      ),
-      bibleStory: BibleStory(
-        title: 'Test',
-        summary: 'Test story',
-      ),
+      scripture: Scripture(reference: 'Test 1:1', verse: 'Test verse'),
+      bibleStory: BibleStory(title: 'Test', summary: 'Test story'),
       testimony: 'Test transcript',
     );
   }
@@ -131,9 +125,7 @@ class _CountingAiService implements AiService {
         topic: '',
         insight: 'Test insight',
       ),
-      application: ApplicationSuggestion(
-        action: '테스트 행동',
-      ),
+      application: ApplicationSuggestion(action: '테스트 행동'),
       knowledge: RelatedKnowledge(
         historicalContext: 'Test context',
         crossReferences: [CrossReference(reference: 'Test 1:1', text: '')],
@@ -165,6 +157,7 @@ class _CountingAiService implements AiService {
     required String transcript,
     required String locale,
     required String userName,
+    List<String> recentReferences = const [],
   }) async* {
     callCount++;
     // Minimal stub — tests don't assert stream content
