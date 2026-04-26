@@ -6,7 +6,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import '../models/prayer.dart';
 
 /// Polling helper for Phase 4 lazy retry — sits between
-/// `Home/AiLoadingView` and the `process_pending_prayer` Edge Function.
+/// `Home/AiLoadingView` and the `abba-process-pending-prayer` Edge Function.
 ///
 /// Usage:
 ///   final poller = PendingPrayerPoller(Supabase.instance.client);

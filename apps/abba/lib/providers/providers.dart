@@ -34,6 +34,7 @@ import '../services/prayer_quota_service.dart';
 import '../services/prayer_template_service.dart';
 import '../services/mock_data.dart';
 import '../services/notification_service.dart';
+import '../services/pending_prayer_trigger.dart';
 import '../services/prayer_repository.dart';
 import '../services/qt_repository.dart';
 import '../services/recent_references_service.dart';
@@ -91,6 +92,14 @@ final notificationServiceProvider = Provider<NotificationService>((ref) {
 
 final qtRepositoryProvider = Provider<QtRepository>((ref) {
   throw UnimplementedError('qtRepositoryProvider must be overridden');
+});
+
+/// Phase B5 — fire-and-forget trigger for the partial-failed Edge retry.
+/// Invoked from `HomeView.initState` and on app resume. Process-scoped
+/// debounce lives inside `PendingPrayerTrigger` itself; the provider just
+/// hands out a single instance bound to the app's Supabase client.
+final pendingPrayerTriggerProvider = Provider<PendingPrayerTrigger>((ref) {
+  return PendingPrayerTrigger(Supabase.instance.client);
 });
 
 /// v7 — Reads the user's last-30-day chosen scripture references so T1

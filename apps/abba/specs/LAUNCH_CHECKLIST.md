@@ -105,13 +105,14 @@
 - [ ] ARB 키 추가 (en + ko): `aiErrorNetwork`, `aiErrorAiService`, `aiErrorRetry`, `aiErrorWaitAndCheck`, `aiErrorHome`
 - [ ] 기존 테스트 수정 (`gemini_service_test.dart` — malformed JSON throw 기대)
 
-#### Phase 4 — Edge Function (process_pending_prayer)
-- [ ] `supabase/functions/process_pending_prayer/index.ts` 작성
+#### Phase 4 — Edge Function (abba-process-pending-prayer)
+- [ ] `supabase/functions/abba-process-pending-prayer/index.ts` 작성
   - JWT 인증 (본인 기도만)
   - 10분 cooldown 체크
   - Gemini API 호출 + status 업데이트
   - 10회 초과 시 `failed` 확정
-- [ ] **사용자 승인 후** `supabase functions deploy process_pending_prayer`
+- [ ] **사용자 승인 후** `supabase functions deploy abba-process-pending-prayer`
+- [x] **Phase B post-deploy gate**: Flutter client가 실 user access token으로 `abba-process-pending-prayer`를 호출했을 때 401 없이 통과하는지 실기 검증 (B5 wire 후 iPhone 실기에서 `home_init status=200 body={accepted:false, reason:no_eligible_prayer}` 확인 — SDK 토큰 + JWKS gateway 호환성 OK)
 
 #### Phase 5 — Pending UX + 재방문 트리거
 - [ ] `home_view.dart`: 진입 시 pending 기도 감지 → Edge Function 호출 → Realtime subscribe

@@ -46,7 +46,7 @@ verify_jwt = false
 [functions.abba-weekly-report]
 verify_jwt = false
 
-# process_pending_prayer is intentionally NOT listed here — that function
+# abba-process-pending-prayer is intentionally NOT listed here — that function
 # IS user-scoped (reads Authorization header, calls auth.getUser()) and
 # its JWT verification is part of its security model. If ES256 401 starts
 # hitting it, the fix is Edge Runtime upgrade or in-function JWKS verify,

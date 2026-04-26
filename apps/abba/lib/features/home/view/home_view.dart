@@ -54,6 +54,13 @@ class _HomeViewState extends ConsumerState<HomeView>
     // Rebuild the "기도 마침" button when the user types so the disabled
     // gate on too-short text mode input flips live.
     _textController.addListener(_onTextChanged);
+    // Phase B5 — kick the partial-failed retry Edge once the widget tree
+    // is attached. Fire-and-forget; debounce + auth gating live in the
+    // service. Post-frame so `ref.read` is safe.
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted) return;
+      ref.read(pendingPrayerTriggerProvider).tryTrigger(reason: 'home_init');
+    });
   }
 
   @override
@@ -85,6 +92,15 @@ class _HomeViewState extends ConsumerState<HomeView>
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
+    // Phase B5 — kick the partial-failed retry Edge when the user
+    // returns from background. Runs BEFORE the recording-recovery
+    // early-return below so it fires on the common "resume while idle
+    // on home" path too. The service's own debounce window prevents
+    // stampedes when the OS bounces resume/pause rapidly.
+    if (state == AppLifecycleState.resumed && mounted) {
+      ref.read(pendingPrayerTriggerProvider).tryTrigger(reason: 'app_resume');
+    }
+
     // Wave A fix #3 — App lifecycle background guard.
     // When the OS suspends the app mid voice-recording, immediately stop
     // the recorder so we don't burn battery / mic in the background and
